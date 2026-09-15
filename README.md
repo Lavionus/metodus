@@ -676,23 +676,33 @@ hezčí je systémový hlas (na Linuxu `sudo pacman -S espeak-ng`, ověření
 Podporované jazyky vestavěného hlasu: čeština, angličtina, němčina, francouzština
 (přidání dalšího popisuje `hlas/LICENCE.md`).
 
-## Vazba na hlavní web
+## Samostatný web, žádná vazba ven
 
-Metodus je samostatný web: **žádná stránka neodkazuje ven ze složky**. Složku
-`metodus/` lze zkopírovat na vlastní doménu nebo do jiného repozitáře a funguje
-beze změn — nic v ní nevede na `../` ani `../../`.
+Metodus je od září 2026 **vlastní repozitář a vlastní GitHub Pages**
+(`Lavionus/metodus` → <https://lavionus.github.io/metodus/>), ne podsložka
+hlavního webu. Důvod je jediný: kdo dostane odkaz sem, nesmí se odmazáváním
+adresy v prohlížeči dostat na hlavní web — a naopak. Proto:
 
-Opačným směrem je hlavní web závislý na této složce jediným místem:
-`obsah/weather_globe.html` používá textury Země z `../metodus/obsah/textures/`
-(aby se 34 MB textur neduplikovalo). Při osamostatnění Metodusu je potřeba textury
-zkopírovat zpět.
+- **žádná stránka Metodusu neodkazuje ven** (nic nevede na `../` ani `../../`),
+- **hlavní web neodkazuje na Metodus** — ani z menu, ani přesměrováním starých
+  odkazů; co si od Metodusu půjčoval (textury Země pro glóbus s počasím,
+  stránku s historickými mapami), má dnes ve vlastní kopii.
+
+Ukázková stránka `obsah/predstaveni.html` je nasazená ještě jednou, ve třetím
+repozitáři `Lavionus/metodus-ukazka` — ze stejného důvodu. Zdrojem zůstává
+soubor tady; kopii vyrábí `../metodus-ukazka/aktualizuj.sh`.
+
+Nahrávání všech tří webů naráz obstará `upload.sh` v repozitáři hlavního webu
+(ukázku si před nahráním vyrobí ze zdroje sám).
 
 ## Vývoj a nasazení
 
 ```bash
-./test_local.sh          # z kořene repozitáře, pak http://localhost:8000/metodus/
-./upload.sh "zpráva"     # commit + push na GitHub Pages
+python3 -m http.server 8000     # z téhle složky, pak http://localhost:8000/
 ```
+
+Nahrávání dělá `upload.sh` v repozitáři hlavního webu — spouští se jednou
+a nahraje hlavní web, Metodus i ukázkovou stránku.
 
 Testovat vždy přes lokální server — otevření přes `file://` blokuje CORS
 (textury, fetch, moduly).
