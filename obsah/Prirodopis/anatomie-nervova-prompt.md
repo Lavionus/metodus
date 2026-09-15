@@ -1,0 +1,8 @@
+# Nervová soustava
+
+Vytvořeno vestavěným nástrojem image_gen. Soubor: `anatomie-nervova.png`.
+Výukový průhled zezadu, schematické větvení a zesílené nervy. Aktivní oblasti a český výklad jsou v `../Anatomy/atlas-modules.js`.
+
+## Použitý prompt
+
+Use case: scientific-educational. Create a professional Czech school human anatomy atlas illustration of the nervous system, NO TEXT NO LABELS. Portrait 1024x1536. Warm ivory background, elegant detailed hand-painted medical textbook rendering matching terracotta muscle and ivory skeleton atlases. Full body from behind in anatomical standing pose, arms slightly spread, entire head and feet visible, body centered around x512 with generous empty margins for interactive labels. Neutral translucent pale beige body silhouette with no skin detail or genitals. Clearly show pink cerebral hemispheres at top of head, cerebellum beneath them, narrow brainstem connecting to spinal cord. Spinal cord in vertebral canal ends around upper lumbar spine, BELOW THAT only thin descending cauda equina nerve roots, not continuous thick spinal cord. Golden ochre peripheral nerves clearly contrasting against pale body: brachial plexuses at shoulders, branching nerves down both arms and hands; thoracic nerves curving around ribs; lumbar and sacral plexuses in pelvis, sciatic nerves down posterior thighs branching near knees into tibial and fibular nerves down calves and feet. Anatomically plausible locations, no invented organs, no blood vessels, no extra inset panels. Clean uncluttered precise teaching image; enlarged nerve thickness for visibility, subtle ghosted vertebrae without obscuring neural structures.
