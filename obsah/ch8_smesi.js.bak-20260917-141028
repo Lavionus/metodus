@@ -1,0 +1,80 @@
+'use strict';
+const MIX_VIEWS = [
+ {name:'Roztok',example:'Sůl rozpuštěná ve vodě',phase:'Rozpuštěná látka je rozptýlená na úrovni iontů nebo molekul.',note:'Částice rozpuštěné soli projdou běžným papírovým filtrem spolu s vodou. Rozpuštění neznamená, že sůl zmizela.',kind:'solution'},
+ {name:'Suspenze',example:'Písek ve vodě',phase:'Nerozpuštěné pevné částice v kapalině.',note:'Písek může klesat ke dnu a zachytí se na vhodném filtru. Velmi jemné částice se usazují pomalu.',kind:'suspension'},
+ {name:'Emulze',example:'Olej ve vodě po protřepání',phase:'Kapičky jedné kapaliny v jiné, s níž se nemísí.',note:'Olejové kapičky se bez stabilizátoru postupně spojují. Olej a voda vytvoří dvě vrstvy; olej je díky menší hustotě nahoře.',kind:'emulsion'},
+ {name:'Pěna',example:'Mýdlová pěna',phase:'Bubliny plynu oddělené tenkými vrstvami kapaliny.',note:'Plyn není rozpuštěný: tvoří samostatné bubliny. Pěna se časem může rozpadat.',kind:'foam'},
+ {name:'Dým',example:'Pevné saze rozptýlené ve vzduchu',phase:'Drobné pevné částice v plynu.',note:'Dým patří mezi aerosoly. Skutečný kouř může obsahovat také kapalné kapičky a další plyny.',kind:'smoke'},
+ {name:'Mlha',example:'Vodní kapičky ve vzduchu',phase:'Drobné kapalné kapičky v plynu.',note:'Mlha není vodní pára. Vodní pára je plyn a není viditelná; mlhu tvoří kapalná voda.',kind:'fog'}
+];
+let mixIndex=0, mixPaused=false, labStage=0;
+function mixtureSvg(kind, settled=false) {
+ let dots='';
+ const gas=['smoke','fog'].includes(kind);
+ for(let i=0;i<30;i++) {
+  const x=46+(i*67%270), y=48+(i*43%180);
+  if(kind==='solution') dots+=`<circle class="particle" cx="${x}" cy="${y}" r="4" fill="var(--warn)"/><text x="${x}" y="${y+3}" style="font-size:9px;fill:var(--bg-deep)">${i%2?'+':'−'}</text>`;
+  else if(kind==='suspension'||kind==='smoke') dots+=`<rect class="${settled?'':'particle'}" x="${x}" y="${settled?222+(i%3)*7:y}" width="${gas?5:9}" height="${gas?5:8}" fill="#b78342"/>`;
+  else if(kind==='emulsion') dots+=settled?'':`<circle class="particle" cx="${x}" cy="${y}" r="${6+i%7}" fill="var(--warn)" opacity=".8"/>`;
+  else if(kind==='foam') {if(i<18)dots+=`<circle class="particle" cx="${55+(i%6)*49}" cy="${75+Math.floor(i/6)*65}" r="24" fill="var(--bg-panel)" stroke="var(--accent)" stroke-width="3"/>`;}
+  else dots+=`<circle class="particle" cx="${x}" cy="${y}" r="6" fill="var(--accent)"/>`;
+ }
+ return `<svg class="lab-scene ${mixPaused?'paused':''}" viewBox="0 0 360 290" role="img" aria-label="${MIX_VIEWS.find(v=>v.kind===kind)?.phase||'Model směsi'}${settled?' Po odstátí.':''}"><path class="water" d="M28 32H332V255H28Z" ${gas?'style="fill:var(--bg-panel)"':''}/>${kind==='emulsion'&&settled?'<path d="M29 33H331V95H29Z" fill="var(--warn)" opacity=".7"/>':''}${dots}<path class="glass" d="M28 20V255H332V20"/><text x="180" y="281">${gas?'plyn jako prostředí':'kapalina jako prostředí'}</text></svg>`;
+}
+function castice() {
+ const v=MIX_VIEWS[mixIndex];
+ $('plocha').innerHTML=`<div class="lab-controls" aria-label="Druhy směsí">${MIX_VIEWS.map((x,i)=>`<button data-mix="${i}" aria-pressed="${i===mixIndex}">${x.name}</button>`).join('')}</div><div class="lab-grid"><div id="mixDrawing">${mixtureSvg(v.kind)}</div><section class="lab-panel"><h2>${v.name}: ${v.example}</h2><p>${v.phase}</p><p>${v.note}</p><div class="lab-controls"><button id="mixPause">${mixPaused?'Spustit pohyb':'Pozastavit pohyb'}</button>${['suspension','emulsion'].includes(v.kind)?'<button id="mixSettle">Nechat odstát</button><button id="mixShake">Znovu promíchat</button>':''}</div><p id="mixStatus" role="status"></p></section></div><p class="vysvetlivka">Zvětšené schéma, nikoli skutečný pohled mikroskopem. Velikosti a počty nejsou v měřítku. Barvy rozlišují složky; rozpuštěná sůl vodu nebarví.</p>`;
+ document.querySelectorAll('[data-mix]').forEach(b=>b.addEventListener('click',()=>{mixIndex=+b.dataset.mix;castice();}));
+ $('mixPause').setAttribute('aria-pressed',String(mixPaused));
+ $('mixPause').addEventListener('click',()=>{mixPaused=!mixPaused;document.querySelector('.lab-scene').classList.toggle('paused',mixPaused);$('mixPause').textContent=mixPaused?'Spustit pohyb':'Pozastavit pohyb';$('mixPause').setAttribute('aria-pressed',String(mixPaused));});
+ if($('mixSettle')) {
+ $('mixSettle').addEventListener('click',()=>{$('mixDrawing').innerHTML=mixtureSvg(v.kind,true);$('mixStatus').textContent=v.kind==='suspension'?'Písek je u dna. Voda nad ním je čirší, není tím ale automaticky pitná.':'Nahoře je olej, dole voda. Samotným mícháním nevznikl roztok.';});
+ $('mixShake').addEventListener('click',()=>{$('mixDrawing').innerHTML=mixtureSvg(v.kind);$('mixStatus').textContent='Složky jsou znovu rozptýlené.';});
+ }
+}
+const LAB_STEPS=['Suchá směs','Rozpuštění soli','Filtrace','Získaná sůl'];
+function labDrawing() {
+ const titles=['Písek + sůl','Písek + solný roztok','Na filtru: písek','Po odpaření: sůl'];
+ let parts='';
+ if(labStage===2) {
+  parts='<path class="glass" d="M60 30H300L180 140Z M180 140V163"/><path d="M77 44H283L180 119Z" fill="var(--bg-control)" stroke="var(--text-muted)"/>';
+  for(let i=0;i<14;i++)parts+=`<rect x="${125+i%7*15}" y="${53+Math.floor(i/7)*13}" width="8" height="7" fill="#b78342"/>`;
+  parts+='<path class="water" d="M101 210H259V247H101Z"/><path class="glass" d="M100 171V250H260V171"/><path d="M180 170v20" stroke="var(--accent)" stroke-width="4"/><text x="180" y="278">Filtrát: voda s rozpuštěnou solí</text>';
+ } else {
+  parts='<path class="glass" d="M45 30V247H315V30"/>'+(labStage===1?'<path class="water" d="M47 90H313V245H47Z"/>':'');
+  for(let i=0;i<32;i++) {
+   const salt=i%2===0||labStage===3, dissolved=salt&&labStage===1;
+   const x=65+i*53%225,y=dissolved?110+i*37%115:210+i%4*8;
+   parts+=salt?`<circle class="${dissolved?'particle':''}" cx="${x}" cy="${y}" r="${dissolved?3:5}" fill="var(--warn)"/>`:`<rect x="${x}" y="${y}" width="9" height="7" fill="#b78342"/>`;
+  }
+  parts+=`<text x="180" y="279">${labStage===1?'Sůl je rozpuštěná, písek není.':labStage===3?'Voda odešla do okolí jako pára.':'Dvě pevné složky.'}</text>`;
+ }
+ return `<svg class="lab-scene" viewBox="0 0 360 295" role="img" aria-label="${titles[labStage]}">${parts}</svg>`;
+}
+function laborator() {
+ $('plocha').innerHTML=`<div class="lab-panel"><h2>Výzva: odděl písek a kuchyňskou sůl</h2><p>Chceme získat obě pevné složky zvlášť. Vyber vždy další vhodný krok. Oranžové body představují sůl, hnědé čtverečky písek.</p></div><ol class="lab-steps">${LAB_STEPS.map((s,i)=>`<li ${i===labStage?'aria-current="step"':''}>${i+1}. ${s}${i<labStage?' ✓':''}</li>`).join('')}</ol><div class="lab-grid">${labDrawing()}<section class="lab-panel"><h2>${LAB_STEPS[labStage]}</h2><p>${['Sůl se rozpouští ve vodě, písek ne. Jak tuto odlišnost využiješ?','Sůl prošla do roztoku. Jak odstraníš nerozpuštěný písek?','Písek zůstal na filtru. Ve filtrátu je stále sůl. Jak ji získáš, když vodu nechceš zachytit?','Hotovo: písek zůstal na filtru a sůl jsme získali odpařením vody. Písek je ještě mokrý; pro získání suchého písku jej necháme vyschnout.'][labStage]}</p><div class="lab-controls">${labStage<3?['Přidat vodu a míchat','Přefiltrovat','Odpařit vodu','Použít magnet'].map((x,i)=>`<button data-action="${i}">${x}</button>`).join(''):''}<button id="labReset">Začít znovu</button></div></section></div><p id="labStatus" class="lab-feedback" role="status"></p><details class="lab-panel"><summary>Proč nestačí samotný filtr? A co když chci vodu?</summary><p>Filtr zachytí zrnka písku, rozpuštěné ionty soli však projdou. Chceme-li zachytit také vodu, použijeme destilaci: vodu odpaříme a její páru ochladíme v chladiči na kapalinu. Běžná filtrace solný roztok neodsolí.</p></details>`;
+ document.querySelectorAll('[data-action]').forEach(b=>b.addEventListener('click',()=>{
+ const a=+b.dataset.action;
+ if(a===labStage){labStage++;laborator();$('labStatus').textContent=['','✓ Sůl se rozpustila. Písek zůstal nerozpuštěný.','✓ Filtr zachytil písek; slaná voda jím prošla.','✓ Získali jsme sůl. Obě pevné složky jsou oddělené.'][labStage];}
+ else $('labStatus').textContent=a===3?'✗ Magnet nepřitahuje písek ani kuchyňskou sůl.':a===1?(labStage===0?'✗ Suchá směs takto nepůjde spolehlivě oddělit. Nejprve využij rozpustnost soli.':'✗ Písek už je oddělený. Rozpuštěná sůl by znovu prošla filtrem.'):a===2?'✗ Odpařením teď sůl od písku neoddělíš. Nejprve potřebujeme roztok soli bez písku.':'✗ Vodu už máme. Další voda písek neodstraní; zkus filtraci.';
+ }));
+ $('labReset').addEventListener('click',()=>{labStage=0;laborator();});
+}
+let solutionSalt=20,solutionWater=180;
+function roztok() {
+ $('plocha').innerHTML=`<div class="lab-grid"><section class="lab-panel"><h2>Namíchej solný roztok</h2><p>Měň hmotnosti a sleduj, jak se mění podíl soli. Předpokládáme úplné rozpuštění a žádné ztráty.</p><label for="saltMass">Sůl: <output id="saltValue"></output><input id="saltMass" type="range" min="0" max="30" step="1" value="${solutionSalt}"></label><label for="waterMass">Voda: <output id="waterValue"></output><input id="waterMass" type="range" min="100" max="400" step="5" value="${solutionWater}"></label><div class="lab-controls"><button id="dilute">Přidat 50 g vody</button><button id="solutionReset">Výchozí směs</button></div></section><section class="lab-panel" aria-live="polite"><h2>Co je v celé směsi?</h2><div id="solutionNumber" class="lab-number"></div><div class="lab-meter" aria-hidden="true"><div class="solute" id="soluteBar"></div><div class="solvent" id="solventBar"></div></div><p>🟠 sůl · 🔵 voda<br>Pruh znázorňuje podíly hmotnosti, nikoli objemy ani barvu roztoku.</p><div id="solutionMath"></div></section></div><section class="lab-panel"><h2>Tvůj úkol: připrav 10% roztok</h2><p>Nastav posuvníky tak, aby sůl tvořila přesně desetinu celkové hmotnosti. Existuje více správných řešení.</p><div class="lab-controls"><button id="solutionCheck">Zkontrolovat</button><button id="solutionHint">Nápověda</button></div><p id="solutionFeedback" role="status"></p></section>`;
+ const render=()=>{
+ solutionSalt=+$('saltMass').value;solutionWater=+$('waterMass').value;
+ const total=solutionSalt+solutionWater,w=solutionSalt/total;
+ $('saltValue').textContent=solutionSalt+' g';$('waterValue').textContent=solutionWater+' g';
+ $('solutionNumber').textContent=fmt(w*100)+' %';$('soluteBar').style.width=(w*100)+'%';$('solventBar').style.width=(100-w*100)+'%';
+ $('solutionMath').innerHTML=`<p>m(roztoku) = ${solutionSalt} + ${solutionWater} = <b>${total} g</b></p><p>w = ${solutionSalt} / ${total} ≈ <b>${Number(w.toFixed(4)).toLocaleString('cs-CZ')}</b><br>V procentech: w × 100 % ≈ <b>${fmt(w*100)} %</b></p><p>${solutionSalt===0?'Bez soli jde o čistou vodu, nikoli solný roztok.':'Dělíme hmotností celého roztoku, ne samotné vody.'}</p>`;
+ $('solutionFeedback').textContent='';$('dilute').disabled=solutionWater>350;
+ };
+ ['saltMass','waterMass'].forEach(id=>$(id).addEventListener('input',render));
+ $('dilute').addEventListener('click',()=>{$('waterMass').value=solutionWater+50;render();$('solutionFeedback').textContent='Přidáním vody se roztok zředil. Hmotnost soli zůstala stejná.';});
+ $('solutionReset').addEventListener('click',()=>{$('saltMass').value=20;$('waterMass').value=180;render();});
+ $('solutionCheck').addEventListener('click',()=>{$('solutionFeedback').textContent=solutionSalt*9===solutionWater?'✓ Správně! Na 1 hmotnostní díl soli připadá 9 dílů vody.':'Ještě uprav poměr. Pro 10 % musí platit: hmotnost vody = 9 × hmotnost soli.';});
+ $('solutionHint').addEventListener('click',()=>{$('solutionFeedback').textContent='Například 20 g soli + 180 g vody = 200 g roztoku. Sůl tvoří 20 / 200 = 0,1 = 10 %.';});
+ render();
+}

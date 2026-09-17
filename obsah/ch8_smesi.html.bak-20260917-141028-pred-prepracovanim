@@ -51,33 +51,15 @@
     @media(prefers-reduced-motion:reduce) { .particle { animation:none; } }
     @media(max-width:650px) { .lab-grid { grid-template-columns:1fr; } .plocha { padding:16px 12px; } }
   </style>
-  <link rel="stylesheet" href="ch8_smesi.css">
 </head>
 <body>
-  <header class="hero">
-    <div><span class="eyebrow">Chemie / 8. ročník / Interaktivní laboratoř</span>
-    <h1>Smíchat je snadné.<br>Jak to oddělit?</h1>
-    <p class="podtitul">Prozkoumej, co se skrývá ve směsi. Rozhýbej aparatury, získej složky zpět a zjisti, kdy už se další látka nerozpustí.</p>
-    <div class="hero-links"><a href="#rezimy">Otevřít laboratoř ↓</a><a href="#tahak">Pravidla na jednom místě</a></div></div>
-    <svg class="hero-art" viewBox="0 0 390 230" aria-hidden="true">
-      <path d="M35 30v153q50 20 100 0V30M238 30v153q50 20 100 0V30" fill="none" stroke="var(--text-muted)" stroke-width="3"/>
-      <path d="M37 82h96v98q-48 20-96 0zM240 82h96v98q-48 20-96 0z" fill="var(--accent-soft)"/>
-      <g fill="var(--warn)"><circle class="particle" cx="64" cy="100" r="6"/><circle class="particle" cx="103" cy="139" r="5"/><circle class="particle" cx="73" cy="163" r="5"/><circle class="particle" cx="109" cy="98" r="5"/></g>
-      <path d="M51 171h14v10H51zM89 160h13v11H89zM108 171h12v10h-12z" fill="#bd9253"/>
-      <path d="M160 112h54m-13-13 13 13-13 13" fill="none" stroke="var(--accent)" stroke-width="3"/>
-      <g fill="var(--warn)"><circle class="particle" cx="267" cy="103" r="5"/><circle class="particle" cx="301" cy="134" r="5"/><circle class="particle" cx="275" cy="166" r="5"/></g>
-      <text x="85" y="219">směs</text><text x="288" y="219">oddělené složky</text>
-    </svg>
-  </header>
-  <div class="learning-path"><article><b>01 · Pozoruj</b><p>Částice a aparatury v pohybu.</p></article><article><b>02 · Experimentuj</b><p>Koncentrace, rozpustnost a teplota.</p></article><article><b>03 · Rozhoduj</b><p>Vyřeš misi a vysvětli svůj postup.</p></article></div>
+  <h1>🧪 Směsi a jejich oddělování</h1>
+  <p class="podtitul">Pro 8. ročník: druhy směsí, dělicí metody a složení roztoku.</p>
+
   <div class="rezimy" id="rezimy">
-    <span class="nav-label">Objevování a pokusy</span>
-    <button data-rezim="aparatury" class="active">⚗️ Atlas aparatur</button>
-    <button data-rezim="castice">🔬 Pod lupou</button>
+    <button data-rezim="castice" class="active">🔬 Pod lupou</button>
     <button data-rezim="laborator">⚗️ Oddělovací laboratoř</button>
     <button data-rezim="roztok">💧 Namíchej roztok</button>
-    <button data-rezim="mise">🧩 Laboratorní mise</button>
-    <span class="nav-label">Ověření znalostí</span>
     <button data-rezim="metoda">🔧 Jak směs oddělit</button>
     <button data-rezim="druh">🗂️ Druh směsi</button>
     <button data-rezim="zlomek">📐 Hmotnostní zlomek</button>
@@ -91,20 +73,16 @@
     <span class="skore" id="skore"></span>
   </div>
 
-  <details class="reference" id="tahak"><summary>Rychlý tahák · co si odnést z laboratoře</summary>
-    <div class="reference-grid"><section><h3>Směs, ne nová látka</h3><p>Směs obsahuje více látek. Při zde ukázaném oddělování využíváme jejich fyzikální vlastnosti, například rozpustnost, těkavost nebo hustotu.</p></section><section><h3>Čirá ≠ čistá</h3><p>Čirý roztok může obsahovat rozpuštěné látky. Filtrace sama neodstraní rozpuštěnou sůl. Ani čirá voda nemusí být pitná.</p></section><section><h3>Co chci získat?</h3><p>Pro sůl postačí odpařování. Chci-li zachytit i vodu, potřebuji destilaci. Neexistuje jediná nejlepší metoda pro každou směs a každý cíl.</p></section><section><h3>Koncentrace</h3><p>w = m(složky) / m(roztoku). Desetiprocentní roztok obsahuje 10 g složky ve 100 g celého roztoku, tedy například 10 g soli a 90 g vody.</p></section><section><h3>Nasycení</h3><p>Nasycený roztok už za daných podmínek další množství dané látky nerozpustí. Pevný zbytek patří do celé směsi, ale ne do kapalného roztoku.</p></section><section><h3>Model a skutečnost</h3><p>Obrázky nejsou v měřítku. Bilance misí jsou ideální a modelová látka X má záměrně zjednodušenou rozpustnost. Reálné látky se mohou chovat jinak.</p></section></div>
-  </details>
   <p class="napoveda">
     <b>Stejnorodá</b> směs má v celém objemu stejné složení. <b>Různorodá</b> směs obsahuje odlišné fáze; pouhým okem je nemusíme rozlišit (například u mléka).
     Hmotnostní zlomek <b>w = m<sub>složky</sub> / m<sub>roztoku</sub></b>, často se udává v procentech.
   </p>
 
 <script src="ch8_smesi.js"></script>
-<script src="ch8_smesi_experiments.js"></script>
 <script>
 const $ = id => document.getElementById(id);
 const skore = Uloha.skore('metodus_ch8_smesi', $('skore'));
-let rezim = 'aparatury';
+let rezim = 'castice';
 const fmt = x => Number(Number(x).toFixed(2)).toLocaleString('cs-CZ');
 function odezvaEl() { const d = document.createElement('div'); d.className = 'odezva'; d.setAttribute('role','status'); return d; }
 
@@ -129,6 +107,31 @@ const SMESI = [
   { s: 'mořská voda, chceme získat pitnou vodu', m: 'destilace' },
   { s: 'hrubý písek ve vodě, necháme směs stát', m: 'usazovani' },
 ];
+function svgAparatura(metoda) {
+  if (metoda === 'filtrace') {
+    return `<svg class="aparatura" viewBox="0 0 220 200">
+      <polygon class="sklo" points="70,20 150,20 110,90"/>
+      <path class="kapalina" d="M78 28 L142 28 L110 84 Z"/>
+      <path class="sklo" d="M80 110 L80 175 A30 12 0 0 0 140 175 L140 110"/>
+      <ellipse class="kapalina" cx="110" cy="168" rx="29" ry="10"/>
+      <text class="popis" x="110" y="196">filtrace</text></svg>`;
+  }
+  if (metoda === 'destilace') {
+    return `<svg class="aparatura" viewBox="0 0 240 200">
+      <path class="sklo" d="M40 60 L40 140 A28 12 0 0 0 96 140 L96 60"/>
+      <ellipse class="kapalina" cx="68" cy="130" rx="27" ry="10"/>
+      <path class="sklo" d="M96 70 L170 70 L170 120"/>
+      <path class="sklo" d="M150 130 L150 170 A22 10 0 0 0 194 170 L194 130"/>
+      <ellipse class="kapalina" cx="172" cy="166" rx="21" ry="8"/>
+      <ellipse class="plamen" cx="68" cy="158" rx="14" ry="8"/>
+      <text class="popis" x="120" y="196">destilace</text></svg>`;
+  }
+  return `<svg class="aparatura" viewBox="0 0 220 200">
+    <path class="sklo" d="M60 40 L60 150 A50 16 0 0 0 160 150 L160 40"/>
+    <ellipse class="kapalina" cx="110" cy="120" rx="49" ry="14"/>
+    <ellipse class="usazenina" cx="110" cy="150" rx="46" ry="10"/>
+    <text class="popis" x="110" y="192">usazování</text></svg>`;
+}
 function metoda() {
   const p = $('plocha');
   const u = Uloha.nahodne(SMESI);
@@ -252,8 +255,8 @@ function pojmy() {
   p.appendChild(odezva);
 }
 
-const REZIMY = { aparatury, mise, castice, laborator, roztok, metoda, druh, zlomek, pojmy };
-function novaUloha() { stopApparatus(); Uloha.zrusPosun(); REZIMY[rezim](); const learning = ['aparatury','mise','castice','laborator','roztok'].includes(rezim); $('btnDalsi').hidden = learning; document.querySelector('.ovladani').hidden=learning; }
+const REZIMY = { castice, laborator, roztok, metoda, druh, zlomek, pojmy };
+function novaUloha() { Uloha.zrusPosun(); REZIMY[rezim](); $('btnDalsi').hidden = ['castice','laborator','roztok'].includes(rezim); }
 
 document.querySelectorAll('#rezimy button').forEach(b => b.addEventListener('click', () => {
   document.querySelectorAll('#rezimy button').forEach(x => x.classList.remove('active'));

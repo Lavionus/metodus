@@ -397,7 +397,7 @@ function stavbaNahodny() {
 function stavbaKresli() {
   const { z, n, e } = ST;
   const naboj = z - e;
-  $('stavbaObraz').innerHTML = svgAtom(ST, { velky: true, valence: true, otacej: true, naboj });
+  $('stavbaObraz').innerHTML = svgAtom(ST, { velky: true, valence: true, otacej: false, naboj });
   $('hodZ').textContent = z; $('hodN').textContent = n; $('hodE').textContent = e;
   $('statZ').textContent = z; $('statN').textContent = n;
   $('statA').textContent = z + n;
