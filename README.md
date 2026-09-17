@@ -2,8 +2,13 @@
 
 Samostatný web s interaktivními výukovými aplikacemi pro základní školu —
 čeština, matematika, cizí jazyky, prvouka a vlastivěda, přírodní vědy, zeměpis,
-dějepis a informatika. Vše běží v prohlížeči, bez serveru a bez registrace,
-po prvním otevření i offline (PWA + service worker).
+dějepis a informatika. Výukové úlohy běží v prohlížeči bez registrace.
+Service worker ukládá jádro webu a postupně navštívené místní soubory. Offline
+fungují lekce, jejichž potřebné soubory už jsou uložené; otevření rozcestníku
+nestáhne celý katalog. Před výukou bez sítě je potřeba vybrané režimy ověřit.
+Externí zdroje a živá data (například ISS) vyžadují internet. Skóre, deník a
+vlastní sady jsou místní data daného prohlížeče, bez automatické synchronizace;
+externí zdroje, datová API a některé hlasy mohou komunikovat se svými službami.
 
 Katalog je zároveň **kostrou osnov ZŠ**: 245 témat v 11 předmětech a 9 ročnících
 plus 10 nástrojů bez vazby na předmět — dohromady 255 položek. Osnova je momentálně
@@ -302,13 +307,55 @@ i načíst jako JSON — tak se příprava přenese na školní počítač.
 Testy: `python3 _test/run.py slidy.html` (druhy slidů, textový zápis, kvíz,
 časovač, okno pro učitele, vkládání obrázku a tisk).
 
+## Motiv a záměrně tmavé stránky
+
+Většina stránek linkuje `theme.js` a jde se zbytkem webu (světlý režim
+`<html data-theme="light">`, barvy z `common.css`). Čtyři stránky mají vlastní
+tmavou paletu a `theme.js` **schválně nelinkují**:
+
+| Stránka | Proč zůstává tmavá |
+|---|---|
+| `obsah/iss.html`, `obsah/planet_globe.html` | černé pozadí je samotný vesmír kolem tělesa |
+| `obsah/AI_prednaska.html` | promítaná přednáška – tmavé plátno nesvítí do třídy |
+
+Každá to říká komentářem ve své hlavičce. Kdo přidává další takovou stránku:
+buď převezme motiv (`theme.js` + proměnné z `common.css`), nebo si přepíše
+proměnné natvrdo a důvod napíše do hlavičky — polovičatý stav (světlé
+proměnné a tmavé panely natvrdo) je to, co se opravovalo v etapě 04.
+
+Stránka, která motiv sdílí, nesmí mít barvy zapsané natvrdo ani v plátně:
+`obsah/eduSort.html` čte barvy sloupců i popisků z CSS proměnných a obnovuje
+je přes `MutationObserver` nad `data-theme`, jinak by po přepnutí zůstaly
+popisky nečitelné.
+
+## Hlavička rozcestníku na mobilu
+
+Na širokém zobrazení jsou akce v hlavičce vedle sebe jako ikony. Pod **700 px**
+zůstanou v hlavičce jen ☰ menu, název, 🏠 úvod a nabídka **⋯ Další**; osnova,
+kabinet, ukázky, motiv, projektor a nové okno se do ní přesunou — a to
+přesunem prvků, ne kopií, takže si tlačítka nesou své posluchače i stav
+(zvýrazněný projektor, ikona motivu). Zpátky do hlavičky je vrátí
+`presunOvladani()` při změně šířky. Popisek u každé akce je ve zdroji stále
+(`<span class="popis">`), v hlavičce ho jen skrývá CSS.
+
+Nabídku otevírá Enter i mezerník, šipky v ní přecházejí mezi položkami,
+Home/End skáčou na kraje, Esc ji zavře a vrátí fokus na tlačítko. Otevření
+hlavního menu ☰ posune fokus do hledání a Esc ho vrátí zpět na ☰.
+
+Ve filtrech je tlačítko **✕ Zrušit filtry**, které se objeví jen tehdy, když
+nějaký filtr ubírá položky, a vypíše, co zruší (předmět, ročník, hledání,
+skryté připravované). Bez něj nebylo na telefonu poznat, proč je vidět jen
+část katalogu.
+
 ## Režim projektor
 
 `projektor.js` zvětšuje obraz pro plátno nebo interaktivní tabuli. Zapíná se
-v rozcestníku tlačítkem 📽️ nebo klávesou **F8**: schová menu i hlavičku,
-požádá o celou obrazovku a nechá na obrazovce jen plovoucí lištu
-(zvětšení −/+, výběr aplikace, celá obrazovka, konec). Úroveň zvětšení
-si režim pamatuje (`metodus_projektor`).
+v rozcestníku tlačítkem 📽️ (na telefonu v nabídce **⋯ Další**) nebo klávesou
+**F8**: schová menu i hlavičku, požádá o celou obrazovku a nechá na obrazovce
+jen plovoucí lištu (zvětšení −/+, výběr aplikace, celá obrazovka, konec).
+Úroveň zvětšení si režim pamatuje (`metodus_projektor`). Odchod z celé
+obrazovky ukončí i režim — v celé obrazovce totiž Esc spolkne prohlížeč
+a bez toho by režim zůstal zapnutý bez zvětšení.
 
 Zvětšuje se **rám, ne obsah v něm**: rámu se nastaví rozměr zmenšený
 o zvolený násobek a `transform: scale()` ho vykreslí na celou plochu.
@@ -348,7 +395,7 @@ Jediné, co se podle prostředí liší, jsou čísla v hlavičce — berou se z
 a bez katalogu se blok odstraní.
 
 Kolem ukázek je pak to, co potřebují ostatní dvě publika: pás **pro školu**
-(nic se neinstaluje, offline, data zůstávají ve škole, podle osnovy ZŠ) pro toho,
+(bez instalace, uložené lekce offline, místní ukládání výsledků, podle osnovy ZŠ) pro toho,
 kdo o nasazení rozhoduje — mluví **jen o provozu, ne o ceně a účtech**, aby si
 web nechal otevřené dveře k případné monetizaci, a **lepivá lišta ukázek** pro toho, kdo stránku
 promítá — skáče se s ní mezi ukázkami a zvýrazněná položka říká, kde v pořadí
@@ -493,6 +540,71 @@ Nové stránky nemusí dělat nic — stačí `dalsi` v `Uloha.odpoved`. Kdo si 
 plánuje sám (například po druhé chybě), volá místo `setTimeout(novaUloha, ms)`
 funkci **`Uloha.posun(novaUloha, ms)`**; jinak by na takové stránce volba
 neplatila.
+
+Naplánovaný posun je **jen jeden a dá se zrušit**. `Uloha.vyber` ho ruší sám,
+takže přeskočení, změna režimu i tlačítko „Pokračovat" zahodí časovač předchozí
+otázky — bez toho doběhl a přehodil žákovi otázku, kterou právě dostal.
+Stránka, která staví otázku mimo `Uloha.vyber`, si zruší posun sama přes
+**`Uloha.zrusPosun()`**; `Uloha.cekaPosun()` řekne, jestli se na něco čeká.
+Přepnutí tempa nebo režimu během čekání se přepočítá hned — přechod na „ručně"
+tedy nabídne tlačítko místo toho, aby dojel starý časovač.
+
+## Vzorová lekce: co má obsahovat
+
+`obsah/m4_zlomky_uvod.html` je vzor, podle kterého se předělávají další lekce.
+Kostra je pořád stejná (`vyuka.css`), přibývají k ní čtyři věci:
+
+1. **Cíl nad ovladači** v bloku `.cil`: jedna věta „Po této lekci dokážu…",
+   ročník, odhad času, odkaz na dovednost, která se hodí předtím, a
+   `<details>` se scénářem pro učitele na 5 / 15 / 45 minut.
+2. **Vedený příklad** jako první režim: pár kroků, které z obrázku postupně
+   přečtou zadání (u zlomků nejdřív jmenovatel, pak čitatel) a v zápisu vždy
+   rozsvítí tu část, o které je řeč. Kroky posouvá tlačítko, ne časovač —
+   tempo drží žák. Poslední krok vede rovnou do procvičování.
+3. **Víc pohledů na tutéž věc se stejně velkým celkem.** Koláč, proužek
+   i číselná osa mají stejný `viewBox` i šířku, střídají se po řadě a po
+   správné odpovědi se ukážou pohromadě. Bez stejně velkého celku obrázky
+   neukazují tentýž zlomek, ale tři nesouvisející obrázky.
+4. **Blok `.navaznosti`** na konci: „Nejdřív potřebuji / Pokračuj na / Později".
+   Odkazy se značí `data-lekce` a otevírá je rozcestník ve své ploše
+   (`postMessage({otevri})`), aby lekce nevypadla z rámu.
+
+**Chyba má pojmenovat záměnu.** `zpravaChyba` v `Uloha.vyber` smí být funkce,
+která dostane klíč zvolené možnosti — lekce tak odpoví „máš prohozený zápis"
+místo „zkus jinou možnost". Aby bylo co pojmenovat, obsahuje nabídka typické
+záměny (u zlomků: nevybarvené díly, prohozený zápis, o jedna vedle).
+
+**Čeština generovaných vět** se kontroluje včetně tvarů: „jedna čtvrtina",
+„dvě třetiny", „pět šestin", „1 díl / 2 díly / 5 dílů". Pomocné funkce jsou
+zatím v lekci (`slovyZlomek`, `tvar`); kdo je bude potřebovat jinde, přesune
+je do sdíleného souboru.
+
+**Obrázek, na který se klepe, musí jít ovládat i klávesnicí.** Díly koláče
+jsou `role="button"` s `tabindex`, `aria-pressed` a přístupným názvem; šipky
+mezi nimi přecházejí, mezerník vybarvuje a zaostřený díl má silnější obrys.
+Šipky i Enter je potřeba zastavit (`stopPropagation`), jinak je spolkne
+klávesová zkratka stránky pro „další otázku".
+
+## Zpětná vazba, klávesnice a pohyb
+
+Tohle všechno řeší `uloha.js` a `vyuka.css` společně pro všechny procvičovací
+stránky; do jednotlivých souborů se kvůli tomu nesahá:
+
+- **Odečítač obrazovky.** Prvek `.odezva` dostává `role="status"` a
+  `aria-live="polite"`, i když ho stránka staví ke každé otázce znovu (hlídá
+  `MutationObserver`). Zpětná vazba tak není jen vidět, ale i slyšet.
+- **Enter patří odpovědi.** Většina stránek má na Enter navázané „další
+  otázka". Když je fokus na možnosti, na prvku pořadí nebo na „Pokračovat",
+  `uloha.js` klávesu zastaví v záchytné fázi, takže odpověď opravdu odejde
+  a stránka místo ní nevygeneruje novou otázku.
+- **Viditelný fokus.** Prstenec `:focus-visible` mají možnosti, pořadí,
+  režimy, lišta ovládání i doplňovací pole. Do polí nepatří `outline: none` —
+  právě to fokus dřív schovávalo.
+- **Omezení pohybu.** Při `prefers-reduced-motion: reduce` se vypne zaklepání
+  u chyby i přechody tlačítek. Chyba zůstane poznat podle barvy a textu.
+- **Přeskočit ≠ odpověď.** Tlačítko `#btnDalsi` s textem „Přeskočit →" dostane
+  popis „Přejde na jinou otázku. Tahle se nezapočítá do skóre." Kontroluje se
+  u každé otázky, protože stránky text tlačítka mění podle režimu.
 
 ## Pravopisné a mluvnické stránky
 
@@ -706,3 +818,25 @@ a nahraje hlavní web, Metodus i ukázkovou stránku.
 
 Testovat vždy přes lokální server — otevření přes `file://` blokuje CORS
 (textury, fetch, moduly).
+
+Postupné opravy podle [auditu všech stránek](AUDIT_VYUKY_2026-09-16.md) vede
+[ETAPY_VYLEPSENI.md](ETAPY_VYLEPSENI.md); zálohy původních souborů a snímky
+z ověření leží v `docs/`. Regresní kontroly ve složce `tests/` se spouští proti
+místnímu serveru a Chromiu s laděním po CDP:
+
+```bash
+python3 -m http.server 8766 --bind 127.0.0.1
+chromium --headless=new --remote-debugging-port=9223 --user-data-dir=/tmp/metodus-profil about:blank
+node tests/etapa01-browser.mjs    # obsahové opravy pH, nepřímé řeči, válce a symbolů
+node tests/etapa02-iss.mjs        # ISS: živá data, výpadek, návrat spojení, start bez sítě
+node tests/etapa02-stranky.mjs    # odkazy, kotvy, šířky a motivy stránek etapy 02
+node tests/etapa03-navigace.mjs   # mobilní hlavička, nabídka Další, klávesnice, zrušení filtrů
+node tests/etapa04-vzhled.mjs     # soulad s motivem a kontrast textu na starších stránkách
+node tests/etapa05-odpoved.mjs    # rušení posunu, živá odezva, klávesnice, omezení pohybu
+node tests/etapa06-zlomky.mjs     # vzorová lekce: cíl, vedený příklad, tři obrázky, klávesnice
+```
+
+Testy používají vlastní profil prohlížeče, aby nepřepisovaly žákovské skóre;
+test ISS nahrazuje datovou službu stubem, takže nevolá `wheretheiss.at`.
+Obcházejí také servisního workera a HTTP cache — jinak by četly starou verzi
+stránky z `metodus-vN` a kontrolovaly by nasazený web místo pracovní kopie.

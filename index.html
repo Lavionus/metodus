@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Metodus | Interaktivní učení</title>
-  <meta name="description" content="Metodus – 77 interaktivních výukových aplikací pro 1. a 2. stupeň ZŠ i střední školu. Čeština, matematika, přírodní vědy, zeměpis, dějepis a cizí jazyky. Zdarma, bez registrace, funguje i offline." />
+  <meta name="description" content="Metodus – interaktivní výukové aplikace pro 1. a 2. stupeň ZŠ i střední školu. Čeština, matematika, přírodní vědy, zeměpis, dějepis a cizí jazyky. Zdarma a bez registrace. Uložené lekce lze používat offline; živá data vyžadují internet." />
   <link rel="stylesheet" href="common.css" />
   <script src="theme.js"></script>
   <script src="podpis.js" defer></script>
@@ -497,6 +497,72 @@
       border-color: var(--accent);
     }
 
+    /* V hlavičce stačí ikona, v nabídce „Další" je potřeba i slovo. */
+    .ovladani button .popis { display: none; }
+
+    /* Nabídka „Další" – na úzké obrazovce sdružuje akce, které se do hlavičky nevejdou */
+    .vice-obal { position: relative; flex-shrink: 0; }
+    .vice-toggle {
+      background-color: var(--bg-control);
+      border: 1px solid var(--border-strong);
+      color: var(--text-muted);
+      border-radius: 6px;
+      padding: 6px 12px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.15s ease;
+    }
+    .vice-toggle:hover, .vice-toggle[aria-expanded="true"] {
+      background-color: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+    .vice-menu {
+      position: absolute;
+      top: calc(100% + 6px);
+      right: 0;
+      z-index: 1001;
+      min-width: 220px;
+      /* zavřenou nabídku drží atribut hidden — display musí platit až pro otevřenou */
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      padding: 6px;
+      background-color: var(--bg-elevated);
+      border: 1px solid var(--border-strong);
+      border-radius: 8px;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
+    }
+    .vice-menu:not([hidden]) { display: flex; }
+    .vice-menu button {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      text-align: left;
+      font-size: 0.9rem;
+      padding: 10px 12px;
+    }
+    .vice-menu button .popis { display: inline; }
+    .vice-menu button .ikona { width: 1.4em; text-align: center; }
+
+    /* Zrušení filtrů – viditelné jen tehdy, když je co rušit */
+    .zrusit-filtry {
+      margin-top: 10px;
+      width: 100%;
+      background-color: var(--bg-control);
+      border: 1px solid var(--border-strong);
+      color: var(--text);
+      border-radius: 6px;
+      padding: 8px 10px;
+      font-size: 0.78rem;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .zrusit-filtry:hover { background-color: var(--accent); color: #fff; border-color: var(--accent); }
+    .zrusit-co { display: block; font-size: 0.72rem; opacity: 0.85; margin-top: 2px; }
+
     /* zvýraznění při hledání */
     .sekce a.zvyrazneno {
       background-color: var(--accent-soft);
@@ -508,6 +574,18 @@
 
     @media (max-width: 768px) {
       .ovladani .jen-desktop { display: none; }
+    }
+
+    /* Úzká hlavička: jeden řádek — menu, název, úvod a nabídka Další.
+       Ostatní akce do ní přesune presunOvladani(). */
+    @media (max-width: 700px) {
+      .hlavicka { padding: 10px 12px; gap: 10px; }
+      .hlavicka-left { gap: 8px; flex: 1 1 auto; }
+      .hlavicka h1 { font-size: 1.05rem; }
+      .ovladani { flex-wrap: nowrap; }
+      /* stejně vysoké a prstem trefitelné prvky v jednom řádku */
+      .hlavicka button { min-height: 38px; }
+      .vice-menu { max-height: 70vh; overflow-y: auto; }
     }
 
     /* Pracovní plocha */
@@ -548,6 +626,15 @@
       .menu-overlay.show { opacity: 1; pointer-events: auto; }
 
       .pracovni-plocha { width: 100%; }
+    }
+
+    .hamburger:focus-visible,
+    .ovladani button:focus-visible,
+    .vice-toggle:focus-visible,
+    .vice-menu button:focus-visible,
+    .zrusit-filtry:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
     }
 
     .ovladani button.aktivni {
@@ -645,16 +732,22 @@
         <button id="hamburger" class="hamburger" aria-label="Otevřít menu" aria-expanded="false" aria-controls="hlavniMenu">☰</button>
         <h1><svg class="znacka-symbol" viewBox="0 0 655 488" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><g transform="translate(0,488) scale(0.1,-0.1)"><path d="M5911 4824 c-708 -239 -1389 -584 -1876 -950 -352 -264 -547 -485 -738 -835 -22 -40 -20 -42 -92 91 -182 335 -566 695 -1067 999 -428 259 -1117 569 -1582 710 -225 69 -459 -49 -526 -266 -33 -109 -31 -4397 3 -4463 39 -78 132 -121 215 -100 247 62 474 296 558 575 17 56 18 153 21 1635 1 866 2 1588 3 1604 0 40 33 34 285 -50 976 -324 1596 -753 1810 -1254 117 -274 117 -276 124 -1170 7 -837 2 -784 71 -843 111 -95 297 -66 363 56 22 42 22 42 28 817 5 741 6 779 26 865 124 529 489 910 1200 1252 354 169 962 387 984 351 5 -7 9 -727 9 -1599 0 -1587 0 -1587 25 -1673 45 -155 115 -267 238 -382 223 -208 448 -238 531 -72 26 52 26 52 26 2204 0 1529 -3 2168 -11 2206 -41 199 -219 348 -413 348 -35 0 -102 -17 -215 -56z"/></g></svg> Metodus</h1>
       </div>
-      <div class="ovladani">
-        <button id="btnDomu" title="Úvodní přehled">🏠</button>
-        <button id="btnOsnova" title="Osnova – pokrytí učiva podle ročníků">🗺️</button>
-        <button id="btnUcitel" title="Kabinet učitele – pracovní listy, slidy, nástroje do hodiny">🧑‍🏫</button>
-        <button id="btnPredstaveni" title="Živé ukázky – co Metodus umí">◈</button>
-        <button id="btnTema" title="Přepnout světlý / tmavý režim">🌙</button>
-        <button id="btnProjektor" title="Režim projektor – zvětšit obraz a schovat menu (F8)">📽️</button>
-        <button id="btnNoveOkno" title="Otevřít aktuální aplikaci v novém okně">🗗</button>
+      <div class="ovladani" id="ovladani">
+        <button id="btnDomu" title="Úvodní přehled"><span class="ikona" aria-hidden="true">🏠</span><span class="popis">Úvod</span></button>
+        <button id="btnOsnova" title="Osnova – pokrytí učiva podle ročníků"><span class="ikona" aria-hidden="true">🗺️</span><span class="popis">Osnova</span></button>
+        <button id="btnUcitel" title="Kabinet učitele – pracovní listy, slidy, nástroje do hodiny"><span class="ikona" aria-hidden="true">🧑‍🏫</span><span class="popis">Kabinet učitele</span></button>
+        <button id="btnPredstaveni" title="Živé ukázky – co Metodus umí"><span class="ikona" aria-hidden="true">◈</span><span class="popis">Živé ukázky</span></button>
+        <button id="btnTema" title="Přepnout světlý / tmavý režim"><span class="ikona" id="temaIkona" aria-hidden="true">🌙</span><span class="popis" id="temaPopis">Světlý režim</span></button>
+        <button id="btnProjektor" title="Režim projektor – zvětšit obraz a schovat menu (F8)"><span class="ikona" aria-hidden="true">📽️</span><span class="popis">Projektor</span></button>
+        <button id="btnNoveOkno" title="Otevřít aktuální aplikaci v novém okně"><span class="ikona" aria-hidden="true">🗗</span><span class="popis">Nové okno</span></button>
         <button id="rozbalitVse" class="jen-desktop" title="Rozbalit vše">⊞ Rozbalit</button>
         <button id="sbalitVse" class="jen-desktop" title="Sbalit vše">⊟ Sbalit</button>
+      </div>
+      <div class="vice-obal">
+        <button id="btnVice" class="vice-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="viceMenu" hidden>
+          <span aria-hidden="true">⋯</span> Další
+        </button>
+        <div class="vice-menu" id="viceMenu" role="menu" aria-labelledby="btnVice" hidden></div>
       </div>
     </header>
 
@@ -681,6 +774,9 @@
               <input type="checkbox" id="prepinacPlan" checked>
               Zobrazit připravované 🚧
             </label>
+            <button type="button" class="zrusit-filtry" id="zrusitFiltry" hidden>
+              ✕ Zrušit filtry<span class="zrusit-co" id="zrusitCo"></span>
+            </button>
           </div>
         </div>
         <div id="menuSekce"></div>
@@ -1001,7 +1097,8 @@
 
     function zobrazTema() {
       const light = document.documentElement.dataset.theme === 'light';
-      btnTema.textContent = light ? '☀️' : '🌙';
+      document.getElementById('temaIkona').textContent = light ? '☀️' : '🌙';
+      document.getElementById('temaPopis').textContent = light ? 'Tmavý režim' : 'Světlý režim';
       btnTema.title = light ? 'Přepnout na tmavý režim' : 'Přepnout na světlý režim';
       if (themeColor) themeColor.content = light ? '#ffffff' : '#2d2d2d';
     }
@@ -1183,8 +1280,37 @@
         }
       });
       bezVysledku.classList.toggle('zobraz', celkemShod === 0);
+      zobrazZruseni();
       prepoctiPocty();
     }
+
+    /* Zrušení filtrů je vidět jen tehdy, když nějaký filtr opravdu ubírá
+       položky — a rovnou pojmenuje, co zruší. Jinak uživatel na telefonu
+       nepozná, proč vidí jen část katalogu. */
+    const zrusitFiltry = document.getElementById('zrusitFiltry');
+    const zrusitCo = document.getElementById('zrusitCo');
+    function zobrazZruseni() {
+      const co = [];
+      if (aktivniSkupina !== 'vse') {
+        const p = pills.find(x => x.dataset.skupina === aktivniSkupina);
+        co.push('předmět ' + (p ? p.querySelector('span').textContent.trim() : aktivniSkupina));
+      }
+      if (aktivniRocnik !== 'vse') co.push(aktivniRocnik + '. ročník');
+      if (aktualniDotaz()) co.push('hledání');
+      if (maPlan && !zobrazPlan) co.push('skryté připravované 🚧');
+      zrusitFiltry.hidden = co.length === 0;
+      zrusitCo.textContent = co.length ? 'zruší: ' + co.join(', ') : '';
+    }
+    zrusitFiltry.addEventListener('click', () => {
+      aktivniSkupina = 'vse'; uloz(localStorage, KEY_SKUPINA, 'vse');
+      aktivniRocnik = 'vse'; uloz(localStorage, KEY_ROCNIK, 'vse');
+      if (maPlan) { zobrazPlan = true; prepinacPlan.checked = true; uloz(localStorage, KEY_PLAN, '1'); }
+      nastavDotaz('');
+      updatePillState();
+      aplikujFiltr();
+      menuEl.scrollTop = 0;
+      hledatMenu.focus();
+    });
 
     searchInputs.forEach(input => {
       input.addEventListener('input', () => {
@@ -1231,6 +1357,7 @@
       }
       if (e.key === 'F8') { e.preventDefault(); nastavProjektor(!projektorZap); return; }
       if (e.key === 'Escape') {
+        if (!viceMenu.hidden) { setViceOpen(false); btnVice.focus(); return; }
         if (document.body.classList.contains('menu-nad')) {
           document.body.classList.remove('menu-nad'); return;
         }
@@ -1254,19 +1381,83 @@
     const hamburger = document.getElementById('hamburger');
     const menuOverlay = document.getElementById('menuOverlay');
 
-    function openMenu() {
+    function openMenu(fokus = false) {
       menuEl.classList.add('open');
       menuOverlay.classList.add('show');
       hamburger.setAttribute('aria-expanded', 'true');
+      hamburger.setAttribute('aria-label', 'Zavřít menu');
+      // Klávesnice i čtečka musí po otevření skončit uvnitř menu, ne za ním.
+      if (fokus) hledatMenu.focus();
     }
     function closeMenu() {
+      const bylUvnitr = menuEl.contains(document.activeElement);
       menuEl.classList.remove('open');
       menuOverlay.classList.remove('show');
       hamburger.setAttribute('aria-expanded', 'false');
+      hamburger.setAttribute('aria-label', 'Otevřít menu');
+      if (bylUvnitr && window.matchMedia('(max-width: 1024px)').matches) hamburger.focus();
     }
     hamburger.addEventListener('click', () =>
-      menuEl.classList.contains('open') ? closeMenu() : openMenu());
+      menuEl.classList.contains('open') ? closeMenu() : openMenu(true));
     menuOverlay.addEventListener('click', closeMenu);
+
+    /* ---- Nabídka „Další": na úzké obrazovce sdružuje akce z hlavičky ----
+       Tlačítka se přesouvají, ne kopírují — zůstávají jim posluchače i stav
+       (zvýrazněný projektor, ikona motivu). */
+    const ovladaniEl = document.getElementById('ovladani');
+    const btnVice = document.getElementById('btnVice');
+    const viceMenu = document.getElementById('viceMenu');
+    const doNabidky = ['btnOsnova', 'btnUcitel', 'btnPredstaveni', 'btnTema', 'btnProjektor', 'btnNoveOkno']
+      .map(id => document.getElementById(id));
+    const uzkaHlavicka = window.matchMedia('(max-width: 700px)');
+
+    function setViceOpen(open) {
+      viceMenu.hidden = !open;
+      btnVice.setAttribute('aria-expanded', String(open));
+      if (open) viceMenu.querySelector('button:not([disabled])')?.focus();
+    }
+    function presunOvladani() {
+      const uzka = uzkaHlavicka.matches;
+      btnVice.hidden = !uzka;
+      if (!uzka) setViceOpen(false);
+      doNabidky.forEach(b => {
+        const cil = uzka ? viceMenu : ovladaniEl;
+        if (b.parentElement !== cil) {
+          if (uzka) b.setAttribute('role', 'menuitem'); else b.removeAttribute('role');
+          cil.insertBefore(b, uzka ? null : document.getElementById('rozbalitVse'));
+        }
+      });
+    }
+    presunOvladani();
+    uzkaHlavicka.addEventListener('change', presunOvladani);
+
+    btnVice.addEventListener('click', e => {
+      e.stopPropagation();
+      setViceOpen(viceMenu.hidden);
+    });
+    // Šipky procházejí nabídkou, Esc ji zavře a vrátí fokus na tlačítko.
+    viceMenu.addEventListener('keydown', e => {
+      const polozky = [...viceMenu.querySelectorAll('button')];
+      const i = polozky.indexOf(document.activeElement);
+      if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+        e.preventDefault();
+        const posun = e.key === 'ArrowDown' ? 1 : -1;
+        polozky[(i + posun + polozky.length) % polozky.length].focus();
+      } else if (e.key === 'Home' || e.key === 'End') {
+        e.preventDefault();
+        (e.key === 'Home' ? polozky[0] : polozky[polozky.length - 1]).focus();
+      }
+    });
+    // volba akce nabídku zavře (tlačítka si svou práci odbaví sama)
+    viceMenu.addEventListener('click', e => { if (e.target.closest('button')) setViceOpen(false); });
+    document.addEventListener('click', e => {
+      if (!viceMenu.hidden && !e.target.closest('.vice-obal')) setViceOpen(false);
+    });
+    // odchod tabulátorem mimo nabídku ji také zavře
+    document.addEventListener('focusin', e => {
+      if (!viceMenu.hidden && !e.target.closest('.vice-obal')) setViceOpen(false);
+    });
+
     window.addEventListener('resize', () => {
       if (!window.matchMedia('(max-width: 1024px)').matches) closeMenu();
     });
@@ -1294,6 +1485,13 @@
       else Projektor.zrus(iframe);
       zobrazUroven();
     }
+
+    // V celé obrazovce spolkne Esc prohlížeč (ukončí jen fullscreen) a režim
+    // projektor by zůstal zapnutý bez zvětšení. Odchod z celé obrazovky proto
+    // ukončí i režim — jedno Esc tedy dělá to, co slibuje popisek tlačítka.
+    document.addEventListener('fullscreenchange', () => {
+      if (projektorZap && !document.fullscreenElement) nastavProjektor(false);
+    });
 
     function nastavProjektor(zap) {
       projektorZap = zap;

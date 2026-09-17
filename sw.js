@@ -1,11 +1,12 @@
 /* Service worker webu Metodus.
    Jádro (index, katalog, styly) se předcachuje; jednotlivé aplikace
    se cachují průběžně při prvním otevření (stale-while-revalidate),
-   takže jednou navštívená aplikace funguje i offline. */
+   takže offline fungují lekce s uloženými potřebnými soubory.
+   Externí zdroje ani živá data tento worker neukládá. */
 /* Při větší aktualizaci webu zvyš číslo verze — stará cache se u návštěvníků
    smaže a vše se stáhne čerstvé (jinak SWR ukáže novou verzi až na druhé načtení). */
 const PREFIX = 'metodus-';
-const CACHE = PREFIX + 'v73';
+const CACHE = PREFIX + 'v76';
 const JADRO = [
   './',
   './index.html',

@@ -10,6 +10,7 @@
   <script src="../podpis.js" defer></script>
   <script src="../uloha.js"></script>
   <style>
+    .napoveda a { color: var(--accent); }
     .stupnice { display: flex; width: min(520px, 96%); border-radius: 8px; overflow: hidden;
       border: 1px solid var(--border-strong); }
     .stupnice div { flex: 1; text-align: center; font-size: 0.72rem; font-weight: 700;
@@ -41,46 +42,51 @@
     <span class="skore" id="skore"></span>
   </div>
 
-  <div class="stupnice">
-    <div style="background:#e2453c">0–2<br>silně kyselé</div>
-    <div style="background:#f08a3c">3–5<br>kyselé</div>
-    <div style="background:#7ec850">6–8<br>neutrální</div>
-    <div style="background:#3fa9c9">9–11<br>zásadité</div>
-    <div style="background:#6a5acd">12–14<br>silně zásadité</div>
+  <div class="stupnice" aria-label="Rozdělení prostředí podle pH při 25 °C">
+    <div style="background:#f08a3c">pH &lt; 7<br>kyselé</div>
+    <div style="background:#7ec850">pH = 7<br>neutrální</div>
+    <div style="background:#3fa9c9">pH &gt; 7<br>zásadité</div>
   </div>
 
   <p class="napoveda">
-    Stupnice pH má rozsah <b>0 až 14</b>. Hodnota <b>7 je neutrální</b>, nižší znamená kyselé
-    a vyšší zásadité prostředí. Při <b>neutralizaci</b> reaguje kyselina s hydroxidem
-    a vzniká <b>sůl a voda</b>.
+    V těchto úlohách používáme školní model při <b>25 °C</b>: hodnota <b>7 je neutrální</b>,
+    nižší znamená kyselé a vyšší zásadité prostředí. Běžně zobrazujeme rozsah <b>0 až 14</b>,
+    ale pH může ležet i mimo něj. Hodnoty u látek jsou orientační a závisí na složení a podmínkách.
+    Barvy v přehledu označují druh prostředí, nikoli skutečnou barvu látky.
+    Při <b>neutralizaci kyseliny hydroxidem</b> vzniká <b>sůl a voda</b>.
   </p>
+  <details class="napoveda">
+    <summary>Jak číst barvy indikátorů · zdroje</summary>
+    <p>Každý indikátor mění barvu v jiném rozmezí pH. Samotné označení „kyselé“ či „zásadité“
+      proto nestačí. V úlohách porovnáváme konkrétní hodnoty; u indikátorového papírku jde
+      o orientační barvy, přesný odstín porovnávej se stupnicí výrobce.</p>
+    <p><a href="https://openstax.org/books/chemistry-atoms-first-2e/pages/14-2-ph-and-poh">OpenStax: pH a pOH</a> ·
+      <a href="https://www2.chem.wisc.edu/deptfiles/genchem/tables/IndicatorTable.htm">University of Wisconsin: přechody indikátorů</a></p>
+  </details>
 
 <script>
 const $ = id => document.getElementById(id);
 const skore = Uloha.skore('metodus_ch9_ph', $('skore'));
 let rezim = 'stupnice';
-function odezvaEl() { const d = document.createElement('div'); d.className = 'odezva'; return d; }
+function odezvaEl() { const d = document.createElement('div'); d.className = 'odezva'; d.setAttribute('role', 'status'); return d; }
+const druhPodlePh = ph => ph < 7 ? 'kyselé' : ph > 7 ? 'zásadité' : 'neutrální';
 
 const LATKY = [
-  { n: 'žaludeční šťáva', ph: 1.5, druh: 'kyselé' },
-  { n: 'citronová šťáva', ph: 2.4, druh: 'kyselé' },
-  { n: 'ocet', ph: 3, druh: 'kyselé' },
-  { n: 'pomerančový džus', ph: 3.5, druh: 'kyselé' },
-  { n: 'káva', ph: 5, druh: 'kyselé' },
-  { n: 'mléko', ph: 6.6, druh: 'neutrální' },
-  { n: 'čistá voda', ph: 7, druh: 'neutrální' },
-  { n: 'krev', ph: 7.4, druh: 'neutrální' },
-  { n: 'mořská voda', ph: 8.1, druh: 'zásadité' },
-  { n: 'mýdlová voda', ph: 10, druh: 'zásadité' },
-  { n: 'čpavek v čističi', ph: 11.5, druh: 'zásadité' },
-  { n: 'roztok hydroxidu sodného', ph: 13.5, druh: 'zásadité' },
-];
+  { n: 'žaludeční šťáva', ph: 1.5 },
+  { n: 'citronová šťáva', ph: 2.4 },
+  { n: 'ocet', ph: 3 },
+  { n: 'pomerančový džus', ph: 3.5 },
+  { n: 'káva', ph: 5 },
+  { n: 'mléko', ph: 6.6 },
+  { n: 'čistá voda', ph: 7 },
+  { n: 'krev', ph: 7.4 },
+  { n: 'mořská voda', ph: 8.1 },
+  { n: 'mýdlová voda', ph: 10 },
+  { n: 'čpavek v čističi', ph: 11.5 },
+  { n: 'roztok hydroxidu sodného', ph: 13.5 },
+].map(latka => ({ ...latka, druh: druhPodlePh(latka.ph) }));
 function barvaPodlePh(ph) {
-  if (ph < 3) return '#e2453c';
-  if (ph < 6) return '#f08a3c';
-  if (ph <= 8) return '#7ec850';
-  if (ph <= 11.5) return '#3fa9c9';
-  return '#6a5acd';
+  return ph < 7 ? '#f08a3c' : ph > 7 ? '#3fa9c9' : '#7ec850';
 }
 function svgZkumavka(barva) {
   return `<svg class="zkumavka" viewBox="0 0 100 180">
@@ -96,14 +102,14 @@ function stupnice() {
   p.innerHTML = naDruh
     ? `<div class="zadani uloha-text">Jaké prostředí má látka <b>${l.n}</b> (pH ${String(l.ph).replace('.', ',')})?</div>
        <div class="karta">${svgZkumavka(barvaPodlePh(l.ph))}</div>`
-    : `<div class="zadani uloha-text">Která z látek je <b>${l.druh}</b>?</div>`;
+    : `<div class="zadani uloha-text">Která z látek má <b>${l.druh} prostředí</b>?</div>`;
   const odezva = odezvaEl();
   Uloha.vyber({
     kam: p, odezva,
     moznosti: naDruh
       ? Uloha.zamichej([
           { klic: 'kyselé', popis: 'kyselé (pH < 7)' },
-          { klic: 'neutrální', popis: 'neutrální (pH ≈ 7)' },
+          { klic: 'neutrální', popis: 'neutrální (pH = 7)' },
           { klic: 'zásadité', popis: 'zásadité (pH > 7)' },
         ])
       : Uloha.zamichej([l.n, ...Uloha.zamichej(LATKY.filter(x => x.druh !== l.druh)).slice(0, 3).map(x => x.n)])
@@ -117,33 +123,44 @@ function stupnice() {
   p.appendChild(odezva);
 }
 
+// Konkrétní hodnoty leží mimo přechodové oblasti: obecné „kyselé/zásadité“ nestačí.
 const INDIKATORY = [
-  { i: 'lakmus', kyselé: 'červený', zásadité: 'modrý', neutrální: 'fialový' },
-  { i: 'fenolftalein', kyselé: 'bezbarvý', zásadité: 'růžový až fialový', neutrální: 'bezbarvý' },
-  { i: 'univerzální indikátorový papírek', kyselé: 'červený až oranžový', zásadité: 'modrý až fialový', neutrální: 'zelený' },
-  { i: 'methyloranž', kyselé: 'červená', zásadité: 'žlutá', neutrální: 'žlutooranžová' },
+  { i: 'lakmus', proc: 'Lakmus je při pH 2 červený, kolem pH 7 fialový a při pH 11 modrý.',
+    vzorky: [{ ph: 2, barva: 'červená', odstin: '#e2453c' }, { ph: 7, barva: 'fialová', odstin: '#9565c9' }, { ph: 11, barva: 'modrá', odstin: '#3f80d9' }] },
+  { i: 'fenolftalein', proc: 'Fenolftalein zůstává při pH 8 bezbarvý, přestože je prostředí už mírně zásadité. Růžoví až při vyšším pH (přechod přibližně 8,3–10).',
+    vzorky: [{ ph: 2, barva: 'bezbarvý roztok', odstin: 'none' }, { ph: 7, barva: 'bezbarvý roztok', odstin: 'none' }, { ph: 8, barva: 'bezbarvý roztok', odstin: 'none' }, { ph: 11, barva: 'růžová', odstin: '#ed6baf' }] },
+  { i: 'univerzální indikátorový papírek', proc: 'Na běžné orientační stupnici je pH 2 červené, pH 7 zelené a pH 11 modré až fialové. Přesný odstín závisí na výrobci.',
+    vzorky: [{ ph: 2, barva: 'červená', odstin: '#e2453c' }, { ph: 7, barva: 'zelená', odstin: '#7ec850' }, { ph: 11, barva: 'modrá až fialová', odstin: '#6a5acd' }] },
+  { i: 'methyloranž', proc: 'Methyloranž mění barvu z červené na žlutou přibližně při pH 3,1–4,4. Při pH 5 je už žlutá, i když je roztok stále kyselý; žlutá zůstává i při pH 7 a 11.',
+    vzorky: [{ ph: 2, barva: 'červená', odstin: '#e2453c' }, { ph: 5, barva: 'žlutá', odstin: '#f3ce4e' }, { ph: 7, barva: 'žlutá', odstin: '#f3ce4e' }, { ph: 11, barva: 'žlutá', odstin: '#f3ce4e' }] },
 ];
 function indikatory() {
   const p = $('plocha');
   const ind = Uloha.nahodne(INDIKATORY);
-  const prostredi = Uloha.nahodne(['kyselé', 'zásadité', 'neutrální']);
-  const spravny = ind[prostredi];
-  const jine = [...new Set([ind.kyselé, ind.zásadité, ind.neutrální,
-    ...INDIKATORY.flatMap(x => [x.kyselé, x.zásadité])])].filter(x => x !== spravny);
-
-  p.innerHTML = `<div class="zadani uloha-text">Jakou barvu má <b>${ind.i}</b>
-      v <b>${prostredi}m</b> prostředí?</div>
-    <div class="karta">${svgZkumavka(prostredi === 'kyselé' ? '#e2453c'
-      : prostredi === 'zásadité' ? '#3fa9c9' : '#7ec850')}</div>`;
+  const vzorek = Uloha.nahodne(ind.vzorky);
+  const jine = [...new Set(INDIKATORY.flatMap(x => x.vzorky.map(v => v.barva)))]
+    .filter(x => x !== vzorek.barva);
+  p.innerHTML = `<div class="zadani uloha-text">Jaké zbarvení ukáže <b>${ind.i}</b>
+      při <b>pH ${String(vzorek.ph).replace('.', ',')}</b>?</div>
+    <div class="karta" id="ukazkaIndikatoru">Vyber odpověď. Pak se zobrazí barva a vysvětlení.</div>`;
   const odezva = odezvaEl();
   Uloha.vyber({
     kam: p, odezva,
-    moznosti: Uloha.zamichej([spravny, ...Uloha.zamichej(jine).slice(0, 3)]).map(t => ({ klic: t, popis: t })),
-    spravnyKlic: spravny,
-    zpravaOk: `✅ ${ind.i} je v ${prostredi}m prostředí ${spravny}.`,
-    zpravaChyba: 'Lakmus: červený v kyselém, modrý v zásaditém. Fenolftalein je v kyselém bezbarvý.',
-    poSpravne: skore.vyhodnot,
+    moznosti: Uloha.zamichej([vzorek.barva, ...Uloha.zamichej(jine).slice(0, 3)])
+      .map(t => ({ klic: t, popis: t })),
+    spravnyKlic: vzorek.barva,
+    zpravaOk: `✅ pH ${vzorek.ph}: ${vzorek.barva}. ${ind.proc}`,
+    zpravaChyba: ind.proc,
+    poSpravne: napoprve => {
+      skore.vyhodnot(napoprve);
+      const vzornik = document.createElement('span');
+      vzornik.setAttribute('aria-hidden', 'true');
+      vzornik.style.cssText = 'display:inline-block;width:76px;height:38px;border:2px solid var(--text-muted);border-radius:6px';
+      vzornik.style.backgroundColor = vzorek.odstin === 'none' ? 'transparent' : vzorek.odstin;
+      $('ukazkaIndikatoru').replaceChildren(vzornik, document.createTextNode(vzorek.barva));
+    },
     dalsi: novaUloha,
+    prodleva: 6500,
   });
   p.appendChild(odezva);
 }
@@ -159,7 +176,7 @@ function neutralizace() {
   const p = $('plocha');
   const u = Uloha.nahodne(NEUTRALIZACE);
   const naSul = Math.random() < 0.7;
-  const jine = NEUTRALIZACE.filter(x => x.sul !== u.sul).map(x => x.sul);
+  const jine = [...new Set(NEUTRALIZACE.filter(x => x.sul !== u.sul).map(x => x.sul))];
 
   p.innerHTML = naSul
     ? `<div class="zadani uloha-text">Jaká sůl vznikne při neutralizaci?</div>

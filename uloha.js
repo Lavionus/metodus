@@ -41,6 +41,14 @@ const Uloha = (function () {
   const posluchaciNastaveni = [];
   function ulozNastaveni() {
     try { localStorage.setItem(NASTAVENI_KLIC, JSON.stringify(nastaveni)); } catch { /* nevadí */ }
+    // Naplánovaný posun patří ke starému nastavení: přepnutí tempa nebo režimu
+    // ho musí přepočítat, jinak by po přepnutí na „ručně“ stránka i tak sama
+    // skočila dál a volba by se projevila až u další otázky.
+    const cekalo = posunCekani;
+    if (cekalo) {
+      zrusPosun();
+      posun(cekalo.dalsi, cekalo.prodleva, cekalo.napoprve, cekalo.kotva);
+    }
     posluchaciNastaveni.forEach(f => f(nastaveni));
   }
 
@@ -49,11 +57,29 @@ const Uloha = (function () {
     return Math.round(zaklad * TEMPA[nastaveni.tempo].nasobek);
   }
 
+  /* Naplánovaný posun na další otázku. Drží se v modulu, aby se dal zrušit:
+     bez toho po přeskočení nebo přepnutí režimu doběhl starý časovač a vyrobil
+     druhou novou otázku přes tu, kterou žák právě dostal. */
+  let posunCekani = null;   // { id, dalsi, prodleva, napoprve, kotva }
+
+  function zrusPosun() {
+    if (posunCekani && posunCekani.id !== null) clearTimeout(posunCekani.id);
+    posunCekani = null;
+    // tlačítko z ručního režimu patří k odbyté otázce
+    document.querySelectorAll('button.pokracovat').forEach(b => b.remove());
+  }
+
   /* Posun na další otázku – buď sám po pauze, nebo až na klepnutí.
      Volá se odsud i z procvic.js, aby volba platila i tam. */
   function posun(dalsi, prodleva, napoprve, kotva) {
     if (!dalsi) return;
-    if (nastaveni.rezim === 'auto') { setTimeout(dalsi, pauza(prodleva, napoprve)); return; }
+    zrusPosun();
+    if (nastaveni.rezim === 'auto') {
+      const id = setTimeout(() => { posunCekani = null; dalsi(); }, pauza(prodleva, napoprve));
+      posunCekani = { id, dalsi, prodleva, napoprve, kotva };
+      return;
+    }
+    posunCekani = { id: null, dalsi, prodleva, napoprve, kotva };
     nabidniPokracovat(dalsi, kotva);
   }
 
@@ -66,7 +92,7 @@ const Uloha = (function () {
     b.type = 'button';
     b.className = 'pokracovat';
     b.textContent = 'Pokračovat →';
-    b.addEventListener('click', dalsi);
+    b.addEventListener('click', () => { posunCekani = null; b.remove(); dalsi(); });
     kam.appendChild(b);
     /* Klávesnicí se dá pokračovat rovnou – stránky mají Enter navázaný na svou
        novou úlohu, takže tlačítko se stejně smaže s obsahem plochy. */
@@ -88,15 +114,41 @@ const Uloha = (function () {
        stav         – objekt otázky, drží { chyboval, hotovo }
        odezva       – element pro text zpětné vazby (nepovinné)
        zpravaOk     – text při správné odpovědi
-       zpravaChyba  – text při chybě
+       zpravaChyba  – text při chybě, nebo funkce (klic, prvek) => text,
+                      když má zpětná vazba pojmenovat konkrétní záměnu
        poSpravne(napoprve) – zavolá se při správné odpovědi
        dalsi        – funkce, která připraví další otázku
        prodleva     – ms do další otázky, nebo funkce (napoprve) => ms
      }
      Vrací true, když byla odpověď správná. */
+  /* Zpětná vazba musí dorazit i k odečítači obrazovky: bez živé oblasti
+     se změna textu po odpovědi nikde neohlásí a nevidomý žák se o výsledku
+     nedozví. `polite` čte až po dokončení rozečtené věty. */
+  function pripravOdezvu(odezva) {
+    if (!odezva || odezva.dataset.zivaOblast) return;
+    odezva.setAttribute('role', 'status');
+    odezva.setAttribute('aria-live', 'polite');
+    odezva.dataset.zivaOblast = '1';
+  }
+
+  /* Část stránek si prvek `.odezva` staví ke každé otázce znovu a nepředává
+     ho do vyber(). Hlídač proto označí každý nový – ať zpětnou vazbu ohlásí
+     odečítač obrazovky všude stejně. */
+  function hlidejOdezvy() {
+    document.querySelectorAll('.odezva').forEach(pripravOdezvu);
+    new MutationObserver(zmeny => {
+      for (const z of zmeny) for (const uzel of z.addedNodes) {
+        if (uzel.nodeType !== 1) continue;
+        if (uzel.classList.contains('odezva')) pripravOdezvu(uzel);
+        uzel.querySelectorAll?.('.odezva').forEach(pripravOdezvu);
+      }
+    }).observe(document.documentElement, { childList: true, subtree: true });
+  }
+
   function odpoved(volby) {
     const { prvek, spravne, stav, odezva } = volby;
     if (!stav || stav.hotovo) return false;
+    pripravOdezvu(odezva);
 
     if (!spravne) {
       stav.chyboval = true;
@@ -104,8 +156,13 @@ const Uloha = (function () {
       prvek.classList.add('spatne');
       setTimeout(() => prvek.classList.remove('spatne'), BLIK);
       if (odezva) {
+        // Zpráva smí být i funkce: dostane klíč zvolené možnosti, takže stránka
+        // může pojmenovat konkrétní záměnu místo obecného „zkus to jinak".
+        const zprava = typeof volby.zpravaChyba === 'function'
+          ? volby.zpravaChyba(prvek.dataset.klic, prvek)
+          : volby.zpravaChyba;
         odezva.className = 'odezva chyba';
-        odezva.textContent = volby.zpravaChyba || 'Ještě ne – zkus jinou možnost.';
+        odezva.textContent = zprava || 'Ještě ne – zkus jinou možnost.';
       }
       return false;
     }
@@ -138,6 +195,12 @@ const Uloha = (function () {
   /* Postaví řádek s možnostmi a rovnou napojí vyhodnocení.
      moznosti: [{ klic, popis, ikona? }] */
   function vyber(volby) {
+    // Novou otázku staví každá stránka přes vyber(), takže tady se dá spolehlivě
+    // zrušit posun naplánovaný u té předchozí — ať už ji žák zodpověděl,
+    // přeskočil, nebo přepnul režim.
+    zrusPosun();
+    pripravOdezvu(volby.odezva);
+    popisPreskoceni();
     const m = document.createElement('div');
     m.className = 'moznosti' + (volby.trida ? ' ' + volby.trida : '');
     const stav = { chyboval: false, hotovo: false };
@@ -252,7 +315,15 @@ const Uloha = (function () {
       border-radius: 8px; padding: 10px 20px; font-size: 0.95rem; font-family: inherit;
       cursor: pointer; margin-top: 4px;
     }
-    button.pokracovat:hover { background: var(--accent-hover); }`;
+    button.pokracovat:hover { background: var(--accent-hover); }
+    .posun-obal > button.posun-prepinac:focus-visible,
+    .posun-nabidka button:focus-visible,
+    button.pokracovat:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+    @media (prefers-reduced-motion: reduce) {
+      .posun-obal > button.posun-prepinac, .posun-nabidka button, button.pokracovat {
+        transition: none;
+      }
+    }`;
 
   const VOLBY = [
     { rezim: 'auto', tempo: 'normal', popis: '▶️ Automaticky – normálně' },
@@ -267,7 +338,38 @@ const Uloha = (function () {
       : '⏱️ Posun: ' + TEMPA[nastaveni.tempo].popis;
   }
 
+  /* „Přeskočit" znamená na všech stránkách totéž: dostat jinou otázku, aniž by
+     se tahle počítala. Popis se doplňuje odsud, protože tlačítko má přes sto
+     sedmdesát stránek a význam má být všude stejný. */
+  const POPIS_PRESKOCENI = 'Přejde na jinou otázku. Tahle se nezapočítá do skóre.';
+  function popisPreskoceni() {
+    const b = document.getElementById('btnDalsi');
+    if (!b) return;
+    // Stránky text tlačítka mění podle režimu („🎲 Jiná data" místo přeskočení),
+    // proto se popis kontroluje u každé nové otázky, ne jen při načtení.
+    const preskakuje = b.textContent.trim().startsWith('Přeskočit');
+    if (preskakuje && !b.title) b.title = POPIS_PRESKOCENI;
+    else if (!preskakuje && b.title === POPIS_PRESKOCENI) b.removeAttribute('title');
+  }
+
+  /* Osmdesát osm stránek má na Enter navázané „další otázka". Žák, který
+     ovládá web klávesnicí, se ale nejdřív přepne šipkami/tabem na možnost
+     a Enterem chce odpovědět — bez tohohle by mu stránka místo odpovědi
+     rovnou vygenerovala novou otázku. Aktivaci tlačítka necháme proběhnout
+     (žádné preventDefault), jen zastavíme cestu ke globálnímu posluchači. */
+  function chranKlavesovouOdpoved() {
+    document.addEventListener('keydown', e => {
+      if (e.key !== 'Enter' && e.key !== ' ') return;
+      const cil = e.target instanceof Element
+        && e.target.closest('.moznosti button, button.pokracovat, .porada button');
+      if (cil && !cil.disabled) e.stopPropagation();
+    }, true);
+  }
+
   function vlozOvladani() {
+    popisPreskoceni();
+    hlidejOdezvy();
+    chranKlavesovouOdpoved();
     const lista = document.querySelector('.ovladani, .lista, #ovladani');
     if (!lista || document.querySelector('.posun-obal')) return;
 
@@ -338,7 +440,8 @@ const Uloha = (function () {
 
   return {
     odpoved, trhni, vyber, skore, zamichej, nahodne, nahodneCislo, zapisAktivitu,
-    DENIK, PRODLEVA, posun, pauza,
+    DENIK, PRODLEVA, posun, pauza, zrusPosun,
+    cekaPosun: () => posunCekani !== null,
     nastaveni: () => ({ ...nastaveni }),
     nastav: zmena => { nastaveni = { ...nastaveni, ...zmena }; ulozNastaveni(); },
     priNastaveni,

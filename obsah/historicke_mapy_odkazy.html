@@ -8,6 +8,7 @@
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <style>
+    .warning-box a { color: var(--accent); }
     * {
       margin: 0;
       padding: 0;
@@ -60,7 +61,7 @@
 
     .sites-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 350px), 1fr));
       gap: 30px;
       margin-bottom: 40px;
     }
@@ -212,17 +213,15 @@
   <div class="container">
     <div class="header">
       <h1>📜 Kde najít historické mapy</h1>
-      <p>Kvůli ochraně autorských práv nelze historické mapy zobrazovat přímo v naší aplikaci<br>
-      Zde najdete nejlepší weby, kde můžete historické mapy prohlížet a exportovat</p>
+      <p>Odkazy na externí sbírky historických map pro práci ve výuce.<br>
+      K otevření sbírek potřebujete internet; možnosti stažení a tisku se liší podle zdroje.</p>
     </div>
 
     <div class="warning-box">
-      <h3>⚠️ Proč zde nejsou historické mapy?</h3>
-      <p>
-        Většina webů s historickými mapami využívá CORS ochranu, která brání načítání jejich map na jiných webech. 
-        To je legitimní způsob ochrany jejich investice do digitalizace historických materiálů. 
-        Proto vás odkazujeme přímo na jejich oficiální weby, kde můžete mapy prohlížet v plné kvalitě.
-      </p>
+      <h3>Jak se zdroji pracovat</h3>
+      <p>Mapy otevřete přímo na webu vybrané sbírky. Před hodinou ověřte dostupnost konkrétní mapy,
+        její rok a legendu. Při použití podkladu uveďte zdroj a respektujte podmínky dané sbírky.</p>
+      <p><a href="eduMaps.html#pruvodce">Aktivita: porovnej stejné místo ve dvou obdobích →</a></p>
     </div>
 
     <div class="sites-grid">

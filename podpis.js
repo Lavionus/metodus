@@ -49,7 +49,9 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  color: var(--text-faint, #9a9a9a);
+  /* --text-faint má na světlém pozadí kontrast jen 3,4 : 1; pruh je malým
+     písmem, takže bere tlumenější, ale čitelnou barvu. */
+  color: var(--text-muted, #b0b0b0);
   background: var(--bg, #1a1a1a);
   border-top: 1px solid var(--border, #333);
   z-index: 2147483000;
@@ -64,7 +66,8 @@
 #${ID} .podpis-zpet {
   pointer-events: auto;   /* pruh sám kliknutí nepohlcuje */
   flex: none;
-  color: var(--accent, #4a9eff);
+  /* sytější odstín akcentu: obyčejný --accent má ve světlém motivu 4,4 : 1 */
+  color: var(--accent-hover, #8bbcff);
   text-decoration: none;
   font-weight: 600;
 }

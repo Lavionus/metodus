@@ -9,7 +9,11 @@
   <script src="lib/three.0.160.0.min.js"></script>
   <script src="lib/globe.gl.min.js"></script>
   <script src="lib/solar-calculator.min.js"></script>
-  <link rel="stylesheet" href="../common.css">
+  <!-- Motiv: tato stránka má vlastní tmavou paletu a záměrně nelinkuje ../theme.js.
+     Světlý režim rozcestníku ji nepřepne — černé pozadí je vesmír kolem Země a stanice.
+     Proměnné z common.css si přepisuje níže, takže zůstane tmavá i tehdy,
+     když si zbytek webu uživatel přepne na světlý. -->
+<link rel="stylesheet" href="../common.css">
   <style>
     :root {
       --primary: var(--accent); --accent: #7fd4d4;
@@ -51,15 +55,24 @@
     .panel h2 { font-size: 1rem; display: flex; align-items: center; gap: 8px; }
     .panel .stav { font-size: 0.72rem; color: var(--muted); margin: 2px 0 10px; }
     .panel .stav.zivy::before { content: '●'; color: #7fd48f; margin-right: 5px; }
+    .panel .stav.bez::before { content: '○'; color: #ffb27f; margin-right: 5px; }
     .panel .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
     .panel .cell { background: rgba(255,255,255,0.04); border-radius: 8px; padding: 8px 10px; }
     .panel .cell .k { font-size: 0.64rem; color: var(--muted); text-transform: uppercase; letter-spacing: .5px; }
     .panel .cell .v { font-size: 0.95rem; font-weight: 600; margin-top: 2px; }
+    .panel .grid.zastarale .cell .v { color: var(--muted); }
+    .panel .cell .k .znacka { text-transform: none; letter-spacing: 0; color: #ffb27f; }
     .panel .cell.siroka { grid-column: 1 / -1; }
     .panel .fakta { margin-top: 12px; border-top: 1px solid var(--border); padding-top: 10px; }
     .panel .fakta div { font-size: 0.74rem; color: #aab; line-height: 1.5; padding: 3px 0 3px 20px; position: relative; }
     .panel .fakta div::before { content: '💡'; position: absolute; left: 0; font-size: 0.68rem; }
-    .panel .chyba { margin-top: 10px; font-size: 0.78rem; color: #ff9a8a; display: none; }
+    .panel .chyba { margin-top: 10px; font-size: 0.78rem; color: #ff9a8a; display: none; line-height: 1.5; }
+    .panel .chyba p { margin: 0 0 6px; }
+    .panel .chyba button {
+      font: inherit; color: var(--text); background: rgba(255,255,255,0.06);
+      border: 1px solid var(--border); border-radius: 8px; padding: 5px 10px; cursor: pointer;
+    }
+    .panel .chyba button:hover { border-color: var(--primary); }
 
     .hint { position: fixed; bottom: 18px; right: 20px; z-index: 10; font-size: 0.74rem; color: var(--muted); background: var(--panel); border: 1px solid var(--border); border-radius: 8px; padding: 8px 12px; backdrop-filter: blur(8px); }
 
@@ -84,7 +97,7 @@
   <div class="topbar">
     <div class="title">
       <h1>🛰️ ISS živě</h1>
-      <div class="subtitle">Mezinárodní vesmírná stanice v reálném čase · data wheretheiss.at</div>
+      <div class="subtitle">Mezinárodní vesmírná stanice v reálném čase · data wheretheiss.at · vyžaduje internet</div>
     </div>
     <div class="toolbar">
       <button id="followBtn" class="on" title="Kamera sleduje stanici">🔭 Sledovat</button>
@@ -95,14 +108,15 @@
 
   <div class="panel">
     <h2>🛰️ Mezinárodní vesmírná stanice</h2>
-    <div class="stav" id="stav">připojuji se…</div>
-    <div class="grid">
+    <div class="stav" id="stav">připojuji se k datové službě…</div>
+    <div class="grid" id="mrizka">
       <div class="cell"><div class="k">Výška</div><div class="v" id="vyska">—</div></div>
       <div class="cell"><div class="k">Rychlost</div><div class="v" id="rychlost">—</div></div>
       <div class="cell"><div class="k">Zem. šířka</div><div class="v" id="lat">—</div></div>
       <div class="cell"><div class="k">Zem. délka</div><div class="v" id="lon">—</div></div>
       <div class="cell"><div class="k">Osvětlení</div><div class="v" id="svetlo">—</div></div>
       <div class="cell"><div class="k">Právě letí nad</div><div class="v" id="nad">—</div></div>
+      <div class="cell siroka"><div class="k">Data z <span class="znacka" id="stariZnacka"></span></div><div class="v" id="cas">zatím žádná</div></div>
     </div>
     <div class="fakta">
       <div>Obletí Zemi za ~92 minut — posádka vidí <b>16 východů slunce denně</b>.</div>
@@ -110,7 +124,11 @@
       <div>Je velká jako fotbalové hřiště a nepřetržitě obydlená od roku 2000.</div>
       <div>Čára na glóbu = jeden oběh: plná za stanicí, tečkovaná před ní.</div>
     </div>
-    <div class="chyba" id="chyba">⚠️ Data se nepodařilo načíst — zkontroluj připojení. Zkusím to znovu…</div>
+    <div class="chyba" id="chyba">
+      <p id="chybaText">⚠️ Data se nepodařilo načíst — zkontroluj připojení.</p>
+      <p>Stanice je vidět jen s připojením k internetu; stránka o nové polohy žádá sama každých 5 sekund.</p>
+      <button type="button" id="znovuBtn">Zkusit znovu</button>
+    </div>
   </div>
 
   <div class="hint">🖱️ tažením otáčej · kolečkem přibližuj</div>
@@ -239,6 +257,45 @@
     const R_ZEME = 6371; // km — pro převod výšky na jednotky glóbu
     let sledovat = true, prvniPoloha = true;
     const chybaEl = document.getElementById('chyba'), stavEl = document.getElementById('stav');
+    const chybaTextEl = document.getElementById('chybaText'), casEl = document.getElementById('cas');
+    const mrizkaEl = document.getElementById('mrizka'), stariEl = document.getElementById('stariZnacka');
+    let poslednidata = null; // čas poslední úspěšné odpovědi datové služby
+
+    const hodiny = d => d.toLocaleTimeString('cs-CZ');
+
+    // Stáří dat slovy — aby bylo zřejmé, že ukázané hodnoty nejsou z tohoto okamžiku.
+    function stari(od) {
+      const s = Math.max(0, Math.round((Date.now() - od) / 1000));
+      if (s < 60) return 'před ' + s + ' s';
+      const m = Math.round(s / 60);
+      return m < 60 ? 'před ' + m + ' min' : 'před ' + Math.round(m / 60) + ' h';
+    }
+
+    // Jediné místo, které popisuje stav spojení: živě, nebo zamrzlá data / žádná data.
+    function popisStav(zive) {
+      mrizkaEl.classList.toggle('zastarale', !zive && poslednidata !== null);
+      if (zive) {
+        stavEl.className = 'stav zivy';
+        stavEl.textContent = 'živá poloha · obnovuje se každých 5 s';
+        casEl.textContent = hodiny(new Date(poslednidata));
+        stariEl.textContent = '';
+        chybaEl.style.display = 'none';
+        return;
+      }
+      stavEl.className = 'stav bez';
+      chybaEl.style.display = 'block';
+      if (poslednidata === null) {
+        stavEl.textContent = 'bez spojení · data zatím nedorazila';
+        casEl.textContent = 'zatím žádná';
+        stariEl.textContent = '';
+        chybaTextEl.textContent = '⚠️ Polohu stanice se nepodařilo načíst — zkontroluj připojení. Glóbus a ovládání fungují dál.';
+      } else {
+        stavEl.textContent = 'bez spojení · zobrazená poloha je z ' + hodiny(new Date(poslednidata));
+        casEl.textContent = hodiny(new Date(poslednidata));
+        stariEl.textContent = '· ' + stari(poslednidata);
+        chybaTextEl.textContent = '⚠️ Spojení se přerušilo — hodnoty v panelu zůstávají z ' + hodiny(new Date(poslednidata)) + ' a stanice už je jinde.';
+      }
+    }
 
     function vlajka(cc) { // ISO kód země → emoji vlajka
       if (!cc || cc.length !== 2 || cc === '??') return '';
@@ -258,9 +315,8 @@
         const res = await fetchS(API + '?units=kilometers');
         if (!res.ok) throw new Error(res.status);
         const d = await res.json();
-        chybaEl.style.display = 'none';
-        stavEl.className = 'stav zivy';
-        stavEl.textContent = 'živá poloha · obnovuje se každých 5 s';
+        poslednidata = Date.now();
+        popisStav(true);
         world.htmlElementsData([{ lat: d.latitude, lng: d.longitude, alt: d.altitude / R_ZEME }]);
         document.getElementById('vyska').textContent = Math.round(d.altitude) + ' km';
         document.getElementById('rychlost').textContent = Math.round(d.velocity).toLocaleString('cs-CZ') + ' km/h';
@@ -271,11 +327,10 @@
           const pov = world.pointOfView();
           world.pointOfView({ lat: d.latitude, lng: d.longitude, altitude: pov.altitude }, prvniPoloha ? 0 : 900);
         }
+        posledniLat = d.latitude; posledniLon = d.longitude;
         if (prvniPoloha) { prvniPoloha = false; nactiTrasu(); nactiZemi(d.latitude, d.longitude); }
       } catch (e) {
-        stavEl.className = 'stav';
-        stavEl.textContent = 'bez spojení';
-        chybaEl.style.display = 'block';
+        popisStav(false);
       }
     }
 
@@ -315,13 +370,10 @@
 
     // hlavní cyklus polohy — 5 s je ohleduplné k API a přitom plynulé
     setInterval(aktualizujPolohu, 5000);
-    const prvni = aktualizujPolohu().then(() => {
-      // zapamatuj si polohu pro dotaz na zemi
-      setInterval(() => {
-        const d = world.htmlElementsData()[0];
-        if (d) { posledniLat = d.lat; posledniLon = d.lng; }
-      }, 5000);
-    });
+    const prvni = aktualizujPolohu();
+    // stáří zamrzlých dat musí růst i bez odpovědi služby
+    setInterval(() => { if (poslednidata !== null && !stavEl.classList.contains('zivy')) popisStav(false); }, 5000);
+    document.getElementById('znovuBtn').onclick = aktualizujPolohu;
 
     /* ================= Ovládání ================= */
     document.getElementById('followBtn').onclick = function () {

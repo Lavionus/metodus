@@ -40,8 +40,9 @@
   </div>
 
   <p class="napoveda">
-    Síť válce tvoří <b>dvě kruhové podstavy</b> a <b>obdélníkový plášť</b>, jehož delší strana je
-    rovna obvodu podstavy. Objem <b>V = πr²·v</b>, povrch <b>S = 2πr² + 2πr·v</b>.
+    Síť válce tvoří <b>dvě kruhové podstavy</b> a <b>obdélníkový plášť</b>, jehož strany mají délky
+    <b>2πr</b> (obvod podstavy) a <b>v</b> (výška válce). Která je delší, záleží na rozměrech válce. Objem <b>V = πr²·v</b>, povrch <b>S = 2πr² + 2πr·v</b>.
+    Například při r = 1 cm a v = 10 cm je obvod přibližně 6,28 cm: delší stranou pláště je výška.
     Pozor: 1 litr = 1 dm³ = 1000 cm³.
   </p>
 
@@ -79,10 +80,10 @@ function svgSit(r, v) {
 const SIT = [
   { q: 'Z čeho se skládá síť válce?', a: 'ze dvou kruhů a jednoho obdélníku',
     b: ['ze tří kruhů', 'ze dvou obdélníků a kruhu', 'ze čtyř trojúhelníků'] },
-  { q: 'Čemu se rovná delší strana pláště po rozvinutí?', a: 'obvodu podstavy (2πr)',
-    b: ['průměru podstavy', 'výšce válce', 'obsahu podstavy'] },
-  { q: 'Čemu se rovná kratší strana pláště?', a: 'výšce válce',
-    b: ['poloměru podstavy', 'obvodu podstavy', 'polovině obvodu'] },
+  { q: 'Jaké rozměry má obdélníkový plášť po rozvinutí?', a: 'obvod podstavy 2πr a výšku v',
+    b: ['průměr 2r a výšku v', 'poloměr r a výšku v', 'dva průměry 2r a 2r'] },
+  { q: 'Je strana pláště o délce 2πr vždy delší než strana o délce v?', a: 'ne, záleží na poloměru a výšce válce',
+    b: ['ano, obvod podstavy je vždy větší než výška', 'ne, výška je vždy větší než obvod podstavy', 'obě strany jsou vždy stejně dlouhé'] },
   { q: 'Jak spočítáš obsah pláště?', a: 'S = 2πr · v', b: ['S = πr²', 'S = 2πr²', 'S = πr² · v'] },
   { q: 'Kolik podstav má válec?', a: 'dvě', b: ['jednu', 'tři', 'žádnou'] },
   { q: 'Co platí o podstavách válce?', a: 'jsou to shodné kruhy nad sebou', b: ['jsou to různě velké kruhy', 'je to kruh a obdélník', 'jsou to elipsy'] },

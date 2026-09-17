@@ -6,7 +6,9 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>🔢 Vizualizace řadících algoritmů</title>
 
-  <!-- Tmavé téma převzaté z původní HTML šablony -->
+  <!-- Motiv sdílený se zbytkem webu: theme.js musí být před vlastním <style>,
+       aby se světlý režim použil ještě před vykreslením. -->
+  <script src="../theme.js"></script>
   <link rel="stylesheet" href="../common.css">
   <style>
     :root{
@@ -15,12 +17,24 @@
          CSS proměnnou zneplatní a body zůstane bez pozadí. */
       --panel:var(--bg-elevated);
       --panel-2:var(--border);
-      --muted:#94a3b8;
+      --muted:var(--text-muted);
       --blue:#1f77b4;
       --red:#ff6b6b;
       --green:#4caf50;
       --yellow:#ffd93d;
       --purple:#a78bfa;
+      /* Barvy sloupců v plátně. Ve světlém motivu jsou tmavší, aby držely
+         kontrast na světlém podkladu; význam (legenda) zůstává stejný. */
+      --sloupec-modra:#1f77b4;
+      --sloupec-cervena:#ff6b6b;
+      --sloupec-zelena:#4caf50;
+      --sloupec-zluta:#ffd93d;
+    }
+    :root[data-theme="light"]{
+      --sloupec-modra:#1b6698;
+      --sloupec-cervena:#c9453f;
+      --sloupec-zelena:#2f8f4e;
+      --sloupec-zluta:#a9780a;
     }
     *{box-sizing:border-box;margin:0;padding:0}
     body{
@@ -45,12 +59,12 @@
     button:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 4px 8px rgba(0,0,0,0.3)}
     button:active:not(:disabled){transform:translateY(0)}
     button:disabled{opacity:0.5;cursor:not-allowed}
-    button.ghost{background:var(--border)}
-    button.ghost:hover:not(:disabled){background:#505050}
-    .stats{display:flex;flex-direction:column;gap:6px;padding:8px;background:#232323;border-radius:6px;color:var(--muted)}
+    button.ghost{background:var(--bg-control);color:var(--text);border:1px solid var(--border-strong)}
+    button.ghost:hover:not(:disabled){background:var(--bg-hover);color:var(--text)}
+    .stats{display:flex;flex-direction:column;gap:6px;padding:8px;background:var(--bg-panel);border:1px solid var(--border);border-radius:6px;color:var(--muted)}
     .legend{font-size:0.9rem;margin-top:8px;white-space:pre-line;color:var(--muted)}
-    .visual{background:#0f1720;border-radius:10px;padding:12px;display:flex;flex-direction:column;gap:10px}
-    #canvasWrap{background:#111;border-radius:6px;padding:12px;display:flex;align-items:center;justify-content:center;position:relative}
+    .visual{background:var(--bg-panel);border:1px solid var(--border);border-radius:10px;padding:12px;display:flex;flex-direction:column;gap:10px}
+    #canvasWrap{background:var(--bg-deep);border:1px solid var(--border);border-radius:6px;padding:12px;display:flex;align-items:center;justify-content:center;position:relative}
     canvas{display:block;max-width:100%;height:420px;background:transparent}
     .status{font-size:0.9rem;color:var(--muted);padding:6px}
     .small{font-size:0.85rem;color:var(--muted)}
@@ -147,7 +161,7 @@
           <h1>🔢 Vizualizace řazení</h1>
           <div class="small" id="status">Připraveno — vyberte algoritmus a stiskněte Start nebo <span class="kbd">Space</span></div>
         </div>
-        <div class="small">🎨 Téma: tmavé</div>
+        <div class="small" id="temaStav">🎨 Téma: tmavé</div>
       </div>
 
       <div class="progress-bar">
@@ -318,6 +332,33 @@
       updateButtonStates();
     }
 
+    /* Plátno nečte CSS proměnné samo — musíme je přečíst a při změně motivu
+       obnovit, jinak by ve světlém režimu zůstaly tmavé popisky a naopak. */
+    let barvyPlatna = nactiBarvyPlatna();
+    function nactiBarvyPlatna() {
+      const s = getComputedStyle(document.documentElement);
+      const vem = (nazev, zaloha) => (s.getPropertyValue(nazev) || '').trim() || zaloha;
+      return {
+        modra: vem('--sloupec-modra', '#1f77b4'),
+        cervena: vem('--sloupec-cervena', '#ff6b6b'),
+        zelena: vem('--sloupec-zelena', '#4caf50'),
+        zluta: vem('--sloupec-zluta', '#ffd93d'),
+        text: vem('--text', '#e0e0e0')
+      };
+    }
+
+    function svetlyMotiv() { return document.documentElement.dataset.theme === 'light'; }
+    function zobrazTemaStav() {
+      document.getElementById('temaStav').textContent = '🎨 Téma: ' + (svetlyMotiv() ? 'světlé' : 'tmavé');
+    }
+    // motiv mění rozcestník přes theme.js (postMessage / storage) — reagujeme na atribut
+    new MutationObserver(() => {
+      barvyPlatna = nactiBarvyPlatna();
+      zobrazTemaStav();
+      drawBars();
+    }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+    zobrazTemaStav();
+
     function drawBars(highlight=[], comparing=[], pivot=[]) {
       const w = canvas.width, h = canvas.height;
       ctx.clearRect(0,0,w,h);
@@ -330,17 +371,17 @@
         const x = i*(barWidth+2);
         const barH = (val / maxVal) * (h - 30);
         
-        let color = '#1f77b4'; // modrá - výchozí
-        if (pivot.includes(i)) color = '#ffd93d'; // žlutá - pivot
-        else if (comparing.includes(i)) color = '#ff6b6b'; // červená - porovnávané
-        else if (highlight.includes(i)) color = '#4caf50'; // zelená - seřazené
+        let color = barvyPlatna.modra; // výchozí - neseřazené
+        if (pivot.includes(i)) color = barvyPlatna.zluta; // pivot
+        else if (comparing.includes(i)) color = barvyPlatna.cervena; // porovnávané
+        else if (highlight.includes(i)) color = barvyPlatna.zelena; // seřazené
         
         ctx.fillStyle = color;
         ctx.fillRect(x, h - barH - 20, barWidth, barH);
         
         // Zobrazit hodnotu u menšího počtu prvků
         if (n <= 30 && barWidth > 15) {
-          ctx.fillStyle = '#fff';
+          ctx.fillStyle = barvyPlatna.text;
           ctx.font = '10px monospace';
           ctx.textAlign = 'center';
           ctx.fillText(val, x + barWidth/2, h - barH - 24);

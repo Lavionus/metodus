@@ -5,7 +5,11 @@
   <script src="../podpis.js" defer></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🤖 Úvod do AI pro laiky</title>
-    <link rel="stylesheet" href="../common.css">
+    <!-- Motiv: tato stránka má vlastní tmavou paletu a záměrně nelinkuje ../theme.js.
+     Světlý režim rozcestníku ji nepřepne — je to promítaná přednáška, kde tmavé plátno nesvítí do třídy.
+     Proměnné z common.css si přepisuje níže, takže zůstane tmavá i tehdy,
+     když si zbytek webu uživatel přepne na světlý. -->
+<link rel="stylesheet" href="../common.css">
     <style>
         :root {
             --bg: #0d0d1a;

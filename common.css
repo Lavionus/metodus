@@ -86,6 +86,12 @@
 
 .trhni { animation: trhnuti 0.35s; }
 
+/* Kdo má v systému zapnuté omezení pohybu, nemá dostat třesoucí se prvek.
+   Chybu i tak pozná podle barvy a textu zpětné vazby. */
+@media (prefers-reduced-motion: reduce) {
+  .trhni { animation: none; }
+}
+
 /* základní reset */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 

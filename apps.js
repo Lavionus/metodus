@@ -3471,7 +3471,7 @@ const KATALOG_SEKCE = [
       },
       {
         "soubor": "obsah/eduMaps.html",
-        "nazev": "🗺️ Mapy",
+        "nazev": "🗺️ Mapy – lekce a průvodce",
         "tagy": [
           "zeměpis",
           "mapy",
