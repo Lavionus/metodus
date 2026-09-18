@@ -133,7 +133,6 @@
     <button data-rezim="retezovka">☢️ Řetězová reakce</button>
     <button data-rezim="rozpad">⏳ Rozpad naživo</button>
     <button data-rezim="schema">🏭 Elektrárna zblízka</button>
-    <button data-rezim="havarie">🛡 Havárie a chlazení</button>
     <button data-rezim="stepeni">🧠 Kvíz: štěpení</button>
     <button data-rezim="polocas">📉 Kvíz: poločas</button>
     <button data-rezim="provoz">⚖️ Provoz a zdroje</button>
@@ -154,7 +153,6 @@
   </p>
 
 <details class="zdroje"><summary>O modelech a zdrojích</summary><p>Modely jsou výuková zjednodušení, rozměry ani rychlosti částic nejsou v měřítku. Elektrárna představuje tlakovodní typ; bilance používá modelovou účinnost přibližně 33 %. Poločasy v úlohách jsou zaokrouhlené.</p><p>Podklady: <a href="https://www.nrc.gov/reactors/power/pwrs">NRC – tlakovodní reaktor</a>, <a href="https://www.nrc.gov/reading-rm/basic-ref/students/animated-pwr">NRC – oddělení okruhů</a>.</p></details>
-<script src="f9_jaderna-extra.js"></script>
 <script src="f9_jaderna.js"></script>
 </body>
 </html>
