@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="../vyuka.css">
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
   <script src="../uloha.js"></script>
   <style>
     .uloha-text { max-width: 640px; font-size: 1.02rem; line-height: 1.6; }
@@ -67,7 +68,7 @@
       border-radius: 6px; padding: 5px 11px; font-size: 0.78rem; font-family: inherit; cursor: pointer;
     }
     .tvary button:hover { border-color: var(--accent); color: var(--text); }
-    .tvary button.zap { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .tvary button.zap { background: var(--accent); border-color: var(--accent); color: var(--na-akcentu, #fff); }
 
     /* Tabulka „co se s čím děje“ */
     .pomery {
@@ -131,7 +132,7 @@
   <p class="podtitul">Pro 9. ročník: poměr podobnosti, stejnolehlost, věty o podobnosti, měřítko plánů a modelů.</p>
 
   <div class="rezimy" id="rezimy">
-    <button data-rezim="stejnolehlost" class="active">🔬 Zvětšovadlo</button>
+    <button data-rezim="stejnolehlost" data-faze="vyuka" class="active">🔬 Zvětšovadlo</button>
     <button data-rezim="stin">🌳 Měření stínem</button>
     <button data-rezim="poznej">🧩 Podobné, nebo ne?</button>
     <button data-rezim="vety">🔺 Věty o podobnosti</button>

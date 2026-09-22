@@ -8,6 +8,8 @@
   <link rel="stylesheet" href="../vyuka.css">
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
+  <script src="../data/tisnova_cisla.js"></script>
   <script src="../rec.js"></script>
   <script src="../uloha.js"></script>
   <style>
@@ -58,12 +60,8 @@ const $ = id => document.getElementById(id);
 const skore = Uloha.skore('metodus_prv2_zdravi', $('skore'));
 let rezim = 'cisla';
 
-const CISLA = [
-  { klic: '155', ikona: '🚑', popis: '155 záchranka' },
-  { klic: '150', ikona: '🚒', popis: '150 hasiči' },
-  { klic: '158', ikona: '🚓', popis: '158 policie' },
-  { klic: '112', ikona: '🆘', popis: '112 tísňová linka' },
-];
+// Tísňová čísla jsou společná data rodiny „Lidské tělo a zdraví" (data/tisnova_cisla.js).
+const CISLA = METODUS_TISNOVA.map(t => ({ klic: t.cislo, ikona: t.ikona, popis: `${t.cislo} ${t.kratce}` }));
 
 const SITUACE = [
   { e: '🤕', t: 'Kamarád spadl z kola a nemůže vstát, bolí ho noha.', c: '155' },

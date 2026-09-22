@@ -8,6 +8,8 @@
   <link rel="stylesheet" href="../vyuka.css">
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
+  <script src="../data/horniny.js"></script>
   <script src="../rec.js"></script>
   <script src="../uloha.js"></script>
   <style>
@@ -47,38 +49,8 @@ const $ = id => document.getElementById(id);
 const skore = Uloha.skore('metodus_prv4_horniny', $('skore'));
 let rezim = 'poznej';
 
-const VZORKY = [
-  { n: 'žula', e: '🪨', hornina: true, vlastnosti: ['tvrdá', 'zrnitá', 'světlá s tmavými zrnky'],
-    popis: 'Tvrdá zrnitá hornina, ve které jsou vidět zrnka křemene, živce a slídy.',
-    vyuziti: 'dlažební kostky a pomníky' },
-  { n: 'pískovec', e: '🟫', hornina: true, vlastnosti: ['měkčí', 'zrnitý', 'nasákavý'],
-    popis: 'Usazená hornina ze stmelených zrnek písku, snadno se opracovává. Tvoří skalní města.',
-    vyuziti: 'sochy a stavební kámen' },
-  { n: 'vápenec', e: '⬜', hornina: true, vlastnosti: ['šumí s octem', 'světlý', 'usazený'],
-    popis: 'Usazená hornina, ve které bývají zkameněliny. S kyselinou šumí a vznikají v ní jeskyně.',
-    vyuziti: 'výroba vápna a cementu' },
-  { n: 'čedič', e: '⬛', hornina: true, vlastnosti: ['tmavý', 'velmi tvrdý', 'sopečný'],
-    popis: 'Tmavá vyvřelá hornina ze ztuhlé lávy, někdy tvoří pravidelné sloupy.',
-    vyuziti: 'štěrk na silnice' },
-  { n: 'uhlí', e: '🖤', hornina: true, vlastnosti: ['černé', 'lehké', 'hořlavé'],
-    popis: 'Vzniklo z pravěkých rostlin. Je hořlavé, těží se v dolech.',
-    vyuziti: 'palivo v elektrárnách' },
-  { n: 'křemen', e: '💎', hornina: false, vlastnosti: ['velmi tvrdý', 'průhledný až mléčný', 'rýpe do skla'],
-    popis: 'Tvrdý nerost, který rýpe do skla. Bývá průhledný nebo mléčně bílý.',
-    vyuziti: 'výroba skla' },
-  { n: 'sůl kamenná', e: '🧂', hornina: false, vlastnosti: ['slaná', 'rozpustná ve vodě', 'krystalická'],
-    popis: 'Nerost, který se rozpouští ve vodě a je slaný. Krystalky mají tvar krychle.',
-    vyuziti: 'do jídla a na silnice v zimě' },
-  { n: 'grafit (tuha)', e: '✏️', hornina: false, vlastnosti: ['měkký', 'šedý', 'špiní ruce'],
-    popis: 'Velmi měkký nerost, který zanechává stopu na papíře a maže se.',
-    vyuziti: 'tuha do tužek' },
-  { n: 'zlato', e: '🥇', hornina: false, vlastnosti: ['těžké', 'lesklé', 'nerezaví'],
-    popis: 'Vzácný kov, který nerezaví a dá se snadno tvarovat. Rýžuje se z řek.',
-    vyuziti: 'šperky a elektronika' },
-  { n: 'slída', e: '✨', hornina: false, vlastnosti: ['loupe se na plátky', 'lesklá', 'pružná'],
-    popis: 'Nerost, který se dá loupat na tenké lesklé plátky.',
-    vyuziti: 'žáruvzdorné materiály' },
-];
+// Vzorky jsou společná data rodiny „Horniny a stavba Země" (data/horniny.js).
+const VZORKY = METODUS_HORNINY;
 
 /* ---- Poznej podle popisu ------------------------------------------------------ */
 function poznej() {

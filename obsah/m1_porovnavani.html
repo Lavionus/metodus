@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="../common.css">
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
   <script src="../rec.js"></script>
   <script src="../uloha.js"></script>
   <style>
@@ -19,7 +20,7 @@
       background: var(--bg-control); border: 1px solid var(--border-strong); color: var(--text-muted);
       border-radius: 6px; padding: 8px 14px; font-size: 0.86rem; font-family: inherit; cursor: pointer;
     }
-    .lista button.active { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+    .lista button.active { background: var(--accent); border-color: var(--accent); color: var(--na-akcentu, #fff); font-weight: 600; }
     .lista .oddelovac { color: var(--text-faint); font-size: 0.8rem; margin: 0 4px; }
 
     .plocha {
@@ -90,8 +91,8 @@
       font-variant-numeric: tabular-nums; cursor: pointer; transition: all 0.15s ease;
     }
     .moznosti button:hover:not(:disabled) { border-color: var(--accent); transform: translateY(-3px); }
-    .moznosti button.spravne { background: var(--ok); border-color: var(--ok); color: #fff; }
-    .moznosti button.spatne { background: var(--danger); border-color: var(--danger); color: #fff; }
+    .moznosti button.spravne { background: var(--ok); border-color: var(--ok); color: var(--na-akcentu, #fff); }
+    .moznosti button.spatne { background: var(--danger); border-color: var(--danger); color: var(--na-akcentu, #fff); }
     .moznosti button:disabled { cursor: default; }
 
     .odezva { font-size: 1.05rem; font-weight: 600; min-height: 28px; }
@@ -103,7 +104,7 @@
       background: var(--bg-control); border: 1px solid var(--border-strong); color: var(--text);
       border-radius: 6px; padding: 10px 18px; font-size: 0.92rem; font-family: inherit; cursor: pointer;
     }
-    .ovladani button.hlavni { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+    .ovladani button.hlavni { background: var(--accent); border-color: var(--accent); color: var(--na-akcentu, #fff); font-weight: 600; }
     .ovladani button.hlavni:hover { background: var(--accent-hover); }
     .skore { margin-left: auto; color: var(--text-muted); font-size: 0.9rem; font-variant-numeric: tabular-nums; }
     .skore b { color: var(--ok); }
@@ -131,7 +132,7 @@
   <div class="plocha" id="plocha"></div>
 
   <div class="ovladani">
-    <button class="hlavni" id="btnDalsi">Další →</button>
+    <button class="hlavni" id="btnDalsi">Přeskočit →</button>
     <button id="btnCist" title="Přečíst zadání nahlas">🔊 Přečti</button>
     <span class="skore" id="skore"></span>
   </div>

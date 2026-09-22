@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="../vyuka.css">
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
   <script src="../uloha.js"></script>
   <style>
     .slovo-uloha { font-size: clamp(2.2rem, 9vw, 3.4rem); font-weight: 700; color: var(--accent); }
@@ -22,9 +23,9 @@
     }
     .druhy button:hover:not(:disabled) { border-color: var(--accent); transform: translateY(-2px); }
     .druhy button small { display: block; color: var(--text-faint); font-size: 0.7rem; margin-top: 2px; }
-    .druhy button.spravne { background: var(--ok); border-color: var(--ok); color: #fff; }
+    .druhy button.spravne { background: var(--ok); border-color: var(--ok); color: var(--na-akcentu, #fff); }
     .druhy button.spravne small { color: rgba(255, 255, 255, 0.85); }
-    .druhy button.spatne { background: var(--danger); border-color: var(--danger); color: #fff; }
+    .druhy button.spatne { background: var(--danger); border-color: var(--danger); color: var(--na-akcentu, #fff); }
     .druhy button.tlumene { opacity: 0.3; }
     .skupina-nadpis {
       width: 100%; text-align: left; color: var(--text-faint); font-size: 0.74rem;

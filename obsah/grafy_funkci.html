@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="../common.css">
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
   <style>
     body { background-color: var(--bg-deep); padding: 24px clamp(14px, 3vw, 40px); min-height: 100vh; }
     h1 { font-size: 1.4rem; margin-bottom: 4px; }
@@ -18,7 +19,7 @@
     .nastaveni { flex: 0 1 320px; }
     .typy { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
     .typy button { background: var(--bg-control); border: 1px solid var(--border-strong); color: var(--text-muted); border-radius: 6px; padding: 6px 11px; font-size: 0.82rem; cursor: pointer; }
-    .typy button.active { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+    .typy button.active { background: var(--accent); border-color: var(--accent); color: var(--na-akcentu, #fff); font-weight: 600; }
     .predpis { font-family: Georgia, serif; font-size: 1.15rem; margin-bottom: 14px; text-align: center; color: var(--accent); min-height: 1.6rem; }
     .tahlo { margin-bottom: 12px; }
     .tahlo label { display: flex; justify-content: space-between; font-size: 0.88rem; color: var(--text-muted); margin-bottom: 4px; }
@@ -45,7 +46,7 @@
       border-radius: 8px; padding: 8px 14px; font-size: 0.84rem; font-family: inherit; cursor: pointer;
     }
     .trefa button:hover { border-color: var(--accent); }
-    .trefa button.hlavni { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+    .trefa button.hlavni { background: var(--accent); border-color: var(--accent); color: var(--na-akcentu, #fff); font-weight: 600; }
     .presnost { font-size: 0.9rem; font-weight: 700; font-variant-numeric: tabular-nums; }
     .presnost.dobre { color: var(--ok); }
     .presnost.stredne { color: var(--warn); }

@@ -8,8 +8,13 @@
   <link rel="stylesheet" href="../vyuka.css">
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
   <script src="../rec.js"></script>
   <script src="../uloha.js"></script>
+  <link rel="stylesheet" href="../propojeni.css">
+  <link rel="stylesheet" href="../nazor.css">
+  <script src="../nazor.js"></script>
+  <script src="../prubeh.js"></script>
   <style>
     /* Koláč, proužek i osa mají stejně široký celek (180 jednotek viewBoxu),
        aby šlo poznat, že ukazují tentýž zlomek – jen jinak nakreslený. */
@@ -108,49 +113,13 @@ const zlomekHtml = (c, j, zvyrazni) =>
 /* ---- Tři obrázky téhož zlomku ----------------------------------------------
    Celek je ve všech třech stejně široký, jinak by se z obrázků nedalo poznat,
    že jde pořád o tentýž díl téhož celku. */
-function vysec(i, n, r = 74, cx = 90, cy = 90) {
-  const a1 = (i / n) * 2 * Math.PI - Math.PI / 2;
-  const a2 = ((i + 1) / n) * 2 * Math.PI - Math.PI / 2;
-  const x1 = cx + r * Math.cos(a1), y1 = cy + r * Math.sin(a1);
-  const x2 = cx + r * Math.cos(a2), y2 = cy + r * Math.sin(a2);
-  const velky = (a2 - a1) > Math.PI ? 1 : 0;
-  return `M${cx} ${cy} L${x1.toFixed(1)} ${y1.toFixed(1)} `
-    + `A${r} ${r} 0 ${velky} 1 ${x2.toFixed(1)} ${y2.toFixed(1)} Z`;
-}
 
-function kolac(n, obarvene, klikaci = false) {
-  let cesty = '';
-  for (let i = 0; i < n; i++) {
-    cesty += `<path class="${obarvene.includes(i) ? 'plna' : 'prazdna'}" data-i="${i}" d="${vysec(i, n)}"/>`;
-  }
-  return `<svg class="kolac${klikaci ? ' klikaci' : ''}" viewBox="0 0 180 180" role="img"
-    aria-label="Koláč rozdělený na ${n} dílů, vybarvených ${obarvene.length}">${cesty}</svg>`;
-}
-
-function prouzek(n, obarvene) {
-  const sirka = 176 / n;
-  let obd = '';
-  for (let i = 0; i < n; i++) {
-    obd += `<rect class="${obarvene.includes(i) ? 'plna' : 'prazdna'}" data-i="${i}"`
-      + ` x="${(2 + i * sirka).toFixed(1)}" y="60" width="${sirka.toFixed(1)}" height="60"/>`;
-  }
-  return `<svg class="prouzek" viewBox="0 0 180 180" role="img"
-    aria-label="Proužek rozdělený na ${n} dílů, vybarvených ${obarvene.length}">${obd}</svg>`;
-}
-
-function osa(c, j) {
-  const x = i => 10 + (160 * i) / j;
-  let znacky = '';
-  for (let i = 0; i <= j; i++) {
-    znacky += `<line class="znacka" x1="${x(i).toFixed(1)}" y1="82" x2="${x(i).toFixed(1)}" y2="98"/>`;
-  }
-  return `<svg class="osa" viewBox="0 0 180 180" role="img"
-    aria-label="Číselná osa od nuly do jedné rozdělená na ${j} dílů, značka na ${c} dílech">
-    <line x1="10" y1="90" x2="170" y2="90"/>${znacky}
-    <circle class="bod" cx="${x(c).toFixed(1)}" cy="90" r="6"/>
-    <text x="10" y="118">0</text><text x="170" y="118">1</text>
-    <text x="${x(c).toFixed(1)}" y="70">${c}/${j}</text></svg>`;
-}
+/* Koláč, proužek a osu kreslí společná knihovna nazor.js – stejný zlomek
+   vypadá stejně i v procentech, poměru a počítání se zlomky. Třída navíc
+   drží starší styly a testy této lekce. */
+const kolac = (n, obarvene, klikaci = false) => Nazor.kolac(n, obarvene, { klikaci, trida: 'kolac' });
+const prouzek = (n, obarvene) => Nazor.prouzek(n, obarvene, { trida: 'prouzek' });
+const osa = (c, j) => Nazor.zlomekNaOse(c, j, { trida: 'osa' });
 
 const OBRAZKY = {
   kolac: { kresli: (c, j) => kolac(j, [...Array(c).keys()]), popis: 'koláč' },
@@ -506,6 +475,7 @@ document.querySelectorAll('a[data-lekce]').forEach(a => a.addEventListener('clic
 }));
 
 novaUloha();
+if (new URLSearchParams(location.search).get('rezim') === 'prectiZlomek') prepniRezim('prectiZlomek');
 </script>
 </body>
 </html>

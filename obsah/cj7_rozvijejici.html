@@ -6,8 +6,10 @@
   <title>Rozvíjející větné členy</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../nazor.css">
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
   <script src="../rec.js"></script>
   <script src="../uloha.js"></script>
   <style>
@@ -19,15 +21,15 @@
     .veta-slova button.cast { cursor: pointer; }
     .veta-slova button.cast:hover:not(:disabled) { border-color: var(--accent); }
     .veta-slova .cast.zvyraz { border-color: var(--accent); background: var(--accent-soft); font-weight: 700; }
-    .veta-slova .cast.spravne { background: var(--ok); border-color: var(--ok); color: #fff; }
-    .veta-slova .cast.spatne { background: var(--danger); border-color: var(--danger); color: #fff; }
+    .veta-slova .cast.spravne { background: var(--ok); border-color: var(--ok); color: var(--na-akcentu, #fff); }
+    .veta-slova .cast.spatne { background: var(--danger); border-color: var(--danger); color: var(--na-akcentu, #fff); }
     .rozbor { display: flex; flex-direction: column; gap: 4px; color: var(--text-faint); font-size: 0.82rem; }
     /* rozbor v kartičce: každý člen s názvem pod sebou */
     .rozbor-radek { display: flex; flex-wrap: wrap; gap: 6px; }
     .rozbor-clen { display: flex; flex-direction: column; align-items: center; gap: 2px; }
-    .rozbor-clen .text { font-weight: 700; color: var(--text); }
+    .rozbor-clen .text { font-weight: 700; color: var(--clen, var(--text)); border-bottom: 3px solid var(--clen, transparent); }
     .rozbor-clen .znacka { font-size: 0.72rem; color: var(--text-faint); }
-    .rozbor-clen.sviti .text { color: var(--ok-text); }
+    .rozbor-clen.sviti .text { background: color-mix(in srgb, var(--clen, var(--ok)) 20%, transparent); border-radius: 4px; }
     .rozbor-clen.sviti .znacka { color: var(--ok-text); }
     .pomucka .skupina { flex: 1 1 175px; }
     .pomucka .skupina.sviti { box-shadow: 0 0 0 2px var(--accent-soft); }
@@ -176,10 +178,13 @@ function hotovo(p, napoprve, tag) {
    jak probíraný člen zapadá do zbytku. */
 function rozborHTML(v, zvyraz) {
   return '<div class="rozbor-radek">' + v.map(([text, tag], k) =>
-    `<div class="rozbor-clen${k === zvyraz ? ' sviti' : ''}">
+    `<div class="rozbor-clen clen-${CLEN_NAZOR[zaklad(tag)] || ''}${k === zvyraz ? ' sviti' : ''}">
        <span class="text">${text}</span><span class="znacka">${ZKRATKA[tag]}</span>
      </div>`).join('') + '</div>';
 }
+
+/* barvy větných členů jsou společné pro celý web (nazor.css) */
+const CLEN_NAZOR = { po: 'podmet', ps: 'prisudek', pt: 'predmet', pk: 'privlastek', pu: 'urceni' };
 
 const ZKRATKA = {
   po: 'podmět', ps: 'přísudek', pt: 'předmět', pk: 'přívlastek',

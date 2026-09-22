@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Směsi a jejich oddělování</title>
+  <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="../vyuka.css">
+  <script src="../theme.js"></script>
+  <script src="../podpis.js" defer></script>
+  <script src="../uloha.js"></script>
+  <style>
+    .aparatura { width: min(300px, 76%); }
+    .aparatura .sklo { fill: none; stroke: var(--text-muted); stroke-width: 3; }
+    .aparatura .kapalina { fill: rgba(80,150,220,0.4); }
+    .aparatura .usazenina { fill: #a9772f; }
+    .aparatura .plamen { fill: var(--warn); }
+    .aparatura .popis { fill: var(--text-faint); font-size: 12px; text-anchor: middle; }
+    .uloha-text { max-width: 640px; font-size: 1.02rem; line-height: 1.6; }
+    .uloha-text b { color: var(--accent); }
+    .vzorec { font-family: 'Courier New', monospace; color: var(--text-muted); font-size: 0.95rem; }
+    .smes { font-size: 1.2rem; font-weight: 700; }
+
+    body { max-width:1100px; margin:auto; } h1 { font-size:clamp(1.5rem,4vw,2.2rem); }
+    .plocha,.ovladani,.napoveda { max-width:100%; } .plocha { justify-content:flex-start; }
+    button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible { outline:3px solid var(--accent); outline-offset:3px; }
+    .lab-grid { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:22px; width:100%; align-items:center; text-align:left; }
+    .lab-controls { display:flex; flex-wrap:wrap; gap:8px; margin:12px 0; }
+    .lab-controls button { background:var(--bg-control); color:var(--text); border:1px solid var(--border-strong); border-radius:8px; padding:10px 13px; font:inherit; cursor:pointer; }
+    .lab-controls button[aria-pressed="true"] { background:var(--accent-soft); border-color:var(--accent); }
+    .lab-controls button:disabled { opacity:.45;cursor:default; }
+    .lab-scene { width:100%; max-width:460px; background:var(--bg-deep); border:1px solid var(--border); border-radius:14px; }
+    .lab-scene text { fill:var(--text); font:15px sans-serif; text-anchor:middle; }
+    .lab-scene .glass { fill:none;stroke:var(--text-muted);stroke-width:3; }
+    .lab-scene .water { fill:var(--accent-soft); }
+    .lab-panel { width:100%; background:var(--bg-deep);border:1px solid var(--border);border-radius:12px;padding:16px;text-align:left;line-height:1.65; }
+    .lab-panel h2 { font-size:1.2rem;margin-bottom:8px; } .lab-panel p { margin:8px 0; }
+    .lab-panel input[type=range] { width:100%;accent-color:var(--accent); }
+    .lab-panel label { display:block;margin:12px 0; }
+    .lab-feedback { min-height:2em;line-height:1.6;text-align:left; width:100%; }
+    .lab-meter { display:flex;height:34px;border:1px solid var(--border-strong);border-radius:8px;overflow:hidden;margin:14px 0; }
+    .lab-meter .solute { background:var(--warn); } .lab-meter .solvent { background:var(--accent); }
+    .lab-number { font-size:2rem;font-weight:700;color:var(--accent); }
+    .lab-steps { display:flex;flex-wrap:wrap;gap:8px;list-style:none;padding:0;width:100%;text-align:left; }
+    .lab-steps li { border:1px solid var(--border);border-radius:8px;padding:7px 12px; }
+    .lab-steps li[aria-current=step] { border-color:var(--accent);background:var(--accent-soft);font-weight:700; }
+    .particle { animation:drift 3s ease-in-out infinite alternate;transform-box:fill-box;transform-origin:center; }
+    .particle:nth-child(3n) { animation-delay:-1.5s;animation-duration:4s; }
+    .paused .particle { animation-play-state:paused; }
+    @keyframes drift { to { transform:translate(4px,-5px); } }
+    @media(prefers-reduced-motion:reduce) { .particle { animation:none; } }
+    @media(max-width:650px) { .lab-grid { grid-template-columns:1fr; } .plocha { padding:16px 12px; } }
+  </style>
+  <link rel="stylesheet" href="ch8_smesi.css">
+</head>
+<body>
+  <header class="hero">
+    <div><span class="eyebrow">Chemie / 8. ročník / Interaktivní laboratoř</span>
+    <h1>Smíchat je snadné.<br>Jak to oddělit?</h1>
+    <p class="podtitul">Prozkoumej, co se skrývá ve směsi. Rozhýbej aparatury, získej složky zpět a zjisti, kdy už se další látka nerozpustí.</p>
+    <div class="hero-links"><a href="#rezimy">Otevřít laboratoř ↓</a><a href="#tahak">Pravidla na jednom místě</a></div></div>
+    <svg class="hero-art" viewBox="0 0 390 230" aria-hidden="true">
+      <path d="M35 30v153q50 20 100 0V30M238 30v153q50 20 100 0V30" fill="none" stroke="var(--text-muted)" stroke-width="3"/>
+      <path d="M37 82h96v98q-48 20-96 0zM240 82h96v98q-48 20-96 0z" fill="var(--accent-soft)"/>
+      <g fill="var(--warn)"><circle class="particle" cx="64" cy="100" r="6"/><circle class="particle" cx="103" cy="139" r="5"/><circle class="particle" cx="73" cy="163" r="5"/><circle class="particle" cx="109" cy="98" r="5"/></g>
+      <path d="M51 171h14v10H51zM89 160h13v11H89zM108 171h12v10h-12z" fill="#bd9253"/>
+      <path d="M160 112h54m-13-13 13 13-13 13" fill="none" stroke="var(--accent)" stroke-width="3"/>
+      <g fill="var(--warn)"><circle class="particle" cx="267" cy="103" r="5"/><circle class="particle" cx="301" cy="134" r="5"/><circle class="particle" cx="275" cy="166" r="5"/></g>
+      <text x="85" y="219">směs</text><text x="288" y="219">oddělené složky</text>
+    </svg>
+  </header>
+  <div class="learning-path"><article><b>01 · Pozoruj</b><p>Částice a aparatury v pohybu.</p></article><article><b>02 · Experimentuj</b><p>Koncentrace, rozpustnost a teplota.</p></article><article><b>03 · Rozhoduj</b><p>Vyřeš misi a vysvětli svůj postup.</p></article></div>
+  <div class="rezimy" id="rezimy">
+    <span class="nav-label">Objevování a pokusy</span>
+    <button data-rezim="aparatury" class="active">⚗️ Atlas aparatur</button>
+    <button data-rezim="castice">🔬 Pod lupou</button>
+    <button data-rezim="laborator">⚗️ Oddělovací laboratoř</button>
+    <button data-rezim="roztok">💧 Namíchej roztok</button>
+    <button data-rezim="mise">🧩 Laboratorní mise</button>
+    <span class="nav-label">Ověření znalostí</span>
+    <button data-rezim="metoda">🔧 Jak směs oddělit</button>
+    <button data-rezim="druh">🗂️ Druh směsi</button>
+    <button data-rezim="zlomek">📐 Hmotnostní zlomek</button>
+    <button data-rezim="pojmy">📖 Pojmy</button>
+  </div>
+
+  <div class="plocha" id="plocha"></div>
+
+  <div class="ovladani">
+    <button class="hlavni" id="btnDalsi">Přeskočit →</button>
+    <span class="skore" id="skore"></span>
+  </div>
+
+  <details class="reference" id="tahak"><summary>Rychlý tahák · co si odnést z laboratoře</summary>
+    <div class="reference-grid"><section><h3>Směs, ne nová látka</h3><p>Směs obsahuje více látek. Při zde ukázaném oddělování využíváme jejich fyzikální vlastnosti, například rozpustnost, těkavost nebo hustotu.</p></section><section><h3>Čirá ≠ čistá</h3><p>Čirý roztok může obsahovat rozpuštěné látky. Filtrace sama neodstraní rozpuštěnou sůl. Ani čirá voda nemusí být pitná.</p></section><section><h3>Co chci získat?</h3><p>Pro sůl postačí odpařování. Chci-li zachytit i vodu, potřebuji destilaci. Neexistuje jediná nejlepší metoda pro každou směs a každý cíl.</p></section><section><h3>Koncentrace</h3><p>w = m(složky) / m(roztoku). Desetiprocentní roztok obsahuje 10 g složky ve 100 g celého roztoku, tedy například 10 g soli a 90 g vody.</p></section><section><h3>Nasycení</h3><p>Nasycený roztok už za daných podmínek další množství dané látky nerozpustí. Pevný zbytek patří do celé směsi, ale ne do kapalného roztoku.</p></section><section><h3>Model a skutečnost</h3><p>Obrázky nejsou v měřítku. Bilance misí jsou ideální a modelová látka X má záměrně zjednodušenou rozpustnost. Reálné látky se mohou chovat jinak.</p></section></div>
+  </details>
+  <p class="napoveda">
+    <b>Stejnorodá</b> směs má v celém objemu stejné složení. <b>Různorodá</b> směs obsahuje odlišné fáze; pouhým okem je nemusíme rozlišit (například u mléka).
+    Hmotnostní zlomek <b>w = m<sub>složky</sub> / m<sub>roztoku</sub></b>, často se udává v procentech.
+  </p>
+
+<script src="ch8_smesi.js"></script>
+<script src="ch8_smesi_experiments.js"></script>
+<script>
+const $ = id => document.getElementById(id);
+const skore = Uloha.skore('metodus_ch8_smesi', $('skore'));
+let rezim = 'aparatury';
+const fmt = x => Number(Number(x).toFixed(2)).toLocaleString('cs-CZ');
+function odezvaEl() { const d = document.createElement('div'); d.className = 'odezva'; d.setAttribute('role','status'); return d; }
+
+const METODY = {
+  filtrace: 'filtrace – nerozpuštěnou pevnou látku zachytí filtr',
+  usazovani: 'usazování (sedimentace) – částice s větší hustotou než kapalina klesají ke dnu',
+  odparovani: 'odpařování – rozpouštědlo se odpaří, zůstane rozpuštěná látka',
+  destilace: 'destilace – využívá rozdílnou těkavost, odpaření a následné zkapalnění',
+  krystalizace: 'krystalizace – z nasyceného roztoku vyrostou krystaly',
+  magnet: 'oddělení magnetem – přitáhne železné částice',
+  odstredovani: 'odstřeďování – rychlá rotace oddělí složky podle hustoty',
+};
+const SMESI = [
+  { s: 'písek ve vodě', m: 'filtrace' },
+  { s: 'kalná voda z potoka (necháme stát)', m: 'usazovani' },
+  { s: 'sůl rozpuštěná ve vodě, chceme získat sůl a vodu nezachycujeme', m: 'odparovani' },
+  { s: 'líh a voda', m: 'destilace' },
+  { s: 'železné piliny a piliny dřevěné', m: 'magnet' },
+  { s: 'modrá skalice rozpuštěná ve vodě, chceme velké krystaly', m: 'krystalizace' },
+  { s: 'smetana v mléce (v mlékárně)', m: 'odstredovani' },
+  { s: 'čajové lístky v uvařeném čaji', m: 'filtrace' },
+  { s: 'mořská voda, chceme získat pitnou vodu', m: 'destilace' },
+  { s: 'hrubý písek ve vodě, necháme směs stát', m: 'usazovani' },
+];
+function metoda() {
+  const p = $('plocha');
+  const u = Uloha.nahodne(SMESI);
+  p.innerHTML = `<div class="zadani uloha-text">Jak oddělíš složky této směsi?<br>
+      <b class="smes">${u.s}</b></div>
+    <div class="lab-panel">Nejdříve urči vlastnost, ve které se složky liší: rozpustnost, velikost částic, hustota, těkavost nebo přitažlivost k magnetu.</div>`;
+  const odezva = odezvaEl();
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: Uloha.zamichej([u.m, ...Uloha.zamichej(Object.keys(METODY).filter(k => k !== u.m)).slice(0, 3)])
+      .map(k => ({ klic: k, popis: METODY[k].split(' – ')[0] })),
+    spravnyKlic: u.m,
+    zpravaOk: `✅ ${METODY[u.m]}`,
+    zpravaChyba: 'Zeptej se: je látka rozpuštěná, nebo jen promíchaná? A liší se body varu?',
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+const DRUHY = {
+  roztok: 'roztok (stejnorodá směs)',
+  suspenze: 'suspenze (pevná látka v kapalině)',
+  emulze: 'emulze (dvě nemísitelné kapaliny)',
+  pena: 'pěna (plyn v kapalině)',
+  dym: 'dým (pevné částice v plynu)',
+  mlha: 'mlha (kapalné kapičky v plynu)',
+};
+const PRIKLADY = [
+  { s: 'slaná voda', d: 'roztok' }, { s: 'ocet ve vodě', d: 'roztok' },
+  { s: 'čistý vzduch bez prachu a kapiček', d: 'roztok' }, { s: 'křída rozmíchaná ve vodě', d: 'suspenze' },
+  { s: 'bahnitá voda', d: 'suspenze' }, { s: 'olej ve vodě po zatřepání', d: 'emulze' },
+  { s: 'mléko', d: 'emulze' }, { s: 'šlehačka', d: 'pena' },
+  { s: 'mýdlová pěna', d: 'pena' }, { s: 'kouř z komína', d: 'dym' },
+  { s: 'ranní mlha nad loukou', d: 'mlha' }, { s: 'oblak tvořený vodními kapičkami', d: 'mlha' },
+];
+function druh() {
+  const p = $('plocha');
+  const u = Uloha.nahodne(PRIKLADY);
+  p.innerHTML = `<div class="zadani">O jaký druh směsi jde?</div>
+    <div class="karta"><div class="smes" style="font-size:1.5rem">${u.s}</div></div>`;
+  const odezva = odezvaEl();
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: Uloha.zamichej([u.d, ...Uloha.zamichej(Object.keys(DRUHY).filter(k => k !== u.d)).slice(0, 3)])
+      .map(k => ({ klic: k, popis: DRUHY[k] })),
+    spravnyKlic: u.d,
+    zpravaOk: `✅ ${DRUHY[u.d]}`,
+    zpravaChyba: 'Urči skupenství obou složek – podle toho se druh směsi pozná.',
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+function zlomek() {
+  const p = $('plocha');
+  const mRoztoku = Uloha.nahodneCislo(2, 10) * 50;
+  const w = Uloha.nahodneCislo(1, 4) * 5;
+  const mLatky = mRoztoku * w / 100;
+  const mVody = mRoztoku - mLatky;
+  const typ = Uloha.nahodne(['procenta', 'hmotnostLatky', 'hmotnostRoztoku']);
+  let zadani, spravny, jednotka;
+
+  if (typ === 'procenta') {
+    zadani = `V <b>${mVody} g</b> vody rozpustíme <b>${mLatky} g</b> soli.
+      Kolikaprocentní roztok vznikl?`;
+    spravny = fmt(w); jednotka = '%';
+  } else if (typ === 'hmotnostLatky') {
+    zadani = `Máme <b>${mRoztoku} g</b> ${fmt(w)}% roztoku. Kolik gramů rozpuštěné látky obsahuje?`;
+    spravny = fmt(mLatky); jednotka = 'g';
+  } else {
+    zadani = `Kolik gramů roztoku vznikne rozpuštěním <b>${mLatky} g</b> látky
+      v <b>${mVody} g</b> vody?`;
+    spravny = fmt(mRoztoku); jednotka = 'g';
+  }
+  const jine = new Set([fmt(mLatky), fmt(mVody), fmt(mRoztoku), fmt(w), fmt(mLatky / mVody * 100)]);
+  jine.delete(spravny);
+  for(let i=1;jine.size<3;i++) {const x=fmt(Number(spravny.replace(',','.'))+i*3);if(x!==spravny)jine.add(x);}
+
+  p.innerHTML = `<div class="zadani uloha-text">${zadani}</div>
+    <div class="karta"><div class="vzorec">w = m(látky) / m(roztoku) · 100 %<br>
+      m(roztoku) = m(látky) + m(rozpouštědla)</div></div>`;
+  const odezva = odezvaEl();
+  Uloha.vyber({
+    kam: p, odezva, trida: 'velke',
+    moznosti: Uloha.zamichej([spravny, ...[...jine].slice(0, 3)]).map(t => ({ klic: t, popis: t + ' ' + jednotka })),
+    spravnyKlic: spravny,
+    zpravaOk: `✅ Roztok váží ${mRoztoku} g, z toho ${mLatky} g je látka → w = ${fmt(w)} %.`,
+    zpravaChyba: 'Pozor: ve jmenovateli je hmotnost celého roztoku, ne jen rozpouštědla.',
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+const POJMY = [
+  { q: 'Co je rozpouštědlo?', a: 'složka roztoku, v níž se rozpouští jiná látka', b: ['pevná látka na dně', 'plyn nad hladinou', 'filtr'] },
+  { q: 'Co je nasycený roztok?', a: 'roztok, ve kterém se za dané teploty už další látka nerozpustí', b: ['roztok bez rozpouštědla', 'roztok o teplotě 100 °C', 'roztok s pevnými částicemi'] },
+  { q: 'Jak se změní rozpustnost většiny pevných látek s rostoucí teplotou?', a: 'zvýší se', b: ['sníží se', 'nezmění se', 'látka se rozloží'] },
+  { q: 'Co je filtrát?', a: 'kapalina, která prošla filtrem', b: ['zbytek na filtru', 'filtrační papír', 'usazenina'] },
+  { q: 'Podle čeho odděluje destilace?', a: 'podle různých teplot varu', b: ['podle barvy', 'podle hustoty', 'podle magnetismu'] },
+  { q: 'Je vzduch chemická látka, nebo směs?', a: 'směs plynů', b: ['chemická sloučenina', 'prvek', 'roztok pevných látek'] },
+  { q: 'Jak poznáš různorodou směs?', a: 'jednotlivé složky jsou rozeznatelné okem nebo mikroskopem', b: ['je vždy kapalná', 'nedá se oddělit', 'je průhledná'] },
+  { q: 'Co se stane, když necháme kalnou vodu delší dobu stát?', a: 'pevné částice se usadí u dna', b: ['voda se odpaří', 'vznikne roztok', 'částice zmizí'] },
+];
+function pojmy() {
+  const p = $('plocha');
+  const u = Uloha.nahodne(POJMY);
+  p.innerHTML = `<div class="zadani uloha-text">${u.q}</div>`;
+  const odezva = odezvaEl();
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: Uloha.zamichej([u.a, ...u.b]).map(t => ({ klic: t, popis: t })),
+    spravnyKlic: u.a,
+    zpravaOk: `✅ ${u.a}`,
+    zpravaChyba: 'Vrať se k tomu, co je rozpouštědlo, roztok a jak fungují dělicí metody.',
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+const REZIMY = { aparatury, mise, castice, laborator, roztok, metoda, druh, zlomek, pojmy };
+function novaUloha() { stopApparatus(); Uloha.zrusPosun(); REZIMY[rezim](); const learning = ['aparatury','mise','castice','laborator','roztok'].includes(rezim); $('btnDalsi').hidden = learning; document.querySelector('.ovladani').hidden=learning; }
+
+document.querySelectorAll('#rezimy button').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('#rezimy button').forEach(x => x.classList.remove('active'));
+  b.classList.add('active');
+  rezim = b.dataset.rezim; document.querySelectorAll('#rezimy button').forEach(x=>x.setAttribute('aria-pressed',x===b));
+  novaUloha();
+}));
+document.querySelectorAll('#rezimy button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.rezim===rezim));
+$('btnDalsi').addEventListener('click', novaUloha);
+novaUloha();
+</script>
+</body>
+</html>

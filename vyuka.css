@@ -26,7 +26,7 @@
   --ok-text: var(--ok);
   --danger-text: var(--danger);
 }
-:root[data-theme="light"] {
+:root[data-tone="light"] {
   --zvyraz-text: #8a6209;
   --ok-text:     #1f7a52;
   --danger-text: #b3261e;
@@ -47,7 +47,7 @@ h1 { font-size: 1.35rem; margin-bottom: 3px; }
   background: var(--bg-control); border: 1px solid var(--border-strong); color: var(--text-muted);
   border-radius: 6px; padding: 8px 14px; font-size: 0.86rem; font-family: inherit; cursor: pointer;
 }
-.rezimy button.active { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+.rezimy button.active { background: var(--accent); border-color: var(--accent); color: var(--na-akcentu, #fff); font-weight: 600; }
 
 /* Pracovní plocha úlohy */
 .plocha {
@@ -85,8 +85,8 @@ h1 { font-size: 1.35rem; margin-bottom: 3px; }
 }
 .moznosti button .ikona { font-size: 2rem; line-height: 1; }
 .moznosti button:hover:not(:disabled) { border-color: var(--accent); transform: translateY(-3px); }
-.moznosti button.spravne { background: var(--ok); border-color: var(--ok); color: #fff; }
-.moznosti button.spatne { background: var(--danger); border-color: var(--danger); color: #fff; }
+.moznosti button.spravne { background: var(--ok); border-color: var(--ok); color: var(--na-akcentu, #fff); }
+.moznosti button.spatne { background: var(--danger); border-color: var(--danger); color: var(--na-akcentu, #fff); }
 .moznosti button:disabled { cursor: default; }
 
 /* Velká písmenová/číselná tlačítka */
@@ -124,7 +124,7 @@ h1 { font-size: 1.35rem; margin-bottom: 3px; }
   background: var(--bg-control); border: 1px solid var(--border-strong); color: var(--text);
   border-radius: 6px; padding: 10px 18px; font-size: 0.92rem; font-family: inherit; cursor: pointer;
 }
-.ovladani button.hlavni { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+.ovladani button.hlavni { background: var(--accent); border-color: var(--accent); color: var(--na-akcentu, #fff); font-weight: 600; }
 .ovladani button.hlavni:hover { background: var(--accent-hover); }
 .skore { margin-left: auto; color: var(--text-muted); font-size: 0.9rem; font-variant-numeric: tabular-nums; }
 .skore b { color: var(--ok-text); }
@@ -190,8 +190,8 @@ h1 { font-size: 1.35rem; margin-bottom: 3px; }
   font-family: inherit; font-variant-numeric: tabular-nums;
 }
 .odpoved-pole:focus { border-color: var(--accent); }
-.odpoved-pole.spravne { background: var(--ok); border-color: var(--ok); color: #fff; }
-.odpoved-pole.spatne { background: var(--danger); border-color: var(--danger); color: #fff; }
+.odpoved-pole.spravne { background: var(--ok); border-color: var(--ok); color: var(--na-akcentu, #fff); }
+.odpoved-pole.spatne { background: var(--danger); border-color: var(--danger); color: var(--na-akcentu, #fff); }
 .odpoved-pole:disabled { opacity: 0.85; }
 
 .karta.vysledky { gap: 14px; max-width: 640px; }
@@ -211,7 +211,7 @@ h1 { font-size: 1.35rem; margin-bottom: 3px; }
   background: var(--bg-control); border: 1px solid var(--border-strong); color: var(--text);
   border-radius: 6px; padding: 10px 18px; font-size: 0.92rem; font-family: inherit; cursor: pointer;
 }
-.konec-tlacitka button.hlavni { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+.konec-tlacitka button.hlavni { background: var(--accent); border-color: var(--accent); color: var(--na-akcentu, #fff); font-weight: 600; }
 .pokrok { color: var(--text-muted); font-size: 0.9rem; font-variant-numeric: tabular-nums; }
 .zadani-obrazek { line-height: 0; }
 .zadani-obrazek canvas { max-width: 100%; height: auto; border-radius: 10px; background: var(--bg-input); }
@@ -249,7 +249,7 @@ h1 { font-size: 1.35rem; margin-bottom: 3px; }
 /* písmeno, podle kterého se pravopis rozhoduje (obojetná/párová souhláska) */
 .veta-uloha .spoust { color: var(--zvyraz-text); }
 .veta-uloha .podmet {
-  color: var(--accent); border-bottom: 2px dotted var(--accent); cursor: default;
+  color: var(--clen-podmet); border-bottom: 2px dotted var(--clen-podmet); cursor: default;
 }
 /* Klikací slova musí být poznat i na dotykovém displeji, kde žádný hover není
    – proto mají tečkovanou linku pod sebou už v klidovém stavu. */
@@ -259,7 +259,7 @@ h1 { font-size: 1.35rem; margin-bottom: 3px; }
 }
 .veta-uloha .slovo-klik:hover { background: var(--accent-soft); border-bottom-color: var(--accent); }
 .veta-uloha .slovo-klik.spravne {
-  background: var(--ok); color: #fff; border-bottom-color: var(--ok);
+  background: var(--ok); color: var(--na-akcentu, #fff); border-bottom-color: var(--ok);
 }
 
 /* Kartička „proč“ – ukáže se až po odpovědi, nikdy ne dřív */
@@ -306,7 +306,7 @@ h1 { font-size: 1.35rem; margin-bottom: 3px; }
   transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 .pomucka .znak.sviti {
-  background: var(--accent); border-color: var(--accent); color: #fff;
+  background: var(--accent); border-color: var(--accent); color: var(--na-akcentu, #fff);
   box-shadow: 0 0 0 3px var(--accent-soft);
 }
 .pomucka .skupina.sviti { border-color: var(--accent); }
@@ -405,7 +405,7 @@ kbd {
   background: var(--bg-panel); border: 1px solid var(--border); border-radius: 10px;
   text-align: left; font-size: 0.9rem; line-height: 1.6;
 }
-.navaznosti h2 { font-size: 0.8rem; text-transform: uppercase; letter-spacing: .05em; color: var(--text-faint); margin-bottom: 6px; }
+.navaznosti h2 { font-size: 0.8rem; text-transform: uppercase; letter-spacing: .05em; color: var(--text-muted); margin-bottom: 6px; }
 .navaznosti a { color: var(--accent-hover); }
 .navaznosti a:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
 .navaznosti .radek { display: flex; flex-wrap: wrap; gap: 6px 14px; }

@@ -7,13 +7,14 @@
   <link rel="stylesheet" href="../common.css">
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
   <style>
     body { background-color: var(--bg-deep); padding: 24px clamp(14px, 3vw, 40px); min-height: 100vh; }
     h1 { font-size: 1.4rem; margin-bottom: 4px; }
     .podtitul { color: var(--text-muted); font-size: 0.88rem; margin-bottom: 16px; }
     .rezimy { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
     .rezimy button { background: var(--bg-control); border: 1px solid var(--border-strong); color: var(--text-muted); border-radius: 6px; padding: 7px 13px; font-size: 0.84rem; cursor: pointer; }
-    .rezimy button.active { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+    .rezimy button.active { background: var(--accent); border-color: var(--accent); color: var(--na-akcentu, #fff); font-weight: 600; }
     .mrizka { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; max-width: 860px; }
     .dlazdice { background: var(--bg-panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px; text-align: center; }
     .dlazdice svg { width: 100%; height: 90px; }
@@ -29,7 +30,7 @@
     .stavovy { display: flex; align-items: center; gap: 16px; margin-top: 16px; font-size: 0.9rem; }
     .serie { color: var(--warn); }
     .pomer { color: var(--text-muted); margin-left: auto; font-variant-numeric: tabular-nums; }
-    .dalsi { background: var(--accent); border: 1px solid var(--accent); color: #fff; border-radius: 6px; padding: 8px 16px; font-size: 0.88rem; cursor: pointer; visibility: hidden; }
+    .dalsi { background: var(--accent); border: 1px solid var(--accent); color: var(--na-akcentu, #fff); border-radius: 6px; padding: 8px 16px; font-size: 0.88rem; cursor: pointer; visibility: hidden; }
   </style>
 </head>
 <body>
@@ -37,18 +38,18 @@
   <p class="podtitul">Poznávání rovinných útvarů a těles (1.–6. ročník ZŠ).</p>
 
   <div class="rezimy" id="rezimy">
-    <button data-rezim="prehled" class="active">📖 Přehled</button>
+    <button data-rezim="prehled" data-faze="vyuka" class="active">📖 Přehled</button>
     <button data-rezim="kviz2d">Kvíz: rovinné útvary</button>
     <button data-rezim="kviz3d">Kvíz: tělesa</button>
   </div>
 
   <div class="mrizka" id="prehled"></div>
 
-  <div class="karta" id="kviz" style="display:none">
+  <div class="karta" id="kviz" style="display:none" data-kostra-odpovedi>
     <div id="obrazek"></div>
     <div class="moznosti" id="moznosti"></div>
     <div class="stavovy">
-      <button class="dalsi" id="btnDalsi">Další →</button>
+      <button class="dalsi" id="btnDalsi">Pokračovat →</button>
       <span class="serie" id="serie"></span>
       <span class="pomer" id="pomer"></span>
     </div>
@@ -99,6 +100,7 @@ function dalsi() {
   let i;
   do { i = Math.floor(Math.random() * zdroj.length); } while (i === posledni);
   posledni = i; uloha = zdroj[i];
+  const otazka = {};   // společná kostra – Ověř se
   $('obrazek').innerHTML = svg(uloha[1]);
   const spatne = zamichej(zdroj.filter(t => t[0] !== uloha[0])).slice(0, 3).map(t => t[0]);
   $('moznosti').innerHTML = '';
@@ -107,6 +109,7 @@ function dalsi() {
     b.textContent = n;
     b.onclick = () => {
       celkem++;
+      window.Kostra?.odpoved(n === uloha[0], otazka);
       if (n === uloha[0]) { spravne++; serie++; b.classList.add('ok'); }
       else { serie = 0; b.classList.add('spatne'); [...$('moznosti').children].find(x => x.textContent === uloha[0]).classList.add('ok'); }
       [...$('moznosti').children].forEach(x => x.disabled = true);
@@ -117,6 +120,7 @@ function dalsi() {
     $('moznosti').appendChild(b);
   });
   $('btnDalsi').style.visibility = 'hidden';
+  window.Kostra?.otazka();
 }
 $('btnDalsi').onclick = dalsi;
 document.querySelectorAll('#rezimy button').forEach(b => b.onclick = () => {

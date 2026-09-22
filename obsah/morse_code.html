@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="../common.css">
 <script src="../theme.js"></script>
 <script src="../podpis.js" defer></script>
+<script src="../kostra.js" defer></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding:20px}
@@ -17,8 +18,8 @@ h2{font-size:1rem;color:var(--accent);margin-bottom:12px}
 textarea{width:100%;min-height:90px;background:var(--bg-input);border:1px solid var(--border-strong);border-radius:6px;color:var(--text);padding:12px;font-size:1rem;resize:vertical}
 #morseOut{font-family:monospace;color:var(--accent);letter-spacing:1px}
 .arrows{display:flex;gap:10px;justify-content:center;margin:12px 0;flex-wrap:wrap}
-.btn{background:var(--accent);color:#fff;border:none;padding:10px 18px;border-radius:6px;cursor:pointer;font-weight:600;font-size:.88rem}
-.btn:hover{background:var(--accent)}.btn-sec{background:var(--border)}
+.btn{background:var(--accent);color: var(--na-akcentu, #fff);border:none;padding:10px 18px;border-radius:6px;cursor:pointer;font-weight:600;font-size:.88rem}
+.btn:hover{background:var(--accent)}.btn-sec{background:var(--border);color:var(--text)}
 .controls{display:flex;gap:14px;align-items:center;justify-content:center;flex-wrap:wrap;color:var(--text-faint);font-size:.85rem}
 .controls input[type=range]{vertical-align:middle}
 .ref{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:6px}
@@ -27,8 +28,8 @@ textarea{width:100%;min-height:90px;background:var(--bg-input);border:1px solid 
 .playing{color:#27ae60;text-align:center;min-height:20px;margin-top:8px}
 
 /* světlý režim: dorovnání kontrastu textu */
-:root[data-theme="light"] .btn.btn-sec { color: var(--text); }
-:root[data-theme="light"] code { color: #a3690c; }
+:root[data-tone="light"] .btn.btn-sec { color: var(--text); }
+:root[data-tone="light"] code { color: #a3690c; }
 </style>
 </head>
 <body>

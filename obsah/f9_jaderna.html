@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="../vyuka.css">
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
   <script src="../uloha.js"></script>
   <style>
     .schema { width: min(360px, 90%); }
@@ -42,7 +43,7 @@
       border-radius: 8px; padding: 8px 14px; font-size: 0.84rem; font-family: inherit; cursor: pointer;
     }
     .ovladace button:hover { border-color: var(--accent); }
-    .ovladace button.hlavniAkce { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+    .ovladace button.hlavniAkce { background: var(--accent); border-color: var(--accent); color: var(--na-akcentu, #fff); font-weight: 600; }
 
     .stavovky {
       display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -129,11 +130,11 @@
   <p class="podtitul">Pro 9. ročník: štěpení jader, poločas rozpadu, jaderná elektrárna a bezpečnost.</p>
 
   <div class="rezimy" id="rezimy" role="group" aria-label="Výukové režimy">
-    <button data-rezim="dej" class="active">⚛️ Štěpení krok za krokem</button>
-    <button data-rezim="retezovka">☢️ Řetězová reakce</button>
-    <button data-rezim="rozpad">⏳ Rozpad naživo</button>
-    <button data-rezim="schema">🏭 Elektrárna zblízka</button>
-    <button data-rezim="havarie">🛡 Havárie a chlazení</button>
+    <button data-rezim="dej" data-faze="ukazka" class="active">⚛️ Štěpení krok za krokem</button>
+    <button data-rezim="retezovka" data-faze="vyuka">☢️ Řetězová reakce</button>
+    <button data-rezim="rozpad" data-faze="vyuka">⏳ Rozpad naživo</button>
+    <button data-rezim="schema" data-faze="vyuka">🏭 Elektrárna zblízka</button>
+    <button data-rezim="havarie" data-faze="vyuka">🛡 Havárie a chlazení</button>
     <button data-rezim="stepeni">🧠 Kvíz: štěpení</button>
     <button data-rezim="polocas">📉 Kvíz: poločas</button>
     <button data-rezim="provoz">⚖️ Provoz a zdroje</button>

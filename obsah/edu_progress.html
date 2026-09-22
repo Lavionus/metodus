@@ -7,8 +7,12 @@
 <link rel="stylesheet" href="../common.css">
 <script src="../theme.js"></script>
 <script src="../podpis.js" defer></script>
+<script src="../kostra.js" defer></script>
 <script src="../apps.js" defer></script>
 <script src="../uloha.js" defer></script>
+<script src="../prubeh.js" defer></script>
+<script src="../denik-prubeh.js" defer></script>
+<link rel="stylesheet" href="../propojeni.css">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:var(--font);background:var(--bg-deep);color:var(--text);min-height:100vh;padding:20px clamp(12px,3vw,36px)}
@@ -21,10 +25,10 @@ h1{font-size:1.35rem;margin-bottom:3px}
 .streakbar .v{font-size:1.7rem;font-weight:700}
 .streakbar .l{font-size:.72rem;color:var(--text-faint)}
 .subjects{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
-.subj{background:var(--bg-control);border:1px solid var(--border-strong);border-radius:999px;
+.subj{font:inherit;color:var(--text);background:var(--bg-control);border:1px solid var(--border-strong);border-radius:999px;
   padding:8px 14px;font-size:.85rem;cursor:pointer;user-select:none}
-.subj.done{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
-.subj.auto{background:var(--ok);border-color:var(--ok);color:#fff;font-weight:600;cursor:default}
+.subj.done{background:var(--accent);border-color:var(--accent);color: var(--na-akcentu, #fff);font-weight:600}
+.subj.auto{background:var(--ok);border-color:var(--ok);color: var(--na-akcentu, #fff);font-weight:600;cursor:default}
 .cal{display:grid;grid-template-columns:repeat(14,1fr);gap:4px}
 .cal .d{aspect-ratio:1;border-radius:4px;background:var(--bg-control)}
 .cal .d.on{background:var(--ok)}
@@ -36,7 +40,7 @@ h1{font-size:1.35rem;margin-bottom:3px}
 .badge .ic{font-size:1.5rem}
 .badge .n{font-size:.7rem;color:var(--text-muted);margin-top:4px}
 .temata{display:flex;flex-direction:column;gap:6px}
-.tema{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:8px;background:var(--bg-elevated);
+.tema{display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:8px 10px;border-radius:8px;background:var(--bg-elevated);
   border-left:3px solid var(--border);font-size:.88rem}
 .tema.slabe{border-left-color:var(--warn)}
 .tema.silne{border-left-color:var(--ok)}
@@ -45,7 +49,7 @@ h1{font-size:1.35rem;margin-bottom:3px}
 .tema a{color:var(--accent);text-decoration:none;font-size:.8rem;white-space:nowrap}
 .tema a:hover{text-decoration:underline}
 .prazdno{color:var(--text-faint);font-size:.85rem;font-style:italic}
-.btn{background:var(--accent);color:#fff;border:none;padding:9px 16px;border-radius:6px;
+.btn{background:var(--accent);color: var(--na-akcentu, #fff);border:none;padding:9px 16px;border-radius:6px;
   cursor:pointer;font-weight:600;font-family:inherit}
 .btn.sec{background:var(--bg-control);color:var(--text);border:1px solid var(--border-strong);font-weight:400;font-size:.8rem;padding:6px 12px}
 .vysvetleni{color:var(--text-faint);font-size:.8rem;line-height:1.5;margin-top:10px}
@@ -54,14 +58,14 @@ h1{font-size:1.35rem;margin-bottom:3px}
 <body>
 <div class="container">
   <h1>🏅 Studijní deník</h1>
-  <div class="podtitul">Dny, kdy jsi procvičoval/a, se zapisují samy — stačí otevřít kteroukoli úlohu a odpovědět.</div>
+  <div class="podtitul">Záznam práce v tomto prohlížeči. Dokončené úlohy se zapisují v zapojených lekcích; práci na papíře můžeš přidat ručně.</div>
 
   <div class="card">
     <div class="streakbar">
       <div><div class="v" id="streak">0</div><div class="l">Dní v řadě 🔥</div></div>
       <div><div class="v" id="totalDays">0</div><div class="l">Celkem dní</div></div>
-      <div><div class="v" id="totalOdpovedi">0</div><div class="l">Zodpovězených otázek</div></div>
-      <div><div class="v" id="uspesnost">–</div><div class="l">Úspěšnost napoprvé</div></div>
+      <div><div class="v" id="totalOdpovedi">0</div><div class="l">Záznamů dokončení</div></div>
+      <div><div class="v" id="uspesnost">–</div><div class="l">Napoprvé z dokončených</div></div>
     </div>
     <h2 class="sec">Dnes jsi procvičoval/a</h2>
     <div class="subjects" id="subjects"></div>
@@ -79,14 +83,19 @@ h1{font-size:1.35rem;margin-bottom:3px}
   </div>
 
   <div class="card">
-    <h2 class="sec">Co ti jde a co drhne</h2>
+    <h2 class="sec">Záznamy podle tématu</h2>
     <div class="temata" id="temata"></div>
-    <p class="vysvetleni">Počítá se jen odpověď napoprvé, takže poměr ukazuje, jak jistě téma umíš.
-      Témata s nejnižším poměrem stojí za zopakování.</p>
+    <p class="vysvetleni">Poměr popisuje odpovědi napoprvé mezi dokončenými úlohami. Nezahrnuje přeskočené otázky a neříká, zda byla použita pomoc. Není známkou ani důkazem zvládnutí tématu; různé úlohy mají různou obtížnost.</p>
   </div>
 
+  <section class="card">
+    <h2 class="sec">Průběh řešení v pilotních lekcích</h2>
+    <div id="podrobnyPrubeh"></div>
+    <p class="vysvetleni">Zlomky, pH, nepřímá řeč, prameny a tabulky: zaznamenávají se výběrové otázky, nikoli vedené aktivity nebo vybarvování. Otázka je zahájená první odeslanou odpovědí; každá další odpověď je další pokus. Dokončená znamená, že nakonec padla správná odpověď. Rozdíl mezi zahájenými a dokončenými může znamenat rozpracovanou nebo opuštěnou otázku.</p>
+    <p class="vysvetleni">Podporu označuje žák políčkem u otázky (nápověda, vzor, pomoc druhého). Záznam podpory se může překrývat s odpovědí napoprvé; nezaškrtnutí nedokazuje samostatnost. Starší záznamy podrobnosti nemají a zpětně je nedopočítáváme. Souhrn výše a podrobný průběh se překrývají — nesčítej je.</p>
+  </section>
   <div class="card">
-    <h2 class="sec">Odznaky</h2>
+    <h2 class="sec">Odznaky za pravidelnost a činnost</h2>
     <div class="badges" id="badges"></div>
   </div>
 </div>
@@ -94,7 +103,7 @@ h1{font-size:1.35rem;margin-bottom:3px}
 <script>
 const $=id=>document.getElementById(id);
 const KLIC_RUCNE='edu_diary_v1';   // ruční zápisy si necháváme ve stejném klíči jako dřív
-const PREDMETY=['📖 Čeština','🔢 Matematika','🔬 Přírodní vědy','🌍 Zeměpis/Dějepis','🇬🇧 Jazyky','🎴 Kartičky'];
+const PREDMETY=['📖 Čeština','🔢 Matematika','🔬 Přírodní vědy','🌍 Zeměpis/Dějepis','🇬🇧 Jazyky','💻 Informatika','🎴 Kartičky'];
 
 /* Deník činnosti zapisuje uloha.js pod názvem souboru stránky.
    Předmět a hezký název si dohledáme v katalogu Metodusu. */
@@ -116,7 +125,7 @@ const PREDMET_NA_SKUPINU={
   aj:'🇬🇧 Jazyky', dcj:'🇬🇧 Jazyky',
   prv:'🔬 Přírodní vědy', pr:'🔬 Přírodní vědy', f:'🔬 Přírodní vědy', ch:'🔬 Přírodní vědy',
   z:'🌍 Zeměpis/Dějepis', d:'🌍 Zeměpis/Dějepis', vo:'🌍 Zeměpis/Dějepis',
-  inf:'🎴 Kartičky',
+  inf:'💻 Informatika',
 };
 
 function nactiJson(klic,vychozi){
@@ -162,12 +171,12 @@ function render(){
   $('subjects').innerHTML=PREDMETY.map(p=>{
     const jeAuto=auto.has(p);
     const trida=jeAuto?'subj auto':(dnesRucne.has(p)?'subj done':'subj');
-    return `<div class="${trida}" data-p="${p}" title="${jeAuto?'Rozpoznáno z procvičování':'Klepnutím zapíšeš ručně'}">${p}</div>`;
+    return `<button type="button" class="${trida}" data-p="${p}" aria-pressed="${jeAuto||dnesRucne.has(p)}" ${jeAuto?'disabled':''} title="${jeAuto?'Rozpoznáno z procvičování':'Klepnutím zapíšeš ručně'}">${p}</button>`;
   }).join('');
   document.querySelectorAll('.subj:not(.auto)').forEach(el=>el.onclick=()=>{
     const p=el.dataset.p;
     if(dnesRucne.has(p))dnesRucne.delete(p);else dnesRucne.add(p);
-    el.classList.toggle('done');
+    el.classList.toggle('done');el.setAttribute('aria-pressed',String(dnesRucne.has(p)));
   });
 
   // souhrn
@@ -176,7 +185,7 @@ function render(){
   let ok=0,pokusy=0;
   Object.values(denik).forEach(den=>Object.values(den).forEach(z=>{ok+=z.ok;pokusy+=z.pokusy;}));
   $('totalOdpovedi').textContent=pokusy;
-  $('uspesnost').textContent=pokusy?Math.round(ok/pokusy*100)+' %':'–';
+  $('uspesnost').textContent=pokusy?`${ok} / ${pokusy}`:'–';
   $('streak').textContent=spocitejSerii(vsechnyDny);
 
   renderKalendar(denik);
@@ -216,21 +225,21 @@ function renderTemata(denik){
     .map(([soubor,s])=>({soubor,...s,pomer:s.ok/s.pokusy}))
     .sort((a,b)=>a.pomer-b.pomer);
   if(!seznam.length){
-    $('temata').innerHTML='<p class="prazdno">Zatím není z čeho vycházet — po pár úlohách se tu objeví, co ti jde a co ne.</p>';
+    $('temata').innerHTML='<p class="prazdno">Zatím není z čeho vycházet — po pár úlohách se tu objeví, přehled tvých dokončených úloh.</p>';
     return;
   }
   const vypis=t=>{
     const zaznam=KATALOG.get(t.soubor);
     const nazev=zaznam?zaznam.nazev:t.soubor.replace('.html','');
-    const trida=t.pomer<0.6?'slabe':t.pomer>=0.85?'silne':'';
+    const trida='';
     const odkaz=zaznam?`<a href="../index.html#${zaznam.soubor}" target="_top">procvičit →</a>`:'';
     return `<div class="tema ${trida}"><span class="nazev">${nazev}</span>`+
-           `<span class="pomer">${Math.round(t.pomer*100)} % (${t.ok}/${t.pokusy})</span>${odkaz}</div>`;
+           `<span class="pomer">${t.ok} z ${t.pokusy} napoprvé</span>${odkaz}</div>`;
   };
   const slabe=seznam.slice(0,5);
   const silne=seznam.slice(-3).reverse().filter(t=>!slabe.includes(t));
   $('temata').innerHTML=slabe.map(vypis).join('')+
-    (silne.length?'<div class="vysvetleni" style="margin:6px 0 0">Nejlépe zvládnutá témata:</div>'+silne.map(vypis).join(''):'');
+    (silne.length?'<div class="vysvetleni" style="margin:6px 0 0">Další zaznamenaná témata:</div>'+silne.map(vypis).join(''):'');
 }
 
 const ODZNAKY=[
@@ -238,8 +247,8 @@ const ODZNAKY=[
   {n:'3denní série',ic:'🔥',cond:(d,o,st)=>st>=3},
   {n:'Týdenní série',ic:'⭐',cond:(d,o,st)=>st>=7},
   {n:'Měsíční série',ic:'🏆',cond:(d,o,st)=>st>=30},
-  {n:'100 odpovědí',ic:'📚',cond:(d,o)=>o>=100},
-  {n:'1000 odpovědí',ic:'🎓',cond:(d,o)=>o>=1000},
+  {n:'100 dokončení',ic:'📚',cond:(d,o)=>o>=100},
+  {n:'1000 dokončení',ic:'🎓',cond:(d,o)=>o>=1000},
   {n:'Všestrannost',ic:'🌈',cond:(d,o,st,denik)=>{
     const skupiny=new Set();
     Object.values(denik).forEach(den=>Object.keys(den).forEach(s=>skupiny.add(skupinaSouboru(s))));
@@ -260,8 +269,8 @@ $('doneBtn').onclick=()=>{
   ulozRucne();render();
 };
 $('resetBtn').onclick=()=>{
-  try{localStorage.removeItem(DENIK);localStorage.removeItem(KLIC_RUCNE);}catch{/* nevadí */}
-  rucne={days:{}};dnesRucne=new Set();render();
+  try{localStorage.removeItem(DENIK);localStorage.removeItem(KLIC_RUCNE);localStorage.removeItem(Prubeh.KEY);}catch{/* nevadí */}
+  rucne={days:{}};dnesRucne=new Set();render();window.renderPrubeh();
 };
 
 window.addEventListener('DOMContentLoaded',()=>{KATALOG=katalogIndex();render();});

@@ -8,6 +8,8 @@
   <link rel="stylesheet" href="../vyuka.css">
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
+  <script src="../data/tisnova_cisla.js"></script>
   <script src="../uloha.js"></script>
   <style>
     .uloha-text { max-width: 640px; font-size: 1.02rem; line-height: 1.6; }
@@ -22,7 +24,7 @@
     }
     .kroky button:hover:not(:disabled) { border-color: var(--accent); }
     .kroky button.hotovy { background: var(--accent-soft); border-color: var(--accent); opacity: 0.7; }
-    .kroky button.spatne { background: var(--danger); border-color: var(--danger); color: #fff; }
+    .kroky button.spatne { background: var(--danger); border-color: var(--danger); color: var(--na-akcentu, #fff); }
     .situace { font-size: 1.15rem; font-weight: 700; max-width: 600px; }
     .lista { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; max-width: 740px;
       color: var(--text-faint); font-size: 0.8rem; }
@@ -64,12 +66,8 @@ const skore = Uloha.skore('metodus_pr8_prvni_pomoc', $('skore'));
 let rezim = 'tisnova';
 function odezvaEl() { const d = document.createElement('div'); d.className = 'odezva'; return d; }
 
-const TISNOVA = [
-  { c: '155', kdo: 'zdravotnická záchranná služba', kdy: 'člověk je zraněný, v bezvědomí nebo mu je náhle zle' },
-  { c: '150', kdo: 'hasiči', kdy: 'požár, únik plynu, vyprošťování z auta nebo výtahu' },
-  { c: '158', kdo: 'policie', kdy: 'trestný čin, krádež, dopravní nehoda s viníkem' },
-  { c: '112', kdo: 'jednotné evropské číslo tísňového volání', kdy: 'nevíš, koho volat, nebo jsi v cizině' },
-];
+// Tísňová čísla jsou společná data rodiny „Lidské tělo a zdraví" (data/tisnova_cisla.js).
+const TISNOVA = METODUS_TISNOVA.map(t => ({ c: t.cislo, kdo: t.kdo, kdy: t.kdy }));
 const PRIPADY = [
   { s: 'Spolužák upadl na hřišti, nehýbe se a nereaguje.', c: '155' },
   { s: 'Ze sousedova balkonu jde hustý kouř.', c: '150' },

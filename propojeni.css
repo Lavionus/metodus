@@ -1,0 +1,26 @@
+.propojeni { margin:18px 0; padding:18px; max-width:1000px; border:1px solid var(--border); border-radius:var(--radius); background:var(--bg-panel); line-height:1.55; }
+.propojeni h2 { font-size:1.15rem; margin:0 0 12px; }
+.propojeni p { margin:8px 0; }
+.propojeni label { display:block; margin:8px 0; }
+.propojeni :is(a,button,select) { font:inherit; }
+.propojeni a { color:var(--accent-hover); }
+.propojeni :is(button,select) { color:var(--text); background:var(--bg-control); border:1px solid var(--border-strong); border-radius:6px; padding:9px; max-width:100%; }
+.propojeni :is(button,select,a):focus-visible { outline:3px solid var(--accent); outline-offset:3px; }
+.propojeni button { cursor:pointer; min-height:44px; }
+.propojeni .vstupy { display:flex; flex-wrap:wrap; gap:10px; margin:12px 0; }
+.propojeni .lekce { padding:12px 0; border-top:1px solid var(--border); }
+.propojeni .meta { font-size:.86rem; color:var(--text-muted); }
+.propojeni .psani { min-height:65px; border-bottom:1px solid var(--border-strong); }
+.propojeni [hidden] { display:none; }
+.prubeh-podpora { display:block; max-width:100%; font-size:.85rem; color:var(--text-muted); margin:8px 0; }
+.prubeh-podpora input:focus-visible { outline:3px solid var(--accent); }
+.prubeh-radek { padding:12px 0; border-top:1px solid var(--border); line-height:1.6; overflow-wrap:anywhere; }
+@media print {
+ body.list-pilot { background:white!important; color:black!important; padding:0!important; }
+ body.list-pilot > :not(.wrap),body.list-pilot .wrap > :not(#listPilot) { display:none!important; }
+ body.list-pilot #listPilot { display:block!important; border:0; color:black; background:white; max-width:none; }
+ body.list-pilot #listPilot h1 { display:block!important; }
+ body.list-pilot #listPilot .noprint,body.list-pilot #listPilot details { display:none!important; }
+ body.list-pilot #listPilot .psani { border-color:black; min-height:95px; }
+}
+body.list-pilot .wrap > :not(#listPilot) { display:none; }

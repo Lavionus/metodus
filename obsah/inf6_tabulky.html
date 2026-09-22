@@ -6,10 +6,15 @@
   <title>Tabulkový procesor – vzorce</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../pilot07.css">
+  <script src="../pilot07.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
   <script src="../rec.js"></script>
   <script src="../uloha.js"></script>
+  <link rel="stylesheet" href="../propojeni.css">
+  <script src="../prubeh.js"></script>
   <style>
     .tabulka-obal { overflow-x: auto; max-width: 100%; }
     table.list { border-collapse: collapse; font-variant-numeric: tabular-nums; }
@@ -29,6 +34,18 @@
 <body>
   <h1>📊 Tabulkový procesor – vzorce</h1>
   <p class="podtitul">Pro 6.–7. ročník: adresy buněk, vzorce, funkce a čtení dat z tabulky.</p>
+
+  <section class="cil" aria-label="Cíl lekce">
+    <p><b>Po této lekci dokážu</b> změnit vstupní buňku a vysvětlit, proč se výsledek vzorce přepočítá.</p>
+    <p class="drobne">6.–7. ročník · přibližně 15 minut · Nejdřív: <a href="inf4_data.html" data-lekce>Data a informace</a>.</p>
+    <details><summary>Pro učitele: 5 / 15 / 45 minut</summary><ul>
+      <li>5 minut: společně projděte vedenou aktivitu a nechte žáky vysvětlit výsledek.</li>
+      <li>15 minut: nejprve vlastní předpověď, pak ověření a několik úloh z procvičování.</li>
+      <li>45 minut: práce ve dvojicích, vlastní obměna příkladu a závěrečné vysvětlení bez nápovědy.</li>
+    </ul></details>
+  </section>
+  <section id="vedena-aktivita" class="pilot" data-pilot="inf6_tabulky" aria-label="Vedená aktivita"></section>
+  <h2 class="pilot-heading" id="procvicovani">Procvičování</h2>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="adresa" class="active">📍 Adresa buňky</button>
@@ -50,6 +67,7 @@
     <b>PRŮMĚR</b> spočítá průměr, <b>MAX</b> a <b>MIN</b> najdou největší a nejmenší hodnotu.
   </p>
 
+  <nav class="navaznosti" aria-label="Navazující lekce"><h2>Kam dál</h2><a href="inf6_promenne.html" data-lekce>Proměnné a podmínky</a></nav>
 <script>
 const $ = id => document.getElementById(id);
 const skore = Uloha.skore('metodus_inf6_tabulky', $('skore'));
@@ -238,7 +256,7 @@ function cteni() {
 }
 
 const REZIMY = { adresa, vysledek, funkce, cteni };
-function novaUloha() { REZIMY[rezim](); }
+function novaUloha() { Uloha.zrusPosun(); REZIMY[rezim](); }
 
 document.querySelectorAll('#rezimy button').forEach(b => b.addEventListener('click', () => {
   document.querySelectorAll('#rezimy button').forEach(x => x.classList.remove('active'));
@@ -248,6 +266,7 @@ document.querySelectorAll('#rezimy button').forEach(b => b.addEventListener('cli
 }));
 $('btnDalsi').addEventListener('click', novaUloha);
 document.addEventListener('keydown', e => {
+  if (e.target.closest('input, select, textarea, button, a, summary, .pilot')) return;
   if (e.key === 'ArrowRight' || e.key === 'Enter') { e.preventDefault(); novaUloha(); }
 });
 novaUloha();

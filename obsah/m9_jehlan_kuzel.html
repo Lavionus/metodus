@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="../vyuka.css">
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
   <script src="../uloha.js"></script>
   <style>
     .teleso { width: min(280px, 74%); }
@@ -70,7 +71,7 @@
       border-radius: 6px; padding: 5px 12px; font-size: 0.8rem; font-family: inherit; cursor: pointer;
     }
     .prepinac-tvar button:hover { border-color: var(--accent); color: var(--text); }
-    .prepinac-tvar button.zap { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .prepinac-tvar button.zap { background: var(--accent); border-color: var(--accent); color: var(--na-akcentu, #fff); }
 
     /* Živý výpočet – dosazení do vzorce krok za krokem */
     .vypocet {
@@ -100,9 +101,9 @@
   <p class="podtitul">Pro 9. ročník: objem a povrch prostorových těles.</p>
 
   <div class="rezimy" id="rezimy">
-    <button data-rezim="modelarna" class="active">🔬 Modelárna</button>
-    <button data-rezim="site">📐 Rozbal síť</button>
-    <button data-rezim="tretina">💧 Proč třetina</button>
+    <button data-rezim="modelarna" data-faze="vyuka" class="active">🔬 Modelárna</button>
+    <button data-rezim="site" data-faze="vyuka">📐 Rozbal síť</button>
+    <button data-rezim="tretina" data-faze="vyuka">💧 Proč třetina</button>
     <button data-rezim="jehlan">🔻 Jehlan</button>
     <button data-rezim="kuzel">🍦 Kužel</button>
     <button data-rezim="koule">⚽ Koule</button>

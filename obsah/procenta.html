@@ -5,8 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Procenta a trojčlenka</title>
   <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="../nazor.css">
+  <script src="../nazor.js"></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
   <style>
     body { background-color: var(--bg-deep); padding: 24px clamp(14px, 3vw, 40px); min-height: 100vh; }
     h1 { font-size: 1.4rem; margin-bottom: 4px; }
@@ -16,7 +19,7 @@
       background: var(--bg-control); border: 1px solid var(--border-strong); color: var(--text-muted);
       border-radius: 6px; padding: 7px 13px; font-size: 0.84rem; cursor: pointer;
     }
-    .rezimy button.active { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+    .rezimy button.active { background: var(--accent); border-color: var(--accent); color: var(--na-akcentu, #fff); font-weight: 600; }
     .karta { background: var(--bg-panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; max-width: 640px; }
     .zadani { font-size: 1.25rem; line-height: 1.55; margin-bottom: 18px; min-height: 3.6rem; }
     .odpovedni { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
@@ -27,7 +30,7 @@
     input:focus { outline: none; border-color: var(--accent); }
     .jednotka { color: var(--text-muted); font-size: 1.1rem; }
     .potvrdit {
-      background: var(--accent); border: none; color: #fff; border-radius: 8px;
+      background: var(--accent); border: none; color: var(--na-akcentu, #fff); border-radius: 8px;
       padding: 11px 26px; font-size: 0.95rem; font-weight: 600; cursor: pointer;
     }
     .potvrdit:hover { background: var(--accent-hover); }
@@ -49,15 +52,16 @@
     <button data-rezim="trojclenka">Trojčlenka</button>
   </div>
 
-  <div class="karta">
+  <div class="karta" data-kostra-odpovedi>
     <div class="zadani" id="zadani"></div>
     <div class="odpovedni">
       <input type="number" id="odpoved" step="any" autocomplete="off">
       <span class="jednotka" id="jednotka"></span>
-      <button class="potvrdit" id="btnPotvrdit">Potvrdit</button>
+      <button class="potvrdit" id="btnPotvrdit">✔️ Zkontrolovat</button>
     </div>
     <div class="zprava" id="zprava"></div>
     <div class="reseni" id="reseni"></div>
+    <div id="nazorProcenta"></div>
   </div>
   <div class="stav">
     <span class="serie" id="serie"></span>
@@ -100,24 +104,25 @@ function nova() {
   $('odpoved').value = '';
   $('zprava').textContent = ''; $('zprava').className = 'zprava';
   $('reseni').style.display = 'none';
-  $('btnPotvrdit').textContent = 'Potvrdit';
+  $('nazorProcenta').innerHTML = '';
+  $('btnPotvrdit').textContent = '✔️ Zkontrolovat';
   if (rezim === 'zceho') {
     const p = nahodnyPrvek([5, 10, 12, 15, 20, 25, 30, 40, 50, 75]);
     const z = nahodnyPrvek([40, 60, 80, 120, 150, 200, 240, 300, 500, 640, 800, 1200]);
-    uloha = { vysledek: cislo2(z * p / 100), jednotka: '',
+    uloha = { vysledek: cislo2(z * p / 100), jednotka: '', obraz: [z * p / 100, z],
       postup: `1 % z ${z} je ${fmt(z / 100)} → ${p} % je ${p} × ${fmt(z / 100)} = ${fmt(z * p / 100)}` };
     $('zadani').textContent = `Kolik je ${p} % z čísla ${z}?`;
   } else if (rezim === 'kolikpct') {
     const b = nahodnyPrvek([40, 50, 80, 120, 200, 250, 400, 500]);
     const a = cislo2(b * nahodnyPrvek([5, 10, 15, 20, 25, 30, 40, 60, 75, 90]) / 100);
-    uloha = { vysledek: cislo2(a / b * 100), jednotka: '%',
+    uloha = { vysledek: cislo2(a / b * 100), jednotka: '%', obraz: [a, b],
       postup: `${fmt(a)} ÷ ${b} = ${fmt(a / b)} → × 100 = ${fmt(a / b * 100)} %` };
     $('zadani').textContent = `Kolik procent je ${fmt(a)} z čísla ${b}?`;
   } else if (rezim === 'zaklad') {
     const p = nahodnyPrvek([10, 20, 25, 40, 50, 60, 75, 80]);
     const zaklad = nahodnyPrvek([80, 120, 160, 200, 240, 300, 400, 500]);
     const c = cislo2(zaklad * p / 100);
-    uloha = { vysledek: zaklad, jednotka: '',
+    uloha = { vysledek: zaklad, jednotka: '', obraz: [c, zaklad],
       postup: `${p} % je ${fmt(c)} → 1 % je ${fmt(c)} ÷ ${p} = ${fmt(c / p)} → 100 % = ${fmt(zaklad)}` };
     $('zadani').textContent = `${p} % z neznámého čísla je ${fmt(c)}. Jaké je celé číslo (základ)?`;
   } else {
@@ -126,6 +131,7 @@ function nova() {
   }
   $('jednotka').textContent = uloha.jednotka;
   $('odpoved').focus();
+  window.Kostra?.otazka();
 }
 function vyhodnot() {
   if (vyhodnoceno) { nova(); return; }
@@ -133,13 +139,16 @@ function vyhodnot() {
   if (v === '') { $('odpoved').focus(); return; }
   vyhodnoceno = true; celkem++;
   const ok = Math.abs(Number(v) - uloha.vysledek) < 0.011;
+  window.Kostra?.odpoved(ok, uloha);   // společná kostra – Ověř se
   if (ok) { spravne++; serie++; $('zprava').textContent = '✅ Správně!'; $('zprava').classList.add('ok'); }
   else { serie = 0; $('zprava').textContent = '❌ Správný výsledek: ' + fmt(uloha.vysledek) + (uloha.jednotka ? ' ' + uloha.jednotka : ''); $('zprava').classList.add('spatne'); }
   $('reseni').textContent = '💡 ' + uloha.postup;
   $('reseni').style.display = 'block';
+  // proužek hodnot nad stupnicí 0–100 % – stejný obraz jako u zlomků a poměru
+  $('nazorProcenta').innerHTML = uloha.obraz ? Nazor.procenta(uloha.obraz[0], uloha.obraz[1]) : '';
   $('serie').textContent = serie >= 3 ? '🔥 série ' + serie : '';
   $('skore').textContent = spravne + ' / ' + celkem;
-  $('btnPotvrdit').textContent = 'Další →';
+  $('btnPotvrdit').textContent = 'Pokračovat →';
 }
 $('btnPotvrdit').onclick = vyhodnot;
 $('odpoved').addEventListener('keydown', e => { if (e.key === 'Enter') vyhodnot(); });

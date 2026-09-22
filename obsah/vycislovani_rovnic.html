@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="../common.css">
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
   <style>
     body { background-color: var(--bg-deep); padding: 24px clamp(14px, 3vw, 40px); min-height: 100vh; }
     h1 { font-size: 1.4rem; margin-bottom: 4px; }
@@ -26,7 +27,7 @@
     .sipka { margin: 0 10px; color: var(--accent); }
     .ovladani { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
     .ovladani button { border: none; border-radius: 8px; padding: 10px 20px; font-size: 0.92rem; font-weight: 600; cursor: pointer; }
-    .btn-hlavni { background: var(--accent); color: #fff; }
+    .btn-hlavni { background: var(--accent); color: var(--na-akcentu, #fff); }
     .btn-hlavni:hover { background: var(--accent-hover); }
     .btn-vedle { background: var(--bg-control); color: var(--text); border: 1px solid var(--border-strong) !important; }
     .zprava { text-align: center; margin-top: 16px; min-height: 1.5rem; font-size: 1rem; }
@@ -40,12 +41,12 @@
   <h1>🧪 Vyčíslování chemických rovnic</h1>
   <p class="podtitul">Doplň stechiometrické koeficienty tak, aby počet atomů každého prvku byl vlevo i vpravo stejný (8.–9. ročník ZŠ, SŠ). Koeficient 1 se nechává, ale zapiš ho.</p>
 
-  <div class="karta">
+  <div class="karta" data-kostra-odpovedi>
     <div class="rovnice" id="rovnice"></div>
     <div class="ovladani">
-      <button class="btn-hlavni" id="btnZkontrolovat">Zkontrolovat</button>
-      <button class="btn-vedle" id="btnNapoveda">💡 Napovědět</button>
-      <button class="btn-vedle" id="btnDalsi">Další →</button>
+      <button class="btn-hlavni" id="btnZkontrolovat">✔️ Zkontrolovat</button>
+      <button class="btn-vedle" id="btnNapoveda">💡 Nápověda</button>
+      <button class="btn-vedle" id="btnDalsi">Přeskočit →</button>
     </div>
     <div class="zprava" id="zprava"></div>
   </div>
@@ -91,16 +92,20 @@ function postavClen(vzorec, i, strana) {
   return `<span class="clen"><input type="number" min="1" max="30" data-strana="${strana}" data-i="${i}" autocomplete="off">` +
     `<span class="vzorec">${vzorecHtml(vzorec)}</span></span>`;
 }
+let otazkaKostry = {};
 function nova() {
   let i;
   do { i = Math.floor(Math.random() * ROVNICE.length); } while (i === poradi && ROVNICE.length > 1);
   poradi = i; aktualni = ROVNICE[i]; hotovo = false;
+  otazkaKostry = {};   // společná kostra – jedna otázka = jeden objekt
   const r = aktualni.r.map(([v], k) => postavClen(v, k, 'r')).join('<span class="op">+</span>');
   const p = aktualni.p.map(([v], k) => postavClen(v, k, 'p')).join('<span class="op">+</span>');
   $('rovnice').innerHTML = r + '<span class="sipka">→</span>' + p;
   $('zprava').textContent = ''; $('zprava').className = 'zprava';
   $('skore').textContent = spravne + ' / ' + celkem;
+  $('btnZkontrolovat').textContent = '✔️ Zkontrolovat';
   const prvni = $('rovnice').querySelector('input'); if (prvni) prvni.focus();
+  window.Kostra?.otazka();
 }
 function vstupy() { return [...$('rovnice').querySelectorAll('input')]; }
 function koef(strana, i) { return strana === 'r' ? aktualni.r[i][1] : aktualni.p[i][1]; }
@@ -116,6 +121,7 @@ function zkontroluj() {
   const ok = Number.isFinite(nasobek) && nasobek > 0 &&
     zadane.every((z, k) => Math.abs(z - spravneKoef[k] * nasobek) < 1e-9);
   celkem++; hotovo = true;
+  window.Kostra?.odpoved(ok, otazkaKostry);
   ins.forEach((x, k) => x.classList.add(ok ? 'ok' : 'spatne'));
   if (ok) {
     spravne++; serie++;
@@ -128,6 +134,7 @@ function zkontroluj() {
   }
   $('serie').textContent = serie >= 3 ? '🔥 série ' + serie : '';
   $('skore').textContent = spravne + ' / ' + celkem;
+  $('btnZkontrolovat').textContent = 'Pokračovat →';
 }
 function napovez() {
   const ins = vstupy();

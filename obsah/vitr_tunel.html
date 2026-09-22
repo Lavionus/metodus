@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="../common.css">
 <script src="../theme.js"></script>
 <script src="../podpis.js" defer></script>
+<script src="../kostra.js" defer></script>
 <style>
 body{height:100vh;overflow:hidden;display:flex;flex-direction:column}
 .horni{display:flex;gap:10px;align-items:center;padding:10px 16px;background:var(--bg-elevated);border-bottom:1px solid var(--border);flex-wrap:wrap}
@@ -17,8 +18,8 @@ body{height:100vh;overflow:hidden;display:flex;flex-direction:column}
 input[type=range]{width:110px;accent-color:var(--accent)}
 select{background:var(--bg-input);color:var(--text);border:1px solid var(--border);border-radius:6px;padding:5px 8px;font-size:.8rem}
 button{background:var(--bg-control);border:1px solid var(--border-strong);color:var(--text);border-radius:6px;padding:7px 13px;font-size:.82rem;cursor:pointer}
-button:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
-button.zap{background:var(--accent);color:#fff;border-color:var(--accent)}
+button:hover{background:var(--accent);color: var(--na-akcentu, #fff);border-color:var(--accent)}
+button.zap{background:var(--accent);color: var(--na-akcentu, #fff);border-color:var(--accent)}
 .prep{display:flex;align-items:center;gap:7px;font-size:.78rem;color:var(--text-muted);cursor:pointer;user-select:none}
 .prep input{accent-color:var(--accent);width:16px;height:16px;cursor:pointer}
 .sipka{display:inline-block;width:1.1em;text-align:center}
@@ -734,7 +735,7 @@ function posunCastice() {
 /* ---------- vykreslení ---------- */
 function vykresli() {
   const rezim = $('zobrazeni').value;
-  const svetly = document.documentElement.dataset.theme === 'light';
+  const svetly = document.documentElement.dataset.tone === 'light';
   const d = img.data;
   const uref = Math.max(0.02, Math.hypot(uinX, uinY));
 

@@ -6,8 +6,16 @@
   <title>Minerály a horniny</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <style>
+    .stul-vzorku { width: 100%; overflow-x: auto; }
+    .stul-vzorku table { border-collapse: collapse; width: 100%; font-size: 0.86rem; text-align: left; }
+    .stul-vzorku th, .stul-vzorku td { border-bottom: 1px solid var(--border); padding: 6px 8px; vertical-align: top; }
+    .stul-vzorku thead th { color: var(--text-muted); font-weight: 600; }
+  </style>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
+  <script src="../data/horniny.js"></script>
   <script src="../uloha.js"></script>
   <style>
     .uloha-text { max-width: 660px; font-size: 1.02rem; line-height: 1.62; }
@@ -24,6 +32,7 @@
   <p class="podtitul">Pro 9. ročník: vlastnosti minerálů, tvrdost a dělení hornin podle vzniku.</p>
 
   <div class="rezimy" id="rezimy">
+    <button data-rezim="vzorky" data-faze="vyuka">🧪 Stůl vzorků</button>
     <button data-rezim="kviz1" class="active">🔍 Poznej minerál</button>
     <button data-rezim="kviz2">🪨 Vlastnosti a tvrdost</button>
     <button data-rezim="kviz3">🌋 Vznik hornin</button>
@@ -370,7 +379,20 @@ function kviz(klic) {
   p.appendChild(odezva);
 }
 
+/* Stůl vzorků: stejné vzorky jako v lekci pro 4.–5. ročník (data/horniny.js),
+   tady s druhem horniny, vznikem a tvrdostí podle Mohse. */
+function vzorky() {
+  const p = $('plocha');
+  const radek = v => `<tr><th scope="row">${v.e} ${v.n}</th><td>${v.hornina ? 'hornina' : 'nerost'}</td>`
+    + `<td>${v.hornina ? `${v.druh} – ${v.vznik}` : `tvrdost ${v.tvrdost}`}</td>`
+    + `<td>${v.vlastnosti.join(', ')}</td><td>${v.vyuziti}</td></tr>`;
+  p.innerHTML = `<div class="zadani">Stejné vzorky znáš ze 4. ročníku (Horniny a nerosty) – teď k nim patří druh, vznik a tvrdost.</div>
+    <div class="stul-vzorku"><table><thead><tr><th>Vzorek</th><th>Je to</th><th>Druh a vznik / tvrdost (Mohs)</th><th>Poznávací znaky</th><th>Využití</th></tr></thead>
+    <tbody>${METODUS_HORNINY.map(radek).join('')}</tbody></table></div>`;
+}
+
 const REZIMY = {
+  vzorky,
   kviz1: () => kviz('kviz1'), kviz2: () => kviz('kviz2'),
   kviz3: () => kviz('kviz3'), kviz4: () => kviz('kviz4'),
 };

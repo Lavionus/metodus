@@ -37,13 +37,17 @@ prvním načtení jednorázová migrace v `theme.js`, starou cache `nodus-*` sma
 | `obsah/predstaveni.html` | živé ukázky – zkrácené, ale funkční verze šesti aplikací na jedné stránce |
 | `obsah/*.html` | jednotlivé výukové aplikace |
 | `obsah/lib/`, `obsah/textures/`, `obsah/Anatomy/` | knihovny a data aplikací |
-| `common.css`, `theme.js` | sdílený vzhled a přepínání světlého/tmavého režimu |
+| `common.css`, `theme.js` | sdílený vzhled a přepínání motivů (podle systému, tmavý, světlý, vysoký kontrast, sépie, stará knihovna, škola, noční škola) |
+| `kontrast.css`, `sepia.css`, `knihovna.css`, `skola.css`, `nocni-skola.css` | palety a textury dalších motivů (importuje je `common.css`) |
 | `projektor.js` | zvětšení obrazu pro projektor a tabuli – používá rozcestník i prezentace |
 | `podpis.js` | podpis (`© Metodus · hdm@seznam.cz`) ve vlastním pruhu dole – patří do `<head>` **každé** stránky; text skládají konstanty `DILO` a `MAIL` na začátku souboru |
 | `rec.js` | čtení nahlas – systémový hlas, jinak vestavěný ze složky `hlas/` |
 | `uloha.js` | společné chování úloh: zaklepání u chyby, zelená a automatický posun u správné odpovědi, skóre |
 | `vyjmenovana.js` | řady vyjmenovaných slov (jediný zdroj pro doplňovačky, vyjmenovaná slova i diktáty) |
 | `vyuka.css` | společný vzhled procvičovacích aplikací (plocha, možnosti, odezva, řazení, pravopisné díly) |
+| `kostra.js`, `kostra.css` | společná kostra každé lekce: proužek předmětu, cíl z katalogu, fáze Výuka · Ukázka · Procvič · Ověř se · Tahák, cesta rodiny témat a blok „Kam dál“ – viz [Společná kostra stránky](#společná-kostra-stránky) |
+| `nazor.js`, `nazor.css` | knihovna sdílených názorných prvků (koláč, proužek, číselná osa, procenta, věta s větnými členy, časová osa, mapa) – ukázky v `docs/nazor-ukazky.html` |
+| `data/` | společná data rodin témat: `udalosti.js` (české a světové dějiny), `staty.js` (státy, hlavní města, vlajky), `horniny.js` (vzorky hornin a nerostů), `tisnova_cisla.js` |
 | `hlas/` | vestavěný syntetizér řeči (meSpeak/eSpeak, GPL) – viz `hlas/LICENCE.md` |
 | `fonty/` | školní psací písmo Playwrite CZ (OFL) – viz `fonty/LICENCE.md` |
 | `sw.js`, `manifest.webmanifest`, `icon-*.png`, `apple-touch-icon.png` | PWA (cache `metodus-vN`) |
@@ -70,6 +74,62 @@ Rozdělení témat do ročníků odpovídá obvyklé praxi českých ŠVP. RVP Z
 stanovuje očekávané výstupy po obdobích (1.–3. a 4.–5. ročník, 2. stupeň),
 ne po jednotlivých ročnících. Revidované RVP ZV bylo schváleno v lednu 2025
 a povinné bude od září 2027 pro 1. a 6. ročník.
+
+## Společná kostra stránky
+
+Každá stránka katalogu má v `<head>` řádek `<script src="../kostra.js" defer></script>`.
+Skript si najde svou položku v katalogu (`apps.js`; když ho stránka nenačítá, načte si ho sám)
+a pod nadpis vloží jednotnou hlavičku:
+
+- **proužek předmětu** – barva a ikona předmětu (`--predmet-*` v `common.css`), sekce, ročník;
+- **cíl lekce** z `KATALOG_CILE` („Po této lekci: …“, v první osobě, popisuje to, co stránka umí dnes).
+  Pilotní lekce s vlastním rozepsaným blokem `.cil` ho neopakují;
+- **lištu fází** 📖 Výuka · 📘 Ukázka · ✏️ Procvič · 🎯 Ověř se · 📌 Tahák – jen ty, které stránka má;
+- **cestu rodiny témat** (`KATALOG_RODINY`) a na konec stránky blok **Kam dál** (předchozí a další krok,
+  hlavní lekce). Stránky s vlastním `.navaznosti` si ho nechávají.
+
+Aplikace na celou obrazovku (tělo s `overflow: hidden` nebo nadpis ve vodorovné liště) dostanou
+jednořádkovou kostru s odkazy „← předchozí · další →“ a bez zápatí. Výšku kostry zveřejňuje
+proměnná `--kostra-vyska`, takže mřížka na celou výšku si ji může odečíst
+(`height: calc(100% - var(--kostra-vyska, 0px))`).
+
+Fáze se hledají automaticky (pomůcka `.pomucka`/`.napoveda` = Výuka a Tahák, `#rezimy`/`#plocha` =
+Procvič, `#vedena-aktivita` nebo režim `ukazka` = Ukázka). Kde to nestačí, stránka je určí sama:
+
+| Atribut | Význam |
+|---|---|
+| `data-faze="vyuka"` / `"ukazka"` / `"procvic"` / `"tahak"` | prvek (sekce, záložka, tlačítko režimu) patří dané fázi; tlačítko režimu se při volbě fáze stiskne |
+| `data-kostra-overeni="ne"` | stránka má vlastní sérii otázek, „Ověř se“ se nenabízí |
+| `data-kostra-odpovedi` | stránka bez `uloha.js` ohlašuje odpovědi přes `Kostra.odpoved()` (viz níže) |
+| `data-kostra-misto="po"` / `"pred"` | kam kostru vložit, když nadpis stránky není na vhodném místě |
+
+**Ověř se** složí 8 otázek napříč režimy stránky, skryje nápovědy a pomůcky a počítá první odpověď
+u každé otázky. Výsledek s doporučením, které režimy zopakovat, se uloží do `localStorage`
+(`metodus_overeni`, posledních 5 pokusů na stránku). Stačí k tomu, že stránka staví otázky přes
+`Uloha.vyber`/`Uloha.odpoved` – `uloha.js` ohlašuje události `metodus:otazka` a `metodus:odpoved`.
+Starší stránky bez `uloha.js` volají `Kostra.odpoved(spravne, otazka)` (objekt `otazka` = jedna otázka)
+a `Kostra.otazka()` při nové otázce. Režimy, které nejsou úlohou (přehled, model, kalkulačka),
+se ze zkoušky vyřadí: nemají `data-faze="procvic"`, nebo nevytvoří otázku.
+
+**Jednotné názvy tlačítek:** ✔️ Zkontrolovat · Pokračovat → (po odpovědi) · Přeskočit → (bez započtení) ·
+▶️ Spustit sérii / 🔄 Nová série · 💡 Nápověda · 👁️ Ukázat řešení · ⏸️ Pauza · ↺ Výchozí stav.
+„Další →“ zůstává jen u listování kartičkami.
+
+### Knihovna názorných prvků
+
+`nazor.js` + `nazor.css`: stejný jev se na celém webu kreslí stejně. Zlomky (koláč, proužek, osa se
+stejně velkým celkem) používají zlomky úvod; číselná osa s posunem celá čísla; proužek 0–100 %
+procenta; časová osa se souběžnými pruhy Česko/svět (měřítko „pořadí“ nebo skutečné) obě časové osy.
+Barvy větných členů (`--clen-*`) jsou v `common.css` a berou je rozbor věty, skladební dvojice,
+rozvíjející členy i shoda podmětu. Mapy obstarává dál `mapy.js` (`Nazor.mapa` je jen tenký obal).
+
+### Rodiny témat
+
+`KATALOG_RODINY` v `apps.js`: 43 rodin, každá s hlavní lekcí a doporučeným pořadím napříč ročníky;
+stránka patří nejvýš do jedné rodiny, nástroje (kartičky, kabinet…) do žádné. Rodiny ukazuje hlavička
+každé lekce, blok Kam dál a stránka Osnova (oddíl „Rodiny témat“). Souběžné stránky čtou společná
+data z `data/` (a `vyjmenovana.js`), aby si neodporovaly – například kvíz vlajek a kvíz hlavních měst
+dřív uváděly různé názvy téhož hlavního města.
 
 ## Generátor pracovních listů
 
@@ -309,8 +369,49 @@ Testy: `python3 _test/run.py slidy.html` (druhy slidů, textový zápis, kvíz,
 
 ## Motiv a záměrně tmavé stránky
 
-Většina stránek linkuje `theme.js` a jde se zbytkem webu (světlý režim
-`<html data-theme="light">`, barvy z `common.css`). Čtyři stránky mají vlastní
+Většina stránek linkuje `theme.js` a jde se zbytkem webu. Motivy se vybírají
+z výklopného seznamu v hlavičce rozcestníku (nativní `<select id="temaVolba">`;
+na úzké obrazovce se i s popiskem „Motiv“ přesune do nabídky „Další“). Seznam má
+dvě skupiny: **Základní** (čitelnost – podle systému, tmavý, světlý, vysoký kontrast)
+a **Tematické** (nálada – sépie, stará knihovna, škola, noční škola).
+**Motiv mění jen barvy a textury pozadí, nikdy písmo** – hlídá to `tests/motivy.mjs`.
+
+| Motiv | `data-theme` | `data-tone` | Vzhled |
+|---|---|---|---|
+| Tmavý (výchozí) | *(žádný)* | `dark` | `common.css` |
+| Světlý | `light` | `light` | `common.css` |
+| Podle systému | vykreslí `light` / *(žádný)* | podle zařízení | uloží se `auto`; `theme.js` vybere světlý/tmavý podle `prefers-color-scheme` a při změně systému přepne za běhu (`MetodusTheme.get()` vrací volbu, `rendered()` vykreslený motiv) |
+| Vysoký kontrast | `kontrast` | `light` | `kontrast.css` – černá na bílé, text AAA (≥ 7 : 1), zřetelné okraje, podtržené odkazy v textu, výrazný fokus; pro projektor a slabší zrak, bez textur |
+| Sépie | `sepia` | `light` | `sepia.css` – recyklovaný papír (`obsah/textures/recyklovany-papir.webp`, image_gen, zadání vedle) |
+| Stará knihovna | `knihovna` | `dark` | `knihovna.css` – ořechové dřevo (`obsah/textures/knihovna-drevo.webp`, procedurálně z `knihovna-drevo.py`), starozlatý akcent |
+| Škola | `skola` | `light` | `skola.css` – sešitový papír se čtverečkovou linkou (jen CSS přechod), modrý inkoust, červené opravy |
+| Noční škola | `nocni-skola` | `dark` | `nocni-skola.css` – zelená tabule (`obsah/textures/tabule-krida.webp`, procedurálně z `tabule-krida.py`), křídově bílý text, žlutá křída |
+
+Výchozí motiv pro nového návštěvníka zůstává tmavý.
+
+**Úpravy stránek se řídí tónem, ne jménem motivu.** Kdo dorovnává barvy pro
+světlé pozadí, píše `:root[data-tone="light"] …` a v JS
+`MetodusTheme.isLight()` (případně `dataset.tone === 'light'`) — pak úprava
+platí i pro sépii a nový motiv nevyžaduje zásah do stránek. `theme.js` nastaví
+`data-tone` dřív než `data-theme`, takže `MutationObserver` nad `data-theme`
+už čte nový tón. Jména motivů pro popisky dává `MetodusTheme.name()`.
+
+**Pole formulářů** mají pozadí `var(--bg-input)`, nikdy `var(--border)` (ve vysokém
+kontrastu je okraj tmavě šedý a text v poli by zanikl).
+
+**Text na barevné výplni** (pozadí `var(--accent)`, `--ok`, `--warn`, `--danger`)
+se píše `color: var(--na-akcentu, #fff)`, ne natvrdo bílou. Ve většině motivů je
+`--na-akcentu` bílá; knihovna a noční škola mají světlé výplně (zlato, křída),
+a tak tmavý inkoust.
+
+Textury se na povrchy kladou jen jako `background-image` s režimem prolnutí
+(sépie `multiply`, knihovna `overlay`) a **nikdy nepřepisují barvu pozadí**:
+záměrně tmavé simulace (sluneční soustava, gravitační hřiště) tak zůstanou
+tmavé i v sépii. Textura je jen na `body` a na prvcích, které mají vlastní
+barvu pozadí — na průhledném prvku by se nakreslila „holá“ (v knihovně jako
+šedé dřevo).
+
+Čtyři stránky mají vlastní
 tmavou paletu a `theme.js` **schválně nelinkují**:
 
 | Stránka | Proč zůstává tmavá |
@@ -832,6 +933,7 @@ node tests/etapa02-iss.mjs        # ISS: živá data, výpadek, návrat spojení
 node tests/etapa02-stranky.mjs    # odkazy, kotvy, šířky a motivy stránek etapy 02
 node tests/etapa03-navigace.mjs   # mobilní hlavička, nabídka Další, klávesnice, zrušení filtrů
 node tests/etapa04-vzhled.mjs     # soulad s motivem a kontrast textu na starších stránkách
+node tests/motivy.mjs             # motivy: výklopný seznam, podle systému, tón, tmavé simulace, textury, kontrast (AAA u kontrastu), stejné písmo
 node tests/etapa05-odpoved.mjs    # rušení posunu, živá odezva, klávesnice, omezení pohybu
 node tests/etapa06-zlomky.mjs     # vzorová lekce: cíl, vedený příklad, tři obrázky, klávesnice
 ```

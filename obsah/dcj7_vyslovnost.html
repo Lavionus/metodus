@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="../vyuka.css">
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
   <script src="../uloha.js"></script>
   <style>
     .slovo-ciz { font-size: clamp(1.6rem, 6vw, 2.4rem); font-weight: 700; }
@@ -19,10 +20,16 @@
       margin-top: 10px; color: var(--text-faint); font-size: 0.8rem; }
     .tabulka span { background: var(--bg-control); border: 1px solid var(--border); border-radius: 8px; padding: 6px 12px; }
   </style>
+<link rel="stylesheet" href="vyslovnost-atlas.css">
+<script src="vyslovnost-atlas.js" defer></script>
 </head>
 <body>
   <h1>🔊 Výslovnost a abeceda (NJ/FJ)</h1>
   <p class="podtitul">Pro 7. ročník: čtení hlásek, hláskování jmen a zvláštní znaky.</p>
+  <details class="vyslovnost-atlas" data-vyslovnost-atlas="de,fr">
+    <summary>Obrazový průvodce: poloha úst a jazyka</summary>
+  </details>
+
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="cteniNJ" class="active">🇩🇪 Jak se to čte</button>

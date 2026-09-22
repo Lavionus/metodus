@@ -83,7 +83,7 @@
 
     .hamburger:hover {
       background-color: var(--accent);
-      color: #fff;
+      color: var(--na-akcentu, #fff);
       border-color: var(--accent);
     }
 
@@ -255,7 +255,7 @@
     .rocnik-pill.active {
       background-color: var(--accent);
       border-color: var(--accent);
-      color: #fff;
+      color: var(--na-akcentu, #fff);
       font-weight: 600;
     }
 
@@ -306,7 +306,7 @@
     .skupina-pill.active {
       background-color: var(--accent);
       border-color: var(--accent);
-      color: #fff;
+      color: var(--na-akcentu, #fff);
       font-weight: 600;
     }
 
@@ -493,12 +493,28 @@
 
     .ovladani button:hover {
       background-color: var(--accent);
-      color: #fff;
+      color: var(--na-akcentu, #fff);
       border-color: var(--accent);
     }
 
     /* V hlavičce stačí ikona, v nabídce „Další" je potřeba i slovo. */
     .ovladani button .popis { display: none; }
+
+    /* Výklopný seznam motivů (nativní <select>: klávesnice, dotyk i čtečky ho znají) */
+    .tema-volba { display: inline-flex; align-items: center; gap: 8px; color: var(--text-muted); }
+    .tema-volba select {
+      background-color: var(--bg-control);
+      border: 1px solid var(--border-strong);
+      color: var(--text-muted);
+      border-radius: 6px;
+      padding: 6px 8px;
+      font-family: inherit;
+      font-size: 0.8rem;
+      cursor: pointer;
+    }
+    .tema-volba select:hover { border-color: var(--accent); color: var(--text); }
+    .tema-volba select:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    .ovladani .tema-volba .popis { display: none; }
 
     /* Nabídka „Další" – na úzké obrazovce sdružuje akce, které se do hlavičky nevejdou */
     .vice-obal { position: relative; flex-shrink: 0; }
@@ -515,7 +531,7 @@
     }
     .vice-toggle:hover, .vice-toggle[aria-expanded="true"] {
       background-color: var(--accent);
-      color: #fff;
+      color: var(--na-akcentu, #fff);
       border-color: var(--accent);
     }
     .vice-menu {
@@ -536,6 +552,12 @@
     }
     .vice-menu:not([hidden]) { display: flex; }
     .vice-menu button {
+      /* v nabídce už neplatí .ovladani button – bez vlastních barev by zůstalo šedé systémové tlačítko */
+      background-color: var(--bg-control);
+      border: 1px solid var(--border-strong);
+      border-radius: 6px;
+      color: var(--text-muted);
+      cursor: pointer;
       display: flex;
       align-items: center;
       gap: 10px;
@@ -544,8 +566,11 @@
       font-size: 0.9rem;
       padding: 10px 12px;
     }
+    .vice-menu button:hover { background-color: var(--accent); color: var(--na-akcentu, #fff); border-color: var(--accent); }
     .vice-menu button .popis { display: inline; }
     .vice-menu button .ikona { width: 1.4em; text-align: center; }
+    .vice-menu .tema-volba { justify-content: space-between; padding: 6px 12px; font-size: 0.9rem; }
+    .vice-menu .tema-volba select { font-size: 0.9rem; padding: 8px 10px; min-height: 38px; }
 
     /* Zrušení filtrů – viditelné jen tehdy, když je co rušit */
     .zrusit-filtry {
@@ -560,7 +585,7 @@
       cursor: pointer;
       transition: all 0.15s ease;
     }
-    .zrusit-filtry:hover { background-color: var(--accent); color: #fff; border-color: var(--accent); }
+    .zrusit-filtry:hover { background-color: var(--accent); color: var(--na-akcentu, #fff); border-color: var(--accent); }
     .zrusit-co { display: block; font-size: 0.72rem; opacity: 0.85; margin-top: 2px; }
 
     /* zvýraznění při hledání */
@@ -640,7 +665,7 @@
     .ovladani button.aktivni {
       background-color: var(--accent);
       border-color: var(--accent);
-      color: #fff;
+      color: var(--na-akcentu, #fff);
     }
 
     /* ---- Režim projektor (viz projektor.js) ----
@@ -692,7 +717,7 @@
     .projektor-lista button:hover {
       background-color: var(--accent);
       border-color: var(--accent);
-      color: #fff;
+      color: var(--na-akcentu, #fff);
     }
 
 
@@ -737,7 +762,12 @@
         <button id="btnOsnova" title="Osnova – pokrytí učiva podle ročníků"><span class="ikona" aria-hidden="true">🗺️</span><span class="popis">Osnova</span></button>
         <button id="btnUcitel" title="Kabinet učitele – pracovní listy, slidy, nástroje do hodiny"><span class="ikona" aria-hidden="true">🧑‍🏫</span><span class="popis">Kabinet učitele</span></button>
         <button id="btnPredstaveni" title="Živé ukázky – co Metodus umí"><span class="ikona" aria-hidden="true">◈</span><span class="popis">Živé ukázky</span></button>
-        <button id="btnTema" title="Přepnout světlý / tmavý režim"><span class="ikona" id="temaIkona" aria-hidden="true">🌙</span><span class="popis" id="temaPopis">Světlý režim</span></button>
+        <label id="temaObal" class="tema-volba" title="Barevný motiv">
+          <span class="popis">Motiv</span>
+          <select id="temaVolba" aria-label="Barevný motiv">
+            <option value="dark">🌙 Tmavý</option>
+          </select>
+        </label>
         <button id="btnProjektor" title="Režim projektor – zvětšit obraz a schovat menu (F8)"><span class="ikona" aria-hidden="true">📽️</span><span class="popis">Projektor</span></button>
         <button id="btnNoveOkno" title="Otevřít aktuální aplikaci v novém okně"><span class="ikona" aria-hidden="true">🗗</span><span class="popis">Nové okno</span></button>
         <button id="rozbalitVse" class="jen-desktop" title="Rozbalit vše">⊞ Rozbalit</button>
@@ -1091,27 +1121,43 @@
     });
 
     /* ---- Přepínání tématu ---- */
-    // theme.js už téma použil při načtení; tady se jen přepíná a rozesílá.
-    const btnTema = document.getElementById('btnTema');
+    // theme.js už téma použil při načtení; tady se jen vybírá ze seznamu a rozesílá.
+    const temaVolba = document.getElementById('temaVolba');
     const themeColor = document.querySelector('meta[name="theme-color"]');
+    // „motiv“ je rodu mužského – vlastní tvary, ne MetodusTheme.name() („světlé téma“)
+    const MOTIVY = {
+      auto: ['🖥️', 'Podle systému'], dark: ['🌙', 'Tmavý', '#2d2d2d'], light: ['☀️', 'Světlý', '#ffffff'],
+      kontrast: ['🔲', 'Vysoký kontrast', '#ffffff'],
+      sepia: ['📜', 'Sépie', '#e9ddbe'], knihovna: ['📚', 'Stará knihovna', '#2c2118'],
+      skola: ['✏️', 'Škola', '#f6f8f4'], 'nocni-skola': ['🦉', 'Noční škola', '#244236']
+    };
+    // Základní motivy řeší čitelnost (i na projektoru), tematické náladu; skupiny drží seznam přehledný.
+    const SKUPINY = [['Základní', ['auto', 'dark', 'light', 'kontrast']], ['Tematické', ['sepia', 'knihovna', 'skola', 'nocni-skola']]];
+    temaVolba.replaceChildren(...SKUPINY.map(([nazev, motivy]) => {
+      const g = document.createElement('optgroup'); g.label = nazev;
+      g.append(...motivy.filter(t => MetodusTheme.themes.includes(t)).map(t => new Option(MOTIVY[t][0] + ' ' + MOTIVY[t][1], t)));
+      return g;
+    }));
 
     function zobrazTema() {
-      const light = document.documentElement.dataset.theme === 'light';
-      document.getElementById('temaIkona').textContent = light ? '☀️' : '🌙';
-      document.getElementById('temaPopis').textContent = light ? 'Tmavý režim' : 'Světlý režim';
-      btnTema.title = light ? 'Přepnout na tmavý režim' : 'Přepnout na světlý režim';
-      if (themeColor) themeColor.content = light ? '#ffffff' : '#2d2d2d';
+      const tema = MetodusTheme.get();
+      temaVolba.value = tema;
+      temaVolba.title = 'Barevný motiv: ' + MOTIVY[tema][1];
+      if (themeColor) themeColor.content = MOTIVY[MetodusTheme.rendered()][2];
     }
     zobrazTema();
-
-    btnTema.addEventListener('click', () => {
-      const light = document.documentElement.dataset.theme !== 'light';
-      if (light) document.documentElement.dataset.theme = 'light';
-      else delete document.documentElement.dataset.theme;
-      uloz(localStorage, KEY_TEMA, light ? 'light' : 'dark');
-      // storage událost se ve stejné záložce nespouští -> iframu to řekneme přímo
-      iframe.contentWindow?.postMessage({ tema: light ? 'light' : 'dark' }, '*');
-      zobrazTema();
+    temaVolba.addEventListener('change', () => {
+      MetodusTheme.set(temaVolba.value);
+      // v nabídce „Další“ volba nabídku zavře jako ostatní položky
+      if (temaVolba.closest('.vice-menu')) setViceOpen(false);
+    });
+    window.addEventListener('metodus-theme', zobrazTema);
+    // Nová lekce přebírá aktuální motiv i při zablokovaném localStorage.
+    iframe.addEventListener('load', () => iframe.contentWindow?.postMessage({ tema: MetodusTheme.get() }, '*'));
+    window.addEventListener('message', e => {
+      if (e.source === iframe.contentWindow && MetodusTheme.themes.includes(e.data?.metodusTemaVolba)) {
+        MetodusTheme.set(e.data.metodusTemaVolba);
+      }
     });
 
     /* ---- Pilulky předmětů a ročníků ---- */
@@ -1403,11 +1449,11 @@
 
     /* ---- Nabídka „Další": na úzké obrazovce sdružuje akce z hlavičky ----
        Tlačítka se přesouvají, ne kopírují — zůstávají jim posluchače i stav
-       (zvýrazněný projektor, ikona motivu). */
+       (zvýrazněný projektor, zvolený motiv). */
     const ovladaniEl = document.getElementById('ovladani');
     const btnVice = document.getElementById('btnVice');
     const viceMenu = document.getElementById('viceMenu');
-    const doNabidky = ['btnOsnova', 'btnUcitel', 'btnPredstaveni', 'btnTema', 'btnProjektor', 'btnNoveOkno']
+    const doNabidky = ['btnOsnova', 'btnUcitel', 'btnPredstaveni', 'temaObal', 'btnProjektor', 'btnNoveOkno']
       .map(id => document.getElementById(id));
     const uzkaHlavicka = window.matchMedia('(max-width: 700px)');
 
@@ -1423,7 +1469,8 @@
       doNabidky.forEach(b => {
         const cil = uzka ? viceMenu : ovladaniEl;
         if (b.parentElement !== cil) {
-          if (uzka) b.setAttribute('role', 'menuitem'); else b.removeAttribute('role');
+          // výklopný seznam motivů zůstává seznamem, položkou nabídky jsou jen tlačítka
+          if (b.tagName === 'BUTTON') { if (uzka) b.setAttribute('role', 'menuitem'); else b.removeAttribute('role'); }
           cil.insertBefore(b, uzka ? null : document.getElementById('rozbalitVse'));
         }
       });
@@ -1437,7 +1484,7 @@
     });
     // Šipky procházejí nabídkou, Esc ji zavře a vrátí fokus na tlačítko.
     viceMenu.addEventListener('keydown', e => {
-      const polozky = [...viceMenu.querySelectorAll('button')];
+      const polozky = [...viceMenu.querySelectorAll('button, select')];
       const i = polozky.indexOf(document.activeElement);
       if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
         e.preventDefault();

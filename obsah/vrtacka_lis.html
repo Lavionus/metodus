@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="../common.css">
 <script src="../theme.js"></script>
 <script src="../podpis.js" defer></script>
+<script src="../kostra.js" defer></script>
 <style>
 body{height:100vh;overflow:hidden;display:flex;flex-direction:column}
 .horni{display:flex;gap:10px;align-items:center;padding:10px 16px;background:var(--bg-elevated);border-bottom:1px solid var(--border);flex-wrap:wrap}
@@ -18,8 +19,8 @@ body{height:100vh;overflow:hidden;display:flex;flex-direction:column}
 input[type=range]{width:96px;accent-color:var(--accent)}
 select{background:var(--bg-input);color:var(--text);border:1px solid var(--border);border-radius:6px;padding:4px 7px;font-size:.8rem}
 button{background:var(--bg-control);border:1px solid var(--border-strong);color:var(--text);border-radius:6px;padding:7px 13px;font-size:.82rem;cursor:pointer}
-button:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
-button.zap{background:var(--accent);color:#fff;border-color:var(--accent)}
+button:hover{background:var(--accent);color: var(--na-akcentu, #fff);border-color:var(--accent)}
+button.zap{background:var(--accent);color: var(--na-akcentu, #fff);border-color:var(--accent)}
 .panel label:has(input[type=checkbox]){background:var(--bg-control);border-color:var(--border-strong);cursor:pointer;color:var(--text-muted)}
 .panel label:has(input[type=checkbox]:checked){background:var(--accent-soft);border-color:var(--accent);color:var(--text)}
 .plocha{flex:1;position:relative;overflow:hidden;background:var(--bg-deep);min-height:0}

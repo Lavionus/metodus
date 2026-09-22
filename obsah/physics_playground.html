@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="../common.css">
 <script src="../theme.js"></script>
 <script src="../podpis.js" defer></script>
+<script src="../kostra.js" defer></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:var(--font);background:var(--bg-deep);color:var(--text);
@@ -18,7 +19,7 @@ body{font-family:var(--font);background:var(--bg-deep);color:var(--text);
 .tabs{display:flex;gap:6px;flex-wrap:wrap}
 .tabs button{background:var(--bg-control);border:1px solid var(--border-strong);color:var(--text-muted);
   border-radius:6px;padding:7px 14px;font-size:.84rem;cursor:pointer;font-family:inherit}
-.tabs button.active{background:var(--accent);color:#fff;border-color:var(--accent);font-weight:600}
+.tabs button.active{background:var(--accent);color: var(--na-akcentu, #fff);border-color:var(--accent);font-weight:600}
 
 .ovladani{display:flex;gap:14px;align-items:center;padding:10px 16px;background:var(--bg-elevated);
   border-bottom:1px solid var(--border);flex-wrap:wrap}
@@ -28,8 +29,8 @@ input[type=range]{width:110px;accent-color:var(--accent)}
 .ovladani button{background:var(--bg-control);border:1px solid var(--border-strong);color:var(--text);
   border-radius:6px;padding:7px 12px;font-size:.82rem;cursor:pointer;font-family:inherit}
 .ovladani button:hover{border-color:var(--accent)}
-.ovladani button.zap{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
-.ovladani button.hlavni{background:var(--ok);border-color:var(--ok);color:#fff;font-weight:600}
+.ovladani button.zap{background:var(--accent);border-color:var(--accent);color: var(--na-akcentu, #fff);font-weight:600}
+.ovladani button.hlavni{background:var(--ok);border-color:var(--ok);color: var(--na-akcentu, #fff);font-weight:600}
 .oddel{width:1px;align-self:stretch;background:var(--border)}
 .prepinac{display:flex;gap:4px}
 /* Při porovnávání dvou kyvadel drží délky i hmotnosti ve sloupcích pod sebou,

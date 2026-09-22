@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="../common.css">
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
   <script src="../rec.js"></script>
   <style>
     body { background-color: var(--bg-deep); padding: 24px clamp(14px, 3vw, 40px); min-height: 100vh; }
@@ -15,7 +16,7 @@
     .radek { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; align-items: center; }
     .radek .skupina { display: flex; gap: 6px; flex-wrap: wrap; background: var(--bg-panel); border: 1px solid var(--border); border-radius: 8px; padding: 5px; }
     .radek button.chip { background: transparent; border: 1px solid transparent; color: var(--text-muted); border-radius: 6px; padding: 6px 12px; font-size: 0.84rem; cursor: pointer; }
-    .radek button.chip.active { background: var(--accent); color: #fff; font-weight: 600; }
+    .radek button.chip.active { background: var(--accent); color: var(--na-akcentu, #fff); font-weight: 600; }
 
     .karta { background: var(--bg-panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 26px; max-width: 520px; text-align: center; }
     .emoji { font-size: clamp(5rem, 22vw, 9rem); line-height: 1; margin-bottom: 10px; user-select: none; }
@@ -25,7 +26,7 @@
     .cz.skryto { visibility: hidden; }
     .tlacitka { display: flex; gap: 10px; justify-content: center; margin-top: 18px; flex-wrap: wrap; }
     .tlacitka button { border: none; border-radius: 8px; padding: 11px 20px; font-size: 0.95rem; font-weight: 600; cursor: pointer; }
-    .b-hlavni { background: var(--accent); color: #fff; }
+    .b-hlavni { background: var(--accent); color: var(--na-akcentu, #fff); }
     .b-vedle { background: var(--bg-control); color: var(--text); border: 1px solid var(--border-strong) !important; }
     .pocet { color: var(--text-faint); font-size: 0.85rem; margin-top: 12px; font-variant-numeric: tabular-nums; }
 
@@ -48,7 +49,7 @@
   </div>
   <div class="radek">
     <div class="skupina" id="rezimy">
-      <button class="chip active" data-rezim="karticky">🎴 Kartičky</button>
+      <button class="chip active" data-rezim="karticky" data-faze="vyuka">🎴 Kartičky</button>
       <button class="chip" data-rezim="kviz">❓ Kvíz</button>
     </div>
     <button class="chip" id="btnZvuk" title="Přečíst slovo nahlas">🔊 Číst nahlas: zap</button>
@@ -68,11 +69,12 @@
   </div>
 
   <!-- kvíz -->
-  <div class="karta" id="kvizKarta" style="display:none">
+  <div class="karta" id="kvizKarta" style="display:none" data-kostra-odpovedi>
     <div class="emoji" id="kvizEmoji"></div>
     <div style="color:var(--text-muted);font-size:.9rem">Co je to anglicky?</div>
     <div class="moznosti" id="moznosti"></div>
     <div class="serie" id="serie"></div>
+    <button class="b-hlavni" id="kvizDalsi" style="visibility:hidden">Pokračovat →</button>
     <div class="pocet" id="kvizPocet"></div>
   </div>
 
@@ -165,6 +167,7 @@ const zamichej = p => { p = [...p]; for (let i = p.length - 1; i > 0; i--) { con
 function novyKviz() {
   let i; do { i = Math.floor(Math.random() * slova.length); } while (i === posledni && slova.length > 1); posledni = i;
   const s = slova[i];
+  const otazka = {};   // společná kostra – Ověř se
   $('kvizEmoji').textContent = s[0];
   const ostatni = zamichej(slova.filter(x => x[1] !== s[1])).slice(0, 3).map(x => x[1]);
   $('moznosti').innerHTML = '';
@@ -172,18 +175,23 @@ function novyKviz() {
     const b = document.createElement('button'); b.textContent = en;
     b.onclick = () => {
       celkem++;
+      window.Kostra?.odpoved(en === s[1], otazka);
       if (en === s[1]) { spravne++; serie++; b.classList.add('ok'); rekni(s[1]); }
       else { serie = 0; b.classList.add('spatne'); [...$('moznosti').children].find(x => x.textContent === s[1]).classList.add('ok'); }
       [...$('moznosti').children].forEach(x => x.disabled = true);
       $('serie').textContent = serie >= 3 ? '🔥 série ' + serie : '';
-      $('kvizPocet').textContent = spravne + ' / ' + celkem + '  ·  klikni sem pro další';
+      $('kvizPocet').textContent = spravne + ' / ' + celkem;
+      $('kvizDalsi').style.visibility = 'visible';
+      $('kvizDalsi').focus();
     };
     $('moznosti').appendChild(b);
   });
   $('serie').textContent = serie >= 3 ? '🔥 série ' + serie : '';
-  $('kvizPocet').textContent = spravne + ' / ' + celkem + '  ·  klikni sem pro další';
+  $('kvizPocet').textContent = spravne + ' / ' + celkem;
+  $('kvizDalsi').style.visibility = 'hidden';
+  window.Kostra?.otazka();
 }
-$('kvizPocet').onclick = novyKviz;
+$('kvizDalsi').onclick = novyKviz;
 
 /* přepínače režimu a zvuku */
 document.querySelectorAll('#rezimy .chip').forEach(b => b.onclick = () => {

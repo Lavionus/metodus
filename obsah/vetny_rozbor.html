@@ -6,27 +6,21 @@
   <title>Rozbor věty – větné členy</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../nazor.css">
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
   <script src="../uloha.js"></script>
   <style>
     /* Každý větný člen má vlastní barvu – v rozboru celé věty je pak vidět
-       stavba věty na první pohled, ne jako seznam pojmů. */
+       stavba věty na první pohled. Barvy jsou společné pro celý web (nazor.css),
+       ve světlém motivu tmavší sada kvůli kontrastu. */
     :root {
-      --cl-podmet: #4c9be8;
-      --cl-prisudek: #e0765d;
-      --cl-predmet: #5cb98b;
-      --cl-privlastek: #c084e0;
-      --cl-purceni: #d9a441;
-    }
-    /* Na bílém papíři mají barvy nahoře kontrast jen kolem 2,5 : 1 – barevný
-       rozbor věty by se v něm nedal přečíst, proto tmavší sada. */
-    :root[data-theme="light"] {
-      --cl-podmet: #1f6bb5;
-      --cl-prisudek: #b23c22;
-      --cl-predmet: #1f7a52;
-      --cl-privlastek: #7b3fa0;
-      --cl-purceni: #8a6209;
+      --cl-podmet: var(--clen-podmet);
+      --cl-prisudek: var(--clen-prisudek);
+      --cl-predmet: var(--clen-predmet);
+      --cl-privlastek: var(--clen-privlastek);
+      --cl-purceni: var(--clen-urceni);
     }
     .veta-uloha .hl { color: var(--zvyraz-text); border-bottom: 3px solid var(--zvyraz-text); }
     .veta-uloha .urceno {

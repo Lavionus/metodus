@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="../vyuka.css">
 <script src="../theme.js"></script>
 <script src="../podpis.js" defer></script>
+<script src="../kostra.js" defer></script>
 <script src="../uloha.js" defer></script>
 <script src="../rekord.js" defer></script>
 <style>
@@ -16,7 +17,7 @@
   background: var(--bg-control); border: 2px solid var(--border-strong); color: var(--text);
   border-radius: 10px; padding: 10px 16px; font-size: 1.3rem; cursor: pointer; font-family: inherit;
 }
-.operace button.zapnuto { background: var(--accent); border-color: var(--accent); color: #fff; }
+.operace button.zapnuto { background: var(--accent); border-color: var(--accent); color: var(--na-akcentu, #fff); }
 </style>
 </head>
 <body>
@@ -44,7 +45,7 @@
         <option value="0">20 příkladů</option>
       </select>
     </label>
-    <button class="hlavni" id="btnStart">▶️ Start</button>
+    <button class="hlavni" id="btnStart" data-faze="procvic" data-kostra-overeni="ne">▶️ Spustit sérii</button>
   </div>
 
   <div class="plocha" id="plocha"></div>
@@ -191,7 +192,7 @@ function konec() {
   tlacitka.className = 'konec-tlacitka';
   const znovu = document.createElement('button');
   znovu.className = 'hlavni';
-  znovu.textContent = '🔄 Znovu';
+  znovu.textContent = '🔄 Nová série';
   znovu.onclick = start;
   tlacitka.appendChild(znovu);
   karta.appendChild(tlacitka);

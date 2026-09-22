@@ -6,9 +6,14 @@
   <title>Kyseliny, hydroxidy a pH</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../pilot07.css">
+  <script src="../pilot07.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
   <script src="../uloha.js"></script>
+  <link rel="stylesheet" href="../propojeni.css">
+  <script src="../prubeh.js"></script>
   <style>
     .napoveda a { color: var(--accent); }
     .stupnice { display: flex; width: min(520px, 96%); border-radius: 8px; overflow: hidden;
@@ -27,6 +32,18 @@
 <body>
   <h1>🧫 Kyseliny, hydroxidy a pH</h1>
   <p class="podtitul">Pro 9. ročník: stupnice pH, indikátory, neutralizace a běžné kyseliny i hydroxidy.</p>
+
+  <section class="cil" aria-label="Cíl lekce">
+    <p><b>Po této lekci dokážu</b> porovnat dvě hodnoty pH a vysvětlit vyčíslenou neutralizaci.</p>
+    <p class="drobne">9. ročník · přibližně 15 minut · Nejdřív: <a href="ch8_smesi.html" data-lekce>Směsi a roztoky</a>.</p>
+    <details><summary>Pro učitele: 5 / 15 / 45 minut</summary><ul>
+      <li>5 minut: společně projděte vedenou aktivitu a nechte žáky vysvětlit výsledek.</li>
+      <li>15 minut: nejprve vlastní předpověď, pak ověření a několik úloh z procvičování.</li>
+      <li>45 minut: práce ve dvojicích, vlastní obměna příkladu a závěrečné vysvětlení bez nápovědy.</li>
+    </ul></details>
+  </section>
+  <section id="vedena-aktivita" class="pilot" data-pilot="ch9_ph" aria-label="Vedená aktivita"></section>
+  <h2 class="pilot-heading" id="procvicovani">Procvičování</h2>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="stupnice" class="active">🌡️ Kyselé, či zásadité</button>
@@ -64,6 +81,7 @@
       <a href="https://www2.chem.wisc.edu/deptfiles/genchem/tables/IndicatorTable.htm">University of Wisconsin: přechody indikátorů</a></p>
   </details>
 
+  <nav class="navaznosti" aria-label="Navazující lekce"><h2>Kam dál</h2><a href="vycislovani_rovnic.html" data-lekce>Vyčíslování rovnic</a></nav>
 <script>
 const $ = id => document.getElementById(id);
 const skore = Uloha.skore('metodus_ch9_ph', $('skore'));
@@ -166,11 +184,11 @@ function indikatory() {
 }
 
 const NEUTRALIZACE = [
-  { kys: 'HCl (kyselina chlorovodíková)', hyd: 'NaOH (hydroxid sodný)', sul: 'NaCl (chlorid sodný)' },
-  { kys: 'H₂SO₄ (kyselina sírová)', hyd: 'NaOH (hydroxid sodný)', sul: 'Na₂SO₄ (síran sodný)' },
-  { kys: 'HNO₃ (kyselina dusičná)', hyd: 'KOH (hydroxid draselný)', sul: 'KNO₃ (dusičnan draselný)' },
-  { kys: 'HCl (kyselina chlorovodíková)', hyd: 'KOH (hydroxid draselný)', sul: 'KCl (chlorid draselný)' },
-  { kys: 'H₂CO₃ (kyselina uhličitá)', hyd: 'Ca(OH)₂ (hydroxid vápenatý)', sul: 'CaCO₃ (uhličitan vápenatý)' },
+  { kys: 'HCl (kyselina chlorovodíková)', hyd: 'NaOH (hydroxid sodný)', rovnice: 'HCl + NaOH → NaCl + H₂O', sul: 'NaCl (chlorid sodný)' },
+  { kys: 'H₂SO₄ (kyselina sírová)', hyd: 'NaOH (hydroxid sodný)', rovnice: 'H₂SO₄ + 2 NaOH → Na₂SO₄ + 2 H₂O', sul: 'Na₂SO₄ (síran sodný)' },
+  { kys: 'HNO₃ (kyselina dusičná)', hyd: 'KOH (hydroxid draselný)', rovnice: 'HNO₃ + KOH → KNO₃ + H₂O', sul: 'KNO₃ (dusičnan draselný)' },
+  { kys: 'HCl (kyselina chlorovodíková)', hyd: 'KOH (hydroxid draselný)', rovnice: 'HCl + KOH → KCl + H₂O', sul: 'KCl (chlorid draselný)' },
+  { kys: 'H₂CO₃ (kyselina uhličitá)', hyd: 'Ca(OH)₂ (hydroxid vápenatý)', rovnice: 'H₂CO₃ + Ca(OH)₂ → CaCO₃ + 2 H₂O', sul: 'CaCO₃ (uhličitan vápenatý)' },
 ];
 function neutralizace() {
   const p = $('plocha');
@@ -180,7 +198,7 @@ function neutralizace() {
 
   p.innerHTML = naSul
     ? `<div class="zadani uloha-text">Jaká sůl vznikne při neutralizaci?</div>
-       <div class="karta"><div class="latka">${u.kys} + ${u.hyd} → ? + H₂O</div></div>`
+       <div class="karta"><div class="latka">${u.rovnice.replace(u.sul.split(' ')[0], '?')}</div></div>`
     : `<div class="zadani uloha-text">Co vždy vzniká při neutralizaci kyseliny hydroxidem?</div>
        <div class="karta"><div class="vzorec">kyselina + hydroxid → ? </div></div>`;
   const odezva = odezvaEl();
@@ -195,7 +213,7 @@ function neutralizace() {
           { klic: 'nová kyselina', popis: 'nová kyselina' },
         ]),
     spravnyKlic: naSul ? u.sul : 'sůl a voda',
-    zpravaOk: naSul ? `✅ ${u.kys} + ${u.hyd} → ${u.sul} + H₂O` : '✅ Vzniká sůl a voda.',
+    zpravaOk: naSul ? `✅ ${u.rovnice}. Vzniká ${u.sul}. Koeficienty zachovávají počet atomů každého prvku.` : '✅ Vzniká sůl a voda.',
     zpravaChyba: 'Kation z hydroxidu se spojí s aniontem z kyseliny – vznikne sůl, zbytek dá vodu.',
     poSpravne: skore.vyhodnot,
     dalsi: novaUloha,
@@ -233,7 +251,7 @@ function latky() {
 }
 
 const REZIMY = { stupnice, indikatory, neutralizace, latky };
-function novaUloha() { REZIMY[rezim](); }
+function novaUloha() { Uloha.zrusPosun(); REZIMY[rezim](); }
 
 document.querySelectorAll('#rezimy button').forEach(b => b.addEventListener('click', () => {
   document.querySelectorAll('#rezimy button').forEach(x => x.classList.remove('active'));

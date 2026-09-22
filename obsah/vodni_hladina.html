@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="../common.css">
 <script src="../theme.js"></script>
 <script src="../podpis.js" defer></script>
+<script src="../kostra.js" defer></script>
 <style>
 body{height:100vh;overflow:hidden;display:flex;flex-direction:column}
 .horni{display:flex;gap:10px;align-items:center;padding:10px 16px;background:var(--bg-elevated);border-bottom:1px solid var(--border);flex-wrap:wrap}
@@ -18,8 +19,8 @@ input[type=range]{width:110px;accent-color:var(--accent)}
 input[type=number]{width:5.4em;background:var(--bg-input);color:var(--text);border:1px solid var(--border);border-radius:6px;padding:5px 8px;font-size:.8rem;font-variant-numeric:tabular-nums}
 select{background:var(--bg-input);color:var(--text);border:1px solid var(--border);border-radius:6px;padding:5px 8px;font-size:.8rem}
 button{background:var(--bg-control);border:1px solid var(--border-strong);color:var(--text);border-radius:6px;padding:7px 13px;font-size:.82rem;cursor:pointer}
-button:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
-button.zap{background:var(--accent);color:#fff;border-color:var(--accent)}
+button:hover{background:var(--accent);color: var(--na-akcentu, #fff);border-color:var(--accent)}
+button.zap{background:var(--accent);color: var(--na-akcentu, #fff);border-color:var(--accent)}
 .prep{display:flex;align-items:center;gap:7px;font-size:.78rem;color:var(--text-muted);cursor:pointer;user-select:none}
 .prep input{accent-color:var(--accent);width:16px;height:16px;cursor:pointer}
 .plocha{flex:1;position:relative;overflow:hidden;background:#08131f}
@@ -38,7 +39,7 @@ canvas{display:block;width:100%;height:100%;touch-action:none;cursor:crosshair}
 /* u Země může Slunce obíhat i horním okrajem – popisek proto patří dolů */
 #boxZeme .popisek{top:auto;bottom:8px;line-height:1.5}
 #boxGraf .popisek{color:var(--text-faint)}
-:root[data-theme="light"] #boxPristav .popisek{color:#33455a}
+:root[data-tone="light"] #boxPristav .popisek{color:#33455a}
 .stav{grid-column:1 / -1;background:var(--bg-panel);padding:8px 16px;font-size:.8rem;color:var(--text-muted);display:flex;gap:8px 18px;flex-wrap:wrap;align-items:center}
 .stav b{color:var(--text)}
 .stav .znak{font-size:1.15rem;line-height:1}
@@ -70,7 +71,7 @@ button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid 
   min-width:62px;padding:5px 8px 6px;line-height:1.15;font-size:.68rem;color:var(--text-muted)}
 .nastroje .ik{font-size:1.3rem;line-height:1.15}
 .nastroje button:hover{color:#fff}
-.nastroje button.zap{background:var(--accent);border-color:var(--accent);color:#fff;box-shadow:0 0 0 2px color-mix(in srgb,var(--accent) 35%,transparent)}
+.nastroje button.zap{background:var(--accent);border-color:var(--accent);color: var(--na-akcentu, #fff);box-shadow:0 0 0 2px color-mix(in srgb,var(--accent) 35%,transparent)}
 .nastroje .odebrat{margin-left:4px}
 button.vic.zap{background:var(--bg-control);border-color:var(--accent);color:var(--text)}
 
@@ -688,7 +689,7 @@ function kresliMireni() {
 function vykresli() {
   const rezim = $('zobrazeni').value;
   const d = img.data;
-  const svetlo = document.documentElement.dataset.theme === 'light';
+  const svetlo = document.documentElement.dataset.tone === 'light';
   const ZISK = 13;                       // jak silně se sklon hladiny projeví na světle
 
   for (let y = 0; y < rady; y++) {
@@ -1084,7 +1085,7 @@ function prepocitejSlapy() {
       pevniny.push({ a: Math.random() * Math.PI * 2, s: 0.25 + Math.random() * 0.45, d: 0.3 + Math.random() * 0.5 });
   }
 }
-const svetlo = () => document.documentElement.dataset.theme === 'light';
+const svetlo = () => document.documentElement.dataset.tone === 'light';
 
 /* ---------- Země, Měsíc a dvě vodní boule ---------- */
 function kresliZemi() {

@@ -1,0 +1,106 @@
+/* ============================================================
+   nazor.css – vzhled sdílených názorných prvků (viz nazor.js).
+   Barvy z common.css; oba motivy. Stránka ho linkuje jako
+   <link rel="stylesheet" href="../nazor.css">.
+   ============================================================ */
+
+/* ---- větné členy: barvy (--clen-*) jsou v common.css, stejné na celém webu -- */
+.clen-podmet { --clen: var(--clen-podmet); }
+.clen-prisudek { --clen: var(--clen-prisudek); }
+.clen-predmet { --clen: var(--clen-predmet); }
+.clen-privlastek { --clen: var(--clen-privlastek); }
+.clen-urceni { --clen: var(--clen-urceni); }
+.clen-doplnek { --clen: var(--clen-doplnek); }
+
+.nazor-veta { line-height: 2.1; }
+.nazor-slovo { display: inline-flex; flex-direction: column; align-items: center; line-height: 1.2; }
+.nazor-slovo[class*="clen-"] {
+  color: var(--clen); border-bottom: 3px solid var(--clen); border-radius: 3px; padding: 0 2px;
+}
+.nazor-slovo small { font-size: 0.6em; font-weight: 700; letter-spacing: .03em; margin-top: 2px; }
+.nazor-slovo.zvyraz { background: color-mix(in srgb, var(--clen, var(--accent)) 18%, transparent); }
+.nazor-legenda { display: inline-flex; flex-wrap: wrap; gap: 6px 14px; font-size: 0.85rem; }
+.nazor-legenda > span { color: var(--clen); border-bottom: 2px solid var(--clen); }
+
+/* ---- zlomek: koláč, proužek, osa – stejně široký celek ---------------- */
+.nazor-kolac, .nazor-prouzek, .nazor-zlomek-osa { width: min(240px, 60vw); }
+.nazor-kolac path { stroke: var(--bg-deep); stroke-width: 2; }
+.nazor-kolac path.prazdna, .nazor-prouzek rect.prazdna { fill: var(--bg-control); }
+.nazor-kolac path.plna, .nazor-prouzek rect.plna { fill: var(--accent); }
+.nazor-kolac path.spravne, .nazor-prouzek rect.spravne { fill: var(--ok); }
+.nazor-prouzek rect { stroke: var(--bg-deep); stroke-width: 2; }
+.nazor-zlomek-osa line, .nazor-zlomek-osa path { stroke: var(--text-muted); stroke-width: 2; fill: none; }
+.nazor-zlomek-osa line.znacka { stroke-width: 1.5; }
+.nazor-zlomek-osa .bod { fill: var(--accent); stroke: none; }
+.nazor-zlomek-osa text { fill: var(--text-muted); font-size: 11px; text-anchor: middle; }
+.nazor-kolac.klikaci path { cursor: pointer; }
+.nazor-kolac.klikaci path:focus, .nazor-kolac.klikaci path:focus-visible {
+  outline: none; stroke: var(--accent-hover); stroke-width: 5;
+}
+
+/* ---- číselná osa ------------------------------------------------------ */
+.nazor-osa { width: min(600px, 100%); height: auto; display: block; margin: 0 auto; overflow: visible; }
+.nazor-osa .cara { stroke: var(--text-muted); stroke-width: 2; fill: none; }
+.nazor-osa .znacka { stroke: var(--text-muted); stroke-width: 2; }
+.nazor-osa .znacka.nula { stroke: var(--text); stroke-width: 3; }
+.nazor-osa .jemna { stroke: var(--border-strong); stroke-width: 1; }
+.nazor-osa text { fill: var(--text-muted); font-size: 15px; text-anchor: middle; font-family: var(--font); }
+.nazor-osa text.nula { fill: var(--text); font-weight: 700; }
+.nazor-osa .bod { stroke: var(--bg-panel); stroke-width: 2; }
+.nazor-osa .bod.hlavni { fill: var(--accent); }
+.nazor-osa .bod.druhy { fill: var(--warn); }
+.nazor-osa .bod.chyba { fill: var(--danger); }
+.nazor-osa .bod-popis { font-weight: 700; font-size: 16px; fill: var(--text); }
+.nazor-osa .skok { stroke: var(--accent); stroke-width: 2.5; fill: none; stroke-dasharray: 5 4; }
+.nazor-osa .skok-hrot { fill: var(--accent); }
+.nazor-osa .skok-popis { fill: var(--accent-hover); font-weight: 700; }
+
+/* ---- procenta --------------------------------------------------------- */
+.nazor-procenta { width: min(560px, 100%); margin: 0 auto; font-size: 0.86rem; color: var(--text-muted); text-align: left; }
+.nazor-procenta-radek { display: grid; grid-template-columns: 5.5em 1fr 6em; align-items: center; gap: 8px; margin: 6px 0; }
+.nazor-procenta-pas {
+  position: relative; height: 22px; border-radius: 4px;
+  background: var(--bg-control); border: 1px solid var(--border-strong); overflow: visible;
+}
+.nazor-procenta-dil { position: absolute; inset: 0 auto 0 0; background: var(--accent); border-radius: 3px 0 0 3px; }
+.nazor-procenta-stupnice i {
+  position: absolute; top: 100%; transform: translateX(-50%); font-style: normal;
+  font-size: 0.72rem; color: var(--text-muted); padding-top: 2px; white-space: nowrap;
+}
+.nazor-procenta-stupnice i::before {
+  content: ''; position: absolute; left: 50%; bottom: 100%; height: 26px; border-left: 1px dashed var(--border-strong);
+}
+.nazor-procenta-popis { margin: 20px 0 0; text-align: center; color: var(--text); }
+
+/* ---- časová osa ------------------------------------------------------- */
+.nazor-cas { overflow-x: auto; padding: 4px 0 8px; }
+.nazor-cas-vnitrek { position: relative; min-width: var(--nazor-cas-sirka, 640px); padding: 0 90px; }
+.nazor-cas-pruh { position: relative; padding: 4px 0; border-bottom: 1px dashed var(--border); }
+.nazor-cas-nazev {
+  position: sticky; left: 0; display: inline-block; font-size: 0.75rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .05em; color: var(--text-muted); margin-left: -84px;
+}
+.nazor-cas-udalosti { position: relative; height: 128px; list-style: none; margin: 0; padding: 0; }
+.nazor-cas-udalosti::before { content: ''; position: absolute; left: 0; right: 0; top: 50%; border-top: 2px solid var(--border-strong); }
+.nazor-cas-udalost { position: absolute; top: 50%; width: 0; }
+.nazor-cas-bod {
+  position: absolute; left: -6px; top: -6px; width: 12px; height: 12px; border-radius: 50%;
+  background: var(--accent); border: 2px solid var(--bg-panel);
+}
+.nazor-cas-text {
+  position: absolute; bottom: 12px; left: 0; transform: translateX(-50%); width: 132px;
+  font-size: 0.74rem; line-height: 1.25; color: var(--text); text-align: center;
+}
+.nazor-cas-udalost.dole .nazor-cas-text { bottom: auto; top: 12px; }
+.nazor-cas-text b { display: block; color: var(--accent-hover); }
+.nazor-cas-stupnice { position: relative; height: 22px; }
+.nazor-cas-znacka {
+  position: absolute; top: 4px; transform: translateX(-50%); font-size: 0.7rem; color: var(--text-muted); white-space: nowrap;
+}
+.nazor-cas-znacka::before { content: ''; position: absolute; left: 50%; bottom: 100%; height: 6px; border-left: 1px solid var(--border-strong); }
+
+.nazor-chyba { color: var(--danger); }
+
+@media print {
+  .nazor-cas { overflow: visible; }
+}

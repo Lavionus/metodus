@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="../vyuka.css">
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
   <script src="../uloha.js"></script>
   <style>
     .uloha-text { max-width: 620px; font-size: 1.05rem; line-height: 1.65; }
@@ -50,7 +51,7 @@
       border-radius: 6px; padding: 5px 12px; font-size: 0.82rem; font-family: inherit; cursor: pointer;
     }
     .prepinac-druh button:hover { border-color: var(--accent); color: var(--text); }
-    .prepinac-druh button.zap { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .prepinac-druh button.zap { background: var(--accent); border-color: var(--accent); color: var(--na-akcentu, #fff); }
 
     .konstanta {
       background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 12px;
@@ -67,7 +68,7 @@
   <p class="podtitul">Pro 7. ročník: rozlišení úměrností, výpočet trojčlenkou a čtení grafu.</p>
 
   <div class="rezimy" id="rezimy">
-    <button data-rezim="ziva" class="active">🔗 Úměrnost naživo</button>
+    <button data-rezim="ziva" data-faze="vyuka" class="active">🔗 Úměrnost naživo</button>
     <button data-rezim="rozliseni">🔀 Přímá, nebo nepřímá?</button>
     <button data-rezim="trojclenka">🧮 Vypočítej trojčlenkou</button>
     <button data-rezim="tabulka">🔢 Doplň tabulku</button>

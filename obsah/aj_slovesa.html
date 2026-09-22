@@ -7,13 +7,14 @@
   <link rel="stylesheet" href="../common.css">
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
   <style>
     body { background-color: var(--bg-deep); padding: 24px clamp(14px, 3vw, 40px); min-height: 100vh; }
     h1 { font-size: 1.4rem; margin-bottom: 4px; }
     .podtitul { color: var(--text-muted); font-size: 0.88rem; margin-bottom: 14px; }
     .rezimy { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
     .rezimy button { background: var(--bg-control); border: 1px solid var(--border-strong); color: var(--text-muted); border-radius: 6px; padding: 7px 13px; font-size: 0.84rem; cursor: pointer; }
-    .rezimy button.active { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+    .rezimy button.active { background: var(--accent); border-color: var(--accent); color: var(--na-akcentu, #fff); font-weight: 600; }
 
     /* tabulka */
     .hledej { margin-bottom: 10px; }
@@ -42,7 +43,7 @@
     .tvar .reseni { font-size: 0.85rem; color: var(--ok); min-width: 90px; }
     .tlacitka { display: flex; gap: 10px; margin-top: 18px; flex-wrap: wrap; }
     .tlacitka button { border: none; border-radius: 8px; padding: 11px 20px; font-size: 0.92rem; font-weight: 600; cursor: pointer; }
-    .b-hlavni { background: var(--accent); color: #fff; }
+    .b-hlavni { background: var(--accent); color: var(--na-akcentu, #fff); }
     .b-vedle { background: var(--bg-control); color: var(--text); border: 1px solid var(--border-strong) !important; }
     .zprava { margin-top: 14px; min-height: 1.4rem; font-size: 0.95rem; }
     .zprava.ok { color: var(--ok); } .zprava.spatne { color: var(--danger); }
@@ -55,7 +56,7 @@
   <p class="podtitul">Infinitiv – minulý čas (past simple) – příčestí minulé (past participle). 2. stupeň ZŠ, SŠ.</p>
 
   <div class="rezimy" id="rezimy">
-    <button data-rezim="prehled" class="active">📖 Přehled</button>
+    <button data-rezim="prehled" data-faze="vyuka" class="active">📖 Přehled</button>
     <button data-rezim="trenink">✍️ Doplň tvary</button>
   </div>
 
@@ -64,7 +65,7 @@
     <div class="tabulka-obal"><table><thead><tr><th>Infinitiv</th><th>Past simple</th><th>Past participle</th><th>Význam</th></tr></thead><tbody id="telo"></tbody></table></div>
   </div>
 
-  <div class="karta" id="trenink" style="display:none">
+  <div class="karta" id="trenink" style="display:none" data-kostra-odpovedi>
     <div class="zadani">Doplň chybějící tvary slovesa:</div>
     <div class="infinitiv" id="tInfinitiv"></div>
     <div class="vyznam" id="tVyznam"></div>
@@ -74,8 +75,8 @@
       <div class="tvar"><label>Past participle</label><input id="in2" autocomplete="off"><span class="reseni" id="re2"></span></div>
     </div>
     <div class="tlacitka">
-      <button class="b-hlavni" id="btnZkontrolovat">Zkontrolovat</button>
-      <button class="b-vedle" id="btnDalsi">Další →</button>
+      <button class="b-hlavni" id="btnZkontrolovat">✔️ Zkontrolovat</button>
+      <button class="b-vedle" id="btnDalsi">Přeskočit →</button>
     </div>
     <div class="zprava" id="zprava"></div>
   </div>
@@ -129,8 +130,10 @@ function spravneTvar(spravny, zadano) {
   // "was/were" i "learnt/learned" – uznej kteroukoli variantu
   return spravny.toLowerCase().split('/').some(v => v === norm(zadano));
 }
+let otazkaKostry = {};   // společná kostra – jedna otázka = jeden objekt
 function nova() {
   vyhodnoceno = false;
+  otazkaKostry = {};
   let i; do { i = Math.floor(Math.random() * SLOVESA.length); } while (i === posledni); posledni = i;
   uloha = SLOVESA[i];
   // schovej 1–2 náhodné tvary, aspoň jeden zůstane vidět
@@ -148,8 +151,9 @@ function nova() {
     $('re' + k).textContent = '';
   }
   $('zprava').textContent = ''; $('zprava').className = 'zprava';
-  $('btnZkontrolovat').textContent = 'Zkontrolovat';
+  $('btnZkontrolovat').textContent = '✔️ Zkontrolovat';
   const prvni = zadany.indexOf(true); if (prvni >= 0) $('in' + prvni).focus();
+  window.Kostra?.otazka();
 }
 function zkontroluj() {
   if (vyhodnoceno) { nova(); return; }
@@ -161,11 +165,12 @@ function zkontroluj() {
     else { inp.classList.add('spatne'); $('re' + k).textContent = '→ ' + uloha[k]; vsechnyOk = false; }
   }
   vyhodnoceno = true; celkem++;
+  window.Kostra?.odpoved(vsechnyOk, otazkaKostry);
   if (vsechnyOk) { spravne++; serie++; $('zprava').textContent = '✅ Správně!'; $('zprava').className = 'zprava ok'; }
   else { serie = 0; $('zprava').textContent = '❌ Zkontroluj zvýrazněné tvary.'; $('zprava').className = 'zprava spatne'; }
   $('serie').textContent = serie >= 3 ? '🔥 série ' + serie : '';
   $('skore').textContent = spravne + ' / ' + celkem;
-  $('btnZkontrolovat').textContent = 'Další →';
+  $('btnZkontrolovat').textContent = 'Pokračovat →';
 }
 $('btnZkontrolovat').onclick = zkontroluj;
 $('btnDalsi').onclick = nova;

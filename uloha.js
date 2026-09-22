@@ -145,10 +145,21 @@ const Uloha = (function () {
     }).observe(document.documentElement, { childList: true, subtree: true });
   }
 
+  /* Společná kostra stránky (kostra.js, fáze „Ověř se") potřebuje vědět
+     o každé nové otázce a odpovědi, aniž by se musela zasahovat do stovek
+     stránek. Proto se tu ohlásí událostí na `document`; stránky bez kostry
+     si jich nevšimnou. `prvniPokus` = první odpověď na tuto otázku. */
+  function ohlas(nazev, detail) {
+    try { document.dispatchEvent(new CustomEvent('metodus:' + nazev, { detail })); } catch { /* starý prohlížeč */ }
+  }
+
   function odpoved(volby) {
     const { prvek, spravne, stav, odezva } = volby;
     if (!stav || stav.hotovo) return false;
     pripravOdezvu(odezva);
+    const prvniPokus = !stav.ohlaseno;
+    stav.ohlaseno = true;
+    ohlas('odpoved', { spravne: !!spravne, prvniPokus, stav });
 
     if (!spravne) {
       stav.chyboval = true;
@@ -204,6 +215,7 @@ const Uloha = (function () {
     const m = document.createElement('div');
     m.className = 'moznosti' + (volby.trida ? ' ' + volby.trida : '');
     const stav = { chyboval: false, hotovo: false };
+    ohlas('otazka', { stav });
     volby.moznosti.forEach(v => {
       const b = document.createElement('button');
       b.dataset.klic = v.klic;
@@ -311,7 +323,7 @@ const Uloha = (function () {
       color: var(--text-faint); font-size: 0.75rem; line-height: 1.4; padding: 6px 9px 8px;
     }
     button.pokracovat {
-      background: var(--accent); border: 1px solid var(--accent); color: #fff; font-weight: 600;
+      background: var(--accent); border: 1px solid var(--accent); color: var(--na-akcentu, #fff); font-weight: 600;
       border-radius: 8px; padding: 10px 20px; font-size: 0.95rem; font-family: inherit;
       cursor: pointer; margin-top: 4px;
     }
@@ -439,7 +451,7 @@ const Uloha = (function () {
   }
 
   return {
-    odpoved, trhni, vyber, skore, zamichej, nahodne, nahodneCislo, zapisAktivitu,
+    odpoved, trhni, vyber, skore, ohlas, zamichej, nahodne, nahodneCislo, zapisAktivitu,
     DENIK, PRODLEVA, posun, pauza, zrusPosun,
     cekaPosun: () => posunCekani !== null,
     nastaveni: () => ({ ...nastaveni }),

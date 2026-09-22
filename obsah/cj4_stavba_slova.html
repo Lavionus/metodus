@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="../vyuka.css">
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
   <script src="../rec.js"></script>
   <script src="../uloha.js"></script>
   <style>
@@ -18,8 +19,8 @@
       font-family: inherit; color: var(--text); cursor: pointer;
     }
     .rozbor .cast:hover:not(:disabled) { border-color: var(--accent); }
-    .rozbor .cast.spravne { background: var(--ok); border-color: var(--ok); color: #fff; }
-    .rozbor .cast.spatne { background: var(--danger); border-color: var(--danger); color: #fff; }
+    .rozbor .cast.spravne { background: var(--ok); border-color: var(--ok); color: var(--na-akcentu, #fff); }
+    .rozbor .cast.spatne { background: var(--danger); border-color: var(--danger); color: var(--na-akcentu, #fff); }
     .legenda-castí { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; font-size: 0.8rem; color: var(--text-faint); }
     .slovo-velke { font-size: clamp(1.7rem, 6vw, 2.6rem); font-weight: 700; }
     /* barvy částí slova jsou v celé stránce stejné – v úloze, v kartičce i v přehledu */

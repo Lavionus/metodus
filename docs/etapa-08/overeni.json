@@ -1,0 +1,30 @@
+{
+  "ok": true,
+  "pilots": 5,
+  "purposeFilters": 5,
+  "telemetry": {
+    "zahajene": 3,
+    "odpovedi": 5,
+    "dokoncene": 2,
+    "napoprve": 1,
+    "sPodporou": 1
+  },
+  "legacyPreserved": true,
+  "teacherFlow": true,
+  "print": true,
+  "pages": [
+    "prehled.html",
+    "osnova.html",
+    "ucitel.html",
+    "edu_progress.html",
+    "priprava_hodiny.html",
+    "pracovni_listy.html?lekce=ch9_ph",
+    "ch9_ph.html?tabule=1"
+  ],
+  "widths": [
+    1366,
+    390,
+    320
+  ],
+  "themes": 2
+}

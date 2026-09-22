@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="../common.css">
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
   <style>
     body { background-color: var(--bg-deep); padding: 20px clamp(12px, 3vw, 36px); min-height: 100vh; }
     h1 { font-size: 1.4rem; margin-bottom: 4px; }
@@ -16,7 +17,7 @@
       background: var(--bg-control); border: 1px solid var(--border-strong); color: var(--text-muted);
       border-radius: 6px; padding: 8px 14px; font-size: 0.85rem; cursor: pointer;
     }
-    .rezimy button.active { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+    .rezimy button.active { background: var(--accent); border-color: var(--accent); color: var(--na-akcentu, #fff); font-weight: 600; }
     .panel {
       display: flex; flex-wrap: wrap; align-items: center; gap: 14px;
       background: var(--bg-panel); border: 1px solid var(--border); border-radius: var(--radius);
@@ -54,9 +55,9 @@
   <p class="podtitul">Procvičování krajů a krajských měst České republiky.</p>
 
   <div class="rezimy" id="rezimy">
-    <button data-rezim="kraje" class="active">Kraje</button>
+    <button data-rezim="kraje" data-faze="procvic" data-kostra-overeni="ne" class="active">Kraje</button>
     <button data-rezim="mesta">Krajská města</button>
-    <button data-rezim="uceni">Prohlížení (učení)</button>
+    <button data-rezim="uceni" data-faze="vyuka">Prohlížení (učení)</button>
   </div>
 
   <div class="panel">

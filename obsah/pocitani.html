@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="../common.css">
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
   <style>
     body { background-color: var(--bg-deep); padding: 24px clamp(14px, 3vw, 40px); min-height: 100vh; }
     h1 { font-size: 1.4rem; margin-bottom: 4px; }
@@ -17,7 +18,7 @@
       background: transparent; border: 1px solid transparent; color: var(--text-muted);
       border-radius: 6px; padding: 6px 12px; font-size: 0.86rem; cursor: pointer;
     }
-    .volby button.active { background: var(--accent); color: #fff; font-weight: 600; }
+    .volby button.active { background: var(--accent); color: var(--na-akcentu, #fff); font-weight: 600; }
     .karta {
       background: var(--bg-panel); border: 1px solid var(--border); border-radius: var(--radius);
       padding: 30px; max-width: 560px; text-align: center;
@@ -34,7 +35,7 @@
     input::-webkit-outer-spin-button, input::-webkit-inner-spin-button { -webkit-appearance: none; }
     input:focus { outline: none; border-color: var(--accent); }
     .potvrdit {
-      display: block; margin: 18px auto 0; background: var(--accent); border: none; color: #fff;
+      display: block; margin: 18px auto 0; background: var(--accent); border: none; color: var(--na-akcentu, #fff);
       border-radius: 8px; padding: 12px 34px; font-size: 1.05rem; font-weight: 600; cursor: pointer;
     }
     .potvrdit:hover { background: var(--accent-hover); }
@@ -63,10 +64,10 @@
     </div>
   </div>
 
-  <div class="karta">
+  <div class="karta" data-faze="procvic" data-kostra-overeni="ne">
     <div class="priklad" id="priklad"></div>
     <input type="number" id="odpoved" inputmode="numeric" autocomplete="off">
-    <button class="potvrdit" id="btnPotvrdit">Potvrdit</button>
+    <button class="potvrdit" id="btnPotvrdit">✔️ Zkontrolovat</button>
     <div class="zprava" id="zprava"></div>
   </div>
   <div class="stav">
@@ -92,7 +93,7 @@ function novyPriklad() {
   $('zprava').textContent = ''; $('zprava').className = 'zprava';
   $('postup').textContent = 'Příklad ' + (cislo + 1) + ' / 10';
   $('skore').textContent = '✅ ' + spravne;
-  $('btnPotvrdit').textContent = 'Potvrdit';
+  $('btnPotvrdit').textContent = '✔️ Zkontrolovat';
 }
 function vyhodnot() {
   if (vyhodnoceno) { dalsiKrok(); return; }
@@ -106,7 +107,7 @@ function vyhodnot() {
   else { serie = 0; $('zprava').textContent = '❌ Zadal(a) jsi ' + v + '. Správně je ' + (op === '+' ? a + b : a - b) + '.'; $('zprava').classList.add('spatne'); }
   $('serie').textContent = serie >= 3 ? '🔥 série ' + serie : '';
   $('skore').textContent = '✅ ' + spravne;
-  $('btnPotvrdit').textContent = cislo >= 10 ? 'Vyhodnotit' : 'Další →';
+  $('btnPotvrdit').textContent = cislo >= 10 ? 'Vyhodnotit' : 'Pokračovat →';
 }
 function dalsiKrok() {
   if (cislo >= 10) { vysvedceni(); return; }

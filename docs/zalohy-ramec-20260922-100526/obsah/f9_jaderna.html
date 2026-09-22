@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jaderná energie</title>
+  <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="../vyuka.css">
+  <script src="../theme.js"></script>
+  <script src="../podpis.js" defer></script>
+  <script src="../uloha.js"></script>
+  <style>
+    .schema { width: min(360px, 90%); }
+    .schema .jadro { fill: var(--danger); }
+    .schema .neutron { fill: var(--accent); }
+    .schema .sipka { stroke: var(--text-muted); stroke-width: 2; marker-end: url(#hrot2); }
+    .schema .popis { fill: var(--text-muted); font-size: 12px; text-anchor: middle; }
+    .graf { width: min(360px, 90%); }
+    .graf .osy { stroke: var(--text-muted); stroke-width: 2; }
+    .graf .krivka { fill: none; stroke: var(--accent); stroke-width: 3; }
+    .graf .mrizka { stroke: var(--border); stroke-width: 1; }
+    .graf .popis { fill: var(--text-faint); font-size: 11px; text-anchor: middle; }
+    .uloha-text { max-width: 640px; font-size: 1.02rem; line-height: 1.6; }
+    .uloha-text b { color: var(--accent); }
+
+    /* ---- interaktivní režimy ---- */
+    canvas.scena { width: min(560px, 100%); height: auto; display: block;
+      background: var(--bg-deep); border: 1px solid var(--border); border-radius: 10px; }
+    .scena-svg { width: min(600px, 100%); display: block; }
+
+    .ovladace { display: flex; flex-wrap: wrap; gap: 8px 12px; justify-content: center; max-width: 580px; }
+    .ovladace label {
+      display: flex; align-items: center; gap: 8px;
+      background: var(--bg-input); border: 1px solid var(--border);
+      border-radius: 8px; padding: 5px 10px; font-size: 0.8rem; color: var(--text-muted);
+    }
+    .ovladace input[type=range] { width: 120px; accent-color: var(--accent); }
+    .ovladace .hodnota { color: var(--text); font-weight: 600; min-width: 3.2em; text-align: right;
+      font-variant-numeric: tabular-nums; }
+    .ovladace button {
+      background: var(--bg-control); border: 1px solid var(--border-strong); color: var(--text);
+      border-radius: 8px; padding: 8px 14px; font-size: 0.84rem; font-family: inherit; cursor: pointer;
+    }
+    .ovladace button:hover { border-color: var(--accent); }
+    .ovladace button.hlavniAkce { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+
+    .stavovky {
+      display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 8px; width: min(560px, 100%);
+    }
+    .stavovky .bunka { background: var(--bg-elevated); border: 1px solid var(--border);
+      border-radius: 10px; padding: 8px 6px; }
+    .stavovky .nadpis { color: var(--text-faint); font-size: 0.66rem; text-transform: uppercase;
+      letter-spacing: 0.4px; }
+    .stavovky .cislo { font-size: 1.2rem; font-weight: 700; margin-top: 2px;
+      font-variant-numeric: tabular-nums; }
+    .stavovky .a .cislo { color: var(--accent); }
+    .stavovky .b .cislo { color: var(--warn); }
+    .stavovky .c .cislo { color: var(--ok); }
+    .stavovky .d .cislo { color: var(--danger); }
+    @media (max-width: 560px) { .stavovky { grid-template-columns: repeat(2, 1fr); } }
+
+    .verdikt { font-size: 0.95rem; font-weight: 600; min-height: 1.5rem; }
+    .verdikt.podkriticka { color: var(--accent); }
+    .verdikt.kriticka { color: var(--ok); }
+    .verdikt.nadkriticka { color: var(--danger); }
+
+    /* pruh osudů neutronů */
+    .osudy { width: min(560px, 100%); }
+    .osudy .pruhy { display: flex; gap: 3px; height: 13px; }
+    .osudy .pruhy div { border-radius: 3px; min-width: 2px; }
+    .osudy .stitky { display: flex; flex-wrap: wrap; gap: 6px 16px; justify-content: center;
+      margin-top: 6px; font-size: 0.76rem; color: var(--text-muted); }
+    .osudy .stitky span { display: inline-flex; align-items: center; gap: 5px; }
+    .osudy .stitky i { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
+
+    /* schéma elektrárny */
+    .scena-svg .budova { fill: var(--bg-elevated); stroke: var(--border-strong); stroke-width: 2; }
+    .scena-svg .dil { cursor: pointer; }
+    .scena-svg .dil:hover .obrys { stroke: var(--accent); }
+    .scena-svg .dil.zap .obrys { stroke: var(--accent); stroke-width: 3; }
+    .scena-svg .obrys { fill: var(--bg-elevated); stroke: var(--border-strong); stroke-width: 2; }
+    .scena-svg .primar { stroke: #d96a6a; stroke-width: 5; fill: none; stroke-linecap: round; }
+    .scena-svg .sekundar { stroke: #6aa6fd; stroke-width: 5; fill: none; stroke-linecap: round; }
+    .scena-svg .terciar { stroke: #6ad0c0; stroke-width: 5; fill: none; stroke-linecap: round; }
+    .scena-svg .popis { fill: var(--text-muted); font-size: 11px; text-anchor: middle; }
+    .scena-svg .popis.male { font-size: 10px; }
+    .vysvetlivka { color: var(--text-faint); font-size: 0.84rem; max-width: 580px; line-height: 1.55; }
+    .vysvetlivka b { color: var(--text-muted); }
+    .legenda { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center;
+      font-size: 0.76rem; color: var(--text-muted); }
+    .legenda span { display: inline-flex; align-items: center; gap: 5px; }
+    .legenda i { width: 14px; height: 4px; border-radius: 2px; display: inline-block; }
+    body { max-width: 1160px; margin: auto; }
+    .plocha { max-width: 1060px; width: 100%; box-sizing: border-box; justify-content: flex-start; }
+    .plocha > * { min-width: 0; max-width: 100%; }
+    .laborator { width: 100%; display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(230px, 1fr); gap: 22px; text-align: left; align-items: start; }
+    .laborator svg { width: 100%; height: auto; background: var(--bg-deep); border: 1px solid var(--border); border-radius: 16px; }
+    .laborator svg text { fill: var(--text); font-family: inherit; }
+    .panel, .pokus { background: var(--bg-input); border: 1px solid var(--border); border-radius: 12px; padding: 16px; line-height: 1.6; }
+    .panel h2 { font-size: 1.12rem; margin: 0 0 10px; }
+    .panel p { margin: 8px 0; }
+    .pokus { width: min(650px, 100%); box-sizing: border-box; text-align: left; border-left: 4px solid var(--accent); }
+    .kroky { display: flex; flex-wrap: wrap; gap: 7px; margin: 12px 0; }
+    .kroky button, .panel button, .pokus button { font: inherit; font-size: .88rem; padding: 9px 12px; border: 1px solid var(--border-strong); border-radius: 8px; background: var(--bg-control); color: var(--text); cursor: pointer; min-height: 42px; }
+    .kroky button[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-soft); }
+    button:focus-visible, input:focus-visible, .dil:focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; }
+    button:disabled { opacity: .5; cursor: default; }
+    .rovnice { font-size: clamp(1rem, 2.5vw, 1.4rem); line-height: 2; font-weight: 650; text-align: center; padding: 12px; background: var(--accent-soft); border-radius: 12px; }
+    .mereni { border-collapse: collapse; width: 100%; font-size: .84rem; }
+    .mereni th, .mereni td { border-bottom: 1px solid var(--border); padding: 7px; text-align: right; }
+    .mereni th:first-child, .mereni td:first-child { text-align: left; }
+    .tok { display: flex; height: 26px; border-radius: 5px; overflow: hidden; margin: 12px 0; }
+    .tok span:first-child { background: var(--accent); } .tok span:last-child { background: var(--warn); }
+    .zdroje { max-width: 900px; color: var(--text-muted); font-size: .8rem; margin-top: 22px; }
+    .zdroje a { color: var(--accent); }
+    .ovladace label { flex-wrap: wrap; max-width: 100%; box-sizing: border-box; }
+    .ovladace button { min-height: 42px; }
+    .stavovky .cislo { font-size: 1.04rem; }
+    .scena-svg .dil:focus-visible .obrys { stroke: var(--accent); stroke-width: 4; }
+    .b .cislo { color: var(--zvyraz-text); } .c .cislo { color: var(--ok-text); } .d .cislo { color: var(--danger-text); }
+    @media(max-width: 720px) { .laborator { grid-template-columns: 1fr; } .plocha { padding: 18px 12px; } }
+    @media(prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+  </style>
+  <link rel="stylesheet" href="f9_jaderna.css">
+</head>
+<body>
+  <h1>☢️ Jaderná energie</h1>
+  <p class="podtitul">Pro 9. ročník: štěpení jader, poločas rozpadu, jaderná elektrárna a bezpečnost.</p>
+
+  <div class="rezimy" id="rezimy" role="group" aria-label="Výukové režimy">
+    <button data-rezim="dej" class="active">⚛️ Štěpení krok za krokem</button>
+    <button data-rezim="retezovka">☢️ Řetězová reakce</button>
+    <button data-rezim="rozpad">⏳ Rozpad naživo</button>
+    <button data-rezim="schema">🏭 Elektrárna zblízka</button>
+    <button data-rezim="havarie">🛡 Havárie a chlazení</button>
+    <button data-rezim="stepeni">🧠 Kvíz: štěpení</button>
+    <button data-rezim="polocas">📉 Kvíz: poločas</button>
+    <button data-rezim="provoz">⚖️ Provoz a zdroje</button>
+  </div>
+
+  <main class="plocha" id="plocha" aria-label="Interaktivní laboratoř"></main>
+
+  <div class="ovladani">
+    <button class="hlavni" id="btnDalsi">Přeskočit →</button>
+    <span class="skore" id="skore"></span>
+  </div>
+
+  <p class="napoveda">
+    Při <b>štěpení</b> se těžké jádro (uran 235) po zásahu neutronem rozpadne a uvolní energii
+    i další neutrony – vzniká <b>řetězová reakce</b>. V reaktoru se řídí regulačními tyčemi.
+    <b>Poločas rozpadu</b> je doba, za kterou se rozpadne polovina jader – nikoli odpočet,
+    ale statistika: každé jádro se rozpadá náhodně.
+  </p>
+
+<details class="zdroje"><summary>O modelech a zdrojích</summary><p>Modely jsou výuková zjednodušení, rozměry ani rychlosti částic nejsou v měřítku. Elektrárna představuje tlakovodní typ; bilance používá modelovou účinnost přibližně 33 %. Poločasy v úlohách jsou zaokrouhlené.</p><p>Podklady: <a href="https://www.nrc.gov/reactors/power/pwrs">NRC – tlakovodní reaktor</a>, <a href="https://www.nrc.gov/reading-rm/basic-ref/students/animated-pwr">NRC – oddělení okruhů</a>.</p></details>
+<script src="f9_jaderna-extra.js"></script>
+<script src="f9_jaderna.js"></script>
+</body>
+</html>

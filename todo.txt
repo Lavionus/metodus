@@ -1,0 +1,10 @@
+Pravidla:
+Nic necommituj, pokud o to vysloveně nepožádám. 
+Pohybuj se pouze ve složce /mnt/sata/HOME/OSS_Workspace/MyWebSites/metodus.
+Pokud se chceš podívat mimo povolenou složku vždy se zeptej. 
+Pokud použiješ obrázky z internetu musi mít licenci, která umožňuje volné šíření. 
+Generované obrázky musí stylem ladit se stavajícími.
+
+
+Vykonej:
+pridej dalsi dve nova temata a to škola a nocni skola. prepinac temat udelej jako vyklozny seznam.

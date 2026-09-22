@@ -7,6 +7,8 @@
 <link rel="stylesheet" href="../common.css">
 <script src="../theme.js"></script>
 <script src="../podpis.js" defer></script>
+<script src="../kostra.js" defer></script>
+<script src="../data/staty.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding:20px}
@@ -15,8 +17,8 @@ h1{font-size:1.6rem;margin-bottom:18px;font-weight:600;text-align:center}
 .card{background:var(--bg-elevated);border:1px solid var(--border);border-radius:8px;padding:24px;margin-bottom:16px}
 .setup{display:flex;gap:12px;flex-wrap:wrap;align-items:end;justify-content:center}
 label{display:block;font-size:.78rem;color:var(--text-faint);margin-bottom:4px}
-select{background:var(--border);border:1px solid var(--border-strong);border-radius:4px;color:var(--text);padding:9px}
-.btn{background:var(--accent);color:#fff;border:none;padding:12px 28px;border-radius:6px;cursor:pointer;font-weight:600}
+select{background:var(--bg-input);border:1px solid var(--border-strong);border-radius:4px;color:var(--text);padding:9px}
+.btn{background:var(--accent);color: var(--na-akcentu, #fff);border:none;padding:12px 28px;border-radius:6px;cursor:pointer;font-weight:600}
 .btn:hover{background:var(--accent)}
 .scorebar{display:flex;justify-content:space-around;margin-bottom:18px}
 .scorebar .v{font-size:1.5rem;font-weight:700;color:var(--accent)}.scorebar .l{font-size:.72rem;color:var(--text-faint)}
@@ -38,12 +40,13 @@ select{background:var(--border);border:1px solid var(--border-strong);border-rad
     <div class="setup">
       <div><label>Kontinent</label><select id="cont">
         <option value="all" selected>Celý svět</option>
+        <option value="Evropa">Evropa</option>
         <option value="Asie">Asie</option>
         <option value="Afrika">Afrika</option>
         <option value="Amerika">Amerika</option>
         <option value="Oceánie">Oceánie</option>
       </select></div>
-      <button class="btn" id="startBtn">▶️ Start</button>
+      <button class="btn" id="startBtn" data-faze="procvic" data-kostra-overeni="ne">▶️ Spustit sérii</button>
     </div>
   </div>
 
@@ -60,22 +63,14 @@ select{background:var(--border);border:1px solid var(--border-strong);border-rad
   <div class="card results" id="resultsCard">
     <div class="big" id="finalScore"></div>
     <p style="color:var(--text-faint)" id="finalDetail"></p>
-    <button class="btn" id="againBtn" style="margin-top:16px">🔄 Znovu</button>
+    <button class="btn" id="againBtn" style="margin-top:16px">🔄 Nová série</button>
   </div>
 </div>
 <script>
 const $=id=>document.getElementById(id);
-const STATY=[
-['Japonsko','Tokio','Asie'],['Čína','Peking','Asie'],['Indie','Dillí','Asie'],['Jižní Korea','Soul','Asie'],
-['Thajsko','Bangkok','Asie'],['Vietnam','Hanoj','Asie'],['Indonésie','Jakarta','Asie'],['Saúdská Arábie','Rijád','Asie'],
-['Izrael','Jeruzalém','Asie'],['Turecko','Ankara','Asie'],['Pákistán','Islámábád','Asie'],['Mongolsko','Ulánbátar','Asie'],
-['Egypt','Káhira','Afrika'],['Jihoafrická republika','Pretoria','Afrika'],['Keňa','Nairobi','Afrika'],['Nigérie','Abuja','Afrika'],
-['Maroko','Rabat','Afrika'],['Etiopie','Addis Abeba','Afrika'],['Ghana','Akkra','Afrika'],['Tunisko','Tunis','Afrika'],
-['USA','Washington, D.C.','Amerika'],['Kanada','Ottawa','Amerika'],['Mexiko','Mexico City','Amerika'],['Brazílie','Brasília','Amerika'],
-['Argentina','Buenos Aires','Amerika'],['Peru','Lima','Amerika'],['Chile','Santiago','Amerika'],['Kolumbie','Bogotá','Amerika'],
-['Kuba','Havana','Amerika'],['Venezuela','Caracas','Amerika'],
-['Austrálie','Canberra','Oceánie'],['Nový Zéland','Wellington','Oceánie'],['Fidži','Suva','Oceánie'],['Papua Nová Guinea','Port Moresby','Oceánie']
-];
+// Státy jsou společná data rodiny „Světadíly a státy" (data/staty.js),
+// stejná jako v kvízu vlajek. [stát, hlavní město, světadíl]
+const STATY=METODUS_STATY.map(s=>[s.stat,s.mesto,s.svetadil]);
 let deck,idx,score,total;
 function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
 function start(){

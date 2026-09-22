@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="../vyuka.css">
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
   <script src="../uloha.js"></script>
   <style>
     /* ---- model atomu (kreslí svgAtom) ---- */
@@ -44,7 +45,7 @@
       border-radius: 8px; padding: 8px 14px; font-size: 0.84rem; font-family: inherit; cursor: pointer;
     }
     .ovladace button:hover { border-color: var(--accent); }
-    .ovladace button.hlavniAkce { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+    .ovladace button.hlavniAkce { background: var(--accent); border-color: var(--accent); color: var(--na-akcentu, #fff); font-weight: 600; }
 
     .vysvetlivka { color: var(--text-muted); font-size: 0.86rem; max-width: 600px; line-height: 1.55; min-height: 2.6em; }
     .vysvetlivka b { color: var(--text); }
@@ -158,9 +159,9 @@
     <p><b>Z = p⁺</b> · <b>A = p⁺ + n</b> · <b>náboj v jednotkách e = p⁺ − e⁻</b>. Začni úkoly ve stavebnici a sleduj, co se při každém kroku mění.</p>
   </details>
   <div class="rezimy" id="rezimy">
-    <button data-rezim="stavebnice" class="active">🔬 Stavebnice atomu</button>
-    <button data-rezim="vznik">🔗 Vznik vazby</button>
-    <button data-rezim="molekuly">🧪 Molekuly</button>
+    <button data-rezim="stavebnice" data-faze="vyuka" class="active">🔬 Stavebnice atomu</button>
+    <button data-rezim="vznik" data-faze="vyuka">🔗 Vznik vazby</button>
+    <button data-rezim="molekuly" data-faze="vyuka">🧪 Molekuly</button>
     <button data-rezim="castice">🔢 Počty částic</button>
     <button data-rezim="model">🎯 Model atomu</button>
     <button data-rezim="vazby">⚗️ Poznej vazbu</button>

@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="../common.css">
 <script src="../theme.js"></script>
 <script src="../podpis.js" defer></script>
+<script src="../kostra.js" defer></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding:20px}
@@ -16,16 +17,16 @@ h1{font-size:1.6rem;margin-bottom:8px;font-weight:600;text-align:center}
 .card{background:var(--bg-elevated);border:1px solid var(--border);border-radius:8px;padding:18px;margin-bottom:16px}
 .ovladani{display:flex;gap:12px;flex-wrap:wrap;align-items:end;justify-content:center}
 label{display:block;font-size:.8rem;color:var(--text-faint);margin-bottom:4px}
-input{background:var(--border);border:1px solid var(--border-strong);border-radius:4px;color:var(--text);padding:8px}
-.btn{background:var(--accent);color:#fff;border:none;padding:9px 16px;border-radius:6px;cursor:pointer;font-weight:600;font-size:.85rem}
+input{background:var(--bg-input);border:1px solid var(--border-strong);border-radius:4px;color:var(--text);padding:8px}
+.btn{background:var(--accent);color: var(--na-akcentu, #fff);border:none;padding:9px 16px;border-radius:6px;cursor:pointer;font-weight:600;font-size:.85rem}
 .zkratky{margin-top:14px;border-top:1px solid var(--bg-control);padding-top:12px;display:flex;flex-direction:column;gap:8px}
 .skupina{display:flex;align-items:center;gap:6px;flex-wrap:wrap;justify-content:center}
 #obdobiChips,#mesicChips{display:contents}
 .skupina .nazev{font-size:.78rem;color:var(--text-faint);min-width:92px;text-align:right}
 .chip{background:var(--bg-hover);border:1px solid var(--border-strong);color:var(--text-muted);border-radius:14px;padding:4px 10px;font-size:.78rem;cursor:pointer}
 .chip:hover{background:#3d3d55;border-color:var(--accent)}
-.chip.aktiv{background:var(--accent);border-color:var(--accent);color:#fff}
-select{background:var(--border);border:1px solid var(--border-strong);border-radius:4px;color:var(--text);padding:7px;font-size:.82rem}
+.chip.aktiv{background:var(--accent);border-color:var(--accent);color: var(--na-akcentu, #fff)}
+select{background:var(--bg-input);border:1px solid var(--border-strong);border-radius:4px;color:var(--text);padding:7px;font-size:.82rem}
 canvas{width:100%;border-radius:50%;background:#050510;display:block;margin:0 auto;max-width:760px}
 .legenda{color:var(--text-faint);font-size:.78rem;text-align:center;margin-top:10px;line-height:1.5}
 </style>

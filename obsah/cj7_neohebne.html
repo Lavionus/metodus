@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="../vyuka.css">
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
   <script src="../rec.js"></script>
   <script src="../uloha.js"></script>
   <style>
@@ -19,8 +20,8 @@
     .veta-slova button.cast { cursor: pointer; }
     .veta-slova button.cast:hover:not(:disabled) { border-color: var(--accent); }
     .veta-slova .cast.zvyraz { border-color: var(--accent); background: var(--accent-soft); font-weight: 700; }
-    .veta-slova .cast.spravne { background: var(--ok); border-color: var(--ok); color: #fff; }
-    .veta-slova .cast.spatne { background: var(--danger); border-color: var(--danger); color: #fff; }
+    .veta-slova .cast.spravne { background: var(--ok); border-color: var(--ok); color: var(--na-akcentu, #fff); }
+    .veta-slova .cast.spatne { background: var(--danger); border-color: var(--danger); color: var(--na-akcentu, #fff); }
     .dve-vety { display: flex; flex-direction: column; gap: 10px; max-width: 620px; }
     .dve-vety .veta { font-size: 1.1rem; }
     .dve-vety .veta b { color: var(--accent); }

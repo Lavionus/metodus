@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>🔢 Vizualizace řadících algoritmů</title>
 
@@ -30,7 +31,7 @@
       --sloupec-zelena:#4caf50;
       --sloupec-zluta:#ffd93d;
     }
-    :root[data-theme="light"]{
+    :root[data-tone="light"]{
       --sloupec-modra:#1b6698;
       --sloupec-cervena:#c9453f;
       --sloupec-zelena:#2f8f4e;
@@ -48,14 +49,14 @@
     .controls .row{margin-bottom:12px}
     label{display:block;color:var(--muted);font-size:0.85rem;margin-bottom:6px}
     select,input[type=number],button,.range{width:100%}
-    select,input[type=number]{padding:8px;border-radius:6px;background:var(--border);border:1px solid var(--border-strong);color:var(--text)}
+    select,input[type=number]{padding:8px;border-radius:6px;background:var(--bg-input);border:1px solid var(--border-strong);color:var(--text)}
     select:focus, input[type=number]:focus{outline:2px solid var(--accent);outline-offset:2px}
     .range{appearance:none;height:8px;background:var(--border);border-radius:6px}
     .range::-webkit-slider-thumb{appearance:none;width:16px;height:16px;border-radius:50%;background:var(--accent);border:2px solid #fff;cursor:pointer;transition:transform 0.1s}
     .range::-webkit-slider-thumb:hover{transform:scale(1.1)}
     .range::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:var(--accent);border:2px solid #fff;cursor:pointer}
     .btn-row{display:flex;gap:8px}
-    button{background:var(--accent);color:#fff;padding:10px;border:none;border-radius:6px;cursor:pointer;transition:all 0.2s;font-weight:500}
+    button{background:var(--accent);color: var(--na-akcentu, #fff);padding:10px;border:none;border-radius:6px;cursor:pointer;transition:all 0.2s;font-weight:500}
     button:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 4px 8px rgba(0,0,0,0.3)}
     button:active:not(:disabled){transform:translateY(0)}
     button:disabled{opacity:0.5;cursor:not-allowed}
@@ -86,7 +87,7 @@
 <script src="../dialog.js" defer></script>
 </head>
 <body>
-  <div class="container">
+  <div class="container" data-kostra-misto="pred">
     <!-- levý panel -->
     <div class="panel controls">
       <h1>🔧 Ovládání</h1>
@@ -117,12 +118,12 @@
 
       <div class="row btn-row">
         <button id="newData">🆕 Nová data</button>
-        <button id="start">▶️ Start</button>
+        <button id="start">▶️ Spustit</button>
       </div>
 
       <div class="row btn-row">
-        <button id="pause" class="ghost">⏸️ Pozastavit</button>
-        <button id="reset" class="ghost">↺ Reset</button>
+        <button id="pause" class="ghost">⏸️ Pauza</button>
+        <button id="reset" class="ghost">↺ Výchozí stav</button>
       </div>
 
       <div class="row">
@@ -302,7 +303,7 @@
         return; 
       }
       paused = !paused;
-      pauseBtn.textContent = paused ? '▶️ Pokračovat' : '⏸️ Pozastavit';
+      pauseBtn.textContent = paused ? '▶️ Pokračovat' : '⏸️ Pauza';
       statusEl.textContent = paused ? '⏸️ Řazení pozastaveno' : `⚙️ Probíhá: ${algoEl.value}`;
       
       if (paused) {
@@ -347,9 +348,9 @@
       };
     }
 
-    function svetlyMotiv() { return document.documentElement.dataset.theme === 'light'; }
+    function svetlyMotiv() { return document.documentElement.dataset.tone === 'light'; }
     function zobrazTemaStav() {
-      document.getElementById('temaStav').textContent = '🎨 Téma: ' + (svetlyMotiv() ? 'světlé' : 'tmavé');
+      document.getElementById('temaStav').textContent = '🎨 Téma: ' + (window.MetodusTheme ? MetodusTheme.name() : (svetlyMotiv() ? 'světlé' : 'tmavé'));
     }
     // motiv mění rozcestník přes theme.js (postMessage / storage) — reagujeme na atribut
     new MutationObserver(() => {
@@ -357,6 +358,8 @@
       zobrazTemaStav();
       drawBars();
     }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+    // volba „podle systému“ nemusí změnit data-theme (tmavé → podle systému (tmavé)), popisek ale ano
+    window.addEventListener('metodus-theme', zobrazTemaStav);
     zobrazTemaStav();
 
     function drawBars(highlight=[], comparing=[], pivot=[]) {
@@ -735,7 +738,7 @@
       currentGenerator = null;
       stopTimer();
       
-      pauseBtn.textContent = '⏸️ Pozastavit';
+      pauseBtn.textContent = '⏸️ Pauza';
       statusEl.textContent = '⏹️ Zastaveno';
       updateStats();
       updateButtonStates();

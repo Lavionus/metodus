@@ -63,6 +63,8 @@ const Procvic = (function () {
       stav = { chyboval: false, hotovo: false };
       vykresli();
       poradi++;
+      // společná kostra (fáze Ověř se) potřebuje vědět o nové otázce
+      if (Uloha.ohlas) Uloha.ohlas('otazka', { stav });
     }
 
     function vykresli() {

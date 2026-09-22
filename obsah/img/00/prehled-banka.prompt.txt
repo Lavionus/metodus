@@ -1,0 +1,5 @@
+Use case: scientific-educational. Asset type: style B watercolor subject card for Metodus Czech educational website, IMG-00-02. Natural-history watercolor and gouache with fine ink detail on uniform warm ivory paper (#faf6ec), muted sage/jade/ochre palette, soft daylight from upper left, contemporary educational book. One centered compact still life, three-quarter view, generous even 12 percent empty margins. Square 1:1, 768 by 768 pixels. No text, letters, labels, arrows, numbers, border, watermark, logos or extra props. Subject: A single transparent conical Erlenmeyer laboratory flask containing a little pale jade liquid, no measurements or label.
+
+Alt: Laboratorní baňka s kapalinou.
+Generator: built-in image_gen
+Datum: 2026-09-22

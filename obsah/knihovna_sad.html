@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="../common.css">
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
   <style>
     body { background-color: var(--bg-deep); padding: 24px clamp(14px, 3vw, 40px); min-height: 100vh; }
     h1 { font-size: 1.4rem; margin-bottom: 4px; }
@@ -15,7 +16,7 @@
     .odkaz-app a { color: var(--accent); }
     .filtry { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
     .filtry button { background: var(--bg-control); border: 1px solid var(--border-strong); color: var(--text-muted); border-radius: 6px; padding: 7px 13px; font-size: 0.84rem; cursor: pointer; }
-    .filtry button.active { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+    .filtry button.active { background: var(--accent); border-color: var(--accent); color: var(--na-akcentu, #fff); font-weight: 600; }
     .mrizka { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; max-width: 1000px; }
     .sada { background: var(--bg-panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; display: flex; flex-direction: column; }
     .sada .predmet { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-faint); }
@@ -24,10 +25,10 @@
     .sada .ukazka { color: var(--text-faint); font-size: 0.82rem; font-style: italic; margin-bottom: 12px; line-height: 1.5; flex: 1; }
     .sada .akce { display: flex; gap: 8px; flex-wrap: wrap; }
     .sada .akce button { flex: 1; border: none; border-radius: 7px; padding: 9px; font-size: 0.85rem; font-weight: 600; cursor: pointer; }
-    .b-pridat { background: var(--accent); color: #fff; }
+    .b-pridat { background: var(--accent); color: var(--na-akcentu, #fff); }
     .b-pridat:hover { background: var(--accent-hover); }
     .b-stahnout { background: var(--bg-control); color: var(--text); border: 1px solid var(--border-strong) !important; }
-    .toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: var(--ok); color: #fff; padding: 12px 20px; border-radius: 8px; font-size: 0.9rem; opacity: 0; transition: opacity 0.25s ease; pointer-events: none; }
+    .toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: var(--ok); color: var(--na-akcentu, #fff); padding: 12px 20px; border-radius: 8px; font-size: 0.9rem; opacity: 0; transition: opacity 0.25s ease; pointer-events: none; }
     .toast.show { opacity: 1; }
   </style>
 </head>

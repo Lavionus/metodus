@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="../common.css">
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
   <style>
     body { background-color: var(--bg-deep); padding: 24px clamp(14px, 3vw, 40px); min-height: 100vh; }
     h1 { font-size: 1.4rem; margin-bottom: 4px; }
@@ -17,7 +18,7 @@
       border-radius: 6px; padding: 7px 13px; font-size: 0.84rem; cursor: pointer;
     }
     .rezimy button.active, .kategorie button.active {
-      background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600;
+      background: var(--accent); border-color: var(--accent); color: var(--na-akcentu, #fff); font-weight: 600;
     }
     .karta { background: var(--bg-panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; max-width: 640px; }
     .zadani { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-faint); margin-bottom: 8px; }
@@ -37,7 +38,7 @@
     .stavovy .serie { color: var(--warn); }
     .stavovy .pomer { color: var(--text-muted); margin-left: auto; font-variant-numeric: tabular-nums; }
     .dalsi {
-      background: var(--accent); border: 1px solid var(--accent); color: #fff; border-radius: 6px;
+      background: var(--accent); border: 1px solid var(--accent); color: var(--na-akcentu, #fff); border-radius: 6px;
       padding: 8px 16px; font-size: 0.88rem; cursor: pointer; visibility: hidden;
     }
     .dalsi:hover { background: var(--accent-hover); }
@@ -117,22 +118,22 @@
   <div class="rezimy" id="rezimy">
     <button data-rezim="vzorec" class="active">Vzorec → název</button>
     <button data-rezim="nazev">Název → vzorec</button>
-    <button data-rezim="uceni">Přehled (učení)</button>
+    <button data-rezim="uceni" data-faze="vyuka">Přehled (učení)</button>
   </div>
   <div class="kategorie" id="kategorie"></div>
 
-  <div class="karta" id="kvizKarta">
+  <div class="karta" id="kvizKarta" data-kostra-odpovedi>
     <div class="zadani" id="zadani"></div>
     <div class="dotaz" id="dotaz"></div>
     <label><input type="checkbox" id="writeMode"> Chci odpověď napsat samostatně</label>
     <div class="moznosti" id="moznosti"></div>
     <form id="answerForm" hidden>
-      <div class="lab-controls"><label for="writtenAnswer">Tvoje odpověď<input id="writtenAnswer" autocomplete="off" spellcheck="false" aria-describedby="answerHelp"></label><button class="action" type="submit">Ověřit</button></div>
+      <div class="lab-controls"><label for="writtenAnswer">Tvoje odpověď<input id="writtenAnswer" autocomplete="off" spellcheck="false" aria-describedby="answerHelp"></label><button class="action" type="submit">✔️ Zkontrolovat</button></div>
       <p class="muted" id="answerHelp">Vzorec piš například Ca(OH)2. U značek prvků rozlišujeme velká a malá písmena.</p>
     </form>
     <div id="quizFeedback" class="feedback" role="status"></div>
     <div class="stavovy">
-      <button class="dalsi" id="btnDalsi">Další →</button>
+      <button class="dalsi" id="btnDalsi">Pokračovat →</button>
       <span class="serie" id="serie"></span>
       <span class="pomer" id="pomer"></span>
     </div>
@@ -234,10 +235,12 @@
       else dalsiOtazka();
     });
 
+    let otazkaKostry = {};
     function dalsiOtazka() {
       const zdroj = vyber();
       if (zdroj.length < 4) { $('dotaz').textContent = 'Málo položek v kategorii.'; $('moznosti').innerHTML = ''; return; }
       aktualni = nahodne(zdroj.filter(l => l !== aktualni));
+      otazkaKostry = {};   // společná kostra – jedna otázka = jeden objekt
       zodpovezeno = false; $('quizFeedback').textContent = ''; $('writtenAnswer').value = ''; $('writtenAnswer').classList.remove('ok','spatne'); $('writtenAnswer').disabled = false; $('answerForm').querySelector('button').disabled = false;
       $('btnDalsi').style.visibility = 'hidden';
 
@@ -259,13 +262,14 @@
         b.addEventListener('click', () => odpoved(b, m));
         el.appendChild(b);
       });
+      window.Kostra?.otazka();
     }
 
     function odpoved(btn, m) {
       if (zodpovezeno) return;
       zodpovezeno = true;
       celkem++;
-      const dobre = m === aktualni; $('quizFeedback').innerHTML = (dobre ? '✓ Správně. ' : '✗ Tentokrát ne. Správná odpověď: ') + subHtml(aktualni[0]) + ' — ' + aktualni[1] + '. ' + explanation(aktualni); $('writtenAnswer').disabled = true; $('answerForm').querySelector('button').disabled = true;
+      const dobre = m === aktualni; window.Kostra?.odpoved(dobre, otazkaKostry); $('quizFeedback').innerHTML = (dobre ? '✓ Správně. ' : '✗ Tentokrát ne. Správná odpověď: ') + subHtml(aktualni[0]) + ' — ' + aktualni[1] + '. ' + explanation(aktualni); $('writtenAnswer').disabled = true; $('answerForm').querySelector('button').disabled = true;
       if (dobre) { spravne++; serie++; btn.classList.add('ok'); }
       else {
         serie = 0;

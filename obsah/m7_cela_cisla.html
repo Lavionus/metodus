@@ -6,8 +6,11 @@
   <title>Celá čísla</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../nazor.css">
+  <script src="../nazor.js"></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
   <script src="../uloha.js"></script>
   <style>
     .osa { width: min(620px, 96%); }
@@ -53,27 +56,31 @@ let rezim = 'osa';
 
 const SIRKA = 620, VYSKA = 110, STRED_Y = 62;
 
-/* Číselná osa od `od` do `do`; volby.bod = zvýrazněné číslo, volby.skryjPopisek */
+/* Číselná osa ze společné knihovny nazor.js – stejná osa jako v ostatních
+   lekcích. volby.bod = zvýrazněné číslo, volby.skryjPopisek = místo čísla „?". */
 function svgOsa(od, doC, volby = {}) {
-  const kroku = doC - od;
-  const okraj = 30;
-  const x = n => okraj + (n - od) / kroku * (SIRKA - 2 * okraj);
-  let obsah = '';
-  for (let n = od; n <= doC; n++) {
-    obsah += `<line class="ryska" x1="${x(n)}" y1="${STRED_Y - 6}" x2="${x(n)}" y2="${STRED_Y + 6}"/>`;
-    if (!(volby.skryjPopisek && n === volby.bod)) {
-      obsah += `<text class="cislo" x="${x(n)}" y="${STRED_Y + 24}">${n}</text>`;
-    }
-  }
-  if (volby.bod !== undefined) {
-    obsah += `<circle class="bod" cx="${x(volby.bod)}" cy="${STRED_Y}" r="7"/>`;
-    obsah += `<text class="znacka" x="${x(volby.bod)}" y="${STRED_Y - 14}">▼</text>`;
-  }
-  return `<svg class="osa" viewBox="0 0 ${SIRKA} ${VYSKA}">
-    <line class="cara" x1="10" y1="${STRED_Y}" x2="${SIRKA - 10}" y2="${STRED_Y}"/>
-    <polygon class="sipka" points="${SIRKA - 10},${STRED_Y} ${SIRKA - 22},${STRED_Y - 5} ${SIRKA - 22},${STRED_Y + 5}"/>
-    ${obsah}
-  </svg>`;
+  const krok = doC - od > 26 ? 5 : 1;
+  const body = volby.bod !== undefined ? [{ hodnota: volby.bod, popis: volby.skryjPopisek ? '?' : String(volby.bod).replace('-', '−') }] : [];
+  return Nazor.osa({
+    od, do: doC, krok, jemny: krok > 1 ? 1 : 0, body,
+    popisek: n => (volby.skryjPopisek && n === volby.bod) ? '' : String(n).replace('-', '−'),
+    popis: volby.skryjPopisek ? `Číselná osa od ${od} do ${doC}, jedno číslo je označené otazníkem` : undefined,
+  });
+}
+
+/* Po správném výpočtu ukáže výsledek jako posun po ose: z prvního čísla
+   o druhé doprava (kladné) nebo doleva (záporné). */
+function osaPosunu(a, posun, popis) {
+  const vysl = a + posun;
+  const od = Math.min(a, vysl, 0) - 2, doC = Math.max(a, vysl, 0) + 2;
+  const krok = doC - od > 26 ? 5 : 1;
+  const znak = n => String(n).replace('-', '−');
+  if (posun === 0) return Nazor.osa({ od, do: doC, krok, jemny: krok > 1 ? 1 : 0, body: [{ hodnota: a, popis: znak(a) + ' (posun o 0)' }] });
+  return Nazor.osa({
+    od, do: doC, krok, jemny: krok > 1 ? 1 : 0,
+    body: [{ hodnota: a, popis: znak(a), druh: 'druhy' }, { hodnota: vysl, popis: znak(vysl) }],
+    skok: { z: a, na: vysl, popis },
+  });
 }
 
 const zapis = n => n < 0 ? `<span class="zap">(${n})</span>` : String(n);
@@ -152,7 +159,11 @@ function operace() {
     zpravaOk: `✅ ${a} ${scitame ? '+' : '−'} ${b} = ${vysledek}` + (!scitame
       ? ` – odčítání ${b < 0 ? 'záporného čísla je přičítání' : 'znamená posun doleva'}.` : ''),
     zpravaChyba: 'Představ si posun po číselné ose: kladné doprava, záporné doleva.',
-    poSpravne: skore.vyhodnot,
+    poSpravne: napoprve => {
+      skore.vyhodnot(napoprve);
+      const posun = scitame ? b : -b;
+      odezva.insertAdjacentHTML('afterend', osaPosunu(a, posun, (posun < 0 ? '−' : '+') + Math.abs(posun)));
+    },
     dalsi: novaUloha,
   });
   p.appendChild(odezva);

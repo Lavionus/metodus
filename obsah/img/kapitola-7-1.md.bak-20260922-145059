@@ -1,0 +1,16 @@
+# Obrázky kapitoly 7.1
+
+Vytvořeno 22. 9. 2026 vestavěným nástrojem `image_gen` podle `PODKLAD_STRANEK.md`, oddílů 4 a 7.1. [Galerie](kapitola-7-1.html), [strojový seznam s alt texty](kapitola-7-1.json).
+
+- `00/prehled-*.webp`: 11 motivů sady IMG-00-02 pro přehled a osnovu.
+- `aj/vyslovnost-*.webp`: 8 artikulačních karet sady IMG-aj-01.
+- WebP: 768 × 768 px, každý soubor nejvýše 60 000 B. Vedle jsou původní PNG ve vyšším rozlišení a přesná zadání `.prompt.txt`, u oprav včetně dodatečného zadání.
+- Karty jsou bez vloženého textu; popisky patří do HTML. Slonovinový podklad `#faf6ec` zachovat v obou motivech. Originál baňky má průhledné pozadí; webová verze je složená na slonovinovém pozadí.
+
+## Použití výslovnosti
+
+Jde o zjednodušené ilustrační řezy. Th /θ/ a /ð/ mají podobnou polohu úst; znělost doplňte nahrávkou a vysvětlením vibrací hlasivek. Karty ü a ö představují dlouhé /yː/ a /øː/, nikoliv všechny varianty těchto písmen. Jedna karta nosovky představuje /ɑ̃/; pro ostatní francouzské nosové samohlásky se poloha jazyka a rtů liší. Ilustrace atomu je symbolem předmětu, nikoli modelem skutečných drah elektronů.
+
+Fonetická klasifikace pro zadání ověřena podle [International Phonetic Association – interaktivní tabulka IPA](https://www.internationalphoneticassociation.org/IPAcharts/IPA_charts_TI/IPA_charts_TI.html). Tabulka nebyla kopírována do obrázků. Hotové ilustrace prošly vizuální kontrolou; nejde o odbornou fonetickou revizi.
+
+Obrázky jsou připravené k zapojení; existující lekce ani rozcestníky se tímto balíčkem nepřestavují.

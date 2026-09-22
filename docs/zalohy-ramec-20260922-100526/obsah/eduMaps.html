@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mapy pro výuku – lekce a průvodce</title>
+  <link rel="stylesheet" href="../common.css">
+  <script src="../theme.js"></script>
+  <script src="../podpis.js" defer></script>
+  <style>
+    body { padding: 24px clamp(12px, 4vw, 40px); line-height: 1.65; }
+    main { max-width: 1080px; margin: auto; }
+    h1 { font-size: clamp(1.6rem, 5vw, 2.2rem); line-height: 1.25; }
+    h2 { font-size: 1.35rem; margin-bottom: 12px; }
+    h3 { font-size: 1.1rem; }
+    p { margin: 8px 0; }
+    a { color: var(--accent); text-underline-offset: 3px; }
+    a:focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; }
+    .uvod { color: var(--text-muted); max-width: 800px; }
+    nav { display: flex; gap: 12px; flex-wrap: wrap; margin: 20px 0 28px; }
+    /* Odkaz na tlačítkovém podkladu potřebuje sytější barvu — obyčejný --accent
+       má na světlém --bg-control kontrast jen 4,1 : 1. */
+    nav a, .odkaz { display: inline-block; padding: 9px 14px; border: 1px solid var(--border-strong); border-radius: var(--radius); background: var(--bg-control); color: var(--accent-hover); }
+    section { margin: 28px 0; scroll-margin-top: 16px; }
+    .karty { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 16px; }
+    article { padding: 20px; background: var(--bg-panel); border: 1px solid var(--border); border-radius: 12px; }
+    article p { color: var(--text-muted); }
+    .stitek { font-size: .8rem; color: var(--text-muted); margin: 0 0 10px; }
+    .poznamka { padding: 14px 18px; border-left: 4px solid var(--accent); background: var(--accent-soft); }
+    ol, ul { padding-left: 24px; }
+    li { margin: 6px 0; }
+    .aktivita { margin-bottom: 16px; }
+    .overeni { border-top: 1px solid var(--border); padding-top: 10px; }
+    button { font: inherit; padding: 9px 14px; background: var(--bg-control); color: var(--text); border: 1px solid var(--border-strong); border-radius: var(--radius); cursor: pointer; }
+    button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+    @media print {
+      body { background: white; color: black; padding: 0; }
+      nav, #lekce, #dostupnost, .tisk { display: none; }
+      article { background: white; color: black; border: 1px solid #777; break-inside: avoid; }
+      article p, .stitek { color: #222; }
+      a { color: black; }
+      h1 { font-size: 20pt; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>🗺️ Mapy pro výuku</h1>
+    <p class="uvod">Vyber lekci k procvičení, otevři historické mapy nebo si připrav krátkou aktivitu do hodiny.
+      Pro 4.–9. ročník; náročnost zvol podle zkušeností žáků.</p>
+  </header>
+  <nav aria-label="Části mapového průvodce">
+    <a href="#lekce">Vybrat mapovou lekci</a>
+    <a href="#pruvodce">Tři aktivity do hodiny</a>
+    <a href="#dostupnost">Příprava bez internetu</a>
+  </nav>
+
+  <section id="lekce" aria-labelledby="lekceNadpis">
+    <h2 id="lekceNadpis">Co chceš s mapou procvičit?</h2>
+    <div class="karty">
+      <article>
+        <p class="stitek">4.–5. ročník · mapové značky a směry</p>
+        <h3>Orientace v mapě</h3>
+        <p>Poznávej značky, určuj světové strany a převáděj vzdálenost podle měřítka.</p>
+        <a class="odkaz" href="prv4_mapy_smery.html" data-lekce>Otevřít orientaci v mapě →</a>
+      </article>
+      <article>
+        <p class="stitek">6.–7. ročník · souřadnice a měřítko</p>
+        <h3>Najdi bod a spočítej vzdálenost</h3>
+        <p>Propoj zeměpisnou síť s polohou bodu a porovnej různé druhy map.</p>
+        <a class="odkaz" href="z6_mapa_souradnice.html" data-lekce>Otevřít souřadnice a měřítko →</a>
+      </article>
+      <article>
+        <p class="stitek">Česká republika · kraje a města</p>
+        <h3>Slepá mapa ČR</h3>
+        <p>Nejdřív si mapu prohlédni s názvy, potom hledej kraje nebo krajská města.</p>
+        <a class="odkaz" href="slepa_mapa.html" data-lekce>Otevřít mapu ČR →</a>
+      </article>
+      <article>
+        <p class="stitek">Evropa · poloha států</p>
+        <h3>Slepá mapa Evropy</h3>
+        <p>Procvičuj státy a jejich sousedství. Malé státy jsou označené tečkou.</p>
+        <a class="odkaz" href="slepa_mapa_evropa.html" data-lekce>Otevřít mapu Evropy →</a>
+      </article>
+      <article>
+        <p class="stitek">Externí sbírky · vyžadují internet</p>
+        <h3>Historické mapy</h3>
+        <p>Otevři přehled odkazů na sbírky a vyhledej starší podobu známého místa.
+          Prohlížení a možnosti stažení se řídí nabídkou dané sbírky.</p>
+        <a class="odkaz" href="historicke_mapy_odkazy.html" data-lekce>Vybrat historický zdroj →</a>
+      </article>
+    </div>
+  </section>
+
+  <section id="pruvodce" aria-labelledby="pruvodceNadpis">
+    <h2 id="pruvodceNadpis">Průvodce pro učitele: tři aktivity do hodiny</h2>
+    <p>Každá aktivita končí vysvětlením nebo dokladem v mapě. Zvol jednu podle cíle hodiny.</p>
+    <article class="aktivita">
+      <p class="stitek">5–10 minut · dvojice · 4.–6. ročník</p>
+      <h3>1. Popiš cestu spolužákovi</h3>
+      <p><b>Cíl:</b> Žák popíše polohu pomocí světových stran a mapové značky.</p>
+      <ol>
+        <li>Otevřete <a href="prv4_mapy_smery.html" data-lekce>mapové značky a směry</a> a společně vyřešte dvě zadání.</li>
+        <li>Na papír nakreslete jednoduchý plán školy a okolí, doplňte severku a legendu.</li>
+        <li>Jeden žák popíše cestu mezi dvěma místy, druhý ji podle pokynů zakreslí. Pak si role vyměňte.</li>
+      </ol>
+      <p class="overeni"><b>Ověření:</b> Dovedou pokyny spolužáka na správné místo? Který údaj chyběl nebo nebyl jednoznačný?</p>
+    </article>
+    <article class="aktivita">
+      <p class="stitek">10–15 minut · dvojice · 6.–7. ročník</p>
+      <h3>2. Stejná cesta, jiné měřítko</h3>
+      <p><b>Cíl:</b> Žák vysvětlí rozdíl mezi délkou na mapě a skutečnou vzdáleností.</p>
+      <ol>
+        <li>V lekci <a href="z6_mapa_souradnice.html" data-lekce>souřadnice a měřítko</a> vyberte režim Měřítko mapy.</li>
+        <li>Na papír narýsujte úsečku 4 cm pro mapu 1 : 25 000. Spočítejte skutečnou vzdálenost.</li>
+        <li>Určete, jak dlouhá bude tatáž cesta na mapě 1 : 50 000. Nejprve odhadněte, potom spočítejte.</li>
+      </ol>
+      <p class="overeni"><b>Ověření:</b> Skutečná vzdálenost je 1 km; na druhé mapě úsečka měří 2 cm. Vysvětlete, proč se délka na mapě změnila a skutečná cesta zůstala stejná.</p>
+    </article>
+    <article class="aktivita">
+      <p class="stitek">15–20 minut · skupiny · 6.–9. ročník</p>
+      <h3>3. Jak se změnilo známé místo?</h3>
+      <p><b>Cíl:</b> Žák doloží změnu krajiny porovnáním dvou map a odliší pozorování od domněnky.</p>
+      <ol>
+        <li>Z <a href="historicke_mapy_odkazy.html" data-lekce>přehledu historických map</a> vyberte sbírku. Učitel předem připraví stejné místo na starší a novější mapě.</li>
+        <li>Zapište zdroj a rok obou map. Najděte tři změny: například zástavbu, tok řeky nebo železnici.</li>
+        <li>U každé změny oddělte „v mapě vidím“ od „myslím si, že příčinou bylo“. Vysvětlete, jak by šla domněnka ověřit.</li>
+      </ol>
+      <p class="overeni"><b>Ověření:</b> Dokáže skupina ukázat každý závěr v obou mapách? Nemůže rozdíl způsobovat jiné měřítko, legenda nebo účel mapy?</p>
+    </article>
+    <p class="tisk"><button type="button" id="tiskPrůvodce">Vytisknout aktivity pro učitele</button></p>
+  </section>
+
+  <section id="dostupnost" class="poznamka" aria-labelledby="dostupnostNadpis">
+    <h2 id="dostupnostNadpis">Připrav si hodinu i bez internetu</h2>
+    <p>Místní mapové lekce mohou po uložení stránky a jejích podkladů do prohlížeče fungovat offline.
+      Nejprve otevři Metodus přes jeho rozcestník online, načti vybrané lekce a vyzkoušej potřebné režimy.
+      Před hodinou ověř jejich otevření i bez připojení.</p>
+    <p>Externí historické sbírky vyžadují internet. Pro hodinu bez sítě si předem připrav podklady,
+      které daná sbírka umožňuje stáhnout či vytisknout, a připoj zdroj.
+      Tato stránka nabízí lekce a průvodce; vlastní export map do PNG ani tisk map na více archů zde není.</p>
+  </section>
+</main>
+<script>
+  document.getElementById('tiskPrůvodce').addEventListener('click', () => window.print());
+  document.querySelectorAll('a[data-lekce]').forEach(a => a.addEventListener('click', e => {
+    if (window.parent === window || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey || e.button !== 0) return;
+    e.preventDefault();
+    window.parent.postMessage({ otevri: 'obsah/' + a.getAttribute('href') }, location.origin);
+  }));
+</script>
+</body>
+</html>

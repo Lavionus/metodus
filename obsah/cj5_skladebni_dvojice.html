@@ -6,8 +6,10 @@
   <title>Základní skladební dvojice</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../nazor.css">
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
   <script src="../rec.js"></script>
   <script src="../uloha.js"></script>
   <style>
@@ -17,16 +19,16 @@
       border-radius: 8px; padding: 9px 13px; font-size: 1.05rem; font-family: inherit; cursor: pointer;
     }
     .veta-slova button:hover:not(:disabled) { border-color: var(--accent); }
-    .veta-slova button.spravne { background: var(--ok); border-color: var(--ok); color: #fff; }
-    .veta-slova button.spatne { background: var(--danger); border-color: var(--danger); color: #fff; }
+    .veta-slova button.spravne { background: var(--ok); border-color: var(--ok); color: var(--na-akcentu, #fff); }
+    .veta-slova button.spatne { background: var(--danger); border-color: var(--danger); color: var(--na-akcentu, #fff); }
     .veta-slova button.hotovo { background: var(--accent-soft); border-color: var(--accent); }
     .veta-cela { font-size: clamp(1.1rem, 4vw, 1.6rem); font-weight: 600; max-width: 640px; line-height: 1.45; }
-    .veta-cela .podmet { color: var(--accent); text-decoration: underline; }
-    .veta-cela .prisudek { color: var(--warn); text-decoration: underline; }
+    .veta-cela .podmet { color: var(--clen-podmet); text-decoration: underline; }
+    .veta-cela .prisudek { color: var(--clen-prisudek); text-decoration: underline; }
     .pomucka .skupina { flex: 1 1 190px; }
     .pomucka .skupina.sviti { box-shadow: 0 0 0 2px var(--accent-soft); }
-    .pomucka .modra { color: var(--accent); }
-    .pomucka .zluta { color: var(--warn); }
+    .pomucka .modra { color: var(--clen-podmet); }
+    .pomucka .zluta { color: var(--clen-prisudek); }
     /* dvojice v kartičce: podmět ← spojka → přísudek */
     .paru { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; font-size: 1.05rem; }
     .paru .sipka { color: var(--text-faint); }
@@ -38,7 +40,7 @@
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="najdiPodmet" class="active">🔵 Najdi podmět</button>
-    <button data-rezim="najdiPrisudek">🟡 Najdi přísudek</button>
+    <button data-rezim="najdiPrisudek">🟠 Najdi přísudek</button>
     <button data-rezim="druhPodmetu">🗂️ Jaký je podmět</button>
     <button data-rezim="dvojice">🔗 Patří k sobě?</button>
   </div>
@@ -60,7 +62,7 @@
         a stojí v <b>1. pádě</b>.</p>
     </div>
     <div class="skupina" data-h="prisudek">
-      <h2><span class="zluta">🟡</span> Přísudek</h2>
+      <h2><span class="zluta">🟠</span> Přísudek</h2>
       <div class="znaky"><span class="znak">co dělá?</span></div>
       <p class="popis">Co podmět <b>dělá</b> nebo <b>jaký je</b>. Bývá to sloveso v určitém tvaru.</p>
     </div>
@@ -204,7 +206,7 @@ function klikaciUloha(hledanyIndex, popis, zpravaOk, zpravaNeni) {
       zpravaChyba: zpravaNeni,
       poSpravne: napoprve => {
         hotovo(p, napoprve, hledanyIndex);
-        p.appendChild(pravidloEl(hledanyIndex === 'podmet' ? '🔵' : '🟡', `${dvojiceHTML(v)}
+        p.appendChild(pravidloEl(hledanyIndex === 'podmet' ? '🔵' : '🟠', `${dvojiceHTML(v)}
           <div style="margin-top:6px">${hledanyIndex === 'podmet'
             ? `Na podmět se ptáme <b>kdo? co?</b> — „${v.s[v.prisudek]}“ a odpověď je
                <span class="vysledek">${v.s[cil]}</span>. Podmět je vždycky v 1. pádě.`

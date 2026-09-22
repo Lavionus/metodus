@@ -6,13 +6,14 @@
 <title>Biologie člověka · Interaktivní atlas</title>
 <link rel="stylesheet" href="../common.css"><link rel="stylesheet" href="Anatomy/atlas.css">
 <script src="../theme.js"></script><script src="../podpis.js" defer></script>
+<script src="../kostra.js" defer></script>
 <script src="Anatomy/atlas-data.js" defer></script><script src="Anatomy/atlas-modules.js" defer></script><script src="Anatomy/atlas.js" defer></script>
 </head>
 <body>
 <main class="container">
 <header><p class="eyebrow">Přírodopis · Člověk a jeho tělo</p><h1>Lidské tělo pod povrchem</h1><p class="intro">Prozkoumej orgány, kostru, svaly, nervovou soustavu i smysly a nahlédni dovnitř srdce. Zjisti, kde jednotlivé části leží, co dělají a jak spolupracují.</p></header>
 <nav class="jump" aria-label="Na této stránce"><a href="#atlas">Interaktivní atlas</a><a href="#souvislosti">Jak vše spolupracuje</a><a href="#moduly">Další poznávání</a></nav>
-<section id="atlas" aria-labelledby="atlas-title">
+<section id="atlas" aria-labelledby="atlas-title" data-faze="vyuka">
 <div class="section-head"><div><p class="eyebrow">01 / Stavba těla</p><h2 id="atlas-title">Vnitřní orgány</h2></div><div class="modes" aria-label="Režim atlasu"><button id="explore-mode" aria-pressed="true">Prozkoumat</button><button id="quiz-mode" aria-pressed="false">Procvičit</button></div></div>
 <div id="topic-switch" class="topic-switch" role="group" aria-label="Téma anatomického atlasu"></div><p id="topic-intro" class="topic-intro"></p>
 <div class="atlas-layout">
@@ -22,7 +23,7 @@
 <figcaption id="view-caption">Pravá strana těla je na obrázku vlevo. Močový měchýř leží vpředu v malé pánvi, za stydkou sponou a před konečníkem; na ilustraci překrývá jeho dolní část. Jde o zjednodušený výukový průhled.</figcaption>
 </figure>
 <aside class="side">
-<div id="quiz-panel" class="card" hidden><p class="eyebrow">Obrázkový kvíz</p><div class="quiz-meta"><span id="quiz-count"></span><span id="quiz-score"></span></div><progress id="progress" max="10" value="0" aria-label="Dokončené otázky"></progress><h3 id="question" tabindex="-1"></h3><p class="muted" id="quiz-help">Vyber strukturu v obrázku nebo v seznamu. Změna tématu nebo pohledu zahájí nové kolo.</p><p id="feedback" role="status"></p><button id="next" class="primary" hidden>Další otázka →</button><button id="restart" hidden>Zkusit znovu</button></div>
+<div id="quiz-panel" class="card" hidden><p class="eyebrow">Obrázkový kvíz</p><div class="quiz-meta"><span id="quiz-count"></span><span id="quiz-score"></span></div><progress id="progress" max="10" value="0" aria-label="Dokončené otázky"></progress><h3 id="question" tabindex="-1"></h3><p class="muted" id="quiz-help">Vyber strukturu v obrázku nebo v seznamu. Změna tématu nebo pohledu zahájí nové kolo.</p><p id="feedback" role="status"></p><button id="next" class="primary" hidden>Pokračovat →</button><button id="restart" hidden>Zkusit znovu</button></div>
 <div id="heart-flow" class="card" hidden><p class="eyebrow">Cesta krve</p><h3>Projdi oběh krok za krokem</h3><p class="small">Kroky 1–6 vedou krev z těla do plic. V plicích přijme kyslík; kroky 7–12 ji vracejí přes levou polovinu srdce do těla.</p><ol id="flow-steps" class="flow-steps"></ol></div>
 <article class="card detail" id="detail" aria-live="polite"></article>
 <div class="card chooser"><label for="system">Zvýraznit soustavu</label><select id="system"><option value="all">Všechny soustavy</option><option value="nervova">Nervová</option><option value="dychaci">Dýchací</option><option value="obehova">Oběhová</option><option value="travici">Trávicí</option></select><div class="organ-list" id="organ-list" aria-label="Výběr struktury"></div><p class="small" id="explored">Prozkoumáno 0 z 10 struktur v tomto pohledu</p></div>

@@ -85,14 +85,14 @@ try {
   await klavesa('Enter');
   const nabidka = await evaluate(`({
     otevrena: !viceMenu.hidden, aria: btnVice.getAttribute('aria-expanded'),
-    polozky: [...viceMenu.querySelectorAll('button')].map(b => b.id),
-    popisky: [...viceMenu.querySelectorAll('button')].map(b => b.querySelector('.popis')?.textContent.trim()),
+    polozky: [...viceMenu.querySelectorAll('button, select')].map(b => b.id),
+    popisky: [...viceMenu.querySelectorAll('button, select')].map(b => (b.closest('label') || b).querySelector('.popis')?.textContent.trim()),
     role: viceMenu.querySelector('button').getAttribute('role'),
     fokus: document.activeElement.id
   })`);
   assert.equal(nabidka.otevrena, true, 'nabídka se otevře Enterem');
   assert.equal(nabidka.aria, 'true', 'aria-expanded po otevření');
-  assert.deepEqual(nabidka.polozky, ['btnOsnova', 'btnUcitel', 'btnPredstaveni', 'btnTema', 'btnProjektor', 'btnNoveOkno'], 'obsah nabídky');
+  assert.deepEqual(nabidka.polozky, ['btnOsnova', 'btnUcitel', 'btnPredstaveni', 'temaVolba', 'btnProjektor', 'btnNoveOkno'], 'obsah nabídky');
   assert.ok(nabidka.popisky.every(p => p && p.length > 2), 'každá položka má slovní popis: ' + JSON.stringify(nabidka.popisky));
   assert.equal(nabidka.role, 'menuitem', 'role položek');
   assert.equal(nabidka.fokus, 'btnOsnova', 'fokus skočí na první položku, byl: ' + nabidka.fokus);
@@ -105,17 +105,22 @@ try {
   assert.equal(await evaluate('document.activeElement.id'), 'btnVice', 'Esc vrátí fokus na tlačítko');
   vysledky.nabidka = nabidka;
 
-  // 3) Motiv se přepne z nabídky a tlačítko si ponechá popis i po přepnutí.
-  await evaluate(`btnVice.click(); btnTema.click()`);
+  // 3) Motiv se vybere z výklopného seznamu v nabídce; volba nabídku zavře.
+  const vyber = hodnota => evaluate(`btnVice.click(); temaVolba.value = '${hodnota}';
+    temaVolba.dispatchEvent(new Event('change', { bubbles: true }))`);
+  await vyber('light');
   const tema = await evaluate(`({
-    tema: document.documentElement.dataset.theme || 'dark',
-    popis: temaPopis.textContent, ikona: temaIkona.textContent, zavreno: viceMenu.hidden
+    tema: document.documentElement.dataset.theme || 'dark', hodnota: temaVolba.value,
+    moznosti: [...temaVolba.options].map(o => o.value), popis: temaObal.querySelector('.popis').textContent,
+    zavreno: viceMenu.hidden
   })`);
-  assert.equal(tema.tema, 'light', 'přepnutí na světlý motiv');
-  assert.equal(tema.popis, 'Tmavý režim', 'popis nabídne návrat, je: ' + tema.popis);
-  assert.equal(tema.ikona, '☀️', 'ikona motivu');
+  assert.equal(tema.tema, 'light', 'výběr světlého motivu');
+  assert.equal(tema.hodnota, 'light', 'seznam ukazuje zvolený motiv');
+  assert.deepEqual(tema.moznosti, ['auto', 'dark', 'light', 'kontrast', 'sepia', 'knihovna', 'skola', 'nocni-skola'], 'všechny motivy v seznamu');
+  assert.equal(tema.popis, 'Motiv', 'seznam má v nabídce slovní popis');
   assert.equal(tema.zavreno, true, 'nabídka se po volbě zavře');
-  await evaluate(`btnVice.click(); btnTema.click()`); // zpět na tmavý
+  await vyber('dark');
+  assert.equal(await evaluate(`document.documentElement.dataset.theme || 'dark'`), 'dark', 'návrat na tmavý motiv');
 
   // 4) Vysouvací menu: otevření dá fokus do hledání, Esc zavře a vrátí ho na hamburger.
   await evaluate(`hamburger.focus()`);
@@ -197,10 +202,10 @@ try {
     await new Promise(r => setTimeout(r, 150));
     const s = await evaluate(`({
       width: innerWidth, scroll: document.documentElement.scrollWidth,
-      radku: [...document.querySelectorAll('.hlavicka button')].filter(b => b.offsetParent !== null)
+      radku: [...document.querySelectorAll('.hlavicka button, .hlavicka select')].filter(b => b.offsetParent !== null)
         .map(b => { const r = b.getBoundingClientRect(); return r.top + r.height / 2; })
         .reduce((acc, s) => (acc.some(x => Math.abs(x - s) <= 8) ? acc : [...acc, s]), []).length,
-      viceVidno: !btnVice.hidden, vHlavicce: btnTema.closest('.ovladani') !== null
+      viceVidno: !btnVice.hidden, vHlavicce: temaObal.closest('.ovladani') !== null
     })`);
     assert.ok(s.scroll <= s.width + 1, 'přetečení při ' + w + ' ' + theme + ' (' + s.scroll + ')');
     assert.equal(s.radku, 1, 'hlavička na jeden řádek při ' + w + ' ' + theme);

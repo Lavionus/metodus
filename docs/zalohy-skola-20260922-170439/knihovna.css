@@ -1,0 +1,99 @@
+/* Stará knihovna: tmavé ořechové dřevo regálů, text barvy pergamenu,
+   zlacená ořízka jako akcent a patkové nadpisy jako na hřbetech knih.
+   Tón motivu je tmavý (theme.js nastaví data-tone="dark"), takže všechny
+   stránky, které počítají s tmavým motivem, fungují beze změny.
+   Textura je procedurální (obsah/textures/knihovna-drevo.py) – neutrální
+   šedá kolem 50 %, v režimu overlay jen prokreslí letokruhy do barvy
+   plochy. Na záměrně tmavých simulacích (vesmír) je tak prakticky neviditelná.
+   Kontrasty (WCAG) na panelu #2c2118: text 12,2 : 1, tlumený 8,7 : 1,
+   nejslabší 5,6 : 1, akcent 6,1 : 1. Text na ploše v barvě akcentu
+   (aktivní režim, hlavní tlačítko) bere --na-akcentu – tady tmavý inkoust
+   místo bílé, jinak by na zlaté měl jen 2,6 : 1. */
+
+:root[data-theme="knihovna"] {
+  color-scheme: dark;
+  --bg: #211912;
+  --bg-deep: #1a130d;
+  --bg-panel: #2c2118;
+  --bg-elevated: #35281d;
+  --bg-control: #433222;
+  --bg-input: #1d160f;
+  --bg-hover: #523d29;
+  --text: #eee2c8;
+  --text-muted: #d2bf9a;
+  --text-faint: #ad9874;
+  --border: #4e3b29;
+  --border-strong: #6b5237;
+  --accent: #c99a45;
+  --accent-soft: rgba(201, 154, 69, .16);
+  --accent-hover: #e2bb6d;
+  --na-akcentu: #1d140b;     /* tmavý inkoust na zlaté: 7,1 : 1 (bílá by měla 2,6 : 1) */
+  --ok: #8dbb86;
+  --warn: #e3ac52;
+  --danger: #ea8a72;
+  --ok-text: #8dbb86;
+  --danger-text: #ea8a72;
+  --zvyraz-text: #e3ac52;
+  --shadow: 0 2px 12px rgba(0, 0, 0, .5);
+  /* předměty: jako hřbety vazeb – teplejší, ale stále rozlišitelné */
+  --predmet-cj: #e38c7c;
+  --predmet-m: #86b3d6;
+  --predmet-aj: #c69ad0;
+  --predmet-dcj: #e6a565;
+  --predmet-prv: #b5c26f;
+  --predmet-inf: #a4abe0;
+  --predmet-f: #e3c374;
+  --predmet-ch: #e59ab0;
+  --predmet-pr: #7cc494;
+  --predmet-z: #6fc0ae;
+  --predmet-d: #d3a77e;
+  --predmet-nastroj: #b0a592;
+  /* Starší samostatné simulace mají jiná jména palety. */
+  --bg-dark: var(--bg-deep);
+  --panel: var(--bg-panel);
+  --surface: var(--bg-panel);
+  --surface2: var(--bg-elevated);
+  --muted: var(--text-muted);
+  --accent2: #8dbb86;
+  --font-nadpis: Georgia, 'Palatino Linotype', 'Book Antiqua', Palatino, 'Times New Roman', serif;
+  --drevo-textura: url('obsah/textures/knihovna-drevo.webp');
+}
+
+:root[data-theme="knihovna"] body {
+  background-image: var(--drevo-textura);
+  background-size: 512px 512px;
+  background-repeat: repeat;
+  background-blend-mode: overlay;
+}
+
+/* Povrchy rozhraní dostanou tutéž kresbu dřeva; barvy se nemění. Jen prvky
+   s vlastní barvou pozadí – na průhledném by zůstala šedá kresba bez barvy. */
+:root[data-theme="knihovna"] :where(
+  select, dialog, .card, .karta, .panel, .kostra-hlavicka
+) {
+  background-image: var(--drevo-textura);
+  background-size: 512px 512px;
+  background-repeat: repeat;
+  background-blend-mode: overlay;
+}
+
+/* Nadpisy patkovým písmem, jako tituly na hřbetech. */
+:root[data-theme="knihovna"] :where(h1, h2, h3) {
+  font-family: var(--font-nadpis);
+  letter-spacing: .01em;
+}
+
+:root[data-theme="knihovna"] :where(button, input, select, textarea) { accent-color: var(--accent); }
+:root[data-theme="knihovna"] :where(a,button,input,select,textarea,summary):focus-visible {
+  outline-color: var(--accent);
+}
+:root[data-theme="knihovna"] ::selection { background: #6b5237; color: #fff6e0; }
+
+@media print {
+  :root[data-theme="knihovna"] body,
+  :root[data-theme="knihovna"] body * { background-image: none !important; }
+}
+@media (forced-colors: active) {
+  :root[data-theme="knihovna"] body,
+  :root[data-theme="knihovna"] body * { background-image: none !important; }
+}

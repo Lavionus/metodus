@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="../vyuka.css">
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
   <script src="../uloha.js"></script>
   <style>
     .uloha-text { max-width: 650px; font-size: 1.02rem; line-height: 1.62; }
@@ -47,7 +48,7 @@
       border-radius: 6px; padding: 5px 12px; font-size: 0.82rem; font-family: inherit; cursor: pointer;
     }
     .prepinac-druh button:hover { border-color: var(--accent); color: var(--text); }
-    .prepinac-druh button.zap { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .prepinac-druh button.zap { background: var(--accent); border-color: var(--accent); color: var(--na-akcentu, #fff); }
 
     .souhrn {
       display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -76,7 +77,7 @@
   <p class="podtitul">Pro 9. ročník: úroky, spoření, půjčky a rodinný rozpočet.</p>
 
   <div class="rezimy" id="rezimy">
-    <button data-rezim="kalkulacka" class="active">💹 Kalkulačka</button>
+    <button data-rezim="kalkulacka" data-faze="vyuka" class="active">💹 Kalkulačka</button>
     <button data-rezim="urok">📈 Jednoduchý úrok</button>
     <button data-rezim="slozeny">🔁 Složené úročení</button>
     <button data-rezim="pujcky">🏦 Porovnej půjčky</button>

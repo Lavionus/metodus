@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="../vyuka.css">
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
   <script src="../uloha.js"></script>
   <style>
     .vyraz { font-size: clamp(1.4rem, 5.5vw, 2.2rem); font-weight: 700; font-variant-numeric: tabular-nums; }
@@ -42,7 +43,7 @@
       border-radius: 6px; padding: 5px 12px; font-size: 0.82rem; font-family: inherit; cursor: pointer;
     }
     .prepinac-vzorce button:hover { border-color: var(--accent); color: var(--text); }
-    .prepinac-vzorce button.zap { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .prepinac-vzorce button.zap { background: var(--accent); border-color: var(--accent); color: var(--na-akcentu, #fff); }
 
     .rozklad {
       background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 12px;
@@ -62,7 +63,7 @@
   <p class="podtitul">Pro 8. ročník: roznásobování, vytýkání, vzorce a dosazování za proměnnou.</p>
 
   <div class="rezimy" id="rezimy">
-    <button data-rezim="plocha" class="active">🟦 Roznásobení plochou</button>
+    <button data-rezim="plocha" data-faze="vyuka" class="active">🟦 Roznásobení plochou</button>
     <button data-rezim="roznasob">✖️ Roznásob závorku</button>
     <button data-rezim="vytkni">📦 Vytkni před závorku</button>
     <button data-rezim="vzorce">📐 Vzorce</button>

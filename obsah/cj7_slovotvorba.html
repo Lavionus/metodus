@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="../vyuka.css">
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
   <script src="../rec.js"></script>
   <script src="../uloha.js"></script>
   <style>
@@ -19,8 +20,8 @@
       font-weight: 700; font-family: inherit; cursor: pointer;
     }
     .casti button:hover:not(:disabled) { border-color: var(--accent); }
-    .casti button.spravne { background: var(--ok); border-color: var(--ok); color: #fff; }
-    .casti button.spatne { background: var(--danger); border-color: var(--danger); color: #fff; }
+    .casti button.spravne { background: var(--ok); border-color: var(--ok); color: var(--na-akcentu, #fff); }
+    .casti button.spatne { background: var(--danger); border-color: var(--danger); color: var(--na-akcentu, #fff); }
     .rozbor { color: var(--text-faint); font-size: 0.82rem; }
     .zkratka { font-size: clamp(1.8rem, 7vw, 3rem); font-weight: 700; letter-spacing: 0.06em; }
     /* barvy částí slova jsou v celé stránce stejné – v úloze i v kartičce */

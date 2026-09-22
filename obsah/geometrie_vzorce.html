@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="../common.css">
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
   <style>
     body { background-color: var(--bg-deep); padding: 24px clamp(14px, 3vw, 40px); min-height: 100vh; }
     h1 { font-size: 1.4rem; margin-bottom: 4px; }
@@ -16,7 +17,7 @@
       background: var(--bg-control); border: 1px solid var(--border-strong); color: var(--text-muted);
       border-radius: 6px; padding: 7px 13px; font-size: 0.84rem; cursor: pointer;
     }
-    .rezimy button.active { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+    .rezimy button.active { background: var(--accent); border-color: var(--accent); color: var(--na-akcentu, #fff); font-weight: 600; }
     table { border-collapse: collapse; font-size: 0.92rem; max-width: 860px; width: 100%; }
     th, td { padding: 8px 12px; text-align: left; border-bottom: 1px solid var(--border); }
     th { color: var(--text-faint); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.5px; }
@@ -31,7 +32,7 @@
     }
     input:focus { outline: none; border-color: var(--accent); }
     .jednotka { color: var(--text-muted); font-size: 1.05rem; }
-    .potvrdit { background: var(--accent); border: none; color: #fff; border-radius: 8px; padding: 11px 26px; font-size: 0.95rem; font-weight: 600; cursor: pointer; }
+    .potvrdit { background: var(--accent); border: none; color: var(--na-akcentu, #fff); border-radius: 8px; padding: 11px 26px; font-size: 0.95rem; font-weight: 600; cursor: pointer; }
     .potvrdit:hover { background: var(--accent-hover); }
     .zprava { margin-top: 14px; min-height: 1.5rem; font-size: 0.98rem; }
     .zprava.ok { color: var(--ok); } .zprava.spatne { color: var(--danger); }
@@ -46,7 +47,7 @@
   <p class="podtitul">Přehled vzorců a počítání příkladů (6.–9. ročník ZŠ). Zaokrouhluj na 2 desetinná místa, π ≈ 3,14.</p>
 
   <div class="rezimy" id="rezimy">
-    <button data-rezim="prehled" class="active">📖 Přehled vzorců</button>
+    <button data-rezim="prehled" data-faze="vyuka" class="active">📖 Přehled vzorců</button>
     <button data-rezim="rovinne">Rovinné útvary</button>
     <button data-rezim="telesa">Tělesa</button>
   </div>
@@ -68,12 +69,12 @@
     </table>
   </div>
 
-  <div class="karta" id="kviz" style="display:none">
+  <div class="karta" id="kviz" style="display:none" data-kostra-odpovedi>
     <div class="zadani" id="zadani"></div>
     <div class="odpovedni">
       <input type="number" id="odpoved" step="any" autocomplete="off">
       <span class="jednotka" id="jednotka"></span>
-      <button class="potvrdit" id="btnPotvrdit">Potvrdit</button>
+      <button class="potvrdit" id="btnPotvrdit">✔️ Zkontrolovat</button>
     </div>
     <div class="zprava" id="zprava"></div>
     <div class="reseni" id="reseni"></div>
@@ -121,8 +122,9 @@ function nova() {
   $('odpoved').value = '';
   $('zprava').textContent = ''; $('zprava').className = 'zprava';
   $('reseni').style.display = 'none';
-  $('btnPotvrdit').textContent = 'Potvrdit';
+  $('btnPotvrdit').textContent = '✔️ Zkontrolovat';
   $('odpoved').focus();
+  window.Kostra?.otazka();
 }
 function vyhodnot() {
   if (vyhodnoceno) { nova(); return; }
@@ -130,13 +132,14 @@ function vyhodnot() {
   if (v === '') { $('odpoved').focus(); return; }
   vyhodnoceno = true; celkem++;
   const ok = Math.abs(Number(v) - uloha.v) < 0.011;
+  window.Kostra?.odpoved(ok, uloha);   // společná kostra – Ověř se
   if (ok) { spravne++; serie++; $('zprava').textContent = '✅ Správně!'; $('zprava').classList.add('ok'); }
   else { serie = 0; $('zprava').textContent = '❌ Správný výsledek: ' + fmt(uloha.v) + ' ' + uloha.j; $('zprava').classList.add('spatne'); }
   $('reseni').textContent = '💡 ' + uloha.p;
   $('reseni').style.display = 'block';
   $('serie').textContent = serie >= 3 ? '🔥 série ' + serie : '';
   $('skore').textContent = spravne + ' / ' + celkem;
-  $('btnPotvrdit').textContent = 'Další →';
+  $('btnPotvrdit').textContent = 'Pokračovat →';
 }
 $('btnPotvrdit').onclick = vyhodnot;
 $('odpoved').addEventListener('keydown', e => { if (e.key === 'Enter') vyhodnot(); });

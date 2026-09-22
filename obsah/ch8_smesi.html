@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="../vyuka.css">
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
   <script src="../uloha.js"></script>
   <style>
     .aparatura { width: min(300px, 76%); }
@@ -72,11 +73,11 @@
   <div class="learning-path"><article><b>01 · Pozoruj</b><p>Částice a aparatury v pohybu.</p></article><article><b>02 · Experimentuj</b><p>Koncentrace, rozpustnost a teplota.</p></article><article><b>03 · Rozhoduj</b><p>Vyřeš misi a vysvětli svůj postup.</p></article></div>
   <div class="rezimy" id="rezimy">
     <span class="nav-label">Objevování a pokusy</span>
-    <button data-rezim="aparatury" class="active">⚗️ Atlas aparatur</button>
-    <button data-rezim="castice">🔬 Pod lupou</button>
-    <button data-rezim="laborator">⚗️ Oddělovací laboratoř</button>
-    <button data-rezim="roztok">💧 Namíchej roztok</button>
-    <button data-rezim="mise">🧩 Laboratorní mise</button>
+    <button data-rezim="aparatury" data-faze="vyuka" class="active">⚗️ Atlas aparatur</button>
+    <button data-rezim="castice" data-faze="vyuka">🔬 Pod lupou</button>
+    <button data-rezim="laborator" data-faze="vyuka">⚗️ Oddělovací laboratoř</button>
+    <button data-rezim="roztok" data-faze="vyuka">💧 Namíchej roztok</button>
+    <button data-rezim="mise" data-faze="vyuka">🧩 Laboratorní mise</button>
     <span class="nav-label">Ověření znalostí</span>
     <button data-rezim="metoda">🔧 Jak směs oddělit</button>
     <button data-rezim="druh">🗂️ Druh směsi</button>
@@ -91,7 +92,7 @@
     <span class="skore" id="skore"></span>
   </div>
 
-  <details class="reference" id="tahak"><summary>Rychlý tahák · co si odnést z laboratoře</summary>
+  <details class="reference" id="tahak" data-faze="tahak"><summary>Rychlý tahák · co si odnést z laboratoře</summary>
     <div class="reference-grid"><section><h3>Směs, ne nová látka</h3><p>Směs obsahuje více látek. Při zde ukázaném oddělování využíváme jejich fyzikální vlastnosti, například rozpustnost, těkavost nebo hustotu.</p></section><section><h3>Čirá ≠ čistá</h3><p>Čirý roztok může obsahovat rozpuštěné látky. Filtrace sama neodstraní rozpuštěnou sůl. Ani čirá voda nemusí být pitná.</p></section><section><h3>Co chci získat?</h3><p>Pro sůl postačí odpařování. Chci-li zachytit i vodu, potřebuji destilaci. Neexistuje jediná nejlepší metoda pro každou směs a každý cíl.</p></section><section><h3>Koncentrace</h3><p>w = m(složky) / m(roztoku). Desetiprocentní roztok obsahuje 10 g složky ve 100 g celého roztoku, tedy například 10 g soli a 90 g vody.</p></section><section><h3>Nasycení</h3><p>Nasycený roztok už za daných podmínek další množství dané látky nerozpustí. Pevný zbytek patří do celé směsi, ale ne do kapalného roztoku.</p></section><section><h3>Model a skutečnost</h3><p>Obrázky nejsou v měřítku. Bilance misí jsou ideální a modelová látka X má záměrně zjednodušenou rozpustnost. Reálné látky se mohou chovat jinak.</p></section></div>
   </details>
   <p class="napoveda">

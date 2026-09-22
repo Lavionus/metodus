@@ -6,10 +6,15 @@
   <title>Čas, prameny a práce historika</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../pilot07.css">
+  <script src="../pilot07.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
   <script src="../rec.js"></script>
   <script src="../uloha.js"></script>
+  <link rel="stylesheet" href="../propojeni.css">
+  <script src="../prubeh.js"></script>
   <style>
     .polozka { font-size: 1.15rem; font-weight: 700; max-width: 540px; }
     .popis-p { color: var(--text-muted); max-width: 560px; line-height: 1.55; }
@@ -24,6 +29,18 @@
 <body>
   <h1>🔎 Čas, prameny a práce historika</h1>
   <p class="podtitul">Pro 6. ročník: dějepisné prameny, počítání letopočtů a historická období.</p>
+
+  <section class="cil" aria-label="Cíl lekce">
+    <p><b>Po této lekci dokážu</b> určit původ a účel pramene a doložit závěr konkrétními slovy.</p>
+    <p class="drobne">6. ročník · přibližně 15 minut · Nejdřív: <a href="casova_osa.html" data-lekce>Časová osa</a>.</p>
+    <details><summary>Pro učitele: 5 / 15 / 45 minut</summary><ul>
+      <li>5 minut: společně projděte vedenou aktivitu a nechte žáky vysvětlit výsledek.</li>
+      <li>15 minut: nejprve vlastní předpověď, pak ověření a několik úloh z procvičování.</li>
+      <li>45 minut: práce ve dvojicích, vlastní obměna příkladu a závěrečné vysvětlení bez nápovědy.</li>
+    </ul></details>
+  </section>
+  <section id="vedena-aktivita" class="pilot" data-pilot="d6_prameny" aria-label="Vedená aktivita"></section>
+  <h2 class="pilot-heading" id="procvicovani">Procvičování</h2>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="pramen" class="active">📜 Hmotný, či písemný</button>
@@ -45,6 +62,7 @@
     rok 500 př. n. l. je starší než rok 200 př. n. l.
   </p>
 
+  <nav class="navaznosti" aria-label="Navazující lekce"><h2>Kam dál</h2><a href="d9_csr.html" data-lekce>Vznik ČSR</a></nav>
 <script>
 const $ = id => document.getElementById(id);
 const skore = Uloha.skore('metodus_d6_prameny', $('skore'));
@@ -115,10 +133,10 @@ function letopocty() {
   if (typ === 'rozdil') {
     const pred = Uloha.nahodneCislo(2, 8) * 100;
     const po = Uloha.nahodneCislo(1, 12) * 100;
-    zadani = `Kolik let uplynulo mezi rokem ${pred} př. n. l. a rokem ${po} n. l.?`;
-    spravny = pred + po;
+    zadani = `Kolik let uplynulo od začátku roku ${pred} př. n. l. do začátku roku ${po} n. l.?`;
+    spravny = pred + po - 1;
     jine = [Math.abs(po - pred), spravny + 100, spravny - 100];
-    vysvetleni = `${pred} + ${po} = ${spravny} let (přes přelom letopočtu se roky sčítají)`;
+    vysvetleni = `${pred} + ${po} − 1 = ${spravny} let (mezi stejnými daty; rok nula v historickém letopočtu není)`;
   } else if (typ === 'stoleti') {
     const rok = Uloha.nahodneCislo(1, 20) * 100 - Uloha.nahodneCislo(1, 99);
     const stol = Math.ceil(rok / 100);
@@ -250,7 +268,7 @@ function vedy() {
 }
 
 const REZIMY = { pramen, letopocty, obdobi, vedy };
-function novaUloha() { REZIMY[rezim](); }
+function novaUloha() { Uloha.zrusPosun(); REZIMY[rezim](); }
 
 document.querySelectorAll('#rezimy button').forEach(b => b.addEventListener('click', () => {
   document.querySelectorAll('#rezimy button').forEach(x => x.classList.remove('active'));
@@ -260,6 +278,7 @@ document.querySelectorAll('#rezimy button').forEach(b => b.addEventListener('cli
 }));
 $('btnDalsi').addEventListener('click', novaUloha);
 document.addEventListener('keydown', e => {
+  if (e.target.closest('input, select, textarea, button, a, summary, .pilot')) return;
   if (e.key === 'ArrowRight' || e.key === 'Enter') { e.preventDefault(); novaUloha(); }
 });
 novaUloha();

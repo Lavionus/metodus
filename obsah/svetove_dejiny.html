@@ -5,8 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>📜 Časová osa světových dějin</title>
 <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="../nazor.css">
+  <script src="../nazor.js"></script>
+  <script src="../data/udalosti.js"></script>
 <script src="../theme.js"></script>
 <script src="../podpis.js" defer></script>
+<script src="../kostra.js" defer></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding:20px}
@@ -14,8 +18,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 h1{font-size:1.6rem;margin-bottom:14px;font-weight:600;text-align:center}
 .tabs{display:flex;gap:8px;justify-content:center;margin-bottom:14px}
 .tab{background:var(--bg-hover);border:1px solid var(--border-strong);border-radius:6px;padding:8px 16px;cursor:pointer;font-size:.85rem}
-.tab.active{background:var(--accent);border-color:var(--accent);color:#fff}
+.tab.active{background:var(--accent);border-color:var(--accent);color: var(--na-akcentu, #fff)}
 .card{background:var(--bg-elevated);border:1px solid var(--border);border-radius:8px;padding:20px;margin-bottom:16px}
+.osa-pozn{font-size:.82rem;color:var(--text-muted);margin-bottom:6px}.osa-meritko{font-size:.85rem;display:inline-flex;gap:6px;align-items:center;cursor:pointer;margin-bottom:6px}#osaNazor{margin-bottom:18px}
 .timeline{position:relative;padding-left:24px;border-left:3px solid var(--border)}
 .event{position:relative;margin-bottom:22px}
 .event::before{content:'';position:absolute;left:-31px;top:4px;width:12px;height:12px;border-radius:50%;background:var(--accent)}
@@ -30,21 +35,24 @@ h1{font-size:1.6rem;margin-bottom:14px;font-weight:600;text-align:center}
 .opt{background:var(--bg-hover);border:1px solid var(--border-strong);border-radius:6px;padding:12px;color:var(--text);cursor:pointer}
 .opt.correct{border-color:#27ae60;background:#1f3a2a}
 .opt.wrong{border-color:#e74c3c;background:#3a1f1f}
-.btn{background:var(--accent);color:#fff;border:none;padding:10px 22px;border-radius:6px;cursor:pointer;font-weight:600}
+.btn{background:var(--accent);color: var(--na-akcentu, #fff);border:none;padding:10px 22px;border-radius:6px;cursor:pointer;font-weight:600}
 
 /* světlý režim: dorovnání kontrastu textu */
-:root[data-theme="light"] .desc { color: #757575; }
+:root[data-tone="light"] .desc { color: #757575; }
 </style>
 </head>
 <body>
 <div class="container">
   <h1>📜 Časová osa světových dějin</h1>
   <div class="tabs">
-    <div class="tab active" data-m="osa">🗓️ Osa</div>
-    <div class="tab" data-m="quiz">❓ Kvíz</div>
+    <div class="tab active" data-m="osa" data-faze="vyuka">🗓️ Osa</div>
+    <div class="tab" data-m="quiz" data-faze="procvic" data-kostra-overeni="ne">❓ Kvíz</div>
   </div>
 
   <div class="card" id="osaCard">
+    <p class="osa-pozn">Horní pruh: svět. Dolní pruh: české dějiny ve stejné době (stejná data jako Časová osa českých dějin).</p>
+    <label class="osa-meritko"><input type="checkbox" id="meritko"> 📏 Skutečné měřítko (vzdálenost = počet let)</label>
+    <div id="osaNazor"></div>
     <div class="timeline" id="timeline"></div>
   </div>
 
@@ -56,30 +64,8 @@ h1{font-size:1.6rem;margin-bottom:14px;font-weight:600;text-align:center}
 </div>
 <script>
 const $=id=>document.getElementById(id);
-const UDALOSTI=[
-{y:-3100,t:'Sjednocení Egypta',d:'Vznik jednotného egyptského státu pod vládou faraonů.'},
-{y:-776,t:'První olympijské hry',d:'Konaly se ve starověkém Řecku v Olympii.'},
-{y:-509,t:'Vznik Římské republiky',d:'Řím se stal republikou po svržení posledního krále.'},
-{y:-336,t:'Alexandr Veliký na trůně',d:'Začátek výbojů, které vytvořily obrovskou říši.'},
-{y:27,t:'Vznik Římského impéria',d:'Octavianus Augustus se stal prvním římským císařem.'},
-{y:476,t:'Zánik Západořímské říše',d:'Konec starověku a začátek raného středověku v Evropě.'},
-{y:800,t:'Korunovace Karla Velikého',d:'Karel Veliký se stal císařem, vznik Franské říše.'},
-{y:1096,t:'První křížová výprava',d:'Začátek série tažení do Svaté země.'},
-{y:1215,t:'Magna Carta',d:'Anglická listina omezující moc krále, základ ústavního práva.'},
-{y:1347,t:'Černá smrt v Evropě',d:'Epidemie moru zabila třetinu evropské populace.'},
-{y:1492,t:'Kolumbus objevuje Ameriku',d:'Začátek evropské kolonizace amerického kontinentu.'},
-{y:1517,t:'Lutherova reformace',d:'Martin Luther zahájil protestantskou reformaci církve.'},
-{y:1642,t:'Anglická občanská válka',d:'Konflikt mezi royalisty a parlamentem.'},
-{y:1789,t:'Francouzská revoluce',d:'Pád monarchie, vznik moderních myšlenek svobody a rovnosti.'},
-{y:1861,t:'Americká občanská válka',d:'Konflikt mezi Severem a Jihem, skončil zrušením otroctví.'},
-{y:1914,t:'První světová válka',d:'Globální konflikt trvající do roku 1918.'},
-{y:1929,t:'Velká hospodářská krize',d:'Krach na burze v New Yorku vyvolal celosvětovou krizi.'},
-{y:1939,t:'Druhá světová válka',d:'Nejrozsáhlejší válečný konflikt v dějinách, trvala do roku 1945.'},
-{y:1969,t:'Přistání na Měsíci',d:'Apollo 11 přistálo s posádkou na Měsíci.'},
-{y:1989,t:'Pád Berlínské zdi',d:'Symbolický konec studené války a rozdělení Evropy.'},
-{y:1991,t:'Rozpad Sovětského svazu',d:'Konec studené války, vznik nových samostatných států.'},
-{y:2004,t:'Rozšíření Evropské unie',d:'EU se rozšířila o deset zemí včetně ČR.'}
-];
+// Události jsou společná data rodiny „Čas a práce historika" (data/udalosti.js)
+const UDALOSTI=METODUS_UDALOSTI.filter(u=>u.pruh==='svet').map(u=>({y:u.rok,t:u.nazev,d:u.popis}));
 document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{
   document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));t.classList.add('active');
   const m=t.dataset.m;
@@ -88,6 +74,12 @@ document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{
   if(m==='quiz')startQuiz();
 });
 function fmtYear(y){return y<0?`${-y} př. n. l.`:`${y}`;}
+/* Společná časová osa (nazor.js): svět a české dějiny souběžně. */
+function kresliOsu(){
+  $('osaNazor').innerHTML=Nazor.casovaOsa(METODUS_UDALOSTI,{pruhy:[...METODUS_PRUHY].reverse(),meritko:$('meritko').checked?'linearni':'poradi'});
+}
+$('meritko').addEventListener('change',kresliOsu);
+kresliOsu();
 $('timeline').innerHTML=UDALOSTI.map(e=>`<div class="event"><div class="year">${fmtYear(e.y)}</div><div class="title">${e.t}</div><div class="desc">${e.d}</div></div>`).join('');
 
 let score,idx,total=10;

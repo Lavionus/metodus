@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="../common.css">
 <script src="../theme.js"></script>
 <script src="../podpis.js" defer></script>
+<script src="../kostra.js" defer></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0a0a14;color:var(--text);height:100vh;overflow:hidden;display:flex;flex-direction:column}
@@ -15,11 +16,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;b
 .horni label{font-size:.78rem;color:var(--text-faint);display:flex;align-items:center;gap:7px}
 input[type=range]{width:130px;accent-color:var(--accent)}
 button,a.odkaz{background:#2a2a3a;border:1px solid #3a3a4d;color:var(--text-muted);border-radius:6px;padding:6px 13px;font-size:.82rem;cursor:pointer;text-decoration:none;display:inline-block}
-button:hover,a.odkaz:hover{background:var(--accent);color:#fff}
+button:hover,a.odkaz:hover{background:var(--accent);color: var(--na-akcentu, #fff)}
 button.on{border-color:var(--accent);color:var(--accent)}
 .zalozky{display:flex;gap:6px;padding:8px 16px;background:#12121b;border-bottom:1px solid #2a2a3a;flex-wrap:wrap}
 .zalozky button{padding:6px 14px;border-radius:8px}
-.zalozky button.aktivni{background:var(--accent);color:#fff;border-color:var(--accent)}
+.zalozky button.aktivni{background:var(--accent);color: var(--na-akcentu, #fff);border-color:var(--accent)}
 .plocha{flex:1;position:relative;overflow:hidden}
 canvas{display:block;width:100%;height:100%}
 #platno.tahani{cursor:grabbing}
@@ -34,12 +35,19 @@ canvas{display:block;width:100%;height:100%}
 @media (max-width:700px){.fakta{display:none}}
 
 /* světlý režim: dorovnání kontrastu textu */
-:root[data-theme="light"] h1 { color: #e0e0e0; }
-:root[data-theme="light"] #pauza { color: #e0e0e0; }
-:root[data-theme="light"] .on { color: #6393da; }
-:root[data-theme="light"] .odkaz { color: #e0e0e0; }
-:root[data-theme="light"] button { color: #e0e0e0; }
-:root[data-theme="light"] b { color: #e0e0e0; }
+:root[data-tone="light"] h1 { color: #e0e0e0; }
+:root[data-tone="light"] #pauza { color: #e0e0e0; }
+:root[data-tone="light"] .on { color: #6393da; }
+:root[data-tone="light"] .odkaz { color: #e0e0e0; }
+:root[data-tone="light"] button { color: #e0e0e0; }
+:root[data-tone="light"] b:not(.kostra b) { color: #e0e0e0; }   /* pruh kostry je světlý */
+
+/* světlé motivy (sépie, škola, kontrast…): tmavé plochy stránky si nechají světlé písmo (tmavý text motivu by na nich zanikl) */
+:root[data-tone="light"] :is(.horni, .zalozky, .fakta, .vysvetleni) {
+  --text: #eee2c8; --text-muted: #d2c3a3; --text-faint: #b3a17f; --accent: #d9a95e;
+  --na-akcentu: #1d140b;
+}
+:root[data-tone="light"] :is(.horni, .zalozky, .fakta, .vysvetleni) :is(.aktivni, .active) { color: var(--na-akcentu); }
 </style>
 </head>
 <body>

@@ -11,13 +11,13 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding:20px}
-.container{max-width:560px;margin:0 auto}
+.container{max-width:960px;margin:0 auto}
 h1{font-size:1.6rem;margin-bottom:18px;font-weight:600;text-align:center}
 .card{background:var(--bg-elevated);border:1px solid var(--border);border-radius:8px;padding:24px;margin-bottom:16px}
 .setup{display:flex;gap:12px;flex-wrap:wrap;align-items:end;justify-content:center}
 label{display:block;font-size:.78rem;color:var(--text-faint);margin-bottom:4px}
 select{background:var(--border);border:1px solid var(--border-strong);border-radius:4px;color:var(--text);padding:9px}
-.btn{background:var(--accent);color:#fff;border:none;padding:12px 28px;border-radius:6px;cursor:pointer;font-weight:600}
+.btn{background:var(--accent);color: var(--na-akcentu, #fff);border:none;padding:12px 28px;border-radius:6px;cursor:pointer;font-weight:600}
 .btn:hover{background:var(--accent)}
 .btn.sec{background:var(--border)}
 .game,.results{display:none;text-align:center}
@@ -33,15 +33,17 @@ select{background:var(--border);border:1px solid var(--border-strong);border-rad
 .warn{color:#f39c12;font-size:.8rem;text-align:center;margin-top:8px}
 
 /* světlý režim: dorovnání kontrastu textu */
-:root[data-theme="light"] .warn { color: #a3690c; }
+:root[data-tone="light"] .warn { color: #a3690c; }
 </style>
+<link rel="stylesheet" href="vyslovnost-atlas.css">
+<script src="vyslovnost-atlas.js" defer></script>
 </head>
 <body>
 <style>
 /* Aplikace stojí a padá s hlasovým syntetizátorem. Než web dostane kvalitní
-   český (a anglický) hlas, je vypnutá: zůstane jen vysvětlující hláška.
+   český (a anglický) hlas, poslech je vypnutý. Obrazový atlas zůstává dostupný.
    Zapnutí: smazat toto pravidlo a vrátit stránku do katalogu v apps.js. */
-.container > *:not(.vypnuto):not(h1) { display: none !important; }
+.container > *:not(.vypnuto):not(h1):not(.vyslovnost-atlas) { display: none !important; }
 .vypnuto {
   background: var(--bg-panel); border: 1px solid var(--warn); border-left: 4px solid var(--warn);
   border-radius: var(--radius); padding: 20px 22px; margin-top: 18px;
@@ -53,13 +55,15 @@ select{background:var(--border);border:1px solid var(--border-strong);border-rad
 <div class="container">
   <h1>🔊 Výslovnost a poslech</h1>
   <div class="vypnuto">
-    <b>Tahle stránka je dočasně vypnutá.</b><br>
-    Celá je postavená na poslechu, a web zatím nemá dost kvalitní hlasový syntetizátor –
-    vestavěný hlas čte česky i anglicky příliš hrubě na to, aby se podle něj dala učit výslovnost.
-    Jakmile bude k dispozici lepší hlas, stránka se vrátí do menu.<br><br>
-    Zatím zkus <a href="aj_slovicka.html">🇬🇧 Angličtinu – první slovíčka</a> nebo
-    <a href="aj3_abeceda.html">🔤 Anglickou abecedu a hláskování</a>.
+    <b>Polohu úst si můžeš prohlédnout a vyzkoušet níže.</b><br>
+    Poslechové procvičování je zatím vypnuté, protože nemáme vhodné nahrávky.
+    Obrázky ukazují polohu mluvidel; správný zvuk si ověř s učitelem.<br><br>
+    Pokračuj na <a href="aj3_abeceda.html">anglickou abecedu</a> nebo
+    <a href="dcj7_vyslovnost.html">výslovnost a abecedu v němčině a francouzštině</a>.
   </div>
+  <section class="vyslovnost-atlas" data-vyslovnost-atlas="en,de,fr" aria-labelledby="atlasNadpis">
+    <h2 id="atlasNadpis">Jak nastavit ústa a jazyk</h2>
+  </section>
   <div class="card" id="setupCard">
     <div class="setup">
       <div><label>Jazyk</label><select id="lang">

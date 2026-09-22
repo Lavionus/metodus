@@ -1,0 +1,1253 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🧩 Stavba optické soustavy</title>
+<link rel="stylesheet" href="../common.css">
+<script src="../theme.js"></script>
+<script src="../podpis.js" defer></script>
+<style>
+body{height:100vh;overflow:hidden;display:flex;flex-direction:column}
+.horni{display:flex;gap:10px;align-items:center;padding:9px 14px;background:var(--bg-elevated);border-bottom:1px solid var(--border);flex-wrap:wrap}
+.horni h1{font-size:1.05rem;font-weight:600;margin-right:auto}
+.panel{display:flex;gap:8px;align-items:center;padding:8px 14px;background:var(--bg-panel);border-bottom:1px solid var(--border);flex-wrap:wrap}
+.panel .skupina{font-size:.72rem;color:var(--text-faint);text-transform:uppercase;letter-spacing:.05em;margin-right:2px}
+.panel label{font-size:.78rem;color:var(--text-muted);display:flex;align-items:center;gap:6px;background:var(--bg-input);border:1px solid var(--border);border-radius:8px;padding:4px 9px}
+.panel .hodnota{color:var(--text);font-weight:600;min-width:3.6em;font-variant-numeric:tabular-nums}
+input[type=range]{width:96px;accent-color:var(--accent)}
+input[type=checkbox]{accent-color:var(--accent);width:15px;height:15px;cursor:pointer}
+select{background:var(--bg-input);color:var(--text);border:1px solid var(--border);border-radius:6px;padding:5px 8px;font-size:.8rem}
+button{background:var(--bg-control);border:1px solid var(--border-strong);color:var(--text);border-radius:7px;padding:6px 11px;font-size:.8rem;cursor:pointer}
+button:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+button.nebezpecne:hover{background:var(--danger);border-color:var(--danger)}
+.panel label:has(input[type=checkbox]){background:var(--bg-control);border-color:var(--border-strong);cursor:pointer}
+.panel label:has(input[type=checkbox]:checked){background:var(--accent-soft);border-color:var(--accent);color:var(--text)}
+#panelPrvek{background:var(--bg-elevated)}
+#prvekNazev{font-size:.82rem;font-weight:600;color:var(--accent);min-width:9em}
+.plocha{flex:1;position:relative;overflow:hidden;background:var(--bg-deep);min-height:0}
+canvas{display:block;width:100%;height:100%;touch-action:none;cursor:crosshair}
+.stav{background:var(--bg-panel);border-top:1px solid var(--border);padding:8px 14px;font-size:.8rem;color:var(--text-muted);display:flex;gap:6px 16px;flex-wrap:wrap;align-items:center}
+.stav b{color:var(--text);font-variant-numeric:tabular-nums}
+.stav .znak{font-size:1rem}
+.info{position:absolute;top:12px;right:12px;width:290px;max-width:calc(100% - 24px);max-height:calc(100% - 24px);overflow-y:auto;overscroll-behavior:contain;background:var(--bg-elevated);border:1px solid var(--border-strong);border-radius:10px;padding:11px 14px;font-size:.78rem;line-height:1.6;color:var(--text-muted);box-shadow:var(--shadow)}
+.info b{color:var(--text)}
+.info .zavri{position:sticky;float:right;top:0;margin:-4px -6px 0 6px;background:none;border:none;color:var(--text-faint);font-size:1rem;padding:0 4px;cursor:pointer}
+.info .zavri:hover{background:none;color:var(--accent)}
+.napoveda{position:absolute;left:12px;bottom:10px;font-size:.74rem;color:var(--text-faint);pointer-events:none;max-width:calc(100% - 24px)}
+.skryto{display:none !important}
+@media(max-width:760px){.info{display:none}.panel{gap:6px;padding:7px 9px}input[type=range]{width:78px}}
+
+/* Optická dílna: velká pracovní plocha a ovládání dostupné i na telefonu. */
+body{height:auto;min-height:100vh;overflow:auto}
+.horni{padding:16px 22px}.horni h1{font-size:1.3rem}.horni a{color:var(--text-muted);font-size:.8rem}
+button,select{min-height:36px}button:focus-visible,select:focus-visible,input:focus-visible,canvas:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+button:disabled{opacity:.4;cursor:default}button[aria-pressed=true]{background:var(--accent-soft);border-color:var(--accent)}
+.intro{padding:15px 22px;background:var(--bg-panel)}.eyebrow{font-size:.68rem;text-transform:uppercase;letter-spacing:.14em;color:var(--accent);margin-bottom:7px}
+.intro p{color:var(--text-muted);font-size:.86rem;line-height:1.6}.presety{display:flex;gap:8px;overflow:auto;padding:12px 0 2px}.presety button{min-width:135px;text-align:left;padding:10px 13px}.presety small{display:block;color:var(--text-muted);margin-top:5px;font-size:.69rem}
+.dilna{display:grid;grid-template-columns:minmax(0,1fr) 290px;gap:1px;background:var(--border)}
+.pracoviste{min-width:0;background:var(--bg-deep)}.plocha{height:clamp(440px,54vh,680px);min-height:440px}
+.bocni{background:var(--bg-panel);padding:20px 17px;overflow:auto}.bocni h2{font-size:.95rem;margin:0 0 12px}.bocni p{font-size:.8rem;line-height:1.65;color:var(--text-muted)}
+#vysvetleni{padding-bottom:18px;border-bottom:1px solid var(--border);margin-bottom:18px}#vysvetleni strong{color:var(--text)}
+#seznam{display:grid;gap:7px;margin-bottom:16px}#seznam button{text-align:left;width:100%;padding:9px 11px}#seznam small{display:block;color:var(--text-muted);margin-top:4px}
+.pokus{background:var(--accent-soft);border:1px solid var(--border);border-radius:9px;padding:12px;margin-top:17px}.pokus b{display:block;color:var(--accent);font-size:.8rem;margin-bottom:5px}
+.panel{padding:10px 16px}.panel .skupina{min-width:75px}#panelPrvek{border-left:3px solid var(--accent)}
+input[type=number]{width:74px;background:var(--bg-input);border:1px solid var(--border-strong);color:var(--text);padding:6px;border-radius:5px;font:inherit}.presne{margin-left:3px}
+.legenda{display:flex;flex-wrap:wrap;gap:8px 20px;padding:10px 16px;color:var(--text-muted);font-size:.72rem;border-bottom:1px solid var(--border);background:var(--bg-panel)}.legenda span:before{content:'';display:inline-block;width:20px;border-top:2px solid var(--warn);margin-right:7px;vertical-align:middle}.legenda .obraz:before{border-color:var(--ok)}.legenda .virtual:before{border-color:var(--ok);border-top-style:dashed}.legenda .osa:before{border-color:var(--text-faint);border-top-style:dashed}
+.stav{line-height:1.7;padding:12px 16px;min-height:64px}.model{padding:13px 22px;font-size:.73rem;line-height:1.7;color:var(--text-muted)}.model a{color:var(--accent)}
+#oznameni{font-size:.78rem;color:var(--accent)}.napoveda{background:var(--bg-deep);padding:3px 6px;border-radius:5px}.info{z-index:2}.panel label{flex-wrap:wrap}
+@media(max-width:950px){.dilna{grid-template-columns:1fr}.bocni{display:grid;grid-template-columns:1fr 1fr;gap:20px}.plocha{height:540px}.horni{padding:12px 16px}.intro{padding:12px 16px}}
+@media(max-width:560px){.bocni{display:block}.horni h1{width:100%}.horni>label{font-size:.8rem}.plocha{height:490px;min-height:490px}.panel{padding:8px;gap:7px}.panel .skupina{width:100%}.panel label{font-size:.75rem}.info{display:block}.napoveda{font-size:.64rem}.presety button{min-width:126px}#panelPrvek label{flex:1;min-width:150px}.panel .hodnota{min-width:0}.presne{width:65px!important}}
+.ovladace>summary{display:none;cursor:pointer;background:var(--bg-panel);padding:13px 16px;color:var(--accent);font-size:.85rem;border-bottom:1px solid var(--border)}
+@media(max-width:560px){.ovladace>summary{display:list-item;list-style-position:inside}}
+
+/* Dva jasně oddělené způsoby práce: vedené vysvětlení a volná stavba. */
+.horni h1{font-size:1.16rem}.rezimy{display:flex;gap:8px;padding:14px 24px;border-bottom:1px solid var(--border);background:var(--bg-panel)}.rezimy button{padding:11px 20px;font-size:.9rem;font-weight:600}
+body[data-rezim=pruvodce] .horni>label,body[data-rezim=pruvodce] #btnInfo,body[data-rezim=pruvodce] .intro,body[data-rezim=pruvodce] .dilna,body[data-rezim=pruvodce] .stavbaUvod{display:none}
+body[data-rezim=stavba] #pruvodce{display:none}
+#pruvodce{max-width:1220px;width:100%;margin:0 auto;padding:22px 26px 28px}.uvodPruvodce h2{font-size:1.3rem;font-weight:600;margin-bottom:7px}.uvodPruvodce p{color:var(--text-muted);font-size:.9rem;line-height:1.6}
+#vyberPristroje{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:9px;margin:18px 0 24px}#vyberPristroje button{text-align:left;padding:10px 12px;background:var(--bg-panel);border-radius:11px;transition:border-color .15s}#vyberPristroje button[aria-pressed=true]{border:2px solid var(--accent);background:var(--accent-soft);padding:9px 11px}#vyberPristroje svg{display:block;width:100%;height:43px;margin-bottom:8px}#vyberPristroje strong{display:block;font-size:.82rem;line-height:1.4}#vyberPristroje small{display:block;color:var(--text-muted);font-size:.7rem;line-height:1.5;margin-top:5px}
+.vyklad{background:var(--bg-panel);border:1px solid var(--border);border-radius:15px;overflow:hidden}.vyklad header{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:18px 24px;border-bottom:1px solid var(--border)}.vyklad header h2{font-size:1.25rem;margin-top:5px}.vyklad header .eyebrow{font-size:.65rem}.schemaScroll{overflow-x:auto;background:var(--bg-deep)}#schemaPristroje{min-width:660px}#schemaPristroje svg{display:block;width:100%;max-height:360px}.voditko{display:flex;gap:8px 20px;flex-wrap:wrap;padding:10px 24px;font-size:.74rem;color:var(--text-muted);border-bottom:1px solid var(--border)}.voditko span:first-child{color:var(--warn)}.voditko span:nth-child(2){color:var(--ok)}
+.vykladKroku{display:flex;align-items:center;justify-content:space-between;gap:26px;padding:22px 24px;background:var(--accent-soft)}#cisloKroku{font-size:.68rem;letter-spacing:.12em;color:var(--accent);font-weight:700}.krokPopis h3{font-size:1.2rem;margin:7px 0 9px}.krokPopis p{font-size:.96rem;line-height:1.65;max-width:730px;color:var(--text-muted)}.krokTlacitka{display:flex;gap:8px;flex-shrink:0}.krokTlacitka button{padding:12px 15px}#dalsiVysvetleni,#zkusStavbu{background:var(--accent);color:var(--bg-deep);font-weight:700}#krokyPristroje{display:flex;gap:8px;padding:15px 24px}#krokyPristroje button{flex:1;display:flex;align-items:center;gap:9px;text-align:left;font-size:.76rem;background:transparent;border-color:transparent;color:var(--text-muted)}#krokyPristroje button[aria-current=step]{color:var(--text);background:var(--accent-soft);border-color:var(--accent)}#krokyPristroje span{display:grid;place-items:center;width:24px;height:24px;border:1px solid var(--border-strong);border-radius:50%;flex-shrink:0}
+#vysledekJednoduse:not([hidden]){display:flex;gap:20px;align-items:center;justify-content:space-between;border-top:1px solid var(--border);padding:20px 24px}#vysledekJednoduse h3{font-size:1.12rem;margin:7px 0}#vysledekJednoduse p{font-size:.8rem;line-height:1.6;color:var(--text-muted);max-width:680px}#zkusStavbu{flex-shrink:0;padding:12px}.modelDetaily{max-width:1220px;margin:0 auto 24px;padding:0 26px;color:var(--text-faint);font-size:.75rem}.modelDetaily summary{cursor:pointer;padding:8px 0}.modelDetaily .model{padding:10px 0}.stavbaUvod{padding:20px 22px 0}.stavbaUvod h2{font-size:1.15rem}.stavbaUvod p{font-size:.85rem;line-height:1.6;color:var(--text-muted);margin-top:7px}
+@media(max-width:950px){#vyberPristroje{grid-template-columns:repeat(4,minmax(0,1fr))}.vykladKroku{align-items:flex-start;flex-direction:column;gap:16px}.krokTlacitka{align-self:flex-end}#vysledekJednoduse:not([hidden]){align-items:flex-start;flex-direction:column}}
+@media(max-width:560px){.horni{padding:13px 16px}.horni h1{font-size:1.02rem}.rezimy{padding:10px 12px;gap:6px}.rezimy button{padding:9px 10px;font-size:.77rem;flex:1}#pruvodce{padding:18px 12px}.uvodPruvodce h2{font-size:1.1rem}.uvodPruvodce p{font-size:.8rem}#vyberPristroje{display:flex;overflow-x:auto;gap:8px;margin:13px 0 18px;padding-bottom:6px}#vyberPristroje button{min-width:145px;max-width:145px}#vyberPristroje svg{height:32px}.vyklad header{padding:14px}.vyklad header h2{font-size:1rem}.vyklad header button{font-size:.7rem;max-width:100px}.vyklad header .eyebrow{font-size:.56rem}.schemaScroll{position:relative}.voditko{padding:10px 14px;font-size:.65rem}.voditko:after{content:'↔ Posuň obrázek do strany a prohlédni si celý přístroj.'}.vykladKroku{padding:17px 14px}.krokPopis h3{font-size:1.08rem}.krokPopis p{font-size:.88rem}.krokTlacitka{align-self:stretch;justify-content:space-between}#krokyPristroje{padding:10px;gap:2px}#krokyPristroje button{display:block;font-size:.65rem;padding:6px}#krokyPristroje span{margin-bottom:6px}#vysledekJednoduse:not([hidden]){padding:18px 14px}.modelDetaily{padding:0 14px}}
+@media(max-width:560px){#schemaPristroje{min-width:0}#schemaPristroje svg{max-height:none}.voditko:after{content:"Na mobilu sleduj přístroj shora dolů."}}
+</style>
+</head>
+<body>
+<div class="horni">
+  <h1>Jak fungují optické přístroje</h1><a href="optika.html">← Základy optiky</a>
+  <label>🎬 Hotová soustava <select id="preset">
+      <option value="" selected>vlastní</option>
+      <option value="lupa">🔍 Lupa</option>
+      <option value="projektor">📽️ Promítačka</option>
+      <option value="kepler">🔭 Keplerův dalekohled</option>
+      <option value="galileo">🎭 Galileův dalekohled</option>
+      <option value="zrcadlovy">🪞 Cassegrainův dalekohled</option>
+      <option value="pozemni">🌄 Pozemní dalekohled</option>
+      <option value="mikroskop">🔬 Mikroskop</option>
+    </select></label>
+  <button id="btnInfo">❓ Nápověda</button>
+</div>
+
+<nav class="rezimy" aria-label="Způsob práce"><button id="rezimPruvodce" aria-pressed="true">① Pochopit přístroj</button><button id="rezimStavba" aria-pressed="false">② Postavit vlastní soustavu</button></nav>
+<section id="pruvodce">
+  <div class="uvodPruvodce"><h2>Vyber si, do čeho se chceš podívat.</h2><p>Potom sleduj světlo krok za krokem. Začni třeba Keplerovým dalekohledem.</p></div>
+  <div id="vyberPristroje" aria-label="Výběr přístroje"></div>
+  <section class="vyklad">
+    <header><div><span class="eyebrow">Takto putuje světlo uvnitř přístroje</span><h2 id="jmenoPristroje"></h2></div><button id="ukazCele">Ukázat celou cestu</button></header>
+    <div class="vykladKroku" aria-live="polite"><div class="krokPopis"><span id="cisloKroku"></span><h3 id="titulekKroku"></h3><p id="textKroku"></p></div><div class="krokTlacitka"><button id="predchoziVysvetleni" aria-label="Předchozí krok">← Zpět</button><button id="dalsiVysvetleni">Další krok →</button></div></div>
+    <div class="schemaScroll"><div id="schemaPristroje"></div></div>
+    <div class="voditko"><span>→ Žluté čáry jsou paprsky světla.</span><span>↑ Zelená šipka označuje obraz.</span><span>Obrázek je schematický řez přístrojem.</span></div>
+
+    <div id="krokyPristroje" aria-label="Kroky vysvětlení"></div>
+    <div id="vysledekJednoduse" hidden><div><span class="eyebrow">Co nakonec uvidíš</span><h3 id="vysledekVeta"></h3><p id="orientaceVeta"></p></div><button id="zkusStavbu">Zkusit tento přístroj upravit →</button></div>
+  </section>
+</section>
+<div class="stavbaUvod"><h2>Postav si vlastní optickou soustavu</h2><p>Vyber hotový přístroj, nebo začni tlačítkem Vyprázdnit. Přidávej čočky a zrcadla. Kliknutím na prvek otevřeš jeho nastavení.</p></div>
+<section class="intro"><div class="eyebrow">Sestav · pozoruj · pochop</div><p>Jak objektiv vytvoří obraz a co s ním udělá okulár? Vyber přístroj, posouvej jeho části a sleduj světlo od předmětu až k oku.</p><div class="presety" id="presety" aria-label="Přednastavené přístroje"></div></section>
+<div class="dilna"><main class="pracoviste">
+<details class="ovladace" open><summary>⚙ Upravit soustavu a předmět</summary>
+<div class="panel">
+  <span class="skupina">Přidat prvek</span>
+  <button data-pridat="spojka">🔍 Spojka</button>
+  <button data-pridat="rozptylka">🔎 Rozptylka</button>
+  <button data-pridat="dute">🪞 Duté zrcadlo</button>
+  <button data-pridat="vypukle">◗ Vypuklé zrcadlo</button>
+  <button data-pridat="clona">▯ Clona</button>
+  <button id="btnZpet" disabled>↶ Zpět</button>
+  <button id="btnSmaz" class="nebezpecne">🗑️ Vyprázdnit</button>
+</div>
+
+<div class="panel">
+  <span class="skupina">Předmět</span>
+  <label>💡 <select id="objTyp">
+      <option value="blizko" selected>předmět v konečné vzdálenosti</option>
+      <option value="nekonecno">hvězda v nekonečnu</option>
+    </select></label>
+  <label class="jenBlizko">🕯️ Výška <input type="range" id="objH" min="0.1" max="6" step="0.1" value="1.2"><span class="hodnota" id="objHV">1,2 cm</span></label>
+  <label class="jenNekonecno skryto">⭐ Úhel <input type="range" id="objA" min="0" max="30" step="1" value="10"><span class="hodnota" id="objAV">1,0°</span></label>
+  <label><input type="checkbox" id="osovy" checked> ➖ I osový svazek</label>
+  <label><input type="checkbox" id="nahled" checked> 👁️ Náhled výstupu</label>
+  <label><input type="checkbox" id="popisky" checked> 🏷️ Popisky</label>
+</div>
+
+<div class="panel skryto" id="panelPrvek">
+  <span class="skupina">Vybraný prvek</span>
+  <span id="prvekNazev"></span>
+  <label>📍 Poloha <input type="range" id="pZ" min="0.5" max="200" step="0.1" value="10"><span class="hodnota" id="pZV"></span></label>
+  <label id="labF">🎯 Ohnisko <input type="range" id="pF" min="1" max="80" step="0.5" value="10"><span class="hodnota" id="pFV"></span></label>
+  <label>⭕ Průměr <input type="range" id="pA" min="0.4" max="24" step="0.2" value="7"><span class="hodnota" id="pAV"></span></label>
+  <label id="labD">🕳️ Středový otvor <input type="range" id="pD" min="0" max="12" step="0.1" value="0"><span class="hodnota" id="pDV"></span></label>
+  <button id="btnKopie">📄 Kopírovat</button>
+  <button id="btnSmazPrvek" class="nebezpecne">🗑️ Odebrat</button>
+</div>
+
+</details>
+<div class="panel">
+  <span class="skupina">Chod světla</span><button id="krokZpet" aria-label="Předchozí úsek">←</button><button id="krokDalsi">Další úsek →</button><button id="vse">Celá cesta</button><span id="krokText" style="font-size:.78rem" aria-live="polite"></span>
+  <label><input type="checkbox" id="ztracene"> Neprocházející paprsky</label>
+</div>
+<div class="legenda"><span>Paprsky z jednoho bodu</span><span class="osa">Osový svazek</span><span class="obraz">Skutečný obraz</span><span class="virtual">Zdánlivé prodloužení</span></div>
+<div class="plocha">
+  <canvas id="c" tabindex="0" aria-label="Optická lavice s paprsky. Prvky lze vybrat také v seznamu vedle a upravit číselnými poli.">Chod světla popisuje stavový řádek pod lavicí.</canvas>
+  <div class="info skryto" id="infoBox">
+    <button class="zavri" id="zavriInfo" title="Zavřít">✕</button>
+    <div id="infoText"></div>
+  </div>
+  <div class="napoveda" id="napoveda">Klikni na prvek a táhni ho po ose · kolečkem myši nad prvkem měníš jeho ohnisko · šipky ←/→ posouvají vybraný prvek.</div>
+</div>
+
+<div class="stav" id="stav" role="status"></div>
+</main><aside class="bocni"><section><div class="eyebrow">Co právě pozoruješ</div><h2 id="nazevSoustavy"></h2><div id="vysvetleni"></div><div class="pokus"><b>Vyzkoušej si</b><p id="pokusText"></p></div></section><section><h2 style="margin-top:20px">Prvky na lavici</h2><p style="margin-bottom:10px">Vyber prvek a uprav jeho polohu, ohnisko nebo průměr. Rozměry jsou v centimetrech.</p><div id="seznam"></div><button id="ulozit">↓ Uložit soustavu</button> <button id="nacist">↑ Načíst</button><input type="file" id="soubor" accept=".json,application/json" hidden><p id="oznameni" role="status"></p></section></aside></div>
+<div class="model"><strong>Jak číst model:</strong> tenké čočky a ideální zrcadla, paprsky blízko optické osy (paraxiální aproximace). Svislé měřítko je zvětšené. Náhled znázorňuje orientaci a zvětšení; nesimuluje ostrost oka, jas, difrakci ani optické vady. Zrcadla jsou v tomto osovém modelu oboustranná; Newtonův dalekohled s bočním okulárem vyžaduje jinou geometrii. <a href="https://openstax.org/books/university-physics-volume-3/pages/2-8-microscopes-and-telescopes" target="_blank" rel="noopener">Principy dalekohledů a mikroskopu ↗</a></div>
+<script>
+/* =====================================================================
+   Optická lavice: prvky se skládají na jednu osu, světlo běží zleva
+   doprava a na zrcadle se otáčí zpátky. Počítá se paraxiálně – každý
+   paprsek nese výšku nad osou y a sklon u = dy/ds (s je dráha, ne x).
+   V téhle soustavě souřadnic se zrcadlo chová přesně jako čočka:
+   u ← u − y/f, jen se navíc obrátí směr jízdy. Proto stačí jediná
+   funkce pro čočky i zrcadla.
+   ===================================================================== */
+const $=id=>document.getElementById(id);
+const canvas=$('c'), ctx=canvas.getContext('2d');
+const cz=(x,d=1)=>(Math.abs(x)<5e-10?0:x).toFixed(d).replace('.',',');
+const DEG=180/Math.PI;
+
+let C={};
+function nactiBarvy(){
+  const s=getComputedStyle(document.documentElement), g=n=>s.getPropertyValue(n).trim();
+  C={text:g('--text'),muted:g('--text-muted'),faint:g('--text-faint'),border:g('--border'),
+     silny:g('--border-strong'),akcent:g('--accent'),ok:g('--ok'),warn:g('--warn'),
+     danger:g('--danger'),panel:g('--bg-panel'),elev:g('--bg-elevated')};
+}
+nactiBarvy();
+
+function resize(){
+  const r=devicePixelRatio||1;
+  const w=Math.round(canvas.clientWidth*r), h=Math.round(canvas.clientHeight*r);
+  if(canvas.width!==w||canvas.height!==h){ canvas.width=w; canvas.height=h; }
+  ctx.setTransform(r,0,0,r,0,0);
+}
+
+/* ---------- kreslicí drobnosti ---------- */
+function cara(x1,y1,x2,y2,barva,sirka=2,carkovane=false){
+  ctx.save();
+  if(carkovane) ctx.setLineDash([6,5]);
+  ctx.strokeStyle=barva; ctx.lineWidth=sirka;
+  ctx.beginPath(); ctx.moveTo(x1,y1); ctx.lineTo(x2,y2); ctx.stroke();
+  ctx.restore();
+}
+function hrot(x,y,uhel,barva,vel=8){
+  ctx.fillStyle=barva;
+  ctx.beginPath();
+  ctx.moveTo(x,y);
+  ctx.lineTo(x-vel*Math.cos(uhel-0.42),y-vel*Math.sin(uhel-0.42));
+  ctx.lineTo(x-vel*Math.cos(uhel+0.42),y-vel*Math.sin(uhel+0.42));
+  ctx.closePath(); ctx.fill();
+}
+function popis(text,x,y,barva=C.muted,font='12px sans-serif',zar='center'){
+  ctx.fillStyle=barva; ctx.font=font; ctx.textAlign=zar; ctx.textBaseline='middle';
+  ctx.fillText(text,x,y);
+}
+/* popisek s podkladem – čitelný i přes paprsky, u kraje uhne dovnitř */
+function chip(text,x,y,barva=C.muted,font='11px sans-serif'){
+  ctx.font=font;
+  const s=ctx.measureText(text).width, w=canvas.clientWidth;
+  const cx=Math.max(s/2+6,Math.min(w-s/2-6,x));
+  ctx.save();
+  ctx.globalAlpha=.9; ctx.fillStyle=C.panel;
+  ctx.beginPath(); ctx.roundRect(cx-s/2-5,y-9,s+10,18,5); ctx.fill();
+  ctx.restore();
+  popis(text,cx,y,barva,font);
+}
+
+/* ---------- druhy prvků ---------- */
+const TYPY={
+  spojka:   {nazev:'Spojka',           zn:'🔍', znam:+1},
+  rozptylka:{nazev:'Rozptylka',        zn:'🔎', znam:-1},
+  dute:     {nazev:'Duté zrcadlo',     zn:'🪞', znam:+1, zrcadlo:true},
+  vypukle:  {nazev:'Vypuklé zrcadlo',  zn:'◗',  znam:-1, zrcadlo:true},
+  clona:    {nazev:'Clona',            zn:'▯',  clona:true}
+};
+
+/* ---------- stav soustavy ---------- */
+let prvky=[];                                  // {typ,z,f,a,d}
+let objekt={nekonecno:false,h:1.2,alfa:1.0};
+let vybrany=-1, osovy=true, popisky=true, nahledZap=true;
+
+/* Hotové soustavy. Čísla nejsou náhodná – u dalekohledů a mikroskopu sedí
+   ohniska na sebe tak, aby soustava vyšla afokální (obraz v nekonečnu),
+   u zrcadlového dalekohledu se sekundární zrcátko trefí těsně před ohnisko
+   primárního a pošle svazek dírou v primárním zrcadle ven. */
+const SOUSTAVY={
+  lupa:      {popis:'Lupa: předmět je blíž než ohnisko, proto oko vidí zvětšený přímý zdánlivý obraz.',
+              objekt:{nekonecno:false,h:1.2},
+              prvky:[{typ:'spojka',z:7,f:10,a:3.5,role:'lupa'}]},
+  projektor: {popis:'Promítačka: předmět stojí kousek za ohniskem, na stínítku daleko vpravo vznikne velký převrácený obraz.',
+              objekt:{nekonecno:false,h:1.0},
+              prvky:[{typ:'spojka',z:12,f:10,a:4,role:'objektiv'}]},
+  kepler:    {popis:'Keplerův dalekohled: ohnisko objektivu splývá s ohniskem okuláru, takže dovnitř i ven letí rovnoběžný svazek – mění se jen jeho úhel.',
+              objekt:{nekonecno:true,alfa:1.0},
+              prvky:[{typ:'spojka',z:10,f:60,a:5,role:'objektiv'},
+                     {typ:'spojka',z:75,f:5,a:1.6,role:'okulár'}]},
+  galileo:   {popis:'Galileův dalekohled: okulár je rozptylka postavená ještě před ohniskovou rovinou. Tubus je kratší a obraz zůstane přímý – tak fungují divadelní kukátka.',
+              objekt:{nekonecno:true,alfa:1.0},
+              prvky:[{typ:'spojka',z:10,f:60,a:4,role:'objektiv'},
+                     {typ:'rozptylka',z:65,f:-5,a:1.4,role:'okulár'}]},
+  zrcadlovy: {popis:'Zrcadlový (Cassegrainův) dalekohled: sekundární zrcátko vrací světlo dírou v primárním zrcadle. Dlouhé ohnisko se tak vejde do krátkého tubusu – zato je střed svazku zastíněný.',
+              objekt:{nekonecno:true,alfa:0.3},
+              prvky:[{typ:'vypukle',z:75,f:-6,a:2,role:'sekundární zrcátko'},
+                     {typ:'dute',z:100,f:30,a:10,d:1.4,role:'primární zrcadlo'},
+                     {typ:'spojka',z:108,f:3,a:1.6,role:'okulár'}]},
+  mikroskop: {popis:'Mikroskop: předmět leží těsně za ohniskem objektivu, ten udělá skutečný převrácený meziobraz a okulár se na něj dívá jako lupa.',
+              objekt:{nekonecno:false,h:0.1},
+              prvky:[{typ:'spojka',z:1.1,f:1,a:0.5,role:'objektiv'},
+                     {typ:'spojka',z:14.6,f:2.5,a:1.4,role:'okulár'}]}
+};
+let popisSoustavy='';
+
+function nacti(klic){
+  krok=Infinity;
+  const s=SOUSTAVY[klic];
+  if(!s) return;
+  prvky=s.prvky.map(p=>Object.assign({d:0},p));
+  objekt=Object.assign({nekonecno:false,h:1.2,alfa:1.0},s.objekt);
+  popisSoustavy=s.popis||'';
+  vybrany=-1;
+  panelZObjektu(); panelZPrvku(); kresli();
+}
+
+/* ---------- trasování ---------- */
+const KROKU=64;
+/* Jeden paprsek. Když je zadaná `seq`, jde se přesně přes vyjmenované prvky
+   a clonky se neřeší – tak se počítá poloha obrazu, kde nás vinětace nezajímá. */
+function trasa(z0,y0,u0,dir0,seq){
+  let z=z0,y=y0,u=u0,dir=dir0;
+  const body=[[z,y]], smery=[], potkane=[];
+  let blok=false;
+  for(let k=0;k<KROKU;k++){
+    smery.push([dir,u]);
+    let cil=null;
+    if(seq){
+      if(k>=seq.length) break;
+      const p=prvky[seq[k]], t=(p.z-z)*dir;
+      if(!(t>1e-9)) break;
+      cil={p,i:seq[k],t};
+    }else{
+      const kand=prvky.map((p,i)=>({p,i,t:(p.z-z)*dir}))
+                      .filter(c=>c.t>1e-6).sort((a,b)=>a.t-b.t);
+      for(const c of kand){
+        const ay=Math.abs(y+u*c.t);
+        const trefa=ay<=c.p.a+1e-9&&ay>=(c.p.d||0)-1e-9;
+        if(c.p.typ==='clona'){ if(!trefa){ cil=c; cil.blok=true; break; } continue; }
+        if(trefa){ cil=c; break; }
+      }
+    }
+    if(!cil){ smery.pop(); smery.push([dir,u]); break; }
+    z+=dir*cil.t; y+=u*cil.t;
+    body.push([z,y]); potkane.push(cil.i);
+    if(cil.blok){ blok=true; break; }
+    const p=cil.p;
+    if(p.typ==='clona') continue;
+    u-=y/p.f;
+    p.dopad=dir;                                 // odkud světlo přišlo (kvůli kresbě)
+    if(TYPY[p.typ].zrcadlo) dir=-dir;
+  }
+  if(!seq&&body.length>KROKU) blok=true; // Paprsek uvězněný mezi zrcadly není výstup.
+  if(smery.length<body.length) smery.push([dir,u]);
+  return {body,smery,potkane,blok,z,y,u,dir};
+}
+
+/* ---------- svazky paprsků ---------- */
+function nejvetsiClona(){ return prvky.length?Math.max(...prvky.map(p=>p.a)):3; }
+/* Kde svazek do soustavy vstupuje. Výšky paprsků měříme v rovině nejširšího
+   prvku (u zrcadlového dalekohledu je to primární zrcadlo, ne sekundární
+   zrcátko vpředu) a startujeme kus před prvním prvkem, aby ho paprsek potkal. */
+function vstup(){
+  const zPrvni=Math.min(...prvky.map(p=>p.z));
+  const zPosl=Math.max(...prvky.map(p=>p.z));
+  const rozp=Math.max(4,zPosl-Math.min(0,zPrvni));
+  return {zPrvni, zPosl, zStart:zPrvni-Math.max(1,rozp*0.12)};
+}
+
+/* Nasype se hodně kandidátů a nechají se ty, které projdou soustavou stejnou
+   cestou jako ten „hlavní". Tím samo od sebe vypadne zastíněný střed svazku
+   u zrcadlového dalekohledu i paprsky, které minou čočku. */
+function svazek(yObj,tgDano){
+  if(!prvky.length) return {paprsky:[],mimo:[],seq:null};
+  const {zStart,zPosl}=vstup();
+  const tg=tgDano===undefined?Math.tan(objekt.alfa/DEG):tgDano;
+  /* Nevíme dopředu, který prvek svazek opravdu ořízne (clonou nemusí být ten
+     nejužší – u mikroskopu je to objektiv, u zrcadlového dalekohledu primární
+     zrcadlo). Proto nasypeme hodně kandidátů přes celý možný rozsah a necháme
+     projít jen ty, které se soustavou dostanou stejnou cestou jako ten hlavní. */
+  const N=801, vsechny=[];
+  const meze=objekt.nekonecno
+    ? nejvetsiClona()+Math.abs(tg)*(zPosl-zStart)+0.01
+    : Math.max(...prvky.map(p=>(p.a+Math.abs(yObj))/Math.max(0.2,p.z)))*1.02;
+  for(let i=0;i<N;i++){
+    const q=(i/(N-1))*2-1;
+    let z0,y0,u0;
+    if(objekt.nekonecno){ z0=zStart; y0=q*meze+yObj; u0=-tg; }
+    else { z0=0; y0=yObj; u0=q*meze; }
+    const t=trasa(z0,y0,u0,1,null);
+    t.q=q; t.dozadu=objekt.nekonecno;
+    vsechny.push(t);
+  }
+  if(!vsechny.length) return {paprsky:[],mimo:[],seq:null};
+  /* Hlavní cesta = ta, která potká nejvíc prvků (u shody ta krajnější). Vybírá
+     se jen z paprsků, které soustavou opravdu prolezly – jinak by vzorem mohl
+     být paprsek, který skončil na cloně, a neprošel by pak vůbec žádný. */
+  let vzor=null;
+  const projde=vsechny.filter(t=>!t.blok&&t.potkane.length);
+  if(!projde.length) return {paprsky:[],mimo:vsechny,seq:null};
+  for(const t of projde)
+    if(!vzor||t.potkane.length>vzor.potkane.length||
+       (t.potkane.length===vzor.potkane.length&&Math.abs(t.q)>Math.abs(vzor.q))) vzor=t;
+  if(!vzor||!vzor.potkane.length) return {paprsky:[],mimo:vsechny,seq:null};
+  const klic=vzor.potkane.join(',');
+  const dobre=vsechny.filter(t=>t.potkane.join(',')===klic&&!t.blok);
+  const mimo=vsechny.filter(t=>t.potkane.join(',')!==klic||t.blok);
+  // z projitých vybereme pět rovnoměrně rozložených, ať obrázek nezhoustne
+  const vyber=[];
+  const kolik=Math.min(5,dobre.length);
+  for(let i=0;i<kolik;i++) vyber.push(dobre[Math.round(i*(dobre.length-1)/Math.max(1,kolik-1))]);
+  return {paprsky:vyber,mimo,seq:vzor.potkane};
+}
+
+/* ---------- kde vznikají obrazy ---------- */
+function prusecik(p1,d1,p2,d2){
+  const den=d1[0]*d2[1]-d1[1]*d2[0];
+  if(Math.abs(den)<1e-12) return null;
+  const t=((p2[0]-p1[0])*d2[1]-(p2[1]-p1[1])*d2[0])/den;
+  return {z:p1[0]+t*d1[0], y:p1[1]+t*d1[1], t};
+}
+/* Dva „výpočtové" paprsky z vrcholu předmětu projdou stejnou cestou jako
+   svazek; jejich průsečík za každým prvkem je obraz, který v tom místě vzniká. */
+function obrazy(seq,tgDano){
+  if(!seq||!seq.length) return null;
+  const {zStart}=vstup(), tg=tgDano===undefined?Math.tan(objekt.alfa/DEG):tgDano;
+  const p0=prvky[seq[0]], mir=Math.max(0.05,p0.a*0.55);
+  let A,B;
+  if(objekt.nekonecno){
+    A=trasa(zStart,tg*(p0.z-zStart),-tg,1,seq);
+    B=trasa(zStart,mir+tg*(p0.z-zStart),-tg,1,seq);
+  }else{
+    if(p0.z<=1e-6) return null;
+    A=trasa(0,objekt.h,(0-objekt.h)/p0.z,1,seq);
+    B=trasa(0,objekt.h,(mir-objekt.h)/p0.z,1,seq);
+  }
+  const kroky=[];
+  for(let k=1;k<A.body.length;k++){
+    const pr=prusecik(A.body[k],A.smery[k],B.body[k],B.smery[k]);
+    if(!pr) { kroky.push(null); continue; }
+    // dosah do dalšího prvku (u posledního úseku neomezeně)
+    const dalsi=k<A.body.length-1?Math.abs(A.body[k+1][0]-A.body[k][0]):Infinity;
+    kroky.push({z:pr.z,y:pr.y,t:pr.t,skutecny:pr.t>0,vgapu:pr.t>0&&pr.t<dalsi});
+  }
+  return {kroky,A,B};
+}
+
+function vysledek(){
+  const s=svazek(objekt.nekonecno?0:objekt.h,objekt.nekonecno?undefined:null);
+  const ob=obrazy(s.seq);
+  const v={svazek:s,obrazy:ob,typ:'nic'};
+  if(!ob||!ob.kroky.length) return v;
+  const posl=ob.kroky[ob.kroky.length-1];
+  const uKon=ob.A.u, uZac=objekt.nekonecno?-Math.tan(objekt.alfa/DEG):null;
+  v.uKon=uKon;
+  // afokální = z okuláru letí rovnoběžný svazek, obraz je v nekonečnu
+  const afokal=!posl||!isFinite(posl.z)||Math.abs(posl.t)>4e4;
+  if(afokal){
+    v.typ='afokal';
+    if(objekt.nekonecno){
+      const probe=obrazy(s.seq,0.001);
+      const pomer=probe.A.u/-0.001;
+      v.Z=Math.abs(pomer);
+      v.prevraceny=pomer<0;
+    }else{
+      v.Z=Math.abs(uKon)/(objekt.h/25);          // proti pohledu ze vzdálenosti 25 cm
+      v.prevraceny=Math.sign(uKon)===Math.sign(objekt.h);
+    }
+  }else{
+    v.typ='obraz';
+    v.obraz=posl;
+    v.prevraceny=objekt.nekonecno?obrazy(s.seq,0.001).kroky.at(-1).y<0:Math.sign(posl.y)!==Math.sign(objekt.h);
+    if(objekt.nekonecno) v.F=Math.abs(obrazy(s.seq,0.001).kroky.at(-1).y/0.001);
+    else v.zvetseni=posl.y/objekt.h;
+  }
+  return v;
+}
+
+/* ---------- podklad pro náhled „co uvidíš" ----------
+   Vizuální přístroj (dalekohled, lupa, mikroskop) se srovnává úhlově: jak velký
+   se předmět jeví okem a jak přes soustavu. Soustava se skutečným obrazem se
+   srovnává délkově – obraz padne na stínítko a dá se změřit. */
+function nahledData(v){
+  if(!v||v.typ==='nic'||!v.svazek.seq) return null;
+  const stinitko=v.typ==='obraz'&&v.obraz.skutecny;
+  let Z=1, prevraceny=false;
+  if(v.typ==='afokal'){
+    Z=v.Z; prevraceny=v.prevraceny;
+  }else if(v.typ==='obraz'){
+    // při α = 0 leží obraz na ose a orientaci z něj nepoznáme – zkusíme půl stupně
+    let yObr=v.obraz.y;
+    if(objekt.nekonecno&&Math.abs(objekt.alfa)<0.05){
+      const zk=obrazy(v.svazek.seq,Math.tan(0.5/DEG));
+      const k=zk&&zk.kroky[zk.kroky.length-1];
+      yObr=k?k.y:0;
+    }
+    prevraceny=objekt.nekonecno?yObr<0:Math.sign(v.obraz.y)!==Math.sign(objekt.h);
+    if(stinitko){
+      Z=objekt.nekonecno?null:Math.abs(v.zvetseni);
+    }else{
+      // zdánlivý obraz: úhlová velikost proti pohledu z 25 cm
+      const posl=prvky[v.svazek.seq[v.svazek.seq.length-1]];
+      const d=Math.max(1e-6,Math.abs(v.obraz.z-posl.z));
+      Z=objekt.nekonecno
+        ? (Math.abs(v.obraz.y)/d)/Math.max(1e-9,Math.tan(objekt.alfa/DEG))
+        : (Math.abs(v.obraz.y)/d)/(Math.abs(objekt.h)/25);
+    }
+  }
+  return {stinitko,Z,prevraceny};
+}
+
+/* Předmět pro náhled. U hvězdy noční obloha, jinak podložní sklíčko s písmenem F
+   (nejde ho splést, když se převrátí) a s rastrem „buněk" ve třech velikostech –
+   při jakémkoli zvětšení tak zůstane vidět nějaká struktura. */
+const NEBE=[[0.9,0.7,2.4,'#ffbe73'],[-1.5,0.6,3.4,null],[1.1,-1.6,3.9,null],
+            [-2.6,1.9,3.0,null],[2.9,1.2,4.2,null],[-1.9,-2.6,4.6,null],
+            [3.1,-0.7,4.0,null],[-3.3,-0.4,4.4,null],[0.4,2.7,3.6,null]];
+function kresliScenu(cx,cy,px,otoc,jednotka){
+  ctx.save();
+  ctx.translate(cx,cy);
+  if(otoc) ctx.rotate(Math.PI);
+  if(objekt.nekonecno){
+    const rm=Math.max(1.4,0.25*px);                      // Měsíc má 0,5°
+    if(rm<30){
+      ctx.save(); ctx.globalAlpha=.18; ctx.fillStyle='#e9e3d2';
+      ctx.beginPath(); ctx.arc(0,0,rm*2.2,0,Math.PI*2); ctx.fill(); ctx.restore();
+    }
+    ctx.fillStyle='#e9e3d2';
+    ctx.beginPath(); ctx.arc(0,0,rm,0,Math.PI*2); ctx.fill();
+    if(rm>3.5){
+      ctx.fillStyle='rgba(96,90,76,.5)';
+      for(const [dx,dy,dr] of [[-0.40,0.32,0.26],[0.30,0.10,0.34],[-0.08,-0.48,0.17],[0.48,-0.40,0.12]]){
+        ctx.beginPath(); ctx.arc(dx*rm,-dy*rm,dr*rm,0,Math.PI*2); ctx.fill();
+      }
+    }
+    for(const [x,y,m,barva] of NEBE){
+      const r=Math.max(1.1,2.9-0.3*m);
+      ctx.fillStyle=barva||'#ffffff';
+      ctx.beginPath(); ctx.arc(x*px,-y*px,r,0,Math.PI*2); ctx.fill();
+      ctx.globalAlpha=.22;
+      ctx.beginPath(); ctx.arc(x*px,-y*px,r*2.6,0,Math.PI*2); ctx.fill();
+      ctx.globalAlpha=1;
+    }
+  }else{
+    const h=jednotka;
+    const vel=Math.min(6000,h*px);
+    if(vel>2){
+      ctx.fillStyle='#1d2735';
+      ctx.font='bold '+vel+'px sans-serif';
+      ctx.textAlign='center'; ctx.textBaseline='middle';
+      ctx.fillText('F',0,0);
+    }
+    // buňky ve třech velikostech – při jakémkoli zvětšení zůstane vidět struktura
+    for(const s of [1,0.1,0.01,0.001]){
+      const krok=h*0.34*s*px, r=h*0.075*s*px;
+      if(krok<7||krok>90) continue;
+      ctx.fillStyle='rgba(58,106,178,.42)';
+      for(let i=-9;i<=9;i++) for(let j=-9;j<=9;j++){
+        ctx.beginPath();
+        ctx.arc(i*krok+(j%2?krok/2:0),j*krok,Math.max(1,r),0,Math.PI*2); ctx.fill();
+      }
+    }
+  }
+  ctx.restore();
+}
+
+/* ---------- měřítko ---------- */
+/* Vodorovně a svisle se kreslí jiným měřítkem. Soustava bývá metr dlouhá
+   a pár centimetrů široká – v poctivém poměru by z ní byla čára. Paraxiální
+   optika je v příčné souřadnici lineární, takže svislé roztažení nic nerozbije. */
+function rozsah(v){
+  const zs=[];
+  if(!objekt.nekonecno) zs.push(0);
+  prvky.forEach(p=>zs.push(p.z));
+  if(!zs.length) zs.push(0,20);
+  let a=Math.min(...zs), b=Math.max(...zs);
+  const zaklad=Math.max(4,b-a,...prvky.map(p=>Math.abs(p.f)||0));
+  const pridej=z=>{ if(isFinite(z)&&z>a-6*zaklad&&z<b+6*zaklad){ a=Math.min(a,z); b=Math.max(b,z); } };
+  if(v&&v.obrazy) v.obrazy.kroky.forEach(k=>{ if(k&&k.vgapu) pridej(k.z); });
+  if(v&&v.typ==='obraz') pridej(v.obraz.z);
+  if(objekt.nekonecno) a-=zaklad*0.16;
+  const roz=Math.max(4,b-a);
+  return [a-roz*0.07,b+roz*0.10];
+}
+
+/* ---------- kreslení prvku ---------- */
+function kresliPrvek(p,i,X,os,merY,H){
+  const x=X(p.z), a=p.a*merY, d=(p.d||0)*merY, vyb=i===vybrany;
+  ctx.save();
+  ctx.lineWidth=vyb?3:2.2;
+  ctx.strokeStyle=vyb?C.akcent:C.silny;
+  ctx.fillStyle=vyb?'rgba(106,166,253,.26)':'rgba(106,166,253,.14)';
+  if(p.typ==='clona'){
+    ctx.fillStyle=vyb?C.akcent:C.silny;
+    ctx.beginPath();
+    ctx.rect(x-3,os-a-Math.max(14,H*0.22),6,Math.max(14,H*0.22));
+    ctx.rect(x-3,os+a,6,Math.max(14,H*0.22));
+    if(d>0.5) ctx.rect(x-3,os-d,6,2*d);
+    ctx.fill();
+  }else if(TYPY[p.typ].zrcadlo){
+    // zrcadlo se prohýbá podle toho, odkud na něj světlo dopadá
+    const vyd=TYPY[p.typ].znam*(p.dopad||1)*Math.max(5,a*0.20);
+    const bodX=yy=>x+vyd*(1-(yy*yy)/(a*a));
+    const oblouk=(y1,y2)=>{
+      ctx.beginPath();
+      for(let k=0;k<=24;k++){ const yy=y1+(y2-y1)*k/24; k?ctx.lineTo(bodX(yy),os-yy):ctx.moveTo(bodX(yy),os-yy); }
+      ctx.stroke();
+      // šrafování zadní strany, ať je poznat, že je to zrcadlo a ne čočka
+      ctx.save(); ctx.globalAlpha=.55; ctx.lineWidth=1;
+      for(let k=0;k<=8;k++){
+        const yy=y1+(y2-y1)*k/8, bx=bodX(yy);
+        ctx.beginPath(); ctx.moveTo(bx,os-yy);
+        ctx.lineTo(bx-(p.dopad||1)*8,os-yy+6); ctx.stroke();
+      }
+      ctx.restore();
+    };
+    if(d>0.5){ oblouk(d,a); oblouk(-a,-d); } else oblouk(-a,a);
+  }else{
+    const roz=TYPY[p.typ].znam<0, v=Math.max(4,a*0.22);
+    ctx.beginPath();
+    if(roz){
+      const s=Math.max(3,a*0.09);
+      ctx.moveTo(x-s-v,os-a); ctx.lineTo(x+s+v,os-a);
+      ctx.quadraticCurveTo(x+s-v,os,x+s+v,os+a);
+      ctx.lineTo(x-s-v,os+a);
+      ctx.quadraticCurveTo(x-s+v,os,x-s-v,os-a);
+    }else{
+      ctx.moveTo(x,os-a);
+      ctx.quadraticCurveTo(x+v,os,x,os+a);
+      ctx.quadraticCurveTo(x-v,os,x,os-a);
+    }
+    ctx.closePath(); ctx.fill(); ctx.stroke();
+  }
+  ctx.restore();
+  // ohniska F na ose – bez nich se v soustavě těžko orientuje
+  if(popisky&&p.typ!=='clona'&&Math.abs(p.f)>0.01){
+    for(const zn of [-1,1]){
+      const fx=X(p.z+zn*Math.abs(p.f));
+      ctx.fillStyle=C.faint;
+      ctx.beginPath(); ctx.arc(fx,os,2.5,0,Math.PI*2); ctx.fill();
+      popis('F'+(i+1),fx,os+12,C.faint,'9px sans-serif');
+    }
+  }
+  return {x,a};
+}
+
+/* ---------- hlavní kreslení ---------- */
+let uchopy=[], tahne=null, geo=null, posledni=null;
+function kresli(){
+  if(!canvas.clientWidth||!canvas.clientHeight)return;
+  resize();
+  const w=canvas.clientWidth, h=canvas.clientHeight;
+  ctx.clearRect(0,0,w,h);
+  uchopy=[];
+  prvky.forEach(p=>{ p.dopad=1; });
+  prvky.sort((a,b)=>a.z-b.z);
+
+  const v=vysledek(); posledni=v;
+  if(!$('preset').value) popisSoustavy='';
+  const nd=nahledData(v);
+  // dole na ploše leží nápověda – kolik místa ukousne, tolik si necháme
+  const rezerva=($('napoveda').offsetHeight||0)+12;
+  const bandH=(nahledZap&&nd&&h-rezerva>250)?Math.max(126,Math.min(196,(h-rezerva)*0.32)):0;
+  const H=h-bandH-(bandH?rezerva:0);
+  const [zA,zB]=tahne&&geo?[geo.zA,geo.zB]:rozsah(v);
+  const merX=w/(zB-zA);
+  const X=z=>(z-zA)*merX;
+  const os=Math.round(H*0.47);
+
+  const yKandidati=[nejvetsiClona()];
+  if(!objekt.nekonecno) yKandidati.push(Math.abs(objekt.h));
+  if(v.obrazy) v.obrazy.kroky.forEach(k=>{ if(k&&k.vgapu&&Math.abs(k.y)<nejvetsiClona()*6) yKandidati.push(Math.abs(k.y)); });
+  const yMax=Math.max(0.3,...yKandidati);
+  const volno=Math.min(H*0.31,190);
+  const merY=Math.min(merX*6,volno/yMax);
+  const Y=y=>os-y*merY;
+
+  geo={zA,zB,merX,merY,X,Y,os,w,h};
+
+  ctx.save();
+  ctx.beginPath(); ctx.rect(0,0,w,H); ctx.clip();
+
+  cara(0,os,w,os,C.border,1.2,true);
+  const jednotka=10**Math.floor(Math.log10((zB-zA)/8));
+  const tick=[1,2,5,10].map(n=>n*jednotka).find(n=>(zB-zA)/n<=10);
+  for(let z=Math.ceil(zA/tick)*tick;z<=zB;z+=tick){cara(X(z),H-30,X(z),H-24,C.border,1);popis(cz(z,tick<1?1:0),X(z),H-16,C.faint,'10px sans-serif');}
+  popis('z [cm]',w-8,H-38,C.faint,'10px sans-serif','right');                     // optická osa
+
+  /* paprsky */
+  // u zdánlivého obrazu se paprsky nikde nesejdou – dotáhneme je čárkovaně
+  // dozadu, aby bylo vidět, odkud jen zdánlivě přicházejí
+  const zpetne=(v.typ==='obraz'&&!v.obraz.skutecny)?v.obraz.z:null;
+  const kresliSvazek=(s,barva,sirka,alfa)=>{
+    ctx.save(); ctx.globalAlpha=alfa;
+    for(const t of s.paprsky){
+      const b=t.body;
+      for(let k=0;k+1<b.length&&k<krok;k++){
+        const x1=X(b[k][0]),y1=Y(b[k][1]),x2=X(b[k+1][0]),y2=Y(b[k+1][1]);
+        cara(x1,y1,x2,y2,barva,sirka);
+        if(Math.hypot(x2-x1,y2-y1)>35) hrot((x1+x2)/2,(y1+y2)/2,Math.atan2(y2-y1,x2-x1),barva,6);
+      }
+      // poslední úsek ven z obrázku
+      const [dir,u]=t.smery[t.smery.length-1], p=b[b.length-1];
+      const T=(zB-zA)*1.4;
+      if(!t.blok&&krok>=b.length){ cara(X(p[0]),Y(p[1]),X(p[0]+dir*T),Y(p[1]+u*T),barva,sirka); const dt=(zB-zA)*.045; hrot(X(p[0]+dir*dt),Y(p[1]+u*dt),Math.atan2(-u*merY,dir*merX),barva,7); }
+      // a u hvězdy i kus dopředu, ať je vidět, že svazek přilétá rovnoběžně
+      if(t.dozadu){
+        const [d0,u0]=t.smery[0];
+        cara(X(b[0][0]),Y(b[0][1]),X(b[0][0]-d0*T),Y(b[0][1]-u0*T),barva,sirka);
+      }
+      if(krok>=b.length&&zpetne!==null&&!t.blok&&t.potkane.length){
+        const tz=(zpetne-p[0])/dir;
+        if(tz<0){
+          ctx.save(); ctx.globalAlpha=alfa*0.6;
+          cara(X(p[0]),Y(p[1]),X(p[0]+dir*tz),Y(p[1]+u*tz),C.ok,1.1,true);
+          ctx.restore();
+        }
+      }
+    }
+    ctx.restore();
+  };
+  const sOsovy=osovy?svazek(0,objekt.nekonecno?0:null):null;
+  if(sOsovy){ ctx.save(); ctx.setLineDash([5,5]); kresliSvazek(sOsovy,C.faint,1,.7); ctx.restore(); }
+  kresliSvazek(v.svazek,C.warn,1.7,1);
+
+  // paprsky, které se do soustavy nedostanou (minou prvek, zháší je clona,
+  // nebo je zastíní sekundární zrcátko) – krátký pahýl s křížkem
+  // kreslíme jen pár zástupců, jinak by z uříznutého svazku byla šrafura
+  ctx.save(); ctx.globalAlpha=.32;
+  const mimo=$('ztracene').checked&&krok===Infinity?v.svazek.mimo.filter(t=>t.potkane.length):[];
+  const ukazka=mimo.length<=6?mimo:Array.from({length:6},(_,i)=>mimo[Math.round(i*(mimo.length-1)/5)]);
+  for(const t of ukazka){
+    const b=t.body;
+    for(let k=0;k+1<b.length;k++) cara(X(b[k][0]),Y(b[k][1]),X(b[k+1][0]),Y(b[k+1][1]),C.danger,1.1,true);
+    if(b.length>1){
+      const p=b[b.length-1], px=X(p[0]), py=Y(p[1]);
+      ctx.globalAlpha=.6; ctx.strokeStyle=C.danger; ctx.lineWidth=1.4;
+      ctx.beginPath();
+      ctx.moveTo(px-4,py-4); ctx.lineTo(px+4,py+4);
+      ctx.moveTo(px+4,py-4); ctx.lineTo(px-4,py+4);
+      ctx.stroke(); ctx.globalAlpha=.32;
+    }
+  }
+  ctx.restore();
+
+  /* prvky */
+  prvky.forEach((p,i)=>{
+    const g=kresliPrvek(p,i,X,os,merY,h);
+    const vys=Math.max(g.a, p.typ==='clona'?H*0.3:0);
+    uchopy.push({typ:'prvek',i,obdelnik:[g.x-13,os-vys-8,26,2*vys+16]});
+    if(popisky){
+      const txt=p.typ==='clona'
+        ? (p.role?p.role+' · ':'▯ ')+'Ø '+cz(2*p.a,1)+' cm'
+        : (p.role?p.role+' · ':TYPY[p.typ].zn+' ')+'f = '+cz(p.f,Math.abs(p.f)%1?1:0)+' cm';
+      chip(txt,g.x,Math.max(12,os-Math.max(g.a,10)-16),i===vybrany?C.akcent:C.muted,'10px sans-serif');
+    }
+  });
+
+  /* předmět */
+  if(objekt.nekonecno){
+    const zPrvni=prvky.length?Math.min(...prvky.map(p=>p.z)):0;
+    const tg=Math.tan(objekt.alfa/DEG);
+    const hx=Math.max(22,X(zA)+18), hy=Y(tg*(zPrvni-(hx/merX+zA)));
+    uchopy.push({typ:'hvezda',x:hx,y:hy,r:17});
+    popis('⭐',hx,hy,C.text,'19px sans-serif');
+    if(popisky) chip('hvězda v nekonečnu · α = '+cz(objekt.alfa)+'°',hx+92,hy,C.muted,'10px sans-serif');
+  }else{
+    const x0=X(0), y0=Y(objekt.h);
+    cara(x0,os,x0,y0,C.text,3);
+    hrot(x0,y0,objekt.h>0?-Math.PI/2:Math.PI/2,C.text,9);
+    uchopy.push({typ:'predmet',x:x0,y:y0,r:17});
+    if(popisky) chip('předmět '+cz(objekt.h)+' cm',x0,y0-16,C.text,'10px sans-serif');
+  }
+
+  /* obrazy */
+  if(v.obrazy){
+    v.obrazy.kroky.forEach((k,idx)=>{
+      if(!k||!k.vgapu||idx+2>krok) return;
+      const posledniK=idx===v.obrazy.kroky.length-1;
+      if(posledniK&&v.typ!=='obraz') return;
+      const x=X(k.z);
+      ctx.save();
+      ctx.strokeStyle=C.ok; ctx.lineWidth=posledniK?3.2:2;
+      if(!posledniK) ctx.globalAlpha=.75;
+      ctx.beginPath(); ctx.moveTo(x,os); ctx.lineTo(x,Y(k.y)); ctx.stroke();
+      ctx.restore();
+      hrot(x,Y(k.y),k.y>0?-Math.PI/2:Math.PI/2,C.ok,posledniK?9:7);
+      if(popisky) chip(posledniK?'obraz':'meziobraz',x,Y(k.y)+(k.y>0?-16:16),C.ok,'10px sans-serif');
+    });
+    // zdánlivý obraz leží proti směru paprsků – dokreslíme ho čárkovaně
+    if(krok>=(v.svazek.seq||[]).length+1&&v.typ==='obraz'&&!v.obraz.skutecny){
+      const x=X(v.obraz.z);
+      ctx.save();
+      ctx.strokeStyle=C.ok; ctx.lineWidth=2.4; ctx.setLineDash([5,4]); ctx.globalAlpha=.85;
+      ctx.beginPath(); ctx.moveTo(x,os); ctx.lineTo(x,Y(v.obraz.y)); ctx.stroke();
+      ctx.restore();
+      if(popisky) chip('zdánlivý obraz',x,Y(v.obraz.y)+(v.obraz.y>0?-16:16),C.ok,'10px sans-serif');
+    }
+  }
+
+  if(merY>merX*1.15&&w>780)
+    popis('svislý směr je pro názornost zvětšen '+cz(merY/merX,1)+'×',w-10,H-9,C.faint,'10px sans-serif','right');
+
+  ctx.restore();
+  if(bandH){if(krok>=(v.svazek.seq||[]).length+1)kresliNahled(w,H,bandH,v,nd);else popis('Pokračuj až k výstupu a zobrazí se náhled.',w/2,H+bandH/2,C.muted,'12px sans-serif');}
+  $('stav').innerHTML=stavText(v);
+  aktualizujDilnu(v);
+}
+
+/* ---------- náhled „co uvidíš" ----------
+   Vlevo předmět tak, jak vypadá bez pomůcky, vpravo výsledek soustavy.
+   U vizuálních přístrojů kolečko (pohled okulárem – proto se výřez zvětšením
+   zužuje), u soustavy se skutečným obrazem obdélníkové stínítko. */
+function kresliNahled(w,bandTop,bandH,v,nd){
+  cara(0,bandTop,w,bandTop,C.border,1);
+  const r=Math.max(30,Math.min((bandH-42)/2,w*0.14,86));
+  const cy=bandTop+r+6;
+  const mez=Math.max(112,Math.min(w*0.2,186));
+  const cx1=w/2-r-mez/2, cx2=w/2+r+mez/2;
+  const Z=nd.Z;
+
+  const ramecek=(cx,kresba)=>{
+    ctx.save();
+    ctx.beginPath();
+    if(nd.stinitko) ctx.roundRect(cx-r*1.16,cy-r*0.86,r*2.32,r*1.72,7);
+    else ctx.arc(cx,cy,r,0,Math.PI*2);
+    ctx.fillStyle=objekt.nekonecno?'#0c1018':'#e9edf4';
+    ctx.fill();
+    ctx.save(); ctx.clip(); kresba(); ctx.restore();
+    ctx.strokeStyle=C.silny; ctx.lineWidth=1.6; ctx.stroke();
+    ctx.restore();
+  };
+
+  // měřítko: u stínítka společné délkové, u oka stejné zdánlivé pole
+  const h=Math.abs(objekt.h)||1;
+  let pxL,pxP;
+  if(objekt.nekonecno){
+    pxL=2*r/10;                                   // 10° oblohy na šířku kroužku
+    pxP=nd.stinitko?pxL:pxL*Z;
+  }else if(nd.stinitko){
+    const nej=Math.max(1,Z||1);
+    pxL=(r*1.35)/(h*nej);                         // společné měřítko, větší z obou vyplní rámeček
+    pxP=pxL*(Z||1);
+  }else{
+    pxL=(r*0.8)/h;
+    pxP=pxL*Z;
+  }
+  ramecek(cx1,()=>{
+    kresliScenu(cx1,cy,pxL,false,h);
+    // kolik z předmětu se do pravého rámečku vejde
+    if(!nd.stinitko&&Z>1.15){
+      ctx.save();
+      ctx.strokeStyle=C.akcent; ctx.lineWidth=1.6; ctx.setLineDash([4,3]);
+      ctx.beginPath(); ctx.arc(cx1,cy,Math.max(4,r/Z),0,Math.PI*2); ctx.stroke();
+      ctx.restore();
+    }
+  });
+  ramecek(cx2,()=>kresliScenu(cx2,cy,pxP,nd.prevraceny,h));
+
+  // lupová výseč: z čárkovaného výřezu vlevo se stane celý pohled vpravo
+  if(!nd.stinitko&&Z>1.15){
+    const rc=Math.max(4,r/Z);
+    ctx.save();
+    ctx.strokeStyle=C.akcent; ctx.lineWidth=1.2; ctx.setLineDash([4,3]); ctx.globalAlpha=.75;
+    for(const zn of [-1,1]){
+      const y1=cy+zn*rc, y2=cy+zn*r;
+      const t=xx=>y1+(y2-y1)*(xx-cx1)/(cx2-cx1);
+      const xa=cx1+r*0.8, xb=cx2-r*0.8;
+      ctx.beginPath(); ctx.moveTo(xa,t(xa)); ctx.lineTo(xb,t(xb)); ctx.stroke();
+    }
+    ctx.restore();
+  }
+
+  const titul=objekt.nekonecno?'🌙 pouhým okem':'💡 předmět';
+  popis(titul,cx1,cy+r+15,C.muted,'11px sans-serif');
+  popis(nd.stinitko?'🎞️ obraz na stínítku':'👁️ pohled do soustavy',cx2,cy+r+15,C.muted,'11px sans-serif');
+
+  const ax1=cx1+r+12, ax2=cx2-r-12;
+  cara(ax1,cy,ax2-7,cy,C.akcent,1.6);
+  hrot(ax2,cy,0,C.akcent,9);
+  const cislo=Z===null?'obraz':(Z>=10?cz(Z,0):cz(Z,1))+'×';
+  popis(cislo,w/2,cy-14,C.akcent,'bold 15px sans-serif');
+  popis(nd.prevraceny?'převráceně':'přímo',w/2,cy+15,nd.prevraceny?C.warn:C.ok,'10px sans-serif');
+}
+
+/* ---------- stavový řádek ---------- */
+function pocet(n,a,b,c){ return n===1?a:(n>=2&&n<=4?b:c); }
+function stavText(v){
+  const nd=nahledData(v);
+  if(!prvky.length)
+    return '<span class="znak">🧩</span> Zatím je tu jen předmět. Přidej první prvek a sleduj, kudy paprsky poletí.';
+  const cesta=(v.svazek.seq||[]).map(i=>TYPY[prvky[i].typ].zn).join(' → ');
+  let s=`<span class="znak">🧩</span> ${prvky.length} ${pocet(prvky.length,'prvek','prvky','prvků')}`;
+  if(cesta) s+=` · světlo prochází <b>${cesta}</b>`;
+  if(!v.svazek.seq){
+    return s+' · <b>svazek soustavou neprojde</b> – posuň prvky nebo zvětši jejich průměr';
+  }
+  const mezi=v.obrazy?v.obrazy.kroky.filter((k,i)=>k&&k.vgapu&&i<v.obrazy.kroky.length-1).length:0;
+  if(mezi) s+=` · cestou vzniká ${mezi} ${pocet(mezi,'skutečný meziobraz','skutečné meziobrazy','skutečných meziobrazů')}`;
+  if(v.typ==='afokal'){
+    s+=objekt.nekonecno?' · <b>afokální soustava</b> – dovnitř i ven letí rovnoběžný svazek':' · <b>obraz v nekonečnu</b> – ven letí rovnoběžný svazek';
+    if(objekt.nekonecno)
+      s+=` · úhlové zvětšení <b>${cz(v.Z,1)}×</b> (α = ${cz(objekt.alfa)}° → ${cz(Math.atan(Math.abs(v.uKon))*DEG,1)}°)`;
+    else
+      s+=` · úhlové zvětšení <b>${cz(v.Z,0)}×</b> proti pohledu z 25 cm`;
+    s+=` · obraz je <b>${v.prevraceny?'převrácený':'přímý'}</b>`;
+  }else if(v.typ==='obraz'){
+    const o=v.obraz;
+    s+=` · obraz je <b>${o.skutecny?'skutečný':'zdánlivý'}</b> v <b>z = ${cz(o.z,1)} cm</b>`;
+    if(objekt.nekonecno)
+      s+=` · velikost <b>${cz(Math.abs(o.y),2)} cm</b> · efektivní ohnisko soustavy <b>F = ${cz(v.F,1)} cm</b>`;
+    else
+      s+=` · zvětšení <b>${cz(v.zvetseni,2)}×</b> · obraz je <b>${v.prevraceny?'převrácený':'přímý'}</b>`;
+    if(!o.skutecny&&nd&&isFinite(nd.Z))
+      s+=` · oku se jeví <b>${cz(nd.Z,1)}×</b> větší než při pohledu z 25 cm`;
+  }else{
+    s+=' · obraz se nepodařilo určit';
+  }
+  if(prvky.some((p,i)=>i&&Math.abs(p.z-prvky[i-1].z)<1e-6))s+=' · <b>Rozestup prvky: dvě části jsou ve stejné rovině, kde model neumí rozlišit jejich pořadí.</b>';
+  const vynechane=prvky.filter((p,i)=>p.typ!=='clona'&&!(v.svazek.seq||[]).includes(i));
+  if(vynechane.length)s+=' · <b>Pozor: svazek nezasahuje všechny optické prvky (vynecháno: '+vynechane.length+'). Výsledek platí pro vyznačenou cestu.</b>';
+  const ztr=v.svazek.mimo.filter(t=>t.potkane.length).length;
+  if(ztr) s+=` · <span class="znak">✕</span> část svazku se do soustavy nedostane`;
+  return s;
+}
+
+/* ---------- panely ---------- */
+function panelZObjektu(){
+  $('objTyp').value=objekt.nekonecno?'nekonecno':'blizko';
+  $('objH').value=Math.abs(objekt.h);
+  $('objA').value=Math.round(objekt.alfa*10);
+  $('objHV').textContent=cz(objekt.h)+' cm';
+  $('objAV').textContent=cz(objekt.alfa)+'°';
+  document.querySelectorAll('.jenBlizko').forEach(e=>e.classList.toggle('skryto',objekt.nekonecno));
+  document.querySelectorAll('.jenNekonecno').forEach(e=>e.classList.toggle('skryto',!objekt.nekonecno));
+}
+function panelZPrvku(){
+  const p=prvky[vybrany];
+  $('panelPrvek').classList.toggle('skryto',!p);
+  if(!p) return;
+  document.querySelector('.ovladace').open=true;
+  const t=TYPY[p.typ];
+  $('prvekNazev').textContent=t.zn+' '+t.nazev;
+  $('labD').firstChild.textContent='🕳️ Středový otvor ';
+  $('pZ').value=p.z;   $('pZV').textContent=cz(p.z,1)+' cm';
+  $('pA').value=2*p.a; $('pAV').textContent=cz(2*p.a,1)+' cm';
+  $('pD').value=2*(p.d||0); $('pDV').textContent=cz(2*(p.d||0),1)+' cm';
+  $('labF').classList.toggle('skryto',!!t.clona);
+  if(!t.clona){ $('pF').value=Math.abs(p.f); $('pFV').textContent=cz(p.f,Math.abs(p.f)%1?1:0)+' cm'; }
+  $('labD').classList.toggle('skryto',!t.zrcadlo);
+  for(const id of ['pZ','pF','pA','pD']) if($(id+'N')){ $(id+'N').value=$(id).value; $(id+'N').max=$(id).max; }
+  $('pD').max=Math.max(0,Math.round(2*p.a*0.8*10)/10);
+  if($('pDN')) $('pDN').max=$('pD').max;
+}
+function zPanelu(){
+  const p=prvky[vybrany];
+  if(!p) return;
+  p.z=+$('pZ').value;
+  p.a=+$('pA').value/2;
+  p.d=Math.min(+$('pD').value/2,p.a*0.8);
+  if(!TYPY[p.typ].clona) p.f=TYPY[p.typ].znam*Math.abs(+$('pF').value);
+  const id=prvky[vybrany];
+  prvky.sort((a,b)=>a.z-b.z);
+  vybrany=prvky.indexOf(id);
+  $('preset').value='';
+  panelZPrvku(); kresli();
+}
+
+/* ---------- ovládání ---------- */
+function pridej(typ){
+  const t=TYPY[typ];
+  const zmax=prvky.length?Math.max(...prvky.map(p=>p.z)):0;
+  const p={typ,z:Math.min(200,zmax+(prvky.length?15:10)),f:t.clona?0:t.znam*10,a:3,d:0};
+  if(t.zrcadlo) p.a=5;
+  if(prvky.length>=24){ $('oznameni').textContent='Na lavici může být nejvýše 24 prvků.'; return; }
+  prvky.push(p);
+  prvky.sort((a,b)=>a.z-b.z);
+  vybrany=prvky.indexOf(p);
+  $('preset').value='';
+  panelZPrvku(); kresli();
+}
+document.querySelectorAll('[data-pridat]').forEach(b=>b.onclick=()=>pridej(b.dataset.pridat));
+$('btnSmaz').onclick=()=>{ prvky=[]; vybrany=-1; $('preset').value=''; panelZPrvku(); kresli(); };
+$('btnSmazPrvek').onclick=()=>{ if(vybrany>=0){ prvky.splice(vybrany,1); vybrany=-1; $('preset').value=''; panelZPrvku(); kresli(); } };
+$('btnKopie').onclick=()=>{
+  const p=prvky[vybrany];
+  if(!p) return;
+  if(prvky.length>=24) return;
+  const n=Object.assign({},p); n.z=Math.min(200,p.z+15); delete n.role;
+  prvky.push(n); prvky.sort((a,b)=>a.z-b.z);
+  vybrany=prvky.indexOf(n); $('preset').value='';
+  panelZPrvku(); kresli();
+};
+['pZ','pF','pA','pD'].forEach(id=>$(id).oninput=zPanelu);
+$('preset').onchange=()=>{ const k=$('preset').value; if(k) nacti(k); };
+$('objTyp').onchange=()=>{ objekt.nekonecno=$('objTyp').value==='nekonecno'; $('preset').value=''; panelZObjektu(); kresli(); };
+$('objH').oninput=()=>{ objekt.h=+$('objH').value; $('preset').value=''; panelZObjektu(); kresli(); };
+$('objA').oninput=()=>{ objekt.alfa=+$('objA').value/10; $('preset').value=''; panelZObjektu(); kresli(); };
+$('osovy').onchange=()=>{ osovy=$('osovy').checked; kresli(); };
+$('popisky').onchange=()=>{ popisky=$('popisky').checked; kresli(); };
+$('nahled').onchange=()=>{ nahledZap=$('nahled').checked; kresli(); };
+$('btnInfo').onclick=()=>$('infoBox').classList.toggle('skryto');
+$('zavriInfo').onclick=()=>$('infoBox').classList.add('skryto');
+
+function poloha(e){ const r=canvas.getBoundingClientRect(); return [e.clientX-r.left,e.clientY-r.top]; }
+function najdi(x,y){
+  let nej=null,nd=1e9;
+  for(const u of uchopy){
+    if(u.obdelnik){
+      const [rx,ry,rw,rh]=u.obdelnik;
+      if(x>=rx&&x<=rx+rw&&y>=ry&&y<=ry+rh) return u;
+      continue;
+    }
+    const d=Math.hypot(x-u.x,y-u.y);
+    if(d<u.r&&d<nd){ nd=d; nej=u; }
+  }
+  return nej;
+}
+canvas.addEventListener('pointerdown',e=>{
+  const [x,y]=poloha(e), u=najdi(x,y);
+  if(u&&u.typ==='prvek'){ vybrany=u.i; panelZPrvku(); }
+  else if(!u){ vybrany=-1; panelZPrvku(); }
+  tahne=u?u.typ:null;
+  if(tahne==='prvek') tahne={typ:'prvek',i:u.i};
+  else if(tahne) tahne={typ:tahne};
+  try{ canvas.setPointerCapture(e.pointerId); }catch(_){}
+  if(tahne) zapamatuj();
+  kresli();
+});
+canvas.addEventListener('pointermove',e=>{
+  const [x,y]=poloha(e);
+  if(tahne){ tahni(x,y); return; }
+  canvas.style.cursor=najdi(x,y)?'grab':'crosshair';
+});
+canvas.addEventListener('pointerup',()=>{ tahne=null; kresli(); });
+canvas.addEventListener('pointercancel',()=>{ tahne=null; });
+
+function tahni(x,y){
+  if(!geo) return;
+  if(tahne.typ==='prvek'){
+    const p=prvky[tahne.i];
+    if(!p) return;
+    p.z=Math.max(0.5,Math.min(200,Math.round((x/geo.merX+geo.zA)*10)/10));
+    prvky.sort((a,b)=>a.z-b.z);
+    tahne.i=prvky.indexOf(p); vybrany=tahne.i;
+    $('preset').value=''; panelZPrvku();
+  }else if(tahne.typ==='predmet'){
+    objekt.h=Math.max(0.1,Math.min(6,Math.round((geo.os-y)/geo.merY*10)/10));
+    $('preset').value=''; panelZObjektu();
+  }else if(tahne.typ==='hvezda'){
+    const zPrvni=prvky.length?Math.min(...prvky.map(p=>p.z)):0;
+    const dz=Math.max(1,zPrvni-(x/geo.merX+geo.zA));
+    objekt.alfa=Math.max(0,Math.min(3,Math.round(Math.atan((geo.os-y)/geo.merY/dz)*DEG*10)/10));
+    $('preset').value=''; panelZObjektu();
+  }
+  kresli();
+}
+canvas.addEventListener('wheel',e=>{
+  const [x,y]=poloha(e), u=najdi(x,y);
+  if(u&&u.typ==='prvek'){
+    const p=prvky[u.i];
+    if(TYPY[p.typ].clona){ p.a=Math.max(0.2,Math.min(12,p.a+(e.deltaY<0?0.2:-0.2))); }
+    else{
+      const nf=Math.max(1,Math.min(80,Math.abs(p.f)+(e.deltaY<0?1:-1)*(e.shiftKey?5:0.5)));
+      p.f=TYPY[p.typ].znam*nf;
+    }
+    vybrany=u.i; $('preset').value=''; panelZPrvku(); kresli(); e.preventDefault();
+  }else if(objekt.nekonecno){
+    objekt.alfa=Math.max(0,Math.min(3,objekt.alfa+(e.deltaY<0?0.1:-0.1)));
+    $('preset').value=''; panelZObjektu(); kresli(); e.preventDefault();
+  }else{
+    objekt.h=Math.max(0.1,Math.min(6,objekt.h+(e.deltaY<0?0.1:-0.1)));
+    $('preset').value=''; panelZObjektu(); kresli(); e.preventDefault();
+  }
+},{passive:false});
+addEventListener('keydown',e=>{
+  if(e.target.tagName==='INPUT'||e.target.tagName==='SELECT') return;
+  const p=prvky[vybrany];
+  const krok=e.key==='ArrowLeft'?-1:e.key==='ArrowRight'?1:0;
+  if(!krok||!p) return;
+  p.z=Math.max(0.5,Math.min(200,p.z+krok*(e.shiftKey?5:0.5)));
+  prvky.sort((a,b)=>a.z-b.z); vybrany=prvky.indexOf(p);
+  $('preset').value=''; panelZPrvku(); kresli(); e.preventDefault();
+});
+
+$('infoText').innerHTML=`<b>Stavba optické soustavy</b><br>Optická lavice, na kterou si můžeš poskládat vlastní přístroj.
+  Světlo běží zleva doprava, na zrcadle se otočí a jede zpátky. Každá čočka i zrcadlo mění jen
+  <b>sklon</b> paprsku podle jeho výšky nad osou – proto se dá spočítat i hodně složitá soustava.<br><br>
+  <b>Zkus si</b><br>
+  • Tlačítky nahoře <b>přidej prvek</b>, pak ho <b>chyť a táhni</b> po ose. Kolečkem myši nad ním měníš ohnisko,
+  šipky ←/→ ho posouvají po půl centimetru.<br>
+  • V nabídce <b>🎬 Hotová soustava</b> jsou skutečné přístroje. Vyber si je a pak jimi hýbej – uvidíš,
+  co soustavu drží pohromadě.<br>
+  • <b>Dalekohled</b> je afokální: ohnisko objektivu splývá s ohniskem okuláru, dovnitř i ven letí
+  rovnoběžný svazek a mění se jen jeho úhel. Posuň okulár o kousek a afokálnost se rozbije.<br>
+  • <b>Mikroskop</b> má předmět těsně za ohniskem objektivu. Objektiv udělá skutečný převrácený
+  <b>meziobraz</b> a okulár se na něj dívá jako lupa.<br>
+  • U <b>zrcadlového dalekohledu</b> si všimni, že střed svazku je zastíněný sekundárním zrcátkem
+  (červené křížky) a že se světlo vrací <b>dírou v primárním zrcadle</b>. Tubus je proto mnohem
+  kratší než efektivní ohnisko soustavy.<br>
+  • <b>Clona</b> nic neláme, jen ořízne svazek – dá se s ní ukázat, proč má přístroj zorné pole
+  a proč se s menší clonou obraz ztmaví.<br>
+  • Zelené šipky jsou obrazy. Plná = skutečný (paprsky se v něm opravdu sejdou),
+  čárkovaná = zdánlivý (paprsky se jen tak tváří, že odtud přicházejí).<br><br>
+  <b>Náhled dole</b><br>
+  Vlevo je předmět tak, jak vypadá bez pomůcky, vpravo výsledek soustavy.
+  U dalekohledu, lupy a mikroskopu je to <b>kolečko</b> – pohled do okuláru; čárkovaný
+  výřez vlevo ukazuje, jak malý kousek se do něj vejde, takže je hned vidět, že větší
+  zvětšení znamená užší pohled. Když soustava dělá <b>skutečný obraz</b>, náhled se
+  změní na <b>stínítko</b> a obě políčka mají společné délkové měřítko – obraz je na
+  nich opravdu tolikrát větší, kolikrát ho soustava zvětší.<br>
+  Písmeno <b>F</b> na sklíčku není náhoda: po převrácení ho nejde splést. Rastr „buněk"
+  je nakreslený v několika velikostech, aby i při stonásobném zvětšení zůstalo vidět,
+  do čeho se díváš.`;
+
+/* Dílna a její ovládání. */
+let krok=Infinity, historie=[], posledniSeznam='', aktivniPreset='';
+SOUSTAVY.pozemni={popis:'Pozemní dalekohled má navíc převracecí spojku. Ta převrátí meziobraz ještě jednou, takže do okuláru přichází přímý obraz.',objekt:{nekonecno:true,alfa:0.5},prvky:[{typ:'spojka',z:10,f:30,a:3,role:'objektiv'},{typ:'spojka',z:60,f:10,a:2,role:'převracecí čočka'},{typ:'spojka',z:85,f:5,a:1.6,role:'okulár'}]};
+const LEKCE={
+ kepler:['🔭 Keplerův','2 spojky · 12×','Objektiv vytvoří převrácený skutečný meziobraz. Okulár je od něj vzdálen o své ohnisko, takže paprsky opět vycházejí rovnoběžně.','Vzdálenost čoček je f₁ + f₂ = 65 cm. Zvětšení |f₁ / f₂| = 12×.','Vyber okulár a posuň ho ze 75 na 77 cm. Jsou výstupní paprsky stále rovnoběžné? Tlačítkem Zpět obnovíš zaostření.'],
+ galileo:['🎭 Galileův','spojka + rozptylka · 12×','Rozptylný okulár zachytí svazek ještě před vznikem skutečného meziobrazu. Výstupní svazek je rovnoběžný a obraz přímý.','Vzdálenost čoček je f₁ + f₂ = 55 cm, protože f₂ = −5 cm.','Porovnej s Keplerovým dalekohledem: stejné zvětšení, ale kratší tubus a přímý obraz. Kde by se paprsky sešly bez okuláru?'],
+ zrcadlovy:['🪞 Cassegrainův','2 zrcadla + okulár · 60×','Světlo nejprve dopadá na velké duté zrcadlo, vrací se k malému vypuklému a pak prochází otvorem v hlavním zrcadle do okuláru.','Ohnisko dvojice zrcadel je 180 cm; okulár má 3 cm. Úhlové zvětšení je 60×.','Zapni neprocházející paprsky. Sleduj zastínění malým zrcadlem a průchod otvorem ve velkém. Tlačítkem Další úsek projdi oba odrazy.'],
+ pozemni:['🌄 Pozemní','3 spojky · 6×','Převracecí čočka mezi objektivem a okulárem vytvoří druhý skutečný meziobraz. Dvojí převrácení dá přímý pohled na krajinu.','Převracecí čočka zobrazuje z 2f do 2f. Celkové úhlové zvětšení je 6×.','Najdi oba meziobrazy. Odeber prostřední čočku a pozoruj, jak se změní výstup. Pak vrať změnu tlačítkem Zpět.'],
+ mikroskop:['🔬 Mikroskop','objektiv + okulár · 100×','Předmět leží těsně za ohniskem objektivu. Objektiv vytvoří desetkrát větší převrácený meziobraz; okulár funguje jako lupa.','Objektiv: 10×. Okulár: 25 / 2,5 = 10×. Celkem 100× vůči pohledu ze vzdálenosti 25 cm.','Změň polohu objektivu z 1,1 na 1,2 cm. I tak malý posun výrazně změní polohu meziobrazu a zaostření.'],
+ lupa:['🔍 Lupa','1 spojka · zdánlivý obraz','Předmět je uvnitř ohniskové vzdálenosti. Paprsky se za čočkou rozbíhají; jejich zpětná prodloužení ukazují zvětšený přímý obraz.','Čárkované čáry jsou konstrukce, světlo se po nich nešíří zpět.','Posuň spojku ze 7 na 10 a potom na 12 cm. Kdy se zdánlivý obraz změní na skutečný?'],
+ projektor:['📽️ Promítačka','1 spojka · skutečný obraz','Předmět je těsně za ohniskem spojky. Paprsky se za čočkou setkají ve skutečném převráceném obrazu, který lze zachytit stínítkem.','Pro výchozí nastavení vzniká obraz v z = 72 cm a je pětkrát větší.','Posouvej čočku dál od předmětu. Sleduj, jak se mění vzdálenost i velikost skutečného obrazu.']
+};
+for(const [key,l] of Object.entries(LEKCE)){
+ const b=document.createElement('button'); b.dataset.soustava=key; b.innerHTML=l[0]+'<small>'+l[1]+'</small>';
+ b.onclick=()=>{zapamatuj();$('preset').value=key;nacti(key);}; $('presety').append(b);
+}
+function stavSoubor(){return {verze:1,objekt:{...objekt},prvky:prvky.map(({typ,z,f,a,d,role})=>({typ,z,f,a,d:d||0,...(role?{role}:{})})),preset:$('preset').value};}
+function zapamatuj(){const stav=stavSoubor();stav.preset=aktivniPreset;const s=JSON.stringify(stav);if(historie.at(-1)!==s)historie.push(s);if(historie.length>80)historie.shift();$('btnZpet').disabled=!historie.length;}
+function obnov(s){objekt={...s.objekt};prvky=s.prvky.map(p=>({...p}));vybrany=-1;krok=Infinity;$('preset').value=s.preset||'';panelZObjektu();panelZPrvku();kresli();}
+$('btnZpet').onclick=()=>{if(historie.length)obnov(JSON.parse(historie.pop()));$('btnZpet').disabled=!historie.length;};
+// Capture before existing handlers mutate the optical bench; range input is one undo step per gesture.
+for(const id of ['btnSmaz','btnSmazPrvek','btnKopie']) $(id).addEventListener('click',zapamatuj,{capture:true});
+document.querySelectorAll('[data-pridat]').forEach(b=>b.addEventListener('click',zapamatuj,{capture:true}));
+for(const id of ['preset','objTyp']) $(id).addEventListener('change',zapamatuj,{capture:true});
+for(const id of ['pZ','pF','pA','pD','objH','objA']){
+ $(id).addEventListener('pointerdown',zapamatuj);
+ $(id).addEventListener('keydown',e=>{if(e.key.startsWith('Arrow'))zapamatuj();});
+}
+canvas.addEventListener('wheel',zapamatuj,{capture:true,passive:true});
+window.addEventListener('keydown',e=>{if(e.target===canvas&&['ArrowLeft','ArrowRight'].includes(e.key))zapamatuj();},{capture:true});
+for(const id of ['pZ','pF','pA','pD']){
+ const range=$(id), n=document.createElement('input'); n.type='number';n.className='presne';n.id=id+'N';n.min=range.min;n.max=range.max;n.step=id==='pF'?'0.1':range.step;
+ n.setAttribute('aria-label',({pZ:'Poloha',pF:'Velikost ohniskové vzdálenosti',pA:'Průměr',pD:'Průměr středového otvoru'})[id]+' v centimetrech');
+ range.step=n.step;range.after(n);
+ n.onchange=()=>{if(!n.checkValidity()||!Number.isFinite(n.valueAsNumber)){n.value=range.value;return;}zapamatuj();range.value=n.value;zPanelu();};
+}
+function aktualizujDilnu(v){
+ const key=$('preset').value, l=LEKCE[key];aktivniPreset=key;
+ $('nazevSoustavy').textContent=l?l[0]:'🧩 Vlastní soustava';
+ $('vysvetleni').innerHTML=l?'<p>'+l[2]+'</p><p style="margin-top:10px"><strong>'+l[3]+'</strong></p>':'<p>Přidávej čočky, zrcadla a clony. Světlo začíná vlevo a při odrazu mění směr. Zelené šipky označují obrazy.</p><p style="margin-top:10px">Změnou polohy nebo ohniska se mění výsledek celé soustavy. Aktuální výsledek najdeš pod lavicí.</p>';
+ $('pokusText').textContent=l?l[4]:'Začni spojkou s ohniskem 10 cm. Dej ji 20 cm od předmětu: obraz bude stejně velký a převrácený. Pak přidej druhou čočku jako okulár.';
+ document.querySelectorAll('[data-soustava]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.soustava===key)));
+ const podpis=JSON.stringify([prvky.map(({typ,z,f,a,role})=>[typ,z,f,a,role]),vybrany]);
+ if(podpis!==posledniSeznam){
+  const fokus=$('seznam').contains(document.activeElement)?document.activeElement.dataset.index:null;
+  posledniSeznam=podpis;$('seznam').replaceChildren();
+  if(!prvky.length){const p=document.createElement('p');p.textContent='Lavice je prázdná. Přidej první prvek nahoře.';$('seznam').append(p);}
+  prvky.forEach((p,i)=>{const b=document.createElement('button');b.dataset.index=i;b.setAttribute('aria-pressed',String(i===vybrany));b.textContent=(i+1)+'. '+(p.role||TYPY[p.typ].nazev);const small=document.createElement('small');small.textContent='z = '+cz(p.z)+' cm'+(p.typ==='clona'?' · otvor Ø '+cz(2*p.a):' · f = '+cz(p.f))+' cm';b.append(small);b.onclick=()=>{vybrany=i;panelZPrvku();kresli();};$('seznam').append(b);});
+  if(fokus!==null)$('seznam').querySelector('[data-index="'+fokus+'"]')?.focus({preventScroll:true});
+ }
+ const seq=v.svazek.seq||[], max=seq.length+1;
+ if(krok!==Infinity)krok=Math.min(krok,max);
+ $('krokText').textContent=krok===Infinity?'Všechny úseky':krok===max?'Výstup ze soustavy':krok===0?'Vstupní svazek':'Úsek '+krok+' → '+(prvky[seq[krok-1]]?.role||TYPY[prvky[seq[krok-1]]?.typ]?.nazev||'prvek');
+ $('krokZpet').disabled=krok===0;$('krokDalsi').disabled=!seq.length||krok===max;
+}
+$('krokDalsi').onclick=()=>{krok=krok===Infinity?1:krok+1;kresli();};
+$('krokZpet').onclick=()=>{krok=krok===Infinity?Math.max(0,(posledni.svazek.seq||[]).length):Math.max(0,krok-1);kresli();};
+$('vse').onclick=()=>{krok=Infinity;kresli();};$('ztracene').onchange=kresli;
+$('ulozit').onclick=()=>{const blob=new Blob([JSON.stringify(stavSoubor(),null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='opticka-soustava.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);$('oznameni').textContent='Soustava je připravena ke stažení jako JSON.';};
+$('nacist').onclick=()=>$('soubor').click();
+function overSoubor(s){
+ const cislo=(v,min,max)=>typeof v==='number'&&Number.isFinite(v)&&v>=min&&v<=max;
+ if(!s||s.verze!==1||!s.objekt||typeof s.objekt.nekonecno!=='boolean'||!cislo(s.objekt.h,.1,6)||!cislo(s.objekt.alfa,0,3)||!Array.isArray(s.prvky)||s.prvky.length>24)throw Error('Neplatný formát soustavy.');
+ for(const p of s.prvky){if(!p||!Object.hasOwn(TYPY,p.typ)||!cislo(p.z,.5,200)||!cislo(p.a,.2,12)||!cislo(p.d??0,0,p.a*.8)||(p.typ!=='clona'&&(!cislo(p.f,-80,80)||Math.abs(p.f)<1||Math.sign(p.f)!==TYPY[p.typ].znam))||(p.role!==undefined&&(typeof p.role!=='string'||p.role.length>60)))throw Error('Soubor obsahuje neplatný optický prvek.');}
+ return {objekt:{nekonecno:s.objekt.nekonecno,h:s.objekt.h,alfa:s.objekt.alfa},prvky:s.prvky.map(p=>({typ:p.typ,z:p.z,f:p.typ==='clona'?0:p.f,a:p.a,d:p.d||0,role:p.role||''})),preset:''};
+}
+$('soubor').onchange=async()=>{try{const f=$('soubor').files[0];if(!f)return;if(f.size>100000)throw Error('Soubor je příliš velký.');const s=overSoubor(JSON.parse(await f.text()));zapamatuj();obnov(s);$('oznameni').textContent='Soustava byla načtena. Můžeš ji dále upravovat.';}catch(e){$('oznameni').textContent='Načtení se nezdařilo: '+(e instanceof SyntaxError?'soubor není platný JSON.':e.message);}finally{$('soubor').value='';}};
+
+const uzkaObrazovka=matchMedia('(max-width:560px)');
+function slozOvladani(){document.querySelector('.ovladace').open=!uzkaObrazovka.matches;}
+uzkaObrazovka.addEventListener('change',slozOvladani);slozOvladani();
+new ResizeObserver(()=>kresli()).observe(canvas);
+new MutationObserver(()=>{nactiBarvy();kresli();}).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+panelZObjektu(); panelZPrvku();
+nacti('kepler'); $('preset').value='kepler';
+// Průvodce používá stejné vypočtené paprsky jako volná optická lavice.
+let rezim='pruvodce', faze=0, vyukovyPreset='kepler', vlastniLavice=null;
+const PRUVODCE={
+ kepler:{nazev:'Keplerův dalekohled',kratce:'Dvě spojky',vysledek:'Vidíš 12× větší, převrácený obraz.',kroky:[['Světlo přichází z dálky','Od jednoho vzdáleného bodu přicházejí téměř rovnoběžné paprsky. Sleduj tři žluté čáry.'],['Objektiv vytvoří malý obraz','Velká přední čočka soustředí světlo. V místě zelené šipky vzniká skutečný, převrácený obraz.'],['Okulár zvětší pohled na obraz','Malá čočka u oka funguje jako lupa. Za ní jsou paprsky opět rovnoběžné a oko vidí zvětšený obraz.']]},
+ galileo:{nazev:'Galileův dalekohled',kratce:'Spojka a rozptylka',vysledek:'Vidíš 12× větší, přímý obraz.',kroky:[['Světlo přichází z dálky','Paprsky míří k velké přední čočce. Také tento dalekohled slouží k pozorování vzdálených předmětů.'],['Objektiv sbírá světlo','Spojka stáčí paprsky k sobě. Bez druhé čočky by se za chvíli setkaly.'],['Okulár zachytí světlo dřív','Rozptylka je ještě před místem setkání paprsků. Narovná svazek a oko vidí zvětšený obraz bez převrácení.']]},
+ zrcadlovy:{nazev:'Cassegrainův dalekohled',kratce:'Dvě zrcadla a okulár',vysledek:'Vidíš 60× větší, převrácený obraz.',kroky:[['Světlo vstupuje do tubusu','Světlo míří kolem malého zrcátka až na velké duté zrcadlo vzadu.'],['Velké zrcadlo vrací světlo','Sleduj šipky: světlo se teď šíří zpátky doleva, k malému vypuklému zrcátku.'],['Malé zrcátko odrazí světlo podruhé','Světlo nyní míří doprava. Projde středovým otvorem ve velkém zrcadle a vytvoří obraz.'],['Okulár zvětší pohled','Čočka za otvorem funguje jako lupa. Dvojí odraz umožnil vměstnat dlouhou dráhu světla do krátkého přístroje.']]},
+ pozemni:{nazev:'Pozemní dalekohled',kratce:'Tři spojky',vysledek:'Vidíš 6× větší, přímý obraz.',kroky:[['Světlo přichází z krajiny','Přední čočka zachytí téměř rovnoběžné paprsky od vzdáleného bodu.'],['Objektiv obraz převrátí','První čočka vytvoří malý převrácený obraz. Zelená šipka ukazuje jeho polohu i převrácení.'],['Prostřední čočka obraz otočí zpět','Další spojka vytvoří druhý skutečný obraz. Dvojí převrácení znamená, že teď už je obraz přímý.'],['Okulár zvětší pohled','Poslední čočka přiblíží druhý meziobraz oku. Krajinu vidíš zvětšeně a správně orientovanou.']]},
+ mikroskop:{nazev:'Mikroskop',kratce:'Dvě spojky, předmět zblízka',vysledek:'Vidíš 100× větší, převrácený obraz.',kroky:[['Malý předmět je těsně před objektivem','Místo vzdálené hvězdy pozorujeme malý blízký předmět. Paprsky vycházejí z jeho horního bodu.'],['Objektiv vytvoří větší obraz','První čočka vytvoří zvětšený, převrácený meziobraz. V této soustavě je desetkrát větší než předmět.'],['Okulár funguje jako lupa','Druhá čočka zvětší pohled na meziobraz ještě desetkrát. Zvětšení se násobí: 10 × 10 = 100.']]},
+ lupa:{nazev:'Lupa',kratce:'Jedna spojka',vysledek:'Vidíš zvětšený, přímý zdánlivý obraz.',kroky:[['Předmět je blízko čočky','Předmět leží blíž než ohnisko spojky. Sleduj světlo vycházející z jeho horního bodu.'],['Čočka změní směr paprsků','Paprsky se za lupou stále rozbíhají. Oko je vnímá, jako by vycházely z většího předmětu dál vlevo. Zelené čárkované čáry ukazují tento zdánlivý původ.']]},
+ projektor:{nazev:'Promítačka',kratce:'Jedna spojka a obraz na stěně',vysledek:'Na stěně vznikne 5× větší, převrácený obraz.',kroky:[['Předmět posílá světlo do čočky','Předmět je o trochu dál od spojky než její ohnisko.'],['Paprsky se sejdou na stěně','Spojka vytvoří skutečný obraz. Můžeš jej zachytit na stěně nebo stínítku; oproti předmětu je větší a převrácený.']]}
+};
+const xml=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&apos;'}[c]));
+function ikonaPristroje(k){
+ const lens=(x,h=18)=>`<ellipse cx="${x}" cy="24" rx="4" ry="${h}" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2"/>`;
+ let parts='';
+ if(k==='zrcadlovy')parts='<path d="M86 5Q100 24 86 43M38 16Q31 24 38 32" fill="none" stroke="currentColor" stroke-width="3"/>'+lens(109,8);
+ else if(k==='pozemni')parts=lens(24)+lens(62,14)+lens(101,10);
+ else if(k==='galileo')parts=lens(30)+'<path d="M90 12Q97 24 90 36H102Q95 24 102 12Z" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2"/>';
+ else if(['lupa','projektor'].includes(k))parts=lens(60);
+ else parts=lens(30,k==='mikroskop'?10:18)+lens(96,12);
+ return `<svg viewBox="0 0 120 48" aria-hidden="true"><path d="M8 24H112" stroke="var(--warn)" stroke-width="2"/><path d="M7 13H20M7 35H20" stroke="var(--warn)" stroke-width="1.5"/>${parts}</svg>`;
+}
+
+for(const [k,p] of Object.entries(PRUVODCE)){
+ const b=document.createElement('button');b.dataset.volba=k;b.innerHTML=ikonaPristroje(k)+'<strong>'+p.nazev+'</strong><small>'+p.kratce+'</small>';b.onclick=()=>vyberPruvodce(k);$('vyberPristroje').append(b);
+}
+function vyberPruvodce(k){vyukovyPreset=k;faze=0;$('preset').value=k;nacti(k);zobrazPruvodce();}
+function prepniRezim(r){
+ if(rezim===r)return;
+ if(r==='pruvodce'){vlastniLavice=stavSoubor();rezim=r;vyberPruvodce(vyukovyPreset);}
+ else{rezim=r;if(vlastniLavice)obnov(vlastniLavice);else{$('preset').value=vyukovyPreset;nacti(vyukovyPreset);}}
+ document.body.dataset.rezim=r;
+ $('rezimPruvodce').setAttribute('aria-pressed',String(r==='pruvodce'));$('rezimStavba').setAttribute('aria-pressed',String(r==='stavba'));
+ if(r==='stavba'){document.querySelector('.ovladace').open=true;osovy=false;$('osovy').checked=false;vybrany=-1;panelZPrvku();kresli();}
+}
+$('rezimPruvodce').onclick=()=>prepniRezim('pruvodce');$('rezimStavba').onclick=()=>prepniRezim('stavba');
+$('zkusStavbu').onclick=()=>{vlastniLavice=null;prepniRezim('stavba');};
+$('predchoziVysvetleni').onclick=()=>{faze=Math.max(0,faze-1);zobrazPruvodce();};
+$('dalsiVysvetleni').onclick=()=>{faze=Math.min(PRUVODCE[vyukovyPreset].kroky.length-1,faze+1);zobrazPruvodce();};
+$('ukazCele').onclick=()=>{faze=PRUVODCE[vyukovyPreset].kroky.length-1;zobrazPruvodce();};
+function zobrazPruvodce(){
+ const p=PRUVODCE[vyukovyPreset],v=vysledek(),seq=v.svazek.seq||[],last=faze===p.kroky.length-1,mobil=matchMedia('(max-width:560px)').matches;
+ $('jmenoPristroje').textContent=p.nazev;$('cisloKroku').textContent='KROK '+(faze+1)+' ZE '+p.kroky.length;
+ $('titulekKroku').textContent=p.kroky[faze][0];$('textKroku').textContent=mobil?p.kroky[faze][1].replaceAll('doleva','vzhůru').replaceAll('doprava','dolů').replaceAll('dál vlevo','výš nahoře'):p.kroky[faze][1];
+ $('predchoziVysvetleni').disabled=faze===0;$('dalsiVysvetleni').disabled=last;
+ $('vysledekJednoduse').hidden=!last;$('vysledekVeta').textContent=p.vysledek;
+ $('orientaceVeta').textContent=vyukovyPreset==='mikroskop'?'Zvětšení porovnáváme s pohledem na předmět ze vzdálenosti 25 cm.':'Předvolba je správně zaostřená. Ve vlastní stavbě můžeš zjistit, co změní posunutí čoček.';
+ document.querySelectorAll('[data-volba]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.volba===vyukovyPreset)));
+ $('krokyPristroje').replaceChildren();p.kroky.forEach((k,i)=>{const b=document.createElement('button');b.innerHTML='<span>'+(i+1)+'</span>'+k[0];b.setAttribute('aria-current',i===faze?'step':'false');b.onclick=()=>{faze=i;zobrazPruvodce();};$('krokyPristroje').append(b);});
+ const [a,b]=rozsah(v),W=1000,H=400,axis=210,X=z=>90+(z-a)/(b-a)*800;
+ const ymax=Math.max(nejvetsiClona(),objekt.h,...(v.obrazy?.kroky||[]).filter(k=>k&&k.vgapu).map(k=>Math.abs(k.y)));
+ const scale=110/ymax,Y=y=>axis-y*scale;
+ const line=(x1,y1,x2,y2,color,width=2,dash='')=>`<path d="M${x1} ${y1}L${x2} ${y2}" fill="none" stroke="${color}" stroke-width="${width}" ${dash?'stroke-dasharray="'+dash+'"':''}/>`;
+ const text=(txt,x,y,color='var(--text)',size=16)=>`<text ${mobil?`transform="matrix(0 -1 ${1/.65} 0 ${x} ${y})" x="0" y="0" text-anchor="${y<85?'end':y>335?'start':'middle'}"`:`x="${x}" y="${y}" text-anchor="middle"`} fill="${color}" font-size="${size}" font-family="system-ui,sans-serif">${xml(txt)}</text>`;
+ let svg=`<svg viewBox="0 0 ${mobil?400:W} ${mobil?650:H}" role="img" aria-labelledby="schemaTitle schemaDesc"><title id="schemaTitle">${xml(p.nazev)} — krok ${faze+1}</title><desc id="schemaDesc">${xml(p.kroky[faze][1])}</desc><defs><marker id="smerSvetla" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0L7 3L0 6Z" fill="var(--warn)"/></marker></defs>`;
+ if(mobil)svg+='<g transform="matrix(0 .65 -1 0 400 0)">';
+ const minX=Math.min(...prvky.map(q=>X(q.z))),maxX=Math.max(...prvky.map(q=>X(q.z)));
+ if(prvky.length>1)svg+=`<rect x="${minX-17}" y="68" width="${maxX-minX+34}" height="263" rx="22" fill="var(--accent-soft)" stroke="var(--border)"/>`;
+ svg+=line(35,axis,965,axis,'var(--border)',1,'5 6');
+ const rays=v.svazek.paprsky.filter((_,i)=>i%2===0);
+ for(const t of rays){
+  const points=t.body.map(q=>[X(q[0]),Y(q[1])]);
+  // Incoming rays extend to the left edge; finite objects retain their actual origin.
+  if(objekt.nekonecno){const q=t.body[0];const z=a-(b-a)*.065;points.unshift([X(z),Y(q[1]+t.smery[0][1]*(z-q[0]))]);}
+  const offset=objekt.nekonecno?1:0;
+  for(let j=offset;j<points.length-1;j++){
+   const stage=j-offset;const show=stage<=faze;
+   if(show){const A=points[j],B=points[j+1];svg+=line(...A,...B,'var(--warn)',2.5);svg+=`<path d="M${A[0]} ${A[1]}L${(A[0]+B[0])/2} ${(A[1]+B[1])/2}" fill="none" stroke="var(--warn)" stroke-width="2.5" marker-end="url(#smerSvetla)"/>`;}
+  }
+  if(objekt.nekonecno)svg+=line(...points[0],...points[1],'var(--warn)',2.5);
+  if(last){const q=t.body.at(-1),end=b+(b-a)*.055,dt=(end-q[0])/t.dir;svg+=line(X(q[0]),Y(q[1]),X(end),Y(q[1]+t.u*dt),'var(--warn)',2.5);svg+=`<path d="M${X(q[0])} ${Y(q[1])}L${X(q[0]+t.dir*dt*.65)} ${Y(q[1]+t.u*dt*.65)}" fill="none" stroke="var(--warn)" stroke-width="2.5" marker-end="url(#smerSvetla)"/>`;
+   if(v.typ==='obraz'&&!v.obraz.skutecny){const dt2=(v.obraz.z-q[0])/t.dir;svg+=line(X(q[0]),Y(q[1]),X(v.obraz.z),Y(q[1]+t.u*dt2),'var(--ok)',1.8,'5 5');}
+  }
+ }
+ prvky.forEach((q,i)=>{
+  const x=X(q.z),h=Math.max(16,q.a*scale),active=seq[Math.min(Math.max(0,faze-1),seq.length-1)]===i,color=active?'var(--accent)':'var(--text-muted)';
+  if(TYPY[q.typ].zrcadlo){const bend=q.typ==='dute'?16:-10;const d=(q.d||0)*scale;svg+=`<path d="M${x} ${axis-h}Q${x+bend} ${axis-h/2} ${x+bend} ${axis-d}M${x+bend} ${axis+d}Q${x+bend} ${axis+h/2} ${x} ${axis+h}" fill="none" stroke="${color}" stroke-width="5"/>`;}
+  else{const spread=q.typ==='rozptylka';svg+=`<path d="M${x-(spread?12:0)} ${axis-h}Q${x+(spread?4:17)} ${axis} ${x-(spread?12:0)} ${axis+h}L${x+(spread?12:0)} ${axis+h}Q${x-(spread?4:17)} ${axis} ${x+(spread?12:0)} ${axis-h}Z" fill="var(--bg-panel)" fill-opacity=".7" stroke="${color}" stroke-width="3"/>`;}
+  const name=q.role||TYPY[q.typ].nazev;const labelY=i%2?365:40;svg+=line(x,labelY===40?55:343,x,labelY===40?axis-h-8:axis+h+8,'var(--border)',1.5);
+  svg+=text(name.charAt(0).toUpperCase()+name.slice(1),Math.max(110,Math.min(875,x)),labelY,color,19);
+  if(active)svg+=`<circle cx="${x}" cy="${labelY===40?60:337}" r="5" fill="var(--accent)"/>`;
+ });
+ if(!objekt.nekonecno){const x=X(0),y=Y(objekt.h);svg+=line(x,axis,x,y,'var(--text)',4)+`<path d="M${x-6} ${y+10}L${x} ${y}L${x+6} ${y+10}" fill="none" stroke="var(--text)" stroke-width="3"/>`+text('Předmět',Math.max(55,x-20),axis+35,'var(--text)',15);}
+ else{svg+=text('✦',37,axis-40,'var(--warn)',40)+text('Z dálky',46,axis+35,'var(--text-muted)',15);}
+ if(v.obrazy) v.obrazy.kroky.forEach((q,i)=>{if(!q||(!q.vgapu&&!(last&&i===v.obrazy.kroky.length-1))||faze<i+1)return;const x=X(q.z),y=Y(q.y),sgn=q.y>0?1:-1;svg+=line(x,axis,x,y,'var(--ok)',4,q.skutecny?'':'5 5')+`<path d="M${x-6} ${y+sgn*10}L${x} ${y}L${x+6} ${y+sgn*10}" fill="none" stroke="var(--ok)" stroke-width="3"/>`+text('Obraz',x,y+(q.y>0?-13:23),'var(--ok)',16);});
+ if(last&&vyukovyPreset!=='projektor')svg+=`<g transform="translate(947 210)"><path d="M-23 0Q0 -25 23 0Q0 25 -23 0Z" fill="var(--bg-panel)" stroke="var(--text-muted)" stroke-width="2"/><circle r="7" fill="var(--accent)"/></g>`+text('Oko',947,251,'var(--text-muted)',16);
+ if(last&&vyukovyPreset==='projektor')svg+=line(X(v.obraz.z),70,X(v.obraz.z),330,'var(--text-muted)',2,'5 5')+text('Stěna',X(v.obraz.z),352,'var(--text-muted)',16);
+ svg+=(mobil?'</g>':'')+'</svg>';$('schemaPristroje').innerHTML=svg;
+}
+// Model details are available on demand, outside the first learning path.
+const podrobnosti=document.createElement('details');podrobnosti.className='modelDetaily';podrobnosti.innerHTML='<summary>O modelu a jeho zjednodušení</summary>';const model=document.querySelector('.model');model.before(podrobnosti);podrobnosti.append(model);
+document.body.dataset.rezim='pruvodce';vyberPruvodce('kepler');
+matchMedia('(max-width:560px)').addEventListener('change',()=>{if(rezim==='pruvodce')zobrazPruvodce();});
+
+</script>
+</body>
+</html>

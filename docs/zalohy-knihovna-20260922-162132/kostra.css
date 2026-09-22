@@ -1,0 +1,196 @@
+/* ============================================================
+   kostra.css – vzhled společné kostry stránky (viz kostra.js).
+   Barvy bere z common.css; barvu předmětu nastaví kostra.js
+   do proměnné --predmet na <html>.
+   ============================================================ */
+:root { --predmet: var(--predmet-nastroj, #9aa4ad); }
+
+/* nadpis stránky dostane podtržení v barvě předmětu – stejný znak na všech stránkách */
+h1.kostra-nadpis {
+  border-left: 5px solid var(--predmet);
+  padding-left: 10px;
+}
+
+.kostra {
+  max-width: 900px;
+  margin: 6px 0 16px;
+  padding: 10px 14px 12px;
+  background: var(--bg-panel);
+  border: 1px solid var(--border);
+  border-left: 5px solid var(--predmet);
+  border-radius: var(--radius, 8px);
+  font-family: var(--font);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--text);
+  text-align: left;
+}
+.kostra.kostra-nahore { margin: 8px auto 12px; width: calc(100% - 20px); }
+.kostra p { margin: 0; }
+
+.kostra-radek { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; }
+.kostra-predmet {
+  font-weight: 700;
+  color: var(--predmet);
+}
+.kostra-sekce, .kostra-rocnik { color: var(--text-muted); }
+.kostra-sekce::before, .kostra-rocnik::before { content: '·'; margin-right: 10px; color: var(--text-faint); }
+
+.kostra-cil { margin-top: 6px !important; }
+.kostra-cil b { color: var(--text); }
+
+/* jednořádková kostra pro aplikace a simulace na celou obrazovku */
+.kostra.kostra-kompakt {
+  max-width: none; width: auto; margin: 0; padding: 6px 12px;
+  border-radius: 0; border-width: 0 0 1px 5px;
+  display: flex; flex-wrap: wrap; align-items: center; gap: 4px 16px;
+  font-size: 0.84rem; line-height: 1.4;
+}
+.kostra.kostra-kompakt.kostra-nahore { margin: 0; width: auto; }
+.kostra-kompakt .kostra-cil { margin: 0 !important; flex: 1 1 320px; }
+.kostra-kompakt .kostra-faze { margin: 0; }
+.kostra-kompakt .kostra-faze button { min-height: 30px; padding: 3px 10px; }
+.kostra-kroky { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; }
+
+/* lišta fází */
+.kostra-faze { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.kostra-faze button {
+  font: inherit;
+  font-size: 0.86rem;
+  color: var(--text);
+  background: var(--bg-control);
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  padding: 6px 13px;
+  min-height: 36px;
+  cursor: pointer;
+}
+.kostra-faze button:hover { border-color: var(--predmet); }
+.kostra-faze button[aria-pressed="true"] {
+  background: color-mix(in srgb, var(--predmet) 22%, var(--bg-control));
+  border-color: var(--predmet);
+  font-weight: 600;
+}
+.kostra-naposledy { color: var(--text-muted); font-size: 0.8rem; }
+.kostra-hlaseni { margin-top: 8px !important; color: var(--text-muted); font-size: 0.85rem; }
+
+/* rodina témat */
+.kostra-rodina { margin-top: 10px; border-top: 1px solid var(--border); padding-top: 8px; }
+.kostra-rodina summary { cursor: pointer; color: var(--text); }
+.kostra-rodina-stitek { font-weight: 700; color: var(--predmet); }
+.kostra-rodina-poradi { color: var(--text-muted); font-size: 0.84rem; }
+.kostra-rodina-popis { color: var(--text-muted); margin-top: 6px !important; }
+.kostra-cesta { margin: 8px 0 0 1.4em; padding: 0; columns: 2 260px; column-gap: 24px; }
+.kostra-cesta li { margin: 2px 0; break-inside: avoid; }
+.kostra-cesta small { color: var(--text-muted); }
+.kostra-tady { font-weight: 700; }
+.kostra-hlavni {
+  margin-left: 6px; font-size: 0.75rem; white-space: nowrap;
+  color: var(--text-muted);
+}
+.kostra a, .kostra-zapati a, .kostra-vysledek a { color: var(--accent-hover); }
+
+.kostra :is(button, a, summary):focus-visible,
+.kostra-overeni button:focus-visible,
+.kostra-vysledek button:focus-visible,
+.kostra-dialog button:focus-visible,
+.kostra-zapati a:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+/* krátké zvýraznění cíle po skoku z lišty fází */
+.kostra-zvyrazni { animation: kostraZvyrazni 1.4s ease; }
+@keyframes kostraZvyrazni {
+  0% { box-shadow: 0 0 0 0 transparent; }
+  25% { box-shadow: 0 0 0 4px color-mix(in srgb, var(--predmet) 55%, transparent); }
+  100% { box-shadow: 0 0 0 0 transparent; }
+}
+
+/* zápatí Kam dál (stejné jako .navaznosti ve vyuka.css, pro stránky bez něj) */
+.kostra-zapati {
+  max-width: 900px; margin: 22px 0 10px; padding: 12px 14px;
+  border: 1px solid var(--border); border-left: 5px solid var(--predmet);
+  border-radius: var(--radius, 8px); background: var(--bg-panel);
+  font-family: var(--font); font-size: 0.9rem; line-height: 1.5; color: var(--text); text-align: left;
+}
+.kostra-zapati h2 {
+  font-size: 0.8rem; text-transform: uppercase; letter-spacing: .05em;
+  color: var(--text-muted); margin: 0 0 6px;
+}
+.kostra-zapati .radek { display: flex; flex-wrap: wrap; gap: 6px 14px; }
+body > .kostra-zapati { margin-left: auto; margin-right: auto; width: calc(100% - 20px); }
+body.kostra-stranka:has(> .plocha, > #plocha, > h1) > .kostra-zapati { margin-left: 0; width: auto; }
+
+/* Ověř se */
+.kostra-overeni, .kostra-vysledek {
+  max-width: 900px; margin: 0 0 12px; padding: 10px 14px;
+  border: 2px solid var(--predmet); border-radius: var(--radius, 8px);
+  background: color-mix(in srgb, var(--predmet) 10%, var(--bg-panel));
+  display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px;
+  font-family: var(--font); color: var(--text); text-align: left;
+}
+.kostra-overeni-stav { margin: 0; font-weight: 600; flex: 1 1 260px; }
+.kostra-body { display: flex; gap: 5px; }
+.kostra-bod {
+  width: 13px; height: 13px; border-radius: 50%;
+  border: 2px solid var(--border-strong); background: transparent;
+}
+.kostra-bod.ted { border-color: var(--predmet); }
+.kostra-bod.ok { background: var(--ok); border-color: var(--ok); }
+.kostra-bod.chyba { background: var(--danger); border-color: var(--danger); }
+.kostra-overeni button, .kostra-vysledek button, .kostra-dialog button {
+  font: inherit; font-size: 0.88rem; color: var(--text); background: var(--bg-control);
+  border: 1px solid var(--border-strong); border-radius: 6px; padding: 7px 12px; min-height: 38px; cursor: pointer;
+}
+.kostra-vysledek { display: block; }
+.kostra-vysledek h2 { font-size: 1.15rem; margin: 0 0 6px; }
+.kostra-vysledek p { margin: 6px 0; }
+.kostra-zopakuj { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.kostra-vysledek button.hlavni, .kostra-dialog button.hlavni {
+  background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600;
+}
+.kostra-dialog-tlacitka { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+
+/* během ověření bez nápověd a pomůcek */
+body.kostra-overuje :is(#btnNapoveda, .pomucka, .napoveda, .pravidla, .tahak, [data-faze="tahak"], [data-faze="vyuka"]):not(.kostra *):not(.odezva) {
+  display: none !important;
+}
+body.kostra-overuje .kostra-faze button:not([data-faze="overse"]) { opacity: .55; }
+
+/* Tahák */
+.kostra-dialog {
+  width: min(760px, calc(100vw - 24px)); max-height: calc(100vh - 40px);
+  border: 1px solid var(--border-strong); border-top: 5px solid var(--predmet);
+  border-radius: 10px; padding: 16px 18px; background: var(--bg-panel); color: var(--text);
+  font-family: var(--font); line-height: 1.5; text-align: left;
+}
+.kostra-dialog::backdrop { background: rgba(0, 0, 0, .55); }
+.kostra-dialog > h2 { font-size: 1.1rem; margin: 0 0 10px; }
+.kostra-tahak-obsah h2 { font-size: .8rem; }
+.kostra-tahak-obsah > * { margin: 0 0 10px; max-width: none; }
+.kostra-tahak-obsah .pomucka { display: flex; flex-wrap: wrap; gap: 10px; }
+
+@media (max-width: 520px) {
+  .kostra { padding: 9px 10px 10px; }
+  .kostra-faze button { padding: 6px 10px; }
+  .kostra-cesta { columns: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .kostra-zvyrazni { animation: none; }
+}
+
+/* tisk: kostra na papír nepatří; tahák se tiskne sám */
+@media print {
+  .kostra, .kostra-zapati, .kostra-overeni, .kostra-vysledek { display: none !important; }
+  body.kostra-tisk-tahaku > :not(dialog.kostra-dialog) { display: none !important; }
+  body.kostra-tisk-tahaku dialog.kostra-dialog {
+    position: static; display: block; width: auto; max-height: none; border: 0; padding: 0;
+    background: #fff; color: #000;
+  }
+  body.kostra-tisk-tahaku .kostra-dialog-tlacitka { display: none; }
+}
+.kostra-vysledek h2:focus { outline: none; }
+
+/* stránky si stylují <details> po svém (karty, rámečky) – v kostře ne */
+.kostra .kostra-rodina details, .kostra .kostra-rodina summary {
+  background: none; border: 0; box-shadow: none; padding: 0; margin: 0; border-radius: 0;
+}
+.kostra .kostra-rodina summary { display: list-item; font-size: inherit; font-weight: inherit; }

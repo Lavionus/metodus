@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="../common.css">
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
   <style>
     body { background-color: var(--bg-deep); padding: 24px clamp(14px, 3vw, 40px); min-height: 100vh; }
     h1 { font-size: 1.4rem; margin-bottom: 4px; }
@@ -16,7 +17,7 @@
       background: var(--bg-control); border: 1px solid var(--border-strong); color: var(--text-muted);
       border-radius: 6px; padding: 7px 13px; font-size: 0.84rem; cursor: pointer;
     }
-    .rezimy button.active { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+    .rezimy button.active { background: var(--accent); border-color: var(--accent); color: var(--na-akcentu, #fff); font-weight: 600; }
     .karta { background: var(--bg-panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 26px; max-width: 640px; }
     .rovnice { font-size: clamp(1.8rem, 7vw, 2.6rem); font-weight: 700; text-align: center; margin-bottom: 22px; font-variant-numeric: tabular-nums; }
     .odpovedni { display: flex; gap: 10px; align-items: center; justify-content: center; flex-wrap: wrap; }
@@ -27,7 +28,7 @@
     }
     input:focus { outline: none; border-color: var(--accent); }
     .potvrdit {
-      background: var(--accent); border: none; color: #fff; border-radius: 8px;
+      background: var(--accent); border: none; color: var(--na-akcentu, #fff); border-radius: 8px;
       padding: 11px 26px; font-size: 0.95rem; font-weight: 600; cursor: pointer;
     }
     .potvrdit:hover { background: var(--accent-hover); }
@@ -65,7 +66,7 @@
     }
     .operace button:hover:not(:disabled) { border-color: var(--accent); }
     .operace button:disabled { opacity: 0.32; cursor: default; }
-    .operace button.hotovo { background: var(--ok); border-color: var(--ok); color: #fff; font-weight: 600; }
+    .operace button.hotovo { background: var(--ok); border-color: var(--ok); color: var(--na-akcentu, #fff); font-weight: 600; }
     .hlaska { text-align: center; margin-top: 14px; min-height: 1.6rem; font-size: 0.95rem; color: var(--text-muted); }
     .hlaska.ok { color: var(--ok); font-weight: 600; }
     .kroky-vahy {
@@ -82,7 +83,7 @@
   <p class="podtitul">Řešení rovnic o jedné neznámé (8.–9. ročník ZŠ). Všechny mají celočíselné řešení.</p>
 
   <div class="rezimy" id="rezimy">
-    <button data-rezim="vahy">⚖️ Váhy</button>
+    <button data-rezim="vahy" data-faze="vyuka">⚖️ Váhy</button>
     <button data-uroven="1" class="active">x + a = b</button>
     <button data-uroven="2">a·x = b</button>
     <button data-uroven="3">a·x + b = c</button>
@@ -103,12 +104,12 @@
     <div class="kroky-vahy" id="krokyVahy"></div>
   </div>
 
-  <div class="karta" id="kartaUloha">
+  <div class="karta" id="kartaUloha" data-kostra-odpovedi>
     <div class="rovnice" id="rovnice"></div>
     <div class="odpovedni">
       <span class="x">x =</span>
       <input type="number" id="odpoved" autocomplete="off">
-      <button class="potvrdit" id="btnPotvrdit">Potvrdit</button>
+      <button class="potvrdit" id="btnPotvrdit">✔️ Zkontrolovat</button>
     </div>
     <div class="zprava" id="zprava"></div>
     <div class="reseni" id="reseni"></div>
@@ -133,8 +134,10 @@ const cst = (k, prvni) => (k < 0 ? (prvni ? '−' : '− ') : (prvni ? '' : '+ '
    se zápisem členů výše – jinak vyjde nesourodé „x − 7 = -15“. */
 const cis = n => String(n).replace('-', '−');
 
+let otazkaKostry = {};   // společná kostra – jedna otázka = jeden objekt
 function nova() {
   vyhodnoceno = false;
+  otazkaKostry = {};
   x = ni(-9, 9);
   if (uroven === 1) {
     const a = neNula(-15, 15), b = x + a;
@@ -166,8 +169,9 @@ function nova() {
   $('odpoved').value = '';
   $('zprava').textContent = ''; $('zprava').className = 'zprava';
   $('reseni').style.display = 'none';
-  $('btnPotvrdit').textContent = 'Potvrdit';
+  $('btnPotvrdit').textContent = '✔️ Zkontrolovat';
   $('odpoved').focus();
+  window.Kostra?.otazka();
 }
 function vyhodnot() {
   if (vyhodnoceno) { nova(); return; }
@@ -175,13 +179,14 @@ function vyhodnot() {
   if (v === '') { $('odpoved').focus(); return; }
   vyhodnoceno = true; celkem++;
   const ok = Number(v) === x;
+  window.Kostra?.odpoved(ok, otazkaKostry);
   if (ok) { spravne++; serie++; $('zprava').textContent = '✅ Správně, x = ' + cis(x) + '.'; $('zprava').classList.add('ok'); }
   else { serie = 0; $('zprava').textContent = '❌ Správné řešení je x = ' + cis(x) + '.'; $('zprava').classList.add('spatne'); }
   $('reseni').innerHTML = '💡 Postup:<br>' + zapis + '<br>' + kroky.join('<br>');
   $('reseni').style.display = 'block';
   $('serie').textContent = serie >= 3 ? '🔥 série ' + serie : '';
   $('skore').textContent = spravne + ' / ' + celkem;
-  $('btnPotvrdit').textContent = 'Další →';
+  $('btnPotvrdit').textContent = 'Pokračovat →';
 }
 /* ============================================================
    Model vah: a·x + b = c. Všechna čísla držíme kladná, aby šlo

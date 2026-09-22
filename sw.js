@@ -6,12 +6,23 @@
 /* Při větší aktualizaci webu zvyš číslo verze — stará cache se u návštěvníků
    smaže a vše se stáhne čerstvé (jinak SWR ukáže novou verzi až na druhé načtení). */
 const PREFIX = 'metodus-';
-const CACHE = PREFIX + 'v76';
+const CACHE = PREFIX + 'v84';
 const JADRO = [
   './',
   './index.html',
   './apps.js',
+  './propojeni.css',
+  './propojeni.js',
+  './prubeh.js',
   './common.css',
+  './sepia.css',      // motivy importované z common.css
+  './knihovna.css',
+  './skola.css',
+  './nocni-skola.css',
+  './kontrast.css',
+  './obsah/textures/recyklovany-papir.webp',
+  './obsah/textures/knihovna-drevo.webp',
+  './obsah/textures/tabule-krida.webp',
   './theme.js',
   './podpis.js',
   './dialog.js',
@@ -24,6 +35,14 @@ const JADRO = [
   './pisemne.js',
   './mapy.js',
   './vyuka.css',
+  './kostra.js',      // společná kostra každé lekce (hlavička, fáze, rodina)
+  './kostra.css',
+  './nazor.js',       // knihovna názorných prvků (osa, proužek, věta, časová osa)
+  './nazor.css',
+  './data/udalosti.js',      // společná data rodin témat
+  './data/staty.js',
+  './data/horniny.js',
+  './data/tisnova_cisla.js',
   './fonty/playwrite-cz.woff2',   // školní psací písmo (cj1_pismena)
   './manifest.webmanifest',
   './icon-192.png',

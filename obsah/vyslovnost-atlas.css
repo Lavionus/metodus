@@ -1,0 +1,20 @@
+.vyslovnost-atlas { width: 100%; max-width: 960px; margin: 20px auto; padding: clamp(12px,3vw,24px); border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg-panel); text-align: left; box-sizing: border-box; }
+.vyslovnost-atlas summary { cursor: pointer; font-weight: 650; padding: 4px 0; }
+.vyslovnost-atlas h2 { font-size: 1.2rem; margin: 0 0 10px; }
+.atlas-uvod, .atlas-poznamka { color: var(--text-muted); line-height: 1.6; margin: 12px 0; }
+.atlas-volby { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0; }
+.atlas-volby button { color: var(--text); background: var(--bg-control); border: 1px solid var(--border-strong); border-radius: 8px; padding: 9px 12px; font: inherit; cursor: pointer; }
+.atlas-volby button[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-soft); }
+.atlas-volby button:focus-visible, .vyslovnost-atlas summary:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+.atlas-detail { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 20px; align-items: start; }
+.atlas-detail figure { margin: 0; min-width: 0; }
+.atlas-detail img { display: block; width: 100%; height: auto; aspect-ratio: 1; border-radius: 12px; background: #faf6ec; }
+.atlas-detail figcaption { margin-top: 8px; font-size: .82rem; color: var(--text-muted); }
+.atlas-vyklad { min-width: 0; line-height: 1.6; }
+.atlas-vyklad h3 { font-size: 1.25rem; margin: 0 0 8px; }
+.atlas-vyklad p { margin: 0 0 12px; }
+.atlas-vyklad details { padding: 10px 12px; background: var(--bg-elevated); border-radius: 8px; margin-top: 14px; }
+.atlas-vyklad details p { margin: 10px 0 0; }
+.atlas-vyklad a, .atlas-poznamka a { color: var(--accent); }
+.atlas-vyklad strong { color: var(--text); }
+@media (max-width: 600px) { .atlas-detail { grid-template-columns: minmax(0,1fr); } .atlas-detail figure { max-width: 360px; margin: 0 auto; } }

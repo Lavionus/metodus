@@ -1,0 +1,28 @@
+/* Vedené aktivity čtyř pilotních lekcí. Barvy přebírají motiv webu. */
+.pilot { max-width:900px; margin:16px 0 24px; padding:clamp(12px,3vw,24px); border:1px solid var(--border); border-radius:var(--radius); background:var(--bg-panel); line-height:1.6; }
+.pilot h2,.pilot-heading { font-size:1.15rem; margin:0 0 12px; }
+.pilot p { margin:10px 0; }
+.pilot label { display:block; font-weight:600; }
+.pilot input,.pilot select,.pilot button { font:inherit; color:var(--text); background:var(--bg-control); border:1px solid var(--border-strong); border-radius:6px; padding:8px; max-width:100%; }
+.pilot button { cursor:pointer; min-height:44px; }
+.pilot :is(button,input,select,a):focus-visible { outline:3px solid var(--accent); outline-offset:3px; }
+.pilot a,.cil a { color:var(--accent-hover); }
+.pilot-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr)); gap:16px; }
+.pilot-actions { display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; }
+.pilot-result { border-left:4px solid var(--accent); padding:10px 14px; background:var(--bg-elevated); min-height:3em; margin-top:12px; }
+.pilot blockquote { margin:12px 0; padding:16px; border-left:4px solid var(--accent); background:var(--bg-elevated); font-size:1.15rem; }
+.pilot mark { background:var(--accent-soft); color:var(--text); border-bottom:2px solid var(--accent); padding:0 3px; }
+.pilot fieldset { border:1px solid var(--border); padding:12px; min-width:0; margin:12px 0; }
+.pilot fieldset label { font-weight:400; margin:6px 0; }
+.pilot input[type=range] { width:100%; padding:0; }
+.pilot-scale { display:flex; justify-content:space-between; font-size:.8rem; }
+.pilot table { border-collapse:collapse; width:100%; table-layout:fixed; margin:12px 0; }
+.pilot th,.pilot td { border:1px solid var(--border-strong); padding:6px; text-align:center; overflow-wrap:anywhere; }
+.pilot td input { width:100%; min-width:0; box-sizing:border-box; }
+.pilot th:first-child { width:2.5em; }
+.pilot .formula { width:100%; box-sizing:border-box; font-family:monospace; }
+.pilot small { color:var(--text-muted); }
+.pilot [hidden] { display:none; }
+
+body.pilot-tabule > :not(.pilot):not(script) { display:none; }
+body.pilot-tabule .pilot { max-width:1200px; margin:auto; font-size:clamp(1rem,2.2vw,1.6rem); }

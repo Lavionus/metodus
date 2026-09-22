@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="../vyuka.css">
 <script src="../theme.js"></script>
 <script src="../podpis.js" defer></script>
+<script src="../kostra.js" defer></script>
 <script src="../rec.js"></script>
 <script src="../uloha.js"></script>
 <style>
@@ -18,7 +19,7 @@
 .setup{display:flex;gap:12px;flex-wrap:wrap;align-items:end;justify-content:center}
 .setup label{display:block;font-size:.78rem;color:var(--text-faint);margin-bottom:4px}
 .setup select{background:var(--bg-control);border:1px solid var(--border-strong);border-radius:6px;color:var(--text);padding:9px}
-.btn{background:var(--accent);color:#fff;border:none;padding:12px 28px;border-radius:6px;cursor:pointer;font-weight:600;font-size:.95rem}
+.btn{background:var(--accent);color: var(--na-akcentu, #fff);border:none;padding:12px 28px;border-radius:6px;cursor:pointer;font-weight:600;font-size:.95rem}
 .btn:hover{background:var(--accent-hover)}
 .game,.results{display:none}
 .text{line-height:1.75;font-size:1.05rem;white-space:pre-line}
@@ -26,8 +27,8 @@
 .qtyp{font-size:.76rem;color:var(--text-faint);margin-bottom:10px}
 .opt{display:block;width:100%;text-align:left;background:var(--bg-hover);border:1px solid var(--border-strong);border-radius:6px;padding:10px 14px;margin-bottom:8px;color:var(--text);cursor:pointer;font-size:.95rem;font-family:inherit}
 .opt:hover:not(:disabled){border-color:var(--accent)}
-.opt.correct{background:var(--ok);border-color:var(--ok);color:#fff}
-.opt.wrong{background:var(--danger);border-color:var(--danger);color:#fff}
+.opt.correct{background:var(--ok);border-color:var(--ok);color: var(--na-akcentu, #fff)}
+.opt.wrong{background:var(--danger);border-color:var(--danger);color: var(--na-akcentu, #fff)}
 .opt:disabled{cursor:default}
 .progress{font-size:.8rem;color:var(--text-faint);margin-bottom:6px;text-align:center}
 .results{text-align:center}
@@ -74,7 +75,7 @@
     <div class="big" id="finalScore"></div>
     <p style="color:var(--text-faint);margin-top:8px" id="finalDetail"></p>
     <div class="prehled-chyb" id="prehledChyb"></div>
-    <button class="btn" id="againBtn" style="margin-top:16px">🔄 Znovu</button>
+    <button class="btn" id="againBtn" style="margin-top:16px">🔄 Nová série</button>
   </div>
 </div>
 <script>

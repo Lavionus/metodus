@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="../vyuka.css">
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
   <script src="../rec.js"></script>
   <script src="../uloha.js"></script>
   <style>
@@ -18,8 +19,8 @@
       border-radius: 8px; padding: 9px 13px; font-size: 1.05rem; font-family: inherit; cursor: pointer;
     }
     .veta-slova button:hover:not(:disabled) { border-color: var(--accent); }
-    .veta-slova button.spravne { background: var(--ok); border-color: var(--ok); color: #fff; }
-    .veta-slova button.spatne { background: var(--danger); border-color: var(--danger); color: #fff; }
+    .veta-slova button.spravne { background: var(--ok); border-color: var(--ok); color: var(--na-akcentu, #fff); }
+    .veta-slova button.spatne { background: var(--danger); border-color: var(--danger); color: var(--na-akcentu, #fff); }
     .pomucka .skupina { flex: 1 1 180px; }
     .pomucka .skupina.sviti { box-shadow: 0 0 0 2px var(--accent-soft); }
     .pomucka .ukaz { color: var(--accent); font-weight: 700; }

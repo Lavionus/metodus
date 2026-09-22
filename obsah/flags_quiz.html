@@ -7,6 +7,8 @@
 <link rel="stylesheet" href="../common.css">
 <script src="../theme.js"></script>
 <script src="../podpis.js" defer></script>
+<script src="../kostra.js" defer></script>
+<script src="../data/staty.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding:20px}
@@ -15,8 +17,8 @@ h1{font-size:1.6rem;margin-bottom:18px;font-weight:600;text-align:center}
 .card{background:var(--bg-elevated);border:1px solid var(--border);border-radius:8px;padding:24px;margin-bottom:20px}
 .setup{display:flex;gap:12px;flex-wrap:wrap;align-items:end;justify-content:center}
 label{display:block;font-size:.78rem;color:var(--text-faint);margin-bottom:4px}
-select{background:var(--border);border:1px solid var(--border-strong);border-radius:4px;color:var(--text);padding:9px}
-.btn{background:var(--accent);color:#fff;border:none;padding:11px 22px;border-radius:6px;cursor:pointer;font-weight:600}
+select{background:var(--bg-input);border:1px solid var(--border-strong);border-radius:4px;color:var(--text);padding:9px}
+.btn{background:var(--accent);color: var(--na-akcentu, #fff);border:none;padding:11px 22px;border-radius:6px;cursor:pointer;font-weight:600}
 .btn:hover{background:var(--accent)}
 .game,.results{display:none;text-align:center}
 .scorebar{display:flex;justify-content:space-around;margin-bottom:18px}
@@ -39,7 +41,7 @@ select{background:var(--border);border:1px solid var(--border-strong);border-rad
       <div><label>Typ otázek</label><select id="mode"><option value="flag2country">Vlajka → země</option><option value="country2capital">Země → hlavní město</option><option value="capital2country">Hl. město → země</option><option value="mix">Smíšené</option></select></div>
       <div><label>Region</label><select id="region"><option value="europe">Evropa</option><option value="world">Celý svět</option></select></div>
       <div><label>Otázek</label><select id="numQ"><option>10</option><option>15</option><option>20</option></select></div>
-      <button class="btn" id="startBtn">▶️ Start</button>
+      <button class="btn" id="startBtn" data-faze="procvic" data-kostra-overeni="ne">▶️ Spustit sérii</button>
     </div>
   </div>
   <div class="card game" id="gameCard">
@@ -56,17 +58,16 @@ select{background:var(--border);border:1px solid var(--border-strong);border-rad
     <div style="font-size:2rem" id="emoji"></div>
     <div class="big" id="finalScore"></div>
     <p style="color:var(--text-faint)" id="finalDetail"></p>
-    <button class="btn" id="againBtn" style="margin-top:16px">🔄 Hrát znovu</button>
+    <button class="btn" id="againBtn" style="margin-top:16px">🔄 Nová série</button>
   </div>
 </div>
 <script>
 const $=id=>document.getElementById(id);
-const EUROPE=[
-['🇨🇿','Česko','Praha'],['🇸🇰','Slovensko','Bratislava'],['🇵🇱','Polsko','Varšava'],['🇩🇪','Německo','Berlín'],['🇦🇹','Rakousko','Vídeň'],['🇭🇺','Maďarsko','Budapešť'],['🇫🇷','Francie','Paříž'],['🇪🇸','Španělsko','Madrid'],['🇮🇹','Itálie','Řím'],['🇵🇹','Portugalsko','Lisabon'],['🇬🇧','Velká Británie','Londýn'],['🇮🇪','Irsko','Dublin'],['🇳🇱','Nizozemsko','Amsterdam'],['🇧🇪','Belgie','Brusel'],['🇨🇭','Švýcarsko','Bern'],['🇩🇰','Dánsko','Kodaň'],['🇸🇪','Švédsko','Stockholm'],['🇳🇴','Norsko','Oslo'],['🇫🇮','Finsko','Helsinky'],['🇬🇷','Řecko','Atény'],['🇷🇴','Rumunsko','Bukurešť'],['🇧🇬','Bulharsko','Sofie'],['🇭🇷','Chorvatsko','Záhřeb'],['🇸🇮','Slovinsko','Lublaň'],['🇷🇸','Srbsko','Bělehrad'],['🇺🇦','Ukrajina','Kyjev'],['🇱🇹','Litva','Vilnius'],['🇱🇻','Lotyšsko','Riga'],['🇪🇪','Estonsko','Tallinn'],['🇮🇸','Island','Reykjavík']
-];
-const WORLD=EUROPE.concat([
-['🇺🇸','USA','Washington'],['🇨🇦','Kanada','Ottawa'],['🇲🇽','Mexiko','Ciudad de México'],['🇧🇷','Brazílie','Brasília'],['🇦🇷','Argentina','Buenos Aires'],['🇯🇵','Japonsko','Tokio'],['🇨🇳','Čína','Peking'],['🇮🇳','Indie','Nové Dillí'],['🇦🇺','Austrálie','Canberra'],['🇪🇬','Egypt','Káhira'],['🇿🇦','JAR','Pretoria'],['🇷🇺','Rusko','Moskva'],['🇹🇷','Turecko','Ankara'],['🇰🇷','Jižní Korea','Soul'],['🇹🇭','Thajsko','Bangkok'],['🇮🇩','Indonésie','Jakarta'],['🇸🇦','Saúdská Arábie','Rijád'],['🇳🇿','Nový Zéland','Wellington'],['🇰🇪','Keňa','Nairobi'],['🇳🇬','Nigérie','Abuja']
-]);
+// Státy jsou společná data rodiny „Světadíly a státy" (data/staty.js),
+// stejná jako v kvízu hlavních měst. [vlajka, stát, hlavní město]
+const naPole=s=>[s.vlajka,s.stat,s.mesto];
+const EUROPE=METODUS_STATY.filter(s=>s.svetadil==='Evropa').map(naPole);
+const WORLD=METODUS_STATY.map(naPole);
 let pool,questions,idx,score,streak;
 function start(){
   pool=$('region').value==='europe'?EUROPE:WORLD;

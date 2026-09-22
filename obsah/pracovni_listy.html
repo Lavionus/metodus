@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="../common.css">
 <script src="../theme.js"></script>
 <script src="../podpis.js" defer></script>
+<script src="../kostra.js" defer></script>
 <script src="../dialog.js" defer></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -27,7 +28,7 @@ select:focus,input:focus,textarea:focus{outline:2px solid var(--accent);outline-
 textarea{width:100%;min-height:120px;background:var(--bg-input);border:1px solid var(--border-strong);border-radius:6px;color:var(--text);padding:9px;font-family:ui-monospace,monospace;font-size:.84rem;resize:vertical}
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .g2 .field{min-width:0}
-.btn{background:var(--accent);color:#fff;border:none;padding:11px 18px;border-radius:6px;cursor:pointer;font-weight:600;font-size:.9rem;font-family:inherit}
+.btn{background:var(--accent);color: var(--na-akcentu, #fff);border:none;padding:11px 18px;border-radius:6px;cursor:pointer;font-weight:600;font-size:.9rem;font-family:inherit}
 .btn:hover{background:var(--accent-hover)}
 .btn.sec{background:var(--bg-control);color:var(--text)}
 .btn.sec:hover{background:var(--bg-hover);border:none}
@@ -43,7 +44,7 @@ textarea{width:100%;min-height:120px;background:var(--bg-input);border:1px solid
 .chips{display:flex;flex-wrap:wrap;gap:5px}
 .chip{background:var(--bg-hover);border:1px solid var(--border-strong);color:var(--text-muted);border-radius:14px;padding:5px 10px;font-size:.78rem;cursor:pointer;font-family:inherit;text-align:left;line-height:1.25}
 .chip:hover{border-color:var(--accent);color:var(--text)}
-.chip.on{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
+.chip.on{background:var(--accent);border-color:var(--accent);color: var(--na-akcentu, #fff);font-weight:600}
 
 /* dvě nezávislé osy filtru: ročník a předmět (stejné jako v menu Metodusu) */
 .filtr{margin-bottom:9px}
@@ -179,6 +180,8 @@ textarea{width:100%;min-height:120px;background:var(--bg-input);border:1px solid
 }
 /* výstraha nad náhledem drží tmavou jantarovou i ve světlém režimu — je to varování */
 </style>
+<link rel="stylesheet" href="../propojeni.css">
+<script src="../pracovni-pilot.js" defer></script>
 </head>
 <body>
 <div class="wrap">
@@ -233,7 +236,7 @@ textarea{width:100%;min-height:120px;background:var(--bg-input);border:1px solid
           </div>
         </div>
         <div class="field" style="margin-top:10px">
-          <label for="seed">Kód listu <span style="color:#666">(stejný kód = stejný list)</span></label>
+          <label for="seed">Kód listu <span style="color:var(--text-faint)">(stejný kód = stejný list)</span></label>
           <div style="display:flex;gap:6px">
             <input type="text" id="seed" maxlength="12" style="text-transform:uppercase">
             <button class="btn sec mini" id="reseed" title="Nový náhodný kód">🎲</button>
@@ -280,7 +283,7 @@ textarea{width:100%;min-height:120px;background:var(--bg-input);border:1px solid
       <div class="card">
         <h3>5 · Hlavička</h3>
         <div class="field" style="margin-bottom:10px"><label for="skola">Škola / třída</label><input type="text" id="skola" placeholder="např. ZŠ Komenského, 4.B"></div>
-        <div class="field" style="margin-bottom:10px"><label for="title">Vlastní nadpis <span style="color:#666">(nepovinné)</span></label><input type="text" id="title" placeholder="např. Opakování před čtvrtletní prací"></div>
+        <div class="field" style="margin-bottom:10px"><label for="title">Vlastní nadpis <span style="color:var(--text-faint)">(nepovinné)</span></label><input type="text" id="title" placeholder="např. Opakování před čtvrtletní prací"></div>
         <div class="field" style="margin-bottom:12px"><label for="instr">Pokyn pro žáky</label><input type="text" id="instr" placeholder="např. Pracuj samostatně, piš čitelně."></div>
         <label class="check"><input type="checkbox" id="idline" checked> Řádek pro jméno a datum</label>
         <label class="check"><input type="checkbox" id="score"> Políčko pro body a známku</label>

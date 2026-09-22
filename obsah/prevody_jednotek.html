@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="../common.css">
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
   <style>
     body { background-color: var(--bg-deep); padding: 24px clamp(14px, 3vw, 40px); min-height: 100vh; }
     h1 { font-size: 1.4rem; margin-bottom: 4px; }
@@ -14,7 +15,7 @@
     .volby { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; align-items: center; }
     .volby .skupina { display: flex; gap: 6px; background: var(--bg-panel); border: 1px solid var(--border); border-radius: 8px; padding: 5px; flex-wrap: wrap; }
     .volby button { background: transparent; border: 1px solid transparent; color: var(--text-muted); border-radius: 6px; padding: 6px 12px; font-size: 0.86rem; cursor: pointer; }
-    .volby button.active { background: var(--accent); color: #fff; font-weight: 600; }
+    .volby button.active { background: var(--accent); color: var(--na-akcentu, #fff); font-weight: 600; }
 
     details.vyber { max-width: 720px; background: var(--bg-panel); border: 1px solid var(--border); border-radius: 8px; padding: 8px 12px; margin-bottom: 14px; }
     details.vyber summary { cursor: pointer; font-size: 0.88rem; color: var(--text-muted); }
@@ -69,7 +70,7 @@
       <span class="jednotka" id="jednotka"></span>
     </div>
     <div class="zprava" id="zprava"></div>
-    <div><button class="nevim" id="btnNevim">Nevím, ukaž řešení</button></div>
+    <div><button class="nevim" id="btnNevim">👁️ Ukázat řešení</button></div>
     <div class="napoveda" id="napoveda"></div>
   </div>
   <div class="stav">

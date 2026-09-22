@@ -1,0 +1,49 @@
+{
+  "ok": true,
+  "results": [
+    {
+      "file": "ch9_ph",
+      "activity": true,
+      "modes": 4,
+      "widths": [
+        1366,
+        390,
+        320
+      ],
+      "themes": 2
+    },
+    {
+      "file": "aj9_neprima_rec",
+      "activity": true,
+      "modes": 4,
+      "widths": [
+        1366,
+        390,
+        320
+      ],
+      "themes": 2
+    },
+    {
+      "file": "d6_prameny",
+      "activity": true,
+      "modes": 4,
+      "widths": [
+        1366,
+        390,
+        320
+      ],
+      "themes": 2
+    },
+    {
+      "file": "inf6_tabulky",
+      "activity": true,
+      "modes": 4,
+      "widths": [
+        1366,
+        390,
+        320
+      ],
+      "themes": 2
+    }
+  ]
+}

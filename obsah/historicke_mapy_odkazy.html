@@ -7,7 +7,13 @@
   <link rel="stylesheet" href="../common.css">
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
   <style>
+    /* Oranžová stránky podle tónu motivu: v tmavém jasná s tmavým písmem na výplni,
+       ve světlém sytější s bílým (text i výplň ≥ 4,5 : 1 ve všech motivech). */
+    :root { --mapy-oranzova: #ff9800; --mapy-oranzova-hover: #ffad33; --mapy-na-oranzove: #1a1a1a; }
+    :root[data-tone="light"] { --mapy-oranzova: #8f4c00; --mapy-oranzova-hover: #6e3a00; --mapy-na-oranzove: #ffffff; }
+
     .warning-box a { color: var(--accent); }
     * {
       margin: 0;
@@ -36,7 +42,7 @@
     .header h1 {
       font-size: 2.2rem;
       font-weight: 700;
-      color: #ff9800;
+      color: var(--mapy-oranzova);
       margin-bottom: 15px;
     }
 
@@ -48,14 +54,14 @@
 
     .warning-box {
       background-color: color-mix(in srgb, var(--danger) 22%, var(--bg-panel));
-      border-left: 4px solid #ff9800;
+      border-left: 4px solid var(--mapy-oranzova);
       padding: 20px;
       border-radius: 8px;
       margin-bottom: 40px;
     }
 
     .warning-box h3 {
-      color: #ff9800;
+      color: var(--mapy-oranzova);
       margin-bottom: 10px;
     }
 
@@ -76,7 +82,7 @@
 
     .site-card:hover {
       transform: translateY(-5px);
-      border-color: #ff9800;
+      border-color: var(--mapy-oranzova);
       box-shadow: 0 8px 25px rgba(255, 152, 0, 0.2);
     }
 
@@ -89,7 +95,7 @@
     .site-title {
       font-size: 1.4rem;
       font-weight: 600;
-      color: #ff9800;
+      color: var(--mapy-oranzova);
       margin-bottom: 10px;
     }
 
@@ -123,7 +129,7 @@
       content: "✓";
       position: absolute;
       left: 0;
-      color: #4caf50;
+      color: var(--ok);
       font-weight: bold;
     }
 
@@ -131,8 +137,8 @@
       display: inline-block;
       width: 100%;
       padding: 12px 24px;
-      background-color: #ff9800;
-      color: white;
+      background-color: var(--mapy-oranzova);
+      color: var(--mapy-na-oranzove);
       text-decoration: none;
       text-align: center;
       border-radius: 6px;
@@ -141,13 +147,13 @@
     }
 
     .site-button:hover {
-      background-color: #f57c00;
+      background-color: var(--mapy-oranzova-hover);
     }
 
     .badge {
       display: inline-block;
       padding: 4px 12px;
-      background-color: #4caf50;
+      background-color: #2e7d32;   /* tmavší odstín: bílé písmo 5,1 : 1 */
       color: white;
       border-radius: 12px;
       font-size: 0.75rem;
@@ -156,11 +162,11 @@
     }
 
     .badge.premium {
-      background-color: #2196f3;
+      background-color: #1565c0;
     }
 
     .badge.czech {
-      background-color: #e91e63;
+      background-color: #c2185b;
     }
 
     .info-section {
@@ -173,7 +179,7 @@
 
     .info-section h2 {
       font-size: 1.6rem;
-      color: #ff9800;
+      color: var(--mapy-oranzova);
       margin-bottom: 20px;
     }
 
@@ -193,7 +199,7 @@
       display: inline-block;
       padding: 12px 30px;
       background-color: var(--accent);
-      color: white;
+      color: var(--na-akcentu, #fff);
       text-decoration: none;
       border-radius: 6px;
       font-weight: 600;
@@ -205,8 +211,6 @@
     }
   
 /* světlý režim: dorovnání kontrastu textu */
-:root[data-theme="light"] h1 { color: #a16000; }
-:root[data-theme="light"] .warning-box h3 { color: #a35c00; }
 </style>
 </head>
 <body>

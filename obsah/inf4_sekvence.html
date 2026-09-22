@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="../vyuka.css">
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
   <script src="../rec.js"></script>
   <script src="../uloha.js"></script>
   <style>
@@ -38,7 +39,7 @@
     }
     .program .prikaz .poradi { font-size: 0.7rem; font-weight: 600; color: var(--text-faint); }
     .program .prikaz:hover { transform: translateY(-2px); border-color: var(--danger); }
-    .program .prikaz.bezi { background: var(--accent); color: #fff; transform: scale(1.12); }
+    .program .prikaz.bezi { background: var(--accent); color: var(--na-akcentu, #fff); transform: scale(1.12); }
     .program .prikaz.hotovy { opacity: 0.45; }
     .program .prazdno { color: var(--text-faint); font-size: 0.85rem; padding: 6px; }
     .program.zamceno .prikaz { cursor: default; }
@@ -53,7 +54,7 @@
     .ovladace button:hover:not(:disabled) { border-color: var(--accent); transform: translateY(-2px); }
     .ovladace button:disabled { opacity: 0.35; cursor: default; }
     .ovladace button.akce { font-size: 0.9rem; font-weight: 600; padding: 10px 14px; }
-    .ovladace button.spustit { background: var(--ok); border-color: var(--ok); color: #fff; }
+    .ovladace button.spustit { background: var(--ok); border-color: var(--ok); color: var(--na-akcentu, #fff); }
     .ovladace .oddel { width: 1px; background: var(--border); margin: 4px 4px; }
 
     .info { text-align: center; color: var(--text-muted); font-size: 0.85rem; margin-top: 8px; }
@@ -77,7 +78,7 @@
   <div class="plocha" id="plocha"></div>
 
   <div class="ovladani">
-    <button class="hlavni" id="btnDalsi">Nová úloha →</button>
+    <button class="hlavni" id="btnDalsi">Přeskočit →</button>
     <span class="skore" id="skore"></span>
   </div>
 

@@ -128,7 +128,7 @@
     .osnova-pruh a {
       margin-left: auto;
       background-color: var(--accent);
-      color: #fff;
+      color: var(--na-akcentu, #fff);
       text-decoration: none;
       border-radius: 6px;
       padding: 8px 14px;
@@ -202,7 +202,7 @@
     }
     .tip a.otevrit, .tip button.nahodne {
       background-color: var(--accent);
-      color: #fff;
+      color: var(--na-akcentu, #fff);
       text-decoration: none;
       border: none;
       border-radius: 6px;
@@ -231,6 +231,8 @@
     .uvod-provoz summary { cursor: pointer; color: var(--accent); padding: 6px 0; }
     .uvod-provoz p { margin-top: 8px; }
   </style>
+<link rel="stylesheet" href="../propojeni.css">
+<script src="../propojeni.js" defer></script>
 </head>
 <body>
   <header class="uvod">
@@ -250,6 +252,7 @@
     <div class="statistika" id="statistika"></div>
   </header>
 
+<section class="propojeni" id="ucelVyuky" aria-label="Výběr podle účelu"></section>
   <section>
     <h2>📅 Ročník</h2>
     <div class="rocniky" id="rocniky"></div>
@@ -258,6 +261,7 @@
   <section>
     <h2>📚 Předměty</h2>
     <div class="predmety" id="predmety"></div>
+    <p class="atlas-odkaz"><a href="vyslovnost.html">Obrazový průvodce výslovností: angličtina, němčina a francouzština →</a></p>
   </section>
 
   <section>
@@ -265,8 +269,8 @@
     <div class="osnova-pruh">
       <span class="znak" aria-hidden="true">🗺️</span>
       <div class="text">
-        <b>Pokrytí učiva podle ročníků</b>
-        <span id="osnovaPopis">Mřížka ročníků a předmětů s přehledem, co je hotové a co se připravuje.</span>
+        <b>Dostupné aplikace podle ročníků</b>
+        <span id="osnovaPopis">Existence aplikace není potvrzením úplného pokrytí učiva.</span>
       </div>
       <a href="osnova.html" id="odkazOsnova">Otevřít osnovu</a>
     </div>
@@ -318,6 +322,8 @@
   </footer>
 
   <script src="../apps.js"></script>
+  <link rel="stylesheet" href="predmety-obrazky.css">
+  <script src="predmety-obrazky.js"></script>
   <script>
     /* Úvodní přehled Metodusu. Běží uvnitř rozcestníku (iframe) i samostatně:
        uvnitř posílá výběr rodičovskému oknu přes postMessage, samostatně
@@ -427,6 +433,8 @@
       temata.className = 'temata';
       temata.textContent = sekce.map(s => rozdel(s.nazev).text).join(' · ');
       el.appendChild(temata);
+      const ilustrace = PredmetyObrazky.skupina(g.id);
+      if (ilustrace) el.prepend(ilustrace);
       el.addEventListener('click', ev => {
         if (vRozcestniku) {
           ev.preventDefault();
