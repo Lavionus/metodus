@@ -49,7 +49,7 @@ canvas{display:block;width:100%;height:100%;cursor:pointer}
 :root[data-tone="light"] #popisky { color: #e0e0e0; }
 :root[data-tone="light"] #drahy { color: #e0e0e0; }
 :root[data-tone="light"] .odkaz { color: #e0e0e0; }
-:root[data-tone="light"] button { color: #e0e0e0; }
+:root[data-tone="light"] button:not(.badani button):not(.kostra button) { color: #e0e0e0; }   /* panel úkolů má barvy motivu */
 
 /* světlé motivy (sépie, škola, kontrast…): tmavé plochy stránky si nechají světlé písmo (tmavý text motivu by na nich zanikl) */
 :root[data-tone="light"] :is(.horni, .zalozky, .info, .vysvetleni) {
@@ -144,11 +144,13 @@ const rozmer=()=>({w:canvas.width/devicePixelRatio,h:canvas.height/devicePixelRa
 function geometrie(){
   const {w,h}=rozmer();
   const cx=w/2,cy=h/2;
-  const maxR=Math.min(w,h)/2-30;
-  return {cx,cy,krok:(maxR-46)/(PLANETY.length-1)};
+  const maxR=Math.max(20,Math.min(w,h)/2-30);
+  // na nízkém plátně (mobil) se zmenší i nejvnitřnější dráha, jinak by krok vyšel záporný
+  const r0=Math.min(46,maxR*0.35);
+  return {cx,cy,r0,krok:(maxR-r0)/(PLANETY.length-1)};
 }
 function polohaPlanety(p,i,g){
-  const r=46+i*g.krok;
+  const r=g.r0+i*g.krok;
   const uhel=cas*365/p.perioda+i*1.7; // úhlová rychlost ~ 1/perioda, normovaná na Zemi
   return {x:g.cx+r*Math.cos(uhel),y:g.cy+r*Math.sin(uhel),r,uhel};
 }
@@ -156,7 +158,7 @@ function kresliSoustavu(){
   const g=geometrie();
   if(ukazDrahy){
     ctx.strokeStyle='rgba(255,255,255,.07)';ctx.lineWidth=1;
-    PLANETY.forEach((p,i)=>{ctx.beginPath();ctx.arc(g.cx,g.cy,46+i*g.krok,0,7);ctx.stroke();});
+    PLANETY.forEach((p,i)=>{ctx.beginPath();ctx.arc(g.cx,g.cy,g.r0+i*g.krok,0,7);ctx.stroke();});
   }
   const zar=ctx.createRadialGradient(g.cx,g.cy,4,g.cx,g.cy,34);
   zar.addColorStop(0,'#fff3b0');zar.addColorStop(.4,'#ffd54f');zar.addColorStop(1,'rgba(255,180,60,0)');
@@ -186,6 +188,7 @@ function kresliSoustavu(){
 
 /* ================= ZÁLOŽKA: SKUTEČNÉ MĚŘÍTKO ================= */
 const SVETLO_MIN_AU=8.317; // světlu trvá 1 AU 8,3 minuty
+const cz1=(x,d)=>x.toFixed(d).replace('.',',');   // česká desetinná čárka
 function kresliMeritko(){
   const {w,h}=rozmer();
   mtkHit=[];
@@ -262,7 +265,7 @@ function kresliMeritko(){
     ctx.fillText(p.nazev,x,nahore?y2-30:y2+28);
     ctx.fillStyle='#778';ctx.font='9px sans-serif';
     const min=p.au*SVETLO_MIN_AU;
-    ctx.fillText(min<60?('světlo '+min.toFixed(1)+' min'):('světlo '+(min/60).toFixed(1)+' h'),x,nahore?y2-19:y2+39);
+    ctx.fillText(min<60?('světlo '+cz1(min,1)+' min'):('světlo '+cz1(min/60,1)+' h'),x,nahore?y2-19:y2+39);
     ctx.strokeStyle='rgba(255,255,255,.2)';
     ctx.beginPath();ctx.moveTo(x,y2-8);ctx.lineTo(x,y2+8);ctx.stroke();
     mtkHit.push({x,y:y2,r:14,p});
@@ -276,7 +279,7 @@ function kresliMeritko(){
   zar.addColorStop(0,'rgba(255,249,192,.8)');zar.addColorStop(1,'rgba(255,249,192,0)');
   ctx.fillStyle=zar;ctx.beginPath();ctx.arc(fx,y2,12,0,7);ctx.fill();
   ctx.fillStyle='#ffe97a';ctx.font='12px sans-serif';ctx.textAlign='center';
-  const t=fotonMin<60?fotonMin.toFixed(1)+' minut':(fotonMin/60).toFixed(2)+' hodin';
+  const t=fotonMin<60?cz1(fotonMin,1)+' minut':cz1(fotonMin/60,2)+' hodin';
   ctx.fillText('💫 foton letí už '+t,w/2,y2+62);
 }
 
@@ -343,7 +346,7 @@ function kresliMesic(){
   ctx.fillStyle='#e0e0e0';ctx.font='600 17px sans-serif';ctx.textAlign='center';
   ctx.fillText(FAZE_NAZVY(f),px,py+pr+32);
   ctx.fillStyle='#889';ctx.font='12px sans-serif';
-  ctx.fillText('den '+dny.toFixed(1)+' z 29,5denního cyklu',px,py+pr+52);
+  ctx.fillText('den '+cz1(dny,1)+' z 29,5denního cyklu',px,py+pr+52);
   ctx.fillStyle='#aab';ctx.font='12px sans-serif';
   ctx.fillText('takhle Měsíc právě vidíme ze Země ↑',px,py-pr-18);
 }
@@ -476,6 +479,132 @@ document.querySelectorAll('#zalozky button').forEach(b=>b.onclick=()=>{
   $('drahy').style.display=jeSoustava?'':'none';
 });
 $('vysvetleni').innerHTML=VYSVETLENI.soustava;
+</script>
+<script src="../badani.js"></script>
+<script>
+/* Úkoly k modelu (badani.js): předpověz → vyzkoušej → vysvětli.
+   Fáze Měsíce, roční období, cesta světla ve skutečném měřítku.
+   Čas modelu: fáze f = (cas·3 mod 29,53)/29,53, rok = cas·0,12 mod 1. */
+(function(){
+const N=Badani.nastav, cis=Badani.cislo;
+const nahodne=p=>p[Math.floor(Math.random()*p.length)];
+const moznost=(t,ok,proc)=>({t,ok,proc});
+const zalozka=r=>document.querySelector(`#zalozky [data-r="${r}"]`).click();
+const beh=()=>{ if(!bezi) $('pauza').click(); N({'#rychlost':40}); };
+const faze=()=>((cas*3)%29.53)/29.53;
+const rok=()=>(cas*0.12)%1;
+let videno={}, fotonPred=0;
+// Foton za Neptunem skočí zpět na začátek – průlet se proto hlídá často
+// a počítá se i skok (kontrola úkolu běží jen 4× za sekundu).
+setInterval(()=>{
+  if(rezim==='meritko'&&(fotonMin>=30.07*SVETLO_MIN_AU||fotonMin<fotonPred-50)) videno.neptun=true;
+  fotonPred=fotonMin;
+},50);
+
+Badani.start({
+  zakryt:'#vysvetleni',   // výklad pod plátnem odpovídá na otázky úkolů
+  ukoly:[
+    { id:'faze', nazev:'Proč se mění tvar Měsíce',
+      predpoved:{
+        otazka:'Měsíc je někdy celý kulatý, jindy jen tenký srpek. Čím to je?',
+        moznosti:['Zakrývá ho stín Země','Vidíme jeho osvětlenou polovinu pokaždé z jiného úhlu','Měsíc se zmenšuje a zase roste'],
+        spravna:1 },
+      priprava(){ zalozka('mesic'); beh(); cas=0.35*29.53/3; videno={}; },
+      pokus:'V záložce <b>🌗 Fáze Měsíce</b> sleduj, kde je Měsíc na dráze (vlevo) a jak ho vidíme ze Země (vpravo). Počkej na <b>úplněk</b>.',
+      splneno:()=>{ if(rezim!=='mesic') return false; const f=faze(); if(f>0.47&&f<0.53) videno.uplnek=true; return !!videno.uplnek; },
+      ukaz:{'#rychlost':100},
+      pozorovani:'Při úplňku stojí Měsíc na <b>opačné straně Země než Slunce</b> – vidíme celou jeho osvětlenou polovinu. Stín Země na něj přitom nepadá.',
+      vysvetli:{
+        otazka:'Proč vidíme při novu Měsíc tmavý?',
+        moznosti:[
+          moznost('Měsíc stojí mezi Zemí a Sluncem a obrací k nám svou neosvětlenou polovinu.',true),
+          moznost('Stín Země ho celý zakryje.',false,'Stín Země padá na Měsíc jen při zatmění (a to při úplňku). Fáze vznikají úhlem pohledu na osvětlenou polovinu.'),
+          moznost('Měsíc je v tu dobu na druhé straně Slunce.',false,'Měsíc obíhá Zemi, ne Slunce – při novu je mezi Zemí a Sluncem.')]},
+      shrnuti:'Slunce osvětluje vždy <b>polovinu Měsíce</b>. Fáze (nov → první čtvrť → úplněk → poslední čtvrť) vznikají tím, jakou část osvětlené poloviny vidíme ze Země. Celý cyklus trvá <b>29,5 dne</b>.' },
+
+    { id:'obdobi', nazev:'Proč je v létě teplo',
+      predpoved:{
+        otazka:'Proč je u nás v červenci tepleji než v prosinci?',
+        moznosti:['Země je v létě blíž Slunci','Severní polokoule je v létě přikloněná ke Slunci','Slunce v létě víc svítí'],
+        spravna:1 },
+      priprava(){ zalozka('obdobi'); beh(); cas=0.45/0.12; videno={}; },
+      pokus:'V záložce <b>🌞 Roční období</b> sleduj Zemi během roku. Všimni si, kam míří zemská osa v <b>prosinci</b> a kam v <b>červnu</b>.',
+      splneno:()=>{ if(rezim!=='obdobi') return false; const m=Math.floor(rok()*12)%12; if(m===6) videno.prosinec=true; if(m===0&&videno.prosinec) videno.cerven=true; return !!videno.cerven; },
+      ukaz:{'#rychlost':100},
+      pozorovani:'Osa Země míří <b>pořád stejným směrem</b>. V červnu je k Slunci přikloněná severní polokoule, v prosinci jižní.',
+      vysvetli:{
+        otazka:'Proč přikloněná polokoule dostává víc tepla?',
+        moznosti:[
+          moznost('Paprsky na ni dopadají strměji (energie se soustředí na menší plochu) a den je delší než noc.',true),
+          moznost('Je o kousek blíž Slunci, protože je přikloněná.',false,'Rozdíl vzdálenosti je proti 150 milionům km zanedbatelný. Rozhoduje sklon paprsků a délka dne.'),
+          moznost('Na přikloněné polokouli je víc pevniny.',false,'S pevninou to nesouvisí – v Austrálii je léto, když je u nás zima.')]},
+      shrnuti:'Roční období způsobuje <b>sklon zemské osy (23,5°)</b>, ne vzdálenost od Slunce – Země je Slunci nejblíž dokonce začátkem ledna. Když je u nás léto, je na jižní polokouli zima.' },
+
+    { id:'svetlo', nazev:'Jak daleko je Neptun',
+      predpoved:{
+        otazka:'Světlo letí od Slunce k Zemi asi <b>8 minut</b>. Neptun je 30× dál. Jak dlouho k němu letí světlo?',
+        moznosti:['Asi 30 minut','Asi 4 hodiny','Asi rok'],
+        spravna:1 },
+      priprava(){ zalozka('meritko'); beh(); fotonMin=0; fotonPred=0; videno={}; },
+      pokus:'V záložce <b>📏 Skutečné měřítko</b> sleduj letící foton, dokud nedoletí k <b>Neptunu</b>. Jak dlouho už letí, ukazuje nápis „💫 foton letí už …“ pod drahou.',
+      splneno:()=>rezim==='meritko'&&!!videno.neptun,
+      ukaz:{'#rychlost':100},
+      pozorovani:()=>`K Neptunu letí světlo <b>${cis(30.07*SVETLO_MIN_AU/60,1)} hodiny</b> (30 au × 8,3 min).`,
+      vysvetli:{
+        otazka:'Co to říká o velikosti sluneční soustavy?',
+        moznosti:[
+          moznost('Vzdálenosti jsou obrovské proti velikosti planet – i nejrychlejší věc ve vesmíru letí k Neptunu přes 4 hodiny.',true),
+          moznost('Světlo se cestou zpomaluje.',false,'Světlo letí prázdným prostorem stále stejně rychle – 300 000 km/s. Dlouhá doba je dána vzdáleností.'),
+          moznost('Neptun je jen o trochu dál než Země, světlo je pomalé.',false,'Neptun je 30× dál než Země (30 au). Proto světlo potřebuje 30× déle.')]},
+      shrnuti:'<b>1 au</b> (Země–Slunce) je asi 150 milionů km, světlo ji urazí za <b>8,3 minuty</b>. Neptun je 30 au daleko – světlo letí přes <b>4 hodiny</b>. Obrázky soustavy proto nikdy nejsou ve skutečném měřítku.' },
+  ],
+
+  otazky:[
+    ()=>{ const [pl,au]=nahodne([['Marsu',1.52],['Jupiteru',5.2],['Saturnu',9.54]]);
+      const min=au*8.317;
+      return { otazka:`Planeta je od Slunce <b>${cis(au,1)} au</b> daleko. Jak dlouho letí světlo ze Slunce k ${pl}?`,
+        moznosti:[moznost(`asi ${cis(min,0)} minut`,true),
+          moznost(`asi ${cis(au,1)} minuty`,false,'Světlo potřebuje na 1 au 8,3 minuty – ne jednu.'),
+          moznost(`asi ${cis(min,0)} sekund`,false,'Na 1 au letí světlo 8,3 minuty, ne sekundy.')],
+        vysvetleni:`${cis(au,1)} au × 8,3 min ≈ ${cis(min,0)} min.` }; },
+    { otazka:'Kdy může nastat <b>zatmění Měsíce</b>?',
+      moznosti:[moznost('Jen při úplňku – Země je mezi Sluncem a Měsícem.',true),
+        moznost('Při každém novu.',false,'Při novu může nastat zatmění Slunce. Zatmění Měsíce vyžaduje, aby na Měsíc padl stín Země – při úplňku.'),
+        moznost('Při první čtvrti.',false,'Při čtvrti není Země mezi Sluncem a Měsícem, stín na Měsíc nedopadne.')],
+      vysvetleni:'Zatmění nenastává každý měsíc, protože dráha Měsíce je trochu skloněná.' },
+    { otazka:'Jak dlouho trvá celý cyklus <b>fází Měsíce</b>?',
+      moznosti:[moznost('Asi 29,5 dne',true),
+        moznost('Přesně 7 dní',false,'Sedm dní trvá jen jedna čtvrtina cyklu (například od novu k první čtvrti).'),
+        moznost('Jeden rok',false,'Za rok proběhne fází asi dvanáct – proto máme dvanáct měsíců.')],
+      vysvetleni:'Od novu do dalšího novu uplyne 29,5 dne.' },
+    { otazka:'Když je u nás <b>zima</b>, jaké období je v Austrálii?',
+      moznosti:[moznost('Léto',true),
+        moznost('Také zima',false,'V prosinci je ke Slunci přikloněná jižní polokoule – v Austrálii je léto.'),
+        moznost('Jaro',false,'Protější polokoule má vždy opačné období: naše zima = jejich léto.')],
+      vysvetleni:'Polokoule se ke Slunci přiklánějí střídavě.' },
+    { otazka:'Kdy je Země Slunci <b>nejblíž</b>?',
+      moznosti:[moznost('Začátkem ledna',true),
+        moznost('Uprostřed léta',false,'Léto nezpůsobuje vzdálenost. Země je nejblíž Slunci v zimě (3. ledna).'),
+        moznost('Vzdálenost je pořád úplně stejná',false,'Dráha Země je mírná elipsa – v lednu je o 5 milionů km blíž než v červenci.')],
+      vysvetleni:'Přísluní je kolem 3. ledna – důkaz, že vzdálenost roční období neurčuje.' },
+    { otazka:'Proč vidíme z Měsíce stále <b>stejnou stranu</b>?',
+      moznosti:[moznost('Měsíc se otočí kolem osy přesně za stejnou dobu, za kterou oběhne Zemi.',true),
+        moznost('Měsíc se neotáčí vůbec.',false,'Kdyby se neotáčel, viděli bychom během měsíce postupně celý jeho povrch. Otáčí se jednou za oběh.'),
+        moznost('Druhou stranu zakrývá stín Země.',false,'Odvrácená strana je často osvětlená (při novu) – jen je od nás odvrácená.')],
+      vysvetleni:'Vázaná rotace: oběh i otočka trvají 27,3 dne.' },
+    { otazka:'Která planeta je <b>největší</b>?',
+      moznosti:[moznost('Jupiter',true),
+        moznost('Saturn',false,'Saturn je druhý – bez prstenců je o něco menší než Jupiter.'),
+        moznost('Neptun',false,'Neptun je nejvzdálenější, ale menší než Jupiter i Saturn.')],
+      vysvetleni:'Jupiter má průměr asi 11× větší než Země – porovnej v záložce 📏.' },
+    { otazka:'Proč se <b>Venuše</b> na obloze objevuje jen ráno nebo večer?',
+      moznosti:[moznost('Obíhá blíž Slunci než Země, takže ji vidíme vždy nedaleko Slunce.',true),
+        moznost('Přes den zhasne.',false,'Venuše svítí odraženým slunečním světlem stále. Jen je blízko Slunce a přes den ji přezáří.'),
+        moznost('Obíhá kolem Země jednou za den.',false,'Venuše obíhá Slunce, ne Zemi. Vnitřní planety se od Slunce na obloze nikdy moc nevzdálí.')],
+      vysvetleni:'Proto je Venuše „Jitřenka“ a „Večernice“.' },
+  ],
+});
+})();
 </script>
 </body>
 </html>

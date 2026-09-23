@@ -20,6 +20,14 @@
     .pomucka .znak.klik { cursor: pointer; }
     .pomucka .znak.klik:hover { border-color: var(--accent); }
     .pomucka .znak.bezrady { opacity: 0.45; cursor: default; }
+    .vyznamy { max-width: var(--sirka-obsahu, 900px); }
+    .vyznamy-grid { display: grid; grid-template-columns: repeat(4, minmax(130px, 1fr)); gap: 12px; }
+    .vyznamy-par { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+    .vyznamy figure { margin: 0; text-align: center; font-weight: 700; }
+    .vyznamy img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; border-radius: 10px; background: #faf6ec; }
+    .vyznamy figcaption { margin-top: 4px; }
+    @media (max-width: 720px) { .vyznamy-grid { grid-template-columns: repeat(2, minmax(130px, 1fr)); } }
+    @media (max-width: 360px) { .vyznamy-grid { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
@@ -48,6 +56,30 @@
       <div class="znaky" id="obojetne"></div>
       <p class="popis">Po obojetné souhlásce se rozhoduje podle slova: je-li vyjmenované nebo
         s ním příbuzné, píše se <b>y</b>. Po <b>f</b> žádná vyjmenovaná slova nejsou.</p>
+    </div>
+  </div>
+
+  <div class="pomucka vyznamy">
+    <div class="skupina">
+      <h2>Stejně znějí, ale znamenají něco jiného</h2>
+      <div class="vyznamy-grid">
+        <div class="vyznamy-par">
+          <figure><img src="img/cj/doplnovacky-byt.webp" alt="Dítě stojí – být." width="768" height="768"><figcaption>být</figcaption></figure>
+          <figure><img src="img/cj/doplnovacky-bit.webp" alt="Palice bije do kolíku – bít." width="768" height="768"><figcaption>bít</figcaption></figure>
+        </div>
+        <div class="vyznamy-par">
+          <figure><img src="img/cj/doplnovacky-myt.webp" alt="Ruce se myjí vodou a mýdlem – mýt." width="768" height="768"><figcaption>mýt</figcaption></figure>
+          <figure><img src="img/cj/doplnovacky-mit.webp" alt="Dítě drží svůj míč – mít." width="768" height="768"><figcaption>mít</figcaption></figure>
+        </div>
+        <div class="vyznamy-par">
+          <figure><img src="img/cj/doplnovacky-vyr.webp" alt="Výr s výraznými péřovými oušky." width="768" height="768"><figcaption>výr</figcaption></figure>
+          <figure><img src="img/cj/doplnovacky-vir.webp" alt="Vodní vír." width="768" height="768"><figcaption>vír</figcaption></figure>
+        </div>
+        <div class="vyznamy-par">
+          <figure><img src="img/cj/doplnovacky-vit.webp" alt="Ruce vijí věnec – vít." width="768" height="768"><figcaption>vít</figcaption></figure>
+          <figure><img src="img/cj/doplnovacky-vyt.webp" alt="Vlk vyje – výt." width="768" height="768"><figcaption>výt</figcaption></figure>
+        </div>
+      </div>
     </div>
   </div>
 

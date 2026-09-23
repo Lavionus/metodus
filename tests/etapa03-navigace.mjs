@@ -116,7 +116,7 @@ try {
   })`);
   assert.equal(tema.tema, 'light', 'výběr světlého motivu');
   assert.equal(tema.hodnota, 'light', 'seznam ukazuje zvolený motiv');
-  assert.deepEqual(tema.moznosti, ['auto', 'dark', 'light', 'kontrast', 'sepia', 'knihovna', 'skola', 'nocni-skola'], 'všechny motivy v seznamu');
+  assert.deepEqual(tema.moznosti, ['auto', 'dark', 'light', 'kontrast', 'sepia', 'sepia-tmava', 'knihovna', 'skola', 'nocni-skola'], 'všechny motivy v seznamu');
   assert.equal(tema.popis, 'Motiv', 'seznam má v nabídce slovní popis');
   assert.equal(tema.zavreno, true, 'nabídka se po volbě zavře');
   await vyber('dark');

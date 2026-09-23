@@ -119,28 +119,27 @@ try {
   assert.match(await evaluate(`document.querySelector('[data-faze=overse]').textContent`), /naposledy 5\/8/);
   vysledek.overse = { ...ulozeno, rezimu: rezimy.size };
 
-  // 6) Ověř se na starším kvízu bez uloha.js (Kostra.odpoved / Kostra.otazka).
-  await nav('obsah/casova_osa.html', 900);
+  // 6) Ověř se na úloze s vlastním vstupem (procvic.js „vlastni“ – víc políček
+  // pro koeficienty rovnice). Ručně psané Kostra.odpoved už žádná stránka nemá.
+  await nav('obsah/vycislovani_rovnic.html', 900);
   await evaluate(`localStorage.removeItem('metodus_overeni'); document.querySelector('.kostra-faze [data-faze=overse]').click()`);
   await cekejNa(`!!document.querySelector('.kostra-overeni')`);
-  for (let i = 0; i < 20 && !await evaluate(`!!document.querySelector('.kostra-vysledek')`); i++) {
+  for (let i = 0; i < 120 && !await evaluate(`!!document.querySelector('.kostra-vysledek')`); i++) {
     await evaluate(`(() => {
-      const vid = e => e && e.offsetParent !== null && !e.disabled;
-      const inp = document.getElementById('odpoved');
-      if (vid(inp) && inp.value === '' && !document.getElementById('zprava').textContent) { inp.value = '1918'; document.getElementById('btnPotvrdit').click(); return; }
-      const opt = [...document.querySelectorAll('#moznosti button')].find(vid);
-      if (opt) { opt.click(); return; }
-      const dal = [document.getElementById('btnDalsi'), document.getElementById('btnPotvrdit')].find(b => vid(b) && /Pokračovat/.test(b.textContent) && b.style.visibility !== 'hidden');
+      const inp = document.querySelector('#plocha .clen input:not(:disabled)');
+      if (inp) { inp.value = '9797'; inp.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true })); return; }
+      const dal = [...document.querySelectorAll('button')].find(b => b.offsetParent && /Pokračovat/.test(b.textContent) && !b.closest('.kostra'));
       if (dal) dal.click();
     })()`);
-    await pause(300);
+    await pause(250);
   }
-  assert.ok(await evaluate(`!!document.querySelector('.kostra-vysledek')`), 'starší kvíz doběhne do výsledku');
-  assert.equal(await evaluate(`JSON.parse(localStorage.getItem('metodus_overeni'))['casova_osa.html'].at(-1).celkem`), 8);
+  assert.ok(await evaluate(`!!document.querySelector('.kostra-vysledek')`), 'úloha s vlastním vstupem doběhne do výsledku');
+  const vycisl = await evaluate(`JSON.parse(localStorage.getItem('metodus_overeni'))['vycislovani_rovnic.html'].at(-1)`);
+  assert.equal(vycisl.celkem, 8); assert.equal(vycisl.spravne, 0);
 
   // 7) Jednotná tlačítka: žádné staré popisky u úloh.
   const stare = [];
-  for (const [f, sel] of [['obsah/procenta.html', '#btnPotvrdit'], ['obsah/rovnice.html', '#btnPotvrdit'], ['obsah/m1_porovnavani.html', '#btnDalsi'], ['obsah/flags_quiz.html', '#startBtn'], ['obsah/vycislovani_rovnic.html', '#btnNapoveda']]) {
+  for (const [f, sel] of [['obsah/procenta.html', '#startBtn'], ['obsah/rovnice.html', '#startBtn'], ['obsah/m1_porovnavani.html', '#btnDalsi'], ['obsah/flags_quiz.html', '#startBtn'], ['obsah/vycislovani_rovnic.html', '#startBtn']]) {
     await nav(f, 500);
     const t = await evaluate(`document.querySelector('${sel}').textContent.trim()`);
     if (/^(Potvrdit|Další →|▶️ Start|💡 Napovědět)$/.test(t)) stare.push(f + ': ' + t);
@@ -167,8 +166,11 @@ try {
   assert.ok(await cekejNa(`!!document.querySelector('#plocha .nazor-osa')`, 2000));
   // procenta: proužek 0–100 % po odpovědi
   await nav('obsah/procenta.html', 600);
-  await evaluate(`document.getElementById('odpoved').value = '1'; document.getElementById('btnPotvrdit').click()`);
-  assert.ok(await evaluate(`!!document.querySelector('#nazorProcenta .nazor-procenta')`));
+  for (let k = 0; k < 2; k++) {   // dvakrát vedle → karta ukáže postup a proužek
+    await evaluate(`(() => { const p = document.querySelector('#plocha input.odpoved-pole'); p.value = '9797'; p.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter', bubbles: true })); })()`);
+    await pause(100);
+  }
+  assert.ok(await evaluate(`!!document.querySelector('#plocha .karta .nazor-procenta')`));
 
   // 9) Společná data rodin: jedna pravda pro souběžné stránky.
   await nav('obsah/flags_quiz.html', 500);

@@ -1,4 +1,5 @@
 @import url("sepia.css");
+@import url("sepia-tmava.css");
 @import url("knihovna.css");
 @import url("skola.css");
 @import url("nocni-skola.css");
@@ -7,8 +8,9 @@
 /* ============================================================
    common.css – sdílené barvy a základ vzhledu celého webu.
    Tmavý režim je výchozí, ostatní motivy se zapínají atributem
-   <html data-theme="light|kontrast|sepia|knihovna|skola|nocni-skola">
-   (kontrast.css, sepia.css, knihovna.css, skola.css, nocni-skola.css). Motiv mění jen
+   <html data-theme="light|kontrast|sepia|sepia-tmava|knihovna|skola|nocni-skola">
+   (kontrast.css, sepia.css, sepia-tmava.css, knihovna.css, skola.css,
+   nocni-skola.css). Motiv mění jen
    barvy a textury pozadí – nikdy písmo.
    theme.js navíc nastaví data-tone="light|dark": úpravy stránek pro
    světlé pozadí patří pod :root[data-tone="light"], aby platily i v sépii.
@@ -16,6 +18,8 @@
    ============================================================ */
 
 :root {
+  /* šířka obsahu: na malém displeji 900 px, na širokém roste až do 1600 px */
+  --sirka-obsahu: clamp(900px, 90vw, 1600px);
   /* plochy */
   --bg:            #1a1a1a;   /* pozadí stránky */
   --bg-deep:       #121212;   /* nejtmavší plocha (pracovní plocha) */
@@ -73,6 +77,15 @@
   color-scheme: dark;
 }
 
+/* Tmavý motiv (bez data-theme): akcent, zelená i červená jsou světlé barvy, takže
+   písmo na jejich výplni (aktivní režim, správně/špatně) musí být tmavé – bílá
+   měla jen 2,0–3,6 : 1, tmavý inkoust má 5,1–9,4 : 1. Tématické motivy si
+   --na-akcentu určují samy; světlé z nich (kontrast, sépie, škola) mají bílou. */
+:root:not([data-theme]) {
+  --na-akcentu:    #10151c;
+  --danger-text:   #ec7474;   /* červený text zpětné vazby: 5,4 : 1 na panelu (--danger jen 4,4 : 1) */
+}
+
 :root[data-theme="light"] {
   --bg:            #f2f3f5;
   --bg-deep:       #e8eaed;
@@ -84,7 +97,7 @@
 
   --text:          #24292f;
   --text-muted:    #4b535b;
-  --text-faint:    #7a828a;
+  --text-faint:    #59636d;   /* 5,1 : 1 i na --bg-deep; drobná nápověda zůstává čitelná */
 
   --border:        #d0d7de;
   --border-strong: #b9c2cb;
@@ -93,6 +106,10 @@
   --accent-hover:  #1f5bb5;
 
   --shadow:        0 2px 10px rgba(0, 0, 0, 0.12);
+  /* výplně „správně / špatně“ nesou bílé písmo: sytější tóny (jako motiv Škola)
+     dávají 6,1 a 6,5 : 1, původní #4caf7d / #e05d5d jen 2,7 a 3,6 : 1 */
+  --ok:            #23703f;
+  --danger:        #b3261e;
 
   --predmet-cj:    #b8303d;
   --predmet-m:     #1e67b0;
@@ -148,6 +165,10 @@
 
 /* základní reset */
 * { margin: 0; padding: 0; box-sizing: border-box; }
+/* Atributy width/height u <img> slouží jen k rezervaci místa; bez height:auto
+   by z height="768" zůstala pevná výška a aspect-ratio v CSS by nic nezměnilo.
+   :where() má nulovou specifičnost, takže pevnou výšku ze tříd nepřebije. */
+:where(img[width][height]) { height: auto; }
 
 body {
   font-family: var(--font);

@@ -842,5 +842,135 @@ ${'='.repeat(50)}`;
     fitCanvas();
     algoDescEl.innerHTML = descriptions[algoEl.value] + `<span class="complexity">${complexities[algoEl.value]}</span>`;
   </script>
+<script src="../badani.js"></script>
+<script>
+/* Úkoly k modelu (badani.js): předpověz → vyzkoušej → vysvětli.
+   Počty porovnání a prohození se zapisují po každém dokončeném řazení
+   (spolu s daty, na kterých běželo), takže jde porovnávat na stejných datech. */
+(function(){
+const N=Badani.nastav, cis=Badani.cislo;
+const nahodne=p=>p[Math.floor(Math.random()*p.length)];
+const moznost=(t,ok,proc)=>({t,ok,proc});
+const hotove=[]; let bezelo=false, klicBehu='';
+setInterval(()=>{
+  if(sorting&&!bezelo) klicBehu=originalData.join(',');
+  if(!sorting&&bezelo&&/Hotovo/.test(finalSummary.textContent))
+    hotove.push({algo:algoEl.value,n:data.length,klic:klicBehu,porovnani:comparisons,prohozeni:swaps});
+  bezelo=sorting;
+},100);
+const najdi=(algo,n,klic)=>hotove.filter(h=>h.algo===algo&&(!n||h.n===n)&&(!klic||h.klic===klic)).at(-1);
+const spolecna=(a,b)=>hotove.find(h=>h.algo===a&&hotove.some(g=>g.algo===b&&g.klic===h.klic));
+const pripravit=(n)=>{ if(sorting) handleReset(); N({'#size':n,'#speed':20,'#algo':'Bubble Sort'}); generateData(); hotove.length=0; };
+// „Ukaž mi“: seřadí data postupně zadanými algoritmy (vždy od stejných výchozích dat)
+const serad=(algoritmy)=>{ const dalsi=()=>{ const a=algoritmy.shift(); if(!a) return;
+  if(sorting) handleReset(); resetToOriginalData(); N({'#algo':a,'#speed':10}); startSorting();
+  const t=setInterval(()=>{ if(!sorting){ clearInterval(t); setTimeout(dalsi,200); } },100); }; dalsi(); };
+
+Badani.start({
+  ukoly:[
+    { id:'rychlost', nazev:'Bubble Sort proti Quick Sortu',
+      predpoved:{
+        otazka:'Stejných <b>20 čísel</b> seřadíš Bubble Sortem (prohazuje sousedy) a Quick Sortem (dělí podle pivota). Který potřebuje <b>méně porovnání</b>?',
+        moznosti:['Bubble Sort','Quick Sort','Oba stejně – čísel je stejně'],
+        spravna:1 },
+      priprava(){ pripravit(20); },
+      pokus:'Spusť <b>Bubble Sort</b> (▶️ Spustit). Po dokončení dej <b>↺ Výchozí stav</b> (stejná data), vyber <b>Quick Sort</b> a spusť znovu. Porovnej počty porovnání.',
+      splneno:()=>!!spolecna('Bubble Sort','Quick Sort'),
+      ukaz(){ serad(['Bubble Sort','Quick Sort']); },
+      pozorovani:()=>{ const b=spolecna('Bubble Sort','Quick Sort'), q=hotove.find(h=>h.algo==='Quick Sort'&&h.klic===b.klic);
+        return `Bubble Sort: <b>${b.porovnani}</b> porovnání, Quick Sort jen <b>${q.porovnani}</b> na stejných datech.`; },
+      vysvetli:{
+        otazka:'Proč Quick Sort stačí s méně porovnáními?',
+        moznosti:[
+          moznost('Rozdělí čísla podle pivota na menší a větší a každou část řadí zvlášť. Čísla z různých částí už spolu porovnávat nemusí.',true),
+          moznost('Quick Sort porovnává rychleji.',false,'Jedno porovnání trvá u obou stejně. Quick Sort jich jen potřebuje méně.'),
+          moznost('Quick Sort některá čísla vynechá.',false,'Seřazená jsou všechna čísla. Úspora je v tom, že se zbytečně neporovnávají čísla, o nichž už je jasné, kam patří.')]},
+      shrnuti:'Bubble Sort porovná každou dvojici sousedů v každém průchodu: <b>n·(n−1)/2</b> porovnání. Quick Sort dělí problém na menší části – v průměru asi <b>n·log n</b>.' },
+
+    { id:'rust', nazev:'Dvojnásobek čísel',
+      predpoved:{
+        otazka:'Bubble Sort potřebuje na <b>20 čísel</b> 190 porovnání. Kolik jich bude potřebovat na <b>40 čísel</b>?',
+        moznosti:['Asi 380 – dvakrát víc','Asi 780 – čtyřikrát víc','Asi 200'],
+        spravna:1 },
+      priprava(){ pripravit(20); },
+      pokus:'Nastav <b>velikost 40</b>, dej <b>🆕 Nová data</b> a spusť <b>Bubble Sort</b>. (Rychlost můžeš stáhnout na 10.)',
+      splneno:()=>!!najdi('Bubble Sort',40),
+      ukaz(){ if(sorting) handleReset(); N({'#size':40,'#speed':10}); generateData(); serad(['Bubble Sort']); },
+      pozorovani:()=>`Na 40 čísel potřeboval Bubble Sort <b>${najdi('Bubble Sort',40).porovnani}</b> porovnání – čtyřikrát víc než na 20.`,
+      vysvetli:{
+        otazka:'Proč dvojnásobek čísel znamená čtyřnásobek práce?',
+        moznosti:[
+          moznost('Počet porovnání roste s n², protože každé číslo se porovnává s mnoha dalšími: (2n)² = 4n².',true),
+          moznost('Na větších datech se Bubble Sort splete a opakuje.',false,'Algoritmus se nespletl – 780 = 40 · 39 / 2 přesně odpovídá vzorci.'),
+          moznost('Počet porovnání roste stejně jako počet čísel.',false,'Pak by vyšlo 380. Porovnává se každý s každým, takže práce roste kvadraticky.')]},
+      shrnuti:'Složitost <b>O(n²)</b>: dvojnásobek dat = <b>čtyřnásobek</b> práce. U milionu čísel by Bubble Sort potřeboval půl bilionu porovnání – proto se v praxi používají algoritmy O(n log n).' },
+
+    { id:'prohozeni', nazev:'Kdo méně prohazuje',
+      predpoved:{
+        otazka:'Na stejných datech spustíš Bubble Sort a <b>Selection Sort</b> (najde nejmenší a dá ho dopředu). Který <b>prohodí</b> čísla méněkrát?',
+        moznosti:['Bubble Sort','Selection Sort','Oba stejně'],
+        spravna:1 },
+      priprava(){ pripravit(20); },
+      pokus:'Spusť <b>Bubble Sort</b>, pak <b>↺ Výchozí stav</b>, vyber <b>Selection Sort</b> a spusť. Porovnej řádek „Prohození“ ve statistice.',
+      splneno:()=>!!spolecna('Bubble Sort','Selection Sort'),
+      ukaz(){ serad(['Bubble Sort','Selection Sort']); },
+      pozorovani:()=>{ const b=spolecna('Bubble Sort','Selection Sort'), v=hotove.find(h=>h.algo==='Selection Sort'&&h.klic===b.klic);
+        return `Bubble Sort prohodil <b>${b.prohozeni}×</b>, Selection Sort jen <b>${v.prohozeni}×</b>. Porovnání měly oba stejně: ${b.porovnani}.`; },
+      vysvetli:{
+        otazka:'Proč Selection Sort prohazuje tak málo?',
+        moznosti:[
+          moznost('V každém průchodu jen hledá nejmenší číslo a prohodí ho jednou na jeho místo – nejvýš n − 1 prohození.',true),
+          moznost('Selection Sort porovnává méně.',false,'Porovnání měly oba stejně (190). Rozdíl je v tom, kolikrát čísla přesouvají.'),
+          moznost('Selection Sort přeskočí už seřazená čísla, Bubble Sort ne.',false,'Oba procházejí neseřazenou část. Bubble Sort ale posouvá číslo krok po kroku sousedními prohozeními.')]},
+      shrnuti:'Algoritmy se liší nejen počtem <b>porovnání</b>, ale i počtem <b>prohození</b>. Selection Sort prohazuje nejvýš n − 1krát; to se hodí, když je přesun dat drahý.' },
+  ],
+
+  otazky:[
+    ()=>{ const n=nahodne([10,30,50]);
+      return { otazka:`Kolik porovnání udělá Bubble Sort na <b>${n} čísel</b>?`,
+        moznosti:[moznost(`${n*(n-1)/2}`,true),
+          moznost(`${n}`,false,'Jeden průchod nestačí – číslo se posune jen o kus. Průchodů je n − 1.'),
+          moznost(`${n*n}`,false,'V každém průchodu je o jedno porovnání méně: (n−1) + (n−2) + … + 1 = n·(n−1)/2.')],
+        vysvetleni:`${n} · ${n-1} / 2 = ${n*(n-1)/2}.` }; },
+    ()=>{ const k=nahodne([2,3,10]);
+      return { otazka:`Algoritmus se složitostí O(n²) řadí 100 čísel 1 sekundu. Jak dlouho bude řadit <b>${100*k} čísel</b>?`,
+        moznosti:[moznost(`asi ${k*k} s`,true),
+          moznost(`asi ${k} s`,false,'U O(n²) roste čas s druhou mocninou počtu čísel.'),
+          moznost('asi 1 s',false,'Víc čísel znamená víc práce – u O(n²) kvadraticky víc.')],
+        vysvetleni:`${k}× víc čísel → ${k}² = ${k*k}× déle.` }; },
+    { otazka:'Co dělá <b>Bubble Sort</b>?',
+      moznosti:[moznost('Opakovaně prochází seznam a prohazuje sousední čísla, která jsou ve špatném pořadí.',true),
+        moznost('Najde nejmenší číslo a dá ho na začátek.',false,'To dělá Selection Sort.'),
+        moznost('Rozdělí čísla podle pivota.',false,'To dělá Quick Sort.')],
+      vysvetleni:'Velká čísla „probublávají“ na konec.' },
+    { otazka:'Co je <b>pivot</b> v Quick Sortu?',
+      moznosti:[moznost('Vybrané číslo, podle kterého se ostatní rozdělí na menší a větší.',true),
+        moznost('Nejmenší číslo v seznamu.',false,'Pivot může být libovolný prvek – rozdělí seznam na menší a větší část.'),
+        moznost('Poslední seřazené číslo.',false,'Pivot slouží k rozdělení seznamu, ne k označení seřazené části.')],
+      vysvetleni:'Po rozdělení je pivot na svém definitivním místě.' },
+    { otazka:'Jak řadí <b>Insertion Sort</b>?',
+      moznosti:[moznost('Bere čísla jedno po druhém a vkládá je na správné místo do již seřazené části – jako karty v ruce.',true),
+        moznost('Slévá dvě seřazené poloviny.',false,'To je Merge Sort.'),
+        moznost('Staví haldu.',false,'To je Heap Sort.')],
+      vysvetleni:'Na téměř seřazených datech je Insertion Sort velmi rychlý.' },
+    { otazka:'Který algoritmus má v průměru složitost <b>O(n log n)</b>?',
+      moznosti:[moznost('Merge Sort',true),
+        moznost('Bubble Sort',false,'Bubble Sort má O(n²).'),
+        moznost('Selection Sort',false,'Selection Sort má O(n²) – vždy stejně porovnání.')],
+      vysvetleni:'O(n log n): Merge, Quick (v průměru), Heap Sort.' },
+    { otazka:'Proč se pro porovnání algoritmů počítají <b>porovnání</b>, a ne sekundy?',
+      moznosti:[moznost('Počet porovnání nezávisí na rychlosti počítače ani animace.',true),
+        moznost('Sekundy se změřit nedají.',false,'Dají, ale závisí na počítači a nastavené rychlosti animace – porovnání ne.'),
+        moznost('Porovnání jsou vždy stejná pro všechny algoritmy.',false,'Právě se liší – a tím se algoritmy dají férově srovnat.')],
+      vysvetleni:'Porovnání a prohození jsou míra práce algoritmu, ne stroje.' },
+    { otazka:'Co znamená <b>algoritmus</b>?',
+      moznosti:[moznost('Přesný postup krok za krokem, který vede k výsledku.',true),
+        moznost('Počítačový program v konkrétním jazyce.',false,'Program je zápis algoritmu. Algoritmus sám je postup – může být i na papíře.'),
+        moznost('Rychlý počítač.',false,'Algoritmus je postup, ne stroj.')],
+      vysvetleni:'Recept na bábovku je také algoritmus.' },
+  ],
+});
+})();
+</script>
 </body>
 </html>

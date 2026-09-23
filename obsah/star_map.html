@@ -214,5 +214,123 @@ $('cas').addEventListener('input',zrusAktiv);
 $('ted').onclick=ted;
 ted();
 </script>
+<script src="../badani.js"></script>
+<script>
+/* Úkoly k modelu (badani.js): předpověz → vyzkoušej → vysvětli.
+   Polohy hvězd se počítají stejně jako mapa (altaz, lst). */
+(function(){
+const N=Badani.nastav, cis=Badani.cislo;
+const nahodne=p=>p[Math.floor(Math.random()*p.length)];
+const moznost=(t,ok,proc)=>({t,ok,proc});
+const cas=()=>new Date($('cas').value);
+const poloha=(i,d=cas(),lat=+$('lat').value,lon=+$('lon').value)=>{ const [,ra,dec]=HVEZDY[i]; return altaz(ra,dec,lat,lst(d,lon)); };
+const POLARKA=0, DUBHE=1, BETELGEUSE=13;
+const praha=()=>{ $('misto').value='0'; $('misto').dispatchEvent(new Event('change')); };
+let t0=null;
+
+Badani.start({
+  ukoly:[
+    { id:'polarka', nazev:'Hvězda, která stojí',
+      predpoved:{
+        otazka:'Během noci se hvězdy po obloze pomalu posouvají. Je některá hvězda, která zůstává <b>skoro na stejném místě</b>?',
+        moznosti:['Ano – Polárka','Ano – nejjasnější hvězda na obloze','Ne, všechny se posouvají stejně'],
+        spravna:0 },
+      priprava(){ praha(); nastavMesic(1); t0=cas(); },
+      pokus:'Je 15. ledna 22:00 v Praze. Posuň <b>čas o 3 až 4 hodiny</b> dopředu (políčko Datum a čas) a sleduj Polárku (konec ojů Malého vozu) a Velký vůz.',
+      splneno:()=>t0&&Math.abs(cas()-t0)>=3*3600e3&&Math.abs(cas()-t0)<=12*3600e3&&Math.abs(+$('lat').value-50.1)<0.2,
+      ukaz(){ const d=new Date(t0.getTime()+4*3600e3); d.setMinutes(d.getMinutes()-d.getTimezoneOffset()); N({'#cas':d.toISOString().slice(0,16)}); },
+      pozorovani:()=>{ const h=Math.abs(cas()-t0)/3600e3, p0=poloha(POLARKA,t0), p1=poloha(POLARKA);
+        return `Polárka zůstala asi <b>${cis(p1.alt,0)}° nad severem</b> (posun pod 1°), Velký vůz se kolem ní za ${cis(h,0)} h pootočil asi o <b>${cis(h*15,0)}°</b>.`; },
+      vysvetli:{
+        otazka:'Proč se obloha otáčí zrovna kolem Polárky?',
+        moznosti:[
+          moznost('Země se otáčí kolem své osy a Polárka leží skoro přesně v prodloužení osy nad severním pólem – proto se všechno zdánlivě točí kolem ní.',true),
+          moznost('Polárka je nejbližší hvězda, a proto se nehýbe.',false,'Polárka je asi 430 světelných let daleko – ani blízká, ani nejjasnější. Stojí proto, že je v ose otáčení Země.'),
+          moznost('Hvězdy obíhají kolem Polárky.',false,'Hvězdy se po obloze pohybují jen zdánlivě – ve skutečnosti se otáčí Země.')]},
+      shrnuti:'Obloha se zdánlivě otáčí kolem <b>Polárky</b> o <b>15° za hodinu</b>, protože se Země otočí jednou za den. Polárku najdeš prodloužením zadní stěny Velkého vozu asi pětkrát.' },
+
+    { id:'sirka', nazev:'Polárka na severu Evropy',
+      predpoved:{
+        otazka:'V Praze (50° s. š.) je Polárka asi 50° nad obzorem. Jak vysoko ji uvidíš v <b>Reykjavíku (64° s. š.)</b>?',
+        moznosti:['Stejně vysoko','Výš – asi 64°','Níž'],
+        spravna:1 },
+      priprava(){ praha(); nastavMesic(1); },
+      pokus:'Vyber v nabídce <b>Místo na Zemi</b> Reykjavík a porovnej, jak daleko od okraje (obzoru) je Polárka.',
+      splneno:()=>Math.abs(+$('lat').value-64.1)<0.05,
+      ukaz(){ $('misto').value='2'; $('misto').dispatchEvent(new Event('change')); },
+      pozorovani:()=>`V Reykjavíku je Polárka <b>${cis(poloha(POLARKA).alt,0)}°</b> nad obzorem, v Praze ${cis(poloha(POLARKA,cas(),50.1,14.4).alt,0)}°.`,
+      vysvetli:{
+        otazka:'Proč výška Polárky odpovídá zeměpisné šířce?',
+        moznosti:[
+          moznost('Polárka je nad severním pólem. Čím blíž jsi pólu, tím víc se zemská osa (a Polárka) zvedá nad tvůj obzor – na pólu je v nadhlavníku, na rovníku na obzoru.',true),
+          moznost('V Reykjavíku je čistší vzduch.',false,'Čistota vzduchu výšku hvězdy nemění. Rozhoduje poloha pozorovatele na kulaté Zemi.'),
+          moznost('Reykjavík leží výš nad mořem.',false,'Nadmořská výška je proti velikosti Země zanedbatelná. Rozhoduje zeměpisná šířka.')]},
+      shrnuti:'<b>Výška Polárky nad obzorem = zeměpisná šířka.</b> Podle toho se dřív určovala poloha na moři. Z jižní polokoule Polárku vidět není.' },
+
+    { id:'orion', nazev:'Zimní souhvězdí v létě',
+      predpoved:{
+        otazka:'Orion je výrazné zimní souhvězdí. Uvidíš ho z Prahy <b>v červenci ve 22:00</b>?',
+        moznosti:['Ano, jen níž nad obzorem','Ne – je pod obzorem','Ano, přesně na stejném místě'],
+        spravna:1 },
+      priprava(){ praha(); nastavMesic(1); },
+      pokus:'Teď je leden 22:00 – najdi Orion. Pak klepni na <b>☀️ Letní</b> (červenec) a hledej ho znovu.',
+      splneno:()=>{ const d=cas(); return d.getMonth()===6&&d.getHours()===22&&Math.abs(+$('lat').value-50.1)<0.2; },
+      ukaz(){ nastavMesic(7); },
+      pozorovani:()=>`V červenci ve 22:00 je Betelgeuse (rameno Orionu) <b>${cis(Math.abs(poloha(BETELGEUSE).alt),0)}° pod obzorem</b> – Orion na večerní obloze není. V lednu byla ${cis(poloha(BETELGEUSE,new Date(cas().getFullYear(),0,15,22)).alt,0)}° nad obzorem.`,
+      vysvetli:{
+        otazka:'Proč v létě večer Orion nevidíme?',
+        moznosti:[
+          moznost('Země za půl roku oběhne na druhou stranu Slunce. Orion je teď ve směru ke Slunci – nad obzorem je ve dne, kdy ho Slunce přezáří.',true),
+          moznost('V létě Orion zhasne.',false,'Hvězdy svítí stále. Jen je v létě Orion na obloze ve dne.'),
+          moznost('V létě jsou krátké noci, proto se nestihne objevit.',false,'Krátké noci nejsou důvod – i o půlnoci je Orion v červenci pod obzorem. Je na straně oblohy u Slunce.')]},
+      shrnuti:'Jak Země obíhá Slunce, mění se <b>noční obloha během roku</b>: v zimě večer vidíme Orion a Býka, v létě Labuť, Lyru a Orla (letní trojúhelník). Kolem Polárky jsou souhvězdí vidět celý rok.' },
+  ],
+
+  otazky:[
+    ()=>{ const h=nahodne([2,4,6]);
+      return { otazka:`O kolik stupňů se obloha kolem Polárky pootočí za <b>${h} hodiny</b>?`,
+        moznosti:[moznost(`${h*15}°`,true),
+          moznost(`${h}°`,false,'Obloha se otočí o 360° za 24 hodin – to je 15° za hodinu.'),
+          moznost(`${h*30}°`,false,'360° / 24 h = 15° za hodinu.')],
+        vysvetleni:`${h} h · 15° = ${h*15}°.` }; },
+    ()=>{ const [m,l]=nahodne([['v Londýně',51],['v Oslu',60],['v Římě',42]]);
+      return { otazka:`Jak vysoko nad obzorem je Polárka <b>${m}</b> (${l}° s. š.)?`,
+        moznosti:[moznost(`asi ${l}°`,true), moznost(`asi ${90-l}°`,false,'Výška Polárky se rovná přímo zeměpisné šířce, ne jejímu doplňku do 90°.'),
+          moznost('asi 90°',false,'V nadhlavníku (90°) je Polárka jen na severním pólu.')],
+        vysvetleni:'Výška Polárky = zeměpisná šířka.' }; },
+    { otazka:'Jak najdeš <b>Polárku</b>?',
+      moznosti:[moznost('Prodloužíš zadní stěnu Velkého vozu asi pětkrát.',true),
+        moznost('Je to nejjasnější hvězda na obloze.',false,'Polárka není nejjasnější – je průměrně jasná. Pozná se podle Velkého vozu.'),
+        moznost('Je vždy přímo nad hlavou.',false,'Nad hlavou je jen na severním pólu. U nás je asi 50° nad severem.')],
+      vysvetleni:'Dvě zadní hvězdy Velkého vozu (Merak a Dubhe) míří na Polárku.' },
+    { otazka:'Proč se hvězdy během noci pohybují po obloze?',
+      moznosti:[moznost('Protože se Země otáčí kolem své osy.',true),
+        moznost('Protože hvězdy obíhají kolem Země.',false,'Pohyb je zdánlivý – otáčí se Země, ne hvězdy kolem ní.'),
+        moznost('Protože Země obíhá Slunce.',false,'Oběh kolem Slunce mění oblohu během roku. Pohyb během jedné noci způsobuje otáčení Země.')],
+      vysvetleni:'Hvězdy vycházejí na východě a zapadají na západě, stejně jako Slunce.' },
+    { otazka:'Které souhvězdí vidíme z Česka <b>po celý rok</b>?',
+      moznosti:[moznost('Velký vůz – je blízko Polárky a nikdy nezapadne',true),
+        moznost('Orion',false,'Orion je zimní souhvězdí – v létě je večer pod obzorem.'),
+        moznost('Štír',false,'Štír je letní a u nás vystupuje jen nízko nad jih.')],
+      vysvetleni:'Souhvězdí blízko Polárky (cirkumpolární) nezapadají.' },
+    { otazka:'Vidí lidé v Austrálii <b>Polárku</b>?',
+      moznosti:[moznost('Ne, z jižní polokoule je Polárka pod obzorem.',true),
+        moznost('Ano, stejně jako my.',false,'Polárka je nad severním pólem – na jižní polokouli je pod obzorem. Vyzkoušej v mapě Sydney.'),
+        moznost('Ano, ale jen v zimě.',false,'Polárka se během roku nemění – z jižní polokoule není vidět nikdy.')],
+      vysvetleni:'Jižní obloha má jiná souhvězdí, třeba Jižní kříž.' },
+    { otazka:'Proč jsou hvězdy přes den <b>neviditelné</b>?',
+      moznosti:[moznost('Svítí dál, ale rozptýlené sluneční světlo v atmosféře je přezáří.',true),
+        moznost('Ve dne nesvítí.',false,'Hvězdy svítí nepřetržitě. Ve dne je jen přezáří jasná obloha.'),
+        moznost('Ve dne jsou pod obzorem všechny.',false,'Nad obzorem je jich ve dne stejně jako v noci – jen je nevidíme.')],
+      vysvetleni:'Z Měsíce bez atmosféry jsou hvězdy vidět i ve dne.' },
+    { otazka:'Co je <b>nadhlavník (zenit)</b>?',
+      moznosti:[moznost('Bod na obloze přímo nad hlavou pozorovatele',true),
+        moznost('Nejjasnější hvězda',false,'Zenit je bod, ne hvězda – na mapě je to střed kruhu.'),
+        moznost('Místo, kde vychází Slunce',false,'Slunce vychází na východě u obzoru. Zenit je přímo nad hlavou.')],
+      vysvetleni:'Na mapě oblohy je zenit ve středu, obzor na okraji.' },
+  ],
+});
+})();
+</script>
 </body>
 </html>

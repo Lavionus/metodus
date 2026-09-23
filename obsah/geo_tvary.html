@@ -5,9 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Geometrické tvary a tělesa</title>
   <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="../vyuka.css">
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
+  <script src="../rec.js"></script>
+  <script src="../uloha.js"></script>
   <style>
     body { background-color: var(--bg-deep); padding: 24px clamp(14px, 3vw, 40px); min-height: 100vh; }
     h1 { font-size: 1.4rem; margin-bottom: 4px; }
@@ -31,7 +34,9 @@
     .serie { color: var(--warn); }
     .pomer { color: var(--text-muted); margin-left: auto; font-variant-numeric: tabular-nums; }
     .dalsi { background: var(--accent); border: 1px solid var(--accent); color: var(--na-akcentu, #fff); border-radius: 6px; padding: 8px 16px; font-size: 0.88rem; cursor: pointer; visibility: hidden; }
-  </style>
+      #prehled[hidden], .plocha[hidden], .ovladani[hidden] { display: none !important; }
+    .obrazek-tvaru { display: flex; justify-content: center; margin: 0 auto 14px; width: fit-content; }
+</style>
 </head>
 <body>
   <h1>🔺 Geometrické tvary a tělesa</h1>
@@ -41,19 +46,18 @@
     <button data-rezim="prehled" data-faze="vyuka" class="active">📖 Přehled</button>
     <button data-rezim="kviz2d">Kvíz: rovinné útvary</button>
     <button data-rezim="kviz3d">Kvíz: tělesa</button>
+    <button data-rezim="pocty">🔢 Vrcholy, strany, hrany</button>
   </div>
 
   <div class="mrizka" id="prehled"></div>
 
-  <div class="karta" id="kviz" style="display:none" data-kostra-odpovedi>
-    <div id="obrazek"></div>
-    <div class="moznosti" id="moznosti"></div>
-    <div class="stavovy">
-      <button class="dalsi" id="btnDalsi">Pokračovat →</button>
-      <span class="serie" id="serie"></span>
-      <span class="pomer" id="pomer"></span>
-    </div>
+  <div class="plocha" id="plocha" hidden></div>
+  <div class="ovladani" id="ovladani" hidden>
+    <button class="hlavni" id="btnDalsi">Přeskočit →</button>
+    <span class="skore" id="skore"></span>
   </div>
+
+  <p class="napoveda"><b>Rovinný útvar</b> leží celý v rovině (nakreslíš ho na papír): čtverec, obdélník, trojúhelník, kruh. <b>Těleso</b> má i hloubku (vezmeš ho do ruky): krychle, kvádr, koule, válec, kužel, jehlan. Mnohoúhelník má stejně <b>vrcholů jako stran</b>. Krychle i kvádr mají <b>6 stěn, 8 vrcholů a 12 hran</b>; čtyřboký jehlan 5 stěn, 5 vrcholů a 8 hran.</p>
 
 <script>
 const $ = id => document.getElementById(id);
@@ -91,44 +95,71 @@ $('prehled').innerHTML =
   TVARY_2D.map(([n, k]) => `<div class="dlazdice">${svg(k)}<div class="nazev">${n}</div></div>`).join('') +
   TVARY_3D.map(([n, k]) => `<div class="dlazdice">${svg(k)}<div class="nazev">${n} (těleso)</div></div>`).join('');
 
-/* kvíz */
-let rezim = 'prehled', uloha = null, spravne = 0, celkem = 0, serie = 0, posledni = -1;
-const zamichej = p => { p = [...p]; for (let i = p.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [p[i], p[j]] = [p[j], p[i]]; } return p; };
+/* ---- procvičování --------------------------------------------------------- */
+const skore = Uloha.skore('metodus_geo_tvary', $('skore'));
+let rezim = 'prehled', posledni = null;
+// jednoznačné počty (útvary se zaoblením a hvězdu vynecháváme)
+const POCTY = [   // [kresba, otázka, počet, věta po správné odpovědi]
+  ['trojúhelník', 'Kolik vrcholů má trojúhelník?', 3, 'Trojúhelník má 3 vrcholy.'],
+  ['čtverec', 'Kolik stran má čtverec?', 4, 'Čtverec má 4 strany, všechny stejně dlouhé.'],
+  ['obdélník', 'Kolik vrcholů má obdélník?', 4, 'Obdélník má 4 vrcholy.'],
+  ['kosočtverec', 'Kolik stran má kosočtverec?', 4, 'Kosočtverec má 4 strany.'],
+  ['lichoběžník', 'Kolik vrcholů má lichoběžník?', 4, 'Lichoběžník má 4 vrcholy.'],
+  ['pětiúhelník', 'Kolik stran má pětiúhelník?', 5, 'Pětiúhelník má 5 stran.'],
+  ['šestiúhelník', 'Kolik vrcholů má šestiúhelník?', 6, 'Šestiúhelník má 6 vrcholů.'],
+  ['krychle', 'Kolik stěn má krychle?', 6, 'Krychle má 6 stěn – čtverců.'],
+  ['krychle', 'Kolik vrcholů má krychle?', 8, 'Krychle má 8 vrcholů.'],
+  ['krychle', 'Kolik hran má krychle?', 12, 'Krychle má 12 hran: 4 dole, 4 nahoře a 4 svislé.'],
+  ['kvádr', 'Kolik stěn má kvádr?', 6, 'Kvádr má 6 stěn – obdélníků.'],
+  ['kvádr', 'Kolik hran má kvádr?', 12, 'Kvádr má 12 hran: 4 dole, 4 nahoře a 4 svislé.'],
+  ['jehlan', 'Kolik stěn má čtyřboký jehlan?', 5, 'Čtyřboký jehlan má 5 stěn: podstavu a 4 trojúhelníky.'],
+  ['jehlan', 'Kolik hran má čtyřboký jehlan?', 8, 'Čtyřboký jehlan má 8 hran: 4 v podstavě a 4 k vrcholu.'],
+];
+const kresbaTvaru = nazev => ([...TVARY_2D, ...TVARY_3D].find(t => t[0] === nazev) || [])[1];
 
-function dalsi() {
-  const zdroj = rezim === 'kviz2d' ? TVARY_2D : TVARY_3D;
-  let i;
-  do { i = Math.floor(Math.random() * zdroj.length); } while (i === posledni);
-  posledni = i; uloha = zdroj[i];
-  const otazka = {};   // společná kostra – Ověř se
-  $('obrazek').innerHTML = svg(uloha[1]);
-  const spatne = zamichej(zdroj.filter(t => t[0] !== uloha[0])).slice(0, 3).map(t => t[0]);
-  $('moznosti').innerHTML = '';
-  zamichej([uloha[0], ...spatne]).forEach(n => {
-    const b = document.createElement('button');
-    b.textContent = n;
-    b.onclick = () => {
-      celkem++;
-      window.Kostra?.odpoved(n === uloha[0], otazka);
-      if (n === uloha[0]) { spravne++; serie++; b.classList.add('ok'); }
-      else { serie = 0; b.classList.add('spatne'); [...$('moznosti').children].find(x => x.textContent === uloha[0]).classList.add('ok'); }
-      [...$('moznosti').children].forEach(x => x.disabled = true);
-      $('serie').textContent = serie >= 3 ? '🔥 série ' + serie : '';
-      $('pomer').textContent = spravne + ' / ' + celkem;
-      $('btnDalsi').style.visibility = 'visible';
-    };
-    $('moznosti').appendChild(b);
-  });
-  $('btnDalsi').style.visibility = 'hidden';
-  window.Kostra?.otazka();
+function novaUloha() {
+  const p = $('plocha');
+  const odezva = document.createElement('div');
+  odezva.className = 'odezva';
+  if (rezim === 'pocty') {
+    let u; do { u = Uloha.nahodne(POCTY); } while (u === posledni); posledni = u;
+    const [nazev, otazka, n, veta] = u;
+    p.innerHTML = `<div class="zadani">${otazka}</div><div class="karta obrazek-tvaru">${svg(kresbaTvaru(nazev))}</div>`;
+    const moznosti = [...new Set([n, n - 1, n + 1, n + 2, n === 12 ? 8 : n * 2].filter(x => x > 2))].slice(0, 4);
+    Uloha.vyber({
+      kam: p, odezva, trida: 'velke',
+      moznosti: Uloha.zamichej(moznosti).map(x => ({ klic: String(x), popis: String(x) })),
+      spravnyKlic: String(n),
+      zpravaOk: '✅ ' + veta,
+      zpravaChyba: /stěn/.test(otazka) ? 'Stěna je rovná plocha na povrchu tělesa – spočítej i ty, které na obrázku nevidíš.'
+        : /hran/.test(otazka) ? 'Hrana je úsečka, kde se stýkají dvě stěny. Počítej po skupinách: dole, nahoře a svisle.'
+        : 'Obejdi útvar prstem a počítej rohy (vrcholy) nebo úsečky (strany).',
+      poSpravne: skore.vyhodnot, dalsi: novaUloha,
+    });
+  } else {
+    const zdroj = rezim === 'kviz2d' ? TVARY_2D : TVARY_3D;
+    let t; do { t = Uloha.nahodne(zdroj); } while (t === posledni); posledni = t;
+    p.innerHTML = `<div class="zadani">Jak se jmenuje ${rezim === 'kviz2d' ? 'tento útvar' : 'toto těleso'}?</div><div class="karta obrazek-tvaru">${svg(t[1])}</div>`;
+    const spatne = Uloha.zamichej(zdroj.filter(x => x !== t)).slice(0, 3).map(x => x[0]);
+    Uloha.vyber({
+      kam: p, odezva,
+      moznosti: Uloha.zamichej([t[0], ...spatne]).map(x => ({ klic: x, popis: x })),
+      spravnyKlic: t[0],
+      zpravaOk: `✅ Ano, ${t[0]}.`,
+      zpravaChyba: rezim === 'kviz2d' ? 'Počítej rohy a strany a všimni si, jestli jsou strany stejně dlouhé.' : 'Všimni si, jestli má těleso rovné stěny, nebo je oblé, a jakou má podstavu.',
+      poSpravne: skore.vyhodnot, dalsi: novaUloha,
+    });
+  }
+  p.appendChild(odezva);
 }
-$('btnDalsi').onclick = dalsi;
+$('btnDalsi').onclick = novaUloha;
 document.querySelectorAll('#rezimy button').forEach(b => b.onclick = () => {
   document.querySelectorAll('#rezimy button').forEach(x => x.classList.remove('active'));
-  b.classList.add('active'); rezim = b.dataset.rezim;
-  $('prehled').style.display = rezim === 'prehled' ? '' : 'none';
-  $('kviz').style.display = rezim === 'prehled' ? 'none' : '';
-  if (rezim !== 'prehled') { posledni = -1; dalsi(); }
+  b.classList.add('active'); rezim = b.dataset.rezim; posledni = null;
+  const prehled = rezim === 'prehled';
+  $('prehled').hidden = !prehled;
+  $('plocha').hidden = $('ovladani').hidden = prehled;
+  if (!prehled) novaUloha();
 });
 </script>
 </body>

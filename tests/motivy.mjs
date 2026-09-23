@@ -27,7 +27,9 @@ const evaluate = async expression => {
 };
 const cekej = ms => new Promise(r => setTimeout(r, ms));
 const POMUCKY = `
-  window.__barva = s => { const m = String(s).match(/-?[\\d.]+/g) || []; const [r = 0, g = 0, b = 0, a = 1] = m.map(Number); return { r, g, b, a }; };
+  // color-mix() vrací color(srgb r g b / a) v rozsahu 0–1
+  window.__barva = s => { const m = String(s).match(/-?[\\d.]+/g) || []; let [r = 0, g = 0, b = 0, a = 1] = m.map(Number);
+    if (/^color\\(srgb/.test(s)) { r *= 255; g *= 255; b *= 255; } return { r, g, b, a }; };
   window.__jas = s => { const { r, g, b } = __barva(s);
     const k = [r, g, b].map(v => { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); });
     return 0.2126 * k[0] + 0.7152 * k[1] + 0.0722 * k[2]; };
@@ -51,7 +53,7 @@ const nacti = async (cesta, tema) => {
   await cekej(900);   // přechody barev tlačítek doběhnou
   await evaluate(POMUCKY);
 };
-const TONY = { dark: 'dark', light: 'light', kontrast: 'light', sepia: 'light', knihovna: 'dark', skola: 'light', 'nocni-skola': 'dark' };
+const TONY = { dark: 'dark', light: 'light', kontrast: 'light', sepia: 'light', 'sepia-tmava': 'dark', knihovna: 'dark', skola: 'light', 'nocni-skola': 'dark' };
 const vysledky = {};
 try {
   await call('Runtime.enable'); await call('Page.enable'); await call('Network.enable');
@@ -63,8 +65,8 @@ try {
   await nacti('index.html#obsah/eduSort.html', 'dark');
   await cekej(800);
   const kolo = [];
-  const PORADI = ['light', 'kontrast', 'sepia', 'knihovna', 'skola', 'nocni-skola', 'dark'];
-  assert.deepEqual(await evaluate(`[...temaVolba.options].map(o => o.value)`), ['auto', 'dark', 'light', 'kontrast', 'sepia', 'knihovna', 'skola', 'nocni-skola'], 'motivy v seznamu');
+  const PORADI = ['light', 'kontrast', 'sepia', 'sepia-tmava', 'knihovna', 'skola', 'nocni-skola', 'dark'];
+  assert.deepEqual(await evaluate(`[...temaVolba.options].map(o => o.value)`), ['auto', 'dark', 'light', 'kontrast', 'sepia', 'sepia-tmava', 'knihovna', 'skola', 'nocni-skola'], 'motivy v seznamu');
   assert.deepEqual(await evaluate(`[...temaVolba.querySelectorAll('optgroup')].map(g => g.label)`), ['Základní', 'Tematické'], 'skupiny seznamu');
   for (const volba of PORADI) {
     await evaluate(`temaVolba.value = '${volba}'; temaVolba.dispatchEvent(new Event('change', { bubbles: true }))`);
@@ -84,15 +86,16 @@ try {
     assert.ok(k.popis.length > 3, 'položka seznamu má název: ' + k.popis);
   }
   assert.equal(kolo[2].stitek, '🎨 Téma: sépie', 'eduSort pojmenuje sépii');
-  assert.equal(kolo[3].stitek, '🎨 Téma: stará knihovna', 'eduSort pojmenuje knihovnu');
-  assert.equal(kolo[5].stitek, '🎨 Téma: noční škola', 'eduSort pojmenuje noční školu');
+  assert.equal(kolo[3].stitek, '🎨 Téma: tmavá sépie', 'eduSort pojmenuje tmavou sépii');
+  assert.equal(kolo[4].stitek, '🎨 Téma: stará knihovna', 'eduSort pojmenuje knihovnu');
+  assert.equal(kolo[6].stitek, '🎨 Téma: noční škola', 'eduSort pojmenuje noční školu');
   assert.equal(kolo[1].stitek, '🎨 Téma: vysoký kontrast', 'eduSort pojmenuje vysoký kontrast');
   assert.equal(errors.length, 0, 'rozcestník — výjimka: ' + JSON.stringify(errors));
   vysledky.prepinac = kolo.map(k => k.tema + '/' + k.tone);
 
   // 2) Záměrně tmavé simulace zůstanou tmavé ve všech motivech; ve světlém tónu mají čitelné lišty.
   for (const cesta of ['obsah/solar_system.html', 'obsah/gravitacni_hriste.html', 'obsah/pohyb_vesmirem.html']) {
-    for (const tema of ['kontrast', 'sepia', 'knihovna', 'skola', 'nocni-skola']) {
+    for (const tema of ['kontrast', 'sepia', 'sepia-tmava', 'knihovna', 'skola', 'nocni-skola']) {
       await nacti(cesta, tema);
       const r = await evaluate(`({ telo: __jas(getComputedStyle(document.body).backgroundColor),
         tlacitka: Math.min(...[...document.querySelectorAll('button')].filter(b => b.offsetParent && b.textContent.trim() && !b.matches('.aktivni,.on,.active')).map(__kontrast)),
@@ -107,7 +110,7 @@ try {
 
   // 3) Běžné lekce: pozadí odpovídá tónu, textura je načtená, text a nadpis drží kontrast.
   for (const cesta of ['index.html', 'obsah/m4_zlomky_uvod.html', 'obsah/aj3_abeceda.html', 'obsah/osnova.html', 'obsah/pocitani.html']) {
-    for (const tema of ['kontrast', 'sepia', 'knihovna', 'skola', 'nocni-skola']) {
+    for (const tema of ['kontrast', 'sepia', 'sepia-tmava', 'knihovna', 'skola', 'nocni-skola']) {
       await nacti(cesta, tema);
       const r = await evaluate(`(async () => ({ telo: __jas(__pozadi(document.body)),
         textura: getComputedStyle(document.body).backgroundImage,
@@ -119,7 +122,7 @@ try {
         preteka: document.documentElement.scrollWidth > innerWidth + 1 }))()`);
       if (TONY[tema] === 'light') assert.ok(r.telo > 0.6, cesta + ' má světlé pozadí v motivu ' + tema + ' (jas ' + r.telo + ')');
       else assert.ok(r.telo < 0.05, cesta + ' má tmavé pozadí v motivu ' + tema + ' (jas ' + r.telo + ')');
-      const TEX = { kontrast: /^none$/, sepia: /recyklovany-papir/, knihovna: /knihovna-drevo/, skola: /linear-gradient/, 'nocni-skola': /tabule-krida/ };
+      const TEX = { kontrast: /^none$/, sepia: /recyklovany-papir/, 'sepia-tmava': /recyklovany-papir/, knihovna: /knihovna-drevo/, skola: /linear-gradient/, 'nocni-skola': /tabule-krida/ };
       assert.match(r.textura, TEX[tema], cesta + ' — textura motivu');
       if (tema !== 'kontrast') assert.ok(r.texturaNactena, cesta + ' — textura se načte (' + tema + ')');
       assert.ok(r.nadpis >= 4.5, cesta + ' — kontrast nadpisu ' + tema + ': ' + r.nadpis);
@@ -143,6 +146,23 @@ try {
   await nacti('obsah/m4_zlomky_uvod.html', 'light');
   assert.equal(await evaluate(`MetodusTheme.paper(document.createElement('canvas').getContext('2d'), '#123456')`), '#123456', 've světlém motivu paper() vrací zadanou barvu');
 
+  // 5) Úzká obrazovka: každý motiv zůstane bez vodorovného přetečení a zachová čitelný text.
+  await call('Emulation.setDeviceMetricsOverride', { width: 390, height: 844, deviceScaleFactor: 1, mobile: true });
+  for (const tema of Object.keys(TONY)) {
+    await nacti('obsah/m4_zlomky_uvod.html', tema);
+    const r = await evaluate(`(() => { const prvky = [...document.querySelectorAll('p, li, label, a, h2, h3, summary')]
+      .filter(e => e.offsetParent && e.textContent.trim()).slice(0, 40).map(e => ({ e, k: __kontrast(e) }));
+      const minimum = prvky.sort((a, b) => a.k - b.k)[0]; return { preteka: document.documentElement.scrollWidth > innerWidth + 1,
+        text: minimum.k, prvek: minimum.e.outerHTML.slice(0, 240), barva: getComputedStyle(minimum.e).color, pozadi: __pozadi(minimum.e) }; })()`);
+    assert.equal(r.preteka, false, 'mobilní lekce přetéká (' + tema + ')');
+    assert.ok(r.text >= (tema === 'kontrast' ? 7 : 4.5), 'mobilní kontrast textu ' + tema + ': ' + JSON.stringify(r));
+    assert.equal(errors.length, 0, 'mobilní lekce — výjimka (' + tema + '): ' + JSON.stringify(errors));
+  }
+  await nacti('obsah/m4_zlomky_uvod.html', 'sepia-tmava');
+  assert.deepEqual(await evaluate(`[MetodusTheme.isSepia(), MetodusTheme.ink('#123456'), MetodusTheme.ink('#123456', '#654321', '#fedcba')]`),
+    [true, '#f0dfc0', '#fedcba'], 'API sépie rozliší tmavý inkoust');
+  await call('Emulation.setDeviceMetricsOverride', { width: 1366, height: 900, deviceScaleFactor: 1, mobile: false });
+
   // 6) „Podle systému“: vykreslí tmavý/světlý podle zařízení a přepne se za běhu i v lekci v iframu.
   const system = hodnota => call('Emulation.setEmulatedMedia', { features: [{ name: 'prefers-color-scheme', value: hodnota }] });
   await system('light');
@@ -161,9 +181,9 @@ try {
   await call('Emulation.setEmulatedMedia', { features: [] });
   vysledky.auto = a;
 
-  // 5) Motiv mění jen barvy: písmo nadpisů, textu a ovládání je ve všech motivech stejné.
+  // 7) Motiv mění jen barvy: písmo nadpisů, textu a ovládání je ve všech motivech stejné.
   const pisma = {};
-  for (const tema of ['dark', 'light', 'kontrast', 'sepia', 'knihovna', 'skola', 'nocni-skola']) {
+  for (const tema of ['dark', 'light', 'kontrast', 'sepia', 'sepia-tmava', 'knihovna', 'skola', 'nocni-skola']) {
     await nacti('obsah/aj3_abeceda.html', tema);
     pisma[tema] = await evaluate(`['h1', 'h2', 'p', 'button', 'body'].map(v => { const e = document.querySelector(v);
       return e ? v + ': ' + getComputedStyle(e).fontFamily + ' ' + getComputedStyle(e).fontWeight : ''; }).join(' | ')`);

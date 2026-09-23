@@ -69,7 +69,7 @@ body[data-rezim=stavba] #pruvodce{display:none}
 #pruvodce{max-width:1220px;width:100%;margin:0 auto;padding:22px 26px 28px}.uvodPruvodce h2{font-size:1.3rem;font-weight:600;margin-bottom:7px}.uvodPruvodce p{color:var(--text-muted);font-size:.9rem;line-height:1.6}
 #vyberPristroje{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:9px;margin:18px 0 24px}#vyberPristroje button{text-align:left;padding:10px 12px;background:var(--bg-panel);border-radius:11px;transition:border-color .15s}#vyberPristroje button[aria-pressed=true]{border:2px solid var(--accent);background:var(--accent-soft);padding:9px 11px}#vyberPristroje svg{display:block;width:100%;height:43px;margin-bottom:8px}#vyberPristroje strong{display:block;font-size:.82rem;line-height:1.4}#vyberPristroje small{display:block;color:var(--text-muted);font-size:.7rem;line-height:1.5;margin-top:5px}
 .vyklad{background:var(--bg-panel);border:1px solid var(--border);border-radius:15px;overflow:hidden}.vyklad header{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:18px 24px;border-bottom:1px solid var(--border)}.vyklad header h2{font-size:1.25rem;margin-top:5px}.vyklad header .eyebrow{font-size:.65rem}.schemaScroll{overflow-x:auto;background:var(--bg-deep)}#schemaPristroje{min-width:660px}#schemaPristroje svg{display:block;width:100%;max-height:360px}.voditko{display:flex;gap:8px 20px;flex-wrap:wrap;padding:10px 24px;font-size:.74rem;color:var(--text-muted);border-bottom:1px solid var(--border)}.voditko span:first-child{color:var(--warn)}.voditko span:nth-child(2){color:var(--ok)}
-.vykladKroku{display:flex;align-items:center;justify-content:space-between;gap:26px;padding:22px 24px;background:var(--accent-soft)}#cisloKroku{font-size:.68rem;letter-spacing:.12em;color:var(--accent);font-weight:700}.krokPopis h3{font-size:1.2rem;margin:7px 0 9px}.krokPopis p{font-size:.96rem;line-height:1.65;max-width:730px;color:var(--text-muted)}.krokTlacitka{display:flex;gap:8px;flex-shrink:0}.krokTlacitka button{padding:12px 15px}#dalsiVysvetleni,#zkusStavbu{background:var(--accent);color:var(--bg-deep);font-weight:700}#krokyPristroje{display:flex;gap:8px;padding:15px 24px}#krokyPristroje button{flex:1;display:flex;align-items:center;gap:9px;text-align:left;font-size:.76rem;background:transparent;border-color:transparent;color:var(--text-muted)}#krokyPristroje button[aria-current=step]{color:var(--text);background:var(--accent-soft);border-color:var(--accent)}#krokyPristroje span{display:grid;place-items:center;width:24px;height:24px;border:1px solid var(--border-strong);border-radius:50%;flex-shrink:0}
+.vykladKroku{display:flex;align-items:center;justify-content:space-between;gap:26px;padding:22px 24px;background:var(--accent-soft)}#cisloKroku{font-size:.68rem;letter-spacing:.12em;color:var(--accent);font-weight:700}.krokPopis h3{font-size:1.2rem;margin:7px 0 9px}.krokPopis p{font-size:.96rem;line-height:1.65;max-width:730px;color:var(--text-muted)}.krokTlacitka{display:flex;gap:8px;flex-shrink:0}.krokTlacitka button{padding:12px 15px}#dalsiVysvetleni,#zkusStavbu{background:var(--accent);color:var(--na-akcentu,#fff);font-weight:700}#krokyPristroje{display:flex;gap:8px;padding:15px 24px}#krokyPristroje button{flex:1;display:flex;align-items:center;gap:9px;text-align:left;font-size:.76rem;background:transparent;border-color:transparent;color:var(--text-muted)}#krokyPristroje button[aria-current=step]{color:var(--text);background:var(--accent-soft);border-color:var(--accent)}#krokyPristroje span{display:grid;place-items:center;width:24px;height:24px;border:1px solid var(--border-strong);border-radius:50%;flex-shrink:0}
 #vysledekJednoduse:not([hidden]){display:flex;gap:20px;align-items:center;justify-content:space-between;border-top:1px solid var(--border);padding:20px 24px}#vysledekJednoduse h3{font-size:1.12rem;margin:7px 0}#vysledekJednoduse p{font-size:.8rem;line-height:1.6;color:var(--text-muted);max-width:680px}#zkusStavbu{flex-shrink:0;padding:12px}.modelDetaily{max-width:1220px;margin:0 auto 24px;padding:0 26px;color:var(--text-faint);font-size:.75rem}.modelDetaily summary{cursor:pointer;padding:8px 0}.modelDetaily .model{padding:10px 0}.stavbaUvod{padding:20px 22px 0}.stavbaUvod h2{font-size:1.15rem}.stavbaUvod p{font-size:.85rem;line-height:1.6;color:var(--text-muted);margin-top:7px}
 @media(max-width:950px){#vyberPristroje{grid-template-columns:repeat(4,minmax(0,1fr))}.vykladKroku{align-items:flex-start;flex-direction:column;gap:16px}.krokTlacitka{align-self:flex-end}#vysledekJednoduse:not([hidden]){align-items:flex-start;flex-direction:column}}
 @media(max-width:560px){.horni{padding:13px 16px}.horni h1{font-size:1.02rem}.rezimy{padding:10px 12px;gap:6px}.rezimy button{padding:9px 10px;font-size:.77rem;flex:1}#pruvodce{padding:18px 12px}.uvodPruvodce h2{font-size:1.1rem}.uvodPruvodce p{font-size:.8rem}#vyberPristroje{display:flex;overflow-x:auto;gap:8px;margin:13px 0 18px;padding-bottom:6px}#vyberPristroje button{min-width:145px;max-width:145px}#vyberPristroje svg{height:32px}.vyklad header{padding:14px}.vyklad header h2{font-size:1rem}.vyklad header button{font-size:.7rem;max-width:100px}.vyklad header .eyebrow{font-size:.56rem}.schemaScroll{position:relative}.voditko{padding:10px 14px;font-size:.65rem}.voditko:after{content:'↔ Posuň obrázek do strany a prohlédni si celý přístroj.'}.vykladKroku{padding:17px 14px}.krokPopis h3{font-size:1.08rem}.krokPopis p{font-size:.88rem}.krokTlacitka{align-self:stretch;justify-content:space-between}#krokyPristroje{padding:10px;gap:2px}#krokyPristroje button{display:block;font-size:.65rem;padding:6px}#krokyPristroje span{margin-bottom:6px}#vysledekJednoduse:not([hidden]){padding:18px 14px}.modelDetaily{padding:0 14px}}
@@ -1249,6 +1249,125 @@ const podrobnosti=document.createElement('details');podrobnosti.className='model
 document.body.dataset.rezim='pruvodce';vyberPruvodce('kepler');
 matchMedia('(max-width:560px)').addEventListener('change',()=>{if(rezim==='pruvodce')zobrazPruvodce();});
 
+</script>
+<script src="../badani.js"></script>
+<script>
+/* Úkoly k modelu (badani.js): předpověz → vyzkoušej → vysvětli.
+   V dílně nad Keplerovým dalekohledem: zvětši, zaostři, převrať obraz. */
+(function(){
+const N=Badani.nastav, cis=Badani.cislo;
+const nahodne=p=>p[Math.floor(Math.random()*p.length)];
+const moznost=(t,ok,proc)=>({t,ok,proc});
+const dilna=klic=>{ prepniRezim('stavba'); $('preset').value=klic; nacti(klic); vybrany=-1; panelZPrvku(); kresli(); };
+const cocky=()=>prvky.filter(p=>p.typ==='spojka');
+const okular=()=>prvky[prvky.length-1];
+const vyber=p=>{ vybrany=prvky.indexOf(p); panelZPrvku(); kresli(); };
+const dalekohled=()=>rezim==='stavba'&&objekt.nekonecno&&prvky.length===2&&cocky().length===2&&prvky[0].f===60;
+
+Badani.start({
+  zakryt:'#vysvetleni',  // výklad soustavy uvádí vzdálenost čoček i zvětšení
+  ukoly:[
+    { id:'zvetsi', nazev:'Silnější okulár',
+      predpoved:{
+        otazka:'Keplerův dalekohled má objektiv s ohniskem <b>60 cm</b> a okulár s ohniskem <b>5 cm</b> – zvětšuje 12×. Co se stane, když okulár vyměníš za jiný s ohniskem <b>3 cm</b> (a znovu zaostříš)?',
+        moznosti:['Zvětšení klesne','Zvětšení zůstane 12× – určuje ho objektiv','Zvětšení vzroste'],
+        spravna:2 },
+      priprava(){ dilna('kepler'); },
+      pokus:'Klepni na <b>okulár</b> (pravá čočka) a nastav mu <b>ohnisko 3 cm</b>. Pak ho posuň na <b>73 cm</b>, aby jeho ohnisko znovu splynulo s ohniskem objektivu. Úhlové zvětšení je ve stavovém řádku.',
+      splneno:()=>{ if(!dalekohled()||okular().f!==3) return false; const v=vysledek(); return v.typ==='afokal'&&Math.abs(v.Z-20)<0.6; },
+      ukaz(){ vyber(okular()); N({'#pF':3}); N({'#pZ':73}); },
+      pozorovani:()=>`Dalekohled je zaostřený a zvětšuje <b>${cis(vysledek().Z,0)}×</b> místo 12×.`,
+      vysvetli:{
+        otazka:'Proč kratší ohnisko okuláru zvětšení zvýší?',
+        moznosti:[
+          moznost('Úhlové zvětšení dalekohledu je Z = f₁ / f₂. Čím kratší ohnisko okuláru, tím víc okulár roztáhne úhel paprsků: 60 / 3 = 20.',true),
+          moznost('Menší čočka propustí méně světla, a tak je obraz větší.',false,'Množství světla ovlivňuje jas, ne zvětšení. Zvětšení určuje poměr ohniskových vzdáleností.'),
+          moznost('Okulár se posunul blíž k objektivu, proto je obraz větší.',false,'Posun jen dalekohled znovu zaostřil (f₁ + f₂ = 63 cm). Zvětšení změnilo kratší ohnisko okuláru.')]},
+      shrnuti:'Úhlové zvětšení dalekohledu je <b>Z = f₁ / f₂</b>: dlouhé ohnisko objektivu a krátké ohnisko okuláru. Čočky přitom stojí od sebe <b>f₁ + f₂</b>.' },
+
+    { id:'zaostri', nazev:'Zaostření dalekohledu',
+      predpoved:{
+        otazka:'Okulár (ohnisko 5 cm) se posunul a dalekohled je rozostřený. Objektiv s ohniskem 60 cm stojí na <b>10 cm</b>. Kam musí okulár stát, aby z něj opět vycházel rovnoběžný svazek?',
+        moznosti:['Na 70 cm – přesně do ohniska objektivu','Na 75 cm – aby jeho ohnisko splynulo s ohniskem objektivu','Kamkoli, zaostří si to oko samo'],
+        spravna:1 },
+      priprava(){ dilna('kepler'); okular().z=79; vybrany=-1; panelZPrvku(); kresli(); },
+      pokus:'Klepni na <b>okulár</b> a posouvej ho (posuvník Poloha nebo tažení), dokud nebude svazek za okulárem <b>rovnoběžný</b> – stavový řádek napíše „afokální soustava“.',
+      splneno:()=>dalekohled()&&okular().f===5&&vysledek().typ==='afokal',
+      ukaz(){ vyber(okular()); N({'#pZ':75}); },
+      pozorovani:()=>`Okulár stojí na <b>${cis(okular().z,1)} cm</b> – 65 cm od objektivu. Z dalekohledu teď vychází rovnoběžný svazek.`,
+      vysvetli:{
+        otazka:'Proč musí vzdálenost čoček být právě f₁ + f₂?',
+        moznosti:[
+          moznost('Objektiv vytvoří obraz hvězdy ve svém ohnisku. Když tam je i ohnisko okuláru, vyjdou z něj paprsky rovnoběžně a oko je vidí ostře bez námahy.',true),
+          moznost('Aby byl dalekohled co nejkratší.',false,'Kratší by šel postavit, ale pak by paprsky z okuláru nebyly rovnoběžné – obraz by byl rozmazaný.'),
+          moznost('Okulár musí stát přímo v ohnisku objektivu.',false,'V ohnisku objektivu vzniká meziobraz. Okulár od něj musí být ještě o své ohnisko dál – jako lupa od předmětu.')]},
+      shrnuti:'Dalekohled je zaostřený (afokální), když <b>ohnisko objektivu splývá s ohniskem okuláru</b>: vzdálenost čoček je f₁ + f₂. Pro jiné oko nebo blízký předmět se okulár jen trochu posune.' },
+
+    { id:'prevrat', nazev:'Krajina vzhůru nohama',
+      predpoved:{
+        otazka:'Keplerův dalekohled ukazuje krajinu <b>vzhůru nohama</b>. Co udělá další spojka vložená mezi objektiv a okulár (převracecí čočka)?',
+        moznosti:['Obraz převrátí ještě jednou – bude přímý','Obraz jen zvětší','Obraz rozostří, dalekohled přestane fungovat'],
+        spravna:0 },
+      priprava(){ dilna('kepler'); },
+      pokus:'Zapni <b>👁️ Náhled výstupu</b> a všimni si převráceného obrazu. Pak vyber hotovou soustavu <b>🌄 Pozemní dalekohled</b> a porovnej.',
+      splneno:()=>rezim==='stavba'&&objekt.nekonecno&&prvky.length===3&&cocky().length===3&&(v=>v.typ==='afokal'&&!v.prevraceny)(vysledek()),
+      ukaz(){ $('preset').value='pozemni'; nacti('pozemni'); },
+      pozorovani:()=>`Pozemní dalekohled dává <b>přímý</b> obraz se zvětšením ${cis(vysledek().Z,0)}×; cestou vznikají dva skutečné meziobrazy.`,
+      vysvetli:{
+        otazka:'Jak převracecí čočka obraz narovná?',
+        moznosti:[
+          moznost('Objektiv vytvoří převrácený meziobraz. Převracecí čočka z něj udělá druhý, znovu převrácený – dvakrát převrácený je přímý.',true),
+          moznost('Převracecí čočka otočí paprsky zrcadlově zleva doprava.',false,'Spojka převrací obraz nahoru–dolů i zleva–doprava zároveň. Dvojí převrácení vrátí obraz do správné polohy.'),
+          moznost('Obraz narovná okulár, převracecí čočka jen prodlužuje tubus.',false,'V Keplerově dalekohledu stejný okulár obraz nechá převrácený. Narovnání dělá právě druhý meziobraz za převracecí čočkou.')]},
+      shrnuti:'Každý skutečný obraz spojky je <b>převrácený</b>. Pozemní dalekohled má proto převracecí čočku (dva meziobrazy = přímý pohled), triedr hranoly a Galileův dalekohled rozptylný okulár.' },
+  ],
+
+  otazky:[
+    ()=>{ const f2=nahodne([2,4,5]), Z=nahodne([8,10,15]), f1=f2*Z;
+      return { otazka:`Dalekohled má objektiv s ohniskem <b>${f1} cm</b> a okulár s ohniskem <b>${f2} cm</b>. Jak dlouhý musí být (vzdálenost čoček) a kolikrát zvětšuje?`,
+        moznosti:[moznost(`${f1+f2} cm a ${Z}×`,true),
+          moznost(`${f1+f2} cm a ${f1*f2}×`,false,'Zvětšení je podíl ohnisek, ne součin: Z = f₁ / f₂.'),
+          moznost(`${f1} cm a ${Z}×`,false,`Okulár musí stát ještě o své ohnisko za ohniskem objektivu: f₁ + f₂ = ${f1+f2} cm.`)],
+        vysvetleni:`Délka f₁ + f₂ = ${f1+f2} cm, zvětšení f₁ / f₂ = ${Z}×.` }; },
+    ()=>{ const zo=nahodne([10,20,40]), zk=nahodne([10,15,25]);
+      return { otazka:`Objektiv mikroskopu zvětšuje <b>${zo}×</b> a okulár <b>${zk}×</b>. Jaké je celkové zvětšení?`,
+        moznosti:[moznost(`${zo*zk}×`,true),
+          moznost(`${zo+zk}×`,false,'Okulár zvětšuje už zvětšený meziobraz – zvětšení se násobí.'),
+          moznost(`${Math.max(zo,zk)}×`,false,'Obě čočky zvětšují za sebou, celkové zvětšení je jejich součin.')],
+        vysvetleni:`Z = Z₁ · Z₂ = ${zo} · ${zk} = ${zo*zk}.` }; },
+    { otazka:'Proč je obraz v <b>Galileově</b> dalekohledu (divadelním kukátku) přímý?',
+      moznosti:[moznost('Rozptylný okulár zachytí paprsky dřív, než vznikne převrácený meziobraz.',true),
+        moznost('Má navíc převracecí čočku.',false,'Galileův dalekohled má jen dvě čočky. Převracecí čočku má pozemní dalekohled.'),
+        moznost('Objektiv je rozptylka.',false,'Objektiv je spojka, rozptylka je okulár. Ten stojí před ohniskem objektivu, takže meziobraz nevznikne.')],
+      vysvetleni:'Bez meziobrazu nedojde k převrácení – obraz zůstane přímý a tubus je kratší.' },
+    { otazka:'Jak poznáš <b>skutečný</b> obraz od zdánlivého?',
+      moznosti:[moznost('Skutečný obraz jde zachytit na stínítko – paprsky se v něm opravdu protínají.',true),
+        moznost('Skutečný obraz je vždy větší.',false,'Skutečný obraz může být zmenšený (fotoaparát) i zvětšený (promítačka).'),
+        moznost('Zdánlivý obraz vidí jen jedno oko.',false,'Zdánlivý obraz vidí obě oči, ale paprsky se v něm jen zdánlivě protínají (jejich prodloužení) – na stínítko ho nezachytíš.')],
+      vysvetleni:'Lupa dává zdánlivý obraz, promítačka skutečný.' },
+    { otazka:'Proč se diapozitiv do promítačky vkládá <b>vzhůru nohama</b>?',
+      moznosti:[moznost('Spojka vytvoří převrácený skutečný obraz – obrácený diapozitiv se na plátně ukáže správně.',true),
+        moznost('Aby do něj nesvítila lampa přímo.',false,'Rozhoduje optika: skutečný obraz spojky je převrácený.'),
+        moznost('Jen ze zvyku, na obrazu to nic nemění.',false,'Mění – bez obrácení by byl obraz na plátně vzhůru nohama.')],
+      vysvetleni:'Obraz za spojkou je převrácený nahoru–dolů i zleva–doprava.' },
+    { otazka:'Kde musí být předmět, aby spojka fungovala jako <b>lupa</b>?',
+      moznosti:[moznost('Blíž k čočce, než je její ohnisko',true),
+        moznost('Kousek za ohniskem',false,'Tam vznikne velký skutečný obraz daleko za čočkou – tak funguje promítačka.'),
+        moznost('Dál než dvojnásobek ohniska',false,'Tam vznikne malý skutečný obraz – tak funguje fotoaparát.')],
+      vysvetleni:'Předmět uvnitř ohniskové vzdálenosti dává zdánlivý, přímý a zvětšený obraz.' },
+    { otazka:'Proč mají velké hvězdářské dalekohledy místo čočky <b>duté zrcadlo</b>?',
+      moznosti:[moznost('Velké zrcadlo se dá vyrobit i podepřít snadněji než velká čočka a nerozkládá světlo na barvy.',true),
+        moznost('Zrcadlo zvětšuje víc než čočka se stejným ohniskem.',false,'Zvětšení určují ohniska, ne druh prvku. Výhoda zrcadla je ve výrobě a v tom, že netvoří barevné okraje.'),
+        moznost('Zrcadlo propouští víc světla.',false,'Zrcadlo světlo nepropouští, ale odráží. Výhodou je velký průměr a žádná barevná vada.')],
+      vysvetleni:'Cassegrainovo uspořádání navíc „složí“ dlouhé ohnisko do krátkého tubusu.' },
+    { otazka:'Co znamená, že je dalekohled <b>afokální</b>?',
+      moznosti:[moznost('Dovnitř i ven letí rovnoběžný svazek – mění se jen jeho úhel.',true),
+        moznost('Nemá žádné ohnisko.',false,'Obě čočky ohnisko mají. Afokální je celá soustava: ohniska čoček splývají, takže výstupní svazek je rovnoběžný.'),
+        moznost('Obraz vzniká přímo na okuláru.',false,'Obraz je v nekonečnu – oko ho vidí ostře bez zaostřování na blízko.')],
+      vysvetleni:'Zaostřený dalekohled je afokální: vzdálenost čoček f₁ + f₂.' },
+  ],
+});
+})();
 </script>
 </body>
 </html>

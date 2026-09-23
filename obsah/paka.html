@@ -481,8 +481,9 @@ const paka={
       popis(cz(M,2)+' N·m',px0+sirka+8,y+6,C.muted,'11px sans-serif','left');
     });
     ctx.restore();
+    // příklady do pravého horního rohu – dole se na užší ploše tloukly s nápovědou
     popis(dvoj?'🛝 houpačka, nůžky, kleště':'🛒 kolečko, otvírák, louskáček',
-      w-14,h-14,C.faint,'11px sans-serif','right');
+      w-14,16,C.faint,'11px sans-serif','right');
 
     // rovnováha se zvýrazní, ať je zpětná vazba okamžitá
     const [M1,M2]=this.momenty();
@@ -2218,6 +2219,145 @@ function prepinace(){
   });
 }
 prepinace();
+</script>
+<script src="../badani.js"></script>
+<script>
+/* Úkoly k modelu (badani.js): předpověz → vyzkoušej → vysvětli.
+   Jeden úkol na každou část: páka, kladkostroj, ozubená kola. */
+(function(){
+const N=Badani.nastav, cislo=Badani.cislo;
+const nahodne=p=>p[Math.floor(Math.random()*p.length)];
+const moznost=(t,ok,proc)=>({t,ok,proc});
+
+Badani.start({
+  nad:'#stav',          // stavový řádek s hodnotami zůstane vidět
+  ukoly:[
+    { id:'rameno', nazev:'Delší rameno, menší síla',
+      predpoved:{
+        otazka:'Na dvojzvratné páce je břemeno <b>30 N</b> ve vzdálenosti <b>20 cm</b> od osy. Teď ho vyrovnává síla 30 N na stejně dlouhém rameni. Jakou silou páku vyrovnáš, když ji přiložíš třikrát dál – <b>60 cm</b> od osy?',
+        moznosti:['Větší než 30 N – dál od osy se páčí hůř','Pořád 30 N – břemeno se nezměnilo','Menší než 30 N'],
+        spravna:2 },
+      priprava(){ prepni('paka'); N({'#druhPaky':'dvoj','#f1':30,'#r1':20,'#r2':20,'#f2':30}); },
+      pokus:'Nastav <b>rameno r₂ = 60 cm</b> a posuvníkem <b>F₂</b> (nebo tažením šipky síly) najdi sílu, při které je páka <b>vodorovně</b>.',
+      splneno:()=>rezim==='paka'&&paka.druh==='dvoj'&&paka.F1===30&&paka.r1===20&&paka.r2===60&&paka.rovnovaha(),
+      ukaz:{'#r2':60,'#f2':10},
+      pozorovani:()=>`Páka je vodorovně při <b>F₂ = ${paka.F2} N</b>: 30 N · 20 cm = ${paka.F2} N · 60 cm.`,
+      vysvetli:{
+        otazka:'Proč na delším rameni stačí menší síla?',
+        moznosti:[
+          moznost('Rozhoduje součin síly a ramene. Na obou stranách osy musí vyjít stejně: 30 N · 20 cm = 10 N · 60 cm.',true),
+          moznost('Delší část tyče je těžší a pomáhá tlačit dolů.',false,'Tyč v modelu nic neváží – a přesto stačí 10 N. Rozhoduje délka ramene, ne hmotnost tyče.'),
+          moznost('Síla se cestou po tyči zeslabí, takže na druhý konec dojde menší.',false,'Nic se neztrácí. Menší síla je vykoupená delší dráhou: zkus ▶️ Ukázat zdvih a porovnej, kolik urazí oba konce.')]},
+      shrnuti:'Páka je v rovnováze, když <b>F₁ · r₁ = F₂ · r₂</b>. Kolikrát delší rameno, tolikrát menší síla – konec ramene ale urazí tolikrát delší dráhu.' },
+
+    { id:'kladkostroj', nazev:'Kladkostroj',
+      predpoved:{
+        otazka:'Kladkostroj se <b>dvěma volnými kladkami</b> zvedá břemeno o tíze <b>200 N</b>. Jakou silou musíš táhnout za lano?',
+        moznosti:['200 N – kladky jen mění směr','100 N – polovinou','50 N – čtvrtinou'],
+        spravna:2 },
+      priprava(){ prepni('kladka'); N({'#druhKladky':'kladkostroj','#pocetKladek':1,'#brem':200,'#zvednuti':0}); },
+      pokus:'Přidej druhou volnou kladku (<b>Volné kladky = 2</b>) a břemeno zvedni o <b>50 cm</b> – tlačítkem ▶️ Táhnout nebo posuvníkem Zvednutí. Sleduj sílu i délku vytaženého lana.',
+      splneno:()=>rezim==='kladka'&&kladka.druh==='kladkostroj'&&kladka.n===2&&kladka.G===200&&kladka.h>=50,
+      ukaz(){ N({'#pocetKladek':2}); animujKladku(50); },
+      pozorovani:()=>`Síla je <b>${cislo(kladka.sila(),1)} N</b> – čtvrtina tíhy, protože břemeno visí na 4 pramenech. Aby stouplo o 50 cm, musela ruka vytáhnout <b>${kladka.h*kladka.prevod()} cm</b> lana.`,
+      vysvetli:{
+        otazka:'Co kladkostroj ušetří?',
+        moznosti:[
+          moznost('Sílu, ne práci: 200 N · 0,5 m = 50 N · 2 m = 100 J.',true),
+          moznost('Práci – zvednout břemeno je s ním celkově čtyřikrát snazší.',false,'Práce F · s vyšla na obou stranách stejně: 100 J. Čtvrtinovou sílu platíš čtyřikrát delší dráhou lana.'),
+          moznost('Nic – kladky jen mění směr síly.',false,'To platí jen pro pevnou kladku. Volné kladky rozloží tíhu na víc pramenů lana, a tak síla klesne.')]},
+      shrnuti:'Břemeno visí na <b>n</b> nosných pramenech: <b>F = G / n</b>, ale lana vytáhneš <b>n-krát víc</b>. Práce zůstává stejná – žádný stroj ji neušetří.' },
+
+    { id:'prevod', nazev:'Převod ozubených kol',
+      predpoved:{
+        otazka:'Malé kolo s <b>12 zuby</b> se točí <b>60× za minutu</b> a pohání kolo s <b>36 zuby</b>. Jak rychle se bude točit velké kolo?',
+        moznosti:['Rychleji – 180× za minutu','Stejně – 60× za minutu','Pomaleji – 20× za minutu'],
+        spravna:2 },
+      priprava(){ prepni('kola'); N({'#rezimKol':'dvojice','#mezikolo':false,'#z1':12,'#z2':12,'#otacky':60,'#mom':10}); },
+      pokus:'Nastav počet zubů hnaného kola <b>z₂ = 36</b> a sleduj otáčky obou kol a moment v panelu výpočtu.',
+      splneno:()=>rezim==='kola'&&kola.rezim==='dvojice'&&kola.z1===12&&kola.z2===36&&kola.otacky===60,
+      ukaz:{'#z2':36},
+      pozorovani:()=>`Převodový poměr i = 36 / 12 = 3. Velké kolo se točí <b>20× za minutu</b>, zato jeho moment je <b>${cislo(kola.moment*3)} N·m</b> – trojnásobný.`,
+      vysvetli:{
+        otazka:'Proč se velké kolo točí pomaleji?',
+        moznosti:[
+          moznost('Za jednu otáčku malého kola projde záběrem 12 zubů. Velké kolo se tím pootočí jen o 12 ze svých 36 zubů – o třetinu otáčky.',true),
+          moznost('Velké kolo je těžší, a tak se hůř roztáčí.',false,'Model s hmotností kol nepočítá, a poměr přesto vyšel přesně 3. Rozhoduje počet zubů.'),
+          moznost('Zuby velkého kola trochu prokluzují.',false,'Ozubená kola neprokluzují – právě proto mají zuby. Zuby obou kol projdou záběrem stejně rychle.')]},
+      shrnuti:'Převodový poměr <b>i = z₂ / z₁</b>. Hnané kolo má <b>i-krát menší otáčky</b> a <b>i-krát větší moment</b>. Co získáš na síle, ztratíš na rychlosti.' },
+  ],
+
+  otazky:[
+    ()=>{ // rovnováha páky s náhodnými čísly
+      const k=nahodne([2,3,4]), r1=nahodne([10,15,20]), F2=nahodne([5,10,15]), F1=F2*k, r2=r1*k;
+      const alt=k===2?F1*3:F1/2;
+      return { otazka:`Dvojzvratná páka: břemeno <b>F₁ = ${F1} N</b> je <b>${r1} cm</b> od osy. Jakou silou <b>F₂</b> ji vyrovnáš na rameni <b>${r2} cm</b>?`,
+        moznosti:[moznost(`${F2} N`,true),
+          moznost(`${F1*k} N`,false,'Delší rameno sílu nezvětšuje, ale zmenšuje: F₂ = F₁ · r₁ / r₂.'),
+          moznost(`${F1} N`,false,'Stejnou sílu by stačilo jen při stejně dlouhých ramenech.'),
+          moznost(`${cislo(alt,1)} N`,false,`Rameno je ${k}× delší, síla tedy ${k}× menší: F₂ = ${F1} · ${r1} / ${r2}.`)],
+        vysvetleni:`F₂ = F₁ · r₁ / r₂ = ${F1} · ${r1} / ${r2} = ${F2} N.` };
+    },
+    ()=>{ // síla na kladkostroji
+      const volne=nahodne([1,2,3]), n=2*volne, G=nahodne([120,240,360,480]);
+      return { otazka:`Kladkostroj má <b>${volne} ${volne===1?'volnou kladku':'volné kladky'}</b> a zvedá břemeno o tíze <b>${G} N</b>. Jakou silou táhneš?`,
+        moznosti:[moznost(`${cislo(G/n,1)} N`,true),
+          volne>1?moznost(`${cislo(G/volne,1)} N`,false,`Každá volná kladka visí na dvou pramenech – nosných pramenů je ${n}, ne ${volne}.`)
+                 :moznost(`${2*G} N`,false,'Kladkostroj sílu nezvětšuje. Volná kladka visí na dvou pramenech a každý nese polovinu tíhy.'),
+          moznost(`${G} N`,false,'Celou tíhu táhneš jen u samotné pevné kladky.')],
+        vysvetleni:`Nosných pramenů je 2 · ${volne} = ${n}, takže F = ${G} / ${n} = ${cislo(G/n,1)} N.` };
+    },
+    ()=>{ // délka lana
+      const n=nahodne([2,4,6]), h=nahodne([20,30,40]);
+      return { otazka:`Kladkostrojem se <b>${n} nosnými prameny</b> zvedáš břemeno o <b>${h} cm</b>. Kolik lana přitom vytáhneš?`,
+        moznosti:[moznost(`${n*h} cm`,true),
+          moznost(`${h} cm`,false,'O kolik se zvedne břemeno, o tolik se musí zkrátit každý nosný pramen – a těch je víc.'),
+          moznost(`${cislo(h/n,1)} cm`,false,'Kladkostroj šetří sílu, ne dráhu – lana se vytáhne víc, ne méně.')],
+        vysvetleni:`s = n · h = ${n} · ${h} cm = ${n*h} cm. Menší síla se platí delší dráhou.` };
+    },
+    { otazka:'K čemu je <b>pevná kladka</b>, když sílu nezmenší?',
+      moznosti:[moznost('Mění směr síly – můžeš táhnout dolů a pomoct si vlastní vahou.',true),
+        moznost('Zmenší potřebnou práci na polovinu.',false,'Práci neušetří žádný jednoduchý stroj. Pevná kladka nešetří ani sílu.'),
+        moznost('Zmenší sílu na polovinu.',false,'To dělá volná kladka. Na pevné kladce táhneš celou tíhu břemene.')],
+      vysvetleni:'Pevná kladka jen obrací směr: táhnout lano dolů je pohodlnější než zvedat břemeno nahoru.' },
+    ()=>{ // převod ozubených kol
+      const z1=nahodne([10,12,15,20]), k=nahodne([2,3]), rychlo=Math.random()<0.4;
+      const z2=rychlo?z1:z1*k, zz1=rychlo?z1*k:z1, n1=nahodne([30,60,90]);
+      const n2=n1*zz1/z2;
+      return { otazka:`Hnací kolo má <b>${zz1} zubů</b> a točí se <b>${n1}× za minutu</b>. Pohání kolo s <b>${z2} zuby</b>. Kolikrát za minutu se otočí hnané kolo?`,
+        moznosti:[moznost(`${cislo(n2,1)}×`,true),
+          moznost(`${cislo(n1*z2/zz1,1)}×`,false,'Poměr je obráceně: kolo s víc zuby se točí pomaleji. n₂ = n₁ · z₁ / z₂.'),
+          moznost(`${n1}×`,false,'Stejně rychle by se točila jen kola se stejným počtem zubů.')],
+        vysvetleni:`n₂ = n₁ · z₁ / z₂ = ${n1} · ${zz1} / ${z2} = ${cislo(n2,1)}. ${n2<n1?'Převod do pomala – větší moment.':'Převod do rychla – menší moment.'}` };
+    },
+    { otazka:'Mezi dvě ozubená kola vložíš <b>mezikolo</b>. Co se změní?',
+      moznosti:[moznost('Jen smysl otáčení – převodový poměr zůstane stejný.',true),
+        moznost('Převodový poměr se zvětší.',false,'Zuby mezikola se v poměru vykrátí: z_m/z₁ · z₂/z_m = z₂/z₁. Vyzkoušej v modelu ➕ Mezikolo.'),
+        moznost('Nic se nezmění.',false,'Poměr ano, ale hnané kolo se teď točí stejným směrem jako hnací – dřív se točilo opačně.')],
+      vysvetleni:'Dvě kola v záběru se točí proti sobě; mezikolo směr ještě jednou obrátí.' },
+    { otazka:'Co platí pro <b>všechny jednoduché stroje</b> – páku, kladkostroj i převody?',
+      moznosti:[moznost('Co získáš na síle, ztratíš na dráze – práce zůstane stejná.',true),
+        moznost('Zmenší práci, kterou musíš vykonat.',false,'Práce F · s vyjde s pomocí stroje i bez něj stejně (bez tření). Stroj ji jen rozloží na jinou sílu a dráhu.'),
+        moznost('Zmenší sílu i dráhu zároveň.',false,'Kdyby stroj zmenšil sílu i dráhu, vznikla by práce z ničeho. Menší síla vždy znamená delší dráhu.')],
+      vysvetleni:'Zlaté pravidlo mechaniky: F₁ · s₁ = F₂ · s₂.' },
+    { otazka:'Který předmět je <b>jednozvratná páka</b> – břemeno i síla jsou na stejné straně od osy?',
+      moznosti:[moznost('Stavební kolečko',true),
+        moznost('Nůžky',false,'Osa nůžek (šroubek) leží mezi prsty a stříhaným papírem – to je dvojzvratná páka.'),
+        moznost('Houpačka',false,'Houpačka má osu uprostřed a děti sedí na opačných stranách – dvojzvratná páka.')],
+      vysvetleni:'U kolečka je osou kolo, náklad leží blíž k ose a ruce zvedají rukojeti dál od ní.' },
+    { otazka:'Jedeš na kole do kopce. Proč přeřadíš vzadu na <b>větší kolečko</b> (víc zubů)?',
+      moznosti:[moznost('Vznikne převod do pomala: šlape se snadněji, ale jede se pomaleji.',true),
+        moznost('Větší kolečko roztočí zadní kolo rychleji.',false,'Víc zubů na hnaném kolečku znamená menší otáčky kola – převod do pomala.'),
+        moznost('Řetěz se méně natahuje, takže kolo nemá ztráty.',false,'Tím se převod nevysvětlí. Rozhoduje poměr zubů: vzadu víc zubů → větší moment na kole.')],
+      vysvetleni:'Hnané kolečko s více zuby dává větší moment na zadním kole za cenu nižší rychlosti.' },
+    { otazka:'Páka se naklání na stranu břemene. Co to znamená?',
+      moznosti:[moznost('Moment břemene je větší: F₁ · r₁ > F₂ · r₂.',true),
+        moznost('Břemeno je těžší než síla na druhé straně: F₁ > F₂.',false,'Nerozhoduje samotná síla, ale součin síla × rameno. Těžší břemeno blízko osy může lehčí síla daleko od osy přetáhnout.'),
+        moznost('Rameno břemene je delší: r₁ > r₂.',false,'Samotná délka ramene nestačí – rozhoduje součin síla × rameno na každé straně.')],
+      vysvetleni:'Páka se otáčí na stranu většího momentu M = F · r.' },
+  ],
+});
+})();
 </script>
 </body>
 </html>

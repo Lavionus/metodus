@@ -5,112 +5,101 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>🏳️ Kvíz vlajky a hlavní města</title>
 <link rel="stylesheet" href="../common.css">
+<link rel="stylesheet" href="../vyuka.css">
 <script src="../theme.js"></script>
 <script src="../podpis.js" defer></script>
 <script src="../kostra.js" defer></script>
+<script src="../uloha.js" defer></script>
+<script src="../procvic.js" defer></script>
 <script src="../data/staty.js"></script>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding:20px}
-.container{max-width:600px;margin:0 auto}
-h1{font-size:1.6rem;margin-bottom:18px;font-weight:600;text-align:center}
-.card{background:var(--bg-elevated);border:1px solid var(--border);border-radius:8px;padding:24px;margin-bottom:20px}
-.setup{display:flex;gap:12px;flex-wrap:wrap;align-items:end;justify-content:center}
-label{display:block;font-size:.78rem;color:var(--text-faint);margin-bottom:4px}
-select{background:var(--bg-input);border:1px solid var(--border-strong);border-radius:4px;color:var(--text);padding:9px}
-.btn{background:var(--accent);color: var(--na-akcentu, #fff);border:none;padding:11px 22px;border-radius:6px;cursor:pointer;font-weight:600}
-.btn:hover{background:var(--accent)}
-.game,.results{display:none;text-align:center}
-.scorebar{display:flex;justify-content:space-around;margin-bottom:18px}
-.scorebar .v{font-size:1.4rem;font-weight:700;color:var(--accent)}.scorebar .l{font-size:.72rem;color:var(--text-faint)}
-.flag{font-size:7rem;line-height:1;margin:10px 0}
-.qtext{font-size:1.2rem;margin-bottom:18px;color:var(--text-muted)}
-.options{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.opt{padding:14px;background:var(--bg-input);border:2px solid var(--border);border-radius:8px;cursor:pointer;font-size:1rem;transition:all .15s}
-.opt:hover{border-color:var(--accent)}
-.opt.correct{background:#1e3a26;border-color:#27ae60}
-.opt.wrong{background:#3a1e1e;border-color:#e74c3c}
-.results .big{font-size:3rem;font-weight:700;color:var(--accent);margin:10px 0}
+  /* vlajka jako velký obrázek zadání, v přehledu chyb jen malá */
+  .vlajka { display: block; font-size: clamp(4.5rem, 16vw, 7rem); line-height: 1.1; margin-bottom: 6px; }
+  .otazka-text { display: block; font-size: 1.15rem; font-weight: 500; color: var(--text-muted); }
+  .prehled-chyb .vlajka { display: inline; font-size: 1.4rem; margin: 0 6px 0 0; }
+  .prehled-chyb .otazka-text { display: inline; font-size: inherit; }
+  .ovladani label { display: inline-flex; align-items: center; gap: 6px; color: var(--text-muted); font-size: 0.9rem; }
+  .ovladani select { background: var(--bg-input); color: var(--text); border: 1px solid var(--border-strong); border-radius: 6px; padding: 8px 10px; font: inherit; }
 </style>
 </head>
 <body>
-<div class="container">
   <h1>🏳️ Kvíz: vlajky a hlavní města</h1>
-  <div class="card" id="setupCard">
-    <div class="setup">
-      <div><label>Typ otázek</label><select id="mode"><option value="flag2country">Vlajka → země</option><option value="country2capital">Země → hlavní město</option><option value="capital2country">Hl. město → země</option><option value="mix">Smíšené</option></select></div>
-      <div><label>Region</label><select id="region"><option value="europe">Evropa</option><option value="world">Celý svět</option></select></div>
-      <div><label>Otázek</label><select id="numQ"><option>10</option><option>15</option><option>20</option></select></div>
-      <button class="btn" id="startBtn" data-faze="procvic" data-kostra-overeni="ne">▶️ Spustit sérii</button>
-    </div>
+  <p class="podtitul">Série deseti otázek o státech Evropy nebo celého světa. Po chybě máš druhý pokus, na konci uvidíš přehled chyb a můžeš si je zopakovat.</p>
+
+  <div class="rezimy" id="rezimy">
+    <button data-rezim="flag2country" class="active">🏳️ Vlajka → země</button>
+    <button data-rezim="country2capital">🏛️ Země → hlavní město</button>
+    <button data-rezim="capital2country">📍 Hlavní město → země</button>
+    <button data-rezim="mix">🔀 Smíšené</button>
   </div>
-  <div class="card game" id="gameCard">
-    <div class="scorebar">
-      <div><div class="v" id="qNum">1</div><div class="l">Otázka</div></div>
-      <div><div class="v" id="score">0</div><div class="l">Skóre</div></div>
-      <div><div class="v" id="streak">0</div><div class="l">Série 🔥</div></div>
-    </div>
-    <div class="flag" id="flag"></div>
-    <div class="qtext" id="qtext"></div>
-    <div class="options" id="options"></div>
+
+  <div class="plocha" id="plocha"></div>
+
+  <div class="ovladani">
+    <label>🌍 <select id="region" aria-label="Region">
+      <option value="europe">Evropa</option>
+      <option value="world">Celý svět</option>
+    </select></label>
+    <button class="hlavni" id="startBtn">🔄 Nová série</button>
+    <span class="pokrok" id="pokrok"></span>
+    <span class="skore" id="skore"></span>
   </div>
-  <div class="card results" id="resultsCard">
-    <div style="font-size:2rem" id="emoji"></div>
-    <div class="big" id="finalScore"></div>
-    <p style="color:var(--text-faint)" id="finalDetail"></p>
-    <button class="btn" id="againBtn" style="margin-top:16px">🔄 Nová série</button>
-  </div>
-</div>
+
+  <p class="napoveda">Hlavní město nemusí být největší město státu: Austrálie má <b>Canberru</b> (ne Sydney), Turecko <b>Ankaru</b> (ne Istanbul), Kanada <b>Ottawu</b>, Švýcarsko <b>Bern</b> a Brazílie <b>Brasílii</b>. Podobné vlajky rozliš podle detailu: <b>Slovensko, Slovinsko a Rusko</b> mají stejné barvy, liší se znakem; <b>Irsko a Itálie</b> mají zelený a bílý pruh, třetí je u Irska oranžový, u Itálie červený; <b>Polsko a Indonésie</b> jsou obrácené; <b>Rakousko a Lotyšsko</b> se liší odstínem červené a šířkou pruhu.</p>
+
 <script>
-const $=id=>document.getElementById(id);
+const $ = id => document.getElementById(id);
 // Státy jsou společná data rodiny „Světadíly a státy" (data/staty.js),
 // stejná jako v kvízu hlavních měst. [vlajka, stát, hlavní město]
-const naPole=s=>[s.vlajka,s.stat,s.mesto];
-const EUROPE=METODUS_STATY.filter(s=>s.svetadil==='Evropa').map(naPole);
-const WORLD=METODUS_STATY.map(naPole);
-let pool,questions,idx,score,streak;
-function start(){
-  pool=$('region').value==='europe'?EUROPE:WORLD;
-  const n=Math.min(+$('numQ').value,pool.length);
-  const shuffled=[...pool].sort(()=>Math.random()-0.5).slice(0,n);
-  questions=shuffled.map(c=>{
-    let m=$('mode').value;if(m==='mix')m=['flag2country','country2capital','capital2country'][Math.floor(Math.random()*3)];
-    return{country:c,type:m};
+const naPole = s => [s.vlajka, s.stat, s.mesto];
+const EUROPE = METODUS_STATY.filter(s => s.svetadil === 'Evropa').map(naPole);
+const WORLD = METODUS_STATY.map(naPole);
+let rezim = 'flag2country';
+
+function generuj(r) {
+  const pool = $('region').value === 'europe' ? EUROPE : WORLD;
+  const typ = r === 'mix' ? Uloha.nahodne(['flag2country', 'country2capital', 'capital2country']) : r;
+  const stat = Uloha.nahodne(pool);
+  const [vlajka, zeme, mesto] = stat;
+  const i = typ === 'country2capital' ? 2 : 1;          // co se hádá: stát, nebo město
+  const spravne = stat[i];
+  const spatne = Uloha.zamichej(pool.filter(s => s[i] !== spravne)).slice(0, 3).map(s => s[i]);
+  const zadani = typ === 'flag2country'
+    ? `<span class="vlajka" role="img" aria-label="vlajka">${vlajka}</span><span class="otazka-text">Které zemi patří tato vlajka?</span>`
+    : typ === 'country2capital'
+      ? `<span class="otazka-text">Jaké je hlavní město státu</span>${zeme}?`
+      : `<span class="otazka-text">Kterého státu je hlavním městem</span>${mesto}?`;
+  return {
+    zadani,
+    odpoved: spravne,
+    moznosti: Uloha.zamichej([spravne, ...spatne]),
+    // po druhé chybě i souvislost, ať se žák něco dozví
+    napoveda: typ === 'country2capital' ? `${vlajka} ${zeme}` : `${vlajka} hlavní město ${mesto}`,
+  };
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  const serie = Procvic.spust({
+    klic: 'metodus_vlajky',
+    pocet: 10,
+    typ: 'text',
+    plocha: $('plocha'),
+    skoreEl: $('skore'),
+    pokrokEl: $('pokrok'),
+    rezim: () => rezim,
+    generuj,
   });
-  idx=0;score=0;streak=0;
-  $('setupCard').style.display='none';$('resultsCard').style.display='none';$('gameCard').style.display='block';
-  showQ();
-}
-function showQ(){
-  if(idx>=questions.length){finish();return;}
-  const{country,type}=questions[idx];
-  $('qNum').textContent=idx+1;$('score').textContent=score;$('streak').textContent=streak;
-  let answerIdx,question,flag='';
-  if(type==='flag2country'){flag=country[0];question='Které zemi patří tato vlajka?';answerIdx=1;}
-  else if(type==='country2capital'){question='Jaké je hlavní město země '+country[1]+'?';answerIdx=2;}
-  else{question='Které země je '+country[2]+' hlavním městem?';answerIdx=1;}
-  $('flag').textContent=flag;$('flag').style.display=flag?'block':'none';
-  $('qtext').textContent=question;
-  const correct=country[answerIdx];
-  const wrongs=[...pool].filter(c=>c[answerIdx]!==correct).sort(()=>Math.random()-0.5).slice(0,3).map(c=>c[answerIdx]);
-  const opts=[correct,...wrongs].sort(()=>Math.random()-0.5);
-  $('options').innerHTML=opts.map(o=>`<div class="opt" data-o="${o.replace(/"/g,'&quot;')}">${o}</div>`).join('');
-  $('options').querySelectorAll('.opt').forEach(el=>el.onclick=()=>answer(el,correct));
-}
-function answer(el,correct){
-  $('options').querySelectorAll('.opt').forEach(o=>{o.onclick=null;if(o.dataset.o===correct)o.classList.add('correct');});
-  if(el.dataset.o===correct){score++;streak++;}else{el.classList.add('wrong');streak=0;}
-  $('score').textContent=score;$('streak').textContent=streak;
-  setTimeout(()=>{idx++;showQ();},1000);
-}
-function finish(){
-  $('gameCard').style.display='none';$('resultsCard').style.display='block';
-  const pct=Math.round(score/questions.length*100);
-  $('finalScore').textContent=score+' / '+questions.length+' ('+pct+'%)';
-  $('emoji').textContent=pct>=90?'🏆':pct>=70?'🎉':pct>=50?'👍':'📚';
-  $('finalDetail').textContent=pct>=90?'Skvělý zeměpisec!':pct>=70?'Dobrá práce!':pct>=50?'Slušné, trénuj dál!':'Příště to půjde lépe!';
-}
-$('startBtn').onclick=start;$('againBtn').onclick=()=>{$('setupCard').style.display='block';$('resultsCard').style.display='none';};
+  $('rezimy').addEventListener('click', e => {
+    const b = e.target.closest('button[data-rezim]');
+    if (!b) return;
+    $('rezimy').querySelectorAll('button').forEach(x => x.classList.toggle('active', x === b));
+    rezim = b.dataset.rezim;
+    serie.restart();
+  });
+  $('region').addEventListener('change', () => serie.restart());
+  $('startBtn').onclick = () => serie.restart();
+  serie.restart();
+});
 </script>
 </body>
 </html>

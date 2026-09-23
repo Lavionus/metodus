@@ -5,9 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Obvody, obsahy, objemy</title>
   <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="../vyuka.css">
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
+  <script src="../uloha.js" defer></script>
+  <script src="../procvic.js" defer></script>
   <style>
     body { background-color: var(--bg-deep); padding: 24px clamp(14px, 3vw, 40px); min-height: 100vh; }
     h1 { font-size: 1.4rem; margin-bottom: 4px; }
@@ -40,7 +43,11 @@
     .stav { display: flex; justify-content: space-between; max-width: 640px; margin-top: 12px; color: var(--text-muted); font-size: 0.9rem; }
     .serie { color: var(--warn); }
     sup { font-size: 70%; }
-  </style>
+      #prehled[hidden], .plocha[hidden], .ovladani[hidden] { display: none !important; }
+    .velky-text .slovni { display: block; font-size: 1.15rem; font-weight: 500; line-height: 1.45; max-width: 560px; margin: 0 auto; }
+    .jednotka-info { display: block; font-size: 0.85rem; font-weight: 400; color: var(--text-faint); margin-top: 6px; }
+    .reseni-postup { margin-top: 12px; font-size: 0.95rem; color: var(--text-muted); line-height: 1.5; }
+</style>
 </head>
 <body>
   <h1>📐 Obvody, obsahy, objemy</h1>
@@ -69,20 +76,14 @@
     </table>
   </div>
 
-  <div class="karta" id="kviz" style="display:none" data-kostra-odpovedi>
-    <div class="zadani" id="zadani"></div>
-    <div class="odpovedni">
-      <input type="number" id="odpoved" step="any" autocomplete="off">
-      <span class="jednotka" id="jednotka"></span>
-      <button class="potvrdit" id="btnPotvrdit">✔️ Zkontrolovat</button>
-    </div>
-    <div class="zprava" id="zprava"></div>
-    <div class="reseni" id="reseni"></div>
+  <div class="plocha" id="plocha" hidden></div>
+  <div class="ovladani" id="stav" hidden>
+    <button class="hlavni" id="startBtn">🔄 Nová série</button>
+    <span class="pokrok" id="pokrok"></span>
+    <span class="skore" id="skore"></span>
   </div>
-  <div class="stav" id="stav" style="display:none">
-    <span class="serie" id="serie"></span>
-    <span id="skore"></span>
-  </div>
+
+  <p class="napoveda">Obvod je délka čáry kolem útvaru (cm), obsah plocha uvnitř (cm²), objem prostor tělesa (cm³). Obsah trojúhelníku je polovina obdélníku se stejnou stranou a výškou. π ≈ 3,14; výsledky zaokrouhluj na 2 desetinná místa, čárku i tečku bereme obojí.</p>
 
 <script>
 const $ = id => document.getElementById(id);
@@ -112,45 +113,30 @@ const TELESA = [
   () => { const S = nahodnyPrvek([9, 12, 15, 18, 24, 30]), v = ni(2, 9); return { z: `Jehlan má obsah podstavy ${S} cm² a výšku ${v} cm. Vypočítej objem.`, v: c2(S * v / 3), j: 'cm³', p: `V = (S·v)/3 = (${S} × ${v})/3 = ${fmt(S * v / 3)} cm³` }; },
 ];
 
-let rezim = 'prehled', uloha = null, spravne = 0, celkem = 0, serie = 0, vyhodnoceno = false;
-
-function nova() {
-  vyhodnoceno = false;
-  uloha = nahodnyPrvek(rezim === 'rovinne' ? ROVINNE : TELESA)();
-  $('zadani').textContent = uloha.z;
-  $('jednotka').textContent = uloha.j;
-  $('odpoved').value = '';
-  $('zprava').textContent = ''; $('zprava').className = 'zprava';
-  $('reseni').style.display = 'none';
-  $('btnPotvrdit').textContent = '✔️ Zkontrolovat';
-  $('odpoved').focus();
-  window.Kostra?.otazka();
+let rezim = 'prehled';
+function generuj(r) {
+  const u = nahodnyPrvek(r === 'rovinne' ? ROVINNE : TELESA)();
+  return {
+    zadani: `<span class="slovni">${u.z}</span><span class="jednotka-info">výsledek v ${u.j}</span>`,
+    odpoved: u.v, tolerance: 0.011, napoveda: '',
+    poVyhodnoceni: karta => karta.insertAdjacentHTML('beforeend', `<div class="reseni-postup">💡 ${u.p}</div>`),
+  };
 }
-function vyhodnot() {
-  if (vyhodnoceno) { nova(); return; }
-  const v = $('odpoved').value.trim().replace(',', '.');
-  if (v === '') { $('odpoved').focus(); return; }
-  vyhodnoceno = true; celkem++;
-  const ok = Math.abs(Number(v) - uloha.v) < 0.011;
-  window.Kostra?.odpoved(ok, uloha);   // společná kostra – Ověř se
-  if (ok) { spravne++; serie++; $('zprava').textContent = '✅ Správně!'; $('zprava').classList.add('ok'); }
-  else { serie = 0; $('zprava').textContent = '❌ Správný výsledek: ' + fmt(uloha.v) + ' ' + uloha.j; $('zprava').classList.add('spatne'); }
-  $('reseni').textContent = '💡 ' + uloha.p;
-  $('reseni').style.display = 'block';
-  $('serie').textContent = serie >= 3 ? '🔥 série ' + serie : '';
-  $('skore').textContent = spravne + ' / ' + celkem;
-  $('btnPotvrdit').textContent = 'Pokračovat →';
-}
-$('btnPotvrdit').onclick = vyhodnot;
-$('odpoved').addEventListener('keydown', e => { if (e.key === 'Enter') vyhodnot(); });
-document.querySelectorAll('#rezimy button').forEach(b => b.onclick = () => {
-  document.querySelectorAll('#rezimy button').forEach(x => x.classList.remove('active'));
-  b.classList.add('active'); rezim = b.dataset.rezim;
-  const kviz = rezim !== 'prehled';
-  $('prehled').style.display = kviz ? 'none' : '';
-  $('kviz').style.display = kviz ? '' : 'none';
-  $('stav').style.display = kviz ? '' : 'none';
-  if (kviz) nova();
+window.addEventListener('DOMContentLoaded', () => {
+  const serie = Procvic.spust({
+    klic: 'metodus_geometrie_vzorce', pocet: 10, typ: 'text',
+    plocha: $('plocha'), skoreEl: $('skore'), pokrokEl: $('pokrok'),
+    rezim: () => rezim, generuj,
+  });
+  document.querySelectorAll('#rezimy button').forEach(b => b.onclick = () => {
+    document.querySelectorAll('#rezimy button').forEach(x => x.classList.remove('active'));
+    b.classList.add('active'); rezim = b.dataset.rezim;
+    const kviz = rezim !== 'prehled';
+    $('prehled').hidden = kviz;
+    $('plocha').hidden = $('stav').hidden = !kviz;
+    if (kviz) serie.restart();
+  });
+  $('startBtn').onclick = () => serie.restart();
 });
 </script>
 </body>

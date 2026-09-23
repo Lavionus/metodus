@@ -52,8 +52,8 @@ canvas{display:block;width:100%;height:100%;cursor:crosshair;touch-action:none}
 :root[data-tone="light"] #plochy { color: #e0e0e0; }
 :root[data-tone="light"] #smazat { color: #e0e0e0; }
 :root[data-tone="light"] .odkaz { color: #e0e0e0; }
-:root[data-tone="light"] button { color: #e0e0e0; }
-:root[data-tone="light"] b:not(.kostra b) { color: #e0e0e0 !important; }   /* pruh kostry je světlý */
+:root[data-tone="light"] button:not(.badani button):not(.kostra button) { color: #e0e0e0; }   /* panel úkolů má barvy motivu */
+:root[data-tone="light"] b:not(.kostra b):not(.badani b) { color: #e0e0e0 !important; }   /* pruh kostry je světlý */
 
 /* světlé motivy (sépie, škola, kontrast…): tmavé plochy stránky si nechají světlé písmo (tmavý text motivu by na nich zanikl) */
 :root[data-tone="light"] :is(.horni, .priklady, .panel, .vysvetleni) {
@@ -429,6 +429,131 @@ document.addEventListener('keydown',e=>{
   else if(KLAVES[+e.key-1])spustPriklad(KLAVES[+e.key-1]);
 });
 panel();
+</script>
+<script src="../badani.js"></script>
+<script>
+/* Úkoly k modelu (badani.js): předpověz → vyzkoušej → vysvětli.
+   II. a III. Keplerův zákon a úniková rychlost. Rychlosti se převádějí
+   do km/s stejně jako panel údajů (1 au ≙ 29,8 km/s na kruhové dráze). */
+(function(){
+const N=Badani.nastav, cis=Badani.cislo;
+const nahodne=p=>p[Math.floor(Math.random()*p.length)];
+const moznost=(t,ok,proc)=>({t,ok,proc});
+const kms=v=>v/V_AU*29.8;
+const zacni=()=>{ $('smazat').click(); if(!bezi) $('pauza').click(); N({'#rychlost':100}); if(ukazVektory) $('vektory').click(); };
+let sledovana=null, blizko=null, prosla=false;   // planetka úkolu 1 a průlet přísluním
+const radialni=t=>{ const c=stred(); return (t.x-c.x)*t.vx+(t.y-c.y)*t.vy; };
+
+Badani.start({
+  zakryt:'#panely > .panel:not(.udaje), #vysvetleni',   // zákony by prozradily odpovědi
+  ukoly:[
+    { id:'prisluni', nazev:'Kde letí planetka nejrychleji',
+      predpoved:{
+        otazka:'Planetka obíhá Slunce po <b>protáhlé elipse</b>. Kde na dráze je <b>nejrychlejší</b>?',
+        moznosti:['Nejdál od Slunce (v odsluní)','Nejblíž Slunci (v přísluní)','Všude stejně rychlá'],
+        spravna:1 },
+      priprava(){ zacni(); const c=stred(); sledovana=novaPlanetka(c.x+150,c.y,0,-vKruh(150)*0.6); prosla=false; blizko=null; },
+      pokus:'Zapni <b>➡️ Vektory</b> a sleduj zelenou šipku rychlosti, dokud planetka neoblétne Slunce (projde přísluním).',
+      splneno:()=>{ if(!sledovana||!telesa.includes(sledovana)) return false;
+        const r=radialni(sledovana); if(blizko!==null&&blizko<0&&r>=0) prosla=true; blizko=r;
+        return prosla&&ukazVektory; },
+      ukaz(){ if(!ukazVektory) $('vektory').click(); },
+      pozorovani:()=>{ const el=elementy(sledovana), vP=Math.sqrt(MU*(1+el.e)/el.perihel), vA=Math.sqrt(MU*(1-el.e)/el.afel);
+        return `V přísluní (${cis(el.perihel/AU,2)} au) letí <b>${cis(kms(vP),0)} km/s</b>, v odsluní (${cis(el.afel/AU,2)} au) jen <b>${cis(kms(vA),0)} km/s</b>.`; },
+      vysvetli:{
+        otazka:'Proč je planetka u Slunce rychlejší?',
+        moznosti:[
+          moznost('Cestou ke Slunci ji gravitace urychluje a polohová energie se mění na pohybovou. Průvodič přitom opíše za stejný čas stejnou plochu – blízko Slunce musí letět rychleji.',true),
+          moznost('U Slunce je horko a planetka se rozpíná.',false,'Teplota v modelu nehraje roli. Rychlost mění gravitace Slunce.'),
+          moznost('V přísluní na ni nepůsobí žádná síla.',false,'Gravitace působí vždycky – u Slunce je dokonce největší (žlutá šipka).')]},
+      shrnuti:'<b>II. Keplerův zákon</b>: průvodič opíše za stejný čas stejnou plochu. Těleso je proto nejrychlejší v <b>přísluní</b> a nejpomalejší v <b>odsluní</b> (Země letí nejrychleji začátkem ledna).' },
+
+    { id:'obeh', nazev:'Dvakrát dál od Slunce',
+      predpoved:{
+        otazka:'Planetka ve vzdálenosti <b>1 au</b> oběhne Slunce za 1 rok. Za jak dlouho oběhne planetka po kruhové dráze ve vzdálenosti <b>2 au</b>?',
+        moznosti:['Za 2 roky','Asi za 2,8 roku','Za 4 roky'],
+        spravna:1 },
+      priprava(){ zacni(); spustPriklad('kruh'); },
+      pokus:'Vystřel prakem druhou planetku <b>dál od Slunce</b> tak, aby měla velkou poloosu <b>a ≈ 2 au</b> (údaje o drahách, tlačítko ⓘ na úzké obrazovce). Porovnej dobu oběhu T.',
+      splneno:()=>telesa.some(t=>{ const el=elementy(t); return el.vazane&&Math.abs(el.a/AU-2)<=0.2; }),
+      ukaz(){ const c=stred(); const r=Math.min(2*AU, Math.min(rozmer().w,rozmer().h)*0.47); novaPlanetka(c.x-r,c.y,0,vKruh(r)*Math.sqrt(2-r/(2*AU))); },
+      pozorovani:()=>{ const t=telesa.find(t=>{ const el=elementy(t); return el.vazane&&Math.abs(el.a/AU-2)<=0.2; }); const el=elementy(t);
+        return `Planetka s a = ${cis(el.a/AU,2)} au obíhá <b>${cis(el.T/T_AU,2)} roku</b> – ne 2 roky. Podíl T²/a³ vyšel oběma stejně.`; },
+      vysvetli:{
+        otazka:'Proč vzdálenější planetka oběhne víc než dvakrát pomaleji?',
+        moznosti:[
+          moznost('Má delší cestu a navíc letí pomaleji, protože ji Slunce přitahuje slaběji. Obojí dohromady dává T² ∝ a³.',true),
+          moznost('Dvakrát delší dráha znamená přesně dvakrát delší oběh.',false,'To by platilo při stejné rychlosti. Vzdálenější planetka ale letí pomaleji – oběh trvá asi 2,8×.'),
+          moznost('Vzdálenější planetky jsou těžší.',false,'Hmotnost planetky dobu oběhu neovlivňuje. Rozhoduje velikost dráhy.')]},
+      shrnuti:'<b>III. Keplerův zákon</b>: <b>T² / a³</b> je pro všechna tělesa kolem Slunce stejné. Dvakrát větší dráha → oběh 2√2 ≈ 2,8× delší (Mars 1,5 au obíhá 1,9 roku).' },
+
+    { id:'unik', nazev:'Úniková rychlost',
+      predpoved:{
+        otazka:'Planetku vystřelíš <b>1,5× rychleji</b>, než je potřeba na kruhovou dráhu. Co se stane?',
+        moznosti:['Poletí po větší elipse a vrátí se','Uletí pryč a už se nevrátí','Spadne do Slunce'],
+        spravna:1 },
+      priprava(){ zacni(); },
+      pokus:'Spusť příklad <b>💫 Úniková rychlost</b> (nebo vystřel prakem s natažením aspoň 1,5×) a sleduj dráhu v údajích.',
+      splneno:()=>telesa.some(t=>!elementy(t).vazane)||pocitadla.uniklo>0,
+      ukaz(){ spustPriklad('unik'); },
+      pozorovani:'Dráha je <b>hyperbola</b> – planetka odletí a už se nevrátí. Hranice je √2 ≈ 1,41× kruhové rychlosti.',
+      vysvetli:{
+        otazka:'Proč se planetka nevrátí?',
+        moznosti:[
+          moznost('Má tolik pohybové energie, že ji gravitace Slunce nestačí zastavit – ani ve velké dálce neklesne rychlost na nulu.',true),
+          moznost('Ve velké vzdálenosti gravitace Slunce úplně zmizí.',false,'Gravitace slábne, ale nikdy nezmizí. Planetka uletí, protože má víc energie, než kolik jí gravitace stihne ubrat.'),
+          moznost('Rychlejší planetky nejsou gravitací přitahovány.',false,'Gravitace působí na všechna tělesa stejně, bez ohledu na rychlost. Jen pomalou planetku stočí zpět.')]},
+      shrnuti:'Při <b>√2 ≈ 1,41×</b> kruhové rychlosti těleso uniká (2. kosmická rychlost, u Země 11,2 km/s). Pod ní obíhá po elipse, nad ní odlétá po hyperbole.' },
+  ],
+
+  otazky:[
+    ()=>{ const k=nahodne([4,9]), T=Math.pow(k,1.5);
+      return { otazka:`Planetka obíhá <b>${k}× dál</b> od Slunce než Země. Jak dlouho trvá její oběh?`,
+        moznosti:[moznost(`${cis(T,0)} let`,true),
+          moznost(`${k} let`,false,'Doba oběhu roste víc než vzdálenost: T² ∝ a³, tedy T = a · √a.'),
+          moznost(`${k*k} let`,false,`Kvadrát doby oběhu je úměrný třetí mocnině vzdálenosti: T = √(${k}³) = ${cis(T,0)} let.`)],
+        vysvetleni:`T = √(a³) = √(${k}³) = ${cis(T,0)} let.` }; },
+    ()=>{ const k=nahodne([2,3]);
+      return { otazka:`Těleso se vzdálí od Slunce <b>${k}× dál</b>. Kolikrát slabší gravitační sílou ho Slunce přitahuje?`,
+        moznosti:[moznost(`${k*k}× slabší`,true),
+          moznost(`${k}× slabší`,false,'Gravitace klesá s druhou mocninou vzdálenosti.'),
+          moznost('Stejně silně',false,'Gravitační síla se vzdáleností slábne: F ∝ 1 / r².')],
+        vysvetleni:`F ∝ 1/r²: ${k}× dál → ${k*k}× slabší.` }; },
+    { otazka:'Kde leží Slunce na eliptické dráze planety?',
+      moznosti:[moznost('V jednom z ohnisek elipsy',true),
+        moznost('Přesně ve středu elipsy',false,'Ve středu by leželo jen u kružnice. U elipsy je Slunce v ohnisku – proto má planeta přísluní a odsluní.'),
+        moznost('Na okraji elipsy',false,'Planeta Slunce nikdy nepřekročí – Slunce je uvnitř dráhy, v ohnisku.')],
+      vysvetleni:'I. Keplerův zákon – zapni v modelu 📐 Elipsa.' },
+    { otazka:'Proč Merkur oběhne Slunce za 88 dní, ale Neptun za 165 let?',
+      moznosti:[moznost('Merkur je blízko: má kratší dráhu a Slunce ho přitahuje silněji, takže letí rychleji.',true),
+        moznost('Merkur je menší, a proto rychlejší.',false,'Velikost planety dobu oběhu neovlivňuje. Rozhoduje vzdálenost od Slunce.'),
+        moznost('Neptun brzdí mezihvězdný prach.',false,'Neptun obíhá pomalu kvůli velké vzdálenosti – T² ∝ a³.')],
+      vysvetleni:'Blízké planety obíhají rychle a krátce, vzdálené pomalu a dlouho.' },
+    { otazka:'Co je <b>1. kosmická rychlost</b>?',
+      moznosti:[moznost('Nejmenší rychlost, při které těleso obíhá Zemi po kružnici těsně nad povrchem (7,9 km/s)',true),
+        moznost('Rychlost, při které těleso uletí ze Země navždy',false,'To je 2. kosmická (úniková) rychlost, 11,2 km/s.'),
+        moznost('Rychlost světla',false,'Rychlost světla je 300 000 km/s – s kosmickými rychlostmi nesouvisí.')],
+      vysvetleni:'1. kosmická = kruhová dráha, 2. kosmická = √2× víc = únik.' },
+    { otazka:'Kdy letí Země kolem Slunce <b>nejrychleji</b>?',
+      moznosti:[moznost('Začátkem ledna, kdy je Slunci nejblíž',true),
+        moznost('V létě, kdy je teplo',false,'Léto u nás způsobuje sklon zemské osy, ne vzdálenost. Nejblíž Slunci je Země v lednu.'),
+        moznost('Pořád stejně rychle',false,'Dráha Země je mírná elipsa, takže se rychlost trochu mění – nejrychlejší je v přísluní.')],
+      vysvetleni:'Přísluní Země nastává kolem 3. ledna.' },
+    { otazka:'Co znamená II. Keplerův zákon (zapni 🍰 Plochy)?',
+      moznosti:[moznost('Průvodič opíše za stejný čas stejnou plochu – u Slunce těleso letí rychleji.',true),
+        moznost('Všechny planety opíší za rok stejnou plochu.',false,'Zákon platí pro jedno těleso: jeho průvodič opíše za stejné časy stejné plochy.'),
+        moznost('Dráha má všude stejnou šířku.',false,'Zákon mluví o plochách, které průvodič opíše za stejný čas.')],
+      vysvetleni:'Krátký průvodič u Slunce musí za stejný čas „zamést“ stejnou plochu jako dlouhý v odsluní – proto rychleji.' },
+    ()=>{ const k=nahodne([1.2,1.3,1.6,1.8]);
+      const ok=k<1.41? 'Obíhá po protáhlé elipse':'Uletí po hyperbole';
+      return { otazka:`Planetku vystřelíš <b>${cis(k,1)}× rychleji</b>, než je potřeba na kruhovou dráhu. Co se stane?`,
+        moznosti:[moznost('Obíhá po protáhlé elipse',k<1.41,'Nad √2 ≈ 1,41× kruhové rychlosti už má planetka dost energie na únik.'),
+          moznost('Uletí po hyperbole',k>=1.41,'Pod √2 ≈ 1,41× kruhové rychlosti planetku gravitace udrží – oblétá po elipse.'),
+          moznost('Spadne do Slunce',false,'Rychlejší planetka se od Slunce vzdálí, nespadne.')],
+        vysvetleni:`Hranice úniku je √2 ≈ 1,41×. ${ok}.`, poradi:true }; },
+  ],
+});
+})();
 </script>
 </body>
 </html>

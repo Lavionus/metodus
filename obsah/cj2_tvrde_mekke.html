@@ -20,6 +20,12 @@
       background: var(--accent-soft); border-radius: 6px; padding: 1px 9px; margin-left: 8px;
     }
     .pomucka h2 { display: flex; align-items: center; }
+    .domek-pomucka {
+      width: 104px; height: 104px; object-fit: cover; flex: 0 0 auto;
+      border-radius: 14px; background: #faf6ec; box-shadow: var(--shadow);
+    }
+    .domek-hlavicka { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+    .domek-hlavicka h2 { margin: 0; }
   </style>
 </head>
 <body>
@@ -43,11 +49,17 @@
 
   <div class="pomucka" id="pomucka">
     <div class="skupina tvrde" data-druh="tvrde">
-      <h2>🧱 Tvrdé souhlásky <span class="cil">y, ý</span></h2>
+      <div class="domek-hlavicka">
+        <img class="domek-pomucka" src="img/cj/cj2-tvrde-mekke-domek-tvrdy.webp" alt="Pevný hranatý domek z kamene představuje tvrdé souhlásky." width="768" height="768">
+        <h2>Tvrdé souhlásky <span class="cil">y, ý</span></h2>
+      </div>
       <div class="znaky" id="znakyTvrde"></div>
     </div>
     <div class="skupina" data-druh="mekke">
-      <h2>🧸 Měkké souhlásky <span class="cil">i, í</span></h2>
+      <div class="domek-hlavicka">
+        <img class="domek-pomucka" src="img/cj/cj2-tvrde-mekke-domek-mekky.webp" alt="Útulný dřevěný domek s polštáři představuje měkké souhlásky." width="768" height="768">
+        <h2>Měkké souhlásky <span class="cil">i, í</span></h2>
+      </div>
       <div class="znaky" id="znakyMekke"></div>
     </div>
   </div>

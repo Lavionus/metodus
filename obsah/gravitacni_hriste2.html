@@ -954,5 +954,126 @@ $('panelyOtevrit').onclick=()=>{nastavPanely(false);pamet.zapis('gh2_fakta_skryt
 })();
 panel();
 </script>
+<script src="../badani.js"></script>
+<script>
+/* Úkoly k modelu (badani.js): předpověz → vyzkoušej → vysvětli.
+   Akce a reakce, pohyb Slunce kolem těžiště, srážka a splynutí. */
+(function(){
+const N=Badani.nastav, cis=Badani.cislo;
+const nahodne=p=>p[Math.floor(Math.random()*p.length)];
+const moznost=(t,ok,proc)=>({t,ok,proc});
+const cas=chci=>{ if(bezi!==chci) $('pauza').click(); };
+const tezisteZap=chci=>{ if(ukazTeziste!==chci) $('teziste').click(); };
+const odTeziste=()=>{ const b=bilance(); return Math.hypot(slunce.x-b.cx,slunce.y-b.cy); };
+
+Badani.start({
+  zakryt:'#panely .panel:not(.udaje), #vysvetleni',   // fakta vpravo prozrazují odpovědi
+  ukoly:[
+    { id:'reakce', nazev:'Kdo koho přitahuje víc',
+      predpoved:{
+        otazka:'Slunce má hmotnost <b>1 000</b>, planeta <b>30</b>. Kdo koho přitahuje <b>větší silou</b>?',
+        moznosti:['Slunce planetu','Obě tělesa se přitahují stejně velkou silou','Planeta Slunce'],
+        spravna:1 },
+      priprava(){ cas(true); tezisteZap(false); vycisti(); N({'#hmotnost':30}); spustPriklad('jedna'); vybrane=[]; },
+      pokus:'Klepni na <b>Slunce</b> a pak na <b>planetu</b>. V panelu „Soustava v číslech“ (ℹ️ Údaje) se ukáže síla i zrychlení obou těles.',
+      splneno:()=>vybrane.length===2&&vybrane.includes(slunce),
+      ukaz(){ vybrane=[slunce,telesa[telesa.length-1]]; },
+      pozorovani:()=>{ const [a,c]=vybrane, pom=Math.max(a.hmotnost,c.hmotnost)/Math.min(a.hmotnost,c.hmotnost);
+        return `Síla je na obě tělesa <b>stejně velká</b>, ale planeta dostane <b>${cis(pom,0)}× větší zrychlení</b> než Slunce.`; },
+      vysvetli:{
+        otazka:'Proč se hýbe hlavně planeta, když síla je stejná?',
+        moznosti:[
+          moznost('Síly jsou stejné (akce a reakce), ale zrychlení je a = F / m. Slunce je 33× hmotnější, a tak zrychlí 33× méně.',true),
+          moznost('Slunce planetu přitahuje víc, protože je větší.',false,'Podle 3. Newtonova zákona je síla na obě tělesa stejná – vyšlo to i v panelu. Liší se jen zrychlení.'),
+          moznost('Na Slunce gravitace planety nepůsobí.',false,'Působí – stejně velkou silou. Slunce se jen kvůli své hmotnosti pohne nepatrně.')]},
+      shrnuti:'Gravitační síla <b>F = G · m₁ · m₂ / r²</b> působí na obě tělesa <b>stejně velká a opačná</b> (3. Newtonův zákon). Lehčí těleso dostane větší zrychlení <b>a = F / m</b>.' },
+
+    { id:'teziste', nazev:'Hýbe se i Slunce?',
+      predpoved:{
+        otazka:'Ke Slunci přidáš <b>velmi těžkou planetu</b> (hmotnost 60). Bude se Slunce pohybovat?',
+        moznosti:['Ne, Slunce zůstane nehybné uprostřed','Ano – Slunce i planeta obíhají kolem společného těžiště','Slunce spadne do planety'],
+        spravna:1 },
+      priprava(){ cas(true); tezisteZap(false); vycisti(); N({'#hmotnost':8}); vybrane=[]; },
+      pokus:'Nastav <b>hmotnost dalšího tělesa na 60</b>, přidej <b>🪨 Planetku na dráhu</b> a zapni <b>⚖️ Těžiště</b>. Sleduj Slunce.',
+      splneno:()=>ukazTeziste&&telesa.some(t=>t.hmotnost>=60)&&odTeziste()>1,
+      ukaz(){ N({'#hmotnost':60}); spustPriklad('jedna'); tezisteZap(true); },
+      pozorovani:()=>{ const t=telesa.find(t=>t.hmotnost>=60), b=bilance();
+        return `Slunce krouží kolem těžiště ve vzdálenosti <b>${cis(odTeziste(),1)} px</b>, planeta asi ${cis(Math.hypot(t.x-b.cx,t.y-b.cy),0)} px od něj – v poměru hmotností.`; },
+      vysvetli:{
+        otazka:'Proč se Slunce hýbe jen málo?',
+        moznosti:[
+          moznost('Obě tělesa obíhají kolem společného těžiště. To leží blízko hmotnějšího tělesa – vzdálenosti od těžiště jsou v obráceném poměru hmotností.',true),
+          moznost('Slunce se hýbe, protože do něj planeta naráží.',false,'Planeta se Slunce nedotkne. Slunce táhne gravitace planety – stejně velkou silou, jakou ono táhne planetu.'),
+          moznost('Slunce se točí kolem své osy, a proto se zdá, že se hýbe.',false,'Model rotaci Slunce nepočítá. Slunce opravdu obíhá kolem těžiště soustavy.')]},
+      shrnuti:'Dvě tělesa obíhají kolem <b>společného těžiště</b>; m₁ · r₁ = m₂ · r₂. Těžiště Země a Měsíce leží ještě uvnitř Země. Podle kmitání hvězd astronomové objevují cizí planety.' },
+
+    { id:'srazka', nazev:'Srážka planetek',
+      predpoved:{
+        otazka:'Dvě planetky letí proti sobě, srazí se a <b>splynou v jednu</b>. Co z toho se při srážce zachová?',
+        moznosti:['Celková hybnost','Celková pohybová energie','Obojí'],
+        spravna:0 },
+      priprava(){ cas(false); tezisteZap(false); vycisti(); vybrane=[];
+        naKruhovouDrahu(200,10,1,0); naKruhovouDrahu(200,30,-1,2.2); vyrovnejHybnost(); },
+      pokus:'Čas je zastavený. Pusť ho (<b>▶️ Spustit</b> nebo mezerník) a po srážce přečti v panelu „Soustava v číslech“, co se stalo s hybností a energií.',
+      splneno:()=>pocitadla.splynulo>0&&!!posledniSplynuti,
+      ukaz(){ cas(true); },
+      pozorovani:()=>`Hybnost soustavy se <b>nezměnila</b>, ale energie klesla o <b>${cis(Math.abs(posledniSplynuti.dE/posledniSplynuti.Epred)*100,1)} %</b>.`,
+      vysvetli:{
+        otazka:'Kam se část energie ztratila?',
+        moznosti:[
+          moznost('Při nepružné srážce se část pohybové energie změní v teplo a deformaci. Hybnost se ztratit nemůže – vnitřní síly srážky ji jen přerozdělí.',true),
+          moznost('Energie zanikla.',false,'Energie nezaniká. V modelu „chybí“ jen proto, že teplo a deformaci nepočítá.'),
+          moznost('Ztratila se i hybnost, jen to panel neukazuje.',false,'Panel ukazuje hybnost výslovně – nezměnila se. Při srážce působí síly jen mezi planetkami navzájem.')]},
+      shrnuti:'Při srážce se <b>hybnost zachová vždy</b>. Pohybová energie se zachová jen při pružné srážce – při splynutí se část změní v <b>teplo</b>.' },
+  ],
+
+  otazky:[
+    ()=>{ const k=nahodne([2,3]);
+      return { otazka:`Dvě tělesa se od sebe vzdálí na <b>${k}× větší</b> vzdálenost. Jak se změní gravitační síla mezi nimi?`,
+        moznosti:[moznost(`Zmenší se ${k*k}×`,true),
+          moznost(`Zmenší se ${k}×`,false,'Gravitace klesá s druhou mocninou vzdálenosti: F ∝ 1/r².'),
+          moznost('Nezmění se',false,'Gravitační síla na vzdálenosti závisí: F = G · m₁ · m₂ / r².')],
+        vysvetleni:`F ∝ 1/r²: ${k}× dál → ${k*k}× slabší.` }; },
+    ()=>{ const k=nahodne([2,3]);
+      return { otazka:`Hmotnost jednoho ze dvou těles se zvětší <b>${k}×</b>. Jak se změní síla, kterou se přitahují?`,
+        moznosti:[moznost(`Zvětší se ${k}×`,true),
+          moznost(`Zvětší se ${k*k}×`,false,'Síla je úměrná hmotnosti každého tělesa – jen vzdálenost je ve druhé mocnině.'),
+          moznost('Zvětší se jen síla, kterou těžší těleso táhne lehčí',false,'Síla je vždy stejná na obě tělesa – zvětší se pro obě.')],
+        vysvetleni:`F = G · m₁ · m₂ / r² – úměrná každé z hmotností.` }; },
+    ()=>{ const M=nahodne([100,300,1000]), m=nahodne([2,5,10]);
+      return { otazka:`Hvězda s hmotností <b>${M}</b> a planeta s hmotností <b>${m}</b> se přitahují. Kolikrát větší zrychlení má planeta než hvězda?`,
+        moznosti:[moznost(`${cis(M/m,0)}×`,true),
+          moznost('Stejné',false,'Stejná je síla, ne zrychlení. a = F / m – lehčí těleso zrychlí víc.'),
+          moznost(`${cis(m/M,2)}×`,false,'Obráceně: lehčí planeta zrychlí víc než těžká hvězda.')],
+        vysvetleni:`Síla je stejná, zrychlení a = F/m: poměr ${M} / ${m} = ${cis(M/m,0)}.` }; },
+    { otazka:'Kde leží <b>těžiště Země a Měsíce</b>?',
+      moznosti:[moznost('Uvnitř Země, asi 4 700 km od jejího středu',true),
+        moznost('Přesně uprostřed mezi Zemí a Měsícem',false,'Uprostřed by bylo jen u stejně těžkých těles. Země je 81× hmotnější, takže těžiště je blízko ní.'),
+        moznost('Ve středu Měsíce',false,'Těžiště leží blíž hmotnějšímu tělesu – tedy Zemi.')],
+      vysvetleni:'m₁ · r₁ = m₂ · r₂: Země (81×) je od těžiště 81× blíž než Měsíc.' },
+    { otazka:'Jak astronomové poznají neviditelnou planetu u vzdálené hvězdy?',
+      moznosti:[moznost('Hvězda se kolem společného těžiště nepatrně kolébá.',true),
+        moznost('Planeta svítí stejně jako hvězda.',false,'Planety samy nesvítí a jsou vedle hvězdy téměř neviditelné.'),
+        moznost('Planetu přitahuje hvězda, ale hvězdu planeta ne.',false,'Přitahují se navzájem – proto se i hvězda hýbe, a to je vidět.')],
+      vysvetleni:'Stejně jako Slunce v modelu se hvězda s planetou pohybuje kolem těžiště.' },
+    { otazka:'Proč je <b>problém tří těles</b> tak zrádný?',
+      moznosti:[moznost('Nepatrná změna na začátku vede později k úplně jiným drahám (chaos).',true),
+        moznost('Tři tělesa se vždycky srazí.',false,'Nesrazí se nutně – jejich dráhy jsou ale nepředvídatelné.'),
+        moznost('Třetí těleso gravitaci ruší.',false,'Gravitace se sčítá od všech těles. Problémem je citlivost na počáteční podmínky.')],
+      vysvetleni:'Zkus 🌀 Problém tří těles dvakrát – pokaždé to dopadne jinak.' },
+    { otazka:'Přitahují se gravitací i dvě jablka na stole?',
+      moznosti:[moznost('Ano, ale síla je tak malá, že ji nepoznáme.',true),
+        moznost('Ne, gravitace je jen mezi planetami.',false,'Gravitace působí mezi všemi tělesy s hmotností – u malých je jen nepatrná.'),
+        moznost('Ne, protože je přitahuje Země.',false,'Země je přitahuje silněji, ale jablka se navzájem přitahují také.')],
+      vysvetleni:'F = G · m₁ · m₂ / r² – s malými hmotnostmi je síla nepatrná.' },
+    { otazka:'Proč se sluneční soustava jako celek po srážce dvou planetek nerozletí jinam?',
+      moznosti:[moznost('Celková hybnost se zachová – srážka ji jen přerozdělí.',true),
+        moznost('Slunce srážku zastaví.',false,'Slunce nic nezastavuje – rozhoduje zákon zachování hybnosti.'),
+        moznost('Srážka hybnost zničí.',false,'Hybnost se při srážce nezničí ani nevytvoří – vnitřní síly se navzájem vyruší.')],
+      vysvetleni:'Vnitřní síly (srážka, gravitace mezi tělesy) celkovou hybnost nemění.' },
+  ],
+});
+})();
+</script>
 </body>
 </html>

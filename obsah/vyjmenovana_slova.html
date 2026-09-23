@@ -29,7 +29,7 @@
       font-size: clamp(2rem, 8vw, 3.4rem); font-weight: 700; letter-spacing: 0.03em;
     }
     .znamka { font-size: 3rem; font-weight: 700; color: var(--accent); line-height: 1.1; }
-    .prehled-rady { max-width: 720px; text-align: left; width: 100%; }
+    .prehled-rady { text-align: left; width: 100%; }
     .prehled-rady .radek { margin-bottom: 14px; }
     .prehled-rady .pismeno {
       font-size: 1.3rem; font-weight: 700; color: var(--accent); margin-bottom: 6px;
@@ -39,6 +39,20 @@
     .rada.velka span.mezera-slova {
       border-style: dashed; border-color: var(--accent); color: var(--accent);
       font-weight: 700; min-width: 5em;
+    }
+    .obrazkova-rada {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: 10px; margin-top: 12px;
+    }
+    .obrazkova-rada figure { margin: 0; text-align: center; }
+    .obrazkova-rada img {
+      width: 100%; aspect-ratio: 1; object-fit: cover; display: block;
+      border-radius: 12px; background: #faf6ec; box-shadow: var(--shadow);
+    }
+    .obrazkova-rada figcaption { margin-top: 5px; font-size: 0.82rem; font-weight: 700; }
+    .pravidlo-obrazek {
+      width: 112px; height: 112px; object-fit: cover; flex: 0 0 auto;
+      border-radius: 12px; background: #faf6ec;
     }
   </style>
 </head>
@@ -70,6 +84,62 @@
 
 <script>
 const $ = id => document.getElementById(id);
+
+const OBRAZKY_SLOV = {
+  'být': ['doplnovacky-byt', 'Dítě stojí – být.'],
+  'bydlit (bydlet)': ['vyjmenovana-b-bydlet', 'Dítě bydlí v domě.'],
+  'bydlet': ['vyjmenovana-b-bydlet', 'Dítě bydlí v domě.'],
+  'obyvatel': ['vyjmenovana-b-obyvatel', 'Obyvatel před vchodem svého domu.'],
+  'byt': ['vyjmenovana-b-byt', 'Zařízený byt.'],
+  'příbytek': ['vyjmenovana-b-pribytek', 'Malý příbytek.'],
+  'nábytek': ['vyjmenovana-b-nabytek', 'Skříň, židle a stůl jako nábytek.'],
+  'dobytek': ['vyjmenovana-b-dobytek', 'Skupina dobytka.'],
+  'bylina': ['vyjmenovana-b-bylina', 'Kvetoucí bylina.'],
+  'kobyla': ['vyjmenovana-b-kobyla', 'Hnědá kobyla.'],
+  'býk': ['vyjmenovana-b-byk', 'Hnědý býk.'],
+  'babyka': ['vyjmenovana-b-babyka', 'Babyka s listy a křídlatými semeny.'],
+  'mlýn': ['vyjmenovana-l-mlyn', 'Vodní mlýn s mlýnským kolem.'],
+  'blýskat se': ['vyjmenovana-l-blyskat', 'Z mraku se blýská.'],
+  'polykat': ['vyjmenovana-l-polykat', 'Dítě polyká doušek vody.'],
+  'plynout': ['vyjmenovana-l-plynout', 'Řeka plyne krajinou.'],
+  'plýtvat': ['vyjmenovana-l-plytvat', 'Tekoucí voda zbytečně přetéká z umyvadla.'],
+  'vzlykat': ['vyjmenovana-l-vzlykat', 'Plačící dítě vzlyká.'],
+  'lýtko': ['vyjmenovana-l-lytko', 'Lýtko na zadní straně dolní končetiny.'],
+  'lýko': ['vyjmenovana-l-lyko', 'Pruhy lýka pod kůrou lipové větve.'],
+  'lyže': ['vyjmenovana-l-lyze', 'Pár běžeckých lyží s holemi.'],
+  'pelyněk': ['vyjmenovana-l-pelynek', 'Kvetoucí pelyněk pravý.'],
+  'mýt': ['doplnovacky-myt', 'Ruce se myjí vodou a mýdlem.'],
+  'hmyz': ['vyjmenovana-m-hmyz', 'Včela, slunéčko, motýl a vážka jako zástupci hmyzu.'],
+  'myš': ['cj1-pismena-mys', 'Myš.'],
+  'hlemýžď': ['vyjmenovana-m-hlemyzd', 'Hlemýžď zahradní.'],
+  'mýtit': ['vyjmenovana-m-mytit', 'Vymýcená část lesa s pařezy.'],
+  'zamykat': ['vyjmenovana-m-zamykat', 'Ruce zamykají dveře klíčem.'],
+  'smýkat': ['vyjmenovana-m-smykat', 'Dítě smýká těžký pytel po zemi.'],
+  'dmýchat': ['vyjmenovana-m-dmychat', 'Měch dmýchá vzduch do výhně.'],
+  'chmýří': ['vyjmenovana-m-chmyri', 'Pampeliškové chmýří.'],
+  'mýto': ['vyjmenovana-m-myto', 'Mýtná závora na silnici.'],
+  'pytel': ['vyjmenovana-p-pytel', 'Plný jutový pytel.'],
+  'pysk': ['vyjmenovana-p-pysk', 'Pysk divočáka.'],
+  'netopýr': ['vyjmenovana-p-netopyr', 'Letící netopýr.'],
+  'slepýš': ['vyjmenovana-p-slepys', 'Slepýš křehký, beznohý ještěr.'],
+  'pyl': ['vyjmenovana-p-pyl', 'Včela a pyl na květu.'],
+  'kopyto': ['vyjmenovana-p-kopyto', 'Koňské kopyto.'],
+  'klopýtat': ['vyjmenovana-p-klopytat', 'Dítě klopýtá o kámen.'],
+  'třpytit se': ['vyjmenovana-p-trpytit', 'Třpytící se krystaly křemene.'],
+  'pýr': ['vyjmenovana-p-pyr', 'Pýr plazivý s dlouhými oddenky.'],
+  'čepýřit se': ['vyjmenovana-p-cepirit', 'Vrabec čepýří peří.'],
+};
+
+function obrazekSlova(slovo, trida = '') {
+  const data = OBRAZKY_SLOV[slovo];
+  return data ? `<img class="${trida}" src="img/cj/${data[0]}.webp" alt="${data[1]}" width="768" height="768">` : '';
+}
+
+function obrazkovaRada(pismeno) {
+  return `<div class="obrazkova-rada" aria-label="Obrázková řada vyjmenovaných slov po ${pismeno}">${
+    Vyjm.RADY[pismeno].filter(slovo => OBRAZKY_SLOV[slovo]).map(slovo => `<figure>${obrazekSlova(slovo)}<figcaption>${slovo}</figcaption></figure>`).join('')
+  }</div>`;
+}
 
 const OTAZKY={
 B:[
@@ -223,7 +293,8 @@ function pravidloEl(o) {
   const pismeno = Vyjm.radaSlova(o.f) || souhlaska(o);
   const el = document.createElement('div');
   el.className = 'pravidlo ok';
-  el.innerHTML = `<span class="znak">💡</span><div>
+  const obrazek = obrazekSlova(o.f, 'pravidlo-obrazek');
+  el.innerHTML = `${obrazek || '<span class="znak">💡</span>'}<div>
       <span class="vysledek">${o.f}</span> — ${o.e}.
       <div class="rada" style="margin-top:8px;justify-content:flex-start">${Vyjm.pas(pismeno, o.f)}</div>
     </div>`;
@@ -405,6 +476,7 @@ function prehled() {
     PISMENA.map(pismeno => `<div class="radek">
         <div class="pismeno">${pismeno}</div>
         <div class="rada">${Vyjm.pas(pismeno)}</div>
+        ${['B', 'L', 'M', 'P'].includes(pismeno) ? obrazkovaRada(pismeno) : ''}
       </div>`).join('')}
     <p class="napoveda" style="margin-top:4px">S vyjmenovanými slovy se píší s y i slova
       <b>příbuzná</b> – od <i>mýt</i> je to <i>mýdlo, umyvadlo, umývárna</i>,

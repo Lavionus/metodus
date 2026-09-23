@@ -40,6 +40,14 @@
     .prikladbtn { background: var(--bg-control); border: 1px solid var(--border-strong); color: var(--text-muted); border-radius: 6px; padding: 6px 12px; font-size: 0.82rem; cursor: pointer; margin-right: 6px; margin-top: 6px; }
     .prikladbtn:hover { border-color: var(--accent); color: var(--text); }
   
+    /* simulace potomků: kolik jich skutečně vyjde s každým projevem */
+    .simulace .radek { gap: 8px; align-items: center; }
+    .simulace .pruh { display: flex; height: 22px; border-radius: 5px; overflow: hidden; border: 1px solid var(--border-strong); margin: 10px 0 4px; max-width: 520px; }
+    .simulace .pruh span { display: block; height: 100%; }
+    .simulace .pruh .d { background: rgba(106,166,253,.55); } .simulace .pruh .r { background: rgba(224,163,63,.55); }
+    .simulace ol { margin: 8px 0 0 1.3em; font-size: 0.88rem; color: var(--text-muted); }
+    .simulace ol b { color: var(--text); }
+
 /* světlý režim: dorovnání kontrastu textu */
 :root[data-tone="light"] .rec { color: #966f2a; }
 </style>
@@ -74,6 +82,17 @@
   </div>
 
   <div class="panel" id="vystup"></div>
+
+  <div class="panel simulace" id="simulace">
+    <h3 style="font-size:1rem;margin-bottom:6px">🎲 Kolik potomků vyjde doopravdy?</h3>
+    <p class="legenda">Čtverec ukazuje <b>pravděpodobnost</b>. Každý potomek dostane od každého rodiče jednu alelu náhodně – vyzkoušej, kolik potomků s dominantním a recesivním projevem vyjde ve skutečnosti.</p>
+    <div class="radek" style="margin-top:8px">
+      <button class="prikladbtn" data-n="4">🎲 4 potomci</button>
+      <button class="prikladbtn" data-n="40">🎲 40 potomků</button>
+      <button class="prikladbtn" data-n="400">🎲 400 potomků</button>
+    </div>
+    <div id="simVysledek" aria-live="polite"></div>
+  </div>
 
 <script>
 const $ = id => document.getElementById(id);
@@ -170,6 +189,142 @@ document.querySelectorAll('.prikladbtn').forEach(b => b.onclick = () => {
   $('rodic1').value = b.dataset.p; $('rodic2').value = b.dataset.q; $('znak').value = b.dataset.z; spocti();
 });
 spocti();
+
+/* simulace potomků – historie posledních pokusů */
+const simulace = [];
+function simuluj(n) {
+  const r1 = normalizuj($('rodic1').value.trim()), r2 = normalizuj($('rodic2').value.trim());
+  if (!r1 || !r2 || r1[0].toLowerCase() !== r2[0].toLowerCase()) return;
+  const velke = r1[0].toUpperCase();
+  let dom = 0;
+  for (let i = 0; i < n; i++) {
+    const a = r1[Math.random() < 0.5 ? 0 : 1], b = r2[Math.random() < 0.5 ? 0 : 1];
+    if (a === velke || b === velke) dom++;
+  }
+  simulace.unshift({ n, dom, rec: n - dom, krizeni: r1 + ' × ' + r2 });
+  simulace.length = Math.min(simulace.length, 6);
+  const s = simulace[0], pd = s.dom / s.n * 100;
+  $('simVysledek').innerHTML = `
+    <div class="pruh" role="img" aria-label="${s.dom} s dominantním a ${s.rec} s recesivním projevem">
+      <span class="d" style="width:${pd}%"></span><span class="r" style="width:${100 - pd}%"></span></div>
+    <ol>${simulace.map(x => `<li>${x.krizeni}, ${x.n} potomků: <b>${x.dom}</b> dominantní : <b>${x.rec}</b> recesivní
+      (${Math.round(x.dom / x.n * 100)} % : ${Math.round(x.rec / x.n * 100)} %)</li>`).join('')}</ol>`;
+}
+document.querySelectorAll('#simulace [data-n]').forEach(b => b.onclick = () => simuluj(+b.dataset.n));
+</script>
+<script src="../badani.js"></script>
+<script>
+/* Úkoly k modelu (badani.js): předpověz → vyzkoušej → vysvětli.
+   Štěpný poměr 3 : 1, uniformita první generace, náhoda u malého počtu potomků. */
+(function(){
+const N=Badani.nastav, cis=Badani.cislo;
+const nahodne=p=>p[Math.floor(Math.random()*p.length)];
+const moznost=(t,ok,proc)=>({t,ok,proc});
+const rodice=()=>[normalizuj($('rodic1').value.trim()),normalizuj($('rodic2').value.trim())].join(' × ');
+let odZacatku=0;
+
+Badani.start({
+  ukoly:[
+    { id:'stepeni', nazev:'Dva heterozygoti',
+      predpoved:{
+        otazka:'Oba rodiče mají hnědé oči, ale každý nese i recesivní alelu pro modré oči (<b>Aa × Aa</b>). Jaká část jejich dětí bude mít <b>modré oči</b>?',
+        moznosti:['Žádné – oba rodiče mají hnědé oči','Asi čtvrtina','Polovina'],
+        spravna:1 },
+      priprava(){ N({'#rodic1':'AA','#rodic2':'aa','#znak':'A = hnědé oči, a = modré oči'}); },
+      pokus:'Zadej rodiče <b>Aa × Aa</b> (nebo klepni na tlačítko Aa × Aa) a prohlédni si čtverec i štěpné poměry.',
+      splneno:()=>rodice()==='Aa × Aa',
+      ukaz:{'#rodic1':'Aa','#rodic2':'Aa'},
+      pozorovani:'Čtverec dává genotypy <b>AA : Aa : aa = 1 : 2 : 1</b> a projevy <b>3 : 1</b> – čtvrtina dětí (aa) má modré oči.',
+      vysvetli:{
+        otazka:'Jak mohou mít hnědoocí rodiče modrooké dítě?',
+        moznosti:[
+          moznost('Oba předávají s pravděpodobností ½ recesivní alelu a. Když dítě dostane a od obou, projeví se recesivní znak: ½ · ½ = ¼.',true),
+          moznost('Recesivní alela se v dítěti změní na dominantní.',false,'Alely se nemění. Dítě s aa prostě nedostalo žádnou dominantní alelu.'),
+          moznost('To nejde, dítě musí mít oči po rodičích.',false,'Rodiče Aa recesivní alelu nesou, jen se u nich neprojeví. Čtverec ukazuje, že aa vyjde v ¼ případů.')]},
+      shrnuti:'<b>Aa × Aa</b>: genotypy 1 AA : 2 Aa : 1 aa, fenotypy <b>3 : 1</b>. Recesivní znak se projeví jen u homozygota <b>aa</b>.' },
+
+    { id:'uniformita', nazev:'Čistá linie',
+      predpoved:{
+        otazka:'Vysoká rostlina z čisté linie (<b>AA</b>) se kříží s nízkou (<b>aa</b>). Jací budou potomci?',
+        moznosti:['Všichni vysocí','Polovina vysokých, polovina nízkých','Všichni středně vysocí'],
+        spravna:0 },
+      priprava(){ N({'#rodic1':'Aa','#rodic2':'Aa','#znak':'A = vysoký vzrůst, a = nízký vzrůst'}); },
+      pokus:'Zadej rodiče <b>AA × aa</b> a podívej se na čtverec.',
+      splneno:()=>rodice()==='AA × aa'||rodice()==='aa × AA',
+      ukaz:{'#rodic1':'AA','#rodic2':'aa'},
+      pozorovani:'Všechna čtyři pole jsou <b>Aa</b> – všichni potomci jsou vysocí, ale nesou skrytou alelu a.',
+      vysvetli:{
+        otazka:'Proč jsou všichni potomci stejní?',
+        moznosti:[
+          moznost('Jeden rodič může předat jen A, druhý jen a – každý potomek je Aa a dominantní A se projeví.',true),
+          moznost('Znak nízkého rodiče se ztratil.',false,'Neztratil – alela a je v každém potomkovi. Jen se vedle dominantní A neprojeví; v další generaci se objeví znovu.'),
+          moznost('Znaky rodičů se smíchaly.',false,'U dominance se znaky nemíchají: Aa je vysoký, ne středně vysoký.')]},
+      shrnuti:'<b>1. Mendelův zákon</b> (uniformita): křížením dvou čistých linií (AA × aa) vzniknou <b>stejní potomci Aa</b> s dominantním projevem.' },
+
+    { id:'nahoda', nazev:'Čtyři děti',
+      predpoved:{
+        otazka:'Rodiče <b>Aa × Aa</b> budou mít <b>4 děti</b>. Kolik z nich bude mít recesivní znak?',
+        moznosti:['Vždycky přesně jedno','Může to být 0 až 4 – poměr 3 : 1 platí jen v průměru','Nikdy žádné'],
+        spravna:1 },
+      priprava(){ N({'#rodic1':'Aa','#rodic2':'Aa','#znak':'A = hnědé oči, a = modré oči'}); simulace.length=0; $('simVysledek').innerHTML=''; },
+      pokus:'Pod čtvercem spusť <b>🎲 4 potomci</b> aspoň třikrát a pak <b>🎲 400 potomků</b>. Porovnej poměry.',
+      splneno:()=>simulace.filter(x=>x.n===4&&x.krizeni==='Aa × Aa').length>=3&&simulace.some(x=>x.n===400&&x.krizeni==='Aa × Aa'),
+      ukaz(){ const b=n=>document.querySelector(`#simulace [data-n="${n}"]`).click(); b(4); b(4); b(4); b(400); },
+      pozorovani:()=>{ const ctyri=simulace.filter(x=>x.n===4).slice(0,3).map(x=>x.rec).join(', '), velka=simulace.find(x=>x.n===400);
+        return `U čtyř dětí vyšlo recesivních: <b>${ctyri}</b>. U 400 potomků ${Math.round(velka.rec/4)} % – blízko čtvrtiny.`; },
+      vysvetli:{
+        otazka:'Proč se u malého počtu dětí poměr 3 : 1 nedodrží?',
+        moznosti:[
+          moznost('Každé dítě je samostatná náhoda s pravděpodobností ¼. U malého počtu výsledek kolísá, u velkého se k ¼ přibližuje.',true),
+          moznost('Čtverec je špatně.',false,'Čtverec udává pravděpodobnost pro každé dítě zvlášť – ne přesný počet v rodině.'),
+          moznost('Když už jedno dítě má znak aa, další ho mít nemůže.',false,'Každé dítě dostává alely nezávisle. Klidně může mít znak aa i více dětí ze čtyř.')]},
+      shrnuti:'Štěpný poměr je <b>pravděpodobnost</b>. Platí přesně jen v průměru pro velký počet potomků – proto Mendel zkoumal tisíce rostlin hrachu.' },
+  ],
+
+  otazky:[
+    ()=>{ const [r1,r2,d]=nahodne([['Aa','aa',2],['AA','Aa',4],['Aa','Aa',3],['aa','aa',0]]);
+      return { otazka:`Kolik ze 4 polí čtverce <b>${r1} × ${r2}</b> má dominantní projev?`,
+        moznosti:[moznost(`${d} ze 4`,true), moznost(`${(d+1)%5} ze 4`,false,'Vyplň čtverec: dominantní projev má každé pole aspoň s jedním velkým A.'),
+          moznost(`${(d+2)%5} ze 4`,false,'Spočítej pole, kde je aspoň jedno velké A.')],
+        vysvetleni:`${r1} × ${r2}: ${d} ze 4 polí obsahuje A.` }; },
+    { otazka:'Co znamená, že je jedinec <b>heterozygot</b>?',
+      moznosti:[moznost('Má dvě různé alely téhož genu (Aa).',true),
+        moznost('Má dvě stejné dominantní alely (AA).',false,'To je dominantní homozygot. Heterozygot má alely různé.'),
+        moznost('Má jen jednu alelu.',false,'Každý jedinec má od každého genu dvě alely – od každého rodiče jednu.')],
+      vysvetleni:'Homozygot AA nebo aa, heterozygot Aa.' },
+    { otazka:'Kolik alel od každého genu předá rodič jednomu dítěti?',
+      moznosti:[moznost('Jednu – do pohlavní buňky (gamety) jde z každé dvojice jen jedna.',true),
+        moznost('Obě',false,'Dítě by pak mělo čtyři alely. Gameta nese z každé dvojice jen jednu.'),
+        moznost('Záleží na tom, která je dominantní',false,'Dominance ovlivní jen projev. Do gamety jde vždy jedna alela, náhodně.')],
+      vysvetleni:'Proto má čtverec u každého rodiče dvě řádky nebo sloupce – dvě možné gamety.' },
+    { otazka:'Jaký je <b>genotypový</b> štěpný poměr u křížení Aa × Aa?',
+      moznosti:[moznost('1 : 2 : 1',true),
+        moznost('3 : 1',false,'3 : 1 je poměr fenotypů (projevů). Genotypy jsou AA : Aa : aa = 1 : 2 : 1.'),
+        moznost('1 : 1',false,'1 : 1 vyjde u křížení Aa × aa.')],
+      vysvetleni:'AA, Aa, aA, aa → 1 AA : 2 Aa : 1 aa.' },
+    { otazka:'Pes s černou srstí může být BB, nebo Bb. Jak to zjistíš?',
+      moznosti:[moznost('Zkřížíš ho s bílým bb – objeví-li se bílé štěně, je Bb.',true),
+        moznost('Podle odstínu černé barvy.',false,'Při úplné dominanci vypadají BB i Bb stejně. Rozhodne až zpětné křížení.'),
+        moznost('Nijak, genotyp se zjistit nedá.',false,'Dá – zpětným křížením s recesivním homozygotem bb.')],
+      vysvetleni:'Zpětné křížení: BB × bb dá jen černá štěňata, Bb × bb polovinu bílých.' },
+    { otazka:'Pravděpodobnost, že dítě rodičů Aa × Aa bude aa, je ¼. Jaká je pravděpodobnost, že <b>dvě</b> jejich děti budou obě aa?',
+      moznosti:[moznost('1/16',true),
+        moznost('1/2',false,'U nezávislých jevů se pravděpodobnosti násobí: ¼ · ¼.'),
+        moznost('1/4',false,'Každé dítě má ¼ zvlášť; obě zároveň ¼ · ¼ = 1/16.')],
+      vysvetleni:'¼ · ¼ = 1/16.' },
+    { otazka:'Co je <b>fenotyp</b>?',
+      moznosti:[moznost('Soubor znaků, jak se projeví (barva, tvar, velikost).',true),
+        moznost('Dvojice alel jedince.',false,'To je genotyp. Fenotyp je projev – co vidíme.'),
+        moznost('Počet chromozomů.',false,'Fenotyp jsou pozorovatelné vlastnosti jedince.')],
+      vysvetleni:'Genotyp = alely, fenotyp = projev.' },
+    { otazka:'Jaký je štěpný poměr projevů u křížení <b>Aa × aa</b>?',
+      moznosti:[moznost('1 : 1',true),
+        moznost('3 : 1',false,'3 : 1 vyjde u Aa × Aa. U Aa × aa jsou dvě pole Aa a dvě aa.'),
+        moznost('Všichni dominantní',false,'Polovina potomků dostane od rodiče Aa alelu a a bude aa.')],
+      vysvetleni:'Aa, Aa, aa, aa → 1 : 1.' },
+  ],
+});
+})();
 </script>
 </body>
 </html>

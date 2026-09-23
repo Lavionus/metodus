@@ -12,7 +12,7 @@ h1.kostra-nadpis {
 }
 
 .kostra {
-  max-width: 900px;
+  max-width: var(--sirka-obsahu, 900px);
   margin: 6px 0 16px;
   padding: 10px 14px 12px;
   background: var(--bg-panel);
@@ -106,7 +106,7 @@ h1.kostra-nadpis {
 
 /* zápatí Kam dál (stejné jako .navaznosti ve vyuka.css, pro stránky bez něj) */
 .kostra-zapati {
-  max-width: 900px; margin: 22px 0 10px; padding: 12px 14px;
+  max-width: var(--sirka-obsahu, 900px); margin: 22px 0 10px; padding: 12px 14px;
   border: 1px solid var(--border); border-left: 5px solid var(--predmet);
   border-radius: var(--radius, 8px); background: var(--bg-panel);
   font-family: var(--font); font-size: 0.9rem; line-height: 1.5; color: var(--text); text-align: left;
@@ -121,7 +121,7 @@ body.kostra-stranka:has(> .plocha, > #plocha, > h1) > .kostra-zapati { margin-le
 
 /* Ověř se */
 .kostra-overeni, .kostra-vysledek {
-  max-width: 900px; margin: 0 0 12px; padding: 10px 14px;
+  max-width: var(--sirka-obsahu, 900px); margin: 0 0 12px; padding: 10px 14px;
   border: 2px solid var(--predmet); border-radius: var(--radius, 8px);
   background: color-mix(in srgb, var(--predmet) 10%, var(--bg-panel));
   display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px;

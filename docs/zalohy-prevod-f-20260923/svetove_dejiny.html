@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📜 Časová osa světových dějin</title>
+<link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="../nazor.css">
+  <script src="../nazor.js"></script>
+  <script src="../data/udalosti.js"></script>
+<script src="../theme.js"></script>
+<script src="../podpis.js" defer></script>
+<script src="../kostra.js" defer></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding:20px}
+.container{max-width:700px;margin:0 auto}
+h1{font-size:1.6rem;margin-bottom:14px;font-weight:600;text-align:center}
+.tabs{display:flex;gap:8px;justify-content:center;margin-bottom:14px}
+.tab{background:var(--bg-hover);border:1px solid var(--border-strong);border-radius:6px;padding:8px 16px;cursor:pointer;font-size:.85rem}
+.tab.active{background:var(--accent);border-color:var(--accent);color: var(--na-akcentu, #fff)}
+.card{background:var(--bg-elevated);border:1px solid var(--border);border-radius:8px;padding:20px;margin-bottom:16px}
+.osa-pozn{font-size:.82rem;color:var(--text-muted);margin-bottom:6px}.osa-meritko{font-size:.85rem;display:inline-flex;gap:6px;align-items:center;cursor:pointer;margin-bottom:6px}#osaNazor{margin-bottom:18px}
+.timeline{position:relative;padding-left:24px;border-left:3px solid var(--border)}
+.event{position:relative;margin-bottom:22px}
+.event::before{content:'';position:absolute;left:-31px;top:4px;width:12px;height:12px;border-radius:50%;background:var(--accent)}
+.year{color:var(--accent);font-weight:700;font-size:.95rem}
+.title{font-weight:600;margin:2px 0}
+.desc{color:#aaa;font-size:.85rem;line-height:1.5}
+.quiz{display:none;text-align:center}
+.scorebar{display:flex;justify-content:space-around;margin-bottom:16px}
+.scorebar .v{font-size:1.4rem;font-weight:700;color:var(--accent)}.scorebar .l{font-size:.72rem;color:var(--text-faint)}
+.qtext{font-size:1.05rem;margin-bottom:14px}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.opt{background:var(--bg-hover);border:1px solid var(--border-strong);border-radius:6px;padding:12px;color:var(--text);cursor:pointer}
+.opt.correct{border-color:#27ae60;background:#1f3a2a}
+.opt.wrong{border-color:#e74c3c;background:#3a1f1f}
+.btn{background:var(--accent);color: var(--na-akcentu, #fff);border:none;padding:10px 22px;border-radius:6px;cursor:pointer;font-weight:600}
+
+/* světlý režim: dorovnání kontrastu textu */
+:root[data-tone="light"] .desc { color: #757575; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>📜 Časová osa světových dějin</h1>
+  <div class="tabs">
+    <div class="tab active" data-m="osa" data-faze="vyuka">🗓️ Osa</div>
+    <div class="tab" data-m="quiz" data-faze="procvic" data-kostra-overeni="ne">❓ Kvíz</div>
+  </div>
+
+  <div class="card" id="osaCard">
+    <p class="osa-pozn">Horní pruh: svět. Dolní pruh: české dějiny ve stejné době (stejná data jako Časová osa českých dějin).</p>
+    <label class="osa-meritko"><input type="checkbox" id="meritko"> 📏 Skutečné měřítko (vzdálenost = počet let)</label>
+    <div id="osaNazor"></div>
+    <div class="timeline" id="timeline"></div>
+  </div>
+
+  <div class="card quiz" id="quizCard">
+    <div class="scorebar"><div><div class="v" id="score">0</div><div class="l">Správně</div></div><div><div class="v" id="idx">0/10</div><div class="l">Otázka</div></div></div>
+    <div class="qtext" id="qtext"></div>
+    <div class="opts" id="opts"></div>
+  </div>
+</div>
+<script>
+const $=id=>document.getElementById(id);
+// Události jsou společná data rodiny „Čas a práce historika" (data/udalosti.js)
+const UDALOSTI=METODUS_UDALOSTI.filter(u=>u.pruh==='svet').map(u=>({y:u.rok,t:u.nazev,d:u.popis}));
+document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{
+  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));t.classList.add('active');
+  const m=t.dataset.m;
+  $('osaCard').style.display=m==='osa'?'block':'none';
+  $('quizCard').style.display=m==='quiz'?'block':'none';
+  if(m==='quiz')startQuiz();
+});
+function fmtYear(y){return y<0?`${-y} př. n. l.`:`${y}`;}
+/* Společná časová osa (nazor.js): svět a české dějiny souběžně. */
+function kresliOsu(){
+  $('osaNazor').innerHTML=Nazor.casovaOsa(METODUS_UDALOSTI,{pruhy:[...METODUS_PRUHY].reverse(),meritko:$('meritko').checked?'linearni':'poradi'});
+}
+$('meritko').addEventListener('change',kresliOsu);
+kresliOsu();
+$('timeline').innerHTML=UDALOSTI.map(e=>`<div class="event"><div class="year">${fmtYear(e.y)}</div><div class="title">${e.t}</div><div class="desc">${e.d}</div></div>`).join('');
+
+let score,idx,total=10;
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function startQuiz(){score=0;idx=0;$('score').textContent=0;next();}
+function next(){
+  if(idx>=total){$('qtext').textContent=`Výsledek: ${score} / ${total}`;$('opts').innerHTML='';return;}
+  $('idx').textContent=`${idx+1}/${total}`;
+  const ev=shuffle([...UDALOSTI])[0];
+  $('qtext').textContent=`Kdy se stalo: „${ev.t}"?`;
+  const correct=fmtYear(ev.y);
+  const wrongYears=shuffle(UDALOSTI.filter(e=>e.t!==ev.t)).slice(0,3).map(e=>fmtYear(e.y));
+  const opts=shuffle([correct,...wrongYears]);
+  const box=$('opts');box.innerHTML='';
+  opts.forEach(o=>{
+    const b=document.createElement('button');b.className='opt';b.textContent=o;
+    b.onclick=()=>{
+      [...box.children].forEach(x=>x.disabled=true);
+      if(o===correct){b.classList.add('correct');score++;}
+      else{b.classList.add('wrong');[...box.children].find(x=>x.textContent===correct).classList.add('correct');}
+      $('score').textContent=score;
+      setTimeout(()=>{idx++;next();},900);
+    };
+    box.appendChild(b);
+  });
+}
+</script>
+</body>
+</html>

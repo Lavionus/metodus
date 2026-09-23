@@ -79,19 +79,4 @@ function explanation(l) {
   if (l[2] === 'soli') return 'Název soli určuje záporný ion a potom kladný ion. Jejich náboje se ve vzorci vyrovnají.';
   return 'Dolní index označuje počet atomů předcházejícího prvku; za závorkou násobí celou skupinu. Jednička se nepíše.';
 }
-$('writeMode').addEventListener('change', () => {
-  $('moznosti').hidden = $('writeMode').checked;
-  $('answerForm').hidden = !$('writeMode').checked;
-  if (!zodpovezeno && $('writeMode').checked) $('writtenAnswer').focus();
-});
-const normalizeName = value => value.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,' ');
-$('answerForm').addEventListener('submit', e => {
-  e.preventDefault(); if (zodpovezeno) return;
-  const value = $('writtenAnswer').value.trim(); if (!value) { $('quizFeedback').textContent = 'Nejprve napiš odpověď.'; return; }
-  const normalizedFormula = value.replace(/[₀-₉]/g, x => '₀₁₂₃₄₅₆₇₈₉'.indexOf(x)).replace(/\s/g,'');
-  const names = [aktualni[1], ...aktualni[1].replace(/[()]/g,'|').split('|').map(x=>x.trim()).filter(Boolean)];
-  const correct = rezim === 'nazev' ? normalizedFormula === aktualni[0] : names.some(x => normalizeName(x) === normalizeName(value));
-  odpoved($('writtenAnswer'), correct ? aktualni : null);
-});
-document.querySelectorAll('#rezimy button').forEach(b => b.setAttribute('aria-pressed', b.dataset.rezim === rezim));
 renderLab();

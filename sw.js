@@ -6,7 +6,7 @@
 /* Při větší aktualizaci webu zvyš číslo verze — stará cache se u návštěvníků
    smaže a vše se stáhne čerstvé (jinak SWR ukáže novou verzi až na druhé načtení). */
 const PREFIX = 'metodus-';
-const CACHE = PREFIX + 'v84';
+const CACHE = PREFIX + 'v96';
 const JADRO = [
   './',
   './index.html',
@@ -16,6 +16,7 @@ const JADRO = [
   './prubeh.js',
   './common.css',
   './sepia.css',      // motivy importované z common.css
+  './sepia-tmava.css',
   './knihovna.css',
   './skola.css',
   './nocni-skola.css',
@@ -39,6 +40,11 @@ const JADRO = [
   './kostra.css',
   './nazor.js',       // knihovna názorných prvků (osa, proužek, věta, časová osa)
   './nazor.css',
+  './badani.js',      // úkoly k modelu u simulací (předpověz → vyzkoušej → vysvětli)
+  './badani.css',
+  './osa-kviz.js',    // společný kvíz obou časových os
+  './slovicka.js',    // slovíčka cizích jazyků (přehled, kartičky, série)
+  './slovicka.css',
   './data/udalosti.js',      // společná data rodin témat
   './data/staty.js',
   './data/horniny.js',

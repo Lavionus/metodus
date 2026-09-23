@@ -83,7 +83,8 @@
     a.addEventListener('click', e => {
       if (!V_RAMU || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey || e.button !== 0) return;
       e.preventDefault();
-      try { window.parent.postMessage({ otevri: soubor }, location.origin); }
+      const cilovyPuvod = location.protocol === 'file:' ? '*' : location.origin;
+      try { window.parent.postMessage({ otevri: soubor }, cilovyPuvod); }
       catch { location.href = a.href; }
     });
     return a;
@@ -198,9 +199,11 @@
       return [...document.querySelectorAll('#rezimy [data-rezim], .rezimy [data-rezim]')]
         .filter(b => b.dataset.rezim !== 'ukazka' && !b.disabled && b.offsetParent !== null);
     }
-    const plocha = () => document.querySelector('#plocha, .plocha');
+    // Stránka s vlastní oblastí odpovědí (data-kostra-odpovedi) ji má přednost
+    // před .plocha – simulace tak nazývají plochu s plátnem, ne úlohy.
+    const plocha = () => document.querySelector('[data-kostra-odpovedi]') || document.querySelector('#plocha, .plocha');
     const maUlohu = () => {
-      const p = plocha() || document.querySelector('[data-kostra-odpovedi]');
+      const p = plocha();
       return !!(p && p.querySelector('.moznosti button, input:not([type=hidden]):not([type=checkbox]), select, [data-klic], textarea'));
     };
     const snimek = () => new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
@@ -290,7 +293,8 @@
       konec.type = 'button';
       konec.addEventListener('click', () => ukonci(true));
       pruh.append(stav, body, konec);
-      const cil = document.querySelector('#rezimy, .rezimy') || plocha() || document.querySelector('[data-kostra-odpovedi]');
+      // .rezimy bez tlačítek data-rezim je navigace stránky, ne režimy úloh
+      const cil = (document.querySelector('#rezimy [data-rezim], .rezimy [data-rezim]') && document.querySelector('#rezimy, .rezimy')) || plocha();
       cil.parentElement.insertBefore(pruh, cil);
       beh = { ok, plan: planRezimu(ok), otazky: [], pruh, stav, body, videne: new WeakSet(), cekaNaRotaci: false, tlac };
       document.body.classList.add('kostra-overuje');
@@ -611,6 +615,8 @@
 
   function aktivujFazi(id, faze, polozka) {
     const f = faze[id];
+    // Komponenty mimo tok stránky (panel úkolů k modelu) se samy otevřou.
+    document.dispatchEvent(new CustomEvent('metodus:faze', { detail: { id } }));
     if (id !== 'overse' && Overeni.bezi()) Overeni.ukonci(true);
     if (id === 'tahak') return otevriTahak(f.prvky, nazevBezIkony(polozka.nazev));
     if (id === 'overse') return Overeni.bezi() ? Overeni.ukonci(true) : Overeni.spust();

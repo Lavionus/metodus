@@ -3,91 +3,87 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Anglická nepravidelná slovesa</title>
+  <title>🇬🇧 Nepravidelná slovesa</title>
   <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="../vyuka.css">
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
+  <script src="../uloha.js" defer></script>
+  <script src="../procvic.js" defer></script>
   <style>
-    body { background-color: var(--bg-deep); padding: 24px clamp(14px, 3vw, 40px); min-height: 100vh; }
-    h1 { font-size: 1.4rem; margin-bottom: 4px; }
-    .podtitul { color: var(--text-muted); font-size: 0.88rem; margin-bottom: 14px; }
-    .rezimy { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
-    .rezimy button { background: var(--bg-control); border: 1px solid var(--border-strong); color: var(--text-muted); border-radius: 6px; padding: 7px 13px; font-size: 0.84rem; cursor: pointer; }
-    .rezimy button.active { background: var(--accent); border-color: var(--accent); color: var(--na-akcentu, #fff); font-weight: 600; }
-
-    /* tabulka */
-    .hledej { margin-bottom: 10px; }
-    .hledej input { background: var(--bg-input); border: 1px solid var(--border-strong); border-radius: 6px; color: var(--text); padding: 8px 12px; font-size: 0.9rem; width: min(300px, 100%); }
+    [hidden] { display: none !important; }
+    .filtry { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-bottom: 10px; }
+    .filtry input {
+      background: var(--bg-input); border: 1px solid var(--border-strong); border-radius: 6px; color: var(--text);
+      padding: 8px 12px; font-size: 0.9rem; font-family: inherit; width: min(300px, 100%); margin-right: 6px;
+    }
+    .filtry button {
+      background: var(--bg-panel); border: 1px solid var(--border); color: var(--text-muted);
+      border-radius: 14px; padding: 5px 12px; font-size: 0.8rem; font-family: inherit; cursor: pointer;
+    }
+    .filtry button.active { background: var(--accent-soft); color: var(--accent); border-color: var(--accent); font-weight: 600; }
+    .skupiny-popis { color: var(--text-muted); font-size: 0.85rem; margin: 0 0 10px; max-width: 720px; line-height: 1.5; }
     /* Na mobilu se čtyři sloupce pod svou min-content šířku nesmrsknou,
        takže tabulka roluje uvnitř svého obalu a nerozjede celou stránku. */
-    .tabulka-obal { max-width: 720px; overflow-x: auto; }
-    table { width: 100%; border-collapse: collapse; font-size: 0.95rem; min-width: 420px; }
-    th, td { padding: 8px 12px; text-align: left; border-bottom: 1px solid var(--border); }
-    th { color: var(--text-faint); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.5px; }
-    td.en { font-weight: 600; }
-    td.cz { color: var(--text-muted); }
+    .tabulka-obal { max-width: 760px; overflow-x: auto; }
+    .slovesa { width: 100%; border-collapse: collapse; font-size: 0.95rem; min-width: 460px; }
+    .slovesa th, .slovesa td { padding: 7px 12px; text-align: left; border-bottom: 1px solid var(--border); }
+    .slovesa th { color: var(--text-faint); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.5px; }
+    .slovesa td.en { font-weight: 600; }
+    .slovesa td.cz { color: var(--text-muted); }
+    .slovesa td.typ { color: var(--text-faint); font-size: 0.8rem; white-space: nowrap; }
 
-    /* trénink */
-    .karta { background: var(--bg-panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; max-width: 620px; }
-    .zadani { font-size: 1.05rem; color: var(--text-muted); margin-bottom: 4px; }
-    .infinitiv { font-size: 1.9rem; font-weight: 700; margin-bottom: 4px; }
-    .vyznam { color: var(--accent); margin-bottom: 18px; }
-    .tvary { display: grid; gap: 12px; }
-    .tvar { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-    .tvar label { width: 130px; color: var(--text-muted); font-size: 0.9rem; }
-    .tvar input { flex: 1; min-width: 140px; background: var(--bg-input); border: 2px solid var(--border-strong); border-radius: 7px; color: var(--text); padding: 9px 12px; font-size: 1.05rem; }
-    .tvar input:focus { outline: none; border-color: var(--accent); }
-    .tvar input.ok { border-color: var(--ok); color: var(--ok); }
-    .tvar input.spatne { border-color: var(--danger); }
-    .tvar .reseni { font-size: 0.85rem; color: var(--ok); min-width: 90px; }
-    .tlacitka { display: flex; gap: 10px; margin-top: 18px; flex-wrap: wrap; }
-    .tlacitka button { border: none; border-radius: 8px; padding: 11px 20px; font-size: 0.92rem; font-weight: 600; cursor: pointer; }
-    .b-hlavni { background: var(--accent); color: var(--na-akcentu, #fff); }
-    .b-vedle { background: var(--bg-control); color: var(--text); border: 1px solid var(--border-strong) !important; }
-    .zprava { margin-top: 14px; min-height: 1.4rem; font-size: 0.95rem; }
-    .zprava.ok { color: var(--ok); } .zprava.spatne { color: var(--danger); }
-    .stav { display: flex; justify-content: space-between; max-width: 620px; margin-top: 12px; color: var(--text-muted); font-size: 0.9rem; }
-    .serie { color: var(--warn); }
+    /* zadání série */
+    .druh { display: block; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-faint); margin-bottom: 6px; }
+    .tvary-radek { display: block; font-size: clamp(1.4rem, 5.5vw, 2rem); font-weight: 700; color: var(--text); }
+    .tvary-radek .mezera { color: var(--accent); }
+    .vyznam { display: block; color: var(--text-muted); font-size: 1.05rem; margin-top: 4px; }
+    .plocha .odpoved-pole { width: min(300px, 80vw); }   /* understood, forgotten */
+    .sloveso-doplnek { margin-top: 10px; font-size: 1.02rem; color: var(--text-muted); line-height: 1.5; }
+    .sloveso-doplnek b { color: var(--text); }
+    .sloveso-doplnek .typ { display: block; font-size: 0.88rem; }
+    .prehled-chyb .druh { display: none; }
+    .prehled-chyb .tvary-radek, .prehled-chyb .vyznam { display: inline; font-size: inherit; margin: 0 6px 0 0; }
   </style>
 </head>
 <body>
   <h1>🇬🇧 Anglická nepravidelná slovesa</h1>
-  <p class="podtitul">Infinitiv – minulý čas (past simple) – příčestí minulé (past participle). 2. stupeň ZŠ, SŠ.</p>
+  <p class="podtitul">Infinitiv – minulý čas (past simple) – příčestí minulé (past participle). Prohlédni si přehled po skupinách, pak si zkus sérii deseti otázek – po chybě máš druhý pokus.</p>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="prehled" data-faze="vyuka" class="active">📖 Přehled</button>
-    <button data-rezim="trenink">✍️ Doplň tvary</button>
+    <button data-rezim="vyber">❓ Který tvar je správně?</button>
+    <button data-rezim="past">✍️ Past simple</button>
+    <button data-rezim="participle">✍️ Past participle</button>
+    <button data-rezim="chybi">🧩 Chybějící tvar</button>
   </div>
 
-  <div id="prehled">
-    <div class="hledej"><input id="hledej" placeholder="🔍 Hledej sloveso (česky i anglicky)…" autocomplete="off"></div>
-    <div class="tabulka-obal"><table><thead><tr><th>Infinitiv</th><th>Past simple</th><th>Past participle</th><th>Význam</th></tr></thead><tbody id="telo"></tbody></table></div>
+  <div id="prehledObal">
+    <div class="filtry" id="filtry">
+      <input id="hledej" placeholder="🔍 Hledej sloveso (česky i anglicky)…" autocomplete="off">
+      <button data-typ="" class="active">Vše</button>
+      <button data-typ="AAA">A–A–A</button>
+      <button data-typ="ABB">A–B–B</button>
+      <button data-typ="ABA">A–B–A</button>
+      <button data-typ="ABC">A–B–C</button>
+    </div>
+    <p class="skupiny-popis">Slovesa se lépe pamatují po skupinách: <b>A–A–A</b> mají všechny tři tvary stejné (put – put – put), <b>A–B–B</b> mají stejný minulý čas a příčestí (buy – bought – bought), <b>A–B–A</b> vrací v příčestí infinitiv (come – came – come) a <b>A–B–C</b> mají tři různé tvary (go – went – gone).</p>
+    <div class="tabulka-obal"><table class="slovesa"><thead><tr><th>Infinitiv</th><th>Past simple</th><th>Past participle</th><th>Význam</th><th>Skupina</th></tr></thead><tbody id="telo"></tbody></table></div>
   </div>
 
-  <div class="karta" id="trenink" style="display:none" data-kostra-odpovedi>
-    <div class="zadani">Doplň chybějící tvary slovesa:</div>
-    <div class="infinitiv" id="tInfinitiv"></div>
-    <div class="vyznam" id="tVyznam"></div>
-    <div class="tvary">
-      <div class="tvar"><label>Infinitiv</label><input id="in0" autocomplete="off"><span class="reseni" id="re0"></span></div>
-      <div class="tvar"><label>Past simple</label><input id="in1" autocomplete="off"><span class="reseni" id="re1"></span></div>
-      <div class="tvar"><label>Past participle</label><input id="in2" autocomplete="off"><span class="reseni" id="re2"></span></div>
-    </div>
-    <div class="tlacitka">
-      <button class="b-hlavni" id="btnZkontrolovat">✔️ Zkontrolovat</button>
-      <button class="b-vedle" id="btnDalsi">Přeskočit →</button>
-    </div>
-    <div class="zprava" id="zprava"></div>
+  <div class="plocha" id="plocha" hidden></div>
+  <div class="ovladani" id="ovladani" hidden>
+    <button class="hlavni" id="startBtn">🔄 Nová série</button>
+    <span class="pokrok" id="pokrok"></span>
+    <span class="skore" id="skore"></span>
   </div>
-  <div class="stav" id="stav" style="display:none">
-    <span class="serie" id="serie"></span>
-    <span id="skore"></span>
-  </div>
+
+  <p class="napoveda">Pravidelná slovesa mají v minulém čase i příčestí koncovku <b>-ed</b> (play – played – played), nepravidelná se musí naučit. Minulý čas (<b>past simple</b>) použiješ ve větě <i>I <b>went</b> home yesterday.</i>, příčestí (<b>past participle</b>) v předpřítomném čase a v trpném rodě: <i>I have <b>gone</b></i>, <i>it was <b>written</b></i>. Sloveso <b>be</b> má dva minulé tvary: <b>was</b> (I, he, she, it) a <b>were</b> (you, we, they). U <b>learn</b> platí britské <b>learnt</b> i americké <b>learned</b>.</p>
 
 <script>
 const $ = id => document.getElementById(id);
-// [infinitiv, past simple, past participle, český význam]
+// [infinitiv, past simple, past participle, český význam]; varianty oddělené lomítkem
 const SLOVESA = [
   ['be', 'was/were', 'been', 'být'], ['become', 'became', 'become', 'stát se'], ['begin', 'began', 'begun', 'začít'],
   ['break', 'broke', 'broken', 'rozbít'], ['bring', 'brought', 'brought', 'přinést'], ['build', 'built', 'built', 'stavět'],
@@ -99,7 +95,7 @@ const SLOVESA = [
   ['forget', 'forgot', 'forgotten', 'zapomenout'], ['get', 'got', 'got', 'dostat'], ['give', 'gave', 'given', 'dát'],
   ['go', 'went', 'gone', 'jít'], ['grow', 'grew', 'grown', 'růst'], ['have', 'had', 'had', 'mít'],
   ['hear', 'heard', 'heard', 'slyšet'], ['hold', 'held', 'held', 'držet'], ['keep', 'kept', 'kept', 'udržet'],
-  ['know', 'knew', 'known', 'vědět, znát'], ['learn', 'learnt', 'learnt', 'učit se'], ['leave', 'left', 'left', 'odejít, nechat'],
+  ['know', 'knew', 'known', 'vědět, znát'], ['learn', 'learnt/learned', 'learnt/learned', 'učit se'], ['leave', 'left', 'left', 'odejít, nechat'],
   ['lose', 'lost', 'lost', 'ztratit'], ['make', 'made', 'made', 'vyrobit'], ['meet', 'met', 'met', 'potkat'],
   ['pay', 'paid', 'paid', 'platit'], ['put', 'put', 'put', 'položit'], ['read', 'read', 'read', 'číst'],
   ['ride', 'rode', 'ridden', 'jet (na kole)'], ['run', 'ran', 'run', 'běžet'], ['say', 'said', 'said', 'říct'],
@@ -112,78 +108,101 @@ const SLOVESA = [
   ['win', 'won', 'won', 'vyhrát'], ['write', 'wrote', 'written', 'psát'],
 ];
 
-/* přehled + hledání */
-function vykresli(filtr = '') {
-  const f = filtr.trim().toLowerCase();
-  $('telo').innerHTML = SLOVESA
-    .filter(s => !f || s.some(x => x.toLowerCase().includes(f)))
-    .map(s => `<tr><td class="en">${s[0]}</td><td class="en">${s[1]}</td><td class="en">${s[2]}</td><td class="cz">${s[3]}</td></tr>`).join('')
-    || '<tr><td colspan="4" style="color:var(--text-faint);padding:20px">Nic nenalezeno.</td></tr>';
+const TVARY = ['infinitiv', 'past simple', 'past participle'];
+const prvni = t => t.split('/')[0];
+// skupina podle toho, které tvary se shodují
+function typ(s) {
+  const [a, b, c] = s.slice(0, 3).map(prvni);
+  return a === b && b === c ? 'AAA' : b === c ? 'ABB' : a === c ? 'ABA' : 'ABC';
 }
-$('hledej').addEventListener('input', e => vykresli(e.target.value));
+const typText = t => t.split('').join('–');
+const radek = s => `${s[0]} – ${s[1]} – ${s[2]}`;
+
+/* ---- přehled ---- */
+let filtrTyp = '';
+function vykresli() {
+  const f = $('hledej').value.trim().toLowerCase();
+  $('telo').innerHTML = SLOVESA
+    .filter(s => (!filtrTyp || typ(s) === filtrTyp) && (!f || s.some(x => x.toLowerCase().includes(f))))
+    .map(s => `<tr><td class="en">${s[0]}</td><td class="en">${s[1]}</td><td class="en">${s[2]}</td><td class="cz">${s[3]}</td><td class="typ">${typText(typ(s))}</td></tr>`).join('')
+    || '<tr><td colspan="5" style="color:var(--text-faint);padding:20px">Nic nenalezeno.</td></tr>';
+}
+$('hledej').addEventListener('input', vykresli);
+$('filtry').addEventListener('click', e => {
+  const b = e.target.closest('button[data-typ]');
+  if (!b) return;
+  $('filtry').querySelectorAll('button').forEach(x => x.classList.toggle('active', x === b));
+  filtrTyp = b.dataset.typ;
+  vykresli();
+});
 vykresli();
 
-/* trénink */
-let rezim = 'prehled', uloha = null, zadany = [], spravne = 0, celkem = 0, serie = 0, vyhodnoceno = false, posledni = -1;
-const norm = s => s.trim().toLowerCase();
-function spravneTvar(spravny, zadano) {
-  // "was/were" i "learnt/learned" – uznej kteroukoli variantu
-  return spravny.toLowerCase().split('/').some(v => v === norm(zadano));
+/* ---- série ---- */
+let posledni = null;
+function vyberSloveso() {
+  let s; do { s = Uloha.nahodne(SLOVESA); } while (s === posledni);
+  posledni = s;
+  return s;
 }
-let otazkaKostry = {};   // společná kostra – jedna otázka = jeden objekt
-function nova() {
-  vyhodnoceno = false;
-  otazkaKostry = {};
-  let i; do { i = Math.floor(Math.random() * SLOVESA.length); } while (i === posledni); posledni = i;
-  uloha = SLOVESA[i];
-  // schovej 1–2 náhodné tvary, aspoň jeden zůstane vidět
-  const schovej = new Set();
-  const kolik = Math.random() < 0.5 ? 1 : 2;
-  while (schovej.size < kolik) schovej.add(Math.floor(Math.random() * 3));
-  zadany = [0, 1, 2].map(k => schovej.has(k));
-  $('tInfinitiv').textContent = uloha[0];
-  $('tVyznam').textContent = uloha[3];
-  for (let k = 0; k < 3; k++) {
-    const inp = $('in' + k);
-    inp.value = zadany[k] ? '' : uloha[k];
-    inp.disabled = !zadany[k];
-    inp.classList.remove('ok', 'spatne');
-    $('re' + k).textContent = '';
-  }
-  $('zprava').textContent = ''; $('zprava').className = 'zprava';
-  $('btnZkontrolovat').textContent = '✔️ Zkontrolovat';
-  const prvni = zadany.indexOf(true); if (prvni >= 0) $('in' + prvni).focus();
-  window.Kostra?.otazka();
+// „zpravidelněný" tvar – nejčastější chyba (buyed, goed, catched)
+function pravidelne(inf) {
+  if (/e$/.test(inf)) return inf + 'd';
+  if (/[^aeiou]y$/.test(inf)) return inf.slice(0, -1) + 'ied';
+  if (/^[^aeiou]*[aeiou][^aeiouwy]$/.test(inf)) return inf + inf.slice(-1) + 'ed';   // stop → stopped
+  return inf + 'ed';
 }
-function zkontroluj() {
-  if (vyhodnoceno) { nova(); return; }
-  let vsechnyOk = true;
-  for (let k = 0; k < 3; k++) {
-    if (!zadany[k]) continue;
-    const inp = $('in' + k);
-    if (spravneTvar(uloha[k], inp.value)) { inp.classList.add('ok'); }
-    else { inp.classList.add('spatne'); $('re' + k).textContent = '→ ' + uloha[k]; vsechnyOk = false; }
-  }
-  vyhodnoceno = true; celkem++;
-  window.Kostra?.odpoved(vsechnyOk, otazkaKostry);
-  if (vsechnyOk) { spravne++; serie++; $('zprava').textContent = '✅ Správně!'; $('zprava').className = 'zprava ok'; }
-  else { serie = 0; $('zprava').textContent = '❌ Zkontroluj zvýrazněné tvary.'; $('zprava').className = 'zprava spatne'; }
-  $('serie').textContent = serie >= 3 ? '🔥 série ' + serie : '';
-  $('skore').textContent = spravne + ' / ' + celkem;
-  $('btnZkontrolovat').textContent = 'Pokračovat →';
-}
-$('btnZkontrolovat').onclick = zkontroluj;
-$('btnDalsi').onclick = nova;
-$('trenink').addEventListener('keydown', e => { if (e.key === 'Enter') zkontroluj(); });
+// po uzavření otázky celé sloveso a jeho skupina
+const doplnek = s => karta => karta.insertAdjacentHTML('beforeend',
+  `<div class="sloveso-doplnek"><b>${radek(s)}</b> = ${s[3]}<span class="typ">skupina ${typText(typ(s))}</span></div>`);
+// odpověď s případnými variantami (was/were)
+const odpovedZ = t => ({ odpoved: prvni(t), varianty: t.split('/').slice(1) });
 
-document.querySelectorAll('#rezimy button').forEach(b => b.onclick = () => {
-  document.querySelectorAll('#rezimy button').forEach(x => x.classList.remove('active'));
-  b.classList.add('active'); rezim = b.dataset.rezim;
-  const tr = rezim === 'trenink';
-  $('prehled').style.display = tr ? 'none' : '';
-  $('trenink').style.display = tr ? '' : 'none';
-  $('stav').style.display = tr ? '' : 'none';
-  if (tr) { posledni = -1; nova(); }
+function generuj(r) {
+  const s = vyberSloveso();
+  if (r === 'vyber') {
+    const k = Uloha.nahodne([1, 2]);
+    const spravne = prvni(s[k]);
+    const kandidati = [pravidelne(s[0]), ...s.slice(0, 3).map(prvni),
+      ...Uloha.zamichej(SLOVESA.filter(x => x !== s)).map(x => prvni(x[k]))];
+    const jine = [...new Set(kandidati)].filter(t => t !== spravne && !s[k].split('/').includes(t)).slice(0, 3);
+    return {
+      zadani: `<span class="druh">${TVARY[k]} slovesa</span><span class="tvary-radek">${s[0]}</span><span class="vyznam">${s[3]}</span>`,
+      odpoved: spravne,
+      moznosti: Uloha.zamichej([spravne, ...jine]),
+      napoveda: '',
+      poVyhodnoceni: doplnek(s),
+    };
+  }
+  // psaná odpověď: past simple, past participle, nebo náhodný chybějící tvar
+  const k = r === 'past' ? 1 : r === 'participle' ? 2 : Uloha.nahodne([0, 1, 2]);
+  const ukaz = [0, 1, 2].map(i => i === k ? '<span class="mezera">?</span>' : (r === 'chybi' || i === 0 ? s[i] : '…'));
+  return {
+    zadani: `<span class="druh">Napiš ${TVARY[k]}</span><span class="tvary-radek">${ukaz.join(' – ')}</span><span class="vyznam">${s[3]}</span>`,
+    ...odpovedZ(s[k]),
+    napoveda: '',
+    poVyhodnoceni: doplnek(s),
+  };
+}
+
+let rezim = 'prehled';
+window.addEventListener('DOMContentLoaded', () => {
+  const serie = Procvic.spust({
+    klic: 'metodus_aj_slovesa', pocet: 10, typ: 'text',
+    plocha: $('plocha'), skoreEl: $('skore'), pokrokEl: $('pokrok'),
+    rezim: () => rezim, generuj,
+  });
+  $('rezimy').addEventListener('click', e => {
+    const b = e.target.closest('button[data-rezim]');
+    if (!b) return;
+    $('rezimy').querySelectorAll('button').forEach(x => x.classList.toggle('active', x === b));
+    rezim = b.dataset.rezim;
+    const prehled = rezim === 'prehled';
+    $('prehledObal').hidden = !prehled;
+    $('plocha').hidden = $('ovladani').hidden = prehled;
+    posledni = null;
+    if (!prehled) serie.restart();
+  });
+  $('startBtn').onclick = () => serie.restart();
 });
 </script>
 </body>

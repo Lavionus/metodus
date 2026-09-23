@@ -911,5 +911,122 @@ let posledni = performance.now();
   requestAnimationFrame(smycka);
 })(posledni);
 </script>
+<script src="../badani.js"></script>
+<script>
+/* Úkoly k modelu (badani.js): předpověz → vyzkoušej → vysvětli.
+   Náporový motor na zemi, turbo-fan proti turbo-jetu, tah a rychlost letu.
+   Hodnoty se zapisují, jak žák model přestavuje (zaznam). */
+(function(){
+const N=Badani.nastav, cis=Badani.cislo;
+const nahodne=p=>p[Math.floor(Math.random()*p.length)];
+const moznost=(t,ok,proc)=>({t,ok,proc});
+let zaznam={};
+const zapis=(klic,podminka)=>{ if(podminka) zaznam[klic]={...stav.stat}; return zaznam[klic]; };
+const je=(id,mach,plyn=85)=>motor.id===id&&+ui('mach').value===mach&&+ui('plyn').value===plyn;
+const nastavMotor=(id,mach)=>{ if(!bezi) ui('btnPauza').click(); vyberMotor(id); N({'#plyn':85,'#mach':mach}); zaznam={}; };
+
+Badani.start({
+  ukoly:[
+    { id:'napor', nazev:'Náporový motor na zemi',
+      predpoved:{
+        otazka:'Náporový motor (ram-jet) <b>nemá kompresor ani turbínu</b> – je to jen roura se sáním, spalovací komorou a tryskou. Co udělá, když letadlo <b>stojí na zemi</b>?',
+        moznosti:['Funguje stejně jako za letu','Nemá žádný tah','Má dokonce největší tah'],
+        spravna:1 },
+      priprava(){ nastavMotor('ramjet',0); },
+      pokus:'Na zemi (rychlost letu M 0) si všimni tahu v panelu měření. Pak zvyš <b>rychlost letu na M 2,5</b> a porovnej tlakový poměr i tah.',
+      splneno:()=>{ zapis('zeme',je('ramjet',0)); zapis('let',je('ramjet',25)); return !!(zaznam.zeme&&zaznam.let); },
+      ukaz:{'#mach':25},
+      pozorovani:()=>`Na zemi je tah <b>0</b> – vzduch se nemá čím stlačit. Při M 2,5 se vzduch v sání stlačí náporem <b>${cis(zaznam.let.PR,0)}×</b> a tah je ${cis(zaznam.let.tah)} N na kg/s.`,
+      vysvetli:{
+        otazka:'Proč ram-jet na zemi nefunguje?',
+        moznosti:[
+          moznost('Vzduch v něm stlačuje jen nápor proti rychle letícímu motoru. Bez rychlosti se vzduch nestlačí a spalování nedá tah.',true),
+          moznost('Na zemi je málo kyslíku.',false,'Kyslíku je na zemi dost. Chybí stlačení vzduchu, které u ram-jetu obstarává jen rychlost letu.'),
+          moznost('Na zemi se palivo nezapálí.',false,'Zapálit by šlo, ale bez stlačeného vzduchu by plyny nevyletěly tryskou rychleji, než přišly – tah nevznikne.')]},
+      shrnuti:'Motor potřebuje vzduch nejdřív <b>stlačit</b>. Turbo-motory to dělají kompresorem, <b>ram-jet náporem</b> za rychlého letu – proto ho musí něco nejdřív rozletět.' },
+
+    { id:'turbofan', nazev:'Turbo-fan proti turbo-jetu',
+      predpoved:{
+        otazka:'Dopravní letadla mají <b>turbo-fan</b> s velkým ventilátorem vpředu. Jak rychle z něj proudí plyny ve srovnání s úzkým <b>turbo-jetem</b> stíhačky?',
+        moznosti:['Rychleji','Pomaleji','Stejně'],
+        spravna:1 },
+      priprava(){ nastavMotor('turbojet',8); },
+      pokus:'Přečti si <b>rychlost výtoku</b> turbo-jetu v panelu měření. Pak vyber motor <b>Turbo-fan</b> (rychlost letu i plyn nech stejné) a porovnej.',
+      splneno:()=>{ zapis('jet',je('turbojet',8)); zapis('fan',je('turbofan',8)); return !!(zaznam.jet&&zaznam.fan); },
+      ukaz(){ vyberMotor('turbofan'); },
+      pozorovani:()=>`Turbo-jet: výtok <b>${cis(zaznam.jet.ve)} m/s</b>. Turbo-fan: jádro <b>${cis(zaznam.fan.ve)} m/s</b> a obtokový proud jen ${cis(zaznam.fan.vb)} m/s – obtokem ale proudí osmkrát víc vzduchu.`,
+      vysvetli:{
+        otazka:'Proč dopravní letadla volí pomalejší proud?',
+        moznosti:[
+          moznost('Stejný tah dá velké množství vzduchu urychlené málo i malé množství urychlené hodně. Pomalejší proud ztrácí méně energie – motor je úspornější a tišší.',true),
+          moznost('Pomalejší proud znamená pomalejší letadlo, a to je bezpečnější.',false,'Dopravní letadla létají skoro stejně rychle jako by s turbo-jetem. Jde o spotřebu: víc vzduchu, menší rychlost výtoku.'),
+          moznost('Ventilátor vzduch brzdí, aby motor nepřehřál.',false,'Ventilátor vzduch naopak urychluje – jen hodně vzduchu o málo. Chlazení není hlavní důvod.')]},
+      shrnuti:'Tah vzniká urychlením vzduchu. <b>Turbo-fan</b> urychlí hodně vzduchu o málo (úsporné, tiché – dopravní letadla), <b>turbo-jet</b> málo vzduchu o hodně (stíhačky, nadzvuková rychlost).' },
+
+    { id:'rychlost', nazev:'Tah při rychlém letu',
+      predpoved:{
+        otazka:'Turbo-jet stojí na zemi. Co se stane s jeho tahem (na každý kilogram vzduchu), když letadlo poletí rychlostí <b>M 2</b>?',
+        moznosti:['Vzroste – motor dostává víc vzduchu','Nezmění se','Klesne'],
+        spravna:2 },
+      priprava(){ nastavMotor('turbojet',0); },
+      pokus:'Přečti si <b>specifický tah</b> na zemi (M 0). Pak nastav <b>rychlost letu M 2,0</b> a porovnej tah i rychlost výtoku.',
+      splneno:()=>{ zapis('zeme',je('turbojet',0)); zapis('let',je('turbojet',20)); return !!(zaznam.zeme&&zaznam.let); },
+      ukaz:{'#mach':20},
+      pozorovani:()=>`Na zemi ${cis(zaznam.zeme.tah)} N na kg/s, při M 2 jen <b>${cis(zaznam.let.tah)} N na kg/s</b> – přestože výtok zrychlil z ${cis(zaznam.zeme.ve)} na ${cis(zaznam.let.ve)} m/s.`,
+      vysvetli:{
+        otazka:'Proč tah klesl, když výtok zrychlil?',
+        moznosti:[
+          moznost('Tah závisí na tom, o kolik motor vzduch urychlí: (rychlost výtoku − rychlost letu). Při M 2 přilétá vzduch už rychlostí 680 m/s, takže ho motor urychlí jen málo.',true),
+          moznost('Ve výšce je řidší vzduch.',false,'Model výšku nemění – tah na kilogram vzduchu klesá kvůli rychlosti letu.'),
+          moznost('Motor se při rychlém letu přehřívá a ubírá výkon.',false,'Nejvyšší teplota zůstala stejná. Tah klesl, protože rozdíl rychlostí výtoku a letu je menší.')]},
+      shrnuti:'Specifický tah je <b>rychlost výtoku − rychlost letu</b>. Čím rychleji letadlo letí, tím méně motor vzduch přidá – proto nadzvukové stroje potřebují velmi rychlý výtok nebo nápor.' },
+  ],
+
+  otazky:[
+    ()=>{ const ve=nahodne([600,800,900]), v0=nahodne([200,250,300]);
+      return { otazka:`Motor vyfukuje plyny rychlostí <b>${ve} m/s</b> a letadlo letí <b>${v0} m/s</b>. Kolik newtonů tahu dá každý kilogram vzduchu, který projde motorem za sekundu?`,
+        moznosti:[moznost(`${ve-v0} N`,true),
+          moznost(`${ve+v0} N`,false,'Vzduch do motoru už přilétá rychlostí letu – motor ho urychlí jen o rozdíl rychlostí.'),
+          moznost(`${ve} N`,false,'To platí jen pro stojící motor. Za letu se odečte rychlost, kterou vzduch už měl.')],
+        vysvetleni:`F = (v výtoku − v letu) · 1 kg/s = ${ve-v0} N.` }; },
+    { otazka:'Kterým směrem motor tlačí letadlo, když vyfukuje plyny dozadu?',
+      moznosti:[moznost('Dopředu – plyny tlačí motor opačně, než je motor vrhá (akce a reakce).',true),
+        moznost('Dopředu, protože plyny se odrážejí od vzduchu za letadlem.',false,'Motor by táhl i ve vakuu – jako raketa. Tah vzniká tím, že motor plyny urychluje, ne odrazem od okolí.'),
+        moznost('Dozadu, stejně jako proudí plyny.',false,'Síla na motor má opačný směr než síla, kterou motor působí na plyny – 3. Newtonův zákon.')],
+      vysvetleni:'Motor působí na plyn silou dozadu, plyn na motor stejně velkou silou dopředu.' },
+    { otazka:'Proč <b>raketový motor</b> funguje i ve vesmíru?',
+      moznosti:[moznost('Veze s sebou palivo i okysličovadlo, vzduch nepotřebuje.',true),
+        moznost('Ve vesmíru je dost kyslíku.',false,'Ve vesmíru je vakuum – kyslík si raketa musí vézt s sebou.'),
+        moznost('Odráží se od vzduchu, kterého je ve vesmíru málo.',false,'Tah nevzniká odrazem od okolí. Raketa odhazuje plyny a sama se tím pohání dopředu.')],
+      vysvetleni:'Proudové motory berou kyslík ze vzduchu, raketa ho veze v nádrži.' },
+    { otazka:'Co dělá v proudovém motoru <b>turbína</b>?',
+      moznosti:[moznost('Odebírá horkým plynům část energie a pohání kompresor vpředu.',true),
+        moznost('Stlačuje nasátý vzduch.',false,'To dělá kompresor. Turbína je za spalovací komorou a kompresor přes hřídel pohání.'),
+        moznost('Zapaluje palivo.',false,'Palivo hoří ve spalovací komoře. Turbína z horkých plynů bere energii pro kompresor.')],
+      vysvetleni:'Kompresor a turbína sedí na stejné hřídeli – turbína „platí“ práci kompresoru.' },
+    { otazka:'Seřaď části proudového motoru, jak jimi prochází vzduch.',
+      moznosti:[moznost('sání → kompresor → spalovací komora → turbína → tryska',true),
+        moznost('sání → spalovací komora → kompresor → turbína → tryska',false,'Vzduch se musí nejdřív stlačit – kompresor je před spalovací komorou.'),
+        moznost('sání → turbína → kompresor → spalovací komora → tryska',false,'Turbína je až za spalovací komorou – pohánějí ji horké plyny.')],
+      vysvetleni:'Sání – komprese – spalování – expanze v turbíně – výtok tryskou.', poradi:true },
+    { otazka:'Co pohání vrtulník (turbo-shaft) nebo elektrárnu s plynovou turbínou?',
+      moznosti:[moznost('Výkon hřídele – turbína točí rotorem nebo generátorem, výtok skoro netlačí.',true),
+        moznost('Proud plynů z trysky, stejně jako u stíhačky.',false,'U turbo-shaftu a plynové turbíny si skoro všechnu energii vezme turbína a předá ji hřídeli.'),
+        moznost('Raketový tah.',false,'Ty spalují vzduch a výkon odebírají hřídelí – tah trysky je vedlejší.')],
+      vysvetleni:'Turbo-shaft a plynová turbína jsou „motory na hřídel“, ne na tah.' },
+    { otazka:'Proč se vzduch v proudovém motoru před spálením <b>stlačuje</b>?',
+      moznosti:[moznost('Stlačený vzduch spálí palivo účinněji – vyšší tlakový poměr znamená vyšší účinnost.',true),
+        moznost('Aby se do motoru vešlo víc paliva.',false,'Paliva se přidává podle potřeby. Stlačení zvyšuje účinnost přeměny tepla na práci.'),
+        moznost('Aby vzduch vychladl.',false,'Při stlačení se vzduch naopak ohřeje. Smyslem je vyšší účinnost cyklu.')],
+      vysvetleni:'Turbo-fan s tlakovým poměrem 40 má vyšší tepelnou účinnost než turbo-jet s 12.' },
+    { otazka:'Kde je v proudovém motoru plyn <b>nejteplejší</b>?',
+      moznosti:[moznost('Ve spalovací komoře a před turbínou',true),
+        moznost('V sání',false,'V sání má vzduch skoro teplotu okolí.'),
+        moznost('Na konci trysky',false,'V turbíně a trysce plyn expanduje a chladne. Nejteplejší je za spalováním.')],
+      vysvetleni:'Přepni barvu na teplotu – nejsvětlejší je oblast za spalovací komorou.' },
+  ],
+});
+})();
+</script>
 </body>
 </html>

@@ -237,13 +237,15 @@ function stitek(x, y, text, barva) {
 function cistiPlochu() { ctx.fillStyle = B.pozadi; ctx.fillRect(0, 0, W(), H()); }
 
 /* ---------- panel ---------- */
+// česká desetinná čárka a znaménko minus ve výpisu (hodnoty se skládají přes toFixed)
+const cesky = t => String(t).replace(/(\d)\.(\d)/g, '$1,$2').replace(/-(?=\d)/g, '−');
 function vypisMereni(radky) {
   $('mereni').innerHTML = radky.map(r =>
-    `<div class="radek${r.duraz ? ' duraz' : ''}"><span>${r.popis}</span><b>${r.hodnota}</b></div>`).join('');
+    `<div class="radek${r.duraz ? ' duraz' : ''}"><span>${r.popis}</span><b>${cesky(r.hodnota)}</b></div>`).join('');
 }
 function vypisEnergie(polozky, max) {
   $('energie').innerHTML = polozky.map(p =>
-    `<div class="epruh ${p.trida}"><div class="popis"><span>${p.popis}</span><b>${p.hodnota.toFixed(2)} J</b></div>` +
+    `<div class="epruh ${p.trida}"><div class="popis"><span>${p.popis}</span><b>${cesky(p.hodnota.toFixed(2))} J</b></div>` +
     `<div class="drazka"><i style="width:${max > 0 ? Math.min(100, p.hodnota / max * 100) : 0}%"></i></div></div>`).join('');
 }
 /* Všechny hlášky, které se můžou objevit – v nejdelší podobě, jakou dovolí
@@ -888,6 +890,146 @@ window.addEventListener('DOMContentLoaded', () => {
   postavOvladani();
   requestAnimationFrame(smycka);
 });
+</script>
+<script src="../badani.js"></script>
+<script>
+/* Úkoly k modelu (badani.js): předpověz → vyzkoušej → vysvětli.
+   Rychlost a doba kmitu kyvadla, sklon a tření, srážka stejných koulí. */
+(function(){
+const N=Badani.nastav, cislo=Badani.cislo;
+const nahodne=p=>p[Math.floor(Math.random()*p.length)];
+const moznost=(t,ok,proc)=>({t,ok,proc});
+// scéna hřiště a běžící čas (pauza by pokus zastavila)
+const scena=id=>{
+  if(sim!==id) document.querySelector(`#tabs [data-sim="${id}"]`).click();
+  if(!bezi) $('btnPauza').click();
+};
+const dveKyvadla=chci=>{ if(kyvadlo.dve!==chci) $('kDve').click(); };
+
+Badani.start({
+  zakryt:'#vyklad, #otazka',
+  ukoly:[
+    { id:'rychlost', nazev:'Kde je kyvadlo nejrychlejší',
+      predpoved:{
+        otazka:'Kyvadlo vychýlíš o <b>60°</b> a pustíš. Ve kterém místě bude mít <b>největší rychlost</b>?',
+        moznosti:['V krajní poloze, odkud ho pouštíš','V nejnižším bodě','Všude stejnou – jen mění směr'],
+        spravna:1 },
+      priprava(){ scena('kyvadlo'); dveKyvadla(false); N({'#kDelka':120,'#kHmota':10,'#kUhel':60}); },
+      pokus:'Pusť kyvadlo (<b>▶️ Pustit</b>) a sleduj modrou šipku rychlosti a sloupce energie. Nech ho aspoň jednou projít nejnižším bodem.',
+      splneno:()=>sim==='kyvadlo'&&kyvadlo.pusteno&&!kyvadlo.dve&&kyvadlo.a.prosloDolu>=2,
+      ukaz(){ if(!kyvadlo.pusteno) $('kPustit').click(); },
+      pozorovani:()=>`Nejdelší je šipka rychlosti <b>dole</b> – asi ${cislo(Math.sqrt(2*G*kyvadlo.a.L*(1-Math.cos(Math.PI/3))),1)} m/s. V krajních polohách se závaží na okamžik zastaví.`,
+      vysvetli:{
+        otazka:'Proč je kyvadlo nejrychlejší právě dole?',
+        moznosti:[
+          moznost('Cestou dolů se polohová energie mění na pohybovou. Dole je polohové energie nejméně, a tak je pohybové – a s ní rychlosti – nejvíc.',true),
+          moznost('V krajní poloze na závaží působí největší síla, a proto je tam nejrychlejší.',false,'Síla, která kyvadlo rozhoupává, je v krajní poloze opravdu největší – ale teprve odtud závaží rozjíždí. Rychlost je tam nulová.'),
+          moznost('Dole ho postrčí závěs.',false,'Závěs jen drží závaží na kružnici – táhne kolmo k pohybu, takže ho nezrychlí. Rychlost roste díky tíze na cestě dolů.')]},
+      shrnuti:'Kyvadlo pořád přeměňuje <b>polohovou energii na pohybovou</b> a zpět. Nejrychlejší je v nejnižším bodě, v krajních polohách se na okamžik zastaví.' },
+
+    { id:'hmotnost', nazev:'Těžší kyvadlo',
+      predpoved:{
+        otazka:'Dvě kyvadla mají stejně dlouhý závěs (1 m). Kyvadlu B dáš <b>osmkrát těžší</b> závaží. Které bude kmitat rychleji (bude mít kratší dobu kmitu)?',
+        moznosti:['Těžší kyvadlo B','Lehčí kyvadlo A','Obě stejně'],
+        spravna:2 },
+      priprava(){ scena('kyvadlo'); dveKyvadla(true); N({'#kDelka':100,'#kHmota':10,'#kDelkaB':100,'#kHmotaB':10,'#kUhel':20}); },
+      pokus:'Nastav kyvadlu <b>B hmotnost 8,0 kg</b>, pusť kyvadla a počkej, až se u obou změří doba kmitu.',
+      splneno:()=>sim==='kyvadlo'&&kyvadlo.dve&&kyvadlo.a.L===1&&kyvadlo.b.L===1&&kyvadlo.a.m===1&&kyvadlo.b.m===8&&kyvadlo.a.perioda&&kyvadlo.b.perioda,
+      ukaz(){ N({'#kHmotaB':80}); if(!kyvadlo.pusteno) $('kPustit').click(); },
+      pozorovani:()=>`Obě kyvadla kmitají <b>stejně</b>: doba kmitu A je ${cislo(kyvadlo.a.perioda,2)} s, B ${cislo(kyvadlo.b.perioda,2)} s.`,
+      vysvetli:{
+        otazka:'Proč těžší závaží nekmitá rychleji?',
+        moznosti:[
+          moznost('Na těžší závaží působí větší tíha, ale má i větší setrvačnost. Obojí roste stejně, takže se závaží rozjíždí stejně rychle.',true),
+          moznost('Těžší kyvadlo má víc energie, a proto se kývá rychleji.',false,'Energii má opravdu víc, ale doba kmitu z ní neplyne – obě kyvadla v modelu kmitají stejně. Rozhoduje délka závěsu.'),
+          moznost('Těžší závaží víc brzdí vzduch.',false,'Tlumení je u obou kyvadel stejné a doba kmitu vyšla stejná. Hmotnost dobu kmitu neurčuje.')]},
+      shrnuti:'Doba kmitu kyvadla <b>nezávisí na hmotnosti</b>, jen na <b>délce závěsu</b>: T = 2π√(l / g). Čtyřikrát delší závěs → dvakrát delší kmit.' },
+
+    { id:'sklon', nazev:'Sklon a tření',
+      predpoved:{
+        otazka:'Kvádr leží na nakloněné rovině se sklonem <b>5°</b> a třením 0,20 a stojí. Co se stane, když sklon zvětšíš na <b>20°</b>?',
+        moznosti:['Rozjede se dolů','Zůstane stát – tření ho udrží při každém sklonu','Rozjede se, jen když bude těžší'],
+        spravna:0 },
+      priprava(){ scena('rovina'); N({'#rUhel':5,'#rMu':20,'#rHmota':20}); },
+      pokus:'Nastav <b>sklon 20°</b> a pusť těleso (<b>▶️ Pustit</b>). Sleduj šipky sil a tření.',
+      splneno:()=>sim==='rovina'&&rovina.uhel===20&&Math.abs(rovina.mu-0.2)<1e-9&&rovina.s>0.05,
+      ukaz(){ N({'#rUhel':20}); $('rStart').click(); },
+      pozorovani:()=>`Těleso se rozjelo. Tření 0,20 ho udrží jen do sklonu asi <b>${cislo(rovina.kritickyUhel(),0)}°</b>.`,
+      vysvetli:{
+        otazka:'Proč se při větším sklonu kvádr rozjel?',
+        moznosti:[
+          moznost('S větším sklonem roste část tíhy, která táhne kvádr dolů po rovině, a klesá přítlak do podložky – a s ním tření.',true),
+          moznost('Při větším sklonu je kvádr těžší.',false,'Hmotnost ani tíha se nemění. Mění se, jak velká část tíhy táhne kvádr podél roviny.'),
+          moznost('Tření zmizí, jakmile je rovina dost strmá.',false,'Součinitel tření zůstal 0,20 a třecí síla dál působí (hnědá šipka). Jen už nestačí na tah dolů po rovině.')]},
+      shrnuti:'Na nakloněné rovině táhne těleso dolů část tíhy <b>G · sin α</b> a tření brzdí silou <b>f · G · cos α</b>. Těleso se rozjede nad kritickým úhlem, kdy <b>tg α = f</b> – nezávisle na hmotnosti.' },
+
+    { id:'srazka', nazev:'Srážka stejných koulí',
+      predpoved:{
+        otazka:'Modrá koule (2 kg) narazí rychlostí 2 m/s do <b>stejně těžké</b> červené koule, která <b>stojí</b>. Srážka je dokonale pružná. Co se stane?',
+        moznosti:['Obě pojedou spolu rychlostí 1 m/s','Modrá se zastaví a červená odjede rychlostí 2 m/s','Modrá se odrazí zpět a červená zůstane stát'],
+        spravna:1 },
+      priprava(){ scena('srazky'); N({'#sM1':2,'#sV1':2,'#sM2':1,'#sV2':-1,'#sE':100}); },
+      pokus:'Nastav červené kouli <b>hmotnost 2,0 kg</b> a <b>rychlost 0 m/s</b> a sleduj srážku.',
+      splneno:()=>sim==='srazky'&&srazky.m1===2&&srazky.m2===2&&srazky.u1===2&&srazky.u2===0&&srazky.e===1&&srazky.srazilo,
+      ukaz:{'#sM2':2,'#sV2':0},
+      pozorovani:'Modrá koule se po srážce <b>zastavila</b> a červená odjela rychlostí <b>2 m/s</b> – koule si vyměnily rychlosti.',
+      vysvetli:{
+        otazka:'Proč si koule vyměnily rychlosti?',
+        moznosti:[
+          moznost('Při pružné srážce se zachová hybnost i pohybová energie. U stejně těžkých koulí to jde jedině tak, že si rychlosti vymění.',true),
+          moznost('Modrou kouli zastavilo tření o podložku.',false,'Model tření nepočítá. Modrá se zastavila v okamžiku srážky, protože celou hybnost předala červené.'),
+          moznost('Pojedou-li spolu 1 m/s, zachová se hybnost – tak by to mělo být.',false,'Hybnost by se zachovala, ale ztratila by se polovina pohybové energie. To se stane jen při nepružné srážce – zkus stáhnout pružnost na 0 %.')]},
+      shrnuti:'Při každé srážce se zachová <b>hybnost p = m · v</b>. Při pružné srážce stejně těžkých koulí si koule <b>vymění rychlosti</b> (Newtonova kolébka), při nepružné jedou dál spolu.' },
+  ],
+
+  otazky:[
+    ()=>{ const k=nahodne([[4,'4 m','2krát delší'],[0.25,'0,25 m','2krát kratší'],[9,'9 m','3krát delší']]);
+      const T=2*Math.sqrt(k[0]);
+      return { otazka:`Kyvadlo s délkou závěsu 1 m má dobu kmitu asi 2 s. Jakou dobu kmitu bude mít kyvadlo s délkou <b>${k[1]}</b>?`,
+        moznosti:[moznost(`${cislo(T,1)} s`,true),
+          moznost(`${cislo(2*k[0],1)} s`,false,`Doba kmitu neroste s délkou přímo, ale s její odmocninou: √${cislo(k[0],2)} = ${cislo(Math.sqrt(k[0]),1)}.`),
+          moznost('2 s',false,'Doba kmitu na délce závěsu závisí: T = 2π√(l / g).')],
+        vysvetleni:`T roste s odmocninou délky, takže kmit je ${k[2]}: ${cislo(T,1)} s.` }; },
+    { otazka:'Kde má závaží kyvadla <b>největší polohovou energii</b>?',
+      moznosti:[moznost('V krajních polohách',true),
+        moznost('V nejnižším bodě',false,'Dole je závaží nejníž – polohové energie má nejméně a pohybové nejvíc.'),
+        moznost('Všude stejnou',false,'Polohová energie závisí na výšce, a ta se během kmitu mění.')],
+      vysvetleni:'Nahoře je závaží nejvýš a na okamžik stojí: všechna energie je polohová.' },
+    ()=>{ const m=nahodne([0.5,3,4]), v=nahodne([3,4,5]);   // v = 2 by dalo m·v = ½·m·v²
+      return { otazka:`Koule o hmotnosti <b>${cislo(m,1)} kg</b> jede rychlostí <b>${v} m/s</b>. Jakou má hybnost?`,
+        moznosti:[moznost(`${cislo(m*v,1)} kg·m/s`,true),
+          moznost(`${cislo(m*v*v/2,1)} kg·m/s`,false,'To je pohybová energie ½ m v² (v joulech). Hybnost je p = m · v.'),
+          moznost(`${cislo(m+v,1)} kg·m/s`,false,'Hmotnost a rychlost se násobí, nesčítají: p = m · v.')],
+        vysvetleni:`p = m · v = ${cislo(m,1)} · ${v} = ${cislo(m*v,1)} kg·m/s.` }; },
+    ()=>{ const m=nahodne([1,2,3]), v=nahodne([2,4,6]);
+      return { otazka:`Vozík (${m} kg) jede rychlostí <b>${v} m/s</b> a narazí do stejně těžkého stojícího vozíku. Vozíky se <b>spojí</b> a jedou dál spolu. Jak rychle?`,
+        moznosti:[moznost(`${cislo(v/2,1)} m/s`,true),
+          moznost(`${v} m/s`,false,'Hybnost se rozdělí na dvojnásobnou hmotnost, takže rychlost klesne na polovinu.'),
+          moznost('0 m/s',false,'Hybnost se zachová – spojené vozíky se musí dál pohybovat.')],
+        vysvetleni:`Hybnost ${m} · ${v} = ${m*v} kg·m/s nese teď ${2*m} kg: v = ${cislo(v/2,1)} m/s.` }; },
+    { otazka:'Co se zachová při <b>nepružné</b> srážce (koule se spojí)?',
+      moznosti:[moznost('Hybnost, ale ne pohybová energie',true),
+        moznost('Hybnost i pohybová energie',false,'Pohybová energie se zachová jen u pružné srážky. Při nepružné se část změní v teplo a deformaci.'),
+        moznost('Jen pohybová energie',false,'Je to naopak: hybnost se zachová při každé srážce, energie jen při pružné.')],
+      vysvetleni:'Hybnost se zachovává vždy, pohybová energie jen při dokonale pružné srážce.' },
+    { otazka:'Na stejnou nakloněnou rovinu se stejným třením položíš <b>dvakrát těžší</b> kvádr. Rozjede se při menším sklonu?',
+      moznosti:[moznost('Ne, rozjede se při stejném sklonu',true),
+        moznost('Ano, těžší kvádr se rozjede dřív',false,'Těžšímu kvádru roste tah dolů po rovině, ale stejně tak přítlak a tření. Kritický úhel na hmotnosti nezávisí.'),
+        moznost('Ne, těžší se rozjede až při větším sklonu',false,'Tření sice vzroste, ale tah dolů po rovině vzroste stejně. Kritický úhel zůstane stejný: tg α = f.')],
+      vysvetleni:'Kritický úhel určuje jen součinitel tření: tg α = f.' },
+    { otazka:'Co způsobí <b>větší tření</b> na nakloněné rovině?',
+      moznosti:[moznost('Těleso se rozjede až při větším sklonu a zrychluje pomaleji.',true),
+        moznost('Těleso sjede rychleji, protože se o rovinu opírá.',false,'Tření pohyb vždy brzdí – s větším třením je zrychlení menší.'),
+        moznost('Na nakloněné rovině tření nepůsobí.',false,'Působí – brzdí těleso proti směru pohybu (hnědá šipka v modelu).')],
+      vysvetleni:'Tření působí proti pohybu; kritický úhel roste s třením (tg α = f).' },
+    { otazka:'Tlumené kyvadlo se po chvíli zastaví. Kam se poděla jeho energie?',
+      moznosti:[moznost('Přeměnila se na teplo – odpor vzduchu a tření v závěsu.',true),
+        moznost('Zanikla.',false,'Energie nezaniká, jen se mění z jedné formy na jinou.'),
+        moznost('Uložila se v závěsu jako polohová energie.',false,'Závěs se nezvedá ani nenapíná – energie odešla jako teplo do okolí.')],
+      vysvetleni:'Zákon zachování energie: celková energie zůstává, část se jen přemění na teplo.' },
+  ],
+});
+})();
 </script>
 </body>
 </html>

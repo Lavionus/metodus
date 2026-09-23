@@ -1491,5 +1491,128 @@ napovedaNastroje();
 rozvlni(Math.round(cols * 0.5), Math.round(rady * 0.5), Number($('velikost').value), 0.5);
 requestAnimationFrame(smycka);
 </script>
+<script src="../badani.js"></script>
+<script>
+/* Úkoly k modelu (badani.js): předpověz → vyzkoušej → vysvětli.
+   Frekvence a vlnová délka; dva přílivy denně; skočný a hluchý příliv. */
+(function(){
+const N=Badani.nastav, cis=Badani.cislo;
+const nahodne=p=>p[Math.floor(Math.random()*p.length)];
+const moznost=(t,ok,proc)=>({t,ok,proc});
+const bez=()=>{ if(!bezi) $('btnPauza').click(); };
+const rozkyv=()=>{ const r=rozsahDne(SL.t); return r.mx-r.mn; };
+const soulad=()=>{ let d=(uhelMesic(SL.t)-uhelSlunce(SL.t))%(2*Math.PI); if(d<0) d+=2*Math.PI; return Math.abs(Math.cos(d)); };
+// jak dlouho už platí podmínka (pro pokusy, kde je potřeba chvíli pozorovat)
+const trvaAspon=(()=>{ const od={}; return (klic,plati,ms)=>{ if(!plati){ delete od[klic]; return false; } od[klic]=od[klic]||performance.now(); return performance.now()-od[klic]>=ms; }; })();
+let t0=0;                      // čas slapů na začátku úkolu
+let rozkyvy={};                // naměřené rozkyvy podle fáze Měsíce
+
+Badani.start({
+  ukoly:[
+    { id:'frekvence', nazev:'Rychleji kapající kapátko',
+      predpoved:{
+        otazka:'Kapátko kape <b>0,6krát za sekundu</b> a po hladině se šíří kruhové vlny. Co se stane se vzdáleností mezi sousedními vlnami, když bude kapat <b>2krát za sekundu</b>?',
+        moznosti:['Zvětší se','Nezmění se','Zmenší se – vlny budou hustší'],
+        spravna:2 },
+      priprava(){ prepni('vlny'); bez(); if($('btnVic').getAttribute('aria-expanded')==='false') $('btnVic').click();
+        N({'#prekazka':'zadna','#kapac':'1','#frekvence':6,'#tlumeni':10,'#rychlost':30,'#zobrazeni':'vyska'}); uklid(); },
+      pokus:'V nastavení (⚙️ Víc nastavení) zvyš <b>Frekvenci na 2,0</b> a chvíli pozoruj, jak daleko od sebe jsou kruhy vln.',
+      splneno:()=>trvaAspon('f',rezimStr==='vlny'&&bezi&&$('kapac').value==='1'&&+$('frekvence').value===20&&+$('rychlost').value===30,3000),
+      ukaz:{'#frekvence':20},
+      pozorovani:'Při 2 kapkách za sekundu jsou kruhy vln <b>asi třikrát blíž u sebe</b> než při 0,6 kapky za sekundu. Vlny se přitom šíří stejně rychle.',
+      vysvetli:{
+        otazka:'Proč jsou vlny při rychlejším kapání blíž u sebe?',
+        moznosti:[
+          moznost('Vlna se šíří pořád stejně rychle. Když kapky přicházejí častěji, stihne každá vlna do další kapky urazit kratší kus: λ = v / f.',true),
+          moznost('Rychlejší kapky vlny zpomalí.',false,'Rychlost šíření určuje voda (posuvník Rychlost), ne kapátko. Změnila se jen frekvence.'),
+          moznost('Silnější kapky dělají menší vlny.',false,'Velikost kapek se nezměnila (Vlnka). Mění se jen, jak často kapou.')]},
+      shrnuti:'Pro každou vlnu platí <b>v = λ · f</b>: při stejné rychlosti šíření je vyšší frekvence spojená s kratší vlnovou délkou. Platí to pro vlny na vodě, zvuk i světlo.' },
+
+    { id:'dvakrat', nazev:'Kolikrát denně příliv',
+      predpoved:{
+        otazka:'Kolikrát za den přijde v přímořském přístavu <b>příliv</b>?',
+        moznosti:['Jednou – když je Měsíc nad přístavem','Dvakrát','Čtyřikrát'],
+        spravna:1 },
+      priprava(){ prepni('slapy'); bez(); N({'#slSlunce':true,'#slRychlost':40}); t0=SL.t; },
+      pokus:'Sleduj graf hladiny v přístavu a počítej přílivy během <b>jednoho dne</b> (čas je ve stavovém řádku). Panel pozná, až uplyne celý den.',
+      splneno:()=>rezimStr==='slapy'&&SL.t-t0>=25,
+      ukaz:{'#slRychlost':60},
+      pozorovani:()=>{ const a=nejblizsi(SL.t,true), b=nejblizsi(SL.t+a+0.2,true)+0.2;
+        return `Za den přišly <b>dva přílivy</b> a dva odlivy; mezi dvěma přílivy uplyne asi <b>${trvani(b)}</b>.`; },
+      vysvetli:{
+        otazka:'Proč jsou přílivy dva?',
+        moznosti:[
+          moznost('Voda se vzdouvá ve dvou vlnách – na straně přivrácené k Měsíci a na straně odvrácené. Země se pod nimi otočí jednou za den, takže přístav projde oběma.',true),
+          moznost('Měsíc oběhne Zemi dvakrát za den.',false,'Měsíc oběhne Zemi asi za 27 dní. Dvakrát denně přichází příliv proto, že se přístav otočí pod dvěma vodními vlnami.'),
+          moznost('Dvakrát denně se mění vítr.',false,'Příliv způsobuje přitažlivost Měsíce a Slunce, ne vítr. Model vítr vůbec nepočítá.')]},
+      shrnuti:'Měsíc vytváří <b>dvě slapové vlny</b> (k Měsíci a od Měsíce). Země se pod nimi otáčí, proto příliv přichází <b>asi každých 12 h 25 min</b> – Měsíc se mezitím posune po své dráze.' },
+
+    { id:'skocny', nazev:'Skočný a hluchý příliv',
+      predpoved:{
+        otazka:'Kdy je rozdíl mezi přílivem a odlivem <b>největší</b>?',
+        moznosti:['Při novoluní a úplňku','Při první a poslední čtvrti','Pořád stejný'],
+        spravna:0 },
+      priprava(){ prepni('slapy'); bez(); N({'#slSlunce':true,'#slRychlost':12}); nastavFazi(Math.PI/2); rozkyvy={}; },
+      pokus:'Teď je <b>první čtvrť</b> – přečti si „dnešní rozkyv“ ve stavovém řádku. Pak stiskni <b>🌑 Novoluní</b> a porovnej.',
+      splneno:()=>{ if(rezimStr!=='slapy'||!slunceZap) return false;
+        const k=soulad(); if(k<0.2) rozkyvy.ctvrt=rozkyv(); if(k>0.95) rozkyvy.nov=rozkyv();
+        return rozkyvy.ctvrt!=null&&rozkyvy.nov!=null; },
+      ukaz(){ $('slNov').click(); },
+      pozorovani:()=>`Při první čtvrti je rozkyv hladiny <b>${cis(rozkyvy.ctvrt,1)} m</b>, při novoluní <b>${cis(rozkyvy.nov,1)} m</b>.`,
+      vysvetli:{
+        otazka:'Proč je při novoluní rozkyv tak velký?',
+        moznosti:[
+          moznost('Slunce, Země a Měsíc jsou v jedné přímce, takže slapové vlny Měsíce a Slunce se sečtou. Při čtvrti táhne Slunce napříč a vlnu Měsíce zeslabuje.',true),
+          moznost('Při novoluní je Měsíc Zemi blíž.',false,'Vzdálenost Měsíce model nemění. Rozhoduje, zda Slunce táhne ve stejné přímce jako Měsíc.'),
+          moznost('Neosvětlený Měsíc přitahuje silněji.',false,'Osvětlení s přitažlivostí nesouvisí – úplněk dává stejně velký skočný příliv jako novoluní.')]},
+      shrnuti:'Při novoluní a úplňku se slapy Měsíce a Slunce sčítají – <b>skočný příliv</b>. Při první a poslední čtvrti se částečně ruší – <b>hluchý příliv</b>. Měsíc působí asi 2× silněji než Slunce.' },
+  ],
+
+  otazky:[
+    ()=>{ const v=nahodne([30,40,60]), f=nahodne([2,3,4]);
+      return { otazka:`Vlny na vodě se šíří rychlostí <b>${v} cm/s</b> a kapátko kape <b>${f}krát za sekundu</b>. Jaká je vzdálenost mezi sousedními vlnami (vlnová délka)?`,
+        moznosti:[moznost(`${cis(v/f,1)} cm`,true),
+          moznost(`${v*f} cm`,false,'Vlnová délka je podíl rychlosti a frekvence: λ = v / f.'),
+          moznost(`${cis(f/v,2)} cm`,false,'Podíl je obráceně – rychlost patří do čitatele: λ = v / f.')],
+        vysvetleni:`λ = v / f = ${v} / ${f} = ${cis(v/f,1)} cm.` }; },
+    { otazka:'Co <b>přenáší</b> vlna na hladině rybníka?',
+      moznosti:[moznost('Energii – voda sama se jen houpe nahoru a dolů na místě.',true),
+        moznost('Vodu – vlna ji odnáší ke břehu.',false,'Plovoucí lístek se na vlnách jen houpe a zůstává skoro na místě. Vlna přenáší energii, ne vodu.'),
+        moznost('Kamínek, který do vody spadl.',false,'Kamínek zůstane na dně. Dál se šíří jen rozruch – energie.')],
+      vysvetleni:'Vlnění je šíření rozruchu (energie) prostředím, látka se přitom jen kmitá kolem své polohy.' },
+    { otazka:'Dvě vlny se potkají tak, že se <b>hřeben potká s důlkem</b>. Co se v tom místě stane?',
+      moznosti:[moznost('Vlny se zruší – hladina zůstane skoro klidná.',true),
+        moznost('Vznikne dvakrát vyšší vlna.',false,'To nastane, když se potká hřeben s hřebenem. Hřeben a důlek se navzájem vyruší.'),
+        moznost('Vlny se od sebe odrazí.',false,'Vlny se navzájem projdou – v místě setkání se jen sečtou jejich výchylky.')],
+      vysvetleni:'Skládání vln (interference): výchylky se sčítají, hřeben + důlek = klid.' },
+    { otazka:'Co se stane s vlnou, když připluje do <b>mělké vody u břehu</b>?',
+      moznosti:[moznost('Zpomalí se a vlny se k sobě přiblíží.',true),
+        moznost('Zrychlí se.',false,'V mělké vodě se vlna naopak zpomaluje – rychlost závisí na hloubce (√(g·h)).'),
+        moznost('Nic se nezmění.',false,'Rychlost vln na vodě závisí na hloubce – v mělčině klesá. Vyzkoušej přepínač Mělčina tlumí.')],
+      vysvetleni:'Rychlost vln na mělké vodě je √(g·h): menší hloubka, pomalejší vlna – proto se vlny stáčejí k břehu.' },
+    { otazka:'Proč příliv nepřichází přesně každých 12 hodin, ale asi po <b>12 h 25 min</b>?',
+      moznosti:[moznost('Měsíc se mezitím posune po své dráze a Země se musí pootočit o kousek víc.',true),
+        moznost('Voda je líná a opožďuje se.',false,'Zpoždění vychází z pohybu Měsíce, ne z vlastností vody.'),
+        moznost('Kvůli letnímu času.',false,'Posun o 25 minut platí celý rok – Měsíc za den urazí asi 1/27 své dráhy.')],
+      vysvetleni:'Měsíc obíhá stejným směrem, jakým se Země otáčí, takže „dohánění“ trvá 24 h 50 min – na dva přílivy.' },
+    { otazka:'Kdo má na slapy <b>větší</b> vliv?',
+      moznosti:[moznost('Měsíc – asi dvakrát větší než Slunce',true),
+        moznost('Slunce, protože je mnohem hmotnější',false,'Slunce je hmotnější, ale mnohem dál. Slapy závisí na rozdílu přitažlivosti na blízké a vzdálené straně Země – a ten je u Měsíce větší.'),
+        moznost('Oba stejný',false,'Model počítá Měsíc asi 2,2× silněji – vypni Slunce a uvidíš, že slapy zůstanou.')],
+      vysvetleni:'Slapový účinek klesá se třetí mocninou vzdálenosti, proto blízký Měsíc vyhrává.' },
+    { otazka:'Kdy nastává <b>hluchý příliv</b> (nejmenší rozdíl hladin)?',
+      moznosti:[moznost('Při první a poslední čtvrti',true),
+        moznost('Při úplňku',false,'Při úplňku jsou Slunce, Země a Měsíc v přímce – příliv je skočný.'),
+        moznost('Při novoluní',false,'Při novoluní se slapy sčítají – příliv je skočný.')],
+      vysvetleni:'Při čtvrtích táhne Slunce kolmo na Měsíc a jeho vlnu zeslabuje.' },
+    { otazka:'Vlna na hladině narazí na velký <b>kámen</b>. Co udělá?',
+      moznosti:[moznost('Odrazí se od něj zpět.',true),
+        moznost('Zanikne.',false,'Tvrdá překážka vlnu odrazí – energie se vrací zpět do rybníka. Pohltí ji spíš rákosí.'),
+        moznost('Projde kamenem beze změny.',false,'Vlna se šíří jen vodou. O kámen se odrazí – vyzkoušej nástroj 🗿 Kámen.')],
+      vysvetleni:'Pevná překážka vlnu odráží, měkké rákosí ji tlumí.' },
+  ],
+});
+})();
+</script>
 </body>
 </html>

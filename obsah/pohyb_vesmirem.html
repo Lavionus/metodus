@@ -39,8 +39,8 @@ canvas{display:block;width:100%;height:100%}
 :root[data-tone="light"] #pauza { color: #e0e0e0; }
 :root[data-tone="light"] .on { color: #6393da; }
 :root[data-tone="light"] .odkaz { color: #e0e0e0; }
-:root[data-tone="light"] button { color: #e0e0e0; }
-:root[data-tone="light"] b:not(.kostra b) { color: #e0e0e0; }   /* pruh kostry je světlý */
+:root[data-tone="light"] button:not(.badani button):not(.kostra button) { color: #e0e0e0; }   /* panel úkolů má barvy motivu */
+:root[data-tone="light"] b:not(.kostra b):not(.badani b) { color: #e0e0e0; }   /* pruh kostry je světlý */
 
 /* světlé motivy (sépie, škola, kontrast…): tmavé plochy stránky si nechají světlé písmo (tmavý text motivu by na nich zanikl) */
 :root[data-tone="light"] :is(.horni, .zalozky, .fakta, .vysvetleni) {
@@ -387,6 +387,123 @@ velikostPlatna();
 const param=new URLSearchParams(location.search).get('rezim');
 prepni(VYSVETLENI[param]?param:'zememesic');
 requestAnimationFrame(smycka);
+</script>
+<script src="../badani.js"></script>
+<script>
+/* Úkoly k modelu (badani.js): předpověz → vyzkoušej → vysvětli.
+   Dráha Měsíce kolem Slunce, šroubovice při letu Galaxií, galaktický rok.
+   Čas modelu: úhel Země uZ = cas · 0,9, jeden rok = 2π / 0,9 jednotek. */
+(function(){
+const N=Badani.nastav, cis=Badani.cislo;
+const nahodne=p=>p[Math.floor(Math.random()*p.length)];
+const moznost=(t,ok,proc)=>({t,ok,proc});
+const ROK=2*Math.PI/0.9;
+let start=0, vTabu=0;
+const zacni=r=>{ prepni(r); if(!bezi) $('pauza').click(); N({'#rychlost':40}); start=cas; vTabu=performance.now(); };
+
+Badani.start({
+  zakryt:'#vysvetleni, #fakta',   // výklad a čísla odpovídají na otázky úkolů
+  ukoly:[
+    { id:'vlnovka', nazev:'Dráha Měsíce kolem Slunce',
+      predpoved:{
+        otazka:'Měsíc obíhá Zemi a Země obíhá Slunce. Jak vypadá dráha <b>Měsíce vzhledem ke Slunci</b>?',
+        moznosti:['Kličky – Měsíc chvílemi couvá zpět','Jemná vlnovka, pořád vypouklá ke Slunci','Kružnice kolem Země, která stojí'],
+        spravna:1 },
+      priprava(){ zacni('zememesic'); if(!ukazStopy) $('stopy').click(); },
+      pokus:'Nech zapnuté <b>〰️ Stopy</b> a sleduj šedou stopu Měsíce aspoň <b>půl roku</b> (počítadlo vlevo nahoře). Zrychlit můžeš posuvníkem Rychlost.',
+      splneno:()=>rezim==='zememesic'&&ukazStopy&&cas-start>=ROK/2,
+      ukaz:{'#rychlost':100},
+      pozorovani:'Stopa Měsíce je <b>jemná vlnovka</b> kolem dráhy Země – nikde se nezatočí zpět do kličky.',
+      vysvetli:{
+        otazka:'Proč Měsíc vzhledem ke Slunci nikdy necouvá?',
+        moznosti:[
+          moznost('Kolem Země se Měsíc pohybuje jen asi 1 km/s, kdežto se Zemí letí kolem Slunce 29,8 km/s. Jeho vlastní pohyb jen trochu zpomalí nebo zrychlí společný let.',true),
+          moznost('Měsíc ve skutečnosti Zemi neobíhá.',false,'Obíhá – 13krát za rok. Jen je jeho oběh proti letu Země kolem Slunce pomalý.'),
+          moznost('Slunce Měsíc přitahuje tak silně, že kličky vyrovná.',false,'Rozhodují rychlosti: 1 km/s kolem Země je proti 29,8 km/s kolem Slunce málo na to, aby Měsíc couval.')]},
+      shrnuti:'Pohyby se <b>skládají</b>. Měsíc obíhá Zemi rychlostí asi 1 km/s, Země Slunce 29,8 km/s – dráha Měsíce kolem Slunce je proto jen <b>vlnovka vypouklá ke Slunci</b>.' },
+
+    { id:'sroubovice', nazev:'Vrátí se Země na stejné místo?',
+      predpoved:{
+        otazka:'Slunce se řítí kolem středu Galaxie a planety letí s ním. Vrátí se Země po roce na <b>stejné místo v prostoru</b>?',
+        moznosti:['Ano – oběh je kruh, po roce je zpět','Ne – opisuje šroubovici a na stejné místo se nevrátí','Ne – Země zůstane pozadu a Slunce jí uletí'],
+        spravna:1 },
+      priprava(){ zacni('helix'); },
+      pokus:'V záložce <b>🌀 Let Galaxií</b> sleduj stopy planet aspoň <b>jeden rok</b>. Tažením myši můžeš pohled otočit.',
+      splneno:()=>rezim==='helix'&&cas-start>=ROK,
+      ukaz:{'#rychlost':100},
+      pozorovani:'Planety za letícím Sluncem opisují <b>šroubovice</b>. Za rok Slunce i se Zemí uletí asi 7,3 miliardy km.',
+      vysvetli:{
+        otazka:'Proč se z kruhu stala šroubovice?',
+        moznosti:[
+          moznost('Oběh kolem Slunce se skládá s letem celého Slunce Galaxií. Kruh, který se zároveň posouvá dopředu, dává šroubovici.',true),
+          moznost('Země obíhá Slunce po spirále směrem ven.',false,'Vzdálenost Země od Slunce se nemění. Šroubovice vznikne až tím, že se celé Slunce posouvá.'),
+          moznost('Je to jen efekt kamery.',false,'Stopy ukazují skutečnou dráhu v prostoru. Slunce opravdu letí asi 230 km/s.')]},
+      shrnuti:'Nic ve vesmíru nestojí. Pohyb vždy popisujeme <b>vzhledem k něčemu</b>: vůči Slunci obíhá Země po elipse, vůči Galaxii po šroubovici.' },
+
+    { id:'galakticky', nazev:'Galaktický rok',
+      predpoved:{
+        otazka:'Za jak dlouho oběhne Slunce jednou <b>střed naší Galaxie</b>?',
+        moznosti:['Asi za 1 rok','Asi za 230 milionů let','Asi za 13 miliard let'],
+        spravna:1 },
+      priprava(){ zacni('galaxie'); },
+      pokus:'Přepni na <b>🌌 Oběh Galaxií</b> a prohlédni si čísla vpravo. Kolik galaktických let je staré Slunce?',
+      splneno:()=>rezim==='galaxie'&&performance.now()-vTabu>=2500,
+      ukaz(){ vTabu=performance.now()-2500; },
+      pozorovani:'Jeden <b>galaktický rok trvá asi 230 milionů let</b>. Slunce za svůj život oběhlo Galaxii zhruba <b>20krát</b>.',
+      vysvetli:{
+        otazka:'Proč oběh trvá tak dlouho, když Slunce letí 230 km/s?',
+        moznosti:[
+          moznost('Galaxie je obrovská – Slunce je od středu asi 26 000 světelných let, takže i velkou rychlostí trvá oběh stovky milionů let.',true),
+          moznost('Slunce se cestou zastavuje.',false,'Slunce letí stále asi 230 km/s. Oběh trvá dlouho, protože dráha je nesmírně dlouhá.'),
+          moznost('230 km/s je vlastně pomalu.',false,'230 km/s je 8× víc než Země kolem Slunce. Rozhoduje obrovská vzdálenost od středu Galaxie.')]},
+      shrnuti:'Slunce obíhá střed Mléčné dráhy ve vzdálenosti asi <b>26 000 světelných let</b> rychlostí ~230 km/s. Oběh (<b>galaktický rok</b>) trvá asi 230 milionů let.' },
+  ],
+
+  otazky:[
+    ()=>{ const [co,s]=nahodne([['minutu',60],['hodinu',3600]]);
+      return { otazka:`Země letí kolem Slunce rychlostí <b>29,8 km/s</b>. Kolik kilometrů urazí za <b>${co}</b>?`,
+        moznosti:[moznost(`asi ${cis(29.8*s,0)} km`,true),
+          moznost(`asi ${cis(29.8*s/60,0)} km`,false,`${co==='minutu'?'Minuta má 60 sekund':'Hodina má 3 600 sekund'} – rychlost v km/s se násobí počtem sekund.`),
+          moznost('asi 29,8 km',false,'29,8 km urazí Země za jedinou sekundu.')],
+        vysvetleni:`29,8 km/s · ${s} s ≈ ${cis(29.8*s,0)} km.` }; },
+    { otazka:'Měsíc oběhne Zemi za <b>27,3 dne</b>, ale od úplňku k úplňku uplyne <b>29,5 dne</b>. Proč?',
+      moznosti:[moznost('Země se mezitím posune po dráze kolem Slunce, Měsíc musí kousek „dohnat“, aby byl zase naproti Slunci.',true),
+        moznost('Měsíc se cestou zpomaluje.',false,'Rychlost Měsíce se nemění. Rozdíl vzniká tím, že se mezitím posune Země se Sluncem ve výhledu.'),
+        moznost('Kalendář se pravidelně opravuje.',false,'Kalendář tu nehraje roli – je to důsledek skládání pohybů Měsíce a Země.')],
+      vysvetleni:'Oběh vůči hvězdám 27,3 dne, vůči Slunci (fáze) 29,5 dne.' },
+    { otazka:'Sedíš v klidu v lavici. Pohybuješ se?',
+      moznosti:[moznost('Záleží, vzhledem k čemu: vůči lavici ne, vůči Slunci letím asi 30 km/s.',true),
+        moznost('Ne, stojím úplně v klidu.',false,'V klidu jsi jen vůči lavici. Se Zemí se otáčíš i letíš kolem Slunce.'),
+        moznost('Ano, ale jen kvůli otáčení Země.',false,'K otáčení Země se přidává i oběh kolem Slunce a let Slunce Galaxií.')],
+      vysvetleni:'Pohyb i klid jsou relativní – vždy vzhledem k nějakému tělesu.' },
+    { otazka:'Co je <b>světelný rok</b>?',
+      moznosti:[moznost('Vzdálenost, kterou světlo urazí za rok (asi 9,5 bilionu km)',true),
+        moznost('Doba, za kterou Země oběhne Slunce',false,'To je obyčejný rok. Světelný rok je jednotka délky.'),
+        moznost('Rok, kdy je na obloze nejvíc světla',false,'Světelný rok měří vzdálenost – kolik urazí světlo za rok.')],
+      vysvetleni:'Světelný rok je délka, ne čas.' },
+    { otazka:'Kolik hvězd má naše Galaxie (Mléčná dráha)?',
+      moznosti:[moznost('Stovky miliard',true),
+        moznost('Asi tisíc',false,'Pouhým okem jich na obloze vidíme několik tisíc, ale Galaxie jich má 100–400 miliard.'),
+        moznost('Jen Slunce a planety',false,'Slunce je jen jednou z asi stovek miliard hvězd Galaxie.')],
+      vysvetleni:'100–400 miliard hvězd v disku o průměru ~100 000 světelných let.' },
+    { otazka:'Jak rychle letí Slunce kolem středu Galaxie ve srovnání se Zemí kolem Slunce?',
+      moznosti:[moznost('Asi 8× rychleji (230 km/s proti 30 km/s)',true),
+        moznost('Stejně rychle',false,'Slunce letí asi 230 km/s, Země kolem Slunce 29,8 km/s.'),
+        moznost('Mnohem pomaleji, protože je těžké',false,'Hmotnost rychlost oběhu neurčuje. Slunce letí asi 230 km/s.')],
+      vysvetleni:'230 / 29,8 ≈ 8.' },
+    { otazka:'Jak často vidíme <b>úplněk</b>?',
+      moznosti:[moznost('Asi jednou za 29,5 dne – dvanáctkrát až třináctkrát za rok',true),
+        moznost('Každý týden',false,'Za týden uplyne jen čtvrtina cyklu fází.'),
+        moznost('Jednou za rok',false,'Úplňků je za rok 12–13 – podívej se na počítadlo v záložce Země a Měsíc.')],
+      vysvetleni:'Počítadlo úplňků v modelu ukazuje asi 12,4 úplňku za rok.' },
+    { otazka:'Proč nám nepřipadá, že se řítíme vesmírem rychlostí stovek km/s?',
+      moznosti:[moznost('Pohybujeme se rovnoměrně spolu se Zemí a vším kolem nás – necítíme rychlost, jen změny rychlosti.',true),
+        moznost('Protože se ve skutečnosti nepohybujeme.',false,'Pohybujeme se – vůči Slunci i Galaxii. Jen stálou rychlost tělo nepozná.'),
+        moznost('Atmosféra nás chrání před větrem.',false,'Atmosféra letí se Zemí. Rovnoměrný pohyb se nedá pocítit ani bez ní.')],
+      vysvetleni:'Setrvačnost: v rovnoměrně jedoucím vlaku také můžeš v klidu nalít čaj.' },
+  ],
+});
+})();
 </script>
 </body>
 </html>

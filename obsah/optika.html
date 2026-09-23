@@ -1230,5 +1230,128 @@ function prepinace(){
 }
 prepinace();
 </script>
+<script src="../badani.js"></script>
+<script>
+/* Úkoly k modelu (badani.js): předpověz → vyzkoušej → vysvětli.
+   Lom ke kolmici, úplný odraz, obraz spojky; otázky i k hranolu a dalekohledu. */
+(function(){
+const N=Badani.nastav, cislo=Badani.cislo;
+const nahodne=p=>p[Math.floor(Math.random()*p.length)];
+const moznost=(t,ok,proc)=>({t,ok,proc});
+const VZDUCH='1.0003', VODA='1.333';
+const jeVzduch=n=>Math.abs(n-1.0003)<1e-6, jeVoda=n=>Math.abs(n-1.333)<1e-6;
+
+Badani.start({
+  nad:'#stav',
+  ukoly:[
+    { id:'lom', nazev:'Ze vzduchu do vody',
+      predpoved:{
+        otazka:'Paprsek dopadá ze vzduchu na vodní hladinu pod úhlem <b>40°</b> (od kolmice). Kam se po vstupu do vody odkloní?',
+        moznosti:['Ke kolmici – úhel lomu bude menší než 40°','Od kolmice – úhel lomu bude větší než 40°','Nikam – půjde dál rovně'],
+        spravna:0 },
+      priprava(){ prepni('lom'); N({'#zdola':false,'#ukazOdraz':true,'#n1':VZDUCH,'#n2':VZDUCH,'#uhel':40}); },
+      pokus:'Teď je nahoře i dole vzduch a paprsek jde rovně. Přepni <b>dolní prostředí na vodu</b> a porovnej úhel lomu s úhlem dopadu 40°.',
+      splneno:()=>rezim==='lom'&&!lom.zdola&&jeVzduch(lom.n1)&&jeVoda(lom.n2)&&lom.uhel===40,
+      ukaz:{'#n2':VODA},
+      pozorovani:()=>`Úhel lomu je <b>${cislo(lom.vysledek().th2*DEG,1)}°</b> – menší než 40°, paprsek se ve vodě lomí ke kolmici.`,
+      vysvetli:{
+        otazka:'Proč se paprsek ve vodě lomí ke kolmici?',
+        moznosti:[
+          moznost('Ve vodě se světlo šíří pomaleji než ve vzduchu (má větší index lomu). Při přechodu do opticky hustšího prostředí se lomí ke kolmici.',true),
+          moznost('Voda je těžší než vzduch, a tak paprsek přitahuje dolů.',false,'Hmotnost vody tu nehraje roli. Rozhoduje rychlost světla v prostředí – index lomu n.'),
+          moznost('Paprsek se od hladiny odrazí, a proto jde dolů strměji.',false,'Odražený paprsek zůstává nad hladinou (úhel odrazu = úhel dopadu). Do vody pokračuje paprsek lomený.')]},
+      shrnuti:'Do opticky <b>hustšího</b> prostředí (větší n) se světlo lomí <b>ke kolmici</b>, do řidšího <b>od kolmice</b>. Úhel odrazu se vždy rovná úhlu dopadu.' },
+
+    { id:'uplny', nazev:'Úplný odraz',
+      predpoved:{
+        otazka:'Paprsek teď jde <b>z vody do vzduchu</b>. Co se stane, když budeš úhel dopadu postupně zvětšovat až k 60°?',
+        moznosti:['Paprsek vždycky projde do vzduchu, jen se zlomí víc','Od určitého úhlu už do vzduchu neprojde a celý se odrazí zpět do vody','Začne se lámat ke kolmici'],
+        spravna:1 },
+      priprava(){ prepni('lom'); N({'#n1':VZDUCH,'#n2':VODA,'#zdola':true,'#ukazOdraz':true,'#uhel':20}); },
+      pokus:'Zvětšuj <b>úhel dopadu</b> (posuvník, šipky nebo tažení za 🔦 zdroj), až lomený paprsek zmizí. Při jakém úhlu se to stane?',
+      splneno:()=>rezim==='lom'&&lom.zdola&&jeVzduch(lom.n1)&&jeVoda(lom.n2)&&lom.vysledek().uplny,
+      ukaz:{'#uhel':55},
+      pozorovani:()=>`Nad <b>mezním úhlem ${cislo(lom.vysledek().mezni,1)}°</b> lomený paprsek zmizel a všechno světlo se odráží zpět do vody – nastal úplný odraz.`,
+      vysvetli:{
+        otazka:'Proč světlo nad mezním úhlem z vody nevyjde?',
+        moznosti:[
+          moznost('Z hustšího prostředí se světlo lomí od kolmice. Nad mezním úhlem by úhel lomu musel přesáhnout 90°, a tak se všechno světlo odrazí.',true),
+          moznost('Voda světlo při velkém úhlu pohltí.',false,'Světlo nezmizí – v modelu je vidět, že se celé odrazí zpátky do vody.'),
+          moznost('Úplný odraz nastane při každém přechodu z vody do vzduchu.',false,'Jen nad mezním úhlem (u vody asi 49°). Pod ním část světla do vzduchu prochází – vyzkoušej menší úhel.')]},
+      shrnuti:'<b>Úplný odraz</b> nastává jen při přechodu do opticky řidšího prostředí a nad <b>mezním úhlem</b> (voda asi 49°, sklo asi 41°). Využívají ho optická vlákna.' },
+
+    { id:'spojka', nazev:'Obraz ze spojky',
+      predpoved:{
+        otazka:'Svíčka stojí <b>30 cm</b> před spojkou s ohniskovou vzdáleností <b>12 cm</b> a za čočkou vzniká malý převrácený obraz. Co se s obrazem stane, když svíčku posuneš blíž – na <b>18 cm</b>?',
+        moznosti:['Zmenší se a přiblíží k čočce','Zvětší se a vzdálí od čočky','Nezmění se – záleží jen na čočce'],
+        spravna:1 },
+      priprava(){ prepni('cocka'); N({'#typ':'spojka','#f':12,'#a':30,'#vys':6,'#ukazVse':false}); },
+      pokus:'Posuň předmět na vzdálenost <b>18 cm</b> (posuvník nebo tažení za hrot svíčky) a sleduj polohu a velikost obrazu.',
+      splneno:()=>rezim==='cocka'&&cocka.typ==='spojka'&&cocka.f===12&&cocka.a===18,
+      ukaz:{'#a':18},
+      pozorovani:()=>{ const o=cocka.obraz(); return `Obraz je <b>${cislo(o.a2,0)} cm</b> za čočkou (dřív 20 cm), převrácený a <b>${cislo(Math.abs(o.z),1)}× zvětšený</b> (dřív 0,7×).`; },
+      vysvetli:{
+        otazka:'Proč se obraz při přiblížení předmětu zvětšil a vzdálil?',
+        moznosti:[
+          moznost('Podle rovnice 1/a + 1/a′ = 1/f: když se předmět blíží k ohnisku, musí vzdálenost obrazu a′ růst – a se vzdáleností roste i zvětšení Z = a′/a.',true),
+          moznost('Bližší věci jsou vždycky větší, stejně jako při pohledu okem.',false,'Tady nejde o to, jak velký se předmět zdá oku, ale o skutečný obraz za čočkou. Zvětšení určuje poměr a′/a.'),
+          moznost('Spojka zvětšuje pořád stejně, jen se obraz posunul.',false,'Při 30 cm byl obraz zmenšený (0,7×), při 18 cm zvětšený (2×). Zvětšení závisí na poloze předmětu.')]},
+      shrnuti:'Spojka: předmět za 2F → obraz <b>zmenšený</b> a převrácený (fotoaparát), mezi F a 2F → <b>zvětšený</b> a převrácený (projektor), blíž než F → <b>zdánlivý</b>, vzpřímený a zvětšený (lupa).' },
+  ],
+
+  otazky:[
+    ()=>{ const a=nahodne([20,25,35,50,65]);
+      return { otazka:`Paprsek dopadá na rovinné zrcadlo pod úhlem <b>${a}°</b> od kolmice. Pod jakým úhlem od kolmice se odrazí?`,
+        moznosti:[moznost(`${a}°`,true),
+          moznost(`${90-a}°`,false,'Úhly se měří od kolmice, ne od plochy zrcadla. Úhel odrazu = úhel dopadu.'),
+          moznost(`${2*a}°`,false,`O ${2*a}° se paprsek celkem stočí, ale úhel odrazu od kolmice je stejný jako úhel dopadu.`)],
+        vysvetleni:'Zákon odrazu: úhel odrazu se rovná úhlu dopadu (oba od kolmice).' }; },
+    { otazka:'Paprsek vychází ze <b>skla do vzduchu</b>. Jak se na rozhraní zlomí?',
+      moznosti:[moznost('Od kolmice',true),
+        moznost('Ke kolmici',false,'Ke kolmici se světlo lomí při vstupu do hustšího prostředí. Vzduch je opticky řidší než sklo.'),
+        moznost('Nezlomí se',false,'Sklo a vzduch mají různý index lomu (1,52 a 1,00), takže se šikmý paprsek zlomí.')],
+      vysvetleni:'Do opticky řidšího prostředí se světlo lomí od kolmice.' },
+    { otazka:'Ve kterém prostředí se světlo šíří <b>nejpomaleji</b>?',
+      moznosti:[moznost('V diamantu (n = 2,42)',true),
+        moznost('Ve vodě (n = 1,33)',false,'Čím větší index lomu, tím pomalejší světlo. Diamant má n = 2,42, voda jen 1,33.'),
+        moznost('Ve vzduchu (n = 1,00)',false,'Ve vzduchu je světlo skoro stejně rychlé jako ve vakuu – nejrychlejší ze všech.')],
+      vysvetleni:'Index lomu n = c / v: kolikrát je světlo v látce pomalejší než ve vakuu.' },
+    ()=>{ const f=10, typ=nahodne(['daleko','mezi','blizko']);
+      const a={daleko:nahodne([25,30,40]),mezi:nahodne([13,15,17]),blizko:nahodne([4,6,8])}[typ];
+      const T={daleko:'skutečný, převrácený a zmenšený',mezi:'skutečný, převrácený a zvětšený',blizko:'zdánlivý, vzpřímený a zvětšený'};
+      const P={daleko:'Předmět je dál než 2F (20 cm) – obraz je zmenšený.',mezi:'Předmět leží mezi F a 2F – obraz je zvětšený a převrácený.',blizko:'Předmět je blíž než ohnisko – spojka pracuje jako lupa.'};
+      return { otazka:`Předmět stojí <b>${a} cm</b> před spojkou s ohniskovou vzdáleností <b>${f} cm</b>. Jaký vznikne obraz?`,
+        moznosti:Object.keys(T).map(k=>moznost(T[k],k===typ,P[typ])),
+        vysvetleni:P[typ], poradi:true }; },
+    { otazka:'Kam musíš dát předmět, aby spojka fungovala jako <b>lupa</b>?',
+      moznosti:[moznost('Blíž k čočce, než je ohnisko',true),
+        moznost('Dál, než je dvojnásobek ohniskové vzdálenosti',false,'Tam vznikne skutečný zmenšený obraz – tak pracuje fotoaparát, ne lupa.'),
+        moznost('Přesně do ohniska',false,'Z ohniska vycházejí paprsky za čočkou rovnoběžně a obraz nevznikne vůbec.')],
+      vysvetleni:'Předmět před ohniskem dává zdánlivý, vzpřímený a zvětšený obraz.' },
+    { otazka:'Jaký obraz vytvoří <b>rozptylka</b>?',
+      moznosti:[moznost('Vždy zdánlivý, vzpřímený a zmenšený',true),
+        moznost('Skutečný a převrácený, jako spojka',false,'Rozptylka paprsky rozptyluje, takže se za ní nikdy neprotnou – skutečný obraz nevznikne.'),
+        moznost('Podle vzdálenosti předmětu zmenšený i zvětšený',false,'To platí pro spojku. Rozptylka dává vždy zmenšený obraz – vyzkoušej v záložce 🔍 Čočky a zrcadla.')],
+      vysvetleni:'Rozptylka (i vypuklé zrcadlo) dává vždy zdánlivý zmenšený obraz – například zpětné zrcátko.' },
+    { otazka:'Proč hranol rozloží bílé světlo na barvy?',
+      moznosti:[moznost('Každá barva má ve skle trochu jiný index lomu – fialová se láme nejvíc, červená nejméně.',true),
+        moznost('Sklo hranolu je jemně obarvené.',false,'Hranol je z čirého skla. Barvy už v bílém světle jsou, hranol je jen rozdělí.'),
+        moznost('Hranol k bílému světlu barvy přidá.',false,'Nic se nepřidává: bílé světlo je směs barev a hranol je díky různému lomu rozloží.')],
+      vysvetleni:'Rozklad světla podle barev se jmenuje disperze – tak vzniká i duha v kapkách vody.' },
+    { otazka:'Kde se využívá <b>úplný odraz</b>?',
+      moznosti:[moznost('V optických vláknech',true),
+        moznost('V brýlích pro krátkozraké',false,'Brýle pro krátkozraké jsou rozptylky – využívají lom, ne úplný odraz.'),
+        moznost('V obyčejném zrcadle v koupelně',false,'Zrcadlo odráží díky tenké kovové vrstvě. Úplný odraz nastává na rozhraní dvou průhledných prostředí.')],
+      vysvetleni:'Světlo ve vláknu dopadá na stěnu nad mezním úhlem, a tak se odráží dál i v ohybech.' },
+    ()=>{ const f2=nahodne([2,4,5,10]), Z=nahodne([6,10,12,20]), f1=f2*Z;
+      return { otazka:`Keplerův dalekohled má objektiv s ohniskovou vzdáleností <b>f₁ = ${f1} cm</b> a okulár <b>f₂ = ${f2} cm</b>. Jaké má úhlové zvětšení?`,
+        moznosti:[moznost(`${Z}×`,true),
+          moznost(`${f1*f2}×`,false,'Zvětšení je podíl ohniskových vzdáleností, ne součin: Z = f₁ / f₂.'),
+          moznost(`${f1+f2}×`,false,`Součet ${f1+f2} cm je délka dalekohledu (vzdálenost čoček), ne zvětšení. Z = f₁ / f₂.`)],
+        vysvetleni:`Z = f₁ / f₂ = ${f1} / ${f2} = ${Z}.` }; },
+  ],
+});
+})();
+</script>
 </body>
 </html>

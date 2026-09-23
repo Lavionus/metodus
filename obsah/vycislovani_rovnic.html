@@ -5,63 +5,107 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Vyčíslování chemických rovnic</title>
   <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="../vyuka.css">
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
+  <script src="../uloha.js" defer></script>
+  <script src="../procvic.js" defer></script>
   <style>
-    body { background-color: var(--bg-deep); padding: 24px clamp(14px, 3vw, 40px); min-height: 100vh; }
-    h1 { font-size: 1.4rem; margin-bottom: 4px; }
-    .podtitul { color: var(--text-muted); font-size: 0.88rem; margin-bottom: 16px; max-width: 720px; }
-    .karta { background: var(--bg-panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 26px 24px; max-width: 720px; }
-    .rovnice { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; font-size: clamp(1.3rem, 5vw, 1.9rem); justify-content: center; margin-bottom: 22px; }
-    .clen { display: inline-flex; align-items: baseline; }
+    [hidden] { display: none !important; }
+    .podtitul { max-width: 760px; }
+    .druh { display: block; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-faint); }
+
+    /* rovnice s políčky pro koeficienty */
+    .rovnice { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 4px; font-size: clamp(1.25rem, 4.6vw, 1.8rem); font-weight: 600; }
+    .clen { display: inline-flex; align-items: baseline; white-space: nowrap; }
     .clen input {
-      width: 52px; background: var(--bg-input); border: 2px solid var(--border-strong); border-radius: 6px;
-      color: var(--accent); font-size: 1.3rem; font-weight: 700; text-align: center; padding: 4px; margin-right: 2px;
+      width: 3.1rem; background: var(--bg-input); border: 2px solid var(--border-strong); border-radius: 6px;
+      color: var(--accent); font: inherit; font-size: 1.2rem; font-weight: 700; text-align: center; padding: 3px 2px; margin-right: 3px;
+      -moz-appearance: textfield;
     }
+    .clen input::-webkit-inner-spin-button, .clen input::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+    .clen input::placeholder { color: var(--text-faint); font-weight: 400; }
     .clen input:focus { outline: none; border-color: var(--accent); }
-    .clen input.ok { border-color: var(--ok); color: var(--ok); }
-    .clen input.spatne { border-color: var(--danger); color: var(--danger); }
+    .clen .koef { color: var(--accent); margin-right: 4px; }
     .vzorec sub { font-size: 62%; }
     .op { margin: 0 6px; color: var(--text-muted); }
     .sipka { margin: 0 10px; color: var(--accent); }
-    .ovladani { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
-    .ovladani button { border: none; border-radius: 8px; padding: 10px 20px; font-size: 0.92rem; font-weight: 600; cursor: pointer; }
-    .btn-hlavni { background: var(--accent); color: var(--na-akcentu, #fff); }
-    .btn-hlavni:hover { background: var(--accent-hover); }
-    .btn-vedle { background: var(--bg-control); color: var(--text); border: 1px solid var(--border-strong) !important; }
-    .zprava { text-align: center; margin-top: 16px; min-height: 1.5rem; font-size: 1rem; }
-    .zprava.ok { color: var(--ok); } .zprava.spatne { color: var(--danger); }
-    .stav { display: flex; justify-content: space-between; max-width: 720px; margin-top: 12px; color: var(--text-muted); font-size: 0.9rem; }
-    .serie { color: var(--warn); }
-    .napoveda { max-width: 720px; margin-top: 10px; font-size: 0.85rem; color: var(--text-faint); line-height: 1.6; }
+    .rovnice.spatne .clen input { border-color: var(--danger); }
+    .rovnice.spravne .clen input { border-color: var(--ok); }
+
+    /* bilance atomů – živě se přepočítává */
+    .bilance { border-collapse: collapse; margin: 12px auto 0; font-size: 0.95rem; font-variant-numeric: tabular-nums; }
+    .bilance th, .bilance td { padding: 4px 14px; text-align: center; border-bottom: 1px solid var(--border); }
+    .bilance th { color: var(--text-faint); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; }
+    .bilance td.prvek { font-weight: 700; }
+    .bilance td.stav { font-weight: 700; }
+    .bilance tr.sedi td.stav { color: var(--ok-text); }
+    .bilance tr.nesedi td.stav { color: var(--danger-text); }
+    .bilance-pozn { font-size: 0.88rem; color: var(--text-muted); min-height: 1.3em; margin-top: 6px; max-width: 520px; }
+    .tlacitka-rovnice { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-top: 10px; }
+    .tlacitka-rovnice button {
+      border-radius: 8px; padding: 9px 16px; font-size: 0.92rem; font-weight: 600; font-family: inherit; cursor: pointer;
+      background: var(--bg-control); color: var(--text); border: 1px solid var(--border-strong);
+    }
+    .tlacitka-rovnice button.hlavni { background: var(--accent); border-color: var(--accent); color: var(--na-akcentu, #fff); }
+    .tip-rovnice { font-size: 0.9rem; color: var(--text-muted); max-width: 520px; }
+    .prehled-chyb .druh { display: none; }
+
+    /* výuka: postup krok za krokem */
+    .vyuka-karta { background: var(--bg-panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px 22px; max-width: var(--sirka-obsahu, 900px); }
+    .vyuka-karta h2 { font-size: 1.1rem; margin-bottom: 8px; }
+    .pravidla { margin: 0 0 14px 20px; color: var(--text-muted); line-height: 1.6; font-size: 0.95rem; }
+    .pravidla b { color: var(--text); }
+    .priklad { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 14px; padding: 16px; text-align: center; }
+    .krok-cislo { font-size: 0.72rem; letter-spacing: 0.1em; color: var(--accent); font-weight: 700; text-transform: uppercase; }
+    .krok-text { color: var(--text); font-size: 1rem; line-height: 1.55; margin: 6px auto 10px; max-width: 620px; }
+    .krok-tlacitka { display: flex; gap: 8px; justify-content: center; margin-top: 12px; }
+    .krok-tlacitka button {
+      border-radius: 8px; padding: 9px 16px; font-size: 0.92rem; font-weight: 600; font-family: inherit; cursor: pointer;
+      background: var(--bg-control); color: var(--text); border: 1px solid var(--border-strong);
+    }
+    .krok-tlacitka button.hlavni { background: var(--accent); border-color: var(--accent); color: var(--na-akcentu, #fff); }
+    .krok-tlacitka button:disabled { opacity: 0.45; cursor: default; }
+    .koef-novy { background: var(--accent-soft); border-radius: 5px; padding: 0 3px; }
   </style>
 </head>
 <body>
   <h1>🧪 Vyčíslování chemických rovnic</h1>
-  <p class="podtitul">Doplň stechiometrické koeficienty tak, aby počet atomů každého prvku byl vlevo i vpravo stejný (8.–9. ročník ZŠ, SŠ). Koeficient 1 se nechává, ale zapiš ho.</p>
+  <p class="podtitul">Doplň stechiometrické koeficienty tak, aby počet atomů každého prvku byl vlevo i vpravo stejný. Tabulka pod rovnicí průběžně počítá atomy na obou stranách. 8.–9. ročník ZŠ, SŠ.</p>
 
-  <div class="karta" data-kostra-odpovedi>
-    <div class="rovnice" id="rovnice"></div>
-    <div class="ovladani">
-      <button class="btn-hlavni" id="btnZkontrolovat">✔️ Zkontrolovat</button>
-      <button class="btn-vedle" id="btnNapoveda">💡 Nápověda</button>
-      <button class="btn-vedle" id="btnDalsi">Přeskočit →</button>
-    </div>
-    <div class="zprava" id="zprava"></div>
+  <div class="rezimy" id="rezimy">
+    <button data-rezim="postup" data-faze="vyuka" class="active">📖 Jak na to</button>
+    <button data-rezim="lehke">🟢 Lehčí rovnice</button>
+    <button data-rezim="tezke">🔴 Těžší rovnice</button>
+    <button data-rezim="vse">🔀 Všechny</button>
   </div>
-  <div class="stav">
-    <span class="serie" id="serie"></span>
-    <span id="skore"></span>
+
+  <div class="vyuka-karta" id="vyuka">
+    <h2>Pravidla</h2>
+    <ul class="pravidla">
+      <li>Atomy při reakci nevznikají ani nemizí – každého prvku musí být <b>vlevo stejně jako vpravo</b>.</li>
+      <li>Měníš jen <b>koeficienty</b> před látkami, nikdy indexy ve vzorci: z H₂O nesmíš udělat H₂O₂, to je jiná látka.</li>
+      <li>Koeficient násobí <b>celou látku</b>, i skupinu v závorce: 2 Ca(OH)₂ = 2 Ca, 4 O, 4 H.</li>
+      <li>Koeficienty mají být <b>nejmenší celá čísla</b>; jednička se nepíše.</li>
+    </ul>
+    <div class="priklad" id="priklad"></div>
   </div>
-  <div class="napoveda">Tip: začni prvkem, který je jen v jedné látce vlevo a jedné vpravo. Vodík a kyslík dolaď nakonec.</div>
+
+  <div class="plocha" id="plocha" hidden></div>
+  <div class="ovladani" id="ovladani" hidden>
+    <button class="hlavni" id="startBtn">🔄 Nová série</button>
+    <span class="pokrok" id="pokrok"></span>
+    <span class="skore" id="skore"></span>
+  </div>
+
+  <p class="napoveda">Postup: <b>1.</b> spočítej atomy vlevo a vpravo, <b>2.</b> začni prvkem, který je jen v jedné látce na každé straně (kov, uhlík), <b>3.</b> vodík a kyslík dolaď nakonec, <b>4.</b> když ti u kyslíku vychází polovina (O₂), vynásob všechny koeficienty dvěma, <b>5.</b> zkontroluj všechny prvky a zkrať, jde-li to. Prázdné políčko znamená koeficient 1.</p>
 
 <script>
 const $ = id => document.getElementById(id);
 
-// reaktanty a produkty: [vzorec, správný koeficient]
+// reaktanty a produkty: [vzorec, správný koeficient] – nejmenší celá čísla
 const ROVNICE = [
-  { r: [['H2', 1], ['O2', 1]], p: [['H2O', 2]] },
   { r: [['H2', 2], ['O2', 1]], p: [['H2O', 2]] },
   { r: [['N2', 1], ['H2', 3]], p: [['NH3', 2]] },
   { r: [['Fe', 4], ['O2', 3]], p: [['Fe2O3', 2]] },
@@ -80,74 +124,172 @@ const ROVNICE = [
   { r: [['Fe', 2], ['Cl2', 3]], p: [['FeCl3', 2]] },
   { r: [['H2O2', 2]], p: [['H2O', 2], ['O2', 1]] },
   { r: [['P4', 1], ['O2', 5]], p: [['P2O5', 2]] },
+  { r: [['Fe', 3], ['O2', 2]], p: [['Fe3O4', 1]] },
   { r: [['C2H6', 2], ['O2', 7]], p: [['CO2', 4], ['H2O', 6]] },
+  { r: [['Na', 2], ['H2O', 2]], p: [['NaOH', 2], ['H2', 1]] },
+  { r: [['Ca', 1], ['H2O', 2]], p: [['Ca(OH)2', 1], ['H2', 1]] },
+  { r: [['Al', 2], ['HCl', 6]], p: [['AlCl3', 2], ['H2', 3]] },
+  { r: [['CuO', 1], ['H2', 1]], p: [['Cu', 1], ['H2O', 1]] },
+  { r: [['NH3', 4], ['O2', 5]], p: [['NO', 4], ['H2O', 6]] },
+  { r: [['C6H12O6', 1], ['O2', 6]], p: [['CO2', 6], ['H2O', 6]] },
+  { r: [['C4H10', 2], ['O2', 13]], p: [['CO2', 8], ['H2O', 10]] },
+  { r: [['NaOH', 2], ['H2SO4', 1]], p: [['Na2SO4', 1], ['H2O', 2]] },
+  { r: [['Ca(OH)2', 1], ['HCl', 2]], p: [['CaCl2', 1], ['H2O', 2]] },
+  { r: [['Fe2O3', 1], ['CO', 3]], p: [['Fe', 2], ['CO2', 3]] },
+  { r: [['C2H5OH', 1], ['O2', 3]], p: [['CO2', 2], ['H2O', 3]] },
 ];
+// lehčí: nejvýš tři látky a malé koeficienty
+const lehka = q => q.r.length + q.p.length <= 3 && [...q.r, ...q.p].every(([, k]) => k <= 4);
 
-let aktualni = null, spravne = 0, celkem = 0, serie = 0, poradi = -1, hotovo = false;
+const vzorecHtml = v => v.replace(/(\d+)/g, '<sub>$1</sub>');
+const vzorecText = v => v.replace(/\d/g, d => '₀₁₂₃₄₅₆₇₈₉'[d]);
+const gcd = (a, b) => b ? gcd(b, a % b) : a;
 
-function vzorecHtml(v) {
-  return v.replace(/(\d+)/g, '<sub>$1</sub>');
-}
-function postavClen(vzorec, i, strana) {
-  return `<span class="clen"><input type="number" min="1" max="30" data-strana="${strana}" data-i="${i}" autocomplete="off">` +
-    `<span class="vzorec">${vzorecHtml(vzorec)}</span></span>`;
-}
-let otazkaKostry = {};
-function nova() {
-  let i;
-  do { i = Math.floor(Math.random() * ROVNICE.length); } while (i === poradi && ROVNICE.length > 1);
-  poradi = i; aktualni = ROVNICE[i]; hotovo = false;
-  otazkaKostry = {};   // společná kostra – jedna otázka = jeden objekt
-  const r = aktualni.r.map(([v], k) => postavClen(v, k, 'r')).join('<span class="op">+</span>');
-  const p = aktualni.p.map(([v], k) => postavClen(v, k, 'p')).join('<span class="op">+</span>');
-  $('rovnice').innerHTML = r + '<span class="sipka">→</span>' + p;
-  $('zprava').textContent = ''; $('zprava').className = 'zprava';
-  $('skore').textContent = spravne + ' / ' + celkem;
-  $('btnZkontrolovat').textContent = '✔️ Zkontrolovat';
-  const prvni = $('rovnice').querySelector('input'); if (prvni) prvni.focus();
-  window.Kostra?.otazka();
-}
-function vstupy() { return [...$('rovnice').querySelectorAll('input')]; }
-function koef(strana, i) { return strana === 'r' ? aktualni.r[i][1] : aktualni.p[i][1]; }
-
-function zkontroluj() {
-  if (hotovo) { nova(); return; }
-  const ins = vstupy();
-  if (ins.some(x => x.value.trim() === '')) { $('zprava').textContent = 'Doplň všechny koeficienty.'; $('zprava').className = 'zprava spatne'; return; }
-  // porovnání s nejmenším celočíselným řešením (uživatel může zadat i násobek – zkontrolujeme poměr)
-  const zadane = ins.map(x => Number(x.value));
-  const spravneKoef = ins.map(x => koef(x.dataset.strana, +x.dataset.i));
-  const nasobek = zadane[0] / spravneKoef[0];
-  const ok = Number.isFinite(nasobek) && nasobek > 0 &&
-    zadane.every((z, k) => Math.abs(z - spravneKoef[k] * nasobek) < 1e-9);
-  celkem++; hotovo = true;
-  window.Kostra?.odpoved(ok, otazkaKostry);
-  ins.forEach((x, k) => x.classList.add(ok ? 'ok' : 'spatne'));
-  if (ok) {
-    spravne++; serie++;
-    $('zprava').textContent = nasobek === 1 ? '✅ Správně vyčísleno!' : '✅ Správně (zapsal(a) jsi ' + nasobek + '× základní řešení).';
-    $('zprava').className = 'zprava ok';
-  } else {
-    serie = 0;
-    $('zprava').innerHTML = '❌ Zatím nesedí. Správné řešení: ' + spravneKoef.join(', ') + '.';
-    $('zprava').className = 'zprava spatne';
+// počty atomů ve vzorci, i se závorkami: Ca(OH)2 → { Ca: 1, O: 2, H: 2 }
+function atomy(v) {
+  const z = [{}];
+  for (const m of v.matchAll(/([A-Z][a-z]?|\(|\))(\d*)/g)) {
+    const n = +(m[2] || 1);
+    if (m[1] === '(') z.push({});
+    else if (m[1] === ')') { const s = z.pop(); for (const k in s) z.at(-1)[k] = (z.at(-1)[k] || 0) + s[k] * n; }
+    else z.at(-1)[m[1]] = (z.at(-1)[m[1]] || 0) + n;
   }
-  $('serie').textContent = serie >= 3 ? '🔥 série ' + serie : '';
-  $('skore').textContent = spravne + ' / ' + celkem;
-  $('btnZkontrolovat').textContent = 'Pokračovat →';
+  return z[0];
 }
-function napovez() {
-  const ins = vstupy();
-  const prazdne = ins.filter(x => x.value.trim() === '');
-  const cil = prazdne.length ? prazdne[0] : ins[0];
-  cil.value = koef(cil.dataset.strana, +cil.dataset.i);
-  cil.classList.add('ok');
+// prvky v pořadí, jak se v rovnici objeví
+const prvky = q => [...new Set([...q.r, ...q.p].flatMap(([v]) => Object.keys(atomy(v))))];
+function soucet(strana, koef) {
+  const c = {};
+  strana.forEach(([v], i) => { for (const [e, n] of Object.entries(atomy(v))) c[e] = (c[e] || 0) + n * koef[i]; });
+  return c;
 }
-$('btnZkontrolovat').onclick = zkontroluj;
-$('btnDalsi').onclick = nova;
-$('btnNapoveda').onclick = napovez;
-$('rovnice').addEventListener('keydown', e => { if (e.key === 'Enter') zkontroluj(); });
-nova();
+const rovniceText = (q, koef = null) => [q.r, q.p].map((s, si) => s.map(([v, k], i) => {
+  const c = koef ? koef[si][i] : k;
+  return (c === 1 ? '' : c + ' ') + vzorecText(v);
+}).join(' + ')).join(' → ');
+
+// tabulka bilance: prvek | vlevo | vpravo | stav
+function bilanceHtml(q, kr, kp) {
+  const L = soucet(q.r, kr), R = soucet(q.p, kp);
+  return '<table class="bilance"><thead><tr><th>Prvek</th><th>Vlevo</th><th>Vpravo</th><th></th></tr></thead><tbody>'
+    + prvky(q).map(e => {
+      const ok = L[e] === R[e];
+      return `<tr class="${ok ? 'sedi' : 'nesedi'}"><td class="prvek">${e}</td><td>${L[e] || 0}</td><td>${R[e] || 0}</td>`
+        + `<td class="stav">${ok ? '✓' : L[e] < R[e] ? '← málo' : 'málo →'}</td></tr>`;
+    }).join('') + '</tbody></table>';
+}
+const sedi = (q, kr, kp) => { const L = soucet(q.r, kr), R = soucet(q.p, kp); return prvky(q).every(e => L[e] === R[e]); };
+
+/* ---- výuka: CH4 + O2 → CO2 + H2O krok za krokem ---- */
+const VZOR = ROVNICE.find(q => q.r[0][0] === 'CH4');
+const KROKY = [
+  { k: [[1, 1], [1, 1]], nove: [], text: 'Nejdřív spočítej atomy. Uhlík sedí (1 : 1), ale vodíku jsou vlevo 4 a vpravo jen 2 a kyslíku vlevo 2, vpravo 3.' },
+  { k: [[1, 1], [1, 2]], nove: [[1, 1]], text: 'Vodík je vpravo jen ve vodě. Dvě molekuly H₂O mají 4 atomy H – napiš <b>2 před H₂O</b>. Uhlík a vodík už sedí.' },
+  { k: [[1, 2], [1, 2]], nove: [[0, 1]], text: 'Kyslík nakonec: vpravo je 2 (v CO₂) + 2 (ve 2 H₂O) = 4 atomy. Molekula O₂ má dva, takže potřebuješ <b>2 O₂</b>.' },
+  { k: [[1, 2], [1, 2]], nove: [], text: 'Kontrola: C 1 = 1, H 4 = 4, O 4 = 4. Koeficienty 1, 2, 1, 2 nejdou dál zkrátit – rovnice je vyčíslená: <b>CH₄ + 2 O₂ → CO₂ + 2 H₂O</b>.' },
+];
+let krok = 0;
+function vykresliKrok() {
+  const s = KROKY[krok];
+  const strana = (latky, si) => latky.map(([v], i) => {
+    const c = s.k[si][i], novy = s.nove.some(([a, b]) => a === si && b === i);
+    return `<span class="clen">${c > 1 ? `<span class="koef${novy ? ' koef-novy' : ''}">${c}</span>` : ''}<span class="vzorec">${vzorecHtml(v)}</span></span>`;
+  }).join('<span class="op">+</span>');
+  $('priklad').innerHTML = `<div class="krok-cislo">Krok ${krok + 1} z ${KROKY.length}</div>`
+    + `<div class="rovnice">${strana(VZOR.r, 0)}<span class="sipka">→</span>${strana(VZOR.p, 1)}</div>`
+    + bilanceHtml(VZOR, s.k[0], s.k[1])
+    + `<p class="krok-text">${s.text}</p>`
+    + `<div class="krok-tlacitka"><button id="krokZpet" ${krok ? '' : 'disabled'}>← Zpět</button>`
+    + (krok < KROKY.length - 1 ? '<button class="hlavni" id="krokDal">Další krok →</button>' : '<button class="hlavni" id="krokZkus">Vyzkoušej si to →</button>') + '</div>';
+  $('krokZpet').onclick = () => { krok--; vykresliKrok(); };
+  if ($('krokDal')) $('krokDal').onclick = () => { krok++; vykresliKrok(); };
+  if ($('krokZkus')) $('krokZkus').onclick = () => $('rezimy').querySelector('[data-rezim="lehke"]').click();
+}
+vykresliKrok();
+
+/* ---- série ---- */
+let rezim = 'postup', posledni = null;
+
+// úloha s vlastním vstupem: políčka pro koeficienty + živá bilance
+function uloha(q) {
+  let vstupy = [], rovniceEl = null;
+  const koef = () => {
+    const h = vstupy.map(x => x.value.trim() === '' ? 1 : Math.round(Number(x.value)));
+    return [h.slice(0, q.r.length), h.slice(q.r.length)];
+  };
+  const platne = () => vstupy.every(x => x.value.trim() === '' || (Number.isInteger(+x.value) && +x.value >= 1));
+  // nejmenší celá čísla – násobek řešení se nepočítá, ale bilance na něj upozorní
+  const nejmensi = () => { const [kr, kp] = koef(); return [...kr, ...kp].reduce(gcd) === 1; };
+  return {
+    vykresli(karta, potvrd) {
+      const strana = (latky, si) => latky.map(([v], i) =>
+        `<span class="clen"><input type="number" min="1" max="30" inputmode="numeric" placeholder="1" aria-label="koeficient před ${vzorecText(v)}" data-i="${si ? q.r.length + i : i}">`
+        + `<span class="vzorec">${vzorecHtml(v)}</span></span>`).join('<span class="op">+</span>');
+      const obal = document.createElement('div');
+      obal.innerHTML = `<div class="rovnice">${strana(q.r, 0)}<span class="sipka">→</span>${strana(q.p, 1)}</div>`
+        + '<div class="bilance-obal"></div><div class="bilance-pozn" aria-live="polite"></div>'
+        + '<div class="tlacitka-rovnice"><button class="hlavni" type="button">✔️ Zkontrolovat</button><button type="button" class="tip">💡 Kde začít?</button></div>'
+        + '<div class="tip-rovnice"></div>';
+      karta.appendChild(obal);
+      rovniceEl = obal.querySelector('.rovnice');
+      vstupy = [...obal.querySelectorAll('input')];
+      const obnov = () => {
+        if (!platne()) { obal.querySelector('.bilance-pozn').textContent = 'Koeficient je celé číslo od 1.'; return; }
+        const [kr, kp] = koef();
+        obal.querySelector('.bilance-obal').innerHTML = bilanceHtml(q, kr, kp);
+        obal.querySelector('.bilance-pozn').textContent = sedi(q, kr, kp) && !nejmensi()
+          ? 'Atomy sedí, ale koeficienty jdou ještě zkrátit – vyděl je společným dělitelem.' : '';
+      };
+      vstupy.forEach(x => x.addEventListener('input', obnov));
+      obal.addEventListener('keydown', e => { if (e.key === 'Enter' && e.target.matches('input')) { e.preventDefault(); if (platne()) potvrd(); } });
+      obal.querySelector('.hlavni').onclick = () => { if (platne()) potvrd(); };
+      obal.querySelector('.tip').onclick = () => {
+        // prvek, který je na každé straně jen v jedné látce a není to H ani O
+        const kde = e => [q.r, q.p].map(s => s.filter(([v]) => atomy(v)[e]).length);
+        const e = prvky(q).find(x => !['H', 'O'].includes(x) && kde(x).every(n => n === 1)) || prvky(q).find(x => kde(x).every(n => n === 1)) || prvky(q)[0];
+        obal.querySelector('.tip-rovnice').innerHTML = `Začni prvkem <b>${e}</b> – je vlevo i vpravo jen v jedné látce. Vodík a kyslík dolaď nakonec.`;
+      };
+      obnov();
+      vstupy[0].focus();
+      return rovniceEl;
+    },
+    spravne() { const [kr, kp] = koef(); return sedi(q, kr, kp) && nejmensi(); },
+    znovu() { vstupy[0].select(); },
+    zamkni() { vstupy.forEach(x => x.disabled = true); },
+  };
+}
+
+function generuj(r) {
+  const zdroj = ROVNICE.filter(q => r === 'vse' || (r === 'lehke') === lehka(q));
+  let q; do { q = Uloha.nahodne(zdroj); } while (zdroj.length > 1 && q === posledni);
+  posledni = q;
+  return {
+    zadani: '<span class="druh">Vyčísli rovnici</span>',
+    odpoved: rovniceText(q),
+    napoveda: '',
+    vlastni: uloha(q),
+  };
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  const serie = Procvic.spust({
+    klic: 'metodus_vycislovani', pocet: 8, typ: 'text',
+    plocha: $('plocha'), skoreEl: $('skore'), pokrokEl: $('pokrok'),
+    rezim: () => rezim, generuj,
+  });
+  $('rezimy').addEventListener('click', e => {
+    const b = e.target.closest('button[data-rezim]');
+    if (!b) return;
+    $('rezimy').querySelectorAll('button').forEach(x => x.classList.toggle('active', x === b));
+    rezim = b.dataset.rezim;
+    const vyuka = rezim === 'postup';
+    $('vyuka').hidden = !vyuka;
+    $('plocha').hidden = $('ovladani').hidden = vyuka;
+    posledni = null;
+    if (!vyuka) serie.restart();
+  });
+  $('startBtn').onclick = () => serie.restart();
+});
 </script>
 </body>
 </html>

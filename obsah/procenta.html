@@ -5,45 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Procenta a trojčlenka</title>
   <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="../vyuka.css">
   <link rel="stylesheet" href="../nazor.css">
   <script src="../nazor.js"></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
+  <script src="../uloha.js" defer></script>
+  <script src="../procvic.js" defer></script>
   <style>
-    body { background-color: var(--bg-deep); padding: 24px clamp(14px, 3vw, 40px); min-height: 100vh; }
-    h1 { font-size: 1.4rem; margin-bottom: 4px; }
-    .podtitul { color: var(--text-muted); font-size: 0.88rem; margin-bottom: 16px; }
-    .rezimy { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
-    .rezimy button {
-      background: var(--bg-control); border: 1px solid var(--border-strong); color: var(--text-muted);
-      border-radius: 6px; padding: 7px 13px; font-size: 0.84rem; cursor: pointer;
-    }
-    .rezimy button.active { background: var(--accent); border-color: var(--accent); color: var(--na-akcentu, #fff); font-weight: 600; }
-    .karta { background: var(--bg-panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; max-width: 640px; }
-    .zadani { font-size: 1.25rem; line-height: 1.55; margin-bottom: 18px; min-height: 3.6rem; }
-    .odpovedni { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
-    input[type=number] {
-      background: var(--bg-input); border: 2px solid var(--border-strong); border-radius: 8px;
-      color: var(--text); font-size: 1.3rem; text-align: center; width: 150px; padding: 9px;
-    }
-    input:focus { outline: none; border-color: var(--accent); }
-    .jednotka { color: var(--text-muted); font-size: 1.1rem; }
-    .potvrdit {
-      background: var(--accent); border: none; color: var(--na-akcentu, #fff); border-radius: 8px;
-      padding: 11px 26px; font-size: 0.95rem; font-weight: 600; cursor: pointer;
-    }
-    .potvrdit:hover { background: var(--accent-hover); }
-    .zprava { margin-top: 14px; min-height: 1.5rem; font-size: 0.98rem; }
-    .zprava.ok { color: var(--ok); } .zprava.spatne { color: var(--danger); }
-    .reseni { margin-top: 10px; padding: 12px 14px; background: var(--bg-elevated); border-left: 3px solid var(--accent); border-radius: 6px; font-size: 0.92rem; color: var(--text-muted); line-height: 1.7; display: none; }
-    .stav { display: flex; justify-content: space-between; max-width: 640px; margin-top: 12px; color: var(--text-muted); font-size: 0.9rem; }
-    .serie { color: var(--warn); }
+    .velky-text .slovni { display: block; font-size: 1.15rem; font-weight: 500; line-height: 1.45; max-width: 560px; margin: 0 auto; }
+    .jednotka-info { display: block; font-size: 0.85rem; font-weight: 400; color: var(--text-faint); margin-top: 6px; }
+    .reseni-postup { margin-top: 12px; font-size: 0.95rem; color: var(--text-muted); line-height: 1.5; }
+    #plocha .karta { width: min(560px, 100%); }
+    .karta .nazor-procenta { margin-top: 10px; }
   </style>
 </head>
 <body>
   <h1>💯 Procenta a trojčlenka</h1>
-  <p class="podtitul">Procvičování pro 7.–9. ročník ZŠ. Výsledky zaokrouhluj na 2 desetinná místa.</p>
+  <p class="podtitul">Pro 7.–9. ročník: série deseti úloh. Výsledky zaokrouhluj na 2 desetinná místa, čárku i tečku bereme obojí. Po chybě máš druhý pokus, pak uvidíš postup a proužek 0–100 %.</p>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="zceho" class="active">Kolik je p % z čísla</button>
@@ -52,26 +32,19 @@
     <button data-rezim="trojclenka">Trojčlenka</button>
   </div>
 
-  <div class="karta" data-kostra-odpovedi>
-    <div class="zadani" id="zadani"></div>
-    <div class="odpovedni">
-      <input type="number" id="odpoved" step="any" autocomplete="off">
-      <span class="jednotka" id="jednotka"></span>
-      <button class="potvrdit" id="btnPotvrdit">✔️ Zkontrolovat</button>
-    </div>
-    <div class="zprava" id="zprava"></div>
-    <div class="reseni" id="reseni"></div>
-    <div id="nazorProcenta"></div>
+  <div class="plocha" id="plocha"></div>
+
+  <div class="ovladani">
+    <button class="hlavni" id="startBtn">🔄 Nová série</button>
+    <span class="pokrok" id="pokrok"></span>
+    <span class="skore" id="skore"></span>
   </div>
-  <div class="stav">
-    <span class="serie" id="serie"></span>
-    <span id="skore"></span>
-  </div>
+
+  <p class="napoveda"><b>1 %</b> je setina celku. Část = základ × p / 100 (20 % ze 300 = 3 × 20 = 60). Počet procent = část / základ × 100. Základ = část / p × 100. <b>Trojčlenka:</b> nejdřív spočítej hodnotu pro jednu jednotku; u přímé úměrnosti pak násob, u nepřímé (víc dělníků → méně dní) je stálý součin.</p>
 
 <script>
 const $ = id => document.getElementById(id);
-let rezim = 'zceho', uloha = null, spravne = 0, celkem = 0, serie = 0, vyhodnoceno = false;
-
+let rezim = 'zceho';
 const nahodnyPrvek = p => p[Math.floor(Math.random() * p.length)];
 const cislo2 = x => Math.round(x * 100) / 100;
 const fmt = x => String(cislo2(x)).replace('.', ',');
@@ -79,7 +52,7 @@ const fmt = x => String(cislo2(x)).replace('.', ',');
 const TROJCLENKY = [
   // [text s {A} {B} {C}, generátor -> {a,b,c,vysledek,jednotka, postup}]
   () => { const kusu = nahodnyPrvek([3, 4, 5, 6]), cena = nahodnyPrvek([12, 15, 18, 24, 30]), chci = kusu + nahodnyPrvek([1, 2, 3]);
-    return { text: `${kusu} ${kusu < 5 ? 'sešity stojí' : 'sešitů stojí'} ${kusu * cena} Kč. Kolik zaplatíš za ${chci} sešitů?`,
+    return { text: `${kusu} ${kusu < 5 ? 'sešity stojí' : 'sešitů stojí'} ${kusu * cena} Kč. Kolik zaplatíš za ${chci} ${chci < 5 ? 'sešity' : 'sešitů'}?`,
       vysledek: chci * cena, jednotka: 'Kč',
       postup: `1 sešit … ${kusu * cena} ÷ ${kusu} = ${cena} Kč → ${chci} sešitů … ${chci} × ${cena} = ${chci * cena} Kč` }; },
   () => { const os = nahodnyPrvek([2, 3, 4]), hod = nahodnyPrvek([6, 8, 10, 12]), os2 = os + nahodnyPrvek([1, 2, 3]);
@@ -99,64 +72,59 @@ const TROJCLENKY = [
       postup: `${prac} × ${dni} = ${prac * dni} „dělníkodní“ → ${prac * dni} ÷ ${prac2} = ${fmt(v)} dní` }; },
 ];
 
-function nova() {
-  vyhodnoceno = false;
-  $('odpoved').value = '';
-  $('zprava').textContent = ''; $('zprava').className = 'zprava';
-  $('reseni').style.display = 'none';
-  $('nazorProcenta').innerHTML = '';
-  $('btnPotvrdit').textContent = '✔️ Zkontrolovat';
-  if (rezim === 'zceho') {
+
+function generuj(r) {
+  let u, zadani;
+  if (r === 'zceho') {
     const p = nahodnyPrvek([5, 10, 12, 15, 20, 25, 30, 40, 50, 75]);
     const z = nahodnyPrvek([40, 60, 80, 120, 150, 200, 240, 300, 500, 640, 800, 1200]);
-    uloha = { vysledek: cislo2(z * p / 100), jednotka: '', obraz: [z * p / 100, z],
+    u = { vysledek: cislo2(z * p / 100), jednotka: '', obraz: [z * p / 100, z],
       postup: `1 % z ${z} je ${fmt(z / 100)} → ${p} % je ${p} × ${fmt(z / 100)} = ${fmt(z * p / 100)}` };
-    $('zadani').textContent = `Kolik je ${p} % z čísla ${z}?`;
-  } else if (rezim === 'kolikpct') {
+    zadani = `Kolik je ${p} % z čísla ${z}?`;
+  } else if (r === 'kolikpct') {
     const b = nahodnyPrvek([40, 50, 80, 120, 200, 250, 400, 500]);
     const a = cislo2(b * nahodnyPrvek([5, 10, 15, 20, 25, 30, 40, 60, 75, 90]) / 100);
-    uloha = { vysledek: cislo2(a / b * 100), jednotka: '%', obraz: [a, b],
+    u = { vysledek: cislo2(a / b * 100), jednotka: '%', obraz: [a, b],
       postup: `${fmt(a)} ÷ ${b} = ${fmt(a / b)} → × 100 = ${fmt(a / b * 100)} %` };
-    $('zadani').textContent = `Kolik procent je ${fmt(a)} z čísla ${b}?`;
-  } else if (rezim === 'zaklad') {
+    zadani = `Kolik procent je ${fmt(a)} z čísla ${b}?`;
+  } else if (r === 'zaklad') {
     const p = nahodnyPrvek([10, 20, 25, 40, 50, 60, 75, 80]);
     const zaklad = nahodnyPrvek([80, 120, 160, 200, 240, 300, 400, 500]);
     const c = cislo2(zaklad * p / 100);
-    uloha = { vysledek: zaklad, jednotka: '', obraz: [c, zaklad],
+    u = { vysledek: zaklad, jednotka: '', obraz: [c, zaklad],
       postup: `${p} % je ${fmt(c)} → 1 % je ${fmt(c)} ÷ ${p} = ${fmt(c / p)} → 100 % = ${fmt(zaklad)}` };
-    $('zadani').textContent = `${p} % z neznámého čísla je ${fmt(c)}. Jaké je celé číslo (základ)?`;
+    zadani = `${p} % z neznámého čísla je ${fmt(c)}. Jaké je celé číslo (základ)?`;
   } else {
-    uloha = nahodnyPrvek(TROJCLENKY)();
-    $('zadani').textContent = uloha.text;
+    u = nahodnyPrvek(TROJCLENKY)();
+    zadani = u.text;
   }
-  $('jednotka').textContent = uloha.jednotka;
-  $('odpoved').focus();
-  window.Kostra?.otazka();
+  return {
+    zadani: `<span class="slovni">${zadani}</span>` + (u.jednotka ? `<span class="jednotka-info">odpověď v jednotkách: ${u.jednotka}</span>` : ''),
+    odpoved: u.vysledek, tolerance: 0.011,
+    napoveda: '',   // postup se ukáže na kartě (poVyhodnoceni), ne podruhé ve zpětné vazbě
+    // po uzavření otázky postup a proužek 0–100 % (stejný obraz jako u zlomků a poměru)
+    poVyhodnoceni: karta => {
+      karta.insertAdjacentHTML('beforeend', `<div class="reseni-postup">💡 ${u.postup}</div>` + (u.obraz ? Nazor.procenta(u.obraz[0], u.obraz[1]) : ''));
+    },
+  };
 }
-function vyhodnot() {
-  if (vyhodnoceno) { nova(); return; }
-  const v = $('odpoved').value.trim().replace(',', '.');
-  if (v === '') { $('odpoved').focus(); return; }
-  vyhodnoceno = true; celkem++;
-  const ok = Math.abs(Number(v) - uloha.vysledek) < 0.011;
-  window.Kostra?.odpoved(ok, uloha);   // společná kostra – Ověř se
-  if (ok) { spravne++; serie++; $('zprava').textContent = '✅ Správně!'; $('zprava').classList.add('ok'); }
-  else { serie = 0; $('zprava').textContent = '❌ Správný výsledek: ' + fmt(uloha.vysledek) + (uloha.jednotka ? ' ' + uloha.jednotka : ''); $('zprava').classList.add('spatne'); }
-  $('reseni').textContent = '💡 ' + uloha.postup;
-  $('reseni').style.display = 'block';
-  // proužek hodnot nad stupnicí 0–100 % – stejný obraz jako u zlomků a poměru
-  $('nazorProcenta').innerHTML = uloha.obraz ? Nazor.procenta(uloha.obraz[0], uloha.obraz[1]) : '';
-  $('serie').textContent = serie >= 3 ? '🔥 série ' + serie : '';
-  $('skore').textContent = spravne + ' / ' + celkem;
-  $('btnPotvrdit').textContent = 'Pokračovat →';
-}
-$('btnPotvrdit').onclick = vyhodnot;
-$('odpoved').addEventListener('keydown', e => { if (e.key === 'Enter') vyhodnot(); });
-document.querySelectorAll('#rezimy button').forEach(b => b.onclick = () => {
-  document.querySelectorAll('#rezimy button').forEach(x => x.classList.remove('active'));
-  b.classList.add('active'); rezim = b.dataset.rezim; nova();
+
+window.addEventListener('DOMContentLoaded', () => {
+  const serie = Procvic.spust({
+    klic: 'metodus_procenta', pocet: 10, typ: 'text',
+    plocha: $('plocha'), skoreEl: $('skore'), pokrokEl: $('pokrok'),
+    rezim: () => rezim, generuj,
+  });
+  $('rezimy').addEventListener('click', e => {
+    const b = e.target.closest('button[data-rezim]');
+    if (!b) return;
+    $('rezimy').querySelectorAll('button').forEach(x => x.classList.toggle('active', x === b));
+    rezim = b.dataset.rezim;
+    serie.restart();
+  });
+  $('startBtn').onclick = () => serie.restart();
+  serie.restart();
 });
-nova();
 </script>
 </body>
 </html>

@@ -19,6 +19,12 @@
        pocet: 12,
        skoreEl, plocha, odezvaEl, pokrokEl,
        generuj: rezim => ({ zadani: '5<sup>2</sup> = ?', odpoved: 25, napoveda: '5·5' }),
+         // volitelně: poVyhodnoceni(karta, spravne) – po uzavření otázky (správně
+         // nebo po druhé chybě), třeba pro obrázek s řešením pod zadáním;
+         // varianty: ['were'] – další uznávané odpovědi (was/were, learnt/learned),
+         // presne: true – rozlišuje velká a malá písmena (vzorce CO × Co);
+         // vlastni: { vykresli(karta, potvrd) → prvek, spravne() → bool,
+         //            znovu?(), zamkni?() } – vlastní vstup místo jednoho pole
        rezim: () => 'mix',
        typ: 'number',                 // 'number' | 'text'
      });
@@ -41,6 +47,12 @@ const Procvic = (function () {
     }
     return false;
   }
+  // odpověď sedí na hlavní tvar nebo na některou uznávanou variantu
+  // (presne: true = záleží na velikosti písmen, třeba u chemických vzorců CO × Co)
+  const bezMezer = v => String(v).replace(/\s+/g, '');
+  const sedi = (zadano, otazka) => otazka.presne
+    ? [otazka.odpoved, ...(otazka.varianty || [])].some(v => bezMezer(v) === bezMezer(zadano))
+    : shoda(zadano, otazka.odpoved, otazka.tolerance) || (otazka.varianty || []).some(v => shoda(zadano, v));
 
   function spust(volby) {
     const o = Object.assign({ pocet: 12, typ: 'number', klic: null }, volby);
@@ -71,6 +83,7 @@ const Procvic = (function () {
       o.plocha.innerHTML = '';
       const karta = document.createElement('div');
       karta.className = 'karta';
+      const uzavri = spravne => { if (aktualni.poVyhodnoceni) aktualni.poVyhodnoceni(karta, spravne); };
 
       const zadani = document.createElement('div');
       zadani.className = 'velky-text';
@@ -103,7 +116,7 @@ const Procvic = (function () {
           b.textContent = v;
           b.addEventListener('click', () => {
             if (stav.hotovo) return;
-            const spravne = shoda(v, aktualni.odpoved, aktualni.tolerance);
+            const spravne = sedi(v, aktualni);
             // Uloha.odpoved nastaví stav.chyboval sama, takže pokusy počítáme
             // vlastní proměnnou – jinak by se druhá šance přeskočila.
             if (!spravne) stav.pokusy = (stav.pokusy || 0) + 1;
@@ -112,7 +125,7 @@ const Procvic = (function () {
               prvek: b, spravne, stav, odezva,
               zpravaOk: '✅ Správně!',
               zpravaChyba: posledni ? vysledekText() : 'Ještě ne – zkus jinou možnost.',
-              poSpravne: napoprve => { if (skore) skore.vyhodnot(napoprve); },
+              poSpravne: napoprve => { if (skore) skore.vyhodnot(napoprve); uzavri(true); },
               dalsi,
             });
             if (!spravne && posledni) {
@@ -120,6 +133,7 @@ const Procvic = (function () {
               chyby.push(aktualni);
               if (skore) skore.vyhodnot(false);
               box.querySelectorAll('button').forEach(x => x.disabled = true);
+              uzavri(false);
               /* Posun řídí společné nastavení (auto s prodlevou / ručně) – i po
                  druhé chybě, kdy je na přečtení správné odpovědi nejvíc potřeba. */
               Uloha.posun(dalsi, 1600, false, odezva);
@@ -127,6 +141,15 @@ const Procvic = (function () {
           });
           box.appendChild(b);
         });
+        return;
+      }
+
+      // Úloha s vlastním vstupem (víc políček – třeba koeficienty rovnice):
+      // stránka vykreslí prvek a sama zavolá potvrd(), až je vyplněno.
+      if (aktualni.vlastni) {
+        const prvek = aktualni.vlastni.vykresli(karta, () => vyhodnot(prvek, odezva, uzavri));
+        o.plocha.appendChild(odezva);
+        if (aktualni.poVykresleni) aktualni.poVykresleni(karta);
         return;
       }
 
@@ -142,7 +165,7 @@ const Procvic = (function () {
       pole.addEventListener('keydown', e => {
         if (e.key !== 'Enter' || pole.value === '') return;
         e.preventDefault();
-        vyhodnot(pole, odezva);
+        vyhodnot(pole, odezva, uzavri);
       });
       pole.focus();
       if (aktualni.poVykresleni) aktualni.poVykresleni(karta);
@@ -152,9 +175,10 @@ const Procvic = (function () {
       return `❌ Správně je ${aktualni.odpoved}.` + (aktualni.napoveda ? ` (${aktualni.napoveda})` : '');
     }
 
-    function vyhodnot(pole, odezva) {
+    function vyhodnot(pole, odezva, uzavri = () => {}) {
       if (stav.hotovo) return;
-      const spravne = shoda(pole.value, aktualni.odpoved, aktualni.tolerance);
+      const vlastni = aktualni.vlastni;
+      const spravne = vlastni ? vlastni.spravne() : sedi(pole.value, aktualni);
       // Uloha.odpoved nastaví stav.chyboval hned při první chybě, takže se na
       // něj nedá spolehnout při rozlišení „první pokus / druhý pokus“.
       if (!spravne) stav.pokusy = (stav.pokusy || 0) + 1;
@@ -167,16 +191,17 @@ const Procvic = (function () {
         zpravaOk: '✅ Správně!',
         // po první chybě dostane žák druhou šanci, teprve pak výsledek
         zpravaChyba: posledni ? vysledekText() : 'Ještě ne – zkus to znovu.',
-        poSpravne: napoprve => { if (skore) skore.vyhodnot(napoprve); },
+        poSpravne: napoprve => { if (skore) skore.vyhodnot(napoprve); uzavri(true); },
         dalsi,
       });
       if (spravne) return;
-      if (!posledni) { pole.select(); return; }
+      if (!posledni) { if (vlastni) vlastni.znovu?.(); else pole.select(); return; }
       // druhá chyba: zapsat mezi chyby a po chvilce jít dál
       stav.hotovo = true;
       chyby.push(aktualni);
       if (skore) skore.vyhodnot(false);
-      pole.disabled = true;
+      if (vlastni) vlastni.zamkni?.(); else pole.disabled = true;
+      uzavri(false);
       Uloha.posun(dalsi, 1600, false, odezva);
     }
 

@@ -232,9 +232,11 @@ Mezipředmětové cesty, které stojí za výslovné odkazy „Souvisí s…“:
 
 1. **Kostra a slovník** (oddíl 2): hlavička z katalogu, fáze, jednotné texty tlačítek, barvy předmětů. Mění se sdílené soubory, přínos je na všech stránkách najednou.
 2. **Převedení 48 stránek F a 5 drilů D** pod `uloha.js` a společnou hlavičku. Právě ony nejvíc kazí dojem celku.
+   > **Stav 23. 9. 2026:** drily D už jedou přes `procvic.js`; 13 kvízových stránek F převedeno pod `procvic.js` / `uloha.js` (etapy, oddíl P), 11 dalších má z dřívějška Ověř se přes `Kostra.odpoved`. Zbytek stránek F jsou nástroje (kartičky, citace, pracovní listy…) nebo simulace s úkoly k modelu.
 3. **Knihovna komponent** (oddíl 3) postupně podle rodin: nejdřív 🧩 věta, osa, proužek, časová osa a mapa. Pokrývají nejvíc stránek.
 4. **Obrázky** podle přílohy A: nejdřív 🔴, pak karty B nahrazující emoji, nakonec scény ⚪.
 5. **Úkoly pro simulace E**: ke každé tři úkoly „předpověz → vyzkoušej → vysvětli“ a krátké Ověř se. Modely jsou hotové, chybí jim učební cesta.
+   > **Stav 23. 9. 2026: komponenta zavedena, dvě dávky hotové** – `badani.js` + `badani.css` (panel 🧪 Úkoly k modelu, README „Úkoly k modelu“), zapojeno v 18 stránkách (fyzika, astronomie, grafy funkcí, Punnettův čtverec, řadicí algoritmy); test `tests/badani.mjs`. Seznam a meze v [etapách](ETAPY_VYLEPSENI.md), oddíl U.
 6. **Rodiny** (oddíl 5): sjednotit data souběžných stránek a doplnit metadata `vyuka` postupně ke všem položkám katalogu.
 
 ---
@@ -325,6 +327,7 @@ Společné pro celou češtinu: 🔗 jedna paleta pro větné členy a slovní d
   - Skládání slova tažením písmen do okének (dnes výběr), s alternativou klepnutí.
 - **Obrázky:**
   - `IMG-cj-01` 🔴 **B** · sada 40 karet jednoduchých předmětů a zvířat pro první čtení (máma, les, pes, auto, ucho, chleba, dům, míč, kolo, ryba…) — jednoznačný motiv bez textu; sdílet s `slabiky` a `cj2_abeceda`
+    - ✅ Hotovo 23. 9. 2026: 40 karet `obsah/img/cj/cj1-pismena-*.webp`, originály PNG a zadání `.prompt.txt`; [galerie a seznam](obsah/img/kapitola-7-2.html).
 
 #### Tvrdé a měkké souhlásky · [cj2_tvrde_mekke.html](obsah/cj2_tvrde_mekke.html)
 - **Zařazení:** Čeština › Pravopis · 2. r. · lekce A
@@ -337,6 +340,7 @@ Společné pro celou češtinu: 🔗 jedna paleta pro větné členy a slovní d
   - 🔗 Stejné domečky použít v `vyjmenovana_slova` a `doplnovacky` (obojetné souhlásky jako třetí domeček).
 - **Obrázky:**
   - `IMG-cj-02` ⚪ **B** · dva domečky: tvrdý (kamenný, hranatý) a měkký (dřevěný s polštáři) — pozadí pomůcky
+    - ✅ Hotovo a zapojeno 23. 9. 2026: `obsah/img/cj/cj2-tvrde-mekke-domek-{tvrdy,mekky}.webp`, originály PNG a zadání `.prompt.txt`.
 
 #### Abeceda a řazení slov · [cj2_abeceda.html](obsah/cj2_abeceda.html)
 - **Zařazení:** Čeština › Pravopis · 2.–3. r. · lekce A
@@ -359,6 +363,7 @@ Společné pro celou češtinu: 🔗 jedna paleta pro větné členy a slovní d
   - 🔗 Sdílet data slov a rodin s `vyjmenovana_slova` a `diktat_gen` (jedna sada, oddíl 5).
 - **Obrázky:**
   - `IMG-cj-03` 🟠 **B** · dvojice karet slov, která znějí stejně: být/bít, mýt/mít, výr/vír, vít (věnec)/výt (vlk), případně další s jednoznačně kreslitelným významem — rozlišení významu obrázkem
+    - ✅ Hotovo a zapojeno 23. 9. 2026: 8 karet `obsah/img/cj/doplnovacky-*.webp`, originály PNG a zadání `.prompt.txt`.
 
 #### Generátor diktátů · [diktat_gen.html](obsah/diktat_gen.html)
 - **Zařazení:** Čeština › Pravopis · 3.–9. r. · lekce A
@@ -393,6 +398,7 @@ Společné pro celou češtinu: 🔗 jedna paleta pro větné členy a slovní d
   - 🔗 Sdílená datová sada i/y pro celou rodinu (oddíl 5).
 - **Obrázky:**
   - `IMG-cj-04` 🟠 **B** · ilustrace k vyjmenovaným slovům, 8 řad × 6–10 karet (například B: být, bydlet, obyvatel, byt, příbytek, nábytek, dobytek, kobyla, býk, Bydžov…) — pomůcka k zapamatování; u slov bez obrazu (bystrý, zbytek) vynechat
+    - 🟡 Částečně hotovo 23. 9. 2026: obrazové řady B, L, M a P, celkem 38 nových karet `obsah/img/cj/vyjmenovana-{b,l,m,p}-*.webp`; sdílené karty „být“, „mýt“ a „myš“ z dřívějších sad; zapojeno do přehledu a zpětné vazby lekce.
 
 #### Shoda podmětu s přísudkem · [shoda_podmetu.html](obsah/shoda_podmetu.html)
 - **Zařazení:** Čeština › Pravopis · 6.–7. r. · lekce A
@@ -617,6 +623,7 @@ Společné pro celou češtinu: 🔗 jedna paleta pro větné členy a slovní d
   - 🔗 Převést pod `uloha.js` a společnou hlavičku.
   - Po přečtení slova volba ze tří obrázků (porozumění), u vět volba obrázku, který větu vystihuje.
   - Postupné ubírání barevné podpory.
+- **Stav 23. 9. 2026:** nový režim „Čtu a rozumím“ (slovo → jeden ze tří obrázků `IMG-cj-01`); čtecí tabule beze změny.
 - **Obrázky:** sdílet sadu `IMG-cj-01`; navíc:
   - `IMG-cj-09` 🟠 **A** · 10 jednoduchých scén k větám pro první čtení (Máma má mísu. Ema mele maso. Pes leží u domu…) — obrázek ke kontrole porozumění
 
@@ -723,6 +730,7 @@ Společné pro celou matematiku: 🔗 každé téma má jeden **názorný obraz*
   - 🔗 Převést pod `uloha.js`, sjednotit vysvědčení se závěrečnou kartou „Ověř se“.
   - 🧩 Pole: rámeček po deseti s rozkladem 8 + 5 = 8 + 2 + 3, kostičky přeskakují do druhé desítky.
   - Po chybě ukázat postup na počítadle, ne jen správný výsledek.
+- **Stav 23. 9. 2026:** převedeno pod `procvic.js`: rámeček po deseti, rozklad přes desítku po chybě, režim „přes desítku“.
 - **Obrázky:** žádné (styl D).
 
 #### Procvičování násobilky · [multiplication.html](obsah/multiplication.html)
@@ -788,6 +796,7 @@ Společné pro celou matematiku: 🔗 každé téma má jeden **názorný obraz*
   - 🔗 Doplnit procvičování pod `uloha.js` (čti, zapiš, najdi chybu) — dnes je to jen převodník.
   - Rozklad čísla po řádech: 1994 = M + CM + XC + IV, barevně nad zápisem.
   - Kde římské číslice potkáme: ciferník, letopočet na budově, kapitoly.
+- **Stav 23. 9. 2026:** převodník + série přečti / zapiš / najdi správný zápis, rozklad po řádech.
 - **Obrázky:**
   - `IMG-m-03` ⚪ **C** · 4 fotografie římských číslic ve skutečnosti (ciferník věžních hodin, letopočet na průčelí, náhrobek, číslování kapitol) — čtení v kontextu
 
@@ -890,6 +899,7 @@ Společné pro celou matematiku: 🔗 každé téma má jeden **názorný obraz*
   - 🔗 Převést pod `uloha.js`, cíl a návaznosti (zlomky → procenta → finance).
   - 🧩 Proužek 0–100 % pod proužkem hodnot; žák nejdřív označí celek a 1 %.
   - Sleva, zdražení a dvě po sobě jdoucí změny; procenta × procentní body.
+- **Stav 23. 9. 2026:** převedeno pod `procvic.js` (série se psanou odpovědí, druhý pokus, přehled chyb); po otázce postup a proužek 0–100 % na kartě; opraven tvar „za 4 sešity“.
 - **Obrázky:**
   - `IMG-m-06` ⚪ **B** · 4 karty situací (cenovka se slevou bez čísel, výsledkový graf voleb bez popisků, etiketa potraviny, spořitelní kasička) — kontext úloh; čísla vkládá web
 
@@ -948,6 +958,7 @@ Společné pro celou matematiku: 🔗 každé téma má jeden **názorný obraz*
   - 🔗 Převést pod `uloha.js`.
   - Útvary v náhodném otočení a poměru stran; tělesa otáčet tažením (jednoduché 3D, sdílené s `m5_site_teles`).
   - „Najdi ve světě“: fotografie předmětů, žák určí těleso.
+- **Stav 23. 9. 2026:** převedeno pod `uloha.js` (průběžně); nový režim „Kolik má…?“ (vrcholy, hrany, stěny).
 - **Obrázky:**
   - `IMG-m-09` 🟠 **C** · 12 fotografií předmětů tvaru těles (kostka cukru, krabice mléka, plechovka, míč, kornout, pyramida, stan, toblerone, válcová pastelka…) — poznávání těles v okolí
 
@@ -1013,6 +1024,7 @@ Společné pro celou matematiku: 🔗 každé téma má jeden **názorný obraz*
 - **Vylepšení:**
   - 🔗 Přeměnit na **společný tahák geometrie**: každý vzorec s obrázkem a odkazem do lekce, kde se vysvětluje. Procvičování přenechat lekcím.
   - Sjednotit značení povrchu (S) na celém webu.
+- **Stav 23. 9. 2026:** převedeno pod `procvic.js`; přehled vzorců jako výuka, tahák.
 - **Obrázky:** žádné (styl D).
 
 #### Úhel a jeho velikost · [m6_uhly.html](obsah/m6_uhly.html)
@@ -1140,6 +1152,7 @@ Společné pro celou matematiku: 🔗 každé téma má jeden **názorný obraz*
   - 🔗 Převést pod `uloha.js`; váhy vytáhnout do 🧩 vah.
   - Historie úprav vedle vah: každý krok „−3 na obou stranách“ jako řádek.
   - Zkouška dosazením jako povinný poslední krok; hranice modelu vah u záporných čísel.
+- **Stav 23. 9. 2026:** převedeno pod `procvic.js`: úrovně jako režimy, váhy zůstaly jako výuka, po otázce postup řešení na kartě.
 - **Obrázky:** žádné.
 
 #### Výrazy a jejich úpravy · [m8_vyrazy.html](obsah/m8_vyrazy.html)
@@ -1160,6 +1173,7 @@ Společné pro celou matematiku: 🔗 každé téma má jeden **názorný obraz*
 - **Vylepšení:**
   - 🔗 Společná hlavička a fáze; ke hře vysvětlení, co posun způsobil.
   - 🧩 Graf s propojenou tabulkou hodnot a situací (taxi: nástupní cena + cena za km).
+- **Stav 23. 9. 2026:** 🧩 úkoly k modelu – 3 úkoly (sklon přímky, posun paraboly nahoru, vodorovný posun |x + b| doleva), 8 otázek; popis parametrů se do tipu rozmaže.
 - **Obrázky:** žádné.
 
 #### Lomené výrazy · [m9_lomene_vyrazy.html](obsah/m9_lomene_vyrazy.html)
@@ -1247,6 +1261,7 @@ Společné pro jazyky: 🔗 gramatika se učí **v krátkém dialogu nebo scénc
   - 🔗 Převést pod `uloha.js` a sdílet data s kartičkami (`knihovna_sad`).
   - Emoji nahradit jednotnými kartami B, rozdělit do témat (zvířata, jídlo, dům, škola, oblečení, rodina).
   - Poslech → výběr obrázku ze čtyř; pak krátká věta („The dog is under the table“) s obrázkem.
+- **Stav 23. 9. 2026:** převedeno pod společný modul `slovicka.js` (stejný pro AJ/NJ/FJ): kartičky, přehled s výslovností, témata pro všechny režimy, série obrázek → anglicky a anglicky → česky; čtení nahlas se řídí vypínačem v `rec.js`.
 - **Obrázky:**
   - `IMG-aj-02` 🔴 **B** · sada asi 120 karet slovíček ve 6 tématech (zvířata, jídlo a pití, dům a nábytek, škola, oblečení, rodina a lidé) — jednoznačný motiv, stejné světlo a okraj; **sdílet s `de_slovicka`, `fr_slovicka`, `cj1_pismena`**
 
@@ -1271,6 +1286,7 @@ Společné pro jazyky: 🔗 gramatika se učí **v krátkém dialogu nebo scénc
   - 🔗 Převést pod `uloha.js` a zařadit do rodiny slovesných časů.
   - Rodiny podobných sloves (sing–sang–sung, drink–drank–drunk; buy–bought, think–thought).
   - Věta ke každému tvaru („Yesterday I went…“, „I have never been…“) s 🧩 časovou osou.
+- **Stav 23. 9. 2026:** převedeno pod `procvic.js`: přehled se skupinami A–A–A / A–B–B / A–B–A / A–B–C, série „Který tvar je správně?“ (i chybné „buyed“), napiš past simple / past participle / chybějící tvar; uznává was/were a learnt/learned.
 - **Obrázky:** žádné.
 
 #### Němčina – slovíčka · [de_slovicka.html](obsah/de_slovicka.html)
@@ -1281,6 +1297,7 @@ Společné pro jazyky: 🔗 gramatika se učí **v krátkém dialogu nebo scénc
 - **Vylepšení:**
   - 🔗 Převést pod `uloha.js`; stálé barvy rodu; kartičky sdílet s `IMG-aj-02`.
   - Hodnotit celý výraz se členem; přidat množné číslo a jednu větu.
+- **Stav 23. 9. 2026:** převedeno pod `slovicka.js`: hodnotí se celý výraz se členem, nový režim „der, die, das?“ s tipem k pravidlu (koncovky, osoby); stálé barvy rodu v přehledu, kartičkách i kvízu.
 - **Obrázky:** sdílet `IMG-aj-02`.
 
 #### Francouzština – slovíčka · [fr_slovicka.html](obsah/fr_slovicka.html)
@@ -1291,6 +1308,7 @@ Společné pro jazyky: 🔗 gramatika se učí **v krátkém dialogu nebo scénc
 - **Vylepšení:**
   - Stejné jako u němčiny (sjednotit obě stránky do jedné komponenty s volbou jazyka).
   - Vysvětlit l' před samohláskou na příkladech.
+- **Stav 23. 9. 2026:** sjednoceno s němčinou v modulu `slovicka.js`; režim „le, nebo la?“, l’ vysvětleno v legendě i taháku, slova s l’ mají uvedený rod (barva podle rodu); opraven řádek „appartement“.
 - **Obrázky:** sdílet `IMG-aj-02`.
 
 #### Číslovky a určování času (NJ/FJ) · [dcj8_cislovky_cas.html](obsah/dcj8_cislovky_cas.html)
@@ -1741,6 +1759,7 @@ Společné pro fyziku: web má **výborné simulace** (páka, optika, elektřina
 - **Vylepšení:**
   - 🔗 Stát se **společným tahákem fyziky**: u každého vzorce odkaz do lekce, kde se vysvětluje, a předpoklady použití.
   - Ukázka dosazení s jednotkami krok za krokem.
+- **Stav 23. 9. 2026:** 🧩 úkoly k modelu – 3 úkoly o závislostech (Ek a dvojnásobná rychlost, volný pád ze 4× výšky, 10 m vody ≈ 1 atmosféra), 8 otázek.
 - **Obrázky:** žádné.
 
 #### Měření fyzikálních veličin · [f6_mereni.html](obsah/f6_mereni.html)
@@ -1762,6 +1781,7 @@ Společné pro fyziku: web má **výborné simulace** (páka, optika, elektřina
 - **Vylepšení:**
   - 🔗 Společná hlavička a tři úkoly na scénu (Kdy je kyvadlo nejrychlejší? Co změní sklon? Co se stane při srážce stejně těžkých koulí?).
   - Uložené výchozí stavy pro srovnání „před/po“.
+- **Stav 23. 9. 2026:** 🧩 úkoly k modelu – 4 úkoly (kde je kyvadlo nejrychlejší, těžší kyvadlo, sklon a tření, srážka stejných koulí), 8 otázek pro Procvič a Ověř se; výklad a „Zkus si“ stránky se do tipu rozmažou.
 - **Obrázky:** žádné.
 
 #### Vlastnosti látek a těles · [f6_vlastnosti_latek.html](obsah/f6_vlastnosti_latek.html)
@@ -1783,6 +1803,7 @@ Společné pro fyziku: web má **výborné simulace** (páka, optika, elektřina
 - **Vylepšení:**
   - 🔗 Rozdělit do tří doporučených cest („síla a rameno“, „kladky“, „převody“) s cílem a Ověř se.
   - Fotografie skutečného stroje u každé scény (houpačka, nůžky, kolečko, jeřáb, kolo).
+- **Stav 23. 9. 2026:** 🧩 úkoly k modelu – 3 úkoly odpovídající třem cestám (rameno a síla, kladkostroj, převod ozubených kol), 10 otázek pro Procvič a Ověř se. Fotografie `IMG-f-04` zůstávají otevřené.
 - **Obrázky:**
   - `IMG-f-04` 🟠 **C** · 12 fotografií jednoduchých strojů v praxi (houpačka, nůžky, kleště, otvírák, kolečko, louskáček, pinzeta, stavební jeřáb s kladkostrojem, studna s rumpálem, převody jízdního kola, hodinový strojek, klika) — spojení modelu se světem
 
@@ -1794,6 +1815,7 @@ Společné pro fyziku: web má **výborné simulace** (páka, optika, elektřina
 - **Vylepšení:**
   - Předpověď síly a dráhy před spuštěním úkolu.
   - 🔗 Propojit s `f7_tlak` (Pascalův zákon) a s `paka` (stejné pravidlo „co získám na síle, ztratím na dráze“).
+- **Stav 23. 9. 2026:** 🧩 úkoly k modelu – 4 úkoly (Pascalův zákon, zlaté pravidlo u lisu, moment tlustšího vrtáku, otáčky pro dřevo a ocel), 8 otázek; propojení s pákou v otázkách.
 - **Obrázky:**
   - `IMG-f-05` ⚪ **C** · fotografie stojanové vrtačky a dílenského hydraulického lisu, hydraulického zvedáku auta — skutečné stroje
 
@@ -1805,6 +1827,7 @@ Společné pro fyziku: web má **výborné simulace** (páka, optika, elektřina
 - **Vylepšení:**
   - 🔗 Společná hlavička a úkoly: „Proč Slunce skoro nehne?“, „Kde je těžiště Země a Měsíce?“.
   - Jasně odlišit od `gravitacni_hriste` (dráhy kolem pevného Slunce).
+- **Stav 23. 9. 2026:** 🧩 úkoly k modelu – 3 úkoly (akce a reakce Slunce–planeta, Slunce kolem těžiště, srážka – hybnost ano, energie ne), 8 otázek.
 - **Obrázky:** žádné.
 
 #### Tlak v kapalinách a plynech · [f7_tlak.html](obsah/f7_tlak.html)
@@ -1827,6 +1850,7 @@ Společné pro fyziku: web má **výborné simulace** (páka, optika, elektřina
 - **Vylepšení:**
   - Předpověď dráhy před vypuštěním (žák nakreslí odhad).
   - Úkoly ke Keplerovým zákonům s měřením ploch.
+- **Stav 23. 9. 2026:** 🧩 úkoly k modelu – 3 úkoly (rychlost v přísluní, III. Keplerův zákon pro 2 au, úniková rychlost), 8 otázek; zákony v panelu se do tipu rozmažou.
 - **Obrázky:** žádné.
 
 #### Pohyb tělesa – dráha a rychlost · [f7_pohyb.html](obsah/f7_pohyb.html)
@@ -1847,6 +1871,7 @@ Společné pro fyziku: web má **výborné simulace** (páka, optika, elektřina
 - **Vylepšení:**
   - Krokování sání – komprese – spalování – expanze – výstup s pozastavením.
   - Fotografie skutečného motoru a letadla.
+- **Stav 23. 9. 2026:** 🧩 úkoly k modelu – 3 úkoly (ram-jet na zemi, turbo-fan × turbo-jet, tah při rychlém letu) z hodnot Braytonova cyklu, 8 otázek.
 - **Obrázky:**
   - `IMG-f-07` ⚪ **C** · fotografie proudového motoru v řezu (muzejní exponát) a dopravního letadla při startu
 
@@ -1858,6 +1883,7 @@ Společné pro fyziku: web má **výborné simulace** (páka, optika, elektřina
 - **Vylepšení:**
   - Srovnání dvou tvarů vedle sebe při stejném větru.
   - Úkoly (Kde je za budovou závětří? Proč má auto zaoblenou příď?).
+- **Stav 23. 9. 2026:** 🧩 úkoly k modelu – 3 úkoly vyhodnocené z ustálených měření odporu a vztlaku (deska × křídlo, úhel náběhu 0° → 10°, vazkost), 8 otázek; nápověda se do tipu rozmaže. Střídavé odtrhávání vírů za válcem model spolehlivě neukáže, proto na něm úkol nestojí.
 - **Obrázky:**
   - `IMG-f-08` ⚪ **C** · 4 fotografie proudění ve skutečnosti (kouřový tunel, sněhové závěje za plotem, vlajka ve větru, cyklista ve skrčené poloze)
 
@@ -1882,6 +1908,7 @@ Společné pro fyziku: web má **výborné simulace** (páka, optika, elektřina
   - 🔗 Doporučené průchody pro 8. a 9. ročník a Ověř se.
   - 🧩 Obvodové schéma vedle „realistického“ zapojení (baterie, žárovky, dráty).
   - Spotřeba a cena → odkaz na `m9_financni` (rodinný rozpočet).
+- **Stav 23. 9. 2026:** 🧩 úkoly k modelu – 3 úkoly (napětí a proud, sériové a paralelní vyšroubování žárovky), 9 otázek včetně pole, indukce a spotřeby; Ověř se z otázek. Schéma vedle realistického zapojení a `IMG-f-10` zůstávají otevřené.
 - **Obrázky:**
   - `IMG-f-10` 🟠 **B** · karty součástek realisticky (plochá baterie, žárovka v objímce, spínač, rezistor, ampérmetr, voltmetr, pojistka, cívka, kompas) — propojení se schématickými značkami
 
@@ -1903,6 +1930,7 @@ Společné pro fyziku: web má **výborné simulace** (páka, optika, elektřina
 - **Vylepšení:**
   - Úkoly (dvě vlny se potkají — co se stane?).
   - U slapů společný čas pro glóbus a graf přístavu; poznámka o zjednodušení.
+- **Stav 23. 9. 2026:** 🧩 úkoly k modelu – 3 úkoly (frekvence a vlnová délka; dva přílivy denně s měřeným intervalem; skočný × hluchý příliv s měřeným rozkyvem), 8 otázek včetně interference.
 - **Obrázky:**
   - `IMG-f-11` ⚪ **C** · fotografie přílivu a odlivu na stejném místě (dvojice) — skutečný rozdíl hladin
 
@@ -1915,6 +1943,7 @@ Společné pro fyziku: web má **výborné simulace** (páka, optika, elektřina
   - Scénáře od jedné čočky po dalekohled, s úkolem v každém kroku.
   - Fotografie jevů (lžička ve sklenici, duha, lupa).
   - 🔗 Stejné barvy paprsků jako `optika_soustava`.
+- **Stav 23. 9. 2026:** 🧩 úkoly k modelu – 3 úkoly (lom ke kolmici, úplný odraz, obraz spojky), 9 otázek včetně hranolu a dalekohledu; Ověř se z otázek. Fotografie jevů `IMG-f-12` zůstávají otevřené.
 - **Obrázky:**
   - `IMG-f-12` 🟠 **C** · 6 fotografií optických jevů (lžíce „zlomená“ ve sklenici vody, duha, hranol s barevným spektrem, obraz v lžíci, lupa, odraz v klidném jezeře)
 
@@ -1926,6 +1955,7 @@ Společné pro fyziku: web má **výborné simulace** (páka, optika, elektřina
 - **Vylepšení:**
   - Řízené úkoly: zaostři, převrať obraz, zvětši.
   - Fotografie skutečného přístroje vedle modelu.
+- **Stav 23. 9. 2026:** 🧩 úkoly k modelu – 3 úkoly v dílně nad Keplerovým dalekohledem (silnější okulár, zaostření f₁ + f₂, převracecí čočka), 8 otázek; výklad soustavy se do tipu rozmaže.
 - **Obrázky:**
   - `IMG-f-13` 🟠 **C** · fotografie 7 přístrojů (lupa, diaprojektor, Keplerův refraktor, divadelní kukátko, Cassegrainův teleskop, triedr, školní mikroskop)
 
@@ -1986,6 +2016,7 @@ Společné: 🔗 jednotné ovládání (pauza, rychlost času, popisky) a spole�
   - Scénář „co uvidím dnes večer“ a animace otáčení oblohy během noci.
   - Hledání Polárky podle Velkého vozu jako vedený úkol.
   - Kresby souhvězdí jako volitelná vrstva.
+- **Stav 23. 9. 2026:** 🧩 úkoly k modelu – 3 úkoly (Polárka a otáčení oblohy, výška Polárky = zeměpisná šířka, Orion v létě pod obzorem), 8 otázek.
 - **Obrázky:**
   - `IMG-f-17` ⚪ **A** · jemné obrysové kresby 12 souhvězdí (Velký vůz/Velká medvědice, Kasiopeja, Orion, Labuť, Lyra, Orel, Blíženci, Býk, Lev, Štír, Pegas, Malý vůz) na průhledném pozadí — volitelná vrstva nad mapou
 
@@ -1997,6 +2028,7 @@ Společné: 🔗 jednotné ovládání (pauza, rychlost času, popisky) a spole�
 - **Vylepšení:**
   - Vedle sebe dva pohledy na stejný pohyb (ze Slunce a ze Země).
   - Otázky ke každé scéně a poznámka o zjednodušení galaktického modelu.
+- **Stav 23. 9. 2026:** 🧩 úkoly k modelu – 3 úkoly (vlnovka dráhy Měsíce, šroubovice při letu Galaxií, galaktický rok), 8 otázek.
 - **Obrázky:** žádné.
 
 #### Glóbusy planet · [planet_globe.html](obsah/planet_globe.html)
@@ -2030,6 +2062,7 @@ Společné: 🔗 jednotné ovládání (pauza, rychlost času, popisky) a spole�
   - 🔗 Společná hlavička, tři úkoly na pohled a Ověř se.
   - Trvalé upozornění, kdy jsou velikosti a vzdálenosti upravené, a přepínač „skutečné měřítko“ viditelnější.
   - Odkazy na `planet_globe` u každé planety.
+- **Stav 23. 9. 2026:** 🧩 úkoly k modelu – 3 úkoly (fáze Měsíce, roční období, světlo k Neptunu), 8 otázek; opraven pád kreslení na nízkém plátně (záporný poloměr dráhy) a desetinné tečky v měřítku.
 - **Obrázky:** žádné.
 
 #### ISS živě · [iss.html](obsah/iss.html)
@@ -2069,6 +2102,7 @@ Společné pro chemii: 🔗 **jeden molekulový model** (🧩 molekula a atom) p
   - 🔗 Převést pod `uloha.js` a společnou hlavičku (dílna jako fáze Ukázka).
   - Dílna jako kostičky nábojů, které do sebe zapadnou (Fe³⁺ + O²⁻ → dvě a tři kostičky).
   - 🧩 Molekula: index = počet atomů v modelu.
+- **Stav 23. 9. 2026:** kvíz převeden pod `procvic.js` (4 režimy včetně psaní názvu i vzorce, u vzorce rozhoduje velikost písmen); po otázce vysvětlení z oxidačních čísel. Koncovky a dílna zůstaly jako výklad.
 - **Obrázky:** žádné.
 
 #### Atom, molekula a chemická vazba · [ch8_atom.html](obsah/ch8_atom.html)
@@ -2124,6 +2158,7 @@ Společné pro chemii: 🔗 **jeden molekulový model** (🧩 molekula a atom) p
   - 🔗 Převést pod `uloha.js`.
   - Živá bilance atomů vlevo/vpravo a 🧩 molekuly, které se při zvýšení koeficientu namnoží.
   - Pokus změnit index → model ukáže jinou látku (zakázaný krok).
+- **Stav 23. 9. 2026:** převedeno pod `procvic.js` (vlastní vstup s víc políčky): výuka krok za krokem, živá bilance atomů vlevo/vpravo, tip „Kde začít?“, upozornění na nezkrácené koeficienty, lehčí/těžší rovnice; 31 rovnic ověřeno programem (opravena nevyčíslená H₂ + O₂ → 2 H₂O).
 - **Obrázky:** žádné.
 
 #### Chemie a životní prostředí · [ch9_zivotni_prostredi.html](obsah/ch9_zivotni_prostredi.html)
@@ -2203,6 +2238,7 @@ Společné pro přírodopis: čtyři stránky (`bunka`, `pr7_rostliny`, `anatomi
 - **Vylepšení:**
   - 🔗 Převést pod `uloha.js`, začlenit jako režim do `pr9_ekologie` nebo `prv4_ekosystemy`, případně zrušit samostatnou položku.
   - 🧩 Řetězec a síť: od řetězce k síti, odebrání organismu a předpověď následků.
+- **Stav 23. 9. 2026:** převedeno pod `uloha.js`: slož řetězec, kdo je kdo, co když článek zmizí; 10 řetězců.
 - **Obrázky:** karty organismů ze `IMG-prv-10` a `IMG-pr-05`.
 
 #### Houby a lišejníky · [pr6_houby.html](obsah/pr6_houby.html)
@@ -2393,6 +2429,7 @@ Společné pro přírodopis: čtyři stránky (`bunka`, `pr7_rostliny`, `anatomi
   - 🔗 Převést pod `uloha.js`.
   - Vznik gamet jako krok před čtvercem; simulace 4, 40 a 400 potomků (poměr se ustálí až při velkém počtu).
   - Znak s obrázkem (barva hrachu, barva srsti).
+- **Stav 23. 9. 2026:** 🧩 úkoly k modelu – nová simulace 4 / 40 / 400 potomků (podle návrhu karty) a 3 úkoly (Aa × Aa, uniformita AA × aa, náhoda u čtyř dětí), 8 otázek.
 - **Obrázky:**
   - `IMG-pr-23` ⚪ **B** · karty znaků pro křížení (žlutý/zelený hrách, hladký/svraštělý hrách, černé/hnědé morče, červený/bílý květ hrachu) — fenotypy
 
@@ -2491,6 +2528,7 @@ Společné pro zeměpis: 🔗 **jedna datová sada států a jedna mapová kompo
 - **Vylepšení:**
   - 🔗 Sloučit s `flags_quiz` do jednoho kvízu „Státy světa“ (vlajka, město, poloha) pod `uloha.js` a se sdílenými daty.
   - Po odpovědi ukázat stát a město na 🧩 mapě.
+- **Stav 23. 9. 2026:** převedeno pod `procvic.js`, světadíly jako režimy, špatné možnosti ze stejného světadílu.
 - **Obrázky:** žádné (vlajky jako SVG).
 
 #### Amerika · [z7_amerika.html](obsah/z7_amerika.html)
@@ -2525,6 +2563,7 @@ Společné pro zeměpis: 🔗 **jedna datová sada států a jedna mapová kompo
 - **Vylepšení:**
   - 🔗 Sloučit se `svetova_hlavni_mesta` (viz výše).
   - Zaměňované vlajky vedle sebe (Rumunsko × Čad, Indonésie × Monako).
+- **Stav 23. 9. 2026:** převedeno pod `procvic.js` (série, druhý pokus, přehled chyb, Ověř se, klávesnice), tahák k podobným vlajkám a hlavním městům.
 - **Obrázky:** žádné.
 
 #### Austrálie, Oceánie a polární oblasti · [z7_australie_oceanie.html](obsah/z7_australie_oceanie.html)
@@ -2568,6 +2607,7 @@ Společné pro zeměpis: 🔗 **jedna datová sada států a jedna mapová kompo
 - **Cíl výuky:** Žák zná hlavní řeky a pohoří ČR a ukáže je na mapě.
 - **Vylepšení:**
   - 🔗 Začlenit jako režim do `z8_cr_prirodni` a zrušit samostatnou položku, nebo převést na mapovou úlohu (klepni na řeku).
+- **Stav 23. 9. 2026:** převedeno pod `procvic.js`, 16 řek a 13 pohoří, nový režim „Kam se vlévá?“ (úmoří).
 - **Obrázky:** žádné.
 
 #### ČR – obyvatelstvo a hospodářství · [z8_cr_hospodarstvi.html](obsah/z8_cr_hospodarstvi.html)
@@ -2693,6 +2733,7 @@ Společné pro dějepis: dnešní lekce mají stejnou čtveřici režimů (osobn
 - **Vylepšení:**
   - 🔗 Sloučit s `casova_osa` do jedné 🧩 časové osy s pruhy ČR / Evropa / svět a filtrem ročníku.
   - Souběžnost: co se dělo jinde ve stejné době (Čína, Amerika).
+- **Stav 23. 9. 2026:** převedeno na společný kvíz `osa-kviz.js`; v datech opraven rok vzniku Římského impéria (27 př. n. l.).
 - **Obrázky:** karty událostí převzít z obrázků dějepisných lekcí.
 
 #### Čas, prameny a práce historika · [d6_prameny.html](obsah/d6_prameny.html)
@@ -2773,6 +2814,7 @@ Společné pro dějepis: dnešní lekce mají stejnou čtveřici režimů (osobn
 - **Vylepšení:**
   - 🔗 Sloučit se `svetove_dejiny` do jedné 🧩 časové osy (hlavní lekce rodiny „čas v dějinách“).
   - Kvízy intervalů a pořadí místo přesných letopočtů; karta události s obrázkem a odkazem do lekce.
+- **Stav 23. 9. 2026:** kvíz sjednocen se světovou osou (`osa-kviz.js`, `procvic.js`): rok → událost, událost → rok, napiš letopočet.
 - **Obrázky:** karty událostí z obrázků dějepisných lekcí.
 
 #### Zámořské objevy a renesance · [d8_objevy_renesance.html](obsah/d8_objevy_renesance.html)
@@ -2829,6 +2871,7 @@ Společné pro dějepis: dnešní lekce mají stejnou čtveřici režimů (osobn
   - 🔗 Převést pod `uloha.js`.
   - Cesta předpisu mezi institucemi jako animované schéma.
   - Srovnání institucí s podobnými názvy (Evropská rada × Rada EU × Rada Evropy).
+- **Stav 23. 9. 2026:** převedeno pod `procvic.js`, opravena dvojice stejných možností „Brusel“, nový režim „Kdo to dělá?“.
 - **Obrázky:**
   - `IMG-d-19` ⚪ **C** · fotografie budov Evropského parlamentu (Štrasburk), Evropské komise (Brusel), Soudního dvora (Lucemburk)
 
@@ -2935,6 +2978,7 @@ Společné pro informatiku: 🔗 programování (4.–7. r.) má projít **jedn�
   - 🔗 Společná hlavička a jednotná tlačítka.
   - Krokování s popisem („porovnávám 5 a 3 → prohodím“).
   - Dva algoritmy vedle sebe na stejných datech; „řaď sám“ s kartami a počítáním porovnání.
+- **Stav 23. 9. 2026:** 🧩 úkoly k modelu – 3 úkoly na stejných datech (porovnání Bubble × Quick, růst O(n²) pro 40 čísel, prohození Bubble × Selection), 8 otázek.
 - **Obrázky:** žádné.
 
 #### Modely a simulace · [inf9_model_simulace.html](obsah/inf9_model_simulace.html)
@@ -2966,6 +3010,7 @@ Společné pro informatiku: 🔗 programování (4.–7. r.) má projít **jedn�
   - 🔗 Doplnit procvičování pod `uloha.js` (poslech → písmeno).
   - Synchronizace přehrávaného znaku se zvýrazněním a světelným signálem (blikání).
   - Morseův strom (tečka vlevo, čárka vpravo) jako pomůcka.
+- **Stav 23. 9. 2026:** převodník + série přečti kód, zakóduj písmeno, poslech.
 - **Obrázky:** žádné.
 
 #### Tabulkový procesor – vzorce · [inf6_tabulky.html](obsah/inf6_tabulky.html)
@@ -3137,6 +3182,7 @@ Nástroje bez vazby na předmět. 🔗 Mají stejnou hlavičku (proužek „Nás
   - Klaviatura, notová osnova a zvuk propojené: klepnutí na klávesu zvýrazní notu a naopak.
   - Kvintový kruh jako otočné kolo se změnou předznamenání na osnově.
   - Procvičování pod `uloha.js` (poznej akord sluchem).
+- **Stav 23. 9. 2026:** správné pojmenování tónů podle stupně (Es dur = Es F G As B C D), procvičování předznamenání, dur/moll sluchem a tónů kvintakordu.
 - **Obrázky:** žádné (klaviatura a noty kódem).
 
 #### Notová osnova – čtení not · [notes_reading.html](obsah/notes_reading.html)
@@ -3148,6 +3194,7 @@ Nástroje bez vazby na předmět. 🔗 Mají stejnou hlavičku (proužek „Nás
   - Záchytné noty (g1, c2) a postupné ubírání nápovědy.
   - Klaviatura a zvuk vybrané noty; krátké písničky k přečtení (Skákal pes).
   - 🔗 Sloučit s hudební naukou do jedné „Hudby“ se sdílenou klaviaturou.
+- **Stav 23. 9. 2026:** převedeno pod `uloha.js`, opraveny pomocné linky a rozsah, poloha noty po chybě, režim linka/mezera.
 - **Obrázky:** žádné.
 
 #### Kabinet učitele · [ucitel.html](obsah/ucitel.html)
@@ -3404,4 +3451,3 @@ Při výrobě sady v jednom stylu zadávat všechny karty v jedné dávce se ste
 - Nový obrázek: uložit podle oddílu 4.2, v kartě u jeho ID doplnit „✅ hotovo“ a název souboru.
 - Nová stránka: nejdřív zařadit do rodiny (oddíl 5) a teprve pak psát; když rodina existuje, přidat satelit místo nové samostatné lekce.
 - Přílohu A lze kdykoli vygenerovat znovu z karet: každá položka má tvar ``- `IMG-xx-NN` priorita **styl** · popis — účel``.
-

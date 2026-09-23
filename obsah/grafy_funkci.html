@@ -345,5 +345,129 @@ $('btnTrefa').addEventListener('click', novaTrefa);
 new MutationObserver(kresli).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
 postavTahla(); kresli();
 </script>
+<script src="../badani.js"></script>
+<script>
+/* Úkoly k modelu (badani.js): předpověz → vyzkoušej → vysvětli.
+   Sklon přímky, posun paraboly nahoru, vodorovný posun u |x + b|. */
+(function(){
+const cis=Badani.cislo;
+const nahodne=p=>p[Math.floor(Math.random()*p.length)];
+const moznost=(t,ok,proc)=>({t,ok,proc});
+const funkce=id=>{ const i=FUNKCE.findIndex(f=>f.id===id); document.querySelectorAll('#typy button')[i].click(); };
+const tahlo=jmeno=>[...document.querySelectorAll('#tahla .tahlo')].find(d=>d.querySelector('label').textContent.trim().startsWith('parametr '+jmeno+' ')).querySelector('input');
+const nastav=mapa=>Object.entries(mapa).forEach(([k,v])=>{ const e=tahlo(k); e.value=v; e.dispatchEvent(new Event('input',{bubbles:true})); });
+const je=(id,mapa)=>aktualni.id===id&&Object.entries(mapa).every(([k,v])=>Math.abs(hodnoty[k]-v)<1e-9);
+
+Badani.start({
+  zakryt:'#popis',   // popis funkce vysvětluje, co který parametr dělá
+  ukoly:[
+    { id:'sklon', nazev:'Sklon přímky',
+      predpoved:{
+        otazka:'Graf funkce <b>y = 1·x + 0</b> je rostoucí přímka. Co se s ní stane, když parametr <b>a</b> změníš na <b>−2</b>?',
+        moznosti:['Posune se o 2 dílky dolů','Bude klesat a bude strmější','Zůstane rovnoběžná s původní'],
+        spravna:1 },
+      priprava(){ funkce('lin'); nastav({a:1,b:0}); },
+      pokus:'Posuvníkem nastav <b>parametr a = −2</b> a sleduj přímku. Najeď myší na graf a odečti, kolik je y pro x = 1.',
+      splneno:()=>je('lin',{a:-2,b:0}),
+      ukaz(){ nastav({a:-2}); },
+      pozorovani:'Přímka teď <b>klesá</b> a je dvakrát strmější: pro x = 1 je y = −2, pro x = 2 je y = −4. Stále prochází počátkem.',
+      vysvetli:{
+        otazka:'Co přesně říká parametr a?',
+        moznosti:[
+          moznost('O kolik se změní y, když x vzroste o 1. Záporné a znamená, že y klesá.',true),
+          moznost('Kde přímka protne osu y.',false,'Průsečík s osou y určuje b. Přímka y = −2x pořád prochází počátkem.'),
+          moznost('O kolik je přímka posunutá dolů.',false,'Posun určuje b. Parametr a mění sklon – přímka se kolem průsečíku s osou y otočila.')]},
+      shrnuti:'U přímky <b>y = a·x + b</b> je <b>a sklon</b> (o kolik vzroste y, když x vzroste o 1; a < 0 → klesá) a <b>b průsečík s osou y</b>.' },
+
+    { id:'posun', nazev:'Parabola nahoru',
+      predpoved:{
+        otazka:'Parabola <b>y = x²</b> má vrchol v počátku. Co s ní udělá změna parametru <b>c na +3</b> (y = x² + 3)?',
+        moznosti:['Posune se o 3 nahoru','Posune se o 3 doprava','Zúží se'],
+        spravna:0 },
+      priprava(){ funkce('kvadr'); nastav({a:1,b:0,c:0}); },
+      pokus:'Nastav <b>parametr c = 3</b> a sleduj, kam se přesune vrchol paraboly.',
+      splneno:()=>je('kvadr',{a:1,b:0,c:3}),
+      ukaz(){ nastav({c:3}); },
+      pozorovani:'Celá parabola se posunula <b>o 3 nahoru</b>, vrchol je v bodě [0; 3]. Tvar se nezměnil.',
+      vysvetli:{
+        otazka:'Proč se parabola posunula nahoru a nezměnila tvar?',
+        moznosti:[
+          moznost('Ke každé hodnotě x² se přičte stejné číslo 3 – každý bod grafu se zvedne o 3.',true),
+          moznost('c mění šířku paraboly.',false,'Šířku a směr otevření určuje a. Tvar zůstal stejný, jen se celý posunul.'),
+          moznost('Vrchol je vždy v bodě [c; 0].',false,'Vrchol se posunul svisle do bodu [0; 3] – c přičítá hodnotu y, ne x.')]},
+      shrnuti:'Přičtení čísla k celé funkci ji <b>posune svisle</b>: y = x² + 3 je parabola y = x² posunutá o 3 nahoru. Parametr <b>a</b> mění šířku a směr otevření.' },
+
+    { id:'vodorovne', nazev:'Kam se posune vrchol |x + b|',
+      predpoved:{
+        otazka:'Graf <b>y = |x|</b> má vrchol v počátku. Kam se vrchol posune v grafu <b>y = |x + 2|</b>?',
+        moznosti:['O 2 doprava','O 2 doleva','O 2 nahoru'],
+        spravna:1 },
+      priprava(){ funkce('abs'); nastav({a:1,b:0,c:0}); },
+      pokus:'Nastav <b>parametr b = 2</b> a sleduj vrchol grafu. Najeď myší na vrchol a odečti jeho souřadnice.',
+      splneno:()=>je('abs',{a:1,b:2,c:0}),
+      ukaz(){ nastav({b:2}); },
+      pozorovani:'Vrchol je v bodě <b>[−2; 0]</b> – posunul se <b>doleva</b>, i když jsme přičetli +2.',
+      vysvetli:{
+        otazka:'Proč „+2“ posunulo graf doleva?',
+        moznosti:[
+          moznost('Vrchol leží tam, kde je výraz v absolutní hodnotě nula: x + 2 = 0, tedy x = −2.',true),
+          moznost('Model se spletl, +2 má posunout doprava.',false,'Dosaď x = −2: |−2 + 2| = 0 – tam je nejnižší bod. Doprava by graf posunulo |x − 2|.'),
+          moznost('Absolutní hodnota vždycky obrací znaménko.',false,'Absolutní hodnota mění záporná čísla na kladná, ale polohu vrcholu určuje, kdy je výraz uvnitř roven nule.')]},
+      shrnuti:'Přičtení čísla <b>k x</b> posouvá graf <b>vodorovně opačným směrem</b>: y = |x + 2| je y = |x| posunutá o 2 doleva, y = (x − 3)² je parabola posunutá o 3 doprava.' },
+  ],
+
+  otazky:[
+    ()=>{ let a,b,x,y;
+      do { a=nahodne([-3,-2,2,3]); b=nahodne([-4,-1,1,5]); x=nahodne([-2,2,3]); y=a*x+b; }
+      while(new Set([y,a*x-b,a+x+b]).size<3);   // chybné možnosti se nesmí trefit do výsledku
+      return { otazka:`Jaká je hodnota funkce <b>y = ${a}x ${b<0?'−':'+'} ${Math.abs(b)}</b> pro <b>x = ${x}</b>?`,
+        moznosti:[moznost(`${y}`,true),
+          moznost(`${a*x-b}`,false,'Pozor na znaménko u b – přičítá se, jak je v předpisu.'),
+          moznost(`${a+x+b}`,false,'a se s x násobí: a · x + b.')],
+        vysvetleni:`y = ${a} · ${x} ${b<0?'−':'+'} ${Math.abs(b)} = ${y}.` }; },
+    ()=>{ const a=nahodne([-3,-0.5,0.5,2]);
+      return { otazka:`Je funkce <b>y = ${cis(a,1)}·x + 1</b> rostoucí, nebo klesající?`,
+        moznosti:[moznost('rostoucí',a>0,'Rozhoduje znaménko a: kladné a = rostoucí, záporné = klesající.'),
+          moznost('klesající',a<0,'Rozhoduje znaménko a: kladné a = rostoucí, záporné = klesající.'),
+          moznost('konstantní',false,'Konstantní by byla jen pro a = 0.')],
+        vysvetleni:`a = ${cis(a,1)} je ${a>0?'kladné – funkce roste':'záporné – funkce klesá'}.`, poradi:true }; },
+    ()=>{ const b=nahodne([-3,4,5]);   // b = 2 by splynulo se sklonem
+      return { otazka:`Ve kterém bodě protne přímka <b>y = 2x ${b<0?'−':'+'} ${Math.abs(b)}</b> osu y?`,
+        moznosti:[moznost(`[0; ${b}]`,true),
+          moznost(`[${b}; 0]`,false,'Na ose y je x = 0. Dosaď: y = 2 · 0 + b = b.'),
+          moznost('[0; 2]',false,'2 je sklon. Průsečík s osou y dostaneš pro x = 0: y = b.')],
+        vysvetleni:`Pro x = 0 je y = ${b}.` }; },
+    ()=>{ const x1=nahodne([0,1]), a=nahodne([2,3,-2]), b=nahodne([1,-1,4]), x2=x1+2;
+      const y1=a*x1+b, y2=a*x2+b;
+      return { otazka:`Přímka prochází body <b>[${x1}; ${y1}]</b> a <b>[${x2}; ${y2}]</b>. Jaký má sklon a?`,
+        moznosti:[moznost(`${a}`,true),
+          moznost(`${y2-y1}`,false,'Rozdíl y je potřeba vydělit rozdílem x: a = (y₂ − y₁) / (x₂ − x₁).'),
+          moznost(`${cis((x2-x1)/(y2-y1),2)}`,false,'Podíl je obráceně: změna y lomeno změnou x.')],
+        vysvetleni:`a = (${y2} − ${y1}) / (${x2} − ${x1}) = ${a}.` }; },
+    { otazka:'Kam je otevřená parabola <b>y = −2x² + 1</b>?',
+      moznosti:[moznost('Dolů',true),
+        moznost('Nahoru',false,'Záporné a (−2) otevírá parabolu dolů – vrchol je nejvyšší bod.'),
+        moznost('Doprava',false,'Graf funkce y = ax² + … je otevřený vždy nahoru, nebo dolů.')],
+      vysvetleni:'a < 0 → parabola otevřená dolů.' },
+    ()=>{ const k=nahodne([1,3,4]), c=nahodne([-2,2,5].filter(c=>c!==k));
+      return { otazka:`Kde je vrchol paraboly <b>y = (x − ${k})² ${c<0?'−':'+'} ${Math.abs(c)}</b>?`,
+        moznosti:[moznost(`[${k}; ${c}]`,true),
+          moznost(`[−${k}; ${c}]`,false,`Výraz v závorce je nula pro x = ${k} – odečtení posouvá doprava.`),
+          moznost(`[${c}; ${k}]`,false,'První souřadnice je poloha na ose x (z závorky), druhá svislý posun.')],
+        vysvetleni:`(x − ${k})² je nejmenší (nula) pro x = ${k}, a pak y = ${c}.` }; },
+    { otazka:'Proč funkce <b>y = 2/x</b> nemá hodnotu pro x = 0?',
+      moznosti:[moznost('Nulou se dělit nedá.',true),
+        moznost('Pro x = 0 je y = 0.',false,'2 / 0 není 0 – dělení nulou není definované, graf má v x = 0 mezeru.'),
+        moznost('Pro x = 0 je y = 2.',false,'2 / 0 není definováno. Hodnota y roste nade všechny meze, čím blíž je x k nule.')],
+      vysvetleni:'Hyperbola se ose y jen přibližuje, nikdy ji neprotne.' },
+    { otazka:'Kterým bodem prochází graf každé exponenciální funkce <b>y = aˣ</b>?',
+      moznosti:[moznost('[0; 1]',true),
+        moznost('[0; 0]',false,'a⁰ = 1 pro každé a > 0 – graf prochází bodem [0; 1].'),
+        moznost('[1; 0]',false,'Pro x = 1 je y = a. Společný bod je [0; 1].')],
+      vysvetleni:'Každé číslo na nultou je 1.' },
+  ],
+});
+})();
+</script>
 </body>
 </html>

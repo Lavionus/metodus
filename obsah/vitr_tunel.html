@@ -994,5 +994,137 @@ requestAnimationFrame(smycka);
 // kalibrace až po prvním vykreslení, ať se stránka objeví hned
 setTimeout(zkalibruj, 400);
 </script>
+<script src="../badani.js"></script>
+<script>
+/* Úkoly k modelu (badani.js): předpověz → vyzkoušej → vysvětli.
+   Proudění se po každé změně chvíli ustaluje, proto se odpor a vztlak
+   porovnávají až jako průměr ustálených hodnot (měření níže). */
+(function(){
+const N=Badani.nastav, cislo=Badani.cislo;
+const moznost=(t,ok,proc)=>({t,ok,proc});
+const cti=id=>parseFloat($(id).textContent.replace(',','.').replace('−','-'))||0;
+const konfig=(prek,smer,sila,turb)=>[prek,smer,sila,turb].join('|');
+const ted=()=>konfig($('prekazka').value,$('smer').value,$('sila').value,$('turbulence').value);
+// ustálené hodnoty: po 3,5 s beze změny se 10 vzorků zprůměruje
+const namereno={}; let klic=null, od=0, vzorky=[];
+setInterval(()=>{
+  const k=ted();
+  if(k!==klic){ klic=k; od=performance.now(); vzorky=[]; return; }
+  if(!bezi||performance.now()-od<3500) return;
+  vzorky.push([cti('mOdpor'),cti('mVztlak')]);
+  if(vzorky.length>10) vzorky.shift();
+  if(vzorky.length>=10) namereno[k]={odpor:vzorky.reduce((a,v)=>a+v[0],0)/10, vztlak:vzorky.reduce((a,v)=>a+v[1],0)/10};
+},200);
+const hodnota=(prek,smer,sila,turb)=>namereno[konfig(prek,smer,sila,turb)];
+const vychozi=(prek,smer=0,turb=70)=>{ if(!bezi) $('btnPauza').click(); N({'#sila':8,'#turbulence':turb,'#smer':smer,'#prekazka':prek,'#zobrazeni':'rychlost'}); };
+// „Ukaž mi“: počká na první měření, potom přepne
+const potom=(podminka,akce)=>{ const t=setInterval(()=>{ if(podminka()){ clearInterval(t); akce(); } },200); };
+
+Badani.start({
+  zakryt:'#infoBox',     // „Zkus si“ v nápovědě prozrazuje odpovědi
+  ukoly:[
+    { id:'tvar', nazev:'Tvar a odpor vzduchu',
+      predpoved:{
+        otazka:'Do stejného větru postavíš <b>kolmou desku</b> a <b>křídlo</b> (proudnicový profil), které je skoro dvakrát delší, než je deska vysoká. Co bude mít větší odpor?',
+        moznosti:['Kolmá deska','Křídlo – je větší','Oba stejný'],
+        spravna:0 },
+      priprava(){ vychozi('deska'); },
+      pokus:'Počkej, až se ustálí <b>odpor desky</b> (tabulka vlevo nahoře), pak přepni překážku na <b>křídlo</b> a znovu chvíli počkej. Panel si obě hodnoty změří sám.',
+      splneno:()=>!!(hodnota('deska','0','8','70')&&hodnota('kridlo','0','8','70')),
+      ukaz(){ potom(()=>hodnota('deska','0','8','70'),()=>N({'#prekazka':'kridlo'})); },
+      pozorovani:()=>{ const d=hodnota('deska','0','8','70').odpor, k=hodnota('kridlo','0','8','70').odpor;
+        return `Odpor desky <b>${cislo(d,1)}</b>, křídla jen <b>${cislo(k,1)}</b> – asi ${cislo(d/k,0)}× méně, přestože je křídlo delší.`; },
+      vysvetli:{
+        otazka:'Proč má křídlo tak malý odpor?',
+        moznosti:[
+          moznost('Vzduch ho plynule obteče a za ním se skoro neodtrhává. Za deskou vzniká široká oblast vírů a podtlaku, která ji táhne dozadu.',true),
+          moznost('Křídlo je lehčí než deska.',false,'Hmotnost překážky odpor vzduchu neurčuje – překážky v tunelu stojí pevně. Rozhoduje tvar a to, jak se za ním proud odtrhává.'),
+          moznost('Vítr do křídla fouká slaběji.',false,'Vítr je v obou pokusech stejný (síla 8). Liší se jen tvar překážky.')]},
+      shrnuti:'Odpor vzduchu závisí hlavně na <b>tvaru</b>: proudnicový tvar (kapka, křídlo) obtéká vzduch plynule, kolmá plocha vytváří za sebou víry a podtlak. Proto mají auta zaoblenou příď a cyklisté se krčí.' },
+
+    { id:'vztlak', nazev:'Úhel náběhu křídla',
+      predpoved:{
+        otazka:'Souměrné křídlo stojí přesně po větru (úhel 0°) a vztlak je nulový. Co se stane se vztlakem, když úhel náběhu zvětšíš na <b>10°</b>?',
+        moznosti:['Zůstane nulový – křídlo je souměrné','Vzroste – křídlo začne nadnášet','Vzroste jen odpor, vztlak ne'],
+        spravna:1 },
+      priprava(){ vychozi('kridlo'); },
+      pokus:'Počkej, až se změří vztlak při 0°, pak nastav <b>směr větru 10°</b> a sleduj vztlak v tabulce.',
+      splneno:()=>!!(hodnota('kridlo','0','8','70')&&hodnota('kridlo','10','8','70')),
+      ukaz(){ potom(()=>hodnota('kridlo','0','8','70'),()=>N({'#smer':10})); },
+      pozorovani:()=>{ const a=hodnota('kridlo','0','8','70'), b=hodnota('kridlo','10','8','70');
+        return `Při 0° je vztlak ${cislo(Math.abs(a.vztlak),1)}, při 10° už <b>${cislo(Math.abs(b.vztlak),1)}</b>. Odpor přitom vzrostl jen málo (${cislo(a.odpor,1)} → ${cislo(b.odpor,1)}).`; },
+      vysvetli:{
+        otazka:'Proč nakloněné křídlo nadnáší?',
+        moznosti:[
+          moznost('Šikmé křídlo stáčí proud vzduchu dolů. Nad křídlem vznikne podtlak a pod ním přetlak – rozdíl tlaků tlačí křídlo kolmo ke směru větru.',true),
+          moznost('Vítr do nakloněného křídla fouká silněji.',false,'Síla větru se nezměnila (8). Změnil se jen úhel, pod kterým vzduch na křídlo dopadá.'),
+          moznost('Při 10° se křídlo stane nesouměrným.',false,'Tvar křídla zůstal stejný. Rozhoduje úhel náběhu – natočení vůči proudu vzduchu.')]},
+      shrnuti:'<b>Vztlak</b> je síla kolmá na směr proudění. S úhlem náběhu roste – proto letadlo při startu zvedá příď. Při příliš velkém úhlu se proud od křídla odtrhne a vztlak přestane růst (pád letadla).' },
+
+    { id:'vazkost', nazev:'Vzduch hustý jako med',
+      predpoved:{
+        otazka:'Posuvník <b>Turbulence</b> stáhneš na 0 – vzduch se bude chovat jako hustá, vazká tekutina (třeba med). Co se stane s odporem válce?',
+        moznosti:['Zmenší se – proudění bude klidnější','Nezmění se','Zvětší se'],
+        spravna:2 },
+      priprava(){ vychozi('valec'); },
+      pokus:'Počkej, až se změří odpor válce, pak stáhni <b>Turbulenci na 0</b> a porovnej.',
+      splneno:()=>!!(hodnota('valec','0','8','70')&&hodnota('valec','0','8','0')),
+      ukaz(){ potom(()=>hodnota('valec','0','8','70'),()=>N({'#turbulence':0})); },
+      pozorovani:()=>{ const a=hodnota('valec','0','8','70').odpor, b=hodnota('valec','0','8','0').odpor;
+        return `Odpor válce vzrostl z ${cislo(a,1)} na <b>${cislo(b,1)}</b>. Proudění je klidné, a přesto brzdí víc.`; },
+      vysvetli:{
+        otazka:'Proč vazká tekutina brzdí víc, i když proudí klidně?',
+        moznosti:[
+          moznost('Vazká tekutina se „lepí“ k povrchu a vrstvy se o sebe třou. Tření v tekutině (vazkost) přidává odpor.',true),
+          moznost('Klidné proudění vždycky znamená větší odpor.',false,'Klid proudění sám o sobě odpor nezvyšuje – vzniká tím, že vazká tekutina víc tře o povrch a sama o sebe.'),
+          moznost('Med je těžší než vzduch.',false,'Hustotu model nemění – posuvník mění jen vazkost, tedy vnitřní tření tekutiny.')]},
+      shrnuti:'Odpor tekutiny tvoří <b>víry za překážkou</b> a <b>vnitřní tření</b> (vazkost). Ve vazké tekutině proud víry skoro netvoří, ale tření brzdí víc – lžička v medu jde ztuha.' },
+  ],
+
+  otazky:[
+    { otazka:'Proč mají auta a rychlovlaky <b>zaoblenou příď</b> a zúženou záď?',
+      moznosti:[moznost('Vzduch je obteče plynule a za nimi vznikne méně vírů – menší odpor.',true),
+        moznost('Kvůli bezpečnosti chodců, na odpor nemá tvar vliv.',false,'Tvar má na odpor vzduchu velký vliv – vyzkoušej desku a křídlo v tunelu.'),
+        moznost('Aby byly lehčí.',false,'Hmotnost s tvarem přídě nesouvisí. Jde o to, jak se kolem vozidla proud vzduchu odtrhává.')],
+      vysvetleni:'Proudnicový tvar zmenší oblast vírů za vozidlem, a tím odpor i spotřebu.' },
+    { otazka:'Kde je za budovou <b>závětří</b>?',
+      moznosti:[moznost('Hned za budovou na straně odvrácené od větru',true),
+        moznost('Před budovou, kam vítr naráží',false,'Tam vítr do stěny přímo tlačí – to je návětrná strana.'),
+        moznost('Nad střechou',false,'Nad střechou se vítr naopak zrychluje. Závětří je za budovou.')],
+      vysvetleni:'Za překážkou vítr slábne a víří – proto tam napadají sněhové závěje.' },
+    { otazka:'Co se stane s větrem v <b>úzké uličce</b> mezi dvěma domy?',
+      moznosti:[moznost('Zrychlí se – stejné množství vzduchu musí projít užším místem.',true),
+        moznost('Zpomalí se, domy ho zastaví.',false,'Vzduch, který přitéká, musí uličkou projít – v užším místě proto proudí rychleji.'),
+        moznost('Nezmění se.',false,'Užší průřez znamená rychlejší proudění – zkus v tunelu dvě budovy a zobrazení rychlosti.')],
+      vysvetleni:'Kolik vzduchu vteče, tolik musí vytéct: v užším místě rychleji.' },
+    { otazka:'Co je <b>vztlak</b> na křídle?',
+      moznosti:[moznost('Síla kolmá na směr proudění, která křídlo nadnáší',true),
+        moznost('Síla ve směru větru, která křídlo brzdí',false,'To je odpor. Vztlak míří napříč proudu.'),
+        moznost('Tíha letadla',false,'Tíha míří dolů k Zemi. Vztlak ji musí při letu vyrovnat.')],
+      vysvetleni:'Odpor působí po směru proudu, vztlak kolmo na něj.' },
+    { otazka:'Proč letadlo při startu <b>zvedá příď</b>?',
+      moznosti:[moznost('Zvětší úhel náběhu křídel, a tím vztlak.',true),
+        moznost('Aby zmenšilo odpor vzduchu.',false,'Větší úhel odpor spíš trochu zvětší. Letadlu jde o vztlak.'),
+        moznost('Aby piloti lépe viděli.',false,'Rozhoduje úhel, pod kterým vzduch obtéká křídla – úhel náběhu.')],
+      vysvetleni:'S úhlem náběhu vztlak roste – vyzkoušej křídlo při 0° a 10°.' },
+    { otazka:'Co se stane, když úhel náběhu křídla zvětšíš <b>příliš</b>?',
+      moznosti:[moznost('Proud se od horní strany křídla odtrhne a vztlak přestane růst – letadlo „padá“.',true),
+        moznost('Vztlak poroste pořád dál.',false,'Jen do určitého úhlu. Pak se proud odtrhne – v modelu je vztlak při 60° menší než při 45°.'),
+        moznost('Odpor zmizí.',false,'Naopak – při velkém úhlu odpor prudce roste.')],
+      vysvetleni:'Odtržení proudu na křídle je nebezpečné – piloti mu říkají pád (stall).' },
+    { otazka:'Cyklista se při sjezdu z kopce <b>skrčí</b>. Proč?',
+      moznosti:[moznost('Zmenší plochu, do které vzduch naráží, a víry za sebou – menší odpor.',true),
+        moznost('Přenese váhu, aby kolo jelo rychleji z kopce.',false,'Rychlost ze sjezdu brzdí hlavně odpor vzduchu. Skrčením ho cyklista zmenší.'),
+        moznost('Aby na něj méně foukalo do očí.',false,'Důvodem je odpor vzduchu, který roste s plochou postavy.')],
+      vysvetleni:'Menší čelní plocha a hladší tvar = menší odpor vzduchu.' },
+    { otazka:'Proč se za plotem tvoří <b>sněhové závěje</b>?',
+      moznosti:[moznost('Za plotem je závětří – vítr zpomalí a sníh, který nesl, spadne.',true),
+        moznost('Plot sníh přitahuje.',false,'Sníh nic nepřitahuje. Rozhoduje, kde vítr zpomalí.'),
+        moznost('Za plotem je větší zima.',false,'Teplota je stejná. Sníh padá tam, kde vítr zeslábne.')],
+      vysvetleni:'Pomalý vítr unese méně sněhu – ten se usadí v závětří.' },
+  ],
+});
+})();
+</script>
 </body>
 </html>

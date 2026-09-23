@@ -1128,11 +1128,12 @@
     const MOTIVY = {
       auto: ['🖥️', 'Podle systému'], dark: ['🌙', 'Tmavý', '#2d2d2d'], light: ['☀️', 'Světlý', '#ffffff'],
       kontrast: ['🔲', 'Vysoký kontrast', '#ffffff'],
-      sepia: ['📜', 'Sépie', '#e9ddbe'], knihovna: ['📚', 'Stará knihovna', '#2c2118'],
+      sepia: ['📜', 'Sépie', '#e9ddbe'], 'sepia-tmava': ['🕯️', 'Tmavá sépie', '#302219'],
+      knihovna: ['📚', 'Stará knihovna', '#2c2118'],
       skola: ['✏️', 'Škola', '#f6f8f4'], 'nocni-skola': ['🦉', 'Noční škola', '#244236']
     };
     // Základní motivy řeší čitelnost (i na projektoru), tematické náladu; skupiny drží seznam přehledný.
-    const SKUPINY = [['Základní', ['auto', 'dark', 'light', 'kontrast']], ['Tematické', ['sepia', 'knihovna', 'skola', 'nocni-skola']]];
+    const SKUPINY = [['Základní', ['auto', 'dark', 'light', 'kontrast']], ['Tematické', ['sepia', 'sepia-tmava', 'knihovna', 'skola', 'nocni-skola']]];
     temaVolba.replaceChildren(...SKUPINY.map(([nazev, motivy]) => {
       const g = document.createElement('optgroup'); g.label = nazev;
       g.append(...motivy.filter(t => MetodusTheme.themes.includes(t)).map(t => new Option(MOTIVY[t][0] + ' ' + MOTIVY[t][1], t)));

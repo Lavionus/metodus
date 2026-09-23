@@ -1,4 +1,4 @@
-.propojeni { margin:18px 0; padding:18px; max-width:1000px; border:1px solid var(--border); border-radius:var(--radius); background:var(--bg-panel); line-height:1.55; }
+.propojeni { margin:18px 0; padding:18px; max-width:var(--sirka-obsahu, 1000px); border:1px solid var(--border); border-radius:var(--radius); background:var(--bg-panel); line-height:1.55; }
 .propojeni h2 { font-size:1.15rem; margin:0 0 12px; }
 .propojeni p { margin:8px 0; }
 .propojeni label { display:block; margin:8px 0; }

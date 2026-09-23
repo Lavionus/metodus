@@ -5,9 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Chemické názvosloví</title>
   <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="../vyuka.css">
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
+  <script src="../uloha.js" defer></script>
+  <script src="../procvic.js" defer></script>
   <style>
     body { background-color: var(--bg-deep); padding: 24px clamp(14px, 3vw, 40px); min-height: 100vh; }
     h1 { font-size: 1.4rem; margin-bottom: 4px; }
@@ -20,28 +23,19 @@
     .rezimy button.active, .kategorie button.active {
       background: var(--accent); border-color: var(--accent); color: var(--na-akcentu, #fff); font-weight: 600;
     }
-    .karta { background: var(--bg-panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; max-width: 640px; }
-    .zadani { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-faint); margin-bottom: 8px; }
-    .dotaz { font-size: 1.7rem; font-weight: 700; margin-bottom: 18px; min-height: 2.2rem; }
+    .karta { background: var(--bg-panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; }
+    /* zadání série (karta uvnitř #plocha má vzhled z vyuka.css) */
+    .plocha .karta { margin: 0; padding: 18px 28px; background: var(--bg-elevated); border-radius: 18px; }
+    .druh { display: block; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-faint); margin-bottom: 6px; }
+    .dotaz { display: block; font-size: clamp(1.5rem, 5vw, 2rem); font-weight: 700; color: var(--text); }
     .dotaz sub { font-size: 60%; }
-    .moznosti { display: grid; gap: 8px; }
-    .moznosti button {
-      background: var(--bg-elevated); border: 1px solid var(--border); color: var(--text);
-      border-radius: 8px; padding: 12px 14px; font-size: 1rem; cursor: pointer; text-align: left;
-      transition: border-color 0.12s ease;
-    }
-    .moznosti button:hover { border-color: var(--accent); }
-    .moznosti button.ok { background: rgba(76, 175, 125, 0.2); border-color: var(--ok); }
-    .moznosti button.spatne { background: rgba(224, 93, 93, 0.18); border-color: var(--danger); }
-    .moznosti button:disabled { cursor: default; }
-    .stavovy { display: flex; align-items: center; gap: 16px; margin-top: 16px; font-size: 0.9rem; }
-    .stavovy .serie { color: var(--warn); }
-    .stavovy .pomer { color: var(--text-muted); margin-left: auto; font-variant-numeric: tabular-nums; }
-    .dalsi {
-      background: var(--accent); border: 1px solid var(--accent); color: var(--na-akcentu, #fff); border-radius: 6px;
-      padding: 8px 16px; font-size: 0.88rem; cursor: pointer; visibility: hidden;
-    }
-    .dalsi:hover { background: var(--accent-hover); }
+    .plocha .moznosti button { min-width: 150px; font-size: 1.05rem; }
+    /* psané názvy jsou dlouhé (hydrogenuhličitan sodný) */
+    .plocha .odpoved-pole { width: min(420px, 80vw); font-size: 1.25rem; }
+    .reseni-postup { margin-top: 10px; font-size: 0.95rem; color: var(--text-muted); line-height: 1.5; max-width: 560px; }
+    .reseni-postup b { color: var(--text); }
+    .prehled-chyb .druh { display: none; }
+    .prehled-chyb .dotaz { display: inline; font-size: inherit; }
     /* tabulka učení */
     .uceni-nastroje { margin: 4px 0 10px; }
     .uceni-nastroje input {
@@ -116,30 +110,23 @@
   </section>
   <h2>3. Vyzkoušej se nebo prozkoumej přehled</h2>
   <div class="rezimy" id="rezimy">
+    <button data-rezim="uceni" data-faze="vyuka">📋 Přehled (učení)</button>
     <button data-rezim="vzorec" class="active">Vzorec → název</button>
     <button data-rezim="nazev">Název → vzorec</button>
-    <button data-rezim="uceni" data-faze="vyuka">Přehled (učení)</button>
+    <button data-rezim="pisnazev">✍️ Napiš název</button>
+    <button data-rezim="pisvzorec">✍️ Napiš vzorec</button>
   </div>
   <div class="kategorie" id="kategorie"></div>
 
-  <div class="karta" id="kvizKarta" data-kostra-odpovedi>
-    <div class="zadani" id="zadani"></div>
-    <div class="dotaz" id="dotaz"></div>
-    <label><input type="checkbox" id="writeMode"> Chci odpověď napsat samostatně</label>
-    <div class="moznosti" id="moznosti"></div>
-    <form id="answerForm" hidden>
-      <div class="lab-controls"><label for="writtenAnswer">Tvoje odpověď<input id="writtenAnswer" autocomplete="off" spellcheck="false" aria-describedby="answerHelp"></label><button class="action" type="submit">✔️ Zkontrolovat</button></div>
-      <p class="muted" id="answerHelp">Vzorec piš například Ca(OH)2. U značek prvků rozlišujeme velká a malá písmena.</p>
-    </form>
-    <div id="quizFeedback" class="feedback" role="status"></div>
-    <div class="stavovy">
-      <button class="dalsi" id="btnDalsi">Pokračovat →</button>
-      <span class="serie" id="serie"></span>
-      <span class="pomer" id="pomer"></span>
-    </div>
+  <div class="plocha" id="plocha"></div>
+  <div class="ovladani" id="ovladani">
+    <button class="hlavni" id="startBtn">🔄 Nová série</button>
+    <span class="pokrok" id="pokrok"></span>
+    <span class="skore" id="skore"></span>
   </div>
+  <p class="napoveda" id="napovedaPsani" hidden>Vzorec piš s obyčejnými číslicemi, například <b>Ca(OH)2</b> nebo <b>Fe2O3</b>; u značek prvků záleží na velikosti písmen (<b>CO</b> je oxid uhelnatý, <b>Co</b> kobalt). Název můžeš psát i bez diakritiky.</p>
 
-  <div class="karta" id="uceniKarta" style="display:none">
+  <div class="karta" id="uceniKarta" hidden>
     <div class="uceni-nastroje">
       <label for="uceniHledat">Vyhledat podle názvu nebo vzorce</label><br><input type="search" id="uceniHledat" placeholder="🔍 Hledat sloučeninu…">
     </div>
@@ -199,94 +186,77 @@
 
     let rezim = 'vzorec';
     let kategorie = 'vše';
-    let aktualni = null;
-    let serie = 0, spravne = 0, celkem = 0;
-    let zodpovezeno = false;
+    let posledni = null;
 
     const $ = id => document.getElementById(id);
     const subHtml = v => v.replace(/(\d+)/g, '<sub>$1</sub>');
-    const nahodne = arr => arr[Math.floor(Math.random() * arr.length)];
+    const subText = v => v.replace(/\d/g, d => '₀₁₂₃₄₅₆₇₈₉'[d]);   // možnosti jsou prostý text
+    const bezDiakritiky = v => v.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
     const vyber = () => LATKY.filter(l => kategorie === 'vše' || l[2] === kategorie);
 
-    /* kategorie pilulky */
+    /* kategorie pilulky – platí pro sérii i přehled */
     KATEGORIE.forEach(k => {
       const b = document.createElement('button');
       b.textContent = k; b.setAttribute('aria-pressed', k === kategorie);
       if (k === 'vše') b.classList.add('active');
       b.addEventListener('click', () => {
-        document.querySelectorAll('#kategorie button').forEach(x => x.classList.remove('active'));
-        b.classList.add('active');
-        kategorie = k; document.querySelectorAll('#kategorie button').forEach(x => x.setAttribute('aria-pressed', x === b));
+        document.querySelectorAll('#kategorie button').forEach(x => { x.classList.toggle('active', x === b); x.setAttribute('aria-pressed', x === b); });
+        kategorie = k;
         if (rezim === 'uceni') vykresliUceni();
-        else dalsiOtazka();
+        else serie.restart();
       });
       $('kategorie').appendChild(b);
     });
 
-    $('rezimy').addEventListener('click', e => {
-      const b = e.target.closest('button'); if (!b) return;
-      document.querySelectorAll('#rezimy button').forEach(x => x.classList.remove('active'));
-      b.classList.add('active');
-      rezim = b.dataset.rezim; document.querySelectorAll('#rezimy button').forEach(x => x.setAttribute('aria-pressed', x === b));
-      const uceni = rezim === 'uceni';
-      $('kvizKarta').style.display = uceni ? 'none' : '';
-      $('uceniKarta').style.display = uceni ? '' : 'none';
-      if (uceni) vykresliUceni();
-      else dalsiOtazka();
+    function generuj(r) {
+      const zdroj = vyber();
+      let l; do { l = zdroj[Math.floor(Math.random() * zdroj.length)]; } while (zdroj.length > 1 && l === posledni);
+      posledni = l;
+      const naVzorec = r === 'nazev' || r === 'pisvzorec';
+      const zadani = `<span class="druh">${naVzorec ? 'Jaký vzorec má' : 'Jak se jmenuje'}</span>`
+        + `<span class="dotaz">${naVzorec ? l[1] : subHtml(l[0])}</span>`;
+      // po uzavření otázky vzorec, název a proč (oxidační čísla, poměr iontů)
+      const poVyhodnoceni = karta => karta.insertAdjacentHTML('beforeend',
+        `<div class="reseni-postup">💡 <b>${subHtml(l[0])}</b> – ${l[1]}. ${explanation(l)}</div>`);
+      if (r === 'pisvzorec') {
+        return { zadani, odpoved: l[0], varianty: [subText(l[0])], presne: true, napoveda: '', poVyhodnoceni };
+      }
+      if (r === 'pisnazev') {
+        // „amoniak (čpavek)" uzná i jednotlivá jména; vše i bez diakritiky
+        const jmena = [l[1], ...l[1].split(/[()]/).map(x => x.trim()).filter(Boolean)];
+        return { zadani, odpoved: l[1], varianty: [...jmena, ...jmena.map(bezDiakritiky)], napoveda: '', poVyhodnoceni };
+      }
+      // tři jiné látky ze stejné kategorie (když nestačí, doplní se z ostatních)
+      const text = x => naVzorec ? subText(x[0]) : x[1];
+      const kandidati = [...Uloha.zamichej(LATKY.filter(x => x !== l && x[2] === l[2])), ...Uloha.zamichej(LATKY.filter(x => x[2] !== l[2]))];
+      const jine = [...new Set(kandidati.map(text))].filter(t => t !== text(l)).slice(0, 3);
+      return { zadani, odpoved: text(l), moznosti: Uloha.zamichej([text(l), ...jine]), napoveda: '', poVyhodnoceni };
+    }
+
+    let serie;
+    window.addEventListener('DOMContentLoaded', () => {
+      serie = Procvic.spust({
+        klic: 'metodus_chem_nazvoslovi', pocet: 10, typ: 'text',
+        plocha: $('plocha'), skoreEl: $('skore'), pokrokEl: $('pokrok'),
+        rezim: () => rezim, generuj,
+      });
+      $('startBtn').onclick = () => serie.restart();
+      serie.restart();
     });
 
-    let otazkaKostry = {};
-    function dalsiOtazka() {
-      const zdroj = vyber();
-      if (zdroj.length < 4) { $('dotaz').textContent = 'Málo položek v kategorii.'; $('moznosti').innerHTML = ''; return; }
-      aktualni = nahodne(zdroj.filter(l => l !== aktualni));
-      otazkaKostry = {};   // společná kostra – jedna otázka = jeden objekt
-      zodpovezeno = false; $('quizFeedback').textContent = ''; $('writtenAnswer').value = ''; $('writtenAnswer').classList.remove('ok','spatne'); $('writtenAnswer').disabled = false; $('answerForm').querySelector('button').disabled = false;
-      $('btnDalsi').style.visibility = 'hidden';
-
-      const naVzorec = rezim === 'nazev';
-      $('zadani').textContent = naVzorec ? 'Jaký vzorec má:' : 'Jak se jmenuje:';
-      $('dotaz').innerHTML = naVzorec ? aktualni[1] : subHtml(aktualni[0]);
-
-      // 3 náhodné špatné odpovědi ze stejné kategorie (nebo ze všech, když nestačí)
-      const spatneKandidati = LATKY.filter(l => l !== aktualni && l[2] === aktualni[2]);
-      while (spatneKandidati.length < 3) spatneKandidati.push(nahodne(LATKY.filter(l => l !== aktualni)));
-      const spatneOdpovedi = [...new Set(spatneKandidati)].sort(() => Math.random() - 0.5).slice(0, 3);
-      const moznosti = [aktualni, ...spatneOdpovedi].sort(() => Math.random() - 0.5);
-
-      const el = $('moznosti');
-      el.innerHTML = '';
-      moznosti.forEach(m => {
-        const b = document.createElement('button');
-        b.innerHTML = naVzorec ? subHtml(m[0]) : m[1];
-        b.addEventListener('click', () => odpoved(b, m));
-        el.appendChild(b);
-      });
-      window.Kostra?.otazka();
-    }
-
-    function odpoved(btn, m) {
-      if (zodpovezeno) return;
-      zodpovezeno = true;
-      celkem++;
-      const dobre = m === aktualni; window.Kostra?.odpoved(dobre, otazkaKostry); $('quizFeedback').innerHTML = (dobre ? '✓ Správně. ' : '✗ Tentokrát ne. Správná odpověď: ') + subHtml(aktualni[0]) + ' — ' + aktualni[1] + '. ' + explanation(aktualni); $('writtenAnswer').disabled = true; $('answerForm').querySelector('button').disabled = true;
-      if (dobre) { spravne++; serie++; btn.classList.add('ok'); }
-      else {
-        serie = 0;
-        btn.classList.add('spatne');
-        [...$('moznosti').children].forEach(b => {
-          const jeSpravna = (rezim === 'nazev') ? b.innerHTML === subHtml(aktualni[0]) : b.textContent === aktualni[1];
-          if (jeSpravna) b.classList.add('ok');
-        });
-      }
-      [...$('moznosti').children].forEach(b => b.disabled = true);
-      $('serie').textContent = serie >= 3 ? `🔥 série ${serie}` : '';
-      $('pomer').textContent = `${spravne}/${celkem}`;
-      $('btnDalsi').style.visibility = 'visible';
-    }
-
-    $('btnDalsi').addEventListener('click', dalsiOtazka);
-
+    $('rezimy').addEventListener('click', e => {
+      const b = e.target.closest('button[data-rezim]'); if (!b) return;
+      document.querySelectorAll('#rezimy button').forEach(x => { x.classList.toggle('active', x === b); x.setAttribute('aria-pressed', x === b); });
+      rezim = b.dataset.rezim;
+      const uceni = rezim === 'uceni';
+      $('plocha').hidden = $('ovladani').hidden = uceni;
+      $('uceniKarta').hidden = !uceni;
+      $('napovedaPsani').hidden = !rezim.startsWith('pis');
+      posledni = null;
+      if (uceni) vykresliUceni();
+      else serie.restart();
+    });
+    document.querySelectorAll('#rezimy button').forEach(b => b.setAttribute('aria-pressed', b.dataset.rezim === rezim));
 
     function vykresliUceni() {
       const q = $('uceniHledat').value.trim().toLowerCase();
@@ -302,8 +272,6 @@
       $('searchCount').textContent = telo.children.length ? `Nalezeno: ${telo.children.length} sloučenin.` : 'Žádná shoda. Zkus jiný název nebo kategorii.';
     }
     $('uceniHledat').addEventListener('input', vykresliUceni);
-
-    dalsiOtazka();
   </script>
   <script src="chem_nazvoslovi.js"></script>
 </body>

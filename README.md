@@ -38,7 +38,7 @@ prvním načtení jednorázová migrace v `theme.js`, starou cache `nodus-*` sma
 | `obsah/*.html` | jednotlivé výukové aplikace |
 | `obsah/lib/`, `obsah/textures/`, `obsah/Anatomy/` | knihovny a data aplikací |
 | `common.css`, `theme.js` | sdílený vzhled a přepínání motivů (podle systému, tmavý, světlý, vysoký kontrast, sépie, stará knihovna, škola, noční škola) |
-| `kontrast.css`, `sepia.css`, `knihovna.css`, `skola.css`, `nocni-skola.css` | palety a textury dalších motivů (importuje je `common.css`) |
+| `kontrast.css`, `sepia.css`, `sepia-tmava.css`, `knihovna.css`, `skola.css`, `nocni-skola.css` | palety a textury dalších motivů (importuje je `common.css`) |
 | `projektor.js` | zvětšení obrazu pro projektor a tabuli – používá rozcestník i prezentace |
 | `podpis.js` | podpis (`© Metodus · hdm@seznam.cz`) ve vlastním pruhu dole – patří do `<head>` **každé** stránky; text skládají konstanty `DILO` a `MAIL` na začátku souboru |
 | `rec.js` | čtení nahlas – systémový hlas, jinak vestavěný ze složky `hlas/` |
@@ -122,6 +122,77 @@ stejně velkým celkem) používají zlomky úvod; číselná osa s posunem cel�
 procenta; časová osa se souběžnými pruhy Česko/svět (měřítko „pořadí“ nebo skutečné) obě časové osy.
 Barvy větných členů (`--clen-*`) jsou v `common.css` a berou je rozbor věty, skladební dvojice,
 rozvíjející členy i shoda podmětu. Mapy obstarává dál `mapy.js` (`Nazor.mapa` je jen tenký obal).
+
+### Úkoly k modelu (simulace)
+
+`badani.js` + `badani.css` dávají simulaci učební cestu: panel **🧪 Úkoly k modelu** vede žáka
+ve třech krocích – 🤔 **předpověz** (tip dřív, než cokoli zkusí), 🔬 **vyzkoušej** (panel sám pozná,
+že model dosáhl požadovaného stavu, a zapíše, co ukázal) a 💬 **vysvětli** (porovnání tipu s pokusem
+a výběr vysvětlení; každá chybná možnost má vlastní zdůvodnění). Panel je nemodální: na obrazovce
+od 900 px se ukotví jako boční sloupec a stránka se o něj zúží (model se překreslí do zbylého místa),
+na užší obrazovce plave, na mobilu je to list u spodní hrany. Poprvé se na širší obrazovce otevře sám.
+
+Napojení na kostru: úkoly jsou fáze 📖 Výuka, záložka **❓ Otázky** fáze ✏️ Procvič a z otázek
+staví kostra 🎯 **Ověř se** (panel má `data-kostra-odpovedi` a odpovědi ohlašuje přes `Kostra.odpoved`).
+Shrnutí úkolů je 📌 Tahák. Postup se ukládá do `metodus_badani` (po stránkách).
+
+Stránka vloží na konec `<body>` až za svůj skript:
+
+```html
+<script src="../badani.js"></script>
+<script>
+Badani.start({
+  nad: '#stav',            // plovoucí panel se drží nad stavovým řádkem
+  zakryt: '#vyklad',       // výklad, který by prozradil odpověď, se do tipu rozmaže
+  ukoly: [{ id, nazev, predpoved: { otazka, moznosti, spravna }, priprava, pokus,
+            splneno: () => …, ukaz, pozorovani, vysvetli: { otazka, moznosti }, shrnuti }],
+  otazky: [{ otazka, moznosti: [{ t, ok, proc }], vysvetleni }, () => ({ … })],
+});
+</script>
+```
+
+`priprava` a `ukaz` jsou buď mapa `{'#posuvnik': hodnota}` (komponenta hodnotu zapíše a vyvolá
+`input` + `change`, jako by to udělal žák), nebo funkce. `splneno` čte stav modelu přímo (globální
+objekty simulace); kontroluje se po každé akci a čtyřikrát za sekundu, takže zachytí i animaci.
+Otázka může být funkce, která vrací nové zadání s náhodnými čísly. Každá musí mít právě jednu
+správnou možnost a u chybných zdůvodnění – hlídá to [tests/badani.mjs](tests/badani.mjs)
+na 40 vygenerovaných zadáních každé otázky. Zavedeno na 18 stránkách (viz `VYCHOZI` v testu).
+
+Když model potřebuje čas (proudění se ustaluje, planetka musí oblétnout Slunce), porovnává úkol až
+ustálené nebo zapsané hodnoty – stránka si je v bloku úkolů sama měří (např. `namereno` u tunelu,
+`hotove` u řazení). Úkol nestavět na jevu, který model spolehlivě neukáže: než se napíše předpověď,
+ověřit v prohlížeči, co model opravdu dělá (tunel má odpor skoro lineární se sílou větru, proto na
+tom úkol nestojí). Tmavé stránky s plošným `button { color: … }` pro světlý tón musí vyjmout
+`.badani` i `.kostra` – s úkoly se na nich poprvé objeví lišta fází.
+
+### Starší samostatné stránky (F) pod společným motorem
+
+Kvízy, které si dřív řešily vlastní skóre a vlastní „tlačítka“ (často `<div>` s `onclick`,
+tedy bez klávesnice), jedou přes `procvic.js` (série s druhým pokusem, přehledem chyb
+a „Zopakovat chyby“) nebo `uloha.js` (průběžné procvičování). Stavba stránky je stejná jako
+u lekcí: `#rezimy` (výkladový režim s `data-faze="vyuka"`), `#plocha`, `.ovladani`, tahák
+`.napoveda`. Výkladová část (převodník, přehled, osa) se při procvičování skryje atributem
+`hidden`. Tím všechny dostaly Ověř se, ovládání klávesnicí, hlášení odečítači a jednotný vzhled
+v motivech. Obě časové osy sdílejí kvíz `osa-kviz.js` (`OsaKviz.spust({ pruh, klic })`),
+slovíčka AJ/NJ/FJ modul `slovicka.js` + `slovicka.css` (`Slovicka.spust({ klic, lang, jazyk,
+slova, kategorie, cleny, plne, plneHtml, pravidlo })` – přehled, kartičky, série a u jazyků se
+členy režim „který člen?“).
+
+Otázka v `procvic.js` umí kromě `zadani`, `odpoved`, `moznosti`, `napoveda` také:
+`poVyhodnoceni(karta, spravne)` – co se ukáže na kartě po uzavření otázky (postup, proužek,
+celé slovíčko); `varianty` – další uznávané odpovědi (was/were); `presne: true` – záleží na
+velikosti písmen (vzorce CO × Co); `vlastni: { vykresli(karta, potvrd), spravne(), znovu(),
+zamkni() }` – vlastní vstup s víc políčky (koeficienty chemické rovnice).
+Test: [tests/prevod-f.mjs](tests/prevod-f.mjs) – fáze, klávesnice, série do konce, žádné
+dvě stejné možnosti, Ověř se, kontrast, mobil.
+
+### Barvy na výplních
+
+Písmo na výplni akcentu, zelené a červené je `--na-akcentu`. V tmavém motivu (bez `data-theme`)
+je tmavé (`#10151c`), protože akcent i stavové barvy jsou světlé – bílá na nich měla 2,0–3,6 : 1.
+Světlý motiv má sytější `--ok` a `--danger`, aby bílá držela ≥ 6 : 1; červený text zpětné
+vazby má v tmavém motivu `--danger-text: #ec7474`. Tématické motivy si `--na-akcentu` určují
+samy. Hlídá to [tests/vyplne.mjs](tests/vyplne.mjs) (všechny stránky, tmavý a světlý motiv).
 
 ### Rodiny témat
 
@@ -373,7 +444,7 @@ Většina stránek linkuje `theme.js` a jde se zbytkem webu. Motivy se vybíraj�
 z výklopného seznamu v hlavičce rozcestníku (nativní `<select id="temaVolba">`;
 na úzké obrazovce se i s popiskem „Motiv“ přesune do nabídky „Další“). Seznam má
 dvě skupiny: **Základní** (čitelnost – podle systému, tmavý, světlý, vysoký kontrast)
-a **Tematické** (nálada – sépie, stará knihovna, škola, noční škola).
+a **Tematické** (nálada – sépie, tmavá sépie, stará knihovna, škola, noční škola).
 **Motiv mění jen barvy a textury pozadí, nikdy písmo** – hlídá to `tests/motivy.mjs`.
 
 | Motiv | `data-theme` | `data-tone` | Vzhled |
@@ -383,6 +454,7 @@ a **Tematické** (nálada – sépie, stará knihovna, škola, noční škola).
 | Podle systému | vykreslí `light` / *(žádný)* | podle zařízení | uloží se `auto`; `theme.js` vybere světlý/tmavý podle `prefers-color-scheme` a při změně systému přepne za běhu (`MetodusTheme.get()` vrací volbu, `rendered()` vykreslený motiv) |
 | Vysoký kontrast | `kontrast` | `light` | `kontrast.css` – černá na bílé, text AAA (≥ 7 : 1), zřetelné okraje, podtržené odkazy v textu, výrazný fokus; pro projektor a slabší zrak, bez textur |
 | Sépie | `sepia` | `light` | `sepia.css` – recyklovaný papír (`obsah/textures/recyklovany-papir.webp`, image_gen, zadání vedle) |
+| Tmavá sépie | `sepia-tmava` | `dark` | `sepia-tmava.css` – tmavý hnědý papír se stejnou jemnou recyklovanou texturou a teplým inkoustem |
 | Stará knihovna | `knihovna` | `dark` | `knihovna.css` – ořechové dřevo (`obsah/textures/knihovna-drevo.webp`, procedurálně z `knihovna-drevo.py`), starozlatý akcent |
 | Škola | `skola` | `light` | `skola.css` – sešitový papír se čtverečkovou linkou (jen CSS přechod), modrý inkoust, červené opravy |
 | Noční škola | `nocni-skola` | `dark` | `nocni-skola.css` – zelená tabule (`obsah/textures/tabule-krida.webp`, procedurálně z `tabule-krida.py`), křídově bílý text, žlutá křída |

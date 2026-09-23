@@ -5,9 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Lineární rovnice</title>
   <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="../vyuka.css">
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
+  <script src="../uloha.js" defer></script>
+  <script src="../procvic.js" defer></script>
   <style>
     body { background-color: var(--bg-deep); padding: 24px clamp(14px, 3vw, 40px); min-height: 100vh; }
     h1 { font-size: 1.4rem; margin-bottom: 4px; }
@@ -34,6 +37,7 @@
     .potvrdit:hover { background: var(--accent-hover); }
     .zprava { margin-top: 14px; min-height: 1.5rem; font-size: 0.98rem; text-align: center; }
     .zprava.ok { color: var(--ok); } .zprava.spatne { color: var(--danger); }
+    .reseni.ukaz { display: block; }
     .reseni { margin-top: 12px; padding: 12px 16px; background: var(--bg-elevated); border-left: 3px solid var(--accent); border-radius: 6px; font-size: 1rem; color: var(--text-muted); line-height: 2; display: none; font-variant-numeric: tabular-nums; }
     .stav { display: flex; justify-content: space-between; max-width: 640px; margin-top: 12px; color: var(--text-muted); font-size: 0.9rem; }
     .serie { color: var(--warn); }
@@ -84,11 +88,11 @@
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="vahy" data-faze="vyuka">⚖️ Váhy</button>
-    <button data-uroven="1" class="active">x + a = b</button>
-    <button data-uroven="2">a·x = b</button>
-    <button data-uroven="3">a·x + b = c</button>
-    <button data-uroven="4">a·x + b = c·x + d</button>
-    <button data-uroven="5">se závorkou</button>
+    <button data-rezim="1" class="active">x + a = b</button>
+    <button data-rezim="2">a·x = b</button>
+    <button data-rezim="3">a·x + b = c</button>
+    <button data-rezim="4">a·x + b = c·x + d</button>
+    <button data-rezim="5">se závorkou</button>
   </div>
 
   <div class="karta vahy-obal skryto" id="kartaVahy">
@@ -104,24 +108,18 @@
     <div class="kroky-vahy" id="krokyVahy"></div>
   </div>
 
-  <div class="karta" id="kartaUloha" data-kostra-odpovedi>
-    <div class="rovnice" id="rovnice"></div>
-    <div class="odpovedni">
-      <span class="x">x =</span>
-      <input type="number" id="odpoved" autocomplete="off">
-      <button class="potvrdit" id="btnPotvrdit">✔️ Zkontrolovat</button>
-    </div>
-    <div class="zprava" id="zprava"></div>
-    <div class="reseni" id="reseni"></div>
+  <div class="plocha" id="plocha"></div>
+  <div class="ovladani" id="stavLista">
+    <button class="hlavni" id="startBtn">🔄 Nová série</button>
+    <span class="pokrok" id="pokrok"></span>
+    <span class="skore" id="skore"></span>
   </div>
-  <div class="stav" id="stavLista">
-    <span class="serie" id="serie"></span>
-    <span id="skore"></span>
-  </div>
+
+  <p class="napoveda">Rovnice je jako váhy v rovnováze: <b>s oběma stranami dělej totéž</b>. Nejdřív převeď členy s x na jednu stranu a čísla na druhou (přičti nebo odečti totéž na obou stranách), pak obě strany vyděl číslem u x. Závorku nejdřív roznásob: 3·(x + 2) = 3x + 6. Řešení ověř dosazením.</p>
 
 <script>
 const $ = id => document.getElementById(id);
-let uroven = 1, x, zapis = '', kroky = [], spravne = 0, celkem = 0, serie = 0, vyhodnoceno = false;
+let rezim = '1';
 
 const ni = (od, doC) => od + Math.floor(Math.random() * (doC - od + 1));      // celé číslo v rozsahu
 const neNula = (od, doC) => { let v; do { v = ni(od, doC); } while (!v); return v; };
@@ -134,25 +132,25 @@ const cst = (k, prvni) => (k < 0 ? (prvni ? '−' : '− ') : (prvni ? '' : '+ '
    se zápisem členů výše – jinak vyjde nesourodé „x − 7 = -15“. */
 const cis = n => String(n).replace('-', '−');
 
-let otazkaKostry = {};   // společná kostra – jedna otázka = jeden objekt
-function nova() {
-  vyhodnoceno = false;
-  otazkaKostry = {};
+/* Série rovnic přes procvic.js: druhý pokus, po uzavření postup krok za krokem. */
+function generuj(r) {
+  const u = +r;
+  let x, zapis, kroky;
   x = ni(-9, 9);
-  if (uroven === 1) {
+  if (u === 1) {
     const a = neNula(-15, 15), b = x + a;
     zapis = `x ${cst(a)} = ${cis(b)}`;
     kroky = [`x = ${cis(b)} ${cst(-a)}`, `x = ${cis(x)}`];
-  } else if (uroven === 2) {
+  } else if (u === 2) {
     const a = neNula(-9, 9), b = a * x;
     zapis = `${clen(a, true)} = ${cis(b)}`;
     kroky = [`x = ${cis(b)} ÷ (${cis(a)})`, `x = ${cis(x)}`];
-  } else if (uroven === 3) {
+  } else if (u === 3) {
     const a = neNula(-9, 9), b = neNula(-12, 12), c = a * x + b;
     zapis = `${clen(a, true)} ${cst(b)} = ${cis(c)}`;
     kroky = [`${clen(a, true)} = ${cis(c)} ${cst(-b)}`, `${clen(a, true)} = ${cis(c - b)}`,
              `x = ${cis(c - b)} ÷ (${cis(a)})`, `x = ${cis(x)}`];
-  } else if (uroven === 4) {
+  } else if (u === 4) {
     let a = neNula(-8, 8), c = neNula(-8, 8);
     if (a === c) a += (a < 8 ? 1 : -1);
     const b = neNula(-12, 12), d = (a - c) * x + b;   // a·x + b = c·x + d
@@ -165,28 +163,11 @@ function nova() {
     kroky = [`${clen(k * a, true)} ${cst(k * b)} = ${cis(cc)}`, `${clen(k * a, true)} = ${cis(cc - k * b)}`,
              `x = ${cis(cc - k * b)} ÷ (${cis(k * a)})`, `x = ${cis(x)}`];
   }
-  $('rovnice').textContent = zapis;
-  $('odpoved').value = '';
-  $('zprava').textContent = ''; $('zprava').className = 'zprava';
-  $('reseni').style.display = 'none';
-  $('btnPotvrdit').textContent = '✔️ Zkontrolovat';
-  $('odpoved').focus();
-  window.Kostra?.otazka();
-}
-function vyhodnot() {
-  if (vyhodnoceno) { nova(); return; }
-  const v = $('odpoved').value.trim();
-  if (v === '') { $('odpoved').focus(); return; }
-  vyhodnoceno = true; celkem++;
-  const ok = Number(v) === x;
-  window.Kostra?.odpoved(ok, otazkaKostry);
-  if (ok) { spravne++; serie++; $('zprava').textContent = '✅ Správně, x = ' + cis(x) + '.'; $('zprava').classList.add('ok'); }
-  else { serie = 0; $('zprava').textContent = '❌ Správné řešení je x = ' + cis(x) + '.'; $('zprava').classList.add('spatne'); }
-  $('reseni').innerHTML = '💡 Postup:<br>' + zapis + '<br>' + kroky.join('<br>');
-  $('reseni').style.display = 'block';
-  $('serie').textContent = serie >= 3 ? '🔥 série ' + serie : '';
-  $('skore').textContent = spravne + ' / ' + celkem;
-  $('btnPotvrdit').textContent = 'Pokračovat →';
+  return {
+    zadani: zapis, odpoved: x,
+    napoveda: '',
+    poVyhodnoceni: karta => karta.insertAdjacentHTML('beforeend', '<div class="reseni ukaz">💡 Postup:<br>' + zapis + '<br>' + kroky.join('<br>') + '</div>'),
+  };
 }
 /* ============================================================
    Model vah: a·x + b = c. Všechna čísla držíme kladná, aby šlo
@@ -295,22 +276,29 @@ function poKroku() {
 /* ---- přepínání mezi váhami a procvičováním ---- */
 function zapniVahy(zapnout) {
   $('kartaVahy').classList.toggle('skryto', !zapnout);
-  $('kartaUloha').classList.toggle('skryto', zapnout);
+  $('plocha').classList.toggle('skryto', zapnout);
   $('stavLista').classList.toggle('skryto', zapnout);
   if (zapnout && !V.kroky.length) novaVaha();
 }
 
-$('btnPotvrdit').onclick = vyhodnot;
-$('odpoved').addEventListener('keydown', e => { if (e.key === 'Enter') vyhodnot(); });
-document.querySelectorAll('#rezimy button').forEach(b => b.onclick = () => {
-  document.querySelectorAll('#rezimy button').forEach(x2 => x2.classList.remove('active'));
-  b.classList.add('active');
-  if (b.dataset.rezim === 'vahy') { zapniVahy(true); return; }
-  zapniVahy(false);
-  uroven = +b.dataset.uroven;
-  nova();
+let serie = null;
+window.addEventListener('DOMContentLoaded', () => {
+  serie = Procvic.spust({
+    klic: 'metodus_rovnice', pocet: 10, typ: 'number',
+    plocha: $('plocha'), skoreEl: $('skore'), pokrokEl: $('pokrok'),
+    rezim: () => rezim, generuj,
+  });
+  document.querySelectorAll('#rezimy button').forEach(b => b.onclick = () => {
+    document.querySelectorAll('#rezimy button').forEach(x2 => x2.classList.remove('active'));
+    b.classList.add('active');
+    if (b.dataset.rezim === 'vahy') { zapniVahy(true); return; }
+    zapniVahy(false);
+    rezim = b.dataset.rezim;
+    serie.restart();
+  });
+  $('startBtn').onclick = () => serie.restart();
+  serie.restart();
 });
-nova();
 </script>
 </body>
 </html>

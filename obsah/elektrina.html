@@ -316,7 +316,8 @@ const ohm={
         ctx.fillStyle=C.akcent;
         ctx.beginPath(); ctx.arc(x,y,3.6,0,Math.PI*2); ctx.fill();
       }
-      popis('elektrony jdou od − k +',w/2,h-16,C.faint,'11px sans-serif');
+      // nad řádkem nápovědy (.napoveda leží u spodní hrany plochy)
+      popis('elektrony jdou od − k +',w/2,h-36,C.faint,'11px sans-serif');
     }
     if(duvod==='pojistka') popis('⚠️ Proud překročil 5 A – pojistka obvod rozpojila',w/2,26,C.danger,'13px sans-serif');
   },
@@ -708,10 +709,10 @@ const indukce={
     popis('průběh napětí',gx0+gw/2,gy0+gh+14,C.faint,'11px sans-serif');
 
     if(Math.abs(this.Ui)<0.05)
-      popis('magnet stojí → žádné napětí',cx,h-18,C.faint,'12px sans-serif');
+      popis('magnet stojí → žádné napětí',cx,h-38,C.faint,'12px sans-serif');
     else
       popis(this.Ui>0?'magnet se přibližuje / vzdaluje – ručka vlevo':'opačný pohyb – ručka vpravo',
-        cx,h-18,C.faint,'12px sans-serif');
+        cx,h-38,C.faint,'12px sans-serif');
   },
   tahni(typ,x,y,vych){
     const cx=canvas.clientWidth*0.52;
@@ -784,10 +785,9 @@ const spotreba={
     });
 
     const v=rada[this.vybrany];
+    // návod k ovládání už je v řádku nápovědy pod plátnem – nekreslit ho podruhé
     popis(`${v.ikona} ${v.n}: ${v.P} W · ${cz(this.hodiny,1)} h denně`,
-      w/2,h-42,C.text,'bold 13px sans-serif');
-    popis('klikni na řádek a přepni spotřebič · posuvníkem měň dobu provozu',
-      w/2,h-20,C.faint,'11px sans-serif');
+      w/2,h-40,C.text,'bold 13px sans-serif');
   },
   stav(){
     const v=SPOTREBICE[this.vybrany];
@@ -987,6 +987,138 @@ function prepinace(){
   });
 }
 prepinace();
+</script>
+<script src="../badani.js"></script>
+<script>
+/* Úkoly k modelu (badani.js): předpověz → vyzkoušej → vysvětli.
+   Ohmův zákon, sériové a paralelní zapojení; otázky i k poli a indukci. */
+(function(){
+const N=Badani.nastav, cislo=Badani.cislo;
+const nahodne=p=>p[Math.floor(Math.random()*p.length)];
+const moznost=(t,ok,proc)=>({t,ok,proc});
+const zarovky=typ=>{ prepni('zapoj'); N({'#zapojeni':typ,'#uz':12,'#r1':10,'#r2':20,'#r3':30}); zapoj.zapnuto=[true,true,true]; };
+
+Badani.start({
+  nad:'#stav',
+  ukoly:[
+    { id:'ohm', nazev:'Napětí a proud',
+      predpoved:{
+        otazka:'Žárovkou s odporem <b>18 Ω</b> teče při napětí <b>9 V</b> proud 0,5 A. Co se stane s proudem, když napětí zvýšíš na <b>18 V</b>?',
+        moznosti:['Zmenší se na polovinu','Zůstane 0,5 A – žárovka je pořád stejná','Zdvojnásobí se'],
+        spravna:2 },
+      priprava(){ prepni('ohm'); N({'#u':9,'#r':18,'#spinac':true,'#pojistka':false}); },
+      pokus:'Nastav napětí <b>U = 18 V</b> (posuvník nebo tažení za baterii) a porovnej proud ve stavovém řádku s původní hodnotou 0,5 A.',
+      splneno:()=>rezim==='ohm'&&ohm.U===18&&ohm.R===18&&ohm.sepnuto&&ohm.proud().I>0,
+      ukaz:{'#u':18},
+      pozorovani:()=>`Proud vzrostl z 0,5 A na <b>${cislo(ohm.proud().I,2)} A</b> a žárovka svítí jasněji.`,
+      vysvetli:{
+        otazka:'Proč se proud zdvojnásobil?',
+        moznosti:[
+          moznost('Při stálém odporu je proud přímo úměrný napětí: I = U / R = 18 V / 18 Ω = 1 A.',true),
+          moznost('Při vyšším napětí se odpor žárovky zmenšil na polovinu.',false,'Odpor v modelu zůstal 18 Ω – změnilo se jen napětí.'),
+          moznost('Silnější baterie dodala do drátů dvakrát víc elektronů.',false,'Volných elektronů je v kovu pořád stejně. Vyšší napětí je jen silněji pohání – proto teče větší proud podle I = U / R.')]},
+      shrnuti:'Ohmův zákon: <b>I = U / R</b>. Při stálém odporu roste proud stejně jako napětí; větší odpor proud zmenšuje.' },
+
+    { id:'serie', nazev:'Žárovky za sebou (sériově)',
+      predpoved:{
+        otazka:'Tři žárovky jsou zapojené <b>za sebou</b> (sériově) a všechny svítí. Co se stane, když jednu z nich vyšroubuješ?',
+        moznosti:['Zhasnou všechny','Zhasne jen ta vyšroubovaná','Zbylé dvě se rozsvítí jasněji'],
+        spravna:0 },
+      priprava(){ zarovky('seriove'); },
+      pokus:'Klepni na <b>prostřední žárovku</b> – tím ji vyšroubuješ. Sleduj ostatní žárovky a proud ze zdroje.',
+      splneno:()=>rezim==='zapoj'&&zapoj.typ==='seriove'&&zapoj.zapnuto.some(z=>!z),
+      ukaz(){ zapoj.zapnuto[1]=false; },
+      pozorovani:()=>`Zhasly <b>všechny</b> žárovky a proud ze zdroje je <b>${cislo(zapoj.vypocet().Ic,2)} A</b>.`,
+      vysvetli:{
+        otazka:'Proč zhasly i ty žárovky, na které nikdo nesáhl?',
+        moznosti:[
+          moznost('Proud má v sériovém obvodu jen jednu cestu přes všechny žárovky. Vyšroubováním se ta cesta přeruší.',true),
+          moznost('Ostatní žárovky se přetížily a spálily.',false,'Proud naopak klesl na nulu – nic se nepřetížilo. Zkus 💡 Zašroubovat všechny: rozsvítí se znovu.'),
+          moznost('Baterie se tím vybila.',false,'Baterie je v pořádku – po zašroubování žárovky obvod zase svítí. Chybí jen uzavřená cesta pro proud.')]},
+      shrnuti:'<b>Sériově</b>: jediná cesta – všemi spotřebiči teče stejný proud, napětí zdroje se mezi ně dělí a přerušení kdekoli zhasne všechno.' },
+
+    { id:'paralelne', nazev:'Žárovky vedle sebe (paralelně)',
+      predpoved:{
+        otazka:'Teď jsou tři žárovky zapojené <b>vedle sebe</b> (paralelně). Co se stane s ostatními, když jednu vyšroubuješ?',
+        moznosti:['Zhasnou všechny','Svítí dál stejně jasně','Rozsvítí se jasněji'],
+        spravna:1 },
+      priprava(){ zarovky('paralelni'); },
+      pokus:'Klepni na <b>jednu žárovku</b> a vyšroubuj ji. Sleduj ostatní žárovky a celkový proud ze zdroje (před pokusem byl 2,2 A).',
+      splneno:()=>rezim==='zapoj'&&zapoj.typ==='paralelni'&&zapoj.zapnuto.some(z=>!z)&&zapoj.zapnuto.some(z=>z),
+      ukaz(){ zapoj.zapnuto[0]=false; },
+      pozorovani:()=>`Zbylé žárovky svítí <b>stejně</b> – každá má dál plných ${cislo(zapoj.U,1)} V. Celkový proud klesl na <b>${cislo(zapoj.vypocet().Ic,2)} A</b>.`,
+      vysvetli:{
+        otazka:'Proč ostatní žárovky svítí dál stejně?',
+        moznosti:[
+          moznost('Každá větev je připojená přímo k baterii. Napětí na ní se nezmění, zmizí jen proud vyšroubované větve.',true),
+          moznost('Proud vyšroubované žárovky se přelil do ostatních.',false,'Kdyby se přelil, ostatní by svítily jasněji. Proud každé větve je dál I = U / R – celkový proud naopak klesl.'),
+          moznost('Každá žárovka má vlastní baterii.',false,'Baterie je jen jedna. Každá větev je k ní ale připojená zvlášť, takže má vlastní cestu pro proud.')]},
+      shrnuti:'<b>Paralelně</b>: na každém spotřebiči je <b>stejné napětí</b> a proudy větví se <b>sčítají</b>. Tak jsou zapojené zásuvky doma – vypnutá lampa nezhasne lednici.' },
+  ],
+
+  otazky:[
+    ()=>{ // proud z Ohmova zákona
+      const U=nahodne([6,9,12,24]), R=nahodne([2,3,4,6,12].filter(r=>r!==U));
+      return { otazka:`Na spotřebič s odporem <b>${R} Ω</b> přivedeš napětí <b>${U} V</b>. Jaký jím poteče proud?`,
+        moznosti:[moznost(`${cislo(U/R,2)} A`,true),
+          moznost(`${U*R} A`,false,'Proud je podíl, ne součin: I = U / R.'),
+          moznost(`${cislo(R/U,2)} A`,false,'Podíl je obráceně – napětí patří do čitatele: I = U / R.')],
+        vysvetleni:`I = U / R = ${U} V / ${R} Ω = ${cislo(U/R,2)} A.` };
+    },
+    ()=>{ // odpor z napětí a proudu
+      const U=nahodne([6,12,24]), I=nahodne([0.5,2,3]);
+      return { otazka:`Žárovkou při napětí <b>${U} V</b> prochází proud <b>${cislo(I,1)} A</b>. Jaký má odpor?`,
+        moznosti:[moznost(`${cislo(U/I,1)} Ω`,true),
+          moznost(`${cislo(U*I,1)} Ω`,false,'Součin U · I je výkon ve wattech, ne odpor.'),
+          moznost(`${cislo(I/U,3)} Ω`,false,'Podíl je obráceně: R = U / I.')],
+        vysvetleni:`R = U / I = ${U} V / ${cislo(I,1)} A = ${cislo(U/I,1)} Ω.` };
+    },
+    ()=>{ // výsledný odpor série
+      const R=[nahodne([5,10,15]),nahodne([20,30]),nahodne([40,60])];
+      const serie=R[0]+R[1]+R[2], par=1/(1/R[0]+1/R[1]+1/R[2]);
+      return { otazka:`Tři rezistory <b>${R.join(' Ω, ')} Ω</b> jsou zapojené <b>sériově</b>. Jaký je celkový odpor?`,
+        moznosti:[moznost(`${serie} Ω`,true),
+          moznost(`${cislo(par,1)} Ω`,false,'To je celkový odpor paralelního zapojení. V sérii se odpory sčítají.'),
+          moznost(`${R[2]} Ω`,false,'Proud musí projít všemi třemi rezistory za sebou, takže se odpory sčítají.')],
+        vysvetleni:`V sérii R = R₁ + R₂ + R₃ = ${R.join(' + ')} = ${serie} Ω.` };
+    },
+    { otazka:'K obvodu přidáš další žárovku <b>paralelně</b>. Co se stane s celkovým odporem obvodu?',
+      moznosti:[moznost('Zmenší se',true),
+        moznost('Zvětší se',false,'To platí v sérii. Paralelně přidáváš další cestu pro proud – celkový odpor klesne a ze zdroje teče větší proud.'),
+        moznost('Nezmění se',false,'Nová větev je další cesta pro proud, takže celkový proud vzroste a celkový odpor klesne.')],
+      vysvetleni:'Paralelní zapojení má menší odpor než nejmenší z odporů větví.' },
+    ()=>{ const I=nahodne([0.2,0.3,0.5]);
+      return { otazka:`V sériovém obvodu se třemi žárovkami prochází první žárovkou proud <b>${cislo(I,1)} A</b>. Jaký proud prochází třetí žárovkou?`,
+        moznosti:[moznost(`${cislo(I,1)} A`,true),
+          moznost(`${cislo(I/3,2)} A`,false,'Proud se v sérii nedělí – má jen jednu cestu a všude je stejný. Dělí se napětí.'),
+          moznost(`${cislo(I*3,1)} A`,false,'Proud se po cestě nesčítá ani neztrácí – v sérii je všude stejný.')],
+        vysvetleni:'V sériovém obvodu je proud ve všech místech stejný.' }; },
+    { otazka:'K čemu slouží v obvodu <b>pojistka</b>?',
+      moznosti:[moznost('Přeruší obvod, když proud překročí bezpečnou hodnotu – chrání vedení před přehřátím.',true),
+        moznost('Zvýší napětí, aby spotřebiče lépe fungovaly.',false,'Pojistka napětí nemění. Hlídá proud a při jeho nebezpečném růstu (třeba při zkratu) obvod rozpojí.'),
+        moznost('Šetří elektřinu, protože zmenšuje proud.',false,'Za běžného provozu pojistka proud nemění vůbec. Zasáhne jen tehdy, když je proud příliš velký.')],
+      vysvetleni:'Při zkratu je odpor téměř nulový a proud obrovský; pojistka obvod přeruší dřív, než se vodiče přehřejí.' },
+    { otazka:'Obrátíš směr proudu v přímém vodiči. Co udělají střelky kompasu kolem něj?',
+      moznosti:[moznost('Otočí se opačně – magnetické pole změní směr.',true),
+        moznost('Nic, směr pole na směru proudu nezávisí.',false,'Vyzkoušej v záložce 🧲 Magnetické pole: se záporným proudem se celé pole obrátí.'),
+        moznost('Přestanou reagovat – pole zmizí.',false,'Pole zmizí jen bez proudu. Opačný proud vytvoří stejně silné pole opačného směru.')],
+      vysvetleni:'Smysl siločar kolem vodiče určuje pravidlo pravé ruky – s opačným proudem se obrátí.' },
+    { otazka:'Kdy vznikne v cívce napětí (indukce)?',
+      moznosti:[moznost('Když se magnet u cívky pohybuje – mění se magnetické pole v cívce.',true),
+        moznost('Když silný magnet leží uvnitř cívky v klidu.',false,'Stojící magnet napětí nevyrobí, i když je silný. Rozhoduje změna pole, ne jeho velikost.'),
+        moznost('Když cívkou už teče proud z baterie.',false,'Indukované napětí vzniká pohybem magnetu (změnou pole) i bez baterie – tak pracuje generátor.')],
+      vysvetleni:'Indukované napětí je tím větší, čím rychleji se pole mění a čím víc má cívka závitů.' },
+    ()=>{ // spotřeba energie
+      const P=nahodne([500,1000,1500,2000]), t=nahodne([2,3,4]), E=P*t/1000;
+      return { otazka:`Spotřebič s příkonem <b>${P} W</b> běží <b>${t} hodiny</b>. Kolik elektrické energie spotřebuje?`,
+        moznosti:[moznost(`${cislo(E,1)} kWh`,true),
+          moznost(`${P*t} kWh`,false,`Watty je potřeba převést na kilowatty: ${P} W = ${cislo(P/1000,1)} kW.`),
+          moznost(`${cislo(P/t/1000,2)} kWh`,false,'Energie je součin příkonu a času (W = P · t), ne podíl.')],
+        vysvetleni:`W = P · t = ${cislo(P/1000,1)} kW · ${t} h = ${cislo(E,1)} kWh.` };
+    },
+  ],
+});
+})();
 </script>
 </body>
 </html>

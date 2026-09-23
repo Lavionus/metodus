@@ -1,5 +1,5 @@
 /* Vedené aktivity čtyř pilotních lekcí. Barvy přebírají motiv webu. */
-.pilot { max-width:900px; margin:16px 0 24px; padding:clamp(12px,3vw,24px); border:1px solid var(--border); border-radius:var(--radius); background:var(--bg-panel); line-height:1.6; }
+.pilot { max-width: var(--sirka-obsahu, 900px); margin:16px 0 24px; padding:clamp(12px,3vw,24px); border:1px solid var(--border); border-radius:var(--radius); background:var(--bg-panel); line-height:1.6; }
 .pilot h2,.pilot-heading { font-size:1.15rem; margin:0 0 12px; }
 .pilot p { margin:10px 0; }
 .pilot label { display:block; font-weight:600; }

@@ -1,0 +1,93 @@
+/* Tmavá sépie: klidný hnědý papír pro večerní práci. Používá stejnou
+   recyklovanou texturu jako světlá sépie, ale tmavý tón a teplý inkoust.
+   Kontrasty na panelu #302219: text 11,7 : 1, tlumený 8,2 : 1,
+   nejslabší 5,2 : 1 a akcent 6,7 : 1. */
+
+:root[data-theme="sepia-tmava"] {
+  color-scheme: dark;
+  --bg: #241a12;
+  --bg-deep: #19110c;
+  --bg-panel: #302219;
+  --bg-elevated: #3a2a1e;
+  --bg-control: #493526;
+  --bg-input: #20170f;
+  --bg-hover: #59402c;
+  --text: #f0dfc0;
+  --text-muted: #d2bb96;
+  --text-faint: #ad9371;
+  --border: #59422f;
+  --border-strong: #8b6c4b;
+  --accent: #d5a45c;
+  --accent-soft: rgba(213, 164, 92, .16);
+  --accent-hover: #edc47f;
+  --na-akcentu: #24170b;
+  --ok: #91bd8b;
+  --warn: #e5b363;
+  --danger: #ef9279;
+  --ok-text: #91bd8b;
+  --danger-text: #ef9279;
+  --zvyraz-text: #e5b363;
+  --shadow: 0 2px 12px rgba(0, 0, 0, .48);
+  --predmet-cj: #e58f7d;
+  --predmet-m: #8eb9da;
+  --predmet-aj: #caa0d2;
+  --predmet-dcj: #e7aa6b;
+  --predmet-prv: #b7c77a;
+  --predmet-inf: #aab1e4;
+  --predmet-f: #e5c779;
+  --predmet-ch: #e7a0b5;
+  --predmet-pr: #82c99a;
+  --predmet-z: #75c6b4;
+  --predmet-d: #d8ac83;
+  --predmet-nastroj: #b8aa96;
+  --clen-podmet: #8eb9da;
+  --clen-prisudek: #e58f7d;
+  --clen-predmet: #82c99a;
+  --clen-privlastek: #caa0d2;
+  --clen-urceni: #e5c779;
+  --clen-doplnek: #75c6b4;
+  --bg-dark: var(--bg-deep);
+  --panel: var(--bg-panel);
+  --surface: var(--bg-panel);
+  --surface2: var(--bg-elevated);
+  --muted: var(--text-muted);
+  --accent2: #caa0d2;
+  --paper-texture: url('obsah/textures/recyklovany-papir.webp');
+}
+
+:root[data-theme="sepia-tmava"] body {
+  background-image: var(--paper-texture);
+  background-size: 512px 512px;
+  background-repeat: repeat;
+  background-blend-mode: soft-light;
+}
+
+:root[data-theme="sepia-tmava"] :where(
+  input:not([type="range"]):not([type="checkbox"]):not([type="radio"]):not([type="color"]),
+  select, textarea, dialog, .card, .karta, .panel, .kostra-hlavicka
+) {
+  background-image: var(--paper-texture);
+  background-size: 512px 512px;
+  background-repeat: repeat;
+  background-blend-mode: soft-light;
+}
+:root[data-theme="sepia-tmava"] :where(button, input, select, textarea) { accent-color: var(--accent); }
+:root[data-theme="sepia-tmava"] :where(a,button,input,select,textarea,summary):focus-visible { outline-color: var(--accent); }
+:root[data-theme="sepia-tmava"] ::selection { background: #765a3d; color: #fff2d8; }
+:root[data-theme="sepia-tmava"] .predmet-ilustrace,
+:root[data-theme="sepia-tmava"] .atlas-detail img { background-color: #302219; }
+:root[data-theme="sepia-tmava"] [data-paper-canvas] {
+  background-color: var(--bg-panel);
+  background-image: var(--paper-texture);
+  background-size: 512px 512px;
+  background-blend-mode: soft-light;
+}
+
+@media print {
+  :root[data-theme="sepia-tmava"], :root[data-theme="sepia-tmava"] body,
+  :root[data-theme="sepia-tmava"] body * { background-image: none !important; }
+}
+@media (forced-colors: active) {
+  :root[data-theme="sepia-tmava"], :root[data-theme="sepia-tmava"] body,
+  :root[data-theme="sepia-tmava"] body * { background-image: none !important; }
+}

@@ -772,5 +772,141 @@ requestAnimationFrame(snimek);
 /* pro testy v _test/ */
 window.VL = { stav, vypocetVrtacky, vypocetLisu, MATERIALY, PREDMETY, prepni, novyKus, povolTlak };
 </script>
+<script src="../badani.js"></script>
+<script>
+/* Úkoly k modelu (badani.js): předpověz → vyzkoušej → vysvětli.
+   Pascalův zákon, zlaté pravidlo u lisu, moment a otáčky vrtačky. */
+(function(){
+const N=Badani.nastav, cis=Badani.cislo;
+const nahodne=p=>p[Math.floor(Math.random()*p.length)];
+const moznost=(t,ok,proc)=>({t,ok,proc});
+const doporucene=()=>Math.max(100,Math.min(3000,Math.round(vypocetVrtacky().nDop/25)*25));
+
+Badani.start({
+  nad:'#stavRadek',
+  ukoly:[
+    { id:'pascal', nazev:'Větší píst, větší síla',
+      predpoved:{
+        otazka:'Malý píst lisu má průměr <b>20 mm</b>. Velký píst bude mít průměr <b>200 mm</b> – desetkrát větší. Kolikrát větší silou bude tlačit než malý píst?',
+        moznosti:['10×','100×','Stejnou silou – tlak je v kapalině všude stejný'],
+        spravna:1 },
+      priprava(){ prepni('lis'); N({'#sila':150,'#paka':6,'#d1':20,'#d2':40,'#predmet':'plech'}); povolTlak(); },
+      pokus:'Nastav <b>velký píst na 200 mm</b> a porovnej ve stavovém řádku sílu na malém pístu se silou velkého pístu (údaj „zvětšení“).',
+      splneno:()=>stav.rezim==='lis'&&+$('d1').value===20&&+$('d2').value===200,
+      ukaz:{'#d2':200},
+      pozorovani:()=>{ const v=vypocetLisu(); return `Zvětšení je <b>${cis(v.pomer,0)}×</b>: z ${sila(v.F1)} na malém pístu je ${sila(v.F2)} na velkém.`; },
+      vysvetli:{
+        otazka:'Proč desetkrát větší průměr dá stokrát větší sílu?',
+        moznosti:[
+          moznost('Tlak je v kapalině všude stejný a síla = tlak × plocha. Plocha pístu roste s druhou mocninou průměru: 10 · 10 = 100.',true),
+          moznost('Síla roste stejně jako průměr, jen se ještě přičte síla páky.',false,'Páka se nezměnila. Síla velkého pístu závisí na jeho ploše – a ta s průměrem roste kvadraticky.'),
+          moznost('Olej se ve válci stlačí a sílu zesílí.',false,'Kapalina je téměř nestlačitelná. Nic nezesiluje – jen přenáší stejný tlak na větší plochu.')]},
+      shrnuti:'<b>Pascalův zákon</b>: tlak p = F₁ / S₁ se kapalinou šíří všude stejně, takže <b>F₂ = p · S₂</b>. Síla se zvětší tolikrát, kolikrát je větší plocha pístu.' },
+
+    { id:'drahy', nazev:'Co lis „zaplatí“',
+      predpoved:{
+        otazka:'Lis zvětšuje sílu stokrát. Malý píst při jednom stlačení páky sjede o <b>40 mm</b>. O kolik se přitom posune velký píst?',
+        moznosti:['Také o 40 mm','O 4 mm','O 0,4 mm'],
+        spravna:2 },
+      priprava(){ prepni('lis'); N({'#sila':150,'#paka':6,'#d1':20,'#d2':200,'#predmet':'plech','#zobPrace':true}); povolTlak(); },
+      pokus:'Pumpuj (<b>▶️ Pumpovat</b> nebo mezerník), dokud lis <b>neohne plech</b>. Sleduj zdvih velkého pístu a počet zdvihů páky.',
+      splneno:()=>{ if(stav.rezim!=='lis'||+$('d2').value!==200||+$('d1').value!==20||$('predmet').value!=='plech') return false; return stav.stlaceni>=vypocetLisu().pr.drah; },
+      ukaz(){ if(!stav.pumpuje) $('btnPumpuj').click(); },
+      pozorovani:()=>{ const v=vypocetLisu(); return `Velký píst se na jedno stlačení posune jen o <b>${cis(v.h2,1)} mm</b>, proto ohnutí plechu zabralo <b>${stav.zdvihu} zdvihů</b> páky.`; },
+      vysvetli:{
+        otazka:'Proč se velký píst posouvá tak málo?',
+        moznosti:[
+          moznost('Kapalina vytlačená malým pístem se rozleje pod stokrát větší plochu, takže velký píst stoupne stokrát méně. Práce F · s zůstane stejná.',true),
+          moznost('Velký píst je těžký, a proto se hýbe pomalu.',false,'Hmotnost pístu tu nerozhoduje. Objem kapaliny, který přiteče, se rozloží do velké plochy – odtud malý zdvih.'),
+          moznost('Část oleje uteče pojistným ventilem.',false,'Ventil pouští až při tlaku nad 70 MPa – tady je tlak mnohem menší. Žádná kapalina se neztrácí.')]},
+      shrnuti:'<b>Zlaté pravidlo mechaniky</b> platí i pro lis: kolikrát větší síla, tolikrát menší dráha (h₂ = h₁ · S₁ / S₂). Stejně jako u páky a kladkostroje se práce neušetří.' },
+
+    { id:'moment', nazev:'Tlustší vrták',
+      predpoved:{
+        otazka:'Vrtáš do oceli vrtákem <b>5 mm</b>. Vyměníš ho za dvakrát tlustší – <b>10 mm</b> – a posuv necháš stejný. Kolikrát větší krouticí moment bude potřeba?',
+        moznosti:['Stejný','2×','4×'],
+        spravna:2 },
+      priprava(){ prepni('vrtacka'); N({'#material':'ocel','#prumer':5,'#posuv':0.1,'#otacky':700,'#tloustka':20}); novyKus(); },
+      pokus:'Nastav <b>vrták 10 mm</b> a porovnej moment ve stavovém řádku (s vrtákem 5 mm byl 0,63 N·m).',
+      splneno:()=>stav.rezim==='vrtacka'&&$('material').value==='ocel'&&+$('prumer').value===10&&+$('posuv').value===0.1,
+      ukaz:{'#prumer':10},
+      pozorovani:()=>`Moment vzrostl z 0,63 N·m na <b>${cis(vypocetVrtacky().Mk,2)} N·m</b> – čtyřikrát.`,
+      vysvetli:{
+        otazka:'Proč dvakrát tlustší vrták potřebuje čtyřikrát větší moment?',
+        moznosti:[
+          moznost('Tlustší vrták ukrajuje širší třísku – řezná síla je dvakrát větší – a ta působí dvakrát dál od osy. Moment = síla × rameno: 2 · 2 = 4.',true),
+          moznost('Moment roste stejně jako průměr, takže 2×.',false,'S průměrem roste síla i rameno, na kterém působí. Moment je jejich součin, proto 4×.'),
+          moznost('Tlustší vrták je těžší a motor ho hůř roztočí.',false,'Hmotnost vrtáku model nepočítá. Moment je potřeba na ukrajování třísky.')]},
+      shrnuti:'Krouticí moment je <b>M = F · r</b> jako u páky. U vrtání roste s <b>druhou mocninou průměru</b>: dvakrát tlustší vrták, čtyřikrát větší moment – obrobek proto musí být pevně upnutý.' },
+
+    { id:'otacky', nazev:'Otáčky pro dřevo a ocel',
+      predpoved:{
+        otazka:'Pro ocel a vrták 8 mm jsou doporučené otáčky asi 1 050 za minutu. Budou pro <b>dřevo</b> se stejným vrtákem otáčky menší, nebo větší?',
+        moznosti:['Menší – dřevo je měkké','Stejné – vrták je stejný','Větší'],
+        spravna:2 },
+      priprava(){ prepni('vrtacka'); N({'#material':'ocel','#prumer':8,'#posuv':0.1,'#tloustka':20}); $('btnDoporuc').click(); novyKus(); },
+      pokus:'Přepni materiál na <b>dřevo</b> a stiskni <b>💡 Doporučené otáčky</b>.',
+      splneno:()=>stav.rezim==='vrtacka'&&$('material').value==='drevo'&&+$('prumer').value===8&&+$('otacky').value===doporucene(),
+      ukaz(){ N({'#material':'drevo'}); $('btnDoporuc').click(); },
+      pozorovani:()=>`Pro dřevo vyšlo <b>${$('otacky').value} min⁻¹</b> (víc stroj neumí), pro ocel jen asi 1 050 min⁻¹.`,
+      vysvetli:{
+        otazka:'Proč se ocel vrtá s menšími otáčkami?',
+        moznosti:[
+          moznost('Každý materiál snese jen určitou řeznou rychlost v = π · d · n. U oceli je nízká – při rychlejším břitu by se vrták přehřál a otupil.',true),
+          moznost('V dřevě vrták prokluzuje, proto potřebuje víc otáček.',false,'Vrták neprokluzuje. Dřevo snese mnohem vyšší řeznou rychlost, a tak se může točit rychleji.'),
+          moznost('Rychlé otáčky by ocel roztavily.',false,'Přehřeje se hlavně břit vrtáku – ten se přepálí a otupí dávno předtím, než by se cokoli tavilo.')]},
+      shrnuti:'<b>Řezná rychlost</b> v = π · d · n / 1000 musí padnout do pásma materiálu: tvrdý materiál a tlustý vrták → <b>málo otáček</b>, měkký materiál a tenký vrták → hodně otáček.' },
+  ],
+
+  otazky:[
+    ()=>{ const k=nahodne([2,3,5]), F1=nahodne([100,200,500]);
+      return { otazka:`Velký píst lisu má <b>${k}× větší průměr</b> než malý. Na malý píst tlačíš silou <b>${F1} N</b>. Jakou silou tlačí velký píst?`,
+        moznosti:[moznost(`${F1*k*k} N`,true),
+          moznost(`${F1*k} N`,false,`Síla roste s plochou, a ta s druhou mocninou průměru: ${k}² = ${k*k}.`),
+          moznost(`${F1} N`,false,'Stejný je v kapalině tlak, ne síla. Větší plocha dá větší sílu.')],
+        vysvetleni:`F₂ = F₁ · S₂ / S₁ = ${F1} · ${k*k} = ${F1*k*k} N.` }; },
+    ()=>{ const F=nahodne([50,100,200]), S=nahodne([2,4,5]);
+      return { otazka:`Na píst s plochou <b>${S} cm²</b> tlačíš silou <b>${F} N</b>. Jaký tlak vznikne v kapalině?`,
+        moznosti:[moznost(`${cis(F/S*10,1)} kPa`,true),
+          moznost(`${F*S} kPa`,false,'Tlak je podíl síly a plochy, ne součin: p = F / S.'),
+          moznost(`${cis(F/S,1)} Pa`,false,'Plochu je potřeba převést na m²: 1 cm² = 0,0001 m². Tlak pak vyjde v tisících pascalů.')],
+        vysvetleni:`p = F / S = ${F} N / ${cis(S/10000,4)} m² = ${cis(F/S*10000,0)} Pa = ${cis(F/S*10,1)} kPa.` }; },
+    ()=>{ const k=nahodne([20,50,100]), h1=nahodne([20,40,50]);
+      return { otazka:`Lis zvětšuje sílu <b>${k}×</b>. Malý píst sjede o <b>${h1} mm</b>. O kolik se posune velký píst?`,
+        moznosti:[moznost(`${cis(h1/k,2)} mm`,true),
+          moznost(`${h1} mm`,false,'Kapalina se rozleje do větší plochy, takže velký píst se posune méně.'),
+          moznost(`${h1*k} mm`,false,'Obráceně: větší síla znamená menší dráhu, ne větší.')],
+        vysvetleni:`h₂ = h₁ / ${k} = ${cis(h1/k,2)} mm – co lis získá na síle, ztratí na dráze.` }; },
+    { otazka:'Proč je v hydraulickém lisu <b>olej</b>, a ne vzduch?',
+      moznosti:[moznost('Kapalina je téměř nestlačitelná, takže tlak přenese hned a beze ztrát dráhy.',true),
+        moznost('Olej je těžší, a tak tlačí víc.',false,'Tíha oleje je proti silám v lisu zanedbatelná. Rozhoduje, že se kapalina skoro nestlačí.'),
+        moznost('Vzduch by z válce unikl vždycky.',false,'Utěsnit se dá i vzduch. Jenže vzduch by se nejdřív stlačoval jako pružina a píst by se téměř nehýbal.')],
+      vysvetleni:'Stlačitelný plyn by část zdvihu „spolkl“; kapalina tlak přenáší okamžitě.' },
+    ()=>{ const d=nahodne([5,8,10]), n=nahodne([500,1000,2000]), v=Math.PI*d*n/1000;
+      return { otazka:`Vrták o průměru <b>${d} mm</b> se točí <b>${n}× za minutu</b>. Jaká je řezná rychlost (rychlost břitu na obvodu)?`,
+        moznosti:[moznost(`${cis(v,1)} m/min`,true),
+          moznost(`${cis(d*n/1000,1)} m/min`,false,'Za jednu otáčku urazí břit obvod π · d, ne jen průměr.'),
+          moznost(`${cis(Math.PI*d*n,0)} m/min`,false,'Průměr je v milimetrech – výsledek je potřeba vydělit 1 000, aby vyšly metry.')],
+        vysvetleni:`v = π · d · n / 1000 = π · ${d} · ${n} / 1000 ≈ ${cis(v,1)} m/min.` }; },
+    ()=>{ const k=nahodne([2,3]);
+      return { otazka:`Použiješ <b>${k}× tlustší</b> vrták do stejného materiálu se stejným posuvem. Kolikrát větší krouticí moment bude potřeba?`,
+        moznosti:[moznost(`${k*k}×`,true),
+          moznost(`${k}×`,false,'S průměrem roste řezná síla i rameno, na kterém působí – moment roste s druhou mocninou.'),
+          moznost('Stejný',false,'Tlustší vrták ukrajuje víc materiálu dál od osy – moment roste.')],
+        vysvetleni:`M roste s d²: ${k}² = ${k*k}.` }; },
+    { otazka:'Co se stane, když vrtáš ocel s <b>příliš vysokými otáčkami</b>?',
+      moznosti:[moznost('Břit se přehřeje a vrták se otupí (přepálí).',true),
+        moznost('Díra bude přesnější a hotová dřív.',false,'Nad pásmem řezné rychlosti se vrták přehřívá – rychlost vrtání tím nevyhraješ.'),
+        moznost('Nic, otáčky rozhodují jen o rychlosti.',false,'Otáčky určují řeznou rychlost, a ta má pro každý materiál horní mez.')],
+      vysvetleni:'Proto má ocel pásmo jen asi 15–35 m/min, dřevo až 250 m/min.' },
+    { otazka:'Co mají společného <b>páka</b> a <b>hydraulický lis</b>?',
+      moznosti:[moznost('Oba zvětší sílu za cenu delší dráhy – práci neušetří.',true),
+        moznost('Oba zmenší potřebnou práci.',false,'Práci neušetří žádný jednoduchý stroj – jen ji rozloží na jinou sílu a dráhu.'),
+        moznost('Oba fungují díky tlaku kapaliny.',false,'Tlak kapaliny využívá jen lis. Páka pracuje s momenty sil kolem osy.')],
+      vysvetleni:'Zlaté pravidlo mechaniky platí pro páku, kladkostroj, převody i hydrauliku.' },
+  ],
+});
+})();
+</script>
 </body>
 </html>

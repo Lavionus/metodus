@@ -25,6 +25,13 @@
     .pomucka .znaky { gap: 4px; }
     .pomucka .znak { min-width: 28px; padding: 4px 5px; font-size: 0.86rem; }
     .pomucka .znak.hledane { background: var(--warn); border-color: var(--warn); color: #1a1a1a; }
+    .slovo-volba {
+      width: 92px; aspect-ratio: 1; object-fit: cover; display: block;
+      border-radius: 10px; background: #faf6ec;
+    }
+    .nabidka button.slovo-karta { min-width: 126px; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+    .porada .polozka { display: inline-flex; align-items: center; gap: 5px; }
+    .porada .polozka img { width: 34px; height: 34px; object-fit: cover; border-radius: 6px; }
   </style>
 </head>
 <body>
@@ -72,6 +79,21 @@ const SLOVA = [
   'motýl', 'medvěd', 'mléko', 'krtek', 'kráva', 'koza', 'liška', 'lopata', 'brambora', 'buk',
   'pero', 'papír', 'police', 'tráva', 'tužka', 'vlak', 'voda', 'houba', 'hory', 'čokoláda',
 ];
+
+const OBRAZKY_SLOV = {
+  auto: ['auto', 'Osobní auto.'], balón: ['balon', 'Červený balón.'], dům: ['dum', 'Rodinný dům.'],
+  chleba: ['chleb', 'Bochník chleba.'], jablko: ['jablko', 'Červené jablko.'], kolo: ['kolo', 'Dětské jízdní kolo.'],
+  pes: ['pes', 'Pes.'], ryba: ['ryba', 'Ryba.'], strom: ['strom', 'Listnatý strom.'], slunce: ['slunce', 'Slunce.'],
+  motýl: ['motyl', 'Motýl.'], mléko: ['mleko', 'Sklenice mléka.'], kráva: ['krava', 'Kráva.'],
+  liška: ['liska', 'Liška.'], brambora: ['brambora', 'Brambora.'], tužka: ['tuzka', 'Ořezaná tužka.'],
+  voda: ['voda', 'Sklenice vody.'],
+};
+function popisSlova(slovo) {
+  const obrazek = OBRAZKY_SLOV[slovo];
+  return obrazek
+    ? `<img class="slovo-volba" src="img/cj/cj1-pismena-${obrazek[0]}.webp" alt="${obrazek[1]}" width="768" height="768"><span>${slovo}</span>`
+    : slovo;
+}
 
 const skore = Uloha.skore('metodus_cj2_abeceda', $('skore'));
 let rezim = 'chybejici';
@@ -179,7 +201,7 @@ function prvni() {
   };
   Uloha.vyber({
     kam: p, odezva,
-    moznosti: vyber.map(s => ({ klic: s, popis: s })),
+    moznosti: vyber.map(s => ({ klic: s, popis: popisSlova(s) })),
     spravnyKlic: prvniSlovo,
     zpravaOk: '✅ Správně. Pořadí: ' + poradiSlov(vyber).join(' → '),
     zpravaChyba: 'Porovnej první písmena slov.',
@@ -216,14 +238,16 @@ function serad() {
   };
   Uloha.zamichej(vyber).forEach(slovo => {
     const b = document.createElement('button');
-    b.textContent = slovo;
+    b.className = OBRAZKY_SLOV[slovo] ? 'slovo-karta' : '';
+    b.innerHTML = popisSlova(slovo);
     b.dataset.slovo = slovo;
     b.addEventListener('click', () => {
       if (b.disabled) return;
       if (slovo === spravnePoradi[dalsiIndex]) {
         const el = document.createElement('span');
         el.className = 'polozka';
-        el.innerHTML = `<span class="cislo">${dalsiIndex + 1}.</span>${slovo}`;
+        const obrazek = OBRAZKY_SLOV[slovo];
+        el.innerHTML = `<span class="cislo">${dalsiIndex + 1}.</span>${obrazek ? `<img src="img/cj/cj1-pismena-${obrazek[0]}.webp" alt="">` : ''}${slovo}`;
         porada.appendChild(el);
         b.disabled = true;
         dalsiIndex++;

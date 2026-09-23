@@ -12,7 +12,7 @@
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
   background:var(--bg);color:var(--text);min-height:100vh;padding:20px}
-.container{max-width:900px;margin:0 auto}
+.container{max-width: var(--sirka-obsahu, 900px);margin:0 auto}
 h1{font-size:1.6rem;margin-bottom:6px;font-weight:600;text-align:center}
 .podtitul{text-align:center;color:var(--text-muted);font-size:.86rem;margin-bottom:18px}
 .card{background:var(--bg-elevated);border:1px solid var(--border);border-radius:8px;
@@ -561,6 +561,120 @@ new MutationObserver(prepocitej).observe(document.documentElement,
   { attributes: true, attributeFilter: ['data-theme'] });
 
 postavKategorie(); postavChipy(); postavVstupy(); prepocitej();
+</script>
+<script src="../badani.js"></script>
+<script>
+/* Úkoly k modelu (badani.js): předpověz → vyzkoušej → vysvětli.
+   Jak výsledek vzorce závisí na veličině: kvadraticky, s odmocninou, lineárně. */
+(function(){
+const cis=Badani.cislo;
+const nahodne=p=>p[Math.floor(Math.random()*p.length)];
+const moznost=(t,ok,proc)=>({t,ok,proc});
+const vyber=(kat,vz)=>{ document.querySelector(`#kategorie [data-kat="${kat}"]`).click(); document.querySelector(`#chipy [data-vz="${vz}"]`).click(); };
+const nastav=mapa=>Object.entries(mapa).forEach(([k,v])=>{ const e=document.querySelector(`#vstupy input[type=range][data-k="${k}"]`); e.value=v; e.dispatchEvent(new Event('input',{bubbles:true})); });
+const je=(vz,mapa)=>stav.vzorec.id===vz&&Object.entries(mapa).every(([k,v])=>Math.abs(stav.hodnoty[k]-v)<1e-9);
+const vysl=()=>stav.vzorec.f(stav.hodnoty);
+
+Badani.start({
+  zakryt:'#zavislost',   // popis grafu říká, jak výsledek s veličinou roste
+  ukoly:[
+    { id:'energie', nazev:'Dvakrát rychleji',
+      predpoved:{
+        otazka:'Cyklista (80 kg) jede <b>10 m/s</b>. Kolikrát větší pohybovou energii má, když pojede <b>20 m/s</b>?',
+        moznosti:['2×','4×','Stejnou – hmotnost se nezměnila'],
+        spravna:1 },
+      priprava(){ vyber('sila','Ek'); nastav({m:80,v:10}); },
+      pokus:'U vzorce <b>Kinetická energie</b> si přečti výsledek pro 10 m/s a pak nastav <b>rychlost 20 m/s</b>. Graf vpravo ukazuje celou závislost.',
+      splneno:()=>je('Ek',{m:80,v:20}),
+      ukaz(){ nastav({v:20}); },
+      pozorovani:()=>`Při 10 m/s je energie 4 000 J, při 20 m/s <b>${cis(vysl(),0)} J</b> – čtyřikrát víc. Graf je parabola.`,
+      vysvetli:{
+        otazka:'Proč dvojnásobná rychlost znamená čtyřnásobnou energii?',
+        moznosti:[
+          moznost('Rychlost je ve vzorci E = ½ · m · v² na druhou: 2² = 4.',true),
+          moznost('Energie roste s rychlostí přímo úměrně.',false,'Pak by vyšlo 8 000 J. Vzorec má v², a tak vyšlo 16 000 J.'),
+          moznost('Při vyšší rychlosti roste i hmotnost.',false,'Hmotnost zůstala 80 kg. Čtyřnásobek plyne z druhé mocniny rychlosti.')]},
+      shrnuti:'Pohybová energie roste s <b>druhou mocninou rychlosti</b>: 2× rychleji = 4× víc energie. Proto se brzdná dráha auta při dvojnásobné rychlosti prodlouží asi čtyřikrát.' },
+
+    { id:'pad', nazev:'Pád z větší výšky',
+      predpoved:{
+        otazka:'Kámen spadne z výšky <b>20 m</b>. Kolikrát větší rychlostí dopadne, když ho pustíš ze <b>80 m</b> (4× výš)?',
+        moznosti:['4×','2×','16×'],
+        spravna:1 },
+      priprava(){ vyber('pohyb','pad'); nastav({h:20}); },
+      pokus:'U vzorce <b>Volný pád</b> si přečti rychlost pro 20 m a nastav <b>výšku 80 m</b>.',
+      splneno:()=>je('pad',{h:80}),
+      ukaz(){ nastav({h:80}); },
+      pozorovani:()=>`Z 20 m dopadne rychlostí 19,8 m/s, z 80 m <b>${cis(vysl(),1)} m/s</b> – jen dvakrát rychleji.`,
+      vysvetli:{
+        otazka:'Proč čtyřnásobná výška dá jen dvojnásobnou rychlost?',
+        moznosti:[
+          moznost('Rychlost je odmocnina z výšky: v = √(2 · g · h), a √4 = 2.',true),
+          moznost('Kámen při delším pádu zpomaluje.',false,'Bez odporu vzduchu kámen celou dobu zrychluje. Jen rychlost roste s odmocninou výšky.'),
+          moznost('Gravitace je ve větší výšce slabší.',false,'Ve výšce desítek metrů je gravitace prakticky stejná. Rozhoduje vzorec v = √(2gh).')]},
+      shrnuti:'Rychlost dopadu roste s <b>odmocninou výšky</b>: 4× výš = 2× rychleji. Energie (m · g · h) přitom roste s výškou přímo úměrně – obojí sedí, protože E = ½ · m · v².' },
+
+    { id:'hloubka', nazev:'Tlak pod vodou',
+      predpoved:{
+        otazka:'V jaké hloubce vody je tlak samotné vody stejně velký jako <b>atmosférický tlak</b> (asi 100 kPa)?',
+        moznosti:['Asi 1 m','Asi 10 m','Asi 100 m'],
+        spravna:1 },
+      priprava(){ vyber('latky','phydro'); nastav({h:1,rho:1000}); },
+      pokus:'U vzorce <b>Hydrostatický tlak</b> nech hustotu vody 1 000 kg/m³ a hledej hloubku, při které převod ukáže asi <b>1× atmosférický tlak</b>.',
+      splneno:()=>stav.vzorec.id==='phydro'&&stav.hodnoty.rho===1000&&Math.abs(vysl()/101325-1)<=0.05,
+      ukaz(){ nastav({h:10.5}); },
+      pozorovani:()=>`V hloubce <b>${cis(stav.hodnoty.h,1)} m</b> je tlak vody ${cis(vysl()/1000,0)} kPa – ${cis(vysl()/101325,2)}× atmosférický tlak.`,
+      vysvetli:{
+        otazka:'Proč stačí tak „malá“ hloubka?',
+        moznosti:[
+          moznost('Voda je asi 800× hustší než vzduch. Sloupec vody 10 m tlačí stejně jako celá atmosféra nad námi (desítky kilometrů řídkého vzduchu).',true),
+          moznost('Ve vodě je tlak vždy dvakrát větší než ve vzduchu.',false,'Tlak roste s hloubkou: p = h · ρ · g. U hladiny je tlak vody nulový, v 10 m asi 100 kPa.'),
+          moznost('Tlak vody nezávisí na hloubce.',false,'Závisí – přímo úměrně. Vyzkoušej posuvník hloubky: dvojnásobná hloubka, dvojnásobný tlak.')]},
+      shrnuti:'<b>Hydrostatický tlak p = h · ρ · g</b> roste s hloubkou přímo úměrně: každých <b>10 m vody přidá asi 1 atmosféru</b>. Potápěč ve 30 m nese tlak 4 atmosfér (s tou vzduchovou).' },
+  ],
+
+  otazky:[
+    ()=>{ const k=nahodne([2,3]);
+      return { otazka:`Auto zrychlí na <b>${k}× větší</b> rychlost. Kolikrát se zvětší jeho pohybová energie?`,
+        moznosti:[moznost(`${k*k}×`,true), moznost(`${k}×`,false,'Energie roste s druhou mocninou rychlosti: E = ½ m v².'), moznost(`${k*k*k}×`,false,`Rychlost se umocní na druhou, ne na třetí: ${k}² = ${k*k}.`)],
+        vysvetleni:`${k}² = ${k*k}.` }; },
+    ()=>{ const s=nahodne([100,200,400]), t=nahodne([10,20,40]);
+      return { otazka:`Běžec uběhne <b>${s} m</b> za <b>${t} s</b>. Jaká je jeho průměrná rychlost v km/h?`,
+        moznosti:[moznost(`${cis(s/t*3.6,1)} km/h`,true), moznost(`${cis(s/t,1)} km/h`,false,'To je rychlost v m/s. Na km/h se násobí 3,6.'),
+          moznost(`${cis(s/t/3.6,1)} km/h`,false,'Z m/s na km/h se násobí 3,6, nedělí.')],
+        vysvetleni:`v = ${s} / ${t} = ${cis(s/t,1)} m/s = ${cis(s/t*3.6,1)} km/h.` }; },
+    ()=>{ const m=nahodne([2,5,10]), h=nahodne([3,4,6]);   // h = 10 by splynulo s g
+      return { otazka:`Jakou polohovou energii má těleso o hmotnosti <b>${m} kg</b> ve výšce <b>${h} m</b> (g ≈ 10 N/kg)?`,
+        moznosti:[moznost(`${m*h*10} J`,true), moznost(`${m*h} J`,false,'Nezapomeň na g ≈ 10 N/kg: E = m · g · h.'),
+          moznost(`${m*10} J`,false,'Energie závisí i na výšce: E = m · g · h.')],
+        vysvetleni:`E = ${m} · 10 · ${h} = ${m*h*10} J.` }; },
+    { otazka:'Kyvadlo prodloužíš <b>čtyřikrát</b>. Jak se změní doba kmitu?',
+      moznosti:[moznost('Prodlouží se dvakrát',true), moznost('Prodlouží se čtyřikrát',false,'T = 2π√(l/g) – doba roste s odmocninou délky.'),
+        moznost('Nezmění se',false,'Doba kmitu na délce závisí – nezávisí jen na hmotnosti.')],
+      vysvetleni:'√4 = 2.' },
+    ()=>{ const F=nahodne([100,300,600]), S=nahodne([0.01,0.02,0.05]);
+      return { otazka:`Síla <b>${F} N</b> působí na plochu <b>${cis(S,2)} m²</b>. Jaký je tlak?`,
+        moznosti:[moznost(`${cis(F/S,0)} Pa`,true), moznost(`${cis(F*S,1)} Pa`,false,'Tlak je podíl síly a plochy, ne součin.'),
+          moznost(`${cis(S/F,5)} Pa`,false,'Síla patří do čitatele: p = F / S.')],
+        vysvetleni:`p = ${F} / ${cis(S,2)} = ${cis(F/S,0)} Pa.` }; },
+    { otazka:'Proč se sněžnicemi nepropadneš do sněhu?',
+      moznosti:[moznost('Tíhu rozloží na větší plochu, takže tlak na sníh je menší.',true),
+        moznost('Zmenší tvou tíhu.',false,'Tíha se nemění. Mění se plocha, a tím tlak p = F / S.'),
+        moznost('Sníh pod nimi ztvrdne.',false,'Sníh zůstane stejný – menší je jen tlak, kterým na něj působíš.')],
+      vysvetleni:'Větší plocha → menší tlak.' },
+    ()=>{ const U=230, P=nahodne([1150,2300,460]);
+      return { otazka:`Varná konvice má příkon <b>${P} W</b> a je zapojená na <b>230 V</b>. Jaký jí teče proud?`,
+        moznosti:[moznost(`${cis(P/U,0)} A`,true), moznost(`${cis(P*U,0)} A`,false,'P = U · I, takže I = P / U.'),
+          moznost(`${cis(U/P,2)} A`,false,'Proud je příkon lomeno napětím: I = P / U.')],
+        vysvetleni:`I = ${P} / 230 = ${cis(P/U,0)} A.` }; },
+    { otazka:'Proč se voda ohřívá tak pomalu ve srovnání se železem stejné hmotnosti?',
+      moznosti:[moznost('Voda má velkou měrnou tepelnou kapacitu – na ohřátí 1 kg o 1 °C potřebuje asi 4 200 J.',true),
+        moznost('Voda je průhledná.',false,'Průhlednost s ohřevem nesouvisí. Rozhoduje měrná tepelná kapacita c.'),
+        moznost('Železo je těžší.',false,'Hmotnosti jsou stejné. Železo má ale asi 9× menší c než voda.')],
+      vysvetleni:'Q = m · c · Δt – s velkým c je potřeba víc tepla.' },
+  ],
+});
+})();
 </script>
 </body>
 </html>

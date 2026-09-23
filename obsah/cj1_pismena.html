@@ -16,6 +16,10 @@
        jen to, co je vlastní téhle stránce, a zvětšení pro prvňáky. */
     .plocha { max-width: 860px; }
     .obrazek { font-size: clamp(3.5rem, 14vw, 6rem); user-select: none; }
+    .obrazek-slova {
+      width: min(240px, 62vw); aspect-ratio: 1; object-fit: cover; display: block;
+      border-radius: 18px; box-shadow: var(--shadow); background: #faf6ec;
+    }
 
     /* Hlásky / písmena ve slově */
     .hlasky { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
@@ -102,34 +106,25 @@ const KLIC = 'metodus_cj1_pismena';
 
 /* ---- Slovní zásoba: obrázek + slovo velkými písmeny ---------------------- */
 const SLOVA = [
-  { e: '🐶', s: 'PES' },   { e: '🐱', s: 'KOČKA' }, { e: '🏠', s: 'DŮM' },
-  { e: '🌳', s: 'STROM' }, { e: '🚗', s: 'AUTO' },  { e: '🍎', s: 'JABLKO' },
-  { e: '🐟', s: 'RYBA' },  { e: '🌞', s: 'SLUNCE' },{ e: '🌷', s: 'TULIPÁN' },
-  { e: '🐄', s: 'KRÁVA' }, { e: '🥛', s: 'MLÉKO' }, { e: '🍞', s: 'CHLÉB' },
-  { e: '🚌', s: 'AUTOBUS' },{ e: '✏️', s: 'TUŽKA' },{ e: '📚', s: 'KNIHA' },
-  { e: '🧦', s: 'PONOŽKA' },{ e: '🐭', s: 'MYŠ' },  { e: '🦊', s: 'LIŠKA' },
-  { e: '🦁', s: 'LEV' }    ,{ e: '🌧️', s: 'DÉŠŤ' }, { e: '❄️', s: 'VLOČKA' },
-  { e: '🍄', s: 'HŘIB' },  { e: '🥕', s: 'MRKEV' }, { e: '🌛', s: 'NOC' }  ,
-  { e: '🐝', s: 'VČELA' }, { e: '🦋', s: 'MOTÝL' }, { e: '🐘', s: 'SLON' },
-  { e: '🎈', s: 'BALÓN' }, { e: '🧸', s: 'MEDVÍDEK' }, { e: '🚲', s: 'KOLO' },
-  { e: '🪑', s: 'ŽIDLE' }, { e: '👟', s: 'BOTA' },  { e: '🧀', s: 'SÝR' },
-  { e: '🐔', s: 'SLEPICE' },{ e: '🌊', s: 'VODA' }, { e: '🔥', s: 'OHEŇ' },
-  { e: '🐸', s: 'ŽÁBA' },  { e: '🍐', s: 'HRUŠKA' }, { e: '🥔', s: 'BRAMBORA' },
-  { e: '🧅', s: 'CIBULE' },{ e: '🌽', s: 'KUKUŘICE' },{ e: '🍇', s: 'HROZNY' },
-  { e: '🐑', s: 'OVCE' },  { e: '🐖', s: 'PRASE' },  { e: '🐴', s: 'KŮŇ' },
-  { e: '🐇', s: 'ZAJÍC' }, { e: '🦌', s: 'SRNA' },   { e: '🐺', s: 'VLK' },
-  { e: '🦉', s: 'SOVA' },  { e: '🐢', s: 'ŽELVA' },  { e: '🐍', s: 'HAD' },
-  { e: '🦆', s: 'KACHNA' },{ e: '🐓', s: 'KOHOUT' }, { e: '🐜', s: 'MRAVENEC' },
-  { e: '🐞', s: 'BERUŠKA' },{ e: '🕷️', s: 'PAVOUK' },{ e: '🏫', s: 'ŠKOLA' },
-  { e: '🪟', s: 'OKNO' },  { e: '🚪', s: 'DVEŘE' },  { e: '🛏️', s: 'POSTEL' },
-  { e: '🥄', s: 'LŽÍCE' }, { e: '🍴', s: 'VIDLIČKA' },{ e: '🧢', s: 'ČEPICE' },
-  { e: '🧣', s: 'ŠÁLA' },  { e: '🌂', s: 'DEŠTNÍK' },{ e: '⌚', s: 'HODINY' },
-  { e: '🔔', s: 'ZVONEK' },{ e: '🎸', s: 'KYTARA' }, { e: '🥁', s: 'BUBEN' },
-  { e: '✂️', s: 'NŮŽKY' }, { e: '🖍️', s: 'PASTELKA' },{ e: '🏀', s: 'MÍČ' },
-  { e: '🚀', s: 'RAKETA' },{ e: '⛵', s: 'LOĎ' },    { e: '🚂', s: 'VLAK' },
-  { e: '✈️', s: 'LETADLO' },{ e: '🌉', s: 'MOST' },  { e: '🏰', s: 'HRAD' },
-  { e: '🎂', s: 'DORT' },  { e: '🍬', s: 'BONBON' }, { e: '🌵', s: 'KAKTUS' },
-];
+  ['pes', 'PES', 'Pes.'], ['kocka', 'KOČKA', 'Kočka.'], ['dum', 'DŮM', 'Rodinný dům.'],
+  ['strom', 'STROM', 'Listnatý strom.'], ['auto', 'AUTO', 'Osobní auto.'], ['jablko', 'JABLKO', 'Červené jablko.'],
+  ['ryba', 'RYBA', 'Ryba.'], ['slunce', 'SLUNCE', 'Slunce.'], ['tulipan', 'TULIPÁN', 'Červený tulipán.'],
+  ['krava', 'KRÁVA', 'Kráva.'], ['mleko', 'MLÉKO', 'Sklenice mléka.'], ['chleb', 'CHLÉB', 'Bochník chleba.'],
+  ['autobus', 'AUTOBUS', 'Autobus.'], ['tuzka', 'TUŽKA', 'Ořezaná tužka.'], ['kniha', 'KNIHA', 'Zavřená kniha.'],
+  ['ponozka', 'PONOŽKA', 'Pruhovaná ponožka.'], ['mys', 'MYŠ', 'Myš.'], ['liska', 'LIŠKA', 'Liška.'],
+  ['lev', 'LEV', 'Lev.'], ['dest', 'DÉŠŤ', 'Dešťový mrak.'], ['vlocka', 'VLOČKA', 'Sněhová vločka.'],
+  ['hrib', 'HŘIB', 'Hřib.'], ['mrkev', 'MRKEV', 'Mrkev.'], ['noc', 'NOC', 'Měsíc a hvězdy jako symbol noci.'],
+  ['vcela', 'VČELA', 'Včela.'], ['motyl', 'MOTÝL', 'Motýl.'], ['slon', 'SLON', 'Slon.'],
+  ['balon', 'BALÓN', 'Červený balón.'], ['medvidek', 'MEDVÍDEK', 'Plyšový medvídek.'], ['kolo', 'KOLO', 'Dětské jízdní kolo.'],
+  ['zidle', 'ŽIDLE', 'Dřevěná židle.'], ['bota', 'BOTA', 'Dětská bota.'], ['syr', 'SÝR', 'Klínek sýra.'],
+  ['slepice', 'SLEPICE', 'Slepice.'], ['voda', 'VODA', 'Sklenice vody.'], ['ohen', 'OHEŇ', 'Oheň nad polínky.'],
+  ['zaba', 'ŽÁBA', 'Žába.'], ['hruska', 'HRUŠKA', 'Hruška.'], ['brambora', 'BRAMBORA', 'Brambora.'],
+  ['cibule', 'CIBULE', 'Cibule.'],
+].map(([slug, s, alt]) => ({ s, alt, obrazek: `img/cj/cj1-pismena-${slug}.webp` }));
+
+function obrazekSlova(slovo) {
+  return `<img class="obrazek-slova" src="${slovo.obrazek}" alt="${slovo.alt}" width="768" height="768">`;
+}
 
 const ABECEDA = [...'AÁBCČDĎEÉĚFGHIÍJKLMNŇOÓPRŘSŠTŤUÚŮVYÝZŽ'];
 
@@ -202,7 +197,7 @@ function rozklad() {
   const p = $('plocha');
   const hlasky = naHlasky(aktualni.s);
   p.innerHTML = `<div class="zadani">Klepni na hlásky zleva doprava a přečti si slovo.</div>
-                 <div class="obrazek">${aktualni.e}</div>`;
+                 ${obrazekSlova(aktualni)}`;
   const rada = document.createElement('div');
   rada.className = 'hlasky';
   hlasky.forEach((h, i) => {
@@ -257,7 +252,7 @@ function skladani() {
   const p = $('plocha');
   const hlasky = naHlasky(aktualni.s);
   p.innerHTML = `<div class="zadani">Slož slovo podle obrázku – klepej na písmena ve správném pořadí.</div>
-                 <div class="obrazek">${aktualni.e}</div>`;
+                 ${obrazekSlova(aktualni)}`;
   const stavba = document.createElement('div');
   stavba.className = 'stavba';
   hlasky.forEach(() => {
@@ -311,7 +306,7 @@ function hlaskaUloha(kdePrvni) {
   const jine = zamichej(ABECEDA.filter(x => x !== spravnaH)).slice(0, 3);
   const volby = zamichej([spravnaH, ...jine]);
   p.innerHTML = `<div class="zadani">Kterou hláskou slovo ${kdePrvni ? 'začíná' : 'končí'}?</div>
-                 <div class="obrazek">${aktualni.e}</div>
+                 ${obrazekSlova(aktualni)}
                  <div class="zadani"><b>${aktualni.s}</b></div>`;
   const m = document.createElement('div');
   m.className = 'moznosti';

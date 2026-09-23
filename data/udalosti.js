@@ -31,7 +31,7 @@ const METODUS_UDALOSTI = [
   "pruh": "svet"
  },
  {
-  "rok": 27,
+  "rok": -27,
   "nazev": "Vznik Římského impéria",
   "popis": "Octavianus Augustus se stal prvním římským císařem.",
   "pruh": "svet"
@@ -45,7 +45,7 @@ const METODUS_UDALOSTI = [
  {
   "rok": 800,
   "nazev": "Korunovace Karla Velikého",
-  "popis": "Karel Veliký se stal císařem, vznik Franské říše.",
+  "popis": "Franský král Karel Veliký byl v Římě korunován na císaře – obnova císařství na Západě.",
   "pruh": "svet"
  },
  {

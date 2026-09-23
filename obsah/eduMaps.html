@@ -148,7 +148,8 @@
   document.querySelectorAll('a[data-lekce]').forEach(a => a.addEventListener('click', e => {
     if (window.parent === window || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey || e.button !== 0) return;
     e.preventDefault();
-    window.parent.postMessage({ otevri: 'obsah/' + a.getAttribute('href') }, location.origin);
+    const cilovyPuvod = location.protocol === 'file:' ? '*' : location.origin;
+    window.parent.postMessage({ otevri: 'obsah/' + a.getAttribute('href') }, cilovyPuvod);
   }));
 </script>
 </body>

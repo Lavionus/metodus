@@ -10,6 +10,7 @@
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
   <script src="../rec.js"></script>
+  <script src="../uloha.js"></script>
   <style>
     /* Rozcestník režimů, lišta ovládání i řada slabik jsou ve vyuka.css –
        tady zůstává jen vlastní čtecí tabule. */
@@ -21,6 +22,16 @@
     .tabule .text { font-weight: 700; line-height: 1.35; letter-spacing: 0.05em; }
     .tabule .text .zvyraz { color: var(--accent); }
     .tabule .text .delic { opacity: 0.35; }
+    .tabule[hidden], .rada[hidden], .pruh[hidden], .ovladani[hidden], .plocha[hidden] { display: none !important; }
+    .skryty-text { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+    .moznosti.obrazky button { padding: 8px; }
+    .moznosti.obrazky img { display: block; width: clamp(88px, 24vw, 150px); height: auto; border-radius: 10px; background: #fbf7ec; }
+    .slovo-cteni { font-size: clamp(2.2rem, 9vw, 3.6rem); font-weight: 700; letter-spacing: 0.05em; text-align: center; margin: 8px 0 14px; }
+    .slovo-cteni .zvyraz { color: var(--accent); }
+    .slovo-obrazek {
+      width: min(190px, 48vw); aspect-ratio: 1; object-fit: cover; display: block;
+      margin: 0 auto 14px; border-radius: 16px; box-shadow: var(--shadow); background: #faf6ec;
+    }
     label.prep { display: inline-flex; align-items: center; gap: 6px; color: var(--text-muted);
       font-size: 0.88rem; cursor: pointer; }
     /* Řada slabik s toutéž souhláskou – dítě vidí, kde se právě nachází v řadě
@@ -35,10 +46,11 @@
   <p class="podtitul">Nácvik čtení pro 1.–2. ročník: písmena → slabiky → slova → věty. Klepnutím na tabuli zobrazíš další.</p>
 
   <div class="rezimy" id="rezimy">
-    <button data-rezim="pismena" class="active">🔤 Písmena</button>
-    <button data-rezim="slabiky">🔡 Slabiky</button>
-    <button data-rezim="slova">📝 Slova</button>
-    <button data-rezim="vety">📄 Věty</button>
+    <button data-rezim="pismena" data-faze="vyuka" class="active">🔤 Písmena</button>
+    <button data-rezim="slabiky" data-faze="vyuka">🔡 Slabiky</button>
+    <button data-rezim="slova" data-faze="vyuka">📝 Slova</button>
+    <button data-rezim="vety" data-faze="vyuka">📄 Věty</button>
+    <button data-rezim="rozumim">✅ Čtu a rozumím</button>
   </div>
 
   <div class="tabule" id="tabule"><div class="text" id="text"></div></div>
@@ -57,6 +69,14 @@
 
   <div class="rada" id="rada"></div>
 
+  <!-- porozumění: přečti slovo a vyber obrázek -->
+  <div class="plocha" id="plocha" hidden></div>
+  <div class="ovladani" id="ovladaniKviz" hidden>
+    <button class="hlavni" id="btnPreskocit">Přeskočit →</button>
+    <button id="btnCistKviz" title="Přečíst slovo nahlas">🔊</button>
+    <span class="skore" id="skore"></span>
+  </div>
+
   <p class="napoveda" id="poznamka">
     Klepnutím na tabuli se objeví další karta. Barvy střídavě oddělují <b>slabiky</b>,
     aby je dítě vidělo i bez pomlček.
@@ -68,6 +88,12 @@ const $ = id => document.getElementById(id);
 
 const SOUHLASKY = ['M', 'L', 'S', 'P', 'T', 'J', 'N', 'D', 'K', 'V', 'Z', 'R', 'B', 'C', 'H'];
 const SAMOHLASKY = ['A', 'Á', 'E', 'É', 'I', 'Í', 'O', 'Ó', 'U', 'Ú', 'Y', 'Ý'];
+
+const OBRAZKY_SLOV = {
+  pes: ['pes', 'Pes.'], dům: ['dum', 'Rodinný dům.'], sýr: ['syr', 'Klínek sýra.'],
+  ryba: ['ryba', 'Ryba.'], strom: ['strom', 'Listnatý strom.'], chléb: ['chleb', 'Bochník chleba.'],
+  kniha: ['kniha', 'Zavřená kniha.'], mléko: ['mleko', 'Sklenice mléka.'],
+};
 
 const DATA = {
   pismena: [...'AÁBCČDĎEÉĚFGHIÍJKLMNŇOÓPRŘSŠTŤUÚVYÝZŽ'],
@@ -123,7 +149,56 @@ function zamichej(pole) {
   for (let i = p.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [p[i], p[j]] = [p[j], p[i]]; }
   return p;
 }
-function start() { poradi = zamichej(DATA[rezim]); idx = 0; ukaz(); }
+/* ---- Čtu a rozumím: slovo po slabikách, výběr ze tří obrázků (IMG-cj-01) ----
+   Jen slova s jednoznačným obrázkem (bez noci, deště a vody ve sklenici). */
+const SLOVA_OBRAZKY = [
+  ['pes', 'pes'], ['koč-ka', 'kocka'], ['dům', 'dum'], ['strom', 'strom'], ['au-to', 'auto'], ['jab-lko', 'jablko'],
+  ['ry-ba', 'ryba'], ['slun-ce', 'slunce'], ['tu-li-pán', 'tulipan'], ['krá-va', 'krava'], ['mlé-ko', 'mleko'],
+  ['chléb', 'chleb'], ['au-to-bus', 'autobus'], ['tuž-ka', 'tuzka'], ['kni-ha', 'kniha'], ['po-nož-ka', 'ponozka'],
+  ['myš', 'mys'], ['liš-ka', 'liska'], ['lev', 'lev'], ['vloč-ka', 'vlocka'], ['hřib', 'hrib'], ['mr-kev', 'mrkev'],
+  ['vče-la', 'vcela'], ['mo-týl', 'motyl'], ['slon', 'slon'], ['ba-lon', 'balon'], ['med-ví-dek', 'medvidek'],
+  ['ko-lo', 'kolo'], ['žid-le', 'zidle'], ['bo-ta', 'bota'], ['sýr', 'syr'], ['sle-pi-ce', 'slepice'],
+  ['o-heň', 'ohen'], ['žá-ba', 'zaba'], ['hruš-ka', 'hruska'], ['bram-bo-ra', 'brambora'], ['ci-bu-le', 'cibule'],
+];
+const skore = Uloha.skore('metodus_slabiky_rozumim', $('skore'));
+let slovoKviz = null;
+function slovoHtml(delene) {
+  const velka = $('chkVelka').checked;
+  const casti = delene.split('-').map(c => velka ? c.toUpperCase() : c);
+  return casti.map((c, i) => i % 2 ? '<span class="zvyraz">' + c + '</span>' : c).join('');
+}
+function kvizUloha() {
+  const p = $('plocha');
+  const [delene, soubor] = Uloha.nahodne(SLOVA_OBRAZKY.filter(x => x !== slovoKviz));
+  slovoKviz = SLOVA_OBRAZKY.find(x => x[1] === soubor);
+  const jine = Uloha.zamichej(SLOVA_OBRAZKY.filter(x => x[1] !== soubor)).slice(0, 2);
+  const slovo = delene.replace(/-/g, '');
+  p.innerHTML = `<div class="zadani">Přečti slovo a vyber správný obrázek:</div><div class="slovo-cteni">${slovoHtml(delene)}</div>`;
+  const odezva = document.createElement('div');
+  odezva.className = 'odezva';
+  Uloha.vyber({
+    kam: p, odezva, trida: 'obrazky',
+    moznosti: Uloha.zamichej([slovoKviz, ...jine]).map(([d, f]) => ({
+      klic: f, popis: `<span class="skryty-text">${d.replace(/-/g, '')}</span>`,
+      ikona: `<img src="img/cj/cj1-pismena-${f}.webp" alt="" width="768" height="768" loading="lazy">`,
+    })),
+    spravnyKlic: soubor,
+    zpravaOk: `✅ ${slovo[0].toUpperCase() + slovo.slice(1)} – přečteno správně!`,
+    zpravaChyba: 'Ještě ne. Přečti slovo znovu po slabikách, třeba nahlas.',
+    poSpravne: skore.vyhodnot, dalsi: kvizUloha,
+  });
+  p.appendChild(odezva);
+}
+
+function start() {
+  const kviz = rezim === 'rozumim';
+  for (const id of ['tabule', 'rada']) $(id).hidden = kviz;
+  document.querySelector('.pruh').hidden = kviz;
+  document.querySelector('.ovladani:not(#ovladaniKviz)').hidden = kviz;
+  $('plocha').hidden = $('ovladaniKviz').hidden = !kviz;
+  if (kviz) { Rec.ticho && Rec.ticho(); kvizUloha(); return; }
+  poradi = zamichej(DATA[rezim]); idx = 0; ukaz();
+}
 
 /* Řada slabik s touž souhláskou. Ukazuje se jen v režimu slabik – u písmen,
    slov a vět by neměla co rozsvítit. Rozsvícená je právě ta na tabuli, takže
@@ -149,8 +224,13 @@ function ukaz() {
   if (velka) t = t.toUpperCase(); else if (rezim !== 'vety') t = t.toLowerCase();
   // slabiky střídavě obarvit
   const casti = t.split('-');
-  $('text').innerHTML = casti.map((c, i) => i % 2 ? '<span class="zvyraz">' + c + '</span>' : c)
+  const textHtml = casti.map((c, i) => i % 2 ? '<span class="zvyraz">' + c + '</span>' : c)
     .join('<span class="delic">-</span>');
+  const klicObrazku = puvodni.replace(/-/g, '').toLowerCase();
+  const obrazek = rezim === 'slova' ? OBRAZKY_SLOV[klicObrazku] : null;
+  $('text').innerHTML = obrazek
+    ? `<img class="slovo-obrazek" src="img/cj/cj1-pismena-${obrazek[0]}.webp" alt="${obrazek[1]}" width="768" height="768">${textHtml}`
+    : textHtml;
   const delka = t.replace(/-/g, '').length;
   $('text').style.fontSize = rezim === 'vety' ? 'clamp(1.6rem, 5vw, 3rem)' : delka > 8 ? 'clamp(2.2rem, 9vw, 4.5rem)' : 'clamp(3rem, 14vw, 7rem)';
   $('pocitadlo').textContent = (idx + 1) + ' / ' + poradi.length;
@@ -179,7 +259,10 @@ $('btnAuto').onclick = () => {
   $('btnAuto').classList.toggle('zapnuto', cist);
   if (cist) precti(); else Rec.ticho();
 };
+$('btnPreskocit').onclick = kvizUloha;
+$('btnCistKviz').onclick = () => slovoKviz && Rec.mluv(slovoKviz[0].replace(/-/g, ''), { rychlost: 0.8 });
 document.addEventListener('keydown', e => {
+  if (rezim === 'rozumim') return;   // v úloze patří klávesy tlačítkům
   if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); dalsi(); }
   if (e.key === 'ArrowLeft') predchozi();
   if (e.key === 'p' || e.key === 'P') precti();

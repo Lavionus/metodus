@@ -1,6 +1,6 @@
 /* ============================================================
    theme.js – sdílené přepínání motivů: tmavý, světlý, vysoký kontrast, sépie,
-   stará knihovna, škola, noční škola a volba „podle systému“.
+   tmavá sépie, stará knihovna, škola, noční škola a volba „podle systému“.
    Vkládá se do <head> podstránek (před jejich vlastní <style>),
    aby se téma použilo ještě před vykreslením.
 
@@ -50,10 +50,10 @@
      (CSS `:root[data-tone="light"]`, kreslení do plátna přes
      MetodusTheme.isLight()) se řídí tónem, takže sépie dostane světlé
      a stará knihovna tmavé varianty barev bez zvláštních pravidel. */
-  const TONY = { dark: 'dark', light: 'light', kontrast: 'light', sepia: 'light', knihovna: 'dark', skola: 'light', 'nocni-skola': 'dark' };
-  const JMENA = { auto: 'podle systému', dark: 'tmavé', light: 'světlé', kontrast: 'vysoký kontrast', sepia: 'sépie',
+  const TONY = { dark: 'dark', light: 'light', kontrast: 'light', sepia: 'light', 'sepia-tmava': 'dark', knihovna: 'dark', skola: 'light', 'nocni-skola': 'dark' };
+  const JMENA = { auto: 'podle systému', dark: 'tmavé', light: 'světlé', kontrast: 'vysoký kontrast', sepia: 'sépie', 'sepia-tmava': 'tmavá sépie',
                   knihovna: 'stará knihovna', skola: 'škola', 'nocni-skola': 'noční škola' };
-  const TEXTURY = { sepia: 'obsah/textures/recyklovany-papir.webp', knihovna: 'obsah/textures/knihovna-drevo.webp',
+  const TEXTURY = { sepia: 'obsah/textures/recyklovany-papir.webp', 'sepia-tmava': 'obsah/textures/recyklovany-papir.webp', knihovna: 'obsah/textures/knihovna-drevo.webp',
                     'nocni-skola': 'obsah/textures/tabule-krida.webp' };
   /* „auto“ není samostatný vzhled: vykreslí se tmavý nebo světlý motiv podle
      nastavení zařízení a při jeho změně (tablet v nočním režimu) se přepne za běhu.
@@ -115,8 +115,9 @@
     // u volby „podle systému“ doplní, co se právě vykresluje: „podle systému (tmavé)“
     name: (tema = current) => tema === 'auto' ? JMENA.auto + ' (' + JMENA[vykresleny('auto')] + ')' : JMENA[tema],
     isLight: () => root.dataset.tone === 'light',
-    isSepia: () => root.dataset.theme === 'sepia',
-    ink: (original, sepia = '#62513b') => root.dataset.theme === 'sepia' ? sepia : original,
+    isSepia: () => root.dataset.theme === 'sepia' || root.dataset.theme === 'sepia-tmava',
+    ink: (original, sepia = '#62513b', tmavaSepia = '#f0dfc0') =>
+      root.dataset.theme === 'sepia' ? sepia : root.dataset.theme === 'sepia-tmava' ? tmavaSepia : original,
     paper
   };
   try { apply(localStorage.getItem('webapp_theme')); } catch { apply(null); }

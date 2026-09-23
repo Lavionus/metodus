@@ -1,111 +1,188 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🌾 Potravní řetězce</title>
-<link rel="stylesheet" href="../common.css">
-<script src="../theme.js"></script>
-<script src="../podpis.js" defer></script>
-<script src="../kostra.js" defer></script>
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding:20px}
-.container{max-width:640px;margin:0 auto}
-h1{font-size:1.6rem;margin-bottom:14px;font-weight:600;text-align:center}
-.card{background:var(--bg-elevated);border:1px solid var(--border);border-radius:8px;padding:22px;margin-bottom:16px}
-.scorebar{display:flex;justify-content:space-around;margin-bottom:16px}
-.scorebar .v{font-size:1.4rem;font-weight:700;color:var(--accent)}.scorebar .l{font-size:.72rem;color:var(--text-faint)}
-.instr{text-align:center;color:var(--text-faint);font-size:.85rem;margin-bottom:14px}
-.pool{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:20px;min-height:50px;padding:10px;background:var(--bg-input);border-radius:8px}
-.slots{display:flex;gap:8px;justify-content:center;align-items:center;flex-wrap:wrap;margin-bottom:16px}
-.slot{width:90px;height:60px;border:2px dashed var(--border-strong);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.6rem;background:var(--bg-input)}
-.slot.filled{border-style:solid;border-color:var(--accent)}
-.arrow{color:var(--text-faint);font-size:1.2rem}
-.chip{background:var(--bg-hover);border:1px solid var(--border-strong);border-radius:8px;padding:10px 14px;font-size:1.6rem;cursor:grab;user-select:none}
-.chip.used{opacity:.25;cursor:default}
-.btn{background:var(--accent);color: var(--na-akcentu, #fff);border:none;padding:10px 22px;border-radius:6px;cursor:pointer;font-weight:600;display:block;margin:0 auto}
-.btn:hover{background:var(--accent)}
-.feedback{text-align:center;font-weight:600;min-height:28px;margin-top:10px}
-.label{text-align:center;font-size:.7rem;color:var(--text-faint);margin-top:2px}
-.slotwrap{display:flex;flex-direction:column;align-items:center}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>🌾 Potravní řetězce</title>
+  <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="../vyuka.css">
+  <script src="../theme.js"></script>
+  <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
+  <script src="../rec.js"></script>
+  <script src="../uloha.js"></script>
+  <style>
+    .retezec { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 6px; margin: 4px 0 14px; }
+    .clanek { background: var(--bg-elevated); border: 1px solid var(--border-strong); border-radius: 10px; padding: 8px 12px; text-align: center; min-width: 92px; }
+    .clanek .jmeno { font-size: 1.05rem; }
+    .clanek .role { font-size: 0.72rem; color: var(--text-faint); text-transform: uppercase; letter-spacing: 0.04em; }
+    .clanek.prazdny { border-style: dashed; color: var(--text-faint); }
+    .clanek.hledany { border: 2px solid var(--accent); }
+    .clanek.zmizel { text-decoration: line-through; opacity: 0.55; border-style: dashed; }
+    .sipka { color: var(--text-faint); font-size: 1.2rem; }
+    .zadani { text-align: center; }
+  </style>
 </head>
 <body>
-<div class="container">
   <h1>🌾 Potravní řetězce</h1>
-  <div class="card" data-faze="procvic" data-kostra-overeni="ne">
-    <div class="scorebar"><div><div class="v" id="score">0</div><div class="l">Správně</div></div><div><div class="v" id="idx">0/0</div><div class="l">Řetězec</div></div></div>
-    <div class="instr">Klikáním doplň organismy do řetězce ve správném pořadí (producent → konzument → …).</div>
-    <div class="slots" id="slots"></div>
-    <div class="pool" id="pool"></div>
-    <div class="feedback" id="feedback"></div>
-    <button class="btn" id="checkBtn">✔️ Zkontrolovat</button>
+  <p class="podtitul">Pro 6. a 9. ročník: kdo koho jí, kudy teče energie a co se stane, když jeden článek zmizí.</p>
+
+  <div class="rezimy" id="rezimy">
+    <button data-rezim="sloz" class="active">🔗 Slož řetězec</button>
+    <button data-rezim="role">🏷️ Kdo je kdo</button>
+    <button data-rezim="zmizi">❓ Co když zmizí?</button>
   </div>
-</div>
+
+  <div class="plocha" id="plocha"></div>
+
+  <div class="ovladani">
+    <button class="hlavni" id="btnDalsi">Přeskočit →</button>
+    <span class="skore" id="skore"></span>
+  </div>
+
+  <p class="napoveda">
+    Řetězec začíná <b>producentem</b> (rostlina vyrábí živiny fotosyntézou). Pak jdou <b>konzumenti</b>:
+    1. řádu jsou býložravci, 2. a 3. řádu masožravci. Šipka ukazuje <b>tok energie</b> – od toho, kdo je sněden,
+    k tomu, kdo jí (tráva → zajíc). Odumřelé zbytky všech článků rozkládají <b>rozkladači</b> (houby, bakterie).
+    Zmizí-li článek, jeho kořist se přemnoží a jeho predátorům ubude potravy. Ve skutečné <b>potravní síti</b>
+    má ale většina živočichů víc zdrojů potravy, takže dopad bývá menší.
+  </p>
+
 <script>
-const $=id=>document.getElementById(id);
-const RETEZCE=[
-{items:['🌾 obilí','🐭 myš','🦉 sova'],labels:['producent','1. konzument','2. konzument']},
-{items:['🌿 tráva','🦗 kobylka','🐸 žába','🐍 had'],labels:['producent','1. konzument','2. konzument','3. konzument']},
-{items:['🌱 rostlinný plankton','🐟 malá ryba','🐟 velká ryba','🐻 medvěd'],labels:['producent','1. konzument','2. konzument','3. konzument']},
-{items:['🌾 pšenice','🐛 housenka','🐦 sýkorka','🦅 jestřáb'],labels:['producent','1. konzument','2. konzument','3. konzument']},
-{items:['🍃 list','🐌 hlemýžď','🐦 kos','🦊 liška'],labels:['producent','1. konzument','2. konzument','3. konzument']}
+const $ = id => document.getElementById(id);
+const skore = Uloha.skore('metodus_potravni_retezec', $('skore'));
+let rezim = 'sloz';
+
+/* Řetězce od producenta; každý vztah „kdo koho jí“ odpovídá skutečnosti ve střední Evropě.
+   Zápis „ikona jméno|4. pád“ – 4. pád kvůli otázce „Kdo jí zajíce?“. */
+const ZAPIS = [
+  ['🌾 obilí|obilí', '🐭 myš|myš', '🦉 sova|sovu'],
+  ['🌿 tráva|trávu', '🐇 zajíc|zajíce', '🦊 liška|lišku'],
+  ['🌿 tráva|trávu', '🦗 kobylka|kobylku', '🐸 žába|žábu', '🐍 užovka|užovku'],
+  ['🌿 bylina|bylinu', '🐜 mšice|mšici', '🐞 slunéčko|slunéčko'],
+  ['🌱 řasy|řasy', '🦐 perloočka|perloočku', '🐟 plotice|plotici', '🐟 štika|štiku'],
+  ['🥬 list|list', '🐌 slimák|slimáka', '🦔 ježek|ježka', '🦉 výr|výra'],
+  ['🌰 bukvice|bukvice', '🐿️ veverka|veverku', '🦦 kuna|kunu'],
+  ['🌾 pšenice|pšenici', '🐛 housenka|housenku', '🐦 sýkora|sýkoru', '🦅 krahujec|krahujce'],
+  ['🍃 list|list', '🦌 srnec|srnce', '🐺 vlk|vlka'],
+  ['🌿 tráva|trávu', '🐄 kráva|krávu', '🧑 člověk|člověka'],
 ];
-let deck,idx,score,current,slotState;
-function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
-function start(){
-  deck=shuffle([...RETEZCE]);idx=0;score=0;$('score').textContent=0;
-  next();
-}
-function next(){
-  if(idx>=deck.length){
-    $('slots').innerHTML='';$('pool').innerHTML='';$('feedback').innerHTML=`<span style="color:#6aa6fd">Hotovo! Výsledek: ${score}/${deck.length}</span>`;
-    $('checkBtn').style.display='none';
-    return;
-  }
-  $('idx').textContent=`${idx+1}/${deck.length}`;
-  current=deck[idx];
-  slotState=new Array(current.items.length).fill(null);
-  const slotsBox=$('slots');slotsBox.innerHTML='';
-  current.items.forEach((_,i)=>{
-    if(i>0){const ar=document.createElement('div');ar.className='arrow';ar.textContent='→';slotsBox.appendChild(ar);}
-    const wrap=document.createElement('div');wrap.className='slotwrap';
-    const s=document.createElement('div');s.className='slot';s.dataset.i=i;
-    wrap.appendChild(s);
-    const lab=document.createElement('div');lab.className='label';lab.textContent=current.labels[i];
-    wrap.appendChild(lab);
-    slotsBox.appendChild(wrap);
+const ROLE = ['producent', 'konzument 1. řádu', 'konzument 2. řádu', 'konzument 3. řádu'];
+const bez = s => s.replace(/^\S+\s/, '');   // „🐭 myš“ → „myš“
+const AKUZATIV = {};
+const RETEZCE = ZAPIS.map(r => r.map(x => { const [n, a] = x.split('|'); AKUZATIV[bez(n)] = a; return n; }));
+const koho = s => AKUZATIV[bez(s)] || bez(s);   // 4. pád
+
+function kresliRetezec(r, zobrazit, trida = () => '') {
+  const box = document.createElement('div');
+  box.className = 'retezec';
+  r.forEach((org, i) => {
+    if (i) box.insertAdjacentHTML('beforeend', '<span class="sipka" aria-hidden="true">→</span>');
+    const vid = zobrazit(i);
+    box.insertAdjacentHTML('beforeend', `<div class="clanek ${vid ? '' : 'prazdny'} ${trida(i)}">` +
+      `<div class="jmeno">${vid ? org : '?'}</div><div class="role">${ROLE[i]}</div></div>`);
   });
-  const pool=$('pool');pool.innerHTML='';
-  shuffle([...current.items]).forEach(item=>{
-    const c=document.createElement('div');c.className='chip';c.textContent=item;
-    c.onclick=()=>{
-      if(c.classList.contains('used'))return;
-      const empty=slotState.findIndex(v=>v===null);
-      if(empty===-1)return;
-      slotState[empty]=item;c.classList.add('used');
-      const slotEl=slotsBox.querySelector(`.slot[data-i="${empty}"]`);
-      slotEl.textContent=item;slotEl.classList.add('filled');
-    };
-    pool.appendChild(c);
-  });
-  $('feedback').textContent='';
-  $('checkBtn').style.display='block';
+  box.setAttribute('aria-label', 'Řetězec: ' + r.map((o, i) => zobrazit(i) ? bez(o) : 'neznámý článek').join(', potom '));
+  return box;
 }
-$('checkBtn').onclick=()=>{
-  if(slotState.includes(null)){$('feedback').innerHTML='<span style="color:#f39c12">Doplň všechny pozice.</span>';return;}
-  const ok=slotState.every((v,i)=>v===current.items[i]);
-  if(ok){score++;$('score').textContent=score;$('feedback').innerHTML='<span style="color:#27ae60">✅ Správně!</span>';}
-  else{$('feedback').innerHTML='<span style="color:#e74c3c">❌ Špatné pořadí, zkus to znovu.</span>';
-    slotState=new Array(current.items.length).fill(null);
-    document.querySelectorAll('.slot').forEach(s=>{s.textContent='';s.classList.remove('filled');});
-    document.querySelectorAll('.chip').forEach(c=>c.classList.remove('used'));
-    return;
-  }
-  setTimeout(()=>{idx++;next();},1000);
-};
-start();
+
+/* ---- Slož řetězec: po článcích, kdo je na řadě ---------------------------- */
+function sloz(r = Uloha.nahodne(RETEZCE), hotovo = 0) {
+  const p = $('plocha');
+  p.innerHTML = '';
+  p.insertAdjacentHTML('beforeend', `<div class="zadani">${hotovo === 0
+    ? 'Kdo je na začátku řetězce – <b>producent</b>?'
+    : `Kdo jí <b>${koho(r[hotovo - 1])}</b>?`}</div>`);
+  p.appendChild(kresliRetezec(r, i => i < hotovo));
+  const odezva = document.createElement('div');
+  odezva.className = 'odezva';
+  // Nabídka: zbytek řetězce, doplněný do tří možností rostlinami z jiných řetězců.
+  // Doplňují se jen rostliny – živočich z jiného řetězce by kořist mohl jíst
+  // i doopravdy (liška myš), a pak by „chybná“ odpověď byla pravdivá.
+  const jmena = new Set(r.map(bez));
+  const rostliny = [...new Set(RETEZCE.map(x => x[0]))].filter(o => !jmena.has(bez(o)));
+  const doplnek = hotovo === 0 ? [] : Uloha.zamichej(rostliny).slice(0, Math.max(0, 3 - (r.length - hotovo)));
+  const zbyvajici = Uloha.zamichej([...r.slice(hotovo), ...doplnek]);
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: zbyvajici.map(o => ({ klic: o, popis: o })),
+    spravnyKlic: r[hotovo],
+    zpravaOk: hotovo === r.length - 1 ? '✅ Řetězec je hotový – energie teče zleva doprava.' : `✅ Ano, ${bez(r[hotovo])}.`,
+    zpravaChyba: k => hotovo === 0
+      ? `${bez(k)} si potravu sama nevyrobí – na začátku řetězce je rostlina.`
+      : RETEZCE.some(x => x[0] === k) ? `${bez(k)} je rostlina – nikoho nejí.` : `Tohle ne. Hledej, kdo jí ${koho(r[hotovo - 1])}.`,
+    poSpravne: napoprve => { skore.vyhodnot(napoprve); },
+    dalsi: hotovo < r.length - 1 ? () => sloz(r, hotovo + 1) : novaUloha,
+    prodleva: hotovo < r.length - 1 ? 500 : 1300,
+  });
+  p.appendChild(odezva);
+}
+
+/* ---- Kdo je kdo: role článku v řetězci ----------------------------------- */
+function role() {
+  const p = $('plocha');
+  const r = Uloha.nahodne(RETEZCE);
+  const i = Uloha.nahodneCislo(0, r.length - 1);
+  p.innerHTML = `<div class="zadani">Čím je v tomto řetězci <b>${bez(r[i])}</b>?</div>`;
+  p.appendChild(kresliRetezec(r, () => true, j => j === i ? 'hledany' : ''));
+  p.querySelectorAll('.role').forEach(e => { e.style.visibility = 'hidden'; });   // role nesmí prozradit odpověď
+  const odezva = document.createElement('div');
+  odezva.className = 'odezva';
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: ROLE.slice(0, Math.max(3, r.length)).map(t => ({ klic: t, popis: t })),
+    spravnyKlic: ROLE[i],
+    zpravaOk: `✅ ${bez(r[i])} je ${ROLE[i]}` + (i === 0 ? ' – vyrábí živiny ze světla.' : i === 1 ? ' – živí se rostlinou.' : ` – živí se ${i === 2 ? 'býložravcem' : 'masožravcem'}.`),
+    zpravaChyba: 'Počítej od rostliny: rostlina je producent, kdo ji jí, je konzument 1. řádu, a tak dál.',
+    poSpravne: napoprve => { skore.vyhodnot(napoprve); p.querySelectorAll('.role').forEach(e => { e.style.visibility = ''; }); },
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+/* ---- Co když zmizí: dopad na kořist a na predátora ----------------------- */
+function zmizi() {
+  const p = $('plocha');
+  // bez člověka: ten má tolik zdrojů potravy, že by otázka neměla smysl
+  const r = Uloha.nahodne(RETEZCE.filter(x => x.length >= 3 && !x.some(o => o.includes('člověk'))));
+  const z = Uloha.nahodneCislo(1, r.length - 2);          // zmizí prostřední článek
+  const naKorist = Math.random() < 0.5;                   // ptáme se na kořist, nebo na predátora
+  const cil = naKorist ? z - 1 : z + 1;
+  p.innerHTML = `<div class="zadani">Z krajiny zmizí: <b>${bez(r[z])}</b>. Co se nejspíš stane s počtem – <b>${bez(r[cil])}</b> (zvýrazněno v řetězci)?</div>`;
+  p.appendChild(kresliRetezec(r, () => true, j => j === z ? 'zmizel' : j === cil ? 'hledany' : ''));
+  const odezva = document.createElement('div');
+  odezva.className = 'odezva';
+  const spravne = naKorist ? 'vzroste' : 'klesne';
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: [{ klic: 'vzroste', popis: '📈 vzroste' }, { klic: 'klesne', popis: '📉 klesne' }, { klic: 'stejne', popis: '➖ nezmění se' }],
+    spravnyKlic: spravne,
+    zpravaOk: naKorist
+      ? `✅ Vzroste: zmizel ten, kdo se tímto článkem živil, a tak se může přemnožit.`
+      : `✅ Klesne: zmizela jeho potrava. Přežijí jen ti, kdo najdou jinou potravu.`,
+    zpravaChyba: k => k === 'stejne'
+      ? 'Články řetězce na sobě závisí – změna jednoho se projeví i u sousedů.'
+      : naKorist ? 'Zmizel jeho predátor (článek napravo). Co se stane, když ho nikdo nežere?'
+                 : 'Zmizela jeho potrava (článek nalevo). Co se stane, když potrava chybí?',
+    poSpravne: napoprve => { skore.vyhodnot(napoprve); },
+    dalsi: novaUloha,
+    prodleva: 2200,
+  });
+  p.appendChild(odezva);
+}
+
+function novaUloha() {
+  ({ sloz: () => sloz(), role, zmizi })[rezim]();
+}
+$('rezimy').addEventListener('click', e => {
+  const b = e.target.closest('button[data-rezim]');
+  if (!b) return;
+  $('rezimy').querySelectorAll('button').forEach(x => x.classList.toggle('active', x === b));
+  rezim = b.dataset.rezim;
+  novaUloha();
+});
+$('btnDalsi').addEventListener('click', novaUloha);
+novaUloha();
 </script>
 </body>
 </html>

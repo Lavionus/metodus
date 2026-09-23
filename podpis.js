@@ -1,6 +1,6 @@
 /* ============================================================
    podpis.js – podpis díla ve vlastním pruhu u spodní hrany
-   (`© Metodus · hdm@seznam.cz`; text skládají konstanty DILO a MAIL).
+   (`© Metodus · Metodus@email.cz`; text skládají konstanty DILO a MAIL).
    Vkládá se do <head> každé stránky webu (rozcestník i všechny
    podstránky), aby i samostatně otevřená stránka nesla údaj o díle.
 
@@ -18,7 +18,7 @@
    nakreslil ze starší verze v cache prohlížeče.
    ============================================================ */
 (function () {
-  const MAIL = 'hdm@seznam.cz';
+  const MAIL = 'Metodus@email.cz';
   const DILO = 'Metodus';   // název díla – každý web má v kopii ten svůj
   const ROZCESTNIK = 'Metodus';  // popisek odkazu zpět – v každé kopii ten svůj
   const ID = 'autor-podpis';
