@@ -36,13 +36,12 @@
     .patro .nazev { color: var(--text-faint); font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.5px; }
     .patro .mista { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
     .misto {
-      width: 108px; min-height: 126px; padding: 5px; border-radius: 12px;
+      width: 96px; height: 92px; border-radius: 12px;
       border: 2px dashed var(--border-strong); background: var(--bg-deep);
       display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px;
       color: var(--text-faint); font-size: 0.8rem; cursor: pointer; transition: all 0.15s ease;
     }
     .misto .em { font-size: 1.9rem; line-height: 1; }
-    .rodina-portret { width: 76px; height: 82px; object-fit: contain; border-radius: 9px; background: #f8f2e5; }
     .misto:hover { border-color: var(--accent); }
     .misto.cil { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
     .misto.plne { border-style: solid; background: var(--bg-elevated); color: var(--text); cursor: default; }
@@ -58,7 +57,6 @@
       font-size: 0.84rem; font-family: inherit; cursor: pointer; transition: all 0.15s ease;
     }
     .kartik .em { font-size: 1.7rem; line-height: 1; }
-    .kartik .rodina-portret { width: 64px; height: 68px; }
     .kartik:hover:not(:disabled) { border-color: var(--accent); transform: translateY(-3px); }
     .kartik.vybrany { border-color: var(--accent); background: var(--accent-soft); }
     .kartik:disabled { opacity: 0.25; cursor: default; }
@@ -72,7 +70,6 @@
       display: flex; flex-direction: column; align-items: center; gap: 6px;
     }
     .moznosti button .ikona { font-size: 2rem; line-height: 1; }
-    .moznosti button .rodina-portret { width: 78px; height: 84px; }
     .moznosti button:hover:not(:disabled) { border-color: var(--accent); transform: translateY(-3px); }
     .moznosti button.spravne { background: var(--ok); border-color: var(--ok); color: var(--na-akcentu, #fff); }
     .moznosti button.spatne { background: var(--danger); border-color: var(--danger); color: var(--na-akcentu, #fff); }
@@ -130,17 +127,15 @@ const PATRA = [
     ],
   },
   {
-    nazev: 'Rodiče a jejich sourozenci', clenove: [
+    nazev: 'Rodiče', clenove: [
       { id: 'maminka', em: '👩', nazev: 'maminka' },
       { id: 'tatinek', em: '👨', nazev: 'tatínek' },
-      { id: 'teta', em: '👩‍🦰', nazev: 'teta' },
-      { id: 'stryc', em: '🧔', nazev: 'strýc' },
     ],
   },
   {
     nazev: 'Děti', clenove: [
-      { id: 'bratranec', em: '👦', nazev: 'bratranec' },
-      { id: 'mladsi', em: '👶', nazev: 'mladší sourozenec' },
+      { id: 'sestra', em: '👧', nazev: 'sestra' },
+      { id: 'bratr', em: '👦', nazev: 'bratr' },
     ],
   },
 ];
@@ -159,20 +154,17 @@ const VZTAHY = [
 ];
 
 const OSOBY = {
-  babicka: { em: '👵', nazev: 'babička', img: 'img/aj/aj-slovicka-grandmother.webp' },
-  dedecek: { em: '👴', nazev: 'dědeček', img: 'img/aj/aj-slovicka-grandfather.webp' },
-  maminka: { em: '👩', nazev: 'maminka', img: 'img/aj/aj-slovicka-mother.webp' },
-  tatinek: { em: '👨', nazev: 'tatínek', img: 'img/aj/aj-slovicka-father.webp' },
-  sestra: { em: '👧', nazev: 'sestra', img: 'img/aj/aj-slovicka-sister.webp' },
-  bratr: { em: '👦', nazev: 'bratr', img: 'img/aj/aj-slovicka-brother.webp' },
-  teta: { em: '👩‍🦰', nazev: 'teta', img: 'img/prv/prv1-rodina-teta.webp' },
-  stryc: { em: '🧔', nazev: 'strýc', img: 'img/prv/prv1-rodina-stryc.webp' },
-  sestrenice: { em: '👧', nazev: 'sestřenice', img: 'img/aj/aj-slovicka-sister.webp' },
-  bratranec: { em: '👦', nazev: 'bratranec', img: 'img/prv/prv1-rodina-bratranec.webp' },
-  mladsi: { em: '👶', nazev: 'mladší sourozenec', img: 'img/aj/aj-slovicka-baby.webp' },
+  babicka: { em: '👵', nazev: 'babička' },
+  dedecek: { em: '👴', nazev: 'dědeček' },
+  maminka: { em: '👩', nazev: 'maminka' },
+  tatinek: { em: '👨', nazev: 'tatínek' },
+  sestra: { em: '👧', nazev: 'sestra' },
+  bratr: { em: '👦', nazev: 'bratr' },
+  teta: { em: '👩‍🦰', nazev: 'teta' },
+  stryc: { em: '🧔', nazev: 'strýc' },
+  sestrenice: { em: '👧', nazev: 'sestřenice' },
+  bratranec: { em: '👦', nazev: 'bratranec' },
 };
-
-PATRA.flatMap(p => p.clenove).forEach(clen => { clen.img = OSOBY[clen.id].img; });
 
 const MISTNOSTI = {
   kuchyne: { em: '🍳', nazev: 'kuchyň' },
@@ -260,7 +252,7 @@ function rodokmen() {
         const clen = vsichni.find(c => c.id === vybrany.dataset.id);
         if (clen.patro === Number(m.dataset.patro)) {
           m.classList.add('plne');
-          m.innerHTML = `<img class="rodina-portret" src="${clen.img}" alt=""><span>${clen.nazev}</span>`;
+          m.innerHTML = `<span class="em">${clen.em}</span><span>${clen.nazev}</span>`;
           vybrany.disabled = true;
           vybrany.classList.remove('vybrany');
           vybrany = null;
@@ -301,7 +293,7 @@ function rodokmen() {
     const b = document.createElement('button');
     b.className = 'kartik';
     b.dataset.id = clen.id;
-    b.innerHTML = `<img class="rodina-portret" src="${clen.img}" alt="${clen.nazev}"><span>${clen.nazev}</span>`;
+    b.innerHTML = `<span class="em">${clen.em}</span><span>${clen.nazev}</span>`;
     b.addEventListener('click', () => {
       kartiky.querySelectorAll('.kartik').forEach(x => x.classList.remove('vybrany'));
       b.classList.add('vybrany');
@@ -326,9 +318,7 @@ function tlacitkovaUloha(zadaniHtml, volby, spravnyKlic, popisSpravne) {
   const stav = { chyboval: false, hotovo: false };
   volby.forEach(v => {
     const b = document.createElement('button');
-    b.innerHTML = v.img
-      ? `<img class="rodina-portret" src="${v.img}" alt=""><span>${v.nazev}</span>`
-      : `<span class="ikona">${v.em}</span><span>${v.nazev}</span>`;
+    b.innerHTML = `<span class="ikona">${v.em}</span><span>${v.nazev}</span>`;
     b.dataset.klic = v.klic;
     b.addEventListener('click', () => Uloha.odpoved({
       prvek: b,
@@ -350,7 +340,7 @@ function vztahy() {
   const jine = zamichej(Object.keys(OSOBY).filter(k => k !== v.s)).slice(0, 3);
   const volby = zamichej([v.s, ...jine]).map(k => ({ klic: k, ...OSOBY[k] }));
   tlacitkovaUloha(
-    `<div class="zadani">${v.o}</div><img class="rodina-portret" src="${OSOBY[v.s].img}" alt="${OSOBY[v.s].nazev}">`,
+    `<div class="zadani">${v.o}</div><div class="obrazek">${v.e}</div>`,
     volby, v.s, OSOBY[v.s].nazev);
 }
 

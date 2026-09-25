@@ -1558,7 +1558,7 @@ Společné pro prvouku: 🔗 malý žák se učí z **obrazu a situace**, ne ze 
   - Plán cesty (z naší vesnice) s rozhodovacími místy: přechod, zaparkované auto, semafor, cizí člověk.
   - Pohled „co vidí řidič / co vidí dítě“ za zaparkovaným autem.
 - **Obrázky:**
-  - `IMG-prv-03` ✅ **A** · pohled shora na cestu do školy v naší vesnici (dům, chodník, přechod se semaforem, přechod bez semaforu, zastávka, zaparkovaná auta, škola) — zapojeno s 10 klikacími místy; rybník, kostel a lípa zakládají geografii pro `IMG-prv-07` a `IMG-prv-20`
+  - `IMG-prv-03` 🔴 **A** · pohled shora na cestu do školy v naší vesnici (dům, chodník, přechod se semaforem, přechod bez semaforu, zastávka, zaparkovaná auta, škola) — hotspoty rozhodovacích míst
   - `IMG-prv-04` 🟠 **B** · 8 karet dopravních značek a situací (přechod, semafor červená/zelená, dítě za autem, reflexní prvky, cyklista s přilbou) — piktogramy bez textu
 
 #### Zdraví, nemoc a první pomoc · [prv2_zdravi.html](obsah/prv2_zdravi.html)
@@ -3291,7 +3291,7 @@ Při výrobě sady v jednom stylu zadávat všechny karty v jedné dávce se ste
 | `IMG-aj-02` | B 🟡 | sada asi 120 karet slovíček ve 6 tématech (zvířata, jídlo a pití, dům a nábytek, škola, oblečení, rodina a lidé) — hotovo 56 různých karet: zvířata (12), jídlo (10), škola (9), rodina (7), dům a nábytek (9; židle sdílená se školou) a oblečení (10); domácí motivy zapojeny také v `de_slovicka` a `fr_slovicka`; jednoznačný motiv, stejné světlo a okraj | [aj_slovicka](obsah/aj_slovicka.html) |
 | `IMG-aj-06` | A ✅ | rušná scéna v parku s 10 osobami, z nichž každá dělá jednu jasnou činnost (běží, čte, jí zmrzlinu, venčí psa, hraje na kytaru, spí na lavičce, jede na kole, fotí, krmí kachny, maluje) — zapojeno; web střídá 10 hotspotů pro popis „právě teď“ | [aj5_pritomny_prubehovy](obsah/aj5_pritomny_prubehovy.html) |
 | `IMG-prv-01` | B ✅ | osm karet členů rozšířené fiktivní rodiny (babička, dědeček, máma, táta, teta, strýc, bratranec, mladší sourozenec) — zapojeno do rodokmenu i vztahových otázek; pět karet sdíleno s `IMG-aj-02`, tři nově vytvořeny | [prv1_rodina](obsah/prv1_rodina.html) |
-| `IMG-prv-03` | A ✅ | pohled shora na cestu do školy v naší vesnici (dům, chodník, přechod se semaforem, přechod bez semaforu, zastávka, zaparkovaná auta, škola) — zapojeno s 10 klikacími místy; společná geografie pro `IMG-prv-07` a `IMG-prv-20` | [prv1_cesta_skola](obsah/prv1_cesta_skola.html) |
+| `IMG-prv-03` | A | pohled shora na cestu do školy v naší vesnici (dům, chodník, přechod se semaforem, přechod bez semaforu, zastávka, zaparkovaná auta, škola) — hotspoty rozhodovacích míst | [prv1_cesta_skola](obsah/prv1_cesta_skola.html) |
 | `IMG-prv-07` | A | naše vesnice ze stejného úhlu ve 4 ročních obdobích (jaro, léto, podzim, zima), se stejným stromem, rybníkem, polem a zahradou — **klíčová sada pro celou prvouku** | [prv1_rocni_obdobi](obsah/prv1_rocni_obdobi.html) |
 | `IMG-prv-10` | B | 30 karet zvířat: 15 domácích (kráva, prase, koza, ovce, kůň, slepice, husa, kachna, králík, pes, kočka, morče, osel, krůta, včela) a 15 volně žijících (liška, srna, zajíc, ježek, veverka, divočák, jezevec, sova, datel, čáp, žába, ropucha, užovka, vydra, bobr) | [prv2_zvirata](obsah/prv2_zvirata.html) |
 | `IMG-prv-13` | A | koloběh vody v krajině (moře/rybník, slunce, stoupající pára, mraky, déšť nad horami, řeka, podzemní voda) — podklad animace; šipky kreslí web | [prv3_voda_vzduch](obsah/prv3_voda_vzduch.html) |

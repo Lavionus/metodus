@@ -2459,25 +2459,5 @@
     "id": "IMG-aj-06", "name": "aj5-prubehovy-park", "alt": "Deset lidí v parku právě běží, čte, jí zmrzlinu, venčí psa, hraje na kytaru, spí, jede na kole, fotografuje, krmí kachny a maluje.", "bytes": 199470,
     "webp": "aj/aj5-prubehovy-park.webp", "png": "aj/aj5-prubehovy-park.png",
     "puvod": {"typ": "generovano", "nastroj": "OpenAI image_gen", "datum": "2026-09-25", "zadani": "aj/aj5-prubehovy-park.prompt.txt"}
-  },
-  {
-    "id": "IMG-prv-01", "name": "prv1-rodina-teta", "alt": "Teta v okrovém svetru.", "bytes": 22428,
-    "webp": "prv/prv1-rodina-teta.webp", "png": "prv/prv1-rodina-teta.png",
-    "puvod": {"typ": "generovano", "nastroj": "OpenAI image_gen", "datum": "2026-09-25", "zadani": "prv/prv1-rodina-teta.prompt.txt"}
-  },
-  {
-    "id": "IMG-prv-01", "name": "prv1-rodina-stryc", "alt": "Strýc v cihlově červeném svetru.", "bytes": 21114,
-    "webp": "prv/prv1-rodina-stryc.webp", "png": "prv/prv1-rodina-stryc.png",
-    "puvod": {"typ": "generovano", "nastroj": "OpenAI image_gen", "datum": "2026-09-25", "zadani": "prv/prv1-rodina-stryc.prompt.txt"}
-  },
-  {
-    "id": "IMG-prv-01", "name": "prv1-rodina-bratranec", "alt": "Bratranec ve žluté mikině.", "bytes": 22116,
-    "webp": "prv/prv1-rodina-bratranec.webp", "png": "prv/prv1-rodina-bratranec.png",
-    "puvod": {"typ": "generovano", "nastroj": "OpenAI image_gen", "datum": "2026-09-25", "zadani": "prv/prv1-rodina-bratranec.prompt.txt"}
-  },
-  {
-    "id": "IMG-prv-03", "name": "prv1-cesta-skola", "alt": "Pohled shora na cestu od domu ke škole se dvěma přechody, chodníky, semafory, zastávkou a auty.", "bytes": 162604,
-    "webp": "prv/prv1-cesta-skola.webp", "png": "prv/prv1-cesta-skola.png",
-    "puvod": {"typ": "generovano", "nastroj": "OpenAI image_gen", "datum": "2026-09-25", "zadani": "prv/prv1-cesta-skola.prompt.txt"}
   }
 ]

@@ -34,7 +34,7 @@ const ready = async expression => {
   throw Error('Not ready: ' + expression);
 };
 
-const pages = ['cj1_pismena', 'slabiky', 'cteni_s_porozumenim', 'cj2_abeceda', 'cj2_tvrde_mekke', 'doplnovacky', 'vyjmenovana_slova', 'cj2_druhy_vet', 'cj3_slovesa', 'cj6_slovni_zasoba', 'cj6_baje', 'cj8_sloh', 'm3_deleni_zbytkem', 'm4_zlomky_uvod', 'm5_slovni_ulohy', 'm7_cela_cisla', 'procenta', 'clock_learning', 'm8_pythagoras', 'm9_podobnost', 'aj_slovicka', 'aj5_pritomny_prubehovy', 'prv1_rodina', 'prv1_cesta_skola', 'de_slovicka', 'fr_slovicka'];
+const pages = ['cj1_pismena', 'slabiky', 'cteni_s_porozumenim', 'cj2_abeceda', 'cj2_tvrde_mekke', 'doplnovacky', 'vyjmenovana_slova', 'cj2_druhy_vet', 'cj3_slovesa', 'cj6_slovni_zasoba', 'cj6_baje', 'cj8_sloh', 'm3_deleni_zbytkem', 'm4_zlomky_uvod', 'm5_slovni_ulohy', 'm7_cela_cisla', 'procenta', 'clock_learning', 'm8_pythagoras', 'm9_podobnost', 'aj_slovicka', 'aj5_pritomny_prubehovy', 'prv1_rodina', 'de_slovicka', 'fr_slovicka'];
 const results = [];
 try {
   await call('Page.enable');
@@ -375,20 +375,6 @@ try {
       assert.ok(await ev(`document.querySelectorAll('.moznosti .rodina-portret').length === 4 && [...document.querySelectorAll('.rodina-portret')].every(i => i.naturalWidth > 0)`));
       await ev(`document.querySelector('[data-rezim="rodokmen"]').click()`);
     }
-    if (page === 'prv1_cesta_skola') {
-      assert.equal(await ev(`MISTA.length`), 10);
-      assert.ok(await ev(`MISTA.every(m => [m.x,m.y,m.w,m.h].every(Number.isFinite))`));
-      await ev(`document.querySelector('.scena > img').decode()`);
-      assert.ok(await ev(`document.querySelector('.scena > img').naturalWidth > 0`));
-      assert.equal(await ev(`document.querySelectorAll('.scena .misto').length`), 10);
-      await ev(`(() => { const cil = document.querySelector('.zadani b').textContent; const m = MISTA.find(x => x.nazev === cil); document.querySelector('[data-misto="'+m.id+'"]').click(); })()`);
-      assert.equal(await ev(`document.querySelectorAll('.scena .misto.spravne').length`), 1);
-      for (const mode of ['semafor', 'kviz', 'mapa']) {
-        await ev(`document.querySelector('[data-rezim="${mode}"]').click()`);
-        assert.ok(await ev(`document.querySelector('#plocha').textContent.trim().length > 10`));
-      }
-      await ev(`document.querySelector('.scena > img').decode()`);
-    }
     if (page === 'de_slovicka' || page === 'fr_slovicka') {
       assert.equal(await ev(`Object.keys(OBRAZKY_DOMOV).length`), 9);
       await ev(`document.querySelector('[data-kat="domov"]').click(); document.querySelector('[data-rezim="prehled"]').click(); Promise.all([...document.querySelectorAll('.emoji-bunka img')].map(i => i.decode()))`);
@@ -418,7 +404,6 @@ try {
         if (page === 'aj_slovicka') { await ev(`document.querySelector('[data-rezim="karticky"]').click()`); await ev(`document.querySelector('.karticka').scrollIntoView({block:'start'})`); }
         if (page === 'aj5_pritomny_prubehovy') { await ev(`document.querySelector('[data-rezim="popisObrazku"]').click()`); await ev(`document.querySelector('.park-scena').scrollIntoView({block:'start'})`); }
         if (page === 'prv1_rodina') await ev(`document.querySelector('#plocha').scrollIntoView({block:'start'})`);
-        if (page === 'prv1_cesta_skola') { await ev(`document.querySelector('[data-rezim="mapa"]').click()`); await ev(`document.querySelector('.scena').scrollIntoView({block:'start'})`); }
         if (page === 'de_slovicka' || page === 'fr_slovicka') { await ev(`document.querySelector('[data-rezim="karticky"]').click()`); await ev(`document.querySelector('.karticka').scrollIntoView({block:'start'})`); }
         await pause(300);
         const shot = await call('Page.captureScreenshot', {format: 'png', captureBeyondViewport: false});

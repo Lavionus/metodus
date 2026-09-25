@@ -2474,10 +2474,5 @@
     "id": "IMG-prv-01", "name": "prv1-rodina-bratranec", "alt": "Bratranec ve žluté mikině.", "bytes": 22116,
     "webp": "prv/prv1-rodina-bratranec.webp", "png": "prv/prv1-rodina-bratranec.png",
     "puvod": {"typ": "generovano", "nastroj": "OpenAI image_gen", "datum": "2026-09-25", "zadani": "prv/prv1-rodina-bratranec.prompt.txt"}
-  },
-  {
-    "id": "IMG-prv-03", "name": "prv1-cesta-skola", "alt": "Pohled shora na cestu od domu ke škole se dvěma přechody, chodníky, semafory, zastávkou a auty.", "bytes": 162604,
-    "webp": "prv/prv1-cesta-skola.webp", "png": "prv/prv1-cesta-skola.png",
-    "puvod": {"typ": "generovano", "nastroj": "OpenAI image_gen", "datum": "2026-09-25", "zadani": "prv/prv1-cesta-skola.prompt.txt"}
   }
 ]
