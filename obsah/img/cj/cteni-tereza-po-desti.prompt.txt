@@ -1,0 +1,6 @@
+Sada: IMG-cj-10 · text „Zapomenutý deštník“
+Scéna: Tereza jde v odpoledním slunci od školy ulicí s kalužemi; bez deštníku, šatny a botníku.
+Styl: teplý akvarel a kvaš, jemná linka, slonovinový papír, tlumená šalvějová, jadeitová, okrová a modrá.
+Omezení: bez písmen, slov, popisků, čísel, loga, vodoznaku a rámečku.
+Alt: Tereza jde od školy slunečnou ulicí po dešti.
+Generátor: OpenAI image_gen · 2026-09-24

@@ -1,0 +1,9 @@
+Use case: scientific-educational.
+Asset type: style B watercolor mnemonic card for Czech vyjmenovaná slova, IMG-cj-04.
+Subject: Dva rodiče stojící za chlapcem, který je jasně jejich synem.
+Style/medium: natural-history watercolor and gouache with fine ink detail, contemporary educational picture book, muted sage, jade and ochre palette, soft daylight from upper left.
+Composition/framing: one centered compact subject, square 1:1, uniform warm ivory paper (#faf6ec), generous even 12 percent empty margins.
+Constraints: visually unambiguous mnemonic anchor, age-appropriate, complete subject visible, no text, letters, digits, labels, logo, watermark, frame, collage or photorealism.
+Alt: Syn se svými rodiči.
+Generator: built-in image_gen
+Datum: 2026-09-23

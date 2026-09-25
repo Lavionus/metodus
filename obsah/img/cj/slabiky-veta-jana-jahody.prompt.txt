@@ -1,0 +1,6 @@
+Sada: IMG-cj-09 · věta „Jana nese jahody.“
+Scéna: Školačka Jana jde po zahradní cestě a opatrně nese košík plný červených jahod; čtvercový formát.
+Styl: teplý akvarel a kvaš, jemná inkoustová linka, slonovinové pozadí, tlumená šalvějová, jadeitová, okrová a jahodově červená.
+Omezení: bez písmen, slov, popisků, log, vodoznaku, rámečku a bublin.
+Alt: Jana nese košík jahod.
+Generátor: OpenAI image_gen · 2026-09-24

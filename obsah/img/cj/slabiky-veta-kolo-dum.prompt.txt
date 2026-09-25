@@ -1,0 +1,6 @@
+Sada: IMG-cj-09 · věta „Kolo je u domu.“
+Scéna: Právě jedno dětské jízdní kolo stojí opřené o stěnu vedle vchodových dveří rodinného domu; čtvercový formát.
+Styl: teplý akvarel a kvaš, jemná inkoustová linka, slonovinové pozadí, tlumená šalvějová, jadeitová a okrová.
+Omezení: bez lidí, písmen, slov, popisků, log, vodoznaku, rámečku a bublin.
+Alt: Kolo stojí vedle domu.
+Generátor: OpenAI image_gen · 2026-09-24

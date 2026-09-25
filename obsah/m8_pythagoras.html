@@ -21,6 +21,9 @@
     .uloha-text { max-width: 620px; font-size: 1.02rem; line-height: 1.6; }
     .uloha-text b { color: var(--accent); }
     .vzorec { font-family: 'Courier New', monospace; color: var(--text-muted); font-size: 0.95rem; }
+    .slovni-scena { margin: 0 0 12px; width: min(560px, 100%); }
+    .slovni-scena img { display: block; width: 100%; aspect-ratio: 3 / 2; object-fit: cover; border-radius: 13px; background: #f4edda; box-shadow: 0 4px 15px #0002; }
+    .slovni-scena figcaption { margin-top: 5px; color: var(--text-faint); font-size: .8rem; text-align: center; }
   </style>
 </head>
 <body>
@@ -184,15 +187,13 @@ function odvesna() {
 
 const SLOVNI = [
   { text: 'Žebřík dlouhý {c} m je opřený o zeď. Jeho pata je {b} m od zdi. Do jaké výšky dosáhne?',
-    hledame: 'a', jednotka: 'm' },
-  { text: 'Obdélníková zahrada má rozměry {a} m a {b} m. Jak dlouhá je její úhlopříčka?',
-    hledame: 'c', jednotka: 'm' },
-  { text: 'Televize má úhlopříčku {c} palců a výšku {a} palců. Jak je široká?',
-    hledame: 'b', jednotka: 'palců' },
+    hledame: 'a', jednotka: 'm', obrazek: 'zebrik', alt: 'Žebřík opřený o stěnu domu tvoří se zemí pravoúhlý trojúhelník.', popisek: 'Žebřík, zeď a zem' },
+  { text: 'Drak je {a} m nad rukou dítěte a vodorovně {b} m daleko. Jak dlouhý je napnutý provázek?',
+    hledame: 'c', jednotka: 'm', obrazek: 'drak', alt: 'Dítě pouští draka na napnutém provázku nad loukou.', popisek: 'Výška draka a délka provázku' },
+  { text: 'Obdélníkový trávník má strany {a} m a {b} m. Jak dlouhá je šikmá zkratka mezi protějšími rohy?',
+    hledame: 'c', jednotka: 'm', obrazek: 'zkratka', alt: 'Pěšina vede úhlopříčně přes obdélníkový trávník.', popisek: 'Zkratka přes trávník' },
   { text: 'Stožár vysoký {a} m je ukotven lanem k bodu vzdálenému {b} m od paty. Jak dlouhé je lano?',
-    hledame: 'c', jednotka: 'm' },
-  { text: 'Loď plula {b} km na východ a pak {a} km na sever. Jak daleko je vzdušnou čarou od startu?',
-    hledame: 'c', jednotka: 'km' },
+    hledame: 'c', jednotka: 'm', obrazek: 'stozar', alt: 'Svislý stožár je zajištěný šikmým lanem ukotveným v zemi.', popisek: 'Stožár s kotvicím lanem' },
 ];
 function slovni() {
   const p = $('plocha');
@@ -205,7 +206,7 @@ function slovni() {
   jine.delete(String(vysledek));
 
   p.innerHTML = `<div class="zadani uloha-text">${text}</div>
-    <div class="karta">${svgTroj(a, b, c, {
+    <div class="karta"><figure class="slovni-scena"><img src="img/m/m8-pythagoras-${u.obrazek}.webp" alt="${u.alt}" width="1152" height="768"><figcaption>${u.popisek} – rozměry doplňuje zadání.</figcaption></figure>${svgTroj(a, b, c, {
       a: u.hledame === 'a' ? '?' : a, b: u.hledame === 'b' ? '?' : b, c: u.hledame === 'c' ? '?' : c,
     })}</div>`;
   const odezva = odezvaEl();

@@ -19,6 +19,12 @@
     .infinitiv { color: var(--text-faint); font-size: 0.9rem; margin-top: 4px; }
     .pomucka .skupina { flex: 1 1 210px; }
     .pomucka .skupina.sviti { box-shadow: 0 0 0 2px var(--accent-soft); }
+    .osoby-obrazky { display: grid; grid-template-columns: repeat(3, minmax(90px, 1fr)); gap: 8px; margin-top: 10px; }
+    .osoba-obrazek { margin: 0; padding: 5px; border: 2px solid transparent; border-radius: 10px; background: var(--bg-elevated); text-align: center; transition: border-color .2s, box-shadow .2s; }
+    .osoba-obrazek img { display: block; width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 7px; }
+    .osoba-obrazek figcaption { margin-top: 4px; font-size: .8rem; font-weight: 700; }
+    .osoba-obrazek.sviti { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+    @media (max-width: 460px) { .osoby-obrazky { grid-template-columns: repeat(2, minmax(90px, 1fr)); } }
   </style>
 </head>
 <body>
@@ -60,6 +66,14 @@
         <span class="znak" data-h="osoba-2">3. on / oni</span>
       </div>
       <p class="popis">Dosaď si před sloveso zájmeno – které tam sedí, ta osoba to je.</p>
+      <div class="osoby-obrazky" aria-label="Obrázkové znázornění mluvnických osob">
+        <figure class="osoba-obrazek" data-zajmeno="ja"><img src="img/cj/cj3-slovesa-ja.webp" alt="Dítě ukazuje samo na sebe – já." width="768" height="768"><figcaption>já</figcaption></figure>
+        <figure class="osoba-obrazek" data-zajmeno="ty"><img src="img/cj/cj3-slovesa-ty.webp" alt="Jedno dítě oslovuje druhé – ty." width="768" height="768"><figcaption>ty</figcaption></figure>
+        <figure class="osoba-obrazek" data-zajmeno="on-ona"><img src="img/cj/cj3-slovesa-on-ona.webp" alt="Dítě ukazuje na někoho, o kom mluví – on nebo ona." width="768" height="768"><figcaption>on / ona</figcaption></figure>
+        <figure class="osoba-obrazek" data-zajmeno="my"><img src="img/cj/cj3-slovesa-my.webp" alt="Dvě děti ukazují samy na sebe – my." width="768" height="768"><figcaption>my</figcaption></figure>
+        <figure class="osoba-obrazek" data-zajmeno="vy"><img src="img/cj/cj3-slovesa-vy.webp" alt="Dítě oslovuje dvojici – vy." width="768" height="768"><figcaption>vy</figcaption></figure>
+        <figure class="osoba-obrazek" data-zajmeno="oni"><img src="img/cj/cj3-slovesa-oni.webp" alt="Dítě ukazuje na skupinu, o které mluví – oni." width="768" height="768"><figcaption>oni</figcaption></figure>
+      </div>
     </div>
     <div class="skupina" data-os="cislo">
       <h2>🔢 Číslo</h2>
@@ -161,11 +175,18 @@ function rozsvit(...klice) {
     el.classList.toggle('sviti', !!el.querySelector('.znak.sviti')));
 }
 
+function rozsvitOsobu(u) {
+  const klice = u.mnozne ? ['my', 'vy', 'oni'] : ['ja', 'ty', 'on-ona'];
+  pomuckaDiv.querySelectorAll('.osoba-obrazek').forEach(el =>
+    el.classList.toggle('sviti', el.dataset.zajmeno === klice[u.osoba]));
+}
+
 function hotovo(p, napoprve, u) {
   skore.vyhodnot(napoprve);
   serie = napoprve ? serie + 1 : 0;
   $('serie').textContent = serie >= 3 ? '🔥 série ' + serie : '';
   rozsvit('cas-' + u.cas, 'osoba-' + u.osoba, 'cislo-' + (u.mnozne ? 'mn' : 'j'));
+  rozsvitOsobu(u);
   const tip = p.querySelector('.pravidlo.tip');
   if (tip) tip.remove();
 }

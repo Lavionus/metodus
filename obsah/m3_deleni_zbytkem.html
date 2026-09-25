@@ -18,15 +18,15 @@
       display: flex; flex-wrap: wrap; gap: 7px; justify-content: center; max-width: 400px;
       padding: 14px; border: 2px dashed var(--border-strong); border-radius: 12px;
     }
-    .hromada i { width: 18px; height: 18px; border-radius: 50%; background: var(--accent); display: block; }
+    .predmet { width: 34px; height: 34px; object-fit: contain; display: block; border-radius: 7px; }
     .skupiny { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; max-width: 640px; }
     .skupina {
       display: flex; flex-wrap: wrap; gap: 5px; padding: 9px; border-radius: 10px;
       border: 2px solid var(--ok); background: rgba(76, 175, 125, 0.12); max-width: 148px;
     }
     .skupina.zbytek { border-color: var(--warn); background: rgba(224, 166, 63, 0.14); border-style: dashed; }
-    .skupina i { width: 16px; height: 16px; border-radius: 50%; background: var(--accent); display: block; }
-    .skupina.zbytek i { background: var(--warn); }
+    .skupina .predmet { width: 29px; height: 29px; }
+    .skupina.zbytek .predmet { outline: 2px solid var(--warn); outline-offset: 1px; }
     .legenda { color: var(--text-faint); font-size: 0.82rem; }
   </style>
 </head>
@@ -56,6 +56,16 @@
 const $ = id => document.getElementById(id);
 const skore = Uloha.skore('metodus_m3_deleni', $('skore'));
 let rezim = 'vypocet';
+
+const PREDMETY = [
+  { soubor: 'jablko', ceho: 'jablek' },
+  { soubor: 'bonbon', ceho: 'bonbonů' },
+  { soubor: 'pastelka', ceho: 'pastelek' },
+  { soubor: 'micek', ceho: 'míčků' },
+  { soubor: 'karticka', ceho: 'kartiček' },
+  { soubor: 'krabicka', ceho: 'krabiček' },
+];
+const predmetHtml = predmet => `<img class="predmet" src="img/m/m3-deleni-${predmet.soubor}.webp" alt="" width="768" height="768" draggable="false">`;
 
 function novyPriklad(minDelitel = 2, maxDelitel = 9) {
   const delitel = Uloha.nahodneCislo(minDelitel, maxDelitel);
@@ -102,16 +112,17 @@ function obrazek() {
   const p = $('plocha');
   // dělitel aspoň 4, aby existovaly nejméně tři různé špatné zbytky
   const u = novyPriklad(4, 8);
-  p.innerHTML = `<div class="zadani">Máš <b>${u.delenec}</b> kuliček a rozdělíš je do skupin
-     po <b>${u.delitel}</b>. Kolik kuliček zbude?</div>`;
+  const predmet = Uloha.nahodne(PREDMETY);
+  p.innerHTML = `<div class="zadani">Máš <b>${u.delenec} ${predmet.ceho}</b> a rozdělíš je do skupin
+     po <b>${u.delitel}</b>. Kolik jich zbude?</div>`;
 
   // kuličky schválně nejsou předrozdělené – rozdělení si musí žák udělat sám
   const hromada = document.createElement('div');
   hromada.className = 'hromada';
-  hromada.innerHTML = '<i></i>'.repeat(u.delenec);
+  hromada.innerHTML = predmetHtml(predmet).repeat(u.delenec);
   const legenda = document.createElement('div');
   legenda.className = 'legenda';
-  legenda.textContent = 'Spočítej, kolik celých skupin vznikne a kolik kuliček přebude.';
+  legenda.textContent = `Spočítej, kolik celých skupin vznikne a kolik ${predmet.ceho} přebude.`;
   p.append(hromada, legenda);
 
   /* po správné odpovědi kuličky přeskládáme do skupin, ať je vidět proč */
@@ -122,16 +133,16 @@ function obrazek() {
     for (let i = 0; i < u.podil; i++) {
       const sk = document.createElement('div');
       sk.className = 'skupina';
-      sk.innerHTML = '<i></i>'.repeat(u.delitel);
+      sk.innerHTML = predmetHtml(predmet).repeat(u.delitel);
       box.appendChild(sk);
     }
     if (u.zbytek) {
       const zb = document.createElement('div');
       zb.className = 'skupina zbytek';
-      zb.innerHTML = '<i></i>'.repeat(u.zbytek);
+      zb.innerHTML = predmetHtml(predmet).repeat(u.zbytek);
       box.appendChild(zb);
     }
-    legenda.textContent = `${u.podil} plných skupin po ${u.delitel} kuličkách`
+    legenda.textContent = `${u.podil} plných skupin po ${u.delitel} předmětech`
       + (u.zbytek ? ` a ${u.zbytek} zbývající` : ' beze zbytku');
     p.insertBefore(box, legenda);
   }

@@ -21,6 +21,23 @@
       padding: 6px 12px; font-size: 0.8rem; color: var(--text-muted);
     }
     .tabulka b { color: var(--text); }
+    .park-scena {
+      position: relative; width: min(100%, 900px); margin: 0 auto 14px;
+      border: 1px solid var(--border); border-radius: 14px; overflow: hidden;
+      background: var(--bg-panel); box-shadow: 0 3px 14px #0002;
+    }
+    .park-scena img { display: block; width: 100%; height: auto; }
+    .park-bod {
+      position: absolute; left: var(--x); top: var(--y); width: clamp(17px, 2.8vw, 28px);
+      aspect-ratio: 1; translate: -50% -50%; border-radius: 50%;
+      border: 2px solid #fff; background: #174f7dcc; box-shadow: 0 1px 7px #0008;
+      opacity: .46; cursor: pointer; padding: 0;
+    }
+    .park-bod.cil { opacity: 1; background: #d13c3566; border: 3px solid #d13c35; outline: 3px solid #fff; animation: parkPulse 1.15s ease-in-out infinite alternate; }
+    .park-bod:focus-visible { outline: 4px solid var(--focus, #ffbf47); opacity: 1; }
+    .park-vyzva { margin: 0 0 8px; font-weight: 700; color: var(--text-muted); text-align: center; }
+    @keyframes parkPulse { to { scale: 1.2; } }
+    @media (prefers-reduced-motion: reduce) { .park-bod.cil { animation: none; } }
   </style>
 </head>
 <body>
@@ -80,9 +97,16 @@ const PODMETY = [
 ];
 
 const OBRAZKY = [
-  { e: '🏃', v: 'running' }, { e: '📖', v: 'reading' }, { e: '🍎', v: 'eating' },
-  { e: '🎤', v: 'singing' }, { e: '🏊', v: 'swimming' }, { e: '✍️', v: 'writing' },
-  { e: '💃', v: 'dancing' }, { e: '🚴', v: 'riding a bike' }, { e: '😴', v: 'sleeping' },
+  { v: 'running', cz: 'běží', x: 7, y: 34 },
+  { v: 'reading', cz: 'čte', x: 20, y: 27 },
+  { v: 'eating an ice cream', cz: 'jí zmrzlinu', x: 32, y: 30 },
+  { v: 'walking a dog', cz: 'venčí psa', x: 45, y: 25 },
+  { v: 'playing the guitar', cz: 'hraje na kytaru', x: 65, y: 35 },
+  { v: 'sleeping', cz: 'spí', x: 68, y: 52 },
+  { v: 'riding a bike', cz: 'jede na kole', x: 93, y: 52 },
+  { v: 'taking a photo', cz: 'fotografuje', x: 87, y: 25 },
+  { v: 'feeding the ducks', cz: 'krmí kachny', x: 10, y: 70 },
+  { v: 'painting', cz: 'maluje', x: 68, y: 76 },
 ];
 
 const ROZDIL = [
@@ -169,19 +193,24 @@ function rozdil() {
 }
 
 /* ---- Popiš obrázek ----------------------------------------------------------------- */
-function popisObrazku() {
+function popisObrazku(vybrany = null) {
   const p = $('plocha');
-  const o = Uloha.nahodne(OBRAZKY);
+  const o = vybrany || Uloha.nahodne(OBRAZKY);
   const jine = Uloha.zamichej(OBRAZKY.filter(x => x.v !== o.v)).slice(0, 3);
   p.innerHTML = `<div class="zadani">What is he/she doing?</div>
-    <div class="karta"><div class="obrazek">${o.e}</div></div>`;
+    <p class="park-vyzva">Popiš činnost osoby označené červeným bodem.</p>
+    <div class="park-scena">
+      <img src="img/aj/aj5-prubehovy-park.webp" alt="Deset lidí v parku právě běží, čte, jí zmrzlinu, venčí psa, hraje na kytaru, spí, jede na kole, fotografuje, krmí kachny a maluje.">
+      ${OBRAZKY.map((x, i) => `<button type="button" class="park-bod ${x === o ? 'cil' : ''}" style="--x:${x.x}%;--y:${x.y}%" aria-label="Vybrat osobu: ${x.cz}" title="${x.cz}" data-osoba="${i}" ${x === o ? 'aria-current="true"' : ''}></button>`).join('')}
+    </div>`;
+  p.querySelectorAll('.park-bod').forEach(b => b.addEventListener('click', () => popisObrazku(OBRAZKY[Number(b.dataset.osoba)])));
   const odezva = document.createElement('div');
   odezva.className = 'odezva';
   Uloha.vyber({
     kam: p, odezva,
     moznosti: Uloha.zamichej([o, ...jine]).map(x => ({ klic: x.v, popis: 'He/She is ' + x.v + '.' })),
     spravnyKlic: o.v,
-    zpravaOk: `✅ He/She is ${o.v}.`,
+    zpravaOk: `✅ He/She is ${o.v}. (${o.cz}.)`,
     zpravaChyba: 'Podívej se pozorně, co postava na obrázku dělá.',
     poSpravne: skore.vyhodnot,
     dalsi: novaUloha,

@@ -451,7 +451,7 @@ Níže je úplný seznam 260 stránek z auditu. Každá má vlastní doporučen�
 
 - [ ] [optika_soustava](obsah/optika_soustava.html) — 🧩 Stavba optické soustavy (P2 v původním auditu).
 - [ ] [paka](obsah/paka.html) — ⚖️ Páka a jednoduché stroje (P2 v původním auditu).
-- [ ] [physics_playground](obsah/physics_playground.html) — 🔬 Fyzikální hřiště pro děti (P2 v původním auditu).
+- [x] [physics_playground](obsah/physics_playground.html) — 🔬 Fyzikální hřiště (P2 v původním auditu) – 24. 9. 2026 přestavěno na interaktivní výklad, viz níže.
 - [ ] [physics_ref](obsah/physics_ref.html) — ⚛️ Fyzikální vzorce a konstanty (P2 v původním auditu).
 
 ### 51 · Fyzika a astronomické modely · část 6
@@ -668,9 +668,26 @@ Níže je úplný seznam 260 stránek z auditu. Každá má vlastní doporučen�
 - `IMG-cj-01`: 40 akvarelových karet je zapojených v `cj1_pismena`; odpovídající slova je sdílejí také `slabiky` a `cj2_abeceda`. Emoji už v hlavní sadě Písmen a hlásek nezastupují učební obrázek.
 - `IMG-cj-02`: tvrdý kamenný a měkký dřevěný domeček jsou stálou obrazovou pomůckou v `cj2_tvrde_mekke`.
 - `IMG-cj-03`: čtyři dvojice být/bít, mýt/mít, výr/vír a vít/výt jsou zapojené jako přehled významů v `doplnovacky`.
-- `IMG-cj-04` (rozpracováno): hotové obrazové řady B, L, M a P s třiceti osmi novými kartami; karty „být“, „mýt“ a „myš“ se sdílejí z dřívějších sad. `vyjmenovana_slova` je ukazuje v přehledu a dostupný obrázek přidává i ke zpětné vazbě konkrétního slova.
-- Všech 88 ilustrací má projektový PNG originál, WebP 768 × 768 px do 60 kB, přesné zadání, alt text a záznam původu v `obsah/img/kapitola-7-2.json`; souhrnná galerie je `obsah/img/kapitola-7-2.html`.
-- Ověření: `tests/obrazky72-browser.mjs`, Chromium přes CDP; šest stránek, původní režimy, načtení obrázků, světlý i tmavý motiv a šířky 1280/390/320 px. Bez běhových JS výjimek a bez vodorovného přetékání; mobilní snímky byly vizuálně zkontrolovány. Cache zvýšena na v96. Veřejné nasazení neproběhlo.
+- `IMG-cj-04` je dokončena: všech sedm obrazových řad B, L, M, P, S, V a Z má 59 nových karet; karty „být“, „mýt“, „myš“, „sýr“, „výr“ a „výt“ se sdílejí z dřívějších sad. `vyjmenovana_slova` je ukazuje v přehledu a dostupný obrázek přidává i ke zpětné vazbě konkrétního slova.
+- `IMG-cj-05`: čtyři situační scénky pro druhy vět jsou zapojené jako přepínatelná obrazová pomůcka; každá situace ukazuje příklady oznamovací, tázací, rozkazovací a přací věty.
+- `IMG-cj-06`: šest karet mluvnických osob je zapojených do pomůcky v `cj3_slovesa`; po vyřešení se rozsvítí odpovídající zájmeno.
+- `IMG-cj-07`: osm trojic významů je zapojených jako přepínatelný obrazový slovník v `cj6_slovni_zasoba`.
+- `IMG-cj-09`: deset scén je zapojených k prvním deseti větám v režimu Věty stránky `slabiky`.
+- `IMG-cj-10`: osm motivačních scén je zapojených ke všem textům 1. stupně v `cteni_s_porozumenim`; na vyšších úrovních se obrazová plocha skryje.
+- `IMG-cj-12`: čtyři žánrové viněty jsou zapojené do rámečků pohádka, pověst, báje a bajka v `cj6_baje`.
+- `IMG-cj-15`: společná scéna pro popis, vypravování a charakteristiku je zapojená jako trojí psací podnět v `cj8_sloh`.
+- `IMG-m-01`: šest karet předmětů nahrazuje abstraktní tečky v názorném režimu `m3_deleni_zbytkem`; po odpovědi se stejné obrázky přeskládají do skupin a zbytku.
+- `IMG-m-02`: čtyři neporušené celky (pizza, čokoláda, látka, 12 dětí) jsou zapojené v `m4_zlomky_uvod`; dělicí čáry kreslí CSS, nikoli obrázky.
+- `IMG-m-04`: šest akvarelových prostředí je přímo svázáno se šesti generátory slovních úloh v `m5_slovni_ulohy`; obrázek dává kontext, proměnná čísla a výpočty zůstávají v HTML.
+- `IMG-m-05`: tři kontextové karty v `m7_cela_cisla` ukazují teplotu, podzemní patra a hloubku; číselné stupnice jsou přístupná webová vrstva, nikoli součást obrázků.
+- `IMG-m-06`: čtyři karty v `procenta` dávají procentům kontext slevy, hlasování, složení potraviny a úroku; příkladové hodnoty jsou webová vrstva.
+- `IMG-m-07`: šest karet v `clock_learning` tvoří denní časovou řadu od vstávání po spaní; časové štítky zůstávají v HTML.
+- `IMG-m-11`: čtyři generátory slovních úloh v `m8_pythagoras` jsou přímo svázané se scénami žebříku, draka, zkratky a stožáru; rozměry doplňuje zadání a SVG.
+- `IMG-m-12`: akvarelová scéna stromu a měřicí tyče uvádí interaktivní režim měření stínem v `m9_podobnost`; přesné trojúhelníky nadále kreslí SVG.
+- `IMG-aj-02` má kompletní témata Zvířata, Jídlo, Škola, Rodina, Dům a nábytek a Oblečení: 56 různých akvarelových karet je zapojených v `aj_slovicka`; devět domácích pojmů zároveň sdílejí `de_slovicka` a `fr_slovicka`. Židle se neduplikuje, používá se ve škole i doma. Společný `slovicka.js` nadále používá emoji tam, kde stránka obrazový soubor ještě nemá.
+- `IMG-aj-06` je zapojená do režimu Popiš obrázek v `aj5_pritomny_prubehovy`: jedna parková scéna obsahuje přesně deset osob s deseti odlišnými činnostmi a web nad ní střídá deset přístupně popsaných hotspotů.
+- Všech 257 ilustrací má projektový PNG originál, optimalizovaný WebP (karty do 60 kB, scény do 200 kB), přesné zadání, alt text a záznam původu v `obsah/img/kapitola-7-2.json`; souhrnná galerie je `obsah/img/kapitola-7-2.html`.
+- Ověření: `tests/obrazky72-browser.mjs`, Chromium přes CDP; 24 stránek, původní režimy, parková scéna se všemi hotspoty, všech deset karet oblečení a devět domácích motivů ve třech jazycích, světlý i tmavý motiv a šířky 1280/390/320 px. Bez běhových JS výjimek a bez vodorovného přetékání; mobilní snímky byly vizuálně zkontrolovány. Cache zvýšena na v118. Veřejné nasazení neproběhlo.
 
 
 ## Motivy Sépie a Stará knihovna (22. 9. 2026)
@@ -707,3 +724,12 @@ Níže je úplný seznam 260 stránek z auditu. Každá má vlastní doporučen�
 - **Opravy, které vysoký kontrast odhalil (platí pro všechny motivy):** periodická tabulka volí písmo na dlaždici podle jasu barvy skupiny (dřív bílá na žluté 1,7 : 1, teď 4,0–11,4 : 1); historické mapy mají oranžovou podle tónu motivu (dřív 2,2 : 1 jako text i výplň) a tmavší štítky; pole formulářů na 10 stránkách (periodická tabulka, eduSort, obloha, hvězdná mapa, vlajky, kartičky, zlomková kalkulačka, hudební nauka, hlavní města, psaní) mají pozadí `--bg-input` místo `--border`.
 - **Ověření:** úsporný průchod 257 stránkami ve vysokém kontrastu bez výjimek, přetečení a holé textury; samostatný průchod formulářových polí (u prázdných polí je běžná kontrola nevidí) ve vysokém kontrastu a noční škole – po opravě vše ≥ 4,5 : 1 a opravené stránky ověřeny i v tmavém, světlém a sépiovém motivu. `tests/motivy.mjs` nově ověřuje skupiny seznamu, AAA u vysokého kontrastu a volbu podle systému s emulací `prefers-color-scheme` (světlý → tmavý za běhu, i v iframu). Prošly `motivy`, `etapa03-navigace`, `etapa04-vzhled`, `etapa05-odpoved`.
 - Zálohy: [docs/zalohy-kontrast-20260922-173000/](docs/zalohy-kontrast-20260922-173000/). Cache `metodus-v84`, do jádra přidán `kontrast.css`. Nasazení na veřejný web nebylo provedeno.
+
+
+## Fyzikální hřiště jako interaktivní výklad (24. 9. 2026)
+
+- [physics_playground](obsah/physics_playground.html) přestavěno ze simulace na celou obrazovku (tři záložky, panel úkolů `badani.js`) na dlouhou lekci ve stylu `optika_lekce`: 5 kapitol (síla a pohyb, tíha a nakloněná rovina, energie, kyvadlo, srážky a hybnost jako rozšiřující učivo), výklad s pojmy a vzorci, rámečky „Zapamatuj si“, „Pro zvídavé“ (F = m · a, sin/cos a tg α = f, T = 2π√(l/g), Foucaultovo kyvadlo), fakta a příklady z praxe.
+- Modely: bedna (tah, tření led/dřevo/koberec, výsledná síla, graf rychlosti), nakloněná rovina (úchop sklonu, rovnoběžník sil, mezní úhel), U-rampa (sloupce energie včetně skládaného „celkem“), kyvadlo (jedno/dvě, Země/Měsíc/Mars, odpor vzduchu, tabulka měření a graf T(l)), srážky vozíků (pružina/guma/suchý zip, bilance hybnosti a energie, 4 hotová nastavení).
+- Rámec: Výuka, Ukázka (řešený příklad k energii), Procvič (19 generátorů, 5 témat), Ověř se, Tahák (6 karet); 7 předpovědí a 10 úkolů. Katalog: nový název, rozšířené tagy, ročníky 7–8, nový cíl. `tests/badani.mjs` stránku už neprochází (nepoužívá `badani.js`).
+- Ověření: nový [tests/hriste-lekce.mjs](tests/hriste-lekce.mjs) prošel (fyzika proti vzorcům, animace, tažení a klávesnice, 17/17 úkolů, obnovení a smazání postupu, 40× každý generátor, Procvič, Ověř se 6/8 uloženo, Tahák, 390/320 px bez přetečení, kontrast 8 motivů). Snímky modelů v tmavém i světlém motivu zkontrolovány okem.
+- Zálohy: [docs/zalohy-hriste-20260924-174636/](docs/zalohy-hriste-20260924-174636/). Cache zvýšena na `metodus-v111`. Nasazení na veřejný web nebylo provedeno.

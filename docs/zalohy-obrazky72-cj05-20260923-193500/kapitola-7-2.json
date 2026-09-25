@@ -1,0 +1,1587 @@
+[
+  {
+    "id": "IMG-cj-01",
+    "name": "cj1-pismena-pes",
+    "alt": "Pes.",
+    "webp": "cj/cj1-pismena-pes.webp",
+    "png": "cj/cj1-pismena-pes.png",
+    "bytes": 34458,
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/cj1-pismena-pes.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-01",
+    "name": "cj1-pismena-kocka",
+    "alt": "Kočka.",
+    "webp": "cj/cj1-pismena-kocka.webp",
+    "png": "cj/cj1-pismena-kocka.png",
+    "bytes": 35804,
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/cj1-pismena-kocka.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-01",
+    "name": "cj1-pismena-dum",
+    "alt": "Rodinný dům.",
+    "webp": "cj/cj1-pismena-dum.webp",
+    "png": "cj/cj1-pismena-dum.png",
+    "bytes": 38824,
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/cj1-pismena-dum.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-01",
+    "name": "cj1-pismena-strom",
+    "alt": "Listnatý strom.",
+    "webp": "cj/cj1-pismena-strom.webp",
+    "png": "cj/cj1-pismena-strom.png",
+    "bytes": 57206,
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/cj1-pismena-strom.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-01",
+    "name": "cj1-pismena-auto",
+    "alt": "Osobní auto.",
+    "webp": "cj/cj1-pismena-auto.webp",
+    "png": "cj/cj1-pismena-auto.png",
+    "bytes": 34970,
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/cj1-pismena-auto.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-01",
+    "name": "cj1-pismena-jablko",
+    "alt": "Červené jablko.",
+    "webp": "cj/cj1-pismena-jablko.webp",
+    "png": "cj/cj1-pismena-jablko.png",
+    "bytes": 34736,
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/cj1-pismena-jablko.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-01",
+    "name": "cj1-pismena-ryba",
+    "alt": "Ryba.",
+    "webp": "cj/cj1-pismena-ryba.webp",
+    "png": "cj/cj1-pismena-ryba.png",
+    "bytes": 32742,
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/cj1-pismena-ryba.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-01",
+    "name": "cj1-pismena-slunce",
+    "alt": "Slunce.",
+    "webp": "cj/cj1-pismena-slunce.webp",
+    "png": "cj/cj1-pismena-slunce.png",
+    "bytes": 17348,
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/cj1-pismena-slunce.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-01",
+    "name": "cj1-pismena-tulipan",
+    "alt": "Červený tulipán.",
+    "webp": "cj/cj1-pismena-tulipan.webp",
+    "png": "cj/cj1-pismena-tulipan.png",
+    "bytes": 17734,
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/cj1-pismena-tulipan.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-01",
+    "name": "cj1-pismena-krava",
+    "alt": "Kráva.",
+    "webp": "cj/cj1-pismena-krava.webp",
+    "png": "cj/cj1-pismena-krava.png",
+    "bytes": 26914,
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/cj1-pismena-krava.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-01",
+    "name": "cj1-pismena-mleko",
+    "alt": "Sklenice mléka.",
+    "webp": "cj/cj1-pismena-mleko.webp",
+    "png": "cj/cj1-pismena-mleko.png",
+    "bytes": 13470,
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/cj1-pismena-mleko.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-01",
+    "name": "cj1-pismena-chleb",
+    "alt": "Bochník chleba s krajícem.",
+    "webp": "cj/cj1-pismena-chleb.webp",
+    "png": "cj/cj1-pismena-chleb.png",
+    "bytes": 59516,
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/cj1-pismena-chleb.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-01",
+    "name": "cj1-pismena-autobus",
+    "alt": "Autobus.",
+    "webp": "cj/cj1-pismena-autobus.webp",
+    "png": "cj/cj1-pismena-autobus.png",
+    "bytes": 35464,
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/cj1-pismena-autobus.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-01",
+    "name": "cj1-pismena-tuzka",
+    "alt": "Ořezaná tužka.",
+    "webp": "cj/cj1-pismena-tuzka.webp",
+    "png": "cj/cj1-pismena-tuzka.png",
+    "bytes": 11432,
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/cj1-pismena-tuzka.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-01",
+    "name": "cj1-pismena-kniha",
+    "alt": "Zavřená kniha.",
+    "webp": "cj/cj1-pismena-kniha.webp",
+    "png": "cj/cj1-pismena-kniha.png",
+    "bytes": 24940,
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/cj1-pismena-kniha.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-01",
+    "name": "cj1-pismena-ponozka",
+    "alt": "Pruhovaná ponožka.",
+    "webp": "cj/cj1-pismena-ponozka.webp",
+    "png": "cj/cj1-pismena-ponozka.png",
+    "bytes": 28824,
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/cj1-pismena-ponozka.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-01",
+    "name": "cj1-pismena-mys",
+    "alt": "Myš.",
+    "webp": "cj/cj1-pismena-mys.webp",
+    "png": "cj/cj1-pismena-mys.png",
+    "bytes": 27280,
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/cj1-pismena-mys.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-01",
+    "name": "cj1-pismena-liska",
+    "alt": "Liška.",
+    "webp": "cj/cj1-pismena-liska.webp",
+    "png": "cj/cj1-pismena-liska.png",
+    "bytes": 33384,
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/cj1-pismena-liska.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-01",
+    "name": "cj1-pismena-lev",
+    "alt": "Lev.",
+    "webp": "cj/cj1-pismena-lev.webp",
+    "png": "cj/cj1-pismena-lev.png",
+    "bytes": 44666,
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/cj1-pismena-lev.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-01",
+    "name": "cj1-pismena-dest",
+    "alt": "Dešťový mrak s kapkami.",
+    "webp": "cj/cj1-pismena-dest.webp",
+    "png": "cj/cj1-pismena-dest.png",
+    "bytes": 20828,
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/cj1-pismena-dest.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-01",
+    "name": "cj1-pismena-vlocka",
+    "alt": "Sněhová vločka.",
+    "webp": "cj/cj1-pismena-vlocka.webp",
+    "png": "cj/cj1-pismena-vlocka.png",
+    "bytes": 58706,
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/cj1-pismena-vlocka.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-01",
+    "name": "cj1-pismena-hrib",
+    "alt": "Hřib.",
+    "webp": "cj/cj1-pismena-hrib.webp",
+    "png": "cj/cj1-pismena-hrib.png",
+    "bytes": 32886,
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/cj1-pismena-hrib.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-01",
+    "name": "cj1-pismena-mrkev",
+    "alt": "Mrkev.",
+    "webp": "cj/cj1-pismena-mrkev.webp",
+    "png": "cj/cj1-pismena-mrkev.png",
+    "bytes": 20244,
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/cj1-pismena-mrkev.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-01",
+    "name": "cj1-pismena-noc",
+    "alt": "Měsíc a hvězdy jako symbol noci.",
+    "webp": "cj/cj1-pismena-noc.webp",
+    "png": "cj/cj1-pismena-noc.png",
+    "bytes": 20230,
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/cj1-pismena-noc.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-01",
+    "name": "cj1-pismena-vcela",
+    "alt": "Včela.",
+    "webp": "cj/cj1-pismena-vcela.webp",
+    "png": "cj/cj1-pismena-vcela.png",
+    "bytes": 44082,
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/cj1-pismena-vcela.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-01",
+    "name": "cj1-pismena-motyl",
+    "alt": "Motýl.",
+    "webp": "cj/cj1-pismena-motyl.webp",
+    "png": "cj/cj1-pismena-motyl.png",
+    "bytes": 49324,
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/cj1-pismena-motyl.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-01",
+    "name": "cj1-pismena-slon",
+    "alt": "Slon.",
+    "webp": "cj/cj1-pismena-slon.webp",
+    "png": "cj/cj1-pismena-slon.png",
+    "bytes": 46452,
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/cj1-pismena-slon.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-01",
+    "name": "cj1-pismena-balon",
+    "alt": "Červený nafukovací balón.",
+    "webp": "cj/cj1-pismena-balon.webp",
+    "png": "cj/cj1-pismena-balon.png",
+    "bytes": 12338,
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/cj1-pismena-balon.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-01",
+    "name": "cj1-pismena-medvidek",
+    "alt": "Plyšový medvídek.",
+    "webp": "cj/cj1-pismena-medvidek.webp",
+    "png": "cj/cj1-pismena-medvidek.png",
+    "bytes": 35960,
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/cj1-pismena-medvidek.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-01",
+    "name": "cj1-pismena-kolo",
+    "alt": "Dětské jízdní kolo.",
+    "webp": "cj/cj1-pismena-kolo.webp",
+    "png": "cj/cj1-pismena-kolo.png",
+    "bytes": 29998,
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/cj1-pismena-kolo.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-01",
+    "name": "cj1-pismena-zidle",
+    "alt": "Dřevěná židle.",
+    "webp": "cj/cj1-pismena-zidle.webp",
+    "png": "cj/cj1-pismena-zidle.png",
+    "bytes": 18882,
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/cj1-pismena-zidle.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-01",
+    "name": "cj1-pismena-bota",
+    "alt": "Dětská bota.",
+    "webp": "cj/cj1-pismena-bota.webp",
+    "png": "cj/cj1-pismena-bota.png",
+    "bytes": 30334,
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/cj1-pismena-bota.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-01",
+    "name": "cj1-pismena-syr",
+    "alt": "Klínek sýra.",
+    "webp": "cj/cj1-pismena-syr.webp",
+    "png": "cj/cj1-pismena-syr.png",
+    "bytes": 14366,
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/cj1-pismena-syr.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-01",
+    "name": "cj1-pismena-slepice",
+    "alt": "Slepice.",
+    "webp": "cj/cj1-pismena-slepice.webp",
+    "png": "cj/cj1-pismena-slepice.png",
+    "bytes": 32234,
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/cj1-pismena-slepice.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-01",
+    "name": "cj1-pismena-voda",
+    "alt": "Sklenice vody.",
+    "webp": "cj/cj1-pismena-voda.webp",
+    "png": "cj/cj1-pismena-voda.png",
+    "bytes": 19740,
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/cj1-pismena-voda.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-01",
+    "name": "cj1-pismena-ohen",
+    "alt": "Oheň nad polínky.",
+    "webp": "cj/cj1-pismena-ohen.webp",
+    "png": "cj/cj1-pismena-ohen.png",
+    "bytes": 27332,
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/cj1-pismena-ohen.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-01",
+    "name": "cj1-pismena-zaba",
+    "alt": "Žába.",
+    "webp": "cj/cj1-pismena-zaba.webp",
+    "png": "cj/cj1-pismena-zaba.png",
+    "bytes": 37700,
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/cj1-pismena-zaba.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-01",
+    "name": "cj1-pismena-hruska",
+    "alt": "Hruška.",
+    "webp": "cj/cj1-pismena-hruska.webp",
+    "png": "cj/cj1-pismena-hruska.png",
+    "bytes": 23526,
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/cj1-pismena-hruska.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-01",
+    "name": "cj1-pismena-brambora",
+    "alt": "Brambora.",
+    "webp": "cj/cj1-pismena-brambora.webp",
+    "png": "cj/cj1-pismena-brambora.png",
+    "bytes": 29638,
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/cj1-pismena-brambora.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-01",
+    "name": "cj1-pismena-cibule",
+    "alt": "Cibule.",
+    "webp": "cj/cj1-pismena-cibule.webp",
+    "png": "cj/cj1-pismena-cibule.png",
+    "bytes": 29430,
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/cj1-pismena-cibule.prompt.txt"
+    }
+  },
+{
+    "id": "IMG-cj-02",
+    "name": "cj2-tvrde-mekke-domek-tvrdy",
+    "alt": "Pevný hranatý domek z kamene představuje tvrdé souhlásky.",
+    "bytes": 56784,
+    "webp": "cj/cj2-tvrde-mekke-domek-tvrdy.webp",
+    "png": "cj/cj2-tvrde-mekke-domek-tvrdy.png",
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/cj2-tvrde-mekke-domek-tvrdy.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-02",
+    "name": "cj2-tvrde-mekke-domek-mekky",
+    "alt": "Útulný dřevěný domek s polštáři představuje měkké souhlásky.",
+    "bytes": 54844,
+    "webp": "cj/cj2-tvrde-mekke-domek-mekky.webp",
+    "png": "cj/cj2-tvrde-mekke-domek-mekky.png",
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/cj2-tvrde-mekke-domek-mekky.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-03",
+    "name": "doplnovacky-byt",
+    "alt": "Dítě stojí – být.",
+    "bytes": 18140,
+    "webp": "cj/doplnovacky-byt.webp",
+    "png": "cj/doplnovacky-byt.png",
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/doplnovacky-byt.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-03",
+    "name": "doplnovacky-bit",
+    "alt": "Palice bije do kolíku – bít.",
+    "bytes": 23380,
+    "webp": "cj/doplnovacky-bit.webp",
+    "png": "cj/doplnovacky-bit.png",
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/doplnovacky-bit.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-03",
+    "name": "doplnovacky-myt",
+    "alt": "Ruce se myjí vodou a mýdlem – mýt.",
+    "bytes": 19588,
+    "webp": "cj/doplnovacky-myt.webp",
+    "png": "cj/doplnovacky-myt.png",
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/doplnovacky-myt.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-03",
+    "name": "doplnovacky-mit",
+    "alt": "Dítě drží svůj míč – mít.",
+    "bytes": 31428,
+    "webp": "cj/doplnovacky-mit.webp",
+    "png": "cj/doplnovacky-mit.png",
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/doplnovacky-mit.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-03",
+    "name": "doplnovacky-vyr",
+    "alt": "Výr s výraznými péřovými oušky.",
+    "bytes": 46434,
+    "webp": "cj/doplnovacky-vyr.webp",
+    "png": "cj/doplnovacky-vyr.png",
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/doplnovacky-vyr.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-03",
+    "name": "doplnovacky-vir",
+    "alt": "Vodní vír.",
+    "bytes": 51620,
+    "webp": "cj/doplnovacky-vir.webp",
+    "png": "cj/doplnovacky-vir.png",
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/doplnovacky-vir.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-03",
+    "name": "doplnovacky-vit",
+    "alt": "Ruce vijí věnec – vít.",
+    "bytes": 46078,
+    "webp": "cj/doplnovacky-vit.webp",
+    "png": "cj/doplnovacky-vit.png",
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/doplnovacky-vit.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-03",
+    "name": "doplnovacky-vyt",
+    "alt": "Vlk vyje – výt.",
+    "bytes": 31524,
+    "webp": "cj/doplnovacky-vyt.webp",
+    "png": "cj/doplnovacky-vyt.png",
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/doplnovacky-vyt.prompt.txt"
+    }
+  },
+{
+    "id": "IMG-cj-04",
+    "cast": "řada B",
+    "name": "vyjmenovana-b-bydlet",
+    "alt": "Dítě bydlí v domě.",
+    "bytes": 57832,
+    "webp": "cj/vyjmenovana-b-bydlet.webp",
+    "png": "cj/vyjmenovana-b-bydlet.png",
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/vyjmenovana-b-bydlet.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-04",
+    "cast": "řada B",
+    "name": "vyjmenovana-b-obyvatel",
+    "alt": "Obyvatel před vchodem svého domu.",
+    "bytes": 50150,
+    "webp": "cj/vyjmenovana-b-obyvatel.webp",
+    "png": "cj/vyjmenovana-b-obyvatel.png",
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/vyjmenovana-b-obyvatel.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-04",
+    "cast": "řada B",
+    "name": "vyjmenovana-b-byt",
+    "alt": "Zařízený byt.",
+    "bytes": 56302,
+    "webp": "cj/vyjmenovana-b-byt.webp",
+    "png": "cj/vyjmenovana-b-byt.png",
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/vyjmenovana-b-byt.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-04",
+    "cast": "řada B",
+    "name": "vyjmenovana-b-pribytek",
+    "alt": "Malý příbytek.",
+    "bytes": 56998,
+    "webp": "cj/vyjmenovana-b-pribytek.webp",
+    "png": "cj/vyjmenovana-b-pribytek.png",
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/vyjmenovana-b-pribytek.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-04",
+    "cast": "řada B",
+    "name": "vyjmenovana-b-nabytek",
+    "alt": "Skříň, židle a stůl jako nábytek.",
+    "bytes": 40068,
+    "webp": "cj/vyjmenovana-b-nabytek.webp",
+    "png": "cj/vyjmenovana-b-nabytek.png",
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/vyjmenovana-b-nabytek.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-04",
+    "cast": "řada B",
+    "name": "vyjmenovana-b-dobytek",
+    "alt": "Skupina dobytka.",
+    "bytes": 55690,
+    "webp": "cj/vyjmenovana-b-dobytek.webp",
+    "png": "cj/vyjmenovana-b-dobytek.png",
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/vyjmenovana-b-dobytek.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-04",
+    "cast": "řada B",
+    "name": "vyjmenovana-b-bylina",
+    "alt": "Kvetoucí bylina.",
+    "bytes": 47444,
+    "webp": "cj/vyjmenovana-b-bylina.webp",
+    "png": "cj/vyjmenovana-b-bylina.png",
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/vyjmenovana-b-bylina.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-04",
+    "cast": "řada B",
+    "name": "vyjmenovana-b-kobyla",
+    "alt": "Hnědá kobyla.",
+    "bytes": 39166,
+    "webp": "cj/vyjmenovana-b-kobyla.webp",
+    "png": "cj/vyjmenovana-b-kobyla.png",
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/vyjmenovana-b-kobyla.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-04",
+    "cast": "řada B",
+    "name": "vyjmenovana-b-byk",
+    "alt": "Hnědý býk.",
+    "bytes": 34424,
+    "webp": "cj/vyjmenovana-b-byk.webp",
+    "png": "cj/vyjmenovana-b-byk.png",
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/vyjmenovana-b-byk.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-04",
+    "cast": "řada B",
+    "name": "vyjmenovana-b-babyka",
+    "alt": "Babyka s listy a křídlatými semeny.",
+    "bytes": 53770,
+    "webp": "cj/vyjmenovana-b-babyka.webp",
+    "png": "cj/vyjmenovana-b-babyka.png",
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/vyjmenovana-b-babyka.prompt.txt"
+    }
+  },
+{
+    "id": "IMG-cj-04",
+    "cast": "řada L",
+    "name": "vyjmenovana-l-mlyn",
+    "alt": "Vodní mlýn s mlýnským kolem.",
+    "bytes": 59684,
+    "webp": "cj/vyjmenovana-l-mlyn.webp",
+    "png": "cj/vyjmenovana-l-mlyn.png",
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/vyjmenovana-l-mlyn.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-04",
+    "cast": "řada L",
+    "name": "vyjmenovana-l-blyskat",
+    "alt": "Z mraku se blýská.",
+    "bytes": 26358,
+    "webp": "cj/vyjmenovana-l-blyskat.webp",
+    "png": "cj/vyjmenovana-l-blyskat.png",
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/vyjmenovana-l-blyskat.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-04",
+    "cast": "řada L",
+    "name": "vyjmenovana-l-polykat",
+    "alt": "Dítě polyká doušek vody.",
+    "bytes": 28582,
+    "webp": "cj/vyjmenovana-l-polykat.webp",
+    "png": "cj/vyjmenovana-l-polykat.png",
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/vyjmenovana-l-polykat.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-04",
+    "cast": "řada L",
+    "name": "vyjmenovana-l-plynout",
+    "alt": "Řeka plyne krajinou.",
+    "bytes": 56164,
+    "webp": "cj/vyjmenovana-l-plynout.webp",
+    "png": "cj/vyjmenovana-l-plynout.png",
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/vyjmenovana-l-plynout.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-04",
+    "cast": "řada L",
+    "name": "vyjmenovana-l-plytvat",
+    "alt": "Tekoucí voda zbytečně přetéká z umyvadla.",
+    "bytes": 41704,
+    "webp": "cj/vyjmenovana-l-plytvat.webp",
+    "png": "cj/vyjmenovana-l-plytvat.png",
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/vyjmenovana-l-plytvat.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-04",
+    "cast": "řada L",
+    "name": "vyjmenovana-l-vzlykat",
+    "alt": "Plačící dítě vzlyká.",
+    "bytes": 27778,
+    "webp": "cj/vyjmenovana-l-vzlykat.webp",
+    "png": "cj/vyjmenovana-l-vzlykat.png",
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/vyjmenovana-l-vzlykat.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-04",
+    "cast": "řada L",
+    "name": "vyjmenovana-l-lytko",
+    "alt": "Lýtko na zadní straně dolní končetiny.",
+    "bytes": 10934,
+    "webp": "cj/vyjmenovana-l-lytko.webp",
+    "png": "cj/vyjmenovana-l-lytko.png",
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/vyjmenovana-l-lytko.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-04",
+    "cast": "řada L",
+    "name": "vyjmenovana-l-lyko",
+    "alt": "Pruhy lýka pod kůrou lipové větve.",
+    "bytes": 47598,
+    "webp": "cj/vyjmenovana-l-lyko.webp",
+    "png": "cj/vyjmenovana-l-lyko.png",
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/vyjmenovana-l-lyko.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-04",
+    "cast": "řada L",
+    "name": "vyjmenovana-l-lyze",
+    "alt": "Pár běžeckých lyží s holemi.",
+    "bytes": 33000,
+    "webp": "cj/vyjmenovana-l-lyze.webp",
+    "png": "cj/vyjmenovana-l-lyze.png",
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/vyjmenovana-l-lyze.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-04",
+    "cast": "řada L",
+    "name": "vyjmenovana-l-pelynek",
+    "alt": "Kvetoucí pelyněk pravý.",
+    "bytes": 49738,
+    "webp": "cj/vyjmenovana-l-pelynek.webp",
+    "png": "cj/vyjmenovana-l-pelynek.png",
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/vyjmenovana-l-pelynek.prompt.txt"
+    }
+  },
+{
+    "id": "IMG-cj-04",
+    "cast": "řada M",
+    "name": "vyjmenovana-m-hmyz",
+    "alt": "Včela, slunéčko, motýl a vážka jako zástupci hmyzu.",
+    "bytes": 48318,
+    "webp": "cj/vyjmenovana-m-hmyz.webp",
+    "png": "cj/vyjmenovana-m-hmyz.png",
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/vyjmenovana-m-hmyz.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-04",
+    "cast": "řada M",
+    "name": "vyjmenovana-m-hlemyzd",
+    "alt": "Hlemýžď zahradní.",
+    "bytes": 34182,
+    "webp": "cj/vyjmenovana-m-hlemyzd.webp",
+    "png": "cj/vyjmenovana-m-hlemyzd.png",
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/vyjmenovana-m-hlemyzd.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-04",
+    "cast": "řada M",
+    "name": "vyjmenovana-m-mytit",
+    "alt": "Vymýcená část lesa s pařezy.",
+    "bytes": 59584,
+    "webp": "cj/vyjmenovana-m-mytit.webp",
+    "png": "cj/vyjmenovana-m-mytit.png",
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/vyjmenovana-m-mytit.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-04",
+    "cast": "řada M",
+    "name": "vyjmenovana-m-zamykat",
+    "alt": "Ruce zamykají dveře klíčem.",
+    "bytes": 32154,
+    "webp": "cj/vyjmenovana-m-zamykat.webp",
+    "png": "cj/vyjmenovana-m-zamykat.png",
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/vyjmenovana-m-zamykat.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-04",
+    "cast": "řada M",
+    "name": "vyjmenovana-m-smykat",
+    "alt": "Dítě smýká těžký pytel po zemi.",
+    "bytes": 26208,
+    "webp": "cj/vyjmenovana-m-smykat.webp",
+    "png": "cj/vyjmenovana-m-smykat.png",
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/vyjmenovana-m-smykat.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-04",
+    "cast": "řada M",
+    "name": "vyjmenovana-m-dmychat",
+    "alt": "Měch dmýchá vzduch do výhně.",
+    "bytes": 57870,
+    "webp": "cj/vyjmenovana-m-dmychat.webp",
+    "png": "cj/vyjmenovana-m-dmychat.png",
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/vyjmenovana-m-dmychat.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-04",
+    "cast": "řada M",
+    "name": "vyjmenovana-m-chmyri",
+    "alt": "Pampeliškové chmýří.",
+    "bytes": 33730,
+    "webp": "cj/vyjmenovana-m-chmyri.webp",
+    "png": "cj/vyjmenovana-m-chmyri.png",
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/vyjmenovana-m-chmyri.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-04",
+    "cast": "řada M",
+    "name": "vyjmenovana-m-myto",
+    "alt": "Mýtná závora na silnici.",
+    "bytes": 35600,
+    "webp": "cj/vyjmenovana-m-myto.webp",
+    "png": "cj/vyjmenovana-m-myto.png",
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/vyjmenovana-m-myto.prompt.txt"
+    }
+  },
+{
+    "id": "IMG-cj-04",
+    "cast": "řada P",
+    "name": "vyjmenovana-p-pytel",
+    "alt": "Plný jutový pytel.",
+    "bytes": 41616,
+    "webp": "cj/vyjmenovana-p-pytel.webp",
+    "png": "cj/vyjmenovana-p-pytel.png",
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/vyjmenovana-p-pytel.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-04",
+    "cast": "řada P",
+    "name": "vyjmenovana-p-pysk",
+    "alt": "Pysk divočáka.",
+    "bytes": 57784,
+    "webp": "cj/vyjmenovana-p-pysk.webp",
+    "png": "cj/vyjmenovana-p-pysk.png",
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/vyjmenovana-p-pysk.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-04",
+    "cast": "řada P",
+    "name": "vyjmenovana-p-netopyr",
+    "alt": "Letící netopýr.",
+    "bytes": 21616,
+    "webp": "cj/vyjmenovana-p-netopyr.webp",
+    "png": "cj/vyjmenovana-p-netopyr.png",
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/vyjmenovana-p-netopyr.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-04",
+    "cast": "řada P",
+    "name": "vyjmenovana-p-slepys",
+    "alt": "Slepýš křehký, beznohý ještěr.",
+    "bytes": 39974,
+    "webp": "cj/vyjmenovana-p-slepys.webp",
+    "png": "cj/vyjmenovana-p-slepys.png",
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/vyjmenovana-p-slepys.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-04",
+    "cast": "řada P",
+    "name": "vyjmenovana-p-pyl",
+    "alt": "Včela a pyl na květu.",
+    "bytes": 43554,
+    "webp": "cj/vyjmenovana-p-pyl.webp",
+    "png": "cj/vyjmenovana-p-pyl.png",
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/vyjmenovana-p-pyl.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-04",
+    "cast": "řada P",
+    "name": "vyjmenovana-p-kopyto",
+    "alt": "Koňské kopyto.",
+    "bytes": 22632,
+    "webp": "cj/vyjmenovana-p-kopyto.webp",
+    "png": "cj/vyjmenovana-p-kopyto.png",
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/vyjmenovana-p-kopyto.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-04",
+    "cast": "řada P",
+    "name": "vyjmenovana-p-klopytat",
+    "alt": "Dítě klopýtá o kámen.",
+    "bytes": 46542,
+    "webp": "cj/vyjmenovana-p-klopytat.webp",
+    "png": "cj/vyjmenovana-p-klopytat.png",
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/vyjmenovana-p-klopytat.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-04",
+    "cast": "řada P",
+    "name": "vyjmenovana-p-trpytit",
+    "alt": "Třpytící se krystaly křemene.",
+    "bytes": 34298,
+    "webp": "cj/vyjmenovana-p-trpytit.webp",
+    "png": "cj/vyjmenovana-p-trpytit.png",
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/vyjmenovana-p-trpytit.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-04",
+    "cast": "řada P",
+    "name": "vyjmenovana-p-pyr",
+    "alt": "Pýr plazivý s dlouhými oddenky.",
+    "bytes": 36536,
+    "webp": "cj/vyjmenovana-p-pyr.webp",
+    "png": "cj/vyjmenovana-p-pyr.png",
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/vyjmenovana-p-pyr.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-04",
+    "cast": "řada P",
+    "name": "vyjmenovana-p-cepirit",
+    "alt": "Vrabec čepýří peří.",
+    "bytes": 34082,
+    "webp": "cj/vyjmenovana-p-cepirit.webp",
+    "png": "cj/vyjmenovana-p-cepirit.png",
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/vyjmenovana-p-cepirit.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-04",
+    "cast": "řada S",
+    "name": "vyjmenovana-s-syn",
+    "alt": "Syn se svými rodiči.",
+    "bytes": 55462,
+    "webp": "cj/vyjmenovana-s-syn.webp",
+    "png": "cj/vyjmenovana-s-syn.png",
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/vyjmenovana-s-syn.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-04",
+    "cast": "řada S",
+    "name": "vyjmenovana-s-syty",
+    "alt": "Syté dítě po jídle.",
+    "bytes": 37766,
+    "webp": "cj/vyjmenovana-s-syty.webp",
+    "png": "cj/vyjmenovana-s-syty.png",
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/vyjmenovana-s-syty.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-04",
+    "cast": "řada S",
+    "name": "vyjmenovana-s-sychravy",
+    "alt": "Sychravé chladné a deštivé počasí.",
+    "bytes": 52776,
+    "webp": "cj/vyjmenovana-s-sychravy.webp",
+    "png": "cj/vyjmenovana-s-sychravy.png",
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/vyjmenovana-s-sychravy.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-04",
+    "cast": "řada S",
+    "name": "vyjmenovana-s-usychat",
+    "alt": "Usychající rostlina.",
+    "bytes": 39888,
+    "webp": "cj/vyjmenovana-s-usychat.webp",
+    "png": "cj/vyjmenovana-s-usychat.png",
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/vyjmenovana-s-usychat.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-04",
+    "cast": "řada S",
+    "name": "vyjmenovana-s-sykora",
+    "alt": "Sýkora koňadra.",
+    "bytes": 35608,
+    "webp": "cj/vyjmenovana-s-sykora.webp",
+    "png": "cj/vyjmenovana-s-sykora.png",
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/vyjmenovana-s-sykora.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-04",
+    "cast": "řada S",
+    "name": "vyjmenovana-s-sycek",
+    "alt": "Sýček obecný.",
+    "bytes": 41114,
+    "webp": "cj/vyjmenovana-s-sycek.webp",
+    "png": "cj/vyjmenovana-s-sycek.png",
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/vyjmenovana-s-sycek.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-04",
+    "cast": "řada S",
+    "name": "vyjmenovana-s-sysel",
+    "alt": "Sysel obecný u nory.",
+    "bytes": 56298,
+    "webp": "cj/vyjmenovana-s-sysel.webp",
+    "png": "cj/vyjmenovana-s-sysel.png",
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/vyjmenovana-s-sysel.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-04",
+    "cast": "řada S",
+    "name": "vyjmenovana-s-sycet",
+    "alt": "Had syčí.",
+    "bytes": 40870,
+    "webp": "cj/vyjmenovana-s-sycet.webp",
+    "png": "cj/vyjmenovana-s-sycet.png",
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/vyjmenovana-s-sycet.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-04",
+    "cast": "řada S",
+    "name": "vyjmenovana-s-sypat",
+    "alt": "Ruce sypou zrní do krmítka.",
+    "bytes": 47614,
+    "webp": "cj/vyjmenovana-s-sypat.webp",
+    "png": "cj/vyjmenovana-s-sypat.png",
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/vyjmenovana-s-sypat.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-04",
+    "cast": "řada V",
+    "name": "vyjmenovana-v-vysoky",
+    "alt": "Vysoká rozhledna nad stromy.",
+    "bytes": 28268,
+    "webp": "cj/vyjmenovana-v-vysoky.webp",
+    "png": "cj/vyjmenovana-v-vysoky.png",
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/vyjmenovana-v-vysoky.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-04",
+    "cast": "řada V",
+    "name": "vyjmenovana-v-vyskat",
+    "alt": "Dítě radostně výská.",
+    "bytes": 22126,
+    "webp": "cj/vyjmenovana-v-vyskat.webp",
+    "png": "cj/vyjmenovana-v-vyskat.png",
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/vyjmenovana-v-vyskat.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-04",
+    "cast": "řada V",
+    "name": "vyjmenovana-v-zvykat",
+    "alt": "Pes si zvyká na nový domov.",
+    "bytes": 46698,
+    "webp": "cj/vyjmenovana-v-zvykat.webp",
+    "png": "cj/vyjmenovana-v-zvykat.png",
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/vyjmenovana-v-zvykat.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-04",
+    "cast": "řada V",
+    "name": "vyjmenovana-v-zvykat-gumu",
+    "alt": "Žvýkací guma.",
+    "bytes": 12880,
+    "webp": "cj/vyjmenovana-v-zvykat-gumu.webp",
+    "png": "cj/vyjmenovana-v-zvykat-gumu.png",
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/vyjmenovana-v-zvykat-gumu.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-04",
+    "cast": "řada V",
+    "name": "vyjmenovana-v-vydra",
+    "alt": "Vydra říční u vody.",
+    "bytes": 51814,
+    "webp": "cj/vyjmenovana-v-vydra.webp",
+    "png": "cj/vyjmenovana-v-vydra.png",
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/vyjmenovana-v-vydra.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-04",
+    "cast": "řada V",
+    "name": "vyjmenovana-v-vyzle",
+    "alt": "Mladé štíhlé vyžle.",
+    "bytes": 21704,
+    "webp": "cj/vyjmenovana-v-vyzle.webp",
+    "png": "cj/vyjmenovana-v-vyzle.png",
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/vyjmenovana-v-vyzle.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-04",
+    "cast": "řada V",
+    "name": "vyjmenovana-v-povyk",
+    "alt": "Děti dělají povyk.",
+    "bytes": 49476,
+    "webp": "cj/vyjmenovana-v-povyk.webp",
+    "png": "cj/vyjmenovana-v-povyk.png",
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/vyjmenovana-v-povyk.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-04",
+    "cast": "řada V",
+    "name": "vyjmenovana-v-vyhen",
+    "alt": "Rozžhavená kovářská výheň.",
+    "bytes": 46578,
+    "webp": "cj/vyjmenovana-v-vyhen.webp",
+    "png": "cj/vyjmenovana-v-vyhen.png",
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/vyjmenovana-v-vyhen.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-04",
+    "cast": "řada Z",
+    "name": "vyjmenovana-z-brzy",
+    "alt": "Budík při časném východu slunce – brzy ráno.",
+    "bytes": 41330,
+    "webp": "cj/vyjmenovana-z-brzy.webp",
+    "png": "cj/vyjmenovana-z-brzy.png",
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/vyjmenovana-z-brzy.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-04",
+    "cast": "řada Z",
+    "name": "vyjmenovana-z-jazyk",
+    "alt": "Jazyk v otevřených ústech.",
+    "bytes": 17122,
+    "webp": "cj/vyjmenovana-z-jazyk.webp",
+    "png": "cj/vyjmenovana-z-jazyk.png",
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/vyjmenovana-z-jazyk.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-04",
+    "cast": "řada Z",
+    "name": "vyjmenovana-z-nazyvat",
+    "alt": "Děti pojmenovávají štěně.",
+    "bytes": 39824,
+    "webp": "cj/vyjmenovana-z-nazyvat.webp",
+    "png": "cj/vyjmenovana-z-nazyvat.png",
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/vyjmenovana-z-nazyvat.prompt.txt"
+    }
+  },
+  {
+    "id": "IMG-cj-04",
+    "cast": "řada Z",
+    "name": "vyjmenovana-z-ruzyne",
+    "alt": "Letiště v pražské Ruzyni.",
+    "bytes": 42944,
+    "webp": "cj/vyjmenovana-z-ruzyne.webp",
+    "png": "cj/vyjmenovana-z-ruzyne.png",
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-23",
+      "zadani": "cj/vyjmenovana-z-ruzyne.prompt.txt"
+    }
+  }
+]

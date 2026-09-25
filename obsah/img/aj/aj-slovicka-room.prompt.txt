@@ -1,0 +1,7 @@
+IMG-aj-02 · room
+
+Use case: scientific-educational. Asset type: square home vocabulary card for children. Gentle watercolor and gouache with delicate fine-ink contours, warm ivory paper background, muted sage, jade, ochre and earthy palette, soft upper-left lighting, consistent refined Czech schoolbook style. One central subject only, centered with generous even 12 percent margins. No people. No text, letters, labels, arrows, numbers, border, frame, logo, or watermark. One simple cozy room shown as a clean cutaway corner: two walls and floor, containing only a small rug and ceiling lamp to identify an interior space; no other furniture, unmistakable.
+
+Nástroj: OpenAI image_gen
+Datum: 2026-09-25
+Výstup: aj-slovicka-room.png, aj-slovicka-room.webp

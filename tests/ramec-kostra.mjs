@@ -44,7 +44,7 @@ try {
   const katalog = await evaluate(`({ polozky: KATALOG_SEKCE.flatMap(s => s.polozky).map(p => ({ soubor: p.soubor, cil: p.cil, rodina: p.rodina || '' })),
     rodiny: KATALOG_RODINY.map(r => ({ id: r.id, hlavni: r.hlavni, cesta: r.cesta })) })`);
   const soubory = [...new Set(katalog.polozky.map(p => p.soubor))].sort();
-  assert.equal(soubory.length, 255);
+  assert.equal(soubory.length, 256);
   for (const p of katalog.polozky) assert.ok(p.cil && p.cil.length > 15, 'cíl ' + p.soubor);
   const clenove = katalog.rodiny.flatMap(r => r.cesta);
   assert.equal(clenove.length, new Set(clenove).size, 'stránka nejvýš v jedné rodině');

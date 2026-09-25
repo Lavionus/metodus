@@ -32,6 +32,9 @@ const Slovicka = (function () {
     const $ = id => document.getElementById(id);
     const esc = t => String(t).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
     const plneHtml = o.plneHtml || (s => esc(o.plne(s)));
+    const motivHtml = (s, trida = '') => s.obrazek
+      ? `<img${trida ? ` class="${trida}"` : ''} src="${esc(s.obrazek)}" alt="${esc(s.cz)}" loading="lazy">`
+      : esc(s.emoji);
     let rezim = 'prehled', kat = o.vychoziKat || '', zvuk = true, posledni = null;
 
     const vKategorii = () => o.slova.filter(s => !kat || s.kat === kat);
@@ -60,7 +63,7 @@ const Slovicka = (function () {
       const radky = vKategorii().filter(s => !f || [o.plne(s), s.cz].some(x => x.toLowerCase().includes(f)));
       const sloupcu = 3 + (sVyslovnosti ? 1 : 0);
       $('prehledTabulka').querySelector('tbody').innerHTML = radky.map((s, i) =>
-        `<tr><td class="emoji-bunka">${s.emoji}</td>`
+        `<tr><td class="emoji-bunka">${motivHtml(s)}</td>`
         + `<td class="cizi"><button type="button" class="cist" data-i="${o.slova.indexOf(s)}" title="Přečíst nahlas">${plneHtml(s)}</button></td>`
         + (sVyslovnosti ? `<td class="vyslov">[${esc(s.vyslov || '')}]</td>` : '')
         + `<td class="cesky">${esc(s.cz)}</td></tr>`).join('')
@@ -77,7 +80,7 @@ const Slovicka = (function () {
     function ukazKartu() {
       const s = karty[idx];
       otoceno = false;
-      $('kEmoji').textContent = s.emoji;
+      $('kEmoji').innerHTML = motivHtml(s);
       $('kSlovo').innerHTML = plneHtml(s) + (s.vyslov ? `<span class="vyslov">[${esc(s.vyslov)}]</span>` : '');
       $('kCesky').textContent = s.cz;
       $('kCesky').classList.add('skryto');
@@ -116,7 +119,7 @@ const Slovicka = (function () {
     }
     // po uzavření otázky celé slovo s překladem (a u členu tip), přečíst nahlas
     const doplnek = (s, tip) => karta => {
-      karta.insertAdjacentHTML('beforeend', `<div class="slovo-doplnek"><span class="emoji-maly">${s.emoji}</span> `
+      karta.insertAdjacentHTML('beforeend', `<div class="slovo-doplnek"><span class="emoji-maly">${motivHtml(s)}</span> `
         + `<b>${plneHtml(s)}</b> = ${esc(s.cz)}${tip ? `<div class="tip">💡 ${tip}</div>` : ''}</div>`);
       rekni(o.plne(s));
     };
@@ -127,7 +130,7 @@ const Slovicka = (function () {
         if (pool.length < 2) pool = o.slova.filter(o.proClen || (() => true));
         const s = vyberSlovo(pool);
         return {
-          zadani: `<span class="obrazek-slova">${s.emoji}</span><span class="druh">Který člen?</span>`
+          zadani: `<span class="obrazek-slova">${motivHtml(s)}</span><span class="druh">Který člen?</span>`
             + `<span class="slovo-zadani">___ ${esc(s.slovo)}</span><span class="cesky-zadani">${esc(s.cz)}</span>`,
           odpoved: s.clen,
           moznosti: [...o.cleny],
@@ -149,7 +152,7 @@ const Slovicka = (function () {
         };
       }
       return {
-        zadani: `<span class="obrazek-slova">${s.emoji}</span><span class="druh">Jak se to řekne ${o.jazyk}?</span>`
+        zadani: `<span class="obrazek-slova">${motivHtml(s)}</span><span class="druh">Jak se to řekne ${o.jazyk}?</span>`
           + `<span class="cesky-zadani">${esc(s.cz)}</span>`,
         odpoved: o.plne(s),
         moznosti: moznosti(pool, s, o.plne),

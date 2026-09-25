@@ -1,0 +1,9 @@
+Use case: scientific-educational
+Asset type: IMG-cj-07 standalone meaning card
+Subject: olistěná koruna vzrostlého listnatého stromu.
+Style: warm watercolor and gouache educational schoolbook illustration with delicate ink, uniform warm ivory background, muted sage, jade, ochre and soft brick palette.
+Composition: one centered compact subject, square 1:1, generous 12 percent margins, legible at small card size.
+Constraints: no readable text, letters, digits, labels, arrows, logo, watermark, border or collage.
+Alt: Koruna listnatého stromu.
+Generator: built-in image_gen
+Datum: 2026-09-24

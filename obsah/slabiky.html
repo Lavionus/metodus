@@ -28,10 +28,11 @@
     .moznosti.obrazky img { display: block; width: clamp(88px, 24vw, 150px); height: auto; border-radius: 10px; background: #fbf7ec; }
     .slovo-cteni { font-size: clamp(2.2rem, 9vw, 3.6rem); font-weight: 700; letter-spacing: 0.05em; text-align: center; margin: 8px 0 14px; }
     .slovo-cteni .zvyraz { color: var(--accent); }
-    .slovo-obrazek {
+    .slovo-obrazek, .veta-obrazek {
       width: min(190px, 48vw); aspect-ratio: 1; object-fit: cover; display: block;
       margin: 0 auto 14px; border-radius: 16px; box-shadow: var(--shadow); background: #faf6ec;
     }
+    .veta-obrazek { width: min(280px, 68vw); }
     label.prep { display: inline-flex; align-items: center; gap: 6px; color: var(--text-muted);
       font-size: 0.88rem; cursor: pointer; }
     /* Řada slabik s toutéž souhláskou – dítě vidí, kde se právě nachází v řadě
@@ -93,6 +94,19 @@ const OBRAZKY_SLOV = {
   pes: ['pes', 'Pes.'], dům: ['dum', 'Rodinný dům.'], sýr: ['syr', 'Klínek sýra.'],
   ryba: ['ryba', 'Ryba.'], strom: ['strom', 'Listnatý strom.'], chléb: ['chleb', 'Bochník chleba.'],
   kniha: ['kniha', 'Zavřená kniha.'], mléko: ['mleko', 'Sklenice mléka.'],
+};
+
+const OBRAZKY_VET = {
+  'Máma má mísu.': ['slabiky-veta-mama-misa', 'Máma drží mísu v kuchyni.'],
+  'Ema má maso.': ['slabiky-veta-ema-maso', 'Ema drží talíř s masem.'],
+  'Táta je doma.': ['slabiky-veta-tata-doma', 'Táta odpočívá doma v křesle.'],
+  'Pes leží u boudy.': ['slabiky-veta-pes-bouda', 'Pes leží vedle své boudy.'],
+  'Sova sedí na dubu.': ['slabiky-veta-sova-dub', 'Sova sedí na větvi dubu.'],
+  'Jana nese jahody.': ['slabiky-veta-jana-jahody', 'Jana nese košík jahod.'],
+  'U lesa je louka.': ['slabiky-veta-les-louka', 'Rozkvetlá louka leží u okraje lesa.'],
+  'Kolo je u domu.': ['slabiky-veta-kolo-dum', 'Kolo stojí vedle domu.'],
+  'Míša pije kakao.': ['slabiky-veta-misa-kakao', 'Míša pije kakao z hrnku.'],
+  'Teta peče koláče.': ['slabiky-veta-teta-kolace', 'Teta vkládá koláče do trouby.'],
 };
 
 const DATA = {
@@ -227,10 +241,12 @@ function ukaz() {
   const textHtml = casti.map((c, i) => i % 2 ? '<span class="zvyraz">' + c + '</span>' : c)
     .join('<span class="delic">-</span>');
   const klicObrazku = puvodni.replace(/-/g, '').toLowerCase();
-  const obrazek = rezim === 'slova' ? OBRAZKY_SLOV[klicObrazku] : null;
-  $('text').innerHTML = obrazek
-    ? `<img class="slovo-obrazek" src="img/cj/cj1-pismena-${obrazek[0]}.webp" alt="${obrazek[1]}" width="768" height="768">${textHtml}`
-    : textHtml;
+  const obrazekSlova = rezim === 'slova' ? OBRAZKY_SLOV[klicObrazku] : null;
+  const obrazekVety = rezim === 'vety' ? OBRAZKY_VET[puvodni] : null;
+  let obrazekHtml = '';
+  if (obrazekSlova) obrazekHtml = `<img class="slovo-obrazek" src="img/cj/cj1-pismena-${obrazekSlova[0]}.webp" alt="${obrazekSlova[1]}" width="768" height="768">`;
+  if (obrazekVety) obrazekHtml = `<img class="veta-obrazek" src="img/cj/${obrazekVety[0]}.webp" alt="${obrazekVety[1]}" width="768" height="768">`;
+  $('text').innerHTML = obrazekHtml + textHtml;
   const delka = t.replace(/-/g, '').length;
   $('text').style.fontSize = rezim === 'vety' ? 'clamp(1.6rem, 5vw, 3rem)' : delka > 8 ? 'clamp(2.2rem, 9vw, 4.5rem)' : 'clamp(3rem, 14vw, 7rem)';
   $('pocitadlo').textContent = (idx + 1) + ' / ' + poradi.length;

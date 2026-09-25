@@ -1,0 +1,6 @@
+Sada: IMG-cj-09 · věta „Máma má mísu.“
+Scéna: Maminka drží prázdnou mísu v domácí kuchyni; jeden jasný děj, čtvercový formát.
+Styl: teplý akvarel a kvaš, jemná inkoustová linka, slonovinové pozadí, tlumená šalvějová, jadeitová a okrová.
+Omezení: bez písmen, slov, popisků, log, vodoznaku, rámečku a bublin.
+Alt: Máma drží mísu v kuchyni.
+Generátor: OpenAI image_gen · 2026-09-24

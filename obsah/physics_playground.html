@@ -3,1033 +3,449 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🔬 Fyzikální hřiště pro děti</title>
+<title>🔬 Fyzikální hřiště – síla, pohyb a energie</title>
+<meta name="description" content="Interaktivní výklad mechaniky pro 7. a 8. ročník: síla a pohyb, tření, tíha a nakloněná rovina, polohová a pohybová energie, kyvadlo, srážky a hybnost.">
 <link rel="stylesheet" href="../common.css">
+<link rel="stylesheet" href="physics_playground.css?v=1">
 <script src="../theme.js"></script>
 <script src="../podpis.js" defer></script>
 <script src="../kostra.js" defer></script>
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:var(--font);background:var(--bg-deep);color:var(--text);
-  display:flex;flex-direction:column;height:100dvh}
-
-.horni{display:flex;gap:10px;align-items:center;padding:10px 16px;background:var(--bg-panel);
-  border-bottom:1px solid var(--border);flex-wrap:wrap}
-.horni h1{font-size:1.05rem;font-weight:600;margin-right:auto}
-.tabs{display:flex;gap:6px;flex-wrap:wrap}
-.tabs button{background:var(--bg-control);border:1px solid var(--border-strong);color:var(--text-muted);
-  border-radius:6px;padding:7px 14px;font-size:.84rem;cursor:pointer;font-family:inherit}
-.tabs button.active{background:var(--accent);color: var(--na-akcentu, #fff);border-color:var(--accent);font-weight:600}
-
-.ovladani{display:flex;gap:14px;align-items:center;padding:10px 16px;background:var(--bg-elevated);
-  border-bottom:1px solid var(--border);flex-wrap:wrap}
-.ovladani label{font-size:.78rem;color:var(--text-muted);display:flex;align-items:center;gap:7px}
-.ovladani label b{color:var(--text);font-variant-numeric:tabular-nums;min-width:3.6em;display:inline-block}
-input[type=range]{width:110px;accent-color:var(--accent)}
-.ovladani button{background:var(--bg-control);border:1px solid var(--border-strong);color:var(--text);
-  border-radius:6px;padding:7px 12px;font-size:.82rem;cursor:pointer;font-family:inherit}
-.ovladani button:hover{border-color:var(--accent)}
-.ovladani button.zap{background:var(--accent);border-color:var(--accent);color: var(--na-akcentu, #fff);font-weight:600}
-.ovladani button.hlavni{background:var(--ok);border-color:var(--ok);color: var(--na-akcentu, #fff);font-weight:600}
-.oddel{width:1px;align-self:stretch;background:var(--border)}
-.prepinac{display:flex;gap:4px}
-/* Při porovnávání dvou kyvadel drží délky i hmotnosti ve sloupcích pod sebou,
-   ať se dají hodnoty srovnat pohledem. */
-.kyvadla{display:grid;grid-template-columns:auto auto;gap:6px 16px;align-items:center}
-.kyvadla.jedno .radek-b{display:none}
-.kyvadla.jedno .znacka{display:none}
-.kyvadla .znacka{font-size:.72rem;font-weight:700;width:21px;height:21px;border-radius:6px;
-  display:flex;align-items:center;justify-content:center;border:2px solid;background:transparent;flex:0 0 auto}
-.kyvadla .znacka.a{border-color:var(--accent);color:var(--accent)}
-.kyvadla .znacka.b{border-color:var(--warn);color:var(--warn)}
-@media(max-width:820px){
-  /* na telefon se dva sloupce posuvníků nevejdou – poskládáme je do jednoho
-     sloupce, ale pořád seřazené podle veličiny (obě délky, pak obě hmotnosti) */
-  .kyvadla{grid-template-columns:1fr}
-  .kyvadla .delka-a{order:1} .kyvadla .delka-b{order:2}
-  .kyvadla .hmota-a{order:3} .kyvadla .hmota-b{order:4}
-}
-.prepinac button{padding:6px 10px;font-size:.78rem}
-
-/* Panel má vlastní posuvník; kdyby řádek gridu rostl podle jeho obsahu,
-   roztáhl by se s ním i canvas a scéna by se kreslila mimo viditelnou plochu.
-   Proto min-height:0 na všech úrovních. */
-.scena{flex:1;display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:0;min-height:0}
-.platno-obal{position:relative;background:var(--bg);min-width:0;min-height:0}
-canvas{display:block;width:100%;height:100%}
-.panel{background:var(--bg-panel);border-left:1px solid var(--border);padding:14px 16px;min-width:0;
-  min-height:0;overflow-y:auto;display:flex;flex-direction:column;gap:14px}
-@media(max-width:820px){
-  /* minmax(0,…) i min-height:0 jsou nutné: aspect-ratio se jinak spolu
-     s min-height propíše do minimální ŠÍŘKY sloupce a rozbije to layout */
-  body{height:auto;min-height:100dvh}
-  .scena{grid-template-columns:minmax(0,1fr)}
-  .panel{border-left:none;border-top:1px solid var(--border);overflow:visible}
-  .platno-obal{aspect-ratio:4/3}
-}
-
-.blok h2{font-size:.82rem;color:var(--text-faint);text-transform:uppercase;letter-spacing:.05em;
-  margin-bottom:8px;font-weight:600}
-.mereni{display:flex;flex-direction:column;gap:5px}
-.mereni .radek{display:flex;justify-content:space-between;align-items:baseline;font-size:.86rem;
-  padding:4px 8px;background:var(--bg-elevated);border-radius:6px}
-.mereni .radek span{color:var(--text-muted)}
-.mereni .radek b{font-variant-numeric:tabular-nums}
-.mereni .radek.duraz{border-left:3px solid var(--accent)}
-
-.energie{display:flex;flex-direction:column;gap:7px}
-.epruh{font-size:.78rem}
-.epruh .popis{display:flex;justify-content:space-between;margin-bottom:3px;color:var(--text-muted)}
-.epruh .popis b{color:var(--text);font-variant-numeric:tabular-nums}
-.epruh .drazka{height:12px;background:var(--bg-elevated);border-radius:6px;overflow:hidden}
-.epruh .drazka i{display:block;height:100%;border-radius:6px;transition:width .08s linear}
-.epruh.ep .drazka i{background:#7e57c2}
-.epruh.ek .drazka i{background:#ef6c00}
-.epruh.ec .drazka i{background:var(--ok)}
-.epruh.ztrata .drazka i{background:var(--danger)}
-
-.vyklad{font-size:.84rem;line-height:1.6;color:var(--text-muted)}
-.vyklad b{color:var(--text)}
-.otazka{background:var(--accent-soft);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;
-  padding:10px 12px;font-size:.84rem;line-height:1.55}
-.otazka .nadpis{font-weight:600;color:var(--text);margin-bottom:4px}
-/* Výška se dopočítá v JS z nejdelší možné hlášky (--vyska-hlasky), aby text
-   pod boxem neposkakoval pokaždé, když se změní situace. */
-.hlaska{padding:9px 12px;border-radius:8px;font-size:.84rem;line-height:1.5;font-weight:600;
-  min-height:var(--vyska-hlasky,auto);display:flex;align-items:center}
-/* barvu nese rámeček, text musí zůstat čitelný i na tónovaném pozadí */
-.hlaska.klid{background:rgba(224,166,63,.15);border:1px solid var(--warn);color:var(--text)}
-.hlaska.jede{background:var(--accent-soft);border:1px solid var(--accent);color:var(--text)}
-.legenda{display:flex;flex-wrap:wrap;gap:8px;font-size:.75rem;color:var(--text-muted)}
-.legenda span{display:flex;align-items:center;gap:5px}
-.legenda i{width:14px;height:3px;border-radius:2px;display:inline-block}
-</style>
+<script src="../uloha.js"></script>
 </head>
 <body>
-<div class="horni">
-  <h1>🔬 Fyzikální hřiště</h1>
-  <div class="tabs" id="tabs">
-    <button data-sim="kyvadlo" class="active">🪀 Kyvadlo</button>
-    <button data-sim="rovina">📐 Nakloněná rovina</button>
-    <button data-sim="srazky">💥 Srážky</button>
+<div class="stranka">
+
+<aside class="osnova" aria-label="Kapitoly lekce">
+  <h2>Kapitoly</h2>
+  <ol id="osnova"></ol>
+  <div class="pokrok">
+    <span id="pokrokText">Splněno 0 úkolů</span>
+    <div class="pokrok-pruh" aria-hidden="true"><span id="pokrokPruh"></span></div>
+    <button type="button" class="znovu" id="zacitZnovu">↺ Začít lekci znovu</button>
   </div>
-</div>
+</aside>
 
-<div class="ovladani" id="ovladani"></div>
+<main class="lekce">
+  <nav class="cipy" id="cipy" aria-label="Kapitoly lekce"></nav>
 
-<div class="ovladani">
-  <div class="prepinac">
-    <button id="btnPauza" title="Mezerník">⏸️ Pauza</button>
-    <button id="btnKrok" title="Posun o kousek dopředu">⏭️ Krok</button>
+  <header class="uvod">
+    <p class="nadtitul">Interaktivní výklad</p>
+    <h1>Fyzikální hřiště</h1>
+    <p class="podtitul">Proč bedna po ledě klouže dál, kde bere kulička na rampě rychlost, proč kyvadlové hodiny jdou pořád stejně a co se stane, když do sebe narazí dva vozíky. Každý jev si pustíš na živém modelu a změříš.</p>
+  </header>
+
+  <ul class="jak-pracovat" aria-label="Jak s lekcí pracovat">
+    <li><svg viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="var(--accent)" stroke-width="2.5"/><circle cx="11" cy="11" r="2.5" fill="var(--accent)"/></svg> Za modré kroužky se dá táhnout (i šipkami na klávesnici).</li>
+    <li>▶️ Modely se pouštějí tlačítkem, 🐌 zpomalí je.</li>
+    <li>🤔 Nejdřív předpověz, pak ověř na modelu.</li>
+    <li>🔬 Úkoly si samy poznají, že jsi je splnil(a).</li>
+  </ul>
+
+  <div class="barvy-sil" aria-label="Barvy v obrázcích">
+    <span class="znacka z-tiha">tíha</span><span class="znacka z-slozka">složky tíhy</span><span class="znacka z-podlozka">síla podložky</span><span class="znacka z-treni">tření</span><span class="znacka z-tah">tah</span><span class="znacka z-rychlost">rychlost</span><span class="znacka z-ep">polohová energie</span><span class="znacka z-ek">pohybová energie</span><span class="znacka z-teplo">teplo</span>
   </div>
-  <label>Tempo
-    <span class="prepinac" id="tempo">
-      <button data-t="0.15">🐌 ¼</button>
-      <button data-t="0.4">🚶 ½</button>
-      <button data-t="1" class="zap">🏃 1×</button>
-    </span>
-  </label>
-  <div class="oddel"></div>
-  <button id="btnSily" class="zap">➡️ Síly</button>
-  <button id="btnStopa" class="zap">〰️ Stopa</button>
-  <button id="btnStitky" class="zap">🏷️ Popisky</button>
-</div>
 
-<div class="scena">
-  <div class="platno-obal"><canvas id="c"></canvas></div>
-  <aside class="panel">
-    <div class="blok"><h2>Co se právě děje</h2><div id="hlaska"></div><div class="mereni" id="mereni"></div></div>
-    <div class="blok"><h2>Energie</h2><div class="energie" id="energie"></div></div>
-    <div class="blok"><h2>Legenda</h2><div class="legenda" id="legenda"></div></div>
-    <div class="blok"><h2>Jak to funguje</h2><div class="vyklad" id="vyklad"></div></div>
-    <div class="otazka" id="otazka"></div>
-  </aside>
-</div>
+  <nav class="mapa" id="mapa" aria-label="Mapa lekce"></nav>
 
-<script>
-const $ = id => document.getElementById(id);
-const canvas = $('c'), ctx = canvas.getContext('2d');
-const G = 9.81;
+  <!-- ============================================================ 1 -->
+  <section class="kapitola" id="sila" data-faze="vyuka" data-nazev="Síla a pohyb" data-popis="Šipka síly, tření, setrvačnost">
+    <header class="kap-hlava"><span class="kap-cislo">1</span><div><p class="kap-otazka">Proč bedna po ledě klouže dál, i když už ji nikdo netáhne?</p><h2>Síla a pohyb</h2></div></header>
+    <div class="text">
+      <p>Když něco táhneš, tlačíš nebo zvedáš, působíš na to <span class="term">silou</span>. Síla může těleso rozpohybovat, zastavit, změnit směr jeho pohybu nebo ho zdeformovat. Značíme ji <i>F</i> a měříme v <strong>newtonech</strong> (N), například siloměrem. Pro představu: na dlaň, na které leží tabulka čokolády (100 g), působí síla asi 1 N.</p>
+      <p>Sílu kreslíme jako <strong>šipku</strong>. Šipka začíná v <strong>působišti</strong> (tam, kde síla na těleso působí), míří ve <strong>směru</strong> síly a její délka odpovídá <strong>velikosti</strong> síly. Na těleso obvykle působí sil víc najednou. Jejich společný účinek nahradí jediná <span class="term">výsledná síla</span>: síly stejného směru se sčítají, síly opačného směru se odečítají.</p>
+      <p>Když bednu smýkáš po podlaze, brzdí ji <span class="term">třecí síla</span>. Tření vzniká tím, že se nerovnosti obou povrchů zachytávají. Působí vždy <strong>proti pohybu</strong> a je tím větší, čím víc těleso tlačí na podložku a čím drsnější povrchy jsou.</p>
+    </div>
+    <div class="vzorec" aria-label="Třecí síla se rovná součinitel tření krát tlaková síla"><span><i>F</i><sub>t</sub> = <i>f</i> · <i>F</i><sub>n</sub></span><span class="vzorec-popis"><i>f</i> je součinitel smykového tření (led asi 0,03, dřevo po dřevě 0,3, guma po betonu až 0,8), <i>F</i><sub>n</sub> síla, kterou těleso tlačí kolmo na podložku</span></div>
 
-let sim = 'kyvadlo';
-let bezi = true, tempo = 1, krokuj = 0;
-let ukazSily = true, ukazStopu = true, ukazStitky = true;
-
-/* ---------- barvy podle tématu ----------
-   Kreslíme na canvas, takže se k tokenům z common.css musíme dostat ručně.
-   Přečteme je jednou a znovu při přepnutí tématu. */
-let B = {};
-function nactiBarvy() {
-  const s = getComputedStyle(document.documentElement);
-  const t = n => s.getPropertyValue(n).trim();
-  B = {
-    pozadi: t('--bg'), text: t('--text'), slabe: t('--text-faint'), tlumene: t('--text-muted'),
-    cara: t('--border-strong'), akcent: t('--accent'), ok: t('--ok'), varovani: t('--warn'),
-    chyba: t('--danger'),
-    teleso: '#e0a63f', teleso2: '#6aa6fd', tiha: '#ef5350', treni: '#8d6e63',
-    normala: '#26a69a', slozka: '#ab47bc', rychlost: '#42a5f5',
-  };
-}
-nactiBarvy();
-new MutationObserver(nactiBarvy).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
-
-function rozmer() {
-  const dpr = window.devicePixelRatio || 1;
-  const w = canvas.clientWidth, h = canvas.clientHeight;
-  if (!w || !h) return;
-  if (canvas.width === Math.round(w * dpr) && canvas.height === Math.round(h * dpr)) return;
-  canvas.width = Math.round(w * dpr);
-  canvas.height = Math.round(h * dpr);
-  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-}
-window.addEventListener('resize', rozmer);
-/* Plátno mění velikost i bez změny okna — když se zalomí lišta ovládání nebo
-   se přepne simulace. Samotná událost `resize` na to nestačí. */
-if (window.ResizeObserver) new ResizeObserver(rozmer).observe(document.querySelector('.platno-obal'));
-
-/* ---------- kreslicí pomůcky ---------- */
-const W = () => canvas.clientWidth, H = () => canvas.clientHeight;
-
-/* `odsad` posune popisek kolmo na šipku – na nakloněné rovině míří tři síly
-   stejným směrem a jejich popisky by se jinak slily. */
-function sipka(x, y, dx, dy, barva, popis, tloustka, odsad) {
-  const d = Math.hypot(dx, dy);
-  if (d < 4) return;                       // kratší šipka než hrot nedává smysl
-  const x2 = x + dx, y2 = y + dy;
-  const uhel = Math.atan2(dy, dx);
-  const hrot = Math.min(11, d * 0.32);
-  ctx.strokeStyle = barva; ctx.fillStyle = barva; ctx.lineWidth = tloustka || 3;
-  ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x2 - Math.cos(uhel) * hrot * 0.6, y2 - Math.sin(uhel) * hrot * 0.6); ctx.stroke();
-  ctx.beginPath();
-  ctx.moveTo(x2, y2);
-  ctx.lineTo(x2 - hrot * Math.cos(uhel - 0.42), y2 - hrot * Math.sin(uhel - 0.42));
-  ctx.lineTo(x2 - hrot * Math.cos(uhel + 0.42), y2 - hrot * Math.sin(uhel + 0.42));
-  ctx.closePath(); ctx.fill();
-  if (popis && ukazStitky) {
-    ctx.font = '600 12px system-ui, sans-serif';
-    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-    // u krátké šipky by popisek skončil na tělese – odsuneme ho na minimální odstup
-    const odstup = Math.max(d, 32) + 15;
-    const o = odsad || 0;
-    const lx = x + Math.cos(uhel) * odstup - Math.sin(uhel) * o;
-    const ly = y + Math.sin(uhel) * odstup + Math.cos(uhel) * o;
-    const s = ctx.measureText(popis).width;
-    ctx.fillStyle = B.pozadi; ctx.globalAlpha = .8;
-    ctx.fillRect(lx - s / 2 - 3, ly - 8, s + 6, 16);
-    ctx.globalAlpha = 1;
-    ctx.fillStyle = barva; ctx.fillText(popis, lx, ly);
-  }
-}
-
-function stitek(x, y, text, barva) {
-  if (!ukazStitky) return;
-  ctx.font = '600 12px system-ui, sans-serif';
-  ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-  const s = ctx.measureText(text).width;
-  ctx.fillStyle = B.pozadi; ctx.globalAlpha = .85;
-  ctx.fillRect(x - s / 2 - 5, y - 9, s + 10, 18);
-  ctx.globalAlpha = 1;
-  ctx.strokeStyle = barva; ctx.lineWidth = 1;
-  ctx.strokeRect(x - s / 2 - 5, y - 9, s + 10, 18);
-  ctx.fillStyle = barva; ctx.fillText(text, x, y);
-}
-
-function cistiPlochu() { ctx.fillStyle = B.pozadi; ctx.fillRect(0, 0, W(), H()); }
-
-/* ---------- panel ---------- */
-// česká desetinná čárka a znaménko minus ve výpisu (hodnoty se skládají přes toFixed)
-const cesky = t => String(t).replace(/(\d)\.(\d)/g, '$1,$2').replace(/-(?=\d)/g, '−');
-function vypisMereni(radky) {
-  $('mereni').innerHTML = radky.map(r =>
-    `<div class="radek${r.duraz ? ' duraz' : ''}"><span>${r.popis}</span><b>${cesky(r.hodnota)}</b></div>`).join('');
-}
-function vypisEnergie(polozky, max) {
-  $('energie').innerHTML = polozky.map(p =>
-    `<div class="epruh ${p.trida}"><div class="popis"><span>${p.popis}</span><b>${cesky(p.hodnota.toFixed(2))} J</b></div>` +
-    `<div class="drazka"><i style="width:${max > 0 ? Math.min(100, p.hodnota / max * 100) : 0}%"></i></div></div>`).join('');
-}
-/* Všechny hlášky, které se můžou objevit – v nejdelší podobě, jakou dovolí
-   rozsahy posuvníků. Slouží jen k změření potřebné výšky boxu. */
-const HLASKY_PRO_MERENI = [
-  'Nahoře je energie <b>schovaná ve výšce</b> (fialová). Dole se celá promění na <b>pohyb</b> (oranžová).',
-  'Právě teď je závaží nejrychlejší — všechna energie je v pohybu.',
-  'Kyvadlo je nachystané v počáteční poloze. Nastav si délku a hmotnost a pak stiskni <b>▶️ Pustit</b>.',
-  'Obě kyvadla jsou stejná — kývají naprosto souhlasně. Změň u <b>B</b> jednu hodnotu a sleduj rozdíl.',
-  'Sklon 60° <b>nestačí</b> — tření (988 N) je silnější než tah dolů (888 N). Přidej sklon nad <b>42°</b>.',
-  'Těleso dojelo dolů. Čím větší sklon, tím rychleji.',
-  'Tah dolů (888 N) <b>přemohl</b> tření (988 N) — těleso zrychluje.',
-  'Sklon už stačí (přes 42°). Stiskni <b>Pustit</b>.',
-  'Sleduj čísla vlevo. <b>Hybnost</b> zůstane po srážce stejná — vždycky.',
-  'Dokonale <b>pružná</b> srážka: hybnost i pohybová energie zůstaly stejné.',
-  'Dokonale <b>nepružná</b> srážka: koule pokračují společně a část energie se proměnila v teplo. Hybnost se ale zachovala!',
-  'Částečně pružná srážka: hybnost se zachovala, kus energie se ztratil.',
-];
-
-let merenaSirka = 0;
-/* Box mění text podle situace a s ním měnil i výšku, což posouvalo celý zbytek
-   panelu. Změříme proto nejvyšší možnou hlášku a výšku zafixujeme na ni.
-   Bereme maximum přes všechny simulace, aby to neposkočilo ani při přepnutí. */
-function ustalVyskuHlasky() {
-  const sirka = $('hlaska').clientWidth;
-  if (!sirka || sirka === merenaSirka) return;   // bez změny šířky není co přepočítávat
-  merenaSirka = sirka;
-  const vzor = document.createElement('div');
-  vzor.className = 'hlaska jede';
-  vzor.style.cssText = 'position:absolute;left:-9999px;top:0;visibility:hidden;min-height:0;width:' + sirka + 'px';
-  document.body.appendChild(vzor);
-  let max = 0;
-  for (const t of HLASKY_PRO_MERENI) {
-    vzor.innerHTML = '<span>' + t + '</span>';
-    // offsetHeight vrací celé pixely a nejdelší hlášku by zaokrouhlil dolů,
-    // takže by o půl pixelu přetekla; rect.height je zlomkový
-    max = Math.max(max, vzor.getBoundingClientRect().height);
-  }
-  vzor.remove();
-  document.documentElement.style.setProperty('--vyska-hlasky', Math.ceil(max) + 'px');
-}
-
-function hlaska(text, trida) {
-  $('hlaska').innerHTML = text ? `<div class="hlaska ${trida}"><span>${text}</span></div>` : '';
-}
-function legenda(polozky) {
-  $('legenda').innerHTML = polozky.map(p => `<span><i style="background:${p.barva}"></i>${p.popis}</span>`).join('');
-}
-
-/* =====================================================================
-   KYVADLO
-   Klíčová myšlenka: perioda závisí na délce, ne na hmotnosti.
-   Proto umí porovnat dvě kyvadla vedle sebe.
-   ===================================================================== */
-const kyvadlo = {
-  a: { L: 1.2, m: 1, uhel: Math.PI / 3, omega: 0, stopa: [], tPosl: null, perioda: null, prosloDolu: 0 },
-  b: { L: 0.6, m: 3, uhel: Math.PI / 3, omega: 0, stopa: [], tPosl: null, perioda: null, prosloDolu: 0 },
-  dve: false, tlumeni: 0.08, cas: 0, pusteno: false,
-
-  reset() {
-    const u = Number($('kUhel').value) * Math.PI / 180;
-    [this.a, this.b].forEach(k => {
-      k.uhel = u; k.omega = 0; k.stopa = []; k.tPosl = null; k.perioda = null; k.prosloDolu = 0;
-    });
-    this.cas = 0;
-    // Kyvadlo se po přípravě nerozjíždí samo – ať se dá v klidu nastavit
-    // délka i hmotnost, aniž by to pokaždé odstartovalo nový pokus.
-    this.pusteno = false;
-  },
-  krok(dt) {
-    if (!this.pusteno) return;
-    this.cas += dt;
-    const zpracuj = k => {
-      const predtim = k.uhel;
-      const alfa = -(G / k.L) * Math.sin(k.uhel) - this.tlumeni * k.omega;
-      k.omega += alfa * dt;
-      k.uhel += k.omega * dt;
-      // periodu měříme z průchodů nejnižším bodem – dva průchody = jeden kmit
-      if (predtim < 0 !== k.uhel < 0) {
-        k.prosloDolu++;
-        if (k.tPosl !== null && k.prosloDolu % 2 === 1) k.perioda = this.cas - k.tPosl;
-        if (k.prosloDolu % 2 === 1) k.tPosl = this.cas;
-      }
-    };
-    zpracuj(this.a);
-    if (this.dve) zpracuj(this.b);
-  },
-  energie(k) {
-    const h = k.L * (1 - Math.cos(k.uhel));      // výška nad nejnižším bodem
-    const v = Math.abs(k.omega) * k.L;
-    return { ep: k.m * G * h, ek: 0.5 * k.m * v * v, v, h };
-  },
-  kresli() {
-    cistiPlochu();
-    const w = W(), h = H();
-    // Měřítko počítáme z delšího z obou kyvadel, aby se vešla obě
-    // a jejich délky se daly poctivě porovnat.
-    const maxL = this.dve ? Math.max(this.a.L, this.b.L) : this.a.L;
-    const mer = Math.max(28, Math.min((h - 190) / maxL, w * (this.dve ? 0.19 : 0.30)));
-    // závěs posadíme tak, aby kyvadlo i šipka tíhy pod ním vyšly na střed plátna
-    const py = Math.max(46, (h - maxL * mer - 96) / 2);
-    const kresliJedno = (k, cx, barva, jmeno) => {
-      const dl = k.L * mer;
-      const bx = cx + dl * Math.sin(k.uhel), by = py + dl * Math.cos(k.uhel);
-      const polomer = 10 + Math.cbrt(k.m) * 7;
-
-      // stopa
-      if (ukazStopu) {
-        k.stopa.push([bx, by]);
-        if (k.stopa.length > 140) k.stopa.shift();
-        ctx.lineWidth = 2;
-        for (let i = 1; i < k.stopa.length; i++) {
-          ctx.globalAlpha = i / k.stopa.length * 0.5;
-          ctx.strokeStyle = barva;
-          ctx.beginPath(); ctx.moveTo(k.stopa[i - 1][0], k.stopa[i - 1][1]); ctx.lineTo(k.stopa[i][0], k.stopa[i][1]); ctx.stroke();
-        }
-        ctx.globalAlpha = 1;
-      }
-
-      // svislice a oblouk úhlu
-      ctx.strokeStyle = B.slabe; ctx.lineWidth = 1; ctx.setLineDash([4, 5]);
-      ctx.beginPath(); ctx.moveTo(cx, py); ctx.lineTo(cx, py + dl + 30); ctx.stroke();
-      ctx.setLineDash([]);
-      const rOblouk = Math.min(46, dl * 0.42);
-      ctx.strokeStyle = B.tlumene; ctx.lineWidth = 1.5;
-      ctx.beginPath();
-      ctx.arc(cx, py, rOblouk, Math.PI / 2, Math.PI / 2 + k.uhel, k.uhel < 0);
-      ctx.stroke();
-      // Popisek úhlu patří vedle oblouku. U krátkého závěsu by ale padl na závaží,
-      // proto ho v tom případě překlopíme na druhou stranu svislice, kde je volno.
-      const rPopisku = rOblouk + 18;
-      let uPopisku = k.uhel / 2;
-      const lx = cx + rPopisku * Math.sin(uPopisku), ly = py + rPopisku * Math.cos(uPopisku);
-      if (Math.hypot(lx - bx, ly - by) < polomer + 20) uPopisku = -k.uhel / 2;
-      stitek(cx + rPopisku * Math.sin(uPopisku), py + rPopisku * Math.cos(uPopisku),
-        Math.abs(k.uhel * 180 / Math.PI).toFixed(0) + '°', B.tlumene);
-
-      // závěs
-      ctx.strokeStyle = B.cara; ctx.lineWidth = 4;
-      ctx.beginPath(); ctx.moveTo(cx - 28, py); ctx.lineTo(cx + 28, py); ctx.stroke();
-      ctx.strokeStyle = barva; ctx.lineWidth = 3;
-      ctx.beginPath(); ctx.moveTo(cx, py); ctx.lineTo(bx, by); ctx.stroke();
-
-      // hladina nejnižšího bodu – ukazuje výšku, ze které závaží padá
-      const dnoY = py + dl;
-      ctx.strokeStyle = B.slabe; ctx.setLineDash([3, 6]); ctx.lineWidth = 1;
-      ctx.beginPath(); ctx.moveTo(cx - dl - 20, dnoY); ctx.lineTo(cx + dl + 20, dnoY); ctx.stroke();
-      ctx.setLineDash([]);
-
-      // závaží
-      ctx.fillStyle = B.teleso;
-      ctx.beginPath(); ctx.arc(bx, by, polomer, 0, Math.PI * 2); ctx.fill();
-      ctx.strokeStyle = barva; ctx.lineWidth = 2; ctx.stroke();
-
-      const e = this.energie(k);
-      if (ukazSily) {
-        // Tíha a její složka kolmo k závěsu — právě ta kyvadlo rozhoupává.
-        // Šipka roste s hmotností, ale je omezená, aby nepřerostla scénu.
-        const tiha = k.m * G;
-        const skala = Math.min(3.4, 88 / tiha);
-        sipka(bx, by, 0, tiha * skala, B.tiha, 'Fɡ');
-        const tang = -tiha * Math.sin(k.uhel);
-        sipka(bx, by, tang * skala * Math.cos(k.uhel), -tang * skala * Math.sin(k.uhel),
-          B.slozka, 'F∥', 2.5);
-        const smer = k.omega >= 0 ? 1 : -1;
-        sipka(bx, by, smer * e.v * 15 * Math.cos(k.uhel), -smer * e.v * 15 * Math.sin(k.uhel),
-          B.rychlost, 'v', 2.5);
-      }
-      // Popisek dáváme k závěsu, ne k závaží — u závaží se pere s lanem i se šipkami.
-      stitek(cx, py - 22, jmeno + ' · ' + k.m.toFixed(1).replace('.', ',') + ' kg · ' +
-        k.L.toFixed(2).replace('.', ',') + ' m', barva);
-      return e;
-    };
-
-    const ea = this.dve ? kresliJedno(this.a, w * 0.3, B.akcent, 'A') : kresliJedno(this.a, w / 2, B.akcent, 'Kyvadlo');
-    let eb = null;
-    if (this.dve) eb = kresliJedno(this.b, w * 0.72, B.varovani, 'B');
-
-    // panel
-    const teor = k => 2 * Math.PI * Math.sqrt(k.L / G);
-    const radky = [
-      { popis: 'Délka závěsu', hodnota: this.a.L.toFixed(2) + ' m' },
-      { popis: 'Hmotnost', hodnota: this.a.m.toFixed(1) + ' kg' },
-      { popis: 'Rychlost', hodnota: ea.v.toFixed(2) + ' m/s' },
-      { popis: 'Výška nad dnem', hodnota: ea.h.toFixed(3) + ' m' },
-      { popis: 'Perioda naměřená', hodnota: this.a.perioda ? this.a.perioda.toFixed(2) + ' s' : 'měřím…', duraz: true },
-      { popis: 'Perioda ze vzorce', hodnota: teor(this.a).toFixed(2) + ' s', duraz: true },
-    ];
-    if (this.dve) {
-      radky.push({ popis: '— kyvadlo B —', hodnota: '' });
-      radky.push({ popis: 'B: délka / hmotnost', hodnota: this.b.L.toFixed(2) + ' m / ' + this.b.m.toFixed(1) + ' kg' });
-      radky.push({ popis: 'B: perioda naměřená', hodnota: this.b.perioda ? this.b.perioda.toFixed(2) + ' s' : 'měřím…', duraz: true });
-    }
-    vypisMereni(radky);
-
-    const maxE = this.a.m * G * this.a.L * (1 - Math.cos(Number($('kUhel').value) * Math.PI / 180)) || 1;
-    vypisEnergie([
-      { popis: 'Polohová Ep (výška)', hodnota: ea.ep, trida: 'ep' },
-      { popis: 'Pohybová Ek (rychlost)', hodnota: ea.ek, trida: 'ek' },
-      { popis: 'Celkem', hodnota: ea.ep + ea.ek, trida: 'ec' },
-    ], maxE);
-
-    if (!this.pusteno)
-      hlaska('Kyvadlo je nachystané v počáteční poloze. Nastav si délku a hmotnost a pak stiskni <b>▶️ Pustit</b>.', 'klid');
-    else if (this.dve && this.a.L === this.b.L && this.a.m === this.b.m)
-      hlaska('Obě kyvadla jsou stejná — kývají naprosto souhlasně. Změň u <b>B</b> jednu hodnotu a sleduj rozdíl.', 'jede');
-    else if (Math.abs(this.a.uhel) > Math.abs(this.a.omega) * 0.05)
-      hlaska('Nahoře je energie <b>schovaná ve výšce</b> (fialová). Dole se celá promění na <b>pohyb</b> (oranžová).', 'jede');
-    else hlaska('Právě teď je závaží nejrychlejší — všechna energie je v pohybu.', 'jede');
-  }
-};
-
-/* =====================================================================
-   NAKLONĚNÁ ROVINA
-   Klíčová myšlenka: těleso se rozjede, až gravitační složka
-   překoná tření. Kritický úhel je arctan(μ).
-   ===================================================================== */
-const rovina = {
-  uhel: 30, mu: 0.2, m: 2, s: 0, v: 0, jede: false, delka: 4,
-
-  reset() { this.s = 0; this.v = 0; this.jede = false; },
-  kritickyUhel() { return Math.atan(this.mu) * 180 / Math.PI; },
-  udrziSe() { return this.uhel <= this.kritickyUhel() + 1e-9; },
-  krok(dt) {
-    if (!this.jede) return;
-    const th = this.uhel * Math.PI / 180;
-    const a = G * (Math.sin(th) - this.mu * Math.cos(th));
-    if (a <= 0 && this.v <= 0) { this.v = 0; return; }
-    this.v += a * dt;
-    this.s += this.v * dt;
-    if (this.s >= this.delka) { this.s = this.delka; this.jede = false; }
-  },
-  kresli() {
-    cistiPlochu();
-    const w = W(), h = H();
-    const th = this.uhel * Math.PI / 180;
-    const mer = Math.min((w - 230) / (this.delka * Math.cos(th)), (h - 175) / Math.max(0.4, this.delka * Math.sin(th)));
-    // rampu kreslíme o kousek delší než dráha, aby těleso na startu
-    // stálo celou plochou na rovině a nepřečnívalo přes vrchol
-    const PRESAH = 0.35;
-    const dl = (this.delka + PRESAH) * mer;
-    const zx = 70, zy = h - 70;                       // pata roviny
-    const vx = zx + dl * Math.cos(th), vy = zy - dl * Math.sin(th);
-
-    // klín
-    ctx.fillStyle = B.akcent; ctx.globalAlpha = .10;
-    ctx.beginPath(); ctx.moveTo(zx, zy); ctx.lineTo(vx, vy); ctx.lineTo(vx, zy); ctx.closePath(); ctx.fill();
-    ctx.globalAlpha = 1;
-    ctx.strokeStyle = B.cara; ctx.lineWidth = 3;
-    ctx.beginPath(); ctx.moveTo(zx, zy); ctx.lineTo(vx, vy); ctx.lineTo(vx, zy); ctx.closePath(); ctx.stroke();
-
-    // vyznačení úhlu
-    ctx.strokeStyle = B.tlumene; ctx.lineWidth = 1.5;
-    ctx.beginPath(); ctx.arc(zx, zy, 46, -th, 0); ctx.stroke();
-    stitek(zx + 66 * Math.cos(th / 2), zy - 66 * Math.sin(th / 2), this.uhel.toFixed(0) + '°', B.tlumene);
-
-    // kritický úhel jako přerušovaná čára – hranice, kdy se to rozjede
-    const kth = Math.atan(this.mu);
-    ctx.strokeStyle = B.varovani; ctx.setLineDash([6, 6]); ctx.lineWidth = 2;
-    ctx.beginPath(); ctx.moveTo(zx, zy); ctx.lineTo(zx + dl * 0.62 * Math.cos(kth), zy - dl * 0.62 * Math.sin(kth)); ctx.stroke();
-    ctx.setLineDash([]);
-    stitek(zx + dl * 0.68 * Math.cos(kth), zy - dl * 0.68 * Math.sin(kth) + 2,
-      'mez ' + this.kritickyUhel().toFixed(0) + '°', B.varovani);
-
-    // těleso
-    const ujeto = (this.s + PRESAH) * mer;
-    const bx = vx - ujeto * Math.cos(th), by = vy + ujeto * Math.sin(th);
-    const a = 34;
-    ctx.save(); ctx.translate(bx, by); ctx.rotate(-th);
-    ctx.fillStyle = B.teleso; ctx.fillRect(-a / 2, -a, a, a);
-    ctx.strokeStyle = B.akcent; ctx.lineWidth = 2; ctx.strokeRect(-a / 2, -a, a, a);
-    ctx.restore();
-
-    const stred = { x: bx - a / 2 * Math.sin(th), y: by - a / 2 * Math.cos(th) };
-    if (ukazSily) {
-      // Šipka roste s hmotností, ale je omezená, aby nepřerostla scénu.
-      // Čísla v newtonech jsou v panelu vpravo, na plátně by se popisky pletly.
-      const tiha = this.m * G;
-      const sk = Math.min(2.2, 92 / tiha);
-      sipka(stred.x, stred.y, 0, tiha * sk, B.tiha, 'Fɡ');
-      const podel = tiha * Math.sin(th);
-      sipka(stred.x, stred.y, -podel * sk * Math.cos(th), podel * sk * Math.sin(th), B.slozka, 'F∥', 2.5, -20);
-      const normala = tiha * Math.cos(th);
-      sipka(bx, by, normala * sk * Math.sin(th), normala * sk * Math.cos(th), B.normala, 'F⊥', 2.5);
-      // tření působí proti pohybu (v klidu nanejvýš vyrovná složku tíhy)
-      const treni = this.jede && this.v > 0 ? this.mu * normala : Math.min(this.mu * normala, podel);
-      sipka(bx, by, treni * sk * Math.cos(th), -treni * sk * Math.sin(th), B.treni, 'Ft', 2.5, 20);
-      if (this.v > 0) {
-        // odsazení kolmo k rovině, aby šipka rychlosti nesplývala s F∥
-        const odsazeni = a + 30;
-        sipka(bx + odsazeni * Math.sin(th), by - odsazeni * Math.cos(th),
-          -this.v * 20 * Math.cos(th), this.v * 20 * Math.sin(th), B.rychlost, 'v', 2.5);
-      }
-    }
-
-    // panel
-    const th_ = th;
-    const podel = this.m * G * Math.sin(th_), maxTreni = this.mu * this.m * G * Math.cos(th_);
-    const vyska = (this.delka - this.s) * Math.sin(th_);
-    const ep = this.m * G * vyska, ek = 0.5 * this.m * this.v * this.v;
-    const epStart = this.m * G * this.delka * Math.sin(th_);
-    vypisMereni([
-      { popis: 'Sklon', hodnota: this.uhel.toFixed(0) + '°' },
-      { popis: 'Kritický (mezní) úhel', hodnota: this.kritickyUhel().toFixed(1) + '°', duraz: true },
-      { popis: 'Tíha Fɡ', hodnota: (this.m * G).toFixed(1) + ' N' },
-      { popis: 'F∥ — táhne dolů', hodnota: podel.toFixed(1) + ' N' },
-      { popis: 'F⊥ — tlačí do roviny', hodnota: (this.m * G * Math.cos(th_)).toFixed(1) + ' N' },
-      { popis: 'Největší možné tření Ft', hodnota: maxTreni.toFixed(1) + ' N' },
-      { popis: 'Rychlost', hodnota: this.v.toFixed(2) + ' m/s' },
-      { popis: 'Ujetá dráha', hodnota: this.s.toFixed(2) + ' m' },
-    ]);
-    vypisEnergie([
-      { popis: 'Polohová Ep', hodnota: ep, trida: 'ep' },
-      { popis: 'Pohybová Ek', hodnota: ek, trida: 'ek' },
-      { popis: 'Spotřebovalo tření', hodnota: Math.max(0, epStart - ep - ek), trida: 'ztrata' },
-    ], epStart || 1);
-
-    if (this.udrziSe())
-      hlaska(`Sklon ${this.uhel.toFixed(0)}° <b>nestačí</b> — tření (${maxTreni.toFixed(0)} N) je silnější než tah dolů (${podel.toFixed(0)} N). Přidej sklon nad <b>${this.kritickyUhel().toFixed(0)}°</b>.`, 'klid');
-    else if (this.s >= this.delka) hlaska('Těleso dojelo dolů. Čím větší sklon, tím rychleji.', 'jede');
-    else if (this.jede) hlaska(`Tah dolů (${podel.toFixed(0)} N) <b>přemohl</b> tření (${maxTreni.toFixed(0)} N) — těleso zrychluje.`, 'jede');
-    else hlaska(`Sklon už stačí (přes ${this.kritickyUhel().toFixed(0)}°). Stiskni <b>Pustit</b>.`, 'jede');
-  }
-};
-
-/* =====================================================================
-   SRÁŽKY
-   Klíčová myšlenka: hybnost se zachová vždycky,
-   pohybová energie jen při dokonale pružné srážce.
-   ===================================================================== */
-const srazky = {
-  m1: 2, m2: 1, u1: 2, u2: -1, e: 1,
-  x1: 0, x2: 0, v1: 0, v2: 0, srazilo: false, pred: null, po: null,
-
-  reset() {
-    this.m1 = Number($('sM1').value); this.m2 = Number($('sM2').value);
-    this.u1 = Number($('sV1').value); this.u2 = Number($('sV2').value);
-    this.e = Number($('sE').value) / 100;
-    this.v1 = this.u1; this.v2 = this.u2;
-    this.x1 = 1.5; this.x2 = 6.5;
-    this.srazilo = false;
-    this.pred = { p: this.m1 * this.u1 + this.m2 * this.u2, ek: 0.5 * this.m1 * this.u1 ** 2 + 0.5 * this.m2 * this.u2 ** 2 };
-    this.po = null;
-  },
-  polomer(m) { return 0.12 + Math.cbrt(m) * 0.10; },
-  krok(dt) {
-    this.x1 += this.v1 * dt;
-    this.x2 += this.v2 * dt;
-    const r1 = this.polomer(this.m1), r2 = this.polomer(this.m2);
-    // mantinely, aby koule nezmizely ze scény
-    if (this.x1 - r1 < 0.2) { this.x1 = 0.2 + r1; this.v1 = Math.abs(this.v1); }
-    if (this.x2 + r2 > 7.8) { this.x2 = 7.8 - r2; this.v2 = -Math.abs(this.v2); }
-    if (this.x2 - this.x1 < r1 + r2 && this.v1 > this.v2) {
-      // obecná srážka s koeficientem restituce e (1 = pružná, 0 = dokonale nepružná)
-      const { m1, m2, v1: a, v2: b, e } = this;
-      const p = m1 * a + m2 * b;
-      this.v1 = (p + m2 * e * (b - a)) / (m1 + m2);
-      this.v2 = (p + m1 * e * (a - b)) / (m1 + m2);
-      const prekryv = (r1 + r2) - (this.x2 - this.x1);
-      this.x1 -= prekryv / 2; this.x2 += prekryv / 2;
-      this.srazilo = true;
-      this.po = { p: m1 * this.v1 + m2 * this.v2, ek: 0.5 * m1 * this.v1 ** 2 + 0.5 * m2 * this.v2 ** 2 };
-    }
-  },
-  kresli() {
-    cistiPlochu();
-    const w = W(), h = H();
-    const mer = w / 8;                     // scéna je 8 metrů široká
-    const podlahaY = h * 0.62;
-
-    // podlaha a měřítko
-    ctx.strokeStyle = B.cara; ctx.lineWidth = 3;
-    ctx.beginPath(); ctx.moveTo(0, podlahaY + 46); ctx.lineTo(w, podlahaY + 46); ctx.stroke();
-    ctx.strokeStyle = B.slabe; ctx.lineWidth = 1; ctx.font = '11px system-ui, sans-serif';
-    ctx.textAlign = 'center'; ctx.fillStyle = B.slabe;
-    for (let i = 0; i <= 8; i++) {
-      ctx.beginPath(); ctx.moveTo(i * mer, podlahaY + 46); ctx.lineTo(i * mer, podlahaY + 54); ctx.stroke();
-      if (i % 2 === 0) {
-        ctx.textAlign = i === 0 ? 'left' : i === 8 ? 'right' : 'center';
-        ctx.fillText(i + ' m', i === 0 ? 3 : i === 8 ? w - 3 : i * mer, podlahaY + 68);
-      }
-    }
-
-    // Popisky se u blízkých koulí překrývaly – druhý proto posuneme výš.
-    const blizko = Math.abs(this.x2 - this.x1) * mer < 150;
-    const kresliKouli = (x, v, m, barva, jmeno, vyssiStitek) => {
-      const r = this.polomer(m) * mer;
-      const px = x * mer;
-      ctx.fillStyle = barva;
-      ctx.beginPath(); ctx.arc(px, podlahaY, r, 0, Math.PI * 2); ctx.fill();
-      if (ukazSily) {
-        // stojící koule je taky informace – jinak to vypadá, že se šipka ztratila
-        if (Math.abs(v) < 0.05) stitek(px, podlahaY + r + 16, 'v = 0', B.rychlost);
-        else sipka(px, podlahaY, v * 30, 0, B.rychlost, v.toFixed(1).replace('.', ',') + ' m/s', 3);
-      }
-      stitek(px, podlahaY - r - (vyssiStitek ? 40 : 18),
-        jmeno + ' ' + m.toFixed(1).replace('.', ',') + ' kg', barva);
-      return r;
-    };
-    kresliKouli(this.x1, this.v1, this.m1, B.teleso2, 'modrá', false);
-    kresliKouli(this.x2, this.v2, this.m2, B.chyba, 'červená', blizko);
-
-    /* Hybnost před a teď kreslíme nad sebe stejným měřítkem.
-       Že jsou šipky pořád stejně dlouhé, je názornější než číslo v tabulce. */
-    if (ukazSily) {
-      const pTed = this.m1 * this.v1 + this.m2 * this.v2;
-      const skalaP = Math.min(26, (w * 0.32) / Math.max(0.5, Math.abs(this.pred.p)));
-      const x0 = w * 0.5, y0 = h * 0.14;
-      ctx.font = '600 12px system-ui, sans-serif';
-      ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
-      ctx.fillStyle = B.tlumene;
-      ctx.fillText('hybnost před srážkou', 16, y0);
-      ctx.fillText('hybnost teď', 16, y0 + 34);
-      ctx.strokeStyle = B.slabe; ctx.lineWidth = 1; ctx.setLineDash([3, 4]);
-      ctx.beginPath(); ctx.moveTo(x0, y0 - 14); ctx.lineTo(x0, y0 + 48); ctx.stroke();
-      ctx.setLineDash([]);
-      sipka(x0, y0, this.pred.p * skalaP, 0, B.tlumene, this.pred.p.toFixed(1).replace('.', ',') + ' kg·m/s', 3);
-      sipka(x0, y0 + 34, pTed * skalaP, 0,
-        Math.abs(pTed - this.pred.p) < 1e-6 ? B.ok : B.chyba,
-        pTed.toFixed(1).replace('.', ',') + ' kg·m/s', 3);
-    }
-
-    const p = this.m1 * this.v1 + this.m2 * this.v2;
-    const ek = 0.5 * this.m1 * this.v1 ** 2 + 0.5 * this.m2 * this.v2 ** 2;
-    vypisMereni([
-      { popis: 'Rychlost modré', hodnota: this.v1.toFixed(2) + ' m/s' },
-      { popis: 'Rychlost červené', hodnota: this.v2.toFixed(2) + ' m/s' },
-      { popis: 'Hybnost před', hodnota: this.pred.p.toFixed(2) + ' kg·m/s' },
-      { popis: 'Hybnost teď', hodnota: p.toFixed(2) + ' kg·m/s', duraz: true },
-      { popis: 'Pohyb. energie před', hodnota: this.pred.ek.toFixed(2) + ' J' },
-      { popis: 'Pohyb. energie teď', hodnota: ek.toFixed(2) + ' J', duraz: true },
-    ]);
-    vypisEnergie([
-      { popis: 'Energie před srážkou', hodnota: this.pred.ek, trida: 'ec' },
-      { popis: 'Energie teď', hodnota: ek, trida: 'ek' },
-      { popis: 'Ztraceno (teplo, zvuk)', hodnota: Math.max(0, this.pred.ek - ek), trida: 'ztrata' },
-    ], this.pred.ek || 1);
-
-    if (!this.srazilo) hlaska('Sleduj čísla vlevo. <b>Hybnost</b> zůstane po srážce stejná — vždycky.', 'jede');
-    else if (this.e >= 0.99) hlaska('Dokonale <b>pružná</b> srážka: hybnost i pohybová energie zůstaly stejné.', 'jede');
-    else if (this.e <= 0.01) hlaska('Dokonale <b>nepružná</b> srážka: koule pokračují společně a část energie se proměnila v teplo. Hybnost se ale zachovala!', 'klid');
-    else hlaska('Částečně pružná srážka: hybnost se zachovala, kus energie se ztratil.', 'klid');
-  }
-};
-
-/* ---------- ovládací panely jednotlivých simulací ---------- */
-const VYKLADY = {
-  kyvadlo: {
-    vyklad: '<b>Kyvadlo</b> mění výškovou energii na pohybovou a zpátky. Nahoře stojí a má nejvíc výšky, ' +
-      'dole je nejrychlejší. Doba jednoho kmitu (perioda) závisí <b>jen na délce závěsu</b> — ' +
-      'ne na tom, jak těžké je závaží.',
-    otazka: '<div class="nadpis">🤔 Zkus si</div>Zapni <b>Porovnat dvě kyvadla</b> a dej jim různou hmotnost, ' +
-      'ale stejnou délku. Kývají stejně rychle? A co když necháš hmotnost a změníš délku?',
-    legenda: [
-      { barva: '#ef5350', popis: 'Fɡ — tíha' },
-      { barva: '#ab47bc', popis: 'F∥ — složka, která rozhoupává' },
-      { barva: '#42a5f5', popis: 'v — rychlost' },
-    ],
-  },
-  rovina: {
-    vyklad: '<b>Nakloněná rovina.</b> Tíha se dělí na dvě části: jedna <b>táhne těleso dolů po rovině</b>, ' +
-      'druhá ho <b>tlačí do podložky</b>. Čím víc tlačí do podložky, tím větší je tření. ' +
-      'Těleso se rozjede, teprve když tah dolů přemůže tření — to nastane nad <b>kritickým úhlem</b>.',
-    otazka: '<div class="nadpis">🤔 Zkus si</div>Nastav tření na maximum a pomalu zvyšuj sklon. ' +
-      'Při kolika stupních se těleso konečně rozjede? Odpovídá to žluté přerušované čáře?',
-    legenda: [
-      { barva: '#ef5350', popis: 'Fɡ — tíha' },
-      { barva: '#ab47bc', popis: 'F∥ — táhne dolů po rovině' },
-      { barva: '#26a69a', popis: 'F⊥ — tlačí do roviny' },
-      { barva: '#8d6e63', popis: 'Ft — tření' },
-      { barva: '#42a5f5', popis: 'v — rychlost' },
-    ],
-  },
-  srazky: {
-    vyklad: '<b>Srážka dvou těles.</b> <b>Hybnost</b> (hmotnost × rychlost) se zachová při <i>každé</i> srážce. ' +
-      '<b>Pohybová energie</b> se zachová jen u dokonale pružné srážky — jinak se část promění v teplo a zvuk.',
-    otazka: '<div class="nadpis">🤔 Zkus si</div>Dej oběma koulím <b>stejnou hmotnost</b> a nech je srazit ' +
-      'při plné pružnosti. Co se stane s jejich rychlostmi? A co když stáhneš pružnost na nulu?',
-    legenda: [
-      { barva: '#42a5f5', popis: 'rychlost' }, { barva: '#6aa6fd', popis: 'modrá koule' },
-      { barva: '#e05d5d', popis: 'červená koule' },
-    ],
-  },
-};
-
-function postavOvladani() {
-  const o = $('ovladani');
-  if (sim === 'kyvadlo') {
-    o.innerHTML = `
-      <div class="kyvadla jedno" id="kMrizka">
-        <label class="delka-a"><span class="znacka a" aria-hidden="true">A</span> Délka závěsu
-          <input type="range" id="kDelka" min="30" max="200" value="120"><b id="kDelkaV">1,20 m</b></label>
-        <label class="hmota-a"><span class="znacka a" aria-hidden="true">A</span> Hmotnost
-          <input type="range" id="kHmota" min="1" max="80" value="10"><b id="kHmotaV">1,0 kg</b></label>
-        <label class="delka-b radek-b"><span class="znacka b" aria-hidden="true">B</span> Délka závěsu
-          <input type="range" id="kDelkaB" min="30" max="200" value="60"><b id="kDelkaBV">0,60 m</b></label>
-        <label class="hmota-b radek-b"><span class="znacka b" aria-hidden="true">B</span> Hmotnost
-          <input type="range" id="kHmotaB" min="1" max="80" value="30"><b id="kHmotaBV">3,0 kg</b></label>
+    <figure class="obr" id="obr-vozik">
+      <div class="obr-plocha"><svg class="model" role="img" aria-label="Bedna na podlaze, provaz, síly a graf rychlosti"></svg></div>
+      <div class="obr-ovladani">
+        <button type="button" class="hlavni" id="voz-tahni">✋ Táhnout</button>
+        <label class="posuvnik">Tah <input type="range" id="voz-sila" min="0" max="60" step="0.5" value="20"><output id="voz-sila-h"></output></label>
+        <label class="posuvnik">Hmotnost bedny <input type="range" id="voz-hmotnost" min="1" max="20" step="1" value="5"><output id="voz-hmotnost-h"></output></label>
       </div>
-      <label>Počáteční úhel <input type="range" id="kUhel" min="5" max="80" value="60"><b id="kUhelV">60°</b></label>
-      <div class="oddel"></div>
-      <button id="kDve">🪀🪀 Porovnat dvě kyvadla</button>
-      <button id="kStejne" style="display:none"
-        title="Nastaví kyvadlu B stejnou délku i hmotnost jako A – dobrý výchozí bod, než začneš měnit jednu věc">⧉ B jako A</button>
-      <button id="kTlum" class="zap">💨 Tlumení</button>
-      <div class="oddel"></div>
-      <button id="kPustit" class="hlavni"
-        title="Pustí nebo zastaví kyvadlo. (Pauza v liště níž zmrazí celou scénu včetně času.)">▶️ Pustit</button>
-      <button id="kReset" title="Vrátí závaží do počáteční polohy">🔄 Nahoru</button>`;
-    const obnov = () => {
-      kyvadlo.a.L = Number($('kDelka').value) / 100;
-      kyvadlo.a.m = Number($('kHmota').value) / 10;
-      kyvadlo.b.L = Number($('kDelkaB').value) / 100;
-      kyvadlo.b.m = Number($('kHmotaB').value) / 10;
-      $('kDelkaV').textContent = kyvadlo.a.L.toFixed(2).replace('.', ',') + ' m';
-      $('kHmotaV').textContent = kyvadlo.a.m.toFixed(1).replace('.', ',') + ' kg';
-      $('kUhelV').textContent = $('kUhel').value + '°';
-      $('kDelkaBV').textContent = kyvadlo.b.L.toFixed(2).replace('.', ',') + ' m';
-      $('kHmotaBV').textContent = kyvadlo.b.m.toFixed(1).replace('.', ',') + ' kg';
-    };
-    // změna kteréhokoli parametru kyvadlo jen připraví, nespustí
-    const prekresliTlacitko = () => {
-      $('kPustit').textContent = kyvadlo.pusteno ? '✋ Zastavit' : '▶️ Pustit';
-      $('kPustit').classList.toggle('hlavni', !kyvadlo.pusteno);
-    };
-    const znovuPriprav = () => { obnov(); kyvadlo.reset(); prekresliTlacitko(); };
-    ['kDelka', 'kHmota', 'kDelkaB', 'kHmotaB', 'kUhel'].forEach(id => $(id).oninput = znovuPriprav);
-    $('kDve').onclick = () => {
-      kyvadlo.dve = !kyvadlo.dve;
-      $('kDve').classList.toggle('zap', kyvadlo.dve);
-      $('kMrizka').classList.toggle('jedno', !kyvadlo.dve);
-      $('kStejne').style.display = kyvadlo.dve ? '' : 'none';
-      kyvadlo.reset();
-      prekresliTlacitko();
-    };
-    $('kStejne').onclick = () => {
-      // úhel mají obě kyvadla společný, takže zkopírováním délky a hmotnosti
-      // se z nich stanou naprosto shodná kyvadla
-      $('kDelkaB').value = $('kDelka').value;
-      $('kHmotaB').value = $('kHmota').value;
-      znovuPriprav();
-    };
-    $('kTlum').onclick = () => {
-      kyvadlo.tlumeni = kyvadlo.tlumeni > 0 ? 0 : 0.08;
-      $('kTlum').classList.toggle('zap', kyvadlo.tlumeni > 0);
-    };
-    $('kPustit').onclick = () => { kyvadlo.pusteno = !kyvadlo.pusteno; prekresliTlacitko(); };
-    $('kReset').onclick = () => { kyvadlo.reset(); prekresliTlacitko(); };
-    obnov(); kyvadlo.reset(); prekresliTlacitko();
-  } else if (sim === 'rovina') {
-    o.innerHTML = `
-      <label>Sklon <input type="range" id="rUhel" min="0" max="60" value="30"><b id="rUhelV">30°</b></label>
-      <label>Tření <input type="range" id="rMu" min="0" max="90" value="20"><b id="rMuV">0,20</b></label>
-      <label>Hmotnost <input type="range" id="rHmota" min="5" max="100" value="20"><b id="rHmotaV">2,0 kg</b></label>
-      <div class="oddel"></div>
-      <button id="rStart">▶️ Pustit</button>
-      <button id="rReset">🔄 Nahoru</button>`;
-    const obnov = () => {
-      rovina.uhel = Number($('rUhel').value);
-      rovina.mu = Number($('rMu').value) / 100;
-      rovina.m = Number($('rHmota').value) / 10;
-      $('rUhelV').textContent = rovina.uhel + '°';
-      $('rMuV').textContent = rovina.mu.toFixed(2).replace('.', ',');
-      $('rHmotaV').textContent = rovina.m.toFixed(1).replace('.', ',') + ' kg';
-    };
-    ['rUhel', 'rMu', 'rHmota'].forEach(id => $(id).oninput = () => { obnov(); rovina.reset(); });
-    $('rStart').onclick = () => { rovina.jede = true; };
-    $('rReset').onclick = () => rovina.reset();
-    obnov(); rovina.reset();
-  } else {
-    o.innerHTML = `
-      <label>Modrá m₁ <input type="range" id="sM1" min="0.5" max="5" step="0.5" value="2"><b id="sM1V">2,0 kg</b></label>
-      <label>Modrá v₁ <input type="range" id="sV1" min="0" max="4" step="0.5" value="2"><b id="sV1V">2,0 m/s</b></label>
-      <label>Červená m₂ <input type="range" id="sM2" min="0.5" max="5" step="0.5" value="1"><b id="sM2V">1,0 kg</b></label>
-      <label>Červená v₂ <input type="range" id="sV2" min="-4" max="0" step="0.5" value="-1"><b id="sV2V">−1,0 m/s</b></label>
-      <label>Pružnost <input type="range" id="sE" min="0" max="100" value="100"><b id="sEV">100 %</b></label>
-      <div class="oddel"></div>
-      <button id="sReset">🔄 Znovu</button>`;
-    const obnov = () => {
-      $('sM1V').textContent = Number($('sM1').value).toFixed(1).replace('.', ',') + ' kg';
-      $('sM2V').textContent = Number($('sM2').value).toFixed(1).replace('.', ',') + ' kg';
-      $('sV1V').textContent = Number($('sV1').value).toFixed(1).replace('.', ',') + ' m/s';
-      $('sV2V').textContent = Number($('sV2').value).toFixed(1).replace('.', ',').replace('-', '−') + ' m/s';
-      $('sEV').textContent = $('sE').value + ' %';
-    };
-    ['sM1', 'sV1', 'sM2', 'sV2', 'sE'].forEach(id => $(id).oninput = () => { obnov(); srazky.reset(); });
-    $('sReset').onclick = () => srazky.reset();
-    obnov(); srazky.reset();
-  }
-  $('vyklad').innerHTML = VYKLADY[sim].vyklad;
-  $('otazka').innerHTML = VYKLADY[sim].otazka;
-  legenda(VYKLADY[sim].legenda);
-}
+      <div class="obr-ovladani">
+        <div class="skupina"><span class="nazev">Podlaha:</span>
+          <div class="segment" id="voz-povrch" role="group" aria-label="Povrch podlahy">
+            <button type="button" data-hodnota="led">🧊 led</button><button type="button" data-hodnota="drevo">🪵 dřevo</button><button type="button" data-hodnota="koberec">🟫 koberec</button>
+          </div>
+        </div>
+        <label class="prepinac"><input type="checkbox" id="voz-vysledna"> Výsledná síla</label>
+        <label class="prepinac"><input type="checkbox" id="voz-pomalu"> 🐌 Zpomalit</label>
+        <button type="button" id="voz-reset">↺ Výchozí stav</button>
+      </div>
+      <div class="odecty"></div>
+      <div class="obr-zprava" role="status"></div>
+      <figcaption>Tlačítkem ✋ Táhnout napneš provaz, dalším stiskem ho pustíš. Posuvník tahu jde měnit i za jízdy. Vpravo nahoře se kreslí graf rychlosti za posledních 12 sekund. <span class="legenda"><span class="znacka z-tah">tah</span><span class="znacka z-treni">tření</span><span class="znacka z-tiha">tíha</span><span class="znacka z-podlozka">síla podložky</span><span class="znacka z-rychlost">rychlost</span></span></figcaption>
+    </figure>
 
-/* ---------- běh ---------- */
-const SIMY = { kyvadlo, rovina, srazky };
-let posledni = null;
+    <div class="predpoved" data-predpoved="voz-led"></div>
+    <div class="ukol" data-ukol="voz-koberec"><div class="ukol-hlava"><p><b>🔬 Úkol:</b> Bedna má 5 kg a stojí na koberci. Najdi nejmenší tah, se kterým se rozjede (s přesností na 1 N).</p><span class="stav"></span></div><p class="ukol-reakce"></p></div>
+    <div class="ukol" data-ukol="voz-rovnomerne"><div class="ukol-hlava"><p><b>🔬 Úkol:</b> Na dřevěné podlaze bednu rozjeď a pak tah zmenši tak, aby jela <strong>stálou rychlostí</strong> – ani nezrychlovala, ani nezpomalovala.</p><span class="stav"></span></div><p class="ukol-reakce"></p></div>
 
-function smycka(t) {
-  if (posledni === null) posledni = t;
-  let dt = Math.min(0.033, (t - posledni) / 1000);
-  posledni = t;
-  if (!bezi) { if (krokuj > 0) { krokuj--; dt = 0.016; } else dt = 0; }
-  SIMY[sim].krok(dt * tempo);
-  SIMY[sim].kresli();
-  requestAnimationFrame(smycka);
-}
+    <h3>Tři pravidla pohybu</h3>
+    <div class="text">
+      <p>Co model ukazuje, popsal už v roce 1687 Isaac Newton ve třech <strong>pohybových zákonech</strong>:</p>
+      <ol>
+        <li><strong>Zákon setrvačnosti.</strong> Když je výsledná síla nulová, těleso zůstane v klidu, nebo se dál pohybuje stejnou rychlostí stejným směrem. Bedna na ledu jede dlouho sama, protože ji skoro nic nebrzdí.</li>
+        <li><strong>Zákon síly.</strong> Výsledná síla mění rychlost tělesa. Čím je větší, tím rychleji se rychlost mění. Čím má těleso větší hmotnost, tím pomaleji se jeho rychlost mění.</li>
+        <li><strong>Zákon akce a reakce.</strong> Síly vznikají vždy ve dvojicích. Bedna tlačí na podlahu a podlaha stejně velkou silou tlačí na bednu opačným směrem. Proto se bedna do podlahy nepropadne.</li>
+      </ol>
+    </div>
 
-$('tabs').onclick = e => {
-  const b = e.target.closest('button[data-sim]');
-  if (!b) return;
-  $('tabs').querySelectorAll('button').forEach(x => x.classList.remove('active'));
-  b.classList.add('active');
-  sim = b.dataset.sim;
-  postavOvladani();
-};
-$('btnPauza').onclick = () => {
-  bezi = !bezi;
-  $('btnPauza').textContent = bezi ? '⏸️ Pauza' : '▶️ Pokračovat';
-  $('btnPauza').classList.toggle('zap', !bezi);
-};
-$('btnKrok').onclick = () => { bezi = false; $('btnPauza').textContent = '▶️ Pokračovat'; $('btnPauza').classList.add('zap'); krokuj = 6; };
-$('tempo').onclick = e => {
-  const b = e.target.closest('button[data-t]');
-  if (!b) return;
-  tempo = Number(b.dataset.t);
-  $('tempo').querySelectorAll('button').forEach(x => x.classList.toggle('zap', x === b));
-};
-const prepni = (id, nastav) => $(id).onclick = () => { nastav(); $(id).classList.toggle('zap'); };
-prepni('btnSily', () => ukazSily = !ukazSily);
-prepni('btnStopa', () => { ukazStopu = !ukazStopu; kyvadlo.a.stopa = []; kyvadlo.b.stopa = []; });
-prepni('btnStitky', () => ukazStitky = !ukazStitky);
-document.addEventListener('keydown', e => {
-  if (e.key === ' ') { e.preventDefault(); $('btnPauza').click(); }
-  if (e.key === 'ArrowRight') { e.preventDefault(); $('btnKrok').click(); }
-});
+    <details class="zvidave"><summary>📐 Pro zvídavé: jak rychle se rychlost mění <small>zrychlení a druhý Newtonův zákon</small></summary>
+      <div class="obsah text">
+        <p>Jak rychle se mění rychlost, udává <strong>zrychlení</strong> <i>a</i> – o kolik metrů za sekundu se rychlost zvětší za každou sekundu (jednotka m/s²). Druhý Newtonův zákon ho spojuje se silou a hmotností:</p>
+        <div class="vzorec"><span><i>F</i> = <i>m</i> · <i>a</i></span><span class="vzorec-popis">výsledná síla = hmotnost × zrychlení</span></div>
+        <p>Příklad: bednu 5 kg na dřevě (tření 14,7 N) táhneš silou 25 N. Výsledná síla je 25 N − 14,7 N = 10,3 N a zrychlení 10,3 N / 5 kg ≈ 2,1 m/s². Každou sekundu se bedna zrychlí asi o 2 m/s. V modelu to vidíš na přímce v grafu rychlosti – čím větší výsledná síla, tím strměji stoupá.</p>
+      </div>
+    </details>
 
-window.addEventListener('DOMContentLoaded', () => {
-  rozmer();
-  ustalVyskuHlasky();
-  if (window.ResizeObserver) new ResizeObserver(ustalVyskuHlasky).observe($('hlaska'));
-  postavOvladani();
-  requestAnimationFrame(smycka);
-});
-</script>
-<script src="../badani.js"></script>
-<script>
-/* Úkoly k modelu (badani.js): předpověz → vyzkoušej → vysvětli.
-   Rychlost a doba kmitu kyvadla, sklon a tření, srážka stejných koulí. */
-(function(){
-const N=Badani.nastav, cislo=Badani.cislo;
-const nahodne=p=>p[Math.floor(Math.random()*p.length)];
-const moznost=(t,ok,proc)=>({t,ok,proc});
-// scéna hřiště a běžící čas (pauza by pokus zastavila)
-const scena=id=>{
-  if(sim!==id) document.querySelector(`#tabs [data-sim="${id}"]`).click();
-  if(!bezi) $('btnPauza').click();
-};
-const dveKyvadla=chci=>{ if(kyvadlo.dve!==chci) $('kDve').click(); };
+    <aside class="zapamatuj"><h3>📌 Zapamatuj si</h3>
+      <ul>
+        <li>Síla se měří v <strong>newtonech</strong> (N) a kreslí se šipkou: působiště, směr, velikost.</li>
+        <li><strong>Tření</strong> působí proti pohybu; <span class="m"><i>F</i><sub>t</sub> = <i>f</i> · <i>F</i><sub>n</sub></span>.</li>
+        <li>Když je výsledná síla <strong>nulová</strong>, těleso stojí, nebo jede <strong>stálou rychlostí</strong>. Nenulová výsledná síla rychlost mění.</li>
+      </ul>
+    </aside>
+  </section>
 
-Badani.start({
-  zakryt:'#vyklad, #otazka',
-  ukoly:[
-    { id:'rychlost', nazev:'Kde je kyvadlo nejrychlejší',
-      predpoved:{
-        otazka:'Kyvadlo vychýlíš o <b>60°</b> a pustíš. Ve kterém místě bude mít <b>největší rychlost</b>?',
-        moznosti:['V krajní poloze, odkud ho pouštíš','V nejnižším bodě','Všude stejnou – jen mění směr'],
-        spravna:1 },
-      priprava(){ scena('kyvadlo'); dveKyvadla(false); N({'#kDelka':120,'#kHmota':10,'#kUhel':60}); },
-      pokus:'Pusť kyvadlo (<b>▶️ Pustit</b>) a sleduj modrou šipku rychlosti a sloupce energie. Nech ho aspoň jednou projít nejnižším bodem.',
-      splneno:()=>sim==='kyvadlo'&&kyvadlo.pusteno&&!kyvadlo.dve&&kyvadlo.a.prosloDolu>=2,
-      ukaz(){ if(!kyvadlo.pusteno) $('kPustit').click(); },
-      pozorovani:()=>`Nejdelší je šipka rychlosti <b>dole</b> – asi ${cislo(Math.sqrt(2*G*kyvadlo.a.L*(1-Math.cos(Math.PI/3))),1)} m/s. V krajních polohách se závaží na okamžik zastaví.`,
-      vysvetli:{
-        otazka:'Proč je kyvadlo nejrychlejší právě dole?',
-        moznosti:[
-          moznost('Cestou dolů se polohová energie mění na pohybovou. Dole je polohové energie nejméně, a tak je pohybové – a s ní rychlosti – nejvíc.',true),
-          moznost('V krajní poloze na závaží působí největší síla, a proto je tam nejrychlejší.',false,'Síla, která kyvadlo rozhoupává, je v krajní poloze opravdu největší – ale teprve odtud závaží rozjíždí. Rychlost je tam nulová.'),
-          moznost('Dole ho postrčí závěs.',false,'Závěs jen drží závaží na kružnici – táhne kolmo k pohybu, takže ho nezrychlí. Rychlost roste díky tíze na cestě dolů.')]},
-      shrnuti:'Kyvadlo pořád přeměňuje <b>polohovou energii na pohybovou</b> a zpět. Nejrychlejší je v nejnižším bodě, v krajních polohách se na okamžik zastaví.' },
+  <!-- ============================================================ 2 -->
+  <section class="kapitola" id="rovina" data-faze="vyuka" data-nazev="Nakloněná rovina" data-popis="Tíha, rozklad sil, mezní úhel">
+    <header class="kap-hlava"><span class="kap-cislo">2</span><div><p class="kap-otazka">Proč sáňky na mírném svahu stojí a na prudkém se samy rozjedou?</p><h2>Tíha a nakloněná rovina</h2></div></header>
+    <div class="text">
+      <p>Země přitahuje každé těleso. Síla, kterou těleso kvůli tomu tlačí na podložku nebo táhne za závěs, je jeho <span class="term">tíha</span> <i>F</i><sub>G</sub>. Míří vždy <strong>svisle dolů</strong> a je tím větší, čím větší je hmotnost tělesa:</p>
+    </div>
+    <div class="vzorec" aria-label="Tíha se rovná hmotnost krát g"><span><i>F</i><sub>G</sub> = <i>m</i> · <i>g</i></span><span class="vzorec-popis"><i>g</i> = 9,81 N/kg na Zemi; ve výpočtech ho zaokrouhlujeme na 10 N/kg. Těleso o hmotnosti 1 kg má tíhu asi 10 N.</span></div>
+    <div class="text">
+      <p>Na nakloněné rovině míří tíha pořád svisle dolů – ne podél svahu. Abychom viděli, co s tělesem dělá, <span class="term">rozložíme ji</span> na dvě složky (jsou to strany rovnoběžníku, jehož úhlopříčkou je tíha):</p>
+      <ul>
+        <li><strong><i>F</i><sub>∥</sub></strong> míří dolů <strong>podél svahu</strong> a těleso rozjíždí;</li>
+        <li><strong><i>F</i><sub>⊥</sub></strong> míří <strong>kolmo do podložky</strong> a přitlačuje těleso k ní – na ní závisí tření.</li>
+      </ul>
+      <p>Čím je svah strmější, tím větší je <i>F</i><sub>∥</sub> a tím menší <i>F</i><sub>⊥</sub>. Těleso se rozjede, až tah dolů po svahu přemůže největší možné tření. Sklonu, od kterého se to stane, říkáme <span class="term">mezní úhel</span>.</p>
+    </div>
 
-    { id:'hmotnost', nazev:'Těžší kyvadlo',
-      predpoved:{
-        otazka:'Dvě kyvadla mají stejně dlouhý závěs (1 m). Kyvadlu B dáš <b>osmkrát těžší</b> závaží. Které bude kmitat rychleji (bude mít kratší dobu kmitu)?',
-        moznosti:['Těžší kyvadlo B','Lehčí kyvadlo A','Obě stejně'],
-        spravna:2 },
-      priprava(){ scena('kyvadlo'); dveKyvadla(true); N({'#kDelka':100,'#kHmota':10,'#kDelkaB':100,'#kHmotaB':10,'#kUhel':20}); },
-      pokus:'Nastav kyvadlu <b>B hmotnost 8,0 kg</b>, pusť kyvadla a počkej, až se u obou změří doba kmitu.',
-      splneno:()=>sim==='kyvadlo'&&kyvadlo.dve&&kyvadlo.a.L===1&&kyvadlo.b.L===1&&kyvadlo.a.m===1&&kyvadlo.b.m===8&&kyvadlo.a.perioda&&kyvadlo.b.perioda,
-      ukaz(){ N({'#kHmotaB':80}); if(!kyvadlo.pusteno) $('kPustit').click(); },
-      pozorovani:()=>`Obě kyvadla kmitají <b>stejně</b>: doba kmitu A je ${cislo(kyvadlo.a.perioda,2)} s, B ${cislo(kyvadlo.b.perioda,2)} s.`,
-      vysvetli:{
-        otazka:'Proč těžší závaží nekmitá rychleji?',
-        moznosti:[
-          moznost('Na těžší závaží působí větší tíha, ale má i větší setrvačnost. Obojí roste stejně, takže se závaží rozjíždí stejně rychle.',true),
-          moznost('Těžší kyvadlo má víc energie, a proto se kývá rychleji.',false,'Energii má opravdu víc, ale doba kmitu z ní neplyne – obě kyvadla v modelu kmitají stejně. Rozhoduje délka závěsu.'),
-          moznost('Těžší závaží víc brzdí vzduch.',false,'Tlumení je u obou kyvadel stejné a doba kmitu vyšla stejná. Hmotnost dobu kmitu neurčuje.')]},
-      shrnuti:'Doba kmitu kyvadla <b>nezávisí na hmotnosti</b>, jen na <b>délce závěsu</b>: T = 2π√(l / g). Čtyřikrát delší závěs → dvakrát delší kmit.' },
+    <figure class="obr" id="obr-rovina">
+      <div class="obr-plocha"><svg class="model" role="img" aria-label="Kvádr na nakloněné rovině a síly, které na něj působí"></svg></div>
+      <div class="obr-ovladani">
+        <button type="button" class="hlavni" id="rov-pustit">▶️ Pustit</button>
+        <label class="posuvnik">Sklon <input type="range" id="rov-sklon" min="0" max="60" step="1" value="12"><output id="rov-sklon-h"></output></label>
+        <label class="posuvnik">Hmotnost <input type="range" id="rov-hmotnost" min="1" max="10" step="1" value="2"><output id="rov-hmotnost-h"></output></label>
+      </div>
+      <div class="obr-ovladani">
+        <div class="skupina"><span class="nazev">Podložka:</span>
+          <div class="segment" id="rov-povrch" role="group" aria-label="Povrch roviny">
+            <button type="button" data-hodnota="led">🧊 led</button><button type="button" data-hodnota="drevo">🪵 dřevo</button><button type="button" data-hodnota="guma">⚫ guma</button>
+          </div>
+        </div>
+        <label class="prepinac"><input type="checkbox" id="rov-rozklad" checked> Rozložit tíhu</label>
+        <label class="prepinac"><input type="checkbox" id="rov-mez"> Ukázat mezní úhel</label>
+        <button type="button" id="rov-reset">↺ Nahoru</button>
+      </div>
+      <div class="odecty"></div>
+      <div class="obr-zprava" role="status"></div>
+      <figcaption>Sklon měníš tažením za kroužek na vrcholu svahu nebo posuvníkem. Šipky sil jsou nakreslené ve stejném měřítku, tíha je vždy stejně dlouhá – čísla v newtonech jsou pod obrázkem. <span class="legenda"><span class="znacka z-tiha">tíha F<sub>G</sub></span><span class="znacka z-slozka">složky F<sub>∥</sub> a F<sub>⊥</sub></span><span class="znacka z-podlozka">síla podložky</span><span class="znacka z-treni">tření</span></span></figcaption>
+    </figure>
 
-    { id:'sklon', nazev:'Sklon a tření',
-      predpoved:{
-        otazka:'Kvádr leží na nakloněné rovině se sklonem <b>5°</b> a třením 0,20 a stojí. Co se stane, když sklon zvětšíš na <b>20°</b>?',
-        moznosti:['Rozjede se dolů','Zůstane stát – tření ho udrží při každém sklonu','Rozjede se, jen když bude těžší'],
-        spravna:0 },
-      priprava(){ scena('rovina'); N({'#rUhel':5,'#rMu':20,'#rHmota':20}); },
-      pokus:'Nastav <b>sklon 20°</b> a pusť těleso (<b>▶️ Pustit</b>). Sleduj šipky sil a tření.',
-      splneno:()=>sim==='rovina'&&rovina.uhel===20&&Math.abs(rovina.mu-0.2)<1e-9&&rovina.s>0.05,
-      ukaz(){ N({'#rUhel':20}); $('rStart').click(); },
-      pozorovani:()=>`Těleso se rozjelo. Tření 0,20 ho udrží jen do sklonu asi <b>${cislo(rovina.kritickyUhel(),0)}°</b>.`,
-      vysvetli:{
-        otazka:'Proč se při větším sklonu kvádr rozjel?',
-        moznosti:[
-          moznost('S větším sklonem roste část tíhy, která táhne kvádr dolů po rovině, a klesá přítlak do podložky – a s ním tření.',true),
-          moznost('Při větším sklonu je kvádr těžší.',false,'Hmotnost ani tíha se nemění. Mění se, jak velká část tíhy táhne kvádr podél roviny.'),
-          moznost('Tření zmizí, jakmile je rovina dost strmá.',false,'Součinitel tření zůstal 0,20 a třecí síla dál působí (hnědá šipka). Jen už nestačí na tah dolů po rovině.')]},
-      shrnuti:'Na nakloněné rovině táhne těleso dolů část tíhy <b>G · sin α</b> a tření brzdí silou <b>f · G · cos α</b>. Těleso se rozjede nad kritickým úhlem, kdy <b>tg α = f</b> – nezávisle na hmotnosti.' },
+    <div class="predpoved" data-predpoved="rov-tezsi"></div>
+    <div class="ukol" data-ukol="rov-45"><div class="ukol-hlava"><p><b>🔬 Úkol:</b> Najdi sklon, při kterém táhne kvádr dolů po svahu <strong>stejně velká</strong> složka tíhy, jakou ho tlačí do podložky.</p><span class="stav"></span></div><p class="ukol-reakce"></p></div>
+    <div class="ukol" data-ukol="rov-mez"><div class="ukol-hlava"><p><b>🔬 Úkol:</b> Na gumové podložce najdi <strong>nejmenší celý sklon</strong>, při kterém se kvádr po puštění rozjede. Mezní úhel si přitom neukazuj.</p><span class="stav"></span></div><p class="ukol-reakce"></p></div>
 
-    { id:'srazka', nazev:'Srážka stejných koulí',
-      predpoved:{
-        otazka:'Modrá koule (2 kg) narazí rychlostí 2 m/s do <b>stejně těžké</b> červené koule, která <b>stojí</b>. Srážka je dokonale pružná. Co se stane?',
-        moznosti:['Obě pojedou spolu rychlostí 1 m/s','Modrá se zastaví a červená odjede rychlostí 2 m/s','Modrá se odrazí zpět a červená zůstane stát'],
-        spravna:1 },
-      priprava(){ scena('srazky'); N({'#sM1':2,'#sV1':2,'#sM2':1,'#sV2':-1,'#sE':100}); },
-      pokus:'Nastav červené kouli <b>hmotnost 2,0 kg</b> a <b>rychlost 0 m/s</b> a sleduj srážku.',
-      splneno:()=>sim==='srazky'&&srazky.m1===2&&srazky.m2===2&&srazky.u1===2&&srazky.u2===0&&srazky.e===1&&srazky.srazilo,
-      ukaz:{'#sM2':2,'#sV2':0},
-      pozorovani:'Modrá koule se po srážce <b>zastavila</b> a červená odjela rychlostí <b>2 m/s</b> – koule si vyměnily rychlosti.',
-      vysvetli:{
-        otazka:'Proč si koule vyměnily rychlosti?',
-        moznosti:[
-          moznost('Při pružné srážce se zachová hybnost i pohybová energie. U stejně těžkých koulí to jde jedině tak, že si rychlosti vymění.',true),
-          moznost('Modrou kouli zastavilo tření o podložku.',false,'Model tření nepočítá. Modrá se zastavila v okamžiku srážky, protože celou hybnost předala červené.'),
-          moznost('Pojedou-li spolu 1 m/s, zachová se hybnost – tak by to mělo být.',false,'Hybnost by se zachovala, ale ztratila by se polovina pohybové energie. To se stane jen při nepružné srážce – zkus stáhnout pružnost na 0 %.')]},
-      shrnuti:'Při každé srážce se zachová <b>hybnost p = m · v</b>. Při pružné srážce stejně těžkých koulí si koule <b>vymění rychlosti</b> (Newtonova kolébka), při nepružné jedou dál spolu.' },
-  ],
+    <div class="fakty">
+      <div class="fakt"><b>9,81 N/kg</b><span>tíhové zrychlení <i>g</i> na Zemi – kilogram váží asi 10 N</span></div>
+      <div class="fakt"><b>1,62 N/kg</b><span>na Měsíci – kilogram tam váží jen asi 1,6 N, šestkrát méně</span></div>
+      <div class="fakt"><b>24,8 N/kg</b><span>na Jupiteru – tam by tě tíha tiskla k zemi dvaapůlkrát víc</span></div>
+      <div class="fakt"><b>8,3 %</b><span>největší sklon nájezdové rampy pro vozíčkáře (1 : 12, tedy asi 4,8°)</span></div>
+    </div>
 
-  otazky:[
-    ()=>{ const k=nahodne([[4,'4 m','2krát delší'],[0.25,'0,25 m','2krát kratší'],[9,'9 m','3krát delší']]);
-      const T=2*Math.sqrt(k[0]);
-      return { otazka:`Kyvadlo s délkou závěsu 1 m má dobu kmitu asi 2 s. Jakou dobu kmitu bude mít kyvadlo s délkou <b>${k[1]}</b>?`,
-        moznosti:[moznost(`${cislo(T,1)} s`,true),
-          moznost(`${cislo(2*k[0],1)} s`,false,`Doba kmitu neroste s délkou přímo, ale s její odmocninou: √${cislo(k[0],2)} = ${cislo(Math.sqrt(k[0]),1)}.`),
-          moznost('2 s',false,'Doba kmitu na délce závěsu závisí: T = 2π√(l / g).')],
-        vysvetleni:`T roste s odmocninou délky, takže kmit je ${k[2]}: ${cislo(T,1)} s.` }; },
-    { otazka:'Kde má závaží kyvadla <b>největší polohovou energii</b>?',
-      moznosti:[moznost('V krajních polohách',true),
-        moznost('V nejnižším bodě',false,'Dole je závaží nejníž – polohové energie má nejméně a pohybové nejvíc.'),
-        moznost('Všude stejnou',false,'Polohová energie závisí na výšce, a ta se během kmitu mění.')],
-      vysvetleni:'Nahoře je závaží nejvýš a na okamžik stojí: všechna energie je polohová.' },
-    ()=>{ const m=nahodne([0.5,3,4]), v=nahodne([3,4,5]);   // v = 2 by dalo m·v = ½·m·v²
-      return { otazka:`Koule o hmotnosti <b>${cislo(m,1)} kg</b> jede rychlostí <b>${v} m/s</b>. Jakou má hybnost?`,
-        moznosti:[moznost(`${cislo(m*v,1)} kg·m/s`,true),
-          moznost(`${cislo(m*v*v/2,1)} kg·m/s`,false,'To je pohybová energie ½ m v² (v joulech). Hybnost je p = m · v.'),
-          moznost(`${cislo(m+v,1)} kg·m/s`,false,'Hmotnost a rychlost se násobí, nesčítají: p = m · v.')],
-        vysvetleni:`p = m · v = ${cislo(m,1)} · ${v} = ${cislo(m*v,1)} kg·m/s.` }; },
-    ()=>{ const m=nahodne([1,2,3]), v=nahodne([2,4,6]);
-      return { otazka:`Vozík (${m} kg) jede rychlostí <b>${v} m/s</b> a narazí do stejně těžkého stojícího vozíku. Vozíky se <b>spojí</b> a jedou dál spolu. Jak rychle?`,
-        moznosti:[moznost(`${cislo(v/2,1)} m/s`,true),
-          moznost(`${v} m/s`,false,'Hybnost se rozdělí na dvojnásobnou hmotnost, takže rychlost klesne na polovinu.'),
-          moznost('0 m/s',false,'Hybnost se zachová – spojené vozíky se musí dál pohybovat.')],
-        vysvetleni:`Hybnost ${m} · ${v} = ${m*v} kg·m/s nese teď ${2*m} kg: v = ${cislo(v/2,1)} m/s.` }; },
-    { otazka:'Co se zachová při <b>nepružné</b> srážce (koule se spojí)?',
-      moznosti:[moznost('Hybnost, ale ne pohybová energie',true),
-        moznost('Hybnost i pohybová energie',false,'Pohybová energie se zachová jen u pružné srážky. Při nepružné se část změní v teplo a deformaci.'),
-        moznost('Jen pohybová energie',false,'Je to naopak: hybnost se zachová při každé srážce, energie jen při pružné.')],
-      vysvetleni:'Hybnost se zachovává vždy, pohybová energie jen při dokonale pružné srážce.' },
-    { otazka:'Na stejnou nakloněnou rovinu se stejným třením položíš <b>dvakrát těžší</b> kvádr. Rozjede se při menším sklonu?',
-      moznosti:[moznost('Ne, rozjede se při stejném sklonu',true),
-        moznost('Ano, těžší kvádr se rozjede dřív',false,'Těžšímu kvádru roste tah dolů po rovině, ale stejně tak přítlak a tření. Kritický úhel na hmotnosti nezávisí.'),
-        moznost('Ne, těžší se rozjede až při větším sklonu',false,'Tření sice vzroste, ale tah dolů po rovině vzroste stejně. Kritický úhel zůstane stejný: tg α = f.')],
-      vysvetleni:'Kritický úhel určuje jen součinitel tření: tg α = f.' },
-    { otazka:'Co způsobí <b>větší tření</b> na nakloněné rovině?',
-      moznosti:[moznost('Těleso se rozjede až při větším sklonu a zrychluje pomaleji.',true),
-        moznost('Těleso sjede rychleji, protože se o rovinu opírá.',false,'Tření pohyb vždy brzdí – s větším třením je zrychlení menší.'),
-        moznost('Na nakloněné rovině tření nepůsobí.',false,'Působí – brzdí těleso proti směru pohybu (hnědá šipka v modelu).')],
-      vysvetleni:'Tření působí proti pohybu; kritický úhel roste s třením (tg α = f).' },
-    { otazka:'Tlumené kyvadlo se po chvíli zastaví. Kam se poděla jeho energie?',
-      moznosti:[moznost('Přeměnila se na teplo – odpor vzduchu a tření v závěsu.',true),
-        moznost('Zanikla.',false,'Energie nezaniká, jen se mění z jedné formy na jinou.'),
-        moznost('Uložila se v závěsu jako polohová energie.',false,'Závěs se nezvedá ani nenapíná – energie odešla jako teplo do okolí.')],
-      vysvetleni:'Zákon zachování energie: celková energie zůstává, část se jen přemění na teplo.' },
-  ],
-});
-})();
-</script>
+    <details class="zvidave"><summary>📐 Pro zvídavé: složky tíhy a mezní úhel početně <small>sinus, kosinus a tangens</small></summary>
+      <div class="obsah text">
+        <p>Složky tíhy spočítáme z pravoúhlého trojúhelníku, který na obrázku tvoří tíha a její dvě složky:</p>
+        <div class="vzorec"><span><i>F</i><sub>∥</sub> = <i>F</i><sub>G</sub> · sin <i>α</i></span><span><i>F</i><sub>⊥</sub> = <i>F</i><sub>G</sub> · cos <i>α</i></span></div>
+        <p>Tření dokáže nanejvýš <i>F</i><sub>t</sub> = <i>f</i> · <i>F</i><sub>⊥</sub>. Těleso se rozjede, když <i>F</i><sub>G</sub> · sin <i>α</i> &gt; <i>f</i> · <i>F</i><sub>G</sub> · cos <i>α</i>. Tíha se na obou stranách zkrátí, a tak mezní úhel <strong>nezávisí na hmotnosti</strong>:</p>
+        <div class="vzorec"><span>tg <i>α</i><sub>m</sub> = <i>f</i></span></div>
+        <p>Pro dřevo (<i>f</i> = 0,3) vychází <i>α</i><sub>m</sub> ≈ 17°, pro gumu (<i>f</i> = 0,8) asi 39°. Model počítá právě takto.</p>
+      </div>
+    </details>
+
+    <div class="text">
+      <p><strong>Kde to potkáš:</strong> nakloněná rovina patří mezi <strong>jednoduché stroje</strong>. Po rampě vytlačíš sud do auta menší silou, než kdybys ho zvedal(a) svisle – zato po delší dráze. Na stejném principu stojí serpentiny na horských silnicích, klín a závit šroubu.</p>
+    </div>
+
+    <aside class="zapamatuj"><h3>📌 Zapamatuj si</h3>
+      <ul>
+        <li><strong>Tíha</strong> <span class="m"><i>F</i><sub>G</sub> = <i>m</i> · <i>g</i></span> míří svisle dolů; <i>g</i> ≈ 10 N/kg.</li>
+        <li>Na nakloněné rovině ji rozložíme na složku <strong>podél svahu</strong> (rozjíždí těleso) a složku <strong>do podložky</strong> (určuje tření).</li>
+        <li>Těleso se rozjede nad <strong>mezním úhlem</strong>. Ten závisí jen na tření, ne na hmotnosti.</li>
+      </ul>
+    </aside>
+  </section>
+
+  <!-- ============================================================ 3 -->
+  <section class="kapitola" id="energie" data-faze="vyuka" data-nazev="Energie" data-popis="Polohová, pohybová, zachování">
+    <header class="kap-hlava"><span class="kap-cislo">3</span><div><p class="kap-otazka">Kde bere kulička na rampě rychlost a proč nakonec zůstane ležet dole?</p><h2>Polohová a pohybová energie</h2></div></header>
+    <div class="text">
+      <p><span class="term">Energie</span> vyjadřuje, kolik práce dokáže těleso vykonat. Měří se v <strong>joulech</strong> (J). Kulička na okraji rampy ještě stojí, ale energii už má – stačí ji pustit a rozjede se. Říkáme jí <span class="term">polohová</span> (tíhová) <strong>energie</strong>. Je tím větší, čím je těleso těžší a čím výš je:</p>
+    </div>
+    <div class="vzorec" aria-label="Polohová energie se rovná m krát g krát h"><span><i>E</i><sub>p</sub> = <i>m</i> · <i>g</i> · <i>h</i></span><span class="vzorec-popis"><i>h</i> je výška nad zvolenou hladinou (tady nad dnem rampy) v metrech</span></div>
+    <div class="text">
+      <p>Pohybující se těleso má <span class="term">pohybovou energii</span>. Ta roste s hmotností a hodně rychle s rychlostí – dvakrát rychlejší těleso jí má čtyřikrát víc:</p>
+    </div>
+    <div class="vzorec" aria-label="Pohybová energie se rovná jedna polovina m v na druhou"><span><i>E</i><sub>k</sub> = <span class="zl"><span>1</span><span>2</span></span> · <i>m</i> · <i>v</i><sup>2</sup></span><span class="vzorec-popis"><i>v</i> v metrech za sekundu</span></div>
+    <div class="text">
+      <p>Cestou dolů se polohová energie mění na pohybovou, cestou nahoru zase zpět. Když nic nebrzdí, jejich součet zůstává pořád stejný. To je <span class="term">zákon zachování energie</span>: energie nevzniká ani nezaniká, jen se mění z jedné formy na jinou.</p>
+    </div>
+
+    <figure class="obr" id="obr-rampa">
+      <div class="obr-plocha"><svg class="model" role="img" aria-label="Kulička na U-rampě a sloupce energie"></svg></div>
+      <div class="obr-ovladani">
+        <button type="button" class="hlavni" id="ram-pustit">▶️ Pustit</button>
+        <label class="posuvnik">Výška startu <input type="range" id="ram-vyska" min="0.2" max="2.5" step="0.1" value="2"><output id="ram-vyska-h"></output></label>
+        <label class="posuvnik">Hmotnost <input type="range" id="ram-hmotnost" min="0.5" max="5" step="0.5" value="1"><output id="ram-hmotnost-h"></output></label>
+      </div>
+      <div class="obr-ovladani">
+        <div class="skupina"><span class="nazev">Tření a odpor vzduchu:</span>
+          <div class="segment" id="ram-treni" role="group" aria-label="Tření">
+            <button type="button" data-hodnota="zadne">žádné</button><button type="button" data-hodnota="male">malé</button><button type="button" data-hodnota="velke">velké</button>
+          </div>
+        </div>
+        <label class="prepinac"><input type="checkbox" id="ram-pomalu"> 🐌 Zpomalit</label>
+        <button type="button" id="ram-reset">↺ Na start</button>
+      </div>
+      <div class="odecty"></div>
+      <div class="obr-zprava" role="status"></div>
+      <figcaption>Kuličku táhni po rampě na místo, odkud ji chceš pustit. Sloupec „celkem“ skládá všechny tři druhy energie na sebe – sleduj, jestli se mění jeho výška. <span class="legenda"><span class="znacka z-ep">polohová E<sub>p</sub></span><span class="znacka z-ek">pohybová E<sub>k</sub></span><span class="znacka z-teplo">teplo</span><span class="znacka z-rychlost">rychlost</span></span></figcaption>
+    </figure>
+
+    <div class="predpoved" data-predpoved="ram-vyska"></div>
+    <div class="ukol" data-ukol="ram-6"><div class="ukol-hlava"><p><b>🔬 Úkol:</b> Bez tření najdi nejmenší výšku startu, ze které projede kulička dnem rampy rychlostí aspoň <strong>6 m/s</strong>.</p><span class="stav"></span></div><p class="ukol-reakce"></p></div>
+    <div class="ukol" data-ukol="ram-teplo"><div class="ukol-hlava"><p><b>🔬 Úkol:</b> Zapni velké tření a nech kuličku jezdit, dokud se skoro nezastaví. Kam se poděla její energie?</p><span class="stav"></span></div><p class="ukol-reakce"></p></div>
+
+    <div class="analogie">
+      <svg viewBox="0 0 52 52" aria-hidden="true"><rect x="4" y="14" width="44" height="30" rx="5" fill="none" stroke="var(--h-celkem)" stroke-width="2.5"/><rect x="10" y="22" width="10" height="16" rx="2" fill="var(--h-ep)"/><rect x="22" y="28" width="10" height="10" rx="2" fill="var(--h-ek)"/><rect x="34" y="32" width="8" height="6" rx="2" fill="var(--h-teplo)"/></svg>
+      <p>Energie se chová jako peníze na <b>třech účtech</b> jedné rodiny. Peníze se převádějí z účtu na účet, ale dohromady jich je pořád stejně. Tření je jako poplatek, který odchází do okolí – z rodinných účtů zmizí, ale ve světě pořád jsou: <b>ohřejí</b> kuličku, rampu i vzduch.</p>
+    </div>
+
+    <div class="ukazka" data-faze="ukazka" id="ram-priklad">
+      <h3>📘 Řešený příklad</h3>
+      <p>Kulička o hmotnosti 0,5 kg startuje z výšky 1,8 m nad dnem rampy. Jak rychle projede dnem, když ji nic nebrzdí? (<i>g</i> = 10 N/kg)</p>
+      <ol>
+        <li>Zapíšeme: <i>m</i> = 0,5 kg, <i>h</i> = 1,8 m, <i>g</i> = 10 N/kg; hledáme <i>v</i> dole.</li>
+        <li>Polohová energie nahoře: <span class="m"><i>E</i><sub>p</sub> = <i>m</i> · <i>g</i> · <i>h</i> = 0,5 · 10 · 1,8 = 9 J</span>.</li>
+        <li>Dole je výška nulová. Bez tření se celá polohová energie změní na pohybovou: <span class="m"><i>E</i><sub>k</sub> = 9 J</span>.</li>
+        <li>Z <span class="m"><i>E</i><sub>k</sub> = ½ · <i>m</i> · <i>v</i><sup>2</sup></span>: <span class="m"><i>v</i><sup>2</sup> = 2 · 9 / 0,5 = 36</span>, tedy <strong><i>v</i> = 6 m/s</strong>.</li>
+        <li>Všimni si: hmotnost se nakonec neuplatní. Těžší kulička má víc polohové energie, ale potřebuje jí víc i na stejnou rychlost. Model počítá přesněji s <i>g</i> = 9,81 N/kg, proto ukáže 5,9 m/s.</li>
+      </ol>
+      <button type="button" id="ram-priklad-model">Ukázat příklad v modelu</button>
+    </div>
+
+    <aside class="zapamatuj"><h3>📌 Zapamatuj si</h3>
+      <ul>
+        <li><strong>Polohová energie</strong> <span class="m"><i>E</i><sub>p</sub> = <i>m</i> · <i>g</i> · <i>h</i></span>, <strong>pohybová</strong> <span class="m"><i>E</i><sub>k</sub> = ½ · <i>m</i> · <i>v</i><sup>2</sup></span>; jednotkou je joule (J).</li>
+        <li>Při pohybu se jedna mění na druhou, jejich součet se bez tření nemění – <strong>zákon zachování energie</strong>.</li>
+        <li>Tření energii nezničí, ale mění ji na <strong>teplo</strong> (vnitřní energii těles a okolí).</li>
+      </ul>
+    </aside>
+  </section>
+
+  <!-- ============================================================ 4 -->
+  <section class="kapitola" id="kyvadlo" data-faze="vyuka" data-nazev="Kyvadlo" data-popis="Doba kmitu, měření, graf">
+    <header class="kap-hlava"><span class="kap-cislo">4</span><div><p class="kap-otazka">Proč jdou kyvadlové hodiny pořád stejně, i když se kyvadlo kývá čím dál míň?</p><h2>Kyvadlo</h2></div></header>
+    <div class="text">
+      <p><span class="term">Kyvadlo</span> je závaží zavěšené na provázku nebo tyči. Když ho vychýlíš a pustíš, pohybuje se pořád tam a zpět – <strong>kmitá</strong>. Jeden <strong>kmit</strong> je celý pohyb tam a zase zpět do stejné polohy. Čas, za který kyvadlo vykoná jeden kmit, je <span class="term">doba kmitu</span> <i>T</i> (perioda) v sekundách.</p>
+      <p>Kyvadlo je ukázka zákona zachování energie z předchozí kapitoly: v krajní poloze se na okamžik zastaví a má jen polohovou energii, v nejnižším bodě je nejrychlejší. Tíha ho pořád táhne zpátky do nejnižšího bodu – rozhoupává ho její složka <i>F</i><sub>∥</sub> kolmá k závěsu.</p>
+      <p>Podle pověsti si roku 1583 mladý <strong>Galileo Galilei</strong> v katedrále v Pise všiml, že houpající se lustr kmitá pořád stejně dlouho, ať se houpe hodně, nebo málo. Dobu kmitu si měřil vlastním tepem. Na čem tedy doba kmitu závisí? Zjisti to měřením.</p>
+    </div>
+
+    <figure class="obr" id="obr-kyvadlo">
+      <div class="obr-plocha"><svg class="model" role="img" aria-label="Kyvadlo, jeho výchylka a síly"></svg></div>
+      <div class="obr-ovladani">
+        <button type="button" class="hlavni" id="kyv-pustit">▶️ Pustit</button>
+        <button type="button" id="kyv-zapsat" disabled>📝 Zapsat měření</button>
+        <label class="prepinac"><input type="checkbox" id="kyv-dve"> 🪀🪀 Druhé kyvadlo</label>
+        <label class="prepinac"><input type="checkbox" id="kyv-odpor"> 💨 Odpor vzduchu</label>
+        <label class="prepinac"><input type="checkbox" id="kyv-sily" checked> Síly</label>
+      </div>
+      <div class="obr-ovladani kyv-posuvniky">
+        <span class="znacka-kyv a" aria-hidden="true">A</span>
+        <label class="posuvnik">Délka <input type="range" id="kyv-delka" min="0.2" max="2" step="0.05" value="1"><output id="kyv-delka-h"></output></label>
+        <label class="posuvnik">Hmotnost <input type="range" id="kyv-hmotnost" min="0.1" max="5" step="0.1" value="1"><output id="kyv-hmotnost-h"></output></label>
+        <label class="posuvnik">Výchylka <input type="range" id="kyv-uhel" min="5" max="60" step="1" value="20"><output id="kyv-uhel-h"></output></label>
+      </div>
+      <div class="obr-ovladani kyv-posuvniky" id="kyv-b" hidden>
+        <span class="znacka-kyv b" aria-hidden="true">B</span>
+        <label class="posuvnik">Délka <input type="range" id="kyv-delka-b" min="0.2" max="2" step="0.05" value="1"><output id="kyv-delka-b-h"></output></label>
+        <label class="posuvnik">Hmotnost <input type="range" id="kyv-hmotnost-b" min="0.1" max="5" step="0.1" value="1"><output id="kyv-hmotnost-b-h"></output></label>
+        <button type="button" id="kyv-b-jako-a">⧉ B jako A</button>
+      </div>
+      <div class="obr-ovladani">
+        <div class="skupina"><span class="nazev">Kde kyvadlo je:</span>
+          <div class="segment" id="kyv-misto" role="group" aria-label="Místo">
+            <button type="button" data-hodnota="zeme">🌍 Země</button><button type="button" data-hodnota="mesic">🌙 Měsíc</button><button type="button" data-hodnota="mars">🔴 Mars</button>
+          </div>
+        </div>
+        <label class="prepinac"><input type="checkbox" id="kyv-pomalu"> 🐌 Zpomalit</label>
+        <button type="button" id="kyv-reset">↺ Do výchylky</button>
+      </div>
+      <div class="odecty"></div>
+      <div class="obr-zprava" role="status"></div>
+      <figcaption>Závaží táhni myší: do strany měníš výchylku, od závěsu a k němu délku. Dobu kmitu model měří sám z průchodů nejnižším bodem. Když je změřená, tlačítkem 📝 ji zapíšeš do tabulky. <span class="legenda"><span class="znacka z-tiha">tíha</span><span class="znacka z-slozka">složka tíhy, která kyvadlo vrací</span><span class="znacka z-rychlost">rychlost</span></span></figcaption>
+    </figure>
+
+    <div class="mereni" id="kyv-mereni">
+      <div class="mereni-tabulka">
+        <h3>📝 Tabulka měření</h3>
+        <div class="tabulka-obal">
+          <table class="pripady" id="kyv-tabulka">
+            <thead><tr><th>#</th><th>délka <i>l</i></th><th>hmotnost</th><th>výchylka</th><th>místo</th><th>doba kmitu <i>T</i></th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <p class="vzorec-popis" id="kyv-tabulka-prazdna">Zatím nic nezapsáno. Pusť kyvadlo, počkej na změřenou dobu kmitu a stiskni 📝 Zapsat měření.</p>
+        <button type="button" id="kyv-smazat" class="male">🗑️ Smazat tabulku</button>
+      </div>
+      <figure class="graf-obal" id="obr-kyv-graf">
+        <svg class="model graf" role="img" aria-label="Graf doby kmitu v závislosti na délce závěsu"></svg>
+        <figcaption>Body = tvoje měření. Čárkovaná křivka ukazuje, jak doba kmitu roste s délkou na Zemi (a na Měsíci či Marsu, pokud tam měříš).</figcaption>
+      </figure>
+    </div>
+
+    <div class="predpoved" data-predpoved="kyv-hmotnost"></div>
+    <div class="predpoved" data-predpoved="kyv-delka"></div>
+    <div class="ukol" data-ukol="kyv-tabulka"><div class="ukol-hlava"><p><b>🔬 Úkol:</b> Změř dobu kmitu aspoň pro <strong>tři různé délky</strong> a všechna měření zapiš do tabulky. Co ukazuje graf?</p><span class="stav"></span></div><p class="ukol-reakce"></p></div>
+    <div class="ukol" data-ukol="kyv-sekundove"><div class="ukol-hlava"><p><b>🔬 Úkol:</b> Najdi délku kyvadla, které má na Zemi dobu kmitu <strong>2 sekundy</strong> – každý kyv tam nebo zpět trvá právě sekundu.</p><span class="stav"></span></div><p class="ukol-reakce"></p></div>
+    <div class="ukol" data-ukol="kyv-mesic"><div class="ukol-hlava"><p><b>🔬 Úkol:</b> Přenes kyvadlo na Měsíc a změř tam dobu kmitu. Kmitá rychleji, nebo pomaleji než na Zemi?</p><span class="stav"></span></div><p class="ukol-reakce"></p></div>
+
+    <details class="zvidave"><summary>📐 Pro zvídavé: vzorec pro dobu kmitu a Foucaultovo kyvadlo <small>proč √</small></summary>
+      <div class="obsah text">
+        <p>Pro malé výchylky platí:</p>
+        <div class="vzorec"><span><i>T</i> = 2π · √(<i>l</i> / <i>g</i>)</span><span class="vzorec-popis"><i>l</i> délka závěsu v metrech, <i>g</i> tíhové zrychlení</span></div>
+        <p>Hmotnost ve vzorci vůbec není. Délka je pod odmocninou: čtyřikrát delší kyvadlo kmitá dvakrát pomaleji, devětkrát delší třikrát pomaleji. Na Měsíci je <i>g</i> asi šestkrát menší, a tak tam stejné kyvadlo kmitá asi 2,5krát pomaleji (√6 ≈ 2,45). Při velké výchylce (nad 20°) je kmit o něco delší – vyzkoušej 60°.</p>
+        <p>V roce 1851 zavěsil Léon Foucault v pařížském Pantheonu kyvadlo s 67 m dlouhým lanem a 28kg koulí. Kmit trval asi 16 sekund a rovina kyvů se během dne pomalu stáčela. Kyvadlo si svou rovinu drží, a tak se pod ním otáčela Země. Byl to první pokus, který otáčení Země ukázal přímo.</p>
+      </div>
+    </details>
+
+    <aside class="zapamatuj"><h3>📌 Zapamatuj si</h3>
+      <ul>
+        <li><strong>Doba kmitu</strong> <i>T</i> je čas jednoho kmitu tam a zpět.</li>
+        <li>Závisí na <strong>délce</strong> závěsu (delší kyvadlo kmitá pomaleji) a na <i>g</i>. <strong>Nezávisí na hmotnosti</strong> a u malých výchylek ani na výchylce.</li>
+        <li>Kyvadlo s délkou asi 1 m má dobu kmitu 2 s – proto se hodí do hodin.</li>
+      </ul>
+    </aside>
+  </section>
+
+  <!-- ============================================================ 5 -->
+  <section class="kapitola" id="srazky" data-faze="vyuka" data-nazev="Srážky" data-popis="Hybnost, pružná a nepružná srážka">
+    <header class="kap-hlava"><span class="kap-cislo">5</span><div><p class="kap-otazka">Proč se kulečníková koule po přímém nárazu zastaví a ta druhá odjede?</p><h2>Srážky a hybnost <small class="rozsirujici">rozšiřující učivo</small></h2></div></header>
+    <div class="text">
+      <p>Zastavit rozjetý nákladní vůz je mnohem těžší než zastavit kolo jedoucí stejnou rychlostí. Obě tělesa se liší <span class="term">hybností</span> – veličinou, která spojuje hmotnost a rychlost:</p>
+    </div>
+    <div class="vzorec" aria-label="Hybnost se rovná m krát v"><span><i>p</i> = <i>m</i> · <i>v</i></span><span class="vzorec-popis">jednotka kg·m/s; hybnost má směr jako rychlost – pohyb doleva počítáme se záporným znaménkem</span></div>
+    <div class="text">
+      <p>Při srážce na sebe tělesa působí stejně velkými silami opačného směru (akce a reakce). Kolik hybnosti jedno těleso ztratí, tolik druhé získá. Celková hybnost se proto nezmění – to je <span class="term">zákon zachování hybnosti</span>. Platí při <strong>každé</strong> srážce.</p>
+      <ul>
+        <li>Při <strong>pružné</strong> srážce (pružina, ocelové koule, kulečník) se tělesa od sebe odrazí a zachová se i pohybová energie.</li>
+        <li>Při <strong>nepružné</strong> srážce (plastelína, suchý zip, bourající auta) se tělesa spojí a jedou dál spolu. Část pohybové energie se změní na teplo a na deformaci.</li>
+      </ul>
+    </div>
+
+    <figure class="obr" id="obr-srazka">
+      <div class="obr-plocha"><svg class="model" role="img" aria-label="Dva vozíky na kolejnici a bilance hybnosti a energie"></svg></div>
+      <div class="obr-ovladani">
+        <button type="button" class="hlavni" id="sr-pustit">▶️ Spustit srážku</button>
+        <div class="skupina"><span class="nazev">Nárazník:</span>
+          <div class="segment" id="sr-typ" role="group" aria-label="Druh srážky">
+            <button type="button" data-hodnota="pruzna">pružina (pružná)</button><button type="button" data-hodnota="castecna">guma (částečně)</button><button type="button" data-hodnota="nepruzna">suchý zip (nepružná)</button>
+          </div>
+        </div>
+        <label class="prepinac"><input type="checkbox" id="sr-pomalu"> 🐌 Zpomalit</label>
+        <button type="button" id="sr-reset">↺ Znovu</button>
+      </div>
+      <div class="obr-ovladani kyv-posuvniky">
+        <span class="znacka-kyv a" aria-hidden="true">A</span>
+        <label class="posuvnik">Hmotnost <input type="range" id="sr-m1" min="0.5" max="4" step="0.5" value="1"><output id="sr-m1-h"></output></label>
+        <label class="posuvnik">Rychlost <input type="range" id="sr-v1" min="-3" max="3" step="0.5" value="2"><output id="sr-v1-h"></output></label>
+      </div>
+      <div class="obr-ovladani kyv-posuvniky">
+        <span class="znacka-kyv b" aria-hidden="true">B</span>
+        <label class="posuvnik">Hmotnost <input type="range" id="sr-m2" min="0.5" max="4" step="0.5" value="1"><output id="sr-m2-h"></output></label>
+        <label class="posuvnik">Rychlost <input type="range" id="sr-v2" min="-3" max="3" step="0.5" value="0"><output id="sr-v2-h"></output></label>
+      </div>
+      <div class="obr-ovladani" aria-label="Hotová nastavení">
+        <span class="nazev-mal">Nastav jako:</span>
+        <button type="button" data-sr-preset="kulecnik">🎱 kulečník (stejné, B stojí)</button>
+        <button type="button" data-sr-preset="tezky">🚚 těžký do lehkého</button>
+        <button type="button" data-sr-preset="lehky">🚲 lehký do těžkého</button>
+        <button type="button" data-sr-preset="celne">🚗🚗 čelně proti sobě</button>
+      </div>
+      <div class="odecty"></div>
+      <div class="obr-zprava" role="status"></div>
+      <figcaption>Kladná rychlost = doprava, záporná = doleva. Nahoře je bilance: horní proužek každé dvojice je stav před srážkou, dolní stav teď. <span class="legenda"><span class="znacka z-rychlost">rychlost</span><span class="znacka z-hybnost">hybnost</span><span class="znacka z-ek">pohybová energie</span><span class="znacka z-teplo">teplo a deformace</span></span></figcaption>
+    </figure>
+
+    <div class="predpoved" data-predpoved="sr-stejne"></div>
+    <div class="predpoved" data-predpoved="sr-lehky"></div>
+    <div class="ukol" data-ukol="sr-zastav"><div class="ukol-hlava"><p><b>🔬 Úkol:</b> Nastav nepružnou srážku dvou jedoucích vozíků tak, aby po srážce <strong>oba stály</strong>.</p><span class="stav"></span></div><p class="ukol-reakce"></p></div>
+
+    <div class="text">
+      <p><strong>Kde to potkáš:</strong> auta mají vpředu a vzadu <strong>deformační zóny</strong>. Při nárazu se záměrně zmačkají – srážka je nepružná a pohybová energie se spotřebuje na deformaci plechu, ne na cestující. Pružnou srážku zase vidíš u <strong>Newtonovy kolébky</strong>: řada ocelových kuliček, kde náraz jedné krajní kuličky vymrští tu na druhém konci.</p>
+    </div>
+
+    <aside class="zapamatuj"><h3>📌 Zapamatuj si</h3>
+      <ul>
+        <li><strong>Hybnost</strong> <span class="m"><i>p</i> = <i>m</i> · <i>v</i></span> má směr jako rychlost; jednotka kg·m/s.</li>
+        <li>Při <strong>každé</strong> srážce se celková hybnost <strong>zachová</strong>.</li>
+        <li>Pohybová energie se zachová jen při <strong>pružné</strong> srážce; při nepružné se část změní na teplo a deformaci.</li>
+      </ul>
+    </aside>
+  </section>
+
+  <!-- ============================================================ tahák -->
+  <section class="kapitola" id="tahak" data-faze="tahak" data-nazev="Tahák" data-popis="Všechno na jedné stránce" data-zvlast>
+    <header class="kap-hlava"><span class="kap-cislo">📌</span><div><p class="kap-otazka">Všechno podstatné na jedné stránce</p><h2>Tahák – síla, pohyb a energie</h2></div></header>
+    <div class="tahak-mrizka">
+      <div class="tahak-karta"><h3>Síla</h3>
+        <svg viewBox="0 0 300 96" class="ikona" aria-hidden="true"><line x1="10" y1="80" x2="290" y2="80" class="cara tenka c-text"/><rect x="110" y="40" width="60" height="40" rx="4" class="bedna"/><path class="cara c-tah" d="M170 60 L250 60"/><path class="hrot c-tah" d="M262 60 L248 53 L248 67Z"/><path class="cara c-treni" d="M110 78 L62 78"/><path class="hrot c-treni" d="M52 78 L64 72 L64 84Z"/><text x="222" y="50" font-size="13" fill="var(--h-tah)">F</text><text x="62" y="70" font-size="13" fill="var(--h-treni)">Fₜ</text></svg>
+        <ul><li>Jednotka newton (N); šipka: působiště, směr, velikost.</li><li>Stejný směr → síly se sčítají, opačný → odečítají.</li><li>Tření <i>F</i><sub>t</sub> = <i>f</i> · <i>F</i><sub>n</sub> působí proti pohybu.</li></ul></div>
+      <div class="tahak-karta"><h3>Newtonovy zákony</h3><ul><li><b>1.</b> Výsledná síla nulová → těleso stojí, nebo jede stálou rychlostí přímo (setrvačnost).</li><li><b>2.</b> Výsledná síla mění rychlost; <i>F</i> = <i>m</i> · <i>a</i>.</li><li><b>3.</b> Akce a reakce: síly jsou vždy ve dvojicích, stejně velké, opačného směru.</li></ul></div>
+      <div class="tahak-karta"><h3>Tíha a nakloněná rovina</h3><p class="m" style="font-size:1.15rem"><i>F</i><sub>G</sub> = <i>m</i> · <i>g</i>, <i>g</i> ≈ 10 N/kg</p><ul><li>Tíhu rozložíme na složku podél svahu (rozjíždí) a do podložky (určuje tření).</li><li>Se sklonem roste <i>F</i><sub>∥</sub>, klesá <i>F</i><sub>⊥</sub>.</li><li>Mezní úhel: tg <i>α</i><sub>m</sub> = <i>f</i>, nezávisí na hmotnosti.</li></ul></div>
+      <div class="tahak-karta"><h3>Energie</h3><p class="m" style="font-size:1.15rem"><i>E</i><sub>p</sub> = <i>m</i> · <i>g</i> · <i>h</i> · <i>E</i><sub>k</sub> = ½ · <i>m</i> · <i>v</i><sup>2</sup></p><ul><li>Jednotka joule (J).</li><li>Zákon zachování: energie nevzniká ani nezaniká, jen se mění.</li><li>Tření mění pohybovou energii na teplo.</li><li>Pád z výšky <i>h</i> bez tření: <i>v</i> = √(2 · <i>g</i> · <i>h</i>).</li></ul></div>
+      <div class="tahak-karta"><h3>Kyvadlo</h3><p class="m" style="font-size:1.15rem"><i>T</i> = 2π · √(<i>l</i> / <i>g</i>)</p><ul><li>Doba kmitu závisí na délce a na <i>g</i>, ne na hmotnosti.</li><li>4× delší kyvadlo → 2× delší kmit.</li><li>Délka 1 m → <i>T</i> ≈ 2 s.</li><li>Nahoře jen <i>E</i><sub>p</sub>, dole nejvíc <i>E</i><sub>k</sub>.</li></ul></div>
+      <div class="tahak-karta"><h3>Hybnost a srážky</h3><p class="m" style="font-size:1.15rem"><i>p</i> = <i>m</i> · <i>v</i></p><ul><li>Celková hybnost se při srážce zachová – vždy.</li><li>Pružná srážka: zachová se i pohybová energie.</li><li>Nepružná: tělesa se spojí, část energie → teplo a deformace.</li><li>Stejně těžká tělesa si při pružné srážce vymění rychlosti.</li></ul></div>
+    </div>
+  </section>
+
+  <!-- ============================================================ procvič -->
+  <section class="kapitola" id="procvic" data-faze="procvic" data-nazev="Procvič" data-popis="Otázky napříč lekcí" data-zvlast>
+    <header class="kap-hlava"><span class="kap-cislo">✏️</span><div><p class="kap-otazka">Otázky se pokaždé vygenerují znovu, s jinými čísly.</p><h2>Procvič si mechaniku</h2></div></header>
+    <div class="cviceni">
+      <div class="cviceni-hlava">
+        <div class="temata" id="cv-temata" role="group" aria-label="Téma otázek"></div>
+      </div>
+      <div class="karta-otazky">
+        <div id="plocha">
+          <p class="tema" id="cv-tema"></p>
+          <p class="zadani" id="cv-zadani" tabindex="-1"></p>
+          <div class="obrazek" id="cv-obrazek" hidden></div>
+          <div id="cv-moznosti"></div>
+          <p class="odezva" id="cv-odezva"></p>
+        </div>
+        <div class="napoveda" id="cv-napoveda" hidden></div>
+        <div class="ovladani cviceni-ovladani">
+          <button type="button" id="btnNapoveda">💡 Nápověda</button>
+          <button type="button" id="btnDalsi">Přeskočit →</button>
+          <span class="skore" id="cv-skore"></span>
+        </div>
+      </div>
+      <p class="vzorec-popis">Na odpověď můžeš klepnout, nebo zmáčknout klávesu 1–4. Po chybě se ukáže, v čem je záměna, a můžeš to zkusit znovu – do skóre se počítá jen odpověď napoprvé. Ve výpočtech počítej s <i>g</i> = 10 N/kg.</p>
+    </div>
+  </section>
+
+  <div data-kostra-zapati></div>
+</main>
+</div>
+
+<script src="physics_playground.js?v=1"></script>
 </body>
 </html>

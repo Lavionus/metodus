@@ -19,11 +19,25 @@
     .reseni-postup { margin-top: 12px; font-size: 0.95rem; color: var(--text-muted); line-height: 1.5; }
     #plocha .karta { width: min(560px, 100%); }
     .karta .nazor-procenta { margin-top: 10px; }
+    .procenta-kontexty { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 9px; width: min(720px, 100%); margin: 14px auto 20px; }
+    .procenta-kontext { margin: 0; padding: 6px; border: 1px solid var(--border); border-radius: 13px; background: var(--panel); box-shadow: 0 3px 12px #0001; }
+    .procenta-obrazek { position: relative; overflow: hidden; aspect-ratio: 1; border-radius: 9px; background: #f4edda; }
+    .procenta-obrazek img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    .procenta-udaj { position: absolute; right: 6px; bottom: 6px; padding: 3px 7px; border-radius: 999px; background: #fffdf1e8; color: #172026; font-weight: 800; font-size: clamp(.72rem, 2vw, .9rem); box-shadow: 0 1px 5px #0003; }
+    .procenta-kontext figcaption { padding: 6px 2px 1px; color: var(--text-faint); font-size: .76rem; line-height: 1.25; text-align: center; }
+    @media (max-width: 560px) { .procenta-kontexty { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   </style>
 </head>
 <body>
   <h1>💯 Procenta a trojčlenka</h1>
   <p class="podtitul">Pro 7.–9. ročník: série deseti úloh. Výsledky zaokrouhluj na 2 desetinná místa, čárku i tečku bereme obojí. Po chybě máš druhý pokus, pak uvidíš postup a proužek 0–100 %.</p>
+
+  <section class="procenta-kontexty" aria-label="Kde se setkáváme s procenty">
+    <figure class="procenta-kontext"><div class="procenta-obrazek"><img src="img/m/procenta-sleva.webp" alt="Školní batoh s prázdnou cenovkou." width="768" height="768"><span class="procenta-udaj">−25 %</span></div><figcaption>Sleva z původní ceny</figcaption></figure>
+    <figure class="procenta-kontext"><div class="procenta-obrazek"><img src="img/m/procenta-volby.webp" alt="Výsledkový graf se čtyřmi barevnými sloupci." width="768" height="768"><span class="procenta-udaj">42 %</span></div><figcaption>Podíl hlasů ve volbě</figcaption></figure>
+    <figure class="procenta-kontext"><div class="procenta-obrazek"><img src="img/m/procenta-etiketa.webp" alt="Krabice ovesných vloček s prázdnou informační etiketou." width="768" height="768"><span class="procenta-udaj">8 %</span></div><figcaption>Složení potraviny</figcaption></figure>
+    <figure class="procenta-kontext"><div class="procenta-obrazek"><img src="img/m/procenta-kasicka.webp" alt="Keramické prasátko s několika mincemi." width="768" height="768"><span class="procenta-udaj">+5 %</span></div><figcaption>Úrok z úspor</figcaption></figure>
+  </section>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="zceho" class="active">Kolik je p % z čísla</button>

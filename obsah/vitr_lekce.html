@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>💨 Vítr a proudění vzduchu – názorná lekce</title>
+<meta name="description" content="Interaktivní výklad pro 7. a 8. ročník: proč fouká vítr, síla větru, obtékání překážek, odpor vzduchu, rychlost a tlak v zúžení, křídlo a vztlak, vítr kolem budov.">
+<link rel="stylesheet" href="../common.css">
+<link rel="stylesheet" href="vitr_lekce.css?v=1">
+<script src="../theme.js"></script>
+<script src="../podpis.js" defer></script>
+<script src="../kostra.js" defer></script>
+<script src="../uloha.js"></script>
+</head>
+<body>
+<div class="stranka">
+
+<aside class="osnova" aria-label="Kapitoly lekce">
+  <h2>Kapitoly</h2>
+  <ol id="osnova"></ol>
+  <div class="pokrok">
+    <span id="pokrokText">Splněno 0 úkolů</span>
+    <div class="pokrok-pruh" aria-hidden="true"><span id="pokrokPruh"></span></div>
+    <button type="button" class="znovu" id="zacitZnovu">↺ Začít lekci znovu</button>
+  </div>
+</aside>
+
+<main class="lekce">
+  <nav class="cipy" id="cipy" aria-label="Kapitoly lekce"></nav>
+
+  <header class="uvod">
+    <p class="nadtitul">Interaktivní výklad</p>
+    <h1>Vítr a proudění vzduchu</h1>
+    <p class="podtitul">Proč vůbec fouká vítr, proč se cyklista při sjezdu krčí, proč vichřice strhne střechu a jak je možné, že těžké letadlo unese vzduch. Každý jev si vyzkoušíš na živém modelu – dva z nich jsou skutečný větrný tunel, který proudění počítá.</p>
+  </header>
+
+  <ul class="jak-pracovat" aria-label="Jak s lekcí pracovat">
+    <li><svg viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="var(--accent)" stroke-width="2.5"/><circle cx="11" cy="11" r="2.5" fill="var(--accent)"/></svg> Modré kroužky a sondy se dají táhnout (i šipkami).</li>
+    <li>🤔 Nejdřív předpověz, pak ověř na modelu.</li>
+    <li>🔬 Úkoly si samy poznají, že jsi je splnil(a).</li>
+    <li>📌 Rámeček „Zapamatuj si“ shrnuje to hlavní.</li>
+  </ul>
+
+  <nav class="mapa" id="mapa" aria-label="Mapa lekce"></nav>
+
+  <!-- ============================================================ 1 -->
+  <section class="kapitola" id="pricina" data-faze="vyuka" data-nazev="Proč fouká vítr" data-popis="Tlak, teplota, bríza">
+    <header class="kap-hlava"><span class="kap-cislo">1</span><div><p class="kap-otazka">Kde se vítr bere a proč u moře fouká ve dne jinam než v noci?</p><h2>Proč fouká vítr</h2></div></header>
+    <div class="text">
+      <p><span class="term">Vítr</span> je vodorovné proudění vzduchu. Vzduch se dá do pohybu vždycky, když má na dvou místech <strong>různý tlak</strong>: proudí z místa s <strong>vyšším tlakem</strong> do místa s <strong>nižším tlakem</strong> – stejně jako vzduch syčí z nafouknutého balónku ven. Čím větší je rozdíl tlaků, tím silnější vítr.</p>
+      <p>Rozdíly tlaků vznikají hlavně tím, že <strong>Slunce ohřívá zemský povrch nestejně</strong>. Nad teplým povrchem se vzduch ohřeje, rozepne se, je lehčí a <strong>stoupá</strong> – u země tam vznikne <strong>tlaková níže</strong> (značka <b>N</b>). Nad chladným povrchem vzduch naopak <strong>klesá</strong> a u země je <strong>tlaková výše</strong> (<b>V</b>). Vzduch u země pak proudí od V k N, nahoře se vrací zpátky – vznikne uzavřený koloběh.</p>
+    </div>
+
+    <figure class="obr" id="obr-briza">
+      <div class="obr-plocha"><svg class="model" role="img" aria-label="Pobřeží: moře, pevnina, koloběh vzduchu a praporek na pláži"></svg></div>
+      <div class="obr-ovladani">
+        <div class="skupina"><span class="nazev">Doba:</span>
+          <div class="segment" id="briza-doba" role="group" aria-label="Denní doba">
+            <button type="button" data-hodnota="den">☀️ den</button><button type="button" data-hodnota="noc">🌙 noc</button>
+          </div>
+        </div>
+        <label class="posuvnik">Rozdíl teplot pevnina × moře <input type="range" id="briza-dt" min="0" max="12" step="1" value="6"><output id="briza-dt-h"></output></label>
+      </div>
+      <div class="odecty"></div>
+      <div class="obr-zprava" role="status"></div>
+      <figcaption>Řez pobřežím. Tečky jsou „kousky vzduchu“, šipky ukazují směr koloběhu. Praporek na pláži ukazuje vítr u země. <span class="legenda"><span class="znacka z-teply">teplý vzduch</span><span class="znacka z-studeny">chladný vzduch</span></span></figcaption>
+    </figure>
+
+    <div class="predpoved" data-predpoved="briza-noc"></div>
+    <div class="ukol" data-ukol="briza-klid"><div class="ukol-hlava"><p><b>🔬 Úkol:</b> Nastav podmínky, při kterých vzduch nad pobřežím vůbec nefouká.</p><span class="stav"></span></div><p class="ukol-reakce"></p></div>
+
+    <div class="text">
+      <p>Pobřežní vítr – <span class="term">bríza</span> – je malý koloběh na pár desítek kilometrů. Stejně ale funguje i vítr na celé Zemi: rovník je ohřívaný víc než póly, a tak se vzduch dává do pohybu v obřích koloběhích. Otáčení Země je pak stáčí do stran, proto na mapě počasí vítr neteče přímo od V k N, ale kolem nich krouží.</p>
+    </div>
+
+    <aside class="zapamatuj"><h3>📌 Zapamatuj si</h3>
+      <ul>
+        <li><strong>Vítr</strong> je proudění vzduchu z místa s <strong>vyšším tlakem</strong> do místa s <strong>nižším tlakem</strong>.</li>
+        <li>Rozdíly tlaků vznikají hlavně <strong>nestejným ohřátím</strong> povrchu: teplý vzduch stoupá (u země níže N), studený klesá (u země výše V).</li>
+        <li><strong>Bríza</strong>: ve dne fouká od moře na pevninu, v noci z pevniny na moře.</li>
+      </ul>
+    </aside>
+  </section>
+
+  <!-- ============================================================ 2 -->
+  <section class="kapitola" id="sila" data-faze="vyuka" data-nazev="Síla větru" data-popis="Beaufortova stupnice, m/s a km/h">
+    <header class="kap-hlava"><span class="kap-cislo">2</span><div><p class="kap-otazka">Jak poznat sílu větru, když nemáš žádný přístroj?</p><h2>Jak silně fouká</h2></div></header>
+    <div class="text">
+      <p>Rychlost větru měří meteorologové <span class="term">anemometrem</span> – vrtulkou nebo miskami, které se ve větru točí tím rychleji, čím silněji fouká. Udává se v <strong>metrech za sekundu</strong> (m/s), v předpovědi počasí často v km/h. Převod je jednoduchý: za hodinu (3 600 s) urazí vzduch 3 600× víc metrů, tedy 3,6× víc kilometrů.</p>
+    </div>
+    <div class="vzorec" aria-label="1 metr za sekundu je 3,6 kilometru za hodinu"><span>1 m/s = 3,6 km/h</span><span class="vzorec-popis">z m/s na km/h násobíme 3,6 · z km/h na m/s dělíme 3,6</span></div>
+    <div class="text">
+      <p>Už v roce 1805 sestavil britský admirál Francis Beaufort stupnici, podle které se síla větru pozná <strong>jen podle toho, co vítr dělá</strong> s kouřem, stromy nebo vlnami. <span class="term">Beaufortova stupnice</span> má 13 stupňů (0–12) a používá se dodnes.</p>
+    </div>
+
+    <figure class="obr" id="obr-beaufort">
+      <div class="obr-plocha"><svg class="model" role="img" aria-label="Krajina s domem, kouřem z komína, stromem a vlajkou ve větru"></svg></div>
+      <div class="obr-ovladani">
+        <label class="posuvnik">Stupeň <input type="range" id="bf-stupen" min="0" max="12" step="1" value="3"><output id="bf-stupen-h"></output></label>
+      </div>
+      <div class="odecty"></div>
+      <div class="obr-zprava" role="status"></div>
+      <figcaption>Posuvníkem měníš sílu větru. Sleduj kouř z komína, strom, vlajku a trávu. Popisy projevů odpovídají stupnici, kterou používá Český hydrometeorologický ústav.</figcaption>
+    </figure>
+
+    <div class="ukol" data-ukol="bf-stromy"><div class="ukol-hlava"><p><b>🔬 Úkol:</b> Najdi nejnižší stupeň, při kterém se pohybují <b>celé stromy</b> a chůze proti větru je nesnadná.</p><span class="stav"></span></div><p class="ukol-reakce"></p></div>
+    <div class="ukol" data-ukol="bf-kmh"><div class="ukol-hlava"><p><b>🔬 Úkol:</b> V předpovědi hlásí vítr <b>30 km/h</b>. Najdi stupeň, do kterého tahle rychlost patří. <i>(Nejdřív si ji převeď na m/s.)</i></p><span class="stav"></span></div><p class="ukol-reakce"></p></div>
+
+    <div class="fakty">
+      <div class="fakt"><b>3,6×</b><span>tolikrát je číslo v km/h větší než v m/s</span></div>
+      <div class="fakt"><b>32,7 m/s</b><span>od této rychlosti (asi 118 km/h) se vítr nazývá orkán – 12. stupeň</span></div>
+      <div class="fakt"><b>408 km/h</b><span>nejsilnější změřený poryv mimo tornáda (ostrov Barrow, Austrálie, 1996)</span></div>
+    </div>
+
+    <aside class="zapamatuj"><h3>📌 Zapamatuj si</h3>
+      <ul>
+        <li>Rychlost větru se měří <strong>anemometrem</strong> a udává v <strong>m/s</strong> nebo km/h; <strong>1 m/s = 3,6 km/h</strong>.</li>
+        <li><strong>Beaufortova stupnice</strong> (0–12) určuje sílu větru podle jeho projevů: 0 bezvětří, 6 silný vítr, 9 vichřice, 12 orkán.</li>
+      </ul>
+    </aside>
+  </section>
+
+  <!-- ============================================================ 3 -->
+  <section class="kapitola" id="obtekani" data-faze="vyuka" data-nazev="Obtékání" data-popis="Proudnice, úplav, víry">
+    <header class="kap-hlava"><span class="kap-cislo">3</span><div><p class="kap-otazka">Co se děje se vzduchem, když mu stojí v cestě překážka?</p><h2>Jak vzduch obtéká překážky</h2></div></header>
+    <div class="text">
+      <p>Proudění se dá zviditelnit kouřem. Ve větrném tunelu se z trysek pouštějí tenké pramínky kouře a každý z nich ukáže cestu, kudy vzduch teče. Takovým čarám říkáme <span class="term">proudnice</span>. Kde jsou proudnice <strong>hustě u sebe</strong>, proudí vzduch <strong>rychle</strong>; kde se rozestupují, zpomaluje.</p>
+      <p>Když vzduch proudí klidně ve vrstvách, které se nepromíchávají, je proudění <span class="term">laminární</span> (z latinského lamina = vrstva). Za překážkou se ale proud často <strong>odtrhne</strong> a vznikne neklidná oblast plná vírů – <span class="term">úplav</span>. Takovému proudění říkáme <span class="term">turbulentní</span>. Víry spotřebují energii, a proto překážku brzdí.</p>
+    </div>
+
+    <figure class="obr tunel" id="obr-obtekani">
+      <div class="obr-plocha tunel-plocha"><canvas tabindex="0" aria-label="Větrný tunel s překážkou. Klepnutím nebo šipkami posouváš sondu."></canvas></div>
+      <div class="tunel-legenda" aria-hidden="true"></div>
+      <div class="obr-ovladani">
+        <div class="skupina"><span class="nazev">Překážka:</span>
+          <div class="segment" data-t="scena" role="group" aria-label="Překážka">
+            <button type="button" data-hodnota="valec">⚪ válec</button><button type="button" data-hodnota="deska">▮ deska</button><button type="button" data-hodnota="kapka">💧 kapka</button>
+          </div>
+        </div>
+        <div class="skupina"><span class="nazev">Tekutina:</span>
+          <div class="segment" data-t="tekutina" role="group" aria-label="Tekutina">
+            <button type="button" data-hodnota="vzduch">vzduch</button><button type="button" data-hodnota="med">hustý med</button>
+          </div>
+        </div>
+      </div>
+      <div class="obr-ovladani">
+        <div class="skupina"><span class="nazev">Ukázat:</span>
+          <div class="segment" data-t="rezim" role="group" aria-label="Zobrazení">
+            <button type="button" data-hodnota="proudnice">proudnice</button><button type="button" data-hodnota="rychlost">rychlost</button><button type="button" data-hodnota="viry">víry</button><button type="button" data-hodnota="tlak">tlak</button>
+          </div>
+        </div>
+        <button type="button" data-t="pauza">⏸️ Pauza</button>
+        <button type="button" data-t="restart">↺ Výchozí stav</button>
+      </div>
+      <div class="odecty"></div>
+      <div class="obr-zprava" role="status"></div>
+      <figcaption>Tunel opravdu počítá, jak vzduch proudí (metoda mřížkového Boltzmannova modelu, v rovině). Vítr fouká zleva. <b>Sonda</b> (terčík) měří, jak rychle vzduch proudí v jejím místě – klepni do tunelu nebo ji táhni. Po přepnutí se proudění chvíli ustaluje. Tunel je malý a vzduch v něm je „vazčí“ než skutečný, proto jsou rozdíly odporů menší než ve skutečnosti – opravdová kapka má asi 30× menší odpor než deska (kapitola 4).</figcaption>
+    </figure>
+
+    <div class="predpoved" data-predpoved="obt-tvar"></div>
+    <div class="ukol" data-ukol="obt-sonda"><div class="ukol-hlava"><p><b>🔬 Úkol:</b> Sondou najdi místo za válcem, kde vzduch skoro stojí – fouká tam méně než 20 % rychlosti větru.</p><span class="stav"></span></div><p class="ukol-reakce"></p></div>
+    <div class="ukol" data-ukol="obt-viry"><div class="ukol-hlava"><p><b>🔬 Úkol:</b> Nech válec ve vzduchu, přepni na <b>víry</b> a počkej, až se za válcem začnou víry odtrhávat střídavě – jednou nahoře, jednou dole.</p><span class="stav"></span></div><p class="ukol-reakce"></p></div>
+    <div class="ukol" data-ukol="obt-med"><div class="ukol-hlava"><p><b>🔬 Úkol:</b> Přepni tekutinu na <b>hustý med</b>. Vznikají za válcem víry i teď?</p><span class="stav"></span></div><p class="ukol-reakce"></p></div>
+
+    <details class="zvidave"><summary>🌀 Pro zvídavé: Kármánova vírová stezka <small>proč zpívají dráty a houpou se komíny</small></summary>
+      <div class="obsah text">
+        <p>Střídavě odtrhávané víry za válcem popsal maďarsko-americký fyzik Theodore von Kármán, proto se jim říká <strong>Kármánova vírová stezka</strong>. Při každém odtržení víru dostane válec malé šťouchnutí do strany – jednou nahoru, jednou dolů. Proto ve větru „zpívají“ telegrafní dráty a lana: kmitají v rytmu odtrhávání vírů.</p>
+        <p>U vysokých ocelových komínů by takové houpání bylo nebezpečné. Proto mají kolem sebe navinutou šroubovitou lištu: víry se pak neodtrhávají všude ve stejném rytmu a komín se nerozkmitá. Vírové stezky jsou vidět i na družicových snímcích – v oblacích za ostrovy, které vyčnívají z oceánu.</p>
+      </div>
+    </details>
+
+    <aside class="zapamatuj"><h3>📌 Zapamatuj si</h3>
+      <ul>
+        <li><strong>Proudnice</strong> ukazují, kudy vzduch proudí; kde jsou hustě u sebe, proudí rychleji.</li>
+        <li><strong>Laminární</strong> proudění je klidné ve vrstvách, <strong>turbulentní</strong> je neuspořádané, s víry.</li>
+        <li>Za překážkou se proud odtrhává a vzniká <strong>úplav</strong> s víry a slabým větrem. Čím je úplav širší, tím víc vzduch překážku brzdí.</li>
+      </ul>
+    </aside>
+  </section>
+
+  <!-- ============================================================ 4 -->
+  <section class="kapitola" id="odpor" data-faze="vyuka" data-nazev="Odpor vzduchu" data-popis="Tvar, plocha, rychlost">
+    <header class="kap-hlava"><span class="kap-cislo">4</span><div><p class="kap-otazka">Proč mají rychlovlaky zaoblenou příď a proč se cyklista krčí?</p><h2>Odporová síla</h2></div></header>
+    <div class="text">
+      <p>Těleso, které se pohybuje vzduchem (nebo do kterého fouká vítr), brzdí <span class="term">odporová síla</span> vzduchu. Míří vždy <strong>proti pohybu tělesa</strong> – tedy po směru větru. Závisí na třech věcech:</p>
+      <ul>
+        <li><strong>na tvaru tělesa</strong> – proudnicový tvar (kapka) má odpor mnohem menší než deska postavená napříč,</li>
+        <li><strong>na velikosti čelní plochy</strong> – to je plocha, kterou těleso „nastavuje“ proudu, jeho stín při pohledu ve směru větru,</li>
+        <li><strong>na rychlosti</strong> – a to hodně: při dvojnásobné rychlosti je odpor <strong>čtyřikrát</strong> větší.</li>
+      </ul>
+    </div>
+
+    <figure class="obr" id="obr-odpor">
+      <div class="obr-plocha"><svg class="model" role="img" aria-label="Těleso ve větrném tunelu se šipkou odporové síly a graf závislosti síly na rychlosti"></svg></div>
+      <div class="obr-ovladani">
+        <div class="skupina"><span class="nazev">Tvar:</span>
+          <div class="segment" id="odpor-tvar" role="group" aria-label="Tvar tělesa">
+            <button type="button" data-hodnota="deska">deska</button><button type="button" data-hodnota="krychle">krychle</button><button type="button" data-hodnota="koule">koule</button><button type="button" data-hodnota="kapka">kapka</button>
+          </div>
+        </div>
+      </div>
+      <div class="obr-ovladani">
+        <label class="posuvnik">Rychlost větru <input type="range" id="odpor-v" min="0" max="30" step="0.5" value="10"><output id="odpor-v-h"></output></label>
+        <label class="posuvnik">Čelní plocha <input type="range" id="odpor-s" min="1" max="10" step="1" value="5"><output id="odpor-s-h"></output></label>
+      </div>
+      <div class="odecty"></div>
+      <div class="obr-zprava" role="status"></div>
+      <figcaption>Těleso je upevněné na siloměru. V grafu vpravo je plnou čarou tvůj tvar, čárkovaně ostatní tvary se stejnou plochou. <span class="legenda"><span class="znacka z-odpor">odporová síla</span><span class="znacka z-proud">proud vzduchu</span></span></figcaption>
+    </figure>
+
+    <div class="predpoved" data-predpoved="odpor-2x"></div>
+    <div class="ukol" data-ukol="odpor-kapka"><div class="ukol-hlava"><p><b>🔬 Úkol:</b> Najdi tvar, který má při stejné rychlosti a ploše víc než 10× menší odpor než deska.</p><span class="stav"></span></div><p class="ukol-reakce"></p></div>
+    <div class="ukol" data-ukol="odpor-10n"><div class="ukol-hlava"><p><b>🔬 Úkol:</b> Nastav <b>desku</b> o ploše <b>5 dm²</b> a takovou rychlost větru, aby na ni tlačil silou 10 N (± 0,5 N) – stejně jako tíha litru vody.</p><span class="stav"></span></div><p class="ukol-reakce"></p></div>
+
+    <div class="ukazka" data-faze="ukazka" id="odpor-priklad">
+      <h3>📘 Řešený příklad</h3>
+      <p>Při rychlosti 50 km/h působí na auto odporová síla vzduchu 150 N. Jak velká bude při 100 km/h?</p>
+      <ol>
+        <li>Rychlost vzrostla <strong>2×</strong> (ze 50 na 100 km/h).</li>
+        <li>Odporová síla roste s <strong>druhou mocninou</strong> rychlosti: 2× větší rychlost → 2 · 2 = <strong>4× větší</strong> odpor.</li>
+        <li><i>F</i> = 4 · 150 N = <strong>600 N</strong>.</li>
+      </ol>
+      <p>Proto auto při dálniční rychlosti spotřebuje mnohem víc paliva než ve městě – většina výkonu motoru jde na přemáhání odporu vzduchu.</p>
+      <button type="button" id="odpor-priklad-model">Ukázat v modelu (10 → 20 m/s)</button>
+    </div>
+
+    <div class="fakty">
+      <div class="fakt"><b>≈ 200 km/h</b><span>největší rychlost parašutisty ve volném pádu na břiše – víc ho odpor vzduchu nepustí</span></div>
+      <div class="fakt"><b>≈ 18 km/h</b><span>rychlost dopadu s otevřeným padákem – velká plocha a dutý tvar dají obrovský odpor</span></div>
+      <div class="fakt"><b>přes 80 %</b><span>všech odporů, které závodní cyklista při rychlé jízdě překonává, tvoří odpor vzduchu</span></div>
+    </div>
+
+    <details class="zvidave"><summary>🧮 Pro zvídavé: vzorec pro odporovou sílu <small>jak se odpor počítá</small></summary>
+      <div class="obsah text">
+        <p>Model v obrázku počítá odporovou sílu podle vzorce</p>
+        <div class="vzorec"><span><i>F</i> = <span class="zl"><span>1</span><span>2</span></span> · <i>C</i> · <i>ρ</i> · <i>S</i> · <i>v</i><sup>2</sup></span></div>
+        <p><i>C</i> je <strong>součinitel odporu</strong>, který závisí jen na tvaru (deska 1,2, krychle 1,05, koule 0,47, kapka 0,04), <i>ρ</i> je hustota vzduchu (asi 1,2 kg/m³), <i>S</i> čelní plocha v m² a <i>v</i> rychlost v m/s. Druhá mocnina <i>v</i><sup>2</sup> je důvod, proč dvojnásobná rychlost dává čtyřnásobný odpor. Moderní osobní auta mají <i>C</i> kolem 0,25–0,35.</p>
+      </div>
+    </details>
+
+    <aside class="zapamatuj"><h3>📌 Zapamatuj si</h3>
+      <ul>
+        <li><strong>Odporová síla</strong> vzduchu působí proti pohybu tělesa (po směru větru).</li>
+        <li>Je tím větší, čím je těleso <strong>méně proudnicové</strong> a čím větší má <strong>čelní plochu</strong>.</li>
+        <li>S rychlostí roste <strong>s druhou mocninou</strong>: 2× rychleji → 4× větší odpor, 3× rychleji → 9× větší odpor.</li>
+      </ul>
+    </aside>
+  </section>
+
+  <!-- ============================================================ 5 -->
+  <section class="kapitola" id="tlak" data-faze="vyuka" data-nazev="Rychlost a tlak" data-popis="Zúžení, podtlak">
+    <header class="kap-hlava"><span class="kap-cislo">5</span><div><p class="kap-otazka">Proč je v úzké uličce průvan a proč vichřice střechu strhne, a ne zamáčkne?</p><h2>Rychlost a tlak v proudícím vzduchu</h2></div></header>
+    <div class="text">
+      <p>Vzduch se nikde neztrácí ani nehromadí. Kolik ho za sekundu do trubice vteče, tolik ho musí projít <strong>každým jejím místem</strong>. V užším místě se to stihne jen tehdy, když vzduch proudí <strong>rychleji</strong>. Zúží-li se trubice na polovinu, proudí vzduch v zúžení dvakrát rychleji.</p>
+      <p>Aby se vzduch v zúžení zrychlil, musí ho něco postrčit – pomáhá mu rozdíl tlaků. Proto platí na první pohled překvapivé pravidlo: <strong>kde proudí vzduch rychleji, tam má menší tlak</strong>.</p>
+    </div>
+
+    <figure class="obr" id="obr-zuzeni">
+      <div class="obr-plocha"><svg class="model" role="img" aria-label="Trubice se zúžením, proudící vzduch a tlakoměry"></svg></div>
+      <div class="obr-ovladani">
+        <label class="posuvnik">Šířka zúžení <input type="range" id="zuz-sirka" min="20" max="100" step="5" value="100"><output id="zuz-sirka-h"></output></label>
+        <label class="posuvnik">Rychlost na vstupu <input type="range" id="zuz-v" min="1" max="6" step="0.5" value="3"><output id="zuz-v-h"></output></label>
+        <label class="prepinac"><input type="checkbox" id="zuz-tlak"> Tlakoměry</label>
+      </div>
+      <div class="odecty"></div>
+      <div class="obr-zprava" role="status"></div>
+      <figcaption>Tečky se pohybují stejně rychle jako vzduch, barva ukazuje rychlost (modrá pomalu, oranžová rychle). Tlakoměry ukazují, o kolik je tlak v trubici menší (−) nebo větší (+) než tlak okolního vzduchu. Zapni je zaškrtávátkem.</figcaption>
+    </figure>
+
+    <div class="predpoved" data-predpoved="zuz-rychlost"></div>
+    <div class="predpoved" data-predpoved="zuz-tlak"></div>
+    <div class="ukol" data-ukol="zuz-4x"><div class="ukol-hlava"><p><b>🔬 Úkol:</b> Zuž trubici tak, aby vzduch v nejužším místě proudil <b>4× rychleji</b> než před zúžením.</p><span class="stav"></span></div><p class="ukol-reakce"></p></div>
+
+    <h3>Pokus se dvěma papíry</h3>
+    <div class="text">
+      <p>Tenhle pokus zvládneš i doma: podrž dva listy papíru svisle kousek od sebe a fouknout mezi ně.</p>
+    </div>
+    <figure class="obr" id="obr-papiry">
+      <div class="obr-plocha"><svg class="model" role="img" aria-label="Dva visící listy papíru a brčko, kterým se fouká mezi ně"></svg></div>
+      <div class="obr-ovladani">
+        <button type="button" class="hlavni" id="papiry-foukni">💨 Foukni mezi papíry</button>
+        <span class="vzorec-popis">Tlačítko drž – foukáš, dokud ho držíš.</span>
+      </div>
+      <div class="obr-zprava" role="status"></div>
+    </figure>
+    <div class="predpoved" data-predpoved="papiry"></div>
+
+    <div class="situace">
+      <article class="situace-karta">
+        <svg viewBox="0 0 220 110" aria-hidden="true"><path d="M30 96 V56 L110 18 L190 56 V96Z" class="ik-budova"/><path d="M22 60 L110 16 L198 60" class="ik-strecha"/><path d="M4 30 H70 M4 12 H80 M130 10 H214 M150 28 H214" class="ik-proud"/><path d="M110 16 V2 M96 26 L90 12 M124 26 L130 12" class="ik-sila"/></svg>
+        <h3>🏠 Střecha ve vichřici</h3>
+        <p>Nad střechou se vzduch zrychlí, tlak nad ní klesne. V domě zůstane klidný vzduch s běžným tlakem – ten zespodu tlačí víc a střechu nadzvedne.</p>
+      </article>
+      <article class="situace-karta">
+        <svg viewBox="0 0 220 110" aria-hidden="true"><rect x="10" y="10" width="80" height="90" class="ik-budova"/><rect x="130" y="10" width="80" height="90" class="ik-budova"/><path d="M0 30 H40 M0 55 H30 M0 80 H40 M92 38 H128 M92 55 H128 M92 72 H128 M180 55 H220" class="ik-proud"/></svg>
+        <h3>🏙️ Průvan mezi domy</h3>
+        <p>Mezi dvěma domy se proud vzduchu zúží, a proto zrychlí. V úzkých uličkách a pod domy na sloupech fouká víc než na otevřeném prostranství.</p>
+      </article>
+      <article class="situace-karta">
+        <svg viewBox="0 0 220 110" aria-hidden="true"><path d="M20 80 Q60 60 100 80 Q60 100 20 80Z" class="ik-lod"/><path d="M120 80 Q160 60 200 80 Q160 100 120 80Z" class="ik-lod" transform="translate(0 -30)"/><path d="M4 66 H214" class="ik-proud"/><path d="M60 72 V62 M160 54 V64" class="ik-sila"/></svg>
+        <h3>🚢 Lodě vedle sebe</h3>
+        <p>Plují-li dvě lodě těsně vedle sebe, voda mezi nimi proudí rychleji a má menší tlak. Lodě se k sobě přitahují – kapitáni proto drží odstup.</p>
+      </article>
+      <article class="situace-karta">
+        <svg viewBox="0 0 220 110" aria-hidden="true"><rect x="80" y="54" width="40" height="46" rx="6" class="ik-budova"/><path d="M100 58 V26 H150" class="ik-trubka"/><path d="M20 26 H96" class="ik-proud"/><path d="M160 20 l40 -10 M160 26 h44 M160 32 l40 10" class="ik-proud"/></svg>
+        <h3>💦 Rozprašovač</h3>
+        <p>Proud vzduchu přes konec trubičky v ní sníží tlak. Běžný tlak vzduchu na hladinu v lahvičce pak vytlačí kapalinu nahoru a proud ji rozpráší.</p>
+      </article>
+    </div>
+
+    <aside class="zapamatuj"><h3>📌 Zapamatuj si</h3>
+      <ul>
+        <li>V <strong>užším</strong> místě proudí vzduch (i voda) <strong>rychleji</strong>: poloviční šířka → dvojnásobná rychlost.</li>
+        <li><strong>Kde proudí tekutina rychleji, tam je menší tlak.</strong></li>
+        <li>Proto se papíry při foukání přiblíží, střecha se ve vichřici nadzvedne a lodě vedle sebe se přitahují.</li>
+      </ul>
+    </aside>
+  </section>
+
+  <!-- ============================================================ 6 -->
+  <section class="kapitola" id="kridlo" data-faze="vyuka" data-nazev="Křídlo" data-popis="Vztlak, úhel náběhu, pád">
+    <header class="kap-hlava"><span class="kap-cislo">6</span><div><p class="kap-otazka">Jak může vzduch unést letadlo, které váží desítky tun?</p><h2>Křídlo a vztlak</h2></div></header>
+    <div class="text">
+      <p>Křídlo je těleso zvláštního tvaru: vpředu zaoblené, vzadu ostré, nahoře obvykle víc vyklenuté. Proud vzduchu ho obtéká tak, že <strong>nad křídlem proudí rychleji</strong> a <strong>pod křídlem pomaleji</strong>. Podle pravidla z minulé kapitoly je nad křídlem menší tlak a pod ním větší. Rozdíl tlaků tlačí křídlo nahoru – vzniká <span class="term">vztlaková síla</span> (vztlak). Míří <strong>kolmo na směr proudu</strong>, kdežto odporová síla míří po proudu.</p>
+      <p>Na to, jak velký je vztlak, má největší vliv <span class="term">úhel náběhu</span> – úhel, který svírá křídlo s proudem vzduchu. S rostoucím úhlem vztlak roste. Křídlo zároveň stáčí proud vzduchu dolů, a vzduch ho proto tlačí nahoru.</p>
+    </div>
+
+    <figure class="obr" id="obr-kridlo">
+      <div class="obr-plocha"><svg class="model" role="img" aria-label="Profil křídla v proudu vzduchu s proudnicemi, silami a grafem vztlaku"></svg></div>
+      <div class="obr-ovladani">
+        <div class="skupina"><span class="nazev">Profil:</span>
+          <div class="segment" id="kr-profil" role="group" aria-label="Profil křídla">
+            <button type="button" data-hodnota="soumerny">souměrný</button><button type="button" data-hodnota="prohnuty">prohnutý</button>
+          </div>
+        </div>
+        <label class="posuvnik">Úhel náběhu <input type="range" id="kr-uhel" min="-6" max="24" step="1" value="0"><output id="kr-uhel-h"></output></label>
+      </div>
+      <div class="obr-ovladani">
+        <label class="posuvnik">Rychlost letu <input type="range" id="kr-v" min="20" max="70" step="1" value="50"><output id="kr-v-h"></output></label>
+        <label class="prepinac"><input type="checkbox" id="kr-znacky"> Časové značky</label>
+        <label class="prepinac"><input type="checkbox" id="kr-tlak"> Tlak na povrchu</label>
+      </div>
+      <div class="odecty"></div>
+      <div class="obr-zprava" role="status"></div>
+      <figcaption>Křídlo malého letadla (plocha křídel 16 m², hmotnost letadla 1 000 kg). Proudnice počítá model ideálního obtékání (Žukovského profil); odtržení proudu za kritickým úhlem je jen naznačené. <b>Časové značky</b> jsou obláčky kouře vypuštěné ve stejnou chvíli. <span class="legenda"><span class="znacka z-vztlak">vztlak</span><span class="znacka z-odpor">odpor</span><span class="znacka z-podtlak">podtlak</span><span class="znacka z-pretlak">přetlak</span></span></figcaption>
+    </figure>
+
+    <div class="predpoved" data-predpoved="kr-uhel"></div>
+    <div class="ukol" data-ukol="kr-znacky"><div class="ukol-hlava"><p><b>🔬 Úkol:</b> Nastav úhel aspoň 4° a zapni <b>časové značky</b>. Obláčky vypuštěné současně – které doletí za křídlo dřív, horní, nebo dolní?</p><span class="stav"></span></div><p class="ukol-reakce"></p></div>
+    <div class="ukol" data-ukol="kr-pristani"><div class="ukol-hlava"><p><b>🔬 Úkol:</b> Letadlo přistává pomalu – rychlostí <b>30 m/s</b>. Najdi úhel náběhu, při kterém ho <b>prohnuté</b> křídlo ještě unese (vztlak aspoň tak velký jako tíha).</p><span class="stav"></span></div><p class="ukol-reakce"></p></div>
+    <div class="predpoved" data-predpoved="kr-pad"></div>
+
+    <div class="fakty">
+      <div class="fakt"><b>asi 15°</b><span>kritický úhel náběhu běžného křídla – za ním se proud odtrhne</span></div>
+      <div class="fakt"><b>250–300 km/h</b><span>asi takovou rychlostí se velké dopravní letadlo odlepí od dráhy</span></div>
+      <div class="fakt"><b>vztlakové klapky</b><span>při přistání se vysunou a křídlo víc prohnou – unese letadlo i při malé rychlosti</span></div>
+    </div>
+
+    <aside class="zapamatuj"><h3>📌 Zapamatuj si</h3>
+      <ul>
+        <li>Nad křídlem proudí vzduch <strong>rychleji</strong> a má <strong>menší tlak</strong>, pod křídlem je tlak větší – vzniká <strong>vztlaková síla</strong> kolmá na proud.</li>
+        <li>Vztlak roste s <strong>úhlem náběhu</strong> a s <strong>rychlostí</strong>. Pomalé letadlo potřebuje větší úhel – proto při přistání zvedá příď.</li>
+        <li>Za <strong>kritickým úhlem</strong> (asi 15°) se proud od horní strany odtrhne a vztlak prudce klesne – <strong>pád</strong> (anglicky stall).</li>
+      </ul>
+    </aside>
+  </section>
+
+  <!-- ============================================================ 7 -->
+  <section class="kapitola" id="stavby" data-faze="vyuka" data-nazev="Vítr a stavby" data-popis="Závětří, ulice, závěje">
+    <header class="kap-hlava"><span class="kap-cislo">7</span><div><p class="kap-otazka">Kde se schovat před větrem a proč závěje rostou právě za plotem?</p><h2>Vítr kolem budov a v krajině</h2></div></header>
+    <div class="text">
+      <p>Strana budovy, do které vítr fouká, se nazývá <span class="term">návětrná</span>; odvrácená strana je <span class="term">závětrná</span>. Za překážkou vzniká <span class="term">závětří</span> – oblast se slabým a vířivým větrem. Čím je překážka vyšší, tím dál za ní závětří sahá. Toho využívají <strong>větrolamy</strong>: řady stromů nebo ploty, které chrání pole před vysušováním a odnášením půdy a silnice před sněhovými závějemi.</p>
+      <p>Naopak tam, kde se proud vzduchu mezi budovami zúží, vítr <strong>zesílí</strong>. Architekti proto vysoké budovy zkoušejí na modelech ve větrném tunelu dřív, než se začnou stavět.</p>
+    </div>
+
+    <figure class="obr tunel" id="obr-stavby">
+      <div class="obr-plocha tunel-plocha"><canvas tabindex="0" aria-label="Větrný tunel se stavbami. Klepnutím nebo šipkami posouváš sondu."></canvas></div>
+      <div class="tunel-legenda" aria-hidden="true"></div>
+      <div class="obr-ovladani">
+        <div class="skupina"><span class="nazev">Scéna:</span>
+          <div class="segment" data-t="scena" role="group" aria-label="Scéna">
+            <button type="button" data-hodnota="dum">🏠 dům</button><button type="button" data-hodnota="ulice">🏙️ ulice (shora)</button><button type="button" data-hodnota="plot">🚧 plot</button><button type="button" data-hodnota="kopec">⛰️ kopec</button><button type="button" data-hodnota="prazdny">✏️ prázdný</button>
+          </div>
+        </div>
+      </div>
+      <div class="obr-ovladani">
+        <div class="skupina"><span class="nazev">Ukázat:</span>
+          <div class="segment" data-t="rezim" role="group" aria-label="Zobrazení">
+            <button type="button" data-hodnota="proudnice">proudnice</button><button type="button" data-hodnota="rychlost">rychlost</button><button type="button" data-hodnota="viry">víry</button>
+          </div>
+        </div>
+        <div class="skupina"><span class="nazev">Nástroj:</span>
+          <div class="segment" data-t="nastroj" role="group" aria-label="Nástroj">
+            <button type="button" data-hodnota="sonda">🎯 sonda</button><button type="button" data-hodnota="kresli">🧱 zeď</button><button type="button" data-hodnota="guma">🧽 guma</button><button type="button" data-hodnota="kour">💨 kouř</button>
+          </div>
+        </div>
+        <label class="prepinac"><input type="checkbox" data-t="snih"> ❄️ Sníh</label>
+        <button type="button" data-t="pauza">⏸️ Pauza</button>
+        <button type="button" data-t="restart">↺ Výchozí stav</button>
+      </div>
+      <div class="odecty"></div>
+      <div class="obr-zprava" role="status"></div>
+      <figcaption>Scény dům, plot a kopec jsou řez krajinou (pohled z boku), ulice je pohled shora na dva bloky domů. Nástrojem <b>zeď</b> můžeš přistavět vlastní překážky, <b>guma</b> maže to, co jsi nakreslil(a). Kdo chce větší tunel na celou obrazovku, najde ho ve <a href="vitr_tunel.html" data-lekce="obsah/vitr_tunel.html">velkém aerodynamickém tunelu</a>.</figcaption>
+    </figure>
+
+    <div class="ukol" data-ukol="st-zavetri"><div class="ukol-hlava"><p><b>🔬 Úkol:</b> Ve scéně <b>dům</b> najdi sondou za domem místo, kde fouká nejvýš třetinou rychlosti větru – závětří.</p><span class="stav"></span></div><p class="ukol-reakce"></p></div>
+    <div class="ukol" data-ukol="st-ulice"><div class="ukol-hlava"><p><b>🔬 Úkol:</b> Ve scéně <b>ulice</b> najdi v mezeře mezi domy místo, kde fouká aspoň <b>1,3× rychleji</b> než volný vítr.</p><span class="stav"></span></div><p class="ukol-reakce"></p></div>
+    <div class="predpoved" data-predpoved="st-zavej"></div>
+
+    <aside class="zapamatuj"><h3>📌 Zapamatuj si</h3>
+      <ul>
+        <li><strong>Návětrná</strong> strana je proti větru, <strong>závětrná</strong> odvrácená. Za překážkou je <strong>závětří</strong> se slabým, vířivým větrem.</li>
+        <li>V závětří vítr zpomalí a upustí to, co nesl – proto tam rostou <strong>sněhové závěje</strong> a písečné duny.</li>
+        <li>Mezi budovami se proud zúží a vítr <strong>zesílí</strong>.</li>
+      </ul>
+    </aside>
+  </section>
+
+  <!-- ============================================================ tahák -->
+  <section class="kapitola" id="tahak" data-faze="tahak" data-nazev="Tahák" data-popis="Všechno na jedné stránce" data-zvlast>
+    <header class="kap-hlava"><span class="kap-cislo">📌</span><div><p class="kap-otazka">Všechno podstatné na jedné stránce</p><h2>Tahák – vítr a proudění</h2></div></header>
+    <div class="tahak-mrizka">
+      <div class="tahak-karta"><h3>Proč fouká vítr</h3><ul><li>Vzduch proudí z <b>vyššího tlaku (V)</b> do <b>nižšího tlaku (N)</b>.</li><li>Teplý vzduch stoupá (u země N), studený klesá (u země V).</li><li>Bríza: ve dne od moře, v noci od pevniny.</li></ul></div>
+      <div class="tahak-karta"><h3>Síla větru</h3><p class="m" style="font-size:1.15rem">1 m/s = 3,6 km/h</p><ul><li>Měří se anemometrem.</li><li>Beaufortova stupnice 0–12: 0 bezvětří · 3 slabý vítr · 6 silný vítr · 8 bouřlivý vítr · 9 vichřice · 12 orkán (od 32,7 m/s).</li></ul></div>
+      <div class="tahak-karta"><h3>Obtékání</h3><ul><li>Proudnice ukazují cestu vzduchu; hustě u sebe = rychle.</li><li>Laminární proudění – klidné ve vrstvách; turbulentní – s víry.</li><li>Za překážkou úplav s víry, za válcem Kármánova vírová stezka.</li></ul></div>
+      <div class="tahak-karta"><h3>Odporová síla</h3><p class="m" style="font-size:1.15rem"><i>F</i> = ½ · <i>C</i> · <i>ρ</i> · <i>S</i> · <i>v</i><sup>2</sup></p><ul><li>Závisí na tvaru (<i>C</i>), čelní ploše <i>S</i> a rychlosti <i>v</i>.</li><li>2× rychleji → 4× větší odpor.</li><li><i>C</i>: deska 1,2 · krychle 1,05 · koule 0,47 · kapka 0,04.</li></ul></div>
+      <div class="tahak-karta"><h3>Rychlost a tlak</h3><ul><li>Užší místo → rychlejší proudění (poloviční šířka → 2× rychleji).</li><li>Kde tekutina proudí rychleji, je <b>menší tlak</b>.</li><li>Papíry se přiblíží, střechu to nadzvedne, lodě se přitahují.</li></ul></div>
+      <div class="tahak-karta"><h3>Křídlo</h3><ul><li>Nad křídlem rychleji a menší tlak, pod ním větší tlak → <b>vztlak</b> kolmo na proud.</li><li>Vztlak roste s úhlem náběhu a rychlostí.</li><li>Za kritickým úhlem (≈ 15°) se proud odtrhne → pád.</li></ul></div>
+      <div class="tahak-karta"><h3>Vítr a stavby</h3><ul><li>Návětrná × závětrná strana, za překážkou závětří.</li><li>V závětří vznikají závěje, větrolamy chrání pole i silnice.</li><li>Mezi domy vítr zesílí.</li></ul></div>
+    </div>
+  </section>
+
+  <!-- ============================================================ procvič -->
+  <section class="kapitola" id="procvic" data-faze="procvic" data-nazev="Procvič" data-popis="Otázky napříč lekcí" data-zvlast>
+    <header class="kap-hlava"><span class="kap-cislo">✏️</span><div><p class="kap-otazka">Otázky se pokaždé vygenerují znovu, s jinými čísly.</p><h2>Procvič si vítr a proudění</h2></div></header>
+    <div class="cviceni">
+      <div class="cviceni-hlava">
+        <div class="temata" id="cv-temata" role="group" aria-label="Téma otázek"></div>
+      </div>
+      <div class="karta-otazky">
+        <div id="plocha">
+          <p class="tema" id="cv-tema"></p>
+          <p class="zadani" id="cv-zadani" tabindex="-1"></p>
+          <div id="cv-moznosti"></div>
+          <p class="odezva" id="cv-odezva"></p>
+        </div>
+        <div class="napoveda" id="cv-napoveda" hidden></div>
+        <div class="ovladani cviceni-ovladani">
+          <button type="button" id="btnNapoveda">💡 Nápověda</button>
+          <button type="button" id="btnDalsi">Přeskočit →</button>
+          <span class="skore" id="cv-skore"></span>
+        </div>
+      </div>
+      <p class="vzorec-popis">Na odpověď můžeš klepnout, nebo zmáčknout klávesu 1–4. Po chybě se ukáže, v čem je záměna, a můžeš to zkusit znovu – do skóre se počítá jen odpověď napoprvé.</p>
+    </div>
+  </section>
+
+  <div data-kostra-zapati></div>
+</main>
+</div>
+
+<script src="vitr_lekce.js?v=1"></script>
+</body>
+</html>

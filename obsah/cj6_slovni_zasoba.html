@@ -20,6 +20,16 @@
     .dvojice-slov .sipka { color: var(--text-faint); font-size: 1.4rem; }
     .pomucka .skupina { flex: 1 1 195px; }
     .pomucka .skupina.sviti { box-shadow: 0 0 0 2px var(--accent-soft); }
+    .obrazovy-slovnik { margin-top: 18px; padding: 16px; border: 1px solid var(--border); border-radius: 14px; background: var(--bg-panel); }
+    .obrazovy-slovnik h2 { margin: 0 0 5px; font-size: 1.15rem; }
+    .obrazovy-slovnik > p { margin: 0 0 12px; color: var(--text-muted); }
+    .slova-volby { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 12px; }
+    .slova-volby button[aria-pressed="true"] { background: var(--accent); color: var(--na-akcentu, #fff); border-color: var(--accent); }
+    .vyznamy-obrazky { display: grid; grid-template-columns: repeat(3, minmax(130px, 1fr)); gap: 10px; }
+    .vyznam-obrazek { margin: 0; padding: 6px; border-radius: 11px; background: var(--bg-elevated); text-align: center; }
+    .vyznam-obrazek img { display: block; width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 8px; }
+    .vyznam-obrazek figcaption { margin-top: 5px; font-size: .84rem; font-weight: 650; }
+    @media (max-width: 560px) { .vyznamy-obrazky { grid-template-columns: 1fr; } .vyznam-obrazek { max-width: 340px; margin-inline: auto; } }
   </style>
 </head>
 <body>
@@ -67,6 +77,13 @@
         (židle, stůl) jsou souřadná.</p>
     </div>
   </div>
+
+  <section class="obrazovy-slovnik" aria-labelledby="obrazovySlovnikNadpis">
+    <h2 id="obrazovySlovnikNadpis">🖼️ Jedno slovo, tři významy</h2>
+    <p>Vyber slovo a porovnej obrázky. Dokážeš ke každému významu vymyslet větu?</p>
+    <div class="slova-volby" id="slovaVolby" aria-label="Vyber mnohoznačné slovo"></div>
+    <div class="vyznamy-obrazky" id="vyznamyObrazky" aria-live="polite"></div>
+  </section>
 
   <p class="napoveda">
     Rozdíl mezi <b>homonymem</b> a <b>mnohoznačným slovem</b>: u homonyma spolu významy
@@ -119,6 +136,64 @@ const MNOHOZNACNA = [
   { s: 'sešit', pocet: 'jeden', vyznamy: 'svázané listy papíru na psaní' },
   { s: 'kostel', pocet: 'jeden', vyznamy: 'stavba určená k bohoslužbám' },
 ];
+
+const OBRAZOVE_VYZNAMY = {
+  koruna: [
+    ['koruna-panovnicka', 'panovnická ozdoba', 'Panovnická koruna.'],
+    ['koruna-stromu', 'koruna stromu', 'Koruna listnatého stromu.'],
+    ['koruna-mince', 'měna a mince', 'Mince české koruny.'],
+  ],
+  kohoutek: [
+    ['kohoutek-ptak', 'mladý kohout', 'Kohoutek, mladý kohout.'],
+    ['kohoutek-vodovodni', 'vodovodní kohoutek', 'Vodovodní kohoutek nad umyvadlem.'],
+    ['kohoutek-ventil', 'uzavírací ventil', 'Malý uzavírací ventil na potrubí.'],
+  ],
+  oko: [
+    ['oko-zrak', 'orgán zraku', 'Lidské oko.'],
+    ['oko-polevka', 'oko na polévce', 'Mastná oka na hladině polévky.'],
+    ['oko-site', 'oko v síti', 'Oko v rybářské síti.'],
+  ],
+  list: [
+    ['list-stromu', 'list stromu', 'Zelený list stromu.'],
+    ['list-papiru', 'list papíru', 'Prázdný list papíru.'],
+    ['list-dopis', 'dopisní list', 'Dopisní list v obálce.'],
+  ],
+  pero: [
+    ['pero-ptaci', 'ptačí pero', 'Ptačí pero.'],
+    ['pero-plnici', 'psací pero', 'Plnicí pero.'],
+    ['pero-pruzina', 'pružina', 'Kovové pero neboli pružina.'],
+  ],
+  zámek: [
+    ['zamek-budova', 'historická budova', 'Barokní zámek.'],
+    ['zamek-dverni', 'dveřní zámek', 'Dveřní zámek s klíčem.'],
+    ['zamek-zip', 'zámek zipu', 'Jezdec neboli zámek zipu.'],
+  ],
+  jazyk: [
+    ['jazyk-usta', 'orgán v ústech', 'Jazyk v otevřených ústech.'],
+    ['jazyk-rec', 'řeč', 'Děti spolu mluví různými jazyky.'],
+    ['jazyk-boty', 'jazyk u boty', 'Jazyk šněrovací boty.'],
+  ],
+  kolej: [
+    ['kolej-trat', 'dráha pro vlak', 'Železniční kolej.'],
+    ['kolej-ubytovna', 'studentská ubytovna', 'Studentská kolej neboli ubytovna.'],
+    ['kolej-vyjeta', 'vyjetá stopa', 'Vyjeté koleje v blátivé cestě.'],
+  ],
+};
+
+function ukazVyznamy(slovo) {
+  $('vyznamyObrazky').innerHTML = OBRAZOVE_VYZNAMY[slovo].map(([soubor, popis, alt]) =>
+    `<figure class="vyznam-obrazek"><img src="img/cj/cj6-vyznam-${soubor}.webp" alt="${alt}" width="768" height="768"><figcaption><b>${slovo}</b> — ${popis}</figcaption></figure>`).join('');
+  $('slovaVolby').querySelectorAll('button').forEach(button =>
+    button.setAttribute('aria-pressed', String(button.dataset.slovo === slovo)));
+}
+
+$('slovaVolby').innerHTML = Object.keys(OBRAZOVE_VYZNAMY).map(slovo =>
+  `<button type="button" data-slovo="${slovo}" aria-pressed="false">${slovo}</button>`).join('');
+$('slovaVolby').addEventListener('click', event => {
+  const button = event.target.closest('[data-slovo]');
+  if (button) ukazVyznamy(button.dataset.slovo);
+});
+ukazVyznamy('koruna');
 
 const KONTEXTY = [
   { v: 'Ve škole nám postavili novou <span class="zvyraz">kolej</span> pro studenty.',

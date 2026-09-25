@@ -1,0 +1,7 @@
+IMG-aj-02 · bag
+
+Use case: scientific-educational. Asset type: square vocabulary card for children. Natural-history watercolor and gouache with delicate fine-ink contours, warm ivory paper background, muted sage green, jade, ochre and earthy palette, soft upper-left lighting, consistent refined Czech schoolbook style. One central subject only, centered with generous even 12 percent margins. No scenery except a faint grounding shadow. No text, letters, labels, arrows, numbers, border, frame, logo, or watermark. One practical child-sized school backpack in muted teal and ochre, upright three-quarter view, zipped and without logos, unmistakable.
+
+Nástroj: OpenAI image_gen
+Datum: 2026-09-25
+Výstup: aj-slovicka-bag.png, aj-slovicka-bag.webp

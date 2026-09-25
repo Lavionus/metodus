@@ -27,6 +27,17 @@
     .pomucka .nazev { font-size: 0.88rem; font-weight: 700; }
     .pomucka .konec { color: var(--accent); font-weight: 700; }
     .pomucka .skupina.sviti { box-shadow: 0 0 0 2px var(--accent-soft); }
+    .scenky { margin-top: 18px; padding: 16px; border: 1px solid var(--border); border-radius: 14px; background: var(--bg-panel); }
+    .scenky h2 { margin: 0 0 5px; font-size: 1.15rem; }
+    .scenky-uvod { margin: 0 0 12px; color: var(--text-muted); }
+    .scenky-volby { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+    .scenky-volby button[aria-pressed="true"] { background: var(--accent); color: var(--na-akcentu, #fff); border-color: var(--accent); }
+    .scenka { display: grid; grid-template-columns: minmax(220px, 360px) 1fr; gap: 16px; align-items: center; }
+    .scenka-obrazek { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 12px; box-shadow: 0 4px 16px #0002; }
+    .bubliny { display: grid; gap: 8px; }
+    .bublina { padding: 10px 12px; border: 1px solid var(--border); border-radius: 12px; background: var(--bg-elevated); line-height: 1.35; }
+    .bublina b { display: block; color: var(--accent); font-size: .82rem; margin-bottom: 2px; }
+    @media (max-width: 620px) { .scenka { grid-template-columns: 1fr; } .scenka-obrazek { max-width: 360px; margin: auto; } }
   </style>
 </head>
 <body>
@@ -50,6 +61,16 @@
 
   <div class="pomucka" id="pomucka"></div>
 
+  <section class="scenky" aria-labelledby="scenkyNadpis">
+    <h2 id="scenkyNadpis">🖼️ Jedna situace, čtyři druhy vět</h2>
+    <p class="scenky-uvod">Prohlédni si obrázek. Stejnou situaci můžeme oznámit, zeptat se, vyslovit rozkaz nebo přání.</p>
+    <div class="scenky-volby" id="scenkyVolby" aria-label="Vyber situaci"></div>
+    <div class="scenka">
+      <img class="scenka-obrazek" id="scenkaObrazek" width="768" height="768" alt="">
+      <div class="bubliny" id="scenkaVety" aria-live="polite"></div>
+    </div>
+  </section>
+
   <p class="napoveda">
     Zkus si větu <b>přečíst nahlas</b> – hlas sám prozradí, jestli něco oznamuje, ptá se,
     přikazuje, nebo si přeje. Žlutě svítí slovo, podle kterého se druh věty pozná.
@@ -69,6 +90,36 @@ const DRUHY = {
   praci:       { nazev: 'přací', ikona: '🌠', znak: '!',
                  co: 'vyjadřuje přání – ať, kéž, nechť', priklad: 'Kéž by nepršelo!' },
 };
+
+const SCENKY = [
+  { klic: 'stul', nazev: 'U stolu', alt: 'Dvě děti u stolu s chlebem.', vety: ['Chleba je na stole.', 'Podáš mi chleba?', 'Podej mi prosím chleba!', 'Kéž by byl ještě teplý!'] },
+  { klic: 'hriste', nazev: 'Na hřišti', alt: 'Dvě děti s míčem na hřišti.', vety: ['Míč leží na trávě.', 'Zahraješ si se mnou?', 'Přihraj mi míč!', 'Kéž bych dal gól!'] },
+  { klic: 'trida', nazev: 'Ve třídě', alt: 'Dvě děti ve třídě si podávají tužku.', vety: ['Tužka je na lavici.', 'Půjčíš mi tužku?', 'Podej mi prosím tužku!', 'Kéž bych měl novou tužku!'] },
+  { klic: 'obchod', nazev: 'V obchodě', alt: 'Dítě ukazuje na jablko u pultu v obchodě.', vety: ['Jablko leží na pultu.', 'Kolik stojí jablko?', 'Dejte mi prosím jedno jablko!', 'Kéž by bylo sladké!'] },
+];
+
+const DRUHY_SCENEK = [
+  ['Oznamovací', '💬'], ['Tázací', '❓'], ['Rozkazovací', '❗'], ['Přací', '🌠'],
+];
+
+function ukazScenku(klic) {
+  const scenka = SCENKY.find(s => s.klic === klic) || SCENKY[0];
+  const obrazek = $('scenkaObrazek');
+  obrazek.src = `img/cj/cj2-druhy-vet-${scenka.klic}.webp`;
+  obrazek.alt = scenka.alt;
+  $('scenkaVety').innerHTML = scenka.vety.map((veta, i) =>
+    `<div class="bublina"><b>${DRUHY_SCENEK[i][1]} ${DRUHY_SCENEK[i][0]}</b>${veta}</div>`).join('');
+  $('scenkyVolby').querySelectorAll('button').forEach(button =>
+    button.setAttribute('aria-pressed', String(button.dataset.scenka === scenka.klic)));
+}
+
+$('scenkyVolby').innerHTML = SCENKY.map(s =>
+  `<button type="button" data-scenka="${s.klic}" aria-pressed="false">${s.nazev}</button>`).join('');
+$('scenkyVolby').addEventListener('click', event => {
+  const button = event.target.closest('[data-scenka]');
+  if (button) ukazScenku(button.dataset.scenka);
+});
+ukazScenku('stul');
 
 /* věta bez koncového znaménka + druh.
    spoust = slovo, podle kterého se druh pozná (u oznamovacích takové slovo není). */

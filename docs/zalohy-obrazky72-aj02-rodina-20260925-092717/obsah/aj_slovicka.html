@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>🇬🇧 Angličtina – první slovíčka</title>
+  <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../slovicka.css">
+  <script src="../theme.js"></script>
+  <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
+  <script src="../uloha.js" defer></script>
+  <script src="../procvic.js" defer></script>
+  <script src="../rec.js"></script>
+  <script src="../slovicka.js" defer></script>
+</head>
+<body>
+  <h1>🇬🇧 Angličtina – první slovíčka</h1>
+  <p class="podtitul">Obrázková slovíčka pro začátečníky. Nejdřív si projdi kartičky (klepnutím na obrázek uvidíš překlad), pak si zkus sérii deseti otázek – po chybě máš druhý pokus.</p>
+
+  <div class="rezimy" id="rezimy">
+    <button data-rezim="karticky" data-faze="vyuka" class="active">🎴 Kartičky</button>
+    <button data-rezim="prehled" data-faze="vyuka">📖 Přehled</button>
+    <button data-rezim="slovo">🖼️ Jak se to řekne?</button>
+    <button data-rezim="preklad">🇨🇿 Co to znamená?</button>
+  </div>
+
+  <div class="pruh-nastroju">
+    <div class="kategorie" id="kategorie" aria-label="Téma"></div>
+    <button type="button" id="btnZvuk" title="Přečíst slovo nahlas">🔊 Číst nahlas: zap</button>
+  </div>
+
+  <div id="prehledObal" hidden>
+    <input class="hledej" id="hledej" placeholder="🔍 Hledej slovíčko (česky i anglicky)…" autocomplete="off">
+    <table class="slovnik" id="prehledTabulka"><thead></thead><tbody></tbody></table>
+  </div>
+
+  <div class="karticka" id="karticky">
+    <div class="k-emoji" id="kEmoji" title="Klepni pro překlad"></div>
+    <div class="k-slovo" id="kSlovo"></div>
+    <div class="k-cesky skryto" id="kCesky"></div>
+    <div class="tlacitka">
+      <button class="b-vedle" id="kZpet">← Zpět</button>
+      <button class="b-hlavni" id="kOtoc">Ukázat překlad</button>
+      <button class="b-vedle" id="kDalsi">Další →</button>
+    </div>
+    <div class="k-pocet" id="kPocet"></div>
+  </div>
+
+  <div class="plocha" id="plocha" hidden></div>
+  <div class="ovladani" id="ovladani" hidden>
+    <button class="hlavni" id="startBtn">🔄 Nová série</button>
+    <span class="pokrok" id="pokrok"></span>
+    <span class="skore" id="skore"></span>
+  </div>
+
+  <p class="napoveda">Angličtina se čte jinak, než se píše – proto je u kartiček v hranatých závorkách <b>výslovnost</b> (zjednodušeně česky). Slovíčka se nejlépe učí po tématech: nejdřív kartičky, pak <b>Jak se to řekne?</b> (obrázek → anglicky) a nakonec opačný směr <b>Co to znamená?</b>. Pozor na dvojice, které se pletou: <b>brother / sister</b>, <b>pen / pencil</b>, <b>mother / grandmother</b>.</p>
+
+<script>
+// témata; slovo: [emoji, anglicky, výslovnost, česky, volitelný obrázek]
+const TEMATA = {
+  'Zvířata': [
+    ['🐶', 'dog', 'dog', 'pes', 'img/aj/aj-slovicka-dog.webp'], ['🐱', 'cat', 'ket', 'kočka', 'img/aj/aj-slovicka-cat.webp'], ['🐭', 'mouse', 'maus', 'myš', 'img/aj/aj-slovicka-mouse.webp'],
+    ['🐴', 'horse', 'hórs', 'kůň', 'img/aj/aj-slovicka-horse.webp'], ['🐮', 'cow', 'kau', 'kráva', 'img/aj/aj-slovicka-cow.webp'], ['🐷', 'pig', 'pig', 'prase', 'img/aj/aj-slovicka-pig.webp'],
+    ['🐰', 'rabbit', 'rebit', 'králík', 'img/aj/aj-slovicka-rabbit.webp'], ['🦊', 'fox', 'foks', 'liška', 'img/aj/aj-slovicka-fox.webp'], ['🐻', 'bear', 'bér', 'medvěd', 'img/aj/aj-slovicka-bear.webp'],
+    ['🦁', 'lion', 'lajn', 'lev', 'img/aj/aj-slovicka-lion.webp'], ['🐟', 'fish', 'fiš', 'ryba', 'img/aj/aj-slovicka-fish.webp'], ['🐦', 'bird', 'bérd', 'pták', 'img/aj/aj-slovicka-bird.webp'],
+  ],
+  'Barvy': [
+    ['🔴', 'red', 'red', 'červená'], ['🔵', 'blue', 'blú', 'modrá'], ['🟢', 'green', 'grín', 'zelená'],
+    ['🟡', 'yellow', 'jelou', 'žlutá'], ['🟠', 'orange', 'orindž', 'oranžová'], ['🟣', 'purple', 'pérpl', 'fialová'],
+    ['⚫', 'black', 'blek', 'černá'], ['⚪', 'white', 'wajt', 'bílá'], ['🟤', 'brown', 'braun', 'hnědá'],
+    ['🩷', 'pink', 'pink', 'růžová'],
+  ],
+  'Jídlo': [
+    ['🍎', 'apple', 'epl', 'jablko', 'img/aj/aj-slovicka-apple.webp'], ['🍌', 'banana', 'benána', 'banán', 'img/aj/aj-slovicka-banana.webp'], ['🍞', 'bread', 'bred', 'chléb', 'img/aj/aj-slovicka-bread.webp'],
+    ['🧀', 'cheese', 'číz', 'sýr', 'img/aj/aj-slovicka-cheese.webp'], ['🥛', 'milk', 'milk', 'mléko', 'img/aj/aj-slovicka-milk.webp'], ['🥚', 'egg', 'eg', 'vejce', 'img/aj/aj-slovicka-egg.webp'],
+    ['🍰', 'cake', 'kejk', 'dort', 'img/aj/aj-slovicka-cake.webp'], ['🍫', 'chocolate', 'čoklit', 'čokoláda', 'img/aj/aj-slovicka-chocolate.webp'], ['💧', 'water', 'wótr', 'voda', 'img/aj/aj-slovicka-water.webp'],
+    ['🍓', 'strawberry', 'stróberi', 'jahoda', 'img/aj/aj-slovicka-strawberry.webp'],
+  ],
+  'Rodina': [
+    ['👩', 'mother', 'mazr', 'matka'], ['👨', 'father', 'fázr', 'otec'], ['👧', 'sister', 'sistr', 'sestra'],
+    ['👦', 'brother', 'brazr', 'bratr'], ['👵', 'grandmother', 'grendmazr', 'babička'], ['👴', 'grandfather', 'grendfázr', 'dědeček'],
+    ['👶', 'baby', 'bejbi', 'miminko'],
+  ],
+  'Čísla': [
+    ['1️⃣', 'one', 'wan', 'jedna'], ['2️⃣', 'two', 'tú', 'dva'], ['3️⃣', 'three', 'srí', 'tři'],
+    ['4️⃣', 'four', 'fór', 'čtyři'], ['5️⃣', 'five', 'fajv', 'pět'], ['6️⃣', 'six', 'siks', 'šest'],
+    ['7️⃣', 'seven', 'sevn', 'sedm'], ['8️⃣', 'eight', 'ejt', 'osm'], ['9️⃣', 'nine', 'najn', 'devět'],
+    ['🔟', 'ten', 'ten', 'deset'],
+  ],
+  'Škola': [
+    ['📕', 'book', 'buk', 'kniha', 'img/aj/aj-slovicka-book.webp'], ['✏️', 'pencil', 'pensl', 'tužka', 'img/aj/aj-slovicka-pencil.webp'], ['🖊️', 'pen', 'pen', 'pero', 'img/aj/aj-slovicka-pen.webp'],
+    ['🎒', 'bag', 'beg', 'taška', 'img/aj/aj-slovicka-bag.webp'], ['📏', 'ruler', 'rúlr', 'pravítko', 'img/aj/aj-slovicka-ruler.webp'], ['✂️', 'scissors', 'sizrs', 'nůžky', 'img/aj/aj-slovicka-scissors.webp'],
+    ['🪑', 'chair', 'čér', 'židle', 'img/aj/aj-slovicka-chair.webp'], ['🏫', 'school', 'skúl', 'škola', 'img/aj/aj-slovicka-school.webp'], ['📓', 'notebook', 'noutbuk', 'sešit', 'img/aj/aj-slovicka-notebook.webp'],
+  ],
+};
+
+window.addEventListener('DOMContentLoaded', () => Slovicka.spust({
+  klic: 'metodus_aj_slovicka', lang: 'en-GB', jazyk: 'anglicky',
+  slova: Object.entries(TEMATA).flatMap(([kat, slova]) =>
+    slova.map(([emoji, slovo, vyslov, cz, obrazek]) => ({ slovo, vyslov, emoji, cz, obrazek, kat }))),
+  kategorie: Object.keys(TEMATA).map(t => ({ klic: t, nazev: t })),
+  vychoziKat: 'Zvířata',
+  cleny: null,
+  plne: s => s.slovo,
+}));
+</script>
+</body>
+</html>

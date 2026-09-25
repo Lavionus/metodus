@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>🇩🇪 Němčina – slovíčka</title>
+  <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../slovicka.css">
+  <script src="../theme.js"></script>
+  <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
+  <script src="../uloha.js" defer></script>
+  <script src="../procvic.js" defer></script>
+  <script src="../rec.js"></script>
+  <script src="../slovicka.js" defer></script>
+  <style>
+    /* barvy členů: der modrá, die červená, das zelená */
+    .art-der { color: #6aa6fd; } .art-die { color: #ec7474; } .art-das { color: #4caf7d; }
+    :root[data-tone="light"] .art-der { color: #2f5f9e; }
+    :root[data-tone="light"] .art-die { color: #a83c3c; }
+    :root[data-tone="light"] .art-das { color: #2d6e4d; }
+    .legenda { color: var(--text-muted); font-size: 0.85rem; margin: 0 0 12px; }
+  </style>
+</head>
+<body>
+  <h1>🇩🇪 Němčina – slovíčka</h1>
+  <p class="podtitul">Základní slovní zásoba se členy der / die / das. Prohlédni si přehled a kartičky, pak si zkus sérii deseti otázek – po chybě máš druhý pokus.</p>
+
+  <div class="rezimy" id="rezimy">
+    <button data-rezim="prehled" data-faze="vyuka" class="active">📖 Přehled</button>
+    <button data-rezim="karticky" data-faze="vyuka">🎴 Kartičky</button>
+    <button data-rezim="slovo">🖼️ Jak se to řekne?</button>
+    <button data-rezim="clen">🔤 der, die, das?</button>
+    <button data-rezim="preklad">🇨🇿 Co to znamená?</button>
+  </div>
+
+  <div class="pruh-nastroju">
+    <div class="kategorie" id="kategorie" aria-label="Téma"></div>
+    <button type="button" id="btnZvuk" title="Přečíst slovo nahlas">🔊 Číst nahlas: zap</button>
+  </div>
+  <p class="legenda">Barva prozrazuje člen: <b class="art-der">der</b> mužský · <b class="art-die">die</b> ženský · <b class="art-das">das</b> střední rod. Člen se učí vždy spolu se slovem.</p>
+
+  <div id="prehledObal">
+    <input class="hledej" id="hledej" placeholder="🔍 Hledej slovíčko (česky i německy)…" autocomplete="off">
+    <table class="slovnik" id="prehledTabulka"><thead></thead><tbody></tbody></table>
+  </div>
+
+  <div class="karticka" id="karticky" hidden>
+    <div class="k-emoji" id="kEmoji" title="Klepni pro překlad"></div>
+    <div class="k-slovo" id="kSlovo"></div>
+    <div class="k-cesky skryto" id="kCesky"></div>
+    <div class="tlacitka">
+      <button class="b-vedle" id="kZpet">← Zpět</button>
+      <button class="b-hlavni" id="kOtoc">Ukázat překlad</button>
+      <button class="b-vedle" id="kDalsi">Další →</button>
+    </div>
+    <div class="k-pocet" id="kPocet"></div>
+  </div>
+
+  <div class="plocha" id="plocha" hidden></div>
+  <div class="ovladani" id="ovladani" hidden>
+    <button class="hlavni" id="startBtn">🔄 Nová série</button>
+    <span class="pokrok" id="pokrok"></span>
+    <span class="skore" id="skore"></span>
+  </div>
+
+  <p class="napoveda">Člen se v němčině často nedá odvodit z češtiny (<b>das Mädchen</b> – dívka je střední rod), proto se učí se slovem. Pomůcky: slova na <b>-ung, -heit, -keit, -schaft, -ion</b> jsou vždy <b>die</b>, zdrobněliny na <b>-chen, -lein</b> vždy <b>das</b>. Většina slov na <b>-e</b> je <b>die</b> (výjimky: der Käse, das Auge). Dny, měsíce, roční období a počasí bývají <b>der</b>. Muži a mužská povolání mají <b>der</b>, ženy <b>die</b>.</p>
+
+<script>
+// [člen, slovo, emoji, český význam, kategorie]
+const SLOVA = [
+  ['das','Haus','🏠','dům','domov'], ['die','Wohnung','🏢','byt','domov'], ['das','Zimmer','🚪','pokoj','domov'],
+  ['die','Küche','🍳','kuchyně','domov'], ['das','Bett','🛏️','postel','domov'], ['der','Tisch','🪑','stůl','domov'],
+  ['der','Stuhl','💺','židle','domov'], ['das','Fenster','🪟','okno','domov'], ['die','Tür','🚪','dveře','domov'],
+  ['der','Apfel','🍎','jablko','jidlo'], ['das','Brot','🍞','chléb','jidlo'], ['die','Milch','🥛','mléko','jidlo'],
+  ['der','Käse','🧀','sýr','jidlo'], ['das','Wasser','💧','voda','jidlo'], ['die','Suppe','🍲','polévka','jidlo'],
+  ['der','Kaffee','☕','káva','jidlo'], ['die','Banane','🍌','banán','jidlo'], ['das','Ei','🥚','vejce','jidlo'],
+  ['der','Hund','🐶','pes','zvirata'], ['die','Katze','🐱','kočka','zvirata'], ['der','Vogel','🐦','pták','zvirata'],
+  ['das','Pferd','🐴','kůň','zvirata'], ['die','Kuh','🐄','kráva','zvirata'], ['der','Fisch','🐟','ryba','zvirata'],
+  ['die','Maus','🐭','myš','zvirata'],
+  ['die','Mutter','👩','matka','lide'], ['der','Vater','👨','otec','lide'], ['der','Bruder','👦','bratr','lide'],
+  ['die','Schwester','👧','sestra','lide'], ['das','Kind','🧒','dítě','lide'], ['der','Freund','🧑‍🤝‍🧑','přítel','lide'],
+  ['der','Lehrer','👨‍🏫','učitel','lide'],
+  ['der','Baum','🌳','strom','priroda'], ['die','Blume','🌸','květina','priroda'], ['der','Wald','🌲','les','priroda'],
+  ['die','Sonne','☀️','slunce','priroda'], ['der','Mond','🌙','měsíc','priroda'], ['der','Regen','🌧️','déšť','priroda'],
+  ['der','Schnee','❄️','sníh','priroda'], ['der','Berg','⛰️','hora','priroda'], ['der','Fluss','🏞️','řeka','priroda'],
+  ['die','Zeit','⏰','čas','ostatni'], ['der','Tag','📅','den','ostatni'], ['die','Nacht','🌃','noc','ostatni'],
+  ['die','Schule','🏫','škola','ostatni'], ['die','Arbeit','💼','práce','ostatni'], ['das','Buch','📖','kniha','ostatni'],
+  ['die','Farbe','🎨','barva','ostatni'], ['die','Straße','🛣️','ulice','ostatni'], ['das','Auto','🚗','auto','ostatni'],
+];
+
+function pravidlo(s) {
+  const w = s.slovo;
+  if (/(ung|heit|keit|schaft|ion)$/.test(w)) return 'Slova na -ung, -heit, -keit, -schaft, -ion jsou vždy <b>die</b>.';
+  if (/(chen|lein)$/.test(w)) return 'Zdrobněliny na -chen a -lein jsou vždy <b>das</b>.';
+  if (s.kat === 'lide') return s.clen === 'das' ? '<b>das Kind</b> je výjimka – dítě je střední rod jako v češtině.'
+    : s.clen === 'der' ? 'Muži a mužská povolání mají <b>der</b>.' : 'Ženy mají <b>die</b>.';
+  if (/e$/.test(w)) return s.clen === 'die' ? 'Většina slov na -e je <b>die</b>.' : `Pozor, výjimka: většina slov na -e je die, ale <b>${s.clen} ${w}</b>.`;
+  if (['Tag', 'Regen', 'Schnee'].includes(w)) return 'Dny, roční období a počasí bývají <b>der</b>.';
+  return '';
+}
+
+window.addEventListener('DOMContentLoaded', () => Slovicka.spust({
+  klic: 'metodus_de_slovicka', lang: 'de-DE', jazyk: 'německy',
+  slova: SLOVA.map(([clen, slovo, emoji, cz, kat]) => ({ clen, slovo, emoji, cz, kat })),
+  kategorie: [
+    { klic: 'domov', nazev: '🏠 Domov' }, { klic: 'jidlo', nazev: '🍎 Jídlo' },
+    { klic: 'zvirata', nazev: '🐶 Zvířata' }, { klic: 'lide', nazev: '👪 Lidé' },
+    { klic: 'priroda', nazev: '🌳 Příroda' }, { klic: 'ostatni', nazev: '✏️ Ostatní' },
+  ],
+  cleny: ['der', 'die', 'das'],
+  plne: s => `${s.clen} ${s.slovo}`,
+  plneHtml: s => `<span class="art-${s.clen}">${s.clen}</span> ${s.slovo}`,
+  pravidlo,
+}));
+</script>
+</body>
+</html>

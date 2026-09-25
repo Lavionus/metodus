@@ -206,7 +206,7 @@ Stránky na stejné téma se propojí do **rodin**: jedna hlavní lekce s modele
 | Měření a jednotky | `f6_mereni` | `prevody_jednotek`, `clock_learning`, `m6_krychle_kvadr` (převody), `physics_ref` | 🧩 řádová tabulka |
 | Síla a stroje | `f7_sila` | `paka`, `vrtacka_lis`, `f7_tlak`, `physics_playground`, `f8_prace_energie` | jednotné g, šipky sil |
 | Látky a částice | `f6_vlastnosti_latek` | `f6_hustota`, `f8_teplo`, `prv3_voda_vzduch`, `ch8_smesi` | 🧩 částicový model |
-| Světlo | `optika` | `optika_soustava` | stejné barvy paprsků |
+| Světlo | `optika_lekce` | `optika`, `optika_soustava` | stejné barvy paprsků |
 | Elektřina a energie | `elektrina` | `f9_stridavy_proud`, `prv5_energie`, `f9_jaderna` | 🧩 schéma |
 | Vesmír | `solar_system` | `gravitacni_hriste`, `gravitacni_hriste2`, `pohyb_vesmirem`, `planet_globe`, `star_map`, `sky_events`, `iss`, `z6_planeta_zeme` | 🧩 glóbus, společná data planet |
 | Stavba látek | `ch8_atom` | `periodic_table`, `chem_nazvoslovi`, `vycislovani_rovnic`, `ch9_redoxni` | 🧩 molekula |
@@ -397,8 +397,8 @@ Společné pro celou češtinu: 🔗 jedna paleta pro větné členy a slovní d
   - Obrázková řada: ke každému vyjmenovanému slovu karta, řady se učí jako „obrázkový příběh“.
   - 🔗 Sdílená datová sada i/y pro celou rodinu (oddíl 5).
 - **Obrázky:**
-  - `IMG-cj-04` 🟠 **B** · ilustrace k vyjmenovaným slovům, 8 řad × 6–10 karet (například B: být, bydlet, obyvatel, byt, příbytek, nábytek, dobytek, kobyla, býk, Bydžov…) — pomůcka k zapamatování; u slov bez obrazu (bystrý, zbytek) vynechat
-    - 🟡 Částečně hotovo 23. 9. 2026: obrazové řady B, L, M a P, celkem 38 nových karet `obsah/img/cj/vyjmenovana-{b,l,m,p}-*.webp`; sdílené karty „být“, „mýt“ a „myš“ z dřívějších sad; zapojeno do přehledu a zpětné vazby lekce.
+  - `IMG-cj-04` 🟠 **B** · ilustrace k vyjmenovaným slovům, 7 řad × 4–11 karet — pomůcka k zapamatování; u slov bez jednoznačného obrazu vynechat
+    - ✅ Hotovo 23. 9. 2026: všechny řady B, L, M, P, S, V a Z, celkem 59 nových karet `obsah/img/cj/vyjmenovana-{b,l,m,p,s,v,z}-*.webp`; šest sdílených karet „být“, „mýt“, „myš“, „sýr“, „výr“ a „výt“ z dřívějších sad; zapojeno do přehledu i zpětné vazby lekce.
 
 #### Shoda podmětu s přísudkem · [shoda_podmetu.html](obsah/shoda_podmetu.html)
 - **Zařazení:** Čeština › Pravopis · 6.–7. r. · lekce A
@@ -443,6 +443,7 @@ Společné pro celou češtinu: 🔗 jedna paleta pro větné členy a slovní d
   - Poslech s intonací a volba znaménka až po poslechu.
 - **Obrázky:**
   - `IMG-cj-05` 🟠 **A** · 4 scénky dětí (u stolu, na hřišti, ve třídě, v obchodě), každá s prázdným místem pro bublinu — situace ke čtyřem druhům vět
+    - ✅ Hotovo 23. 9. 2026: čtyři akvarelové scénky `obsah/img/cj/cj2-druhy-vet-{stul,hriste,trida,obchod}.webp`, originály PNG a zadání; zapojeno jako přepínatelná obrazová pomůcka se čtyřmi druhy vět.
 
 #### Slovní druhy · [slovni_druhy.html](obsah/slovni_druhy.html)
 - **Zařazení:** Čeština › Tvarosloví a skladba · 3.–6. r. · lekce A
@@ -465,6 +466,7 @@ Společné pro celou češtinu: 🔗 jedna paleta pro větné členy a slovní d
   - Osoby jako obrázky mluvčích: já, ty, on/ona, my, vy, oni — mluví v bublinách.
 - **Obrázky:**
   - `IMG-cj-06` 🟠 **B** · karty osob: dítě ukazuje na sebe, dítě ukazuje na druhého, skupinka dětí, dvojice, ukazování „ty/vy“ — vizualizace mluvnických osob
+    - ✅ Hotovo 24. 9. 2026: šest karet `obsah/img/cj/cj3-slovesa-{ja,ty,on-ona,my,vy,oni}.webp`, originály PNG a zadání; zapojeno do živé pomůcky osoby a čísla v lekci.
 
 #### Podstatná jména – rod a číslo · [cj3_podstatna.html](obsah/cj3_podstatna.html)
 - **Zařazení:** Čeština › Tvarosloví a skladba · 3.–4. r. · lekce A
@@ -561,6 +563,7 @@ Společné pro celou češtinu: 🔗 jedna paleta pro větné členy a slovní d
   - Strom nadřazenosti (zvíře → savec → pes → jezevčík) jako rozbalovací schéma.
 - **Obrázky:**
   - `IMG-cj-07` 🟠 **B** · 8 trojic karet pro mnohoznačná slova a homonyma (koruna, kohoutek, oko, list, pero, zámek, jazyk, kolej) — význam podle obrázku
+    - ✅ Hotovo 24. 9. 2026: 24 karet `obsah/img/cj/cj6-vyznam-*.webp`, originály PNG a zadání; zapojeno jako obrazový slovník s přepínáním osmi slov a trojic významů.
 
 #### Rozvíjející větné členy · [cj7_rozvijejici.html](obsah/cj7_rozvijejici.html)
 - **Zařazení:** Čeština › Tvarosloví a skladba · 7.–8. r. · lekce A
@@ -623,9 +626,10 @@ Společné pro celou češtinu: 🔗 jedna paleta pro větné členy a slovní d
   - 🔗 Převést pod `uloha.js` a společnou hlavičku.
   - Po přečtení slova volba ze tří obrázků (porozumění), u vět volba obrázku, který větu vystihuje.
   - Postupné ubírání barevné podpory.
-- **Stav 23. 9. 2026:** nový režim „Čtu a rozumím“ (slovo → jeden ze tří obrázků `IMG-cj-01`); čtecí tabule beze změny.
+- **Stav 24. 9. 2026:** nový režim „Čtu a rozumím“ (slovo → jeden ze tří obrázků `IMG-cj-01`); v režimu Věty je k prvním deseti větám zapojena odpovídající scéna `IMG-cj-09`.
 - **Obrázky:** sdílet sadu `IMG-cj-01`; navíc:
   - `IMG-cj-09` 🟠 **A** · 10 jednoduchých scén k větám pro první čtení (Máma má mísu. Ema mele maso. Pes leží u domu…) — obrázek ke kontrole porozumění
+  - **Hotovo 24. 9. 2026:** deset scén je uloženo jako PNG + WebP + zadání a zobrazuje se přímo nad příslušnou větou; textové příklady v původním návrhu byly při realizaci sjednoceny se skutečnými větami stránky.
 
 #### Čtení s porozuměním · [cteni_s_porozumenim.html](obsah/cteni_s_porozumenim.html)
 - **Zařazení:** Čeština › Čtení a literatura · 2.–9. r. · lekce B
@@ -638,6 +642,7 @@ Společné pro celou češtinu: 🔗 jedna paleta pro větné členy a slovní d
   - Úloha „označ v textu“: žák místo výběru možnosti klepne na větu.
 - **Obrázky:**
   - `IMG-cj-10` ⚪ **A** · jedna ilustrace ke každému textu 1. stupně (odhadem 10–15) — motivace a kontext, bez prozrazení odpovědí
+- **Stav 24. 9. 2026:** hotovo osm ilustrací podle skutečného počtu textů 1. stupně; PNG, WebP a zadání jsou zapojené přímo nad textem a u vyšších úrovní se obrazová plocha nezobrazuje.
 
 #### Čtenářský deník · [reading_log.html](obsah/reading_log.html)
 - **Zařazení:** Čeština › Čtení a literatura · 4.–9. r. · nástroj F
@@ -661,6 +666,7 @@ Společné pro celou češtinu: 🔗 jedna paleta pro větné členy a slovní d
 - **Obrázky:**
   - `IMG-cj-11` 🟠 **E** · antické zobrazení 8–10 řeckých bohů a hrdinů (vázy, sochy; Wikimedia Commons) — skutečné atributy bohů, ne vymyšlené
   - `IMG-cj-12` ⚪ **A** · 4 malé vinety žánrů (pohádkový zámek, skutečný hrad s pověstí, Olymp, liška s havranem) — záhlaví rámečků žánrů
+- **Stav 24. 9. 2026:** `IMG-cj-12` hotovo a zapojeno do čtyř žánrových rámečků; `IMG-cj-11` čeká na autentické volné antické reprodukce.
 
 #### Literatura 20. století · [cj9_literatura_20.html](obsah/cj9_literatura_20.html)
 - **Zařazení:** Čeština › Čtení a literatura · 9. r. · lekce A
@@ -705,6 +711,7 @@ Společné pro celou češtinu: 🔗 jedna paleta pro větné členy a slovní d
   - Psací dílna: zadání, kontrolní seznam znaků útvaru, vlastní odškrtávání (bez automatického hodnocení).
 - **Obrázky:**
   - `IMG-cj-15` ⚪ **A** · jedna scéna (například cyklista na venkovské silnici) jako společné téma pro popis, vypravování a charakteristiku
+- **Stav 24. 9. 2026:** hotovo a zapojeno jako společný psací podnět: cyklista pomáhá dítěti se spadlým řetězem před přicházejícím deštěm; tři otázky vedou k popisu, vypravování a charakteristice.
 
 ### 7.3 Matematika (49 stránek)
 
@@ -754,6 +761,7 @@ Společné pro celou matematiku: 🔗 každé téma má jeden **názorný obraz*
   - Slovní úlohy, kde se zbytek musí interpretovat (kolik aut pro 23 dětí po 4?).
 - **Obrázky:**
   - `IMG-m-01` ⚪ **B** · 6 karet předmětů k rozdělování (jablko, bonbon, pastelka, míček, kartička, krabička) — v jednotném stylu místo emoji
+- **Stav 24. 9. 2026:** hotovo a zapojeno do režimu „Kolik zbude?“; každá úloha náhodně volí jeden předmět a po správné odpovědi stejné obrázky přeskládá do celých skupin a zbytku.
 
 #### Písemné sčítání, odčítání a násobení · [m4_pisemne_operace.html](obsah/m4_pisemne_operace.html)
 - **Zařazení:** Matematika › Čísla a operace · 4. r. · lekce A
@@ -786,6 +794,7 @@ Společné pro celou matematiku: 🔗 každé téma má jeden **názorný obraz*
   - Fáze Ověř se na konci (dnes chybí).
 - **Obrázky:**
   - `IMG-m-02` ⚪ **B** · 4 karty skutečných celků k dělení (pizza shora, tabulka čokolády, pás látky, skupina 12 dětí) — přenos zlomku do situace; dělicí čáry kreslí web
+- **Stav 24. 9. 2026:** hotovo a zapojeno do galerie „Stejný zlomek ve skutečném světě“; všechny čtyři celky jsou neporušené a dělení na čtvrtiny, osminy či poloviny kreslí CSS nad obrázky.
 
 #### Římské číslice · [roman_numerals.html](obsah/roman_numerals.html)
 - **Zařazení:** Matematika › Čísla a operace · 4.–6. r. · samostatná F (převodník)
@@ -832,7 +841,7 @@ Společné pro celou matematiku: 🔗 každé téma má jeden **názorný obraz*
   - Pět kroků jako formulář (údaje → otázka → plán → výpočet → odpověď), zvýrazněné čísla v textu.
   - Úlohy s nadbytečným údajem.
 - **Obrázky:**
-  - `IMG-m-04` ⚪ **A** · 6 scén ke slovním úlohám (obchod, výlet vlakem, zahrada, školní jídelna, sbírka, cyklovýlet) — kontext úlohy; čísla doplňuje web
+  - `IMG-m-04` ✅ **A** · 6 scén ke slovním úlohám (obchod, výlet vlakem, zahrada, školní jídelna, sbírka, cyklovýlet) — zapojeno; čísla doplňuje web
 
 #### Kalkulačka zlomků · [fraction_calc.html](obsah/fraction_calc.html)
 - **Zařazení:** Matematika › Čísla a operace · 6.–7. r. · nástroj F
@@ -877,7 +886,7 @@ Společné pro celou matematiku: 🔗 každé téma má jeden **názorný obraz*
   - 🧩 Osa se „skokanem“: +3 = tři kroky doprava, −(−3) = otočka a kroky.
   - Kontexty: teploměr, výtah s podzemními patry, účet.
 - **Obrázky:**
-  - `IMG-m-05` ⚪ **B** · 3 karty kontextů (teploměr venku v zimě, výtah se štítky pater −2 až 5 bez čísel, potápěč pod hladinou) — pozadí osy
+  - `IMG-m-05` ✅ **B** · 3 karty kontextů (teploměr venku v zimě, výtah a potápěč pod hladinou) — zapojeno; číselné stupnice kreslí web
 
 #### Počítání se zlomky · [m7_zlomky_operace.html](obsah/m7_zlomky_operace.html)
 - **Zařazení:** Matematika › Čísla a operace · 7. r. · lekce A
@@ -901,7 +910,7 @@ Společné pro celou matematiku: 🔗 každé téma má jeden **názorný obraz*
   - Sleva, zdražení a dvě po sobě jdoucí změny; procenta × procentní body.
 - **Stav 23. 9. 2026:** převedeno pod `procvic.js` (série se psanou odpovědí, druhý pokus, přehled chyb); po otázce postup a proužek 0–100 % na kartě; opraven tvar „za 4 sešity“.
 - **Obrázky:**
-  - `IMG-m-06` ⚪ **B** · 4 karty situací (cenovka se slevou bez čísel, výsledkový graf voleb bez popisků, etiketa potraviny, spořitelní kasička) — kontext úloh; čísla vkládá web
+  - `IMG-m-06` ✅ **B** · 4 karty situací (cenovka se slevou bez čísel, výsledkový graf voleb bez popisků, etiketa potraviny, spořitelní kasička) — zapojeno; čísla vkládá web
 
 #### Mocniny a odmocniny · [mocniny_odmocniny.html](obsah/mocniny_odmocniny.html)
 - **Zařazení:** Matematika › Čísla a operace · 8.–9. r. · dril D
@@ -935,7 +944,7 @@ Společné pro celou matematiku: 🔗 každé téma má jeden **názorný obraz*
   - Délka trvání: „Film začíná v 16:40 a trvá 35 minut“ — ručička se posune a ukáže přechod přes celou.
   - Denní program školáka (vstávání, škola, oběd…) na ose dne propojený s ciferníkem.
 - **Obrázky:**
-  - `IMG-m-07` ⚪ **B** · 6 karet denních činností (vstávání, snídaně, škola, oběd, kroužek, spaní) — denní režim k nastavení času
+  - `IMG-m-07` ✅ **B** · 6 karet denních činností (vstávání, snídaně, škola, oběd, kroužek, spaní) — zapojeno; časy vkládá web
 
 #### Převody jednotek · [prevody_jednotek.html](obsah/prevody_jednotek.html)
 - **Zařazení:** Matematika › Měření a jednotky · 4.–7. r. · lekce A
@@ -1098,7 +1107,7 @@ Společné pro celou matematiku: 🔗 každé téma má jeden **názorný obraz*
   - Trojúhelníky v náhodném otočení; žák nejdřív klepne na přeponu.
   - Slovní úlohy s obrázkem (žebřík u zdi, úhlopříčka televize, zkratka přes park).
 - **Obrázky:**
-  - `IMG-m-11` ⚪ **A** · 4 scény k úlohám (žebřík opřený o dům, drak na provázku, zkratka přes trávník, stožár s kotvicím lanem) — kontext; rozměry kreslí web
+  - `IMG-m-11` ✅ **A** · 4 scény k úlohám (žebřík opřený o dům, drak na provázku, zkratka přes trávník, stožár s kotvicím lanem) — zapojeno; rozměry kreslí web
 
 #### Válec · [m8_valec.html](obsah/m8_valec.html)
 - **Zařazení:** Matematika › Geometrie · 8. r. · lekce A
@@ -1131,7 +1140,7 @@ Společné pro celou matematiku: 🔗 každé téma má jeden **názorný obraz*
   - Měření stínem se scénou a otázkou, kdy je metoda použitelná.
   - 🔗 Rozdělit osm režimů do fází Výuka / Procvič, aby lekce nepůsobila jako seznam.
 - **Obrázky:**
-  - `IMG-m-12` ⚪ **A** · scéna „měření stínem“: strom a tyč na louce ve stejném slunci, dlouhé stíny — model pro úlohu; úsečky a čísla kreslí web
+  - `IMG-m-12` ✅ **A** · scéna „měření stínem“: strom a tyč na louce ve stejném slunci, dlouhé stíny — zapojeno; úsečky a čísla kreslí web
 
 #### Jehlan, kužel a koule · [m9_jehlan_kuzel.html](obsah/m9_jehlan_kuzel.html)
 - **Zařazení:** Matematika › Geometrie · 9. r. · lekce B
@@ -1263,7 +1272,7 @@ Společné pro jazyky: 🔗 gramatika se učí **v krátkém dialogu nebo scénc
   - Poslech → výběr obrázku ze čtyř; pak krátká věta („The dog is under the table“) s obrázkem.
 - **Stav 23. 9. 2026:** převedeno pod společný modul `slovicka.js` (stejný pro AJ/NJ/FJ): kartičky, přehled s výslovností, témata pro všechny režimy, série obrázek → anglicky a anglicky → česky; čtení nahlas se řídí vypínačem v `rec.js`.
 - **Obrázky:**
-  - `IMG-aj-02` 🔴 **B** · sada asi 120 karet slovíček ve 6 tématech (zvířata, jídlo a pití, dům a nábytek, škola, oblečení, rodina a lidé) — jednoznačný motiv, stejné světlo a okraj; **sdílet s `de_slovicka`, `fr_slovicka`, `cj1_pismena`**
+  - `IMG-aj-02` 🔴 **B** 🟡 · sada asi 120 karet slovíček ve 6 tématech (zvířata, jídlo a pití, dům a nábytek, škola, oblečení, rodina a lidé) — hotovo 56 různých karet: zvířata (12), jídlo (10), škola (9), rodina (7), dům a nábytek (9; židle sdílená se školou) a oblečení (10); domácí motivy zapojeny také v `de_slovicka` a `fr_slovicka`; jednoznačný motiv, stejné světlo a okraj
 
 #### Pozdravy a představení · [aj3_pozdravy.html](obsah/aj3_pozdravy.html)
 - **Zařazení:** Cizí jazyky › Slovní zásoba · AJ 3. r. · lekce A
@@ -1382,7 +1391,7 @@ Společné pro jazyky: 🔗 gramatika se učí **v krátkém dialogu nebo scénc
   - Rušná scéna (park), žák klepne na postavu a popíše, co dělá právě teď.
   - Dvojice „obvykle / právě teď“ (chlapec obvykle hraje fotbal, ale teď čte).
 - **Obrázky:**
-  - `IMG-aj-06` 🔴 **A** · rušná scéna v parku s 10 osobami, z nichž každá dělá jednu jasnou činnost (běží, čte, jí zmrzlinu, venčí psa, hraje na kytaru, spí na lavičce, jede na kole, fotí, krmí kachny, maluje) — hotspoty pro popis „právě teď“
+  - `IMG-aj-06` ✅ **A** · rušná scéna v parku s 10 osobami, z nichž každá dělá jednu jasnou činnost (běží, čte, jí zmrzlinu, venčí psa, hraje na kytaru, spí na lavičce, jede na kole, fotí, krmí kachny, maluje) — zapojeno; web střídá 10 hotspotů pro popis „právě teď“
 
 #### Can, must – modální slovesa · [aj5_modalni.html](obsah/aj5_modalni.html)
 - **Zařazení:** Cizí jazyky › Gramatika · AJ 5.–6. r. · lekce A
@@ -1773,16 +1782,14 @@ Společné pro fyziku: web má **výborné simulace** (páka, optika, elektřina
 - **Obrázky:**
   - `IMG-f-02` 🟠 **C** · 10 fotografií měřidel (pravítko, svinovací metr, posuvné měřidlo, kuchyňská váha, digitální váha, odměrný válec, teploměr lihový a digitální, stopky, siloměr) — poznávání měřidel
 
-#### Fyzikální hřiště · [physics_playground.html](obsah/physics_playground.html)
-- **Zařazení:** Přírodní vědy › Fyzika · 6.–7. r. · simulace E
-- **Popis:** Kyvadlo, nakloněná rovina, srážky; tempo, krokování, síly, stopa, popisky, energie.
-- **Funkčnost:** 3 scény, pauza, krok, tempo ¼–1×, zobrazení sil a energie.
-- **Cíl výuky:** Žák pozoruje, jak se mění rychlost a energie tělesa, a vysvětlí to silami.
-- **Vylepšení:**
-  - 🔗 Společná hlavička a tři úkoly na scénu (Kdy je kyvadlo nejrychlejší? Co změní sklon? Co se stane při srážce stejně těžkých koulí?).
-  - Uložené výchozí stavy pro srovnání „před/po“.
-- **Stav 23. 9. 2026:** 🧩 úkoly k modelu – 4 úkoly (kde je kyvadlo nejrychlejší, těžší kyvadlo, sklon a tření, srážka stejných koulí), 8 otázek pro Procvič a Ověř se; výklad a „Zkus si“ stránky se do tipu rozmažou.
-- **Obrázky:** žádné.
+#### Fyzikální hřiště – síla, pohyb a energie · [physics_playground.html](obsah/physics_playground.html)
+- **Zařazení:** Přírodní vědy › Fyzika · 7.–8. r. · interaktivní výklad (od 24. 9. 2026 místo simulace E na celou obrazovku; stará verze v `docs/zalohy-hriste-20260924-174636/`)
+- **Popis:** Pět kapitol ve stylu `optika_lekce`: síla a pohyb (šipka síly, výsledná síla, tření, Newtonovy zákony), tíha a nakloněná rovina (rozklad tíhy, mezní úhel), polohová a pohybová energie (zákon zachování), kyvadlo (doba kmitu, měření s tabulkou a grafem, Země/Měsíc/Mars), srážky a hybnost (rozšiřující učivo).
+- **Funkčnost:** 5 živých modelů v SVG s animací (společná smyčka, 🐌 zpomalení): bedna s tahem, třením a grafem v(t); nakloněná rovina s úchopem sklonu, rovnoběžníkem sil a mezním úhlem; U-rampa se sloupci Ep/Ek/teplo/celkem; jedno nebo dvě kyvadla (RK4, měření doby kmitu z průchodů, tabulka měření + graf T(l) s teoretickou křivkou); srážky vozíků (pružina, guma, suchý zip) s bilancí hybnosti a energie a hotovými nastaveními. Fyzika s g = 9,81 N/kg, otázky s g = 10 N/kg.
+- **Rámec:** fáze Výuka (kapitoly), Ukázka (řešený příklad k energii s tlačítkem do modelu), Procvič (19 generátorů přes `uloha.js`, 5 témat), Ověř se, Tahák (6 karet). 7 předpovědí a 10 úkolů, které model sám pozná; postup a tabulka měření v `metodus_hriste`.
+- **Cíl výuky:** Žák nakreslí síly působící na těleso, vysvětlí setrvačnost a tření, určí, kdy se těleso na svahu rozjede, spočítá polohovou a pohybovou energii, změří dobu kmitu kyvadla a řekne, co se zachová při srážce.
+- **Test:** [tests/hriste-lekce.mjs](tests/hriste-lekce.mjs) – fyzika proti vzorcům, animace, tažení úchopů, všech 17 úkolů, tabulka měření, generátory, Ověř se, mobil 390/320 px, kontrast 8 motivů.
+- **Obrázky:** žádné nejsou potřeba (vše kreslí kód, styl D).
 
 #### Vlastnosti látek a těles · [f6_vlastnosti_latek.html](obsah/f6_vlastnosti_latek.html)
 - **Zařazení:** Přírodní vědy › Fyzika · 6. r. · lekce A s modely (hlavní lekce rodiny látek)
@@ -1806,6 +1813,14 @@ Společné pro fyziku: web má **výborné simulace** (páka, optika, elektřina
 - **Stav 23. 9. 2026:** 🧩 úkoly k modelu – 3 úkoly odpovídající třem cestám (rameno a síla, kladkostroj, převod ozubených kol), 10 otázek pro Procvič a Ověř se. Fotografie `IMG-f-04` zůstávají otevřené.
 - **Obrázky:**
   - `IMG-f-04` 🟠 **C** · 12 fotografií jednoduchých strojů v praxi (houpačka, nůžky, kleště, otvírák, kolečko, louskáček, pinzeta, stavební jeřáb s kladkostrojem, studna s rumpálem, převody jízdního kola, hodinový strojek, klika) — spojení modelu se světem
+
+#### Páka a jednoduché stroje – názorná lekce · [paka_lekce.html](obsah/paka_lekce.html)
+- **Zařazení:** Přírodní vědy › Fyzika · 7.–8. r. · interaktivní výklad (od 24. 9. 2026, v rodině „Síla, pohyb a stroje“ před laboratoří `paka`)
+- **Popis:** Devět kapitol: jednoduché stroje, moment síly, rovnováha na páce, druhy pák, kladky, kolo na hřídeli, převody, nakloněná rovina (klín, šroub), zlaté pravidlo mechaniky.
+- **Funkčnost:** 11 živých modelů s úchopy (klíč, školní páka, houpačka, kolečko, předloktí, kladkostroj, rumpál, ozubená kola, jízdní kolo, rampa, graf práce) a třídička 10 předmětů.
+- **Rámec:** Výuka (kapitoly), Ukázka (houpačka, kladkostroj), Procvič (16 generátorů, 5 témat), Ověř se, Tahák (7 karet); 11 předpovědí a 15 úkolů, které model sám pozná; oddíl Pro učitele (scénáře 5/15/45 min, časté omyly).
+- **Cíl výuky:** Žák spočítá moment síly a rovnováhu na páce, rozliší druhy pák a vysvětlí, že jednoduché stroje šetří sílu, ne práci.
+- **Obrázky:** vše kreslí kód (styl D); fotografie `IMG-f-04` by se hodily i sem.
 
 #### Vrtačka a lis · [vrtacka_lis.html](obsah/vrtacka_lis.html)
 - **Zařazení:** Přírodní vědy › Fyzika · 7.–8. r. · simulace E
@@ -1933,6 +1948,15 @@ Společné pro fyziku: web má **výborné simulace** (páka, optika, elektřina
 - **Stav 23. 9. 2026:** 🧩 úkoly k modelu – 3 úkoly (frekvence a vlnová délka; dva přílivy denně s měřeným intervalem; skočný × hluchý příliv s měřeným rozkyvem), 8 otázek včetně interference.
 - **Obrázky:**
   - `IMG-f-11` ⚪ **C** · fotografie přílivu a odlivu na stejném místě (dvojice) — skutečný rozdíl hladin
+
+#### Světlo a optika – názorná lekce · [optika_lekce.html](obsah/optika_lekce.html)
+- **Zařazení:** Přírodní vědy › Fyzika · 8.–9. r. · interaktivní výklad (hlavní lekce rodiny světla od 24. 9. 2026)
+- **Popis:** Deset kapitol od toho, jak vidíme, po optické přístroje; každý jev má vlastní živý model (SVG) s úchopy, odečty a hláškou, co model právě ukazuje.
+- **Funkčnost:** 13 modelů – lampa a prostředí, stín a polostín, zákon odrazu (hladké × drsné), obraz v zrcadle, lom s vlnoplochami (2×, druhý pro mezní úhel), tužka ve vodě, optické vlákno, hranol s disperzí, duha v kapce, čočka počítaná přes obě plochy (i jako hranolky), zobrazení tenkou čočkou (krokování konstrukce, svazek, stínítko s náhledem), oko s akomodací a brýlemi (tlačítko „Nasadit brýle“ vloží správnou korekci a animací ukáže posun obrazu na sítnici; posun je v kresbě zveličený, dioptrie skutečné). Lom, odraz i podíl odraženého světla (Fresnel) počítá společný paprskový počítač; skla podle katalogu (BK7, SF11).
+- **Rámec:** fáze Výuka (kapitoly), Ukázka (řešený příklad k zobrazovací rovnici), Procvič (15 generátorů otázek přes `uloha.js`, témata, obrázky u čoček), Ověř se, Tahák (6 karet). 11 předpovědí „předpověz → vyzkoušej → vysvětli“ a 13 úkolů, které model sám pozná; postup v `metodus_optika_lekce`.
+- **Cíl výuky:** Žák vysvětlí odraz, lom a rozklad světla, najde obraz vytvořený čočkou a řekne, jaké brýle pomohou krátkozrakému a dalekozrakému oku.
+- **Test:** [tests/optika-lekce.mjs](tests/optika-lekce.mjs) – fyzika proti vzorcům, všech 24 úkolů, generátory, Ověř se, mobil, kontrast v 8 motivech.
+- **Obrázky:** žádné nejsou potřeba (vše kreslí kód, styl D); fotografie jevů `IMG-f-12` by se hodily i sem.
 
 #### Optika – odraz, lom a čočky · [optika.html](obsah/optika.html)
 - **Zařazení:** Přírodní vědy › Fyzika · 8.–9. r. · simulace E (hlavní lekce rodiny světla)
@@ -3264,8 +3288,8 @@ Při výrobě sady v jednom stylu zadávat všechny karty v jedné dávce se ste
 | ID | Styl | Co vyrobit nebo sehnat | Stránka |
 |---|---|---|---|
 | `IMG-cj-01` | B | sada 40 karet jednoduchých předmětů a zvířat pro první čtení (máma, les, pes, auto, ucho, chleba, dům, míč, kolo, ryba…) — jednoznačný motiv bez textu; sdílet s `slabiky` a `cj2_abeceda` | [cj1_pismena](obsah/cj1_pismena.html) |
-| `IMG-aj-02` | B | sada asi 120 karet slovíček ve 6 tématech (zvířata, jídlo a pití, dům a nábytek, škola, oblečení, rodina a lidé) — jednoznačný motiv, stejné světlo a okraj; **sdílet s `de_slovicka`, `fr_slovicka`, `cj1_pismena`** | [aj_slovicka](obsah/aj_slovicka.html) |
-| `IMG-aj-06` | A | rušná scéna v parku s 10 osobami, z nichž každá dělá jednu jasnou činnost (běží, čte, jí zmrzlinu, venčí psa, hraje na kytaru, spí na lavičce, jede na kole, fotí, krmí kachny, maluje) — hotspoty pro popis „právě teď“ | [aj5_pritomny_prubehovy](obsah/aj5_pritomny_prubehovy.html) |
+| `IMG-aj-02` | B 🟡 | sada asi 120 karet slovíček ve 6 tématech (zvířata, jídlo a pití, dům a nábytek, škola, oblečení, rodina a lidé) — hotovo 56 různých karet: zvířata (12), jídlo (10), škola (9), rodina (7), dům a nábytek (9; židle sdílená se školou) a oblečení (10); domácí motivy zapojeny také v `de_slovicka` a `fr_slovicka`; jednoznačný motiv, stejné světlo a okraj | [aj_slovicka](obsah/aj_slovicka.html) |
+| `IMG-aj-06` | A ✅ | rušná scéna v parku s 10 osobami, z nichž každá dělá jednu jasnou činnost (běží, čte, jí zmrzlinu, venčí psa, hraje na kytaru, spí na lavičce, jede na kole, fotí, krmí kachny, maluje) — zapojeno; web střídá 10 hotspotů pro popis „právě teď“ | [aj5_pritomny_prubehovy](obsah/aj5_pritomny_prubehovy.html) |
 | `IMG-prv-01` | B | karty členů rozšířené fiktivní rodiny (babička, dědeček, máma, táta, teta, strýc, bratranec, mladší sourozenec) v jednotném stylu — rodokmen | [prv1_rodina](obsah/prv1_rodina.html) |
 | `IMG-prv-03` | A | pohled shora na cestu do školy v naší vesnici (dům, chodník, přechod se semaforem, přechod bez semaforu, zastávka, zaparkovaná auta, škola) — hotspoty rozhodovacích míst | [prv1_cesta_skola](obsah/prv1_cesta_skola.html) |
 | `IMG-prv-07` | A | naše vesnice ze stejného úhlu ve 4 ročních obdobích (jaro, léto, podzim, zima), se stejným stromem, rybníkem, polem a zahradou — **klíčová sada pro celou prvouku** | [prv1_rocni_obdobi](obsah/prv1_rocni_obdobi.html) |
@@ -3388,13 +3412,13 @@ Při výrobě sady v jednom stylu zadávat všechny karty v jedné dávce se ste
 | `IMG-m-01` | B | 6 karet předmětů k rozdělování (jablko, bonbon, pastelka, míček, kartička, krabička) — v jednotném stylu místo emoji | [m3_deleni_zbytkem](obsah/m3_deleni_zbytkem.html) |
 | `IMG-m-02` | B | 4 karty skutečných celků k dělení (pizza shora, tabulka čokolády, pás látky, skupina 12 dětí) — přenos zlomku do situace; dělicí čáry kreslí web | [m4_zlomky_uvod](obsah/m4_zlomky_uvod.html) |
 | `IMG-m-03` | C | 4 fotografie římských číslic ve skutečnosti (ciferník věžních hodin, letopočet na průčelí, náhrobek, číslování kapitol) — čtení v kontextu | [roman_numerals](obsah/roman_numerals.html) |
-| `IMG-m-04` | A | 6 scén ke slovním úlohám (obchod, výlet vlakem, zahrada, školní jídelna, sbírka, cyklovýlet) — kontext úlohy; čísla doplňuje web | [m5_slovni_ulohy](obsah/m5_slovni_ulohy.html) |
-| `IMG-m-05` | B | 3 karty kontextů (teploměr venku v zimě, výtah se štítky pater −2 až 5 bez čísel, potápěč pod hladinou) — pozadí osy | [m7_cela_cisla](obsah/m7_cela_cisla.html) |
-| `IMG-m-06` | B | 4 karty situací (cenovka se slevou bez čísel, výsledkový graf voleb bez popisků, etiketa potraviny, spořitelní kasička) — kontext úloh; čísla vkládá web | [procenta](obsah/procenta.html) |
-| `IMG-m-07` | B | 6 karet denních činností (vstávání, snídaně, škola, oběd, kroužek, spaní) — denní režim k nastavení času | [clock_learning](obsah/clock_learning.html) |
+| `IMG-m-04` | A ✅ | 6 scén ke slovním úlohám (obchod, výlet vlakem, zahrada, školní jídelna, sbírka, cyklovýlet) — zapojeno; čísla doplňuje web | [m5_slovni_ulohy](obsah/m5_slovni_ulohy.html) |
+| `IMG-m-05` | B ✅ | 3 karty kontextů (teploměr venku v zimě, výtah a potápěč pod hladinou) — zapojeno; číselné stupnice kreslí web | [m7_cela_cisla](obsah/m7_cela_cisla.html) |
+| `IMG-m-06` | B ✅ | 4 karty situací (cenovka se slevou bez čísel, výsledkový graf voleb bez popisků, etiketa potraviny, spořitelní kasička) — zapojeno; čísla vkládá web | [procenta](obsah/procenta.html) |
+| `IMG-m-07` | B ✅ | 6 karet denních činností (vstávání, snídaně, škola, oběd, kroužek, spaní) — zapojeno; časy vkládá web | [clock_learning](obsah/clock_learning.html) |
 | `IMG-m-10` | C | 8 fotografií souměrných a téměř souměrných objektů (motýl, list, průčelí zámku, obličej, sněhová vločka, dopravní značka, logo, most) — hledání os ve skutečnosti | [m4_soumernost](obsah/m4_soumernost.html) |
-| `IMG-m-11` | A | 4 scény k úlohám (žebřík opřený o dům, drak na provázku, zkratka přes trávník, stožár s kotvicím lanem) — kontext; rozměry kreslí web | [m8_pythagoras](obsah/m8_pythagoras.html) |
-| `IMG-m-12` | A | scéna „měření stínem“: strom a tyč na louce ve stejném slunci, dlouhé stíny — model pro úlohu; úsečky a čísla kreslí web | [m9_podobnost](obsah/m9_podobnost.html) |
+| `IMG-m-11` | A ✅ | 4 scény k úlohám (žebřík opřený o dům, drak na provázku, zkratka přes trávník, stožár s kotvicím lanem) — zapojeno; rozměry kreslí web | [m8_pythagoras](obsah/m8_pythagoras.html) |
+| `IMG-m-12` | A ✅ | scéna „měření stínem“: strom a tyč na louce ve stejném slunci, dlouhé stíny — zapojeno; úsečky a čísla kreslí web | [m9_podobnost](obsah/m9_podobnost.html) |
 | `IMG-aj-10` | A | 4 situace s viditelným důkazem (tmavé mraky, sklenice na kraji stolu, prázdná nádrž, dívka s lístky na koncert) — kontext going to | [aj7_budouci](obsah/aj7_budouci.html) |
 | `IMG-prv-09` | B | 10 karet vjemů (zvonek, citron, růže, oheň, zmrzlina, tráva, kočka, duha, bubínek, polštář) — čím to poznám | [prv1_smysly](obsah/prv1_smysly.html) |
 | `IMG-prv-18` | C | 8 fotografií využití (dlažba ze žuly, pískovcová socha, vápenka, uhelný lom, sklo z písku, sádra, tužka, solnička) | [prv4_horniny](obsah/prv4_horniny.html) |

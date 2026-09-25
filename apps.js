@@ -2304,18 +2304,31 @@ const KATALOG_SEKCE = [
       },
       {
         "soubor": "obsah/physics_playground.html",
-        "nazev": "🔬 Fyzikální hřiště pro děti",
+        "nazev": "🔬 Fyzikální hřiště – síla, pohyb a energie",
         "tagy": [
           "fyzika",
-          "kyvadlo",
+          "síla",
+          "tření",
+          "setrvačnost",
+          "newtonovy zákony",
+          "tíha",
           "nakloněná rovina",
+          "mezní úhel",
+          "energie",
+          "polohová energie",
+          "pohybová energie",
+          "zákon zachování energie",
+          "kyvadlo",
+          "doba kmitu",
           "srážky",
+          "hybnost",
+          "výklad",
           "simulace"
         ],
         "predmet": "f",
         "rocniky": [
-          6,
-          7
+          7,
+          8
         ]
       },
       {
@@ -2336,6 +2349,42 @@ const KATALOG_SEKCE = [
         "predmet": "f",
         "rocniky": [
           6
+        ]
+      },
+      {
+        "soubor": "obsah/paka_lekce.html",
+        "nazev": "⚖️ Páka a jednoduché stroje – názorná lekce",
+        "tagy": [
+          "fyzika",
+          "výklad",
+          "jednoduché stroje",
+          "páka",
+          "moment síly",
+          "rameno síly",
+          "rovnováha na páce",
+          "houpačka",
+          "dvojzvratná páka",
+          "jednozvratná páka",
+          "kladka",
+          "kladkostroj",
+          "kolo na hřídeli",
+          "rumpál",
+          "ozubená kola",
+          "převod",
+          "převodový poměr",
+          "jízdní kolo",
+          "nakloněná rovina",
+          "klín",
+          "šroub",
+          "zlaté pravidlo mechaniky",
+          "práce",
+          "simulace",
+          "2. stupeň"
+        ],
+        "predmet": "f",
+        "rocniky": [
+          7,
+          8
         ]
       },
       {
@@ -2505,6 +2554,47 @@ const KATALOG_SEKCE = [
         ]
       },
       {
+        "soubor": "obsah/vitr_lekce.html",
+        "nazev": "💨 Vítr a proudění vzduchu – názorná lekce",
+        "tagy": [
+          "fyzika",
+          "vítr",
+          "proudění",
+          "výklad",
+          "tlak vzduchu",
+          "tlaková výše",
+          "tlaková níže",
+          "bríza",
+          "beaufortova stupnice",
+          "anemometr",
+          "proudnice",
+          "laminární proudění",
+          "turbulentní proudění",
+          "úplav",
+          "víry",
+          "kármánova vírová stezka",
+          "odpor vzduchu",
+          "odporová síla",
+          "součinitel odporu",
+          "zúžení",
+          "podtlak",
+          "křídlo",
+          "vztlak",
+          "úhel náběhu",
+          "pád letadla",
+          "závětří",
+          "závěje",
+          "aerodynamika",
+          "simulace",
+          "2. stupeň"
+        ],
+        "predmet": "f",
+        "rocniky": [
+          7,
+          8
+        ]
+      },
+      {
         "soubor": "obsah/vitr_tunel.html",
         "nazev": "💨 Vítr a překážky – aerodynamický tunel",
         "tagy": [
@@ -2621,6 +2711,57 @@ const KATALOG_SEKCE = [
           "slapové jevy",
           "měsíc",
           "zeměpis",
+          "2. stupeň",
+          "sš"
+        ],
+        "predmet": "f",
+        "rocniky": [
+          8,
+          9
+        ]
+      },
+      {
+        "soubor": "obsah/optika_lekce.html",
+        "nazev": "💡 Světlo a optika – názorná lekce",
+        "tagy": [
+          "fyzika",
+          "optika",
+          "světlo",
+          "výklad",
+          "zdroj světla",
+          "stín",
+          "polostín",
+          "zatmění",
+          "odraz",
+          "zákon odrazu",
+          "zrcadlo",
+          "lom",
+          "index lomu",
+          "snellův zákon",
+          "úplný odraz",
+          "mezní úhel",
+          "optické vlákno",
+          "hranol",
+          "disperze",
+          "spektrum",
+          "duha",
+          "čočka",
+          "spojka",
+          "rozptylka",
+          "ohnisko",
+          "optická mohutnost",
+          "dioptrie",
+          "zobrazovací rovnice",
+          "obraz",
+          "oko",
+          "akomodace",
+          "krátkozrakost",
+          "dalekozrakost",
+          "brýle",
+          "lupa",
+          "fotoaparát",
+          "projektor",
+          "simulace",
           "2. stupeň",
           "sš"
         ],
@@ -4840,8 +4981,9 @@ const KATALOG_CILE = {
   "obsah/f6_hustota.html": "Vypočítám hustotu, hmotnost a objem a předpovím, zda těleso plave.",
   "obsah/physics_ref.html": "Najdu fyzikální vzorec a sleduji, jak výsledek závisí na veličinách.",
   "obsah/f6_mereni.html": "Zvolím jednotku a měřidlo, převedu jednotky a odečtu hodnotu ze stupnice.",
-  "obsah/physics_playground.html": "Pozoruji kyvadlo, nakloněnou rovinu a srážky a sleduji síly a energii.",
+  "obsah/physics_playground.html": "Nakreslím síly působící na těleso, vysvětlím setrvačnost a tření, řeknu, kdy se těleso na svahu rozjede, spočítám polohovou a pohybovou energii, změřím dobu kmitu kyvadla a vysvětlím, co se zachová při srážce.",
   "obsah/f6_vlastnosti_latek.html": "Rozliším látku a těleso, popíšu skupenství částicovým modelem a vysvětlím plavání těles.",
+  "obsah/paka_lekce.html": "Spočítám moment síly a rovnováhu na páce, rozliším druhy pák a vysvětlím, proč kladkostroj, kolo na hřídeli, převody i nakloněná rovina šetří sílu, ale ne práci.",
   "obsah/paka.html": "Najdu rovnováhu na páce a vysvětlím, co ušetří kladka a ozubený převod.",
   "obsah/vrtacka_lis.html": "Vysvětlím, jak hydraulický lis znásobí sílu a proč vrtání závisí na materiálu a otáčkách.",
   "obsah/gravitacni_hriste2.html": "Pozoruji, jak se tělesa navzájem přitahují a obíhají společné těžiště.",
@@ -4849,11 +4991,13 @@ const KATALOG_CILE = {
   "obsah/gravitacni_hriste.html": "Vypouštím tělesa kolem Slunce a pozoruji oběžné dráhy a Keplerovy zákony.",
   "obsah/f7_pohyb.html": "Vypočítám dráhu, rychlost a čas, převedu jednotky rychlosti a přečtu graf pohybu.",
   "obsah/proudove_motory.html": "Popíšu, jak proudí vzduch proudovým motorem a jak se mění jeho rychlost, teplota a tlak.",
+  "obsah/vitr_lekce.html": "Vysvětlím, proč fouká vítr, na čem závisí odpor vzduchu, proč má rychlejší vzduch menší tlak a jak křídlo vytváří vztlak.",
   "obsah/vitr_tunel.html": "Pozoruji, jak tvar překážky mění proudění vzduchu, a hledám víry a závětří.",
   "obsah/f7_sila.html": "Složím síly, určím gravitační sílu a těžiště a použiji Newtonovy zákony.",
   "obsah/elektrina.html": "Použiji Ohmův zákon, porovnám sériové a paralelní zapojení a pozoruji magnetické pole.",
   "obsah/f8_teplo.html": "Vypočítám teplo, přečtu graf ohřevu a popíšu změny skupenství.",
   "obsah/vodni_hladina.html": "Pozoruji šíření a skládání vln na hladině a vznik přílivu a odlivu.",
+  "obsah/optika_lekce.html": "Vysvětlím odraz, lom a rozklad světla, najdu obraz vytvořený čočkou a řeknu, jaké brýle pomohou krátkozrakému a dalekozrakému oku.",
   "obsah/optika.html": "Pozoruji odraz a lom světla a zobrazení čočkou a zrcadlem.",
   "obsah/optika_soustava.html": "Vysvětlím, jak optický přístroj vytvoří obraz, a sestavím vlastní soustavu.",
   "obsah/f8_prace_energie.html": "Vypočítám práci, výkon a energii a popíšu přeměny energie.",
@@ -5320,10 +5464,12 @@ const KATALOG_RODINY = [
       "obsah/f7_pohyb.html",
       "obsah/f7_sila.html",
       "obsah/physics_playground.html",
+      "obsah/paka_lekce.html",
       "obsah/paka.html",
       "obsah/vrtacka_lis.html",
       "obsah/f7_tlak.html",
       "obsah/f8_prace_energie.html",
+      "obsah/vitr_lekce.html",
       "obsah/vitr_tunel.html",
       "obsah/proudove_motory.html"
     ]
@@ -5331,11 +5477,12 @@ const KATALOG_RODINY = [
   {
     "id": "vlneni",
     "nazev": "Světlo, zvuk a vlnění",
-    "popis": "Vlny na hladině, zvuk, odraz a lom světla a optické přístroje.",
-    "hlavni": "obsah/optika.html",
+    "popis": "Vlny na hladině, zvuk, výklad optiky od stínu po oko, laboratoř odrazu a lomu a optické přístroje.",
+    "hlavni": "obsah/optika_lekce.html",
     "cesta": [
       "obsah/vodni_hladina.html",
       "obsah/f9_zvuk.html",
+      "obsah/optika_lekce.html",
       "obsah/optika.html",
       "obsah/optika_soustava.html"
     ]

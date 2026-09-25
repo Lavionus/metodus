@@ -1,0 +1,9 @@
+Use case: scientific-educational
+Asset type: IMG-cj-06 grammar-person card — my
+Subject: two illustrated elementary pupils stand together and both indicate their shared pair with bent thumbs.
+Style: warm watercolor and gouache schoolbook illustration with delicate ink, warm ivory background, muted sage, jade, ochre and brick palette.
+Composition: square, centered pair, generous margins, shared self-reference legible at card size.
+Constraints: no text, letters, digits, speech bubble, arrows, labels, logo, watermark or border; natural hands; age-appropriate.
+Alt: Dvě děti ukazují samy na sebe – my.
+Generator: built-in image_gen
+Datum: 2026-09-24

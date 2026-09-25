@@ -22,11 +22,36 @@
     .osa .znacka { fill: var(--warn); font-size: 20px; text-anchor: middle; }
     .priklad { font-size: clamp(1.7rem, 6vw, 2.6rem); font-weight: 700; font-variant-numeric: tabular-nums; }
     .priklad .zap { color: var(--warn); }
+    .kontexty-celych { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; width: min(760px, 100%); margin: 14px auto 20px; }
+    .kontext-cisla { margin: 0; padding: 8px; border: 1px solid var(--border); border-radius: 14px; background: var(--panel); box-shadow: 0 4px 14px #0001; }
+    .kontext-obrazek { position: relative; overflow: hidden; aspect-ratio: 1; border-radius: 10px; background: #f4edda; }
+    .kontext-obrazek img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    .kontext-stupnice { position: absolute; inset: 8% 5% 8% auto; display: flex; flex-direction: column; justify-content: space-between; min-width: 2.2rem; padding: 4px 6px; color: #172026; background: #fffdf1d9; border-left: 3px solid #246b78; border-radius: 7px; font-weight: 800; font-size: clamp(.68rem, 2vw, .88rem); text-align: center; box-shadow: 0 1px 5px #0003; }
+    .kontext-cisla figcaption { padding: 7px 3px 2px; color: var(--text-faint); font-size: .82rem; text-align: center; line-height: 1.35; }
+    @media (max-width: 540px) { .kontexty-celych { gap: 6px; } .kontext-cisla { padding: 4px; } .kontext-cisla figcaption { font-size: .68rem; } }
   </style>
 </head>
 <body>
   <h1>➖ Celá čísla</h1>
   <p class="podtitul">Pro 7. ročník: záporná čísla na ose, porovnávání, absolutní hodnota a počítání.</p>
+
+  <section class="kontexty-celych" aria-label="Kde se setkáme se zápornými čísly">
+    <figure class="kontext-cisla">
+      <div class="kontext-obrazek"><img src="img/m/m7-cela-teplomer.webp" alt="Teploměr v zasněžené zahradě." width="768" height="768">
+        <span class="kontext-stupnice" aria-hidden="true"><span>10 °C</span><span>0 °C</span><span>−10 °C</span></span></div>
+      <figcaption>Teplota pod nulou je záporná.</figcaption>
+    </figure>
+    <figure class="kontext-cisla">
+      <div class="kontext-obrazek"><img src="img/m/m7-cela-vytah.webp" alt="Řez budovou s výtahem a podzemními patry." width="768" height="768">
+        <span class="kontext-stupnice" aria-hidden="true"><span>5</span><span>2</span><span>0</span><span>−2</span></span></div>
+      <figcaption>Podzemní patra značíme záporně.</figcaption>
+    </figure>
+    <figure class="kontext-cisla">
+      <div class="kontext-obrazek"><img src="img/m/m7-cela-potapec.webp" alt="Potápěč plave pod hladinou nad mořským dnem." width="768" height="768">
+        <span class="kontext-stupnice" aria-hidden="true"><span>0 m</span><span>−5 m</span><span>−10 m</span></span></div>
+      <figcaption>Hloubka leží pod úrovní hladiny.</figcaption>
+    </figure>
+  </section>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="osa" class="active">📏 Číslo na ose</button>

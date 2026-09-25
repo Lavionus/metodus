@@ -22,6 +22,8 @@
 .btn{background:var(--accent);color: var(--na-akcentu, #fff);border:none;padding:12px 28px;border-radius:6px;cursor:pointer;font-weight:600;font-size:.95rem}
 .btn:hover{background:var(--accent-hover)}
 .game,.results{display:none}
+.text-ilustrace{display:block;width:min(320px,78vw);height:auto;aspect-ratio:1;object-fit:cover;margin:0 auto 18px;border-radius:14px;box-shadow:var(--shadow);background:#faf6ec}
+.text-ilustrace[hidden]{display:none}
 .text{line-height:1.75;font-size:1.05rem;white-space:pre-line}
 .qtitle{font-weight:600;margin:16px 0 4px;font-size:1.02rem}
 .qtyp{font-size:.76rem;color:var(--text-faint);margin-bottom:10px}
@@ -54,6 +56,7 @@
   <div class="card game" id="gameCard">
     <div class="progress" id="progress"></div>
     <div class="pruh"><i id="pruh"></i></div>
+    <img class="text-ilustrace" id="textIlustrace" alt="" width="768" height="768" hidden>
     <div class="text" id="text"></div>
     <div class="qtitle" id="qtitle"></div>
     <div class="qtyp" id="qtyp"></div>
@@ -84,52 +87,52 @@ const TEXTY={
 /* Každý text má otázky trojího druhu: co v textu přímo stojí,
    co z něj vyplývá (úsudek) a co znamená použité slovo. */
 1:[
-{t:`Kočka Micka žila na statku u pana Nováka. Každé ráno chodila na dvůr chytat myši. Jednoho dne se jí podařilo chytit hned tři myši za sebou. Pan Novák ji za to odměnil miskou mléka. Micka byla moc spokojená a od té doby chytala myši ještě raději.`,
+{img:['cteni-micka-statek','Kočka Micka na dvoře statku.'],t:`Kočka Micka žila na statku u pana Nováka. Každé ráno chodila na dvůr chytat myši. Jednoho dne se jí podařilo chytit hned tři myši za sebou. Pan Novák ji za to odměnil miskou mléka. Micka byla moc spokojená a od té doby chytala myši ještě raději.`,
 qs:[
 {q:"Kde žila kočka Micka?",o:["Ve městě","Na statku","V lese","V bytě"],a:1},
 {q:"Kolik myší chytila Micka za sebou?",o:["Jednu","Dvě","Tři","Pět"],a:2},
 {q:"Čím ji odměnil pan Novák?",o:["Rybou","Miskou mléka","Hračkou","Piškotem"],a:1},
 {q:"Proč začala Micka chytat myši ještě raději?",o:["Měla hlad","Věděla, že dostane odměnu","Bála se psa","Nudila se"],a:1}
 ]},
-{t:`Petr a Jana jeli o prázdninách k babičce na venkov. Babička měla velkou zahradu plnou jablek a hrušek. Děti pomáhaly sbírat ovoce do košíků. Večer si s babičkou upekly jablečný koláč a snědly ho celý ještě teplý.`,
+{img:['cteni-babicka-venkov','Petr a Jana přijíždějí k babičce na venkov.'],t:`Petr a Jana jeli o prázdninách k babičce na venkov. Babička měla velkou zahradu plnou jablek a hrušek. Děti pomáhaly sbírat ovoce do košíků. Večer si s babičkou upekly jablečný koláč a snědly ho celý ještě teplý.`,
 qs:[
 {q:"Kam jeli Petr a Jana?",o:["K babičce","K moři","Do zoo","Do školy"],a:0},
 {q:"Co rostlo na babiččině zahradě?",o:["Jen květiny","Jablka a hrušky","Zelenina","Nic"],a:1},
 {q:"Co si upekly večer?",o:["Chleba","Koláč","Buchty","Housku"],a:1},
 {q:"V jakém ročním období se příběh nejspíš odehrává?",o:["V zimě","Na jaře","V létě nebo na podzim","O Vánocích"],a:2}
 ]},
-{t:`Na zahradě u Kubů bydlí ježek. Přes den spí ve staré hromadě listí, protože ježek je noční zvíře. Až se setmí, vyleze ven a hledá slimáky, žížaly a brouky. Na podzim se ježek pořádně nacpe a pak celou zimu prospí. Kuba mu proto nechává hromadu listí na zahradě až do jara.`,
+{img:['cteni-jezek-zahrada','Ježek u hromady listí na zahradě za soumraku.'],t:`Na zahradě u Kubů bydlí ježek. Přes den spí ve staré hromadě listí, protože ježek je noční zvíře. Až se setmí, vyleze ven a hledá slimáky, žížaly a brouky. Na podzim se ježek pořádně nacpe a pak celou zimu prospí. Kuba mu proto nechává hromadu listí na zahradě až do jara.`,
 qs:[
 {q:"Kdy ježek loví potravu?",o:["Ráno","V poledne","V noci","Jen v zimě"],a:2},
 {q:"Co ježek jí?",o:["Jablka","Slimáky, žížaly a brouky","Seno","Ryby"],a:1},
 {q:"Proč Kuba nechává na zahradě hromadu listí?",o:["Je líný ji uklidit","Aby měl ježek kde přezimovat","Aby listí shnilo","Aby mu nefoukalo"],a:1},
 {q:"Co znamená, že ježek zimu „prospí“?",o:["Že celou zimu nespí","Že přes zimu spí a nevychází ven","Že v zimě odletí","Že se v zimě stěhuje"],a:1}
 ]},
-{t:`Ráno pršelo, a tak si Tereza vzala do školy deštník. Odpoledne svítilo slunce a Tereza šla domů rozzářená, cestou počítala kaluže. Až doma zjistila, že deštník nikde nemá. Druhý den ho našla ve školní šatně opřený o botník.`,
+{img:['cteni-tereza-po-desti','Tereza jde od školy slunečnou ulicí po dešti.'],t:`Ráno pršelo, a tak si Tereza vzala do školy deštník. Odpoledne svítilo slunce a Tereza šla domů rozzářená, cestou počítala kaluže. Až doma zjistila, že deštník nikde nemá. Druhý den ho našla ve školní šatně opřený o botník.`,
 qs:[
 {q:"Proč si Tereza vzala deštník?",o:["Byl hezký","Ráno pršelo","Chtěla si hrát","Půjčila si ho"],a:1},
 {q:"Kde se deštník nakonec našel?",o:["V kaluži","V tašce","Ve školní šatně","V autobuse"],a:2},
 {q:"Proč Tereza zapomněla deštník ve škole?",o:["Odpoledne už ho nepotřebovala, svítilo slunce","Byl rozbitý","Někdo jí ho vzal","Nechala ho schválně"],a:0}
 ]},
-{t:`Chléb se peče z mouky, vody, soli a kvasnic. Nejdřív se z nich zadělá těsto a nechá se odpočívat na teplém místě. Kvasnice v těstě pracují a těsto se zvětšuje – říkáme, že kyne. Vykynuté těsto se vloží do rozpálené trouby. Za necelou hodinu je z něj voňavý bochník.`,
+{img:['cteni-chleb-testo','Vykynuté chlebové těsto odpočívá v míse.'],t:`Chléb se peče z mouky, vody, soli a kvasnic. Nejdřív se z nich zadělá těsto a nechá se odpočívat na teplém místě. Kvasnice v těstě pracují a těsto se zvětšuje – říkáme, že kyne. Vykynuté těsto se vloží do rozpálené trouby. Za necelou hodinu je z něj voňavý bochník.`,
 qs:[
 {q:"Co všechno je potřeba na chléb?",o:["Mouka, voda, sůl a kvasnice","Mouka a cukr","Jen voda a mouka","Mléko a vejce"],a:0},
 {q:"Co se s těstem děje, když kyne?",o:["Tvrdne","Zvětšuje se","Ztmavne","Rozpouští se"],a:1},
 {q:"Co se stane, když se na těsto zapomene a nedá se do trouby?",o:["Upeče se samo","Zůstane syrové","Změní se na mouku","Vypaří se"],a:1}
 ]},
-{t:`Na konci léta se vlaštovky slétají na drátech a hlasitě štěbetají. Chystají se na dlouhou cestu do Afriky, kde je i v zimě teplo a je tam dost hmyzu. U nás by v zimě neměly co jíst. Na jaře se vlaštovky vracejí zpátky a často si najdou to samé hnízdo jako loni.`,
+{img:['cteni-vlastovky-draty','Vlaštovky se na konci léta slétají na drátech.'],t:`Na konci léta se vlaštovky slétají na drátech a hlasitě štěbetají. Chystají se na dlouhou cestu do Afriky, kde je i v zimě teplo a je tam dost hmyzu. U nás by v zimě neměly co jíst. Na jaře se vlaštovky vracejí zpátky a často si najdou to samé hnízdo jako loni.`,
 qs:[
 {q:"Kam vlaštovky odlétají?",o:["Do hor","Do Afriky","Do lesa","Na sever"],a:1},
 {q:"Proč u nás nemohou zůstat přes zimu?",o:["Je jim smutno","Neměly by co jíst","Bojí se sněhu","Nemají hnízda"],a:1},
 {q:"Co dělají vlaštovky na jaře?",o:["Zůstávají v Africe","Vracejí se zpět k nám","Mění barvu","Spí"],a:1}
 ]},
-{t:`Adam se prvního září bál. Neznal ve třídě nikoho a v tašce mu chrastily nové pastelky. Paní učitelka ho posadila vedle Matěje, který mu hned půjčil gumu. O přestávce už si spolu povídali o dinosaurech. Domů šel Adam s úsměvem a hned mamince hlásil, že má kamaráda.`,
+{img:['cteni-adam-skola','Adam poprvé vstupuje do nové třídy.'],t:`Adam se prvního září bál. Neznal ve třídě nikoho a v tašce mu chrastily nové pastelky. Paní učitelka ho posadila vedle Matěje, který mu hned půjčil gumu. O přestávce už si spolu povídali o dinosaurech. Domů šel Adam s úsměvem a hned mamince hlásil, že má kamaráda.`,
 qs:[
 {q:"Jak se Adam cítil na začátku?",o:["Vesele","Bál se","Zlobil se","Byl unavený"],a:1},
 {q:"Kdo Adamovi půjčil gumu?",o:["Paní učitelka","Maminka","Matěj","Nikdo"],a:2},
 {q:"Co Adamovi pomohlo, aby se přestal bát?",o:["Nové pastelky","Že si našel kamaráda","Že byl konec vyučování","Že uměl číst"],a:1}
 ]},
-{t:`Když někde hoří, volá se číslo 150. Hasiči vyjíždějí ve velkém červeném autě, ve kterém vezou vodu, hadice a žebřík. Kromě požárů pomáhají i při nehodách a povodních. Někdy sundávají ze stromu kočku nebo vyprošťují lidi z výtahu. Aby všechno zvládli, musí být silní a hodně cvičit.`,
+{img:['cteni-hasici','Dva hasiči stojí před hasičským autem.'],t:`Když někde hoří, volá se číslo 150. Hasiči vyjíždějí ve velkém červeném autě, ve kterém vezou vodu, hadice a žebřík. Kromě požárů pomáhají i při nehodách a povodních. Někdy sundávají ze stromu kočku nebo vyprošťují lidi z výtahu. Aby všechno zvládli, musí být silní a hodně cvičit.`,
 qs:[
 {q:"Jaké číslo se volá k požáru?",o:["155","158","150","112 jen ve škole"],a:2},
 {q:"Co hasiči vezou v autě?",o:["Vodu, hadice a žebřík","Jídlo","Písek","Nářadí na opravu silnic"],a:0},
@@ -299,6 +302,15 @@ function start() {
 function loadText() {
   qi = 0;
   const item = pool[idx];
+  const ilustrace = $('textIlustrace');
+  ilustrace.hidden = !item.img;
+  if (item.img) {
+    ilustrace.src = `img/cj/${item.img[0]}.webp`;
+    ilustrace.alt = item.img[1];
+  } else {
+    ilustrace.removeAttribute('src');
+    ilustrace.alt = '';
+  }
   $('text').textContent = item.t;
   $('progress').textContent = `Text ${idx + 1} / ${pool.length}`;
   showQ();

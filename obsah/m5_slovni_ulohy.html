@@ -15,6 +15,9 @@
     .zadani-ulohy { max-width: 580px; font-size: 1.1rem; line-height: 1.6; }
     .zadani-ulohy b { color: var(--accent); }
     .napovedy { color: var(--text-faint); font-size: 0.85rem; max-width: 520px; }
+    .scena-ulohy { margin: 0 0 14px; max-width: 580px; }
+    .scena-ulohy img { display: block; width: 100%; aspect-ratio: 3 / 2; object-fit: cover; border-radius: 14px; background: #f4edda; box-shadow: 0 5px 18px #0002; }
+    .scena-ulohy figcaption { margin-top: 6px; color: var(--text-faint); font-size: .82rem; text-align: center; }
   </style>
 </head>
 <body>
@@ -44,8 +47,7 @@ const $ = id => document.getElementById(id);
 const skore = Uloha.skore('metodus_m5_slovni', $('skore'));
 let rezim = 'vyres';
 
-/* Šablony úloh generují vlastní čísla, aby se úlohy neopakovaly.
-   Každá vrací: text, výsledek, jednotku, popis prvního kroku a jeho alternativy. */
+/* Šest prostředí odpovídá šesti ilustracím IMG-m-04. Čísla zůstávají živá ve webu. */
 const SABLONY = [
   () => {
     const cena = Uloha.nahodneCislo(12, 45), kusu = Uloha.nahodneCislo(3, 9);
@@ -53,75 +55,77 @@ const SABLONY = [
     return {
       text: `Sešit stojí <b>${cena} Kč</b>. Maminka koupila <b>${kusu}</b> sešitů a platila
              bankovkou <b>${platil} Kč</b>. Kolik korun dostane nazpátek?`,
+      scena: 'obchod', alt: 'Maminka s dítětem platí za sešity v papírnictví.', popisek: 'Nákup v papírnictví',
       vysledek: platil - cena * kusu, jednotka: 'Kč',
       prvni: `${cena} × ${kusu}`,
       spatnePrvni: [`${platil} − ${cena}`, `${platil} : ${kusu}`, `${platil} + ${cena}`],
     };
   },
   () => {
-    const celkem = Uloha.nahodneCislo(4, 9) * Uloha.nahodneCislo(6, 12);
-    const skupin = [2, 3, 4, 5, 6].filter(d => celkem % d === 0);
-    const d = Uloha.nahodne(skupin);
+    const vagony = Uloha.nahodneCislo(3, 7), vagon = Uloha.nahodneCislo(24, 48);
     return {
-      text: `Do školy přijelo <b>${celkem}</b> žáků. Rozdělili se rovnoměrně do <b>${d}</b> skupin.
-             Kolik žáků je v jedné skupině?`,
-      vysledek: celkem / d, jednotka: 'žáků',
-      prvni: `${celkem} : ${d}`,
-      spatnePrvni: [`${celkem} × ${d}`, `${celkem} − ${d}`, `${celkem} + ${d}`],
+      text: `Výletní vlak má <b>${vagony}</b> vagonů a v každém je <b>${vagon}</b> míst.
+             Kolik cestujících se do vlaku vejde?`,
+      scena: 'vlak', alt: 'Skupina žáků s učiteli čeká u vlaku na nástupišti.', popisek: 'Školní výlet vlakem',
+      vysledek: vagony * vagon, jednotka: 'cestujících',
+      prvni: `${vagony} × ${vagon}`,
+      spatnePrvni: [`${vagon} : ${vagony}`, `${vagon} − ${vagony}`, `${vagon} + ${vagony}`],
     };
   },
   () => {
-    const rychlost = Uloha.nahodne([40, 50, 60, 80]), hodin = Uloha.nahodneCislo(2, 5);
+    const zahony = Uloha.nahodneCislo(3, 8), sazenic = Uloha.nahodneCislo(6, 12);
     return {
-      text: `Auto jede rychlostí <b>${rychlost} km/h</b>. Kolik kilometrů ujede za <b>${hodin} hodiny</b>?`,
-      vysledek: rychlost * hodin, jednotka: 'km',
-      prvni: `${rychlost} × ${hodin}`,
-      spatnePrvni: [`${rychlost} : ${hodin}`, `${rychlost} + ${hodin}`, `${rychlost} − ${hodin}`],
+      text: `Na školní zahradě je <b>${zahony}</b> záhonů. Do každého děti zasadí <b>${sazenic}</b> sazenic.
+             Kolik sazenic potřebují celkem?`,
+      scena: 'zahrada', alt: 'Děti sázejí a zalévají zeleninu ve školní zahradě.', popisek: 'Práce na školní zahradě',
+      vysledek: zahony * sazenic, jednotka: 'sazenic',
+      prvni: `${zahony} × ${sazenic}`,
+      spatnePrvni: [`${sazenic} : ${zahony}`, `${sazenic} + ${zahony}`, `${sazenic} − ${zahony}`],
     };
   },
   () => {
-    const den = Uloha.nahodneCislo(15, 40), dni = Uloha.nahodneCislo(5, 14);
+    const porci = Uloha.nahodneCislo(80, 140), vydano = Uloha.nahodneCislo(35, 75);
     return {
-      text: `Petr šetří <b>${den} Kč</b> každý den. Kolik korun našetří za <b>${dni} dní</b>?`,
-      vysledek: den * dni, jednotka: 'Kč',
-      prvni: `${den} × ${dni}`,
-      spatnePrvni: [`${den} + ${dni}`, `${dni} : ${den}`, `${den} − ${dni}`],
+      text: `Školní jídelna připravila <b>${porci}</b> porcí. O první přestávce vydala <b>${vydano}</b> porcí.
+             Kolik porcí ještě zbývá?`,
+      scena: 'jidelna', alt: 'Žáci si berou oběd u výdejního pultu školní jídelny.', popisek: 'Oběd ve školní jídelně',
+      vysledek: porci - vydano, jednotka: 'porcí',
+      prvni: `${porci} − ${vydano}`,
+      spatnePrvni: [`${porci} + ${vydano}`, `${porci} : ${vydano}`, `${vydano} × 2`],
     };
   },
   () => {
-    const zaku = Uloha.nahodneCislo(18, 30), chlapcu = Uloha.nahodneCislo(8, 14);
+    const krabice = Uloha.nahodneCislo(3, 6), kusu = Uloha.nahodneCislo(7, 14), navic = Uloha.nahodneCislo(2, 8);
     return {
-      text: `Ve třídě je <b>${zaku}</b> žáků, z toho <b>${chlapcu}</b> chlapců.
-             O kolik je dívek méně než chlapců?`,
-      vysledek: Math.abs(chlapcu - (zaku - chlapcu)), jednotka: 'dívek',
-      prvni: `${zaku} − ${chlapcu}`,
-      spatnePrvni: [`${zaku} + ${chlapcu}`, `${zaku} : ${chlapcu}`, `${chlapcu} × 2`],
+      text: `Ve sbírce je <b>${krabice}</b> krabic po <b>${kusu}</b> kamíncích a ještě <b>${navic}</b> kamínků leží vedle.
+             Kolik kamínků je ve sbírce celkem?`,
+      scena: 'sbirka', alt: 'Dívka třídí kamínky, mušle a další přírodniny do krabic.', popisek: 'Třídění sbírky',
+      vysledek: krabice * kusu + navic, jednotka: 'kamínků',
+      prvni: `${krabice} × ${kusu}`,
+      spatnePrvni: [`${krabice} + ${kusu}`, `${kusu} − ${navic}`, `${kusu} : ${krabice}`],
     };
   },
   () => {
-    const stran = Uloha.nahodneCislo(120, 260), precetl = Uloha.nahodneCislo(30, 90);
-    const denne = Uloha.nahodne([10, 15, 20]);
-    const zbyva = stran - precetl;
+    const dopoledne = Uloha.nahodneCislo(18, 36), odpoledne = Uloha.nahodneCislo(12, 28);
     return {
-      text: `Kniha má <b>${stran}</b> stran, Eva přečetla <b>${precetl}</b>.
-             Když bude číst <b>${denne}</b> stran denně, kolik dní jí zbývá? (zaokrouhli nahoru)`,
-      vysledek: Math.ceil(zbyva / denne), jednotka: 'dní',
-      prvni: `${stran} − ${precetl}`,
-      spatnePrvni: [`${stran} : ${denne}`, `${precetl} × ${denne}`, `${stran} + ${precetl}`],
-    };
-  },
-  () => {
-    const litru = Uloha.nahodneCislo(3, 8), cena = Uloha.nahodneCislo(22, 39);
-    return {
-      text: `Litr mléka stojí <b>${cena} Kč</b>. Kolik zaplatíme za <b>${litru} litrů</b>?`,
-      vysledek: litru * cena, jednotka: 'Kč',
-      prvni: `${cena} × ${litru}`,
-      spatnePrvni: [`${cena} : ${litru}`, `${cena} + ${litru}`, `${litru} − ${cena}`],
+      text: `Cyklisté ujeli dopoledne <b>${dopoledne} km</b> a odpoledne <b>${odpoledne} km</b>.
+             Kolik kilometrů ujeli za celý den?`,
+      scena: 'cyklo', alt: 'Děti s učitelem odpočívají s koly u venkovské cyklostezky.', popisek: 'Výlet na kolech',
+      vysledek: dopoledne + odpoledne, jednotka: 'km',
+      prvni: `${dopoledne} + ${odpoledne}`,
+      spatnePrvni: [`${dopoledne} − ${odpoledne}`, `${dopoledne} × ${odpoledne}`, `${dopoledne} : ${odpoledne}`],
     };
   },
 ];
 
 const novaUlohaData = () => Uloha.nahodne(SABLONY)();
+
+const kartaUlohy = u => `<div class="karta">
+  <figure class="scena-ulohy"><picture>
+    <source srcset="img/m/m5-slovni-${u.scena}.webp" type="image/webp">
+    <img src="img/m/m5-slovni-${u.scena}.png" alt="${u.alt}" width="1536" height="1024">
+  </picture><figcaption>${u.popisek} – potřebná čísla najdeš v zadání.</figcaption></figure>
+  <div class="zadani-ulohy">${u.text}</div></div>`;
 
 function moznostiKolem(spravny, jednotka) {
   const jine = new Set();
@@ -137,8 +141,7 @@ function moznostiKolem(spravny, jednotka) {
 function vyres() {
   const p = $('plocha');
   const u = novaUlohaData();
-  p.innerHTML = `<div class="zadani">Vyřeš slovní úlohu:</div>
-    <div class="karta"><div class="zadani-ulohy">${u.text}</div></div>`;
+  p.innerHTML = `<div class="zadani">Vyřeš slovní úlohu:</div>${kartaUlohy(u)}`;
   const odezva = document.createElement('div');
   odezva.className = 'odezva';
   Uloha.vyber({
@@ -157,8 +160,7 @@ function vyres() {
 function prvniKrok() {
   const p = $('plocha');
   const u = novaUlohaData();
-  p.innerHTML = `<div class="zadani">Který výpočet uděláš jako <b>první</b>?</div>
-    <div class="karta"><div class="zadani-ulohy">${u.text}</div></div>`;
+  p.innerHTML = `<div class="zadani">Který výpočet uděláš jako <b>první</b>?</div>${kartaUlohy(u)}`;
   const odezva = document.createElement('div');
   odezva.className = 'odezva';
   Uloha.vyber({
@@ -183,7 +185,7 @@ function odhad() {
     .filter(x => x > 0 && x !== spravny);
 
   p.innerHTML = `<div class="zadani">Odhadni, kolik zhruba vyjde – bez přesného počítání.</div>
-    <div class="karta"><div class="zadani-ulohy">${u.text}</div></div>
+    ${kartaUlohy(u)}
     <div class="napovedy">Zaokrouhli si čísla a počítej zpaměti.</div>`;
   const odezva = document.createElement('div');
   odezva.className = 'odezva';

@@ -1,0 +1,6 @@
+Sada: IMG-cj-09 · věta „Ema má maso.“
+Scéna: Školačka Ema drží talíř s jasně rozpoznatelným kusem masa; jeden jasný děj, čtvercový formát.
+Styl: teplý akvarel a kvaš, jemná inkoustová linka, slonovinové pozadí, tlumená šalvějová, jadeitová a okrová.
+Omezení: bez písmen, slov, popisků, log, vodoznaku, rámečku a bublin.
+Alt: Ema drží talíř s masem.
+Generátor: OpenAI image_gen · 2026-09-24

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>🇫🇷 Francouzština – slovíčka</title>
+  <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../slovicka.css">
+  <script src="../theme.js"></script>
+  <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
+  <script src="../uloha.js" defer></script>
+  <script src="../procvic.js" defer></script>
+  <script src="../rec.js"></script>
+  <script src="../slovicka.js" defer></script>
+  <style>
+    /* barvy rodu: mužský (le) modrá, ženský (la) červená; l’ má barvu svého rodu */
+    .art-le { color: #6aa6fd; } .art-la { color: #ec7474; }
+    :root[data-tone="light"] .art-le { color: #2f5f9e; }
+    :root[data-tone="light"] .art-la { color: #a83c3c; }
+    .legenda { color: var(--text-muted); font-size: 0.85rem; margin: 0 0 12px; }
+  </style>
+</head>
+<body>
+  <h1>🇫🇷 Francouzština – slovíčka</h1>
+  <p class="podtitul">Základní slovní zásoba se členy le / la / l’. Prohlédni si přehled a kartičky, pak si zkus sérii deseti otázek – po chybě máš druhý pokus.</p>
+
+  <div class="rezimy" id="rezimy">
+    <button data-rezim="prehled" data-faze="vyuka" class="active">📖 Přehled</button>
+    <button data-rezim="karticky" data-faze="vyuka">🎴 Kartičky</button>
+    <button data-rezim="slovo">🖼️ Jak se to řekne?</button>
+    <button data-rezim="clen">🔤 le, nebo la?</button>
+    <button data-rezim="preklad">🇨🇿 Co to znamená?</button>
+  </div>
+
+  <div class="pruh-nastroju">
+    <div class="kategorie" id="kategorie" aria-label="Téma"></div>
+    <button type="button" id="btnZvuk" title="Přečíst slovo nahlas">🔊 Číst nahlas: zap</button>
+  </div>
+  <p class="legenda">Barva prozrazuje rod: <b class="art-le">le</b> mužský · <b class="art-la">la</b> ženský. Před samohláskou a němým h se obojí zkrátí na <b>l’</b> – barva i tak ukáže rod. Množné číslo má vždy <b>les</b>.</p>
+
+  <div id="prehledObal">
+    <input class="hledej" id="hledej" placeholder="🔍 Hledej slovíčko (česky i francouzsky)…" autocomplete="off">
+    <table class="slovnik" id="prehledTabulka"><thead></thead><tbody></tbody></table>
+  </div>
+
+  <div class="karticka" id="karticky" hidden>
+    <div class="k-emoji" id="kEmoji" title="Klepni pro překlad"></div>
+    <div class="k-slovo" id="kSlovo"></div>
+    <div class="k-cesky skryto" id="kCesky"></div>
+    <div class="tlacitka">
+      <button class="b-vedle" id="kZpet">← Zpět</button>
+      <button class="b-hlavni" id="kOtoc">Ukázat překlad</button>
+      <button class="b-vedle" id="kDalsi">Další →</button>
+    </div>
+    <div class="k-pocet" id="kPocet"></div>
+  </div>
+
+  <div class="plocha" id="plocha" hidden></div>
+  <div class="ovladani" id="ovladani" hidden>
+    <button class="hlavni" id="startBtn">🔄 Nová série</button>
+    <span class="pokrok" id="pokrok"></span>
+    <span class="skore" id="skore"></span>
+  </div>
+
+  <p class="napoveda">Francouzština má jen dva rody: mužský <b>le</b> a ženský <b>la</b>; český rod často nesedí (<b>le lait</b> – mléko, <b>la table</b> – stůl). Před samohláskou se píše <b>l’</b> (l’eau, l’école) a rod se pak z členu nepozná – proto se vyplatí znát i tvar <b>un / une</b>. Pomůcky: většina slov na <b>-e</b> je <b>la</b> (výjimky: le livre, le père), slova na <b>-age</b> a <b>-ment</b> jsou většinou <b>le</b>, na <b>-tion</b> a <b>-té</b> vždy <b>la</b>.</p>
+
+<script>
+// [člen, slovo, emoji, český význam, kategorie, rod u l’]
+const SLOVA = [
+  ['la','maison','🏠','dům','domov'], ['l’','appartement','🏢','byt','domov','m'], ['la','chambre','🚪','pokoj','domov'],
+  ['la','cuisine','🍳','kuchyně','domov'], ['le','lit','🛏️','postel','domov'], ['la','table','🪑','stůl','domov'],
+  ['la','chaise','💺','židle','domov'], ['la','fenêtre','🪟','okno','domov'], ['la','porte','🚪','dveře','domov'],
+  ['la','pomme','🍎','jablko','jidlo'], ['le','pain','🍞','chléb','jidlo'], ['le','lait','🥛','mléko','jidlo'],
+  ['le','fromage','🧀','sýr','jidlo'], ['l’','eau','💧','voda','jidlo','f'], ['la','soupe','🍲','polévka','jidlo'],
+  ['le','café','☕','káva','jidlo'], ['la','banane','🍌','banán','jidlo'], ['l’','œuf','🥚','vejce','jidlo','m'],
+  ['le','chien','🐶','pes','zvirata'], ['le','chat','🐱','kočka','zvirata'], ['l’','oiseau','🐦','pták','zvirata','m'],
+  ['le','cheval','🐴','kůň','zvirata'], ['la','vache','🐄','kráva','zvirata'], ['le','poisson','🐟','ryba','zvirata'],
+  ['la','souris','🐭','myš','zvirata'],
+  ['la','mère','👩','matka','lide'], ['le','père','👨','otec','lide'], ['le','frère','👦','bratr','lide'],
+  ['la','sœur','👧','sestra','lide'], ['l’','enfant','🧒','dítě','lide','m'], ['l’','ami','🧑‍🤝‍🧑','přítel','lide','m'],
+  ['le','professeur','👨‍🏫','učitel','lide'],
+  ['l’','arbre','🌳','strom','priroda','m'], ['la','fleur','🌸','květina','priroda'], ['la','forêt','🌲','les','priroda'],
+  ['le','soleil','☀️','slunce','priroda'], ['la','lune','🌙','měsíc','priroda'], ['la','pluie','🌧️','déšť','priroda'],
+  ['la','neige','❄️','sníh','priroda'], ['la','montagne','⛰️','hora','priroda'], ['la','rivière','🏞️','řeka','priroda'],
+  ['le','temps','⏰','čas','ostatni'], ['le','jour','📅','den','ostatni'], ['la','nuit','🌃','noc','ostatni'],
+  ['l’','école','🏫','škola','ostatni','f'], ['le','travail','💼','práce','ostatni'], ['le','livre','📖','kniha','ostatni'],
+  ['la','couleur','🎨','barva','ostatni'], ['la','rue','🛣️','ulice','ostatni'], ['la','voiture','🚗','auto','ostatni'],
+];
+
+function pravidlo(s) {
+  const w = s.slovo;
+  if (s.kat === 'lide') return s.clen === 'le' ? 'Muži a mužská povolání mají <b>le</b>.' : 'Ženy mají <b>la</b>.';
+  if (/(age|ment)$/.test(w)) return 'Slova na -age a -ment jsou většinou <b>le</b>.';
+  if (/(tion|té)$/.test(w)) return 'Slova na -tion a -té jsou vždy <b>la</b>.';
+  if (/e$/.test(w)) return s.clen === 'la' ? 'Většina slov na -e je <b>la</b>.' : `Pozor, výjimka: většina slov na -e je la, ale <b>le ${w}</b>.`;
+  if (/eur$/.test(w)) return 'U slov na -eur rozhoduje paměť: <b>la fleur, la couleur</b>, ale <b>le professeur</b>.';
+  return '';
+}
+
+window.addEventListener('DOMContentLoaded', () => Slovicka.spust({
+  klic: 'metodus_fr_slovicka', lang: 'fr-FR', jazyk: 'francouzsky',
+  slova: SLOVA.map(([clen, slovo, emoji, cz, kat, rod]) => ({ clen, slovo, emoji, cz, kat, rod: rod || (clen === 'la' ? 'f' : 'm') })),
+  kategorie: [
+    { klic: 'domov', nazev: '🏠 Domov' }, { klic: 'jidlo', nazev: '🍎 Jídlo' },
+    { klic: 'zvirata', nazev: '🐶 Zvířata' }, { klic: 'lide', nazev: '👪 Lidé' },
+    { klic: 'priroda', nazev: '🌳 Příroda' }, { klic: 'ostatni', nazev: '✏️ Ostatní' },
+  ],
+  cleny: ['le', 'la'],
+  proClen: s => s.clen !== 'l’',
+  plne: s => s.clen === 'l’' ? 'l’' + s.slovo : `${s.clen} ${s.slovo}`,
+  plneHtml: s => `<span class="art-${s.rod === 'f' ? 'la' : 'le'}">${s.clen}</span>${s.clen === 'l’' ? '' : ' '}${s.slovo}`,
+  pravidlo,
+}));
+</script>
+</body>
+</html>

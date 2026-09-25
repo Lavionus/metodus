@@ -915,6 +915,68 @@ osmi motorů), `motory_paticka.html` (úzké okno 420 px) a `motory_snimky.html`
 který uloží snímek každého motoru do `_test/motor_*.png` — geometrii je potřeba
 kontrolovat okem.
 
+## Interaktivní výklad optiky
+
+`obsah/optika_lekce.html` (+ `optika_lekce.css`, `optika_lekce.js`) je dlouhá lekce
+ve stylu „výkladu k prozkoumání“: text kapitol, mezi nimi živé modely v SVG.
+Na rozdíl od simulací na celou obrazovku (`optika`, `optika_soustava`) se čte
+shora dolů; postranní osnova (na užší obrazovce čipy) ukazuje kapitolu a postup.
+
+- **Model** (`class Model`) = jeden obrázek: `kresli(g)` překreslí dynamickou vrstvu,
+  `uchop({ poloha, tahni, klavesa, hodnota })` přidá úchop pro myš, dotyk i šipky.
+  SVG má viewBox v jednotkách modelu; skript nastavuje `--k` (jednotek na 1 px), takže
+  písmo, čáry a úchopy mají na mobilu i projektoru stejnou velikost (`calc(13px * var(--k))`).
+- **Stálé barvy optiky** (`--o-paprsek`, `--o-obraz`, `--o-predmet`, `--o-ohnisko`, …) mají
+  varianty pro světlý tón a vysoký kontrast. Čárkovaně = prodloužení paprsku, proto se
+  ve světlém tónu nekreslí pohyblivé „světlo“ (vypadalo by jako čárkování).
+- **Paprskový počítač** (`trasuj`) láme podle Snellova zákona na úsečkách i kruhových
+  obloucích, větví odražené světlo podle Fresnelových vzorců a pozná úplný odraz.
+  Tělesa (čočka, hranol, vlákno, kapka) se skládají z hran s normálou ven.
+- **Úkoly a předpovědi:** `Ukoly.definuj(id, splneno, reakce)` a `predpoved(id, {...})` –
+  podmínka se kontroluje po každém překreslení modelu. Stav v `metodus_optika_lekce`.
+- **Procvič** jede přes `uloha.js` (`Uloha.vyber`, `Uloha.skore`); generátory otázek jsou
+  v poli `GENERATORY`, každá chybná možnost má `proc`. Kostra z nich staví Ověř se.
+
+Test: [tests/optika-lekce.mjs](tests/optika-lekce.mjs).
+
+## Interaktivní výklad jednoduchých strojů
+
+`obsah/paka_lekce.html` (+ `paka_lekce.css`, `paka_lekce.js`) je výklad „Páka a jednoduché
+stroje“ postavený stejně jako výklad optiky: kapitoly s živými SVG modely, předpovědi a úkoly
+(`Ukoly.definuj`, `predpoved`), Procvič přes `uloha.js`, Ověř se z kostry a tahák. Obecná část
+skriptu (Model, úchopy, úkoly, navigace, procvičování) je převzatá z `optika_lekce.js`.
+
+- **Modely:** klíč na matici (moment a rameno šikmé síly), školní páka s dírkami a pruhy momentů,
+  houpačka, stavební kolečko, předloktí, kladky a kladkostroj (1–3 volné kladky), rumpál,
+  ozubená kola s mezikolem, převody jízdního kola, nakloněná rovina (i s třením) a graf
+  „práce jako obsah obdélníku“. Třídička 10 předmětů (dvojzvratná × jednozvratná páka).
+- **Stálé barvy mechaniky:** síla oranžová (`--m-sila`), břemeno a tíha modrá, osa červená,
+  rameno zelená, dráha fialová; varianty pro světlý tón a kontrast. Počítá se s g = 10 N/kg.
+- Stav v `metodus_paka_lekce`, skóre procvičování v `metodus_paka_lekce_skore`.
+  Stará simulace `paka.html` zůstává jako „laboratoř strojů“ (páčidlo, pařez, hodiny, převodovka, diferenciál).
+
+## Interaktivní výklad mechaniky
+
+`obsah/physics_playground.html` (+ `physics_playground.css`, `physics_playground.js`) je
+„Fyzikální hřiště“ přestavěné 24. 9. 2026 na dlouhou lekci stejné stavby jako
+[výklad optiky](#interaktivní-výklad-optiky): kapitoly síla a pohyb, nakloněná rovina,
+energie, kyvadlo a srážky, každá s živým modelem, předpověďmi a úkoly.
+
+- Infrastruktura (`Model`, úchopy, úkoly, předpovědi, navigace, Procvič) je převzatá
+  z `optika_lekce.js`; navíc je `Animace` – jedna smyčka `requestAnimationFrame` pro modely,
+  které se hýbou. Model mimo obrazovku stojí. Každý model počítá v pevných krocích
+  (1–2,5 ms) a má `simuluj(t)` pro testy.
+- **Stálé barvy mechaniky** (`--h-tiha`, `--h-slozka`, `--h-podlozka`, `--h-treni`, `--h-tah`,
+  `--h-rychlost`, `--h-hybnost`, `--h-ep`, `--h-ek`, `--h-teplo`, `--h-celkem`) mají varianty
+  pro světlý tón a vysoký kontrast; šipky sil kreslí `sipka()` s popiskem s dolním indexem (`F_{G}`).
+- Fyzika: g = 9,81 N/kg (Měsíc 1,62, Mars 3,71), tření s jedním součinitelem, rampa
+  h = x²/4 s útlumem úměrným rychlosti (bez tření srovnání se zákonem zachování),
+  kyvadlo RK4 bez aproximace malých úhlů, srážky se součinitelem restituce.
+- Postup i tabulka měření kyvadla jsou v `metodus_hriste`, skóre Procvič v `metodus_hriste_skore`.
+
+Test: [tests/hriste-lekce.mjs](tests/hriste-lekce.mjs). Původní simulace na celou obrazovku
+je v `docs/zalohy-hriste-20260924-174636/`.
+
 ## Psací písmo
 
 Ve složce `fonty/` je **Playwrite CZ** – česká varianta školní psací abecedy

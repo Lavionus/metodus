@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>💡 Světlo a optika – názorná lekce</title>
+<meta name="description" content="Interaktivní výklad optiky pro 8. a 9. ročník: šíření světla, stín, odraz, lom, úplný odraz, rozklad světla, čočky, zobrazení, oko a optické přístroje.">
+<link rel="stylesheet" href="../common.css">
+<link rel="stylesheet" href="optika_lekce.css?v=6">
+<script src="../theme.js"></script>
+<script src="../podpis.js" defer></script>
+<script src="../kostra.js" defer></script>
+<script src="../uloha.js"></script>
+</head>
+<body>
+<div class="stranka">
+
+<aside class="osnova" aria-label="Kapitoly lekce">
+  <h2>Kapitoly</h2>
+  <ol id="osnova"></ol>
+  <div class="pokrok">
+    <span id="pokrokText">Splněno 0 úkolů</span>
+    <div class="pokrok-pruh" aria-hidden="true"><span id="pokrokPruh"></span></div>
+    <button type="button" class="znovu" id="zacitZnovu">↺ Začít lekci znovu</button>
+  </div>
+</aside>
+
+<main class="lekce">
+  <nav class="cipy" id="cipy" aria-label="Kapitoly lekce"></nav>
+
+  <header class="uvod">
+    <p class="nadtitul">Interaktivní výklad</p>
+    <h1>Světlo a optika</h1>
+    <p class="podtitul">Proč vidíme předměty, proč se lžička ve sklenici vody zdá zlomená a jak čočka v oku nebo ve fotoaparátu vytvoří obraz. Každý jev si vyzkoušíš na živém obrázku.</p>
+  </header>
+
+  <ul class="jak-pracovat" aria-label="Jak s lekcí pracovat">
+    <li><svg viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="var(--accent)" stroke-width="2.5"/><circle cx="11" cy="11" r="2.5" fill="var(--accent)"/></svg> Za modré kroužky se dá táhnout (i šipkami na klávesnici).</li>
+    <li>🤔 Nejdřív předpověz, pak ověř na modelu.</li>
+    <li>🔬 Úkoly si samy poznají, že jsi je splnil(a).</li>
+    <li>📌 Rámeček „Zapamatuj si“ shrnuje to hlavní.</li>
+  </ul>
+
+  <nav class="mapa" id="mapa" aria-label="Mapa lekce"></nav>
+
+  <!-- ============================================================ 1 -->
+  <section class="kapitola" id="vidime" data-faze="vyuka" data-nazev="Jak vidíme" data-popis="Zdroje světla a prostředí">
+    <header class="kap-hlava"><span class="kap-cislo">1</span><div><p class="kap-otazka">Proč v úplné tmě nevidíme ani bílý papír?</p><h2>Jak vidíme</h2></div></header>
+    <div class="text">
+      <p>Světlo vzniká ve <span class="term">zdrojích světla</span>. Některá tělesa světlo vyzařují sama – Slunce, žárovka, plamen svíčky, displej telefonu. Jsou to <strong>primární zdroje</strong>. Většinu věcí kolem sebe ale vidíme jinak: dopadá na ně světlo ze zdroje, ony ho <strong>odrážejí</strong> do všech stran a část odraženého světla doletí do našeho oka. Jablko, papír nebo Měsíc samy nesvítí – jsou to <strong>sekundární zdroje</strong>.</p>
+      <p>Mezi zdrojem a okem je vždy nějaké <span class="term">optické prostředí</span>. <strong>Průhledné</strong> prostředí (vzduch, čiré sklo, voda) světlo propustí téměř beze změny. <strong>Průsvitné</strong> (mléčné sklo, pečicí papír) ho propustí, ale rozptýlí do všech stran. <strong>Neprůhledné</strong> (dřevo, kov) světlo nepropustí vůbec.</p>
+    </div>
+
+    <figure class="obr" id="obr-vidime">
+      <div class="obr-plocha"><svg class="model" role="img" aria-label="Lampa, překážka, jablko a oko"></svg></div>
+      <div class="obr-ovladani">
+        <label class="prepinac"><input type="checkbox" id="vid-lampa" checked> 💡 Lampa svítí</label>
+        <div class="skupina"><span class="nazev">Mezi lampou a jablkem:</span>
+          <div class="segment" id="vid-prostredi" role="group" aria-label="Prostředí mezi lampou a jablkem">
+            <button type="button" data-hodnota="nic">nic</button><button type="button" data-hodnota="sklo">čiré sklo</button><button type="button" data-hodnota="mlecne">mléčné sklo</button><button type="button" data-hodnota="drevo">dřevěná deska</button>
+          </div>
+        </div>
+      </div>
+      <div class="obr-zprava" role="status"></div>
+      <figcaption>Paprsky jsou model: čára ukazuje, kudy světlo letí, šipka a pohyblivé tečky ukazují kam. <span class="legenda"><span class="znacka z-paprsek">světlo</span></span></figcaption>
+    </figure>
+
+    <div class="predpoved" data-predpoved="vid-deska"></div>
+    <div class="ukol" data-ukol="vid-prusvitne"><div class="ukol-hlava"><p><b>🔬 Úkol:</b> Najdi prostředí, přes které lampa jablko osvětlí jen slabě a samotnou lampu oko nevidí ostře – jen jako světlou skvrnu.</p><span class="stav"></span></div><p class="ukol-reakce"></p></div>
+
+    <div class="fakty">
+      <div class="fakt"><b>300 000 km/s</b><span>rychlost světla ve vakuu (a skoro stejná ve vzduchu), značka <i>c</i></span></div>
+      <div class="fakt"><b>8 min 20 s</b><span>tak dlouho letí světlo ze Slunce na Zemi</span></div>
+      <div class="fakt"><b>1,3 s</b><span>tak dlouho letí světlo z Měsíce na Zemi</span></div>
+      <div class="fakt"><b>7,5×</b><span>tolikrát by světlo za jednu sekundu oběhlo Zemi kolem rovníku</span></div>
+    </div>
+
+    <aside class="zapamatuj"><h3>📌 Zapamatuj si</h3>
+      <ul>
+        <li>Těleso vidíme jen tehdy, když z něj do oka dopadá světlo.</li>
+        <li><strong>Primární zdroj</strong> světlo vyzařuje, ostatní tělesa ho jen <strong>odrážejí</strong>.</li>
+        <li>Prostředí je <strong>průhledné</strong>, <strong>průsvitné</strong> nebo <strong>neprůhledné</strong>.</li>
+      </ul>
+    </aside>
+  </section>
+
+  <!-- ============================================================ 2 -->
+  <section class="kapitola" id="stin" data-faze="vyuka" data-nazev="Stín" data-popis="Přímočaré šíření, polostín">
+    <header class="kap-hlava"><span class="kap-cislo">2</span><div><p class="kap-otazka">Proč má stín jednou ostré a jindy rozmazané okraje?</p><h2>Světlo se šíří přímočaře</h2></div></header>
+    <div class="text">
+      <p>Ve stejnorodém prostředí, třeba ve vzduchu, se světlo šíří <span class="term">přímočaře</span>. Proto ho kreslíme jako přímky se šipkou – <strong>světelné paprsky</strong>. Když světlu stojí v cestě neprůhledné těleso, vznikne za ním <span class="term">stín</span>: prostor, kam světlo ze zdroje nedopadá.</p>
+      <p>Je-li zdroj malý (<strong>bodový</strong>), má stín ostré okraje. Velký zdroj – zářivka, okno, Slunce – vytvoří kolem <strong>plného stínu</strong> ještě <strong>polostín</strong>. Do polostínu dopadá světlo jen z části zdroje, proto je šedý a přechod do světla je plynulý.</p>
+    </div>
+
+    <figure class="obr" id="obr-stin">
+      <div class="obr-plocha"><svg class="model" role="img" aria-label="Zdroj světla, koule a stínítko se stínem a polostínem"></svg></div>
+      <div class="obr-ovladani">
+        <label class="posuvnik">Velikost zdroje <input type="range" id="stin-zdroj" min="0" max="70" step="1" value="30"><output id="stin-zdroj-h"></output></label>
+        <label class="prepinac"><input type="checkbox" id="stin-hranice"> Hraniční paprsky</label>
+      </div>
+      <div class="odecty"></div>
+      <div class="obr-zprava" role="status"></div>
+      <figcaption>Táhni kouli. Posuvníkem měníš velikost zdroje – nula je bodový zdroj. Vpravo je stínítko: vidíš, jak je které místo osvětlené.</figcaption>
+    </figure>
+
+    <div class="ukol" data-ukol="stin-bodovy"><div class="ukol-hlava"><p><b>🔬 Úkol:</b> Udělej ze zdroje bodový zdroj. Co se stane s polostínem?</p><span class="stav"></span></div><p class="ukol-reakce"></p></div>
+    <div class="ukol" data-ukol="stin-jen-polostin"><div class="ukol-hlava"><p><b>🔬 Úkol:</b> Nastav zdroj a kouli tak, aby na stínítku zůstal jen polostín a plný stín zmizel. <i>(Tip: velký zdroj, koule blízko něj.)</i></p><span class="stav"></span></div><p class="ukol-reakce"></p></div>
+
+    <details class="zvidave"><summary>🌗 Pro zvídavé: zatmění Slunce a Měsíce <small>stín ve vesmíru</small></summary>
+      <div class="obsah text">
+        <p>Při <strong>zatmění Slunce</strong> se Měsíc dostane mezi Slunce a Zemi a vrhne na Zemi stín. Slunce je obrovský zdroj, proto má stín Měsíce plný stín i polostín. Kdo stojí v plném stínu (pruh široký jen asi 100–200 km), vidí <strong>úplné zatmění</strong>. Kdo je v polostínu, vidí zakrytou jen část Slunce – <strong>částečné zatmění</strong>. Kdyby byl Měsíc o něco dál, jeho plný stín by na Zemi vůbec nedosáhl – přesně jako v tvém druhém úkolu.</p>
+        <p>Při <strong>zatmění Měsíce</strong> je to naopak: Země stojí mezi Sluncem a Měsícem a Měsíc projde jejím stínem.</p>
+      </div>
+    </details>
+
+    <aside class="zapamatuj"><h3>📌 Zapamatuj si</h3>
+      <ul>
+        <li>V jednom prostředí se světlo šíří <strong>přímočaře</strong> – kreslíme ho jako paprsky.</li>
+        <li>Za neprůhledným tělesem vzniká <strong>stín</strong>. Bodový zdroj dává ostrý stín, velký zdroj navíc <strong>polostín</strong>.</li>
+      </ul>
+    </aside>
+  </section>
+
+  <!-- ============================================================ 3 -->
+  <section class="kapitola" id="odraz" data-faze="vyuka" data-nazev="Odraz" data-popis="Zákon odrazu, zrcadlo">
+    <header class="kap-hlava"><span class="kap-cislo">3</span><div><p class="kap-otazka">Proč se v zrcadle vidím, ale v bílém papíře ne?</p><h2>Odraz světla</h2></div></header>
+    <div class="text">
+      <p>Když světlo dopadne na hladký lesklý povrch, <span class="term">odrazí se</span> – podobně jako míček od stěny. Úhly v optice měříme vždy od <strong>kolmice dopadu</strong>: od přímky, která je v místě dopadu kolmá k povrchu. Úhel mezi dopadajícím paprskem a kolmicí je <strong>úhel dopadu α</strong>, úhel mezi odraženým paprskem a kolmicí je <strong>úhel odrazu α′</strong>.</p>
+    </div>
+    <div class="vzorec" aria-label="Zákon odrazu: alfa s čárkou se rovná alfa"><span><i>α′</i> = <i>α</i></span><span class="vzorec-popis">zákon odrazu – odražený paprsek leží v rovině dopadu, na druhé straně kolmice</span></div>
+
+    <figure class="obr" id="obr-odraz">
+      <div class="obr-plocha"><svg class="model" role="img" aria-label="Laser, zrcadlo, úhloměr, dopadající a odražený paprsek"></svg></div>
+      <div class="obr-ovladani">
+        <div class="skupina"><span class="nazev">Povrch:</span>
+          <div class="segment" id="odraz-povrch" role="group" aria-label="Povrch">
+            <button type="button" data-hodnota="hladky">hladké zrcadlo</button><button type="button" data-hodnota="drsny">drsný papír</button>
+          </div>
+        </div>
+      </div>
+      <div class="odecty"></div>
+      <div class="obr-zprava" role="status"></div>
+      <figcaption>Táhni laser po oblouku. Svazek má pět rovnoběžných paprsků. <span class="legenda"><span class="znacka z-paprsek">paprsek</span><span class="znacka z-kolmice">kolmice dopadu</span></span></figcaption>
+    </figure>
+
+    <div class="ukol" data-ukol="odraz-60"><div class="ukol-hlava"><p><b>🔬 Úkol:</b> Na hladkém zrcadle nastav úhel dopadu 60°. Jaký je úhel odrazu?</p><span class="stav"></span></div><p class="ukol-reakce"></p></div>
+    <div class="predpoved" data-predpoved="odraz-drsny"></div>
+
+    <h3>Obraz v rovinném zrcadle</h3>
+    <div class="text">
+      <p>Světlo ze svíčky se odrazí od zrcadla a dopadne do oka. Oko ale neví, že se světlo cestou odrazilo. Vidí svíčku tam, <strong>odkud paprsky zdánlivě přicházejí</strong> – za zrcadlem. Tomu místu říkáme <span class="term">obraz</span>. Za zrcadlem ve skutečnosti žádné světlo není, proto je to obraz <strong>zdánlivý</strong>: na papír ho nezachytíš.</p>
+    </div>
+
+    <figure class="obr" id="obr-zrcadlo">
+      <div class="obr-plocha"><svg class="model" role="img" aria-label="Svíčka, zavěšené zrcadlo a oko s odraženými paprsky"></svg></div>
+      <div class="obr-ovladani">
+        <label class="prepinac"><input type="checkbox" id="zrc-prodlouzit"> Prodloužit odražené paprsky za zrcadlo</label>
+        <label class="prepinac"><input type="checkbox" id="zrc-obraz"> Ukázat obraz</label>
+      </div>
+      <div class="odecty"></div>
+      <div class="obr-zprava" role="status"></div>
+      <figcaption>Táhni svíčku a oko. Paprsky vedou do oka od horního a dolního okraje té části svíčky, kterou oko v zrcadle vidí. <span class="legenda"><span class="znacka z-paprsek">paprsek</span><span class="znacka z-prodlouzeni">prodloužení paprsku</span><span class="znacka z-obraz">obraz</span></span></figcaption>
+    </figure>
+
+    <div class="predpoved" data-predpoved="zrc-kde"></div>
+    <div class="ukol" data-ukol="zrc-cela"><div class="ukol-hlava"><p><b>🔬 Úkol:</b> Zrcadlo je menší než svíčka. Najdi polohu oka, ze které v zrcadle uvidíš celou svíčku – plamen i spodek.</p><span class="stav"></span></div><p class="ukol-reakce"></p></div>
+
+    <div class="text">
+      <p>A proč se nevidíme v bílém papíře? Papír je drsný. Každý jeho kousek odráží světlo podle zákona odrazu, ale kousky jsou natočené různě – světlo se <strong>rozptýlí</strong> do všech stran. Díky tomu papír vidíme odkudkoli, obraz v něm ale nevznikne.</p>
+    </div>
+
+    <aside class="zapamatuj"><h3>📌 Zapamatuj si</h3>
+      <ul>
+        <li><strong>Zákon odrazu:</strong> úhel odrazu se rovná úhlu dopadu, <span class="m"><i>α′</i> = <i>α</i></span>. Úhly měříme od kolmice.</li>
+        <li>Hladký povrch odráží svazek rovnoběžně (<strong>zrcadlový odraz</strong>), drsný ho <strong>rozptýlí</strong>.</li>
+        <li>Obraz v rovinném zrcadle je <strong>zdánlivý, přímý a stejně velký</strong>; leží <strong>stejně daleko za zrcadlem</strong> jako předmět před ním.</li>
+      </ul>
+    </aside>
+  </section>
+
+  <!-- ============================================================ 4 -->
+  <section class="kapitola" id="lom" data-faze="vyuka" data-nazev="Lom" data-popis="Index lomu, ke kolmici a od ní">
+    <header class="kap-hlava"><span class="kap-cislo">4</span><div><p class="kap-otazka">Proč se lžička ve sklenici vody zdá zlomená?</p><h2>Lom světla</h2></div></header>
+    <div class="text">
+      <p>Na rozhraní dvou průhledných prostředí se část světla odrazí a zbytek projde dál. Prošlé světlo přitom obvykle <span class="term">změní směr – láme se</span>. Příčinou je rychlost: ve vodě letí světlo asi o čtvrtinu pomaleji než ve vzduchu, ve skle o třetinu, v diamantu je skoro dvaapůlkrát pomalejší.</p>
+      <p>Kolikrát je světlo v látce pomalejší než ve vakuu, udává <span class="term">index lomu</span> <span class="m"><i>n</i> = <i>c</i> / <i>v</i></span>. Látka s větším indexem lomu je <strong>opticky hustší</strong>.</p>
+      <ul>
+        <li>Do opticky <strong>hustšího</strong> prostředí se světlo láme <strong>ke kolmici</strong> (úhel lomu β je menší než α).</li>
+        <li>Do opticky <strong>řidšího</strong> prostředí se láme <strong>od kolmice</strong> (β je větší než α).</li>
+        <li>Dopadá-li světlo <strong>kolmo</strong>, směr nemění.</li>
+      </ul>
+    </div>
+
+    <figure class="obr" id="obr-lom">
+      <div class="obr-plocha"><svg class="model" role="img" aria-label="Rozhraní dvou prostředí, laser, odražený a lomený paprsek"></svg></div>
+      <div class="obr-ovladani">
+        <div class="skupina"><span class="nazev">Nahoře:</span><div class="segment" data-latka="nahore" role="group" aria-label="Látka nahoře"></div></div>
+        <div class="skupina"><span class="nazev">Dole:</span><div class="segment" data-latka="dole" role="group" aria-label="Látka dole"></div></div>
+        <label class="prepinac"><input type="checkbox" data-vlny> Ukázat vlnoplochy</label>
+      </div>
+      <div class="odecty"></div>
+      <div class="obr-zprava" role="status"></div>
+      <figcaption>Táhni laser – i pod rozhraní, aby světlo šlo zdola nahoru. Čím jasnější odražený paprsek, tím víc světla se na rozhraní odrazí – přesné procento je v řádku pod obrázkem.</figcaption>
+    </figure>
+
+    <div class="ukol" data-ukol="lom-45"><div class="ukol-hlava"><p><b>🔬 Úkol:</b> Pošli světlo ze vzduchu do vody pod úhlem dopadu 45°. Jaký je úhel lomu?</p><span class="stav"></span></div><p class="ukol-reakce"></p></div>
+    <div class="predpoved" data-predpoved="lom-diamant"></div>
+
+    <h3>Proč se světlo láme?</h3>
+    <div class="analogie">
+      <svg viewBox="0 0 52 52" aria-hidden="true"><rect x="0" y="26" width="52" height="26" rx="4" fill="var(--o-voda)"/><g stroke="var(--o-paprsek)" stroke-width="2.5" stroke-linecap="round"><line x1="6" y1="6" x2="24" y2="24"/><line x1="16" y1="2" x2="30" y2="16"/><line x1="26" y1="30" x2="31" y2="47"/><line x1="36" y1="26" x2="40" y2="42"/></g></svg>
+      <p>Představ si řadu vojáků, kteří pochodují šikmo z chodníku do bahna. Kdo vkročí do bahna první, zpomalí dřív, zatímco ostatní ještě jdou rychle. <b>Řada se proto stočí</b> – pokračuje jiným směrem. Světlo se chová stejně: jeho vlnoplochy (hřebeny vln) dopadají na rozhraní šikmo a v pomalejším prostředí se k sobě přiblíží.</p>
+    </div>
+    <div class="ukol" data-ukol="lom-vlny"><div class="ukol-hlava"><p><b>🔬 Úkol:</b> Zapni vlnoplochy a dej dolů diamant. Ve které látce jsou vlnoplochy nejhustěji a proč?</p><span class="stav"></span></div><p class="ukol-reakce"></p></div>
+
+    <details class="zvidave"><summary>📐 Pro zvídavé: Snellův zákon <small>jak úhel lomu spočítat</small></summary>
+      <div class="obsah text">
+        <p>Úhel dopadu a úhel lomu spojuje <strong>Snellův zákon lomu</strong>:</p>
+        <div class="vzorec"><span><i>n</i><sub>1</sub> · sin <i>α</i> = <i>n</i><sub>2</sub> · sin <i>β</i></span></div>
+        <p>Příklad: světlo jde ze vzduchu (<i>n</i><sub>1</sub> = 1,00) do vody (<i>n</i><sub>2</sub> = 1,33) pod úhlem 45°. Pak sin β = 1,00 · sin 45° / 1,33 = 0,532 a β ≈ 32°. Ověř si to na modelu – hodnoty v řádku pod obrázkem počítá model právě tímto vzorcem.</p>
+      </div>
+    </details>
+
+    <h3>Lžička (nebo tužka) ve vodě</h3>
+    <div class="text">
+      <p>Světlo z ponořené části tužky vychází z vody šikmo a na hladině se láme od kolmice. Oko ale opět předpokládá, že světlo letělo rovně. Paprsky proto zpětně „prodlouží“ – a ty se protínají <strong>výš, než tužka ve skutečnosti je</strong>.</p>
+    </div>
+
+    <figure class="obr" id="obr-hloubka">
+      <div class="obr-plocha"><svg class="model" role="img" aria-label="Nádoba s vodou, ponořená tužka a oko"></svg></div>
+      <div class="obr-ovladani">
+        <label class="posuvnik">Sklon tužky <input type="range" id="hl-sklon" min="15" max="65" step="1" value="38"><output id="hl-sklon-h"></output></label>
+        <label class="prepinac"><input type="checkbox" id="hl-skutecna"> Ukázat, kde tužka opravdu je</label>
+      </div>
+      <div class="odecty"></div>
+      <figcaption>Táhni oko. Paprsek z hrotu tužky se na hladině láme a letí do oka; oko si ho prodlouží zpět rovně (čárkovaně). <span class="legenda"><span class="znacka z-paprsek">paprsek</span><span class="znacka z-prodlouzeni">prodloužení paprsku</span><span class="znacka z-predmet">tužka</span></span></figcaption>
+    </figure>
+
+    <div class="predpoved" data-predpoved="hl-tuzka"></div>
+
+    <aside class="zapamatuj"><h3>📌 Zapamatuj si</h3>
+      <ul>
+        <li>Na rozhraní se světlo <strong>láme</strong>, protože v různých látkách letí různě rychle. Index lomu <span class="m"><i>n</i> = <i>c</i>/<i>v</i></span>.</li>
+        <li>Do opticky <strong>hustšího</strong> prostředí se láme <strong>ke kolmici</strong>, do <strong>řidšího</strong> <strong>od kolmice</strong>.</li>
+        <li>Předměty ve vodě se zdají <strong>mělčeji</strong>, než opravdu jsou.</li>
+      </ul>
+    </aside>
+  </section>
+
+  <!-- ============================================================ 5 -->
+  <section class="kapitola" id="uplny" data-faze="vyuka" data-nazev="Úplný odraz" data-popis="Mezní úhel, optické vlákno">
+    <header class="kap-hlava"><span class="kap-cislo">5</span><div><p class="kap-otazka">Jak může světlo zatáčet v tenkém skleněném vlákně?</p><h2>Úplný odraz</h2></div></header>
+    <div class="text">
+      <p>Když světlo jde z opticky hustšího prostředí do řidšího (ze skla nebo z vody do vzduchu), láme se od kolmice. Při zvětšování úhlu dopadu se lomený paprsek stáčí čím dál víc k rozhraní, až při <span class="term">mezním úhlu</span> α<sub>m</sub> klouže přímo po něm. Při ještě větším úhlu už ven nevyjde nic – světlo se <strong>celé odrazí zpět</strong>. Tomu říkáme <span class="term">úplný odraz</span>.</p>
+    </div>
+
+    <figure class="obr" id="obr-mezni">
+      <div class="obr-plocha"><svg class="model" role="img" aria-label="Světlo jde ze skla do vzduchu"></svg></div>
+      <div class="obr-ovladani">
+        <div class="skupina"><span class="nazev">Nahoře:</span><div class="segment" data-latka="nahore" role="group" aria-label="Látka nahoře"></div></div>
+        <div class="skupina"><span class="nazev">Dole:</span><div class="segment" data-latka="dole" role="group" aria-label="Látka dole"></div></div>
+      </div>
+      <div class="odecty"></div>
+      <div class="obr-zprava" role="status"></div>
+      <figcaption>Laser teď svítí zespodu, ze skla. Tečkované čáry ukazují mezní úhel.</figcaption>
+    </figure>
+
+    <div class="predpoved" data-predpoved="mezni"></div>
+    <div class="ukol" data-ukol="mezni-voda"><div class="ukol-hlava"><p><b>🔬 Úkol:</b> Dej dolů vodu a nahoru vzduch. Najdi nejmenší úhel dopadu, při kterém už nastane úplný odraz – mezní úhel pro vodu.</p><span class="stav"></span></div><p class="ukol-reakce"></p></div>
+
+    <h3>Optické vlákno</h3>
+    <div class="text">
+      <p>Na úplném odrazu stojí <strong>optická vlákna</strong> – skleněné nitky tenčí než vlas. Světlo do nich vstoupí na jednom konci a na stěnu dopadá tak šikmo, že se pokaždé úplně odrazí. Vláknem tak může doletět i stovky kilometrů daleko. Po vláknech běží většina internetu, lékaři jimi svítí a nahlížejí do těla (endoskop).</p>
+    </div>
+
+    <figure class="obr" id="obr-vlakno">
+      <div class="obr-plocha"><svg class="model" role="img" aria-label="Ohnuté skleněné vlákno a paprsek laseru"></svg></div>
+      <div class="obr-ovladani">
+        <label class="posuvnik">Poloměr ohybu <input type="range" id="vl-ohyb" min="28" max="260" step="1" value="200"><output id="vl-ohyb-h"></output></label>
+        <label class="posuvnik">Sklon laseru <input type="range" id="vl-sklon" min="-30" max="30" step="1" value="8"><output id="vl-sklon-h"></output></label>
+      </div>
+      <div class="odecty"></div>
+      <div class="obr-zprava" role="status"></div>
+      <figcaption>Vlákno ze skla (n = 1,50) ve vzduchu. Slabší čáry jsou světlo, které z vlákna uniká.</figcaption>
+    </figure>
+
+    <div class="predpoved" data-predpoved="vlakno"></div>
+
+    <aside class="zapamatuj"><h3>📌 Zapamatuj si</h3>
+      <ul>
+        <li><strong>Úplný odraz</strong> nastane, když světlo jde do opticky <strong>řidšího</strong> prostředí a úhel dopadu je <strong>větší než mezní úhel</strong>.</li>
+        <li>Mezní úhel sklo–vzduch je asi 42°, voda–vzduch asi 49°, diamant–vzduch jen 24° (proto diamant tolik třpytí).</li>
+        <li>Úplný odraz vede světlo v <strong>optických vláknech</strong>.</li>
+      </ul>
+    </aside>
+  </section>
+
+  <!-- ============================================================ 6 -->
+  <section class="kapitola" id="barvy" data-faze="vyuka" data-nazev="Barvy" data-popis="Hranol, spektrum, duha">
+    <header class="kap-hlava"><span class="kap-cislo">6</span><div><p class="kap-otazka">Odkud se v duze berou barvy?</p><h2>Rozklad světla</h2></div></header>
+    <div class="text">
+      <p>Bílé světlo je <strong>směs barev</strong>. Index lomu skla je pro každou barvu trochu jiný – největší pro fialovou, nejmenší pro červenou. Hranol proto každou barvu láme o jiný úhel a bílé světlo <span class="term">rozloží na spektrum</span>: červená, oranžová, žlutá, zelená, modrá a fialová. Jevu se říká <strong>disperze</strong>.</p>
+    </div>
+
+    <figure class="obr" id="obr-hranol">
+      <div class="obr-plocha"><svg class="model" role="img" aria-label="Skleněný hranol rozkládá bílé světlo na spektrum"></svg></div>
+      <div class="obr-ovladani">
+        <div class="skupina"><span class="nazev">Sklo:</span>
+          <div class="segment" id="hr-sklo" role="group" aria-label="Druh skla">
+            <button type="button" data-hodnota="korunove">korunové</button><button type="button" data-hodnota="flintove">flintové</button>
+          </div>
+        </div>
+        <label class="prepinac"><input type="checkbox" id="hr-zvetsit"> Zveličit rozklad 4×</label>
+      </div>
+      <div class="odecty"></div>
+      <figcaption>Otáčej hranolem za kroužek u jeho vrcholu. Flintové sklo (olovnaté) rozkládá světlo víc než obyčejné korunové. Volba „zveličit“ rozdíly v indexu lomu uměle zvětší, aby byly lépe vidět.</figcaption>
+    </figure>
+
+    <div class="predpoved" data-predpoved="hranol"></div>
+
+    <details class="zvidave"><summary>🌈 Pro zvídavé: jak vzniká duha <small>světlo v kapce vody</small></summary>
+      <div class="obsah text">
+        <p>Duhu vytvářejí kapky deště. Sluneční světlo do kapky vstoupí, rozloží se, odrazí se na její zadní stěně a vystoupí zpět. Paprsky dopadající na kapku v různé výšce vycházejí pod různými úhly – ale většina se jich nahromadí kolem úhlu asi <strong>42°</strong> od směru slunečních paprsků (pro červenou; fialová asi 40°). Proto vidíme barevný oblouk vždy v úhlu 42° kolem bodu přímo naproti Slunci.</p>
+        <figure class="obr" id="obr-duha">
+          <div class="obr-plocha"><svg class="model" role="img" aria-label="Paprsek světla v kapce vody"></svg></div>
+          <div class="obr-ovladani">
+            <label class="posuvnik">Výška dopadu <input type="range" id="duha-vyska" min="0" max="98" step="1" value="86"><output id="duha-vyska-h"></output></label>
+            <label class="prepinac"><input type="checkbox" id="duha-svazek"> Pošli celý svazek (jen červená)</label>
+          </div>
+          <div class="odecty"></div>
+          <figcaption>Kapka je nakreslená hodně zvětšená. Kreslí se jen světlo, které se uvnitř jednou odrazí.</figcaption>
+        </figure>
+      </div>
+    </details>
+
+    <aside class="zapamatuj"><h3>📌 Zapamatuj si</h3>
+      <ul>
+        <li>Bílé světlo je směs barev. Hranol ho <strong>rozloží na spektrum</strong>.</li>
+        <li>Nejvíc se láme <strong>fialové</strong> světlo, nejméně <strong>červené</strong>.</li>
+      </ul>
+    </aside>
+  </section>
+
+  <!-- ============================================================ 7 -->
+  <section class="kapitola" id="cocky" data-faze="vyuka" data-nazev="Čočky" data-popis="Spojka, rozptylka, ohnisko">
+    <header class="kap-hlava"><span class="kap-cislo">7</span><div><p class="kap-otazka">Proč čočka soustředí světlo do jednoho bodu?</p><h2>Čočky</h2></div></header>
+    <div class="text">
+      <p><span class="term">Čočka</span> je průhledné těleso ohraničené zakřivenými plochami. <strong>Spojka</strong> je uprostřed silnější než na krajích a paprsky rovnoběžné s optickou osou soustředí do jednoho bodu – do <strong>ohniska F′</strong>. <strong>Rozptylka</strong> je uprostřed tenčí; rovnoběžné paprsky rozptýlí, jako by vycházely z ohniska před ní.</p>
+      <p>Proč to tak je? Světlo prochází čočkou přes dvě rozhraní – stejně jako hranolem. U okraje čočky jsou plochy víc skloněné, a tak se tam světlo láme víc. Vyzkoušej si to: přepni čočku na „hranolky“.</p>
+    </div>
+
+    <figure class="obr" id="obr-cocka">
+      <div class="obr-plocha"><svg class="model" role="img" aria-label="Svazek rovnoběžných paprsků prochází čočkou"></svg></div>
+      <div class="obr-ovladani">
+        <div class="segment" id="co-typ" role="group" aria-label="Druh čočky">
+          <button type="button" data-hodnota="spojka">spojka</button><button type="button" data-hodnota="rozptylka">rozptylka</button><button type="button" data-hodnota="hranolky">spojka z hranolků</button>
+        </div>
+        <label class="posuvnik">Poloměr zakřivení <input type="range" id="co-r" min="130" max="420" step="5" value="260"><output id="co-r-h"></output></label>
+        <div class="skupina"><span class="nazev">Materiál:</span>
+          <div class="segment" id="co-n" role="group" aria-label="Materiál čočky">
+            <button type="button" data-hodnota="1.5">sklo 1,50</button><button type="button" data-hodnota="1.7">flint 1,70</button>
+          </div>
+        </div>
+        <label class="prepinac"><input type="checkbox" id="co-osa"> Jen paprsky blízko osy</label>
+      </div>
+      <div class="odecty"></div>
+      <div class="obr-zprava" role="status"></div>
+      <figcaption>Model počítá lom na obou plochách čočky podle zákona lomu. <span class="legenda"><span class="znacka z-paprsek">paprsek</span><span class="znacka z-prodlouzeni">prodloužení paprsku</span><span class="znacka z-ohnisko">ohnisko F′</span></span></figcaption>
+    </figure>
+
+    <div class="text">
+      <p>Vzdálenost ohniska od středu čočky je <span class="term">ohnisková vzdálenost <i>f</i></span>. Čím je čočka víc vyklenutá, tím kratší má <i>f</i> a tím víc paprsky láme. „Sílu“ čočky vyjadřuje <span class="term">optická mohutnost</span> v <strong>dioptriích</strong> (D):</p>
+    </div>
+    <div class="vzorec"><span><i>φ</i> = <span class="zl"><span>1</span><span><i>f</i></span></span></span><span class="vzorec-popis"><i>f</i> dosazujeme v metrech. Spojka s <i>f</i> = 25 cm má <i>φ</i> = 1 / 0,25 m = +4 D, rozptylka má <i>φ</i> záporné.</span></div>
+
+    <div class="predpoved" data-predpoved="cocka-r"></div>
+    <div class="ukol" data-ukol="cocka-f15"><div class="ukol-hlava"><p><b>🔬 Úkol:</b> Uprav spojku tak, aby měla optickou mohutnost aspoň +6 D. Zkus to dvěma způsoby.</p><span class="stav"></span></div><p class="ukol-reakce"></p></div>
+
+    <details class="zvidave"><summary>🔍 Pro zvídavé: vada čočky <small>proč se neprotnou všechny paprsky přesně</small></summary>
+      <div class="obsah text">
+        <p>Vypni „Jen paprsky blízko osy“ a zmenši poloměr zakřivení. Paprsky u okraje čočky protnou osu <strong>blíž</strong> než paprsky u středu – skutečná čočka s kulovými plochami nemá jedno dokonalé ohnisko. Této vadě se říká <strong>otvorová (sférická) vada</strong>. Ve fotoaparátech a dalekohledech ji omezují clonou (zakryje okraje čočky) nebo skládáním více čoček. V dalších kapitolách počítáme s dokonalou tenkou čočkou.</p>
+      </div>
+    </details>
+
+    <aside class="zapamatuj"><h3>📌 Zapamatuj si</h3>
+      <ul>
+        <li><strong>Spojka</strong> (uprostřed silnější) soustředí rovnoběžné paprsky do <strong>ohniska F′</strong>; <strong>rozptylka</strong> (uprostřed tenčí) je rozptyluje.</li>
+        <li><strong>Ohnisková vzdálenost</strong> <i>f</i> = vzdálenost ohniska od středu čočky.</li>
+        <li><strong>Optická mohutnost</strong> <span class="m"><i>φ</i> = 1/<i>f</i></span> v dioptriích (<i>f</i> v metrech); spojka +, rozptylka −.</li>
+      </ul>
+    </aside>
+  </section>
+
+  <!-- ============================================================ 8 -->
+  <section class="kapitola" id="zobrazeni" data-faze="vyuka" data-nazev="Obraz" data-popis="Význačné paprsky, rovnice čočky">
+    <header class="kap-hlava"><span class="kap-cislo">8</span><div><p class="kap-otazka">Jak vznikne na stínítku obraz svíčky?</p><h2>Zobrazení čočkou</h2></div></header>
+    <div class="text">
+      <p>Každý bod plamene vysílá světlo do všech stran. Spojka paprsky z jednoho bodu znovu soustředí do jednoho bodu – vznikne <span class="term">obraz</span>. Kde leží, zjistíme nejsnáze pomocí tří <strong>význačných paprsků</strong>:</p>
+      <ol>
+        <li>paprsek <strong>rovnoběžný s osou</strong> se za čočkou láme do ohniska <strong>F′</strong>;</li>
+        <li>paprsek jdoucí <strong>středem čočky</strong> se neláme;</li>
+        <li>paprsek jdoucí <strong>ohniskem F</strong> (před čočkou) vychází z čočky <strong>rovnoběžně s osou</strong>.</li>
+      </ol>
+      <p>Kde se paprsky za čočkou protnou, vzniká <strong>skutečný obraz</strong> – dá se zachytit na stínítko. Když se za čočkou rozbíhají, protnou se jen jejich prodloužení před čočkou: obraz je <strong>zdánlivý</strong> a vidíme ho jen okem skrz čočku.</p>
+    </div>
+
+    <figure class="obr" id="obr-zobrazeni">
+      <div class="obr-s-nahledem jen-siroky">
+        <div class="obr-plocha"><svg class="model" role="img" aria-label="Svíčka před čočkou, význačné paprsky a obraz"></svg></div>
+        <div class="nahled" id="zob-nahled" hidden>
+          <h4>Co je vidět na stínítku</h4>
+          <svg viewBox="0 0 240 150" aria-hidden="true"></svg>
+          <p id="zob-nahled-text"></p>
+        </div>
+      </div>
+      <div class="krokovani" id="zob-krokovani" hidden aria-live="polite">
+        <p><span class="cislo" id="zob-krok-cislo"></span><span id="zob-krok-text"></span></p>
+        <div class="tlacitka"><button type="button" id="zob-krok-zpet">← Zpět</button><button type="button" class="hlavni" id="zob-krok-dal">Další krok →</button><button type="button" id="zob-krok-konec">Zavřít</button></div>
+      </div>
+      <div class="obr-ovladani">
+        <div class="segment" id="zob-typ" role="group" aria-label="Druh čočky">
+          <button type="button" data-hodnota="spojka">spojka</button><button type="button" data-hodnota="rozptylka">rozptylka</button>
+        </div>
+        <label class="prepinac"><input type="checkbox" id="zob-paprsky" checked> Význačné paprsky</label>
+        <label class="prepinac"><input type="checkbox" id="zob-svazek"> Svazek paprsků</label>
+        <label class="prepinac"><input type="checkbox" id="zob-stinitko"> Stínítko</label>
+        <button type="button" id="zob-krokuj">▶️ Konstrukce krok za krokem</button>
+      </div>
+      <div class="obr-ovladani" aria-label="Hotová nastavení">
+        <span class="nazev" style="font-size:.86rem;color:var(--text-muted)">Nastav jako:</span>
+        <button type="button" data-zob-preset="fotoaparat">📷 fotoaparát</button>
+        <button type="button" data-zob-preset="kopirka">🖨️ kopírka 1 : 1</button>
+        <button type="button" data-zob-preset="projektor">📽️ projektor</button>
+        <button type="button" data-zob-preset="lupa">🔍 lupa</button>
+      </div>
+      <div class="odecty"></div>
+      <div class="obr-zprava" role="status"></div>
+      <figcaption>Táhni svíčku za kroužek nad plamenem (do stran mění vzdálenost, nahoru a dolů výšku), ohnisko F′ a stínítko. Měřítko v centimetrech je dole. <span class="legenda"><span class="znacka z-predmet">předmět</span><span class="znacka z-paprsek">paprsek</span><span class="znacka z-prodlouzeni">prodloužení</span><span class="znacka z-obraz">obraz</span><span class="znacka z-ohnisko">ohniska</span></span></figcaption>
+    </figure>
+
+    <div class="predpoved" data-predpoved="zob-30"></div>
+    <div class="ukol" data-ukol="zob-11"><div class="ukol-hlava"><p><b>🔬 Úkol:</b> Najdi polohu svíčky, kdy je obraz stejně velký jako svíčka.</p><span class="stav"></span></div><p class="ukol-reakce"></p></div>
+    <div class="ukol" data-ukol="zob-lupa"><div class="ukol-hlava"><p><b>🔬 Úkol:</b> Posuň svíčku tak, aby spojka fungovala jako lupa – obraz je zvětšený a vzpřímený.</p><span class="stav"></span></div><p class="ukol-reakce"></p></div>
+    <div class="ukol" data-ukol="zob-rozptylka"><div class="ukol-hlava"><p><b>🔬 Úkol:</b> Přepni na rozptylku, zapni stínítko a zkus zachytit obraz svíčky. Jde to?</p><span class="stav"></span></div><p class="ukol-reakce"></p></div>
+
+    <h3>Zobrazovací rovnice</h3>
+    <div class="text"><p>Polohu obrazu nemusíme jen kreslit – dá se spočítat. Vzdálenost předmětu od čočky je <i>a</i>, vzdálenost obrazu <i>a′</i>, výška předmětu <i>y</i> a výška obrazu <i>y′</i>:</p></div>
+    <div class="vzorec" aria-label="1 lomeno a plus 1 lomeno a s čárkou se rovná 1 lomeno f">
+      <span><span class="zl"><span>1</span><span><i>a</i></span></span> + <span class="zl"><span>1</span><span><i>a′</i></span></span> = <span class="zl"><span>1</span><span><i>f</i></span></span></span>
+      <span style="margin-left:24px"><i>Z</i> = <span class="zl"><span><i>y′</i></span><span><i>y</i></span></span> = −<span class="zl"><span><i>a′</i></span><span><i>a</i></span></span></span>
+    </div>
+    <div class="text"><ul>
+      <li><i>a′</i> &gt; 0: obraz je skutečný, za čočkou; <i>a′</i> &lt; 0: obraz je zdánlivý, před čočkou.</li>
+      <li><i>Z</i> &lt; 0: obraz je převrácený; <i>Z</i> &gt; 0: přímý. |<i>Z</i>| &gt; 1 zvětšený, |<i>Z</i>| &lt; 1 zmenšený.</li>
+      <li>U rozptylky dosazujeme <i>f</i> záporné.</li>
+    </ul></div>
+    <p class="rovnice-ziva" id="zob-rovnice" aria-live="off"></p>
+
+    <div class="tabulka-obal">
+    <table class="pripady" id="zob-pripady">
+      <caption class="vzorec-popis" style="text-align:left;caption-side:top;padding-bottom:6px">Kde je předmět a jaký je obraz (spojka). Řádek podle modelu se zvýrazní.</caption>
+      <thead><tr><th>Poloha předmětu</th><th>Obraz</th><th>Kde se využívá</th></tr></thead>
+      <tbody>
+        <tr data-pripad="za2f"><td><i>a</i> &gt; 2<i>f</i></td><td>skutečný, převrácený, zmenšený</td><td>fotoaparát, oko</td></tr>
+        <tr data-pripad="2f"><td><i>a</i> = 2<i>f</i></td><td>skutečný, převrácený, stejně velký</td><td>kopírování 1 : 1</td></tr>
+        <tr data-pripad="mezi"><td><i>f</i> &lt; <i>a</i> &lt; 2<i>f</i></td><td>skutečný, převrácený, zvětšený</td><td>projektor, objektiv mikroskopu</td></tr>
+        <tr data-pripad="f"><td><i>a</i> = <i>f</i></td><td>nevznikne – paprsky za čočkou jdou rovnoběžně</td><td>reflektor, baterka</td></tr>
+        <tr data-pripad="pred"><td><i>a</i> &lt; <i>f</i></td><td>zdánlivý, přímý, zvětšený</td><td>lupa</td></tr>
+        <tr data-pripad="rozptylka"><td>rozptylka</td><td>vždy zdánlivý, přímý, zmenšený</td><td>brýle pro krátkozraké, kukátko ve dveřích</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <div class="ukazka" data-faze="ukazka" id="zob-priklad">
+      <h3>📘 Řešený příklad</h3>
+      <p>Svíčka vysoká 4 cm stojí 15 cm před spojkou s ohniskovou vzdáleností 10 cm. Kde vznikne obraz a jak bude velký?</p>
+      <ol>
+        <li>Zapíšeme: <i>y</i> = 4 cm, <i>a</i> = 15 cm, <i>f</i> = 10 cm; hledáme <i>a′</i> a <i>y′</i>.</li>
+        <li>Ze zobrazovací rovnice: <span class="m"><span class="zl"><span>1</span><span><i>a′</i></span></span> = <span class="zl"><span>1</span><span><i>f</i></span></span> − <span class="zl"><span>1</span><span><i>a</i></span></span> = <span class="zl"><span>1</span><span>10</span></span> − <span class="zl"><span>1</span><span>15</span></span> = <span class="zl"><span>3</span><span>30</span></span> − <span class="zl"><span>2</span><span>30</span></span> = <span class="zl"><span>1</span><span>30</span></span></span>, tedy <i>a′</i> = 30 cm. Obraz je 30 cm <strong>za</strong> čočkou – skutečný.</li>
+        <li>Zvětšení: <span class="m"><i>Z</i> = −<span class="zl"><span><i>a′</i></span><span><i>a</i></span></span> = −<span class="zl"><span>30</span><span>15</span></span> = −2</span>. Obraz je <strong>převrácený</strong> a <strong>2× zvětšený</strong>.</li>
+        <li>Výška obrazu: <i>y′</i> = <i>Z</i> · <i>y</i> = −2 · 4 cm = −8 cm (8 cm, hlavou dolů).</li>
+      </ol>
+      <button type="button" id="zob-priklad-model">Ukázat příklad v modelu</button>
+    </div>
+
+    <aside class="zapamatuj"><h3>📌 Zapamatuj si</h3>
+      <ul>
+        <li>Obraz najdeme pomocí tří význačných paprsků: <strong>rovnoběžný → F′</strong>, <strong>středem → rovně</strong>, <strong>přes F → rovnoběžně</strong>.</li>
+        <li><strong>Skutečný</strong> obraz jde zachytit na stínítko, <strong>zdánlivý</strong> ne.</li>
+        <li>Zobrazovací rovnice <span class="m"><span class="zl"><span>1</span><span><i>a</i></span></span> + <span class="zl"><span>1</span><span><i>a′</i></span></span> = <span class="zl"><span>1</span><span><i>f</i></span></span></span>, zvětšení <span class="m"><i>Z</i> = −<i>a′</i>/<i>a</i></span>.</li>
+      </ul>
+    </aside>
+  </section>
+
+  <!-- ============================================================ 9 -->
+  <section class="kapitola" id="oko" data-faze="vyuka" data-nazev="Oko" data-popis="Akomodace, vady, brýle">
+    <header class="kap-hlava"><span class="kap-cislo">9</span><div><p class="kap-otazka">Proč někdo potřebuje brýle na dálku a jiný na čtení?</p><h2>Oko a brýle</h2></div></header>
+    <div class="text">
+      <p>Oko funguje podobně jako fotoaparát. Rohovka a <strong>oční čočka</strong> tvoří dohromady spojnou soustavu, která na <strong>sítnici</strong> vytvoří skutečný, zmenšený a převrácený obraz – mozek si ho pak „otočí“. Vzdálenost čočky od sítnice se ale měnit nemůže. Oko proto zaostřuje jinak než fotoaparát: oční čočka se pomocí svalů víc vyklene a zkrátí svou ohniskovou vzdálenost. Tomu se říká <span class="term">akomodace</span>.</p>
+      <p>Zdravé oko dospělého vidí ostře od <strong>blízkého bodu</strong> (asi 25 cm) až do nekonečna.</p>
+      <ul>
+        <li><strong>Krátkozraké</strong> oko láme světlo vzhledem ke své délce příliš silně (bývá příliš dlouhé nebo má příliš vyklenutou rohovku). Obraz vzdálených předmětů vzniká <strong>před sítnicí</strong>, do dálky vidí rozmazaně. Pomůže <strong>rozptylka</strong>.</li>
+        <li><strong>Dalekozraké</strong> oko láme světlo příliš slabě (bývá příliš krátké). Obraz blízkých předmětů by vznikl <strong>za sítnicí</strong>, špatně čte. Pomůže <strong>spojka</strong>.</li>
+        <li><strong>Ve stáří</strong> čočka tuhne a akomodace slábne – člověk potřebuje brýle na čtení (spojku).</li>
+      </ul>
+    </div>
+
+    <figure class="obr" id="obr-oko">
+      <div class="obr-s-nahledem ma-nahled">
+        <div class="obr-plocha"><svg class="model" role="img" aria-label="Řez okem, brýle a paprsky od předmětu"></svg></div>
+        <div class="nahled" id="oko-nahled">
+          <h4>Co oko vidí</h4>
+          <svg viewBox="0 0 240 150" aria-hidden="true"></svg>
+          <p id="oko-nahled-text"></p>
+        </div>
+      </div>
+      <div class="obr-ovladani">
+        <div class="segment" id="oko-typ" role="group" aria-label="Oko">
+          <button type="button" data-hodnota="zdrave">zdravé</button><button type="button" data-hodnota="kratkozrake">krátkozraké</button><button type="button" data-hodnota="dalekozrake">dalekozraké</button><button type="button" data-hodnota="stari">ve stáří</button>
+        </div>
+      </div>
+      <div class="obr-ovladani">
+        <label class="posuvnik">Předmět je <input type="range" id="oko-vzdalenost" min="0" max="1000" step="1" value="1000"><output id="oko-vzdalenost-h"></output></label>
+        <button type="button" data-oko-vzdalenost="25">📖 čtení 25 cm</button>
+        <button type="button" data-oko-vzdalenost="inf">🏔️ do dálky</button>
+        <label class="posuvnik">Brýle <input type="range" id="oko-bryle" min="-5" max="5" step="0.25" value="0"><output id="oko-bryle-h"></output></label>
+        <button type="button" class="hlavni" id="oko-nasadit">👓 Nasadit brýle</button>
+      </div>
+      <div class="odecty"></div>
+      <div class="obr-zprava" role="status"></div>
+      <figcaption>Oko je nakreslené zvětšené a zjednodušené: celá optika oka je jedna čočka a vady jsou v modelu ukázané jako příliš silná nebo slabá čočka (oko má pořád stejnou velikost). Posun obrazu vadou a brýlemi je v kresbě pro názornost asi třikrát zveličený – dioptrie, blízký a daleký bod i potřebné brýle odpovídají skutečnosti. Předmět je vlevo mimo obrázek, proto paprsky přicházejí skoro rovnoběžně.</figcaption>
+    </figure>
+
+    <div class="predpoved" data-predpoved="oko-bryle"></div>
+    <div class="ukol" data-ukol="oko-daleko"><div class="ukol-hlava"><p><b>🔬 Úkol:</b> Dalekozrakému oku nastav brýle, aby ostře vidělo na čtení (25 cm).</p><span class="stav"></span></div><p class="ukol-reakce"></p></div>
+
+    <aside class="zapamatuj"><h3>📌 Zapamatuj si</h3>
+      <ul>
+        <li>Oko zaostřuje <strong>akomodací</strong> – oční čočka mění vyklenutí, a tím i ohniskovou vzdálenost.</li>
+        <li><strong>Krátkozrakost</strong>: obraz vzdálených předmětů před sítnicí → brýle s <strong>rozptylkou</strong> (záporné dioptrie).</li>
+        <li><strong>Dalekozrakost</strong>: obraz blízkých předmětů za sítnicí → brýle se <strong>spojkou</strong> (kladné dioptrie).</li>
+      </ul>
+    </aside>
+  </section>
+
+  <!-- ============================================================ 10 -->
+  <section class="kapitola" id="pristroje" data-faze="vyuka" data-nazev="Přístroje" data-popis="Fotoaparát, projektor, lupa">
+    <header class="kap-hlava"><span class="kap-cislo">10</span><div><p class="kap-otazka">Co mají společného fotoaparát, projektor a lupa?</p><h2>Optické přístroje</h2></div></header>
+    <div class="text">
+      <p>Většina přístrojů s jednou spojkou dělá jedno ze tří – podle toho, kde je předmět vůči ohnisku. Klikni na tlačítko a model z kapitoly 8 se nastaví jako daný přístroj.</p>
+    </div>
+    <div class="pristroje">
+      <article class="pristroj">
+        <svg viewBox="0 0 240 76" class="ikona" aria-hidden="true"><rect x="70" y="18" width="110" height="44" rx="8" fill="var(--bg-control)" stroke="var(--text-faint)"/><rect x="92" y="10" width="34" height="10" rx="3" fill="var(--bg-control)" stroke="var(--text-faint)"/><ellipse cx="80" cy="40" rx="5" ry="18" class="sklo"/><rect x="168" y="26" width="5" height="28" fill="var(--o-obraz)"/><path class="cara c-paprsek" d="M10 24 L80 34 L170 46 M10 56 L80 46 L170 34"/></svg>
+        <h3>📷 Fotoaparát</h3>
+        <p>Předmět je daleko, dál než 2<i>f</i>. Objektiv vytvoří na čipu malý převrácený obraz. Zaostřuje se <strong>posunem objektivu</strong> blíž k čipu nebo dál od něj.</p>
+        <p class="vlastnosti"><i>a</i> &gt; 2<i>f</i> · skutečný · převrácený · zmenšený</p>
+        <button type="button" data-zob-preset="fotoaparat" data-rolovat>Ukázat v modelu</button>
+      </article>
+      <article class="pristroj">
+        <svg viewBox="0 0 240 76" class="ikona" aria-hidden="true"><rect x="16" y="24" width="60" height="32" rx="6" fill="var(--bg-control)" stroke="var(--text-faint)"/><ellipse cx="84" cy="40" rx="5" ry="14" class="sklo"/><rect x="214" y="4" width="6" height="68" fill="var(--text-faint)"/><path class="cara c-paprsek" d="M60 34 L84 30 L214 66 M60 46 L84 50 L214 12"/></svg>
+        <h3>📽️ Projektor</h3>
+        <p>Obrázek (diapozitiv, displej) je kousek za ohniskem, mezi <i>f</i> a 2<i>f</i>. Na plátně vznikne velký převrácený obraz – proto se diapozitiv vkládá <strong>vzhůru nohama</strong>.</p>
+        <p class="vlastnosti"><i>f</i> &lt; <i>a</i> &lt; 2<i>f</i> · skutečný · převrácený · zvětšený</p>
+        <button type="button" data-zob-preset="projektor" data-rolovat>Ukázat v modelu</button>
+      </article>
+      <article class="pristroj">
+        <svg viewBox="0 0 240 76" class="ikona" aria-hidden="true"><circle cx="120" cy="36" r="26" class="sklo"/><rect x="138" y="54" width="46" height="10" rx="5" transform="rotate(35 138 54)" fill="var(--bg-control)" stroke="var(--text-faint)"/><text x="120" y="44" text-anchor="middle" font-size="24" font-weight="700" fill="var(--text)">A</text><text x="60" y="44" text-anchor="middle" font-size="12" fill="var(--text-muted)">A</text></svg>
+        <h3>🔍 Lupa</h3>
+        <p>Předmět je blíž než ohnisko. Oko za lupou vidí zdánlivý, vzpřímený a zvětšený obraz. Lupa s ohniskovou vzdáleností <i>f</i> zvětšuje asi <span class="m">25 cm / <i>f</i></span> krát – lupa s <i>f</i> = 5 cm zvětšuje 5×.</p>
+        <p class="vlastnosti"><i>a</i> &lt; <i>f</i> · zdánlivý · přímý · zvětšený</p>
+        <button type="button" data-zob-preset="lupa" data-rolovat>Ukázat v modelu</button>
+      </article>
+      <article class="pristroj">
+        <svg viewBox="0 0 240 76" class="ikona" aria-hidden="true"><ellipse cx="60" cy="38" rx="4" ry="16" class="sklo"/><ellipse cx="170" cy="38" rx="4" ry="10" class="sklo"/><rect x="56" y="30" width="118" height="16" fill="none" stroke="var(--text-faint)" stroke-dasharray="4 3"/><path class="cara c-paprsek" d="M8 30 L60 30 L140 38 L170 42 L230 30 M8 46 L60 46 L140 38 L170 34 L230 46"/></svg>
+        <h3>🔭 Dalekohled a 🔬 mikroskop</h3>
+        <p>Tady pracují <strong>dvě čočky</strong> za sebou. Objektiv vytvoří skutečný obraz a okulár si ho prohlíží jako lupa. Jak to funguje uvnitř, ukazuje samostatná stránka.</p>
+        <a class="tlacitko" href="optika_soustava.html" data-lekce="obsah/optika_soustava.html">🧩 Stavba optické soustavy →</a>
+      </article>
+    </div>
+    <div class="text">
+      <p>Chceš si se světlem volně hrát? V <a href="optika.html" data-lekce="obsah/optika.html">laboratoři optiky</a> najdeš zrcadla, čočky, hranol i dalekohled bez úkolů.</p>
+    </div>
+  </section>
+
+  <!-- ============================================================ tahák -->
+  <section class="kapitola" id="tahak" data-faze="tahak" data-nazev="Tahák" data-popis="Všechno na jedné stránce" data-zvlast>
+    <header class="kap-hlava"><span class="kap-cislo">📌</span><div><p class="kap-otazka">Všechno podstatné na jedné stránce</p><h2>Tahák – optika</h2></div></header>
+    <div class="tahak-mrizka">
+      <div class="tahak-karta"><h3>Světlo a stín</h3><ul><li>Primární zdroj světlo vyzařuje, ostatní tělesa ho odrážejí.</li><li>V jednom prostředí se světlo šíří přímočaře, <i>c</i> ≈ 300 000 km/s.</li><li>Bodový zdroj → ostrý stín; velký zdroj → plný stín + polostín.</li></ul></div>
+      <div class="tahak-karta"><h3>Odraz</h3><p class="m" style="font-size:1.15rem"><i>α′</i> = <i>α</i></p><ul><li>Úhly se měří od kolmice dopadu.</li><li>Rovinné zrcadlo: obraz zdánlivý, přímý, stejně velký, stejně daleko za zrcadlem.</li></ul></div>
+      <div class="tahak-karta"><h3>Lom</h3><p class="m" style="font-size:1.15rem"><i>n</i> = <i>c</i>/<i>v</i> · <i>n</i><sub>1</sub> sin <i>α</i> = <i>n</i><sub>2</sub> sin <i>β</i></p><ul><li>Do hustšího (větší <i>n</i>) → ke kolmici; do řidšího → od kolmice.</li><li>Úplný odraz: do řidšího prostředí při <i>α</i> &gt; <i>α</i><sub>m</sub>; sin <i>α</i><sub>m</sub> = <i>n</i><sub>2</sub>/<i>n</i><sub>1</sub>.</li><li>Hranol: fialová se láme nejvíc, červená nejméně.</li></ul></div>
+      <div class="tahak-karta"><h3>Čočky</h3>
+        <svg viewBox="0 0 300 170" class="ikona" aria-hidden="true"><line x1="0" y1="80" x2="300" y2="80" class="cara tenka carkovana c-osa"/><line x1="150" y1="10" x2="150" y2="166" class="cara c-text"/><circle cx="100" cy="80" r="3.5" class="vypln c-ohnisko"/><circle cx="200" cy="80" r="3.5" class="vypln c-ohnisko"/><text x="96" y="70" text-anchor="end" font-size="12" fill="var(--o-ohnisko)">F</text><text x="204" y="70" font-size="12" fill="var(--o-ohnisko)">F′</text><line x1="60" y1="80" x2="60" y2="40" class="cara silna c-predmet"/><path class="cara c-paprsek" d="M60 40 L150 40 L300 160"/><path class="cara c-paprsek" d="M60 40 L300 146.7" style="opacity:.8"/><path class="cara c-paprsek" d="M60 40 L150 130 L300 130" style="opacity:.65"/><line x1="262.5" y1="80" x2="262.5" y2="130" class="cara silna c-obraz"/><text x="60" y="98" text-anchor="middle" font-size="11" fill="var(--o-predmet)">předmět</text><text x="262" y="72" text-anchor="middle" font-size="11" fill="var(--o-obraz)">obraz</text></svg>
+        <ul><li>Spojka soustředí rovnoběžné paprsky do F′, rozptylka je rozptyluje.</li><li><i>φ</i> = 1/<i>f</i> [D], <i>f</i> v metrech.</li><li>1/<i>a</i> + 1/<i>a′</i> = 1/<i>f</i>; <i>Z</i> = −<i>a′</i>/<i>a</i>.</li></ul></div>
+      <div class="tahak-karta"><h3>Obraz spojkou</h3><ul><li><i>a</i> &gt; 2<i>f</i>: skutečný, převrácený, zmenšený (fotoaparát)</li><li><i>a</i> = 2<i>f</i>: skutečný, převrácený, stejně velký</li><li><i>f</i> &lt; <i>a</i> &lt; 2<i>f</i>: skutečný, převrácený, zvětšený (projektor)</li><li><i>a</i> &lt; <i>f</i>: zdánlivý, přímý, zvětšený (lupa)</li><li>Rozptylka: vždy zdánlivý, přímý, zmenšený.</li></ul></div>
+      <div class="tahak-karta"><h3>Oko</h3><ul><li>Zaostřuje akomodací (mění se vyklenutí čočky).</li><li>Krátkozraké: obraz před sítnicí → rozptylka (−D).</li><li>Dalekozraké: obraz za sítnicí → spojka (+D).</li></ul></div>
+    </div>
+  </section>
+
+  <!-- ============================================================ procvič -->
+  <section class="kapitola" id="procvic" data-faze="procvic" data-nazev="Procvič" data-popis="Otázky napříč lekcí" data-zvlast>
+    <header class="kap-hlava"><span class="kap-cislo">✏️</span><div><p class="kap-otazka">Otázky se pokaždé vygenerují znovu, s jinými čísly.</p><h2>Procvič si optiku</h2></div></header>
+    <div class="cviceni">
+      <div class="cviceni-hlava">
+        <div class="temata" id="cv-temata" role="group" aria-label="Téma otázek"></div>
+      </div>
+      <div class="karta-otazky">
+        <div id="plocha">
+          <p class="tema" id="cv-tema"></p>
+          <p class="zadani" id="cv-zadani" tabindex="-1"></p>
+          <div class="obrazek" id="cv-obrazek" hidden></div>
+          <div id="cv-moznosti"></div>
+          <p class="odezva" id="cv-odezva"></p>
+        </div>
+        <div class="napoveda" id="cv-napoveda" hidden></div>
+        <div class="ovladani cviceni-ovladani">
+          <button type="button" id="btnNapoveda">💡 Nápověda</button>
+          <button type="button" id="btnDalsi">Přeskočit →</button>
+          <span class="skore" id="cv-skore"></span>
+        </div>
+      </div>
+      <p class="vzorec-popis">Na odpověď můžeš klepnout, nebo zmáčknout klávesu 1–4. Po chybě se ukáže, v čem je záměna, a můžeš to zkusit znovu – do skóre se počítá jen odpověď napoprvé.</p>
+    </div>
+  </section>
+
+  <div data-kostra-zapati></div>
+</main>
+</div>
+
+<script src="optika_lekce.js?v=6"></script>
+</body>
+</html>

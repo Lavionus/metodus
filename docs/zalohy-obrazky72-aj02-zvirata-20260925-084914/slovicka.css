@@ -1,0 +1,61 @@
+/* slovicka.css – společný vzhled stránek se slovíčky (slovicka.js) */
+[hidden] { display: none !important; }
+
+/* přepínače témat */
+.kategorie { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+.kategorie button {
+  background: var(--bg-panel); border: 1px solid var(--border); color: var(--text-muted);
+  border-radius: 14px; padding: 5px 12px; font-size: 0.8rem; font-family: inherit; cursor: pointer;
+}
+.kategorie button.active { background: var(--accent-soft); color: var(--accent-text, var(--accent)); border-color: var(--accent); font-weight: 600; }
+.pruh-nastroju { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: space-between; }
+#btnZvuk {
+  background: var(--bg-control); border: 1px solid var(--border-strong); color: var(--text-muted);
+  border-radius: 6px; padding: 6px 12px; font-size: 0.82rem; font-family: inherit; cursor: pointer; margin-bottom: 12px;
+}
+
+/* přehled */
+.hledej {
+  background: var(--bg-input); border: 1px solid var(--border-strong); border-radius: 6px; color: var(--text);
+  padding: 8px 12px; font-size: 0.9rem; font-family: inherit; width: min(320px, 100%); margin-bottom: 10px;
+}
+.slovnik { width: 100%; max-width: 720px; border-collapse: collapse; font-size: 0.95rem; }
+.slovnik th, .slovnik td { padding: 7px 10px; text-align: left; border-bottom: 1px solid var(--border); }
+.slovnik th { color: var(--text-faint); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.5px; }
+.slovnik .emoji-bunka { font-size: 1.4rem; width: 2.4rem; text-align: center; }
+.slovnik .cist { background: none; border: none; padding: 0; color: var(--text); font: inherit; font-weight: 600; cursor: pointer; text-align: left; }
+.slovnik .cist:hover { text-decoration: underline; text-decoration-color: var(--accent); }
+.slovnik .vyslov { color: var(--text-faint); font-size: 0.85rem; }
+.slovnik .cesky { color: var(--text-muted); }
+.slovnik .nic { color: var(--text-faint); padding: 20px; }
+
+/* kartičky */
+.karticka {
+  background: var(--bg-panel); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 26px; max-width: 520px; text-align: center;
+}
+.karticka .k-emoji { font-size: clamp(4.5rem, 20vw, 7.5rem); line-height: 1; margin-bottom: 10px; user-select: none; cursor: pointer; }
+.karticka .k-slovo { font-size: 2rem; font-weight: 700; cursor: pointer; }
+.karticka .vyslov { font-size: 1rem; color: var(--text-faint); font-weight: 400; margin-left: 8px; }
+.karticka .k-cesky { font-size: 1.3rem; color: var(--accent-text, var(--accent)); margin-top: 6px; min-height: 1.6rem; }
+.karticka .k-cesky.skryto { visibility: hidden; }
+.karticka .tlacitka { display: flex; gap: 10px; justify-content: center; margin-top: 18px; flex-wrap: wrap; }
+.karticka .tlacitka button { border-radius: 8px; padding: 11px 20px; font-size: 0.95rem; font-weight: 600; font-family: inherit; cursor: pointer; }
+.karticka .b-hlavni { background: var(--accent); color: var(--na-akcentu, #fff); border: 1px solid var(--accent); }
+.karticka .b-vedle { background: var(--bg-control); color: var(--text); border: 1px solid var(--border-strong); }
+.karticka .k-pocet { color: var(--text-faint); font-size: 0.85rem; margin-top: 12px; font-variant-numeric: tabular-nums; }
+
+/* zadání kvízu */
+.obrazek-slova { display: block; font-size: clamp(3.6rem, 14vw, 5.5rem); line-height: 1.1; margin-bottom: 4px; }
+.druh { display: block; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-faint); margin-bottom: 6px; }
+.slovo-zadani { display: block; font-size: clamp(1.6rem, 6vw, 2.2rem); font-weight: 700; color: var(--text); }
+.cesky-zadani { display: block; font-size: 1.1rem; color: var(--text-muted); margin-top: 2px; }
+.moznosti.cleny button { min-width: 110px; font-size: 1.2rem; font-weight: 700; }
+.slovo-doplnek { margin-top: 10px; font-size: 1.05rem; color: var(--text-muted); line-height: 1.5; }
+.slovo-doplnek b { color: var(--text); }
+.slovo-doplnek .emoji-maly { font-size: 1.4rem; vertical-align: -0.15em; }
+.slovo-doplnek .tip { font-size: 0.9rem; color: var(--text-muted); margin-top: 4px; max-width: 460px; }
+
+/* v přehledu chyb jen jeden řádek */
+.prehled-chyb .obrazek-slova, .prehled-chyb .slovo-zadani, .prehled-chyb .cesky-zadani { display: inline; font-size: inherit; margin: 0 6px 0 0; }
+.prehled-chyb .druh { display: none; }

@@ -23,6 +23,7 @@
 .slovnik th, .slovnik td { padding: 7px 10px; text-align: left; border-bottom: 1px solid var(--border); }
 .slovnik th { color: var(--text-faint); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.5px; }
 .slovnik .emoji-bunka { font-size: 1.4rem; width: 2.4rem; text-align: center; }
+.slovnik .emoji-bunka img { width: 3.2rem; height: 3.2rem; object-fit: contain; border-radius: 8px; vertical-align: middle; }
 .slovnik .cist { background: none; border: none; padding: 0; color: var(--text); font: inherit; font-weight: 600; cursor: pointer; text-align: left; }
 .slovnik .cist:hover { text-decoration: underline; text-decoration-color: var(--accent); }
 .slovnik .vyslov { color: var(--text-faint); font-size: 0.85rem; }
@@ -35,6 +36,7 @@
   padding: 26px; max-width: 520px; text-align: center;
 }
 .karticka .k-emoji { font-size: clamp(4.5rem, 20vw, 7.5rem); line-height: 1; margin-bottom: 10px; user-select: none; cursor: pointer; }
+.karticka .k-emoji img { width: min(300px, 72vw); aspect-ratio: 1; object-fit: contain; border-radius: 16px; display: block; margin: 0 auto; }
 .karticka .k-slovo { font-size: 2rem; font-weight: 700; cursor: pointer; }
 .karticka .vyslov { font-size: 1rem; color: var(--text-faint); font-weight: 400; margin-left: 8px; }
 .karticka .k-cesky { font-size: 1.3rem; color: var(--accent-text, var(--accent)); margin-top: 6px; min-height: 1.6rem; }
@@ -47,6 +49,7 @@
 
 /* zadání kvízu */
 .obrazek-slova { display: block; font-size: clamp(3.6rem, 14vw, 5.5rem); line-height: 1.1; margin-bottom: 4px; }
+.obrazek-slova img { width: min(240px, 60vw); aspect-ratio: 1; object-fit: contain; border-radius: 14px; display: block; margin: 0 auto 8px; }
 .druh { display: block; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-faint); margin-bottom: 6px; }
 .slovo-zadani { display: block; font-size: clamp(1.6rem, 6vw, 2.2rem); font-weight: 700; color: var(--text); }
 .cesky-zadani { display: block; font-size: 1.1rem; color: var(--text-muted); margin-top: 2px; }
@@ -54,6 +57,7 @@
 .slovo-doplnek { margin-top: 10px; font-size: 1.05rem; color: var(--text-muted); line-height: 1.5; }
 .slovo-doplnek b { color: var(--text); }
 .slovo-doplnek .emoji-maly { font-size: 1.4rem; vertical-align: -0.15em; }
+.slovo-doplnek .emoji-maly img { width: 2.4rem; height: 2.4rem; object-fit: contain; border-radius: 6px; vertical-align: middle; }
 .slovo-doplnek .tip { font-size: 0.9rem; color: var(--text-muted); margin-top: 4px; max-width: 460px; }
 
 /* v přehledu chyb jen jeden řádek */

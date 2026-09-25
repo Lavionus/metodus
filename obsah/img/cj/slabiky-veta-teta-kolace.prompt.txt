@@ -1,0 +1,6 @@
+Sada: IMG-cj-09 · věta „Teta peče koláče.“
+Scéna: Teta v kuchyni bezpečně vkládá v chňapkách plech s malými ovocnými koláči do otevřené trouby; čtvercový formát.
+Styl: teplý akvarel a kvaš, jemná inkoustová linka, slonovinové pozadí, tlumená šalvějová, jadeitová, okrová a ovocně červená.
+Omezení: bez písmen, slov, popisků, log, vodoznaku, rámečku a bublin.
+Alt: Teta vkládá koláče do trouby.
+Generátor: OpenAI image_gen · 2026-09-24

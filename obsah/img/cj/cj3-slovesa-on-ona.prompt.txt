@@ -1,0 +1,9 @@
+Use case: scientific-educational
+Asset type: IMG-cj-06 grammar-person card — on nebo ona
+Subject: one pupil indicates another pupil standing apart and looking away, clearly a third person being spoken about.
+Style: warm watercolor and gouache schoolbook illustration with delicate ink, warm ivory background, muted sage, jade, ochre and brick palette.
+Composition: square, clear separation of observer and third person, generous margins.
+Constraints: no text, letters, digits, speech bubble, arrows, labels, logo, watermark or border; natural hands; age-appropriate.
+Alt: Dítě ukazuje na někoho, o kom mluví – on nebo ona.
+Generator: built-in image_gen
+Datum: 2026-09-24

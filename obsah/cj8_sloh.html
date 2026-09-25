@@ -27,6 +27,21 @@
     .pomucka .skupina { flex: 1 1 205px; }
     .pomucka .skupina.sviti { box-shadow: 0 0 0 2px var(--accent-soft); }
     .pomucka .otazka { color: var(--accent); font-weight: 700; }
+    .spolecne-tema {
+      max-width: 720px; margin: 18px auto; padding: 16px; border: 1px solid var(--border);
+      border-radius: var(--radius); background: var(--bg-panel); text-align: center;
+    }
+    .spolecne-tema h2 { margin: 0 0 5px; }
+    .spolecne-tema > p { margin: 0 0 12px; color: var(--text-muted); }
+    .tema-obrazek {
+      display: block; width: min(430px, 100%); height: auto; aspect-ratio: 1; object-fit: cover;
+      margin: 0 auto 12px; border-radius: 12px; box-shadow: var(--shadow); background: #faf6ec;
+    }
+    .tema-otazky { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+    .tema-otazky span {
+      padding: 7px 10px; border: 1px solid var(--border-strong); border-radius: 999px;
+      background: var(--bg-elevated); font-size: .9rem;
+    }
   </style>
 </head>
 <body>
@@ -48,6 +63,19 @@
     <span class="serie" id="serie"></span>
     <span class="skore" id="skore"></span>
   </div>
+
+  <section class="spolecne-tema" aria-labelledby="temaNadpis">
+    <h2 id="temaNadpis">Jedna scéna, tři různé texty</h2>
+    <p>Prohlédni si stejný výjev pokaždé jinýma očima.</p>
+    <img class="tema-obrazek" src="img/cj/cj8-sloh-cyklista.webp"
+      alt="Starší cyklista pomáhá dítěti se spadlým řetězem na venkovské silnici před přicházejícím deštěm."
+      width="768" height="768">
+    <div class="tema-otazky">
+      <span>🖼️ <b>Popis:</b> Jak scéna vypadá?</span>
+      <span>📖 <b>Vypravování:</b> Co se stalo?</span>
+      <span>🧑 <b>Charakteristika:</b> Jaký je pomocník?</span>
+    </div>
+  </section>
 
   <div class="pomucka" id="pomucka">
     <div class="skupina" data-h="vyklad">

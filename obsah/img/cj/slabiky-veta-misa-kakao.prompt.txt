@@ -1,0 +1,6 @@
+Sada: IMG-cj-09 · věta „Míša pije kakao.“
+Scéna: Školní dítě Míša sedí u kuchyňského stolu a oběma rukama pije teplé kakao z hrnku; čtvercový formát.
+Styl: teplý akvarel a kvaš, jemná inkoustová linka, slonovinové pozadí, tlumená šalvějová, jadeitová, okrová a kakaově hnědá.
+Omezení: bez písmen, slov, popisků, log, vodoznaku, rámečku a bublin.
+Alt: Míša pije kakao z hrnku.
+Generátor: OpenAI image_gen · 2026-09-24

@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>⚖️ Páka a jednoduché stroje – názorná lekce</title>
+<meta name="description" content="Interaktivní výklad pro 7. a 8. ročník: moment síly, rovnováha na páce, dvojzvratná a jednozvratná páka, kladka a kladkostroj, kolo na hřídeli, ozubená kola, nakloněná rovina a zlaté pravidlo mechaniky.">
+<link rel="stylesheet" href="../common.css">
+<link rel="stylesheet" href="paka_lekce.css?v=1">
+<script src="../theme.js"></script>
+<script src="../podpis.js" defer></script>
+<script src="../kostra.js" defer></script>
+<script src="../uloha.js"></script>
+</head>
+<body>
+<div class="stranka">
+
+<aside class="osnova" aria-label="Kapitoly lekce">
+  <h2>Kapitoly</h2>
+  <ol id="osnova"></ol>
+  <div class="pokrok">
+    <span id="pokrokText">Splněno 0 úkolů</span>
+    <div class="pokrok-pruh" aria-hidden="true"><span id="pokrokPruh"></span></div>
+    <button type="button" class="znovu" id="zacitZnovu">↺ Začít lekci znovu</button>
+  </div>
+</aside>
+
+<main class="lekce">
+  <nav class="cipy" id="cipy" aria-label="Kapitoly lekce"></nav>
+
+  <header class="uvod">
+    <p class="nadtitul">Interaktivní výklad</p>
+    <h1>Páka a jednoduché stroje</h1>
+    <p class="podtitul">Jak otevřít zarezlou matici, zvednout kámen, který by neunesli tři lidé, nebo vyjet na kole do kopce. Jednoduché stroje nám dají sílu navíc – ale nic nedají zadarmo. Každé pravidlo si ověříš na živém obrázku.</p>
+  </header>
+
+  <ul class="jak-pracovat" aria-label="Jak s lekcí pracovat">
+    <li><svg viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="var(--accent)" stroke-width="2.5"/><circle cx="11" cy="11" r="2.5" fill="var(--accent)"/></svg> Za modré kroužky se dá táhnout (i šipkami na klávesnici).</li>
+    <li>🤔 Nejdřív předpověz, pak ověř na modelu.</li>
+    <li>🔬 Úkoly si samy poznají, že jsi je splnil(a).</li>
+    <li>📌 Rámeček „Zapamatuj si“ shrnuje to hlavní.</li>
+  </ul>
+  <p class="legenda" aria-label="Barvy v obrázcích"><span class="znacka z-sila">síla, kterou působíme</span><span class="znacka z-bremeno">břemeno, tíha</span><span class="znacka z-osa">osa otáčení</span><span class="znacka z-rameno">rameno síly</span><span class="znacka z-draha">dráha</span></p>
+
+  <nav class="mapa" id="mapa" aria-label="Mapa lekce"></nav>
+
+  <!-- ============================================================ 1 -->
+  <section class="kapitola" id="stroje" data-faze="vyuka" data-nazev="Jednoduché stroje" data-popis="Co umějí a co ne">
+    <header class="kap-hlava"><span class="kap-cislo">1</span><div><p class="kap-otazka">Jak Egypťané bez jeřábů postavili pyramidy?</p><h2>Jednoduché stroje</h2></div></header>
+    <div class="text">
+      <p>Lidské svaly zvládnou krátkodobě vyvinout sílu kolem 500 až 1000 N. Na zvednutí kamenného bloku, vytržení hřebíku nebo utažení kola auta to nestačí. Lidé proto odedávna používají <span class="term">jednoduché stroje</span> – nástroje, které <strong>mění velikost nebo směr síly</strong>. Jsou v nůžkách, klice dveří, jízdním kole i v bagru.</p>
+      <p>Jednoduchých strojů je jen šest a každý složitější stroj se z nich dá poskládat:</p>
+    </div>
+
+    <div class="stroje" id="stroje-karty">
+      <a class="stroj" href="#rovnovaha"><svg viewBox="0 0 200 70" aria-hidden="true"><rect x="16" y="30" width="170" height="8" rx="3" class="drevo" style="--k:1"/><path d="M92 38 L108 38 L100 58Z" transform="rotate(180 100 48)" class="podpera" style="--k:1"/><rect x="28" y="12" width="22" height="18" rx="2" class="zavazi" style="--k:1"/><path d="M168 8 V28" class="cara c-sila" style="--k:1.4"/><path d="M168 30 l-5 -8 h10z" class="vypln c-sila"/></svg><b>Páka</b><small>tyč otočná kolem osy – nůžky, houpačka, kolečko</small></a>
+      <a class="stroj" href="#kladky"><svg viewBox="0 0 200 70" aria-hidden="true"><rect x="60" y="2" width="80" height="6" class="strop" style="--k:1"/><path d="M100 8 V16" class="cara c-text" style="--k:1"/><circle cx="100" cy="26" r="11" class="kov" style="--k:1"/><path d="M89 26 V52 M111 26 V60" class="lano" style="--k:1"/><rect x="78" y="52" width="22" height="16" rx="2" class="zavazi" style="--k:1"/></svg><b>Kladka</b><small>kolo s lanem – studna, jeřáb, vlajkový stožár</small></a>
+      <a class="stroj" href="#hridel"><svg viewBox="0 0 200 70" aria-hidden="true"><circle cx="100" cy="34" r="26" fill="none" class="cara c-sila" style="--k:1.2"/><circle cx="100" cy="34" r="9" class="kov" style="--k:1"/><path d="M100 34 L124 24" class="cara silna c-text" style="--k:1"/><circle cx="124" cy="24" r="4" class="vypln c-sila"/><path d="M91 34 V66" class="lano" style="--k:1"/></svg><b>Kolo na hřídeli</b><small>velké kolo pevně spojené s malým – rumpál, volant, klika</small></a>
+      <a class="stroj" href="#rovina"><svg viewBox="0 0 200 70" aria-hidden="true"><path d="M20 64 L180 64 L180 16Z" class="rampa" style="--k:1"/><rect x="92" y="30" width="22" height="16" rx="2" class="bremeno-vypln" style="--k:1" transform="rotate(-16.7 103 38)"/></svg><b>Nakloněná rovina</b><small>šikmá plocha – rampa, serpentiny, schody</small></a>
+      <a class="stroj" href="#rovina"><svg viewBox="0 0 200 70" aria-hidden="true"><path d="M86 10 L114 10 L100 62Z" class="kov" style="--k:1"/><path d="M30 66 H86 L94 40 L100 62 L106 40 L114 66 H170" fill="none" class="cara c-text" style="--k:1"/></svg><b>Klín</b><small>dvě nakloněné roviny – sekera, nůž, hřebík</small></a>
+      <a class="stroj" href="#rovina"><svg viewBox="0 0 200 70" aria-hidden="true"><rect x="94" y="6" width="12" height="60" class="kov" style="--k:1"/><path d="M92 12 L108 18 M92 22 L108 28 M92 32 L108 38 M92 42 L108 48 M92 52 L108 58" class="cara c-text" style="--k:1"/></svg><b>Šroub</b><small>nakloněná rovina navinutá na válec – vrut, zvedák, víčko</small></a>
+    </div>
+
+    <div class="text">
+      <p>Všechny jednoduché stroje spojuje jedno pravidlo, ke kterému během lekce dojdeš: <strong>co stroj ušetří na síle, to přidá na dráze</strong>. Práci za nás žádný stroj neudělá.</p>
+    </div>
+
+    <div class="fakty">
+      <div class="fakt"><b>„Dejte mi pevný bod…“</b><span>…a pohnu Zemí. Tak prý mluvil o páce řecký učenec Archimédés (asi 287–212 př. n. l.), první, kdo pravidlo páky přesně popsal.</span></div>
+      <div class="fakt"><b>2,5 t</b><span>vážily průměrné kamenné bloky Velké pyramidy. Dělníci je tahali po rampách a nadzvedávali pákami.</span></div>
+      <div class="fakt"><b>10 N</b><span>je tíha tělesa o hmotnosti 1 kg. V celé lekci počítáme s <i>g</i> = 10 N/kg.</span></div>
+    </div>
+
+    <aside class="zapamatuj"><h3>📌 Zapamatuj si</h3>
+      <ul>
+        <li>Jednoduché stroje jsou <strong>páka, kladka, kolo na hřídeli, nakloněná rovina, klín a šroub</strong>.</li>
+        <li>Mění <strong>velikost</strong> nebo <strong>směr</strong> síly. Práci neušetří.</li>
+      </ul>
+    </aside>
+  </section>
+
+  <!-- ============================================================ 2 -->
+  <section class="kapitola" id="moment" data-faze="vyuka" data-nazev="Moment síly" data-popis="Otáčivý účinek, rameno">
+    <header class="kap-hlava"><span class="kap-cislo">2</span><div><p class="kap-otazka">Proč je klika na dveřích na opačné straně než panty?</p><h2>Otáčivý účinek síly – moment</h2></div></header>
+    <div class="text">
+      <p>Když na těleso, které se může otáčet kolem pevné <span class="term">osy otáčení</span>, působí síla, může ho roztočit. Jak silně otáčí, nezáleží jen na velikosti síly, ale i na tom, <strong>jak daleko od osy</strong> a <strong>jakým směrem</strong> působí.</p>
+      <p>Vzdálenost osy od přímky, ve které síla působí, se jmenuje <span class="term">rameno síly</span> <i>r</i>. Měří se <strong>kolmo</strong> na směr síly. Otáčivý účinek síly vyjadřuje <span class="term">moment síly</span>:</p>
+    </div>
+    <div class="vzorec" aria-label="M se rovná F krát r"><span><i>M</i> = <i>F</i> · <i>r</i></span><span class="vzorec-popis">moment síly [N·m] = síla [N] · rameno [m]; v některých učebnicích se rameno značí <i>a</i></span></div>
+
+    <figure class="obr" id="obr-klic">
+      <div class="obr-plocha"><svg class="model" role="img" aria-label="Matice, klíč, ruka a síla s ramenem"></svg></div>
+      <div class="obr-ovladani">
+        <label class="posuvnik">Síla ruky <input type="range" id="klic-F" min="20" max="300" step="5" value="80"><output id="klic-F-h"></output></label>
+        <div class="skupina"><span class="nazev">Matice:</span>
+          <div class="segment" id="klic-matice" role="group" aria-label="Jak pevně je matice utažená">
+            <button type="button" data-hodnota="15">lehce utažená</button><button type="button" data-hodnota="30">utažená</button><button type="button" data-hodnota="60">zarezlá</button>
+          </div>
+        </div>
+        <label class="prepinac"><input type="checkbox" id="klic-rameno" checked> Ukázat rameno síly</label>
+      </div>
+      <div class="odecty"></div>
+      <div class="obr-zprava" role="status"></div>
+      <figcaption>Táhni ruku po klíči a šipku síly, kterou měníš směr. Matice se povolí, když moment síly dosáhne potřebné hodnoty. <span class="legenda"><span class="znacka z-sila">síla ruky</span><span class="znacka z-rameno">rameno síly</span><span class="znacka z-osa">osa otáčení</span></span></figcaption>
+    </figure>
+
+    <div class="predpoved" data-predpoved="mom-konec"></div>
+    <div class="ukol" data-ukol="mom-povol"><div class="ukol-hlava"><p><b>🔬 Úkol:</b> Matice je <b>utažená</b> (potřebuje 30 N·m). Povol ji silou nejvýš <b>120 N</b>.</p><span class="stav"></span></div><p class="ukol-reakce"></p></div>
+    <div class="ukol" data-ukol="mom-sikmo"><div class="ukol-hlava"><p><b>🔬 Úkol:</b> Drž ruku na konci klíče a natoč sílu tak, aby s klíčem svírala úhel <b>30°</b>. Kolikrát se zkrátilo rameno?</p><span class="stav"></span></div><p class="ukol-reakce"></p></div>
+    <div class="predpoved" data-predpoved="mom-podel"></div>
+
+    <div class="text">
+      <p>Proto je klika dveří co nejdál od pantů a proto na zarezlý šroub vezmeme delší klíč – nebo si na klíč nastrčíme trubku. Při stejné síle je moment tím větší, čím delší je rameno.</p>
+    </div>
+
+    <aside class="zapamatuj"><h3>📌 Zapamatuj si</h3>
+      <ul>
+        <li><strong>Moment síly</strong> <span class="m"><i>M</i> = <i>F</i> · <i>r</i></span> popisuje otáčivý účinek síly. Jednotka je <strong>newtonmetr (N·m)</strong>.</li>
+        <li><strong>Rameno síly</strong> je <strong>kolmá</strong> vzdálenost osy otáčení od přímky, ve které síla působí.</li>
+        <li>Síla mířící přímo do osy nebo od ní má rameno nulové – neotáčí.</li>
+      </ul>
+    </aside>
+  </section>
+
+  <!-- ============================================================ 3 -->
+  <section class="kapitola" id="rovnovaha" data-faze="vyuka" data-nazev="Rovnováha na páce" data-popis="F₁ · r₁ = F₂ · r₂">
+    <header class="kap-hlava"><span class="kap-cislo">3</span><div><p class="kap-otazka">Jak může malé dítě na houpačce vyvážit dospělého?</p><h2>Rovnováha na páce</h2></div></header>
+    <div class="text">
+      <p><span class="term">Páka</span> je tuhá tyč, která se může otáčet kolem osy. Na každou stranu od osy působí síla a každá z nich se snaží páku otočit na svou stranu. Vyhraje ta, která má <strong>větší moment</strong>. Když jsou momenty stejné, páka je v <span class="term">rovnováze</span> – zůstane v klidu, ať ji natočíš jakkoli.</p>
+      <p>Vyzkoušej to na školní páce. Každé závaží má tíhu 1 N (hmotnost 100 g) a dírky jsou od sebe 5 cm.</p>
+    </div>
+    <div class="vzorec" aria-label="F1 krát r1 se rovná F2 krát r2"><span><i>F</i><sub>1</sub> · <i>r</i><sub>1</sub> = <i>F</i><sub>2</sub> · <i>r</i><sub>2</sub></span><span class="vzorec-popis">podmínka rovnováhy na páce – momenty sil na obou stranách osy jsou stejné</span></div>
+
+    <figure class="obr" id="obr-lab">
+      <div class="obr-plocha"><svg class="model" role="img" aria-label="Školní páka s dírkami a dvěma skupinami závaží"></svg></div>
+      <div class="obr-ovladani">
+        <label class="posuvnik">Závaží vlevo <input type="range" id="lab-nL" min="1" max="6" step="1" value="2"><output id="lab-nL-h"></output></label>
+        <label class="posuvnik">Závaží vpravo <input type="range" id="lab-nR" min="1" max="6" step="1" value="2"><output id="lab-nR-h"></output></label>
+        <label class="prepinac"><input type="checkbox" id="lab-momenty" checked> Ukázat momenty</label>
+        <button type="button" id="lab-vychozi">↺ Výchozí stav</button>
+      </div>
+      <div class="odecty"></div>
+      <div class="obr-zprava" role="status"></div>
+      <figcaption>Táhni háčky se závažím po páce – zapadnou do dírek. Pruhy pod pákou ukazují momenty obou stran. <span class="legenda"><span class="znacka z-bremeno">tíha závaží vlevo</span><span class="znacka z-sila">tíha závaží vpravo</span><span class="znacka z-rameno">rameno</span></span></figcaption>
+    </figure>
+
+    <div class="ukol" data-ukol="rov-4na3"><div class="ukol-hlava"><p><b>🔬 Úkol:</b> Zavěs vlevo <b>4 závaží</b> na <b>3. dírku</b>. Vyrovnej páku jen <b>dvěma</b> závažími vpravo.</p><span class="stav"></span></div><p class="ukol-reakce"></p></div>
+    <div class="predpoved" data-predpoved="rov-posun"></div>
+    <div class="ukol" data-ukol="rov-1zavazi"><div class="ukol-hlava"><p><b>🔬 Úkol:</b> Vlevo visí <b>6 závaží</b> na <b>1. dírce</b>. Vyrovnej je <b>jediným</b> závažím.</p><span class="stav"></span></div><p class="ukol-reakce"></p></div>
+
+    <h3>Houpačka</h3>
+    <div class="text">
+      <p>Houpačka je páka se dvěma dětmi. Tíhu dítěte spočítáme z hmotnosti: <span class="m"><i>G</i> = <i>m</i> · <i>g</i></span>, kde <i>g</i> = 10 N/kg. Lehčí dítě vyrovná těžší, když si sedne <strong>dál od osy</strong>.</p>
+    </div>
+
+    <figure class="obr" id="obr-houpacka">
+      <div class="obr-plocha"><svg class="model" role="img" aria-label="Houpačka se dvěma dětmi"></svg></div>
+      <div class="obr-ovladani">
+        <label class="posuvnik">Vlevo <input type="range" id="hou-m1" min="15" max="90" step="5" value="40"><output id="hou-m1-h"></output></label>
+        <label class="posuvnik">Vpravo <input type="range" id="hou-m2" min="15" max="90" step="5" value="25"><output id="hou-m2-h"></output></label>
+        <label class="prepinac"><input type="checkbox" id="hou-sily" checked> Ukázat síly a ramena</label>
+      </div>
+      <div class="odecty"></div>
+      <div class="obr-zprava" role="status"></div>
+      <figcaption>Táhni děti po prkně (po 10 cm). Posuvníky mění jejich hmotnost. Prkno je dlouhé 4 m, osa je uprostřed.</figcaption>
+    </figure>
+
+    <div class="ukol" data-ukol="hou-lehci"><div class="ukol-hlava"><p><b>🔬 Úkol:</b> Nastav houpačku tak, aby <b>lehčí dítě převážilo těžší</b> – aby jeho strana klesla dolů.</p><span class="stav"></span></div><p class="ukol-reakce"></p></div>
+
+    <div class="ukazka" data-faze="ukazka" id="rov-priklad">
+      <h3>📘 Řešený příklad</h3>
+      <p>Tatínek o hmotnosti 75 kg sedí na houpačce 0,8 m od osy. Jak daleko od osy si musí sednout syn o hmotnosti 30 kg, aby byla houpačka v rovnováze?</p>
+      <ol>
+        <li>Zapíšeme: <i>m</i><sub>1</sub> = 75 kg, <i>r</i><sub>1</sub> = 0,8 m, <i>m</i><sub>2</sub> = 30 kg; hledáme <i>r</i><sub>2</sub>. Počítáme s <i>g</i> = 10 N/kg.</li>
+        <li>Tíhy: <span class="m"><i>F</i><sub>1</sub> = 75 kg · 10 N/kg = 750 N</span>, <span class="m"><i>F</i><sub>2</sub> = 30 kg · 10 N/kg = 300 N</span>.</li>
+        <li>Moment tatínka: <span class="m"><i>M</i><sub>1</sub> = 750 N · 0,8 m = 600 N·m</span>.</li>
+        <li>Podmínka rovnováhy: <span class="m">300 N · <i>r</i><sub>2</sub> = 600 N·m</span>, tedy <span class="m"><i>r</i><sub>2</sub> = 600 : 300 = 2 m</span>.</li>
+        <li>Kontrola úvahou: syn je 2,5× lehčí, proto musí sedět 2,5× dál: 0,8 m · 2,5 = 2 m. ✓</li>
+      </ol>
+      <button type="button" id="rov-priklad-model">Ukázat příklad v modelu</button>
+    </div>
+
+    <details class="zvidave"><summary>⚖️ Pro zvídavé: rovnoramenné váhy <small>páka, která měří hmotnost</small></summary>
+      <div class="obsah text">
+        <p>Rovnoramenné váhy jsou páka s osou přesně uprostřed. Ramena jsou stejně dlouhá, takže v rovnováze musí být stejné i tíhy na obou miskách – a tedy i hmotnosti. Na přesných lékárnických vahách se hmotnost dala určit na setiny gramu. Mincíř (přezmen) má naopak ramena nestejná: těžké zboží visí blízko osy a lehké závaží se posouvá po dlouhém rameni se stupnicí.</p>
+      </div>
+    </details>
+
+    <aside class="zapamatuj"><h3>📌 Zapamatuj si</h3>
+      <ul>
+        <li>Páka je v rovnováze, když <span class="m"><i>F</i><sub>1</sub> · <i>r</i><sub>1</sub> = <i>F</i><sub>2</sub> · <i>r</i><sub>2</sub></span>.</li>
+        <li>Kolikrát je rameno delší, tolikrát menší síla stačí.</li>
+        <li>Nerozhoduje, která síla je větší, ale <strong>který moment</strong> je větší.</li>
+      </ul>
+    </aside>
+  </section>
+
+  <!-- ============================================================ 4 -->
+  <section class="kapitola" id="druhy" data-faze="vyuka" data-nazev="Druhy pák" data-popis="Dvojzvratná a jednozvratná">
+    <header class="kap-hlava"><span class="kap-cislo">4</span><div><p class="kap-otazka">Co mají společného nůžky, louskáček a tvoje předloktí?</p><h2>Dvojzvratná a jednozvratná páka</h2></div></header>
+    <div class="text">
+      <p>Páky rozlišujeme podle toho, kde leží osa otáčení vzhledem k silám:</p>
+      <ul>
+        <li><strong>Dvojzvratná páka</strong> má osu <strong>mezi</strong> silami. Síly působí na opačných stranách osy a míří stejným směrem (houpačka, nůžky, kleště, páčidlo).</li>
+        <li><strong>Jednozvratná páka</strong> má obě síly na <strong>stejné straně</strong> od osy. Síly míří proti sobě (kolečko, louskáček, otvírák, pinzeta).</li>
+      </ul>
+      <p>Pravidlo rovnováhy <span class="m"><i>F</i><sub>1</sub> · <i>r</i><sub>1</sub> = <i>F</i><sub>2</sub> · <i>r</i><sub>2</sub></span> platí pro obě stejně. Ramena se vždy měří od osy.</p>
+    </div>
+
+    <h3>Roztřiď předměty</h3>
+    <div class="text"><p>U každého předmětu urči, jakou je pákou. Po odpovědi se ukáže osa (červený trojúhelník), břemeno (modře) a síla ruky (oranžově).</p></div>
+    <div class="tridicka" id="tridicka"></div>
+    <p class="tridicka-stav" id="tridicka-stav" role="status"></p>
+    <div class="ukol" data-ukol="druhy-tridicka"><div class="ukol-hlava"><p><b>🔬 Úkol:</b> Správně roztřiď všech deset předmětů.</p><span class="stav"></span></div><p class="ukol-reakce"></p></div>
+
+    <h3>Stavební kolečko</h3>
+    <div class="text"><p>Kolečko je jednozvratná páka: osou je náprava kola, náklad (břemeno) leží blízko ní a ruce zvedají rukojeti daleko od ní. Rukojeti jsou od osy 1,4 m.</p></div>
+
+    <figure class="obr" id="obr-kolecko">
+      <div class="obr-plocha"><svg class="model" role="img" aria-label="Stavební kolečko s nákladem, osa v kole"></svg></div>
+      <div class="obr-ovladani">
+        <label class="posuvnik">Náklad <input type="range" id="kol-m" min="20" max="150" step="10" value="80"><output id="kol-m-h"></output></label>
+      </div>
+      <div class="odecty"></div>
+      <div class="obr-zprava" role="status"></div>
+      <figcaption>Táhni náklad po korbě – blíž ke kolu nebo k rukojetím. <span class="legenda"><span class="znacka z-bremeno">tíha nákladu</span><span class="znacka z-sila">síla rukou</span><span class="znacka z-rameno">ramena</span></span></figcaption>
+    </figure>
+
+    <div class="predpoved" data-predpoved="kol-kam"></div>
+    <div class="ukol" data-ukol="kol-250"><div class="ukol-hlava"><p><b>🔬 Úkol:</b> Nalož <b>100 kg</b> tak, aby ke zvednutí rukojetí stačila síla nejvýš <b>250 N</b>.</p><span class="stav"></span></div><p class="ukol-reakce"></p></div>
+
+    <details class="zvidave"><summary>💪 Pro zvídavé: páky v lidském těle <small>proč sval musí být tak silný</small></summary>
+      <div class="obsah text">
+        <p>Předloktí je jednozvratná páka. Osou je loket, biceps se upíná jen asi 4 cm od něj, kdežto dlaň s břemenem je asi 32 cm od lokte. Sval má tedy 8× kratší rameno – a musí táhnout 8× větší silou, než je tíha břemene. Tělo tu neškudlí se silou, ale získává <strong>rychlost a rozsah pohybu</strong>: malé zkrácení svalu pohne dlaní 8× dál.</p>
+        <figure class="obr" id="obr-predlokti">
+          <div class="obr-plocha"><svg class="model" role="img" aria-label="Předloktí s bicepsem, loket jako osa, břemeno v dlani"></svg></div>
+          <div class="obr-ovladani">
+            <label class="posuvnik">V dlani <input type="range" id="ruka-m" min="0" max="10" step="0.5" value="2"><output id="ruka-m-h"></output></label>
+          </div>
+          <div class="odecty"></div>
+          <figcaption>Tíhu samotného předloktí zanedbáváme.</figcaption>
+        </figure>
+      </div>
+    </details>
+
+    <aside class="zapamatuj"><h3>📌 Zapamatuj si</h3>
+      <ul>
+        <li><strong>Dvojzvratná</strong> páka: osa leží <strong>mezi</strong> silami (houpačka, nůžky, kleště, páčidlo).</li>
+        <li><strong>Jednozvratná</strong> páka: obě síly na <strong>jedné straně</strong> osy (kolečko, louskáček, otvírák, pinzeta, předloktí).</li>
+        <li>Těžký náklad dávej co nejblíž k ose – zkrátíš jeho rameno.</li>
+      </ul>
+    </aside>
+  </section>
+
+  <!-- ============================================================ 5 -->
+  <section class="kapitola" id="kladky" data-faze="vyuka" data-nazev="Kladky" data-popis="Pevná, volná, kladkostroj">
+    <header class="kap-hlava"><span class="kap-cislo">5</span><div><p class="kap-otazka">Jak jeřáb zvedne panel, který váží jako tři auta?</p><h2>Kladka a kladkostroj</h2></div></header>
+    <div class="text">
+      <p><span class="term">Kladka</span> je kolo s drážkou, přes které vede lano. Je to vlastně páka, která se otáčí dokola.</p>
+      <ul>
+        <li><strong>Pevná kladka</strong> je připevněná nahoře a jen se otáčí. Sílu nezmenší, ale <strong>změní její směr</strong>: místo zvedání nahoru táhneš dolů a můžeš si pomoct vlastní vahou.</li>
+        <li><strong>Volná kladka</strong> visí na laně spolu s břemenem. Břemeno drží <strong>dva prameny</strong> lana, každý nese polovinu tíhy.</li>
+        <li><strong>Kladkostroj</strong> spojuje pevné a volné kladky. Když břemeno visí na <i>n</i> nosných pramenech, stačí <i>n</i>-krát menší síla – ale lana musíš vytáhnout <i>n</i>-krát víc.</li>
+      </ul>
+    </div>
+    <div class="vzorec" aria-label="F se rovná G lomeno n, s se rovná n krát h"><span><i>F</i> = <span class="zl"><span><i>G</i></span><span><i>n</i></span></span></span><span style="margin-left:20px"><i>s</i> = <i>n</i> · <i>h</i></span><span class="vzorec-popis"><i>n</i> = počet nosných pramenů, <i>h</i> = o kolik se zvedne břemeno, <i>s</i> = kolik lana vytáhneš</span></div>
+
+    <figure class="obr" id="obr-kladky">
+      <div class="obr-plocha"><svg class="model" role="img" aria-label="Kladka nebo kladkostroj s břemenem a siloměrem"></svg></div>
+      <div class="obr-ovladani">
+        <div class="skupina"><span class="nazev">Zapojení:</span>
+          <div class="segment" id="kl-druh" role="group" aria-label="Zapojení kladek">
+            <button type="button" data-hodnota="pevna">pevná kladka</button><button type="button" data-hodnota="volna">volná kladka</button><button type="button" data-hodnota="kladkostroj">kladkostroj</button>
+          </div>
+        </div>
+        <label class="posuvnik" id="kl-n-obal">Volné kladky <input type="range" id="kl-n" min="1" max="3" step="1" value="2"><output id="kl-n-h"></output></label>
+        <label class="posuvnik">Břemeno <input type="range" id="kl-G" min="100" max="600" step="20" value="400"><output id="kl-G-h"></output></label>
+        <button type="button" id="kl-tahni">▶️ Vytáhnout nahoru</button>
+        <button type="button" id="kl-dolu">↺ Spustit dolů</button>
+      </div>
+      <div class="odecty"></div>
+      <div class="obr-zprava" role="status"></div>
+      <figcaption>Táhni ruku se siloměrem. Nosné prameny, které drží břemeno, jsou zvýrazněné a očíslované. Kladky a lano považujeme za lehké a bez tření. <span class="legenda"><span class="znacka z-bremeno">tíha břemene</span><span class="znacka z-sila">síla ruky</span><span class="znacka z-draha">dráha</span></span></figcaption>
+    </figure>
+
+    <div class="predpoved" data-predpoved="kl-pevna"></div>
+    <div class="ukol" data-ukol="kl-100"><div class="ukol-hlava"><p><b>🔬 Úkol:</b> Zvedni břemeno <b>400 N</b> silou <b>100 N</b> alespoň o <b>30 cm</b>.</p><span class="stav"></span></div><p class="ukol-reakce"></p></div>
+    <div class="predpoved" data-predpoved="kl-lano"></div>
+
+    <div class="ukazka" data-faze="ukazka" id="kl-priklad">
+      <h3>📘 Řešený příklad</h3>
+      <p>Kladkostroj má dvě volné a dvě pevné kladky. Zedník jím zvedá kbelík malty o hmotnosti 24 kg do výšky 3 m. Jakou silou táhne a kolik lana vytáhne?</p>
+      <ol>
+        <li>Tíha kbelíku: <span class="m"><i>G</i> = 24 kg · 10 N/kg = 240 N</span>.</li>
+        <li>Každá volná kladka visí na dvou pramenech: <span class="m"><i>n</i> = 2 · 2 = 4</span>.</li>
+        <li>Síla: <span class="m"><i>F</i> = <i>G</i> : <i>n</i> = 240 N : 4 = 60 N</span>.</li>
+        <li>Lano: <span class="m"><i>s</i> = <i>n</i> · <i>h</i> = 4 · 3 m = 12 m</span>.</li>
+        <li>Kontrola prací: <span class="m">240 N · 3 m = 720 J</span> a <span class="m">60 N · 12 m = 720 J</span>. Práce je stejná. ✓</li>
+      </ol>
+      <button type="button" id="kl-priklad-model">Ukázat zapojení v modelu</button>
+    </div>
+
+    <aside class="zapamatuj"><h3>📌 Zapamatuj si</h3>
+      <ul>
+        <li><strong>Pevná kladka</strong> mění jen směr síly: <span class="m"><i>F</i> = <i>G</i></span>.</li>
+        <li><strong>Volná kladka</strong> zmenší sílu na polovinu: <span class="m"><i>F</i> = <i>G</i>/2</span>.</li>
+        <li><strong>Kladkostroj</strong> s <i>n</i> nosnými prameny: <span class="m"><i>F</i> = <i>G</i>/<i>n</i></span>, lana vytáhneš <span class="m"><i>s</i> = <i>n</i> · <i>h</i></span>.</li>
+      </ul>
+    </aside>
+  </section>
+
+  <!-- ============================================================ 6 -->
+  <section class="kapitola" id="hridel" data-faze="vyuka" data-nazev="Kolo na hřídeli" data-popis="Rumpál, klika, volant">
+    <header class="kap-hlava"><span class="kap-cislo">6</span><div><p class="kap-otazka">Proč má rumpál u studny tak dlouhou kliku?</p><h2>Kolo na hřídeli</h2></div></header>
+    <div class="text">
+      <p><span class="term">Kolo na hřídeli</span> tvoří dvě kola různé velikosti pevně spojená na jedné ose. Na velkém kole (nebo klice) působíme silou, malé kolo (hřídel) navíjí lano s břemenem. Je to páka, která se může točit pořád dokola: ramena jsou <strong>poloměry</strong> obou kol.</p>
+    </div>
+    <div class="vzorec" aria-label="F krát R se rovná G krát r"><span><i>F</i> · <i>R</i> = <i>G</i> · <i>r</i></span><span class="vzorec-popis"><i>R</i> = poloměr kliky (kola), <i>r</i> = poloměr hřídele</span></div>
+
+    <figure class="obr" id="obr-hridel">
+      <div class="obr-plocha"><svg class="model" role="img" aria-label="Rumpál studny: hřídel s lanem a vědrem, klika"></svg></div>
+      <div class="obr-ovladani">
+        <label class="posuvnik">Klika <i>R</i> <input type="range" id="hr-R" min="20" max="60" step="5" value="30"><output id="hr-R-h"></output></label>
+        <label class="posuvnik">Hřídel <i>r</i> <input type="range" id="hr-r" min="5" max="15" step="1" value="10"><output id="hr-r-h"></output></label>
+        <label class="posuvnik">Vědro <input type="range" id="hr-G" min="50" max="300" step="10" value="120"><output id="hr-G-h"></output></label>
+        <button type="button" id="hr-dolu">↺ Spustit vědro</button>
+      </div>
+      <div class="odecty"></div>
+      <div class="obr-zprava" role="status"></div>
+      <figcaption>Otáčej klikou – táhni držadlo po kruhu. Pohled zepředu na osu rumpálu: velký kruh opisuje ruka, malý je hřídel s navinutým lanem. <span class="legenda"><span class="znacka z-sila">síla na klice</span><span class="znacka z-bremeno">tíha vědra</span><span class="znacka z-rameno">ramena R a r</span></span></figcaption>
+    </figure>
+
+    <div class="predpoved" data-predpoved="hr-delsi"></div>
+    <div class="ukol" data-ukol="hr-ctvrt"><div class="ukol-hlava"><p><b>🔬 Úkol:</b> Nastav rumpál tak, aby na klice stačila <b>čtvrtina</b> tíhy vědra.</p><span class="stav"></span></div><p class="ukol-reakce"></p></div>
+    <div class="ukol" data-ukol="hr-otocka"><div class="ukol-hlava"><p><b>🔬 Úkol:</b> Otoč klikou <b>jednou celou otáčkou</b>. O kolik se zvedlo vědro a jakou dráhu urazila ruka?</p><span class="stav"></span></div><p class="ukol-reakce"></p></div>
+
+    <div class="text">
+      <p>Kolo na hřídeli je všude kolem: <strong>klika dveří</strong>, <strong>volant</strong> auta, <strong>šroubovák</strong> (tlustá rukojeť, tenký hrot), <strong>kohoutek</strong>, klička na mlýnku na kávu nebo navijáku rybářského prutu. Čím větší je kolo proti hřídeli, tím menší síla stačí.</p>
+    </div>
+
+    <aside class="zapamatuj"><h3>📌 Zapamatuj si</h3>
+      <ul>
+        <li>Kolo na hřídeli je páka, jejímiž rameny jsou poloměry kola a hřídele: <span class="m"><i>F</i> · <i>R</i> = <i>G</i> · <i>r</i></span>.</li>
+        <li>Za jednu otáčku se lano navine o obvod hřídele <span class="m">2π<i>r</i></span>, ruka urazí obvod kliky <span class="m">2π<i>R</i></span>.</li>
+      </ul>
+    </aside>
+  </section>
+
+  <!-- ============================================================ 7 -->
+  <section class="kapitola" id="prevody" data-faze="vyuka" data-nazev="Převody" data-popis="Ozubená kola, řetěz, kolo">
+    <header class="kap-hlava"><span class="kap-cislo">7</span><div><p class="kap-otazka">Proč do kopce řadíš na kole „lehčí“ převod?</p><h2>Ozubená kola a převody</h2></div></header>
+    <div class="text">
+      <p>Dvě <span class="term">ozubená kola</span> v záběru přenášejí otáčení z jedné osy na druhou. Zuby nemohou prokluzovat, a tak jimi za jednu dobu projde záběrem <strong>stejný počet zubů</strong> na obou kolech. Kolo s víc zuby se proto točí <strong>pomaleji</strong>, zato s <strong>větším momentem</strong>. Poměr počtu zubů se jmenuje <span class="term">převodový poměr</span>:</p>
+    </div>
+    <div class="vzorec" aria-label="i se rovná z2 lomeno z1 se rovná n1 lomeno n2"><span><i>i</i> = <span class="zl"><span><i>z</i><sub>2</sub></span><span><i>z</i><sub>1</sub></span></span> = <span class="zl"><span><i>n</i><sub>1</sub></span><span><i>n</i><sub>2</sub></span></span></span><span class="vzorec-popis"><i>z</i> = počet zubů, <i>n</i> = otáčky; 1 = hnací kolo, 2 = hnané kolo. Moment na hnaném kole je <i>i</i>-krát větší.</span></div>
+
+    <figure class="obr" id="obr-kola">
+      <div class="obr-plocha"><svg class="model" role="img" aria-label="Dvě ozubená kola v záběru, případně s mezikolem"></svg></div>
+      <div class="obr-ovladani">
+        <label class="posuvnik">Hnací <i>z</i><sub>1</sub> <input type="range" id="ko-z1" min="8" max="40" step="1" value="12"><output id="ko-z1-h"></output></label>
+        <label class="posuvnik">Hnané <i>z</i><sub>2</sub> <input type="range" id="ko-z2" min="8" max="40" step="1" value="24"><output id="ko-z2-h"></output></label>
+        <label class="prepinac"><input type="checkbox" id="ko-mezikolo"> Mezikolo</label>
+        <button type="button" id="ko-motor">▶️ Pustit motor</button>
+        <button type="button" id="ko-nuluj">↺ Vynulovat otáčky</button>
+      </div>
+      <div class="odecty"></div>
+      <div class="obr-zprava" role="status"></div>
+      <figcaption>Táhni za kroužek na hnacím kole a otáčej jím, nebo pusť motor (60 otáček za minutu). Červené tečky pomáhají počítat otáčky. <span class="legenda"><span class="znacka z-sila">hnací kolo</span><span class="znacka z-bremeno">hnané kolo</span></span></figcaption>
+    </figure>
+
+    <div class="predpoved" data-predpoved="ko-velke"></div>
+    <div class="ukol" data-ukol="ko-3"><div class="ukol-hlava"><p><b>🔬 Úkol:</b> Sestav převod, při kterém hnané kolo má <b>trojnásobný moment</b>. Hnacím kolem pak otoč jednou dokola.</p><span class="stav"></span></div><p class="ukol-reakce"></p></div>
+    <div class="predpoved" data-predpoved="ko-mezi"></div>
+
+    <h3>Převody na jízdním kole</h3>
+    <div class="text"><p>Na kole spojuje ozubená kola řetěz. Hnacím kolem je <strong>převodník</strong> u pedálů, hnaným <strong>pastorek</strong> na zadním kole. Jedna otáčka zadního kola posune kolo asi o 2,1 m.</p></div>
+
+    <figure class="obr" id="obr-bicykl">
+      <div class="obr-plocha"><svg class="model" role="img" aria-label="Převodník, řetěz a pastorek jízdního kola"></svg></div>
+      <div class="obr-ovladani">
+        <div class="skupina"><span class="nazev">Vpředu:</span>
+          <div class="segment" id="bi-predni" role="group" aria-label="Převodník vpředu – počet zubů">
+            <button type="button" data-hodnota="22">22</button><button type="button" data-hodnota="32">32</button><button type="button" data-hodnota="44">44</button>
+          </div>
+        </div>
+        <div class="skupina"><span class="nazev">Vzadu:</span>
+          <div class="segment" id="bi-zadni" role="group" aria-label="Pastorek vzadu – počet zubů">
+            <button type="button" data-hodnota="11">11</button><button type="button" data-hodnota="15">15</button><button type="button" data-hodnota="21">21</button><button type="button" data-hodnota="28">28</button><button type="button" data-hodnota="34">34</button>
+          </div>
+        </div>
+      </div>
+      <div class="odecty"></div>
+      <div class="obr-zprava" role="status"></div>
+      <figcaption>Šlapej – táhni pedál po kruhu. Počítadlo ukazuje, kolik metrů kolo ujede.</figcaption>
+    </figure>
+
+    <div class="ukol" data-ukol="bi-kopec"><div class="ukol-hlava"><p><b>🔬 Úkol:</b> Přeřaď na převod, se kterým se nejsnáze vyjede strmý kopec, a šlápni jednou dokola.</p><span class="stav"></span></div><p class="ukol-reakce"></p></div>
+    <div class="ukol" data-ukol="bi-rychle"><div class="ukol-hlava"><p><b>🔬 Úkol:</b> Najdi převod, se kterým kolo za jednu otáčku pedálů ujede nejdál.</p><span class="stav"></span></div><p class="ukol-reakce"></p></div>
+
+    <details class="zvidave"><summary>🕰️ Pro zvídavé: převody v hodinách a autě <small>do pomala i do rychla</small></summary>
+      <div class="obsah text">
+        <p>V <strong>hodinách</strong> soukolí zpomaluje: minutová ručička se musí otočit 12× za dobu, kdy hodinová jednou. <strong>Převodovka auta</strong> mění poměr podle potřeby: na jedničku (velký poměr, třeba 3,5) se rozjíždí s velkým momentem, na pětku (poměr blízko 1 nebo menší) jede rychle. Jak to vypadá uvnitř, si můžeš prohlédnout v <a href="paka.html" data-lekce="obsah/paka.html">laboratoři strojů</a> (hodinový strojek, převodovka, diferenciál).</p>
+      </div>
+    </details>
+
+    <aside class="zapamatuj"><h3>📌 Zapamatuj si</h3>
+      <ul>
+        <li>Převodový poměr <span class="m"><i>i</i> = <i>z</i><sub>2</sub>/<i>z</i><sub>1</sub></span>. Hnané kolo má <i>i</i>-krát <strong>menší otáčky</strong> a <i>i</i>-krát <strong>větší moment</strong>.</li>
+        <li>Dvě kola v záběru se točí <strong>opačně</strong>. Mezikolo obrátí směr, poměr nezmění.</li>
+        <li>Na kole: malý převodník + velký pastorek = snadné šlapání, pomalá jízda.</li>
+      </ul>
+    </aside>
+  </section>
+
+  <!-- ============================================================ 8 -->
+  <section class="kapitola" id="rovina" data-faze="vyuka" data-nazev="Nakloněná rovina" data-popis="Rampa, klín, šroub">
+    <header class="kap-hlava"><span class="kap-cislo">8</span><div><p class="kap-otazka">Proč silnice do hor vedou v serpentinách?</p><h2>Nakloněná rovina, klín a šroub</h2></div></header>
+    <div class="text">
+      <p>Těžký sud do výšky <i>h</i> nezvedneš, ale po šikmém prkně ho vyvalíš. <span class="term">Nakloněná rovina</span> rozloží zvedání na delší dráhu <i>l</i>. Bez tření platí, že síla potřebná k posouvání je tolikrát menší než tíha, kolikrát je rovina delší než vysoká:</p>
+    </div>
+    <div class="vzorec" aria-label="F krát l se rovná G krát h"><span><i>F</i> · <i>l</i> = <i>G</i> · <i>h</i></span><span class="vzorec-popis"><i>l</i> = délka nakloněné roviny, <i>h</i> = její výška</span></div>
+
+    <figure class="obr" id="obr-rovina">
+      <div class="obr-plocha"><svg class="model" role="img" aria-label="Nakloněná rovina ke korbě s bednou"></svg></div>
+      <div class="obr-ovladani">
+        <label class="posuvnik">Délka <i>l</i> <input type="range" id="ro-l" min="1.5" max="6" step="0.5" value="2"><output id="ro-l-h"></output></label>
+        <label class="posuvnik">Břemeno <input type="range" id="ro-G" min="200" max="1000" step="50" value="600"><output id="ro-G-h"></output></label>
+        <label class="prepinac"><input type="checkbox" id="ro-treni"> Se třením</label>
+      </div>
+      <div class="odecty"></div>
+      <div class="obr-zprava" role="status"></div>
+      <figcaption>Táhni bednu po rampě až na korbu (výška 1 m). Posuvníkem měníš délku rampy. <span class="legenda"><span class="znacka z-bremeno">tíha</span><span class="znacka z-sila">tažná síla</span><span class="znacka z-draha">dráha po rampě</span></span></figcaption>
+    </figure>
+
+    <div class="predpoved" data-predpoved="ro-delsi"></div>
+    <div class="ukol" data-ukol="ro-sud"><div class="ukol-hlava"><p><b>🔬 Úkol:</b> Dostaň na korbu bednu <b>600 N</b> tak, aby stačila síla nejvýš <b>200 N</b> (bez tření).</p><span class="stav"></span></div><p class="ukol-reakce"></p></div>
+
+    <h3>Klín a šroub</h3>
+    <div class="pristroje">
+      <article class="pristroj">
+        <svg viewBox="0 0 240 76" class="ikona" aria-hidden="true"><path d="M104 4 L136 4 L120 58Z" class="kov" style="--k:1"/><path d="M20 70 H104 L112 40 L120 58 L128 40 L136 70 H220" fill="none" class="cara c-text" style="--k:1"/><path d="M112 40 L86 48" class="cara c-sila" style="--k:1.3"/><path d="M84 49 l8 -6 l1 7z" class="vypln c-sila"/><path d="M128 40 L154 48" class="cara c-sila" style="--k:1.3"/><path d="M156 49 l-8 -6 l-1 7z" class="vypln c-sila"/></svg>
+        <h3>🪓 Klín</h3>
+        <p>Klín jsou dvě nakloněné roviny zády k sobě. Úder shora se na bocích změní na velké síly, které rozrážejí dřevo do stran. Čím je klín <strong>tenčí a delší</strong>, tím větší síly do stran vyvolá. Klínem je sekera, nůž, dláto, hřebík i zuby.</p>
+      </article>
+      <article class="pristroj">
+        <svg viewBox="0 0 240 76" class="ikona" aria-hidden="true"><path d="M30 66 L110 66 L110 14Z" class="rampa" style="--k:1"/><rect x="160" y="8" width="26" height="62" rx="3" class="kov" style="--k:1"/><path d="M158 14 L188 22 M158 26 L188 34 M158 38 L188 46 M158 50 L188 58" class="cara c-sila" style="--k:1.1"/><path d="M120 40 H148" class="cara c-text" style="--k:1"/><path d="M150 40 l-7 -4 v8z" class="vypln c-text"/></svg>
+        <h3>🔩 Šroub</h3>
+        <p>Šroub je nakloněná rovina <strong>navinutá na válec</strong> (zkus obtočit papírový trojúhelník kolem tužky). Při jedné otáčce se posune jen o výšku závitu, ruka ale urazí celý obvod – proto šroubem snadno utáhneš dvě prkna k sobě nebo zvedákem nadzvedneš auto.</p>
+      </article>
+    </div>
+
+    <aside class="zapamatuj"><h3>📌 Zapamatuj si</h3>
+      <ul>
+        <li>Nakloněná rovina: <span class="m"><i>F</i> · <i>l</i> = <i>G</i> · <i>h</i></span> (bez tření). Delší rampa = menší síla, delší cesta.</li>
+        <li><strong>Klín</strong> a <strong>šroub</strong> jsou nakloněné roviny v jiném tvaru.</li>
+        <li>Tření potřebnou sílu vždy zvětší.</li>
+      </ul>
+    </aside>
+  </section>
+
+  <!-- ============================================================ 9 -->
+  <section class="kapitola" id="zlate" data-faze="vyuka" data-nazev="Zlaté pravidlo" data-popis="Síla × dráha = práce">
+    <header class="kap-hlava"><span class="kap-cislo">9</span><div><p class="kap-otazka">Existuje stroj, který by ušetřil práci?</p><h2>Zlaté pravidlo mechaniky</h2></div></header>
+    <div class="text">
+      <p>Ve všech kapitolách se opakovalo totéž: když stroj zmenšil sílu, musela se ruka pohnout o delší dráhu. <span class="term">Práce</span> je součin síly a dráhy, <span class="m"><i>W</i> = <i>F</i> · <i>s</i></span>, a ta zůstává stejná. Tomu se říká <span class="term">zlaté pravidlo mechaniky</span>:</p>
+    </div>
+    <div class="vzorec" aria-label="F1 krát s1 se rovná F2 krát s2"><span><i>F</i><sub>1</sub> · <i>s</i><sub>1</sub> = <i>F</i><sub>2</sub> · <i>s</i><sub>2</sub></span><span class="vzorec-popis">Co získáme na síle, ztratíme na dráze. Práci jednoduchý stroj neušetří.</span></div>
+
+    <figure class="obr" id="obr-zlate">
+      <div class="obr-plocha"><svg class="model" role="img" aria-label="Graf síly a dráhy: práce jako obsah obdélníku"></svg></div>
+      <div class="obr-ovladani">
+        <div class="skupina"><span class="nazev">Pytel 50 kg do výšky 1 m:</span>
+          <div class="segment" id="zl-stroj" role="group" aria-label="Čím pytel zvedneme">
+            <button type="button" data-hodnota="ruce">rukama</button><button type="button" data-hodnota="paka">pákou</button><button type="button" data-hodnota="kladkostroj">kladkostrojem</button><button type="button" data-hodnota="rovina">po rampě</button><button type="button" data-hodnota="hridel">rumpálem</button>
+          </div>
+        </div>
+        <label class="posuvnik" id="zl-k-obal">Výhoda stroje <input type="range" id="zl-k" min="2" max="6" step="1" value="4"><output id="zl-k-h"></output></label>
+        <label class="prepinac"><input type="checkbox" id="zl-treni"> Skutečný stroj (tření)</label>
+      </div>
+      <div class="odecty"></div>
+      <div class="obr-zprava" role="status"></div>
+      <figcaption>Výška obdélníku je síla, šířka dráha ruky. Obsah obdélníku je práce. Čárkovaně je zvedání rukama. <span class="legenda"><span class="znacka z-sila">se strojem</span><span class="znacka z-bremeno z-prerusovana">rukama</span></span></figcaption>
+    </figure>
+
+    <div class="predpoved" data-predpoved="zl-prace"></div>
+    <div class="ukol" data-ukol="zl-100"><div class="ukol-hlava"><p><b>🔬 Úkol:</b> Vyber stroj a nastavení, se kterým pytel zvedneš silou <b>100 N</b>. Jaká bude dráha?</p><span class="stav"></span></div><p class="ukol-reakce"></p></div>
+
+    <div class="tabulka-obal">
+    <table class="srovnani" id="zl-tabulka">
+      <caption class="vzorec-popis" style="text-align:left;caption-side:top;padding-bottom:6px">Jednoduché stroje vedle sebe. Řádek podle modelu se zvýrazní.</caption>
+      <thead><tr><th>Stroj</th><th>Síla</th><th>Dráha síly</th><th>Příklady</th></tr></thead>
+      <tbody>
+        <tr data-stroj="paka"><td>Páka</td><td><i>F</i> = <i>G</i> · <i>r</i><sub>1</sub>/<i>r</i><sub>2</sub></td><td>delší rameno = delší oblouk</td><td>páčidlo, nůžky, kolečko</td></tr>
+        <tr data-stroj="kladkostroj"><td>Kladkostroj</td><td><i>F</i> = <i>G</i>/<i>n</i></td><td><i>s</i> = <i>n</i> · <i>h</i></td><td>jeřáb, lodní lanoví</td></tr>
+        <tr data-stroj="hridel"><td>Kolo na hřídeli</td><td><i>F</i> = <i>G</i> · <i>r</i>/<i>R</i></td><td>obvod kliky místo obvodu hřídele</td><td>rumpál, volant, šroubovák</td></tr>
+        <tr data-stroj="rovina"><td>Nakloněná rovina</td><td><i>F</i> = <i>G</i> · <i>h</i>/<i>l</i></td><td>délka <i>l</i> místo výšky <i>h</i></td><td>rampa, serpentiny, klín, šroub</td></tr>
+        <tr data-stroj="prevod"><td>Ozubený převod</td><td><i>M</i><sub>2</sub> = <i>i</i> · <i>M</i><sub>1</sub></td><td><i>n</i><sub>2</sub> = <i>n</i><sub>1</sub>/<i>i</i></td><td>kolo, hodiny, převodovka</td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <div class="text">
+      <p>Skutečné stroje mají navíc tření, takže vykonaná práce je <strong>o něco větší</strong> než práce užitečná. Poměr užitečné a vykonané práce je <span class="term">účinnost</span> – kladkostroj mívá asi 80 až 90 %.</p>
+      <p>Chceš si se stroji volně hrát? V <a href="paka.html" data-lekce="obsah/paka.html">laboratoři strojů</a> najdeš páčidlo na kámen, vytržení pařezu, hodinový strojek, převodovku i diferenciál. Stejné pravidlo potkáš u <a href="vrtacka_lis.html" data-lekce="obsah/vrtacka_lis.html">hydraulického lisu</a>.</p>
+    </div>
+
+    <aside class="zapamatuj"><h3>📌 Zapamatuj si</h3>
+      <ul>
+        <li><strong>Zlaté pravidlo mechaniky:</strong> <span class="m"><i>F</i><sub>1</sub> · <i>s</i><sub>1</sub> = <i>F</i><sub>2</sub> · <i>s</i><sub>2</sub></span> – co získáš na síle, ztratíš na dráze.</li>
+        <li>Jednoduchý stroj <strong>práci neušetří</strong>, tření ji dokonce o trochu zvětší.</li>
+      </ul>
+    </aside>
+  </section>
+
+  <!-- ============================================================ tahák -->
+  <section class="kapitola" id="tahak" data-faze="tahak" data-nazev="Tahák" data-popis="Všechno na jedné stránce" data-zvlast>
+    <header class="kap-hlava"><span class="kap-cislo">📌</span><div><p class="kap-otazka">Všechno podstatné na jedné stránce</p><h2>Tahák – jednoduché stroje</h2></div></header>
+    <div class="tahak-mrizka">
+      <div class="tahak-karta"><h3>Moment síly</h3><p class="m" style="font-size:1.15rem"><i>M</i> = <i>F</i> · <i>r</i> &nbsp;[N·m]</p><ul><li>Rameno <i>r</i> = kolmá vzdálenost osy od přímky síly.</li><li>Síla mířící do osy neotáčí.</li></ul></div>
+      <div class="tahak-karta"><h3>Páka</h3>
+        <svg viewBox="0 0 300 110" class="ikona" aria-hidden="true"><rect x="20" y="46" width="260" height="10" rx="4" class="drevo" style="--k:1"/><path d="M140 56 L160 56 L150 80Z" transform="rotate(180 150 68)" class="podpera" style="--k:1"/><circle cx="150" cy="51" r="4" class="osa-bod" style="--k:1"/><path d="M70 56 V92" class="cara c-bremeno" style="--k:1.3"/><path d="M70 98 l-6 -10 h12z" class="vypln c-bremeno"/><path d="M260 56 V80" class="cara c-sila" style="--k:1.3"/><path d="M260 86 l-6 -10 h12z" class="vypln c-sila"/><path d="M70 30 H150 M150 30 H260" class="cara tenka c-rameno" style="--k:1"/><path d="M70 24 V36 M150 24 V36 M260 24 V36" class="cara tenka c-rameno" style="--k:1"/><text x="110" y="22" text-anchor="middle" font-size="13" fill="var(--m-rameno)">r₁</text><text x="205" y="22" text-anchor="middle" font-size="13" fill="var(--m-rameno)">r₂</text><text x="84" y="100" font-size="13" fill="var(--m-bremeno)">F₁</text><text x="270" y="90" font-size="13" fill="var(--m-sila)">F₂</text></svg>
+        <p class="m" style="font-size:1.1rem"><i>F</i><sub>1</sub> · <i>r</i><sub>1</sub> = <i>F</i><sub>2</sub> · <i>r</i><sub>2</sub></p><ul><li>Dvojzvratná: osa mezi silami. Jednozvratná: síly na jedné straně.</li></ul></div>
+      <div class="tahak-karta"><h3>Kladky</h3><ul><li>Pevná: <i>F</i> = <i>G</i>, mění jen směr.</li><li>Volná: <i>F</i> = <i>G</i>/2.</li><li>Kladkostroj: <i>F</i> = <i>G</i>/<i>n</i>, lano <i>s</i> = <i>n</i> · <i>h</i> (<i>n</i> = nosné prameny).</li></ul></div>
+      <div class="tahak-karta"><h3>Kolo na hřídeli</h3><p class="m" style="font-size:1.1rem"><i>F</i> · <i>R</i> = <i>G</i> · <i>r</i></p><ul><li>Rumpál, klika, volant, šroubovák.</li><li>Za otáčku: lano 2π<i>r</i>, ruka 2π<i>R</i>.</li></ul></div>
+      <div class="tahak-karta"><h3>Převody</h3><p class="m" style="font-size:1.1rem"><i>i</i> = <i>z</i><sub>2</sub>/<i>z</i><sub>1</sub> = <i>n</i><sub>1</sub>/<i>n</i><sub>2</sub></p><ul><li>Hnané kolo: <i>i</i>× menší otáčky, <i>i</i>× větší moment.</li><li>Kola v záběru se točí opačně, mezikolo mění jen směr.</li></ul></div>
+      <div class="tahak-karta"><h3>Nakloněná rovina</h3><p class="m" style="font-size:1.1rem"><i>F</i> · <i>l</i> = <i>G</i> · <i>h</i></p><ul><li>Klín = dvě nakloněné roviny, šroub = navinutá nakloněná rovina.</li></ul></div>
+      <div class="tahak-karta"><h3>Zlaté pravidlo mechaniky</h3><p class="m" style="font-size:1.1rem"><i>F</i><sub>1</sub> · <i>s</i><sub>1</sub> = <i>F</i><sub>2</sub> · <i>s</i><sub>2</sub></p><ul><li>Co získáš na síle, ztratíš na dráze.</li><li>Práci stroj neušetří; <i>G</i> = <i>m</i> · <i>g</i>, <i>g</i> = 10 N/kg.</li></ul></div>
+    </div>
+  </section>
+
+  <!-- ============================================================ procvič -->
+  <section class="kapitola" id="procvic" data-faze="procvic" data-nazev="Procvič" data-popis="Otázky napříč lekcí" data-zvlast>
+    <header class="kap-hlava"><span class="kap-cislo">✏️</span><div><p class="kap-otazka">Otázky se pokaždé vygenerují znovu, s jinými čísly.</p><h2>Procvič si jednoduché stroje</h2></div></header>
+    <div class="cviceni">
+      <div class="cviceni-hlava">
+        <div class="temata" id="cv-temata" role="group" aria-label="Téma otázek"></div>
+      </div>
+      <div class="karta-otazky">
+        <div id="plocha">
+          <p class="tema" id="cv-tema"></p>
+          <p class="zadani" id="cv-zadani" tabindex="-1"></p>
+          <div class="obrazek" id="cv-obrazek" hidden></div>
+          <div id="cv-moznosti"></div>
+          <p class="odezva" id="cv-odezva"></p>
+        </div>
+        <div class="napoveda" id="cv-napoveda" hidden></div>
+        <div class="ovladani cviceni-ovladani">
+          <button type="button" id="btnNapoveda">💡 Nápověda</button>
+          <button type="button" id="btnDalsi">Přeskočit →</button>
+          <span class="skore" id="cv-skore"></span>
+        </div>
+      </div>
+      <p class="vzorec-popis">Na odpověď můžeš klepnout, nebo zmáčknout klávesu 1–4. Po chybě se ukáže, v čem je záměna, a můžeš to zkusit znovu – do skóre se počítá jen odpověď napoprvé.</p>
+    </div>
+
+    <details class="zvidave" id="pro-ucitele"><summary>👩‍🏫 Pro učitele <small>scénáře hodin a časté omyly žáků</small></summary>
+      <div class="obsah text">
+        <p><strong>5 minut (motivace):</strong> kapitola 2 – klíč na matici. Třída hlasuje v předpovědi „kam chytit klíč“, pak jeden žák na tabuli povolí zarezlou matici. Otázka na závěr: proč je klika daleko od pantů?</p>
+        <p><strong>15 minut (jeden pojem):</strong> kapitola 3 – školní páka. Žáci ve dvojicích plní úkoly s dírkami, pak řešený příklad s houpačkou. Na závěr 3 otázky z Procvič (téma Páka).</p>
+        <p><strong>45 minut (celé téma):</strong> 5 min moment (kap. 2) → 12 min rovnováha a houpačka (kap. 3) → 8 min třídička pák (kap. 4) → 10 min kladky nebo převody podle ŠVP (kap. 5, 7) → 5 min zlaté pravidlo (kap. 9) → 5 min Ověř se. Tahák lze vytisknout jako zápis do sešitu.</p>
+        <p><strong>Časté omyly, na které lekce cíleně míří:</strong></p>
+        <ul>
+          <li>„Rozhoduje větší síla“ – ne, rozhoduje moment (úkol s lehčím dítětem na houpačce).</li>
+          <li>„Rameno je vzdálenost k místu, kde síla působí“ – u šikmé síly je rameno kratší (úkol s klíčem pod úhlem 30°).</li>
+          <li>„Stroj ušetří práci“ – síla klesne, dráha vzroste (kladkostroj, rampa, graf práce v kap. 9).</li>
+          <li>„Větší ozubené kolo se točí rychleji“ – je to naopak (předpověď v kap. 7).</li>
+          <li>„Pevná kladka zmenší sílu na polovinu“ – jen mění směr (předpověď v kap. 5).</li>
+        </ul>
+        <p><strong>Pokus do třídy:</strong> pravítko na tužce jako páka a mince jako závaží; provázek přes kolo od židle jako kladka; knihy a prkno jako nakloněná rovina se siloměrem.</p>
+      </div>
+    </details>
+  </section>
+
+  <div data-kostra-zapati></div>
+</main>
+</div>
+
+<script src="paka_lekce.js?v=1"></script>
+</body>
+</html>

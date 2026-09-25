@@ -110,6 +110,9 @@
     .vysvetlivka { color: var(--text-faint); font-size: 0.8rem; max-width: 600px; line-height: 1.5; }
     .vysvetlivka b { color: var(--text-muted); }
     .vysvetlivka .uhly { color: var(--ok); font-variant-numeric: tabular-nums; }
+    .stin-ilustrace { margin: 0; width: min(600px, 100%); }
+    .stin-ilustrace img { display: block; width: 100%; aspect-ratio: 3 / 2; object-fit: cover; border-radius: 14px; background: #f4edda; box-shadow: 0 4px 15px #0002; }
+    .stin-ilustrace figcaption { margin-top: 6px; color: var(--text-faint); font-size: .8rem; text-align: center; }
 
     /* Karta s teorií pod úlohou */
     .teorie {
@@ -508,6 +511,7 @@ function stin() {
         ? `${d.objekt.nazev[0].toUpperCase() + d.objekt.nazev.slice(1)} je vysoký${d.objekt.id === 'budova' ? 'á' : ''}
            <b>${fmt1(d.vyskaObjektu)} m</b>. Jak dlouhý stín vrhá právě teď?`
         : d.objekt.clen}</div>
+    <figure class="stin-ilustrace"><img src="img/m/m9-podobnost-stiny.webp" alt="Strom a svislá měřicí tyč vrhají v témže slunci dlouhé rovnoběžné stíny." width="1152" height="768"><figcaption>Stejné slunce vytváří podobné trojúhelníky. Přesné délky ukazuje model níže.</figcaption></figure>
     <svg class="scena" id="scena" viewBox="0 0 600 310" role="img"
          aria-label="Tyc a vysoky objekt vrhaji stin ve slunci">
       <polygon class="trojuhelnik maly" id="troj1"/>
