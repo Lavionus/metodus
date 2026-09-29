@@ -15,6 +15,7 @@
     .fraze { font-size: clamp(1.5rem, 6vw, 2.4rem); font-weight: 700; }
     .vyslovnost { color: var(--text-faint); font-size: 0.92rem; font-style: italic; }
     .hodiny-cas { font-size: clamp(2rem, 8vw, 3rem); font-weight: 700; font-variant-numeric: tabular-nums; }
+    .pozdrav-scena { display: block; width: min(620px, 100%); max-width: 100%; aspect-ratio: 3 / 2; object-fit: cover; border-radius: 12px; background: #f8f1df; }
   </style>
 </head>
 <body>
@@ -79,10 +80,10 @@ const DIALOGY = [
 ];
 
 const DENNI_DOBY = [
-  { klic: 'morning', popis: 'Good morning!', ikona: '🌅', od: 6, do: 11 },
-  { klic: 'afternoon', popis: 'Good afternoon!', ikona: '☀️', od: 12, do: 17 },
-  { klic: 'evening', popis: 'Good evening!', ikona: '🌆', od: 18, do: 21 },
-  { klic: 'night', popis: 'Good night!', ikona: '🌙', od: 22, do: 5 },
+  { klic: 'morning', popis: 'Good morning!', ikona: '🌅', img: 'img/aj/aj3-pozdravy-rano.webp', alt: 'Dvě děti se ráno zdraví před školou.', od: 6, do: 11 },
+  { klic: 'afternoon', popis: 'Good afternoon!', ikona: '☀️', img: 'img/aj/aj3-pozdravy-odpoledne.webp', alt: 'Dvě děti se odpoledne zdraví v parku.', od: 12, do: 17 },
+  { klic: 'evening', popis: 'Good evening!', ikona: '🌆', img: 'img/aj/aj3-pozdravy-vecer.webp', alt: 'Dvě děti se večer zdraví před domem.', od: 18, do: 21 },
+  { klic: 'night', popis: 'Good night!', ikona: '🌙', img: 'img/aj/aj3-pozdravy-noc.webp', alt: 'Dítě přeje rodiči dobrou noc.', od: 22, do: 5 },
 ];
 
 /* ---- Co to znamená? -------------------------------------------------------- */
@@ -135,7 +136,7 @@ function denniDoba() {
     ? Uloha.nahodne([22, 23, 0, 1, 2, 3, 4, 5])
     : Uloha.nahodneCislo(doba.od, doba.do);
   p.innerHTML = `<div class="zadani">Jak pozdravíš v tuto dobu?</div>
-    <div class="karta"><div class="obrazek">${doba.ikona}</div>
+    <div class="karta"><img class="pozdrav-scena" src="${doba.img}" alt="${doba.alt}">
     <div class="hodiny-cas">${String(hodina).padStart(2, '0')}:00</div></div>`;
   const odezva = document.createElement('div');
   odezva.className = 'odezva';

@@ -34,7 +34,7 @@ const ready = async expression => {
   throw Error('Not ready: ' + expression);
 };
 
-const pages = ['cj1_pismena', 'slabiky', 'cteni_s_porozumenim', 'cj2_abeceda', 'cj2_tvrde_mekke', 'doplnovacky', 'vyjmenovana_slova', 'cj2_druhy_vet', 'cj3_slovesa', 'cj6_slovni_zasoba', 'cj6_baje', 'cj8_sloh', 'm3_deleni_zbytkem', 'm4_zlomky_uvod', 'm5_slovni_ulohy', 'm7_cela_cisla', 'procenta', 'clock_learning', 'm8_pythagoras', 'm9_podobnost', 'aj_slovicka', 'aj5_pritomny_prubehovy', 'prv1_rodina', 'prv1_cesta_skola', 'de_slovicka', 'fr_slovicka'];
+const pages = ['cj1_pismena', 'slabiky', 'cteni_s_porozumenim', 'cj2_abeceda', 'cj2_tvrde_mekke', 'doplnovacky', 'vyjmenovana_slova', 'cj2_druhy_vet', 'cj3_slovesa', 'cj6_slovni_zasoba', 'cj6_baje', 'cj8_sloh', 'm3_deleni_zbytkem', 'm4_zlomky_uvod', 'm5_slovni_ulohy', 'm7_cela_cisla', 'procenta', 'clock_learning', 'm8_pythagoras', 'm9_podobnost', 'aj_slovicka', 'aj3_pozdravy', 'aj5_pritomny_prubehovy', 'prv1_rodina', 'prv1_cesta_skola', 'prv1_rocni_obdobi', 'prv2_zvirata', 'prv3_voda_vzduch', 'prv4_ekosystemy', 'prv5_energie', 'prv3_obec', 'prv4_nejstarsi_dejiny', 'f6_hustota', 'f7_tlak', 'pr6_clenovci', 'ch8_bezpecnost', 'ch8_voda_vzduch', 'z6_hydrosfera', 'z7_afrika', 'z7_amerika', 'z7_asie', 'ch9_uhlovodiky', 'pr6_houby', 'z6_atmosfera', 'inf4_hardware', 'inf6_digitalni_stopa', 'de_slovicka', 'fr_slovicka'];
 const results = [];
 try {
   await call('Page.enable');
@@ -363,6 +363,33 @@ try {
         assert.equal(await ev(`document.querySelectorAll('.park-bod.cil').length`), 1);
       }
     }
+    if (page === 'aj3_pozdravy') {
+      assert.equal(await ev(`DENNI_DOBY.length`), 4);
+      assert.ok(await ev(`DENNI_DOBY.every(x => x.img?.endsWith('.webp') && x.alt)`));
+      await ev(`document.querySelector('[data-rezim="denniDoba"]').click(); document.querySelector('.pozdrav-scena').decode()`);
+      assert.ok(await ev(`document.querySelector('.pozdrav-scena').naturalWidth > 0`));
+    }
+    if (page === 'pr6_clenovci') {
+      assert.equal(await ev(`ZIVOCICHOVE.filter(x => x.img).length`), 4);
+      await ev(`document.querySelector('#plocha').innerHTML = obrazekClenovce(ZIVOCICHOVE.find(x => x.img))`);
+      await ev(`document.querySelector('.clenovec-img').decode()`);
+      assert.ok(await ev(`document.querySelector('.clenovec-img').naturalWidth > 0`));
+      await ev(`novaUloha()`);
+    }
+    if (page === 'inf4_hardware') {
+      await ev(`document.querySelector('#hardwareScena img').decode()`);
+      assert.ok(await ev(`document.querySelector('#hardwareScena img').naturalWidth > 0`));
+      assert.equal(await ev(`document.querySelectorAll('#hardwareScena .hotspot').length`), 10);
+      await ev(`document.querySelector('#hardwareScena .hotspot').click()`);
+      assert.ok(await ev(`document.querySelector('#hardwareVysledek').textContent.includes('Našel jsi')`));
+    }
+    if (page === 'inf6_digitalni_stopa') {
+      await ev(`document.querySelector('#stopaFotka img').decode()`);
+      assert.ok(await ev(`document.querySelector('#stopaFotka img').naturalWidth > 0`));
+      assert.equal(await ev(`document.querySelectorAll('#stopaFotka .stopa-hotspot').length`), 4);
+      await ev(`document.querySelector('#stopaFotka .stopa-hotspot').click()`);
+      assert.ok(await ev(`document.querySelector('#stopaVysledek').textContent.length > 20`));
+    }
     if (page === 'prv1_rodina') {
       assert.equal(await ev(`PATRA.flatMap(p => p.clenove).length`), 8);
       assert.ok(await ev(`PATRA.flatMap(p => p.clenove).every(x => x.img?.endsWith('.webp'))`));
@@ -373,6 +400,8 @@ try {
       assert.equal(await ev(`document.querySelectorAll('.misto.plne img').length`), 8);
       await ev(`document.querySelector('[data-rezim="vztahy"]').click(); Promise.all([...document.querySelectorAll('.rodina-portret')].map(i => i.decode()))`);
       assert.ok(await ev(`document.querySelectorAll('.moznosti .rodina-portret').length === 4 && [...document.querySelectorAll('.rodina-portret')].every(i => i.naturalWidth > 0)`));
+      await ev(`document.querySelector('[data-rezim="domov"]').click(); document.querySelector('.dum-rez').decode()`);
+      assert.ok(await ev(`document.querySelector('.dum-rez').naturalWidth > 0`));
       await ev(`document.querySelector('[data-rezim="rodokmen"]').click()`);
     }
     if (page === 'prv1_cesta_skola') {
@@ -389,6 +418,40 @@ try {
       }
       await ev(`document.querySelector('.scena > img').decode()`);
     }
+    if (page === 'prv1_rocni_obdobi') {
+      assert.equal(await ev(`Object.keys(OBDOBI).length`), 4);
+      assert.ok(await ev(`Object.values(OBDOBI).every(x => x.img)`));
+      assert.equal(await ev(`document.querySelectorAll('.obdobi-img').length`), 4);
+    }
+    if (page === 'prv2_zvirata') {
+      assert.equal(await ev(`ZVIRATA.length`), 30);
+      assert.ok(await ev(`ZVIRATA.every(x => x.img)`));
+      for (const mode of ['kdeZije', 'mladata', 'pribytky', 'uzitek']) {
+        await ev(`document.querySelector('[data-rezim="${mode}"]').click(); document.querySelector('.zvire-obrazek').decode()`);
+        assert.ok(await ev(`document.querySelector('.zvire-obrazek').naturalWidth > 0`));
+      }
+    }
+    if (page === 'prv3_voda_vzduch') {
+      await ev(`document.querySelector('[data-rezim="kolobeh"]').click(); document.querySelector('.naucna-scena').decode()`);
+      assert.ok(await ev(`document.querySelector('.naucna-scena').naturalWidth > 0`));
+      await ev(`document.querySelector('[data-rezim="puda"]').click(); document.querySelector('.obrazova-mapa img').decode()`);
+      assert.equal(await ev(`document.querySelectorAll('.mapovy-bod').length`), 5);
+    }
+    if (page === 'ch8_bezpecnost') { await ev(`document.querySelector('[data-rezim="chyby"]').click(); document.querySelector('.chyby-scena img').decode()`); assert.equal(await ev(`document.querySelectorAll('.chyba-bod').length`), 6); }
+    if (page === 'ch8_voda_vzduch') { await ev(`document.querySelector('[data-rezim="uprava"]').click(); document.querySelector('.upravna-scena').decode()`); assert.ok(await ev(`document.querySelector('.upravna-scena').naturalWidth > 0`)); }
+    if (page === 'z6_hydrosfera') { await ev(`document.querySelector('[data-rezim="reka"]').click(); document.querySelector('.reka-scena img').decode()`); assert.equal(await ev(`document.querySelectorAll('[data-pojem]').length`), 8); }
+    if (page === 'z7_afrika') { await ev(`document.querySelector('[data-rezim="pasy"]').click(); document.querySelector('.pasy-scena img').decode()`); assert.equal(await ev(`document.querySelectorAll('[data-pas]').length`), 5); }
+    if (page === 'prv4_ekosystemy') {
+      await ev(`document.querySelector('[data-rezim="kamPatri"]').click(); document.querySelector('.naucna-scena').decode()`);
+      assert.ok(await ev(`document.querySelector('.naucna-scena').src.includes('louka-pole')`));
+      await ev(`document.querySelector('[data-rezim="patra"]').click(); document.querySelector('.naucna-scena').decode()`);
+      assert.ok(await ev(`document.querySelector('.naucna-scena').src.includes('lesni-patra')`));
+    }
+    if (page === 'prv5_energie') { await ev(`document.querySelector('[data-rezim="elektrarny"]').click(); document.querySelector('.naucna-scena').decode()`); assert.ok(await ev(`document.querySelector('.naucna-scena').naturalWidth > 0`)); }
+    if (page === 'prv3_obec') { await ev(`document.querySelector('[data-rezim="plan"]').click(); document.querySelector('.obec-ilustrace').decode()`); assert.ok(await ev(`document.querySelector('.obec-ilustrace').naturalWidth > 0`)); }
+    if (page === 'prv4_nejstarsi_dejiny') { assert.equal(await ev(`document.querySelectorAll('.historicke-sceny img').length`), 2); assert.ok(await ev(`[...document.querySelectorAll('.historicke-sceny img')].every(i=>i.naturalWidth>0)`)); }
+    if (page === 'f6_hustota') { assert.equal(await ev(`Object.keys(OBRAZKY_LATKY).length`), 8); await ev(`document.querySelector('[data-rezim="porovnej"]').click(); Promise.all([...document.querySelectorAll('.material-img')].map(i=>i.decode()))`); }
+    if (page === 'f7_tlak') { assert.equal(await ev(`TLAKOVE_SITUACE.length`), 5); await ev(`document.querySelector('[data-rezim="tlakPevne"]').click(); document.querySelector('.tlak-kontext').decode()`); assert.ok(await ev(`document.querySelector('.tlak-kontext').naturalWidth > 0`)); }
     if (page === 'de_slovicka' || page === 'fr_slovicka') {
       assert.equal(await ev(`Object.keys(OBRAZKY_DOMOV).length`), 9);
       await ev(`document.querySelector('[data-kat="domov"]').click(); document.querySelector('[data-rezim="prehled"]').click(); Promise.all([...document.querySelectorAll('.emoji-bunka img')].map(i => i.decode()))`);
@@ -416,9 +479,13 @@ try {
         if (page === 'm8_pythagoras') { await ev(`document.querySelector('[data-rezim="slovni"]').click()`); await ev(`document.querySelector('.slovni-scena').scrollIntoView({block:'start'})`); }
         if (page === 'm9_podobnost') { await ev(`document.querySelector('[data-rezim="stin"]').click()`); await ev(`document.querySelector('.stin-ilustrace').scrollIntoView({block:'start'})`); }
         if (page === 'aj_slovicka') { await ev(`document.querySelector('[data-rezim="karticky"]').click()`); await ev(`document.querySelector('.karticka').scrollIntoView({block:'start'})`); }
+        if (page === 'aj3_pozdravy') { await ev(`document.querySelector('[data-rezim="denniDoba"]').click()`); await ev(`document.querySelector('.pozdrav-scena').scrollIntoView({block:'center'})`); }
         if (page === 'aj5_pritomny_prubehovy') { await ev(`document.querySelector('[data-rezim="popisObrazku"]').click()`); await ev(`document.querySelector('.park-scena').scrollIntoView({block:'start'})`); }
-        if (page === 'prv1_rodina') await ev(`document.querySelector('#plocha').scrollIntoView({block:'start'})`);
+        if (page === 'prv1_rodina') { await ev(`document.querySelector('[data-rezim="domov"]').click()`); await ev(`document.querySelector('.dum-rez').scrollIntoView({block:'center'})`); }
         if (page === 'prv1_cesta_skola') { await ev(`document.querySelector('[data-rezim="mapa"]').click()`); await ev(`document.querySelector('.scena').scrollIntoView({block:'start'})`); }
+        if (page === 'pr6_clenovci') await ev(`document.querySelector('.clenovec-img')?.scrollIntoView({block:'center'})`);
+        if (page === 'inf4_hardware') await ev(`document.querySelector('#hardwareScena').scrollIntoView({block:'center'})`);
+        if (page === 'inf6_digitalni_stopa') await ev(`document.querySelector('#stopaFotka').scrollIntoView({block:'center'})`);
         if (page === 'de_slovicka' || page === 'fr_slovicka') { await ev(`document.querySelector('[data-rezim="karticky"]').click()`); await ev(`document.querySelector('.karticka').scrollIntoView({block:'start'})`); }
         await pause(300);
         const shot = await call('Page.captureScreenshot', {format: 'png', captureBeyondViewport: false});

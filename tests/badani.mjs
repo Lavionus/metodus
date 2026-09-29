@@ -16,7 +16,7 @@ import { readFileSync } from 'node:fs';
 const base = process.env.METODUS_TEST_URL || 'http://127.0.0.1:8766/';
 const endpoint = process.env.METODUS_CDP_URL || 'http://127.0.0.1:9223/json';
 const VYCHOZI = ['paka.html', 'elektrina.html', 'optika.html', 'vrtacka_lis.html',
-  'vitr_tunel.html', 'vodni_hladina.html', 'optika_soustava.html', 'proudove_motory.html', 'gravitacni_hriste.html',
+  'vitr_tunel.html', 'vodni_hladina.html', 'optika_soustava.html', 'optika_dalekohled.html', 'proudove_motory.html', 'gravitacni_hriste.html',
   'gravitacni_hriste2.html', 'solar_system.html', 'pohyb_vesmirem.html', 'grafy_funkci.html', 'punnett.html',
   'eduSort.html', 'star_map.html', 'physics_ref.html'];
 const stranky = process.argv.slice(2).length ? process.argv.slice(2) : VYCHOZI;

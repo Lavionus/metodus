@@ -21,6 +21,11 @@
       padding: 7px 11px; font-size: 0.86rem; font-weight: 600;
     }
     .osa .sipka { color: var(--text-faint); }
+    .historicke-sceny { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; width:min(820px,100%); }
+    .historicke-sceny figure { margin:0; }
+    .historicke-sceny img { width:100%; height:auto; border-radius:12px; display:block; }
+    .historicke-sceny figcaption { font-size:.8rem; color:var(--text-muted); margin-top:5px; }
+    @media(max-width:560px){.historicke-sceny{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
@@ -85,6 +90,7 @@ function kdoTo() {
   const o = Uloha.nahodne(OSOBY);
   const jine = Uloha.zamichej(OSOBY.filter(x => x.n !== o.n)).slice(0, 3);
   p.innerHTML = `<div class="zadani">O koho jde?</div>
+    <div class="historicke-sceny"><figure><img src="img/prv/prv4-dejiny-hradiste.webp" alt="Rekonstrukce každodenního života na slovanském hradišti v 9. století" width="1152" height="768"><figcaption>Rekonstrukce: slovanské hradiště</figcaption></figure><figure><img src="img/prv/prv4-dejiny-praha.webp" alt="Rekonstrukce každodenního života na pražském tržišti za Karla IV." width="1152" height="768"><figcaption>Rekonstrukce: Praha za Karla IV.</figcaption></figure></div>
     <div class="karta"><div class="obrazek">${o.e}</div><div class="udalost">${o.cin}</div></div>`;
   const odezva = document.createElement('div');
   odezva.className = 'odezva';

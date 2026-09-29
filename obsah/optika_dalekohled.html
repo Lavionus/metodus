@@ -1,0 +1,1651 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🔭 Postav si dalekohled</title>
+<link rel="stylesheet" href="../common.css">
+<script src="../theme.js"></script>
+<script src="../podpis.js" defer></script>
+<script src="../kostra.js" defer></script>
+<style>
+:root{--paprsek2:#ff86c0;--nebe:#0b1230}
+:root[data-tone="light"]{--paprsek2:#b8266f}
+body{min-height:100vh}
+.obal{width:min(1360px,100%);margin:0 auto;padding:0 16px 40px}
+.horni{padding:18px 0 6px}
+.horni h1{font-size:1.45rem;font-weight:650;letter-spacing:-.01em}
+.podtitul{color:var(--text-muted);font-size:.92rem;line-height:1.6;max-width:820px;margin-top:6px}
+h2{font-size:1.15rem;font-weight:650;margin:0 0 4px}
+.eyebrow{font-size:.68rem;text-transform:uppercase;letter-spacing:.14em;color:var(--accent);font-weight:700}
+button,select{font:inherit}
+button{background:var(--bg-control);border:1px solid var(--border-strong);color:var(--text);border-radius:8px;padding:7px 12px;font-size:.84rem;cursor:pointer;min-height:36px}
+button:hover:not(:disabled){border-color:var(--accent)}
+button:disabled{opacity:.45;cursor:default}
+button:focus-visible,select:focus-visible,input:focus-visible,canvas:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+button[aria-pressed=true]{background:var(--accent-soft);border-color:var(--accent)}
+.hlavni-btn{background:var(--accent);color:var(--na-akcentu,#fff);border-color:var(--accent);font-weight:700}
+.hlavni-btn:hover:not(:disabled){background:var(--accent-hover,var(--accent))}
+select{background:var(--bg-input);color:var(--text);border:1px solid var(--border-strong);border-radius:7px;padding:6px 8px;min-height:36px}
+input[type=range]{accent-color:var(--accent);width:100%}
+input[type=checkbox]{accent-color:var(--accent);width:16px;height:16px}
+.karta{background:var(--bg-panel);border:1px solid var(--border);border-radius:14px}
+
+/* --- volba typu ---------------------------------------------------- */
+.typy{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:16px 0}
+.typy button{text-align:left;padding:12px 14px;border-radius:12px;display:grid;grid-template-columns:54px 1fr;gap:4px 12px;align-items:center;background:var(--bg-panel)}
+.typy button[aria-pressed=true]{border-width:2px;padding:11px 13px;background:var(--accent-soft)}
+.typy svg{grid-row:span 2;width:54px;height:34px}
+.typy strong{font-size:.92rem}
+.typy small{color:var(--text-muted);font-size:.74rem;line-height:1.45}
+
+/* --- dílna ---------------------------------------------------------- */
+#dilna{padding:16px;margin-top:6px}
+.dilna-hlava{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.dilna-hlava p{color:var(--text-muted);font-size:.86rem;line-height:1.55;max-width:640px}
+.postup{display:flex;align-items:center;gap:10px;font-size:.82rem;color:var(--text-muted)}
+.postup .lista{width:140px;height:8px;border-radius:5px;background:var(--bg-input);border:1px solid var(--border);overflow:hidden}
+.postup .lista i{display:block;height:100%;width:0;background:var(--ok);transition:width .4s}
+.dilna-plocha{display:grid;grid-template-columns:220px minmax(0,1fr) 270px;gap:12px;align-items:start}
+.zasobnik{display:grid;gap:7px}
+.zasobnik .nadpis{font-size:.72rem;color:var(--text-faint);text-transform:uppercase;letter-spacing:.08em}
+.dil{display:grid;grid-template-columns:40px 1fr;gap:2px 10px;align-items:center;text-align:left;padding:8px 10px;touch-action:pan-y;user-select:none;-webkit-user-select:none;position:relative}
+.dil svg{grid-row:span 2;width:40px;height:30px;color:var(--accent)}
+.dil b{font-size:.84rem;font-weight:600}
+.dil small{font-size:.7rem;color:var(--text-muted);line-height:1.35}
+.dil.hotovo{opacity:.55;border-style:dashed}
+.dil.hotovo b::after{content:' ✓';color:var(--ok)}
+.dil.chyba{animation:zatres .4s;border-color:var(--danger)}
+.dil.napovez{border-color:var(--warn);box-shadow:0 0 0 2px color-mix(in srgb,var(--warn) 40%,transparent)}
+@keyframes zatres{20%,60%{transform:translateX(-5px)}40%,80%{transform:translateX(5px)}}
+.letici{position:fixed;z-index:50;pointer-events:none;opacity:.92;transform:translate(-50%,-50%) rotate(-3deg);box-shadow:var(--shadow);background:var(--bg-elevated);border:2px solid var(--accent);border-radius:10px;padding:6px 10px;font-size:.84rem;font-weight:600}
+.scena-obal{position:relative;border-radius:12px;overflow:hidden;border:1px solid var(--border-strong);background:var(--nebe)}
+#scena{display:block;width:100%;aspect-ratio:900/520;touch-action:manipulation;cursor:pointer}
+.scena-obal.cil-pusteni{outline:3px dashed var(--accent);outline-offset:-3px}
+.scena-tlacitka{display:flex;gap:7px;flex-wrap:wrap;margin-top:9px}
+.scena-tlacitka label{display:flex;align-items:center;gap:6px;font-size:.8rem;color:var(--text-muted);padding:0 6px}
+.vysvetlivka{padding:14px 15px;display:grid;gap:10px;align-content:start;min-height:100%}
+.vysvetlivka h3{font-size:1rem;margin:0}
+.vysvetlivka p{font-size:.84rem;line-height:1.6;color:var(--text-muted)}
+.vysvetlivka p b{color:var(--text)}
+.vysvetlivka .typ-popis{border-top:1px solid var(--border);padding-top:10px;font-size:.78rem}
+.vysvetlivka .dalsi{display:none}
+.vysvetlivka.hotovo .dalsi{display:block}
+.hlaska-chyba{color:var(--danger-text,var(--danger))!important}
+
+/* --- dalekohled v akci -------------------------------------------- */
+#akce{margin-top:22px;padding:16px}
+.akce-mrizka{display:grid;grid-template-columns:minmax(0,1fr) 400px;gap:16px;align-items:start;margin-top:12px}
+.ovladani{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px 16px;margin-bottom:12px}
+.ovladani label,.ovladani .pole{display:grid;gap:4px;font-size:.8rem;color:var(--text-muted)}
+.ovladani .radek{display:flex;justify-content:space-between;gap:8px}
+.ovladani output{color:var(--text);font-weight:650;font-variant-numeric:tabular-nums}
+.zaostreni{display:flex;gap:6px;align-items:center}
+.zaostreni button{min-width:38px;padding:4px 8px}
+.paprsky-obal{border:1px solid var(--border);border-radius:12px;overflow:hidden;background:var(--bg-deep)}
+#paprsky{display:block;width:100%;height:340px}
+.legenda{display:flex;flex-wrap:wrap;gap:6px 18px;padding:8px 12px;font-size:.74rem;color:var(--text-muted);border-top:1px solid var(--border)}
+.legenda span::before{content:'';display:inline-block;width:18px;border-top:2px solid var(--warn);margin-right:6px;vertical-align:middle}
+.legenda .l2::before{border-color:var(--paprsek2)}
+.legenda .l3::before{border-top:2px dashed var(--text-faint)}
+.cisla{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin-top:12px}
+.cislo{background:var(--bg-elevated);border:1px solid var(--border);border-radius:10px;padding:9px 11px}
+.cislo .h{font-size:1.15rem;font-weight:700;font-variant-numeric:tabular-nums}
+.cislo .n{font-size:.74rem;color:var(--text-muted)}
+.cislo .v{font-size:.7rem;color:var(--text-faint);margin-top:3px;font-family:ui-monospace,monospace}
+.cislo.pozor{border-color:var(--warn)}
+.stitky{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.stitek{font-size:.76rem;padding:4px 9px;border-radius:20px;border:1px solid var(--border-strong);background:var(--bg-elevated)}
+.stitek.ok{border-color:var(--ok)}
+.stitek.pozor{border-color:var(--warn)}
+.okular-sloupec{display:grid;gap:10px;position:sticky;top:10px}
+.cile{display:flex;flex-wrap:wrap;gap:6px}
+.cile button{padding:6px 10px;font-size:.8rem}
+.pohled-obal{position:relative;aspect-ratio:1;border-radius:50%;background:#000;box-shadow:0 0 0 6px #1b1b1f,0 0 0 8px #3a3a42,0 10px 30px rgba(0,0,0,.45);margin:10px 8px}
+#pohled{display:block;width:100%;height:100%;border-radius:50%}
+.pohled-popis{font-size:.8rem;color:var(--text-muted);text-align:center;font-variant-numeric:tabular-nums}
+.co-vidis{font-size:.84rem;line-height:1.6;color:var(--text-muted);padding:10px 12px;background:var(--bg-elevated);border:1px solid var(--border);border-radius:10px}
+.co-vidis b{color:var(--text)}
+.volby{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.8rem;color:var(--text-muted)}
+.volby label{display:flex;gap:6px;align-items:center}
+.vzorce{margin-top:22px;padding:16px}
+.vzorce-mrizka{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px;margin-top:10px}
+.vzorce-mrizka div{background:var(--bg-elevated);border:1px solid var(--border);border-radius:10px;padding:10px 12px;font-size:.82rem;line-height:1.55;color:var(--text-muted)}
+.vzorce-mrizka b{color:var(--text);display:block;font-size:.95rem;margin-bottom:2px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+@media (max-width:1180px){
+  .dilna-plocha{grid-template-columns:200px minmax(0,1fr)}
+  .vysvetlivka{grid-column:1/-1}
+  .akce-mrizka{grid-template-columns:minmax(0,1fr) 340px}
+}
+@media (max-width:900px){
+  .akce-mrizka{grid-template-columns:1fr}
+  .okular-sloupec{position:static;max-width:440px;margin:0 auto;width:100%}
+}
+@media (max-width:700px){
+  .typy{grid-template-columns:1fr}
+  .typy button{grid-template-columns:44px 1fr;padding:8px 12px}
+  .typy button[aria-pressed=true]{padding:7px 11px}
+  .typy small{display:none}
+  .typy svg{grid-row:auto}
+  .typy{gap:6px;margin:10px 0}
+  .typy svg{width:44px}
+  .dilna-plocha{grid-template-columns:1fr}
+  .zasobnik{grid-template-columns:repeat(auto-fill,minmax(140px,1fr));order:2}
+  .zasobnik .nadpis{grid-column:1/-1}
+  .scena-sloupec{order:1}
+  .vysvetlivka{order:3}
+  .dil{grid-template-columns:30px 1fr}
+  .dil svg{width:30px}
+  .dil small{display:none}
+  #dilna,#akce,.vzorce{padding:12px}
+  #paprsky{height:290px}
+  .obal{padding:0 10px 30px}
+}
+@media (prefers-reduced-motion:reduce){.dil.chyba{animation:none}}
+</style>
+</head>
+<body>
+<div class="obal">
+<header class="horni">
+  <h1>🔭 Postav si dalekohled</h1>
+  <p class="podtitul">Slož dalekohled z jednotlivých dílů, sleduj, jak jím putuje světlo, a podívej se okulárem na Měsíc, Jupiter, Saturn, Plejády nebo na kostelní věž. Zkus měnit objektiv a okuláry – a zjisti, proč „větší zvětšení“ není vždycky lepší.</p>
+</header>
+
+<div class="typy volba-typu" role="group" aria-label="Typ dalekohledu">
+  <button data-typ="kepler" aria-pressed="true">
+    <svg viewBox="0 0 54 34" aria-hidden="true"><rect x="6" y="11" width="40" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M44 9 q4 7.5 0 15" fill="none" stroke="currentColor" stroke-width="2"/><rect x="0" y="14" width="7" height="5" fill="currentColor"/></svg>
+    <strong>Keplerův (čočkový)</strong><small>Dvě spojky. Ostrý obraz a velké pole – ale vzhůru nohama.</small>
+  </button>
+  <button data-typ="galileo" aria-pressed="false">
+    <svg viewBox="0 0 54 34" aria-hidden="true"><rect x="10" y="12" width="32" height="9" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M40 9 q4 7.5 0 15" fill="none" stroke="currentColor" stroke-width="2"/><path d="M5 12 q3 4.5 0 9 M9 12 q-3 4.5 0 9" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+    <strong>Galileův</strong><small>Spojka a rozptylka. Vzpřímený obraz, malé pole – divadelní kukátko.</small>
+  </button>
+  <button data-typ="newton" aria-pressed="false">
+    <svg viewBox="0 0 54 34" aria-hidden="true"><rect x="4" y="9" width="44" height="17" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M46 11 q-4 6.5 0 13" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M11 20 l6 -6" stroke="currentColor" stroke-width="2"/><rect x="11" y="3" width="6" height="6" fill="currentColor"/></svg>
+    <strong>Newtonův (zrcadlový)</strong><small>Duté zrcadlo místo čočky. Tak fungují velké hvězdářské dalekohledy.</small>
+  </button>
+</div>
+
+<!-- ===================== DÍLNA ===================== -->
+<section id="dilna" class="karta" aria-labelledby="dilnaNadpis">
+  <div class="dilna-hlava">
+    <div>
+      <span class="eyebrow">① Dílna</span>
+      <h2 id="dilnaNadpis">Slož dalekohled z dílů</h2>
+      <p>Přetáhni díl ze zásobníku na obrázek (nebo na něj jen klikni). Záleží na pořadí – okulár třeba nemá kam zasunout, dokud nenamontuješ ohniskovač. Čárkovaný obrys ukazuje, kam díl patří.</p>
+    </div>
+    <div class="postup" aria-live="polite"><span id="postupText">0 / 6 dílů</span><span class="lista"><i id="postupLista"></i></span></div>
+  </div>
+  <div class="dilna-plocha">
+    <div class="zasobnik" id="zasobnik" aria-label="Zásobník dílů"></div>
+    <div class="scena-sloupec">
+      <div class="scena-obal" id="scenaObal">
+        <canvas id="scena" role="img" aria-label="Dalekohled na stativu pod noční oblohou"></canvas>
+      </div>
+      <div class="scena-tlacitka">
+        <button id="btnSvetlo" class="hlavni-btn" disabled>✨ První světlo</button>
+        <button id="btnRozlozit" aria-pressed="false" disabled>🔍 Rozložit na díly</button>
+        <button id="btnSlozVse">🧩 Složit vše</button>
+        <button id="btnRozebrat">↺ Výchozí stav</button>
+        <label><input type="checkbox" id="rez" checked> 🩻 Průhledný tubus</label>
+      </div>
+    </div>
+    <aside class="vysvetlivka karta" id="vysvetlivka" aria-live="polite">
+      <h3 id="infoNadpis">Začni stativem</h3>
+      <p id="infoText">Každý díl má svou úlohu. Po vložení se tu dočteš, k čemu slouží.</p>
+      <p class="dalsi"><button id="btnKOkularu" class="hlavni-btn">Podívej se okulárem ↓</button></p>
+      <p class="typ-popis" id="typPopis"></p>
+    </aside>
+  </div>
+</section>
+
+<!-- ===================== DALEKOHLED V AKCI ===================== -->
+<section id="akce" class="karta" aria-labelledby="akceNadpis">
+  <span class="eyebrow">② Laboratoř</span>
+  <h2 id="akceNadpis">Cesta světla a pohled okulárem</h2>
+  <div class="typy volba-typu" role="group" aria-label="Typ dalekohledu v laboratoři" style="margin:10px 0 12px"></div>
+  <div class="akce-mrizka">
+    <div>
+      <div class="ovladani" id="ovladani">
+        <label for="f1"><span class="radek">🔵 Ohnisková vzdálenost objektivu f₁ <output id="f1V">900 mm</output></span>
+          <input type="range" id="f1" min="300" max="2000" step="50" value="900"></label>
+        <label for="D"><span class="radek">⭕ Průměr objektivu D <output id="DV">100 mm</output></span>
+          <input type="range" id="D" min="30" max="250" step="5" value="100"></label>
+        <label for="okular"><span class="radek">👁️ Okulár <output id="okularV">f₂ = 25 mm</output></span>
+          <select id="okular">
+            <option value="40">40 mm – přehledový</option>
+            <option value="32">32 mm</option>
+            <option value="25" selected>25 mm</option>
+            <option value="20">20 mm</option>
+            <option value="15">15 mm</option>
+            <option value="10">10 mm</option>
+            <option value="6">6 mm</option>
+            <option value="4">4 mm – nejsilnější</option>
+          </select></label>
+        <div class="pole"><span class="radek"><label for="zaost">🎛️ Ohniskovač (posun okuláru)</label> <output id="zaostV">+5,0 mm</output></span>
+          <div class="zaostreni"><button id="zaostMinus" aria-label="Posunout okulár dovnitř o 0,5 mm">◀</button><input type="range" id="zaost" min="-8" max="8" step="0.1" value="5"><button id="zaostPlus" aria-label="Posunout okulár ven o 0,5 mm">▶</button></div></div>
+        <label for="uhel"><span class="radek">⭐ Druhá hvězda od středu pole <output id="uhelV">60 %</output></span>
+          <input type="range" id="uhel" min="0" max="150" step="5" value="60"></label>
+      </div>
+      <div class="paprsky-obal">
+        <canvas id="paprsky" role="img" aria-label="Chod paprsků dalekohledem"></canvas>
+        <div class="legenda"><span>hvězda ve středu zorného pole</span><span class="l2">hvězda u okraje pole</span><span class="l3">optická osa</span></div>
+      </div>
+      <div class="cisla" id="cisla"></div>
+      <div class="stitky" id="stitky" aria-live="polite"></div>
+    </div>
+    <div class="okular-sloupec">
+      <div class="cile" role="group" aria-label="Kam se díváš" id="cile">
+        <button data-cil="mesic" aria-pressed="true">🌔 Měsíc</button>
+        <button data-cil="jupiter" aria-pressed="false">🪐 Jupiter</button>
+        <button data-cil="saturn" aria-pressed="false">💫 Saturn</button>
+        <button data-cil="plejady" aria-pressed="false">✨ Plejády</button>
+        <button data-cil="vez" aria-pressed="false">⛪ Věž 2 km</button>
+      </div>
+      <div class="pohled-obal"><canvas id="pohled" role="img" aria-label="Pohled okulárem"></canvas></div>
+      <div class="pohled-popis" id="pohledPopis"></div>
+      <div class="volby">
+        <label><input type="checkbox" id="bezDal"> 👁️ Jen okem (bez dalekohledu)</label>
+        <label><input type="checkbox" id="otaceni"> 🌍 Otáčení Země (10× rychleji)</label>
+        <button id="btnStred" hidden>🎯 Zpět na střed</button>
+      </div>
+      <div class="co-vidis" id="coVidis" aria-live="polite"></div>
+    </div>
+  </div>
+</section>
+
+<section class="vzorce karta" aria-labelledby="vzorceNadpis">
+  <span class="eyebrow">③ Do sešitu</span>
+  <h2 id="vzorceNadpis">Co rozhoduje o tom, co dalekohledem uvidíš</h2>
+  <div class="vzorce-mrizka">
+    <div><b>Zvětšení Z = f₁ : f₂</b>Ohnisková vzdálenost objektivu děleno ohniskovou vzdáleností okuláru. Okulár s kratším ohniskem zvětšuje víc.</div>
+    <div><b>Délka Keplerova dalekohledu ≈ f₁ + f₂</b>Ohniska objektivu a okuláru leží v jednom bodě. U Galileova je okulár rozptylka a délka je f₁ − f₂.</div>
+    <div><b>Sběr světla ∼ D²</b>Objektiv o průměru 70 mm nasbírá (70 : 7)² = 100× víc světla než oko s pupilou 7 mm. Proto uvidíš slabší hvězdy.</div>
+    <div><b>Rozlišení ≈ 116″ : D (mm)</b>Větší objektiv rozliší jemnější detaily. Zvětšení nad 2·D už nic nového neukáže – jen větší rozmazanou skvrnu.</div>
+    <div><b>Zorné pole ≈ 50° : Z</b>Čím větší zvětšení, tím menší kousek oblohy vidíš. Velké objekty (Plejády, Měsíc) se hledají malým zvětšením.</div>
+    <div><b>Výstupní pupila = D : Z</b>Šířka svazku, který vstupuje do oka. Nad 7 mm se část světla do zornice nevejde, pod 0,5 mm je obraz tmavý a „prázdný“.</div>
+  </div>
+</section>
+</div>
+
+<script>
+(function () {
+'use strict';
+/* =====================================================================
+   Stav modelu
+   ===================================================================== */
+const TYPY = {
+  kepler:  { nazev: 'Keplerův dalekohled', f1: 900,  D: 100, f2: 25, afov: 50, prevraci: true,
+    popis: '<b>Johannes Kepler</b> navrhl roku 1611 dalekohled se dvěma spojkami. Objektiv vytvoří skutečný převrácený obraz a okulár ho prohlíží jako lupa. Obraz je proto <b>vzhůru nohama</b> – na hvězdy to nevadí, a tak ho astronomové používají dodnes.' },
+  galileo: { nazev: 'Galileův dalekohled', f1: 500,  D: 40,  f2: 25, afov: 22, prevraci: false,
+    popis: '<b>Galileo Galilei</b> jím roku 1610 objevil čtyři měsíce Jupiteru a hory na Měsíci. Okulárem je <b>rozptylka</b> před ohniskem objektivu, takže obraz zůstane <b>vzpřímený</b> a přístroj je krátký. Zorné pole je ale malé – jako když se díváš klíčovou dírkou.' },
+  newton:  { nazev: 'Newtonův dalekohled', f1: 1200, D: 200, f2: 25, afov: 50, prevraci: true,
+    popis: '<b>Isaac Newton</b> postavil roku 1668 dalekohled s <b>dutým zrcadlem</b>. Zrcadlo nemá barevnou vadu čoček a velké zrcadlo je levnější a lehčí než velká čočka. Proto jsou všechny velké hvězdářské dalekohledy zrcadlové.' },
+};
+const S = {
+  typ: 'kepler', f1: 900, D: 100, f2: 25, zaost: 5, uhel: 60,
+  cil: 'mesic', bezDal: false, otaceni: false, drift: 0,
+  rez: true, rozlozit: 0, rozlozitCil: 0, svetlo: false,
+  slozeno: { kepler: new Map(), galileo: new Map(), newton: new Map() },
+  videno: {},
+};
+const DEG = Math.PI / 180;
+const clamp = (x, a, b) => Math.max(a, Math.min(b, x));
+const cislo = (x, d = 0) => { const r = Number(x).toFixed(d); return (d ? r.replace(/\.?0+$/, '') : r).replace('.', ',').replace('-', '−'); };
+const cisloD = (x, d) => Number(x).toFixed(d).replace('.', ',').replace('-', '−');
+const ease = t => 1 - Math.pow(1 - clamp(t, 0, 1), 3);
+const REDUKCE = matchMedia('(prefers-reduced-motion: reduce)').matches;
+function rng(seed) { return function () { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+
+/* Odvozené veličiny – jediné místo, kde se počítá fyzika dalekohledu. */
+function velicina() {
+  const t = TYPY[S.typ];
+  const Z = S.f1 / S.f2;
+  const pupila = S.D / Z;
+  const pole = t.afov / Z;                         // skutečné zorné pole (°)
+  const Def = Math.min(S.D, 7 * Z);               // světlo, které se vejde do zornice
+  return {
+    Z, pupila, pole,
+    delka: S.typ === 'galileo' ? S.f1 - S.f2 : S.f1 + S.f2,
+    svetlo: Math.pow(Def / 7, 2),
+    rozliseni: 116 / S.D,                          // Dawesova mez (″)
+    maxZ: 2 * S.D,
+    mlim: 7.7 + 5 * Math.log10(Def / 10),          // mezní hvězdná velikost
+    ostre: Math.abs(S.zaost) <= 0.3,
+    prevraci: t.prevraci,
+  };
+}
+
+/* =====================================================================
+   Díly stavebnice
+   ===================================================================== */
+const DILY = {
+  kepler: [
+    { id: 'stativ', nazev: 'Stativ a montáž', kratce: 'pevný základ', ikona: 'stativ', potrebuje: [],
+      text: 'Při zvětšení 50× se <b>každé zachvění zvětší také 50×</b>. Proto dalekohled stojí na pevném stativu. Montáž nahoře umožní dalekohled otáčet a namířit ho přesně tam, kam potřebuješ.' },
+    { id: 'tubus', nazev: 'Tubus', kratce: 'drží čočky v zákrytu', ikona: 'tubus', potrebuje: ['stativ'], chybi: 'Tubus nemá na co položit – nejdřív postav stativ.',
+      text: 'Trubka drží objektiv a okulár <b>přesně na jedné ose</b> a ve správné vzdálenosti – u Keplerova dalekohledu asi <b>f₁ + f₂</b>. Uvnitř je matně černá, aby boční světlo nekazilo kontrast.' },
+    { id: 'objektiv', nazev: 'Objektiv', kratce: 'velká spojka vpředu', ikona: 'spojka', potrebuje: ['tubus'], chybi: 'Objektiv se vsazuje do přední části tubusu – tubus zatím chybí.',
+      text: 'Velká <b>spojka</b> sbírá světlo. Čím větší průměr D, tím víc světla nasbírá a tím jemnější detaily rozliší. Ve vzdálenosti <b>f₁</b> za sebou vytvoří <b>skutečný, zmenšený a převrácený</b> obraz vzdáleného předmětu.' },
+    { id: 'ohniskovac', nazev: 'Ohniskovač', kratce: 'výsuv s kolečkem', ikona: 'ohniskovac', potrebuje: ['tubus'], chybi: 'Ohniskovač se šroubuje na zadní konec tubusu – ten zatím chybí.',
+      text: 'Výsuvná trubka s kolečkem. Posouvá okulár tak, aby <b>ohnisko okuláru leželo přesně v obrazu od objektivu</b>. Tomu se říká <b>zaostření</b>.' },
+    { id: 'okular', nazev: 'Okulár', kratce: 'malá spojka u oka', ikona: 'okular', potrebuje: ['ohniskovac'], chybi: 'Okulár se zasouvá do ohniskovače – ten zatím chybí.',
+      text: 'Malá spojka s krátkým ohniskem funguje jako <b>lupa</b>: prohlížíš si jí obraz, který vytvořil objektiv. Zvětšení <b>Z = f₁ : f₂</b> – okulár s kratším ohniskem zvětšuje víc.' },
+    { id: 'hledacek', nazev: 'Hledáček', kratce: 'malý dalekohled navíc', ikona: 'hledacek', potrebuje: ['tubus'], chybi: 'Hledáček se připevňuje na tubus – ten zatím chybí.',
+      text: 'Hlavním dalekohledem vidíš jen malinký kousek oblohy. <b>Hledáček</b> má malé zvětšení a velké zorné pole, takže v něm objekt snadno najdeš a pak se podíváš hlavním okulárem.' },
+  ],
+  galileo: [
+    { id: 'stativ', nazev: 'Stolní stativ', kratce: 'aby se obraz netřásl', ikona: 'stativ', potrebuje: [],
+      text: 'Galileo držel první dalekohledy v ruce – a obraz se mu třásl. Stačí i malý stativ a pozorování je hned klidnější.' },
+    { id: 'tubus', nazev: 'Tubus', kratce: 'mosazná trubka', ikona: 'tubus', potrebuje: ['stativ'], chybi: 'Tubus nemá na co položit – nejdřív postav stativ.',
+      text: 'Galileův dalekohled je <b>krátký</b>: okulár je <b>před</b> ohniskem objektivu, takže délka je jen <b>f₁ − f₂</b>.' },
+    { id: 'objektiv', nazev: 'Objektiv', kratce: 'spojka vpředu', ikona: 'spojka', potrebuje: ['tubus'], chybi: 'Objektiv patří do přední části tubusu – tubus zatím chybí.',
+      text: 'Spojka sbírá světlo a láme ho k ohnisku. Paprsky se však <b>nestihnou sejít</b> – dřív je zachytí okulár.' },
+    { id: 'vysuv', nazev: 'Výsuv okuláru', kratce: 'zaostřování', ikona: 'ohniskovac', potrebuje: ['tubus'], chybi: 'Výsuv se zasouvá do zadní části tubusu – ten zatím chybí.',
+      text: 'Užší trubka, která se dá vysouvat. Tak se nastavuje vzdálenost okuláru od objektivu – <b>zaostřuje</b> se.' },
+    { id: 'okular', nazev: 'Okulár – rozptylka', kratce: 'vzpřímený obraz', ikona: 'rozptylka', potrebuje: ['vysuv'], chybi: 'Okulár sedí na konci výsuvu – ten zatím chybí.',
+      text: '<b>Rozptylka</b> umístěná před ohniskem objektivu srovná sbíhavé paprsky znovu do rovnoběžných svazků. Obraz zůstane <b>vzpřímený</b> – proto se tento typ používá v divadelních kukátkách.' },
+  ],
+  newton: [
+    { id: 'stativ', nazev: 'Dobsonova montáž', kratce: 'dřevěná kolébka', ikona: 'dobson', potrebuje: [],
+      text: 'Jednoduchá dřevěná „kolébka“, ve které se tubus otáčí nahoru–dolů a celá bedna dokola. Vymyslel ji <b>John Dobson</b>, aby si každý mohl postavit velký dalekohled.' },
+    { id: 'tubus', nazev: 'Tubus', kratce: 'široká trubka', ikona: 'tubus', potrebuje: ['stativ'], chybi: 'Tubus nemá kam položit – nejdřív postav montáž.',
+      text: 'Světlo vstupuje otevřeným koncem, dopadne na zrcadlo na dně a vrací se zpět nahoru. Tubus je proto <b>asi tak dlouhý jako f₁</b>.' },
+    { id: 'zrcadlo', nazev: 'Hlavní zrcadlo', kratce: 'duté, na dně tubusu', ikona: 'zrcadlo', potrebuje: ['tubus'], chybi: 'Zrcadlo sedí na dně tubusu – tubus zatím chybí.',
+      text: '<b>Duté (parabolické) zrcadlo</b> dělá totéž co objektiv – soustředí světlo do ohniska. Využívá ale <b>odraz</b>, ne lom, a tak nemá barevné vady. Zrcadlo se dá podepřít zezadu, proto může být obrovské.' },
+    { id: 'sekundar', nazev: 'Rovinné zrcátko', kratce: 'pod úhlem 45°', ikona: 'sekundar', potrebuje: ['tubus'], chybi: 'Zrcátko visí na tenkých pásech uvnitř tubusu – tubus zatím chybí.',
+      text: 'Malé rovinné zrcátko pod úhlem 45° poblíž ústí tubusu <b>odkloní paprsky ven z tubusu</b> k okuláru. Jinak by ses musel dívat přímo do tubusu a zakryl bys hlavou světlo. Zrcátko stíní malý kousek uprostřed.' },
+    { id: 'ohniskovac', nazev: 'Ohniskovač', kratce: 'na boku tubusu', ikona: 'ohniskovac', potrebuje: ['tubus'], chybi: 'Ohniskovač se šroubuje na bok tubusu – tubus zatím chybí.',
+      text: 'U Newtonova dalekohledu je ohniskovač <b>na boku tubusu</b> u otevřeného konce. Pozoruješ tedy kolmo na směr, kam dalekohled míří.' },
+    { id: 'okular', nazev: 'Okulár', kratce: 'lupa na obraz', ikona: 'okular', potrebuje: ['ohniskovac'], chybi: 'Okulár se zasouvá do ohniskovače – ten zatím chybí.',
+      text: 'Stejný okulár jako u čočkového dalekohledu – <b>lupa</b>, kterou si prohlížíš obraz ze zrcadla. Zvětšení <b>Z = f₁ : f₂</b>.' },
+    { id: 'hledacek', nazev: 'Hledáček', kratce: 'na hledání objektů', ikona: 'hledacek', potrebuje: ['tubus'], chybi: 'Hledáček se připevňuje na tubus – ten zatím chybí.',
+      text: 'Malý dalekohled se širokým polem – pomůže namířit velký dalekohled na správné místo oblohy.' },
+  ],
+};
+const IKONY = {
+  stativ: '<path d="M20 6v6M20 12 8 29M20 12l12 17M20 12v17" stroke="currentColor" stroke-width="2.2" fill="none"/><rect x="14" y="3" width="12" height="6" rx="1.5" fill="currentColor"/>',
+  dobson: '<path d="M6 28h28M9 28V12h6l5 7 5-7h6v16" stroke="currentColor" stroke-width="2.2" fill="none"/>',
+  tubus: '<rect x="3" y="9" width="34" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M11 9v12M29 9v12" stroke="currentColor" stroke-width="1.4"/>',
+  spojka: '<path d="M20 3q9 12 0 24q-9-12 0-24z" fill="currentColor" fill-opacity=".25" stroke="currentColor" stroke-width="2"/>',
+  rozptylka: '<path d="M15 3h10q-5 12 0 24H15q5-12 0-24z" fill="currentColor" fill-opacity=".25" stroke="currentColor" stroke-width="2"/>',
+  ohniskovac: '<rect x="12" y="9" width="20" height="12" fill="none" stroke="currentColor" stroke-width="2"/><rect x="4" y="11" width="9" height="8" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="22" cy="25" r="3.5" fill="currentColor"/>',
+  okular: '<rect x="8" y="10" width="22" height="10" rx="2" fill="currentColor" fill-opacity=".85"/><rect x="4" y="11" width="5" height="8" rx="2" fill="currentColor"/><path d="M30 10v10" stroke="currentColor" stroke-width="2"/>',
+  hledacek: '<rect x="6" y="6" width="26" height="7" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 13v7M26 13v7M4 22h32" stroke="currentColor" stroke-width="2"/>',
+  zrcadlo: '<path d="M26 3q-9 12 0 24h5V3z" fill="currentColor" fill-opacity=".3" stroke="currentColor" stroke-width="2"/>',
+  sekundar: '<path d="M12 24 28 8" stroke="currentColor" stroke-width="4"/><path d="M20 2v26" stroke="currentColor" stroke-width="1" stroke-dasharray="2 2"/>',
+};
+
+/* =====================================================================
+   Pomocné kreslení na plátně s ohledem na devicePixelRatio
+   ===================================================================== */
+function platno(canvas, logW, logH) {
+  const ctx = canvas.getContext('2d');
+  const p = { canvas, ctx, w: logW || 0, h: logH || 0, fix: !!logW, scale: 1 };
+  p.resize = function () {
+    const r = canvas.getBoundingClientRect();
+    const dpr = Math.min(window.devicePixelRatio || 1, 2.5);
+    const cw = Math.max(1, r.width), ch = Math.max(1, r.height);
+    canvas.width = Math.round(cw * dpr); canvas.height = Math.round(ch * dpr);
+    if (p.fix) { p.scale = cw / p.w; ctx.setTransform(dpr * p.scale, 0, 0, dpr * p.scale, 0, 0); }
+    else { p.w = cw; p.h = ch; ctx.setTransform(dpr, 0, 0, dpr, 0, 0); }
+    p.dpr = dpr;
+  };
+  p.reset = function () { const d = p.dpr, s = p.fix ? p.scale : 1; ctx.setTransform(d * s, 0, 0, d * s, 0, 0); };
+  return p;
+}
+const css = name => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+let BARVY = {};
+function nactiBarvy() {
+  BARVY = { text: css('--text'), muted: css('--text-muted'), faint: css('--text-faint'), accent: css('--accent'),
+    warn: css('--warn'), p2: css('--paprsek2'), ok: css('--ok'), danger: css('--danger'), deep: css('--bg-deep'),
+    border: css('--border-strong'), panel: css('--bg-panel'), svetly: document.documentElement.dataset.tone === 'light' };
+}
+
+/* =====================================================================
+   ① DÍLNA – scéna s dalekohledem
+   ===================================================================== */
+const SC = platno(document.getElementById('scena'), 900, 520);
+const CILE = {
+  mesic:   { x: 175, y: 112, nazev: 'Měsíc' },
+  jupiter: { x: 372, y: 64,  nazev: 'Jupiter' },
+  saturn:  { x: 812, y: 92,  nazev: 'Saturn' },
+  plejady: { x: 560, y: 34,  nazev: 'Plejády' },
+  vez:     { x: 64,  y: 356, nazev: 'věž' },
+};
+const PIVOT = { kepler: { x: 600, y: 262 }, galileo: { x: 610, y: 318 }, newton: { x: 598, y: 300 } };
+const ZEM = 452;
+let uhelTubusu = null;
+
+const hvezdyScena = (() => { const r = rng(7); const a = []; for (let i = 0; i < 230; i++) a.push({ x: r() * 900, y: r() * 380, m: r(), f: r() * 6.28 }); return a; })();
+
+function geom(typ) {
+  const f1 = S.f1, D = S.D;
+  if (typ === 'kepler') { const L = 190 + f1 / 11; return { L, front: L * .58, back: -L * .42, r: 11 + D / 9 }; }
+  if (typ === 'galileo') { const L = 130 + f1 / 9; return { L, front: L * .55, back: -L * .45, r: 8 + D / 7 }; }
+  const L = 175 + f1 / 13; return { L, front: L * .5, back: -L * .5, r: 16 + D / 7.5 };
+}
+function stredTubusu(typ, g) {
+  const p = PIVOT[typ];
+  return typ === 'newton' ? { x: p.x, y: p.y } : { x: p.x, y: p.y - g.r - 7 };
+}
+function uhelNaCil(typ) {
+  const g = geom(typ), c = stredTubusu(typ, g), t = CILE[S.cil];
+  // výška nad obzorem (osa y míří dolů); omezit, aby zadní konec nezajel do země
+  const elev = clamp(Math.atan2(c.y - t.y, Math.abs(t.x - c.x)), -4 * DEG, 68 * DEG);
+  return t.x >= c.x ? -elev : Math.PI + elev;
+}
+
+/* Tvary dílů v místních souřadnicích tubusu (osa x míří k obloze). */
+function tvaryDilu(typ, id, g, ctx) {
+  const { L, front, back, r } = g;
+  const out = [];
+  const P = () => new Path2D();
+  const lin = (x0, y0, x1, y1, stops) => { const gr = ctx.createLinearGradient(x0, y0, x1, y1); stops.forEach((c, i) => gr.addColorStop(i / (stops.length - 1), c)); return gr; };
+  const zaostPx = 7 + S.zaost * 0.9;
+  if (id === 'tubus') {
+    const p = P(); p.rect(back, -r, front - back, 2 * r);
+    const fill = typ === 'galileo' ? lin(0, -r, 0, r, ['#f4d98f', '#c99a3e', '#7c5614']) : lin(0, -r, 0, r, ['#f3f6fa', '#c3cad4', '#79828f']);
+    out.push({ p, fill, alpha: S.rez ? 0.32 : 1, stroke: typ === 'galileo' ? '#f1d48a' : '#e9eef5', lw: 1.3 });
+    if (typ !== 'newton') {
+      const rosa = P(); rosa.rect(front - L * .15, -r - 2, L * .15, 2 * r + 4);
+      out.push({ p: rosa, fill: typ === 'galileo' ? lin(0, -r, 0, r, ['#e5c575', '#9b7222', '#5d400d']) : lin(0, -r, 0, r, ['#5b6270', '#30353e', '#1b1e24']), alpha: S.rez ? 0.55 : 1 });
+    } else {
+      const lem = P(); lem.rect(front - 8, -r - 2, 8, 2 * r + 4); lem.rect(back, -r - 2, 8, 2 * r + 4);
+      out.push({ p: lem, fill: '#2b2f37' });
+    }
+    if (typ === 'galileo') { const k = P(); [0.2, 0.5, 0.8].forEach(t => k.rect(back + (front - back) * t - 2, -r - 1.5, 4, 2 * r + 3)); out.push({ p: k, fill: '#e8c46a' }); }
+    else if (typ === 'kepler') { const k = P(); [-0.14, 0.16].forEach(t => k.rect(L * t - 5, -r - 3, 10, 2 * r + 6)); out.push({ p: k, fill: '#2a2e36' }); }
+  }
+  if (id === 'objektiv') {
+    const x = front - L * .16, h = r - 2.5, b = typ === 'galileo' ? 6 : 9;
+    const p = P(); p.moveTo(x, -h); p.quadraticCurveTo(x + b, 0, x, h); p.quadraticCurveTo(x - b, 0, x, -h);
+    out.push({ p, fill: 'rgba(140,205,255,.55)', stroke: '#cfeaff', lw: 1.2 });
+    const c = P(); c.rect(x - 4, -r, 8, 3.5); c.rect(x - 4, r - 3.5, 8, 3.5);
+    out.push({ p: c, fill: '#1c1f25' });
+  }
+  if (id === 'ohniskovac' || id === 'vysuv') {
+    if (typ === 'newton') {
+      const xs = front - L * .14, w = Math.max(15, r * .5);
+      const p = P(); p.rect(xs - w / 2, -r - 16, w, 16); out.push({ p, fill: lin(xs - w / 2, 0, xs + w / 2, 0, ['#3a3f49', '#1a1d22']) });
+      const v = P(); v.rect(xs - w * .36, -r - 16 - Math.max(1, zaostPx), w * .72, Math.max(1, zaostPx)); out.push({ p: v, fill: '#9aa3ad' });
+      const k = P(); k.arc(xs + w / 2 + 5, -r - 8, 4.5, 0, 7); out.push({ p: k, fill: '#c9ced6' });
+    } else {
+      const fl = L * (typ === 'galileo' ? .2 : .12), rf = typ === 'galileo' ? r * .72 : Math.max(7, r * .45);
+      const p = P(); p.rect(back - fl, -rf, fl, 2 * rf);
+      out.push({ p, fill: typ === 'galileo' ? lin(0, -rf, 0, rf, ['#f0d288', '#b8872f', '#6f4c10']) : lin(0, -rf, 0, rf, ['#4a505b', '#22262d', '#15171b']) });
+      const v = P(); v.rect(back - fl - Math.max(1, zaostPx), -rf * .78, Math.max(1, zaostPx), rf * 1.56);
+      out.push({ p: v, fill: typ === 'galileo' ? '#d9b35c' : '#a8b0ba' });
+      if (typ === 'kepler') { const k = P(); k.arc(back - fl * .45, rf + 5, 5, 0, 7); out.push({ p: k, fill: '#c9ced6', stroke: '#6d737c', lw: 1 }); }
+    }
+  }
+  if (id === 'okular') {
+    if (typ === 'newton') {
+      const xs = front - L * .14, w = Math.max(15, r * .5) * .66, y0 = -r - 16 - Math.max(1, zaostPx);
+      const p = P(); p.rect(xs - w / 2, y0 - 22, w, 22); out.push({ p, fill: lin(xs - w / 2, 0, xs + w / 2, 0, ['#2d3139', '#0c0d10']) });
+      const c = P(); c.rect(xs - w / 2 - 1, y0 - 26, w + 2, 5); out.push({ p: c, fill: '#111' });
+      const k = P(); k.rect(xs - w / 2, y0 - 9, w, 2.4); out.push({ p: k, fill: '#b8c0c9' });
+    } else if (typ === 'galileo') {
+      const fl = L * .2, x0 = back - fl - Math.max(1, zaostPx), re = r * .62;
+      const p = P(); p.rect(x0 - 9, -re, 9, 2 * re); out.push({ p, fill: '#6b4a12', stroke: '#e8c46a', lw: 1 });
+      const l = P(); l.moveTo(x0 - 7, -re + 2); l.lineTo(x0 - 2, -re + 2); l.quadraticCurveTo(x0 - 5, 0, x0 - 2, re - 2); l.lineTo(x0 - 7, re - 2); l.quadraticCurveTo(x0 - 4, 0, x0 - 7, -re + 2);
+      out.push({ p: l, fill: 'rgba(140,205,255,.7)' });
+    } else {
+      const fl = L * .12, x0 = back - fl - Math.max(1, zaostPx), re = Math.max(5.5, r * .33);
+      const p = P(); p.rect(x0 - 22, -re, 22, 2 * re); out.push({ p, fill: lin(0, -re, 0, re, ['#3a3f47', '#121418', '#050506']) });
+      const k = P(); k.rect(x0 - 15, -re, 2.5, 2 * re); out.push({ p: k, fill: '#b8c0c9' });
+      const c = P(); c.roundRect ? c.roundRect(x0 - 28, -re - 1, 8, 2 * re + 2, 3) : c.rect(x0 - 28, -re - 1, 8, 2 * re + 2); out.push({ p: c, fill: '#0b0b0d' });
+    }
+  }
+  if (id === 'hledacek') {
+    const x0 = typ === 'newton' ? L * .02 : L * .06, x1 = typ === 'newton' ? L * .24 : L * .3, y = -r - 12, rh = 4.5;
+    const nozky = P(); nozky.rect(x0 + (x1 - x0) * .2 - 1.5, -r - 8, 3, 8); nozky.rect(x0 + (x1 - x0) * .75 - 1.5, -r - 8, 3, 8);
+    out.push({ p: nozky, fill: '#2a2e35' });
+    const p = P(); p.rect(x0, y - rh, x1 - x0, 2 * rh); p.rect(x1 - 6, y - rh - 1.5, 7, 2 * rh + 3);
+    out.push({ p, fill: lin(0, y - rh, 0, y + rh, ['#e7ebf1', '#9ba3ae', '#5a616b']) });
+  }
+  if (id === 'zrcadlo') {
+    const x = back + 9, h = r - 4;
+    const p = P(); p.moveTo(x - 7, -h); p.lineTo(x + 3, -h); p.quadraticCurveTo(x - 6, 0, x + 3, h); p.lineTo(x - 7, h); p.closePath();
+    out.push({ p, fill: lin(x - 7, -h, x + 3, h, ['#ffffff', '#aab6c6', '#e9f0f8', '#7b8898']), stroke: '#dfe8f3', lw: 1 });
+  }
+  if (id === 'sekundar') {
+    const xs = front - L * .14, s = r * .3;
+    const v = P(); v.moveTo(xs, -r); v.lineTo(xs, r); out.push({ p: v, stroke: 'rgba(200,210,220,.7)', lw: 1 });
+    const p = P(); p.moveTo(xs - s - 2, s - 2); p.lineTo(xs - s + 2, s + 2); p.lineTo(xs + s + 2, -s + 2); p.lineTo(xs + s - 2, -s - 2); p.closePath();
+    out.push({ p, fill: lin(xs - s, s, xs + s, -s, ['#8a96a6', '#ffffff', '#8a96a6']), stroke: '#fff', lw: .8 });
+  }
+  return out;
+}
+/* Rozložení na díly: posun každého dílu v místních souřadnicích. */
+function posunRozlozeni(typ, id, g) {
+  const r = g.r;
+  const m = {
+    kepler: { objektiv: [80, 0], ohniskovac: [-38, 0], okular: [-78, 0], hledacek: [10, -38], tubus: [0, 0] },
+    galileo: { objektiv: [70, 0], vysuv: [-50, 0], okular: [-100, 0], tubus: [0, 0] },
+    newton: { zrcadlo: [-90, 0], sekundar: [60, 0], ohniskovac: [0, -40], okular: [0, -85], hledacek: [-10, -r - 10], tubus: [0, 0] },
+  }[typ][id] || [0, 0];
+  return m;
+}
+function kotvaDilu(typ, id, g) {
+  const { L, front, back, r } = g;
+  const zp = 7 + S.zaost * 0.9;
+  const m = {
+    tubus: [0, r], objektiv: [front - L * .16, -r], ohniskovac: typ === 'newton' ? [front - L * .14, -r - 10] : [back - L * .1, 0],
+    vysuv: [back - L * .1, 0], okular: typ === 'newton' ? [front - L * .14, -r - 30 - zp] : [back - L * .12 - zp - 14, 0],
+    hledacek: [L * .16, -r - 12], zrcadlo: [back + 6, 0], sekundar: [front - L * .14, 0],
+  };
+  return m[id] || [0, 0];
+}
+
+function kresliStativ(ctx, typ, g, alfa, duch) {
+  const p = PIVOT[typ];
+  ctx.save();
+  ctx.globalAlpha *= alfa;
+  const tah = (x0, y0, x1, y1, w, c) => { ctx.strokeStyle = c; ctx.lineWidth = w; ctx.lineCap = 'round'; ctx.beginPath(); ctx.moveTo(x0, y0); ctx.lineTo(x1, y1); ctx.stroke(); };
+  if (duch) { ctx.setLineDash([5, 4]); ctx.strokeStyle = duch; ctx.lineWidth = 1.5; }
+  if (typ === 'newton') {
+    const w = 64, top = p.y - 18;
+    if (duch) { ctx.strokeRect(p.x - w, top, 2 * w, ZEM + 12 - top); }
+    else {
+      const gr = ctx.createLinearGradient(p.x - w, 0, p.x + w, 0); gr.addColorStop(0, '#6b4424'); gr.addColorStop(.5, '#9c6a3c'); gr.addColorStop(1, '#5a391d');
+      ctx.fillStyle = gr;
+      ctx.beginPath(); ctx.moveTo(p.x - w, ZEM + 12); ctx.lineTo(p.x - w, top); ctx.lineTo(p.x - w * .45, top); ctx.lineTo(p.x - 18, p.y + 26); ctx.lineTo(p.x + 18, p.y + 26); ctx.lineTo(p.x + w * .45, top); ctx.lineTo(p.x + w, top); ctx.lineTo(p.x + w, ZEM + 12); ctx.closePath(); ctx.fill();
+      ctx.fillStyle = '#4a2f18'; ctx.fillRect(p.x - w - 10, ZEM + 8, 2 * w + 20, 10);
+      ctx.strokeStyle = 'rgba(255,220,170,.25)'; ctx.lineWidth = 1; ctx.strokeRect(p.x - w + 6, top + 40, 2 * w - 12, ZEM - top - 40);
+    }
+  } else {
+    const kr = typ === 'galileo';
+    const hl = kr ? 14 : 22, spod = kr ? ZEM + 6 : ZEM + 30;
+    if (duch) {
+      ctx.beginPath(); ctx.moveTo(p.x, p.y + hl); ctx.lineTo(p.x - (kr ? 55 : 88), spod); ctx.moveTo(p.x, p.y + hl); ctx.lineTo(p.x + (kr ? 50 : 80), spod); ctx.moveTo(p.x, p.y + hl); ctx.lineTo(p.x - 6, spod + 8); ctx.stroke();
+      ctx.strokeRect(p.x - 12, p.y - 6, 24, hl + 6);
+    } else {
+      const noha = kr ? '#5d3d17' : '#8f97a3';
+      tah(p.x, p.y + hl, p.x - 6, spod + 8, kr ? 4 : 6, kr ? '#3d280f' : '#5e6570');
+      tah(p.x, p.y + hl, p.x - (kr ? 55 : 88), spod, kr ? 4 : 7, noha);
+      tah(p.x, p.y + hl, p.x + (kr ? 50 : 80), spod, kr ? 4 : 7, noha);
+      if (!kr) { tah(p.x - 44, (p.y + hl + spod) / 2 + 12, p.x + 40, (p.y + hl + spod) / 2 + 12, 2, '#6c737e'); }
+      const gr = ctx.createLinearGradient(p.x - 12, 0, p.x + 12, 0); gr.addColorStop(0, '#2d3139'); gr.addColorStop(.5, '#5a606b'); gr.addColorStop(1, '#23262c');
+      ctx.fillStyle = gr; ctx.fillRect(p.x - 12, p.y - 6, 24, hl + 6);
+      ctx.fillStyle = '#c9ced6'; ctx.beginPath(); ctx.arc(p.x + 13, p.y + 6, 4, 0, 7); ctx.fill();
+    }
+  }
+  ctx.restore();
+}
+
+function kresliScenu(cas) {
+  const ctx = SC.ctx; SC.reset();
+  const W = 900, H = 520, typ = S.typ, g = geom(typ);
+  // obloha
+  const nb = ctx.createLinearGradient(0, 0, 0, H); nb.addColorStop(0, '#050a1f'); nb.addColorStop(.55, '#122250'); nb.addColorStop(.78, '#2c3b6e'); nb.addColorStop(1, '#1a2240');
+  ctx.fillStyle = nb; ctx.fillRect(0, 0, W, H);
+  // Mléčná dráha
+  ctx.save(); ctx.translate(520, 180); ctx.rotate(-0.55);
+  const mw = ctx.createRadialGradient(0, 0, 10, 0, 0, 380); mw.addColorStop(0, 'rgba(170,185,255,.13)'); mw.addColorStop(1, 'rgba(170,185,255,0)');
+  ctx.fillStyle = mw; ctx.scale(1, .22); ctx.beginPath(); ctx.arc(0, 0, 380, 0, 7); ctx.fill(); ctx.restore();
+  for (const s of hvezdyScena) {
+    const tw = REDUKCE ? 1 : 0.75 + 0.25 * Math.sin(cas / 700 + s.f * 3);
+    ctx.globalAlpha = (0.25 + s.m * 0.75) * tw;
+    ctx.fillStyle = '#fff'; ctx.fillRect(s.x, s.y, s.m > .93 ? 2 : 1.2, s.m > .93 ? 2 : 1.2);
+  }
+  ctx.globalAlpha = 1;
+  // cíle na obloze
+  const zar = (x, y, r, c) => { const gr = ctx.createRadialGradient(x, y, 0, x, y, r); gr.addColorStop(0, c); gr.addColorStop(1, 'rgba(0,0,0,0)'); ctx.fillStyle = gr; ctx.beginPath(); ctx.arc(x, y, r, 0, 7); ctx.fill(); };
+  const m = CILE.mesic; zar(m.x, m.y, 60, 'rgba(255,248,220,.22)');
+  ctx.fillStyle = '#f1ecd9'; ctx.beginPath(); ctx.arc(m.x, m.y, 21, 0, 7); ctx.fill();
+  ctx.fillStyle = 'rgba(10,18,50,.9)'; ctx.beginPath(); ctx.arc(m.x, m.y, 21, Math.PI / 2, Math.PI * 1.5); ctx.ellipse(m.x, m.y, 8, 21, 0, -Math.PI / 2, Math.PI / 2, true); ctx.fill();
+  ctx.fillStyle = 'rgba(120,115,100,.35)'; [[4, -6, 5], [9, 5, 4], [-2, 8, 3]].forEach(([dx, dy, r]) => { ctx.beginPath(); ctx.arc(m.x + dx, m.y + dy, r, 0, 7); ctx.fill(); });
+  zar(CILE.jupiter.x, CILE.jupiter.y, 14, 'rgba(255,240,200,.6)'); ctx.fillStyle = '#fff6df'; ctx.beginPath(); ctx.arc(CILE.jupiter.x, CILE.jupiter.y, 3.2, 0, 7); ctx.fill();
+  zar(CILE.saturn.x, CILE.saturn.y, 11, 'rgba(255,230,170,.5)'); ctx.fillStyle = '#ffe9b8'; ctx.beginPath(); ctx.arc(CILE.saturn.x, CILE.saturn.y, 2.6, 0, 7); ctx.fill();
+  const pr = rng(3); ctx.fillStyle = '#dfe9ff';
+  for (let i = 0; i < 9; i++) { const x = CILE.plejady.x + (pr() - .5) * 34, y = CILE.plejady.y + (pr() - .5) * 20; zar(x, y, 5, 'rgba(160,190,255,.35)'); ctx.fillRect(x - 1, y - 1, 2, 2); }
+  // krajina v dálce s vesnicí a věží
+  ctx.fillStyle = '#0d1430';
+  ctx.beginPath(); ctx.moveTo(0, 372); for (let x = 0; x <= W; x += 30) ctx.lineTo(x, 372 - 16 * Math.sin(x / 140) - 8 * Math.sin(x / 47 + 1)); ctx.lineTo(W, H); ctx.lineTo(0, H); ctx.fill();
+  const v = CILE.vez;
+  ctx.fillStyle = '#0a0f25';
+  ctx.fillRect(v.x - 6, v.y - 4, 12, 30); ctx.beginPath(); ctx.moveTo(v.x - 8, v.y - 4); ctx.quadraticCurveTo(v.x, v.y - 26, v.x + 8, v.y - 4); ctx.fill(); ctx.fillRect(v.x - 0.8, v.y - 34, 1.6, 12);
+  ctx.fillStyle = 'rgba(255,214,120,.9)'; ctx.beginPath(); ctx.arc(v.x, v.y + 3, 2.4, 0, 7); ctx.fill();
+  [[110, 381], [128, 379], [150, 384], [30, 383], [200, 386]].forEach(([x, y]) => { ctx.fillStyle = '#0a0f25'; ctx.fillRect(x - 9, y - 7, 18, 12); ctx.beginPath(); ctx.moveTo(x - 11, y - 7); ctx.lineTo(x, y - 15); ctx.lineTo(x + 11, y - 7); ctx.fill(); ctx.fillStyle = 'rgba(255,210,120,.85)'; ctx.fillRect(x - 3, y - 3, 3, 3); });
+  // popisky cílů
+  ctx.font = '600 12px system-ui, sans-serif'; ctx.textAlign = 'center';
+  for (const [k, c] of Object.entries(CILE)) {
+    const aktiv = k === S.cil;
+    ctx.fillStyle = aktiv ? '#ffe28a' : 'rgba(220,228,255,.55)';
+    const dy = k === 'mesic' ? 38 : k === 'vez' ? -44 : 20;
+    ctx.fillText(c.nazev, c.x, c.y + dy);
+    if (aktiv) { ctx.strokeStyle = 'rgba(255,226,138,.8)'; ctx.lineWidth = 1.5; ctx.setLineDash([4, 4]); ctx.beginPath(); ctx.arc(c.x, c.y + (k === 'vez' ? -8 : 0), k === 'mesic' ? 30 : 18, 0, 7); ctx.stroke(); ctx.setLineDash([]); }
+  }
+  // popředí – kopec
+  const zem = ctx.createLinearGradient(0, 400, 0, H); zem.addColorStop(0, '#16301f'); zem.addColorStop(1, '#0a160e');
+  ctx.fillStyle = zem; ctx.beginPath(); ctx.moveTo(0, H); ctx.lineTo(0, 470); ctx.quadraticCurveTo(300, 420, 560, ZEM + 4); ctx.quadraticCurveTo(760, 438, W, 470); ctx.lineTo(W, H); ctx.fill();
+  ctx.strokeStyle = 'rgba(120,180,120,.35)'; ctx.lineWidth = 1;
+  const gr2 = rng(11); for (let i = 0; i < 90; i++) { const x = gr2() * W, y = 470 + gr2() * 45; ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x + 2 - gr2() * 4, y - 4 - gr2() * 5); ctx.stroke(); }
+
+  // ---------------- dalekohled ----------------
+  const slozeno = S.slozeno[typ], dily = DILY[typ];
+  const cil = uhelNaCil(typ);
+  if (uhelTubusu == null) uhelTubusu = cil;
+  let d = cil - uhelTubusu; while (d > Math.PI) d -= 2 * Math.PI; while (d < -Math.PI) d += 2 * Math.PI;
+  uhelTubusu += REDUKCE ? d : d * 0.12;
+  const animace = { bezi: Math.abs(d) > 0.002 };
+  S.rozlozit += (S.rozlozitCil - S.rozlozit) * (REDUKCE ? 1 : 0.14);
+  if (Math.abs(S.rozlozitCil - S.rozlozit) > 0.002) animace.bezi = true; else S.rozlozit = S.rozlozitCil;
+  const c = stredTubusu(typ, g), a = uhelTubusu, flip = Math.cos(a) < 0 ? -1 : 1;
+  const najeti = id => { const t = slozeno.get(id); if (t == null) return null; const u = (cas - t) / 650; if (u < 1) animace.bezi = true; return ease(u); };
+  const duch = S.tazeno ? 'rgba(255,226,138,.95)' : 'rgba(160,200,255,.5)';
+  const dalsi = dalsiDil();
+
+  // stativ (ve světových souřadnicích)
+  const st = najeti('stativ');
+  if (st == null) kresliStativ(ctx, typ, g, 1, (S.tazeno === 'stativ' || (!S.tazeno && dalsi === 'stativ')) ? 'rgba(255,226,138,.95)' : 'rgba(160,200,255,.45)');
+  else { ctx.save(); ctx.translate(0, (1 - st) * 40); kresliStativ(ctx, typ, g, st, null); ctx.restore(); }
+
+  ctx.save(); ctx.translate(c.x, c.y); ctx.rotate(a); ctx.scale(1, flip);
+  // sedlo/rybina, pokud stojí stativ a tubus
+  if (st != null && slozeno.has('tubus') && typ !== 'newton') { ctx.fillStyle = '#2a2e35'; ctx.fillRect(-g.L * .2, g.r, g.L * .4, 5); }
+  if (typ === 'newton' && slozeno.has('tubus') && st != null) { ctx.fillStyle = '#c9ced6'; ctx.beginPath(); ctx.arc(0, 0, 12, 0, 7); ctx.fill(); }
+  const poradi = typ === 'newton' ? ['zrcadlo', 'sekundar', 'tubus', 'ohniskovac', 'okular', 'hledacek'] : ['objektiv', 'tubus', 'ohniskovac', 'vysuv', 'okular', 'hledacek'];
+  // nejdřív obrysy chybějících dílů
+  for (const id of poradi) {
+    if (!dily.find(x => x.id === id) || slozeno.has(id)) continue;
+    const zvyr = S.tazeno === id || (!S.tazeno && dalsi === id);
+    ctx.save(); ctx.setLineDash([5, 4]); ctx.lineWidth = zvyr ? 1.8 : 1.1;
+    ctx.strokeStyle = zvyr ? 'rgba(255,226,138,.95)' : 'rgba(160,200,255,.4)';
+    if (zvyr && !REDUKCE) { ctx.globalAlpha = 0.6 + 0.4 * Math.sin(cas / 220); animace.bezi = true; }
+    for (const t of tvaryDilu(typ, id, g, ctx)) ctx.stroke(t.p);
+    ctx.restore();
+  }
+  // paprsky uvnitř (první světlo) – pod díly, aby byly vidět čočky
+  const kompletni = dily.every(x => slozeno.has(x.id));
+  if (S.svetlo && kompletni && S.rozlozit < 0.05) { kresliFotony(ctx, typ, g, cas); animace.bezi = true; }
+  // hotové díly
+  for (const id of poradi) {
+    const e = najeti(id); if (e == null) continue;
+    const [ex, ey] = posunRozlozeni(typ, id, g);
+    ctx.save(); ctx.translate(ex * S.rozlozit, ey * S.rozlozit - (1 - e) * 36); ctx.globalAlpha = e;
+    for (const t of tvaryDilu(typ, id, g, ctx)) {
+      ctx.save(); if (t.alpha != null) ctx.globalAlpha *= (S.rozlozit > 0.05 && id === 'tubus') ? Math.max(t.alpha, 0.85) : t.alpha;
+      if (t.fill) { ctx.fillStyle = t.fill; ctx.fill(t.p); }
+      ctx.restore();
+      if (t.stroke) { ctx.strokeStyle = t.stroke; ctx.lineWidth = t.lw || 1; ctx.stroke(t.p); }
+    }
+    ctx.restore();
+  }
+  ctx.restore();
+  // popisky při rozložení
+  if (S.rozlozit > 0.3) {
+    ctx.save(); ctx.globalAlpha = clamp((S.rozlozit - 0.3) / 0.5, 0, 1);
+    ctx.font = '600 12px system-ui, sans-serif'; ctx.textAlign = 'center';
+    const vse = [...slozeno.keys()].filter(id => id !== 'stativ');
+    vse.forEach((id, i) => {
+      const [kx, ky] = kotvaDilu(typ, id, g), [ex, ey] = posunRozlozeni(typ, id, g);
+      const lx = kx + ex * S.rozlozit, ly = (ky + ey * S.rozlozit) * flip;
+      const wx = c.x + lx * Math.cos(a) - ly * Math.sin(a), wy = c.y + lx * Math.sin(a) + ly * Math.cos(a);
+      const tx = wx + (i % 2 ? 28 : -28), ty = wy - 36 - (i % 3) * 12;
+      ctx.strokeStyle = 'rgba(255,226,138,.7)'; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(wx, wy); ctx.lineTo(tx, ty + 4); ctx.stroke();
+      const txt = DILY[typ].find(x => x.id === id).nazev, w = ctx.measureText(txt).width + 12;
+      ctx.fillStyle = 'rgba(8,12,30,.85)'; ctx.fillRect(tx - w / 2, ty - 13, w, 18);
+      ctx.fillStyle = '#ffe28a'; ctx.fillText(txt, tx, ty);
+    });
+    if (slozeno.has('stativ')) { const p = PIVOT[typ]; ctx.fillStyle = 'rgba(8,12,30,.85)'; const t = DILY[typ][0].nazev, w = ctx.measureText(t).width + 12; ctx.fillRect(p.x + 70 - w / 2, ZEM - 20, w, 18); ctx.fillStyle = '#ffe28a'; ctx.fillText(t, p.x + 70, ZEM - 7); }
+    ctx.restore();
+  }
+  // pozvánka
+  if (!slozeno.size) {
+    ctx.save(); ctx.font = '600 15px system-ui, sans-serif'; ctx.textAlign = 'center'; ctx.fillStyle = 'rgba(255,255,255,.8)';
+    ctx.fillText('Sem přetáhni díly ze zásobníku', 640, 170); ctx.restore();
+  }
+  return animace.bezi;
+}
+
+/* Fotony putující dalekohledem (místní souřadnice). */
+function drahyFotonu(typ, g) {
+  const { L, front, back, r } = g;
+  const zp = 7 + S.zaost * 0.9;
+  const cesty = [];
+  const vyska = typ === 'newton' ? [-.78, -.5, .5, .78] : [-.72, -.3, .3, .72];
+  for (const k of vyska) {
+    const y = k * (r - 4), far = front + 520;
+    if (typ === 'kepler') {
+      const xO = front - L * .16, xE = back - L * .12 - zp - 12, xF = xE + 16;
+      const yE = -y * (xF - xE) / (xO - xF);
+      cesty.push([[far, y], [xO, y], [xF, 0], [xE, yE], [xE - 34, yE]]);
+    } else if (typ === 'galileo') {
+      const xO = front - L * .16, xE = back - L * .2 - zp - 5, xF = xE - 16;
+      const yE = y * (xE - xF) / (xO - xF);
+      cesty.push([[far, y], [xO, y], [xE, yE], [xE - 34, yE]]);
+    } else {
+      const xM = back + 6, xS = front - L * .14, F = [xS, -r - 22 - zp];
+      const dF = (xS - xM) + (r + 22 + zp), yS = y * (1 - (xS - xM) / dF);
+      const H = [xS - yS, yS], yEy = -r - 30 - zp;
+      const t = (yEy - H[1]) / (F[1] - H[1]), E = [H[0] + (F[0] - H[0]) * t, yEy];
+      cesty.push([[far, y], [xM, y], H, E, [E[0], yEy - 34]]);
+    }
+  }
+  return cesty;
+}
+function kresliFotony(ctx, typ, g, cas) {
+  const cesty = drahyFotonu(typ, g);
+  ctx.save();
+  ctx.strokeStyle = 'rgba(255,214,107,.28)'; ctx.lineWidth = 1.4;
+  for (const c of cesty) { ctx.beginPath(); ctx.moveTo(c[0][0], c[0][1]); c.slice(1).forEach(p => ctx.lineTo(p[0], p[1])); ctx.stroke(); }
+  ctx.fillStyle = '#ffe9a8'; ctx.shadowColor = '#ffd66b'; ctx.shadowBlur = 8;
+  for (const c of cesty) {
+    const segs = []; let tot = 0;
+    for (let i = 1; i < c.length; i++) { const l = Math.hypot(c[i][0] - c[i - 1][0], c[i][1] - c[i - 1][1]); segs.push(l); tot += l; }
+    for (let k = 0; k < 7; k++) {
+      let s = ((cas * 0.16) + k * tot / 7) % tot;
+      for (let i = 0; i < segs.length; i++) {
+        if (s <= segs[i]) { const u = s / segs[i]; const x = c[i][0] + (c[i + 1][0] - c[i][0]) * u, y = c[i][1] + (c[i + 1][1] - c[i][1]) * u; ctx.beginPath(); ctx.arc(x, y, 2.2, 0, 7); ctx.fill(); break; }
+        s -= segs[i];
+      }
+    }
+  }
+  ctx.restore();
+  // oko pozorovatele
+  const kon = cesty[0][cesty[0].length - 1];
+  ctx.save(); ctx.translate(kon[0], typ === 'newton' ? kon[1] - 6 : 0);
+  if (typ === 'newton') ctx.rotate(-Math.PI / 2);
+  ctx.fillStyle = '#fff'; ctx.strokeStyle = '#ffe28a'; ctx.lineWidth = 1.5;
+  ctx.beginPath(); ctx.moveTo(-14, 0); ctx.quadraticCurveTo(0, -10, 14, 0); ctx.quadraticCurveTo(0, 10, -14, 0); ctx.fill(); ctx.stroke();
+  ctx.fillStyle = '#3b6fd8'; ctx.beginPath(); ctx.arc(0, 0, 4.5, 0, 7); ctx.fill(); ctx.fillStyle = '#000'; ctx.beginPath(); ctx.arc(0, 0, 2, 0, 7); ctx.fill();
+  ctx.restore();
+}
+
+/* ---------------- ovládání dílny ---------------- */
+const zasobnik = document.getElementById('zasobnik');
+const info = { nadpis: document.getElementById('infoNadpis'), text: document.getElementById('infoText'), box: document.getElementById('vysvetlivka') };
+function dalsiDil() {
+  const sl = S.slozeno[S.typ];
+  return (DILY[S.typ].find(d => !sl.has(d.id) && d.potrebuje.every(p => sl.has(p))) || {}).id;
+}
+function vykresliZasobnik() {
+  const sl = S.slozeno[S.typ];
+  zasobnik.innerHTML = '<div class="nadpis">Zásobník dílů</div>';
+  for (const d of DILY[S.typ]) {
+    const b = document.createElement('button');
+    b.className = 'dil' + (sl.has(d.id) ? ' hotovo' : '');
+    b.dataset.dil = d.id;
+    b.innerHTML = `<svg viewBox="0 0 40 30" aria-hidden="true">${IKONY[d.ikona]}</svg><b>${d.nazev}</b><small>${d.kratce}</small>`;
+    b.setAttribute('aria-label', d.nazev + (sl.has(d.id) ? ' – už je namontovaný' : ' – vložit do dalekohledu'));
+    zasobnik.appendChild(b);
+  }
+  const n = sl.size, N = DILY[S.typ].length;
+  document.getElementById('postupText').textContent = `${n} / ${N} dílů`;
+  document.getElementById('postupLista').style.width = (100 * n / N) + '%';
+  const komplet = n === N;
+  document.getElementById('btnSvetlo').disabled = !komplet;
+  document.getElementById('btnRozlozit').disabled = n < 2;
+  info.box.classList.toggle('hotovo', komplet && S.svetlo);
+}
+function vlozDil(id, tiche) {
+  const sl = S.slozeno[S.typ], d = DILY[S.typ].find(x => x.id === id);
+  if (!d) return false;
+  const btn = zasobnik.querySelector(`[data-dil="${id}"]`);
+  zasobnik.querySelectorAll('.napovez').forEach(e => e.classList.remove('napovez'));
+  if (sl.has(id)) { if (!tiche) { info.nadpis.textContent = d.nazev; info.text.innerHTML = d.text; } return false; }
+  const chybi = d.potrebuje.filter(p => !sl.has(p));
+  if (chybi.length) {
+    info.nadpis.textContent = 'Ještě ne!';
+    info.text.innerHTML = `<span class="hlaska-chyba">${d.chybi}</span>`;
+    if (btn) { btn.classList.remove('chyba'); void btn.offsetWidth; btn.classList.add('chyba'); }
+    chybi.forEach(p => zasobnik.querySelector(`[data-dil="${p}"]`)?.classList.add('napovez'));
+    return false;
+  }
+  if (S.rozlozitCil) { S.rozlozitCil = 0; document.getElementById('btnRozlozit').setAttribute('aria-pressed', 'false'); }
+  sl.set(id, performance.now());
+  vykresliZasobnik();
+  if (!tiche) {
+    const komplet = sl.size === DILY[S.typ].length;
+    info.nadpis.textContent = (komplet ? '🎉 Hotovo! ' : '✅ ') + d.nazev;
+    info.text.innerHTML = d.text + (komplet ? '<br><br><b>Dalekohled je složený.</b> Stiskni ✨ První světlo a sleduj, kudy světlo putuje.' : '');
+    document.getElementById(`scena`).setAttribute('aria-label', `Dalekohled: namontováno ${sl.size} z ${DILY[S.typ].length} dílů`);
+    zasobnik.querySelector(`[data-dil="${id}"]`)?.focus({ preventScroll: true });
+  }
+  budScena();
+  return true;
+}
+// přetahování dílů
+let tah = null, potlacKlik = false;
+zasobnik.addEventListener('pointerdown', e => {
+  const b = e.target.closest('.dil'); if (!b || e.button > 0) return;
+  tah = { id: b.dataset.dil, x: e.clientX, y: e.clientY, b, el: null };
+  b.setPointerCapture(e.pointerId);
+});
+zasobnik.addEventListener('pointermove', e => {
+  if (!tah) return;
+  if (!tah.el && Math.hypot(e.clientX - tah.x, e.clientY - tah.y) > 6) {
+    tah.el = document.createElement('div'); tah.el.className = 'letici'; tah.el.textContent = tah.b.querySelector('b').textContent;
+    document.body.appendChild(tah.el); S.tazeno = tah.id; budScena();
+  }
+  if (tah.el) {
+    tah.el.style.left = e.clientX + 'px'; tah.el.style.top = e.clientY + 'px';
+    const r = SC.canvas.getBoundingClientRect(), nad = e.clientX >= r.left && e.clientX <= r.right && e.clientY >= r.top && e.clientY <= r.bottom;
+    document.getElementById('scenaObal').classList.toggle('cil-pusteni', nad);
+  }
+});
+const konecTahu = e => {
+  if (!tah) return;
+  if (tah.el) {
+    const r = SC.canvas.getBoundingClientRect();
+    if (e.type === 'pointerup' && e.clientX >= r.left && e.clientX <= r.right && e.clientY >= r.top && e.clientY <= r.bottom) vlozDil(tah.id);
+    tah.el.remove(); potlacKlik = true; setTimeout(() => potlacKlik = false, 50);
+  }
+  document.getElementById('scenaObal').classList.remove('cil-pusteni');
+  S.tazeno = null; tah = null; budScena();
+};
+zasobnik.addEventListener('pointerup', konecTahu);
+zasobnik.addEventListener('pointercancel', konecTahu);
+zasobnik.addEventListener('click', e => { const b = e.target.closest('.dil'); if (!b || potlacKlik) return; vlozDil(b.dataset.dil); });
+
+document.getElementById('btnSlozVse').addEventListener('click', () => {
+  const sl = S.slozeno[S.typ]; let i = 0;
+  const krok = () => { const id = dalsiDil(); if (!id) return; vlozDil(id, i < DILY[S.typ].length - sl.size - 1); i++; setTimeout(krok, REDUKCE ? 0 : 260); };
+  krok();
+});
+document.getElementById('btnRozebrat').addEventListener('click', () => {
+  S.slozeno[S.typ].clear(); S.svetlo = false; S.rozlozitCil = 0;
+  document.getElementById('btnRozlozit').setAttribute('aria-pressed', 'false');
+  info.nadpis.textContent = 'Začni stativem'; info.text.textContent = 'Každý díl má svou úlohu. Po vložení se tu dočteš, k čemu slouží.';
+  vykresliZasobnik(); budScena();
+});
+document.getElementById('btnRozlozit').addEventListener('click', e => {
+  S.rozlozitCil = S.rozlozitCil ? 0 : 1; e.currentTarget.setAttribute('aria-pressed', String(!!S.rozlozitCil));
+  if (S.rozlozitCil) { info.nadpis.textContent = '🔍 Dalekohled rozložený na díly'; info.text.innerHTML = 'Díly se rozestoupily podél optické osy. Všimni si, že <b>objektiv, ohnisko a okulár leží na jedné přímce</b> – na optické ose.'; }
+  budScena();
+});
+document.getElementById('btnSvetlo').addEventListener('click', () => {
+  S.svetlo = true; S.rozlozitCil = 0; document.getElementById('btnRozlozit').setAttribute('aria-pressed', 'false');
+  const t = S.typ;
+  info.nadpis.textContent = '✨ První světlo!';
+  info.text.innerHTML = t === 'newton'
+    ? 'Světlo z hvězdy vstoupí otevřeným koncem, <b>odrazí se od dutého zrcadla</b> na dně, sbíhá se k ohnisku, <b>rovinné zrcátko</b> ho odkloní do boku a okulár ho srovná do rovnoběžného svazku, který vstoupí do oka.'
+    : t === 'galileo'
+      ? 'Objektiv láme světlo k ohnisku, ale <b>rozptylka ho zachytí dřív</b> a srovná do rovnoběžného svazku. Paprsky se nikde nezkříží, a proto je obraz <b>vzpřímený</b>.'
+      : 'Objektiv láme rovnoběžné paprsky z hvězdy do <b>ohniska</b>. Tam se <b>zkříží</b> (odtud převrácený obraz) a okulár je znovu srovná do rovnoběžného svazku, který vstoupí do oka.';
+  vykresliZasobnik(); budScena();
+});
+document.getElementById('btnKOkularu').addEventListener('click', () => document.getElementById('akce').scrollIntoView({ behavior: REDUKCE ? 'auto' : 'smooth' }));
+document.getElementById('rez').addEventListener('change', e => { S.rez = e.target.checked; budScena(); });
+SC.canvas.addEventListener('click', e => {
+  const r = SC.canvas.getBoundingClientRect(), x = (e.clientX - r.left) / r.width * 900, y = (e.clientY - r.top) / r.height * 520;
+  for (const [k, c] of Object.entries(CILE)) if (Math.hypot(c.x - x, c.y - y) < (k === 'mesic' ? 34 : 24)) { nastavCil(k); return; }
+  const id = dalsiDil(); if (id && S.slozeno[S.typ].size === 0) vlozDil(id);
+});
+
+/* =====================================================================
+   ② LABORATOŘ – chod paprsků (paraxiální trasování v pixelovém prostoru)
+   ===================================================================== */
+const PA = platno(document.getElementById('paprsky'));
+const PAPRSKY_VEDLE = 700;              // od této šířky je detail vedle celkového pohledu
+function kresliPaprsky() {
+  const ctx = PA.ctx; PA.reset();
+  const Wc = PA.w, Hc = PA.h, v = velicina(), typ = S.typ, B = BARVY;
+  ctx.clearRect(0, 0, Wc, Hc);
+  const vedle = Wc >= PAPRSKY_VEDLE, top = 30;
+  const Lp = vedle ? { x: 0, y: top, w: Math.round(Wc * .57), h: Hc - top } : { x: 0, y: top, w: Wc, h: Math.round((Hc - top) * .5) };
+  const Dp = vedle ? { x: Lp.w + 10, y: top, w: Wc - Lp.w - 10, h: Hc - top } : { x: 0, y: top + Lp.h + 8, w: Wc, h: Hc - top - Lp.h - 8 };
+  const det = detailRozsah(v);
+  ctx.save(); ctx.translate(Lp.x, Lp.y); ctx.beginPath(); ctx.rect(0, 0, Lp.w, Lp.h); ctx.clip();
+  const W = Lp.w, H = Lp.h;
+  ctx.font = '12px system-ui, sans-serif';
+  const f1 = S.f1, f2 = typ === 'galileo' ? -S.f2 : S.f2, D = S.D, dz = S.zaost;
+  const Dpx = D / 250 * (typ === 'newton' ? 0.46 : 0.64) * H;
+  const vy = Dpx / D;
+  const eyeRel = typ === 'galileo' ? 12 : S.f2 * (f1 + S.f2) / f1;
+  let vx, X0, osaY, xStart;
+  const rayH = typ === 'newton' ? [-.92, -.6, -.2, .2, .6, .92] : [-.9, -.5, 0, .5, .9];
+  const theta = (S.uhel / 100) * (v.pole / 2) * DEG;
+  const barvy = [B.warn, B.p2];
+  const cara = (pts, col, w = 1.5, dash) => { ctx.strokeStyle = col; ctx.lineWidth = w; ctx.setLineDash(dash || []); ctx.beginPath(); ctx.moveTo(pts[0][0], pts[0][1]); for (const p of pts.slice(1)) ctx.lineTo(p[0], p[1]); ctx.stroke(); ctx.setLineDash([]); };
+  const text = (t, x, y, col, al = 'center', b) => { ctx.fillStyle = col || B.muted; ctx.textAlign = al; ctx.font = (b ? '600 ' : '') + '12px system-ui, sans-serif'; ctx.fillText(t, x, y); };
+  const cocka = (x, y, h, konv, col, vodor) => {
+    ctx.save(); ctx.translate(x, y); if (vodor) ctx.rotate(Math.PI / 2);
+    ctx.strokeStyle = col; ctx.lineWidth = 2; ctx.fillStyle = BARVY.svetly ? 'rgba(47,111,206,.12)' : 'rgba(106,166,253,.14)';
+    const b = Math.min(10, h * .18);
+    ctx.beginPath();
+    if (konv) { ctx.moveTo(0, -h); ctx.quadraticCurveTo(b, 0, 0, h); ctx.quadraticCurveTo(-b, 0, 0, -h); }
+    else { ctx.moveTo(-b / 1.3, -h); ctx.lineTo(b / 1.3, -h); ctx.quadraticCurveTo(0, 0, b / 1.3, h); ctx.lineTo(-b / 1.3, h); ctx.quadraticCurveTo(0, 0, -b / 1.3, -h); }
+    ctx.fill(); ctx.stroke(); ctx.restore();
+  };
+  const oko = (x, y, smer) => {
+    ctx.save(); ctx.translate(x, y); ctx.rotate(smer);
+    ctx.strokeStyle = B.muted; ctx.lineWidth = 1.6; ctx.fillStyle = BARVY.svetly ? '#fff' : '#1d2230';
+    ctx.beginPath(); ctx.arc(14, 0, 14, 0, 7); ctx.fill(); ctx.stroke();
+    ctx.fillStyle = BARVY.accent; ctx.beginPath(); ctx.ellipse(1, 0, 2.5, 6, 0, 0, 7); ctx.fill();
+    ctx.restore();
+  };
+
+  // --- vlastní trasování: prvky v pořadí, paprsek = bod + směr ------------
+  if (typ !== 'newton') {
+    const span = 0.14 * f1 + f1 + f2 + Math.max(eyeRel, 12) + 45;
+    vx = (W - 36) / span; xStart = 14; X0 = xStart + 0.14 * f1 * vx; osaY = H / 2 - 6;
+    const XE = X0 + (f1 + f2 + dz) * vx, XF = X0 + f1 * vx;
+    const fs = typ === 'kepler' ? S.f2 * Math.tan(TYPY.kepler.afov / 2 * DEG) * vy : Infinity;
+    // osa
+    cara([[4, osaY], [W - 4, osaY]], B.faint, 1, [5, 5]);
+    // paprsky
+    [0, theta].forEach((th, bi) => {
+      const m0 = Math.tan(th) * vy / vx;   // sklon v pixelech (y dolů = kladné)
+      for (const k of rayH) {
+        const h = -k * Dpx / 2;           // výška na objektivu (px, nahoru záporné)
+        let y = osaY + h, m = m0;         // hvězda nad osou → paprsky jdou šikmo dolů
+        const pts = [[xStart, y - m * (X0 - xStart)], [X0, y]];
+        m = m - (y - osaY) / (f1 * vx);
+        if (typ === 'kepler') {
+          const yF = y + m * (XF - X0);
+          if (Math.abs(yF - osaY) > fs) { pts.push([XF, yF]); cara(pts, barvy[bi], 1.4); continue; }
+        }
+        const yE = y + m * (XE - X0); pts.push([XE, yE]);
+        const m2 = m - (yE - osaY) / (f2 * vx);
+        const xK = XE + (Math.max(eyeRel, 12) + 40) * vx;
+        pts.push([xK, yE + m2 * (xK - XE)]);
+        cara(pts, barvy[bi], 1.4);
+      }
+    });
+    cocka(X0, osaY, Dpx / 2 + 4, true, B.accent);
+    const hE = Math.max(10, Math.min(Dpx / 2, (typ === 'kepler' ? fs : S.f2 * .5 * vy) + 6));
+    cocka(XE, osaY, hE, typ !== 'galileo', B.accent);
+    if (typ === 'kepler') {
+      ctx.fillStyle = B.text; ctx.fillRect(XF - 1.5, osaY - fs - 10, 3, 10); ctx.fillRect(XF - 1.5, osaY + fs, 3, 10);
+      const yB = osaY + f1 * Math.tan(theta) * vy;   // obraz druhé hvězdy (převrácený)
+      [[osaY, barvy[0]], [yB, barvy[1]]].forEach(([yy, col]) => { if (Math.abs(yy - osaY) <= fs) { ctx.fillStyle = col; ctx.beginPath(); ctx.arc(XF, yy, 3.5, 0, 7); ctx.fill(); } });
+      text('ohnisko F₁ = obraz', Math.min(XF, W - 62), osaY - fs - 16, B.muted);
+    } else {
+      text('F₁', XF, osaY - 8, B.muted); ctx.fillStyle = B.faint; ctx.beginPath(); ctx.arc(XF, osaY, 3, 0, 7); ctx.fill();
+    }
+    oko(XE + Math.max(eyeRel, 12) * vx, osaY, 0);
+    text(`objektiv f₁ = ${f1} mm`, Math.max(6, X0 - 24), osaY - Dpx / 2 - 12, B.text, 'left', true);
+    text(`okulár f₂ = ${typ === 'galileo' ? '−' : ''}${S.f2} mm`, Math.min(XE, W - 70), osaY + hE + 18, B.text, 'center', true);
+    // kóty
+    const yk = H - 16;
+    ctx.strokeStyle = B.faint; ctx.lineWidth = 1;
+    const kota = (xa, xb, t) => { if (Math.abs(xb - xa) < 4) return; ctx.beginPath(); ctx.moveTo(xa, yk); ctx.lineTo(xb, yk); ctx.moveTo(xa, yk - 4); ctx.lineTo(xa, yk + 4); ctx.moveTo(xb, yk - 4); ctx.lineTo(xb, yk + 4); ctx.stroke(); if (Math.abs(xb - xa) > 30) text(t, (xa + xb) / 2, yk - 5, B.muted); };
+    kota(X0, XF, 'f₁'); if (typ === 'kepler') kota(XF, XE, 'f₂');
+    const vr = Math.max(det.ymax * vy, 8) + 6;
+    ramecek(X0 + det.zA * vx, osaY - vr, (det.zK - det.zA) * vx, 2 * vr);
+  } else {
+    // Newton: zrcadlo vpravo, zrcátko 45°, okulár nahoře
+    osaY = H - 18 - Dpx / 2;
+    const upMin = Dpx / 2 + 30;           // ohnisko musí ležet nad tubusem
+    vx = (W - 40) / (f1 * 1.18);
+    const pD = f1 - upMin / vx;              // vzdálenost zrcátka od zrcadla (mm)
+    const XM = W - 22, XS = XM - pD * vx;
+    xStart = Math.max(8, XS - 0.16 * f1 * vx);
+    const YF = osaY - (f1 - pD) * vx;
+    const YE = osaY - (f1 - pD + S.f2 + dz) * vx;
+    const fs = S.f2 * Math.tan(25 * DEG) * vy;
+    const sHalf = Dpx / 2 * (upMin / vx) / f1 + 3; // velikost zrcátka podle kužele
+    cara([[4, osaY], [XM, osaY]], B.faint, 1, [5, 5]);
+    cara([[XS, osaY], [XS, YE - 30]], B.faint, 1, [5, 5]);
+    // tubus
+    ctx.strokeStyle = B.border; ctx.lineWidth = 1.5; ctx.strokeRect(XS - 0.12 * f1 * vx, osaY - Dpx / 2 - 6, XM - XS + 0.12 * f1 * vx + 6, Dpx + 12);
+    [0, theta].forEach((th, bi) => {
+      const m0 = Math.tan(th) * vy / vx;
+      for (const k of rayH) {
+        const h = -k * Dpx / 2;
+        const yM = osaY + h;
+        const x0 = xStart, y0 = yM - m0 * (XM - x0);
+        const pts = [[x0, y0]];
+        // paprsky u středu zastaví zadní strana zrcátka (centrální zastínění)
+        const yS_in = yM - m0 * (XM - XS);
+        if (Math.abs(yS_in - osaY) < sHalf) { pts.push([XS + (yS_in - osaY), yS_in]); cara(pts, barvy[bi], 1.4); continue; }
+        pts.push([XM, yM]);
+        // duté zrcadlo: směr zpět (-1, m1), m1 = sklon na jednotku dráhy
+        const m1 = m0 - (yM - osaY) / (f1 * vx);
+        // paprsek: x = XM - s, y = yM + m1*s ; zrcátko 45°: x - XS = y - osaY
+        const s = (XM - XS - (yM - osaY)) / (1 + m1);
+        const hx = XM - s, hy = yM + m1 * s;
+        pts.push([hx, hy]);
+        // po odrazu jde nahoru; příčná souřadnice = x, sklon dx/d(nahoru)
+        const q = m1;                        // dx na jednotku dráhy nahoru
+        const tF = (hy - YF);
+        const xFp = hx + q * tF;
+        if (Math.abs(xFp - XS) > fs) { pts.push([xFp, YF]); cara(pts, barvy[bi], 1.4); continue; }
+        const xE = hx + q * (hy - YE);
+        pts.push([xE, YE]);
+        const q2 = q - (xE - XS) / (S.f2 * vx);
+        const YK = YE - (eyeRel + 30) * vx - 16;
+        pts.push([xE + q2 * (YE - YK), YK]);
+        cara(pts, barvy[bi], 1.4);
+      }
+    });
+    // zrcadlo
+    ctx.strokeStyle = B.accent; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(XM + 4, osaY - Dpx / 2 - 3); ctx.quadraticCurveTo(XM - 6, osaY, XM + 4, osaY + Dpx / 2 + 3); ctx.stroke();
+    ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(XS - sHalf, osaY - sHalf); ctx.lineTo(XS + sHalf, osaY + sHalf); ctx.stroke();
+    ctx.fillStyle = B.text; ctx.fillRect(XS - fs - 10, YF - 1.5, 10, 3); ctx.fillRect(XS + fs, YF - 1.5, 10, 3);
+    cocka(XS, YE, Math.max(8, fs + 6), true, B.accent, true);
+    const yb = XS + f1 * Math.tan(theta) * vy;
+    [[XS, barvy[0]], [yb, barvy[1]]].forEach(([xx, col]) => { if (Math.abs(xx - XS) <= fs) { ctx.fillStyle = col; ctx.beginPath(); ctx.arc(xx, YF, 3.5, 0, 7); ctx.fill(); } });
+    oko(XS, YE - Math.max(eyeRel, 10) * vx, -Math.PI / 2);
+    text(`duté zrcadlo f₁ = ${f1} mm`, XM - 6, osaY - Dpx / 2 - 14, B.text, 'right', true);
+    text('rovinné zrcátko 45°', XS + sHalf + 8, osaY + 4, B.muted, 'left');
+    text('ohnisko = obraz', XS - fs - 14, YF + 4, B.muted, 'right');
+    text(`okulár f₂ = ${S.f2} mm`, XS + fs + 14, YE + 4, B.text, 'left', true);
+    const vr = Math.max(det.ymax * vy, 8) + 6, yA = osaY - (det.zA - pD) * vx, yK = osaY - (det.zK - pD) * vx;
+    ramecek(XS - vr, yK, 2 * vr, yA - yK);
+  }
+  function ramecek(x, y, w, h) {
+    ctx.strokeStyle = B.text; ctx.globalAlpha = .55; ctx.lineWidth = 1; ctx.setLineDash([3, 3]); ctx.strokeRect(x, y, w, h); ctx.setLineDash([]); ctx.globalAlpha = 1;
+    text('🔍', x + w + 2, y + 2, B.text, 'left');
+  }
+  ctx.restore();
+  kresliDetail(ctx, Dp, v, det, barvy);
+  // hlášení o zaostření
+  ctx.textAlign = 'left'; ctx.font = '600 12.5px system-ui, sans-serif';
+  ctx.fillStyle = v.ostre ? B.ok : B.warn;
+  const kr = Wc < 440;
+  ctx.fillText(v.ostre ? (kr ? '✓ Zaostřeno – rovnoběžný svazek' : '✓ Zaostřeno – z okuláru vychází rovnoběžný svazek.')
+    : (S.zaost > 0 ? (kr ? '⚠ Okulár daleko – paprsky se sbíhají' : '⚠ Okulár je moc daleko – paprsky z něj se sbíhají.') : (kr ? '⚠ Okulár blízko – paprsky se rozbíhají' : '⚠ Okulár je moc blízko – paprsky z něj se rozbíhají.')), 10, 19);
+}
+
+/* Detail u okuláru: tytéž paprsky v milimetrech (rozvinutá dráha), zvětšené. */
+function detailRozsah(v) {
+  const typ = S.typ, f1 = S.f1, f2 = S.f2, f2s = typ === 'galileo' ? -f2 : f2;
+  const zE = f1 + f2s + S.zaost;
+  const eye = typ === 'galileo' ? 12 : f2 * (f1 + f2) / f1;
+  const zA = (typ === 'galileo' ? zE : f1) - 2.2 * f2;
+  const zK = zE + Math.max(eye, 12) + f2 + 14;
+  const fs = typ === 'galileo' ? Infinity : f2 * Math.tan(25 * DEG);
+  const svazek = S.D / 2 * (f1 - zA) / f1;
+  const ymax = Math.max(typ === 'galileo' ? 0 : fs * 1.2, svazek * 1.05, v.pupila / 2 + 2, 5);
+  return { f1, f2, f2s, zE, eye, zA, zK, fs, ymax };
+}
+function kresliDetail(ctx, P, v, d, barvy) {
+  const B = BARVY, typ = S.typ;
+  ctx.save(); ctx.translate(P.x, P.y);
+  ctx.fillStyle = B.svetly ? 'rgba(0,0,0,.035)' : 'rgba(255,255,255,.03)'; ctx.strokeStyle = B.border; ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.rect(0.5, 0.5, P.w - 1, P.h - 1); ctx.fill(); ctx.setLineDash([3, 3]); ctx.stroke(); ctx.setLineDash([]);
+  ctx.beginPath(); ctx.rect(0, 0, P.w, P.h); ctx.clip();
+  const sx = (P.w - 30) / (d.zK - d.zA), cy = P.h / 2 + 4, sy = (P.h / 2 - 34) / d.ymax;
+  const X = z => 15 + (z - d.zA) * sx, Y = y => cy - y * sy;
+  const text = (t, x, y, col, al = 'center', b) => { ctx.fillStyle = col || B.muted; ctx.textAlign = al; ctx.font = (b ? '600 ' : '') + '12px system-ui, sans-serif'; ctx.fillText(t, x, y); };
+  text('🔍 Detail u okuláru' + (typ === 'newton' ? ' (za zrcátkem, natočeno)' : ''), 10, 17, B.text, 'left', true);
+  ctx.strokeStyle = B.faint; ctx.setLineDash([5, 5]); ctx.beginPath(); ctx.moveTo(0, cy); ctx.lineTo(P.w, cy); ctx.stroke(); ctx.setLineDash([]);
+  const th = (S.uhel / 100) * (v.pole / 2) * DEG;
+  const rayH = [-.9, -.6, -.3, 0, .3, .6, .9];
+  [0, th].forEach((t, bi) => {
+    for (const k of rayH) {
+      if (typ === 'newton' && Math.abs(k) < .35) continue;   // stín zrcátka
+      const y0 = k * S.D / 2, u1 = -Math.tan(t) - y0 / d.f1;
+      const y = z => y0 + u1 * z;
+      const pts = [[d.zA, y(d.zA)]];
+      if (typ !== 'galileo' && Math.abs(y(d.f1)) > d.fs) { pts.push([d.f1, y(d.f1)]); }
+      else {
+        const yE = y(d.zE), u2 = u1 - yE / d.f2s;
+        pts.push([d.zE, yE], [d.zK, yE + u2 * (d.zK - d.zE)]);
+      }
+      ctx.strokeStyle = barvy[bi]; ctx.lineWidth = 1.4; ctx.globalAlpha = .9;
+      ctx.beginPath(); pts.forEach(([z, yy], i) => i ? ctx.lineTo(X(z), Y(yy)) : ctx.moveTo(X(z), Y(yy))); ctx.stroke();
+      ctx.globalAlpha = 1;
+    }
+  });
+  // clona zorného pole a ohnisko
+  if (typ !== 'galileo') {
+    ctx.fillStyle = B.text; ctx.fillRect(X(d.f1) - 1.5, Y(d.fs) - 12, 3, 12); ctx.fillRect(X(d.f1) - 1.5, Y(-d.fs), 3, 12);
+    text('clona = okraj pole', X(d.f1), Y(-d.fs) + 26, B.muted);
+    ctx.fillStyle = v.ostre ? B.ok : B.warn; ctx.beginPath(); ctx.arc(X(d.f1), cy, 3.5, 0, 7); ctx.fill();
+    text(v.ostre ? 'F₁ = F₂' : 'F₁', X(d.f1), cy + 16, B.muted);
+    if (!v.ostre) { ctx.fillStyle = B.faint; ctx.beginPath(); ctx.arc(X(d.zE - d.f2), cy, 3, 0, 7); ctx.fill(); text('F₂', X(d.zE - d.f2), cy + 30, B.faint); }
+  } else {
+    ctx.fillStyle = B.faint; ctx.beginPath(); ctx.arc(X(d.f1), cy, 3, 0, 7); ctx.fill(); text('F₁', X(d.f1), cy + 16, B.faint);
+  }
+  // okulár
+  const hE = Math.min(P.h / 2 - 26, (typ === 'galileo' ? d.ymax * .9 : d.fs * 1.1) * sy);
+  ctx.save(); ctx.translate(X(d.zE), cy);
+  ctx.strokeStyle = B.accent; ctx.lineWidth = 2; ctx.fillStyle = B.svetly ? 'rgba(47,111,206,.12)' : 'rgba(106,166,253,.14)';
+  const b = Math.min(12, Math.max(5, d.f2 * sx * .25));
+  ctx.beginPath();
+  if (typ !== 'galileo') { ctx.moveTo(0, -hE); ctx.quadraticCurveTo(b, 0, 0, hE); ctx.quadraticCurveTo(-b, 0, 0, -hE); }
+  else { ctx.moveTo(-b / 1.3, -hE); ctx.lineTo(b / 1.3, -hE); ctx.quadraticCurveTo(0, 0, b / 1.3, hE); ctx.lineTo(-b / 1.3, hE); ctx.quadraticCurveTo(0, 0, -b / 1.3, -hE); }
+  ctx.fill(); ctx.stroke(); ctx.restore();
+  text('okulár', X(d.zE), Y(0) - hE - 5, B.text, 'center', true);
+  // oko se zornicí 7 mm ve skutečném měřítku
+  const zO = d.zE + Math.max(d.eye, 12), xo = X(zO);
+  const r7 = 3.5 * sy, rOko = Math.min(12 * sx, 12 * sy, P.h / 2 - 30);
+  ctx.strokeStyle = B.muted; ctx.lineWidth = 1.5;
+  ctx.beginPath(); ctx.arc(xo + rOko, cy, rOko, Math.PI * .62, Math.PI * 1.38); ctx.stroke();
+  ctx.strokeStyle = B.accent; ctx.lineWidth = 3;
+  if (r7 < rOko) { ctx.beginPath(); ctx.moveTo(xo + 2, cy - r7); ctx.lineTo(xo + 2, cy - Math.min(rOko * .85, r7 + 20)); ctx.moveTo(xo + 2, cy + r7); ctx.lineTo(xo + 2, cy + Math.min(rOko * .85, r7 + 20)); ctx.stroke(); }
+  text('oko', xo + 8, cy + Math.min(rOko * .85, r7 + 20) + 14, B.muted, 'left');
+  // úhly
+  const okraj = S.uhel <= 100 || typ === 'galileo';
+  ctx.textAlign = 'left'; ctx.font = '12px system-ui, sans-serif'; ctx.fillStyle = B.p2;
+  const uz = P.w < 440, uo = cislo(th / DEG, 2) + '°', uk = cislo(Math.atan(v.Z * Math.tan(th)) / DEG, 1) + '°';
+  const radek = okraj ? (uz ? `růžová: obloha ${uo} → okulár ${uk}` : `růžová hvězda: na obloze ${uo} → v okuláru ${uk}`) : (uz ? 'růžová hvězda je mimo pole' : 'růžová hvězda je mimo zorné pole – clona ji zastaví');
+  ctx.fillText(radek, 10, P.h - 10);
+  ctx.fillStyle = B.muted; ctx.textAlign = 'right';
+  ctx.fillText(`svazek za okulárem ${cislo(v.pupila, 1)} mm`, P.w - 10, uz ? 34 : 17);
+  ctx.restore();
+}
+
+/* =====================================================================
+   ② POHLED OKULÁREM
+   ===================================================================== */
+const PO = platno(document.getElementById('pohled'));
+const pomocne = document.createElement('canvas');
+const KM = 206265 / 2000;                   // úhlových vteřin na metr ve 2 km
+function hvezdneData() {
+  const r = rng(42), pole = [];
+  for (let i = 0; i < 420; i++) pole.push({ x: (r() - .5) * 3 * 3600, y: (r() - .5) * 3 * 3600, m: 13.2 - 6.2 * Math.pow(r(), 2.4) });
+  return pole;
+}
+const POLE_HVEZD = hvezdneData();
+const PLEJADY = (() => {
+  const a = [
+    ['Alcyone', 0, 0, 2.9], ['Atlas', -22.8, 3, 3.6], ['Pleione', -23.3, -2, 5.1], ['Electra', 35.8, -0.8, 3.7], ['Maia', 22.8, -16, 3.9],
+    ['Merope', 16, 9.1, 4.2], ['Taygeta', 31.2, -22, 4.3], ['Celaeno', 36.7, -11, 5.5], ['Asterope', 21.7, -27, 5.8],
+  ].map(([n, x, y, m]) => ({ n, x: x * 60, y: y * 60, m }));
+  const r = rng(9);
+  for (let i = 0; i < 260; i++) { const rr = Math.pow(r(), 0.7) * 75 * 60, t = r() * 6.283; a.push({ x: Math.cos(t) * rr * 1.2 + 5 * 60, y: Math.sin(t) * rr * 0.9 - 8 * 60, m: 6.3 + 7 * Math.pow(r(), 0.55) }); }
+  return a;
+})();
+const JUP_MESICE = [{ n: 'Io', x: 95, y: 1, m: 5.0 }, { n: 'Europa', x: -150, y: -2, m: 5.3 }, { n: 'Ganymedes', x: 262, y: 3, m: 4.6 }, { n: 'Kallisto', x: -515, y: -6, m: 5.7 }];
+const SAT_MESICE = [{ n: 'Titan', x: 182, y: -24, m: 8.3 }, { n: 'Rhea', x: -78, y: 8, m: 9.7 }, { n: 'Tethys', x: 52, y: -5, m: 10.2 }];
+const KRATERY = (() => {
+  const r = rng(5), a = [];
+  while (a.length < 700) {
+    const rad = Math.min(0.06, 0.0035 / Math.pow(1 - r() * 0.99, 0.6));
+    const u = (r() * 2 - 1), v = (r() * 2 - 1);
+    if (u * u + v * v < Math.pow(1 - rad, 2)) a.push({ u, v, r: rad, d: 0.7 + r() * 0.5 });
+  }
+  a.push({ u: -0.12, v: 0.72, r: 0.042, d: 1.2, tycho: true }, { u: -0.3, v: -0.15, r: 0.045, d: 1.1 }, { u: 0.05, v: 0.45, r: 0.05, d: 1 });
+  return a;
+})();
+const MORE = [[-0.36, -0.44, 0.27], [-0.2, -0.55, 0.16], [0.17, -0.38, 0.16], [0.33, -0.1, 0.19], [0.69, -0.3, 0.11], [0.55, 0.16, 0.15], [0.35, 0.3, 0.1], [-0.25, 0.36, 0.17], [-0.62, -0.1, 0.24], [-0.7, 0.2, 0.17], [-0.52, 0.42, 0.1], [0.02, -0.22, 0.08], [-0.05, -0.74, 0.08], [0.2, -0.74, 0.07]];
+const TERM = -0.34;                         // terminátor: dorůstající Měsíc, světlo zprava
+
+function kresliMesic(ctx, s) {
+  const R = 0.2605 * 3600 * s;              // poloměr v px (úhlový poloměr 0,26°)
+  ctx.save();
+  const zakl = ctx.createRadialGradient(R * .25, -R * .2, R * .1, 0, 0, R);
+  zakl.addColorStop(0, '#e9e5da'); zakl.addColorStop(1, '#b3afa5');
+  ctx.fillStyle = zakl; ctx.beginPath(); ctx.arc(0, 0, R, 0, 7); ctx.fill();
+  ctx.clip();
+  const mr = rng(77);
+  for (const [u, v, r] of MORE) for (let i = 0; i < 16; i++) {
+    const x = (u + (mr() - .5) * r * 1.2) * R, y = (v + (mr() - .5) * r * 1.2) * R, rr = r * R * (0.6 + mr() * 0.5);
+    const g = ctx.createRadialGradient(x, y, 0, x, y, rr); g.addColorStop(0, 'rgba(92,90,86,.2)'); g.addColorStop(.6, 'rgba(92,90,86,.14)'); g.addColorStop(1, 'rgba(92,90,86,0)');
+    ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, rr, 0, 7); ctx.fill();
+  }
+  const zr = rng(31);
+  for (let i = 0; i < 900; i++) { const u = zr() * 2 - 1, v = zr() * 2 - 1; if (u * u + v * v > 1) continue; const rr = (0.004 + zr() * 0.02) * R; if (rr < 0.4) continue; ctx.fillStyle = zr() < .5 ? 'rgba(255,255,250,.05)' : 'rgba(60,58,55,.06)'; ctx.beginPath(); ctx.arc(u * R, v * R, rr, 0, 7); ctx.fill(); }
+  // paprsky Tycha
+  const ty = KRATERY.find(k => k.tycho), tr = rng(3);
+  ctx.strokeStyle = 'rgba(255,255,250,.09)';
+  for (let i = 0; i < 16; i++) { const a = tr() * 6.28, l = (0.3 + tr() * 0.8) * R; ctx.lineWidth = Math.max(0.6, R * 0.012); ctx.beginPath(); ctx.moveTo(ty.u * R, ty.v * R); ctx.lineTo(ty.u * R + Math.cos(a) * l, ty.v * R + Math.sin(a) * l); ctx.stroke(); }
+  // krátery se stínem podle výšky Slunce
+  const vid = PO.w / 2 + 20;
+  for (const k of KRATERY) {
+    const rc = k.r * R; if (rc < 0.7) continue;
+    const cx = k.u * R, cy = k.v * R;
+    const t = ctx.getTransform(), sx = (t.a * cx + t.c * cy + t.e) / PO.dpr - PO.w / 2, sy = (t.b * cx + t.d * cy + t.f) / PO.dpr - PO.h / 2;
+    if (Math.abs(sx) > vid + rc || Math.abs(sy) > vid + rc) continue;
+    const ut = TERM * Math.sqrt(Math.max(0, 1 - k.v * k.v));
+    if (k.u < ut - k.r) continue;
+    const vyska = clamp((k.u - ut) / (1 - ut), 0, 1);
+    const stin = clamp(0.12 + 0.75 * Math.pow(1 - vyska, 2.2), 0.1, 0.9) * k.d;
+    ctx.fillStyle = 'rgba(70,68,64,.12)'; ctx.beginPath(); ctx.arc(cx, cy, rc, 0, 7); ctx.fill();
+    ctx.save(); ctx.beginPath(); ctx.arc(cx, cy, rc, 0, 7); ctx.clip();
+    ctx.fillStyle = `rgba(20,20,22,${0.35 + 0.5 * (1 - vyska)})`; ctx.beginPath(); ctx.arc(cx, cy, rc, 0, 7); ctx.arc(cx - rc * 2 * stin, cy, rc, 0, 7); ctx.fill('evenodd');
+    ctx.fillStyle = 'rgba(255,255,248,.35)'; ctx.beginPath(); ctx.arc(cx, cy, rc, 0, 7); ctx.arc(cx + rc * 0.5, cy, rc, 0, 7); ctx.fill('evenodd');
+    ctx.restore();
+    if (k.tycho || k.r > 0.035) { ctx.fillStyle = 'rgba(230,228,220,.7)'; ctx.beginPath(); ctx.arc(cx - rc * stin * 0.3, cy, rc * 0.14, 0, 7); ctx.fill(); }
+  }
+  // noční strana
+  ctx.fillStyle = 'rgba(3,4,8,.96)';
+  ctx.beginPath(); ctx.arc(0, 0, R * 1.02, Math.PI / 2, Math.PI * 1.5); ctx.ellipse(0, 0, -TERM * R, R * 1.02, 0, -Math.PI / 2, Math.PI / 2, true); ctx.fill();
+  const tg = ctx.createLinearGradient(TERM * R, 0, TERM * R + R * 0.12, 0); tg.addColorStop(0, 'rgba(3,4,8,.55)'); tg.addColorStop(1, 'rgba(3,4,8,0)');
+  ctx.fillStyle = tg; ctx.fillRect(TERM * R, -R, R * 0.12, 2 * R);
+  ctx.restore();
+}
+function kresliJupiter(ctx, s) {
+  const rx = 22.4 * s, ry = 21 * s;
+  ctx.save(); ctx.beginPath(); ctx.ellipse(0, 0, rx, ry, 0, 0, 7); ctx.clip();
+  const g = ctx.createLinearGradient(0, -ry, 0, ry);
+  [[0, '#bda383'], [.14, '#d9c9a8'], [.27, '#e6d9bd'], [.33, '#b07b52'], [.41, '#a86f47'], [.47, '#efe4cb'], [.53, '#f3ead5'], [.58, '#b98357'], [.66, '#a3683f'], [.72, '#e8d9ba'], [.83, '#cbb08b'], [1, '#a88e70']].forEach(([o, c]) => g.addColorStop(o, c));
+  ctx.fillStyle = g; ctx.fillRect(-rx, -ry, 2 * rx, 2 * ry);
+  const r = rng(12); ctx.strokeStyle = 'rgba(120,75,45,.45)'; ctx.lineWidth = Math.max(0.5, s * 0.5);
+  for (let i = 0; i < 40; i++) { const y = (r() < .5 ? -0.08 : 0.28) * ry + (r() - .5) * ry * .1, x = (r() * 2 - 1) * rx; ctx.beginPath(); ctx.moveTo(x, y); ctx.quadraticCurveTo(x + rx * .08, y + ry * (r() * .1), x + rx * .16, y + ry * .02); ctx.stroke(); }
+  ctx.fillStyle = 'rgba(196,96,64,.85)'; ctx.beginPath(); ctx.ellipse(-rx * .28, ry * .4, rx * .14, ry * .07, 0, 0, 7); ctx.fill();
+  const l = ctx.createRadialGradient(0, 0, rx * .55, 0, 0, rx * 1.02); l.addColorStop(0, 'rgba(0,0,0,0)'); l.addColorStop(1, 'rgba(30,18,8,.6)');
+  ctx.fillStyle = l; ctx.fillRect(-rx, -ry, 2 * rx, 2 * ry);
+  ctx.restore();
+}
+function kresliSaturn(ctx, s, zadni) {
+  const rx = 9.6 * s, ry = 8.6 * s, a = 20.3 * s, b = a * 0.33;
+  const prstenec = (horni) => {
+    ctx.save(); ctx.beginPath(); if (horni) ctx.rect(-a * 1.2, -b * 1.3, a * 2.4, b * 1.3); else ctx.rect(-a * 1.2, 0, a * 2.4, b * 1.3); ctx.clip();
+    const pas = (r1, r2, c) => { ctx.fillStyle = c; ctx.beginPath(); ctx.ellipse(0, 0, r2, r2 * .33, 0, 0, 7); ctx.ellipse(0, 0, r1, r1 * .33, 0, 0, 7, true); ctx.fill(); };
+    pas(15.2 * s, 17.4 * s, 'rgba(236,220,178,.95)');
+    pas(17.4 * s, 17.9 * s, 'rgba(10,10,10,.9)');
+    pas(17.9 * s, 20.3 * s, 'rgba(210,194,156,.9)');
+    pas(12.4 * s, 15.2 * s, 'rgba(160,140,110,.45)');
+    ctx.restore();
+  };
+  if (zadni) { prstenec(true); return; }
+  ctx.save(); ctx.beginPath(); ctx.ellipse(0, 0, rx, ry, 0, 0, 7); ctx.clip();
+  const g = ctx.createLinearGradient(0, -ry, 0, ry);
+  [[0, '#c9b17f'], [.3, '#e7d4a2'], [.45, '#f1e2b6'], [.55, '#d9c08a'], [.7, '#e6d2a0'], [1, '#b89b66']].forEach(([o, c]) => g.addColorStop(o, c));
+  ctx.fillStyle = g; ctx.fillRect(-rx, -ry, 2 * rx, 2 * ry);
+  ctx.fillStyle = 'rgba(40,30,10,.45)'; ctx.fillRect(-rx, b * 0.95, 2 * rx, Math.max(0.6, 0.9 * s));
+  const l = ctx.createRadialGradient(0, 0, rx * .5, 0, 0, rx * 1.02); l.addColorStop(0, 'rgba(0,0,0,0)'); l.addColorStop(1, 'rgba(30,20,5,.55)');
+  ctx.fillStyle = l; ctx.fillRect(-rx, -ry, 2 * rx, 2 * ry);
+  ctx.restore();
+  prstenec(false);
+}
+function kresliVez(ctx, s) {
+  const k = KM * s;                          // px na metr
+  const m = (x, y) => [x * k, y * k];
+  ctx.save();
+  // kopec, domy a stromy
+  ctx.fillStyle = '#5f8a3e'; ctx.beginPath(); ctx.moveTo(-900 * k, 500 * k); ctx.lineTo(-900 * k, 1 * k); ctx.quadraticCurveTo(0, -3 * k, 900 * k, 2 * k); ctx.lineTo(900 * k, 500 * k); ctx.fill();
+  const dum = (x, w, h, c) => { ctx.fillStyle = '#efe6d2'; ctx.fillRect(...m(x - w / 2, -h), w * k, h * k); ctx.fillStyle = c; ctx.beginPath(); ctx.moveTo(...m(x - w / 2 - .6, -h)); ctx.lineTo(...m(x, -h - w * .45)); ctx.lineTo(...m(x + w / 2 + .6, -h)); ctx.fill(); ctx.fillStyle = '#3d4a58'; for (let i = 0; i < 3; i++) ctx.fillRect(...m(x - w / 2 + 1.2 + i * (w - 2.4) / 3, -h * .7), 1 * k, 1.3 * k); };
+  dum(-22, 10, 7, '#b5462e'); dum(19, 12, 8, '#a63d28'); dum(36, 9, 6, '#b5462e'); dum(-40, 11, 7, '#9c3a26');
+  const strom = (x, h) => { ctx.fillStyle = '#5b3d1f'; ctx.fillRect(...m(x - .4, -h * .35), .8 * k, h * .35 * k); ctx.fillStyle = '#2f5e2a'; ctx.beginPath(); ctx.arc(...m(x, -h * .62), h * .36 * k, 0, 7); ctx.fill(); ctx.fillStyle = 'rgba(120,170,80,.35)'; ctx.beginPath(); ctx.arc(...m(x + h * .1, -h * .72), h * .18 * k, 0, 7); ctx.fill(); };
+  strom(-12, 14); strom(11, 12); strom(-31, 11);
+  // věž
+  const gw = ctx.createLinearGradient(-4 * k, 0, 4 * k, 0); gw.addColorStop(0, '#d8cbb1'); gw.addColorStop(.6, '#f2e8d4'); gw.addColorStop(1, '#c4b596');
+  ctx.fillStyle = gw; ctx.fillRect(...m(-4, -42), 8 * k, 42 * k);
+  ctx.fillStyle = '#c9b996'; for (let y = -41; y < 0; y += 2) { ctx.fillRect(...m(-4, y), (y % 4 ? .9 : 1.5) * k, 1 * k); ctx.fillRect(...m(4 - (y % 4 ? .9 : 1.5), y), (y % 4 ? .9 : 1.5) * k, 1 * k); }
+  ctx.fillStyle = '#7a6a50'; ctx.fillRect(...m(-4.6, -42.6), 9.2 * k, .8 * k); ctx.fillRect(...m(-4.4, -25), 8.8 * k, .5 * k);
+  ctx.fillStyle = '#4b3a2a'; ctx.beginPath(); ctx.moveTo(...m(-1.3, 0)); ctx.lineTo(...m(-1.3, -3)); ctx.arc(0, -3 * k, 1.3 * k, Math.PI, 0); ctx.lineTo(...m(1.3, 0)); ctx.fill();
+  for (const x of [-2, 2]) { ctx.fillStyle = '#26221e'; ctx.beginPath(); ctx.moveTo(...m(x - .8, -35)); ctx.lineTo(...m(x - .8, -38)); ctx.arc(x * k, -38 * k, .8 * k, Math.PI, 0); ctx.lineTo(...m(x + .8, -35)); ctx.fill(); ctx.strokeStyle = '#8b7757'; ctx.lineWidth = Math.max(.3, .15 * k); for (let y = -37.6; y < -35; y += .5) { ctx.beginPath(); ctx.moveTo(...m(x - .8, y)); ctx.lineTo(...m(x + .8, y + .25)); ctx.stroke(); } }
+  ctx.fillStyle = '#3d4a58'; ctx.fillRect(...m(-.6, -20), 1.2 * k, 2.2 * k); ctx.fillRect(...m(-.6, -12), 1.2 * k, 2.2 * k);
+  // hodiny
+  ctx.fillStyle = '#c9a44a'; ctx.beginPath(); ctx.arc(0, -30 * k, 1.75 * k, 0, 7); ctx.fill();
+  ctx.fillStyle = '#fbf8ef'; ctx.beginPath(); ctx.arc(0, -30 * k, 1.55 * k, 0, 7); ctx.fill();
+  ctx.strokeStyle = '#222'; for (let i = 0; i < 12; i++) { const a = i * Math.PI / 6; ctx.lineWidth = Math.max(.2, (i % 3 ? .07 : .14) * k); ctx.beginPath(); ctx.moveTo(Math.sin(a) * 1.2 * k, -30 * k - Math.cos(a) * 1.2 * k); ctx.lineTo(Math.sin(a) * 1.45 * k, -30 * k - Math.cos(a) * 1.45 * k); ctx.stroke(); }
+  ctx.lineCap = 'round'; ctx.lineWidth = Math.max(.3, .13 * k); ctx.beginPath(); ctx.moveTo(0, -30 * k); ctx.lineTo(Math.sin(-1.05) * .8 * k, -30 * k - Math.cos(-1.05) * .8 * k); ctx.stroke();
+  ctx.lineWidth = Math.max(.25, .08 * k); ctx.beginPath(); ctx.moveTo(0, -30 * k); ctx.lineTo(Math.sin(1.05) * 1.25 * k, -30 * k - Math.cos(1.05) * 1.25 * k); ctx.stroke();
+  // báň
+  const gb = ctx.createLinearGradient(-5 * k, 0, 5 * k, 0); gb.addColorStop(0, '#2f6e5f'); gb.addColorStop(.55, '#6fb5a0'); gb.addColorStop(1, '#2b5e52');
+  ctx.fillStyle = gb; ctx.beginPath(); ctx.moveTo(...m(-4.4, -42.6)); ctx.bezierCurveTo(...m(-6.2, -46), ...m(-3.8, -49), ...m(-1.3, -50.5)); ctx.lineTo(...m(1.3, -50.5)); ctx.bezierCurveTo(...m(3.8, -49), ...m(6.2, -46), ...m(4.4, -42.6)); ctx.fill();
+  ctx.fillRect(...m(-1.2, -53), 2.4 * k, 2.5 * k); ctx.fillStyle = '#26221e'; ctx.fillRect(...m(-.5, -52.5), 1 * k, 1.4 * k);
+  ctx.fillStyle = gb; ctx.beginPath(); ctx.moveTo(...m(-1.6, -53)); ctx.quadraticCurveTo(...m(0, -56.5), ...m(1.6, -53)); ctx.fill();
+  ctx.fillStyle = '#d9b14a'; ctx.beginPath(); ctx.arc(0, -57 * k, .55 * k, 0, 7); ctx.fill();
+  ctx.fillRect(...m(-.12, -61.5), .24 * k, 4.5 * k); ctx.fillRect(...m(-.8, -60.4), 1.6 * k, .22 * k);
+  // kavka na římse
+  ctx.fillStyle = '#111'; ctx.beginPath(); ctx.ellipse(3 * k, -43.05 * k, .32 * k, .2 * k, -.2, 0, 7); ctx.fill(); ctx.beginPath(); ctx.arc(3.3 * k, -43.25 * k, .12 * k, 0, 7); ctx.fill();
+  ctx.fillRect(2.62 * k, -43.1 * k, .25 * k, .07 * k);
+  ctx.restore();
+}
+
+let cacheKey = '';
+function kresliPohled() {
+  const ctx = PO.ctx; PO.reset();
+  const W = PO.w, H = PO.h, R = Math.min(W, H) / 2, cx = W / 2, cy = H / 2;
+  const v = velicina(), bez = S.bezDal, typ = S.typ;
+  const Z = bez ? 1 : v.Z, pole = bez ? 5 : v.pole;
+  const s = R / (pole * 3600 / 2);                // px na úhlovou vteřinu
+  const prevraceni = !bez && v.prevraci;
+  const mlim = bez ? 6 : v.mlim;
+  const zakladRes = bez ? 60 : Math.hypot(v.rozliseni, 1.2);
+  const rozDif = zakladRes * s / 2;
+  const f2 = S.f2, pupila = bez ? 7 : v.pupila;
+  const def = bez ? 0 : Math.max(0, Math.abs(S.zaost) - 0.3);
+  const rozDef = 1.6 * (pupila * def / (f2 * f2)) / (TYPY[typ].afov / 2 * DEG) * R;
+  const rozmaz = Math.min(28, Math.hypot(rozDif, rozDef));
+  const den = S.cil === 'vez';
+  const rel = den ? Math.pow(Math.min(pupila, 3) / 3, 2) : Math.pow(Math.min(pupila, 7) / 7, 2);
+  // planety a Měsíc mají velký plošný jas – ztmavnou méně než mlhavé objekty
+  const jas = den ? clamp(1 + 0.28 * Math.log10(rel), 0.15, 1) : clamp(1 + 0.14 * Math.log10(rel), 0.45, 1);
+  const ox = S.drift, oy = S.cil === 'vez' ? -31 * KM : 0;
+
+  // --- vrstva s rozlehlým objektem (bez rozmazání) ---
+  const dpr = PO.dpr;
+  if (pomocne.width !== PO.canvas.width || pomocne.height !== PO.canvas.height) { pomocne.width = PO.canvas.width; pomocne.height = PO.canvas.height; }
+  const pc = pomocne.getContext('2d');
+  pc.setTransform(1, 0, 0, 1, 0, 0);
+  if (den) { const g = pc.createLinearGradient(0, 0, 0, pomocne.height); g.addColorStop(0, '#5f9ed8'); g.addColorStop(1, '#a9cdef'); pc.fillStyle = g; }
+  else pc.fillStyle = '#01020a';
+  pc.fillRect(0, 0, pomocne.width, pomocne.height);
+  pc.setTransform(dpr, 0, 0, dpr, 0, 0);
+  pc.translate(cx, cy); if (prevraceni) pc.rotate(Math.PI);
+  pc.translate(-ox * s, -oy * s);
+  if (S.cil === 'mesic') kresliMesic(pc, s);
+  else if (S.cil === 'jupiter') kresliJupiter(pc, s);
+  else if (S.cil === 'saturn') { kresliSaturn(pc, s, true); kresliSaturn(pc, s, false); }
+  else if (S.cil === 'vez') kresliVez(pc, s);
+  else if (S.cil === 'plejady' && S.D > 60 && !bez) {
+    const mer = PLEJADY.find(h => h.n === 'Merope');
+    const g = pc.createRadialGradient(mer.x * s, mer.y * s, 0, mer.x * s, mer.y * s, 25 * 60 * s);
+    g.addColorStop(0, `rgba(110,150,255,${0.05 + 0.13 * (S.D - 60) / 190})`); g.addColorStop(1, 'rgba(110,150,255,0)');
+    pc.fillStyle = g; pc.fillRect(-R * 3 + ox * s, -R * 3, R * 6, R * 6);
+  }
+  pc.setTransform(1, 0, 0, 1, 0, 0);
+  if (jas < 1) { pc.fillStyle = `rgba(0,0,0,${1 - jas})`; pc.fillRect(0, 0, pomocne.width, pomocne.height); }
+
+  // --- složení do okuláru ---
+  ctx.clearRect(0, 0, W, H);
+  ctx.save(); ctx.beginPath(); ctx.arc(cx, cy, R, 0, 7); ctx.clip();
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+  if (rozmaz > 0.35) {
+    if ('filter' in ctx) { ctx.filter = `blur(${rozmaz * dpr}px)`; ctx.drawImage(pomocne, 0, 0); ctx.filter = 'none'; }
+    else { ctx.globalAlpha = 0.2; for (let i = 0; i < 5; i++) { const a = i * 1.2566; ctx.drawImage(pomocne, Math.cos(a) * rozmaz * dpr, Math.sin(a) * rozmaz * dpr); } ctx.globalAlpha = 1; }
+  } else ctx.drawImage(pomocne, 0, 0);
+  PO.reset();
+  // --- hvězdy ---
+  let hvezdy = [];
+  if (S.cil === 'plejady') hvezdy = PLEJADY;
+  else if (S.cil === 'jupiter') hvezdy = JUP_MESICE.concat(POLE_HVEZD);
+  else if (S.cil === 'saturn') hvezdy = SAT_MESICE.concat(POLE_HVEZD);
+  ctx.translate(cx, cy); if (prevraceni) ctx.rotate(Math.PI);
+  let videt = 0;
+  for (const h of hvezdy) {
+    const x = (h.x - ox) * s, y = (h.y - oy) * s;
+    if (x * x + y * y > (R + 30) * (R + 30)) continue;
+    if (h.m > mlim) continue;
+    const nad = mlim - h.m;
+    if (x * x + y * y <= R * R) videt++;
+    let a = clamp(nad / 2.2, 0.15, 1), rr = 0.7 + Math.max(0, nad - 1.5) * 0.28;
+    const barva = S.cil === 'plejady' ? '215,228,255' : '255,250,240';
+    if (rozDef > 1.6) {
+      const rd = rozDef; a = a * Math.min(1, 2.5 / rd) + 0.05;
+      ctx.fillStyle = `rgba(${barva},${a})`; ctx.beginPath(); ctx.arc(x, y, rd, 0, 7);
+      if (typ === 'newton' && !bez) ctx.arc(x, y, rd * 0.36, 0, 7, true);
+      ctx.fill('evenodd');
+      continue;
+    }
+    const rf = Math.max(rr, rozDif * 0.8);
+    const g = ctx.createRadialGradient(x, y, 0, x, y, rf * 2.2);
+    g.addColorStop(0, `rgba(${barva},${a})`); g.addColorStop(0.45, `rgba(${barva},${a * 0.7})`); g.addColorStop(1, `rgba(${barva},0)`);
+    ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, rf * 2.2, 0, 7); ctx.fill();
+    if (typ === 'newton' && !bez && nad > 6.5) {
+      const l = (nad - 5.5) * 5; ctx.strokeStyle = `rgba(${barva},${0.35 * a})`; ctx.lineWidth = 0.8;
+      ctx.beginPath(); ctx.moveTo(x - l, y); ctx.lineTo(x + l, y); ctx.moveTo(x, y - l); ctx.lineTo(x, y + l); ctx.stroke();
+    }
+  }
+  PO.reset();
+  ctx.restore();
+  // okraj zorného pole
+  const vg = ctx.createRadialGradient(cx, cy, R * (typ === 'galileo' && !bez ? 0.55 : 0.86), cx, cy, R);
+  vg.addColorStop(0, 'rgba(0,0,0,0)'); vg.addColorStop(1, 'rgba(0,0,0,.85)');
+  ctx.fillStyle = vg; ctx.beginPath(); ctx.arc(cx, cy, R, 0, 7); ctx.fill();
+  S.videtHvezd = videt;
+  popisPohledu(v, Z, pole, rozmaz, videt);
+}
+
+function popisPohledu(v, Z, pole, rozmaz, videt) {
+  const bez = S.bezDal;
+  document.getElementById('pohledPopis').textContent = bez
+    ? 'Pouhým okem · výřez oblohy 5°'
+    : `Zvětšení ${cislo(Z, 0)}× · zorné pole ${cislo(pole, pole < 1 ? 2 : 1)}° · obraz ${v.prevraci ? 'převrácený' : 'vzpřímený'}`;
+  const t = [];
+  const ost = v.ostre || bez;
+  if (!ost) t.push(`<b>Obraz je rozmazaný.</b> Zaostři ohniskovačem – posuň okulár ${S.zaost > 0 ? 'dovnitř (◀)' : 'ven (▶)'}.`);
+  if (S.drift && Math.abs(S.drift) * 1 > pole * 3600 / 2) t.push('<b>Objekt odplul ze zorného pole!</b> Země se otáčí a obloha se posouvá. Proto mají velké dalekohledy motor, který otáčení vyrovnává.');
+  const c = S.cil;
+  if (c === 'mesic') {
+    if (bez) t.push('Pouhým okem vidíš jen světlá a tmavá místa – <b>moře</b> jsou tmavé lávové pláně.');
+    else if (pole < 0.52) t.push(`Měsíc (0,52°) se do zorného pole ${cislo(pole, 2)}° <b>nevejde celý</b> – vidíš detail kráterů. Nejlépe vypadají u <b>terminátoru</b> (hranice světla a stínu), kde vrhají dlouhé stíny.`);
+    else t.push('Celý Měsíc v zorném poli. Krátery jsou nejlépe vidět u <b>terminátoru</b>, kde Slunce svítí z boku a stíny jsou dlouhé.');
+  } else if (c === 'jupiter') {
+    if (bez) t.push('Jupiter je pro oko jen jasná „hvězda“. Jeho měsíce splývají s planetou.');
+    else t.push(`${Z >= 25 ? 'Vidíš <b>tmavé pásy</b> oblačnosti' + (Z >= 80 && v.rozliseni < 1.5 ? ' i <b>Velkou rudou skvrnu</b>' : '') + '. ' : 'Jupiter je malý kotouček. '}Po stranách jsou <b>Galileovy měsíce</b> – Io, Europa, Ganymedes a Kallisto (${pole * 3600 / 2 > 520 ? 'všechny čtyři v poli' : 'některé jsou mimo pole'}).`);
+  } else if (c === 'saturn') {
+    if (bez) t.push('Saturn je okem nažloutlá hvězdička – prstence neuvidíš.');
+    else t.push(Z < 25 ? 'Saturn je malinký – zkus větší zvětšení (kratší okulár).' : `Prstence jsou jasně vidět${v.rozliseni < 1 && Z >= 100 ? ', dokonce i tmavá <b>Cassiniho mezera</b> mezi nimi' : ''}. Jasná tečka vedle je měsíc <b>Titan</b>.`);
+  } else if (c === 'plejady') {
+    t.push(`V zorném poli vidíš <b>${videt} hvězd</b>${bez ? ' – okem jich lidé obvykle napočítají 6 až 7' : ` (mezní hvězdná velikost ${cislo(v.mlim, 1)} mag)`}. ${!bez && pole < 1.2 ? 'Celá hvězdokupa (asi 2°) se do pole nevejde – zkus okulár s delším ohniskem.' : ''}`);
+  } else if (c === 'vez') {
+    t.push(bez ? 'Věž ve 2 km je okem malá – hodiny nepřečteš.' : v.prevraci ? `Věž je <b>vzhůru nohama</b>! Keplerův i Newtonův dalekohled obraz převrací. ${Z >= 30 ? 'Vidíš i kavku na římse.' : ''}` : `Věž je <b>vzpřímená</b> – Galileův dalekohled obraz nepřevrací. ${Z >= 30 ? 'Na římse sedí kavka.' : ''}`);
+    S.videno[S.typ + '_vez'] = true;
+  }
+  if (!bez && v.Z > v.maxZ) t.push(`⚠️ <b>Prázdné zvětšení:</b> ${cislo(v.Z)}× je víc než 2 · D = ${v.maxZ}×. Obraz je větší, ale neukáže žádný nový detail – jen rozmazanou skvrnu.`);
+  document.getElementById('coVidis').innerHTML = t.join(' ');
+  document.getElementById('pohled').setAttribute('aria-label', 'Pohled okulárem: ' + document.getElementById('coVidis').textContent);
+}
+
+/* =====================================================================
+   Čísla a štítky
+   ===================================================================== */
+function vykresliCisla() {
+  const v = velicina(), typ = S.typ;
+  const k = [
+    { h: cislo(v.Z, v.Z < 10 ? 1 : 0) + '×', n: 'zvětšení', vz: `Z = ${S.f1} : ${S.f2}`, pozor: v.Z > v.maxZ },
+    { h: cislo(v.delka) + ' mm', n: typ === 'newton' ? 'délka tubusu ≈ f₁' : 'délka dalekohledu', vz: typ === 'galileo' ? `f₁ − f₂ = ${S.f1} − ${S.f2}` : `f₁ + f₂ = ${S.f1} + ${S.f2}` },
+    { h: cislo(v.pole, v.pole < 1 ? 2 : 1) + '°', n: 'zorné pole', vz: `${TYPY[typ].afov}° : ${cislo(v.Z, 0)}` },
+    { h: cislo(v.svetlo) + '×', n: 'víc světla než oko', vz: `(D : 7 mm)² = (${S.D} : 7)²`, pozor: v.pupila > 7 },
+    { h: cislo(v.pupila, v.pupila < 10 ? 1 : 0) + ' mm', n: 'výstupní pupila', vz: `D : Z = ${S.D} : ${cislo(v.Z, 0)}`, pozor: v.pupila > 7 || v.pupila < 0.5 },
+    { h: cislo(v.rozliseni, 2) + '″', n: 'nejjemnější detail', vz: `116″ : ${S.D}` },
+    { h: v.maxZ + '×', n: 'nejvyšší užitečné zvětšení', vz: `2 · D = 2 · ${S.D}` },
+    { h: cislo(v.mlim, 1) + ' mag', n: 'nejslabší hvězdy (okem 6)', vz: '7,7 + 5 · log(D v cm)' },
+  ];
+  document.getElementById('cisla').innerHTML = k.map(x => `<div class="cislo${x.pozor ? ' pozor' : ''}"><div class="h">${x.h}</div><div class="n">${x.n}</div><div class="v">${x.vz}</div></div>`).join('');
+  const st = [];
+  st.push(v.ostre ? '<span class="stitek ok">✓ zaostřeno</span>' : '<span class="stitek pozor">⚠ rozostřeno</span>');
+  st.push(`<span class="stitek">${v.prevraci ? '🙃 obraz převrácený' : '🙂 obraz vzpřímený'}</span>`);
+  if (v.Z > v.maxZ) st.push('<span class="stitek pozor">⚠ prázdné zvětšení (Z > 2·D)</span>');
+  if (v.pupila > 7) st.push('<span class="stitek pozor">⚠ pupila > 7 mm – část světla se do oka nevejde</span>');
+  if (v.pupila < 0.5) st.push('<span class="stitek pozor">⚠ pupila < 0,5 mm – obraz tmavý a mdlý</span>');
+  document.getElementById('stitky').innerHTML = st.join('');
+}
+
+/* =====================================================================
+   Propojení ovládání
+   ===================================================================== */
+const $ = id => document.getElementById(id);
+function obnovVystupy() {
+  $('f1V').textContent = S.f1 + ' mm';
+  $('DV').textContent = S.D + ' mm';
+  $('okularV').textContent = `f₂ = ${S.typ === 'galileo' ? '−' : ''}${S.f2} mm → ${cislo(S.f1 / S.f2, 0)}×`;
+  $('zaostV').textContent = (S.zaost > 0 ? '+' : '') + cisloD(S.zaost, 1) + ' mm';
+  $('uhelV').textContent = S.uhel + ' %';
+  $('f1').value = S.f1; $('D').value = S.D; $('okular').value = S.f2; $('zaost').value = S.zaost; $('uhel').value = S.uhel;
+  $('bezDal').checked = S.bezDal; $('otaceni').checked = S.otaceni;
+  document.querySelectorAll('.volba-typu button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.typ === S.typ)));
+  document.querySelectorAll('#cile button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.cil === S.cil)));
+  $('typPopis').innerHTML = TYPY[S.typ].popis;
+  $('btnStred').hidden = !S.drift;
+}
+let naplanovano = false;
+function prekresli() {
+  if (naplanovano) return; naplanovano = true;
+  requestAnimationFrame(() => { naplanovano = false; obnovVystupy(); kresliPaprsky(); kresliPohled(); vykresliCisla(); budScena(); });
+}
+function nastavTyp(t) {
+  if (!TYPY[t]) return;
+  if (S.typ !== t) { const d = TYPY[t]; S.typ = t; S.f1 = d.f1; S.D = d.D; S.f2 = d.f2; S.svetlo = false; S.rozlozitCil = 0; S.rozlozit = 0; uhelTubusu = null; S.drift = 0; }
+  $('btnRozlozit').setAttribute('aria-pressed', 'false');
+  info.nadpis.textContent = S.slozeno[t].size ? TYPY[t].nazev : 'Začni ' + (t === 'newton' ? 'montáží' : 'stativem');
+  info.text.innerHTML = S.slozeno[t].size ? 'Pokračuj ve skládání.' : 'Každý díl má svou úlohu. Po vložení se tu dočteš, k čemu slouží.';
+  vykresliZasobnik(); prekresli();
+}
+function nastavCil(c) { if (!CILE[c]) return; S.cil = c; S.drift = 0; prekresli(); }
+// druhá sada tlačítek typu v laboratoři – kopie první
+document.querySelectorAll('.volba-typu')[1].innerHTML = document.querySelectorAll('.volba-typu')[0].innerHTML;
+document.querySelectorAll('.volba-typu').forEach(g => g.addEventListener('click', e => { const b = e.target.closest('button[data-typ]'); if (b) nastavTyp(b.dataset.typ); }));
+$('cile').addEventListener('click', e => { const b = e.target.closest('button[data-cil]'); if (b) nastavCil(b.dataset.cil); });
+const ciselne = { f1: 'f1', D: 'D', okular: 'f2', zaost: 'zaost', uhel: 'uhel' };
+for (const [id, k] of Object.entries(ciselne)) $(id).addEventListener('input', e => { S[k] = Number(e.target.value); prekresli(); });
+$('zaostMinus').addEventListener('click', () => { S.zaost = Math.round(clamp(S.zaost - 0.5, -8, 8) * 10) / 10; prekresli(); });
+$('zaostPlus').addEventListener('click', () => { S.zaost = Math.round(clamp(S.zaost + 0.5, -8, 8) * 10) / 10; prekresli(); });
+$('bezDal').addEventListener('change', e => { S.bezDal = e.target.checked; prekresli(); });
+$('otaceni').addEventListener('change', e => { S.otaceni = e.target.checked; prekresli(); smycka(); });
+$('btnStred').addEventListener('click', () => { S.drift = 0; prekresli(); });
+
+/* ---------------- animační smyčka ---------------- */
+let scenaBezi = false, scenaVidet = true, posledni = 0;
+function budScena() { if (!scenaBezi) { scenaBezi = true; requestAnimationFrame(krokSceny); } }
+function krokSceny(t) {
+  const dal = kresliScenu(t);
+  if (!scenaVidet) { scenaBezi = false; return; }
+  if (dal) requestAnimationFrame(krokSceny);
+  else if (!REDUKCE) setTimeout(() => requestAnimationFrame(krokSceny), 90);   // jen třpyt hvězd – stačí ~10 snímků za sekundu
+  else scenaBezi = false;
+}
+let driftBezi = false;
+function smycka() {
+  if (driftBezi || !S.otaceni) return; driftBezi = true; posledni = performance.now();
+  const krok = t => {
+    if (!S.otaceni) { driftBezi = false; return; }
+    const dt = Math.min(0.1, (t - posledni) / 1000); posledni = t;
+    S.drift += 15 * 10 * dt;                // 15″ za sekundu, 10× zrychleno
+    kresliPohled(); $('btnStred').hidden = false;
+    requestAnimationFrame(krok);
+  };
+  requestAnimationFrame(krok);
+}
+if ('IntersectionObserver' in window) new IntersectionObserver(z => { scenaVidet = z[0].isIntersecting; if (scenaVidet) budScena(); }).observe(SC.canvas);
+function velikost() { SC.resize(); const pw = PA.canvas.getBoundingClientRect().width; PA.canvas.style.height = (pw >= PAPRSKY_VEDLE ? 360 : Math.round(Math.min(620, 300 + pw * .55))) + 'px'; PA.resize(); PO.resize(); nactiBarvy(); kresliScenu(performance.now()); kresliPaprsky(); kresliPohled(); }
+new ResizeObserver(() => velikost()).observe(document.querySelector('.obal'));
+new MutationObserver(() => { nactiBarvy(); kresliPaprsky(); }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme', 'data-tone'] });
+
+nactiBarvy(); vykresliZasobnik(); obnovVystupy(); velikost(); vykresliCisla();
+
+/* Rozhraní pro úkoly k modelu */
+window.DK = {
+  S, velicina, nastavTyp, nastavCil, prekresli,
+  nastav(o) { Object.assign(S, o); if (o.typ) { /* typ už nastaven přímo */ } prekresli(); },
+  pocetHvezd(D) {
+    const Z = S.f1 / S.f2, Def = Math.min(D, 7 * Z), ml = 7.7 + 5 * Math.log10(Def / 10), r = TYPY[S.typ].afov / Z * 3600 / 2;
+    return PLEJADY.filter(h => h.m <= ml && Math.hypot(h.x, h.y) <= r).length;
+  },
+};
+})();
+</script>
+<script src="../badani.js"></script>
+<script>
+(function () {
+const DK = window.DK, S = DK.S, cislo = Badani.cislo;
+const moznost = (t, ok, proc) => ({ t, ok, proc });
+const nahodne = a => a[Math.floor(Math.random() * a.length)];
+const nastav = o => { if (o.typ && o.typ !== S.typ) DK.nastavTyp(o.typ); const x = Object.assign({}, o); delete x.typ; Object.assign(S, x); DK.prekresli(); };
+let pred = {};
+
+Badani.start({
+  ukoly: [
+    { id: 'zaostreni', nazev: 'Zaostři na Měsíc',
+      uvod: 'Keplerův dalekohled míří na Měsíc, ale obraz je rozmazaný.',
+      predpoved: {
+        otazka: 'Okulár je teď o <b>5 mm dál</b>, než má být. Kam ho musíš ohniskovačem posunout, aby byl Měsíc ostrý?',
+        moznosti: ['Blíž k objektivu – tak, aby ohnisko okuláru leželo přesně v obrazu od objektivu', 'Ještě dál od objektivu – čím dál je okulár, tím víc zvětšuje', 'Nikam – rozmazání způsobuje vzduch, ne dalekohled'],
+        spravna: 0 },
+      priprava() { nastav({ typ: 'kepler', f1: 900, D: 100, f2: 25, zaost: 5, cil: 'mesic', bezDal: false, otaceni: false, drift: 0 }); },
+      pokus: 'Posouvej <b>ohniskovač</b> (posuvník nebo tlačítka ◀ ▶) a sleduj pohled okulárem i paprsky za okulárem.',
+      splneno: () => S.typ === 'kepler' && S.cil === 'mesic' && Math.abs(S.zaost) <= 0.3,
+      ukaz() { nastav({ zaost: 0 }); },
+      pozorovani: () => `Při posunu okuláru na správné místo je Měsíc ostrý. Vzdálenost objektivu a okuláru je teď <b>f₁ + f₂ = ${S.f1 + S.f2} mm</b> a z okuláru vychází rovnoběžný svazek.`,
+      vysvetli: {
+        otazka: 'Proč je obraz ostrý právě v této poloze okuláru?',
+        moznosti: [
+          moznost('Objektiv vytvoří obraz ve svém ohnisku. Okulár jako lupa ukáže ostrý obraz, když jeho ohnisko leží právě v tomto obrazu – pak z něj vycházejí rovnoběžné paprsky, které uvolněné oko zaostří.', true),
+          moznost('V této poloze prochází okulárem nejvíc světla.', false, 'Množství světla určuje hlavně průměr objektivu. Ostrost závisí na tom, jestli se ohniska objektivu a okuláru potkají.'),
+          moznost('Okulár musí být co nejblíž oku, poloha vůči objektivu nehraje roli.', false, 'Právě poloha vůči objektivu rozhoduje – při 5 mm navíc paprsky z okuláru nejsou rovnoběžné a oko je nezaostří.')] },
+      shrnuti: 'Dalekohled je zaostřený, když <b>ohnisko objektivu splývá s ohniskem okuláru</b>. Keplerův dalekohled je pak dlouhý <b>f₁ + f₂</b> a z okuláru vychází rovnoběžný svazek.' },
+
+    { id: 'zvetseni', nazev: 'Silnější okulár',
+      predpoved: {
+        otazka: 'Díváš se na Jupiter s okulárem <b>25 mm</b> (zvětšení 36×). Co se stane, když ho vyměníš za okulár <b>10 mm</b>?',
+        moznosti: ['Jupiter bude 2,5× větší, ale uvidíš menší kousek oblohy a obraz trochu ztmavne', 'Jupiter se zmenší – kratší okulár znamená menší zvětšení', 'Nic se nezmění – zvětšení určuje jen objektiv'],
+        spravna: 0 },
+      priprava() { nastav({ typ: 'kepler', f1: 900, D: 100, f2: 25, zaost: 0, cil: 'jupiter', bezDal: false, otaceni: false, drift: 0 }); },
+      pokus: 'Vyber okulár <b>10 mm</b> a porovnej velikost Jupiteru, zorné pole a jas.',
+      splneno: () => S.cil === 'jupiter' && S.f2 === 10 && S.f1 === 900,
+      ukaz() { nastav({ f2: 10 }); },
+      pozorovani: () => { const v = DK.velicina(); return `Zvětšení vzrostlo z 36× na <b>${cislo(v.Z)}×</b>, zorné pole se zmenšilo z 1,4° na <b>${cislo(v.pole, 2)}°</b> a výstupní pupila z 2,8 mm na <b>${cislo(v.pupila, 1)} mm</b>.`; },
+      vysvetli: {
+        otazka: 'Proč okulár s kratším ohniskem zvětšuje víc?',
+        moznosti: [
+          moznost('Zvětšení je Z = f₁ : f₂. Když se f₂ zmenší 2,5×, zvětšení vzroste 2,5×. Světlo z objektivu se ale rozprostře na větší obraz, proto je tmavší, a do pole se vejde méně oblohy.', true),
+          moznost('Kratší okulár propustí víc světla, a proto je obraz větší.', false, 'Světla je stejně – sbírá ho objektiv. Rozloží se ale na větší plochu, proto je obraz tmavší.'),
+          moznost('Kratší okulár je blíž oku, takže vidíme víc.', false, 'Rozhoduje ohnisková vzdálenost, ne poloha u oka: Z = f₁ : f₂.')] },
+      shrnuti: '<b>Z = f₁ : f₂.</b> Silnější okulár = kratší ohnisko = větší zvětšení, ale <b>menší zorné pole</b> a <b>tmavší</b> obraz.' },
+
+    { id: 'prevraceny', nazev: 'Věž vzhůru nohama',
+      predpoved: {
+        otazka: 'Keplerovým dalekohledem se díváš na kostelní věž 2 km daleko. Jak ji uvidíš?',
+        moznosti: ['Vzhůru nohama – obraz je otočený o 180°', 'Vzpřímeně, jen zvětšeně', 'Vzpřímeně, ale zrcadlově převrácenou zleva doprava'],
+        spravna: 0 },
+      priprava() { S.videno = {}; nastav({ typ: 'kepler', f1: 900, D: 100, f2: 25, zaost: 0, cil: 'vez', bezDal: false, otaceni: false, drift: 0 }); },
+      pokus: 'Prohlédni si věž Keplerovým dalekohledem a pak nahoře přepni na <b>Galileův</b>. Porovnej oba obrazy.',
+      splneno: () => S.videno.kepler_vez && S.typ === 'galileo' && S.cil === 'vez',
+      ukaz() { DK.nastavTyp('galileo'); nastav({ cil: 'vez', zaost: 0 }); },
+      pozorovani: 'Keplerův dalekohled ukázal věž <b>vzhůru nohama</b>, Galileův <b>vzpřímeně</b> – zato s menším zorným polem.',
+      vysvetli: {
+        otazka: 'Proč Keplerův dalekohled obraz převrací a Galileův ne?',
+        moznosti: [
+          moznost('U Keplerova se paprsky v ohnisku objektivu zkříží a vznikne převrácený skutečný obraz, který okulár jen zvětší. Galileova rozptylka zachytí paprsky dřív, než se zkříží.', true),
+          moznost('Keplerův okulár je rozptylka, která obraz otáčí.', false, 'Naopak – Keplerův okulár je spojka. Rozptylku má Galileův dalekohled.'),
+          moznost('Obraz převrací až oko, dalekohled s tím nemá nic společného.', false, 'Stejné oko vidí Galileovým dalekohledem věž vzpřímeně – rozdíl tedy dělá dalekohled.')] },
+      shrnuti: 'Keplerův (i Newtonův) dalekohled dává <b>převrácený</b> obraz – paprsky se zkříží v ohnisku. Galileův je <b>vzpřímený</b>, ale má malé zorné pole. Pozemní dalekohledy obraz otáčejí zpět hranoly.' },
+
+    { id: 'prumer', nazev: 'Větší objektiv',
+      predpoved: {
+        otazka: 'Díváš se na Plejády dalekohledem s objektivem <b>60 mm</b>. Co uvidíš, když ho vyměníš za objektiv <b>200 mm</b> se stejným zvětšením?',
+        moznosti: ['Víc slabých hvězd – větší objektiv nasbírá víc světla', 'Stejné hvězdy, jen větší', 'Méně hvězd – větší objektiv zvětšuje víc, takže se pole zmenší'],
+        spravna: 0 },
+      priprava() { nastav({ typ: 'kepler', f1: 900, D: 60, f2: 32, zaost: 0, cil: 'plejady', bezDal: false, otaceni: false, drift: 0 }); pred.hvezdy = DK.pocetHvezd(60); },
+      pokus: 'Zvětši <b>průměr objektivu D</b> na 200 mm (ohnisko nech 900 mm, okulár 32 mm) a spočítej hvězdy v poli.',
+      splneno: () => S.cil === 'plejady' && S.D >= 200 && S.f1 === 900 && S.f2 === 32,
+      ukaz() { nastav({ D: 200 }); },
+      pozorovani: () => `S objektivem 60 mm bylo v poli <b>${DK.pocetHvezd(60)} hvězd</b>, s objektivem ${S.D} mm jich je <b>${DK.pocetHvezd(S.D)}</b>. Zvětšení zůstalo ${cislo(S.f1 / S.f2)}×.`,
+      vysvetli: {
+        otazka: 'Proč je s větším objektivem vidět víc hvězd?',
+        moznosti: [
+          moznost('Plocha objektivu roste s druhou mocninou průměru. Objektiv 200 mm nasbírá (200 : 60)² ≈ 11× víc světla, takže se zviditelní i hvězdy, které byly příliš slabé.', true),
+          moznost('Větší objektiv víc zvětšuje, a proto jsou hvězdy vidět lépe.', false, 'Zvětšení Z = f₁ : f₂ se nezměnilo – měnil se jen průměr.'),
+          moznost('Hvězdy jsou ve větším objektivu blíž.', false, 'Vzdálenost hvězd se nemění. Rozhoduje, kolik světla objektiv zachytí.')] },
+      shrnuti: 'Hlavní úkol dalekohledu je <b>sbírat světlo</b>. Sběr roste s <b>D²</b> – dvojnásobný průměr = čtyřikrát víc světla. Větší D také rozliší jemnější detaily (116″ : D).' },
+  ],
+
+  otazky: [
+    () => {
+      const f1 = nahodne([600, 750, 900, 1000, 1200]), f2 = nahodne([10, 12, 15, 20, 25, 30]);
+      const z = f1 / f2, zs = cislo(z, 1);
+      return { otazka: `Dalekohled má objektiv s ohniskovou vzdáleností <b>${f1} mm</b> a okulár <b>${f2} mm</b>. Jaké je zvětšení?`,
+        moznosti: [moznost(zs + '×', true), moznost(cislo(f2 / f1 * 100, 1) + ' %', false, 'Dělíš obráceně. Zvětšení je f₁ : f₂ – ohnisko objektivu děleno ohniskem okuláru.'),
+          moznost(cislo(f1 + f2) + '×', false, 'Součet f₁ + f₂ je délka dalekohledu, ne zvětšení.'), moznost(cislo(f1 - f2) + '×', false, 'Rozdíl ohnisek zvětšení neurčuje. Z = f₁ : f₂.')],
+        vysvetleni: `Z = f₁ : f₂ = ${f1} : ${f2} = ${zs}×` };
+    },
+    () => {
+      const f1 = nahodne([500, 700, 800, 1000, 1500]), f2 = nahodne([10, 20, 25, 40]);
+      return { otazka: `Jak dlouhý je zaostřený <b>Keplerův</b> dalekohled s objektivem f₁ = ${f1} mm a okulárem f₂ = ${f2} mm?`,
+        moznosti: [moznost(`asi ${f1 + f2} mm`, true), moznost(`asi ${f1 - f2} mm`, false, 'Rozdíl f₁ − f₂ platí pro Galileův dalekohled s rozptylkou. U Keplerova leží okulár za ohniskem objektivu.'),
+          moznost(`asi ${f1} mm`, false, 'Okulár musí být od ohniska objektivu ještě o f₂ dál.'), moznost(`asi ${cislo(f1 / f2)} mm`, false, 'Podíl f₁ : f₂ je zvětšení, ne délka.')],
+        vysvetleni: `Ohnisko objektivu i okuláru leží v jednom bodě, proto délka ≈ f₁ + f₂ = ${f1 + f2} mm.` };
+    },
+    () => {
+      const D = nahodne([50, 60, 70, 80, 100, 150, 200]);
+      return { otazka: `Jaké největší zvětšení má smysl používat u dalekohledu s objektivem o průměru <b>${D} mm</b>?`,
+        moznosti: [moznost(`asi ${2 * D}×`, true), moznost(`asi ${D / 2}×`, false, 'To je zbytečně málo – rozumná horní mez je asi 2 · D.'),
+          moznost(`asi ${10 * D}×`, false, 'Tak velké zvětšení je „prázdné“ – obraz je větší, ale rozmazaný. Mez je asi 2 · D.'), moznost('libovolné – stačí kratší okulár', false, 'Detail omezuje rozlišení objektivu (116″ : D). Nad 2 · D se nic nového neukáže.')],
+        vysvetleni: `Nejvyšší užitečné zvětšení ≈ 2 · D = ${2 * D}×.` };
+    },
+    () => {
+      const D = nahodne([70, 140, 210]), k = D / 7;
+      return { otazka: `Kolikrát víc světla nasbírá objektiv o průměru <b>${D} mm</b> než oko s pupilou 7 mm?`,
+        moznosti: [moznost(`${k * k}×`, true), moznost(`${k}×`, false, 'To je poměr průměrů. Světlo ale sbírá plocha, která roste s druhou mocninou průměru.'),
+          moznost(`${k * k * k}×`, false, 'Plocha kruhu roste s druhou, ne třetí mocninou průměru.'), moznost(`${D + 7}×`, false, 'Sčítání tu nedává smysl – porovnáváme plochy: (D : 7)².')],
+        vysvetleni: `(${D} : 7)² = ${k}² = ${k * k}×` };
+    },
+    () => {
+      const D = nahodne([80, 100, 120, 150]), Z = nahodne([20, 25, 40, 50]);
+      return { otazka: `Dalekohled s objektivem <b>${D} mm</b> zvětšuje <b>${Z}×</b>. Jak široký svazek světla (výstupní pupila) vychází z okuláru?`,
+        moznosti: [moznost(`${cislo(D / Z, 1)} mm`, true), moznost(`${D * Z} mm`, false, 'Svazek se v dalekohledu zužuje – dělí se zvětšením: D : Z.'),
+          moznost(`${D} mm`, false, 'Tak široký je svazek na objektivu. Za okulárem je Z-krát užší.'), moznost('7 mm vždycky', false, '7 mm je největší zornice oka, ne výstupní pupila dalekohledu.')],
+        vysvetleni: `Výstupní pupila = D : Z = ${D} : ${Z} = ${cislo(D / Z, 1)} mm` };
+    },
+    { otazka: 'Proč jsou všechny velké hvězdářské dalekohledy zrcadlové?',
+      moznosti: [moznost('Zrcadlo nemá barevnou vadu a dá se podepřít zezadu, takže může být obrovské a přitom se neprohne.', true),
+        moznost('Zrcadlo zvětšuje víc než čočka se stejným ohniskem.', false, 'Zvětšení je u obou stejné: Z = f₁ : f₂.'),
+        moznost('Zrcadlové dalekohledy dávají vzpřímený obraz.', false, 'Newtonův dalekohled obraz převrací stejně jako Keplerův.')] },
+    { otazka: 'Chceš vidět celou hvězdokupu Plejády (asi 2° na obloze). Který okulár k dalekohledu s f₁ = 900 mm zvolíš?',
+      moznosti: [moznost('40 mm – malé zvětšení (22×) a velké zorné pole (asi 2,2°)', true),
+        moznost('4 mm – největší zvětšení (225×)', false, 'Zorné pole by bylo jen asi 0,2° – uviděl bys pár hvězd z celé kupy.'),
+        moznost('Na okuláru nezáleží, zorné pole určuje objektiv', false, 'Zorné pole ≈ 50° : Z, a zvětšení závisí na okuláru.')] },
+    { otazka: 'Který dalekohled dává bez dalších součástek <b>vzpřímený</b> obraz?',
+      moznosti: [moznost('Galileův – spojka jako objektiv a rozptylka jako okulár', true),
+        moznost('Keplerův – dvě spojky', false, 'Paprsky se v ohnisku zkříží, obraz je převrácený.'),
+        moznost('Newtonův – duté zrcadlo', false, 'Newtonův dalekohled obraz také převrací.')] },
+  ],
+});
+})();
+</script>
+</body>
+</html>

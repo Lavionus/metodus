@@ -688,8 +688,8 @@ Níže je úplný seznam 260 stránek z auditu. Každá má vlastní doporučen�
 - `IMG-aj-06` je zapojená do režimu Popiš obrázek v `aj5_pritomny_prubehovy`: jedna parková scéna obsahuje přesně deset osob s deseti odlišnými činnostmi a web nad ní střídá deset přístupně popsaných hotspotů.
 - `IMG-prv-01` je zapojená v `prv1_rodina`: rodokmen nyní skládá osm obrazových členů rozšířené rodiny a stejné portréty používají otázky Kdo je kdo. Pět postav se sdílí s `IMG-aj-02`, nově vznikly teta, strýc a bratranec.
 - `IMG-prv-03` nahrazuje schematické SVG v `prv1_cesta_skola`: akvarelová vesnice obsahuje dům, školu, dva druhy přechodu, zastávku, zaparkovaná i jedoucí auta a deset přístupných hotspotů. Rybník, kostel a lípa jsou pevné orientační body pro další společné scény vesnice.
-- Všech 261 ilustrací má projektový PNG originál, optimalizovaný WebP (karty do 60 kB, scény do 200 kB), přesné zadání, alt text a záznam původu v `obsah/img/kapitola-7-2.json`; souhrnná galerie je `obsah/img/kapitola-7-2.html`.
-- Ověření: `tests/obrazky72-browser.mjs`, Chromium přes CDP; 26 stránek, původní režimy, deset míst bezpečné cesty, osm členů obrazového rodokmenu, parková scéna se všemi hotspoty, všech deset karet oblečení a devět domácích motivů ve třech jazycích, světlý i tmavý motiv a šířky 1280/390/320 px. Bez běhových JS výjimek a bez vodorovného přetékání; mobilní snímky byly vizuálně zkontrolovány. Cache zvýšena na v120. Veřejné nasazení neproběhlo.
+- Všech 326 ilustrací má projektový PNG originál, optimalizovaný WebP (karty do 60 kB, scény do 200 kB), přesné zadání, alt text a záznam původu v `obsah/img/kapitola-7-2.json`; dokončeno je 47 sad. Nově přibyly `IMG-z-09`, `IMG-z-11`, `IMG-ch-08`, `IMG-pr-02` a `IMG-z-02`.
+- Ověření: `tests/obrazky72-browser.mjs`, Chromium přes CDP; 48 stránek, původní režimy, nové zeměpisné, chemické a přírodopisné scény, světlý i tmavý motiv a šířky 1280/390/320 px. Cache zvýšena na v125. Veřejné nasazení neproběhlo.
 
 
 ## Motivy Sépie a Stará knihovna (22. 9. 2026)

@@ -15,6 +15,7 @@
     .zvire-nazev { font-size: 1.3rem; font-weight: 700; }
     .dvojice { display: flex; align-items: center; gap: 16px; justify-content: center; }
     .dvojice .sipka { font-size: 1.6rem; color: var(--text-faint); }
+    .zvire-obrazek { width: min(250px, 58vw); aspect-ratio: 1; object-fit: contain; border-radius: 16px; background: #f8f1e5; }
   </style>
 </head>
 <body>
@@ -47,31 +48,39 @@ let rezim = 'kdeZije';
 
 /* zvíře, emoji, domácí?, mládě, příbytek, užitek (jen u domácích) */
 const ZVIRATA = [
-  { n: 'kráva', e: '🐄', domaci: true, mlade: 'tele', dum: 'chlév', uzitek: 'mléko' },
-  { n: 'prase', e: '🐖', domaci: true, mlade: 'sele', dum: 'chlívek', uzitek: 'maso' },
-  { n: 'ovce', e: '🐑', domaci: true, mlade: 'jehně', dum: 'ovčín', uzitek: 'vlna' },
-  { n: 'koza', e: '🐐', domaci: true, mlade: 'kůzle', dum: 'chlév', uzitek: 'mléko' },
-  { n: 'kůň', e: '🐴', domaci: true, mlade: 'hříbě', dum: 'stáj', uzitek: 'práce a jízda' },
-  { n: 'slepice', e: '🐔', domaci: true, mlade: 'kuře', dum: 'kurník', uzitek: 'vejce' },
-  { n: 'husa', e: '🦢', domaci: true, mlade: 'house', dum: 'husník', uzitek: 'peří' },
-  { n: 'kachna', e: '🦆', domaci: true, mlade: 'káče', dum: 'kachní výběh', uzitek: 'maso' },
-  { n: 'králík', e: '🐇', domaci: true, mlade: 'králíče', dum: 'klec', uzitek: 'maso' },
-  { n: 'pes', e: '🐕', domaci: true, mlade: 'štěně', dum: 'bouda', uzitek: 'hlídání' },
-  { n: 'kočka', e: '🐈', domaci: true, mlade: 'kotě', dum: 'dům', uzitek: 'chytání myší' },
-  { n: 'včela', e: '🐝', domaci: true, mlade: 'larva', dum: 'úl', uzitek: 'med' },
-  { n: 'liška', e: '🦊', domaci: false, mlade: 'lišče', dum: 'nora' },
-  { n: 'medvěd', e: '🐻', domaci: false, mlade: 'medvídě', dum: 'brloh' },
-  { n: 'srna', e: '🦌', domaci: false, mlade: 'srnče', dum: 'les' },
-  { n: 'zajíc', e: '🐰', domaci: false, mlade: 'zajíček', dum: 'pole' },
-  { n: 'veverka', e: '🐿️', domaci: false, mlade: 'veverče', dum: 'dutina stromu' },
-  { n: 'sova', e: '🦉', domaci: false, mlade: 'sůvě', dum: 'dutina stromu' },
-  { n: 'vlk', e: '🐺', domaci: false, mlade: 'vlče', dum: 'doupě' },
-  { n: 'ježek', e: '🦔', domaci: false, mlade: 'ježče', dum: 'hnízdo z listí' },
-  { n: 'divoké prase', e: '🐗', domaci: false, mlade: 'sele', dum: 'les' },
-  { n: 'krtek', e: '🐀', domaci: false, mlade: 'krtče', dum: 'podzemní chodby' },
-  { n: 'čáp', e: '🦩', domaci: false, mlade: 'čápě', dum: 'hnízdo na komíně' },
-  { n: 'žába', e: '🐸', domaci: false, mlade: 'pulec', dum: 'rybník' },
+  { n:'kráva', img:'aj/aj-slovicka-cow.webp', domaci:true, mlade:'tele', dum:'chlév', uzitek:'mléko' },
+  { n:'prase', img:'aj/aj-slovicka-pig.webp', domaci:true, mlade:'sele', dum:'chlívek', uzitek:'maso' },
+  { n:'koza', img:'prv/prv2-zvire-koza.webp', domaci:true, mlade:'kůzle', dum:'chlév', uzitek:'mléko' },
+  { n:'ovce', img:'prv/prv2-zvire-ovce.webp', domaci:true, mlade:'jehně', dum:'ovčín', uzitek:'vlna' },
+  { n:'kůň', img:'aj/aj-slovicka-horse.webp', domaci:true, mlade:'hříbě', dum:'stáj', uzitek:'práce a jízda' },
+  { n:'slepice', img:'cj/cj1-pismena-slepice.webp', domaci:true, mlade:'kuře', dum:'kurník', uzitek:'vejce' },
+  { n:'husa', img:'prv/prv2-zvire-husa.webp', domaci:true, mlade:'house', dum:'husník', uzitek:'peří' },
+  { n:'kachna', img:'prv/prv2-zvire-kachna.webp', domaci:true, mlade:'káče', dum:'kachní výběh', uzitek:'maso' },
+  { n:'králík', img:'aj/aj-slovicka-rabbit.webp', domaci:true, mlade:'králíče', dum:'králíkárna', uzitek:'maso' },
+  { n:'pes', img:'aj/aj-slovicka-dog.webp', domaci:true, mlade:'štěně', dum:'bouda', uzitek:'hlídání' },
+  { n:'kočka', img:'aj/aj-slovicka-cat.webp', domaci:true, mlade:'kotě', dum:'dům', uzitek:'chytání myší' },
+  { n:'morče', img:'prv/prv2-zvire-morce.webp', domaci:true, mlade:'mládě morčete', dum:'klec', uzitek:'společnost' },
+  { n:'osel', img:'prv/prv2-zvire-osel.webp', domaci:true, mlade:'oslátko', dum:'stáj', uzitek:'práce a nošení nákladu' },
+  { n:'krůta', img:'prv/prv2-zvire-kruta.webp', domaci:true, mlade:'krůtě', dum:'krůtník', uzitek:'maso' },
+  { n:'včela', img:'cj/cj1-pismena-vcela.webp', domaci:true, mlade:'larva', dum:'úl', uzitek:'med' },
+  { n:'liška', img:'aj/aj-slovicka-fox.webp', domaci:false, mlade:'lišče', dum:'nora' },
+  { n:'srna', img:'prv/prv2-zvire-srna.webp', domaci:false, mlade:'srnče', dum:'les' },
+  { n:'zajíc', img:'prv/prv2-zvire-zajic.webp', domaci:false, mlade:'zajíče', dum:'pelech v poli' },
+  { n:'ježek', img:'prv/prv2-zvire-jezek.webp', domaci:false, mlade:'ježče', dum:'hnízdo z listí' },
+  { n:'veverka', img:'prv/prv2-zvire-veverka.webp', domaci:false, mlade:'veverče', dum:'dutina stromu' },
+  { n:'divoké prase', img:'prv/prv2-zvire-divocak.webp', domaci:false, mlade:'sele', dum:'les' },
+  { n:'jezevec', img:'prv/prv2-zvire-jezevec.webp', domaci:false, mlade:'jezevče', dum:'nora' },
+  { n:'sova', img:'prv/prv2-zvire-sova.webp', domaci:false, mlade:'sůvě', dum:'dutina stromu' },
+  { n:'datel', img:'prv/prv2-zvire-datel.webp', domaci:false, mlade:'mládě datla', dum:'dutina stromu' },
+  { n:'čáp', img:'prv/prv2-zvire-cap.webp', domaci:false, mlade:'čápě', dum:'hnízdo na komíně' },
+  { n:'žába', img:'cj/cj1-pismena-zaba.webp', domaci:false, mlade:'pulec', dum:'rybník' },
+  { n:'ropucha', img:'prv/prv2-zvire-ropucha.webp', domaci:false, mlade:'pulec', dum:'vlhké místo' },
+  { n:'užovka', img:'prv/prv2-zvire-uzovka.webp', domaci:false, mlade:'mládě užovky', dum:'břeh rybníka' },
+  { n:'vydra', img:'cj/vyjmenovana-v-vydra.webp', domaci:false, mlade:'vydří mládě', dum:'nora u vody' },
+  { n:'bobr', img:'prv/prv2-zvire-bobr.webp', domaci:false, mlade:'bobří mládě', dum:'hrad u vody' },
 ];
+
+const obrazekZvirete = z => `<img class="zvire-obrazek" src="img/${z.img}" alt="${z.n}" width="768" height="768">`;
 
 const DOMACI = ZVIRATA.filter(z => z.domaci);
 
@@ -80,7 +89,7 @@ function kdeZije() {
   const p = $('plocha');
   const z = Uloha.nahodne(ZVIRATA);
   p.innerHTML = `<div class="zadani">Je to zvíře domácí, nebo volně žijící?</div>
-    <div class="karta"><div class="obrazek">${z.e}</div><div class="zvire-nazev">${z.n}</div></div>`;
+    <div class="karta">${obrazekZvirete(z)}<div class="zvire-nazev">${z.n}</div></div>`;
   const odezva = document.createElement('div');
   odezva.className = 'odezva';
   Uloha.vyber({
@@ -106,7 +115,7 @@ function mladata() {
   const z = Uloha.nahodne(ZVIRATA);
   const jina = Uloha.zamichej(ZVIRATA.filter(x => x.mlade !== z.mlade)).slice(0, 3);
   p.innerHTML = `<div class="zadani">Jak se jmenuje mládě?</div>
-    <div class="karta"><div class="obrazek">${z.e}</div><div class="zvire-nazev">${z.n}</div></div>`;
+    <div class="karta">${obrazekZvirete(z)}<div class="zvire-nazev">${z.n}</div></div>`;
   const odezva = document.createElement('div');
   odezva.className = 'odezva';
   Uloha.vyber({
@@ -127,7 +136,7 @@ function pribytky() {
   const z = Uloha.nahodne(ZVIRATA);
   const jina = Uloha.zamichej(ZVIRATA.filter(x => x.dum !== z.dum)).slice(0, 3);
   p.innerHTML = `<div class="zadani">Kde toto zvíře bydlí?</div>
-    <div class="karta"><div class="obrazek">${z.e}</div><div class="zvire-nazev">${z.n}</div></div>`;
+    <div class="karta">${obrazekZvirete(z)}<div class="zvire-nazev">${z.n}</div></div>`;
   const odezva = document.createElement('div');
   odezva.className = 'odezva';
   Uloha.vyber({
@@ -148,7 +157,7 @@ function uzitek() {
   const z = Uloha.nahodne(DOMACI);
   const jina = Uloha.zamichej(DOMACI.filter(x => x.uzitek !== z.uzitek)).slice(0, 3);
   p.innerHTML = `<div class="zadani">Proč lidé toto zvíře chovají?</div>
-    <div class="karta"><div class="obrazek">${z.e}</div><div class="zvire-nazev">${z.n}</div></div>`;
+    <div class="karta">${obrazekZvirete(z)}<div class="zvire-nazev">${z.n}</div></div>`;
   const odezva = document.createElement('div');
   odezva.className = 'odezva';
   Uloha.vyber({

@@ -2405,6 +2405,11 @@ const KATALOG_SEKCE = [
           "páčidlo",
           "odvalení kamene",
           "vytržení pařezu",
+          "miskové váhy",
+          "rovnoramenné váhy",
+          "vážení",
+          "závaží",
+          "hmotnost",
           "simulace",
           "2. stupeň",
           "sš"
@@ -2830,6 +2835,41 @@ const KATALOG_SEKCE = [
           "stavebnice",
           "2. stupe\u0148",
           "\u0161\u0161"
+        ],
+        "predmet": "f",
+        "rocniky": [
+          8,
+          9
+        ]
+      },
+      {
+        "soubor": "obsah/optika_dalekohled.html",
+        "nazev": "🔭 Postav si dalekohled",
+        "tagy": [
+          "fyzika",
+          "optika",
+          "dalekohled",
+          "teleskop",
+          "keplerův dalekohled",
+          "galileův dalekohled",
+          "newtonův dalekohled",
+          "zrcadlový dalekohled",
+          "objektiv",
+          "okulár",
+          "ohnisko",
+          "zvětšení",
+          "zorné pole",
+          "rozlišení",
+          "výstupní pupila",
+          "měsíc",
+          "jupiter",
+          "saturn",
+          "plejády",
+          "astronomie",
+          "simulace",
+          "stavebnice",
+          "2. stupeň",
+          "sš"
         ],
         "predmet": "f",
         "rocniky": [
@@ -4984,7 +5024,7 @@ const KATALOG_CILE = {
   "obsah/physics_playground.html": "Nakreslím síly působící na těleso, vysvětlím setrvačnost a tření, řeknu, kdy se těleso na svahu rozjede, spočítám polohovou a pohybovou energii, změřím dobu kmitu kyvadla a vysvětlím, co se zachová při srážce.",
   "obsah/f6_vlastnosti_latek.html": "Rozliším látku a těleso, popíšu skupenství částicovým modelem a vysvětlím plavání těles.",
   "obsah/paka_lekce.html": "Spočítám moment síly a rovnováhu na páce, rozliším druhy pák a vysvětlím, proč kladkostroj, kolo na hřídeli, převody i nakloněná rovina šetří sílu, ale ne práci.",
-  "obsah/paka.html": "Najdu rovnováhu na páce a vysvětlím, co ušetří kladka a ozubený převod.",
+  "obsah/paka.html": "Najdu rovnováhu na páce, zvážím těleso na miskových vahách a vysvětlím, co ušetří kladka a ozubený převod.",
   "obsah/vrtacka_lis.html": "Vysvětlím, jak hydraulický lis znásobí sílu a proč vrtání závisí na materiálu a otáčkách.",
   "obsah/gravitacni_hriste2.html": "Pozoruji, jak se tělesa navzájem přitahují a obíhají společné těžiště.",
   "obsah/f7_tlak.html": "Vypočítám tlak a vysvětlím hydrostatický tlak, Pascalův zákon a plavání těles.",
@@ -5000,6 +5040,7 @@ const KATALOG_CILE = {
   "obsah/optika_lekce.html": "Vysvětlím odraz, lom a rozklad světla, najdu obraz vytvořený čočkou a řeknu, jaké brýle pomohou krátkozrakému a dalekozrakému oku.",
   "obsah/optika.html": "Pozoruji odraz a lom světla a zobrazení čočkou a zrcadlem.",
   "obsah/optika_soustava.html": "Vysvětlím, jak optický přístroj vytvoří obraz, a sestavím vlastní soustavu.",
+  "obsah/optika_dalekohled.html": "Složím dalekohled z dílů, spočítám jeho zvětšení a vysvětlím, proč záleží na průměru objektivu a volbě okuláru.",
   "obsah/f8_prace_energie.html": "Vypočítám práci, výkon a energii a popíšu přeměny energie.",
   "obsah/f9_jaderna.html": "Vysvětlím štěpení jádra, řetězovou reakci, poločas rozpadu a princip jaderné elektrárny.",
   "obsah/f9_zvuk.html": "Přečtu zvukovou vlnu, spočítám vzdálenost z ozvěny a rozliším výšku a hlasitost tónu.",
@@ -5484,7 +5525,8 @@ const KATALOG_RODINY = [
       "obsah/f9_zvuk.html",
       "obsah/optika_lekce.html",
       "obsah/optika.html",
-      "obsah/optika_soustava.html"
+      "obsah/optika_soustava.html",
+      "obsah/optika_dalekohled.html"
     ]
   },
   {

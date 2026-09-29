@@ -14,6 +14,7 @@
   <style>
     .uloha-text { max-width: 620px; font-size: 1.02rem; line-height: 1.6; }
     .uloha-text b { color: var(--accent); }
+    .rez-scena { width:min(760px,100%); border-radius:16px; background:#f8f1df; }
   </style>
 </head>
 <body>
@@ -25,6 +26,7 @@
     <button data-rezim="priroda">🏔️ Slepá mapa – příroda</button>
     <button data-rezim="kvizPriroda">🌦️ Přírodní poměry</button>
     <button data-rezim="kvizHospodarstvi">🏭 Lidé a hospodářství</button>
+    <button data-rezim="rez">🌎 Řez kontinentem</button>
   </div>
 
   <div class="plocha" id="plocha"></div>
@@ -383,8 +385,9 @@ function kviz(sada, napoveda) {
 }
 const kvizPriroda = () => kviz(KVIZ_PRIRODA, 'Vzpomeň si na mapu: pohoří na západě, velké nížiny s řekami uprostřed.');
 const kvizHospodarstvi = () => kviz(KVIZ_HOSPODARSTVI, 'Přemýšlej, čím jsou jednotlivé státy světově známé.');
+function rez(){ $('plocha').innerHTML='<div class="zadani">Sleduj krajinu od Tichého k Atlantskému oceánu.</div><img class="rez-scena" src="img/z/z7-amerika-rez.webp" alt="Řez Jižní Amerikou od pobřeží přes Atacamu a Andy k Amazonskému pralesu a Atlantiku." width="1152" height="768"><div class="odezva">Atacama → Andy → Amazonská nížina → Atlantik</div>'; }
 
-const REZIMY = { staty, priroda, kvizPriroda, kvizHospodarstvi };
+const REZIMY = { staty, priroda, kvizPriroda, kvizHospodarstvi, rez };
 function novaUloha() { REZIMY[rezim](); }
 
 document.querySelectorAll('#rezimy button').forEach(b => b.addEventListener('click', () => {

@@ -101,6 +101,7 @@
       display: flex; flex-direction: column; align-items: center; gap: 6px;
     }
     .moznosti button .ikona { font-size: 2rem; line-height: 1; }
+    .moznosti button .obdobi-img { width: 150px; max-width: 30vw; aspect-ratio: 3/2; object-fit: cover; border-radius: 8px; }
     .moznosti button:hover:not(:disabled) { border-color: var(--accent); transform: translateY(-3px); }
     .moznosti button[data-klic="jaro"]   { border-color: var(--jaro); }
     .moznosti button[data-klic="leto"]   { border-color: var(--leto); }
@@ -165,10 +166,10 @@ const KLIC = 'metodus_prv1_rocni_obdobi';
 
 /* ---- Data ----------------------------------------------------------------- */
 const OBDOBI = {
-  jaro: { em: '🌷', nazev: 'jaro' },
-  leto: { em: '☀️', nazev: 'léto' },
-  podzim: { em: '🍂', nazev: 'podzim' },
-  zima: { em: '❄️', nazev: 'zima' },
+  jaro: { em: '🌷', nazev: 'jaro', img: 'img/prv/prv1-obdobi-jaro.webp' },
+  leto: { em: '☀️', nazev: 'léto', img: 'img/prv/prv1-obdobi-leto.webp' },
+  podzim: { em: '🍂', nazev: 'podzim', img: 'img/prv/prv1-obdobi-podzim.webp' },
+  zima: { em: '❄️', nazev: 'zima', img: 'img/prv/prv1-obdobi-zima.webp' },
 };
 
 const JEVY = [
@@ -270,7 +271,9 @@ function tlacitkovaUloha(zadaniHtml, volby, spravnyKlic, popisSpravne) {
   const stav = { chyboval: false, hotovo: false };
   volby.forEach(v => {
     const b = document.createElement('button');
-    b.innerHTML = `<span class="ikona">${v.em}</span><span>${v.nazev}</span>`;
+    b.innerHTML = v.img
+      ? `<img class="obdobi-img" src="${v.img}" alt="Vesnice v období: ${v.nazev}" width="1152" height="768"><span>${v.em} ${v.nazev}</span>`
+      : `<span class="ikona">${v.em}</span><span>${v.nazev}</span>`;
     b.dataset.klic = v.klic;
     b.addEventListener('click', () => Uloha.odpoved({
       prvek: b,

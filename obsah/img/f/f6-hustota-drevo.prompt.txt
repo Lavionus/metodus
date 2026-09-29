@@ -1,0 +1,4 @@
+Use case: scientific-educational
+Primary request: One same-size cube of dry spruce wood with grain and end grain.
+Style: accurate warm watercolor and light gouache with delicate ink contours, cohesive with the Metodus library.
+Constraints: no text, labels, numbers, logos, signature or watermark.

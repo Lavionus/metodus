@@ -20,6 +20,11 @@
     .prispevek .text { font-size: 1.02rem; }
     .situace-t { max-width: 540px; font-size: 1.02rem; line-height: 1.5; }
     .stopa-znak { font-size: clamp(2.4rem, 9vw, 3.6rem); }
+    .stopa-fotka { position: relative; width: min(760px, 100%); margin: 18px 0; }
+    .stopa-fotka img { display: block; width: 100%; aspect-ratio: 3 / 2; object-fit: cover; border-radius: 14px; background: #f8f1df; }
+    .stopa-hotspot { position: absolute; transform: translate(-50%, -50%); width: 30px; height: 30px; padding: 0; border-radius: 50%; border: 2px solid #fff; background: var(--danger); color: #fff; font-weight: 800; cursor: pointer; box-shadow: 0 2px 8px #0007; }
+    .stopa-hotspot:focus-visible { outline: 3px solid var(--focus, #ffd54f); outline-offset: 2px; }
+    .stopa-vysledek { min-height: 1.6em; margin: 8px 0 0; color: var(--text-muted); font-weight: 600; }
   </style>
 </head>
 <body>
@@ -40,6 +45,18 @@
     <span class="skore" id="skore"></span>
   </div>
 
+  <section aria-labelledby="fotkaNadpis">
+    <h2 id="fotkaNadpis">Co všechno prozradí jediná fotka?</h2>
+    <div class="stopa-fotka" id="stopaFotka">
+      <img src="img/inf/inf6-digitalni-stopa-ulice.webp" alt="Školák na ulici před domem a zastávkou; fotografie obsahuje několik stop, podle kterých by šlo poznat jeho školu, adresu a denní cestu." width="1152" height="768">
+      <button class="stopa-hotspot" style="left:51%;top:57%" data-stopa="Znak školy může prozradit, kam dítě chodí." aria-label="Znak na mikině">?</button>
+      <button class="stopa-hotspot" style="left:29%;top:43%" data-stopa="Číslo domu může prozradit přesnou adresu." aria-label="Číslo domu">?</button>
+      <button class="stopa-hotspot" style="left:74%;top:12%" data-stopa="Název ulice pomůže určit místo pořízení fotografie." aria-label="Název ulice">?</button>
+      <button class="stopa-hotspot" style="left:89%;top:34%" data-stopa="Jízdní řád může prozradit zastávku i pravidelnou trasu." aria-label="Jízdní řád">?</button>
+    </div>
+    <p class="stopa-vysledek" id="stopaVysledek" aria-live="polite">Najdi čtyři stopy, které by bylo lepší před zveřejněním skrýt.</p>
+  </section>
+
   <p class="napoveda">
     <b>Digitální stopa</b> je vše, co po sobě na internetu zanecháš – příspěvky, fotky, komentáře
     i to, co jsi jen vyhledával. Smazaný příspěvek může dál existovat ve screenshotech.
@@ -50,6 +67,12 @@
 const $ = id => document.getElementById(id);
 const skore = Uloha.skore('metodus_inf6_stopa', $('skore'));
 let rezim = 'prozradi';
+
+$('stopaFotka').addEventListener('click', event => {
+  const bod = event.target.closest('[data-stopa]');
+  if (!bod) return;
+  $('stopaVysledek').textContent = bod.dataset.stopa;
+});
 
 const PRISPEVKY = [
   { autor: 'Tvůj profil · dnes 15:20',

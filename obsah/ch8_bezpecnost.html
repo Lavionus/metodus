@@ -25,6 +25,9 @@
     .znacky-rada .znacka { width: 100%; padding: 2px; }
     .uloha-text { max-width: 640px; font-size: 1.02rem; line-height: 1.6; }
     .uloha-text b { color: var(--accent); }
+    .chyby-scena { position: relative; width: min(720px, 100%); }
+    .chyby-scena img { display:block; width:100%; border-radius:16px; }
+    .chyba-bod { position:absolute; transform:translate(-50%,-50%); width:30px; height:30px; padding:0; border-radius:50%; border:2px solid #fff; background:var(--danger); color:#fff; font-weight:800; cursor:pointer; box-shadow:0 2px 7px #0007; }
   </style>
 </head>
 <body>
@@ -36,6 +39,7 @@
     <button data-rezim="kLatce">🧪 Značka k látce</button>
     <button data-rezim="prvniPomoc">🚑 První pomoc</button>
     <button data-rezim="pravidla">📋 Pravidla laboratoře</button>
+    <button data-rezim="chyby">👀 Najdi chyby</button>
   </div>
 
   <div class="plocha" id="plocha"></div>
@@ -191,7 +195,14 @@ function pravidla() {
   p.appendChild(odezva);
 }
 
-const REZIMY = { poznej, kLatce, prvniPomoc, pravidla };
+function chyby() {
+  const p = $('plocha');
+  const body = [['bez ochranných brýlí',20,38],['rozpuštěné vlasy u kahanu',45,43],['jídlo mezi chemikáliemi',59,66],['otevřená láhev na kraji',70,62],['pipetování ústy',88,42],['rozlitá kapalina',91,77]];
+  p.innerHTML = `<div class="zadani">Najdi šest nebezpečných situací.</div><div class="chyby-scena"><img src="img/ch/ch8-bezpecnost-laborator.webp" alt="Školní laboratoř se šesti bezpečnostními chybami." width="1152" height="768">${body.map(([n,x,y])=>`<button class="chyba-bod" style="left:${x}%;top:${y}%" data-chyba="${n}" aria-label="${n}">?</button>`).join('')}</div><div class="odezva" aria-live="polite">Klepni na červené body a vysvětli, proč je situace nebezpečná.</div>`;
+  p.querySelectorAll('[data-chyba]').forEach(b => b.addEventListener('click',()=>{ b.textContent='✓'; b.disabled=true; p.querySelector('.odezva').textContent=`Chyba: ${b.dataset.chyba}.`; }));
+}
+
+const REZIMY = { poznej, kLatce, prvniPomoc, pravidla, chyby };
 function novaUloha() { REZIMY[rezim](); }
 
 document.querySelectorAll('#rezimy button').forEach(b => b.addEventListener('click', () => {

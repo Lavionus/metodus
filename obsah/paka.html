@@ -37,6 +37,7 @@ canvas{display:block;width:100%;height:100%;touch-action:none}
 @media(max-width:760px){
   .info{top:auto;bottom:8px;left:8px;right:8px;width:auto;max-height:62%;overflow:auto}
   .panel{gap:10px;padding:8px 10px}input[type=range]{width:88px}
+  .panel .dl{display:none}      /* na mobilu stačí krátké popisky, ať zbude místo na plátno */
 }
 
 /* ovládací prvky jako přehledné dlaždice v panelu */
@@ -71,6 +72,7 @@ canvas{display:block;width:100%;height:100%;touch-action:none}
   <label>🔧 <select id="druhPaky" class="jakoTlacitka">
       <option value="dvoj" data-krat="⚖️ Dvojzvratná">Dvojzvratná (houpačka, nůžky)</option>
       <option value="jedno" data-krat="🔩 Jednozvratná">Jednozvratná (kolečko, otvírák)</option>
+      <option value="vahy" data-krat="🧺 Miskové váhy">Miskové váhy (rovnoramenná páka)</option>
       <option value="kamen" data-krat="🪨 Kámen">Páčidlo – odvalení kamene</option>
       <option value="parez" data-krat="🌳 Pařez">Páka – vytržení pařezu</option>
     </select></label>
@@ -93,6 +95,12 @@ canvas{display:block;width:100%;height:100%;touch-action:none}
   <label data-druh="kamen parez">💪 Tvoje síla <input type="range" id="silaClovek" min="50" max="900" step="10" value="400"><span class="hodnota" id="silaClovekV">400 N</span></label>
   <button data-druh="kamen parez" id="btnKamenReset">↺ Vrátit</button>
   <button data-druh="kamen parez" id="btnKamenNovy">🎲 Nový</button>
+  <label data-druh="vahy">📏 <span class="dl">Rameno tělesa</span> r₁ <input type="range" id="vR1" min="10" max="30" step="1" value="20"><span class="hodnota" id="vR1V">20 cm</span></label>
+  <label data-druh="vahy">📏 <span class="dl">Rameno závaží</span> r₂ <input type="range" id="vR2" min="10" max="30" step="1" value="20"><span class="hodnota" id="vR2V">20 cm</span></label>
+  <label data-druh="vahy"><input type="checkbox" id="vUkaz"> 👁️ Prozradit<span class="dl"> hmotnost</span></label>
+  <button data-druh="vahy" id="btnVahyNove">🎲 Jiné<span class="dl"> těleso</span></button>
+  <button data-druh="vahy" id="btnVahySundat">↺ Sundat<span class="dl"> závaží</span></button>
+  <button data-druh="vahy" id="btnVahyPoctive" title="Stejně dlouhá ramena – poctivé váhy">⚖️ r₁ = r₂</button>
 </div>
 
 <div class="panel skryto" id="panelKladka">
@@ -324,7 +332,7 @@ const paka={
     // páčidlo má vlastní veličiny, proto se sada ovladačů podle druhu páky přepíná
     document.querySelectorAll('#panelPaka [data-druh]').forEach(el=>
       el.classList.toggle('skryto',!el.dataset.druh.split(' ').includes(this.druh)));
-    praxe.nacti();
+    praxe.nacti(); vahy.nacti();
     if(rezim==='paka'){
       $('infoText').innerHTML=NAPOVEDA.paka(this.druh);
       $('napoveda').textContent=DOLE.paka(this.druh);
@@ -1016,6 +1024,317 @@ const praxe={
       `<span class="znak">•</span> 🪨 ${this.splKamen} <span class="znak">•</span> 🌳 ${this.splParez}`;
   }
 };
+
+/* ================= 1c) MISKOVÉ VÁHY ================= */
+/* Miskové váhy jsou dvojzvratná páka se stejně dlouhými rameny. Z rovnováhy
+   m₁·g·r₁ = m₂·g·r₂ se pak vykrátí g i ramena a zůstane m₁ = m₂ – závaží ukážou
+   přímo hmotnost tělesa. Posuvníky ramen jdou váhy „ošidit": s nestejnými rameny
+   platí dál momentová rovnováha, jenže závaží už hmotnost neukazují. */
+const vahy={
+  // sada závaží jako ve školní kazetě – složí se z ní každá hmotnost do 1110 g
+  SADA:[500,200,200,100,50,20,20,10,5,2,2,1],
+  TELESA:[['🍎','jablko',120,220],['🍐','hruška',140,230],['🧀','sýr',180,320],['🥔','brambora',90,260],
+          ['🍋','citron',80,140],['🥕','mrkev',60,130],['🧸','medvídek',150,400],['📱','mobil',140,220],
+          ['🍞','chleba',450,900],['🔑','klíče',25,80],['🥚','vejce',50,70],['🏐','míč',260,280]],
+  zav:[], teleso:null, r1:20, r2:20, th:0, om:0, ukazat:false, zvazeno:false, splneno:0,
+  geo:null, drag:null,
+  init(){ this.zav=this.SADA.map(g=>({g,kde:'K'})); this.nove(); },
+  nove(){
+    const t=this.TELESA[Math.floor(Math.random()*this.TELESA.length)];
+    let m; do m=t[2]+Math.floor(Math.random()*(t[3]-t[2]+1)); while(this.teleso&&m===this.teleso.m);
+    this.nastavTeleso(t[0],t[1],m);
+  },
+  nastavTeleso(ikona,nazev,m){ this.teleso={ikona,nazev,m}; this.sundat(); },
+  sundat(){ this.zav.forEach(z=>z.kde='K'); this.zvazeno=false; },
+  // pro úkoly: položí na misku závaží daných hmotností
+  poloz(gramy,kde='P'){
+    for(const g of gramy){ const z=this.zav.find(z=>z.kde==='K'&&z.g===g); if(z) z.kde=kde; }
+  },
+  nacti(){
+    this.r1=+$('vR1').value; this.r2=+$('vR2').value; this.ukazat=$('vUkaz').checked;
+    $('vR1V').textContent=this.r1+' cm'; $('vR2V').textContent=this.r2+' cm';
+  },
+  soucet(kde){ return this.zav.reduce((a,z)=>a+(z.kde===kde?z.g:0),0); },
+  mL(){ return this.teleso.m+this.soucet('L'); },       // levá miska: těleso + případná závaží
+  mP(){ return this.soucet('P'); },
+  poctive(){ return this.r1===this.r2; },
+  udaj(){ return this.mP()-this.soucet('L'); },          // co by vážící ze závaží vyčetl
+  // rozdíl momentů přepočtený na gramy na průměrném rameni (kladný = klesá levá miska)
+  rozdil(){ return (this.mL()*this.r1-this.mP()*this.r2)/((this.r1+this.r2)/2); },
+  // u nestejných ramen nejde vždy trefit přesně – stačí rozdíl pod půl gramu závaží
+  rovnovaha(){ return Math.abs(this.mL()*this.r1-this.mP()*this.r2)<=0.5*this.r2+1e-9; },
+  klid(){ return Math.abs(this.th)<0.004&&Math.abs(this.om)<0.03; },
+  MAX:12*Math.PI/180,
+  krok(dt){
+    // Vahadlo se chová jako kyvadlo: těžiště má pod břitem, takže po každé změně
+    // přehoupne, pár kyvů dozní a ustálí se v náklonu podle rozdílu hmotností.
+    const cil=this.rovnovaha()?0:this.MAX*Math.tanh(this.rozdil()/8);
+    const n=Math.max(1,Math.ceil(dt/0.008)), k=dt/n;
+    for(let i=0;i<n;i++){
+      this.om+=(-(this.th-cil)*24-this.om*2.6)*k;
+      this.th+=this.om*k;
+      if(Math.abs(this.th)>this.MAX){ this.th=Math.sign(this.th)*this.MAX; this.om*=-0.25; }   // doraz
+    }
+    if(this.rovnovaha()&&this.mP()>0&&this.klid()&&!this.zvazeno){ this.zvazeno=true; this.splneno++; }
+  },
+
+  /* ---- kreslení ---- */
+  rozmer(g,k){ const s=Math.cbrt(g); return [(9+7*s)*k,(7+5.6*s)*k]; },
+  kresliZavazi(x,yb,g,k,akt){
+    const [sw,sv]=this.rozmer(g,k), tel=sv*0.74, x0=x-sw/2, y0=yb-tel;
+    ctx.save();
+    // úchytka nahoře: u gramových plíšků jen nízký hrbolek
+    const kn=Math.max(3,sw*0.17);
+    ctx.fillStyle=C.elev; ctx.strokeStyle=akt?C.akcent:C.silny; ctx.lineWidth=akt?2.5:1.5;
+    ctx.beginPath(); ctx.rect(x-kn*0.45,y0-sv*0.16,kn*0.9,sv*0.18); ctx.fill(); ctx.stroke();
+    ctx.beginPath(); ctx.arc(x,y0-sv*0.2,kn*0.62,0,Math.PI*2); ctx.fill(); ctx.stroke();
+    zaobleny(x0,y0,sw,tel,Math.min(5,sw*0.14)); ctx.fill(); ctx.stroke();
+    ctx.globalAlpha=.35; ctx.fillStyle=C.faint;        // odlesk, ať závaží působí kovově
+    ctx.fillRect(x0+sw*0.14,y0+2,Math.max(2,sw*0.1),tel-4); ctx.globalAlpha=1;
+    const f=Math.max(8,Math.min(13,sw*0.3));
+    popis(g+' g',x,y0+tel/2+0.5,C.text,'bold '+f+'px sans-serif');
+    ctx.restore();
+  },
+  // skládá předměty na misku do řad zdola nahoru; vrací středy spodních hran
+  rozloz(sirky,sirMisky){
+    const pozice=[]; let rada=[], sir=0, vysRady=0, yOff=0;
+    const uzavri=()=>{
+      let x=-sir/2;
+      for(const [i,w,v] of rada){ pozice[i]=[x+w/2,yOff]; x+=w+3; }
+      yOff+=vysRady+2; rada=[]; sir=0; vysRady=0;
+    };
+    sirky.forEach(([w,v],i)=>{
+      if(rada.length&&sir+3+w>sirMisky) uzavri();
+      sir+=(rada.length?3:0)+w; vysRady=Math.max(vysRady,v); rada.push([i,w,v]);
+    });
+    if(rada.length) uzavri();
+    return pozice;
+  },
+  kresli(w,h){
+    const k=Math.max(0.45,Math.min(1,(w-40)/560,(h-40)/420));   // velikost závaží podle plochy
+    // kazeta končí nad nápovědou u spodní hrany (na nízkém plátně na ni už místo není)
+    const kazV=Math.round(78*k), kazTop=h-kazV-(h>=300?30:8);
+    const patkaY=kazTop-Math.round(16*k);                  // spodní hrana podstavce
+    const ox=w/2, oy=Math.max(78,h*0.22);
+    let pul=Math.max(30,Math.min(74,w*0.085,(patkaY-oy)*0.3));   // poloviční šířka misky
+    const mer=Math.max(2.5,Math.min(11,(w/2-12-pul)/30));  // px na cm
+    pul=Math.min(pul,10*mer-10);
+    const zavesMax=patkaY-oy-30*mer*Math.sin(this.MAX)-24;
+    const zaves=Math.max(46,Math.min(190,(patkaY-oy)*0.55,zavesMax));
+    const fi=-this.th;                                     // kladné th = levá miska dolů
+    const cs=Math.cos(fi), sn=Math.sin(fi);
+    const bod=d=>[ox+d*mer*cs,oy+d*mer*sn];               // d < 0 vlevo od břitu
+    const [lx,ly]=bod(-this.r1), [px,py]=bod(this.r2);
+    const mLy=ly+zaves, mPy=py+zaves;                      // okraje misek
+    this.geo={L:{x:lx,y:mLy,pul},P:{x:px,y:mPy,pul},kazTop,kazV};
+
+    // stolek
+    ctx.strokeStyle=C.border; ctx.lineWidth=2;
+    ctx.beginPath(); ctx.moveTo(0,patkaY); ctx.lineTo(w,patkaY); ctx.stroke();
+
+    // sloupek, podstavec a stupnice jazýčku
+    const sl=Math.max(7,Math.min(12,w*0.014));
+    ctx.fillStyle=C.silny;
+    ctx.fillRect(ox-sl/2,oy+6,sl,patkaY-oy-14);
+    zaobleny(ox-Math.max(46,pul*1.1),patkaY-12,2*Math.max(46,pul*1.1),12,4); ctx.fill();
+    const jaz=Math.min(120,(patkaY-oy)*0.62);             // délka jazýčku
+    const sy=oy+jaz;
+    zaobleny(ox-jaz*Math.sin(this.MAX)-16,sy-14,2*(jaz*Math.sin(this.MAX)+16),26,6);
+    ctx.fillStyle=C.elev; ctx.fill(); ctx.strokeStyle=C.border; ctx.lineWidth=1; ctx.stroke();
+    for(let i=-4;i<=4;i++){
+      const a=i/4*this.MAX, r0=jaz-(i===0?9:5), r1=jaz+(i===0?7:3);
+      ctx.strokeStyle=i===0?C.ok:C.faint; ctx.lineWidth=i===0?2.5:1;
+      ctx.beginPath(); ctx.moveTo(ox+r0*Math.sin(a),oy+r0*Math.cos(a));
+      ctx.lineTo(ox+r1*Math.sin(a),oy+r1*Math.cos(a)); ctx.stroke();
+    }
+
+    // závěsy a misky – visí vždy svisle, i když se vahadlo nakloní
+    const miska=(x,y,ex,ey)=>{
+      ctx.save(); ctx.strokeStyle=C.faint; ctx.lineWidth=1.3;
+      ctx.beginPath();
+      ctx.moveTo(ex,ey+5); ctx.lineTo(x-pul*0.86,y);
+      ctx.moveTo(ex,ey+5); ctx.lineTo(x+pul*0.86,y);
+      ctx.moveTo(ex,ey+5); ctx.lineTo(x,y); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(x-pul,y); ctx.quadraticCurveTo(x,y+pul*0.5,x+pul,y); ctx.closePath();
+      ctx.fillStyle=C.elev; ctx.fill(); ctx.strokeStyle=C.silny; ctx.lineWidth=2; ctx.stroke();
+      ctx.restore();
+    };
+    miska(lx,mLy,lx,ly); miska(px,mPy,px,py);
+
+    // vahadlo s obarvenými rameny (stejně jako u páky: oranžové břemeno, modrá síla)
+    ctx.save(); ctx.translate(ox,oy); ctx.rotate(fi);
+    ctx.fillStyle=C.silny;
+    ctx.beginPath(); ctx.moveTo(-this.r1*mer,-4); ctx.lineTo(0,-9); ctx.lineTo(this.r2*mer,-4);
+    ctx.lineTo(this.r2*mer,4); ctx.lineTo(-this.r1*mer,4); ctx.closePath(); ctx.fill();
+    ctx.globalAlpha=.9;
+    ctx.fillStyle=C.warn; ctx.fillRect(-this.r1*mer,5,this.r1*mer,4);
+    ctx.fillStyle=C.akcent; ctx.fillRect(0,5,this.r2*mer,4);
+    ctx.globalAlpha=1;
+    ctx.fillStyle=C.faint;
+    for(let d=5;d<30;d+=5){
+      if(d<this.r1) ctx.fillRect(-d*mer-0.5,-6,1,3);
+      if(d<this.r2) ctx.fillRect(d*mer-0.5,-6,1,3);
+    }
+    for(const d of [-this.r1,this.r2]){                    // očka na koncích
+      ctx.beginPath(); ctx.arc(d*mer,0,4.5,0,Math.PI*2); ctx.fillStyle=C.elev; ctx.fill();
+      ctx.strokeStyle=C.silny; ctx.lineWidth=2; ctx.stroke();
+    }
+    // jazýček – pevně spojený s vahadlem, proto se otáčí s ním
+    ctx.strokeStyle=this.rovnovaha()&&this.klid()?C.ok:C.text; ctx.lineWidth=2.2;
+    ctx.beginPath(); ctx.moveTo(0,0); ctx.lineTo(0,jaz); ctx.stroke();
+    ctx.restore();
+    // břit (osa otáčení)
+    ctx.fillStyle=C.akcent;
+    ctx.beginPath(); ctx.moveTo(ox,oy-2); ctx.lineTo(ox-9,oy+12); ctx.lineTo(ox+9,oy+12); ctx.closePath(); ctx.fill();
+    popis('břit = osa',ox,oy-18,C.faint,'10px sans-serif');
+    // délky ramen pod vahadlem – nad ním by se při náklonu tloukly s hláškou
+    if(!this.poctive()||w>620){
+      popis('r₁ = '+this.r1+' cm',(ox+lx)/2,(oy+ly)/2+20,C.warn,'11px sans-serif');
+      popis('r₂ = '+this.r2+' cm',(ox+px)/2,(oy+py)/2+20,C.akcent,'11px sans-serif');
+    }
+
+    // obsah misek
+    const tah=this.drag?this.drag.i:-1;
+    const naMisce=kde=>this.zav.map((z,i)=>[z,i]).filter(([z,i])=>z.kde===kde&&i!==tah).sort((a,b)=>b[0].g-a[0].g);
+    const ikonaPx=Math.round((20+7*Math.cbrt(this.teleso.m/10))*k);
+    const polozky=(kde,m)=>{
+      const seznam=naMisce(kde), sir=seznam.map(([z])=>this.rozmer(z.g,k));
+      const vse=kde==='L'?[[ikonaPx*1.05,ikonaPx*0.95],...sir]:sir;
+      const poz=this.rozloz(vse,pul*1.8);
+      const off=kde==='L'?1:0;
+      if(kde==='L'){
+        const [tx,ty]=poz[0];
+        ctx.font=ikonaPx+'px sans-serif'; ctx.textAlign='center'; ctx.textBaseline='alphabetic';
+        ctx.fillText(this.teleso.ikona,m.x+tx,m.y-ty-ikonaPx*0.1);
+      }
+      seznam.forEach(([z,i],j)=>{
+        const [tx,ty]=poz[j+off], [sw,sv]=this.rozmer(z.g,k);
+        const x=m.x+tx, yb=m.y-ty;
+        this.kresliZavazi(x,yb,z.g,k,podKurzorem==='zav:'+i);
+        uchop(x,yb-sv*0.45,Math.max(11,sw*0.6),'zav:'+i,true);
+      });
+    };
+    polozky('L',this.geo.L); polozky('P',this.geo.P);
+
+    // popisek tělesa
+    const odhal=this.ukazat||(this.zvazeno&&this.rovnovaha()&&this.poctive()&&this.soucet('L')===0);
+    popis(this.teleso.nazev+' · '+(odhal?this.teleso.m+' g':'? g'),lx,mLy+pul*0.5+16,C.warn,'bold 12px sans-serif');
+    const P=this.mP();
+    popis(P?'závaží '+P+' g':'prázdná miska',px,mPy+pul*0.5+16,C.akcent,'bold 12px sans-serif');
+
+    // kazeta se závažím: prázdné důlky ukazují, co už je na miskách
+    const sirky=this.zav.map(z=>this.rozmer(z.g,k)[0]);
+    const mezera=Math.max(5,10*k), celk=sirky.reduce((a,b)=>a+b,0)+mezera*(sirky.length-1);
+    const kx0=Math.max(8,(w-celk)/2-14);
+    zaobleny(kx0,kazTop,Math.min(w-16,celk+28),kazV,9);
+    ctx.fillStyle=C.panel; ctx.fill(); ctx.strokeStyle=C.border; ctx.lineWidth=1; ctx.stroke();
+    popis('kazeta se závažím',kx0+10,kazTop-8,C.faint,'10px sans-serif','left');
+    let x=kx0+14;
+    const dno=kazTop+kazV-10;
+    this.zav.forEach((z,i)=>{
+      const [sw,sv]=this.rozmer(z.g,k), cx=x+sw/2;
+      ctx.save(); ctx.globalAlpha=.5; ctx.strokeStyle=C.border; ctx.setLineDash([3,3]);
+      ctx.beginPath(); ctx.ellipse(cx,dno+2,sw/2,3.5,0,0,Math.PI*2); ctx.stroke(); ctx.restore();
+      if(z.kde==='K'&&i!==tah){
+        this.kresliZavazi(cx,dno,z.g,k,podKurzorem==='zav:'+i);
+        uchop(cx,dno-sv*0.45,Math.max(11,sw*0.6),'zav:'+i,true);
+      }
+      x+=sw+mezera;
+    });
+
+    // závaží, které se právě nese
+    if(this.drag){
+      const z=this.zav[this.drag.i], [sw,sv]=this.rozmer(z.g,k);
+      ctx.save(); ctx.globalAlpha=.9;
+      this.kresliZavazi(this.drag.x,this.drag.y+sv*0.45,z.g,k,true); ctx.restore();
+      const cil=this.kamPadne(this.drag.x,this.drag.y);
+      if(cil!=='K'){ const m=this.geo[cil];
+        ctx.save(); ctx.strokeStyle=C.ok; ctx.lineWidth=2; ctx.setLineDash([5,4]);
+        ctx.beginPath(); ctx.ellipse(m.x,m.y,m.pul+6,m.pul*0.3,0,0,Math.PI*2); ctx.stroke(); ctx.restore(); }
+    }
+
+    // pruhy momentů jako u páky – rovnováha = stejně dlouhé pruhy
+    const M1=this.mL()*this.r1, M2=this.mP()*this.r2;
+    const sirka=Math.min(140,Math.max(64,w*0.17)), px0=14, py0=Math.max(30,h*0.05);
+    const meritko=sirka/Math.max(M1,M2,1);
+    if(h>=300&&w>=520) [[M1,C.warn,'levá miska m₁·r₁'],[M2,C.akcent,'pravá miska m₂·r₂']].forEach(([M,barva,jm],i)=>{
+      const y=py0+i*24;
+      ctx.fillStyle=C.border; ctx.fillRect(px0,y,sirka,12);
+      ctx.fillStyle=barva; ctx.fillRect(px0,y,Math.max(2,M*meritko),12);
+      popis(jm,px0,y-9,barva,'10px sans-serif','left');
+    });
+    if(w>=620) popis('🏪 kupecké, lékárnické, laboratorní váhy',w-14,kazTop-8,C.faint,'11px sans-serif','right');
+
+    // hláška nahoře
+    const stred=w/2, hy=26, maly=w<520?'bold 12px sans-serif':null;
+    if(!P&&!this.soucet('L'))
+      popis('👇 Klikni na závaží v kazetě, nebo ho přetáhni na misku',stred,hy,C.akcent,maly||'bold 14px sans-serif');
+    else if(this.rovnovaha()&&!this.klid())
+      popis('… jazýček se ještě kývá',stred,hy,C.muted,maly||'bold 14px sans-serif');
+    else if(this.rovnovaha()){
+      if(this.poctive()&&!this.soucet('L')) popis('⚖️ Rovnováha: '+this.teleso.nazev+' váží '+this.udaj()+' g',stred,hy,C.ok,maly||'bold 15px sans-serif');
+      else if(this.poctive()) popis('⚖️ Rovnováha: '+this.teleso.nazev+' = '+P+' − '+this.soucet('L')+' = '+this.udaj()+' g',stred,hy,C.ok,maly||'bold 15px sans-serif');
+      else popis('⚖️ Rovnováha – závaží ukazují '+this.udaj()+' g, ale '+this.teleso.nazev+' má '+this.teleso.m+' g!',stred,hy,C.danger,maly||'bold 14px sans-serif');
+    }
+    else popis(this.rozdil()>0?'⬇️ Levá miska převažuje – přidej závaží vpravo':'⬇️ Pravá miska převažuje – nějaké závaží uber',
+      stred,hy,C.warn,maly||'bold 14px sans-serif');
+  },
+
+  /* ---- tažení závaží myší ---- */
+  kamPadne(x,y){
+    for(const kde of ['L','P']){
+      const m=this.geo[kde];
+      if(Math.abs(x-m.x)<m.pul+26&&y>m.y-150&&y<m.y+m.pul*0.6+20) return kde;
+    }
+    return 'K';
+  },
+  tahni(typ,x,y,vych){
+    if(!typ.startsWith('zav:')) return;
+    this.drag={i:+typ.slice(4),x,y,posun:Math.hypot(x-vych.ux,y-vych.uy)};
+  },
+  pust(t){
+    const d=this.drag; this.drag=null;
+    if(!t.typ.startsWith('zav:')) return;
+    const z=this.zav[+t.typ.slice(4)];
+    // pouhé klepnutí: z kazety na pravou misku, z misky zpátky do kazety
+    if(!d||d.posun<6) z.kde=z.kde==='K'?'P':'K';
+    else z.kde=this.kamPadne(d.x,d.y);
+  },
+
+  /* obsah pravého sloupce */
+  vypocet(){
+    const L=this.soucet('L'), P=this.mP(), rovn=this.rovnovaha(), poct=this.poctive();
+    const odhal=this.ukazat||(this.zvazeno&&rovn);
+    const r=[['h','📐 Rovnováha na vahách'],
+      ['v','m₁·g·r₁ = m₂·g·r₂'],
+      poct?['v','r₁ = r₂  →  m₁ = m₂',C.ok]:['v','r₁ ≠ r₂  →  m₁ = m₂ · r₂ / r₁',C.danger],null,
+      ['v','m₂ = závaží vpravo = '+P+' g',C.akcent]];
+    if(L) r.push(['v','m₁ = těleso + '+L+' g závaží',C.warn]);
+    r.push(['v','těleso = '+(odhal?this.teleso.m+' g':'?'),C.warn],null,
+      ['v',rovn?'M₁ = M₂  →  rovnováha':(this.rozdil()>0?'M₁ > M₂  →  klesá levá miska':'M₁ < M₂  →  klesá pravá miska'),rovn?C.ok:C.warn]);
+    if(!poct&&rovn)
+      r.push(['v',this.mL()+' g · '+this.r1+' cm ≈ '+P+' g · '+this.r2+' cm',C.danger]);
+    r.push(null,['h','💡 Co se děje a proč']);
+    if(poct) r.push(['p','Miskové váhy jsou dvojzvratná páka se stejně dlouhými rameny. V rovnováze se na obou stranách vykrátí rameno i tíhové zrychlení g – zbude jen m₁ = m₂. Váhy proto neměří sílu, ale přímo hmotnost: na Měsíci by ukázaly totéž.'],
+      ['p',L?'Závaží můžeš dát i k tělesu. Pak platí těleso + závaží vlevo = závaží vpravo, a hmotnost tělesa je jejich rozdíl.'
+            :'Váž od největšího závaží: přelomí-li váhy, vrať ho a zkus menší. Tak se k hmotnosti dostaneš nejrychleji.']);
+    else r.push(['p','Ramena nejsou stejná – takové váhy jsou šizené. Pořád platí momentová rovnováha m₁·r₁ = m₂·r₂, jenže závaží už neukazují hmotnost tělesa. '+
+      (this.r1>this.r2?'Zboží visí na delším rameni, proto potřebuje víc závaží: zákazník zaplatí víc, než dostane.'
+                      :'Zboží visí na kratším rameni, stačí mu méně závaží: váhy ukazují méně, než kolik ho je.')],
+      ['p','Poctivý trik: zvaž těleso, pak prohoď ramena a zvaž znovu. Z obou údajů a, b vyjde skutečná hmotnost m = √(a·b).']);
+    return r;
+  },
+  stav(){
+    const P=this.mP(), L=this.soucet('L'), rovn=this.rovnovaha();
+    const odhal=this.ukazat||(this.zvazeno&&rovn);
+    return `${this.teleso.ikona} ${this.teleso.nazev} <b>${odhal?this.teleso.m+' g':'? g'}</b> `+
+      `<span class="znak">•</span> závaží vpravo <b>${P} g</b>`+(L?`, vlevo <b>${L} g</b>`:'')+' '+
+      `<span class="znak">•</span> ${rovn?'⚖️ <b>rovnováha</b>':(this.rozdil()>0?'⬇️ klesá levá miska':'⬇️ klesá pravá miska')} `+
+      `<span class="znak">•</span> ramena <b>${this.r1} / ${this.r2} cm</b> – ${this.poctive()?'poctivé váhy':'🕵️ <b>šizené váhy</b>'} `+
+      `<span class="znak">•</span> ✅ zváženo: <b>${this.splneno}</b>`;
+  }
+};
+vahy.init();
 
 /* ================= 2) KLADKY ================= */
 const kladka={
@@ -1972,7 +2291,17 @@ const kola={
 
 /* ================= přepínání a smyčka ================= */
 const NAPOVEDA={
-  paka:druh=>druh==='kamen'||druh==='parez'?`<b>Páka v praxi – ${druh==='kamen'?'odvalení kamene':'vytržení pařezu'}</b><br>
+  paka:druh=>druh==='vahy'?`<b>Miskové váhy</b><br>
+    Miskové (rovnoramenné) váhy jsou <b>dvojzvratná páka se stejně dlouhými rameny</b>. V rovnováze platí
+    m₁·g·r₁ = m₂·g·r₂, a když r₁ = r₂, zbude <b>m₁ = m₂</b> – závaží ukážou přímo hmotnost tělesa.<br><br>
+    <b>Zkus si</b><br>
+    • <b>Klikni na závaží</b> v kazetě – skočí na pravou misku. Klepnutím na misce ho vrátíš. Závaží jde i <b>přetáhnout</b>, klidně na levou misku k tělesu.<br>
+    • Váž od největšího: když váhy přelomí na stranu závaží, vrať ho a zkus menší.<br>
+    • Počkej, až se <b>jazýček</b> ustálí na zelené značce – teprve pak je vážení hotové a hmotnost se prozradí.<br>
+    • Změň <b>rameno r₁ nebo r₂</b> – vzniknou <b>šizené váhy</b>. Závaží pak ukazují jinou hmotnost, než těleso má.
+      Kterým směrem by šidil nepoctivý obchodník?<br>
+    • Tlačítkem <b>🎲 Jiné těleso</b> dostaneš nový předmět s neznámou hmotností.`
+  :druh==='kamen'||druh==='parez'?`<b>Páka v praxi – ${druh==='kamen'?'odvalení kamene':'vytržení pařezu'}</b><br>
     Platí pořád stejný zákon: <b>F · r₂ = odpor · r₁</b>, tedy <b>F = odpor · r₁/r₂</b>.<br><br>
     <b>Dvě provedení</b><br>
     • <b>S podpěrou (dvojzvratná)</b> – tyč zasuneš pod břemeno a podložíš <b>polenem</b>, které je osou.
@@ -2003,6 +2332,7 @@ const NAPOVEDA={
       rameno síly, tolikrát delší dráhu ruka opíše: <b>co ušetříš na síle, zaplatíš dráhou</b>
       (zlaté pravidlo mechaniky, práce zůstává stejná).<br>
     • Přepni na <b>jednozvratnou</b> páku – osa je na kraji, břemeno i síla působí na stejné straně (kolečko, otvírák).<br>
+    • Přepni na <b>miskové váhy</b> – páku se stejnými rameny, kterou se váží.<br>
     • Přepni na <b>kámen</b> nebo <b>pařez</b> a vyzkoušej stejný zákon v praxi.`,
   kladka:`<b>Kladky</b><br><b>Pevná kladka</b> jen mění směr síly – táhneš stejnou silou, jako je tíha břemene.
     Každá <b>volná kladka</b> sílu půlí, protože břemeno visí na dvou pramenech lana.<br><br>
@@ -2021,13 +2351,18 @@ const NAPOVEDA={
     • Zapni <b>mezikolo</b> – převodový poměr se nezmění, ale obrátí se smysl otáčení.`
 };
 const DOLE={
-  paka:druh=>druh==='kamen'||druh==='parez'
+  paka:druh=>druh==='vahy'
+    ?'Klepni na závaží v kazetě, nebo ho přetáhni na misku · klepnutím na misce ho vrátíš · kolečkem myši měníš rameno r₂.'
+    :druh==='kamen'||druh==='parez'
     ?'Klepni na tyč kdekoliv – tam ji chytíš ✊ – a zapáč · osu i břemeno jde posunout tažením · kolečkem myši nad tyčí posouváš úchop.'
     :'Táhni za závaží (poloha i váha) nebo za modrou šipku síly · tlačítko ▶️ ukáže dráhy obou konců · kolečkem myši doladíš hodnotu pod kurzorem.',
   kladka:'Táhni za lano (siloměr ukazuje sílu) nebo přímo za břemeno · kolečkem myši zvedáš po centimetrech.',
   kola:'Chyť kolo a otoč jím – druhé se roztočí s ním · kolečkem myši nad kolem měníš počet zubů.'
 };
 let rezim='paka', lastT=null;
+// záložka Páka má tři modely: páku s čísly, páku v praxi (kámen, pařez) a miskové váhy
+const pakaModel=()=>paka.druh==='vahy'?vahy:paka.prakticka()?praxe:paka;
+const pakaHlavni=()=>paka.druh==='vahy'?'vR2':paka.prakticka()?'dPodpera':'f2';
 
 function prepni(r){
   rezim=r; tahne=null; kola.rucne=false; uchopy=[]; canvas.style.cursor='default';
@@ -2060,6 +2395,10 @@ $('btnDopocti').onclick=()=>{
 });
 $('druhPaky').addEventListener('change',()=>{ praxe.rGrip=0; praxe.prekresli(); praxe.nacti(); });
 $('btnKamenReset').onclick=()=>praxe.vratit();
+['vR1','vR2','vUkaz'].forEach(id=>$(id).oninput=$(id).onchange=()=>vahy.nacti());
+$('btnVahyNove').onclick=()=>vahy.nove();
+$('btnVahySundat').onclick=()=>vahy.sundat();
+$('btnVahyPoctive').onclick=()=>{ $('vR1').value=20; $('vR2').value=20; vahy.nacti(); };
 $('btnKamenNovy').onclick=()=>praxe.novy();
 ['druhKladky','pocetKladek','brem','zvednuti'].forEach(id=>$(id).oninput=()=>kladka.nacti());
 $('btnTahni').onclick=()=>animujKladku(50);
@@ -2122,11 +2461,11 @@ canvas.addEventListener('pointermove',e=>{
     canvas.style.cursor=u?'grab':'default';
     return;
   }
-  if(rezim==='paka') (paka.prakticka()?praxe:paka).tahni(tahne.typ,x+tahne.dx,y+tahne.dy,tahne);
+  if(rezim==='paka') pakaModel().tahni(tahne.typ,x+tahne.dx,y+tahne.dy,tahne);
   else if(rezim==='kladka') kladka.tahni(tahne.typ,x,y,tahne);
   else kola.tahni(tahne.typ,x,y,tahne);
 });
-function pusti(){ tahne=null; podKurzorem=null; kola.rucne=false; canvas.style.cursor='default'; }
+function pusti(){ if(tahne&&rezim==='paka'&&paka.druh==='vahy') vahy.pust(tahne); tahne=null; podKurzorem=null; kola.rucne=false; canvas.style.cursor='default'; }
 
 // kolečko myši mění veličinu prvku pod kurzorem
 const KOLECKO={bremeno:'f1',sila:'f2',lano:'zvednuti',bremeno2:'zvednuti',
@@ -2143,7 +2482,7 @@ canvas.addEventListener('wheel',e=>{
   }
   let id=u&&KOLECKO[u.typ];
   if(!id&&u&&u.typ.startsWith('kolo')) id=(kola.geo[+u.typ.slice(4)]||{}).posuvnik;
-  if(!id) id={paka:paka.prakticka()?'dPodpera':'f2',kladka:'zvednuti',
+  if(!id) id={paka:pakaHlavni(),kladka:'zvednuti',
               kola:{dvojice:'z1',soukoli:'z1',hodiny:'hodRychlost',prevodovka:'otackyMotor',diferencial:'zatacka'}[kola.rezim]}[rezim];
   if(!id) return;
   const el=$(id), krok=(+el.step||1)*(e.deltaY<0?1:-1)*(e.shiftKey?5:1);
@@ -2157,7 +2496,7 @@ addEventListener('keydown',e=>{
   if(e.target.tagName==='INPUT'||e.target.tagName==='SELECT') return;
   const krok=e.key==='ArrowLeft'?-1:e.key==='ArrowRight'?1:0;
   if(!krok) return;
-  const el=$({paka:paka.prakticka()?'dPodpera':'f2',kladka:'zvednuti',
+  const el=$({paka:pakaHlavni(),kladka:'zvednuti',
               kola:{dvojice:'z1',soukoli:'z1',hodiny:'hodRychlost',prevodovka:'stupen',diferencial:'zatacka'}[kola.rezim]}[rezim]);
   el.value=Math.max(+el.min,Math.min(+el.max,+el.value+krok*(+el.step||1)*(e.shiftKey?5:1)));
   el.dispatchEvent(new Event('input',{bubbles:true}));
@@ -2174,7 +2513,7 @@ function smycka(t){
   ctx.clearRect(0,0,w,h);
   uchopy=[];   // uchopovací body registruje kreslení znovu v každém snímku
   if(rezim==='paka'){
-    const p=paka.prakticka()?praxe:paka, pw=panelSirka(w,h);
+    const p=pakaModel(), pw=panelSirka(w,h);
     p.krok(dt); p.kresli(w-pw,h);        // kreslí se jen do volné části plátna
     kresliPanel(w,h,pw,p.vypocet());
     $('stav').innerHTML=p.stav();
@@ -2223,7 +2562,7 @@ prepinace();
 <script src="../badani.js"></script>
 <script>
 /* Úkoly k modelu (badani.js): předpověz → vyzkoušej → vysvětli.
-   Jeden úkol na každou část: páka, kladkostroj, ozubená kola. */
+   Jeden úkol na každou část: páka, miskové váhy, kladkostroj, ozubená kola. */
 (function(){
 const N=Badani.nastav, cislo=Badani.cislo;
 const nahodne=p=>p[Math.floor(Math.random()*p.length)];
@@ -2249,6 +2588,24 @@ Badani.start({
           moznost('Delší část tyče je těžší a pomáhá tlačit dolů.',false,'Tyč v modelu nic neváží – a přesto stačí 10 N. Rozhoduje délka ramene, ne hmotnost tyče.'),
           moznost('Síla se cestou po tyči zeslabí, takže na druhý konec dojde menší.',false,'Nic se neztrácí. Menší síla je vykoupená delší dráhou: zkus ▶️ Ukázat zdvih a porovnej, kolik urazí oba konce.')]},
       shrnuti:'Páka je v rovnováze, když <b>F₁ · r₁ = F₂ · r₂</b>. Kolikrát delší rameno, tolikrát menší síla – konec ramene ale urazí tolikrát delší dráhu.' },
+
+    { id:'vahy', nazev:'Šizené váhy',
+      predpoved:{
+        otazka:'Na miskových vahách leží sýr, který váží přesně <b>200 g</b>. Rameno misky se sýrem prodloužíš z 20 na <b>25 cm</b>, rameno se závažím zůstane <b>20 cm</b>. Kolik závaží teď váhy vyrovná?',
+        moznosti:['Méně než 200 g','Pořád 200 g – sýr se nezměnil','Víc než 200 g'],
+        spravna:2 },
+      priprava(){ prepni('paka'); N({'#druhPaky':'vahy','#vR1':20,'#vR2':20,'#vUkaz':true}); vahy.nastavTeleso('🧀','sýr',200); },
+      pokus:'Nastav <b>rameno tělesa r₁ = 25 cm</b> a závažím z kazety vyvaž váhy tak, aby jazýček stál na zelené značce.',
+      splneno:()=>rezim==='paka'&&paka.druh==='vahy'&&vahy.r1===25&&vahy.r2===20&&vahy.teleso.m===200&&vahy.soucet('L')===0&&vahy.rovnovaha(),
+      ukaz(){ N({'#vR1':25}); vahy.sundat(); vahy.poloz([200,50]); },
+      pozorovani:()=>`Váhy jsou v rovnováze s <b>${vahy.mP()} g</b> závaží, přestože sýr váží jen 200 g: 200 g · 25 cm = 250 g · 20 cm.`,
+      vysvetli:{
+        otazka:'Proč teď závaží neukazují skutečnou hmotnost sýra?',
+        moznosti:[
+          moznost('Váhy jsou páka: v rovnováze se musí rovnat součiny hmotnost × rameno. Hmotnost ukazují jen tehdy, když jsou ramena stejně dlouhá.',true),
+          moznost('Sýr na delším rameni ztěžkl.',false,'Hmotnost sýra se nezměnila – pořád 200 g. Na delším rameni má jen větší moment.'),
+          moznost('Závaží se na kratším rameni zlehčila.',false,'Závaží váží pořád stejně. Rozhoduje součin hmotnosti a ramene na každé straně.')]},
+      shrnuti:'Miskové váhy jsou <b>dvojzvratná páka</b>: m₁ · r₁ = m₂ · r₂. Jen se <b>stejnými rameny</b> platí m₁ = m₂ a závaží ukazují hmotnost tělesa.' },
 
     { id:'kladkostroj', nazev:'Kladkostroj',
       predpoved:{
@@ -2315,6 +2672,25 @@ Badani.start({
           moznost(`${cislo(h/n,1)} cm`,false,'Kladkostroj šetří sílu, ne dráhu – lana se vytáhne víc, ne méně.')],
         vysvetleni:`s = n · h = ${n} · ${h} cm = ${n*h} cm. Menší síla se platí delší dráhou.` };
     },
+    ()=>{ // vážení na miskových vahách
+      const sada=[[100,50,20,5],[200,100,20,2],[50,20,10,2,1],[500,200,50,5],[200,20,10,5,2]];
+      const z=nahodne(sada), m=z.reduce((a,b)=>a+b,0);
+      return { otazka:`Na levé misce rovnoramenných vah leží jablko, na pravé závaží <b>${z.join(' g + ')} g</b>. Váhy jsou v rovnováze. Kolik váží jablko?`,
+        moznosti:[moznost(`${m} g`,true),
+          moznost(`${cislo(m*9.81/1000,2)} N`,false,'To je jeho tíha v newtonech, ne hmotnost v gramech. Váhy porovnávají přímo hmotnosti.'),
+          moznost(`${2*m} g`,false,'Ramena jsou stejně dlouhá, takže hmotnost tělesa je rovna součtu závaží – nic se nenásobí.')],
+        vysvetleni:`Stejná ramena: m₁ = m₂ = ${z.join(' + ')} = ${m} g.` };
+    },
+    { otazka:'Proč by <b>miskové váhy</b> ukázaly na Měsíci stejnou hmotnost jako na Zemi?',
+      moznosti:[moznost('Slabší gravitace táhne stejně slabě za obě misky, takže se v rovnováze vykrátí.',true),
+        moznost('Neukázaly by – na Měsíci je těleso šestkrát lehčí.',false,'Šestkrát menší je tíha, ale stejně klesne i tíha závaží. Rovnováha se nezmění.'),
+        moznost('Protože na Měsíci nefouká vítr.',false,'Vítr s tím nesouvisí. Rozhoduje, že g působí na obě misky stejně.')],
+      vysvetleni:'m₁ · g · r = m₂ · g · r → m₁ = m₂. Miskové váhy měří hmotnost, siloměr by na Měsíci ukázal méně.' },
+    { otazka:'Obchodník má miskové váhy, u kterých visí <b>zboží na delším rameni</b> než závaží. Co se stane?',
+      moznosti:[moznost('Váhy ukážou víc, než kolik zboží je – zákazník přeplatí.',true),
+        moznost('Váhy ukážou méně, než kolik zboží je.',false,'Na delším rameni má zboží větší moment, takže ho vyrovná víc závaží, než kolik skutečně váží.'),
+        moznost('Nic – rovnováha nezávisí na délce ramen.',false,'Závisí: v rovnováze se musí rovnat součiny hmotnost × rameno.')],
+      vysvetleni:'m_zboží · r₁ = m_závaží · r₂; při r₁ > r₂ je závaží víc než zboží.' },
     { otazka:'K čemu je <b>pevná kladka</b>, když sílu nezmenší?',
       moznosti:[moznost('Mění směr síly – můžeš táhnout dolů a pomoct si vlastní vahou.',true),
         moznost('Zmenší potřebnou práci na polovinu.',false,'Práci neušetří žádný jednoduchý stroj. Pevná kladka nešetří ani sílu.'),

@@ -17,6 +17,7 @@
     .pasy { width: min(320px, 84vw); }
     .pasy rect { stroke: var(--border); stroke-width: 1; }
     .pasy text { fill: var(--text); font-size: 11px; text-anchor: middle; font-weight: 700; }
+    .atmosfera-img { width:min(720px,100%); border-radius:16px; background:#f8f1df; }
   </style>
 </head>
 <body>
@@ -117,7 +118,7 @@ function vrstvy() {
   const u = Uloha.nahodne(VRSTVY);
   const jine = Uloha.zamichej(VRSTVY.filter(x => x.n !== u.n)).slice(0, 3);
   p.innerHTML = `<div class="zadani">O kterou vrstvu atmosféry jde?</div>
-    <div class="karta"><div class="obrazek">🛰️</div><div class="popis-a">${u.o}</div></div>`;
+    <img class="atmosfera-img" src="img/z/z6-atmosfera-vrstvy.webp" alt="Vrstvy atmosféry od mraků a letadla přes balon a meteor až k polární záři a ISS." width="1152" height="768"><div class="karta"><div class="popis-a">${u.o}</div></div>`;
   const odezva = document.createElement('div');
   odezva.className = 'odezva';
   Uloha.vyber({

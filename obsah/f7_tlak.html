@@ -21,6 +21,7 @@
     .scena .kota { stroke: var(--warn); stroke-width: 2; stroke-dasharray: 5 4; }
     .scena .popis { fill: var(--text-muted); font-size: 13px; text-anchor: middle; }
     .scena .pist { fill: var(--bg-control); stroke: var(--text-muted); stroke-width: 2.5; }
+    .tlak-kontext { width:min(360px,88%); height:auto; border-radius:14px; box-shadow:var(--shadow); }
   </style>
 </head>
 <body>
@@ -51,6 +52,7 @@
 const $ = id => document.getElementById(id);
 const skore = Uloha.skore('metodus_f7_tlak', $('skore'));
 let rezim = 'hydrostaticky';
+const TLAKOVE_SITUACE = ['sneznice','jehla','pas','potapec','prehrada'];
 
 const fmt = x => Number(Number(x).toFixed(2)).toLocaleString('cs-CZ');
 function odezvaEl() { const d = document.createElement('div'); d.className = 'odezva'; return d; }
@@ -184,8 +186,10 @@ function tlakPevne() {
   const jine = new Set([fmt(vKPa * 10), fmt(vKPa / 10), fmt(F * S), fmt(vKPa * 2)]);
   jine.delete(fmt(vKPa));
 
+  const kontext = Uloha.nahodne(TLAKOVE_SITUACE);
   p.innerHTML = `<div class="zadani uloha-text">Těleso působí na podložku silou <b>${F} N</b>
       a dotýká se jí plochou <b>${fmt(S)} m²</b>. Jak velký je tlak?</div>
+    <img class="tlak-kontext" src="img/f/f7-tlak-${kontext}.webp" alt="Příklad působení tlaku v běžné situaci" width="768" height="768">
     <div class="karta"><div class="vzorec">p = F / S &nbsp; [Pa = N/m²]</div></div>`;
   const odezva = odezvaEl();
   Uloha.vyber({

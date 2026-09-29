@@ -15,6 +15,11 @@
     .nazev-zar { font-size: 1.25rem; font-weight: 700; }
     .situace { max-width: 560px; font-size: 1.05rem; line-height: 1.5; }
     .heslo { font-family: 'Courier New', monospace; font-size: clamp(1.3rem, 5vw, 2rem); font-weight: 700; }
+    .hotspot-scena { position: relative; width: min(760px, 100%); margin: 18px 0; }
+    .hotspot-scena img { display: block; width: 100%; aspect-ratio: 3 / 2; object-fit: cover; border-radius: 14px; background: #f8f1df; }
+    .hotspot { position: absolute; transform: translate(-50%, -50%); width: 28px; height: 28px; padding: 0; border-radius: 50%; border: 2px solid #fff; background: var(--accent); color: var(--na-akcentu, #fff); font-weight: 800; cursor: pointer; box-shadow: 0 2px 8px #0007; }
+    .hotspot:focus-visible { outline: 3px solid var(--focus, #ffd54f); outline-offset: 2px; }
+    .hotspot-vysledek { min-height: 1.6em; margin: 8px 0 0; color: var(--text-muted); font-weight: 600; }
   </style>
 </head>
 <body>
@@ -35,6 +40,24 @@
     <span class="skore" id="skore"></span>
   </div>
 
+  <section aria-labelledby="stulNadpis">
+    <h2 id="stulNadpis">Najdi zařízení na pracovním stole</h2>
+    <div class="hotspot-scena" id="hardwareScena">
+      <img src="img/inf/inf4-hardware-pracovni-stul.webp" alt="Pracovní stůl s monitorem, klávesnicí, myší, reproduktory, mikrofonem, webkamerou, tiskárnou, skenerem, flash diskem a sluchátky." width="1152" height="768">
+      <button class="hotspot" style="left:47%;top:31%" data-zarizeni="monitor" aria-label="Monitor">?</button>
+      <button class="hotspot" style="left:48%;top:13%" data-zarizeni="webkamera" aria-label="Webkamera">?</button>
+      <button class="hotspot" style="left:43%;top:65%" data-zarizeni="klávesnice" aria-label="Klávesnice">?</button>
+      <button class="hotspot" style="left:65%;top:64%" data-zarizeni="myš" aria-label="Myš">?</button>
+      <button class="hotspot" style="left:24%;top:43%" data-zarizeni="reproduktory" aria-label="Reproduktory">?</button>
+      <button class="hotspot" style="left:15%;top:54%" data-zarizeni="mikrofon" aria-label="Mikrofon">?</button>
+      <button class="hotspot" style="left:81%;top:36%" data-zarizeni="tiskárna" aria-label="Tiskárna">?</button>
+      <button class="hotspot" style="left:79%;top:72%" data-zarizeni="skener" aria-label="Skener">?</button>
+      <button class="hotspot" style="left:65%;top:81%" data-zarizeni="flash disk" aria-label="Flash disk">?</button>
+      <button class="hotspot" style="left:17%;top:72%" data-zarizeni="sluchátka" aria-label="Sluchátka">?</button>
+    </div>
+    <p class="hotspot-vysledek" id="hardwareVysledek" aria-live="polite">Klepni na některý bod.</p>
+  </section>
+
   <p class="napoveda">
     <b>Vstupní zařízení</b> dávají data do počítače (klávesnice, myš, mikrofon).
     <b>Výstupní zařízení</b> data z počítače ukazují (monitor, tiskárna, reproduktor).
@@ -44,6 +67,12 @@
 const $ = id => document.getElementById(id);
 const skore = Uloha.skore('metodus_inf4_hardware', $('skore'));
 let rezim = 'kCemu';
+
+$('hardwareScena').addEventListener('click', event => {
+  const bod = event.target.closest('[data-zarizeni]');
+  if (!bod) return;
+  $('hardwareVysledek').textContent = `Našel jsi: ${bod.dataset.zarizeni}.`;
+});
 
 const ZARIZENI = [
   { n: 'klávesnice', e: '⌨️', typ: 'vstup', k: 'píšeme na ní text a čísla' },

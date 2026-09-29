@@ -13,6 +13,7 @@
   <script src="../uloha.js"></script>
   <style>
     .nazev-z { font-size: 1.25rem; font-weight: 700; }
+    .clenovec-img { width: min(260px, 70vw); aspect-ratio: 1; object-fit: contain; border-radius: 12px; background: #f8f1df; }
     .popis-z { color: var(--text-muted); max-width: 560px; line-height: 1.55; }
     .promena { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; align-items: center; min-height: 46px; }
     .promena .stadium {
@@ -59,7 +60,7 @@ const TRIDY = {
 };
 
 const ZIVOCICHOVE = [
-  { n: 'včela medonosná', e: '🐝', t: 'hmyz', nohy: 6, promena: 'dokonala',
+  { n: 'včela medonosná', e: '🐝', img: 'img/pr/pr6-clenovci-vcela.webp', t: 'hmyz', nohy: 6, promena: 'dokonala',
     popis: 'opyluje rostliny a vyrábí med, žije ve složité společnosti' },
   { n: 'mravenec lesní', e: '🐜', t: 'hmyz', nohy: 6, promena: 'dokonala',
     popis: 'staví mraveniště a čistí les od hmyzích škůdců' },
@@ -71,17 +72,17 @@ const ZIVOCICHOVE = [
     popis: 'brouk s červenými krovkami, který požírá mšice' },
   { n: 'vážka', e: '🪰', t: 'hmyz', nohy: 6, promena: 'nedokonala',
     popis: 'dravý hmyz s dvěma páry blanitých křídel, larvy žijí ve vodě' },
-  { n: 'pavouk křižák', e: '🕷️', t: 'pavoukovci', nohy: 8, promena: null,
+  { n: 'pavouk křižák', e: '🕷️', img: 'img/pr/pr6-clenovci-krizak.webp', t: 'pavoukovci', nohy: 8, promena: null,
     popis: 'tká kruhovou síť a má na zadečku kříž' },
   { n: 'klíště obecné', e: '🪲', t: 'pavoukovci', nohy: 8, promena: null,
     popis: 'saje krev a může přenášet boreliózu nebo encefalitidu' },
   { n: 'sekáč', e: '🕸️', t: 'pavoukovci', nohy: 8, promena: null,
     popis: 'má velmi dlouhé nohy a nesplétá pavučinu' },
-  { n: 'rak říční', e: '🦞', t: 'korysi', nohy: 10, promena: null,
+  { n: 'rak říční', e: '🦞', img: 'img/pr/pr6-clenovci-rak.webp', t: 'korysi', nohy: 10, promena: null,
     popis: 'žije v čistých potocích, má klepeta a dýchá žábrami' },
   { n: 'krab', e: '🦀', t: 'korysi', nohy: 10, promena: null,
     popis: 'mořský korýš s krunýřem a klepety, pohybuje se do stran' },
-  { n: 'stonožka', e: '🐛', t: 'stonozky', nohy: 30, promena: null,
+  { n: 'stonožka', e: '🐛', img: 'img/pr/pr6-clenovci-stonozka.webp', t: 'stonozky', nohy: 30, promena: null,
     popis: 'na každém článku má jeden pár nohou, je dravá' },
 ];
 
@@ -99,12 +100,16 @@ const VYZNAM = [
   { t: 'mol šatní ve skříni', dobre: false, proc: 'jeho larvy prokousávají vlněné oblečení' },
 ];
 
+const obrazekClenovce = u => u.img
+  ? `<img class="clenovec-img" src="${u.img}" alt="${u.n} při pohledu shora.">`
+  : `<div class="obrazek">${u.e}</div>`;
+
 /* ---- Do které třídy -------------------------------------------------------------------- */
 function trida() {
   const p = $('plocha');
   const u = Uloha.nahodne(ZIVOCICHOVE);
   p.innerHTML = `<div class="zadani">Do které třídy členovců patří?</div>
-    <div class="karta"><div class="obrazek">${u.e}</div><div class="nazev-z">${u.n}</div></div>`;
+    <div class="karta">${obrazekClenovce(u)}<div class="nazev-z">${u.n}</div></div>`;
   const odezva = document.createElement('div');
   odezva.className = 'odezva';
   Uloha.vyber({
@@ -124,7 +129,7 @@ function nohy() {
   const p = $('plocha');
   const u = Uloha.nahodne(ZIVOCICHOVE.filter(x => x.nohy <= 10));
   p.innerHTML = `<div class="zadani">Kolik nohou má tento živočich?</div>
-    <div class="karta"><div class="obrazek">${u.e}</div><div class="nazev-z">${u.n}</div></div>`;
+    <div class="karta">${obrazekClenovce(u)}<div class="nazev-z">${u.n}</div></div>`;
   const odezva = document.createElement('div');
   odezva.className = 'odezva';
   Uloha.vyber({

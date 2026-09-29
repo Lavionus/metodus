@@ -14,6 +14,9 @@
   <style>
     .uloha-text { max-width: 620px; font-size: 1.02rem; line-height: 1.6; }
     .uloha-text b { color: var(--accent); }
+    .monzun-dvojice { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; width:min(860px,100%); }
+    .monzun-dvojice figure { margin:0; } .monzun-dvojice img { display:block; width:100%; border-radius:14px; background:#f8f1df; } .monzun-dvojice figcaption{font-weight:700;margin-top:5px}
+    @media(max-width:620px){.monzun-dvojice{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
@@ -25,6 +28,7 @@
     <button data-rezim="priroda">🏔️ Slepá mapa – příroda</button>
     <button data-rezim="kvizPriroda">🌦️ Přírodní poměry</button>
     <button data-rezim="kvizHospodarstvi">🏭 Lidé a hospodářství</button>
+    <button data-rezim="monzun">🌧️ Sucho a monzun</button>
   </div>
 
   <div class="plocha" id="plocha"></div>
@@ -381,8 +385,9 @@ function kviz(sada, napoveda) {
 }
 const kvizPriroda = () => kviz(KVIZ_PRIRODA, 'Představ si mapu: hory uprostřed, nížiny s velkými řekami na jihu a východě.');
 const kvizHospodarstvi = () => kviz(KVIZ_HOSPODARSTVI, 'Přemýšlej, čím je která oblast Asie světově známá.');
+function monzun(){ $('plocha').innerHTML='<div class="zadani">Porovnej stejné místo v období sucha a monzunu.</div><div class="monzun-dvojice"><figure><img src="img/z/z7-asie-monzun-sucho.webp" alt="Indická vesnice v období sucha." width="1152" height="768"><figcaption>Období sucha</figcaption></figure><figure><img src="img/z/z7-asie-monzun-dest.webp" alt="Stejná indická vesnice během monzunových dešťů." width="1152" height="768"><figcaption>Monzun</figcaption></figure></div>'; }
 
-const REZIMY = { staty, priroda, kvizPriroda, kvizHospodarstvi };
+const REZIMY = { staty, priroda, kvizPriroda, kvizHospodarstvi, monzun };
 function novaUloha() { REZIMY[rezim](); }
 
 document.querySelectorAll('#rezimy button').forEach(b => b.addEventListener('click', () => {

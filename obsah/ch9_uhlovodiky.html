@@ -13,6 +13,7 @@
   <style>
     .uloha-text { max-width: 660px; font-size: 1.02rem; line-height: 1.62; }
     .uloha-text b { color: var(--accent); }
+    .kolona-img { width:min(720px,100%); border-radius:16px; background:#f8f1df; }
     .predmet { font-size: clamp(1.3rem, 5vw, 1.9rem); font-weight: 700; }
     .lista { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; max-width: 780px;
       color: var(--text-faint); font-size: 0.79rem; }
@@ -29,6 +30,7 @@
     <button data-rezim="kviz2">🔗 Typy vazeb</button>
     <button data-rezim="kviz3">🛢️ Ropa a paliva</button>
     <button data-rezim="kviz4">🌍 Uhlovodíky kolem nás</button>
+    <button data-rezim="kolona">🏭 Frakční kolona</button>
   </div>
 
   <div class="plocha" id="plocha"></div>
@@ -375,6 +377,7 @@ function kviz(klic) {
 const REZIMY = {
   kviz1: () => kviz('kviz1'), kviz2: () => kviz('kviz2'),
   kviz3: () => kviz('kviz3'), kviz4: () => kviz('kviz4'),
+  kolona: () => { $('plocha').innerHTML='<div class="zadani">Lehčí frakce kondenzují výše, těžší níže.</div><img class="kolona-img" src="img/ch/ch9-frakcni-kolona.webp" alt="Řez frakční destilační kolonou s pecí, patry a bočními vývody." width="1152" height="768"><div class="odezva">Shora: plyny a benzin; uprostřed petrolej a nafta; dole těžké oleje a asfalt.</div>'; },
 };
 function novaUloha() { REZIMY[rezim](); }
 

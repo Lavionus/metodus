@@ -19,6 +19,7 @@
       padding: 8px 12px; font-size: 0.95rem; font-weight: 600;
     }
     .retezec .sipka { color: var(--text-faint); font-size: 1.3rem; }
+    .naucna-scena { width: min(720px, 100%); height: auto; border-radius: 16px; box-shadow: var(--shadow); }
   </style>
 </head>
 <body>
@@ -107,6 +108,7 @@ function kamPatri() {
   const p = $('plocha');
   const o = Uloha.nahodne(ORGANISMY);
   p.innerHTML = `<div class="zadani">Ve kterém prostředí toto najdeš nejčastěji?</div>
+    <img class="naucna-scena" src="img/prv/prv4-louka-pole.webp" alt="Louka a pole s typickými rostlinami a živočichy" width="1152" height="768">
     <div class="karta"><div class="obrazek">${o.e}</div><div class="nazev-org">${o.n}</div></div>`;
   const odezva = document.createElement('div');
   odezva.className = 'odezva';
@@ -202,6 +204,7 @@ function patra() {
   const p = $('plocha');
   const u = Uloha.nahodne(PATRA);
   p.innerHTML = `<div class="zadani">Které patro lesa to je?</div>
+    <img class="naucna-scena" src="img/prv/prv4-lesni-patra.webp" alt="Řez lesem od kořenů přes mechové, bylinné a keřové patro až po koruny stromů" width="1152" height="768">
     <div class="karta"><div class="obrazek">${u.e}</div><div class="nazev-org">${u.popis}</div></div>`;
   const odezva = document.createElement('div');
   odezva.className = 'odezva';

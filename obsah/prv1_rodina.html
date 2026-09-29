@@ -30,6 +30,7 @@
     .zadani { color: var(--text-muted); font-size: 1rem; }
     .zadani b { color: var(--text); font-size: 1.2rem; }
     .obrazek { font-size: clamp(3rem, 11vw, 4.6rem); line-height: 1; }
+    .dum-rez { display: block; width: min(680px, 100%); max-width: 100%; aspect-ratio: 3 / 2; object-fit: cover; border-radius: 12px; background: #f8f1df; }
 
     /* Rodokmen */
     .patro { display: flex; flex-direction: column; align-items: center; gap: 6px; width: 100%; }
@@ -360,7 +361,7 @@ function domov() {
   cteniZadani = d.t;
   const volby = zamichej(Object.keys(MISTNOSTI)).map(k => ({ klic: k, ...MISTNOSTI[k] }));
   tlacitkovaUloha(
-    `<div class="zadani">${d.t}</div><div class="obrazek">${d.e}</div>`,
+    `<div class="zadani">${d.t}</div><img class="dum-rez" src="img/prv/prv1-rodina-dum-rez.webp" alt="Řez rodinným domem s kuchyní, obývákem, koupelnou, dětským pokojem, ložnicí a předsíní."><div class="obrazek">${d.e}</div>`,
     volby, d.s, MISTNOSTI[d.s].nazev);
 }
 

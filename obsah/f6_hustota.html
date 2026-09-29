@@ -24,6 +24,9 @@
       padding: 5px 10px; font-size: 0.76rem; color: var(--text-muted);
     }
     .tabulka-hustot b { color: var(--text); }
+    .material-img { width:min(210px,52vw); aspect-ratio:1; object-fit:contain; border-radius:14px; background:#f8f1e5; }
+    .material-porovnani { display:flex; flex-wrap:wrap; gap:30px; justify-content:center; max-width:100%; }
+    .material-porovnani > div { min-width:0; max-width:100%; }
   </style>
 </head>
 <body>
@@ -59,13 +62,15 @@ let rezim = 'vypocet';
 
 /* hustoty v g/cm³ */
 const LATKY = [
-  { n: 'korek', e: '🟤', ro: 0.2 }, { n: 'suché dřevo', e: '🪵', ro: 0.6 },
+  { n: 'polystyren', e: '⬜', ro: 0.03 }, { n: 'korek', e: '🟤', ro: 0.2 }, { n: 'suché dřevo', e: '🪵', ro: 0.6 },
   { n: 'led', e: '🧊', ro: 0.92 }, { n: 'voda', e: '💧', ro: 1 },
   { n: 'cukr', e: '🍬', ro: 1.6 }, { n: 'sklo', e: '🪟', ro: 2.5 },
   { n: 'hliník', e: '🥫', ro: 2.7 }, { n: 'žula', e: '🪨', ro: 2.8 },
   { n: 'železo', e: '⛓️', ro: 7.8 }, { n: 'měď', e: '🔶', ro: 8.9 },
   { n: 'olovo', e: '⚫', ro: 11.3 }, { n: 'zlato', e: '🥇', ro: 19.3 },
 ];
+const OBRAZKY_LATKY = { polystyren:'polystyren', korek:'korek', 'suché dřevo':'drevo', led:'led', sklo:'sklo', hliník:'hlinik', železo:'zelezo', olovo:'olovo' };
+const obrazekLatky = l => OBRAZKY_LATKY[l.n] ? `<img class="material-img" src="img/f/f6-hustota-${OBRAZKY_LATKY[l.n]}.webp" alt="Krychle z materiálu ${l.n}" width="768" height="768">` : `<div class="obrazek">${l.e}</div>`;
 
 $('tabulkaHustot').innerHTML = LATKY
   .map(l => `<span>${l.e} <b>${l.n}</b> ${String(l.ro).replace('.', ',')} g/cm³</span>`).join('');
@@ -78,7 +83,7 @@ function vypocet() {
   const m = +(l.ro * V).toFixed(1);
 
   p.innerHTML = `<div class="zadani">Vypočítej hustotu látky:</div>
-    <div class="karta"><div class="obrazek">${l.e}</div>
+    <div class="karta">${obrazekLatky(l)}
     <div class="zadani-vypoctu">Těleso má hmotnost ${String(m).replace('.', ',')} g
       a objem ${V} cm³.</div>
     <div class="vzorec">ρ = m / V</div></div>`;
@@ -107,7 +112,7 @@ function hmotnost() {
   const m = +(l.ro * V).toFixed(1);
 
   p.innerHTML = `<div class="zadani">Jakou hmotnost má těleso?</div>
-    <div class="karta"><div class="obrazek">${l.e}</div>
+    <div class="karta">${obrazekLatky(l)}
     <div class="zadani-vypoctu">${l.n} o objemu ${V} cm³,
       hustota ${String(l.ro).replace('.', ',')} g/cm³</div>
     <div class="vzorec">m = ρ × V</div></div>`;
@@ -173,9 +178,9 @@ function porovnej() {
   const tezsi = a.ro > b.ro ? 'a' : 'b';
 
   p.innerHTML = `<div class="zadani">Které těleso o objemu <b>${V} cm³</b> bude těžší?</div>
-    <div class="karta"><div style="display:flex;gap:30px;justify-content:center">
-      <div><div class="obrazek">${a.e}</div><div>${a.n}</div></div>
-      <div><div class="obrazek">${b.e}</div><div>${b.n}</div></div>
+    <div class="karta"><div class="material-porovnani">
+      <div>${obrazekLatky(a)}<div>${a.n}</div></div>
+      <div>${obrazekLatky(b)}<div>${b.n}</div></div>
     </div></div>`;
   const odezva = document.createElement('div');
   odezva.className = 'odezva';

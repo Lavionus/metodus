@@ -28,6 +28,7 @@
     .ruzice .stred { fill: var(--danger); }
     .ruzice text { fill: var(--text-muted); font-size: 18px; font-weight: 700; text-anchor: middle; }
     .situace { max-width: 520px; font-size: 1.05rem; line-height: 1.45; }
+    .obec-ilustrace { width:min(720px,100%); height:auto; border-radius:16px; box-shadow:var(--shadow); }
   </style>
 </head>
 <body>
@@ -171,7 +172,8 @@ function svgPlan() {
 function plan() {
   const p = $('plocha');
   const cil = Uloha.nahodne(BUDOVY);
-  p.innerHTML = `<div class="zadani">Najdi v plánu obce: <b>${cil.nazev}</b></div>${svgPlan()}`;
+  p.innerHTML = `<div class="zadani">Nejdřív si prohlédni obec, potom najdi v jednoduchém plánu: <b>${cil.nazev}</b></div>
+    <img class="obec-ilustrace" src="img/prv/prv3-obec-plan.webp" alt="Pohled shora na obec s veřejnými budovami, nádražím, parkem, rybníkem a kostelem" width="1152" height="768">${svgPlan()}`;
   const odezva = document.createElement('div');
   odezva.className = 'odezva';
   p.appendChild(odezva);

@@ -442,7 +442,7 @@ Společné pro celou češtinu: 🔗 jedna paleta pro větné členy a slovní d
   - Jedna scénka, čtyři věty: děti u stolu („Podej mi chleba.“ / „Podáš mi chleba?“ / „Kéž by byl chleba!“ / „Chleba je na stole.“). Žák přiřadí bubliny k situaci.
   - Poslech s intonací a volba znaménka až po poslechu.
 - **Obrázky:**
-  - `IMG-cj-05` 🟠 **A** · 4 scénky dětí (u stolu, na hřišti, ve třídě, v obchodě), každá s prázdným místem pro bublinu — situace ke čtyřem druhům vět
+  - `IMG-cj-05` ✅ **A** · 4 scénky dětí (u stolu, na hřišti, ve třídě, v obchodě), každá s prázdným místem pro bublinu — zapojeno
     - ✅ Hotovo 23. 9. 2026: čtyři akvarelové scénky `obsah/img/cj/cj2-druhy-vet-{stul,hriste,trida,obchod}.webp`, originály PNG a zadání; zapojeno jako přepínatelná obrazová pomůcka se čtyřmi druhy vět.
 
 #### Slovní druhy · [slovni_druhy.html](obsah/slovni_druhy.html)
@@ -465,7 +465,7 @@ Společné pro celou češtinu: 🔗 jedna paleta pro větné členy a slovní d
   - Časová osa včera – dnes – zítra (🧩 časová osa, zjednodušená) s posuvníkem: věta se přepisuje podle polohy.
   - Osoby jako obrázky mluvčích: já, ty, on/ona, my, vy, oni — mluví v bublinách.
 - **Obrázky:**
-  - `IMG-cj-06` 🟠 **B** · karty osob: dítě ukazuje na sebe, dítě ukazuje na druhého, skupinka dětí, dvojice, ukazování „ty/vy“ — vizualizace mluvnických osob
+  - `IMG-cj-06` ✅ **B** · šest karet osob já, ty, on/ona, my, vy a oni — zapojeno
     - ✅ Hotovo 24. 9. 2026: šest karet `obsah/img/cj/cj3-slovesa-{ja,ty,on-ona,my,vy,oni}.webp`, originály PNG a zadání; zapojeno do živé pomůcky osoby a čísla v lekci.
 
 #### Podstatná jména – rod a číslo · [cj3_podstatna.html](obsah/cj3_podstatna.html)
@@ -1284,7 +1284,7 @@ Společné pro jazyky: 🔗 gramatika se učí **v krátkém dialogu nebo scénc
   - Denní doba jako posuvník slunce na obloze, pozdrav se mění.
   - Odlišit „Good night“ (loučení) od pozdravů při setkání.
 - **Obrázky:**
-  - `IMG-aj-03` 🟠 **A** · 4 scénky setkání dvou dětí (ráno před školou, odpoledne v parku, večer u domu, loučení před spaním) — kontext pozdravů
+  - `IMG-aj-03` ✅ **A** · 4 scénky setkání dvou dětí podle denní doby — zapojeno do režimu pozdravů
 
 #### Anglická nepravidelná slovesa · [aj_slovesa.html](obsah/aj_slovesa.html)
 - **Zařazení:** Cizí jazyky › Slovní zásoba · AJ 6.–9. r. · samostatná F
@@ -1546,7 +1546,7 @@ Společné pro prvouku: 🔗 malý žák se učí z **obrazu a situace**, ne ze 
   - Řez domem s místnostmi, přetahování činností.
 - **Obrázky:**
   - `IMG-prv-01` ✅ **B** · osm karet členů rozšířené fiktivní rodiny (babička, dědeček, máma, táta, teta, strýc, bratranec, mladší sourozenec) v jednotném stylu — zapojeno do rodokmenu i vztahových otázek; pět karet sdíleno s `IMG-aj-02`, tři nově vytvořeny
-  - `IMG-prv-02` 🟠 **A** · řez rodinným domem (kuchyň, obývák, koupelna, dětský pokoj, ložnice, předsíň) bez lidí — hotspoty místností
+  - `IMG-prv-02` ✅ **A** · řez rodinným domem se šesti částmi domova — zapojeno do režimu Doma
 
 #### Cesta do školy a bezpečnost · [prv1_cesta_skola.html](obsah/prv1_cesta_skola.html)
 - **Zařazení:** Prvouka › Člověk a jeho svět · 1.–2. r. · samostatná F
@@ -1594,7 +1594,7 @@ Společné pro prvouku: 🔗 malý žák se učí z **obrazu a situace**, ne ze 
   - Kruh roku: stejná krajina naší vesnice ve čtyřech obdobích, posuvník měsíců.
   - Znaky období na obrázku (hotspoty: kvetoucí strom, odlétající ptáci, sníh).
 - **Obrázky:**
-  - `IMG-prv-07` 🔴 **A** · naše vesnice ze stejného úhlu ve 4 ročních obdobích (jaro, léto, podzim, zima), se stejným stromem, rybníkem, polem a zahradou — **klíčová sada pro celou prvouku**
+  - `IMG-prv-07` ✅ **A** · naše vesnice ze stejného úhlu ve 4 ročních obdobích (jaro, léto, podzim, zima), se stejným stromem, rybníkem, polem a zahradou — zapojeno jako obrazové volby
 
 #### Lidské tělo a smysly · [prv1_smysly.html](obsah/prv1_smysly.html)
 - **Zařazení:** Prvouka › Příroda kolem nás · 1.–2. r. · samostatná F
@@ -1619,7 +1619,7 @@ Společné pro prvouku: 🔗 malý žák se učí z **obrazu a situace**, ne ze 
   - Dvojice dospělec–mládě k přiřazení.
   - Statek a les z naší vesnice jako dvě scény, zvířata se přetahují.
 - **Obrázky:**
-  - `IMG-prv-10` 🔴 **B** · 30 karet zvířat: 15 domácích (kráva, prase, koza, ovce, kůň, slepice, husa, kachna, králík, pes, kočka, morče, osel, krůta, včela) a 15 volně žijících (liška, srna, zajíc, ježek, veverka, divočák, jezevec, sova, datel, čáp, žába, ropucha, užovka, vydra, bobr)
+  - `IMG-prv-10` ✅ **B** · 30 karet zvířat: 19 nových a 11 sdílených; zapojeno do všech čtyř režimů
   - `IMG-prv-11` 🟠 **B** · 12 karet mláďat k domácím zvířatům (tele, sele, kůzle, jehně, hříbě, kuře…) — dvojice dospělec–mládě
 
 #### Živá a neživá příroda · [prv3_ziva_neziva.html](obsah/prv3_ziva_neziva.html)
@@ -1643,8 +1643,8 @@ Společné pro prvouku: 🔗 malý žák se učí z **obrazu a situace**, ne ze 
   - Pokus do třídy (sklenice s ledem) a otázka „odkud jsou kapky?“.
   - Řez půdou s vrstvami a živočichy.
 - **Obrázky:**
-  - `IMG-prv-13` 🔴 **A** · koloběh vody v krajině (moře/rybník, slunce, stoupající pára, mraky, déšť nad horami, řeka, podzemní voda) — podklad animace; šipky kreslí web
-  - `IMG-prv-14` 🟠 **A** · řez půdou (tráva a kořeny, humus, podorniční vrstva, hornina, žížala, krtek) — hotspoty vrstev
+  - `IMG-prv-13` ✅ **A** · koloběh vody v krajině (moře/rybník, slunce, stoupající pára, mraky, déšť nad horami, řeka, podzemní voda) — zapojeno do řazení
+  - `IMG-prv-14` ✅ **A** · řez půdou s kořeny, humusem, podorniční vrstvou, horninou, žížalou a krtkem — zapojeno
 
 #### Ekosystémy – les, louka, voda · [prv4_ekosystemy.html](obsah/prv4_ekosystemy.html)
 - **Zařazení:** Prvouka › Příroda kolem nás · 4.–5. r. · lekce A
@@ -1656,8 +1656,8 @@ Společné pro prvouku: 🔗 malý žák se učí z **obrazu a situace**, ne ze 
   - 🧩 Řetězec a síť: přetahování karet, směr šipky „kdo je potravou komu“.
   - 🔗 Návaznost na `pr9_ekologie` (stejné ilustrace ve zjednodušené podobě).
 - **Obrázky:**
-  - `IMG-prv-15` 🔴 **A** · les v řezu s patry (kořenové, mechové, bylinné, keřové, stromové) a 12 typickými organismy — hotspoty
-  - `IMG-prv-16` 🔴 **A** · louka a pole s 10 organismy (sdílený styl s `ekologie-krajina-ilustrace`) — hotspoty
+  - `IMG-prv-15` ✅ **A** · les v řezu s patry (kořenové, mechové, bylinné, keřové, stromové) a typickými organismy — zapojeno do režimu Lesní patra
+  - `IMG-prv-16` ✅ **A** · louka a pole s typickými organismy — zapojeno do režimu Kam patří
   - pro rybník použít existující `Prirodopis/ekologie-rybnik-ilustrace`
 
 #### Horniny a nerosty · [prv4_horniny.html](obsah/prv4_horniny.html)
@@ -1682,7 +1682,7 @@ Společné pro prvouku: 🔗 malý žák se učí z **obrazu a situace**, ne ze 
   - Krajina s elektrárnami (hotspoty), cesta elektřiny jako animované vedení až do domu v naší vesnici.
   - Spotřebiče doma s „ukazatelem spotřeby“ (🔗 navazuje na `elektrina` – spotřeba a cena).
 - **Obrázky:**
-  - `IMG-prv-19` 🟠 **A** · krajina s elektrárnami (vodní, větrná, solární pole, uhelná, jaderná, bioplynová stanice) propojená vedením k vesnici — hotspoty; sdílet s `f9_stridavy_proud`
+  - `IMG-prv-19` ✅ **A** · krajina se šesti zdroji elektřiny propojená vedením k vesnici — zapojeno
 
 #### Naše obec a kraj · [prv3_obec.html](obsah/prv3_obec.html)
 - **Zařazení:** Prvouka › Naše vlast · 3.–4. r. · lekce A
@@ -1694,7 +1694,7 @@ Společné pro prvouku: 🔗 malý žák se učí z **obrazu a situace**, ne ze 
   - Otočený plán se severkou.
   - 🧩 Mapa krajů s vyhledáním vlastního kraje a obce.
 - **Obrázky:**
-  - `IMG-prv-20` 🔴 **A** · plán naší vesnice/městečka shora (obecní úřad, pošta, škola, lékař, obchod, knihovna, hasičská zbrojnice, kostel, nádraží, park) — hotspoty; stejné místo jako `IMG-prv-03` a `IMG-prv-07`
+  - `IMG-prv-20` ✅ **A** · plán naší vesnice/městečka shora — zapojeno jako přechod od obrazu k jednoduchému plánu
 
 #### Nejstarší české dějiny · [prv4_nejstarsi_dejiny.html](obsah/prv4_nejstarsi_dejiny.html)
 - **Zařazení:** Prvouka › Naše vlast a dějiny · 4.–5. r. · lekce A
@@ -1706,7 +1706,7 @@ Společné pro prvouku: 🔗 malý žák se učí z **obrazu a situace**, ne ze 
   - Rámeček „pověst / víme z pramenů“ u každé postavy.
   - Každodenní život (dům, jídlo, práce) v Sámově době a za Karla IV. jako dvě scény.
 - **Obrázky:**
-  - `IMG-prv-21` 🟠 **A** · 2 rekonstrukce každodenního života (slovanské hradiště 9. století, Praha za Karla IV.) označené jako rekonstrukce — srovnání
+  - `IMG-prv-21` ✅ **A** · 2 rekonstrukce každodenního života — zapojeno a označeno jako rekonstrukce
   - `IMG-prv-22` ⚪ **E** · 6 doložených vyobrazení (Karel IV. z Karlštejna, Svatováclavská koruna, Vyšehradský kodex, velkomoravský šperk…) — skutečné doklady
 
 #### Mapa, plán a světové strany · [prv4_mapy_smery.html](obsah/prv4_mapy_smery.html)
@@ -1758,7 +1758,7 @@ Společné pro fyziku: web má **výborné simulace** (páka, optika, elektřina
   - Stejný objem různých látek na vahách (🧩 váhy) a stejná hmotnost různých objemů.
   - Plavání: kostka se ponoří do vody, oleje a rtuti; loď z oceli jako „průměrná hustota“.
 - **Obrázky:**
-  - `IMG-f-01` 🟠 **B** · 8 karet krychlí stejné velikosti z různých materiálů (dřevo, korek, led, hliník, železo, olovo, polystyren, sklo) — vzhled materiálu pro laboratoř
+  - `IMG-f-01` ✅ **B** · 8 karet krychlí stejné velikosti z různých materiálů — zapojeno do úloh o hustotě
 
 #### Fyzikální vzorce · [physics_ref.html](obsah/physics_ref.html)
 - **Zařazení:** Přírodní vědy › Fyzika · 6.–9. r. · nástroj F (tahák s modelem)
@@ -1855,7 +1855,7 @@ Společné pro fyziku: web má **výborné simulace** (páka, optika, elektřina
   - Tlak pevného tělesa: cihla na třech stěnách, sněžnice × boty.
   - Odkaz na `vrtacka_lis` pro hydrauliku.
 - **Obrázky:**
-  - `IMG-f-06` ⚪ **B** · karty situací tlaku (sněžnice ve sněhu, jehla, housenkový pás, potápěč, přehrada s tlustou hrází dole) — kontext
+  - `IMG-f-06` ✅ **B** · 5 karet situací tlaku (sněžnice, jehla, housenkový pás, potápěč, přehrada) — zapojeno
 
 #### Kosmický prak: oběžné dráhy · [gravitacni_hriste.html](obsah/gravitacni_hriste.html)
 - **Zařazení:** Přírodní vědy › Fyzika · 7. a 9. r. · simulace F
@@ -2114,7 +2114,7 @@ Společné pro chemii: 🔗 **jeden molekulový model** (🧩 molekula a atom) p
   - Obrázek laboratoře s chybami („najdi 6 prohřešků“).
   - 🔗 První pomoc z jednoho revidovaného zdroje (`pr8_prvni_pomoc`).
 - **Obrázky:**
-  - `IMG-ch-01` 🟠 **A** · školní laboratoř se 6–8 nebezpečnými situacemi (jídlo na stole, chybějící brýle, rozpuštěné vlasy u kahanu, láhev bez víčka, pipetování ústy, rozlitá kapalina) — hotspoty „najdi chybu“
+  - `IMG-ch-01` ✅ **A** · školní laboratoř se šesti nebezpečnými situacemi — zapojeno jako „najdi chybu“
   - `IMG-ch-02` 🟠 **C** · fotografie 6 skutečných domácích výrobků s piktogramy (čistič odpadů, odstraňovač rzi, lak, plynová kartuše, hnojivo, líh) — piktogram v praxi; značky výrobců rozmazat
 
 #### Chemické názvosloví · [chem_nazvoslovi.html](obsah/chem_nazvoslovi.html)
@@ -2160,7 +2160,7 @@ Společné pro chemii: 🔗 **jeden molekulový model** (🧩 molekula a atom) p
   - 🧩 Koláč s lupou na malé podíly (argon, CO₂).
   - Úpravna vody jako schéma, žák skládá kroky do správného pořadí; odlišit čistírnu odpadních vod.
 - **Obrázky:**
-  - `IMG-ch-04` 🟠 **A** · řez úpravnou pitné vody (odběr z nádrže, česle, čiření, usazovací nádrž, pískový filtr, dezinfekce, vodojem) — hotspoty kroků
+  - `IMG-ch-04` ✅ **A** · řez úpravnou pitné vody od odběru k vodojemu — zapojeno do řazení kroků
 
 #### Směsi a jejich oddělování · [ch8_smesi.html](obsah/ch8_smesi.html)
 - **Zařazení:** Přírodní vědy › Chemie · 8. r. · lekce B (vzor laboratorní lekce)
@@ -2226,7 +2226,7 @@ Společné pro chemii: 🔗 **jeden molekulový model** (🧩 molekula a atom) p
   - 🧩 Molekula: stavebnice řetězce, která hlídá čtyřvaznost uhlíku.
   - Destilační kolona s frakcemi (plyn, benzin, nafta, asfalt) a jejich použitím.
 - **Obrázky:**
-  - `IMG-ch-08` ⚪ **A** · řez frakční destilační kolonou s patry — podklad hotspotů (popisky frakcí kreslí web)
+  - `IMG-ch-08` ✅ **A** · řez frakční destilační kolonou s patry — zapojeno
 
 #### Kyseliny, hydroxidy a pH · [ch9_ph.html](obsah/ch9_ph.html)
 - **Zařazení:** Přírodní vědy › Chemie · 9. r. · pilot C
@@ -2276,7 +2276,7 @@ Společné pro přírodopis: čtyři stránky (`bunka`, `pr7_rostliny`, `anatomi
   - Řez plodnicí a podhoubím s hotspoty.
 - **Obrázky:**
   - `IMG-pr-01` 🔴 **C** · fotografie 14 druhů hub, u každého 2–3 pohledy (hřib smrkový, hřib kovář, klouzek, bedla vysoká, liška obecná, václavka, pečárka, muchomůrka červená, muchomůrka zelená, muchomůrka tygrovaná, hřib satan, čirůvka tygrovaná, pavučinec plyšový, ucháč obecný) — **nikdy generované**
-  - `IMG-pr-02` 🟠 **A** · řez houbou (klobouk, rourky/lupeny, prsten, třeň, pochva, podhoubí v půdě) v botanickém stylu rostliny — hotspoty
+  - `IMG-pr-02` ✅ **A** · řez houbou s podhoubím — zapojeno
   - `IMG-pr-03` ⚪ **C** · fotografie 4 typů lišejníků (terčovník, provazovka, dutohlávka, mapovník)
 
 #### Bezobratlí · [pr6_bezobratli.html](obsah/pr6_bezobratli.html)
@@ -2311,7 +2311,7 @@ Společné pro přírodopis: čtyři stránky (`bunka`, `pr7_rostliny`, `anatomi
   - Srovnávací obraz těla (hmyz, pavoukovec, korýš, stonožka) s hotspoty článků a končetin.
   - Proměna na konkrétním druhu (babočka, kobylka) v obrázcích místo emoji.
 - **Obrázky:**
-  - `IMG-pr-07` 🔴 **B** · 4 karty stavby těla ve stejném měřítku a pohledu shora (včela, křižák, rak, stonožka) — hotspoty částí
+  - `IMG-pr-07` ✅ **B** · 4 karty stavby těla ve stejném měřítku a pohledu shora (včela, křižák, rak, stonožka) — zapojeno
   - `IMG-pr-08` 🟠 **B** · proměna dokonalá (babočka: vajíčko, housenka, kukla, motýl) a nedokonalá (kobylka: vajíčko, nymfa, dospělec) — 7 karet
 
 #### Bakterie, viry a jednobuněčné organismy · [pr6_mikroorganismy.html](obsah/pr6_mikroorganismy.html)
@@ -2472,7 +2472,7 @@ Společné pro zeměpis: 🔗 **jedna datová sada států a jedna mapová kompo
   - Fotografie jevů (bouřka, mlha, jinovatka, duha) k určování.
 - **Obrázky:**
   - `IMG-z-01` 🟠 **C** · fotografie 8 meteorologických jevů (kupovitá oblaka, bouřkový oblak, mlha, jinovatka, kroupy, duha, halo, inverze v údolí)
-  - `IMG-z-02` ⚪ **A** · svislý řez atmosférou (troposféra s mraky a letadlem, stratosféra s ozonem a balonem, mezosféra s meteory, termosféra s polární září a ISS) — hotspoty vrstev
+  - `IMG-z-02` ✅ **A** · svislý řez atmosférou od mraků k ISS — zapojeno
 
 #### Hydrosféra · [z6_hydrosfera.html](obsah/z6_hydrosfera.html)
 - **Zařazení:** Zeměpis › 6.–7. r. · lekce A
@@ -2484,7 +2484,7 @@ Společné pro zeměpis: 🔗 **jedna datová sada států a jedna mapová kompo
   - 🔗 Koloběh vody sdílet s prvoukou (`IMG-prv-13`) doplněný o podzemní vodu a ledovce.
   - Řeka od pramene k ústí (horní, střední, dolní tok) s tvary.
 - **Obrázky:**
-  - `IMG-z-03` 🟠 **A** · řeka od pramene po ústí v jedné panoramatické scéně (pramen v horách, peřeje, údolí, meandry, delta, moře) — hotspoty pojmů
+  - `IMG-z-03` ✅ **A** · řeka od pramene přes peřeje, údolí a meandry k deltě a moři — zapojeno
 
 #### Planeta Země – tvar a pohyby · [z6_planeta_zeme.html](obsah/z6_planeta_zeme.html)
 - **Zařazení:** Zeměpis › 6. r. · lekce A
@@ -2541,7 +2541,7 @@ Společné pro zeměpis: 🔗 **jedna datová sada států a jedna mapová kompo
   - Řez od Středozemního moře přes Saharu a savanu k pralesu (symetrie pásů podle rovníku).
   - Dva klimatogramy (Káhira, Kinshasa) a dva příběhy dětí z různých regionů.
 - **Obrázky:**
-  - `IMG-z-07` 🟠 **A** · panoramatický řez Afrikou sever–jih (pobřeží, poušť, polopoušť, savana, tropický deštný les) — hotspoty pásů
+  - `IMG-z-07` ✅ **A** · přírodní pásy Afriky od Středomoří k tropickému lesu — zapojeno
   - `IMG-z-08` ⚪ **C** · 4 fotografie míst (Káhira s Nilem, Sahara, savana v Tanzanii, Kapské Město)
 
 #### Kvíz světových hlavních měst · [svetova_hlavni_mesta.html](obsah/svetova_hlavni_mesta.html)
@@ -2564,7 +2564,7 @@ Společné pro zeměpis: 🔗 **jedna datová sada států a jedna mapová kompo
   - Řez od Tichého oceánu přes Andy/Kordillery do vnitrozemí; klimatogramy Lima × Manaus.
   - Srovnání dvou měst (Toronto × São Paulo).
 - **Obrázky:**
-  - `IMG-z-09` 🟠 **A** · řez Jižní Amerikou západ–východ (pobřežní poušť Atacama, Andy, Amazonský prales, pobřeží Atlantiku) — hotspoty
+  - `IMG-z-09` ✅ **A** · řez Jižní Amerikou od Pacifiku k Atlantiku — zapojeno
   - `IMG-z-10` ⚪ **C** · 4 fotografie míst (Grand Canyon, New York, Machu Picchu, Amazonie)
 
 #### Asie · [z7_asie.html](obsah/z7_asie.html)
@@ -2576,7 +2576,7 @@ Společné pro zeměpis: 🔗 **jedna datová sada států a jedna mapová kompo
   - Přepínač léto/zima: šipky monzunu na mapě a klimatogram Bombaje.
   - Několik studijních regionů (Sibiř, Blízký východ, Indie, Čína, Japonsko).
 - **Obrázky:**
-  - `IMG-z-11` 🟠 **A** · dvojice scén stejné indické vesnice v období sucha a monzunových dešťů — dopad monzunu
+  - `IMG-z-11` ✅ **A** · stejná indická vesnice v suchu a za monzunu — zapojeno
   - `IMG-z-12` ⚪ **C** · 4 fotografie míst (Himálaj, rýžové terasy, Tokio, poušť Gobi)
 
 #### Kvíz vlajky a města · [flags_quiz.html](obsah/flags_quiz.html)
@@ -3090,7 +3090,7 @@ Společné pro informatiku: 🔗 programování (4.–7. r.) má projít **jedn�
   - Pracovní stůl s hotspoty zařízení; zařízení vstup i výstup (dotyková obrazovka, sluchátka s mikrofonem).
   - Měřič síly hesla (lokální, bez odesílání) s vysvětlením.
 - **Obrázky:**
-  - `IMG-inf-04` 🔴 **A** · pracovní stůl s počítačem (monitor, klávesnice, myš, reproduktory, mikrofon, webkamera, tiskárna, skener, flash disk, sluchátka) — hotspoty zařízení
+  - `IMG-inf-04` ✅ **A** · pracovní stůl s deseti počítačovými zařízeními — zapojeno s přístupnými hotspoty
   - `IMG-inf-05` 🟠 **B** · rozložená počítačová skříň (základní deska, procesor, paměť RAM, disk, zdroj, grafická karta) — hotspoty součástí
 
 #### Informace na internetu a ověřování · [inf5_zdroje.html](obsah/inf5_zdroje.html)
@@ -3112,7 +3112,7 @@ Společné pro informatiku: 🔗 programování (4.–7. r.) má projít **jedn�
   - Fiktivní příspěvek školáka s fotografií: postupně odkrývat, co lze zjistit (škola na mikině, adresa na cedulce, čas).
   - Volba adresáta sdílení (rodina / třída / veřejně) mění riziko.
 - **Obrázky:**
-  - `IMG-inf-06` 🔴 **A** · „fotka z telefonu“: školák na ulici před domem, na mikině logo fiktivní školy, v pozadí čitelné číslo domu a název ulice (fiktivní), jízdní řád zastávky — hotspoty prozrazujících detailů
+  - `IMG-inf-06` ✅ **A** · „fotka z telefonu“ se školákem, domem, ulicí a zastávkou — zapojeno se čtyřmi hotspoty soukromí
 
 #### Autorská práva a licence · [inf8_licence.html](obsah/inf8_licence.html)
 - **Zařazení:** Informatika › Bezpečnost a etika · 8.–9. r. · lekce A
@@ -3292,22 +3292,22 @@ Při výrobě sady v jednom stylu zadávat všechny karty v jedné dávce se ste
 | `IMG-aj-06` | A ✅ | rušná scéna v parku s 10 osobami, z nichž každá dělá jednu jasnou činnost (běží, čte, jí zmrzlinu, venčí psa, hraje na kytaru, spí na lavičce, jede na kole, fotí, krmí kachny, maluje) — zapojeno; web střídá 10 hotspotů pro popis „právě teď“ | [aj5_pritomny_prubehovy](obsah/aj5_pritomny_prubehovy.html) |
 | `IMG-prv-01` | B ✅ | osm karet členů rozšířené fiktivní rodiny (babička, dědeček, máma, táta, teta, strýc, bratranec, mladší sourozenec) — zapojeno do rodokmenu i vztahových otázek; pět karet sdíleno s `IMG-aj-02`, tři nově vytvořeny | [prv1_rodina](obsah/prv1_rodina.html) |
 | `IMG-prv-03` | A ✅ | pohled shora na cestu do školy v naší vesnici (dům, chodník, přechod se semaforem, přechod bez semaforu, zastávka, zaparkovaná auta, škola) — zapojeno s 10 klikacími místy; společná geografie pro `IMG-prv-07` a `IMG-prv-20` | [prv1_cesta_skola](obsah/prv1_cesta_skola.html) |
-| `IMG-prv-07` | A | naše vesnice ze stejného úhlu ve 4 ročních obdobích (jaro, léto, podzim, zima), se stejným stromem, rybníkem, polem a zahradou — **klíčová sada pro celou prvouku** | [prv1_rocni_obdobi](obsah/prv1_rocni_obdobi.html) |
-| `IMG-prv-10` | B | 30 karet zvířat: 15 domácích (kráva, prase, koza, ovce, kůň, slepice, husa, kachna, králík, pes, kočka, morče, osel, krůta, včela) a 15 volně žijících (liška, srna, zajíc, ježek, veverka, divočák, jezevec, sova, datel, čáp, žába, ropucha, užovka, vydra, bobr) | [prv2_zvirata](obsah/prv2_zvirata.html) |
-| `IMG-prv-13` | A | koloběh vody v krajině (moře/rybník, slunce, stoupající pára, mraky, déšť nad horami, řeka, podzemní voda) — podklad animace; šipky kreslí web | [prv3_voda_vzduch](obsah/prv3_voda_vzduch.html) |
-| `IMG-prv-15` | A | les v řezu s patry (kořenové, mechové, bylinné, keřové, stromové) a 12 typickými organismy — hotspoty | [prv4_ekosystemy](obsah/prv4_ekosystemy.html) |
-| `IMG-prv-16` | A | louka a pole s 10 organismy (sdílený styl s `ekologie-krajina-ilustrace`) — hotspoty | [prv4_ekosystemy](obsah/prv4_ekosystemy.html) |
+| `IMG-prv-07` | A ✅ | čtyři roční období ve stejné vesnici — zapojeno jako obrazové volby | [prv1_rocni_obdobi](obsah/prv1_rocni_obdobi.html) |
+| `IMG-prv-10` | B ✅ | 30 karet zvířat, 19 nových a 11 sdílených — zapojeno do všech režimů | [prv2_zvirata](obsah/prv2_zvirata.html) |
+| `IMG-prv-13` | A ✅ | koloběh vody v krajině — zapojeno do řazení | [prv3_voda_vzduch](obsah/prv3_voda_vzduch.html) |
+| `IMG-prv-15` | A ✅ | les v řezu s patry a typickými organismy — zapojeno | [prv4_ekosystemy](obsah/prv4_ekosystemy.html) |
+| `IMG-prv-16` | A ✅ | louka a pole s typickými organismy — zapojeno | [prv4_ekosystemy](obsah/prv4_ekosystemy.html) |
 | `IMG-prv-17` | C | fotografie 16 vzorků (žula, pískovec, vápenec, čedič, břidlice, mramor, uhlí, křemen, živec, slída, kalcit, sůl kamenná, sádrovec, pyrit, grafit, magnetit) na neutrálním pozadí se stejným světlem; **sdílet s `pr9_mineraly`** | [prv4_horniny](obsah/prv4_horniny.html) |
-| `IMG-prv-20` | A | plán naší vesnice/městečka shora (obecní úřad, pošta, škola, lékař, obchod, knihovna, hasičská zbrojnice, kostel, nádraží, park) — hotspoty; stejné místo jako `IMG-prv-03` a `IMG-prv-07` | [prv3_obec](obsah/prv3_obec.html) |
+| `IMG-prv-20` | A ✅ | plán naší vesnice/městečka shora (obecní úřad, pošta, škola, lékař, obchod, knihovna, hasičská zbrojnice, kostel, nádraží, park) — hotspoty; stejné místo jako `IMG-prv-03` a `IMG-prv-07`; hotovo: ilustrační plán je zapojen před interaktivní mapou | [prv3_obec](obsah/prv3_obec.html) |
 | `IMG-prv-23` | E | přesné předlohy zbývajících symbolů: státní vlajka, vlajka prezidenta republiky, státní pečeť (SVG z Wikimedia Commons) + nahrávka hymny s volnou licencí | [prv5_statni_symboly](obsah/prv5_statni_symboly.html) |
 | `IMG-ch-06` | B | 30 karet odpadu (PET láhev, kelímek od jogurtu, noviny, krabice od mléka, sklenice, plechovka, slupky, baterie, žárovka, textil, polystyren, obal od chipsů…) + karty 6 kontejnerů v barvách — třídění | [ch9_zivotni_prostredi](obsah/ch9_zivotni_prostredi.html) |
 | `IMG-pr-01` | C | fotografie 14 druhů hub, u každého 2–3 pohledy (hřib smrkový, hřib kovář, klouzek, bedla vysoká, liška obecná, václavka, pečárka, muchomůrka červená, muchomůrka zelená, muchomůrka tygrovaná, hřib satan, čirůvka tygrovaná, pavučinec plyšový, ucháč obecný) — **nikdy generované** | [pr6_houby](obsah/pr6_houby.html) |
-| `IMG-pr-07` | B | 4 karty stavby těla ve stejném měřítku a pohledu shora (včela, křižák, rak, stonožka) — hotspoty částí | [pr6_clenovci](obsah/pr6_clenovci.html) |
+| `IMG-pr-07` | B ✅ | 4 karty stavby těla ve stejném měřítku a pohledu shora (včela, křižák, rak, stonožka); hotovo a zapojeno | [pr6_clenovci](obsah/pr6_clenovci.html) |
 | `IMG-pr-05` | C | fotografie 40 zástupců pro poznávačky přírodopisu 6.–7. r. (bezobratlí, ryby, obojživelníci, plazi, ptáci, savci ČR); **společná sada** pro `pr6_bezobratli`, tuto stránku, `pr7_ptaci_savci`, `potravni_retezec` | [pr7_obratlovci_studenokrevni](obsah/pr7_obratlovci_studenokrevni.html) |
 | `IMG-pr-13` | B | 8 karet hlav ptáků se zobáky ve stejném pohledu z profilu (datel, kachna, káně, pěnkava, čáp, kos, vlaštovka, sýkora) a 6 karet nohou (kachní plovací, dravčí pařát, datlí šplhavá, pštrosí běhavá, pěvčí, brodivá) | [pr7_ptaci_savci](obsah/pr7_ptaci_savci.html) |
 | `IMG-pr-17` | B | 8 karet postupu (kontrola bezpečí, oslovení a zatřesení, záklon hlavy a kontrola dechu, volání 155, stlačování hrudníku — poloha rukou, zotavovací poloha, zástava krvácení tlakem, chlazení popáleniny) — věcné, bez krve; nechat zkontrolovat zdravotníkem | [pr8_prvni_pomoc](obsah/pr8_prvni_pomoc.html) |
-| `IMG-inf-04` | A | pracovní stůl s počítačem (monitor, klávesnice, myš, reproduktory, mikrofon, webkamera, tiskárna, skener, flash disk, sluchátka) — hotspoty zařízení | [inf4_hardware](obsah/inf4_hardware.html) |
-| `IMG-inf-06` | A | „fotka z telefonu“: školák na ulici před domem, na mikině logo fiktivní školy, v pozadí čitelné číslo domu a název ulice (fiktivní), jízdní řád zastávky — hotspoty prozrazujících detailů | [inf6_digitalni_stopa](obsah/inf6_digitalni_stopa.html) |
+| `IMG-inf-04` | A ✅ | pracovní stůl s počítačem a deseti zařízeními; hotovo s přístupnými hotspoty | [inf4_hardware](obsah/inf4_hardware.html) |
+| `IMG-inf-06` | A ✅ | „fotka z telefonu“ se školákem, domem, ulicí a zastávkou; hotovo se čtyřmi hotspoty soukromí | [inf6_digitalni_stopa](obsah/inf6_digitalni_stopa.html) |
 
 ### Střední priorita 🟠
 
@@ -3316,8 +3316,8 @@ Při výrobě sady v jednom stylu zadávat všechny karty v jedné dávce se ste
 | `IMG-aj-01` | B | 8 karet „poloha úst a jazyka“ pro hlásky th (neznělé a znělé), w, æ, ə, ü, ö, francouzské nosovky — boční řez hlavou, zjednodušeně, bez textu | [vyslovnost](obsah/vyslovnost.html) |
 | `IMG-cj-03` | B | dvojice karet slov, která znějí stejně: být/bít, mýt/mít, výr/vír, vít (věnec)/výt (vlk), případně další s jednoznačně kreslitelným významem — rozlišení významu obrázkem | [doplnovacky](obsah/doplnovacky.html) |
 | `IMG-cj-04` | B | ilustrace k vyjmenovaným slovům, 8 řad × 6–10 karet (například B: být, bydlet, obyvatel, byt, příbytek, nábytek, dobytek, kobyla, býk, Bydžov…) — pomůcka k zapamatování; u slov bez obrazu (bystrý, zbytek) vynechat | [vyjmenovana_slova](obsah/vyjmenovana_slova.html) |
-| `IMG-cj-05` | A | 4 scénky dětí (u stolu, na hřišti, ve třídě, v obchodě), každá s prázdným místem pro bublinu — situace ke čtyřem druhům vět | [cj2_druhy_vet](obsah/cj2_druhy_vet.html) |
-| `IMG-cj-06` | B | karty osob: dítě ukazuje na sebe, dítě ukazuje na druhého, skupinka dětí, dvojice, ukazování „ty/vy“ — vizualizace mluvnických osob | [cj3_slovesa](obsah/cj3_slovesa.html) |
+| `IMG-cj-05` | A ✅ | 4 scénky dětí pro čtyři druhy vět; hotovo a zapojeno | [cj2_druhy_vet](obsah/cj2_druhy_vet.html) |
+| `IMG-cj-06` | B ✅ | šest karet mluvnických osob; hotovo a zapojeno | [cj3_slovesa](obsah/cj3_slovesa.html) |
 | `IMG-cj-07` | B | 8 trojic karet pro mnohoznačná slova a homonyma (koruna, kohoutek, oko, list, pero, zámek, jazyk, kolej) — význam podle obrázku | [cj6_slovni_zasoba](obsah/cj6_slovni_zasoba.html) |
 | `IMG-cj-08` | E | sken rukopisu Hospodine, pomiluj ny, strana Bible kralické, titulní list Jungmannova slovníku — ukázky vývoje písma a pravopisu | [cj9_vyvoj_jazyka](obsah/cj9_vyvoj_jazyka.html) |
 | `IMG-cj-09` | A | 10 jednoduchých scén k větám pro první čtení (Máma má mísu. Ema mele maso. Pes leží u domu…) — obrázek ke kontrole porozumění | [slabiky](obsah/slabiky.html) |
@@ -3325,37 +3325,37 @@ Při výrobě sady v jednom stylu zadávat všechny karty v jedné dávce se ste
 | `IMG-cj-14` | E | 8 reprodukcí volných děl výtvarného umění ke směrům (romantismus, realismus, impresionismus, symbolismus, kubismus, surrealismus…) — vizuální znak směru | [literarni_smery](obsah/literarni_smery.html) |
 | `IMG-m-08` | C | fotografie 8 referenčních předmětů s přibližnou velikostí a hmotností (kancelářská sponka, jablko, litrová láhev, dveře, balení mouky 1 kg, lžička, kostka cukru, fotbalové hřiště z výšky) — odhad jednotek | [prevody_jednotek](obsah/prevody_jednotek.html) |
 | `IMG-m-09` | C | 12 fotografií předmětů tvaru těles (kostka cukru, krabice mléka, plechovka, míč, kornout, pyramida, stan, toblerone, válcová pastelka…) — poznávání těles v okolí | [geo_tvary](obsah/geo_tvary.html) |
-| `IMG-aj-03` | A | 4 scénky setkání dvou dětí (ráno před školou, odpoledne v parku, večer u domu, loučení před spaním) — kontext pozdravů | [aj3_pozdravy](obsah/aj3_pozdravy.html) |
+| `IMG-aj-03` | A ✅ | 4 scénky setkání podle denní doby; hotovo a zapojeno | [aj3_pozdravy](obsah/aj3_pozdravy.html) |
 | `IMG-aj-04` | A | 8 scén běžného dne jednoho školáka (vstává, snídá, jede do školy, hraje fotbal, dělá úkoly, dívá se na TV, čte, spí) — obrázkový denní režim; použít i v `aj5_pritomny_prubehovy` | [aj4_pritomny_prosty](obsah/aj4_pritomny_prosty.html) |
 | `IMG-aj-05` | B | pokoj s krabicí, stolem, židlí a postelí + samostatná karta kočky (průhledné pozadí) — kočka se přetahuje na různá místa | [aj4_predlozky](obsah/aj4_predlozky.html) |
 | `IMG-aj-07` | B | 8 cedulí bez textu (zákaz koupání, zákaz psů, zákaz telefonu, povinná přilba, zákaz jízdy na kole, ticho v knihovně, povinnost mýt ruce, zákaz krmení zvířat) — piktogramy v jednotném stylu | [aj5_modalni](obsah/aj5_modalni.html) |
 | `IMG-aj-08` | A | 6 obrázků příběhu „Výlet k moři“ (balení, vlak, pláž, déšť, kavárna, návrat) — vyprávění v minulém čase | [aj6_minuly_cas](obsah/aj6_minuly_cas.html) |
 | `IMG-aj-09` | B | 5 trojic ke srovnání (tři psi různé velikosti, tři auta, tři domy, tři hory, tři dorty) — stejný styl, na kartě jeden objekt | [aj6_stupnovani](obsah/aj6_stupnovani.html) |
 | `IMG-aj-11` | B | 12 karet nádob a porcí (láhev, bochník, kus, sklenice, balíček, plechovka, miska, šálek, kostka, plátek, pytel, krabice) — míry nepočitatelných věcí | [aj7_pocitatelnost](obsah/aj7_pocitatelnost.html) |
-| `IMG-prv-02` | A | řez rodinným domem (kuchyň, obývák, koupelna, dětský pokoj, ložnice, předsíň) bez lidí — hotspoty místností | [prv1_rodina](obsah/prv1_rodina.html) |
+| `IMG-prv-02` | A ✅ | řez rodinným domem se šesti částmi; hotovo a zapojeno | [prv1_rodina](obsah/prv1_rodina.html) |
 | `IMG-prv-04` | B | 8 karet dopravních značek a situací (přechod, semafor červená/zelená, dítě za autem, reflexní prvky, cyklista s přilbou) — piktogramy bez textu | [prv1_cesta_skola](obsah/prv1_cesta_skola.html) |
 | `IMG-prv-05` | B | karty záchranných složek (sanitka, hasiči, policie) a 6 situací (odřené koleno, krvácení z nosu, popálení, bodnutí vosou, pád z kola, cizí člověk v bezvědomí) — bez krve a drastických detailů | [prv2_zdravi](obsah/prv2_zdravi.html) |
 | `IMG-prv-06` | B | 30 karet potravin (sdílet s jídlem v `IMG-aj-02`, doplnit celozrnné pečivo, luštěniny, ořechy, sladkosti, slazené nápoje) — skládání talíře | [prv5_zdravy_styl](obsah/prv5_zdravy_styl.html) |
 | `IMG-prv-08` | B | celá postava dítěte zepředu v neutrálním postoji — hotspoty částí těla | [prv1_smysly](obsah/prv1_smysly.html) |
 | `IMG-prv-11` | B | 12 karet mláďat k domácím zvířatům (tele, sele, kůzle, jehně, hříbě, kuře…) — dvojice dospělec–mládě | [prv2_zvirata](obsah/prv2_zvirata.html) |
 | `IMG-prv-12` | C | 16 fotografií přírodnin (kámen, krystal soli, semeno fazole, klíčící fazole, suchý list, zelený list, houba, mech, voda, oblak, šnek, mravenec, peří, kost, písek, jablko) | [prv3_ziva_neziva](obsah/prv3_ziva_neziva.html) |
-| `IMG-prv-14` | A | řez půdou (tráva a kořeny, humus, podorniční vrstva, hornina, žížala, krtek) — hotspoty vrstev | [prv3_voda_vzduch](obsah/prv3_voda_vzduch.html) |
-| `IMG-prv-19` | A | krajina s elektrárnami (vodní, větrná, solární pole, uhelná, jaderná, bioplynová stanice) propojená vedením k vesnici — hotspoty; sdílet s `f9_stridavy_proud` | [prv5_energie](obsah/prv5_energie.html) |
-| `IMG-prv-21` | A | 2 rekonstrukce každodenního života (slovanské hradiště 9. století, Praha za Karla IV.) označené jako rekonstrukce — srovnání | [prv4_nejstarsi_dejiny](obsah/prv4_nejstarsi_dejiny.html) |
+| `IMG-prv-14` | A ✅ | řez půdou s pěti klikacími vrstvami; hotovo a zapojeno | [prv3_voda_vzduch](obsah/prv3_voda_vzduch.html) |
+| `IMG-prv-19` | A ✅ | krajina s elektrárnami (vodní, větrná, solární pole, uhelná, jaderná, bioplynová stanice) propojená vedením k vesnici — hotspoty; hotovo: zapojeno do přehledu elektráren i cesty elektřiny | [prv5_energie](obsah/prv5_energie.html) |
+| `IMG-prv-21` | A ✅ | 2 rekonstrukce každodenního života (slovanské hradiště 9. století, Praha za Karla IV.) označené jako rekonstrukce — srovnání; hotovo: dvě historicky kontrolované scény | [prv4_nejstarsi_dejiny](obsah/prv4_nejstarsi_dejiny.html) |
 | `IMG-prv-24` | C | fotografie budov Poslanecké sněmovny, Senátu, Úřadu vlády, Pražského hradu, Ústavního soudu | [prv5_statni_symboly](obsah/prv5_statni_symboly.html) |
 | `IMG-prv-25` | E | 8 dobových fotografií s volnou licencí (28. říjen 1918, Masaryk, mobilizace 1938, osvobození 1945, únor 1948, srpen 1968, listopad 1989 na Václavském náměstí, první svobodné volby) — sdílet s dějepisem 9. r. | [prv5_dejiny_20](obsah/prv5_dejiny_20.html) |
-| `IMG-f-01` | B | 8 karet krychlí stejné velikosti z různých materiálů (dřevo, korek, led, hliník, železo, olovo, polystyren, sklo) — vzhled materiálu pro laboratoř | [f6_hustota](obsah/f6_hustota.html) |
+| `IMG-f-01` | B ✅ | 8 karet krychlí stejné velikosti z různých materiálů (dřevo, korek, led, hliník, železo, olovo, polystyren, sklo) — vzhled materiálu pro laboratoř; hotovo: zapojeno do výpočtů, vážení i porovnání | [f6_hustota](obsah/f6_hustota.html) |
 | `IMG-f-02` | C | 10 fotografií měřidel (pravítko, svinovací metr, posuvné měřidlo, kuchyňská váha, digitální váha, odměrný válec, teploměr lihový a digitální, stopky, siloměr) — poznávání měřidel | [f6_mereni](obsah/f6_mereni.html) |
 | `IMG-f-04` | C | 12 fotografií jednoduchých strojů v praxi (houpačka, nůžky, kleště, otvírák, kolečko, louskáček, pinzeta, stavební jeřáb s kladkostrojem, studna s rumpálem, převody jízdního kola, hodinový strojek, klika) — spojení modelu se světem | [paka](obsah/paka.html) |
 | `IMG-f-10` | B | karty součástek realisticky (plochá baterie, žárovka v objímce, spínač, rezistor, ampérmetr, voltmetr, pojistka, cívka, kompas) — propojení se schématickými značkami | [elektrina](obsah/elektrina.html) |
 | `IMG-f-12` | C | 6 fotografií optických jevů (lžíce „zlomená“ ve sklenici vody, duha, hranol s barevným spektrem, obraz v lžíci, lupa, odraz v klidném jezeře) | [optika](obsah/optika.html) |
 | `IMG-f-13` | C | fotografie 7 přístrojů (lupa, diaprojektor, Keplerův refraktor, divadelní kukátko, Cassegrainův teleskop, triedr, školní mikroskop) | [optika_soustava](obsah/optika_soustava.html) |
-| `IMG-ch-01` | A | školní laboratoř se 6–8 nebezpečnými situacemi (jídlo na stole, chybějící brýle, rozpuštěné vlasy u kahanu, láhev bez víčka, pipetování ústy, rozlitá kapalina) — hotspoty „najdi chybu“ | [ch8_bezpecnost](obsah/ch8_bezpecnost.html) |
+| `IMG-ch-01` | A ✅ | školní laboratoř se šesti klikacími bezpečnostními chybami; hotovo | [ch8_bezpecnost](obsah/ch8_bezpecnost.html) |
 | `IMG-ch-02` | C | fotografie 6 skutečných domácích výrobků s piktogramy (čistič odpadů, odstraňovač rzi, lak, plynová kartuše, hnojivo, líh) — piktogram v praxi; značky výrobců rozmazat | [ch8_bezpecnost](obsah/ch8_bezpecnost.html) |
 | `IMG-ch-03` | C | fotografie vzorků asi 40 běžných prvků (Wikimedia Commons „Periodic table of elements“ fotografie s licencí CC BY) — detail prvku | [periodic_table](obsah/periodic_table.html) |
-| `IMG-ch-04` | A | řez úpravnou pitné vody (odběr z nádrže, česle, čiření, usazovací nádrž, pískový filtr, dezinfekce, vodojem) — hotspoty kroků | [ch8_voda_vzduch](obsah/ch8_voda_vzduch.html) |
+| `IMG-ch-04` | A ✅ | řez úpravnou pitné vody; hotovo a zapojeno do řazení kroků | [ch8_voda_vzduch](obsah/ch8_voda_vzduch.html) |
 | `IMG-ch-09` | C | řada 8 zkumavek s výluhem červeného zelí v roztocích od pH 1 po 13, fotografie pH papírku se stupnicí — skutečné barvy indikátorů | [ch9_ph](obsah/ch9_ph.html) |
-| `IMG-pr-02` | A | řez houbou (klobouk, rourky/lupeny, prsten, třeň, pochva, podhoubí v půdě) v botanickém stylu rostliny — hotspoty | [pr6_houby](obsah/pr6_houby.html) |
+| `IMG-pr-02` | A ✅ | řez houbou s podhoubím; hotovo a zapojeno | [pr6_houby](obsah/pr6_houby.html) |
 | `IMG-pr-04` | B | 6 karet stavby těla v botanickém stylu (nezmar, ploštěnka, škrkavka, hlemýžď v řezu, žížala s články, škeble) — srovnávací tabule s hotspoty | [pr6_bezobratli](obsah/pr6_bezobratli.html) |
 | `IMG-pr-06` | C | mikrofotografie pokožky cibule, buněk ústní sliznice, listu mechu (chloroplasty), prvoka trepky — protějšek modelu | [bunka](obsah/bunka.html) |
 | `IMG-pr-08` | B | proměna dokonalá (babočka: vajíčko, housenka, kukla, motýl) a nedokonalá (kobylka: vajíčko, nymfa, dospělec) — 7 karet | [pr6_clenovci](obsah/pr6_clenovci.html) |
@@ -3370,12 +3370,12 @@ Při výrobě sady v jednom stylu zadávat všechny karty v jedné dávce se ste
 | `IMG-pr-20` | C | fotografie Mohsovy stupnice (10 minerálů) a vrypů na porcelánové destičce (hematit, pyrit, malachit) | [pr9_mineraly](obsah/pr9_mineraly.html) |
 | `IMG-pr-21` | C | fotografie 8 zkamenělin (trilobit, amonit, belemnit, přeslička z karbonu, zub žraloka, otisk kapradiny, jantar s hmyzem, archeopteryx — odlitek) | [pr9_vyvoj_zeme](obsah/pr9_vyvoj_zeme.html) |
 | `IMG-z-01` | C | fotografie 8 meteorologických jevů (kupovitá oblaka, bouřkový oblak, mlha, jinovatka, kroupy, duha, halo, inverze v údolí) | [z6_atmosfera](obsah/z6_atmosfera.html) |
-| `IMG-z-03` | A | řeka od pramene po ústí v jedné panoramatické scéně (pramen v horách, peřeje, údolí, meandry, delta, moře) — hotspoty pojmů | [z6_hydrosfera](obsah/z6_hydrosfera.html) |
+| `IMG-z-03` | A ✅ | řeka od pramene po ústí; hotovo s osmi pojmy | [z6_hydrosfera](obsah/z6_hydrosfera.html) |
 | `IMG-z-04` | C | 4 výřezy map stejného území v různých měřítkách a typech (OpenStreetMap, turistická mapa s licencí, ortofoto) — srovnání druhů map | [z6_mapa_souradnice](obsah/z6_mapa_souradnice.html) |
 | `IMG-z-05` | C | fotografie 8 tvarů povrchu (údolí V, ledovcové údolí U, kaňon, sopka, vrásy ve skále, písečné duny, meandry, útesy) — poznávání tvarů | [z6_litosfera](obsah/z6_litosfera.html) |
-| `IMG-z-07` | A | panoramatický řez Afrikou sever–jih (pobřeží, poušť, polopoušť, savana, tropický deštný les) — hotspoty pásů | [z7_afrika](obsah/z7_afrika.html) |
-| `IMG-z-09` | A | řez Jižní Amerikou západ–východ (pobřežní poušť Atacama, Andy, Amazonský prales, pobřeží Atlantiku) — hotspoty | [z7_amerika](obsah/z7_amerika.html) |
-| `IMG-z-11` | A | dvojice scén stejné indické vesnice v období sucha a monzunových dešťů — dopad monzunu | [z7_asie](obsah/z7_asie.html) |
+| `IMG-z-07` | A ✅ | přírodní pásy Afriky; hotovo s pěti pásy | [z7_afrika](obsah/z7_afrika.html) |
+| `IMG-z-09` | A ✅ | řez Jižní Amerikou; hotovo a zapojeno | [z7_amerika](obsah/z7_amerika.html) |
+| `IMG-z-11` | A ✅ | dvojice indické vesnice v suchu a monzunu; hotovo | [z7_asie](obsah/z7_asie.html) |
 | `IMG-z-18` | C | 3 dvojice fotografií „tehdy a dnes“ se stejným záběrem (ústup alpského ledovce, Aralské jezero ze satelitu, odlesňování v Amazonii ze satelitu) — NASA/ESA, volná díla | [z9_globalni_problemy](obsah/z9_globalni_problemy.html) |
 | `IMG-d-01` | E | fotografie Parthenónu, tří řádů sloupů (dórský, iónský, korintský), černofigurové a červenofigurové vázy, olympijského stadionu v Olympii | [d6_recko](obsah/d6_recko.html) |
 | `IMG-d-03` | E | fotografie Kolosea, Pont du Gard, římské silnice, Pompejí, římské mince, nápisu na oblouku | [d6_rim](obsah/d6_rim.html) |
@@ -3425,7 +3425,7 @@ Při výrobě sady v jednom stylu zadávat všechny karty v jedné dávce se ste
 | `IMG-prv-22` | E | 6 doložených vyobrazení (Karel IV. z Karlštejna, Svatováclavská koruna, Vyšehradský kodex, velkomoravský šperk…) — skutečné doklady | [prv4_nejstarsi_dejiny](obsah/prv4_nejstarsi_dejiny.html) |
 | `IMG-f-03` | C | 12 fotografií předmětů k třídění látka × těleso (sklenice, sklo, lžíce, ocel, svíčka, vosk, cihla, jíl…) — dvojice těleso–látka | [f6_vlastnosti_latek](obsah/f6_vlastnosti_latek.html) |
 | `IMG-f-05` | C | fotografie stojanové vrtačky a dílenského hydraulického lisu, hydraulického zvedáku auta — skutečné stroje | [vrtacka_lis](obsah/vrtacka_lis.html) |
-| `IMG-f-06` | B | karty situací tlaku (sněžnice ve sněhu, jehla, housenkový pás, potápěč, přehrada s tlustou hrází dole) — kontext | [f7_tlak](obsah/f7_tlak.html) |
+| `IMG-f-06` | B ✅ | karty situací tlaku (sněžnice ve sněhu, jehla, housenkový pás, potápěč, přehrada s tlustou hrází dole) — kontext; hotovo: pět situací se střídá v úloze o tlaku | [f7_tlak](obsah/f7_tlak.html) |
 | `IMG-f-07` | C | fotografie proudového motoru v řezu (muzejní exponát) a dopravního letadla při startu | [proudove_motory](obsah/proudove_motory.html) |
 | `IMG-f-08` | C | 4 fotografie proudění ve skutečnosti (kouřový tunel, sněhové závěje za plotem, vlajka ve větru, cyklista ve skrčené poloze) | [vitr_tunel](obsah/vitr_tunel.html) |
 | `IMG-f-09` | B | karty situací Newtonových zákonů (bruslař na ledě, raketa, dva bruslaři se odstrkují, autobus brzdí a cestující se nakloní) — kontext zákonů | [f7_sila](obsah/f7_sila.html) |
@@ -3438,13 +3438,13 @@ Při výrobě sady v jednom stylu zadávat všechny karty v jedné dávce se ste
 | `IMG-f-19` | C | fotografie ISS (NASA, volné dílo) a snímek Země z paluby — skutečný pohled | [iss](obsah/iss.html) |
 | `IMG-ch-05` | C | fotografie skutečných aparatur (filtrace, destilace, odpařování, dělicí nálevka, chromatografie na papíře) jako protějšek animací | [ch8_smesi](obsah/ch8_smesi.html) |
 | `IMG-ch-07` | C | fotografie koroze (rezavý hřebík, měděná střecha s patinou), pozinkovaného plechu, citronové baterie | [ch9_redoxni](obsah/ch9_redoxni.html) |
-| `IMG-ch-08` | A | řez frakční destilační kolonou s patry — podklad hotspotů (popisky frakcí kreslí web) | [ch9_uhlovodiky](obsah/ch9_uhlovodiky.html) |
+| `IMG-ch-08` | A ✅ | řez frakční destilační kolonou; hotovo a zapojeno | [ch9_uhlovodiky](obsah/ch9_uhlovodiky.html) |
 | `IMG-ch-10` | B | 8 karet běžných výrobků s deriváty (láhev octa, dezinfekce, odlakovač, aspirin, parfém, nemrznoucí směs, PET láhev, mýdlo) bez značek | [ch9_derivaty](obsah/ch9_derivaty.html) |
 | `IMG-pr-03` | C | fotografie 4 typů lišejníků (terčovník, provazovka, dutohlávka, mapovník) | [pr6_houby](obsah/pr6_houby.html) |
 | `IMG-pr-19` | C | fotografie 6 geologických jevů v ČR (Pravčická brána, propast Macocha, Říp, Komorní hůrka, Adršpašské skály, meandry Lužnice) — vnitřní a vnější děje v krajině | [pr9_geologicke_deje](obsah/pr9_geologicke_deje.html) |
 | `IMG-pr-22` | A | 4 rekonstrukce krajin (prvohorní moře, karbonský les, druhohorní krajina s dinosaury, čtvrtohorní tundra s mamuty) — označit jako rekonstrukce | [pr9_vyvoj_zeme](obsah/pr9_vyvoj_zeme.html) |
 | `IMG-pr-23` | B | karty znaků pro křížení (žlutý/zelený hrách, hladký/svraštělý hrách, černé/hnědé morče, červený/bílý květ hrachu) — fenotypy | [punnett](obsah/punnett.html) |
-| `IMG-z-02` | A | svislý řez atmosférou (troposféra s mraky a letadlem, stratosféra s ozonem a balonem, mezosféra s meteory, termosféra s polární září a ISS) — hotspoty vrstev | [z6_atmosfera](obsah/z6_atmosfera.html) |
+| `IMG-z-02` | A ✅ | svislý řez atmosférou; hotovo a zapojeno | [z6_atmosfera](obsah/z6_atmosfera.html) |
 | `IMG-z-06` | A | řez Zemí (kůra, plášť, vnější a vnitřní jádro) s výsekem — hotspoty vrstev | [z6_litosfera](obsah/z6_litosfera.html) |
 | `IMG-z-08` | C | 4 fotografie míst (Káhira s Nilem, Sahara, savana v Tanzanii, Kapské Město) | [z7_afrika](obsah/z7_afrika.html) |
 | `IMG-z-10` | C | 4 fotografie míst (Grand Canyon, New York, Machu Picchu, Amazonie) | [z7_amerika](obsah/z7_amerika.html) |

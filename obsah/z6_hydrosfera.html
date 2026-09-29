@@ -20,6 +20,11 @@
       padding: 8px 12px; font-size: 0.92rem; font-weight: 600;
     }
     .kolobeh .sipka { color: var(--text-faint); font-size: 1.3rem; }
+    .reka-scena { width:min(760px,100%); }
+    .reka-scena img { display:block; width:100%; border-radius:16px; background:#f8f1df; }
+    .reka-pojmy { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; }
+    .reka-pojmy button { background:var(--bg-control); border:2px solid var(--border-strong); color:var(--text); border-radius:10px; padding:8px 11px; font:inherit; cursor:pointer; }
+    .reka-pojmy button:hover { border-color:var(--accent); }
   </style>
 </head>
 <body>
@@ -31,6 +36,7 @@
     <button data-rezim="kolobeh">🔄 Koloběh vody</button>
     <button data-rezim="oceany">🌏 Oceány a moře</button>
     <button data-rezim="rekordy">📊 Rekordy a čísla</button>
+    <button data-rezim="reka">🏞️ Od pramene k ústí</button>
   </div>
 
   <div class="plocha" id="plocha"></div>
@@ -203,7 +209,14 @@ function rekordy() {
   p.appendChild(odezva);
 }
 
-const REZIMY = { pojmy, kolobeh, oceany, rekordy };
+function reka() {
+  const p=$('plocha');
+  const pojmy=['pramen','peřeje','údolí','přítok','meandr','mrtvé rameno','delta','ústí'];
+  p.innerHTML=`<div class="zadani">Sleduj cestu řeky z hor až do moře.</div><div class="reka-scena"><img src="img/z/z6-reka-pramen-usti.webp" alt="Řeka od horského pramene přes peřeje, údolí, přítoky a meandry až k deltě a moři." width="1152" height="768"></div><div class="reka-pojmy">${pojmy.map(x=>`<button data-pojem="${x}">${x}</button>`).join('')}</div><div class="odezva" aria-live="polite">Najdi každý tvar v krajině zleva doprava.</div>`;
+  p.querySelectorAll('[data-pojem]').forEach(b=>b.addEventListener('click',()=>p.querySelector('.odezva').textContent=`Najdi na obrázku: ${b.dataset.pojem}.`));
+}
+
+const REZIMY = { pojmy, kolobeh, oceany, rekordy, reka };
 function novaUloha() { REZIMY[rezim](); }
 
 document.querySelectorAll('#rezimy button').forEach(b => b.addEventListener('click', () => {

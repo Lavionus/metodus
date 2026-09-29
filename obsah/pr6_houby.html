@@ -22,6 +22,7 @@
     .houba-svg { width: min(200px, 52vw); }
     .houba-svg .klobouk { stroke: var(--text); stroke-width: 2; }
     .houba-svg .trén { fill: #e8e0cc; stroke: var(--text); stroke-width: 2; }
+    .houba-stavba-img { width:min(700px,100%); border-radius:16px; background:#f8f1df; }
   </style>
 </head>
 <body>
@@ -155,7 +156,7 @@ function stavba() {
   const p = $('plocha');
   const u = Uloha.nahodne(STAVBA);
   p.innerHTML = `<div class="zadani">${u.o}</div>
-    <div class="karta"><div class="obrazek">🍄</div></div>`;
+    <img class="houba-stavba-img" src="img/pr/pr6-houba-stavba.webp" alt="Stavba houby: klobouk s lupeny, prsten, třeň, pochva a podhoubí v půdě." width="1152" height="768">`;
   const odezva = document.createElement('div');
   odezva.className = 'odezva';
   Uloha.vyber({

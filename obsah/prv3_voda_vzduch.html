@@ -14,6 +14,10 @@
   <style>
     .nazev-jevu { font-size: 1.2rem; font-weight: 700; }
     .otazka-text { font-size: 1.08rem; max-width: 580px; line-height: 1.45; }
+    .naucna-scena { width: min(720px, 100%); height: auto; border-radius: 16px; box-shadow: var(--shadow); }
+    .obrazova-mapa { position: relative; width: min(720px, 100%); }
+    .obrazova-mapa img { display: block; width: 100%; border-radius: 16px; }
+    .mapovy-bod { position: absolute; right: 3%; transform: translateY(-50%); border: 2px solid #fff; border-radius: 999px; background: var(--accent); color: var(--na-akcentu,#fff); padding: 5px 9px; font-weight: 700; cursor: pointer; box-shadow: 0 2px 7px #0007; }
   </style>
 </head>
 <body>
@@ -24,6 +28,7 @@
     <button data-rezim="skupenstvi" class="active">🧊 Skupenství vody</button>
     <button data-rezim="kolobeh">🔄 Koloběh vody</button>
     <button data-rezim="kviz">❓ Vzduch a půda</button>
+    <button data-rezim="puda">🌱 Půdní profil</button>
   </div>
 
   <div class="plocha" id="plocha"></div>
@@ -109,7 +114,7 @@ function skupenstvi() {
 /* ---- Koloběh vody (řazení) ------------------------------------------------- */
 function kolobeh() {
   const p = $('plocha');
-  p.innerHTML = '<div class="zadani">Seřaď koloběh vody – klepej popořadě od začátku.</div>';
+  p.innerHTML = '<div class="zadani">Seřaď koloběh vody – klepej popořadě od začátku.</div><img class="naucna-scena" src="img/prv/prv3-kolobeh-vody.webp" alt="Koloběh vody v krajině: vypařování, mraky, déšť, řeka a podzemní voda" width="1152" height="768">';
   const porada = document.createElement('div');
   porada.className = 'porada';
   const nabidka = document.createElement('div');
@@ -171,7 +176,14 @@ function kviz() {
   p.appendChild(odezva);
 }
 
-const REZIMY = { skupenstvi, kolobeh, kviz };
+function puda() {
+  const p = $('plocha');
+  const vrstvy = [['kořeny a drn',14],['humusová vrstva',29],['podorniční vrstva',48],['zvětralá hornina',67],['pevná hornina',86]];
+  p.innerHTML = `<div class="zadani">Klepni na vrstvy půdy shora dolů.</div><div class="obrazova-mapa"><img src="img/prv/prv3-pudni-profil.webp" alt="Řez půdou od trávy a kořenů přes humus a podorniční vrstvu až k pevné hornině; v půdě je žížala a krtek." width="1152" height="768">${vrstvy.map(([n,y],i)=>`<button class="mapovy-bod" style="top:${y}%" data-vrstva="${n}" aria-label="${n}">${i+1}</button>`).join('')}</div><div class="odezva" aria-live="polite">Půda vzniká velmi pomalu zvětráváním hornin a činností organismů.</div>`;
+  p.querySelectorAll('[data-vrstva]').forEach(b => b.addEventListener('click', () => p.querySelector('.odezva').textContent = `Vrstva: ${b.dataset.vrstva}.`));
+}
+
+const REZIMY = { skupenstvi, kolobeh, kviz, puda };
 function novaUloha() { REZIMY[rezim](); }
 
 document.querySelectorAll('#rezimy button').forEach(b => b.addEventListener('click', () => {

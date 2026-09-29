@@ -20,6 +20,7 @@
       padding: 8px 12px; font-size: 0.92rem; font-weight: 600;
     }
     .retez .sipka { color: var(--text-faint); font-size: 1.3rem; }
+    .naucna-scena { width:min(720px,100%); height:auto; border-radius:16px; box-shadow:var(--shadow); }
   </style>
 </head>
 <body>
@@ -120,6 +121,7 @@ function elektrarny() {
   const u = Uloha.nahodne(ELEKTRARNY);
   const jine = Uloha.zamichej(ELEKTRARNY.filter(x => x.n !== u.n)).slice(0, 3);
   p.innerHTML = `<div class="zadani">O kterou elektrárnu jde?</div>
+    <img class="naucna-scena" src="img/prv/prv5-energie-krajina.webp" alt="Krajina se šesti způsoby výroby elektřiny propojenými vedením k vesnici" width="1152" height="768">
     <div class="karta"><div class="obrazek">🔎</div><div class="popis-z">${u.popis}</div></div>`;
   const odezva = document.createElement('div');
   odezva.className = 'odezva';
@@ -138,7 +140,7 @@ function elektrarny() {
 /* ---- Cesta elektřiny (řazení) ------------------------------------------------------ */
 function cesta() {
   const p = $('plocha');
-  p.innerHTML = '<div class="zadani">Seřaď cestu elektřiny od elektrárny až do zásuvky.</div>';
+  p.innerHTML = '<div class="zadani">Seřaď cestu elektřiny od elektrárny až do zásuvky.</div><img class="naucna-scena" src="img/prv/prv5-energie-krajina.webp" alt="Elektrárny a přenosové vedení směřující k vesnici" width="1152" height="768">';
   const porada = document.createElement('div');
   porada.className = 'retez';
   const nabidka = document.createElement('div');

@@ -2479,5 +2479,286 @@
     "id": "IMG-prv-03", "name": "prv1-cesta-skola", "alt": "Pohled shora na cestu od domu ke škole se dvěma přechody, chodníky, semafory, zastávkou a auty.", "bytes": 162604,
     "webp": "prv/prv1-cesta-skola.webp", "png": "prv/prv1-cesta-skola.png",
     "puvod": {"typ": "generovano", "nastroj": "OpenAI image_gen", "datum": "2026-09-25", "zadani": "prv/prv1-cesta-skola.prompt.txt"}
-  }
+  },
+  {
+    "id": "IMG-prv-07", "name": "prv1-obdobi-jaro", "alt": "Stejná vesnice na jaře.", "bytes": 165448,
+    "webp": "prv/prv1-obdobi-jaro.webp", "png": "prv/prv1-obdobi-jaro.png",
+    "puvod": {"typ": "generovano", "nastroj": "OpenAI image_gen", "datum": "2026-09-29", "zadani": "prv/prv1-obdobi-jaro.prompt.txt"}
+  },
+  {
+    "id": "IMG-prv-07", "name": "prv1-obdobi-leto", "alt": "Stejná vesnice v létě.", "bytes": 196754,
+    "webp": "prv/prv1-obdobi-leto.webp", "png": "prv/prv1-obdobi-leto.png",
+    "puvod": {"typ": "generovano", "nastroj": "OpenAI image_gen", "datum": "2026-09-29", "zadani": "prv/prv1-obdobi-leto.prompt.txt"}
+  },
+  {
+    "id": "IMG-prv-07", "name": "prv1-obdobi-podzim", "alt": "Stejná vesnice na podzim.", "bytes": 188092,
+    "webp": "prv/prv1-obdobi-podzim.webp", "png": "prv/prv1-obdobi-podzim.png",
+    "puvod": {"typ": "generovano", "nastroj": "OpenAI image_gen", "datum": "2026-09-29", "zadani": "prv/prv1-obdobi-podzim.prompt.txt"}
+  },
+  {
+    "id": "IMG-prv-07", "name": "prv1-obdobi-zima", "alt": "Stejná vesnice v zimě.", "bytes": 183770,
+    "webp": "prv/prv1-obdobi-zima.webp", "png": "prv/prv1-obdobi-zima.png",
+    "puvod": {"typ": "generovano", "nastroj": "OpenAI image_gen", "datum": "2026-09-29", "zadani": "prv/prv1-obdobi-zima.prompt.txt"}
+  },
+  {
+    "id": "IMG-prv-10", "name": "prv2-zvire-koza", "alt": "Koza domácí.", "bytes": 20368,
+    "webp": "prv/prv2-zvire-koza.webp", "png": "prv/prv2-zvire-koza.png",
+    "puvod": {"typ": "generovano", "nastroj": "OpenAI image_gen", "datum": "2026-09-29", "zadani": "prv/prv2-zvire-koza.prompt.txt"}
+  },
+  {
+    "id": "IMG-prv-10", "name": "prv2-zvire-ovce", "alt": "Ovce domácí.", "bytes": 28306,
+    "webp": "prv/prv2-zvire-ovce.webp", "png": "prv/prv2-zvire-ovce.png",
+    "puvod": {"typ": "generovano", "nastroj": "OpenAI image_gen", "datum": "2026-09-29", "zadani": "prv/prv2-zvire-ovce.prompt.txt"}
+  },
+  {
+    "id": "IMG-prv-10", "name": "prv2-zvire-husa", "alt": "Husa domácí.", "bytes": 12484,
+    "webp": "prv/prv2-zvire-husa.webp", "png": "prv/prv2-zvire-husa.png",
+    "puvod": {"typ": "generovano", "nastroj": "OpenAI image_gen", "datum": "2026-09-29", "zadani": "prv/prv2-zvire-husa.prompt.txt"}
+  },
+  {
+    "id": "IMG-prv-10", "name": "prv2-zvire-kachna", "alt": "Kachna domácí.", "bytes": 31072,
+    "webp": "prv/prv2-zvire-kachna.webp", "png": "prv/prv2-zvire-kachna.png",
+    "puvod": {"typ": "generovano", "nastroj": "OpenAI image_gen", "datum": "2026-09-29", "zadani": "prv/prv2-zvire-kachna.prompt.txt"}
+  },
+  {
+    "id": "IMG-prv-10", "name": "prv2-zvire-morce", "alt": "Morče domácí.", "bytes": 32500,
+    "webp": "prv/prv2-zvire-morce.webp", "png": "prv/prv2-zvire-morce.png",
+    "puvod": {"typ": "generovano", "nastroj": "OpenAI image_gen", "datum": "2026-09-29", "zadani": "prv/prv2-zvire-morce.prompt.txt"}
+  },
+  {
+    "id": "IMG-prv-10", "name": "prv2-zvire-osel", "alt": "Osel domácí.", "bytes": 30390,
+    "webp": "prv/prv2-zvire-osel.webp", "png": "prv/prv2-zvire-osel.png",
+    "puvod": {"typ": "generovano", "nastroj": "OpenAI image_gen", "datum": "2026-09-29", "zadani": "prv/prv2-zvire-osel.prompt.txt"}
+  },
+  {
+    "id": "IMG-prv-10", "name": "prv2-zvire-kruta", "alt": "Krůta domácí.", "bytes": 28784,
+    "webp": "prv/prv2-zvire-kruta.webp", "png": "prv/prv2-zvire-kruta.png",
+    "puvod": {"typ": "generovano", "nastroj": "OpenAI image_gen", "datum": "2026-09-29", "zadani": "prv/prv2-zvire-kruta.prompt.txt"}
+  },
+  {
+    "id": "IMG-prv-10", "name": "prv2-zvire-srna", "alt": "Srna obecná.", "bytes": 21712,
+    "webp": "prv/prv2-zvire-srna.webp", "png": "prv/prv2-zvire-srna.png",
+    "puvod": {"typ": "generovano", "nastroj": "OpenAI image_gen", "datum": "2026-09-29", "zadani": "prv/prv2-zvire-srna.prompt.txt"}
+  },
+  {
+    "id": "IMG-prv-10", "name": "prv2-zvire-zajic", "alt": "Zajíc polní.", "bytes": 34588,
+    "webp": "prv/prv2-zvire-zajic.webp", "png": "prv/prv2-zvire-zajic.png",
+    "puvod": {"typ": "generovano", "nastroj": "OpenAI image_gen", "datum": "2026-09-29", "zadani": "prv/prv2-zvire-zajic.prompt.txt"}
+  },
+  {
+    "id": "IMG-prv-10", "name": "prv2-zvire-jezek", "alt": "Ježek evropský.", "bytes": 55458,
+    "webp": "prv/prv2-zvire-jezek.webp", "png": "prv/prv2-zvire-jezek.png",
+    "puvod": {"typ": "generovano", "nastroj": "OpenAI image_gen", "datum": "2026-09-29", "zadani": "prv/prv2-zvire-jezek.prompt.txt"}
+  },
+  {
+    "id": "IMG-prv-10", "name": "prv2-zvire-veverka", "alt": "Veverka obecná.", "bytes": 41394,
+    "webp": "prv/prv2-zvire-veverka.webp", "png": "prv/prv2-zvire-veverka.png",
+    "puvod": {"typ": "generovano", "nastroj": "OpenAI image_gen", "datum": "2026-09-29", "zadani": "prv/prv2-zvire-veverka.prompt.txt"}
+  },
+  {
+    "id": "IMG-prv-10", "name": "prv2-zvire-divocak", "alt": "Prase divoké.", "bytes": 48942,
+    "webp": "prv/prv2-zvire-divocak.webp", "png": "prv/prv2-zvire-divocak.png",
+    "puvod": {"typ": "generovano", "nastroj": "OpenAI image_gen", "datum": "2026-09-29", "zadani": "prv/prv2-zvire-divocak.prompt.txt"}
+  },
+  {
+    "id": "IMG-prv-10", "name": "prv2-zvire-jezevec", "alt": "Jezevec lesní.", "bytes": 41374,
+    "webp": "prv/prv2-zvire-jezevec.webp", "png": "prv/prv2-zvire-jezevec.png",
+    "puvod": {"typ": "generovano", "nastroj": "OpenAI image_gen", "datum": "2026-09-29", "zadani": "prv/prv2-zvire-jezevec.prompt.txt"}
+  },
+  {
+    "id": "IMG-prv-10", "name": "prv2-zvire-sova", "alt": "Puštík obecný.", "bytes": 34646,
+    "webp": "prv/prv2-zvire-sova.webp", "png": "prv/prv2-zvire-sova.png",
+    "puvod": {"typ": "generovano", "nastroj": "OpenAI image_gen", "datum": "2026-09-29", "zadani": "prv/prv2-zvire-sova.prompt.txt"}
+  },
+  {
+    "id": "IMG-prv-10", "name": "prv2-zvire-datel", "alt": "Strakapoud velký.", "bytes": 20638,
+    "webp": "prv/prv2-zvire-datel.webp", "png": "prv/prv2-zvire-datel.png",
+    "puvod": {"typ": "generovano", "nastroj": "OpenAI image_gen", "datum": "2026-09-29", "zadani": "prv/prv2-zvire-datel.prompt.txt"}
+  },
+  {
+    "id": "IMG-prv-10", "name": "prv2-zvire-cap", "alt": "Čáp bílý.", "bytes": 15614,
+    "webp": "prv/prv2-zvire-cap.webp", "png": "prv/prv2-zvire-cap.png",
+    "puvod": {"typ": "generovano", "nastroj": "OpenAI image_gen", "datum": "2026-09-29", "zadani": "prv/prv2-zvire-cap.prompt.txt"}
+  },
+  {
+    "id": "IMG-prv-10", "name": "prv2-zvire-ropucha", "alt": "Ropucha obecná.", "bytes": 43062,
+    "webp": "prv/prv2-zvire-ropucha.webp", "png": "prv/prv2-zvire-ropucha.png",
+    "puvod": {"typ": "generovano", "nastroj": "OpenAI image_gen", "datum": "2026-09-29", "zadani": "prv/prv2-zvire-ropucha.prompt.txt"}
+  },
+  {
+    "id": "IMG-prv-10", "name": "prv2-zvire-uzovka", "alt": "Užovka obojková.", "bytes": 31062,
+    "webp": "prv/prv2-zvire-uzovka.webp", "png": "prv/prv2-zvire-uzovka.png",
+    "puvod": {"typ": "generovano", "nastroj": "OpenAI image_gen", "datum": "2026-09-29", "zadani": "prv/prv2-zvire-uzovka.prompt.txt"}
+  },
+  {
+    "id": "IMG-prv-10", "name": "prv2-zvire-bobr", "alt": "Bobr evropský.", "bytes": 36214,
+    "webp": "prv/prv2-zvire-bobr.webp", "png": "prv/prv2-zvire-bobr.png",
+    "puvod": {"typ": "generovano", "nastroj": "OpenAI image_gen", "datum": "2026-09-29", "zadani": "prv/prv2-zvire-bobr.prompt.txt"}
+  },
+  {
+    "id": "IMG-prv-13", "name": "prv3-kolobeh-vody", "alt": "Koloběh vody v krajině s vypařováním, mraky, srážkami, řekou a podzemní vodou.", "bytes": 165178,
+    "webp": "prv/prv3-kolobeh-vody.webp", "png": "prv/prv3-kolobeh-vody.png",
+    "puvod": {"typ": "generovano", "nastroj": "OpenAI image_gen", "datum": "2026-09-29", "zadani": "prv/prv3-kolobeh-vody.prompt.txt"}
+  },
+  {
+    "id": "IMG-prv-15", "name": "prv4-lesni-patra", "alt": "Řez smíšeným lesem s kořenovým, mechovým, bylinným, keřovým a stromovým patrem.", "bytes": 199156,
+    "webp": "prv/prv4-lesni-patra.webp", "png": "prv/prv4-lesni-patra.png",
+    "puvod": {"typ": "generovano", "nastroj": "OpenAI image_gen", "datum": "2026-09-29", "zadani": "prv/prv4-lesni-patra.prompt.txt"}
+  },
+  {
+    "id": "IMG-prv-16", "name": "prv4-louka-pole", "alt": "Louka a obilné pole s typickými rostlinami a živočichy.", "bytes": 194512,
+    "webp": "prv/prv4-louka-pole.webp", "png": "prv/prv4-louka-pole.png",
+    "puvod": {"typ": "generovano", "nastroj": "OpenAI image_gen", "datum": "2026-09-29", "zadani": "prv/prv4-louka-pole.prompt.txt"}
+  },
+  {
+    "id": "IMG-prv-19", "name": "prv5-energie-krajina", "alt": "Krajina se šesti způsoby výroby elektřiny a vedením k vesnici.", "bytes": 162798,
+    "webp": "prv/prv5-energie-krajina.webp", "png": "prv/prv5-energie-krajina.png",
+    "puvod": {"typ": "generovano", "nastroj": "OpenAI image_gen", "datum": "2026-09-29", "zadani": "prv/prv5-energie-krajina.prompt.txt"}
+  },
+  {
+    "id": "IMG-prv-20", "name": "prv3-obec-plan", "alt": "Pohled shora na obec s veřejnými budovami, nádražím, parkem, rybníkem a kostelem.", "bytes": 194422,
+    "webp": "prv/prv3-obec-plan.webp", "png": "prv/prv3-obec-plan.png",
+    "puvod": {"typ": "generovano", "nastroj": "OpenAI image_gen", "datum": "2026-09-29", "zadani": "prv/prv3-obec-plan.prompt.txt"}
+  },
+  {
+    "id": "IMG-prv-21", "name": "prv4-dejiny-hradiste", "alt": "Rekonstrukce každodenního života na slovanském hradišti v 9. století.", "bytes": 162980,
+    "webp": "prv/prv4-dejiny-hradiste.webp", "png": "prv/prv4-dejiny-hradiste.png",
+    "puvod": {"typ": "generovano", "nastroj": "OpenAI image_gen", "datum": "2026-09-29", "zadani": "prv/prv4-dejiny-hradiste.prompt.txt"}
+  },
+  {
+    "id": "IMG-prv-21", "name": "prv4-dejiny-praha", "alt": "Rekonstrukce každodenního života na pražském tržišti za Karla IV.", "bytes": 128246,
+    "webp": "prv/prv4-dejiny-praha.webp", "png": "prv/prv4-dejiny-praha.png",
+    "puvod": {"typ": "generovano", "nastroj": "OpenAI image_gen", "datum": "2026-09-29", "zadani": "prv/prv4-dejiny-praha.prompt.txt"}
+  },
+  {
+    "id": "IMG-f-01", "name": "f6-hustota-drevo", "alt": "Dřevěná krychle.", "bytes": 16612,
+    "webp": "f/f6-hustota-drevo.webp", "png": "f/f6-hustota-drevo.png",
+    "puvod": {"typ": "generovano", "nastroj": "OpenAI image_gen", "datum": "2026-09-29", "zadani": "f/f6-hustota-drevo.prompt.txt"}
+  },
+  {
+    "id": "IMG-f-01", "name": "f6-hustota-hlinik", "alt": "Hliníková krychle.", "bytes": 18824,
+    "webp": "f/f6-hustota-hlinik.webp", "png": "f/f6-hustota-hlinik.png",
+    "puvod": {"typ": "generovano", "nastroj": "OpenAI image_gen", "datum": "2026-09-29", "zadani": "f/f6-hustota-hlinik.prompt.txt"}
+  },
+  {
+    "id": "IMG-f-01", "name": "f6-hustota-korek", "alt": "Korková krychle.", "bytes": 32432,
+    "webp": "f/f6-hustota-korek.webp", "png": "f/f6-hustota-korek.png",
+    "puvod": {"typ": "generovano", "nastroj": "OpenAI image_gen", "datum": "2026-09-29", "zadani": "f/f6-hustota-korek.prompt.txt"}
+  },
+  {
+    "id": "IMG-f-01", "name": "f6-hustota-led", "alt": "Ledová krychle.", "bytes": 24550,
+    "webp": "f/f6-hustota-led.webp", "png": "f/f6-hustota-led.png",
+    "puvod": {"typ": "generovano", "nastroj": "OpenAI image_gen", "datum": "2026-09-29", "zadani": "f/f6-hustota-led.prompt.txt"}
+  },
+  {
+    "id": "IMG-f-01", "name": "f6-hustota-olovo", "alt": "Olověná krychle.", "bytes": 23954,
+    "webp": "f/f6-hustota-olovo.webp", "png": "f/f6-hustota-olovo.png",
+    "puvod": {"typ": "generovano", "nastroj": "OpenAI image_gen", "datum": "2026-09-29", "zadani": "f/f6-hustota-olovo.prompt.txt"}
+  },
+  {
+    "id": "IMG-f-01", "name": "f6-hustota-polystyren", "alt": "Polystyrenová krychle.", "bytes": 12368,
+    "webp": "f/f6-hustota-polystyren.webp", "png": "f/f6-hustota-polystyren.png",
+    "puvod": {"typ": "generovano", "nastroj": "OpenAI image_gen", "datum": "2026-09-29", "zadani": "f/f6-hustota-polystyren.prompt.txt"}
+  },
+  {
+    "id": "IMG-f-01", "name": "f6-hustota-sklo", "alt": "Skleněná krychle.", "bytes": 55300,
+    "webp": "f/f6-hustota-sklo.webp", "png": "f/f6-hustota-sklo.png",
+    "puvod": {"typ": "generovano", "nastroj": "OpenAI image_gen", "datum": "2026-09-29", "zadani": "f/f6-hustota-sklo.prompt.txt"}
+  },
+  {
+    "id": "IMG-f-01", "name": "f6-hustota-zelezo", "alt": "Železná krychle.", "bytes": 28912,
+    "webp": "f/f6-hustota-zelezo.webp", "png": "f/f6-hustota-zelezo.png",
+    "puvod": {"typ": "generovano", "nastroj": "OpenAI image_gen", "datum": "2026-09-29", "zadani": "f/f6-hustota-zelezo.prompt.txt"}
+  },
+  {
+    "id": "IMG-f-06", "name": "f7-tlak-jehla", "alt": "Jehla ukazuje soustředění síly na malou plochu.", "bytes": 43998,
+    "webp": "f/f7-tlak-jehla.webp", "png": "f/f7-tlak-jehla.png",
+    "puvod": {"typ": "generovano", "nastroj": "OpenAI image_gen", "datum": "2026-09-29", "zadani": "f/f7-tlak-jehla.prompt.txt"}
+  },
+  {
+    "id": "IMG-f-06", "name": "f7-tlak-pas", "alt": "Pás a kola ukazují rozdílný tlak na půdu.", "bytes": 57814,
+    "webp": "f/f7-tlak-pas.webp", "png": "f/f7-tlak-pas.png",
+    "puvod": {"typ": "generovano", "nastroj": "OpenAI image_gen", "datum": "2026-09-29", "zadani": "f/f7-tlak-pas.prompt.txt"}
+  },
+  {
+    "id": "IMG-f-06", "name": "f7-tlak-potapec", "alt": "Potápěč ve dvou hloubkách ukazuje růst tlaku.", "bytes": 58254,
+    "webp": "f/f7-tlak-potapec.webp", "png": "f/f7-tlak-potapec.png",
+    "puvod": {"typ": "generovano", "nastroj": "OpenAI image_gen", "datum": "2026-09-29", "zadani": "f/f7-tlak-potapec.prompt.txt"}
+  },
+  {
+    "id": "IMG-f-06", "name": "f7-tlak-prehrada", "alt": "Přehradní hráz je směrem dolů silnější.", "bytes": 58944,
+    "webp": "f/f7-tlak-prehrada.webp", "png": "f/f7-tlak-prehrada.png",
+    "puvod": {"typ": "generovano", "nastroj": "OpenAI image_gen", "datum": "2026-09-29", "zadani": "f/f7-tlak-prehrada.prompt.txt"}
+  },
+  {
+    "id": "IMG-f-06", "name": "f7-tlak-sneznice", "alt": "Bota a sněžnice ukazují vliv styčné plochy na tlak.", "bytes": 54880,
+    "webp": "f/f7-tlak-sneznice.webp", "png": "f/f7-tlak-sneznice.png",
+    "puvod": {"typ": "generovano", "nastroj": "OpenAI image_gen", "datum": "2026-09-29", "zadani": "f/f7-tlak-sneznice.prompt.txt"}
+  },
+  {
+    "id": "IMG-pr-07", "name": "pr6-clenovci-vcela", "alt": "Včela medonosná při pohledu shora.", "bytes": 31606,
+    "webp": "pr/pr6-clenovci-vcela.webp", "png": "pr/pr6-clenovci-vcela.png",
+    "puvod": {"typ": "generovano", "nastroj": "OpenAI image_gen", "datum": "2026-09-29", "zadani": "pr/pr6-clenovci-vcela.prompt.txt"}
+  },
+  {
+    "id": "IMG-pr-07", "name": "pr6-clenovci-krizak", "alt": "Pavouk křižák při pohledu shora.", "bytes": 37586,
+    "webp": "pr/pr6-clenovci-krizak.webp", "png": "pr/pr6-clenovci-krizak.png",
+    "puvod": {"typ": "generovano", "nastroj": "OpenAI image_gen", "datum": "2026-09-29", "zadani": "pr/pr6-clenovci-krizak.prompt.txt"}
+  },
+  {
+    "id": "IMG-pr-07", "name": "pr6-clenovci-rak", "alt": "Rak říční při pohledu shora.", "bytes": 31306,
+    "webp": "pr/pr6-clenovci-rak.webp", "png": "pr/pr6-clenovci-rak.png",
+    "puvod": {"typ": "generovano", "nastroj": "OpenAI image_gen", "datum": "2026-09-29", "zadani": "pr/pr6-clenovci-rak.prompt.txt"}
+  },
+  {
+    "id": "IMG-pr-07", "name": "pr6-clenovci-stonozka", "alt": "Stonožka při pohledu shora.", "bytes": 18134,
+    "webp": "pr/pr6-clenovci-stonozka.webp", "png": "pr/pr6-clenovci-stonozka.png",
+    "puvod": {"typ": "generovano", "nastroj": "OpenAI image_gen", "datum": "2026-09-29", "zadani": "pr/pr6-clenovci-stonozka.prompt.txt"}
+  },
+  {
+    "id": "IMG-inf-04", "name": "inf4-hardware-pracovni-stul", "alt": "Pracovní stůl s deseti počítačovými zařízeními.", "bytes": 116222,
+    "webp": "inf/inf4-hardware-pracovni-stul.webp", "png": "inf/inf4-hardware-pracovni-stul.png",
+    "puvod": {"typ": "generovano", "nastroj": "OpenAI image_gen", "datum": "2026-09-29", "zadani": "inf/inf4-hardware-pracovni-stul.prompt.txt"}
+  },
+  {
+    "id": "IMG-inf-06", "name": "inf6-digitalni-stopa-ulice", "alt": "Školák před domem a zastávkou s několika stopami prozrazujícími soukromí.", "bytes": 167084,
+    "webp": "inf/inf6-digitalni-stopa-ulice.webp", "png": "inf/inf6-digitalni-stopa-ulice.png",
+    "puvod": {"typ": "generovano", "nastroj": "OpenAI image_gen", "datum": "2026-09-29", "zadani": "inf/inf6-digitalni-stopa-ulice.prompt.txt"}
+  },
+  {
+    "id": "IMG-aj-03", "name": "aj3-pozdravy-rano", "alt": "Dvě děti se ráno zdraví před školou.", "bytes": 124974,
+    "webp": "aj/aj3-pozdravy-rano.webp", "png": "aj/aj3-pozdravy-rano.png",
+    "puvod": {"typ": "generovano", "nastroj": "OpenAI image_gen", "datum": "2026-09-29", "zadani": "aj/aj3-pozdravy-rano.prompt.txt"}
+  },
+  {
+    "id": "IMG-aj-03", "name": "aj3-pozdravy-odpoledne", "alt": "Dvě děti se odpoledne zdraví v parku.", "bytes": 180106,
+    "webp": "aj/aj3-pozdravy-odpoledne.webp", "png": "aj/aj3-pozdravy-odpoledne.png",
+    "puvod": {"typ": "generovano", "nastroj": "OpenAI image_gen", "datum": "2026-09-29", "zadani": "aj/aj3-pozdravy-odpoledne.prompt.txt"}
+  },
+  {
+    "id": "IMG-aj-03", "name": "aj3-pozdravy-vecer", "alt": "Dvě děti se večer zdraví před domem.", "bytes": 163864,
+    "webp": "aj/aj3-pozdravy-vecer.webp", "png": "aj/aj3-pozdravy-vecer.png",
+    "puvod": {"typ": "generovano", "nastroj": "OpenAI image_gen", "datum": "2026-09-29", "zadani": "aj/aj3-pozdravy-vecer.prompt.txt"}
+  },
+  {
+    "id": "IMG-aj-03", "name": "aj3-pozdravy-noc", "alt": "Dítě přeje rodiči dobrou noc.", "bytes": 89498,
+    "webp": "aj/aj3-pozdravy-noc.webp", "png": "aj/aj3-pozdravy-noc.png",
+    "puvod": {"typ": "generovano", "nastroj": "OpenAI image_gen", "datum": "2026-09-29", "zadani": "aj/aj3-pozdravy-noc.prompt.txt"}
+  },
+  {
+    "id": "IMG-prv-02", "name": "prv1-rodina-dum-rez", "alt": "Řez rodinným domem se šesti částmi domova.", "bytes": 146226,
+    "webp": "prv/prv1-rodina-dum-rez.webp", "png": "prv/prv1-rodina-dum-rez.png",
+    "puvod": {"typ": "generovano", "nastroj": "OpenAI image_gen", "datum": "2026-09-29", "zadani": "prv/prv1-rodina-dum-rez.prompt.txt"}
+  },
+  {"id":"IMG-prv-14","name":"prv3-pudni-profil","alt":"Řez půdou od drnu po pevnou horninu.","bytes":196254,"webp":"prv/prv3-pudni-profil.webp","png":"prv/prv3-pudni-profil.png","puvod":{"typ":"generovano","nastroj":"OpenAI image_gen","datum":"2026-09-29","zadani":"prv/prv3-pudni-profil.prompt.txt"}},
+  {"id":"IMG-ch-01","name":"ch8-bezpecnost-laborator","alt":"Školní laboratoř se šesti bezpečnostními chybami.","bytes":105264,"webp":"ch/ch8-bezpecnost-laborator.webp","png":"ch/ch8-bezpecnost-laborator.png","puvod":{"typ":"generovano","nastroj":"OpenAI image_gen","datum":"2026-09-29","zadani":"ch/ch8-bezpecnost-laborator.prompt.txt"}},
+  {"id":"IMG-ch-04","name":"ch8-upravna-vody","alt":"Úpravna pitné vody od odběru k vodojemu.","bytes":100076,"webp":"ch/ch8-upravna-vody.webp","png":"ch/ch8-upravna-vody.png","puvod":{"typ":"generovano","nastroj":"OpenAI image_gen","datum":"2026-09-29","zadani":"ch/ch8-upravna-vody.prompt.txt"}},
+  {"id":"IMG-z-03","name":"z6-reka-pramen-usti","alt":"Řeka od horského pramene přes meandry k deltě a moři.","bytes":198764,"webp":"z/z6-reka-pramen-usti.webp","png":"z/z6-reka-pramen-usti.png","puvod":{"typ":"generovano","nastroj":"OpenAI image_gen","datum":"2026-09-29","zadani":"z/z6-reka-pramen-usti.prompt.txt"}},
+  {"id":"IMG-z-07","name":"z7-afrika-prirodni-pasy","alt":"Přírodní pásy Afriky od Středomoří k tropickému lesu.","bytes":193558,"webp":"z/z7-afrika-prirodni-pasy.webp","png":"z/z7-afrika-prirodni-pasy.png","puvod":{"typ":"generovano","nastroj":"OpenAI image_gen","datum":"2026-09-29","zadani":"z/z7-afrika-prirodni-pasy.prompt.txt"}},
+  {"id":"IMG-z-09","name":"z7-amerika-rez","alt":"Řez Jižní Amerikou od Pacifiku k Atlantiku.","bytes":179002,"webp":"z/z7-amerika-rez.webp","png":"z/z7-amerika-rez.png","puvod":{"typ":"generovano","nastroj":"OpenAI image_gen","datum":"2026-09-29","zadani":"z/z7-amerika-rez.prompt.txt"}},
+  {"id":"IMG-z-11","name":"z7-asie-monzun-sucho","alt":"Indická vesnice v období sucha.","bytes":200176,"webp":"z/z7-asie-monzun-sucho.webp","png":"z/z7-asie-monzun-sucho.png","puvod":{"typ":"generovano","nastroj":"OpenAI image_gen","datum":"2026-09-29","zadani":"z/z7-asie-monzun-sucho.prompt.txt"}},
+  {"id":"IMG-z-11","name":"z7-asie-monzun-dest","alt":"Stejná indická vesnice během monzunu.","bytes":203006,"webp":"z/z7-asie-monzun-dest.webp","png":"z/z7-asie-monzun-dest.png","puvod":{"typ":"generovano","nastroj":"OpenAI image_gen","datum":"2026-09-29","zadani":"z/z7-asie-monzun-dest.prompt.txt"}},
+  {"id":"IMG-ch-08","name":"ch9-frakcni-kolona","alt":"Řez frakční destilační kolonou.","bytes":59996,"webp":"ch/ch9-frakcni-kolona.webp","png":"ch/ch9-frakcni-kolona.png","puvod":{"typ":"generovano","nastroj":"OpenAI image_gen","datum":"2026-09-29","zadani":"ch/ch9-frakcni-kolona.prompt.txt"}},
+  {"id":"IMG-pr-02","name":"pr6-houba-stavba","alt":"Stavba houby a podhoubí v půdě.","bytes":171926,"webp":"pr/pr6-houba-stavba.webp","png":"pr/pr6-houba-stavba.png","puvod":{"typ":"generovano","nastroj":"OpenAI image_gen","datum":"2026-09-29","zadani":"pr/pr6-houba-stavba.prompt.txt"}},
+  {"id":"IMG-z-02","name":"z6-atmosfera-vrstvy","alt":"Vrstvy atmosféry od povrchu Země k ISS.","bytes":52598,"webp":"z/z6-atmosfera-vrstvy.webp","png":"z/z6-atmosfera-vrstvy.png","puvod":{"typ":"generovano","nastroj":"OpenAI image_gen","datum":"2026-09-29","zadani":"z/z6-atmosfera-vrstvy.prompt.txt"}}
 ]

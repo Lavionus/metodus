@@ -24,6 +24,7 @@
     .kroky button.spatne { background: var(--danger); border-color: var(--danger); color: var(--na-akcentu, #fff); }
     .uloha-text { max-width: 640px; font-size: 1.02rem; line-height: 1.6; }
     .uloha-text b { color: var(--accent); }
+    .upravna-scena { width:min(720px,100%); height:auto; border-radius:16px; background:#f8f1df; }
   </style>
 </head>
 <body>
@@ -125,7 +126,7 @@ function uprava() {
   let chyboval = false, hotovo = false;
 
   p.innerHTML = `<div class="zadani uloha-text">Seřaď kroky <b>úpravy pitné vody</b> –
-    klepej na ně v pořadí, jak jdou za sebou.</div>`;
+    klepej na ně v pořadí, jak jdou za sebou.</div><img class="upravna-scena" src="img/ch/ch8-upravna-vody.webp" alt="Úpravna pitné vody od odběru přes česle, čiření, usazování, pískový filtr a dezinfekci až k vodojemu." width="1152" height="768">`;
   const box = document.createElement('div');
   box.className = 'kroky';
   const odezva = odezvaEl();
