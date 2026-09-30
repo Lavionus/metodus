@@ -1,0 +1,8 @@
+Use case: historical-scene
+Asset type: interactive history lesson reconstruction, 3:2 landscape
+Primary request: historically grounded reconstruction of the Roman Forum in the early imperial era, with basilica, temple, rostra, triumphal monuments, senators, merchants and ordinary citizens
+Scene/backdrop: central civic square of ancient Rome in daylight
+Style/medium: refined watercolor and gouache with delicate ink, warm ivory paper, educational museum reconstruction
+Composition/framing: wide scene with major building types and people clearly separated for visual exploration and hotspots
+Color palette: pale marble, terracotta roofs, muted red, olive, warm ochre and soft blue sky
+Constraints: accurate Roman architecture and clothing, no medieval or Renaissance buildings, no modern objects, no text, no labels, no letters, no watermark

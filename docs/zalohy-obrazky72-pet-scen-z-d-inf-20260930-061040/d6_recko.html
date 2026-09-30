@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Starověký Řím</title>
+  <title>Starověké Řecko</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
   <script src="../theme.js"></script>
@@ -20,15 +20,11 @@
       padding: 7px 11px; font-size: 0.85rem; font-weight: 600;
     }
     .osa-cas .sipka { color: var(--text-faint); }
-    .rekonstrukce { width: min(760px, 100%); margin: 18px auto; }
-    .rekonstrukce img { display:block; width:100%; border-radius:14px; }
-    .rekonstrukce figcaption { margin-top:8px; color:var(--text-muted); line-height:1.5; }
-    .stit-rekonstrukce { font-weight:800; color:var(--accent); text-transform:uppercase; letter-spacing:.05em; }
   </style>
 </head>
 <body>
-  <h1>🏟️ Starověký Řím</h1>
-  <p class="podtitul">Pro 6.–7. ročník: od království přes republiku k císařství, stavitelství a vznik křesťanství.</p>
+  <h1>🏛️ Starověké Řecko</h1>
+  <p class="podtitul">Pro 6. ročník: městské státy, athénská demokracie, Sparta, olympijské hry a kultura.</p>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="osobnosti" class="active">👤 Kdo to byl</button>
@@ -44,121 +40,116 @@
     <span class="skore" id="skore"></span>
   </div>
 
-  <section aria-labelledby="forumNadpis"><h2 id="forumNadpis">Římské fórum</h2><figure class="rekonstrukce">
-    <img src="img/d/d6-rim-forum.webp" alt="Umělecká rekonstrukce římského fóra s chrámy, bazilikou, řečništěm, tržištěm a obyvateli Říma." width="1152" height="768" loading="lazy">
-    <figcaption><span class="stit-rekonstrukce">Rekonstrukce:</span> Fórum spojovalo politiku, soudnictví, náboženství i obchod. Rozlehlé baziliky sloužily veřejným jednáním, nikoli původně jako kostely.</figcaption>
-  </figure></section>
-
-  <p class="napoveda">Řím prošel třemi obdobími: <b>království</b>, <b>republika</b> (v čele dva konzulové a senát) a <b>císařství</b>. Římané byli skvělí stavitelé – akvadukty, silnice a beton používáme dodnes.</p>
+  <p class="napoveda">Řecko tvořily samostatné <b>městské státy (polis)</b>. V <b>Athénách</b> vznikla demokracie – o veřejných věcech rozhodovali svobodní muži na sněmu. <b>Sparta</b> naopak vychovávala své občany hlavně jako vojáky.</p>
 
 <script>
 const $ = id => document.getElementById(id);
-const skore = Uloha.skore('metodus_d6_rim', $('skore'));
+const skore = Uloha.skore('metodus_d6_recko', $('skore'));
 let rezim = 'osobnosti';
 
 const OSOBNOSTI = [
   {
-    n: "Gaius Iulius Caesar",
-    e: "⚔️",
-    o: "vojevůdce, který dobyl Galii a byl zavražděn v senátu roku 44 př. n. l."
+    n: "Periklés",
+    e: "🏛️",
+    o: "athénský státník, za jehož vlády vrcholila demokracie a stavěl se Parthenón"
   },
   {
-    n: "Octavianus Augustus",
-    e: "👑",
-    o: "první římský císař, za jeho vlády nastal dlouhý mír"
+    n: "Sokrates",
+    e: "💭",
+    o: "filozof, který učil klást otázky a byl odsouzen k smrti"
   },
   {
-    n: "Spartakus",
-    e: "⛓️",
-    o: "gladiátor, který vedl největší povstání otroků"
+    n: "Alexandr Veliký",
+    e: "🐎",
+    o: "makedonský král, jehož říše sahala až k Indii"
   },
   {
-    n: "Nero",
-    e: "🔥",
-    o: "císař, kterému se přisuzuje požár Říma a pronásledování křesťanů"
+    n: "Homér",
+    e: "📖",
+    o: "údajný autor eposů Ílias a Odysseia"
   },
   {
-    n: "Konstantin Veliký",
-    e: "✝️",
-    o: "císař, který povolil křesťanství milánským ediktem"
+    n: "Leónidás",
+    e: "🛡️",
+    o: "spartský král, který se třemi sty bojovníky bránil Thermopyly"
   },
   {
-    n: "Romulus a Remus",
-    e: "🐺",
-    o: "bájní bratři odkojení vlčicí, zakladatelé Říma"
+    n: "Pythagoras",
+    e: "📐",
+    o: "matematik, po němž je pojmenovaná věta o pravoúhlém trojúhelníku"
   }
 ];
 const POJMY = [
   {
-    n: "republika",
-    e: "🏛️",
-    o: "zřízení, kde v čele stáli dva volení konzulové a senát"
-  },
-  {
-    n: "legie",
-    e: "🛡️",
-    o: "základní jednotka římského vojska o několika tisících mužů"
-  },
-  {
-    n: "akvadukt",
-    e: "🌉",
-    o: "stavba přivádějící vodu do měst na kamenných obloucích"
-  },
-  {
-    n: "Koloseum",
-    e: "🏟️",
-    o: "obrovský amfiteátr v Římě pro gladiátorské zápasy"
-  },
-  {
-    n: "forum",
+    n: "polis",
     e: "🏙️",
-    o: "hlavní náměstí, středisko obchodu a politiky"
+    o: "samostatný městský stát s vlastními zákony a vojskem"
   },
   {
-    n: "limes romanus",
-    e: "🧱",
-    o: "opevněná hranice římské říše proti barbarům"
+    n: "demokracie",
+    e: "🗳️",
+    o: "vláda lidu, o věcech se rozhodovalo hlasováním na sněmu"
   },
   {
-    n: "gladiátor",
-    e: "⚔️",
-    o: "zápasník, který bojoval pro pobavení diváků v aréně"
+    n: "akropolis",
+    e: "⛰️",
+    o: "opevněné návrší nad městem s chrámy"
   },
   {
-    n: "latina",
-    e: "🔤",
-    o: "jazyk Římanů, ze kterého vycházejí románské jazyky"
+    n: "olympijské hry",
+    e: "🏅",
+    o: "sportovní slavnosti na počest boha Dia konané každé čtyři roky"
+  },
+  {
+    n: "falanga",
+    e: "🛡️",
+    o: "sevřený bojový útvar těžkooděnců se štíty a kopími"
+  },
+  {
+    n: "divadlo",
+    e: "🎭",
+    o: "řecký vynález, hrály se tragédie a komedie pod otevřeným nebem"
+  },
+  {
+    n: "Parthenón",
+    e: "🏛️",
+    o: "chrám bohyně Athény na athénské akropoli"
+  },
+  {
+    n: "olympiáda",
+    e: "📅",
+    o: "čtyřleté období mezi hrami, podle něhož Řekové počítali čas"
   }
 ];
 const UDALOSTI = [
   {
-    rok: "753 př. n. l.",
-    t: "podle pověsti byl založen Řím",
+    rok: "776 př. n. l.",
+    t: "konaly se první doložené olympijské hry",
     poradi: 1
   },
   {
-    rok: "509 př. n. l.",
-    t: "v Římě vznikla republika",
+    rok: "490 př. n. l.",
+    t: "Řekové zvítězili nad Peršany u Marathónu",
     poradi: 2
   },
   {
-    rok: "44 př. n. l.",
-    t: "byl zavražděn Gaius Iulius Caesar",
+    rok: "480 př. n. l.",
+    t: "bitva u Thermopyl a námořní vítězství u Salamíny",
     poradi: 3
   },
   {
-    rok: "27 př. n. l.",
-    t: "Octavianus se stal prvním císařem a začalo císařství",
+    rok: "447 př. n. l.",
+    t: "začala stavba Parthenónu za Perikla",
     poradi: 4
   },
   {
-    rok: "313 n. l.",
-    t: "milánský edikt povolil křesťanství",
+    rok: "399 př. n. l.",
+    t: "byl odsouzen a popraven filozof Sokrates",
     poradi: 5
   },
   {
-    rok: "476 n. l.",
-    t: "zanikla západořímská říše a skončil starověk",
+    rok: "336 př. n. l.",
+    t: "Alexandr Veliký nastoupil na makedonský trůn",
     poradi: 6
   }
 ];

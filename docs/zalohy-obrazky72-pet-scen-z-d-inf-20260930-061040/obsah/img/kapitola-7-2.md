@@ -40,11 +40,10 @@ Vytvořeno 23. 9. 2026 vestavěným nástrojem `image_gen` podle `PODKLAD_STRANE
 - Dokončena a zapojena sada `IMG-prv-02`: řez rodinným domem jako názorný podklad úloh o místnostech.
 - Dokončeny a zapojeny sady `IMG-prv-14`, `IMG-ch-01`, `IMG-ch-04`, `IMG-z-03` a `IMG-z-07`: půdní profil, bezpečnost laboratoře, úpravna vody, tok řeky a přírodní pásy Afriky.
 - Dokončeny a zapojeny sady `IMG-z-09`, `IMG-z-11`, `IMG-ch-08`, `IMG-pr-02` a `IMG-z-02`: řez Jižní Amerikou, monzunová dvojice, frakční kolona, stavba houby a vrstvy atmosféry.
-- Dokončeny a zapojeny sady `IMG-z-06`, `IMG-d-02`, `IMG-d-04`, `IMG-d-09` a `IMG-inf-05`: řez Zemí, označené rekonstrukce athénské agory a římského fóra, archeologická sonda a otevřená počítačová skříň.
 - Dokončena a zapojena sada `IMG-f-06`: pět názorných situací tlaku.
 - Rozpracována a zapojena sada `IMG-aj-02`: 56 různých karet z přibližně 120, kompletní témata Zvířata (12), Jídlo (10), Škola (9), Rodina (7), Dům a nábytek (9; židle je sdílená se školou) a Oblečení (10). Domácí motivy sdílejí také německá a francouzská slovíčka.
 - Uložení: `obsah/img/cj/`, `obsah/img/m/` a `obsah/img/aj/`; každý motiv jako `.png`, `.webp` a `.prompt.txt`.
 - WebP: karty 768 × 768 px do 60 000 B, scény 1152 × 768 px do 200 000 B.
 - [Kontrolní galerie](kapitola-7-2.html), [strojový seznam a alt texty](kapitola-7-2.json).
 - Všechny karty jsou generované, bez vloženého textu, čísel a značek. Vizuálně zkontrolováno jako jedna galerie.
-- Celkem 331 hotových ilustrací. Dokončeno 52 ze 168 obrazových sad a rozpracována sada `IMG-aj-02` (56 různých z přibližně 120 karet); další sady pokračují podle pořadí v podkladovém dokumentu. Fotografické sady C a historické doklady E se negenerují.
+- Celkem 326 hotových ilustrací. Dokončeno 47 ze 168 obrazových sad a rozpracována sada `IMG-aj-02` (56 různých z přibližně 120 karet); další sady pokračují podle pořadí v podkladovém dokumentu. Fotografické sady C a historické doklady E se negenerují.

@@ -34,7 +34,7 @@ const ready = async expression => {
   throw Error('Not ready: ' + expression);
 };
 
-const pages = ['cj1_pismena', 'slabiky', 'cteni_s_porozumenim', 'cj2_abeceda', 'cj2_tvrde_mekke', 'doplnovacky', 'vyjmenovana_slova', 'cj2_druhy_vet', 'cj3_slovesa', 'cj6_slovni_zasoba', 'cj6_baje', 'cj8_sloh', 'm3_deleni_zbytkem', 'm4_zlomky_uvod', 'm5_slovni_ulohy', 'm7_cela_cisla', 'procenta', 'clock_learning', 'm8_pythagoras', 'm9_podobnost', 'aj_slovicka', 'aj3_pozdravy', 'aj5_pritomny_prubehovy', 'prv1_rodina', 'prv1_cesta_skola', 'prv1_rocni_obdobi', 'prv2_zvirata', 'prv3_voda_vzduch', 'prv4_ekosystemy', 'prv5_energie', 'prv3_obec', 'prv4_nejstarsi_dejiny', 'f6_hustota', 'f7_tlak', 'pr6_clenovci', 'ch8_bezpecnost', 'ch8_voda_vzduch', 'z6_hydrosfera', 'z7_afrika', 'z7_amerika', 'z7_asie', 'ch9_uhlovodiky', 'pr6_houby', 'z6_atmosfera', 'inf4_hardware', 'inf6_digitalni_stopa', 'de_slovicka', 'fr_slovicka'];
+const pages = ['cj1_pismena', 'slabiky', 'cteni_s_porozumenim', 'cj2_abeceda', 'cj2_tvrde_mekke', 'doplnovacky', 'vyjmenovana_slova', 'cj2_druhy_vet', 'cj3_slovesa', 'cj6_slovni_zasoba', 'cj6_baje', 'cj8_sloh', 'm3_deleni_zbytkem', 'm4_zlomky_uvod', 'm5_slovni_ulohy', 'm7_cela_cisla', 'procenta', 'clock_learning', 'm8_pythagoras', 'm9_podobnost', 'aj_slovicka', 'aj3_pozdravy', 'aj5_pritomny_prubehovy', 'prv1_rodina', 'prv1_cesta_skola', 'prv1_rocni_obdobi', 'prv2_zvirata', 'prv3_voda_vzduch', 'prv4_ekosystemy', 'prv5_energie', 'prv3_obec', 'prv4_nejstarsi_dejiny', 'f6_hustota', 'f7_tlak', 'pr6_clenovci', 'ch8_bezpecnost', 'ch8_voda_vzduch', 'z6_hydrosfera', 'z7_afrika', 'z7_amerika', 'z7_asie', 'ch9_uhlovodiky', 'pr6_houby', 'z6_atmosfera', 'z6_litosfera', 'd6_recko', 'd6_rim', 'd6_pravek', 'inf4_hardware', 'inf6_digitalni_stopa', 'de_slovicka', 'fr_slovicka'];
 const results = [];
 try {
   await call('Page.enable');
@@ -382,6 +382,26 @@ try {
       assert.equal(await ev(`document.querySelectorAll('#hardwareScena .hotspot').length`), 10);
       await ev(`document.querySelector('#hardwareScena .hotspot').click()`);
       assert.ok(await ev(`document.querySelector('#hardwareVysledek').textContent.includes('Našel jsi')`));
+      await ev(`document.querySelector('#skrinScena img').decode()`);
+      assert.equal(await ev(`document.querySelectorAll('#skrinScena .hotspot').length`), 6);
+      await ev(`document.querySelector('#skrinScena .hotspot').click()`);
+      assert.ok(await ev(`document.querySelector('#skrinVysledek').textContent.includes('–')`));
+    }
+    if (page === 'z6_litosfera') {
+      await ev(`document.querySelector('#rezZeme img').decode()`);
+      assert.equal(await ev(`document.querySelectorAll('#rezZeme .obrazovy-bod').length`), 4);
+      await ev(`document.querySelector('#rezZeme .obrazovy-bod').click()`);
+      assert.ok(await ev(`document.querySelector('#rezZemePopis').textContent.includes('kůra')`));
+    }
+    if (page === 'd6_pravek') {
+      await ev(`document.querySelector('#sondaScena img').decode()`);
+      assert.equal(await ev(`document.querySelectorAll('#sondaScena .sonda-bod').length`), 5);
+      await ev(`document.querySelector('#sondaScena .sonda-bod').click()`);
+      assert.ok(await ev(`document.querySelector('#sondaPopis').textContent.length > 30`));
+    }
+    if (page === 'd6_recko' || page === 'd6_rim') {
+      await ev(`document.querySelector('.rekonstrukce img').decode()`);
+      assert.ok(await ev(`document.querySelector('.stit-rekonstrukce').textContent.includes('Rekonstrukce')`));
     }
     if (page === 'inf6_digitalni_stopa') {
       await ev(`document.querySelector('#stopaFotka img').decode()`);

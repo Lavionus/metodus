@@ -2530,7 +2530,7 @@ Společné pro zeměpis: 🔗 **jedna datová sada států a jedna mapová kompo
   - 🔗 Řezy desek sdílet s `pr9_geologicke_deje` (`IMG-pr-18`).
 - **Obrázky:**
   - `IMG-z-05` 🟠 **C** · fotografie 8 tvarů povrchu (údolí V, ledovcové údolí U, kaňon, sopka, vrásy ve skále, písečné duny, meandry, útesy) — poznávání tvarů
-  - `IMG-z-06` ✅ **A** · řez Zemí (kůra, plášť, vnější a vnitřní jádro) s výsekem — zapojeny hotspoty vrstev
+  - `IMG-z-06` ⚪ **A** · řez Zemí (kůra, plášť, vnější a vnitřní jádro) s výsekem — hotspoty vrstev
 
 #### Afrika · [z7_afrika.html](obsah/z7_afrika.html)
 - **Zařazení:** Zeměpis › 7. r. · lekce A (s mapou)
@@ -2713,7 +2713,7 @@ Společné pro dějepis: dnešní lekce mají stejnou čtveřici režimů (osobn
   - Architektura: tři řády sloupů k poznávání.
 - **Obrázky:**
   - `IMG-d-01` 🟠 **E** · fotografie Parthenónu, tří řádů sloupů (dórský, iónský, korintský), černofigurové a červenofigurové vázy, olympijského stadionu v Olympii
-  - `IMG-d-02` ✅ **A** · rekonstrukce athénské agory se shromážděním — zapojeno a označeno „rekonstrukce“
+  - `IMG-d-02` ⚪ **A** · rekonstrukce athénské agory se shromážděním (označit „rekonstrukce“)
 
 #### Starověký Řím · [d6_rim.html](obsah/d6_rim.html)
 - **Zařazení:** Dějepis › 6.–7. r. · lekce A
@@ -2726,7 +2726,7 @@ Společné pro dějepis: dnešní lekce mají stejnou čtveřici režimů (osobn
   - Rozlišení dokladu (Pompeje) a rekonstrukce.
 - **Obrázky:**
   - `IMG-d-03` 🟠 **E** · fotografie Kolosea, Pont du Gard, římské silnice, Pompejí, římské mince, nápisu na oblouku
-  - `IMG-d-04` ✅ **A** · rekonstrukce římského fóra — zapojeno a označeno „rekonstrukce“
+  - `IMG-d-04` ⚪ **A** · rekonstrukce římského fóra (označit)
 
 #### Starověký Egypt a Mezopotámie · [d6_stary_orient.html](obsah/d6_stary_orient.html)
 - **Zařazení:** Dějepis › 6. r. · lekce A
@@ -2782,7 +2782,7 @@ Společné pro dějepis: dnešní lekce mají stejnou čtveřici režimů (osobn
 - **Obrázky:**
   - `IMG-d-07` 🟠 **A** · rekonstrukce dvou sídlišť: lovci a sběrači (starší doba kamenná) a první zemědělci (mladší doba kamenná, dlouhé domy) — označit
   - `IMG-d-08` 🟠 **E** · fotografie nálezů (pěstní klín, Věstonická venuše, keramika s lineární výzdobou, bronzový meč, keltská mince)
-  - `IMG-d-09` ✅ **A** · řez archeologickou sondou s vrstvami a nálezy — zapojeny hotspoty
+  - `IMG-d-09` ⚪ **A** · řez archeologickou sondou s vrstvami a nálezy — hotspoty
 
 #### Raný středověk a příchod Slovanů · [d7_rany_stredovek.html](obsah/d7_rany_stredovek.html)
 - **Zařazení:** Dějepis › 7. r. · lekce A (s mapou)
@@ -3091,7 +3091,7 @@ Společné pro informatiku: 🔗 programování (4.–7. r.) má projít **jedn�
   - Měřič síly hesla (lokální, bez odesílání) s vysvětlením.
 - **Obrázky:**
   - `IMG-inf-04` ✅ **A** · pracovní stůl s deseti počítačovými zařízeními — zapojeno s přístupnými hotspoty
-  - `IMG-inf-05` ✅ **B** · rozložená počítačová skříň (základní deska, procesor, paměť RAM, disk, zdroj, grafická karta) — zapojeny hotspoty součástí
+  - `IMG-inf-05` 🟠 **B** · rozložená počítačová skříň (základní deska, procesor, paměť RAM, disk, zdroj, grafická karta) — hotspoty součástí
 
 #### Informace na internetu a ověřování · [inf5_zdroje.html](obsah/inf5_zdroje.html)
 - **Zařazení:** Informatika › Bezpečnost a etika · 5.–6. r. · lekce A

@@ -18,11 +18,6 @@
     .rez text { fill: var(--text); font-size: 11px; text-anchor: middle; font-weight: 700; }
     .popis-j { color: var(--text-muted); max-width: 560px; line-height: 1.55; }
     .nazev-j { font-size: 1.2rem; font-weight: 700; }
-    .obrazova-scena { position: relative; width: min(760px, 100%); margin: 18px auto; }
-    .obrazova-scena img { display: block; width: 100%; border-radius: 14px; background: #f8f1df; }
-    .obrazovy-bod { position: absolute; transform: translate(-50%, -50%); width: 30px; height: 30px; padding: 0; border: 2px solid #fff; border-radius: 50%; background: var(--accent); color: var(--na-akcentu, #fff); font-weight: 800; box-shadow: 0 2px 8px #0008; cursor: pointer; }
-    .obrazovy-bod:focus-visible { outline: 3px solid var(--focus, #ffd54f); outline-offset: 2px; }
-    .obrazovy-popis { min-height: 2.8em; color: var(--text-muted); font-weight: 600; }
   </style>
 </head>
 <body>
@@ -43,18 +38,6 @@
     <span class="skore" id="skore"></span>
   </div>
 
-  <section aria-labelledby="rezZemeNadpis">
-    <h2 id="rezZemeNadpis">Prozkoumej nitro Země</h2>
-    <div class="obrazova-scena" id="rezZeme">
-      <img src="img/z/z6-litosfera-rez-zeme.webp" alt="Řez Zemí se zemskou kůrou, pláštěm, tekutým vnějším jádrem a pevným vnitřním jádrem." width="1152" height="768">
-      <button class="obrazovy-bod" style="left:78%;top:12%" data-popis="Zemská kůra je velmi tenký pevný obal Země." aria-label="Zemská kůra">1</button>
-      <button class="obrazovy-bod" style="left:71%;top:42%" data-popis="Zemský plášť je nejmohutnější vrstva; pomalé proudění v něm pohybuje deskami." aria-label="Zemský plášť">2</button>
-      <button class="obrazovy-bod" style="left:61%;top:58%" data-popis="Vnější jádro je tekuté a podílí se na vzniku magnetického pole Země." aria-label="Vnější jádro">3</button>
-      <button class="obrazovy-bod" style="left:51%;top:50%" data-popis="Vnitřní jádro zůstává kvůli obrovskému tlaku pevné." aria-label="Vnitřní jádro">4</button>
-    </div>
-    <p class="obrazovy-popis" id="rezZemePopis" aria-live="polite">Vyber očíslovanou vrstvu.</p>
-  </section>
-
   <p class="napoveda">
     <b>Vnitřní děje</b> (pohyb desek, sopky, zemětřesení) povrch vyzdvihují,
     <b>vnější děje</b> (voda, vítr, led, zvětrávání) ho naopak zarovnávají.
@@ -65,11 +48,6 @@
 const $ = id => document.getElementById(id);
 const skore = Uloha.skore('metodus_z6_litosfera', $('skore'));
 let rezim = 'stavba';
-
-$('rezZeme').addEventListener('click', event => {
-  const bod = event.target.closest('[data-popis]');
-  if (bod) $('rezZemePopis').textContent = bod.dataset.popis;
-});
 
 const VRSTVY = [
   { n: 'zemská kůra', o: 'nejtenčí vnější vrstva, pod oceány jen asi 5–10 km silná' },

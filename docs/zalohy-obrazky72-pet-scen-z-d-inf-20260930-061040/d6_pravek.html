@@ -20,11 +20,6 @@
       padding: 7px 11px; font-size: 0.85rem; font-weight: 600;
     }
     .osa-cas .sipka { color: var(--text-faint); }
-    .sonda { position:relative; width:min(760px,100%); margin:18px auto; }
-    .sonda img { display:block; width:100%; border-radius:14px; }
-    .sonda-bod { position:absolute; transform:translate(-50%,-50%); width:30px; height:30px; padding:0; border:2px solid #fff; border-radius:50%; background:var(--accent); color:var(--na-akcentu,#fff); font-weight:800; box-shadow:0 2px 8px #0008; cursor:pointer; }
-    .sonda-bod:focus-visible { outline:3px solid var(--focus,#ffd54f); outline-offset:2px; }
-    .sonda-popis { min-height:2.8em; color:var(--text-muted); font-weight:600; }
   </style>
 </head>
 <body>
@@ -45,17 +40,6 @@
     <span class="skore" id="skore"></span>
   </div>
 
-  <section aria-labelledby="sondaNadpis"><h2 id="sondaNadpis">Čti archeologickou sondu</h2>
-    <div class="sonda" id="sondaScena">
-      <img src="img/d/d6-pravek-archeologicka-sonda.webp" alt="Řez archeologickou sondou s drnem, několika půdními vrstvami, keramikou, ohništěm, kůlovou jamkou, kostmi a kamennou zdí." width="1152" height="768" loading="lazy">
-      <button class="sonda-bod" style="left:74%;top:32%" data-nalez="Mince a keramika v mladší vrstvě pomáhají archeologům určit její stáří." aria-label="Mladší vrstva s mincí">1</button>
-      <button class="sonda-bod" style="left:18%;top:52%" data-nalez="Tmavá plocha s uhlíky je pozůstatek ohniště a lidské činnosti." aria-label="Ohniště">2</button>
-      <button class="sonda-bod" style="left:64%;top:53%" data-nalez="Kůlová jamka je stopa po dřevěném sloupu dávné stavby." aria-label="Kůlová jamka">3</button>
-      <button class="sonda-bod" style="left:25%;top:69%" data-nalez="Kamenný základ leží hlouběji, a je tedy zpravidla starší než vrstvy nad ním." aria-label="Kamenný základ">4</button>
-      <button class="sonda-bod" style="left:55%;top:86%" data-nalez="Světlé přírodní podloží vzniklo bez lidské činnosti a uzavírá sondu." aria-label="Přírodní podloží">5</button>
-    </div><p class="sonda-popis" id="sondaPopis" aria-live="polite">Vyber nález nebo vrstvu. Obecně platí: co leží níže, bývá starší.</p>
-  </section>
-
   <p class="napoveda">
     Pravěk dělíme podle materiálu nástrojů: <b>doba kamenná</b> (starší, střední a mladší),
     <b>doba bronzová</b> a <b>doba železná</b>. Zásadní změnou byl přechod od lovu a sběru
@@ -66,11 +50,6 @@
 const $ = id => document.getElementById(id);
 const skore = Uloha.skore('metodus_d6_pravek', $('skore'));
 let rezim = 'doby';
-
-$('sondaScena').addEventListener('click', event => {
-  const bod = event.target.closest('[data-nalez]');
-  if (bod) $('sondaPopis').textContent = bod.dataset.nalez;
-});
 
 const DOBY = [
   { n: 'starší doba kamenná (paleolit)', o: 'lovci a sběrači, štípané kamenné nástroje, život v tlupách', poradi: 1 },

@@ -58,20 +58,6 @@
     <p class="hotspot-vysledek" id="hardwareVysledek" aria-live="polite">Klepni na některý bod.</p>
   </section>
 
-  <section aria-labelledby="skrinNadpis">
-    <h2 id="skrinNadpis">Co je uvnitř počítače?</h2>
-    <div class="hotspot-scena" id="skrinScena">
-      <img src="img/inf/inf4-hardware-otevrena-skrin.webp" alt="Otevřená počítačová skříň s vysunutým zdrojem, chladičem procesoru, paměťmi RAM, grafickou kartou, SSD a pevným diskem." width="1152" height="768" loading="lazy">
-      <button class="hotspot" style="left:46%;top:48%" data-soucast="základní deska – propojuje všechny součásti" aria-label="Základní deska">?</button>
-      <button class="hotspot" style="left:43%;top:38%" data-soucast="procesor – provádí výpočty a řídí programy" aria-label="Procesor">?</button>
-      <button class="hotspot" style="left:21%;top:34%" data-soucast="paměť RAM – krátkodobě drží právě používaná data" aria-label="Paměť RAM">?</button>
-      <button class="hotspot" style="left:89%;top:57%" data-soucast="disk – uchovává soubory i po vypnutí" aria-label="Disk">?</button>
-      <button class="hotspot" style="left:81%;top:14%" data-soucast="napájecí zdroj – mění elektřinu ze zásuvky pro součástky" aria-label="Napájecí zdroj">?</button>
-      <button class="hotspot" style="left:18%;top:65%" data-soucast="grafická karta – vytváří obraz pro monitor" aria-label="Grafická karta">?</button>
-    </div>
-    <p class="hotspot-vysledek" id="skrinVysledek" aria-live="polite">Klepni na součást uvnitř skříně.</p>
-  </section>
-
   <p class="napoveda">
     <b>Vstupní zařízení</b> dávají data do počítače (klávesnice, myš, mikrofon).
     <b>Výstupní zařízení</b> data z počítače ukazují (monitor, tiskárna, reproduktor).
@@ -86,11 +72,6 @@ $('hardwareScena').addEventListener('click', event => {
   const bod = event.target.closest('[data-zarizeni]');
   if (!bod) return;
   $('hardwareVysledek').textContent = `Našel jsi: ${bod.dataset.zarizeni}.`;
-});
-
-$('skrinScena').addEventListener('click', event => {
-  const bod = event.target.closest('[data-soucast]');
-  if (bod) $('skrinVysledek').textContent = bod.dataset.soucast;
 });
 
 const ZARIZENI = [
