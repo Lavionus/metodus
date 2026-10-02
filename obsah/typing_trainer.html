@@ -60,6 +60,9 @@ select{background:var(--bg-input);border:1px solid var(--border-strong);border-r
   --na-akcentu: #1d140b;
 }
 :root[data-tone="light"] :is(.kbd, .legenda) :is(.aktivni, .active) { color: var(--na-akcentu); }
+.poloha-rukou { max-width:760px; margin:18px auto; }
+.poloha-rukou img { display:block; width:100%; border-radius:14px; }
+.poloha-rukou figcaption { margin-top:8px; color:var(--text-muted); line-height:1.5; }
 </style>
 </head>
 <body>
@@ -99,6 +102,7 @@ select{background:var(--bg-input);border:1px solid var(--border-strong);border-r
   <div class="kbd" id="kbd"></div>
   <input id="hidden" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false">
   <p class="hint">Klikni do textu a začni psát. Měření začne prvním stiskem klávesy, Esc vygeneruje nový text.</p>
+  <figure class="poloha-rukou"><img src="img/00/typing-vychozi-poloha.webp" alt="Pohled shora na správnou výchozí polohu rukou: levé prsty na A, S, D, F, pravé na J, K, L a středníku, palce nad mezerníkem." width="1152" height="768" loading="lazy"><figcaption><b>Výchozí poloha:</b> ukazováčky najdou hmatové značky na F a J, ostatní prsty leží vedle nich a zápěstí zůstávají rovná.</figcaption></figure>
   <div class="done" id="doneCard">
     <div class="big" id="doneWpm"></div>
     <div class="record" id="doneRecord" style="display:none">🏆 Nový rekord!</div>

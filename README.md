@@ -955,6 +955,31 @@ skriptu (Model, úchopy, úkoly, navigace, procvičování) je převzatá z `opt
 - Stav v `metodus_paka_lekce`, skóre procvičování v `metodus_paka_lekce_skore`.
   Stará simulace `paka.html` zůstává jako „laboratoř strojů“ (páčidlo, pařez, hodiny, převodovka, diferenciál).
 
+## Interaktivní výklad závitů
+
+`obsah/zavity_lekce.html` (+ `zavity_lekce.js`, `zavity_lekce.css`) je výklad „Závity a šrouby“
+(7.–9. r., rodina „Síla, pohyb a stroje“ hned za výkladem páky). Rozvržení, úkoly, předpovědi, tahák
+i stálé barvy mechaniky bere z `paka_lekce.css`; `zavity_lekce.css` přidává jen barvy chodů
+šroubovice (`--z-chod1`…`--z-chod4`), tření (`--z-treni`), papír, matici a mikrometr.
+Obecná část skriptu (Model, úchopy, úkoly, navigace, Procvič) je převzatá z `paka_lekce.js`;
+reakce úkolů počítané ze stavu modelu se ukládají s postupem (`reakce`), aby po načtení dávaly smysl.
+
+- **Kapitoly a modely:** 1 papírový trojúhelník navinutý na tužku (přepona → šroubovice),
+  2 šroub M20 z boku (profil M/Tr/oblý/plochý, rozteč, 1–3 chody, levý závit, otáčení matice
+  a značka typu `Tr20×6(P3)`), 3 určení neznámého šroubu (posuvné měřítko + závitová měrka,
+  tabulka hrubých roztečí `ZAVITY_M`), 4 zvedák s klikou a vedle rozvinutá otáčka jako nakloněná
+  rovina, 5 matice na nakloněné rovině s volbou tření (samosvornost), 6 utahování klíčem
+  (moment → předpětí F ≈ M / (0,2 · d), šrouby 8.8 v `SROUBY_88`, zóny málo / správně / přetaženo /
+  praskne), 7 mikrometr s lupou a měřením součástky, 8 **dílna – hřiště** (zvedák, svěrák, lis,
+  rychloupínák; všechny parametry, „Pustit kliku“, tři výzvy), 9 třídička 10 předmětů podle účelu závitu.
+- **Ukázka:** řešené příklady (`.ukazka[data-faze="ukazka"]`) u určení šroubu, zvedáku, utahování a mikrometru.
+- **Fyzika:** jedna otáčka = nakloněná rovina se základnou 2πr a výškou Pₕ; síla po obvodu
+  F₀ = Q · tg(α + φ), na klice F = F₀ · r / R, bez tření F = Q · Pₕ / (2πR). Samosvorný závit α ≤ φ
+  (tg φ = μ), účinnost η = tg α / tg(α + φ) – samosvorný má vždy η < 50 % (hlídá test).
+- Stav v `metodus_zavity_lekce`, skóre procvičování v `metodus_zavity_lekce_skore`.
+
+Test: [tests/zavity-lekce.mjs](tests/zavity-lekce.mjs).
+
 ## Interaktivní výklad mechaniky
 
 `obsah/physics_playground.html` (+ `physics_playground.css`, `physics_playground.js`) je

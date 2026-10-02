@@ -14,6 +14,8 @@
     .veta-en { font-size: clamp(1.1rem, 4.2vw, 1.6rem); font-weight: 600; max-width: 620px; line-height: 1.5; }
     .veta-en .mezera { color: var(--accent); border-bottom: 2px dashed var(--accent); padding: 0 10px; }
     .situace { color: var(--text-muted); font-size: 0.95rem; max-width: 560px; line-height: 1.55; }
+    .dukaz-obrazek { width: min(100%, 360px); aspect-ratio: 1; object-fit: cover; border-radius: 14px;
+      border: 1px solid var(--border); box-shadow: 0 5px 18px #0002; }
     .tabulka { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; max-width: 720px;
       margin-top: 10px; color: var(--text-faint); font-size: 0.8rem; }
     .tabulka span { background: var(--bg-control); border: 1px solid var(--border); border-radius: 8px;
@@ -60,10 +62,18 @@ function odezvaEl() { const d = document.createElement('div'); d.className = 'od
 const SITUACE = [
   { cz: 'Telefon zvoní a ty se právě teď rozhodneš ho zvednout.',
     en: 'I <span class="mezera">?</span> answer it.', spravne: 'will', funkce: 'rozhodnuti' },
-  { cz: 'Už minulý týden jste koupili lístky do kina.',
-    en: 'We <span class="mezera">?</span> see a film tonight.', spravne: 'going to', funkce: 'plan' },
+  { cz: 'Dívka má koupené lístky a čeká na ni kamarádka před koncertem.',
+    en: 'She <span class="mezera">?</span> go to a concert.', spravne: 'going to', funkce: 'plan',
+    img: 'img/aj/aj7-going-to-koncert.webp', alt: 'Dívka s dvěma lístky přichází za kamarádkou na koncert.' },
   { cz: 'Na obloze jsou těžké černé mraky.',
-    en: 'It <span class="mezera">?</span> rain.', spravne: 'going to', funkce: 'dukaz' },
+    en: 'It <span class="mezera">?</span> rain.', spravne: 'going to', funkce: 'dukaz',
+    img: 'img/aj/aj7-going-to-mraky.webp', alt: 'Těžké bouřkové mraky nad městem při pohledu z okna.' },
+  { cz: 'Sklenice s vodou se naklání přes okraj stolu.',
+    en: 'The glass <span class="mezera">?</span> fall.', spravne: 'going to', funkce: 'dukaz',
+    img: 'img/aj/aj7-going-to-sklenice.webp', alt: 'Nakloněná sklenice s vodou padá přes okraj stolu.' },
+  { cz: 'Auto zastavilo a řidič zjistil, že v kanystru už nic není.',
+    en: 'The car <span class="mezera">?</span> run out of fuel.', spravne: 'going to', funkce: 'dukaz',
+    img: 'img/aj/aj7-going-to-nadrz.webp', alt: 'Řidič u zastaveného auta drží prázdný kanystr.' },
   { cz: 'Myslíš si, že v roce 2100 budou lidé žít na Marsu.',
     en: 'People <span class="mezera">?</span> live on Mars.', spravne: 'will', funkce: 'predpoved' },
   { cz: 'Slibuješ mamince, že umyješ nádobí.',
@@ -107,7 +117,8 @@ const SLOVESA = ['play tennis', 'visit London', 'buy a new phone', 'help you', '
 function volba() {
   const p = $('plocha');
   const s = Uloha.nahodne(SITUACE);
-  p.innerHTML = `<div class="situace">${s.cz}</div>
+  p.innerHTML = `${s.img ? `<img class="dukaz-obrazek" src="${s.img}" alt="${s.alt}" width="768" height="768">` : ''}
+    <div class="situace">${s.cz}</div>
     <div class="karta"><div class="veta-en">${s.en}</div></div>`;
   const odezva = odezvaEl();
   Uloha.vyber({
@@ -197,9 +208,10 @@ function zaporOtazka() {
 /* Tvar slovesa be podle podmětu, který stojí před mezerou ve větě. */
 function beTvar(veta) {
   const pred = veta.split('<span')[0].trim().split(/\s+/);
+  const celyPodmet = pred.join(' ').toLowerCase();
   const podmet = (pred[pred.length - 1] || '').toLowerCase();
   if (podmet === 'i') return 'am';
-  if (['he', 'she', 'it'].includes(podmet)) return 'is';
+  if (['he', 'she', 'it'].includes(podmet) || ['my sister', 'the glass', 'the car'].includes(celyPodmet)) return 'is';
   return 'are';
 }
 
@@ -210,6 +222,7 @@ function funkce() {
   const veta = s.en.replace('<span class="mezera">?</span>',
     s.spravne === 'will' ? 'will' : beTvar(s.en) + ' going to');
   p.innerHTML = `<div class="zadani">K čemu je budoucí čas v této větě použit?</div>
+    ${s.img ? `<img class="dukaz-obrazek" src="${s.img}" alt="${s.alt}" width="768" height="768">` : ''}
     <div class="karta"><div class="veta-en">${veta}</div>
       <div class="situace">${s.cz}</div></div>`;
   const odezva = odezvaEl();

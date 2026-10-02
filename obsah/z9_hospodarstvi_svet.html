@@ -14,6 +14,11 @@
   <style>
     .uloha-text { max-width: 640px; font-size: 1.02rem; line-height: 1.6; }
     .uloha-text b { color: var(--accent); }
+    .cesta-vyrobku { display:grid; grid-template-columns:repeat(auto-fit,minmax(145px,1fr)); gap:12px; margin:18px 0; }
+    .cesta-krok { margin:0; padding:8px; background:var(--bg-control); border:1px solid var(--border); border-radius:13px; }
+    .cesta-krok img { display:block; width:100%; aspect-ratio:1; object-fit:cover; border-radius:9px; }
+    .cesta-krok figcaption { padding-top:7px; color:var(--text-muted); line-height:1.35; }
+    .cesta-krok b { color:var(--accent); }
   </style>
 </head>
 <body>
@@ -33,6 +38,15 @@
     <button class="hlavni" id="btnDalsi">Přeskočit →</button>
     <span class="skore" id="skore"></span>
   </div>
+
+  <section aria-labelledby="cestaNadpis"><h2 id="cestaNadpis">Cesta mobilního telefonu kolem světa</h2><div class="cesta-vyrobku">
+    <figure class="cesta-krok"><img src="img/z/z9-vyrobek-dul.webp" alt="Povrchový důl s rypadlem a nákladními vozy." width="768" height="768" loading="lazy"><figcaption><b>1. Suroviny</b><br>Kovy se těží často daleko od místa prodeje.</figcaption></figure>
+    <figure class="cesta-krok"><img src="img/z/z9-vyrobek-tovarna.webp" alt="Výrobní linka mobilních telefonů." width="768" height="768" loading="lazy"><figcaption><b>2. Výroba</b><br>Součástky z více zemí se sestaví v továrně.</figcaption></figure>
+    <figure class="cesta-krok"><img src="img/z/z9-vyrobek-lod.webp" alt="Kontejnerová loď přepravující zboží." width="768" height="768" loading="lazy"><figcaption><b>3. Doprava</b><br>Loď přepraví velké množství zboží.</figcaption></figure>
+    <figure class="cesta-krok"><img src="img/z/z9-vyrobek-sklad.webp" alt="Distribuční sklad s paletami a vozíkem." width="768" height="768" loading="lazy"><figcaption><b>4. Sklad</b><br>Centrum rozdělí výrobky podle cíle.</figcaption></figure>
+    <figure class="cesta-krok"><img src="img/z/z9-vyrobek-obchod.webp" alt="Zákaznice vybírá telefon v prodejně." width="768" height="768" loading="lazy"><figcaption><b>5. Prodej</b><br>Obchod propojí výrobek se zákazníkem.</figcaption></figure>
+    <figure class="cesta-krok"><img src="img/z/z9-vyrobek-recyklace.webp" alt="Pracovníci rozebírají telefony v recyklačním závodě." width="768" height="768" loading="lazy"><figcaption><b>6. Recyklace</b><br>Z telefonu lze získat cenné materiály.</figcaption></figure>
+  </div></section>
 
   <p class="napoveda">Hospodářství dělíme na <b>primární</b> (zemědělství, těžba), <b>sekundární</b> (průmysl) a <b>terciární</b> (služby). Ve vyspělých zemích převažují <b>služby</b>. Globalizace propojila výrobu do dodavatelských řetězců přes celý svět.</p>
 

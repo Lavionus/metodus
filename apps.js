@@ -2388,6 +2388,44 @@ const KATALOG_SEKCE = [
         ]
       },
       {
+        "soubor": "obsah/zavity_lekce.html",
+        "nazev": "🔩 Závity a šrouby – názorná lekce",
+        "tagy": [
+          "fyzika",
+          "výklad",
+          "jednoduché stroje",
+          "závit",
+          "šroub",
+          "matice",
+          "šroubovice",
+          "nakloněná rovina",
+          "stoupání",
+          "rozteč",
+          "vícechodý závit",
+          "levý závit",
+          "metrický závit",
+          "zvedák",
+          "svěrák",
+          "zlaté pravidlo mechaniky",
+          "tření",
+          "samosvornost",
+          "účinnost",
+          "mikrometr",
+          "posuvné měřítko",
+          "závitová měrka",
+          "utahovací moment",
+          "momentový klíč",
+          "simulace",
+          "2. stupeň"
+        ],
+        "predmet": "f",
+        "rocniky": [
+          7,
+          8,
+          9
+        ]
+      },
+      {
         "soubor": "obsah/paka.html",
         "nazev": "⚖️ Páka a jednoduché stroje",
         "tagy": [
@@ -5024,6 +5062,7 @@ const KATALOG_CILE = {
   "obsah/physics_playground.html": "Nakreslím síly působící na těleso, vysvětlím setrvačnost a tření, řeknu, kdy se těleso na svahu rozjede, spočítám polohovou a pohybovou energii, změřím dobu kmitu kyvadla a vysvětlím, co se zachová při srážce.",
   "obsah/f6_vlastnosti_latek.html": "Rozliším látku a těleso, popíšu skupenství částicovým modelem a vysvětlím plavání těles.",
   "obsah/paka_lekce.html": "Spočítám moment síly a rovnováhu na páce, rozliším druhy pák a vysvětlím, proč kladkostroj, kolo na hřídeli, převody i nakloněná rovina šetří sílu, ale ne práci.",
+  "obsah/zavity_lekce.html": "Vysvětlím, proč je závit nakloněná rovina navinutá na válec, rozliším rozteč a stoupání, určím neznámý šroub měřítkem a závitovou měrkou, spočítám sílu na klice i utahovací moment, posoudím, zda šroub drží sám, a odečtu údaj na mikrometru.",
   "obsah/paka.html": "Najdu rovnováhu na páce, zvážím těleso na miskových vahách a vysvětlím, co ušetří kladka a ozubený převod.",
   "obsah/vrtacka_lis.html": "Vysvětlím, jak hydraulický lis znásobí sílu a proč vrtání závisí na materiálu a otáčkách.",
   "obsah/gravitacni_hriste2.html": "Pozoruji, jak se tělesa navzájem přitahují a obíhají společné těžiště.",
@@ -5506,6 +5545,7 @@ const KATALOG_RODINY = [
       "obsah/f7_sila.html",
       "obsah/physics_playground.html",
       "obsah/paka_lekce.html",
+      "obsah/zavity_lekce.html",
       "obsah/paka.html",
       "obsah/vrtacka_lis.html",
       "obsah/f7_tlak.html",

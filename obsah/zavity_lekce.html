@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🔩 Závity a šrouby – názorná lekce</title>
+<meta name="description" content="Interaktivní výklad pro 7. až 9. ročník: závit jako nakloněná rovina navinutá na válec, rozteč a stoupání, vícechodé a levé závity, síla na klice zvedáku, zlaté pravidlo mechaniky, tření a samosvornost, mikrometr a dílna se šroubovými stroji.">
+<link rel="stylesheet" href="../common.css">
+<link rel="stylesheet" href="paka_lekce.css?v=1">
+<link rel="stylesheet" href="zavity_lekce.css?v=2">
+<script src="../theme.js"></script>
+<script src="../podpis.js" defer></script>
+<script src="../kostra.js" defer></script>
+<script src="../uloha.js"></script>
+</head>
+<body>
+<div class="stranka">
+
+<aside class="osnova" aria-label="Kapitoly lekce">
+  <h2>Kapitoly</h2>
+  <ol id="osnova"></ol>
+  <div class="pokrok">
+    <span id="pokrokText">Splněno 0 úkolů</span>
+    <div class="pokrok-pruh" aria-hidden="true"><span id="pokrokPruh"></span></div>
+    <button type="button" class="znovu" id="zacitZnovu">↺ Začít lekci znovu</button>
+  </div>
+</aside>
+
+<main class="lekce">
+  <nav class="cipy" id="cipy" aria-label="Kapitoly lekce"></nav>
+
+  <header class="uvod">
+    <p class="nadtitul">Interaktivní výklad</p>
+    <h1>Závity a šrouby</h1>
+    <p class="podtitul">Jak může jedna ruka zvednout auto, proč se šroub v poličce sám nepovolí a jak se dá měřit na setiny milimetru? Za vším stojí nenápadný vynález: nakloněná rovina navinutá na válec. Každé pravidlo si ověříš na živém obrázku – a na konci si v dílně postavíš vlastní šroubový stroj.</p>
+  </header>
+
+  <ul class="jak-pracovat" aria-label="Jak s lekcí pracovat">
+    <li><svg viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="var(--accent)" stroke-width="2.5"/><circle cx="11" cy="11" r="2.5" fill="var(--accent)"/></svg> Za modré kroužky se dá táhnout (i šipkami na klávesnici).</li>
+    <li>🤔 Nejdřív předpověz, pak ověř na modelu.</li>
+    <li>🔬 Úkoly si samy poznají, že jsi je splnil(a).</li>
+    <li>📌 Rámeček „Zapamatuj si“ shrnuje to hlavní.</li>
+  </ul>
+  <p class="legenda" aria-label="Barvy v obrázcích"><span class="znacka z-sila">síla, kterou působíme</span><span class="znacka z-bremeno">břemeno, tíha</span><span class="znacka z-rameno">stoupání, rozteč</span><span class="znacka z-draha">obvod, dráha</span><span class="znacka z-treni">tření</span></p>
+
+  <nav class="mapa" id="mapa" aria-label="Mapa lekce"></nav>
+
+  <!-- ============================================================ 1 -->
+  <section class="kapitola" id="navin" data-faze="vyuka" data-nazev="Závit je nakloněná rovina" data-popis="Trojúhelník navinutý na tužku">
+    <header class="kap-hlava"><span class="kap-cislo">1</span><div><p class="kap-otazka">Co mají společného rampa ke korbě auta a šroub?</p><h2>Závit je navinutá nakloněná rovina</h2></div></header>
+    <div class="text">
+      <p>Z lekce o <a href="paka_lekce.html#rovina" data-lekce="obsah/paka_lekce.html">jednoduchých strojích</a> víš, že po <span class="term">nakloněné rovině</span> vyvalíš těžký sud menší silou, než kdybys ho zvedal(a) – jen musíš ujít delší cestu. Šroub dělá totéž, jen je jeho nakloněná rovina <strong>navinutá na válec</strong>.</p>
+      <p>Vyzkoušej si to: vystřihni z papíru pravoúhlý trojúhelník a obtoč ho kolem tužky tak, aby delší odvěsna šla kolem dokola. Přepona – šikmá strana – se změní v <span class="term">šroubovici</span>. Vyvýšený pásek, který se po válci takhle vine, se jmenuje <span class="term">závit</span>.</p>
+    </div>
+
+    <figure class="obr" id="obr-navin">
+      <div class="obr-plocha"><svg class="model" role="img" aria-label="Papírový trojúhelník a tužka, na kterou se navíjí"></svg></div>
+      <div class="obr-ovladani">
+        <label class="posuvnik">Stoupání <i>P</i> (výška trojúhelníku na jednu otáčku) <input type="range" id="nav-P" min="0.5" max="2.5" step="0.25" value="1.5"><output id="nav-P-h"></output></label>
+        <button type="button" id="nav-odvin">↺ Odvinout</button>
+      </div>
+      <div class="odecty"></div>
+      <div class="obr-zprava" role="status"></div>
+      <figcaption>Táhni kroužek pod trojúhelníkem doprava – papír se navine na tužku. Každá barva je jedna otáčka kolem tužky. Tužka je nakreslená 2× větší než trojúhelník. <span class="legenda"><span class="znacka z-draha">obvod tužky</span><span class="znacka z-rameno">stoupání</span></span></figcaption>
+    </figure>
+
+    <div class="ukol" data-ukol="nav-cely"><div class="ukol-hlava"><p><b>🔬 Úkol:</b> Naviň na tužku celý trojúhelník. Kolik závitů vzniklo?</p><span class="stav"></span></div><p class="ukol-reakce"></p></div>
+    <div class="predpoved" data-predpoved="nav-hustota"></div>
+    <div class="ukol" data-ukol="nav-mirny"><div class="ukol-hlava"><p><b>🔬 Úkol:</b> Nastav závit s úhlem stoupání menším než <b>10°</b> a naviň ho celý.</p><span class="stav"></span></div><p class="ukol-reakce"></p></div>
+
+    <div class="text">
+      <p>Když jeden závit zase „rozvineš“, dostaneš pravoúhlý trojúhelník. Jeho základna je <strong>obvod šroubu</strong> π · <i>d</i>, výška je <span class="term">stoupání</span> <i>P</i> – o tolik závit vystoupá za jednu otáčku. Úhel mezi nimi je <span class="term">úhel stoupání</span> α. Čím je menší, tím je nakloněná rovina mírnější.</p>
+    </div>
+    <div class="vzorec" aria-label="Jedna otáčka: základna pí krát d, výška P"><span>1 otáčka: základna π · <i>d</i>, výška <i>P</i></span><span class="vzorec-popis">rozvinutý závit je nakloněná rovina; <i>d</i> = průměr šroubu, <i>P</i> = stoupání</span></div>
+
+    <div class="fakty">
+      <div class="fakt"><b>asi 250 př. n. l.</b><span>Archimédův šroub – šroubovice v trubce – vynášel vodu na pole. Šroub je jedním z nejstarších strojů.</span></div>
+      <div class="fakt"><b>2–4°</b><span>je úhel stoupání běžných šroubů. Jejich nakloněná rovina je mnohem mírnější než jakákoli rampa.</span></div>
+      <div class="fakt"><b>1797</b><span>Henry Maudslay sestrojil soustruh, který řezal přesně stejné závity. Od té doby šrouby a matice pasují k sobě.</span></div>
+    </div>
+
+    <aside class="zapamatuj"><h3>📌 Zapamatuj si</h3>
+      <ul>
+        <li><strong>Závit</strong> je nakloněná rovina navinutá na válec. Jeho čára je <strong>šroubovice</strong>.</li>
+        <li><strong>Stoupání</strong> <i>P</i> = o kolik závit vystoupá za jednu otáčku.</li>
+        <li>Rozvinutá otáčka je pravoúhlý trojúhelník se základnou π · <i>d</i> a výškou <i>P</i>.</li>
+      </ul>
+    </aside>
+  </section>
+
+  <!-- ============================================================ 2 -->
+  <section class="kapitola" id="popis" data-faze="vyuka" data-nazev="Popis závitu" data-popis="Rozteč, chody, profil, levý">
+    <header class="kap-hlava"><span class="kap-cislo">2</span><div><p class="kap-otazka">Co znamená nápis M10×1,5 na sáčku se šrouby?</p><h2>Jak se závit popisuje</h2></div></header>
+    <div class="text">
+      <p>Šroub se závitem vidíš na obrázku z boku. Důležité jsou tyto pojmy:</p>
+      <ul>
+        <li><span class="term">velký průměr</span> <i>d</i> – průměr přes vrcholy závitu (podle něj se šroub jmenuje, M20 má 20 mm),</li>
+        <li><span class="term">malý průměr</span> <i>d</i><sub>1</sub> – průměr jádra na dně závitu,</li>
+        <li><span class="term">rozteč</span> <i>P</i> – vzdálenost dvou sousedních vrcholů,</li>
+        <li><span class="term">stoupání</span> <i>P</i><sub>h</sub> – o kolik se matice posune za jednu otáčku,</li>
+        <li><span class="term">profil</span> – tvar zubu v řezu (metrický trojúhelník 60°, lichoběžníkový 30°, oblý, plochý),</li>
+        <li><span class="term">smysl</span> – pravý (běžný) nebo levý závit.</li>
+      </ul>
+      <p>U obyčejného šroubu je rozteč stejná jako stoupání. Na válec ale můžeš navinout i dvě nebo tři šroubovice vedle sebe – vznikne <span class="term">vícechodý závit</span>. Matice se pak za otáčku posune o několik roztečí najednou.</p>
+    </div>
+    <div class="vzorec" aria-label="P h se rovná n krát P"><span><i>P</i><sub>h</sub> = <i>n</i> · <i>P</i></span><span class="vzorec-popis">stoupání = počet chodů · rozteč</span></div>
+
+    <figure class="obr" id="obr-profil">
+      <div class="obr-plocha"><svg class="model" role="img" aria-label="Šroub se závitem a maticí z boku"></svg></div>
+      <div class="obr-ovladani">
+        <div class="skupina"><span class="nazev">Profil:</span>
+          <div class="segment" id="pr-profil" role="group" aria-label="Profil závitu">
+            <button type="button" data-hodnota="M">metrický 60°</button><button type="button" data-hodnota="Tr">lichoběžníkový</button><button type="button" data-hodnota="Rd">oblý</button><button type="button" data-hodnota="Sq">plochý</button>
+          </div>
+        </div>
+        <label class="posuvnik">Rozteč <i>P</i> <input type="range" id="pr-P" min="1" max="6" step="0.5" value="2.5"><output id="pr-P-h"></output></label>
+        <div class="skupina"><span class="nazev">Chody:</span>
+          <div class="segment" id="pr-n" role="group" aria-label="Počet chodů">
+            <button type="button" data-hodnota="1">1</button><button type="button" data-hodnota="2">2</button><button type="button" data-hodnota="3">3</button>
+          </div>
+        </div>
+        <label class="prepinac"><input type="checkbox" id="pr-levy"> Levý závit (LH)</label>
+      </div>
+      <div class="obr-ovladani">
+        <span class="nazev-ovl">Matice:</span>
+        <button type="button" id="pr-cw">↻ Otočit po směru hodinových ručiček</button>
+        <button type="button" id="pr-ccw">↺ Otočit proti směru</button>
+        <button type="button" id="pr-vychozi">↺ Výchozí stav</button>
+      </div>
+      <div class="odecty"></div>
+      <div class="obr-zprava" role="status"></div>
+      <figcaption>Na matici se díváš od volného konce šroubu (zprava). U vícechodého závitu má každý chod svou barvu – sleduj, o kolik roztečí se matice posune. <span class="legenda"><span class="znacka z-rameno">rozteč</span><span class="znacka z-draha">stoupání</span></span></figcaption>
+    </figure>
+
+    <div class="ukol" data-ukol="pop-tr"><div class="ukol-hlava"><p><b>🔬 Úkol:</b> Nastav závit se značkou <b>Tr20×6(P3)</b>. Co v ní znamená které číslo?</p><span class="stav"></span></div><p class="ukol-reakce"></p></div>
+    <div class="ukol" data-ukol="pop-2chod"><div class="ukol-hlava"><p><b>🔬 Úkol:</b> Nastav dvouchodý závit a otoč maticí o celou otáčku. O kolik se posunula?</p><span class="stav"></span></div><p class="ukol-reakce"></p></div>
+    <div class="predpoved" data-predpoved="pop-levy"></div>
+
+    <div class="ukazka">
+      <h3>✍️ Pravidlo pravé ruky</h3>
+      <p>Běžný (pravý) šroub se <strong>utahuje po směru hodinových ručiček</strong> a povoluje proti němu – „doprava utahuj, doleva povoluj“. Když sevřeš pravou ruku v pěst a palec natáhneš ve směru, kam má šroub jít, prsty ukazují, kam ho točit.</p>
+    </div>
+
+    <details class="zvidave"><summary>🌍 Pro zvídavé: proč mají šrouby normy <small>Whitworth, metrické závity, palce</small></summary>
+      <div class="obsah text">
+        <p>Dřív si každá dílna řezala závity po svém a matice z jedné továrny nepasovala na šroub z druhé. Angličan Joseph Whitworth roku 1841 navrhl první jednotný systém (palcové závity s úhlem 55°). Dnes se v Evropě používají hlavně <strong>metrické závity ISO</strong> s úhlem 60°: M3, M4, M5, M6, M8, M10, M12… Každý průměr má normalizovanou „hrubou“ rozteč (M10 má 1,5 mm), a proto se na obyčejný šroub píše jen M10. Jemný závit se píše i s roztečí: M10×1,25. Trubky a vodovodní šroubení mají dodnes palcové závity (G ½").</p>
+      </div>
+    </details>
+
+    <aside class="zapamatuj"><h3>📌 Zapamatuj si</h3>
+      <ul>
+        <li><strong>Rozteč</strong> <i>P</i> = vzdálenost sousedních vrcholů, <strong>stoupání</strong> <i>P</i><sub>h</sub> = posun za otáčku. Platí <span class="m"><i>P</i><sub>h</sub> = <i>n</i> · <i>P</i></span>.</li>
+        <li>Značka <strong>M12×1,75</strong>: metrický závit, průměr 12 mm, rozteč 1,75 mm. <strong>LH</strong> = levý závit.</li>
+        <li>Pravý závit: utahuj po směru hodinových ručiček.</li>
+      </ul>
+    </aside>
+  </section>
+
+  <!-- ============================================================ 3 -->
+  <section class="kapitola" id="urci" data-faze="vyuka" data-nazev="Urči neznámý šroub" data-popis="Posuvné měřítko a závitová měrka">
+    <header class="kap-hlava"><span class="kap-cislo">3</span><div><p class="kap-otazka">Ztratila se matice. Jakou koupit?</p><h2>Urči neznámý šroub</h2></div></header>
+    <div class="text">
+      <p>Na šroubu značka často není. Velikost se proto zjistí měřením ve dvou krocích:</p>
+      <ol>
+        <li><span class="term">Posuvným měřítkem</span> změříš velký průměr přes vrcholy závitu. Skutečný šroub je o pár desetin milimetru tenčí, než říká značka (M10 měří asi 9,8 mm) – výsledek proto zaokrouhli <strong>nahoru</strong> na nejbližší velikost.</li>
+        <li><span class="term">Závitovou měrkou</span> – hřebínkem lístků s různou roztečí – zjistíš rozteč. Správný lístek zapadne do závitu bez mezer; na lístku je rozteč v milimetrech.</li>
+      </ol>
+    </div>
+
+    <div class="tabulka-obal">
+    <table class="srovnani" id="ur-tabulka">
+      <caption class="vzorec-popis" style="text-align:left;caption-side:top;padding-bottom:6px">Metrické závity s hrubou (běžnou) roztečí</caption>
+      <thead><tr><th>Značka</th><td>M4</td><td>M5</td><td>M6</td><td>M8</td><td>M10</td><td>M12</td><td>M16</td><td>M20</td></tr></thead>
+      <tbody><tr><th>Rozteč [mm]</th><td>0,7</td><td>0,8</td><td>1</td><td>1,25</td><td>1,5</td><td>1,75</td><td>2</td><td>2,5</td></tr></tbody>
+    </table>
+    </div>
+
+    <figure class="obr" id="obr-urci">
+      <div class="obr-plocha"><svg class="model" role="img" aria-label="Neznámý šroub, posuvné měřítko a závitová měrka"></svg></div>
+      <div class="obr-ovladani">
+        <div class="skupina"><span class="nazev">Lístek závitové měrky [mm]:</span>
+          <div class="segment" id="ur-list" role="group" aria-label="Lístek závitové měrky"></div>
+        </div>
+      </div>
+      <div class="obr-ovladani">
+        <div class="skupina"><span class="nazev">Je to šroub:</span>
+          <div class="volby-sroubu" id="ur-volby" role="group" aria-label="Velikost šroubu"></div>
+        </div>
+        <button type="button" id="ur-dalsi">🔄 Další šroub</button>
+      </div>
+      <div class="odecty"></div>
+      <div class="obr-zprava" role="status"></div>
+      <figcaption>Táhni horní čelist posuvného měřítka dolů, až dosedne na šroub. Pak zkoušej lístky měrky. Šrouby jsou nakreslené v různém zvětšení – měř, neodhaduj.</figcaption>
+    </figure>
+
+    <div class="ukol" data-ukol="ur-d"><div class="ukol-hlava"><p><b>🔬 Úkol:</b> Změř průměr šroubu posuvným měřítkem.</p><span class="stav"></span></div><p class="ukol-reakce"></p></div>
+    <div class="ukol" data-ukol="ur-merka"><div class="ukol-hlava"><p><b>🔬 Úkol:</b> Najdi lístek závitové měrky, který do závitu zapadne bez mezer.</p><span class="stav"></span></div><p class="ukol-reakce"></p></div>
+    <div class="ukol" data-ukol="ur-tri"><div class="ukol-hlava"><p><b>🔬 Úkol:</b> Urči správně tři různé šrouby.</p><span class="stav"></span></div><p class="ukol-reakce"></p></div>
+
+    <div class="ukazka" data-faze="ukazka" id="ur-priklad">
+      <h3>✍️ Řešený příklad</h3>
+      <p>Posuvné měřítko ukáže 7,82 mm, lístek 1,25 zapadne bez mezer. Jaký je to šroub a jakou matici koupit?</p>
+      <ol>
+        <li>Průměr zaokrouhlím nahoru: 7,82 mm → <strong>8 mm</strong> (šroub je o vůli tenčí).</li>
+        <li>V tabulce má M8 rozteč 1,25 mm – sedí s měrkou, jde o běžný hrubý závit.</li>
+        <li>Koupím matici <strong>M8</strong>. Kdyby měrka ukázala 1 mm, byl by to jemný závit M8×1 a obyčejná matice by nepasovala.</li>
+      </ol>
+    </div>
+
+    <aside class="zapamatuj"><h3>📌 Zapamatuj si</h3>
+      <ul>
+        <li>Průměr měř <strong>posuvným měřítkem</strong> přes vrcholy a zaokrouhli nahoru, rozteč zjisti <strong>závitovou měrkou</strong>.</li>
+        <li>Běžné rozteče: M6 – 1 mm, M8 – 1,25 mm, M10 – 1,5 mm, M12 – 1,75 mm.</li>
+      </ul>
+    </aside>
+  </section>
+
+  <!-- ============================================================ 4 -->
+  <section class="kapitola" id="sila" data-faze="vyuka" data-nazev="Šroub zvedá auto" data-popis="Síla na klice, zlaté pravidlo">
+    <header class="kap-hlava"><span class="kap-cislo">4</span><div><p class="kap-otazka">Jak může jedna ruka zvednout auto?</p><h2>Šroub zvedá auto – síla na klice</h2></div></header>
+    <div class="text">
+      <p>V zvedáku auta je svislý šroub v pevné matici. Když otáčíš klikou, šroub se točí a za každou otáčku vystoupá o stoupání <i>P</i><sub>h</sub>. Ruka na klice přitom opíše celý kruh – urazí dráhu <strong>2π<i>R</i></strong>, kde <i>R</i> je délka kliky.</p>
+      <p>Podle <span class="term">zlatého pravidla mechaniky</span> je (bez tření) práce ruky stejná jako práce, kterou šroub vykoná na břemenu. Pro jednu otáčku:</p>
+    </div>
+    <div class="vzorec" aria-label="F krát 2 pí R se rovná Q krát P h"><span><i>F</i> · 2π<i>R</i> = <i>Q</i> · <i>P</i><sub>h</sub></span><span class="vzorec-popis"><i>F</i> = síla ruky, <i>R</i> = délka kliky, <i>Q</i> = tíha břemene, <i>P</i><sub>h</sub> = stoupání (bez tření)</span></div>
+
+    <figure class="obr" id="obr-zvedak">
+      <div class="obr-plocha"><svg class="model" role="img" aria-label="Šroubový zvedák s klikou a rozvinutá otáčka závitu"></svg></div>
+      <div class="obr-ovladani">
+        <label class="posuvnik">Klika <i>R</i> <input type="range" id="zv-R" min="10" max="40" step="5" value="25"><output id="zv-R-h"></output></label>
+        <label class="posuvnik">Stoupání <i>P</i><sub>h</sub> <input type="range" id="zv-P" min="1" max="8" step="1" value="4"><output id="zv-P-h"></output></label>
+        <label class="posuvnik">Břemeno <i>Q</i> <input type="range" id="zv-Q" min="1000" max="15000" step="1000" value="10000"><output id="zv-Q-h"></output></label>
+        <label class="prepinac"><input type="checkbox" id="zv-treni"> Skutečný zvedák (tření)</label>
+        <label class="prepinac"><input type="checkbox" id="zv-prevys" checked> Převýšit nakloněnou rovinu</label>
+        <button type="button" id="zv-vychozi">↺ Spustit dolů</button>
+      </div>
+      <div class="odecty"></div>
+      <div class="obr-zprava" role="status"></div>
+      <figcaption>Otáčej držadlem kliky dokola (tažením nebo šipkami). Vpravo je táž otáčka rozvinutá do roviny: matice v závitu „jede do kopce“ po nakloněné rovině. Červená čárka na šroubu ukazuje, jak se točí. <span class="legenda"><span class="znacka z-sila">síla ruky F a síla po obvodu F₀</span><span class="znacka z-bremeno">tíha Q</span></span></figcaption>
+    </figure>
+
+    <div class="ukol" data-ukol="zv-auto"><div class="ukol-hlava"><p><b>🔬 Úkol:</b> Bez tření zvedni auto (<b>10 000 N</b>) aspoň o <b>1 cm</b> silou ruky nejvýš <b>30 N</b>.</p><span class="stav"></span></div><p class="ukol-reakce"></p></div>
+    <div class="predpoved" data-predpoved="zv-polovina"></div>
+    <div class="ukol" data-ukol="zv-treni"><div class="ukol-hlava"><p><b>🔬 Úkol:</b> Zapni tření (skutečný zvedák) a otoč klikou jednou dokola. Kolik procent práce jde opravdu do zvedání?</p><span class="stav"></span></div><p class="ukol-reakce"></p></div>
+
+    <div class="ukazka" data-faze="ukazka" id="zv-priklad">
+      <h3>✍️ Řešený příklad</h3>
+      <p>Zvedák má stoupání 4 mm a kliku 25 cm. Jakou silou zvedneš auto o tíze 10 000 N (bez tření)?</p>
+      <ol>
+        <li>Převedu na metry: <i>P</i><sub>h</sub> = 0,004 m, <i>R</i> = 0,25 m.</li>
+        <li>Dráha ruky za otáčku: 2π · 0,25 m ≈ 1,57 m.</li>
+        <li><i>F</i> = <i>Q</i> · <i>P</i><sub>h</sub> : (2π<i>R</i>) = 10 000 N · 0,004 m : 1,57 m ≈ <strong>25 N</strong>.</li>
+        <li>Síla je asi 390× menší než tíha auta. Na zvednutí o 10 cm ale musím klikou otočit 25×.</li>
+      </ol>
+    </div>
+
+    <aside class="zapamatuj"><h3>📌 Zapamatuj si</h3>
+      <ul>
+        <li>Za jednu otáčku urazí ruka <strong>2π<i>R</i></strong>, šroub se posune o <strong><i>P</i><sub>h</sub></strong>.</li>
+        <li>Bez tření <span class="m"><i>F</i> = <i>Q</i> · <i>P</i><sub>h</sub> / (2π<i>R</i>)</span>. Menší stoupání a delší klika = menší síla, ale víc otáček.</li>
+        <li>Tření sílu zvětší – skutečný zvedák má účinnost asi 30 %.</li>
+      </ul>
+    </aside>
+  </section>
+
+  <!-- ============================================================ 5 -->
+  <section class="kapitola" id="samosvornost" data-faze="vyuka" data-nazev="Tření a samosvornost" data-popis="Proč se šroub sám nepovolí">
+    <header class="kap-hlava"><span class="kap-cislo">5</span><div><p class="kap-otazka">Proč auto na zvedáku nespadne, když pustíš kliku?</p><h2>Tření a samosvornost</h2></div></header>
+    <div class="text">
+      <p>Matice v závitu leží na nakloněné rovině a tíha ji tlačí dolů. Sklouznout ji chce <strong>složka tíhy podél roviny</strong> <i>G</i> · sin α. Proti ní působí <span class="term">tření</span> – nejvýš <i>μ</i> · <i>G</i> · cos α, kde <i>μ</i> je součinitel tření.</p>
+      <p>Když je nakloněná rovina dost mírná, tření vyhraje a matice zůstane stát. Takový závit je <span class="term">samosvorný</span>: zatížený šroub se sám nepovolí. Hranicí je <span class="term">úhel tření</span> φ – úhel, při kterém obě síly vyjdou stejně.</p>
+    </div>
+    <div class="vzorec" aria-label="Samosvorný závit: alfa menší nebo rovno fí"><span>samosvorný závit: α ≤ φ</span><span class="vzorec-popis">α = úhel stoupání, φ = úhel tření (pro ocel na sucho asi 8,5°)</span></div>
+
+    <figure class="obr" id="obr-samo">
+      <div class="obr-plocha"><svg class="model" role="img" aria-label="Matice na nakloněné rovině a závit se stejným sklonem"></svg></div>
+      <div class="obr-ovladani">
+        <label class="posuvnik">Úhel stoupání α <input type="range" id="sa-a" min="1" max="40" step="1" value="12"><output id="sa-a-h"></output></label>
+        <div class="skupina"><span class="nazev">Povrch:</span>
+          <div class="segment" id="sa-mu" role="group" aria-label="Součinitel tření">
+            <button type="button" data-hodnota="0.05">ocel mazaná 0,05</button><button type="button" data-hodnota="0.1">ocel s olejem 0,10</button><button type="button" data-hodnota="0.15">ocel na sucho 0,15</button><button type="button" data-hodnota="0.3">dřevo 0,30</button>
+          </div>
+        </div>
+        <button type="button" id="sa-pust">▶️ Pustit matici</button>
+        <button type="button" id="sa-zpet">↺ Zpět nahoru</button>
+      </div>
+      <div class="odecty"></div>
+      <div class="obr-zprava" role="status"></div>
+      <figcaption>Nastav sklon a povrch a pusť matici. Pruhy pod rovinou porovnávají sklouzávací sílu s největším třením. Vpravo je závit se stejným úhlem stoupání. <span class="legenda"><span class="znacka z-bremeno">tíha G</span><span class="znacka z-draha">sklouzávací složka</span><span class="znacka z-treni">tření</span></span></figcaption>
+    </figure>
+
+    <div class="ukol" data-ukol="sa-hranice"><div class="ukol-hlava"><p><b>🔬 Úkol:</b> Ocel na sucho: najdi největší úhel, při kterém matice ještě drží, a nejmenší, při kterém už sjede. Vyzkoušej oba.</p><span class="stav"></span></div><p class="ukol-reakce"></p></div>
+    <div class="predpoved" data-predpoved="sa-olej"></div>
+    <div class="ukol" data-ukol="sa-m10"><div class="ukol-hlava"><p><b>🔬 Úkol:</b> Běžný šroub M10 má úhel stoupání asi <b>3°</b>. Vyzkoušej ho s olejem (μ = 0,10). Drží?</p><span class="stav"></span></div><p class="ukol-reakce"></p></div>
+
+    <details class="zvidave"><summary>🔧 Pro zvídavé: když samosvornost nestačí <small>otřesy, pojistné matice, kuličkové šrouby</small></summary>
+      <div class="obsah text">
+        <p>Otřesy (motor, jízda po kostkách) na okamžik uvolní tření a šroub se může po kouscích povolit. Proto se šrouby zajišťují <strong>pojistnou maticí</strong> s nylonovým kroužkem, <strong>pružnou podložkou</strong>, závlačkou nebo lepidlem na závity. Naopak tam, kde je potřeba co nejmenší tření (posuv stolu obráběcího stroje, elektrické posilovače řízení), se používají <strong>kuličkové šrouby</strong>: mezi šroubem a maticí se valí kuličky, účinnost je přes 90 % – ale samy nedrží, potřebují brzdu.</p>
+        <p>Nesamosvorný strmý závit má i <strong>vrtulka na provázku</strong> nebo starý <strong>„jankee“ šroubovák</strong>: zatlačíš podél osy a šroub se roztočí. Je to obrácený zvedák – posuv se mění v otáčení.</p>
+      </div>
+    </details>
+
+    <aside class="zapamatuj"><h3>📌 Zapamatuj si</h3>
+      <ul>
+        <li>Závit je <strong>samosvorný</strong>, když je úhel stoupání menší než úhel tření (α ≤ φ). Pak se pod zatížením sám nepovolí.</li>
+        <li>Mazání tření zmenší – strmý namazaný závit může začít sám prokluzovat.</li>
+        <li>Samosvorný závit má účinnost <strong>pod 50 %</strong>.</li>
+      </ul>
+    </aside>
+  </section>
+
+  <!-- ============================================================ 6 -->
+  <section class="kapitola" id="utah" data-faze="vyuka" data-nazev="Utahování" data-popis="Moment klíče a síla ve šroubu">
+    <header class="kap-hlava"><span class="kap-cislo">6</span><div><p class="kap-otazka">Proč se kola auta utahují klíčem, který cvaká?</p><h2>Utahování: moment a síla ve šroubu</h2></div></header>
+    <div class="text">
+      <p>Když utahuješ matici, působíš na klíč <span class="term">momentem síly</span> <i>M</i> = <i>F</i> · <i>r</i> (stejně jako u <a href="paka_lekce.html#moment" data-lekce="obsah/paka_lekce.html">páky</a>). Závit tento moment promění ve velkou sílu podél osy: šroub se natáhne jako tuhá pružina a stáhne desky k sobě. Této síle se říká <span class="term">předpětí</span>.</p>
+      <p>Zhruba platí, že předpětí je moment vydělený pětinou průměru šroubu. Šroub ale snese jen určitou sílu – nad <span class="term">mezí kluzu</span> se trvale natáhne a pak praskne. Proto má každá velikost šroubu svůj <strong>doporučený utahovací moment</strong>.</p>
+    </div>
+    <div class="vzorec" aria-label="Předpětí přibližně M lomeno 0,2 krát d"><span><i>F</i><sub>p</sub> ≈ <i>M</i> / (0,2 · <i>d</i>)</span><span class="vzorec-popis"><i>F</i><sub>p</sub> = síla ve šroubu, <i>M</i> = utahovací moment, <i>d</i> = průměr šroubu (v metrech); 0,2 zahrnuje tření v závitu a pod maticí</span></div>
+
+    <figure class="obr" id="obr-utah">
+      <div class="obr-plocha"><svg class="model" role="img" aria-label="Klíč na matici a řez sešroubovaným spojem s ukazatelem síly ve šroubu"></svg></div>
+      <div class="obr-ovladani">
+        <div class="skupina"><span class="nazev">Šroub:</span>
+          <div class="segment" id="ut-v" role="group" aria-label="Velikost šroubu">
+            <button type="button" data-hodnota="M6">M6</button><button type="button" data-hodnota="M8">M8</button><button type="button" data-hodnota="M10">M10</button><button type="button" data-hodnota="M12">M12</button><button type="button" data-hodnota="M16">M16</button>
+          </div>
+        </div>
+        <label class="posuvnik">Síla ruky <i>F</i> <input type="range" id="ut-F" min="20" max="400" step="10" value="200"><output id="ut-F-h"></output></label>
+        <button type="button" id="ut-utahni">🔧 Utáhnout</button>
+        <button type="button" id="ut-povol">↺ Povolit</button>
+      </div>
+      <div class="odecty"></div>
+      <div class="obr-zprava" role="status"></div>
+      <figcaption>Ruku posouvej po klíči (kroužek), sílu nastav posuvníkem a stiskni Utáhnout. Ukazatel vpravo dole ukazuje sílu ve šroubu vůči mezi kluzu. Šrouby jsou z oceli pevnosti 8.8. <span class="legenda"><span class="znacka z-sila">síla ruky</span><span class="znacka z-bremeno">svěrná síla</span></span></figcaption>
+    </figure>
+
+    <div class="ukol" data-ukol="ut-kolo"><div class="ukol-hlava"><p><b>🔬 Úkol:</b> Utáhni šroub <b>M12</b> (jako u kola auta) správně – ne málo, ne moc.</p><span class="stav"></span></div><p class="ukol-reakce"></p></div>
+    <div class="predpoved" data-predpoved="ut-m6"></div>
+    <div class="ukol" data-ukol="ut-m8"><div class="ukol-hlava"><p><b>🔬 Úkol:</b> Utáhni správně šroub <b>M8</b> silou nejvýš <b>100 N</b>. Jak dlouhý klíč stačí?</p><span class="stav"></span></div><p class="ukol-reakce"></p></div>
+
+    <div class="ukazka" data-faze="ukazka" id="ut-priklad">
+      <h3>✍️ Řešený příklad</h3>
+      <p>Šroub M10 se má utáhnout momentem 49 N·m. Klíč je dlouhý 25 cm. Jakou silou táhneš a jak velké je předpětí?</p>
+      <ol>
+        <li><i>F</i> = <i>M</i> : <i>r</i> = 49 N·m : 0,25 m ≈ <strong>196 N</strong> (jako zvednout 20 kg).</li>
+        <li><i>F</i><sub>p</sub> ≈ <i>M</i> : (0,2 · <i>d</i>) = 49 : (0,2 · 0,010) = <strong>24 500 N</strong> ≈ 24,5 kN.</li>
+        <li>Ruka táhne silou kolem 200 N, šroub ale svírá desky silou jako 2,5 tuny – díky páce klíče a nakloněné rovině závitu.</li>
+      </ol>
+    </div>
+
+    <aside class="zapamatuj"><h3>📌 Zapamatuj si</h3>
+      <ul>
+        <li>Utahovací moment <span class="m"><i>M</i> = <i>F</i> · <i>r</i></span>; závit ho promění ve velkou sílu ve šroubu (předpětí).</li>
+        <li>Málo utažený šroub se povolí, přetažený praskne. Důležité šrouby se utahují <strong>momentovým klíčem</strong>.</li>
+        <li>Doporučené momenty (8.8): M6 ≈ 10 N·m, M8 ≈ 25 N·m, M10 ≈ 49 N·m, M12 ≈ 85 N·m.</li>
+      </ul>
+    </aside>
+  </section>
+
+  <!-- ============================================================ 7 -->
+  <section class="kapitola" id="mikrometr" data-faze="vyuka" data-nazev="Mikrometr" data-popis="Šroub měří na setiny mm">
+    <header class="kap-hlava"><span class="kap-cislo">7</span><div><p class="kap-otazka">Jak změřit tloušťku vlasu?</p><h2>Šroub měří: mikrometr</h2></div></header>
+    <div class="text">
+      <p>Zvedák mění velkou dráhu ruky v malý posun šroubu, a proto šetří sílu. Stejný jev se dá využít i k <strong>přesnému měření</strong>. <span class="term">Mikrometr</span> má závit se stoupáním <strong>0,5 mm</strong>. Na <span class="term">bubínku</span>, kterým otáčíš, je 50 dílků – jeden dílek tedy posune vřeteno o 0,5 mm : 50 = <strong>0,01 mm</strong>.</p>
+      <p>Údaj se čte ve dvou krocích: na <span class="term">objímce</span> odečteš milimetry nad linkou a případně půlmilimetrovou čárku pod linkou, na bubínku pak setiny – dílek, který je přesně u podélné linky.</p>
+    </div>
+    <div class="vzorec" aria-label="Údaj se rovná objímka plus dílky bubínku krát 0,01 mm"><span>údaj = objímka + dílky bubínku · 0,01 mm</span><span class="vzorec-popis">objímka: celé milimetry (nad linkou) a půlmilimetry (pod linkou)</span></div>
+
+    <figure class="obr" id="obr-mikro">
+      <div class="obr-plocha"><svg class="model" role="img" aria-label="Mikrometr s objímkou a bubínkem"></svg></div>
+      <div class="mi-lupa"><span class="nazev-ovl">🔍 Lupa</span><svg id="mi-lupa" class="model" role="img" aria-label="Zvětšená stupnice mikrometru u čtecí linky"></svg></div>
+      <div class="obr-ovladani">
+        <button type="button" id="mi-o-minus">⟲ −1 otáčka</button>
+        <button type="button" id="mi-d-minus">−1 dílek</button>
+        <button type="button" id="mi-d-plus">+1 dílek</button>
+        <button type="button" id="mi-o-plus">⟳ +1 otáčka</button>
+        <label class="prepinac"><input type="checkbox" id="mi-predmet"> Vložit součástku a změřit ji</label>
+      </div>
+      <div class="obr-ovladani mi-mereni" id="mi-mereni" hidden>
+        <label>Součástka měří <input type="text" id="mi-hodnota" inputmode="decimal" autocomplete="off" size="7" placeholder="0,00"> mm</label>
+        <button type="button" id="mi-over">✔️ Zkontrolovat</button>
+        <span class="mi-vysledek" id="mi-vysledek" aria-live="polite"></span>
+      </div>
+      <div class="odecty"></div>
+      <div class="obr-zprava" role="status"></div>
+      <figcaption>Kroužkem pod bubínkem posouváš vřeteno nahrubo, tlačítky (nebo šipkami ←→) po jednom dílku, šipkami ↑↓ po celé otáčce.</figcaption>
+    </figure>
+
+    <div class="ukazka" data-faze="ukazka" id="mi-priklad">
+      <h3>✍️ Řešený příklad</h3>
+      <p>Nad linkou objímky je vidět čárka 6 mm, pod linkou ještě půlmilimetrová čárka. U linky je na bubínku dílek 23. Kolik mikrometr ukazuje?</p>
+      <ol>
+        <li>Objímka: 6 mm + 0,5 mm = 6,5 mm.</li>
+        <li>Bubínek: 23 dílků · 0,01 mm = 0,23 mm.</li>
+        <li>Údaj: 6,5 + 0,23 = <strong>6,73 mm</strong>. Bez půlmilimetrové čárky by to bylo 6,23 mm.</li>
+      </ol>
+    </div>
+    <div class="predpoved" data-predpoved="mi-dilek"></div>
+    <div class="ukol" data-ukol="mi-738"><div class="ukol-hlava"><p><b>🔬 Úkol:</b> Nastav na mikrometru <b>7,38 mm</b>.</p><span class="stav"></span></div><p class="ukol-reakce"></p></div>
+    <div class="ukol" data-ukol="mi-1287"><div class="ukol-hlava"><p><b>🔬 Úkol:</b> Nastav <b>12,87 mm</b>. Pozor na půlmilimetrovou čárku pod linkou.</p><span class="stav"></span></div><p class="ukol-reakce"></p></div>
+    <div class="ukol" data-ukol="mi-zmer"><div class="ukol-hlava"><p><b>🔬 Úkol:</b> Vlož součástku, dotoč vřeteno až k ní a zapiš, kolik měří.</p><span class="stav"></span></div><p class="ukol-reakce"></p></div>
+
+    <aside class="zapamatuj"><h3>📌 Zapamatuj si</h3>
+      <ul>
+        <li>Mikrometr: stoupání 0,5 mm, bubínek 50 dílků → <strong>1 dílek = 0,01 mm</strong>.</li>
+        <li>Nezapomeň na <strong>půlmilimetrovou čárku</strong> pod linkou objímky.</li>
+        <li>Malé stoupání = jemný a přesný posun. Stejně se ostří mikroskop nebo dalekohled.</li>
+      </ul>
+    </aside>
+  </section>
+
+  <!-- ============================================================ 8 -->
+  <section class="kapitola" id="hriste" data-faze="vyuka" data-nazev="Dílna – hřiště" data-popis="Postav si šroubový stroj">
+    <header class="kap-hlava"><span class="kap-cislo">8</span><div><p class="kap-otazka">Zvládneš navrhnout šroub, který udělá přesně to, co potřebuješ?</p><h2>Dílna se závity – hřiště</h2></div></header>
+    <div class="text">
+      <p>Tady můžeš měnit všechno: průměr šroubu, rozteč, počet chodů, délku kliky, zatížení i tření. Začni od hotového stroje a pak zkus splnit výzvy. Tlačítko <b>Pustit kliku</b> ukáže, jestli šroub drží sám.</p>
+    </div>
+
+    <figure class="obr" id="obr-dilna">
+      <div class="obr-plocha"><svg class="model" role="img" aria-label="Šroubový stroj podle nastavení a rozvinutá otáčka závitu"></svg></div>
+      <div class="obr-ovladani">
+        <div class="skupina"><span class="nazev">Stroj:</span>
+          <div class="segment" id="hr-stroj" role="group" aria-label="Hotový stroj">
+            <button type="button" data-hodnota="zvedak">zvedák auta</button><button type="button" data-hodnota="sverak">svěrák</button><button type="button" data-hodnota="lis">lis na ovoce</button><button type="button" data-hodnota="rychlo">rychloupínák</button>
+          </div>
+        </div>
+      </div>
+      <div class="obr-ovladani">
+        <label class="posuvnik">Průměr <i>d</i> <input type="range" id="hr-d" min="8" max="40" step="2" value="20"><output id="hr-d-h"></output></label>
+        <label class="posuvnik">Rozteč <i>P</i> <input type="range" id="hr-P" min="0.5" max="10" step="0.5" value="4"><output id="hr-P-h"></output></label>
+        <div class="skupina"><span class="nazev">Chody:</span>
+          <div class="segment" id="hr-n" role="group" aria-label="Počet chodů">
+            <button type="button" data-hodnota="1">1</button><button type="button" data-hodnota="2">2</button><button type="button" data-hodnota="3">3</button><button type="button" data-hodnota="4">4</button>
+          </div>
+        </div>
+        <label class="posuvnik">Klika <i>R</i> <input type="range" id="hr-R" min="5" max="40" step="1" value="25"><output id="hr-R-h"></output></label>
+        <label class="posuvnik">Zatížení <i>Q</i> <input type="range" id="hr-Q" min="100" max="15000" step="100" value="10000"><output id="hr-Q-h"></output></label>
+        <div class="skupina"><span class="nazev">Tření:</span>
+          <div class="segment" id="hr-mu" role="group" aria-label="Součinitel tření">
+            <button type="button" data-hodnota="0">žádné</button><button type="button" data-hodnota="0.05">0,05</button><button type="button" data-hodnota="0.1">0,10</button><button type="button" data-hodnota="0.15">0,15</button><button type="button" data-hodnota="0.3">0,30</button>
+          </div>
+        </div>
+        <label class="prepinac"><input type="checkbox" id="hr-prevys" checked> Převýšit nakloněnou rovinu</label>
+        <button type="button" id="hr-pust">🖐️ Pustit kliku</button>
+        <button type="button" id="hr-vychozi">↺ Na začátek</button>
+      </div>
+      <div class="odecty"></div>
+      <div class="obr-zprava" role="status"></div>
+      <figcaption>Otáčej držadlem kliky. Vpravo je jedna otáčka rozvinutá do roviny – sleduj, jak se mění její sklon, když měníš průměr, rozteč a chody. <span class="legenda"><span class="znacka z-sila">síla ruky</span><span class="znacka z-bremeno">zatížení Q</span></span></figcaption>
+    </figure>
+
+    <h3>🏆 Výzvy</h3>
+    <div class="ukol" data-ukol="hr-sverak"><div class="ukol-hlava"><p><b>Výzva 1 – svěrák:</b> Sevři dřevo silou aspoň <b>3000 N</b>, ruka smí působit nejvýš <b>50 N</b>. Tření nech aspoň <b>0,10</b> a šroub musí držet sám. Pak otoč klikou aspoň jednou dokola.</p><span class="stav"></span></div><p class="ukol-reakce"></p></div>
+    <div class="ukol" data-ukol="hr-rychly"><div class="ukol-hlava"><p><b>Výzva 2 – rychloupínák:</b> Postav závit, který posune šroub aspoň o <b>2 cm za otáčku</b>, a otoč klikou. Drží sám?</p><span class="stav"></span></div><p class="ukol-reakce"></p></div>
+    <div class="predpoved" data-predpoved="hr-50"></div>
+    <div class="ukol" data-ukol="hr-ucinnost"><div class="ukol-hlava"><p><b>Výzva 3 – účinnost:</b> Najdi závit s účinností nad <b>50 %</b> (tření nesmí být vypnuté).</p><span class="stav"></span></div><p class="ukol-reakce"></p></div>
+
+    <aside class="zapamatuj"><h3>📌 Zapamatuj si</h3>
+      <ul>
+        <li>Sílu zmenší <strong>menší stoupání</strong> nebo <strong>delší klika</strong> – za cenu většího počtu otáček.</li>
+        <li><strong>Vícechodý závit</strong> posouvá rychle, ale je strmý: potřebuje větší sílu a často sám nedrží.</li>
+        <li>Konstruktér volí mezi <strong>samosvorností</strong> (zvedák, svěrák) a <strong>účinností</strong> (kuličkový šroub).</li>
+      </ul>
+    </aside>
+  </section>
+
+  <!-- ============================================================ 9 -->
+  <section class="kapitola" id="kolem" data-faze="vyuka" data-nazev="Závity kolem nás" data-popis="K čemu všemu závit slouží">
+    <header class="kap-hlava"><span class="kap-cislo">9</span><div><p class="kap-otazka">Kolik závitů máš doma?</p><h2>Závity kolem nás</h2></div></header>
+    <div class="text">
+      <p>Závit umí čtyři různé věci. Roztřiď předměty podle toho, k čemu v nich závit hlavně slouží.</p>
+    </div>
+    <div class="tridicka" id="tridicka"></div>
+    <p class="tridicka-stav" id="tridicka-stav" aria-live="polite"></p>
+    <div class="ukol" data-ukol="kol-tridicka"><div class="ukol-hlava"><p><b>🔬 Úkol:</b> Roztřiď správně všech deset předmětů.</p><span class="stav"></span></div><p class="ukol-reakce"></p></div>
+
+    <h3>Kde ještě najdeš závit</h3>
+    <div class="pristroje">
+      <article class="pristroj">
+        <svg viewBox="0 0 240 76" class="ikona" aria-hidden="true"><path d="M90 4 Q120 -6 150 4 Q170 20 150 40 H90 Q70 20 90 4Z" class="sklo"/><rect x="98" y="40" width="44" height="30" class="kov"/><path d="M98 46 L142 52 M98 56 L142 62 M98 66 L142 70" class="cara c-text"/></svg>
+        <h3>💡 Žárovka</h3>
+        <p>Patice E27 má <strong>oblý závit</strong>, který se snadno vyrábí z tenkého plechu a nevadí mu nečistoty.</p>
+      </article>
+      <article class="pristroj">
+        <svg viewBox="0 0 240 76" class="ikona" aria-hidden="true"><circle cx="70" cy="40" r="30" fill="none" class="cara silna c-kov"/><path d="M70 40 L150 40" class="cara silna c-kov"/><rect x="150" y="30" width="60" height="20" rx="4" class="kov-tmavy"/><path d="M60 40 h20" class="cara silna c-chod1"/></svg>
+        <h3>🚲 Levý pedál</h3>
+        <p>Má <strong>levý závit</strong>. Šlapáním by se pravý závit na levé straně postupně povoloval, levý se naopak dotahuje.</p>
+      </article>
+      <article class="pristroj">
+        <svg viewBox="0 0 240 76" class="ikona" aria-hidden="true"><rect x="96" y="20" width="48" height="54" rx="12" class="vicko"/><rect x="108" y="6" width="24" height="16" class="kov"/><path d="M108 10 L132 14 M108 16 L132 20" class="cara tenka c-text"/></svg>
+        <h3>🔥 Plynové lahve</h3>
+        <p>Ventily lahví s hořlavým plynem mají <strong>levý závit</strong>, aby se nedaly omylem připojit k zařízení pro kyslík.</p>
+      </article>
+      <article class="pristroj">
+        <svg viewBox="0 0 240 76" class="ikona" aria-hidden="true"><rect x="40" y="30" width="160" height="16" class="kov"/><path d="M50 30 L58 46 M64 30 L72 46 M78 30 L86 46 M92 30 L100 46 M106 30 L114 46 M120 30 L128 46 M134 30 L142 46 M148 30 L156 46 M162 30 L170 46 M176 30 L184 46" class="cara c-chod1"/><path d="M200 38 l20 -12 v24z" class="kov-tmavy"/></svg>
+        <h3>🪛 Vrták</h3>
+        <p>Šroubovité drážky vrtáku fungují jako Archimédův šroub: <strong>vynášejí třísky</strong> z díry ven.</p>
+      </article>
+    </div>
+
+    <aside class="zapamatuj"><h3>📌 Zapamatuj si</h3>
+      <ul>
+        <li>Závit <strong>spojuje</strong> (vrut, šroub s maticí, víčko), <strong>znásobuje sílu</strong> (zvedák, svěrák, lis), <strong>přesně posouvá</strong> (mikrometr, mikroskop) a <strong>dopravuje</strong> (Archimédův šroub, mlýnek, vrták).</li>
+        <li>Levý závit se používá tam, kde by se pravý sám povoloval, nebo kvůli bezpečnosti.</li>
+      </ul>
+    </aside>
+  </section>
+
+  <!-- ============================================================ tahák -->
+  <section class="kapitola" id="tahak" data-faze="tahak" data-nazev="Tahák" data-popis="Všechno na jedné stránce" data-zvlast>
+    <header class="kap-hlava"><span class="kap-cislo">📌</span><div><p class="kap-otazka">Všechno podstatné na jedné stránce</p><h2>Tahák – závity a šrouby</h2></div></header>
+    <div class="tahak-mrizka">
+      <div class="tahak-karta"><h3>Co je závit</h3>
+        <svg viewBox="0 0 300 110" class="ikona" aria-hidden="true"><path d="M20 96 L170 96 L170 30Z" class="papir"/><path d="M20 96 L170 30" class="cara silna c-chod1"/><path d="M20 104 H170" class="cara tenka c-draha"/><text x="95" y="108" text-anchor="middle" font-size="12" fill="var(--m-draha)">π · d</text><path d="M180 96 V30" class="cara tenka c-rameno"/><text x="186" y="68" font-size="12" fill="var(--m-rameno)">P</text><rect x="230" y="12" width="36" height="90" class="drevo"/><path d="M230 92 L266 80 M230 70 L266 58 M230 48 L266 36 M230 26 L266 14" class="cara silna c-chod1"/></svg>
+        <ul><li>Nakloněná rovina navinutá na válec.</li><li>Jedna otáčka: základna π · <i>d</i>, výška <i>P</i>.</li></ul></div>
+      <div class="tahak-karta"><h3>Popis závitu</h3><p class="m" style="font-size:1.1rem"><i>P</i><sub>h</sub> = <i>n</i> · <i>P</i></p><ul><li><i>d</i> velký průměr, <i>d</i><sub>1</sub> malý průměr.</li><li><i>P</i> rozteč, <i>P</i><sub>h</sub> stoupání, <i>n</i> chody.</li><li>M12×1,75 · Tr24×10(P5) · LH = levý.</li></ul></div>
+      <div class="tahak-karta"><h3>Síla na klice</h3><p class="m" style="font-size:1.1rem"><i>F</i> · 2π<i>R</i> = <i>Q</i> · <i>P</i><sub>h</sub></p><ul><li>Bez tření; s třením je síla větší.</li><li>Menší stoupání, delší klika → menší síla, víc otáček.</li></ul></div>
+      <div class="tahak-karta"><h3>Samosvornost</h3><p class="m" style="font-size:1.1rem">α ≤ φ</p><ul><li>Úhel stoupání menší než úhel tření → šroub drží sám.</li><li>Samosvorný závit: účinnost pod 50 %.</li></ul></div>
+      <div class="tahak-karta"><h3>Šrouby v praxi</h3><ul><li>Průměr: posuvné měřítko, zaokrouhlit nahoru. Rozteč: závitová měrka.</li><li>M6/1 · M8/1,25 · M10/1,5 · M12/1,75 mm.</li><li>Utahování: <i>M</i> = <i>F</i> · <i>r</i>, předpětí <i>F</i><sub>p</sub> ≈ <i>M</i> / (0,2 · <i>d</i>); M8 ≈ 25 N·m, M12 ≈ 85 N·m.</li></ul></div>
+      <div class="tahak-karta"><h3>Mikrometr</h3><ul><li>Stoupání 0,5 mm, bubínek 50 dílků → 1 dílek = 0,01 mm.</li><li>Údaj = objímka (mm + půlmm pod linkou) + dílky · 0,01 mm.</li></ul></div>
+      <div class="tahak-karta"><h3>Pravý a levý</h3><ul><li>Pravý (běžný): utahuj po směru hodinových ručiček.</li><li>Levý (LH): obráceně – levý pedál, plynové lahve.</li></ul></div>
+    </div>
+  </section>
+
+  <!-- ============================================================ procvič -->
+  <section class="kapitola" id="procvic" data-faze="procvic" data-nazev="Procvič" data-popis="Otázky napříč lekcí" data-zvlast>
+    <header class="kap-hlava"><span class="kap-cislo">✏️</span><div><p class="kap-otazka">Otázky se pokaždé vygenerují znovu, s jinými čísly.</p><h2>Procvič si závity</h2></div></header>
+    <div class="cviceni">
+      <div class="cviceni-hlava">
+        <div class="temata" id="cv-temata" role="group" aria-label="Téma otázek"></div>
+      </div>
+      <div class="karta-otazky">
+        <div id="plocha">
+          <p class="tema" id="cv-tema"></p>
+          <p class="zadani" id="cv-zadani" tabindex="-1"></p>
+          <div class="obrazek" id="cv-obrazek" hidden></div>
+          <div id="cv-moznosti"></div>
+          <p class="odezva" id="cv-odezva"></p>
+        </div>
+        <div class="napoveda" id="cv-napoveda" hidden></div>
+        <div class="ovladani cviceni-ovladani">
+          <button type="button" id="btnNapoveda">💡 Nápověda</button>
+          <button type="button" id="btnDalsi">Přeskočit →</button>
+          <span class="skore" id="cv-skore"></span>
+        </div>
+      </div>
+      <p class="vzorec-popis">Na odpověď můžeš klepnout, nebo zmáčknout klávesu 1–4. Po chybě se ukáže, v čem je záměna, a můžeš to zkusit znovu – do skóre se počítá jen odpověď napoprvé.</p>
+    </div>
+
+    <details class="zvidave" id="pro-ucitele"><summary>👩‍🏫 Pro učitele <small>scénáře hodin, pokusy a časté omyly</small></summary>
+      <div class="obsah text">
+        <p><strong>5 minut (motivace):</strong> kapitola 1 – každý žák si z papíru vystřihne trojúhelník a navine ho na tužku; pak totéž na modelu. Otázka: kde jinde je „schovaná“ nakloněná rovina?</p>
+        <p><strong>15 minut (praktické činnosti):</strong> kapitola 3 – každá dvojice dostane krabičku se šrouby, posuvné měřítko a závitovou měrku a určí velikosti; pak na modelu kapitoly 6 zkusí, proč se malý šroub nesmí utahovat jako velký.</p>
+        <p><strong>15 minut (síla):</strong> kapitola 4 – zvedák. Třída hlasuje v předpovědi o polovičním stoupání, dvojice plní úkol „auto silou 30 N“. Řešený příklad do sešitu.</p>
+        <p><strong>45 minut (celé téma):</strong> 7 min navinutí (kap. 1) → 8 min popis a značky (kap. 2) → 10 min zvedák a zlaté pravidlo (kap. 4) → 8 min samosvornost (kap. 5) → 7 min podle zaměření: určení šroubu a utahování (kap. 3 a 6, praktické činnosti), mikrometr (kap. 7) nebo výzvy v dílně (kap. 8) → 5 min Ověř se. Tahák lze vytisknout jako zápis.</p>
+        <p><strong>Časté omyly, na které lekce cíleně míří:</strong></p>
+        <ul>
+          <li>„Rozteč a stoupání je totéž“ – jen u jednochodého závitu (úkol s dvouchodým závitem).</li>
+          <li>„Hustší závit potřebuje větší sílu“ – je to naopak, hustší závit je mírnější nakloněná rovina (předpověď v kap. 4).</li>
+          <li>„Šroub drží, protože je pevně utažený“ – drží díky tření a malému úhlu stoupání (kap. 5).</li>
+          <li>„Namazaný šroub drží lépe“ – mazání tření zmenší (předpověď v kap. 5).</li>
+          <li>„Čím víc utáhnu, tím líp“ – přetažený šroub praskne (předpověď v kap. 6).</li>
+          <li>Při čtení mikrometru se zapomíná na půlmilimetrovou čárku (úkol 12,87 mm).</li>
+        </ul>
+        <p><strong>Pokusy do třídy:</strong> papírový trojúhelník a tužka; dlouhý šroub M10 a matice – žáci počítají otáčky na posun o 1 cm; svěrák a siloměr na rukojeti; skutečný mikrometr a měření listu papíru (asi 0,1 mm) nebo vlasu.</p>
+      </div>
+    </details>
+  </section>
+
+  <div data-kostra-zapati></div>
+</main>
+</div>
+
+<script src="zavity_lekce.js?v=3"></script>
+</body>
+</html>

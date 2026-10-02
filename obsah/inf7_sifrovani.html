@@ -23,6 +23,10 @@
       letter-spacing: 0.08em; }
     .uloha-text { max-width: 640px; font-size: 1.02rem; line-height: 1.6; }
     .uloha-text b { color: var(--accent); }
+    .komprese-obraz { width:min(760px,100%); margin:18px auto; }
+    .komprese-obraz canvas { display:block; width:100%; aspect-ratio:3/2; border-radius:14px; image-rendering:pixelated; background:#ddd; }
+    .komprese-obraz input { width:100%; margin-top:10px; }
+    .komprese-obraz figcaption { color:var(--text-muted); line-height:1.5; }
   </style>
 </head>
 <body>
@@ -43,6 +47,12 @@
     <span class="skore" id="skore"></span>
   </div>
 
+  <section aria-labelledby="kompreseObrazNadpis"><h2 id="kompreseObrazNadpis">Co udělá komprese s obrázkem?</h2><figure class="komprese-obraz">
+    <canvas id="kompreseCanvas" width="1152" height="768" role="img" aria-label="Náhled horské krajiny při zvolené úrovni obrazové kvality"></canvas>
+    <input id="kvalitaObrazu" type="range" min="8" max="100" value="100" aria-label="Kvalita obrázku v procentech">
+    <figcaption id="kvalitaPopis" aria-live="polite">Kvalita 100 % – plné rozlišení, všechny jemné detaily.</figcaption>
+  </figure></section>
+
   <p class="napoveda">
     <b>Šifrování</b> mění text tak, aby ho nepovolaný nepřečetl – potřebuje klíč.
     <b>Kódování</b> jen převádí zápis do jiné podoby (třeba písmeno na číslo) a klíč nepotřebuje.
@@ -54,6 +64,24 @@ const $ = id => document.getElementById(id);
 const skore = Uloha.skore('metodus_inf7_sifrovani', $('skore'));
 let rezim = 'zasifruj';
 function odezvaEl() { const d = document.createElement('div'); d.className = 'odezva'; return d; }
+
+const kompreseImg = new Image();
+kompreseImg.src = 'img/inf/inf7-komprese-krajina.webp';
+function kresliKomprimovanyObraz() {
+  if (!kompreseImg.complete || !kompreseImg.naturalWidth) return;
+  const q = Number($('kvalitaObrazu').value);
+  const c = $('kompreseCanvas'), ctx = c.getContext('2d');
+  const w = Math.max(24, Math.round(c.width * q / 100));
+  const h = Math.max(16, Math.round(c.height * q / 100));
+  const pomocny = document.createElement('canvas'); pomocny.width = w; pomocny.height = h;
+  pomocny.getContext('2d').drawImage(kompreseImg, 0, 0, w, h);
+  ctx.imageSmoothingEnabled = false; ctx.clearRect(0, 0, c.width, c.height);
+  ctx.drawImage(pomocny, 0, 0, c.width, c.height);
+  const podil = Math.max(1, Math.round(q * q / 100));
+  $('kvalitaPopis').textContent = `Kvalita ${q} % – přibližně ${podil} % obrazových bodů oproti originálu.`;
+}
+kompreseImg.addEventListener('load', kresliKomprimovanyObraz);
+$('kvalitaObrazu').addEventListener('input', kresliKomprimovanyObraz);
 
 const ABECEDA = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 /* Caesarova šifra pracuje s abecedou bez diakritiky, proto slova volíme bez háčků a čárek. */

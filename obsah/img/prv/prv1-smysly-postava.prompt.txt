@@ -1,0 +1,7 @@
+Use case: scientific and educational illustration for an interactive Czech primary-school lesson about body parts and senses.
+
+Create one full-body school-age child, seen exactly from the front in a neutral standing pose. The child stands upright with both arms slightly away from the torso, hands open and visible, and feet slightly apart. Show the entire body from hair to shoes with generous empty space around it so HTML hotspot buttons can be placed over the head, eye, ear, nose, mouth, neck, belly, hand, leg, and foot. Use modest, simple everyday clothing in calm blue, ochre, and muted red; keep the neck, hands, knees/leg silhouette, and feet visually easy to identify. Anatomically plausible child proportions, friendly neutral expression, inclusive and non-stereotyped appearance.
+
+Visual style: refined watercolor and gouache educational illustration with delicate ink contours, warm ivory paper background, softly painted but clearly separated shapes, matching a Czech school nature notebook. Centered, symmetrical, uncluttered composition. Soft diffuse studio lighting, no cast shadow crossing the figure.
+
+Do not include any text, letters, numbers, labels, arrows, callout lines, diagrams, borders, logo, watermark, extra people, cropped limbs, props, or background scenery.

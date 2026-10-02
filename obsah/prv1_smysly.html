@@ -32,20 +32,28 @@
     .obrazek { font-size: clamp(3.2rem, 12vw, 5rem); line-height: 1; }
     .popis { color: var(--text); font-size: 1.05rem; font-weight: 600; }
 
-    /* Postava */
-    /* výška se omezuje, ne šířka – poměr stran je 1:2, jinak postava přeroste obrazovku */
-    .postava { height: min(330px, 46vh); width: auto; }
-    .cast { cursor: pointer; transition: fill 0.15s ease, stroke 0.15s ease; }
-    .kuze { fill: var(--bg-control); stroke: var(--border-strong); stroke-width: 2.5; }
-    .detail { fill: var(--text-muted); stroke: none; }
-    .cara { stroke: var(--border-strong); stroke-width: 16; stroke-linecap: round; fill: none; }
-    .cast:hover .kuze, .cast:hover.kuze { fill: var(--bg-hover); stroke: var(--accent); }
-    .cast:hover .cara, .cast:hover.cara { stroke: var(--accent); }
-    .cast.spravne .kuze, .cast.spravne.kuze { fill: var(--ok); stroke: var(--ok); }
-    .cast.spravne .cara, .cast.spravne.cara { stroke: var(--ok); }
-    .cast.spravne .detail { fill: #fff; }
-    .cast.spatne .kuze, .cast.spatne.kuze { fill: var(--danger); stroke: var(--danger); }
-    .cast.spatne .cara, .cast.spatne.cara { stroke: var(--danger); }
+    /* Postava s přístupnými hotspoty */
+    .postava-wrap { position: relative; width: min(100%, 400px); aspect-ratio: 2 / 3; }
+    .postava { display: block; width: 100%; height: 100%; object-fit: contain; border-radius: 18px; }
+    .cast {
+      position: absolute; width: clamp(30px, 5vh, 42px); aspect-ratio: 1; border-radius: 50%;
+      border: 3px solid color-mix(in srgb, var(--accent) 84%, white); background: color-mix(in srgb, var(--bg-panel) 32%, transparent);
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--bg-panel) 70%, transparent), 0 2px 8px #0005;
+      transform: translate(-50%, -50%); cursor: pointer; transition: transform 0.15s ease, background 0.15s ease;
+    }
+    .cast:hover, .cast:focus-visible { background: color-mix(in srgb, var(--accent) 34%, transparent); transform: translate(-50%, -50%) scale(1.14); outline: 3px solid var(--text); outline-offset: 2px; }
+    .cast.spravne { background: var(--ok); border-color: white; }
+    .cast.spatne { background: var(--danger); border-color: white; }
+    .hotspot-hlava { left: 50%; top: 10%; }
+    .hotspot-oko { left: 46%; top: 13%; }
+    .hotspot-ucho { left: 37%; top: 15%; }
+    .hotspot-nos { left: 50%; top: 16%; }
+    .hotspot-usta { left: 50%; top: 19%; }
+    .hotspot-krk { left: 50%; top: 23%; }
+    .hotspot-bricho { left: 50%; top: 43%; }
+    .hotspot-ruka { left: 21%; top: 56%; }
+    .hotspot-noha { left: 43%; top: 72%; }
+    .hotspot-chodidlo { left: 39%; top: 91%; }
 
     /* Možnosti */
     .moznosti { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
@@ -198,42 +206,13 @@ function ulozSkore() {
 function zobrazSkore() { $('skore').innerHTML = `Správně: <b>${spravne}</b> z ${pokusy}`; }
 function vyhodnot(napoprve) { pokusy++; if (napoprve) spravne++; ulozSkore(); zobrazSkore(); }
 
-/* ---- Postava (SVG) --------------------------------------------------------
-   Části se překrývají: hlava je vespod, oči, uši, nos a ústa nad ní, aby
-   klepnutí na detail netrefilo hlavu. */
+/* ---- Postava s obrazovým podkladem a HTML hotspoty ------------------------ */
 function svgPostava() {
   return `
-  <svg class="postava" viewBox="0 0 200 400" role="img" aria-label="Postava člověka">
-    <g class="cast" data-cast="noha">
-      <path class="cara" d="M88 250 L78 330"/>
-      <path class="cara" d="M112 250 L122 330"/>
-    </g>
-    <g class="cast" data-cast="chodidlo">
-      <ellipse class="kuze" cx="72" cy="342" rx="18" ry="10"/>
-      <ellipse class="kuze" cx="128" cy="342" rx="18" ry="10"/>
-    </g>
-    <g class="cast" data-cast="ruka">
-      <path class="cara" d="M74 150 L36 208"/>
-      <path class="cara" d="M126 150 L164 208"/>
-      <circle class="kuze" cx="32" cy="216" r="13"/>
-      <circle class="kuze" cx="168" cy="216" r="13"/>
-    </g>
-    <rect class="cast kuze" data-cast="krk" x="90" y="96" width="20" height="22" rx="6"/>
-    <rect class="cast kuze" data-cast="bricho" x="72" y="118" width="56" height="136" rx="22"/>
-    <circle class="cast kuze" data-cast="hlava" cx="100" cy="60" r="40"/>
-    <g class="cast" data-cast="ucho">
-      <ellipse class="kuze" cx="58" cy="60" rx="9" ry="13"/>
-      <ellipse class="kuze" cx="142" cy="60" rx="9" ry="13"/>
-    </g>
-    <g class="cast" data-cast="oko">
-      <circle class="kuze" cx="86" cy="52" r="9"/>
-      <circle class="kuze" cx="114" cy="52" r="9"/>
-      <circle class="detail" cx="86" cy="52" r="4"/>
-      <circle class="detail" cx="114" cy="52" r="4"/>
-    </g>
-    <ellipse class="cast kuze" data-cast="nos" cx="100" cy="68" rx="7" ry="9"/>
-    <path class="cast kuze" data-cast="usta" d="M84 82 Q100 96 116 82 Q100 90 84 82 Z"/>
-  </svg>`;
+  <div class="postava-wrap" role="group" aria-label="Postava dítěte s místy pro části těla">
+    <img class="postava" src="img/prv/prv1-smysly-postava.webp" alt="Dítě stojící zepředu v neutrálním postoji">
+    ${CASTI.map(c => `<button type="button" class="cast hotspot-${c.id}" data-cast="${c.id}" aria-label="${c.nazev}"></button>`).join('')}
+  </div>`;
 }
 
 /* ---- Režim: části těla ---------------------------------------------------- */
@@ -244,7 +223,7 @@ function telo() {
   p.innerHTML = `<div class="zadani">Klepni na obrázku na: <b>${cil.nazev}</b></div>${svgPostava()}`;
   const odezva = document.createElement('div');
   odezva.className = 'odezva';
-  const svg = p.querySelector('svg');
+  const svg = p.querySelector('.postava-wrap');
   const stav = { chyboval: false, hotovo: false };
   svg.querySelectorAll('.cast').forEach(g => {
     g.addEventListener('click', () => {

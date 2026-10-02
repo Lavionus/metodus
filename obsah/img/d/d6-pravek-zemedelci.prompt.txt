@@ -1,0 +1,5 @@
+Use case: historical-scene
+Asset type: Czech history lesson reconstruction, 3:2 landscape
+Primary request: Central European Early Neolithic farming settlement around 5000 BCE, timber longhouses, crops, stored grain, cattle, sheep, pottery and fields
+Style: refined watercolor and gouache museum reconstruction with delicate ink
+Constraints: accurate Neolithic tools, no metal, castles, modern objects, text, labels, numbers or watermark

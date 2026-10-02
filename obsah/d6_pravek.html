@@ -25,6 +25,11 @@
     .sonda-bod { position:absolute; transform:translate(-50%,-50%); width:30px; height:30px; padding:0; border:2px solid #fff; border-radius:50%; background:var(--accent); color:var(--na-akcentu,#fff); font-weight:800; box-shadow:0 2px 8px #0008; cursor:pointer; }
     .sonda-bod:focus-visible { outline:3px solid var(--focus,#ffd54f); outline-offset:2px; }
     .sonda-popis { min-height:2.8em; color:var(--text-muted); font-weight:600; }
+    .srovnani-sidel { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:16px; margin:18px 0; }
+    .srovnani-sidel figure { margin:0; padding:10px; background:var(--bg-control); border:1px solid var(--border); border-radius:14px; }
+    .srovnani-sidel img { display:block; width:100%; border-radius:10px; }
+    .srovnani-sidel figcaption { margin-top:8px; color:var(--text-muted); line-height:1.45; }
+    .rekonstrukce-stit { color:var(--accent); font-weight:800; text-transform:uppercase; }
   </style>
 </head>
 <body>
@@ -44,6 +49,11 @@
     <button class="hlavni" id="btnDalsi">Přeskočit →</button>
     <span class="skore" id="skore"></span>
   </div>
+
+  <section aria-labelledby="sidlaNadpis"><h2 id="sidlaNadpis">Od tábora k trvalé osadě</h2><div class="srovnani-sidel">
+    <figure><img src="img/d/d6-pravek-lovci.webp" alt="Rekonstrukce paleolitického tábora lovců a sběračů s koženými přístřešky." width="1152" height="768" loading="lazy"><figcaption><span class="rekonstrukce-stit">Rekonstrukce:</span> Paleolitický tábor byl dočasný. Lidé se přesouvali za zvěří a potravou, vyráběli štípané nástroje a používali oheň.</figcaption></figure>
+    <figure><img src="img/d/d6-pravek-zemedelci.webp" alt="Rekonstrukce neolitické osady s dlouhými domy, poli a chovanými zvířaty." width="1152" height="768" loading="lazy"><figcaption><span class="rekonstrukce-stit">Rekonstrukce:</span> Neolitická osada byla trvalá. Pole, dobytek, zásoby, keramika a dlouhé domy změnily každodenní život.</figcaption></figure>
+  </div></section>
 
   <section aria-labelledby="sondaNadpis"><h2 id="sondaNadpis">Čti archeologickou sondu</h2>
     <div class="sonda" id="sondaScena">

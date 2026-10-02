@@ -9,6 +9,7 @@
    Obrázky jsou SVG s viewBoxem; skript nastaví na <svg> proměnnou
    --k (jednotek viewBoxu na 1 px obrazovky), takže písmo, čáry
    a úchopy mají na telefonu i na projektoru stejnou velikost.
+   Sdílí ho i výklad „Závity a šrouby“ (zavity_lekce.html + zavity_lekce.css).
    ============================================================ */
 
 :root {

@@ -27,6 +27,10 @@
     .cesta { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; color: var(--text-faint);
       font-size: 0.8rem; }
     .cesta span { background: var(--bg-control); border: 1px solid var(--border); border-radius: 6px; padding: 3px 8px; }
+    .sit-prvky { display:grid; grid-template-columns:repeat(auto-fit,minmax(135px,1fr)); gap:12px; margin:18px 0; }
+    .sit-prvek { margin:0; padding:8px; border:1px solid var(--border); border-radius:13px; background:var(--bg-control); }
+    .sit-prvek img { display:block; width:100%; aspect-ratio:1; object-fit:cover; border-radius:9px; }
+    .sit-prvek figcaption { padding-top:7px; text-align:center; font-weight:700; color:var(--text-muted); }
   </style>
 </head>
 <body>
@@ -46,6 +50,17 @@
     <button class="hlavni" id="btnDalsi">Přeskočit →</button>
     <span class="skore" id="skore"></span>
   </div>
+
+  <section aria-labelledby="prvkySiteNadpis"><h2 id="prvkySiteNadpis">Poznej prvky sítě</h2><div class="sit-prvky">
+    <figure class="sit-prvek"><img src="img/inf/inf7-site-notebook.webp" alt="Notebook připojený k počítačové síti." width="768" height="768" loading="lazy"><figcaption>Notebook</figcaption></figure>
+    <figure class="sit-prvek"><img src="img/inf/inf7-site-telefon.webp" alt="Mobilní telefon jako koncové zařízení sítě." width="768" height="768" loading="lazy"><figcaption>Telefon</figcaption></figure>
+    <figure class="sit-prvek"><img src="img/inf/inf7-site-router.webp" alt="Domácí Wi-Fi router se dvěma anténami." width="768" height="768" loading="lazy"><figcaption>Wi-Fi router</figcaption></figure>
+    <figure class="sit-prvek"><img src="img/inf/inf7-site-switch.webp" alt="Síťový přepínač s osmi ethernetovými porty." width="768" height="768" loading="lazy"><figcaption>Přepínač</figcaption></figure>
+    <figure class="sit-prvek"><img src="img/inf/inf7-site-serverovna.webp" alt="Serverovna s řadami rackových skříní." width="768" height="768" loading="lazy"><figcaption>Serverovna</figcaption></figure>
+    <figure class="sit-prvek"><img src="img/inf/inf7-site-optika.webp" alt="Řez optickým kabelem s tenkými skleněnými vlákny." width="768" height="768" loading="lazy"><figcaption>Optický kabel</figcaption></figure>
+    <figure class="sit-prvek"><img src="img/inf/inf7-site-vysilac.webp" alt="Vysílač mobilní sítě s panelovými anténami." width="768" height="768" loading="lazy"><figcaption>Mobilní vysílač</figcaption></figure>
+    <figure class="sit-prvek"><img src="img/inf/inf7-site-datacentrum.webp" alt="Budova datového centra s chlazením a serverovými sály." width="768" height="768" loading="lazy"><figcaption>Datové centrum</figcaption></figure>
+  </div></section>
 
   <p class="napoveda">
     Data se posílají po malých kouscích – <b>paketech</b>. Cestu jim hledají <b>směrovače (routery)</b>,
