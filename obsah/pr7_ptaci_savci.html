@@ -16,6 +16,18 @@
     .druh { font-size: 1.15rem; font-weight: 700; }
     .zobak { width: min(220px, 60%); }
     .zobak path, .zobak polygon { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 2.5; }
+    .chrup-obrazek { width: min(100%, 320px); aspect-ratio: 1; object-fit: contain; border-radius: 14px;
+      border: 1px solid var(--border); background: #f7f1e5; }
+    .atlas-chrupu { width: min(100%, 960px); margin: 0 0 20px; }
+    .atlas-chrupu h2 { margin: 0 0 5px; font-size: 1.2rem; }
+    .atlas-chrupu > p { margin: 0 0 12px; color: var(--text-muted); }
+    .chrup-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+    .chrup-grid details { overflow: hidden; border: 1px solid var(--border); border-radius: 14px; background: var(--bg-panel); }
+    .chrup-grid img { display: block; width: 100%; aspect-ratio: 1; object-fit: contain; background: #f7f1e5; }
+    .chrup-grid summary { padding: 9px 11px; cursor: pointer; font-weight: 750; color: var(--text); }
+    .chrup-grid p { margin: 0; padding: 0 11px 12px; color: var(--text-muted); font-size: .84rem; line-height: 1.45; }
+    @media (max-width: 720px) { .chrup-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 390px) { .chrup-grid { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
@@ -27,7 +39,21 @@
     <button data-rezim="koncetiny">🦶 Končetiny a způsob života</button>
     <button data-rezim="poznavacka">🔍 Poznávačka</button>
     <button data-rezim="rady">🗂️ Řády savců</button>
+    <button data-rezim="chrup">🦷 Chrup a potrava</button>
   </div>
+
+  <section class="atlas-chrupu" aria-labelledby="atlas-chrupu-nadpis">
+    <h2 id="atlas-chrupu-nadpis">Co prozradí chrup savce?</h2>
+    <p>Porovnej řezáky, špičáky, stoličky a bezzubé mezery. Rozbalením karty zobrazíš vysvětlení.</p>
+    <div class="chrup-grid">
+      <details><summary>Šelma · vlk</summary><img src="img/pr/pr7-chrup-selma.webp" alt="Lebka vlka z boku s dlouhými špičáky a ostrými trháky." width="768" height="768"><p>Špičáky kořist uchopí, ostré trháky maso stříhají.</p></details>
+      <details><summary>Hlodavec · veverka</summary><img src="img/pr/pr7-chrup-hlodavec.webp" alt="Lebka veverky z boku s velkými hlodavými řezáky a bezzubou mezerou." width="768" height="768"><p>Řezáky stále dorůstají; za nimi je dlouhá bezzubá mezera.</p></details>
+      <details><summary>Přežvýkavec · srnec</summary><img src="img/pr/pr7-chrup-prezvykavec.webp" alt="Lebka srnce z boku bez horních řezáků, s mezerou a širokými stoličkami." width="768" height="768"><p>Dolní řezáky tlačí na horní zubní polštář, stoličky drtí rostliny.</p></details>
+      <details><summary>Hmyzožravec · ježek</summary><img src="img/pr/pr7-chrup-hmyzozravec.webp" alt="Lebka ježka z boku s mnoha drobnými hrotitými zuby." width="768" height="768"><p>Mnoho drobných špičatých zubů rozrušuje pevné schránky bezobratlých.</p></details>
+      <details><summary>Všežravec · prase</summary><img src="img/pr/pr7-chrup-vsezravec.webp" alt="Lebka prasete divokého z boku s kly a širokými hrbolkatými stoličkami." width="768" height="768"><p>Smíšený chrup potravu ukousne, trhá i rozmělňuje.</p></details>
+      <details><summary>Zajícovec · zajíc</summary><img src="img/pr/pr7-chrup-zajic.webp" alt="Lebka zajíce z boku se dvěma páry horních řezáků, mezerou a stoličkami." width="768" height="768"><p>Za velkými horními řezáky je druhý malý pár; stoličky melou rostliny.</p></details>
+    </div>
+  </section>
 
   <div class="plocha" id="plocha"></div>
 
@@ -136,6 +162,14 @@ const SAVCI = [
   { n: 'zajíc polní', r: 'zajici', i: '🐇', popis: 'dlouhé uši i zadní nohy, mláďata se rodí vidoucí' },
   { n: 'králík divoký', r: 'zajici', i: '🐰', popis: 'žije v norách v koloniích' },
 ];
+const CHRUPY = [
+  { k: 'selma', n: 'šelma', druh: 'vlk', img: 'img/pr/pr7-chrup-selma.webp', alt: 'Lebka vlka s dlouhými špičáky a ostrými trháky.', znak: 'dlouhé špičáky a ostré trháky', potrava: 'maso' },
+  { k: 'hlodavec', n: 'hlodavec', druh: 'veverka', img: 'img/pr/pr7-chrup-hlodavec.webp', alt: 'Lebka veverky s velkými řezáky a bezzubou mezerou.', znak: 'velké stále dorůstající řezáky a bezzubá mezera', potrava: 'semena a další tuhá rostlinná potrava' },
+  { k: 'prezvykavec', n: 'přežvýkavec', druh: 'srnec', img: 'img/pr/pr7-chrup-prezvykavec.webp', alt: 'Lebka srnce bez horních řezáků a s širokými stoličkami.', znak: 'chybějící horní řezáky a široké rýhované stoličky', potrava: 'tráva, listy a výhonky' },
+  { k: 'hmyzozravec', n: 'hmyzožravec', druh: 'ježek', img: 'img/pr/pr7-chrup-hmyzozravec.webp', alt: 'Lebka ježka s mnoha drobnými hrotitými zuby.', znak: 'mnoho drobných hrotitých zubů', potrava: 'hmyz a další bezobratlí' },
+  { k: 'vsezravec', n: 'všežravec', druh: 'prase', img: 'img/pr/pr7-chrup-vsezravec.webp', alt: 'Lebka prasete s kly a hrbolkatými stoličkami.', znak: 'různé typy zubů včetně hrbolkatých stoliček', potrava: 'rostlinná i živočišná potrava' },
+  { k: 'zajic', n: 'zajícovec', druh: 'zajíc', img: 'img/pr/pr7-chrup-zajic.webp', alt: 'Lebka zajíce se dvěma páry horních řezáků a bezzubou mezerou.', znak: 'dva páry horních řezáků a bezzubá mezera', potrava: 'trávy, byliny a větvičky' },
+];
 function rady() {
   const p = $('plocha');
   const s = Uloha.nahodne(SAVCI);
@@ -190,7 +224,26 @@ function poznavacka() {
   p.appendChild(odezva);
 }
 
-const REZIMY = { zobaky, koncetiny, poznavacka, rady };
+function chrup() {
+  const p = $('plocha');
+  const c = Uloha.nahodne(CHRUPY);
+  p.innerHTML = `<div class="zadani uloha-text">Kterému typu savce patří tento chrup?</div>
+    <div class="karta"><img class="chrup-obrazek" src="${c.img}" alt="${c.alt}" width="768" height="768">
+      <div class="popis" style="font-weight:400">Nápověda: ${c.znak}</div></div>`;
+  const odezva = odezvaEl();
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: Uloha.zamichej(CHRUPY.map(x => ({ klic: x.k, popis: x.n }))),
+    spravnyKlic: c.k,
+    zpravaOk: `✅ ${c.n} (${c.druh}) – chrup odpovídá potravě: ${c.potrava}.`,
+    zpravaChyba: 'Porovnej velikost řezáků a špičáků, tvar stoliček a případnou bezzubou mezeru.',
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+const REZIMY = { zobaky, koncetiny, poznavacka, rady, chrup };
 function novaUloha() { REZIMY[rezim](); }
 
 document.querySelectorAll('#rezimy button').forEach(b => b.addEventListener('click', () => {

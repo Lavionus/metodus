@@ -14,6 +14,33 @@
     .uloha-text { max-width: 620px; font-size: 1.02rem; line-height: 1.6; }
     .uloha-text b { color: var(--accent); }
     .druh { font-size: 1.15rem; font-weight: 700; }
+    .druh-obrazek { width: min(100%, 280px); aspect-ratio: 1; object-fit: contain; border-radius: 14px;
+      border: 1px solid var(--border); background: #f7f1e5; }
+    .atlas-trojice { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px;
+      width: min(100%, 960px); margin-bottom: 18px; }
+    .atlas-trojice details { background: var(--bg-panel); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
+    .atlas-trojice img { display: block; width: 100%; aspect-ratio: 1; object-fit: contain; background: #f7f1e5; }
+    .atlas-trojice summary { padding: 10px 12px; cursor: pointer; color: var(--text); font-weight: 700; }
+    .atlas-trojice ul { margin: 0; padding: 0 18px 14px 32px; color: var(--text-muted); font-size: 0.84rem; line-height: 1.5; }
+    .vyvoj-zaby { width: min(100%, 960px); margin: 2px 0 20px; padding: 14px; border: 1px solid var(--border);
+      border-radius: 16px; background: var(--bg-panel); }
+    .vyvoj-zaby h2 { margin: 0 0 4px; font-size: 1.2rem; }
+    .vyvoj-zaby > p { margin: 0 0 12px; color: var(--text-muted); }
+    .vyvoj-rada { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 9px; margin: 0; padding: 0;
+      list-style: none; counter-reset: stadium; }
+    .vyvoj-rada li { counter-increment: stadium; position: relative; min-width: 0; }
+    .vyvoj-rada li:not(:last-child)::after { content: "→"; position: absolute; z-index: 2; right: -10px; top: 34%;
+      width: 20px; color: var(--accent); text-align: center; font-weight: 900; }
+    .vyvoj-rada img { display: block; width: 100%; aspect-ratio: 1; object-fit: contain; border-radius: 10px;
+      border: 1px solid var(--border); background: #f7f1e5; }
+    .vyvoj-rada figcaption { padding-top: 6px; text-align: center; color: var(--text); font-size: .78rem; font-weight: 700; }
+    .vyvoj-rada figcaption::before { content: counter(stadium) ". "; color: var(--accent); }
+    @media (max-width: 720px) {
+      .atlas-trojice { grid-template-columns: 1fr; }
+      .vyvoj-rada { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .vyvoj-rada li::after { display: none; }
+      .vyvoj-rada li:last-child { grid-column: 1 / -1; width: calc(50% - 5px); justify-self: center; }
+    }
   </style>
 </head>
 <body>
@@ -25,7 +52,38 @@
     <button data-rezim="stavba">🫁 Stavba těla a dýchání</button>
     <button data-rezim="poznavacka">🔍 Poznávačka</button>
     <button data-rezim="tvrzeni">✔️ Platí to?</button>
+    <button data-rezim="vyvoj">🐸 Vývoj žáby</button>
   </div>
+
+  <section class="atlas-trojice" aria-label="Srovnávací atlas ryby, obojživelníka a plaza">
+    <details>
+      <summary>Kapr obecný · ryba</summary>
+      <img src="img/pr/pr7-studenokrevni-kapr.webp" alt="Kapr obecný z levého boku s vousky, šupinami a ploutvemi." width="768" height="768">
+      <ul><li>žábry přijímají kyslík z vody</li><li>šupiny kryje tenká vrstva slizu</li><li>ploutve řídí pohyb a rovnováhu</li></ul>
+    </details>
+    <details>
+      <summary>Skokan hnědý · obojživelník</summary>
+      <img src="img/pr/pr7-studenokrevni-skokan.webp" alt="Skokan hnědý z levého boku s vlhkou kůží a dlouhými zadními končetinami." width="768" height="768">
+      <ul><li>dospělec dýchá plícemi i vlhkou kůží</li><li>zadní končetiny slouží ke skoku a plavání</li><li>pulec dýchá žábrami</li></ul>
+    </details>
+    <details>
+      <summary>Ještěrka obecná · plaz</summary>
+      <img src="img/pr/pr7-studenokrevni-jesterka.webp" alt="Ještěrka obecná z levého boku se suchými šupinami, končetinami a dlouhým ocasem." width="768" height="768">
+      <ul><li>dýchá pouze plícemi</li><li>suché rohovité šupiny brání ztrátě vody</li><li>ocas může při ohrožení odvrhnout</li></ul>
+    </details>
+  </section>
+
+  <section class="vyvoj-zaby" aria-labelledby="vyvoj-zaby-nadpis">
+    <h2 id="vyvoj-zaby-nadpis">Proměna žáby krok za krokem</h2>
+    <p>Žába během metamorfózy mění způsob pohybu i dýchání. Prohlédni si pořadí a potom si je procvič.</p>
+    <ol class="vyvoj-rada">
+      <li><figure><img src="img/pr/pr7-vyvoj-zaby-vajicka.webp" alt="Shluk žabích vajíček v průsvitných rosolovitých obalech pod vodou." width="768" height="768"><figcaption>vajíčka</figcaption></figure></li>
+      <li><figure><img src="img/pr/pr7-vyvoj-zaby-pulec.webp" alt="Čerstvě vylíhlý pulec bez končetin s dlouhým plovacím lemem ocasu." width="768" height="768"><figcaption>pulec</figcaption></figure></li>
+      <li><figure><img src="img/pr/pr7-vyvoj-zaby-pulec-nohy.webp" alt="Pulec s vyvinutými zadními a rodícími se předními končetinami, stále s ocasem." width="768" height="768"><figcaption>pulec s nohama</figcaption></figure></li>
+      <li><figure><img src="img/pr/pr7-vyvoj-zaby-zabka.webp" alt="Mladá žabka se čtyřmi končetinami a krátkým zbytkem vstřebávaného ocasu." width="768" height="768"><figcaption>mladá žabka</figcaption></figure></li>
+      <li><figure><img src="img/pr/pr7-vyvoj-zaby-dospela.webp" alt="Dospělý skokan hnědý bez ocasu s dlouhými zadními končetinami." width="768" height="768"><figcaption>dospělá žába</figcaption></figure></li>
+    </ol>
+  </section>
 
   <div class="plocha" id="plocha"></div>
 
@@ -50,27 +108,34 @@ const SKUPINY = {
   ryby: 'ryby', obojzivelnici: 'obojživelníci', plazi: 'plazi',
 };
 const ZIVOCICHOVE = [
-  { n: 'kapr obecný', s: 'ryby', i: '🐟', popis: 'žije v rybnících, má vousky u tlamy' },
+  { n: 'kapr obecný', s: 'ryby', i: '🐟', img: 'img/pr/pr7-studenokrevni-kapr.webp', alt: 'Kapr obecný z levého boku.', popis: 'žije v rybnících, má vousky u tlamy' },
   { n: 'štika obecná', s: 'ryby', i: '🐠', popis: 'dravec našich vod s protáhlým tělem' },
   { n: 'pstruh obecný', s: 'ryby', i: '🐟', popis: 'žije v čistých bystřinách' },
   { n: 'okoun říční', s: 'ryby', i: '🐠', popis: 'má tmavé pruhy a ostnatou hřbetní ploutev' },
   { n: 'úhoř říční', s: 'ryby', i: '🐍', popis: 'hadovité tělo, táhne se třít do Sargasového moře' },
-  { n: 'skokan hnědý', s: 'obojzivelnici', i: '🐸', popis: 'žába, která žije i daleko od vody' },
+  { n: 'skokan hnědý', s: 'obojzivelnici', i: '🐸', img: 'img/pr/pr7-studenokrevni-skokan.webp', alt: 'Skokan hnědý z levého boku.', popis: 'žába, která žije i daleko od vody' },
   { n: 'ropucha obecná', s: 'obojzivelnici', i: '🐸', popis: 'bradavičnatá kůže, loví v noci' },
   { n: 'mlok skvrnitý', s: 'obojzivelnici', i: '🦎', popis: 'černý se žlutými skvrnami, vlhké lesy' },
   { n: 'čolek obecný', s: 'obojzivelnici', i: '🦎', popis: 'ocasatý obojživelník, v době rozmnožování má hřeben' },
-  { n: 'ještěrka obecná', s: 'plazi', i: '🦎', popis: 'suché stráně, umí odvrhnout ocas' },
+  { n: 'ještěrka obecná', s: 'plazi', i: '🦎', img: 'img/pr/pr7-studenokrevni-jesterka.webp', alt: 'Ještěrka obecná z levého boku.', popis: 'suché stráně, umí odvrhnout ocas' },
   { n: 'užovka obojková', s: 'plazi', i: '🐍', popis: 'nejedovatá, má žluté půlměsíčky za hlavou' },
   { n: 'zmije obecná', s: 'plazi', i: '🐍', popis: 'jediný jedovatý had u nás, klikatý pruh na hřbetě' },
   { n: 'slepýš křehký', s: 'plazi', i: '🦎', popis: 'beznohá ještěrka, často zaměňovaná s hadem' },
   { n: 'želva bahenní', s: 'plazi', i: '🐢', popis: 'vzácný vodní plaz s krunýřem' },
+];
+const VYVOJ_ZABY = [
+  { k: 'vajicka', n: 'vajíčka', img: 'img/pr/pr7-vyvoj-zaby-vajicka.webp', alt: 'Shluk žabích vajíček v rosolovitých obalech.' },
+  { k: 'pulec', n: 'pulec', img: 'img/pr/pr7-vyvoj-zaby-pulec.webp', alt: 'Pulec bez končetin s dlouhým ocasem.' },
+  { k: 'pulec-nohy', n: 'pulec s nohama', img: 'img/pr/pr7-vyvoj-zaby-pulec-nohy.webp', alt: 'Pulec s končetinami a stále dlouhým ocasem.' },
+  { k: 'zabka', n: 'mladá žabka', img: 'img/pr/pr7-vyvoj-zaby-zabka.webp', alt: 'Mladá žabka s krátkým zbytkem ocasu.' },
+  { k: 'dospela', n: 'dospělá žába', img: 'img/pr/pr7-vyvoj-zaby-dospela.webp', alt: 'Dospělý skokan hnědý bez ocasu.' },
 ];
 
 function skupina() {
   const p = $('plocha');
   const z = Uloha.nahodne(ZIVOCICHOVE);
   p.innerHTML = `<div class="zadani">Do které skupiny obratlovců patří?</div>
-    <div class="karta"><div class="obrazek">${z.i}</div><div class="druh">${z.n}</div>
+    <div class="karta">${z.img ? `<img class="druh-obrazek" src="${z.img}" alt="${z.alt}" width="768" height="768">` : `<div class="obrazek">${z.i}</div>`}<div class="druh">${z.n}</div>
       <div class="popis" style="color:var(--text-faint);font-weight:400">${z.popis}</div></div>`;
   const odezva = odezvaEl();
   Uloha.vyber({
@@ -121,7 +186,7 @@ function poznavacka() {
   const z = Uloha.nahodne(ZIVOCICHOVE);
   const jine = Uloha.zamichej(ZIVOCICHOVE.filter(x => x.n !== z.n)).slice(0, 3).map(x => x.n);
   p.innerHTML = `<div class="zadani uloha-text">Který druh to je?</div>
-    <div class="karta"><div class="obrazek">${z.i}</div>
+    <div class="karta">${z.img ? `<img class="druh-obrazek" src="${z.img}" alt="${z.alt}" width="768" height="768">` : `<div class="obrazek">${z.i}</div>`}
       <div class="popis" style="font-weight:400">${z.popis}</div></div>`;
   const odezva = odezvaEl();
   Uloha.vyber({
@@ -170,7 +235,25 @@ function tvrzeni() {
   p.appendChild(odezva);
 }
 
-const REZIMY = { skupina, stavba, poznavacka, tvrzeni };
+function vyvoj() {
+  const p = $('plocha');
+  const stadium = Uloha.nahodne(VYVOJ_ZABY);
+  p.innerHTML = `<div class="zadani uloha-text">Které stadium vývoje žáby vidíš?</div>
+    <div class="karta"><img class="druh-obrazek" src="${stadium.img}" alt="${stadium.alt}" width="768" height="768"></div>`;
+  const odezva = odezvaEl();
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: Uloha.zamichej(VYVOJ_ZABY.map(x => ({ klic: x.k, popis: x.n }))),
+    spravnyKlic: stadium.k,
+    zpravaOk: `✅ ${stadium.n}. Najdi toto stadium také v přehledu proměny.`,
+    zpravaChyba: 'Sleduj, zda má živočich ocas, končetiny a jak moc už připomíná dospělou žábu.',
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+const REZIMY = { skupina, stavba, poznavacka, tvrzeni, vyvoj };
 function novaUloha() { REZIMY[rezim](); }
 
 document.querySelectorAll('#rezimy button').forEach(b => b.addEventListener('click', () => {

@@ -18,6 +18,14 @@
       color: var(--text-faint); font-size: 0.79rem; }
     .lista span { background: var(--bg-control); border: 1px solid var(--border);
       border-radius: 8px; padding: 5px 11px; }
+    .desky-prehled { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px;
+      width: min(100%, 1080px); margin: 0 0 18px; }
+    .desky-prehled figure { margin: 0; overflow: hidden; background: var(--bg-panel); border: 1px solid var(--border);
+      border-radius: 14px; }
+    .desky-prehled img { display: block; width: 100%; aspect-ratio: 2 / 1; object-fit: cover; }
+    .desky-prehled figcaption { padding: 9px 11px 11px; color: var(--text-muted); font-size: 0.8rem; line-height: 1.4; }
+    .desky-prehled b { display: block; color: var(--text); font-size: 0.9rem; margin-bottom: 3px; }
+    @media (max-width: 720px) { .desky-prehled { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
@@ -30,6 +38,21 @@
     <button data-rezim="kviz3">📳 Zemětřesení</button>
     <button data-rezim="kviz4">🏔️ Vnější děje</button>
   </div>
+
+  <section class="desky-prehled" aria-label="Tři typy rozhraní litosférických desek">
+    <figure>
+      <img src="img/pr/pr9-desky-hrbet.webp" alt="Řez středooceánským hřbetem, kde vystupuje plášť a vzniká nová oceánská kůra." width="1152" height="576">
+      <figcaption><b>Rozbíhavé rozhraní</b>Desky se vzdalují, magma vystupuje a tuhne v novou oceánskou kůru.</figcaption>
+    </figure>
+    <figure>
+      <img src="img/pr/pr9-desky-subdukce.webp" alt="Řez subdukční zónou, kde se oceánská deska podsouvá pod kontinentální desku s vulkanickým obloukem." width="1152" height="576">
+      <figcaption><b>Sbíhavé rozhraní</b>Hustší oceánská deska se podsouvá; vzniká příkop, zemětřesení a pás sopek.</figcaption>
+    </figure>
+    <figure>
+      <img src="img/pr/pr9-desky-transform.webp" alt="Řez transformním zlomem se dvěma bloky kůry a stranově posunutým říčním korytem." width="1152" height="576">
+      <figcaption><b>Transformní rozhraní</b>Desky se posouvají podél zlomu; kůra nevzniká ani nezaniká.</figcaption>
+    </figure>
+  </section>
 
   <div class="plocha" id="plocha"></div>
 

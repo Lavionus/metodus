@@ -21,6 +21,28 @@
       padding: 8px 12px; font-size: 0.92rem; font-weight: 600;
     }
     .promena .sipka { color: var(--text-faint); font-size: 1.3rem; }
+    .promena .stadium { width: min(145px, 40vw); padding: 6px; text-align: center; }
+    .promena .stadium img { display: block; width: 100%; aspect-ratio: 1; object-fit: contain; border-radius: 7px;
+      margin-bottom: 5px; background: #f8f1df; }
+    .atlas-promeny { width: min(100%, 980px); margin: 0 0 20px; padding: 14px; border: 1px solid var(--border);
+      border-radius: 16px; background: var(--bg-panel); }
+    .atlas-promeny h2 { margin: 0 0 4px; font-size: 1.2rem; }
+    .atlas-promeny > p { margin: 0 0 12px; color: var(--text-muted); }
+    .promena-rada { display: grid; gap: 9px; margin: 0 0 14px; padding: 0; list-style: none; }
+    .promena-rada.ctyri { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .promena-rada.tri { grid-template-columns: repeat(3, minmax(0, 1fr)); margin-bottom: 0; }
+    .promena-rada li { position: relative; min-width: 0; }
+    .promena-rada li:not(:last-child)::after { content: "→"; position: absolute; z-index: 2; right: -10px; top: 37%;
+      width: 20px; text-align: center; color: var(--accent); font-weight: 900; }
+    .promena-rada img { display: block; width: 100%; aspect-ratio: 1; object-fit: contain; border: 1px solid var(--border);
+      border-radius: 10px; background: #f8f1df; }
+    .promena-rada figcaption { padding-top: 5px; text-align: center; font-size: .78rem; font-weight: 700; }
+    .promena-popisek { margin: 0 0 7px; font-weight: 750; color: var(--text); }
+    @media (max-width: 620px) {
+      .promena-rada.ctyri, .promena-rada.tri { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .promena-rada li::after { display: none; }
+      .promena-rada.tri li:last-child { grid-column: 1 / -1; width: calc(50% - 5px); justify-self: center; }
+    }
   </style>
 </head>
 <body>
@@ -33,6 +55,24 @@
     <button data-rezim="promena">🦋 Proměna hmyzu</button>
     <button data-rezim="vyznam">⚖️ Význam v přírodě</button>
   </div>
+
+  <section class="atlas-promeny" aria-labelledby="atlas-promeny-nadpis">
+    <h2 id="atlas-promeny-nadpis">Dva způsoby proměny hmyzu</h2>
+    <p>Kukla se objevuje pouze u proměny dokonalé. Nymfa při proměně nedokonalé roste a opakovaně se svléká.</p>
+    <p class="promena-popisek">Babočka kopřivová · proměna dokonalá</p>
+    <ol class="promena-rada ctyri">
+      <li><figure><img src="img/pr/pr6-promena-babocka-vajicka.webp" alt="Shluk zelených vajíček babočky na spodní straně listu kopřivy." width="768" height="768"><figcaption>vajíčka</figcaption></figure></li>
+      <li><figure><img src="img/pr/pr6-promena-babocka-housenka.webp" alt="Černá ostnitá housenka babočky se žlutými pruhy na kopřivě." width="768" height="768"><figcaption>housenka</figcaption></figure></li>
+      <li><figure><img src="img/pr/pr6-promena-babocka-kukla.webp" alt="Hranatá hnědozlatá kukla babočky zavěšená pod stonkem." width="768" height="768"><figcaption>kukla</figcaption></figure></li>
+      <li><figure><img src="img/pr/pr6-promena-babocka-dospelec.webp" alt="Dospělá babočka kopřivová s roztaženými oranžovými křídly." width="768" height="768"><figcaption>dospělec</figcaption></figure></li>
+    </ol>
+    <p class="promena-popisek">Kobylka zelená · proměna nedokonalá</p>
+    <ol class="promena-rada tri">
+      <li><figure><img src="img/pr/pr6-promena-kobylka-vajicka.webp" alt="Protáhlá vajíčka kobylky uložená těsně pod povrchem půdy." width="768" height="768"><figcaption>vajíčka</figcaption></figure></li>
+      <li><figure><img src="img/pr/pr6-promena-kobylka-nymfa.webp" alt="Zelená nymfa kobylky s dlouhými tykadly a jen malými základy křídel." width="768" height="768"><figcaption>nymfa</figcaption></figure></li>
+      <li><figure><img src="img/pr/pr6-promena-kobylka-dospelec.webp" alt="Dospělá kobylka zelená s dlouhými tykadly a plně vyvinutými křídly." width="768" height="768"><figcaption>dospělec</figcaption></figure></li>
+    </ol>
+  </section>
 
   <div class="plocha" id="plocha"></div>
 
@@ -86,8 +126,17 @@ const ZIVOCICHOVE = [
     popis: 'na každém článku má jeden pár nohou, je dravá' },
 ];
 
-const PROMENA_DOKONALA = ['🥚 vajíčko', '🐛 larva (housenka)', '🛏️ kukla', '🦋 dospělec'];
-const PROMENA_NEDOKONALA = ['🥚 vajíčko', '🦗 nymfa (podobná dospělci)', '🦗 dospělec'];
+const PROMENA_DOKONALA = [
+  { n: 'vajíčko', img: 'img/pr/pr6-promena-babocka-vajicka.webp', alt: 'Vajíčka babočky na listu kopřivy.' },
+  { n: 'larva (housenka)', img: 'img/pr/pr6-promena-babocka-housenka.webp', alt: 'Ostnitá housenka babočky na kopřivě.' },
+  { n: 'kukla', img: 'img/pr/pr6-promena-babocka-kukla.webp', alt: 'Zavěšená kukla babočky.' },
+  { n: 'dospělec', img: 'img/pr/pr6-promena-babocka-dospelec.webp', alt: 'Dospělá babočka kopřivová.' },
+];
+const PROMENA_NEDOKONALA = [
+  { n: 'vajíčko', img: 'img/pr/pr6-promena-kobylka-vajicka.webp', alt: 'Vajíčka kobylky v půdě.' },
+  { n: 'nymfa (podobná dospělci)', img: 'img/pr/pr6-promena-kobylka-nymfa.webp', alt: 'Nymfa kobylky bez vyvinutých křídel.' },
+  { n: 'dospělec', img: 'img/pr/pr6-promena-kobylka-dospelec.webp', alt: 'Dospělá kobylka zelená.' },
+];
 
 const VYZNAM = [
   { t: 'včely při opylování ovocných stromů', dobre: true, proc: 'bez opylení by nebyla úroda' },
@@ -164,8 +213,8 @@ function promena() {
 
   Uloha.zamichej(stadia).forEach(st => {
     const b = document.createElement('button');
-    b.textContent = st;
-    b.dataset.st = st;
+    b.textContent = st.n;
+    b.dataset.st = st.n;
     b.addEventListener('click', () => {
       if (b.disabled) return;
       if (st === stadia[dalsiIndex]) {
@@ -177,7 +226,7 @@ function promena() {
         }
         const el = document.createElement('span');
         el.className = 'stadium';
-        el.textContent = st;
+        el.innerHTML = `<img src="${st.img}" alt="${st.alt}" width="768" height="768"><span>${st.n}</span>`;
         porada.appendChild(el);
         b.disabled = true;
         dalsiIndex++;

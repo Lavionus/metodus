@@ -4681,6 +4681,27 @@ const KATALOG_SEKCE = [
     ]
   },
   {
+    "nazev": "🧭 Myšlení a řešení problémů",
+    "skupina": "dalsi",
+    "polozky": [
+      {
+        "soubor": "obsah/rybi_kost.html",
+        "nazev": "🐟 Rybí kost – hledání příčin",
+        "tagy": [
+          "rybí kost",
+          "Ishikawův diagram",
+          "fishbone",
+          "příčina a následek",
+          "5× proč",
+          "řešení problémů",
+          "kritické myšlení",
+          "projektová výuka",
+          "diagram"
+        ]
+      }
+    ]
+  },
+  {
     "nazev": "🎼 Hudba",
     "skupina": "dalsi",
     "polozky": [
@@ -5189,7 +5210,8 @@ const KATALOG_CILE = {
   "obsah/ucitel.html": "Mám na jednom místě přípravu hodiny i nástroje pro její průběh.",
   "obsah/prezentace.html": "Připravím a promítnu výklad se slidy a vloženými aplikacemi.",
   "obsah/citation_generator.html": "Správně ocituji knihu, článek i webovou stránku.",
-  "obsah/pracovni_listy.html": "Připravím a vytisknu pracovní list k tématu ve více variantách s řešením."
+  "obsah/pracovni_listy.html": "Připravím a vytisknu pracovní list k tématu ve více variantách s řešením.",
+  "obsah/rybi_kost.html": "Najdu příčiny problému, roztřídím je v rybí kosti a vyberu tu hlavní."
 };
 
 // Rodiny témat: stránky na stejné téma kolem jedné hlavní lekce.

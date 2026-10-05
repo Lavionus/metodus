@@ -10,8 +10,8 @@ Externí zdroje a živá data (například ISS) vyžadují internet. Skóre, den
 vlastní sady jsou místní data daného prohlížeče, bez automatické synchronizace;
 externí zdroje, datová API a některé hlasy mohou komunikovat se svými službami.
 
-Katalog je zároveň **kostrou osnov ZŠ**: 245 témat v 11 předmětech a 9 ročnících
-plus 10 nástrojů bez vazby na předmět — dohromady 255 položek. Osnova je momentálně
+Katalog je zároveň **kostrou osnov ZŠ**: 250 témat v 11 předmětech a 9 ročnících
+plus 11 nástrojů bez vazby na předmět — dohromady 261 položek. Osnova je momentálně
 pokrytá celá, žádné téma nezůstalo jen jako zástupce (🚧). Přehled je na stránce
 [Osnova](obsah/osnova.html).
 

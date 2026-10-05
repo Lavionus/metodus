@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>🐟 Rybí kost – hledání příčin</title>
+  <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="../vyuka.css">
+  <script src="../theme.js"></script>
+  <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
+  <script src="../uloha.js"></script>
+  <style>
+    .sekce {
+      background: var(--bg-panel); border: 1px solid var(--border); border-radius: var(--radius);
+      max-width: var(--sirka-obsahu, 900px); padding: 18px 20px; margin-bottom: 18px;
+    }
+    .sekce > h2 { font-size: 1.05rem; margin-bottom: 10px; }
+    .sekce p { line-height: 1.55; margin-bottom: 8px; }
+    .dva { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; }
+
+    /* diagram */
+    .diagram { width: 100%; height: auto; display: block; user-select: none; }
+    .diagram [data-cast] { cursor: pointer; }
+    .diagram .kost-cara { transition: stroke 0.2s, stroke-width 0.2s; }
+    .diagram .nove { animation: objev 0.45s ease; }
+    @keyframes objev { from { opacity: 0; } to { opacity: 1; } }
+    .ramecek {
+      background: var(--bg-deep); border: 1px solid var(--border); border-radius: 10px; padding: 6px;
+      overflow-x: auto;
+    }
+    /* na úzkém displeji by byl text v diagramu nečitelný – raději se posouvá do strany */
+    @media (max-width: 700px) { .ramecek .diagram { min-width: 680px; } }
+
+    .vysvetlivka {
+      background: var(--bg-elevated); border: 1px solid var(--border); border-left: 4px solid var(--accent);
+      border-radius: 8px; padding: 10px 14px; line-height: 1.5; min-height: 4.5em;
+    }
+    .vysvetlivka b { color: var(--accent); }
+    .legenda { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 0; }
+    .legenda button, .tlacitka button, .dilna button, .dilna select {
+      background: var(--bg-control); border: 1px solid var(--border-strong); color: var(--text);
+      border-radius: 6px; padding: 6px 11px; font: inherit; font-size: 0.84rem; cursor: pointer;
+    }
+    .legenda button:hover, .tlacitka button:hover, .dilna button:hover { background: var(--bg-hover); }
+    .tlacitka { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 10px; }
+    .tlacitka .hlavni { background: var(--accent); border-color: var(--accent); color: var(--na-akcentu, #fff); font-weight: 600; }
+    .tlacitka button:disabled { opacity: 0.45; cursor: default; }
+    .body-kroku { display: flex; gap: 5px; margin-left: auto; }
+    .body-kroku span { width: 9px; height: 9px; border-radius: 50%; background: var(--border-strong); }
+    .body-kroku span.ted { background: var(--accent); }
+    .body-kroku span.hotovo { background: var(--ok); }
+    .krok-text { margin-top: 10px; }
+    .krok-text h3 { font-size: 0.98rem; margin-bottom: 4px; }
+
+    /* procvičování */
+    .mini { width: min(100%, 560px); }
+    .pricina-karta { font-size: 1.1rem; font-weight: 600; max-width: 520px; line-height: 1.4; }
+    .proc-otazka { font-size: 1.05rem; color: var(--text-muted); }
+    .proc-otazka b { color: var(--text); }
+    .plocha .moznosti button { max-width: 340px; }
+
+    /* dílna */
+    .dilna-lista { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 10px; }
+    .dilna label { font-size: 0.82rem; color: var(--text-muted); }
+    .dilna input[type=text] {
+      background: var(--bg-input); border: 1px solid var(--border); color: var(--text);
+      border-radius: 6px; padding: 6px 8px; font: inherit; font-size: 0.88rem; width: 100%; min-width: 0;
+    }
+    .dilna input[type=text]:focus { outline: 2px solid var(--accent); outline-offset: 0; }
+    .problem-radek { display: flex; gap: 8px; align-items: center; margin-bottom: 12px; }
+    .problem-radek input { font-weight: 600; }
+    .kosti-editor { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 10px; margin-top: 12px; }
+    .kost-blok { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 8px; padding: 10px; }
+    .kost-blok.vybrana { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+    .radek { display: flex; gap: 4px; align-items: center; margin-top: 6px; }
+    .radek.pod { margin-left: 22px; }
+    .radek.pod::before { content: '↳'; color: var(--text-faint); }
+    .dilna .radek button { padding: 4px 7px; font-size: 0.8rem; flex-shrink: 0; }
+    .dilna .radek button.zap { background: var(--warn); border-color: var(--warn); color: #1a1a1a; }
+    .kost-nazev input { font-weight: 700; }
+    .pridat { margin-top: 8px; width: 100%; }
+    .poznamka { color: var(--text-faint); font-size: 0.8rem; margin-top: 8px; }
+
+    @media print {
+      body.tisk-dilny > *:not(#dilna) { display: none !important; }
+      body.tisk-dilny #dilna > *:not(.ramecek) { display: none !important; }
+      body.tisk-dilny #dilna, body.tisk-dilny .ramecek { border: 0; background: #fff; padding: 0; max-width: none; }
+    }
+  </style>
+</head>
+<body>
+  <h1>🐟 Rybí kost – hledání příčin</h1>
+  <p class="podtitul">Ishikawův diagram: jak se nespokojit s první odpovědí a najít, proč se problém doopravdy děje.</p>
+
+  <!-- 📖 Výuka -->
+  <section class="sekce" id="vyuka" data-faze="vyuka">
+    <h2>📖 Z čeho se rybí kost skládá</h2>
+    <div class="dva">
+      <div>
+        <p>Když se něco pokazí, první nápad na příčinu bývá jen část pravdy. <b>Rybí kost</b> pomáhá
+          promyslet <b>všechny</b> možné příčiny a roztřídit je do skupin.</p>
+        <p>Diagram vymyslel japonský inženýr <b>Kaoru Ishikawa</b> v 60. letech 20. století, aby
+          v továrnách hledal příčiny vadných výrobků. Dnes ho používají lékaři, vědci, firmy i škola.</p>
+        <p><b>Klepni na libovolnou část ryby</b> a dozvíš se, co znamená.</p>
+        <div class="legenda" aria-label="Části diagramu" style="margin-bottom:4px">
+          <button type="button" data-ukaz="hlava">🐟 hlava</button>
+          <button type="button" data-ukaz="pater">➖ páteř</button>
+          <button type="button" data-ukaz="kost">🦴 hlavní kost</button>
+          <button type="button" data-ukaz="pricina">• příčina</button>
+          <button type="button" data-ukaz="pod">↳ proč?</button>
+          <button type="button" data-ukaz="hlavni">⭐ hlavní příčina</button>
+        </div>
+      </div>
+      <div>
+        <div class="ramecek"><svg class="diagram" id="svgVyuka" role="img" aria-label="Rybí kost: proč rostlina na okně uvadá"></svg></div>
+        <div class="vysvetlivka" id="vysvetlivka" aria-live="polite">Klepni na hlavu, páteř, kost nebo příčinu.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 📘 Ukázka -->
+  <section class="sekce" id="ukazka" data-faze="ukazka">
+    <h2>📘 Ukázka: stavíme rybí kost krok za krokem</h2>
+    <div class="ramecek"><svg class="diagram" id="svgUkazka" role="img" aria-label="Postupně stavěná rybí kost"></svg></div>
+    <div class="krok-text" aria-live="polite"><h3 id="krokNadpis"></h3><p id="krokPopis"></p></div>
+    <div class="tlacitka">
+      <button type="button" id="krokZpet">◀ Zpět</button>
+      <button type="button" class="hlavni" id="krokDal">Další krok ▶</button>
+      <button type="button" id="krokPrehraj">▶️ Přehrát</button>
+      <button type="button" id="krokZnovu">↺ Výchozí stav</button>
+      <span class="body-kroku" id="bodyKroku" aria-hidden="true"></span>
+    </div>
+  </section>
+
+  <!-- ✏️ Procvič -->
+  <h2 style="font-size:1.05rem;margin:4px 0 10px">✏️ Procvič si</h2>
+  <div class="rezimy" id="rezimy">
+    <button data-rezim="kost" data-faze="procvic" class="active">🦴 Na kterou kost?</button>
+    <button data-rezim="pricina" data-faze="procvic">⚖️ Příčina, nebo následek?</button>
+    <button data-rezim="proc" data-faze="procvic">❓ Zeptej se „proč?“</button>
+  </div>
+  <div class="plocha" id="plocha"></div>
+  <div class="ovladani">
+    <button class="hlavni" id="btnDalsi">Přeskočit →</button>
+    <span class="skore" id="skore"></span>
+  </div>
+
+  <!-- 🛠️ Vlastní diagram -->
+  <section class="sekce dilna" id="dilna" style="margin-top:18px">
+    <h2>🛠️ Postav si vlastní rybí kost</h2>
+    <div class="dilna-lista">
+      <label for="sablona">Začít od:</label>
+      <select id="sablona">
+        <option value="">— vyber šablonu —</option>
+        <option value="skola">Skupiny pro školu (Já, Učení, Doma, Škola, Zdraví, Čas)</option>
+        <option value="m6">6M z výroby (Člověk, Metoda, Stroj, Materiál, Měření, Prostředí)</option>
+        <option value="pokus">Pokus (Pomůcky, Postup, Měření, Prostředí, Člověk)</option>
+        <option value="pozde">Hotový příklad: pozdě do školy</option>
+        <option value="rostlina">Hotový příklad: uvadající rostlina</option>
+        <option value="prazdna">Prázdná ryba</option>
+      </select>
+      <button type="button" id="dlSvg">⬇️ SVG</button>
+      <button type="button" id="dlPng">⬇️ PNG</button>
+      <button type="button" id="tisk">🖨️ Vytisknout</button>
+    </div>
+    <div class="problem-radek">
+      <label for="problem">🐟 Problém:</label>
+      <input type="text" id="problem" maxlength="80" placeholder="Co se děje špatně? Např. Ráno nestíhám snídani">
+    </div>
+    <div class="ramecek"><svg class="diagram" id="svgDilna" role="img" aria-label="Tvoje rybí kost"></svg></div>
+    <div class="kosti-editor" id="kostiEditor"></div>
+    <button type="button" class="pridat" id="pridatKost">+ Přidat hlavní kost (skupinu příčin)</button>
+    <p class="poznamka">Klepnutím na část ryby skočíš na její políčko. ⭐ označí hlavní příčinu, +? přidá odpověď na „proč?“.
+      Diagram se ukládá jen v tomto prohlížeči.</p>
+  </section>
+
+  <!-- 📌 Tahák -->
+  <div class="napoveda" data-faze="tahak">
+    <b>Rybí kost v 5 krocích:</b>
+    <ol style="margin:6px 0 6px 20px;line-height:1.55">
+      <li><b>Hlava</b> – napiš problém jako konkrétní větu (co, kde, kdy). Ne příčinu, ne řešení.</li>
+      <li><b>Páteř</b> – vede k hlavě; všechny příčiny se do ní sbíhají.</li>
+      <li><b>Hlavní kosti</b> – 4 až 6 skupin příčin. Ve škole: Já · Učení · Doma · Škola · Zdraví · Čas.
+        Ve výrobě „6M“: Člověk · Metoda · Stroj · Materiál · Měření · Prostředí.</li>
+      <li><b>Drobné kosti</b> – ke každé skupině konkrétní příčiny. U každé se zeptej <b>„Proč?“</b>
+        (klidně pětkrát) a odpověď připiš níž.</li>
+      <li><b>Hlavní příčina</b> – vyber tu, která problém způsobuje nejvíc, ověř ji a navrhni opatření.</li>
+    </ol>
+    Příčina vede k následku: <i>když nastane příčina, objeví se následek</i>. V hlavě je vždy následek.
+  </div>
+
+<script>
+const $ = id => document.getElementById(id);
+const NS = 'http://www.w3.org/2000/svg';
+
+/* ---- příklady ------------------------------------------------------------ */
+const ROSTLINA = {
+  problem: 'Rostlina na okně uvadá',
+  kosti: [
+    { n: '💧 Voda', p: [{ t: 'V misce stojí voda', pod: ['Květináč nemá odtokovou díru'], hlavni: true }, { t: 'Zalévám nepravidelně' }] },
+    { n: '☀️ Světlo', p: [{ t: 'Okno zakrývá závěs' }, { t: 'Okno je na sever' }] },
+    { n: '🪴 Půda', p: [{ t: 'Hlína je stará', pod: ['Rostlinu jsme 4 roky nepřesadili'] }] },
+    { n: '🌡️ Teplo', p: [{ t: 'Stojí nad topením' }, { t: 'Průvan při větrání' }] },
+  ],
+};
+const POZDE = {
+  problem: 'Přicházím pozdě do školy',
+  kosti: [
+    { n: '🧑 Já', p: [{ t: 'Ráno zaspím', pod: ['Večer koukám do mobilu'], hlavni: true }, { t: 'Dlouho se oblékám' }] },
+    { n: '🏠 Doma', p: [{ t: 'Obsazená koupelna' }, { t: 'Hledám klíče' }] },
+    { n: '🚌 Cesta', p: [{ t: 'Autobus má zpoždění' }, { t: 'Rozkopaná silnice' }] },
+    { n: '📋 Plánování', p: [{ t: 'Taška není sbalená', pod: ['Balím ji až ráno'] }, { t: 'Neznám jízdní řád' }] },
+  ],
+};
+const SABLONY = {
+  skola: ['🧑 Já', '📚 Učení', '🏠 Doma', '🏫 Škola', '❤️ Zdraví', '⏰ Čas'],
+  m6: ['🧑 Člověk', '📄 Metoda', '⚙️ Stroj', '🧱 Materiál', '📏 Měření', '🌍 Prostředí'],
+  pokus: ['🔧 Pomůcky', '📄 Postup', '📏 Měření', '🌍 Prostředí', '🧑 Člověk'],
+  prazdna: ['', '', '', ''],
+};
+const kopie = o => JSON.parse(JSON.stringify(o));
+
+/* ---- kreslení rybí kosti -------------------------------------------------
+   m = { problem, kosti: [{ n, p: [{ t, pod: [..], hlavni }] }] }
+   o = { hlava, pater (výchozí true), vyber: {cast, k, p, i}, klik(cil), nove: Set, maly, paleta } */
+function barvy() {
+  const s = getComputedStyle(document.documentElement);
+  const v = n => s.getPropertyValue(n).trim();
+  return { text: v('--text'), slaby: v('--text-muted'), kost: v('--text-faint'), akcent: v('--accent'),
+           hlava: v('--bg-elevated'), okraj: v('--border-strong'), hvezda: v('--warn'), pozadi: 'none' };
+}
+const TISK_BARVY = { text: '#1d232a', slaby: '#4a5560', kost: '#6b7480', akcent: '#1d5fbf',
+                     hlava: '#eaf1fb', okraj: '#5a6a7a', hvezda: '#c48a12', pozadi: '#ffffff' };
+
+function zalom(t, max) {
+  const slova = String(t || '').split(/\s+/).filter(Boolean);
+  const radky = []; let r = '';
+  for (const s of slova) {
+    if (!r) r = s;
+    else if ((r + ' ' + s).length <= max) r += ' ' + s;
+    else { radky.push(r); r = s; }
+  }
+  if (r) radky.push(r);
+  return radky.length ? radky : [''];
+}
+
+function kresli(svg, m, o = {}) {
+  const b = o.paleta || barvy();
+  const W = 1000, HLAVA_W = 170, X0 = 34, XS = W - HLAVA_W - 6, SKLON = 0.42;
+  const kosti = m.kosti || [];
+  const hore = kosti.filter((_, i) => i % 2 === 0), dole = kosti.filter((_, i) => i % 2 === 1);
+  const sloupcu = Math.max(1, hore.length);
+  const sirkaSl = (XS - X0 - 50) / sloupcu;
+  const maxZn = Math.max(12, Math.floor((sirkaSl - 26) / 7.4));
+  const fs = o.maly ? 15 : 13.5, fsPod = o.maly ? 13 : 12;
+
+  // výšky bloků příčin
+  const bloky = kosti.map(k => (k.p || []).map(p => {
+    const radky = zalom(p.t || '…', maxZn);
+    const pod = (p.pod || []).map(t => zalom(t, maxZn + 2));
+    const vyska = radky.length * (fs + 2) + 6 + pod.reduce((s, r) => s + r.length * (fsPod + 2), 0) + 10;
+    return { radky, pod, vyska };
+  }));
+  const vyskaKosti = i => 30 + bloky[i].reduce((s, x) => s + x.vyska, 0) + 14;
+  const hH = Math.max(o.maly ? 70 : 110, ...kosti.map((_, i) => i % 2 === 0 ? vyskaKosti(i) : 0));
+  const hD = Math.max(o.maly ? 70 : 110, ...kosti.map((_, i) => i % 2 === 1 ? vyskaKosti(i) : 0));
+  const POPISEK = 34;
+  const Y = 12 + POPISEK + hH, H = Y + hD + POPISEK + 12;
+  svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+  svg.replaceChildren();
+
+  const prvek = (tag, atr, rodic = svg) => {
+    const e = document.createElementNS(NS, tag);
+    for (const [k, v] of Object.entries(atr)) if (v !== undefined && v !== null) e.setAttribute(k, v);
+    rodic.appendChild(e);
+    return e;
+  };
+  const skupina = (cil, nove) => {
+    const g = prvek('g', {});
+    if (cil) { g.dataset.cast = cil.cast; for (const k of ['k', 'p', 'i']) if (cil[k] !== undefined) g.dataset[k] = cil[k]; }
+    if (nove) g.classList.add('nove');
+    return g;
+  };
+  const jeVybrano = cil => {
+    const v = o.vyber;
+    if (!v || !cil) return false;
+    if (v.cast === 'kost' && cil.cast !== 'pater' && cil.cast !== 'hlava') return cil.k === v.k && (cil.cast === 'kost' || v.cela);
+    return v.cast === cil.cast && v.k === cil.k && v.p === cil.p && v.i === cil.i;
+  };
+  const text = (g, x, y, radky, atr) => {
+    const t = prvek('text', { x, y, 'font-size': atr.fs, fill: atr.fill, 'text-anchor': atr.anchor || 'end',
+      'font-weight': atr.bold ? 700 : 400, 'font-style': atr.italic ? 'italic' : null,
+      'font-family': 'Segoe UI, Roboto, sans-serif' }, g);
+    radky.forEach((r, i) => { const s = prvek('tspan', { x, dy: i ? atr.fs + 2 : 0 }, t); s.textContent = r; });
+    return t;
+  };
+  if (b.pozadi !== 'none') prvek('rect', { x: 0, y: 0, width: W, height: H, fill: b.pozadi });
+
+  // páteř a ocas
+  if (o.pater !== false) {
+    const cil = { cast: 'pater' };
+    const g = skupina(cil, o.nove?.has('pater'));
+    const zv = jeVybrano(cil);
+    prvek('path', { d: `M${X0 - 26} ${Y - 26} L${X0} ${Y} L${X0 - 26} ${Y + 26}`, fill: 'none', stroke: b.kost, 'stroke-width': 4, 'stroke-linejoin': 'round' }, g);
+    prvek('line', { x1: X0 - 8, y1: Y, x2: XS + 4, y2: Y, stroke: zv ? b.akcent : b.kost, 'stroke-width': zv ? 8 : 6, 'stroke-linecap': 'round', class: 'kost-cara' }, g);
+    prvek('line', { x1: X0 - 8, y1: Y, x2: XS + 4, y2: Y, stroke: 'transparent', 'stroke-width': 22 }, g);
+  }
+
+  // hlava
+  if (o.hlava !== false) {
+    const cil = { cast: 'hlava' };
+    const g = skupina(cil, o.nove?.has('hlava'));
+    const zv = jeVybrano(cil);
+    const radky = zalom(m.problem || 'Problém?', 16).slice(0, 5);
+    const hh = Math.max(56, radky.length * 10 + 34);
+    prvek('path', { d: `M${XS} ${Y - hh} C${XS + 110} ${Y - hh} ${W - 8} ${Y - hh * 0.45} ${W - 6} ${Y} C${W - 8} ${Y + hh * 0.45} ${XS + 110} ${Y + hh} ${XS} ${Y + hh} Z`,
+      fill: b.hlava, stroke: zv ? b.akcent : b.okraj, 'stroke-width': zv ? 4 : 2.5 }, g);
+    prvek('circle', { cx: XS + 30, cy: Y - hh + 22, r: 5, fill: b.kost }, g);
+    text(g, XS + 78, Y - (radky.length - 1) * 9 + 5, radky, { fs: o.maly ? 17 : 15, fill: b.text, anchor: 'middle', bold: true });
+  }
+
+  // kosti
+  kosti.forEach((k, ki) => {
+    const naHore = ki % 2 === 0, sl = Math.floor(ki / 2);
+    const h = naHore ? hH : hD;
+    const xa = X0 + 50 + sirkaSl * (sl + 1) - 8;
+    const yKonec = naHore ? Y - h : Y + h;
+    const xKonec = xa - SKLON * h;
+    const xNa = y => xa - SKLON * Math.abs(Y - y);
+    const cilK = { cast: 'kost', k: ki };
+    const g = skupina(cilK, o.nove?.has('k' + ki));
+    const zv = jeVybrano(cilK);
+    prvek('line', { x1: xKonec, y1: yKonec, x2: xa, y2: Y, stroke: zv ? b.akcent : b.kost, 'stroke-width': zv ? 5 : 3.5, 'stroke-linecap': 'round', class: 'kost-cara' }, g);
+    prvek('line', { x1: xKonec, y1: yKonec, x2: xa, y2: Y, stroke: 'transparent', 'stroke-width': 20 }, g);
+    const nazev = k.n || 'skupina?';
+    const sir = Math.min(sirkaSl - 10, Math.max(70, [...nazev].length * 8.4 + 22));
+    const yPop = naHore ? yKonec - POPISEK + 4 : yKonec + 4;
+    prvek('rect', { x: xKonec - sir / 2, y: yPop, width: sir, height: 26, rx: 13, fill: b.hlava, stroke: zv ? b.akcent : b.okraj, 'stroke-width': zv ? 2.5 : 1.5 }, g);
+    text(g, xKonec, yPop + 18, [nazev], { fs: o.maly ? 15 : 14, fill: k.n ? b.text : b.slaby, anchor: 'middle', bold: true });
+
+    // příčiny
+    let y = naHore ? yKonec + 18 : Y + 16;
+    (k.p || []).forEach((p, pi) => {
+      const bl = bloky[ki][pi];
+      const cilP = { cast: 'pricina', k: ki, p: pi };
+      const gp = skupina(cilP, o.nove?.has(`p${ki}-${pi}`));
+      const zvP = jeVybrano(cilP);
+      const yCara = y + bl.radky.length * (fs + 2) + 2;
+      const xb = xNa(yCara);
+      const delka = Math.min(sirkaSl * 0.72, Math.max(...bl.radky.map(r => r.length)) * 7.2 + 18);
+      const barvaP = p.hlavni ? b.hvezda : (zvP ? b.akcent : b.kost);
+      prvek('line', { x1: xb - delka, y1: yCara, x2: xb, y2: yCara, stroke: barvaP, 'stroke-width': p.hlavni || zvP ? 3 : 2, 'stroke-linecap': 'round' }, gp);
+      prvek('rect', { x: xb - delka, y: y - 2, width: delka, height: yCara - y + 8, fill: 'transparent' }, gp);
+      text(gp, xb - 6, y + fs - 2, bl.radky.map((r, i) => (i === 0 && p.hlavni ? '⭐ ' : '') + r),
+        { fs, fill: p.hlavni ? b.text : (zvP ? b.akcent : b.text), bold: p.hlavni || zvP });
+      let yp = yCara + 4;
+      bl.pod.forEach((radky, ii) => {
+        const cilPod = { cast: 'pod', k: ki, p: pi, i: ii };
+        const gpod = skupina(cilPod, o.nove?.has(`d${ki}-${pi}-${ii}`));
+        const zvD = jeVybrano(cilPod);
+        const xp = xb - 16;
+        prvek('line', { x1: xp + 6, y1: yCara, x2: xp, y2: yp + fsPod - 3, stroke: b.kost, 'stroke-width': 1.3 }, gpod);
+        prvek('rect', { x: xp - delka, y: yp, width: delka, height: radky.length * (fsPod + 2) + 2, fill: 'transparent' }, gpod);
+        text(gpod, xp - 4, yp + fsPod - 1, radky.map((r, i) => (i === 0 ? 'proč? ' : '') + r),
+          { fs: fsPod, fill: zvD ? b.akcent : b.slaby, italic: true, bold: zvD });
+        yp += radky.length * (fsPod + 2);
+      });
+      y += bl.vyska;
+    });
+  });
+
+  if (o.klik) {
+    svg.onclick = e => {
+      const g = e.target.closest('[data-cast]');
+      if (!g) return;
+      const d = g.dataset, num = x => x === undefined ? undefined : +x;
+      o.klik({ cast: d.cast, k: num(d.k), p: num(d.p), i: num(d.i) });
+    };
+  }
+  return svg;
+}
+
+/* ---- 📖 Výuka ------------------------------------------------------------ */
+const VYKLAD = {
+  hlava: '<b>Hlava = problém (následek).</b> Píše se jako konkrétní věta: co se děje, případně kde a kdy. Do hlavy nepatří příčina ani řešení – to teprve hledáme.',
+  pater: '<b>Páteř</b> vede k hlavě. Všechny kosti se do ní sbíhají – každá příčina nakonec přispívá ke stejnému problému.',
+  kost: k => `<b>Hlavní kost = skupina příčin</b> (tady „${ROSTLINA.kosti[k].n}“). Skupiny nás nutí přemýšlet ze všech stran, nejen o tom, co nás napadne první. Obvykle jich bývá 4–6.`,
+  pricina: (k, p) => `<b>Drobná kost = konkrétní příčina:</b> „${ROSTLINA.kosti[k].p[p].t}“. Patří do skupiny ${ROSTLINA.kosti[k].n}. Ke každé příčině se vyplatí zeptat: <i>Proč?</i>`,
+  pod: (k, p, i) => `<b>Odpověď na „proč?“:</b> „${ROSTLINA.kosti[k].p[p].pod[i]}“ je hlubší příčina toho, že „${ROSTLINA.kosti[k].p[p].t.toLowerCase()}“. Když se ptáme „proč?“ opakovaně (metoda <i>5× proč</i>), dojdeme ke skutečnému kořeni problému.`,
+  hlavni: '<b>⭐ Hlavní příčina</b> je ta, která problém způsobuje nejvíc. Tady stojící voda v misce – kořeny hnijí. Opatření: přesadit rostlinu do květináče s otvorem. Hlavní příčinu je dobré ověřit (podívat se na kořeny), ne jen odhadnout.',
+};
+let vyberVyuka = null;
+function kresliVyuku() {
+  kresli($('svgVyuka'), ROSTLINA, { vyber: vyberVyuka, klik: ukazCast });
+}
+function ukazCast(c) {
+  let html;
+  if (c.cast === 'pricina' && ROSTLINA.kosti[c.k].p[c.p].hlavni) html = VYKLAD.pricina(c.k, c.p) + '<br>' + VYKLAD.hlavni;
+  else if (c.cast === 'kost') html = VYKLAD.kost(c.k);
+  else if (c.cast === 'pricina') html = VYKLAD.pricina(c.k, c.p);
+  else if (c.cast === 'pod') html = VYKLAD.pod(c.k, c.p, c.i);
+  else html = VYKLAD[c.cast];
+  vyberVyuka = c;
+  $('vysvetlivka').innerHTML = html;
+  kresliVyuku();
+}
+document.querySelectorAll('[data-ukaz]').forEach(btn => btn.addEventListener('click', () => {
+  const co = btn.dataset.ukaz;
+  const c = { hlava: { cast: 'hlava' }, pater: { cast: 'pater' }, kost: { cast: 'kost', k: 1 },
+    pricina: { cast: 'pricina', k: 1, p: 0 }, pod: { cast: 'pod', k: 2, p: 0, i: 0 }, hlavni: { cast: 'pricina', k: 0, p: 0 } }[co];
+  if (co === 'hlavni') { vyberVyuka = c; $('vysvetlivka').innerHTML = VYKLAD.hlavni; kresliVyuku(); }
+  else ukazCast(c);
+}));
+
+/* ---- 📘 Ukázka ----------------------------------------------------------- */
+const KROKY = (() => {
+  const z = POZDE, kroky = [];
+  const prazdne = () => ({ problem: z.problem, kosti: [] });
+  kroky.push({ nadpis: '1. Problém do hlavy', popis: 'Problém napíšeme do hlavy ryby jako konkrétní větu: „Přicházím pozdě do školy.“ Je to následek – zatím nevíme proč.',
+    m: prazdne(), pater: false, nove: ['hlava'], vyber: { cast: 'hlava' } });
+  kroky.push({ nadpis: '2. Páteř', popis: 'Od hlavy natáhneme páteř. Do ní se budou sbíhat všechny příčiny.',
+    m: prazdne(), nove: ['pater'], vyber: { cast: 'pater' } });
+  kroky.push({ nadpis: '3. Hlavní kosti – skupiny příčin', popis: 'Zvolíme 4 skupiny, ve kterých budeme příčiny hledat: já sám, domov, cesta a plánování. Díky nim nezapomeneme na žádnou stranu věci.',
+    m: { problem: z.problem, kosti: z.kosti.map(k => ({ n: k.n, p: [] })) }, nove: ['k0', 'k1', 'k2', 'k3'] });
+  z.kosti.forEach((k, ki) => {
+    const m = { problem: z.problem, kosti: z.kosti.map((kk, j) => ({ n: kk.n, p: j < ki ? kk.p.map(p => ({ t: p.t })) : j === ki ? kk.p.map(p => ({ t: p.t })) : [] })) };
+    kroky.push({ nadpis: `${4 + ki}. Příčiny ve skupině ${k.n}`, popis: {
+      0: 'Co dělám já? Ráno zaspím a dlouho se oblékám. Každou příčinu napíšeme jako krátkou drobnou kost.',
+      1: 'Co se děje doma? Koupelna je obsazená a ještě hledám klíče.',
+      2: 'Co se stane cestou? Autobus má zpoždění, silnice je rozkopaná.',
+      3: 'Jak si to plánuji? Tašku nemám sbalenou a nevím, kdy přesně jede autobus.' }[ki],
+      m, nove: k.p.map((_, pi) => `p${ki}-${pi}`), vyber: { cast: 'kost', k: ki } });
+  });
+  const vse = kopie(z);
+  vse.kosti.forEach(k => k.p.forEach(p => { delete p.hlavni; }));
+  kroky.push({ nadpis: '8. Ptáme se „proč?“', popis: 'U příčin se zeptáme, proč nastávají. Proč zaspím? Protože večer dlouho koukám do mobilu. Proč není taška sbalená? Protože ji balím až ráno. Odpověď je hlubší příčina.',
+    m: vse, nove: ['d0-0-0', 'd3-0-0'], vyber: { cast: 'pod', k: 0, p: 0, i: 0 } });
+  kroky.push({ nadpis: '9. Vybereme hlavní příčinu', popis: 'Která příčina problém způsobuje nejčastěji? Zapisujeme si týden, proč jsem přišel pozdě – nejčastěji to bylo zaspání. Označíme ho ⭐.',
+    m: kopie(z), vyber: { cast: 'pricina', k: 0, p: 0 } });
+  kroky.push({ nadpis: '10. Navrhneme opatření', popis: 'Opatření míří na hlubší příčinu, ne na příznak: mobil odkládám v 21:00 mimo pokoj a tašku balím večer. Za dva týdny zkontrolujeme, jestli chodím včas.',
+    m: kopie(z) });
+  return kroky;
+})();
+let krok = 0, prehravani = null;
+function kresliKrok() {
+  const k = KROKY[krok];
+  kresli($('svgUkazka'), k.m, { pater: k.pater, nove: new Set(k.nove || []), vyber: k.vyber });
+  $('krokNadpis').textContent = k.nadpis;
+  $('krokPopis').textContent = k.popis;
+  $('krokZpet').disabled = krok === 0;
+  $('krokDal').disabled = krok === KROKY.length - 1;
+  $('bodyKroku').replaceChildren(...KROKY.map((_, i) => {
+    const s = document.createElement('span');
+    if (i < krok) s.className = 'hotovo'; else if (i === krok) s.className = 'ted';
+    return s;
+  }));
+}
+function zastavPrehravani() {
+  if (prehravani) { clearInterval(prehravani); prehravani = null; $('krokPrehraj').textContent = '▶️ Přehrát'; }
+}
+$('krokDal').addEventListener('click', () => { zastavPrehravani(); if (krok < KROKY.length - 1) { krok++; kresliKrok(); } });
+$('krokZpet').addEventListener('click', () => { zastavPrehravani(); if (krok > 0) { krok--; kresliKrok(); } });
+$('krokZnovu').addEventListener('click', () => { zastavPrehravani(); krok = 0; kresliKrok(); });
+$('krokPrehraj').addEventListener('click', () => {
+  if (prehravani) { zastavPrehravani(); return; }
+  if (krok === KROKY.length - 1) krok = 0;
+  kresliKrok();
+  $('krokPrehraj').textContent = '⏸️ Pauza';
+  prehravani = setInterval(() => {
+    if (krok >= KROKY.length - 1) { zastavPrehravani(); return; }
+    krok++; kresliKrok();
+  }, 3200);
+});
+
+/* ---- ✏️ Procvič ----------------------------------------------------------- */
+const SCENARE = [
+  { problem: 'Přicházím pozdě do školy', kosti: [
+    { n: '🧑 Já', p: ['Nechce se mi ráno vstávat', 'Dlouho se oblékám'] },
+    { n: '🏠 Doma', p: ['Ráno je obsazená koupelna', 'Nemůžu najít klíče'] },
+    { n: '🚌 Cesta', p: ['Autobus má zpoždění', 'Silnice je rozkopaná, jdu oklikou'] },
+    { n: '📋 Plánování', p: ['Večer si nepřipravím tašku', 'Nevím, kdy přesně jede autobus'] } ] },
+  { problem: 'Rostlina na okně uvadá', kosti: [
+    { n: '💧 Voda', p: ['Zalévám jen jednou za měsíc', 'V misce pořád stojí voda'] },
+    { n: '☀️ Světlo', p: ['Stojí v tmavém rohu', 'Okno zakrývá hustý závěs'] },
+    { n: '🪴 Půda', p: ['Hlína je stará a vyčerpaná', 'Kořeny se do květináče nevejdou'] },
+    { n: '🌡️ Teplo', p: ['Stojí přímo nad topením', 'V zimě na ni táhne od okna'] } ] },
+  { problem: 'Výsledek pokusu ve fyzice nevyšel', kosti: [
+    { n: '🧑 Člověk', p: ['Špatně jsem odečetl stupnici', 'Ve spěchu jsem vynechal krok'] },
+    { n: '🔧 Pomůcky', p: ['Baterie byla skoro vybitá', 'Teploměr byl prasklý'] },
+    { n: '📄 Postup', p: ['V návodu chyběla jednotka', 'Každý ve skupině dělal postup jinak'] },
+    { n: '🌍 Prostředí', p: ['Ve třídě byl průvan', 'Na kádinku svítilo slunce'] } ] },
+  { problem: 'Školní web se načítá pomalu', kosti: [
+    { n: '🖼️ Obsah', p: ['Fotky mají obrovské rozlišení', 'Na úvodní stránce je dlouhé video'] },
+    { n: '🖥️ Server', p: ['Server je přetížený', 'Server stojí na druhém konci světa'] },
+    { n: '📶 Síť', p: ['Wi-Fi ve třídě je slabá', 'Celá třída zrovna stahuje velké soubory'] },
+    { n: '💻 Zařízení', p: ['Počítač má zaplněný disk', 'V prohlížeči je otevřeno 40 karet'] } ] },
+  { problem: 'Ve třídě je při práci hluk', kosti: [
+    { n: '🧑 Lidé', p: ['Spolužáci si povídají o přestávce', 'Někdo si pouští hudbu nahlas'] },
+    { n: '📋 Pravidla', p: ['Nemáme domluvený signál ticha', 'Není jasné, kdy se smí mluvit'] },
+    { n: '🪑 Prostředí', p: ['Za oknem se staví dům', 'Lavice vrzají při každém pohybu'] },
+    { n: '📚 Úkol', p: ['Zadání je nejasné, všichni se ptají', 'Úkol je moc lehký a brzy ho máme'] } ] },
+];
+const RETEZY = [
+  ['Přicházím pozdě do školy', 'Ráno zaspím', 'Budík jsem si nenastavil', 'Večer jsem usnul u mobilu', 'Nemám pravidlo odkládat mobil před spaním'],
+  ['Rostlina uvadá', 'Kořeny rostliny hnijí', 'V květináči stojí voda', 'Květináč nemá odtokovou díru', 'Při přesazování jsem nevěděl, že je potřeba'],
+  ['Pokus ukázal moc velkou hmotnost', 'Váha nebyla vynulovaná', 'V návodu chyběl krok „vynuluj váhu“', 'Návod nikdo před hodinou nevyzkoušel'],
+  ['Z testu mám čtyřku', 'U zlomků jsem nevěděl odpovědi', 'Při výkladu zlomků jsem chyběl', 'Zameškanou látku jsem si nedoplnil', 'Nevěděl jsem, kde najít zápis z hodiny'],
+  ['Kolo špatně brzdí', 'Brzdové špalky nedosedají na ráfek', 'Lanko brzdy je povolené', 'Šroubek u páčky se uvolnil', 'Kolo nemělo jarní kontrolu'],
+  ['Ve třídě je vydýcháno', 'Nikdo nevětrá', 'Okno nejde otevřít', 'Klika okna je rozbitá', 'Závadu nikdo nenahlásil'],
+];
+const skore = Uloha.skore('metodus_rybi_kost', $('skore'));
+let rezim = 'kost';
+let rozpracovany = null;   // { s, model, zbyva: [{t, k}] }
+
+function novyScenar() {
+  const s = Uloha.nahodne(SCENARE.filter(x => !rozpracovany || x !== rozpracovany.s)) || SCENARE[0];
+  const zbyva = Uloha.zamichej(s.kosti.flatMap((k, ki) => k.p.map(t => ({ t, k: ki }))));
+  rozpracovany = { s, model: { problem: s.problem, kosti: s.kosti.map(k => ({ n: k.n, p: [] })) }, zbyva };
+}
+
+function ulohaKost() {
+  if (!rozpracovany || !rozpracovany.zbyva.length) novyScenar();
+  const r = rozpracovany, u = r.zbyva[0];
+  const p = $('plocha');
+  p.innerHTML = `<div class="zadani">Do které skupiny příčin patří?</div>
+    <svg class="diagram mini" aria-hidden="true"></svg>
+    <div class="karta"><div class="pricina-karta"></div></div>`;
+  p.querySelector('.pricina-karta').textContent = u.t;
+  kresli(p.querySelector('svg'), r.model, { maly: true });
+  const odezva = document.createElement('div');
+  odezva.className = 'odezva';
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: r.s.kosti.map((k, ki) => ({ klic: String(ki), popis: k.n })),
+    spravnyKlic: String(u.k),
+    zpravaOk: `✅ Ano, je to příčina ze skupiny ${r.s.kosti[u.k].n}.`,
+    zpravaChyba: 'Zkus to znovu – kde ta příčina vzniká? U koho, v čem, nebo kde?',
+    poSpravne: napoprve => {
+      skore.vyhodnot(napoprve);
+      r.zbyva.shift();
+      r.model.kosti[u.k].p.push({ t: u.t });
+      kresli(p.querySelector('svg'), r.model, { maly: true, nove: new Set([`p${u.k}-${r.model.kosti[u.k].p.length - 1}`]) });
+      if (!r.zbyva.length) odezva.textContent += ' Rybí kost je kompletní! 🐟';
+    },
+    prodleva: 1400,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+function ulohaPricina() {
+  const ret = Uloha.nahodne(RETEZY);
+  const i = Uloha.nahodneCislo(0, ret.length - 2);
+  const nasledek = ret[i], pricina = ret[i + 1];
+  const p = $('plocha');
+  p.innerHTML = `<div class="zadani">Obě věty spolu souvisí. <b>Která z nich je příčina?</b></div>
+    <div class="proc-otazka">Příčina = to, co se stalo <i>dřív</i> a způsobilo to druhé.</div>`;
+  const odezva = document.createElement('div');
+  odezva.className = 'odezva';
+  Uloha.vyber({
+    kam: p, odezva, trida: 'dve',
+    moznosti: Uloha.zamichej([pricina, nasledek]).map(t => ({ klic: t, popis: t })),
+    spravnyKlic: pricina,
+    zpravaOk: `✅ „${pricina}“, a proto: „${nasledek.charAt(0).toLowerCase() + nasledek.slice(1)}“.`,
+    zpravaChyba: 'Zkus větu: „… , a proto …“. Která věta dává smysl na začátku?',
+    poSpravne: skore.vyhodnot,
+    prodleva: 1700,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+function ulohaProc() {
+  const ri = Uloha.nahodneCislo(0, RETEZY.length - 1), ret = RETEZY[ri];
+  const i = Uloha.nahodneCislo(0, ret.length - 2);
+  const spravna = ret[i + 1];
+  const jine = RETEZY.filter((_, j) => j !== ri).flat();
+  const rusive = [];
+  if (i > 0) rusive.push(ret[i - 1]);
+  while (rusive.length < 2) {
+    const t = Uloha.nahodne(jine);
+    if (!rusive.includes(t)) rusive.push(t);
+  }
+  const p = $('plocha');
+  p.innerHTML = `<div class="zadani">Najdi odpověď na otázku <b>„Proč?“</b> – hlubší příčinu.</div>
+    <div class="karta"><div class="obrazek">❓</div><div class="pricina-karta"></div></div>`;
+  p.querySelector('.pricina-karta').textContent = `Proč: ${ret[i].charAt(0).toLowerCase() + ret[i].slice(1)}?`;
+  const odezva = document.createElement('div');
+  odezva.className = 'odezva';
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: Uloha.zamichej([spravna, ...rusive]).map(t => ({ klic: t, popis: t })),
+    spravnyKlic: spravna,
+    zpravaOk: `✅ Protože: ${spravna.charAt(0).toLowerCase() + spravna.slice(1)}.` + (i + 2 < ret.length ? ' A proč tohle? Dalo by se ptát dál…' : ' Tady už je kořen problému.'),
+    zpravaChyba: i > 0 ? 'Pozor: jedna možnost je následek, ne příčina. Hledej, co se stalo dřív.' : 'Hledej větu, která na „proč?“ odpovídá „protože …“.',
+    poSpravne: skore.vyhodnot,
+    prodleva: 1800,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+const REZIMY = { kost: ulohaKost, pricina: ulohaPricina, proc: ulohaProc };
+function novaUloha() { REZIMY[rezim](); }
+document.querySelectorAll('#rezimy button').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('#rezimy button').forEach(x => x.classList.remove('active'));
+  b.classList.add('active');
+  rezim = b.dataset.rezim;
+  novaUloha();
+}));
+$('btnDalsi').addEventListener('click', () => {
+  if (rezim === 'kost' && rozpracovany?.zbyva.length) rozpracovany.zbyva.push(rozpracovany.zbyva.shift());
+  novaUloha();
+});
+
+/* ---- 🛠️ Vlastní diagram --------------------------------------------------- */
+const KLIC = 'metodus_rybi_kost_dilna';
+let dilna;
+try { dilna = JSON.parse(localStorage.getItem(KLIC) || 'null'); } catch { dilna = null; }
+if (!dilna || !Array.isArray(dilna.kosti)) dilna = { problem: '', kosti: SABLONY.skola.map(n => ({ n, p: [] })) };
+let vyberDilna = null;
+
+function ulozDilnu() { try { localStorage.setItem(KLIC, JSON.stringify(dilna)); } catch { /* bez paměti */ } }
+function kresliDilnu() {
+  kresli($('svgDilna'), dilna, { vyber: vyberDilna, klik: c => {
+    vyberDilna = c;
+    kresliDilnu();
+    let sel = '#problem';
+    if (c.cast === 'kost') sel = `[data-pole="n"][data-k="${c.k}"]`;
+    else if (c.cast === 'pricina') sel = `[data-pole="t"][data-k="${c.k}"][data-p="${c.p}"]`;
+    else if (c.cast === 'pod') sel = `[data-pole="pod"][data-k="${c.k}"][data-p="${c.p}"][data-i="${c.i}"]`;
+    const pole = document.querySelector(sel);
+    if (pole) { pole.focus(); pole.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); }
+  } });
+  document.querySelectorAll('.kost-blok').forEach(b => b.classList.toggle('vybrana', vyberDilna?.k === +b.dataset.k && vyberDilna.cast !== 'hlava'));
+}
+const zmena = () => { ulozDilnu(); kresliDilnu(); };
+
+function pole(hodnota, data, placeholder) {
+  const i = document.createElement('input');
+  i.type = 'text'; i.value = hodnota || ''; i.placeholder = placeholder; i.maxLength = 60;
+  Object.assign(i.dataset, data);
+  i.setAttribute('aria-label', placeholder);
+  return i;
+}
+function tlacitko(txt, titul, fn, trida) {
+  const b = document.createElement('button');
+  b.type = 'button'; b.textContent = txt; b.title = titul; b.setAttribute('aria-label', titul);
+  if (trida) b.className = trida;
+  b.addEventListener('click', fn);
+  return b;
+}
+function sestavEditor() {
+  $('problem').value = dilna.problem || '';
+  const box = $('kostiEditor');
+  box.replaceChildren();
+  dilna.kosti.forEach((k, ki) => {
+    const blok = document.createElement('div');
+    blok.className = 'kost-blok'; blok.dataset.k = ki;
+    const hlava = document.createElement('div');
+    hlava.className = 'radek kost-nazev';
+    hlava.append(pole(k.n, { pole: 'n', k: ki }, 'Název skupiny, např. 🏠 Doma'),
+      tlacitko('🗑', 'Smazat celou kost', () => { dilna.kosti.splice(ki, 1); vyberDilna = null; sestavEditor(); zmena(); }));
+    blok.appendChild(hlava);
+    k.p.forEach((p, pi) => {
+      const r = document.createElement('div');
+      r.className = 'radek';
+      r.append(pole(p.t, { pole: 't', k: ki, p: pi }, 'Příčina'),
+        tlacitko('⭐', 'Označit jako hlavní příčinu', () => {
+          const bylo = p.hlavni;
+          dilna.kosti.forEach(kk => kk.p.forEach(x => { delete x.hlavni; }));
+          if (!bylo) p.hlavni = true;
+          sestavEditor(); zmena();
+        }, p.hlavni ? 'zap' : ''),
+        tlacitko('+?', 'Přidat odpověď na „proč?“', () => {
+          (p.pod = p.pod || []).push('');
+          sestavEditor(); zmena();
+          document.querySelector(`[data-pole="pod"][data-k="${ki}"][data-p="${pi}"][data-i="${p.pod.length - 1}"]`)?.focus();
+        }),
+        tlacitko('🗑', 'Smazat příčinu', () => { k.p.splice(pi, 1); sestavEditor(); zmena(); }));
+      blok.appendChild(r);
+      (p.pod || []).forEach((t, ii) => {
+        const rp = document.createElement('div');
+        rp.className = 'radek pod';
+        rp.append(pole(t, { pole: 'pod', k: ki, p: pi, i: ii }, 'Proč? Protože…'),
+          tlacitko('🗑', 'Smazat odpověď', () => { p.pod.splice(ii, 1); sestavEditor(); zmena(); }));
+        blok.appendChild(rp);
+      });
+    });
+    blok.appendChild(tlacitko('+ příčina', 'Přidat příčinu do skupiny', () => {
+      k.p.push({ t: '' });
+      sestavEditor(); zmena();
+      document.querySelector(`[data-pole="t"][data-k="${ki}"][data-p="${k.p.length - 1}"]`)?.focus();
+    }, 'pridat'));
+    box.appendChild(blok);
+  });
+  $('pridatKost').disabled = dilna.kosti.length >= 8;
+}
+$('kostiEditor').addEventListener('input', e => {
+  const d = e.target.dataset;
+  if (!d.pole) return;
+  const k = dilna.kosti[+d.k];
+  if (d.pole === 'n') k.n = e.target.value;
+  else if (d.pole === 't') k.p[+d.p].t = e.target.value;
+  else if (d.pole === 'pod') k.p[+d.p].pod[+d.i] = e.target.value;
+  zmena();
+});
+$('kostiEditor').addEventListener('focusin', e => {
+  const d = e.target.dataset;
+  if (!d.pole) return;
+  vyberDilna = d.pole === 'n' ? { cast: 'kost', k: +d.k } : d.pole === 't' ? { cast: 'pricina', k: +d.k, p: +d.p } : { cast: 'pod', k: +d.k, p: +d.p, i: +d.i };
+  kresliDilnu();
+});
+$('problem').addEventListener('input', e => { dilna.problem = e.target.value; zmena(); });
+$('problem').addEventListener('focus', () => { vyberDilna = { cast: 'hlava' }; kresliDilnu(); });
+$('pridatKost').addEventListener('click', () => {
+  if (dilna.kosti.length >= 8) return;
+  dilna.kosti.push({ n: '', p: [] });
+  sestavEditor(); zmena();
+  document.querySelector(`[data-pole="n"][data-k="${dilna.kosti.length - 1}"]`)?.focus();
+});
+$('sablona').addEventListener('change', e => {
+  const v = e.target.value;
+  e.target.value = '';
+  if (!v) return;
+  const neprazdna = dilna.problem || dilna.kosti.some(k => k.p.length);
+  if (neprazdna && !confirm('Nahradit současný diagram šablonou?')) return;
+  if (v === 'pozde') dilna = kopie(POZDE);
+  else if (v === 'rostlina') dilna = kopie(ROSTLINA);
+  else dilna = { problem: dilna.problem || '', kosti: SABLONY[v].map(n => ({ n, p: [] })) };
+  vyberDilna = null;
+  sestavEditor(); zmena();
+});
+
+function svgProExport() {
+  const s = document.createElementNS(NS, 'svg');
+  s.setAttribute('xmlns', NS);
+  kresli(s, dilna, { paleta: TISK_BARVY });
+  const [, , w, h] = s.getAttribute('viewBox').split(' ').map(Number);
+  s.setAttribute('width', w); s.setAttribute('height', h);
+  return { text: new XMLSerializer().serializeToString(s), w, h };
+}
+function stahni(url, jmeno) {
+  const a = document.createElement('a');
+  a.href = url; a.download = jmeno;
+  document.body.appendChild(a); a.click(); a.remove();
+}
+const jmenoSouboru = () => 'rybi-kost-' + ((dilna.problem || 'diagram').normalize('NFD').replace(/[̀-ͯ]/g, '')
+  .toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 40) || 'diagram');
+$('dlSvg').addEventListener('click', () => {
+  const url = URL.createObjectURL(new Blob([svgProExport().text], { type: 'image/svg+xml' }));
+  stahni(url, jmenoSouboru() + '.svg');
+  setTimeout(() => URL.revokeObjectURL(url), 2000);
+});
+$('dlPng').addEventListener('click', () => {
+  const { text, w, h } = svgProExport();
+  const img = new Image();
+  img.onload = () => {
+    const c = document.createElement('canvas');
+    c.width = w * 2; c.height = h * 2;
+    const g = c.getContext('2d');
+    g.scale(2, 2); g.drawImage(img, 0, 0);
+    stahni(c.toDataURL('image/png'), jmenoSouboru() + '.png');
+  };
+  img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(text);
+});
+$('tisk').addEventListener('click', () => {
+  document.body.classList.add('tisk-dilny');
+  kresli($('svgDilna'), dilna, { paleta: TISK_BARVY });
+  window.print();
+});
+window.addEventListener('afterprint', () => {
+  if (!document.body.classList.contains('tisk-dilny')) return;
+  document.body.classList.remove('tisk-dilny');
+  kresliDilnu();
+});
+
+/* ---- start a překreslení při změně motivu -------------------------------- */
+function kresliVse() { kresliVyuku(); kresliKrok(); kresliDilnu(); if (rezim === 'kost' && rozpracovany) { const s = $('plocha').querySelector('svg'); if (s) kresli(s, rozpracovany.model, { maly: true }); } }
+new MutationObserver(kresliVse).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme', 'data-tone'] });
+sestavEditor();
+kresliVse();
+novaUloha();
+</script>
+</body>
+</html>

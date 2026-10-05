@@ -18,6 +18,17 @@
       color: var(--text-faint); font-size: 0.79rem; }
     .lista span { background: var(--bg-control); border: 1px solid var(--border);
       border-radius: 8px; padding: 5px 11px; }
+    .rekonstrukce-cas { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px;
+      width: min(100%, 1040px); margin-bottom: 18px; }
+    .rekonstrukce-cas figure { position: relative; margin: 0; overflow: hidden; background: var(--bg-panel);
+      border: 1px solid var(--border); border-radius: 14px; }
+    .rekonstrukce-cas img { display: block; width: 100%; aspect-ratio: 3 / 2; object-fit: cover; }
+    .rekonstrukce-cas figcaption { padding: 10px 12px 12px; color: var(--text-muted); font-size: 0.84rem; line-height: 1.45; }
+    .rekonstrukce-cas b { display: block; color: var(--text); font-size: 0.98rem; margin-bottom: 3px; }
+    .rekonstrukce-stit { position: absolute; top: 9px; left: 9px; z-index: 1; padding: 5px 9px;
+      border-radius: 999px; background: #201b16df; color: #fff; font-size: 0.72rem; font-weight: 800;
+      letter-spacing: 0.04em; text-transform: uppercase; }
+    @media (max-width: 700px) { .rekonstrukce-cas { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
@@ -30,6 +41,29 @@
     <button data-rezim="kviz3">🪨 Zkameněliny</button>
     <button data-rezim="kviz4">🧬 Vývoj člověka</button>
   </div>
+
+  <section class="rekonstrukce-cas" aria-label="Rekonstrukce krajin z dějin Země">
+    <figure>
+      <span class="rekonstrukce-stit">Rekonstrukce</span>
+      <img src="img/pr/pr9-vyvoj-prvohorni-more.webp" alt="Rekonstrukce prvohorního moře s trilobity, lilijicemi, ramenonožci a hlavonožcem s přímou schránkou." width="1152" height="768">
+      <figcaption><b>Prvohorní moře</b>Trilobiti žili na dně, lilijice filtrovaly potravu a hlavonožci patřili k významným predátorům.</figcaption>
+    </figure>
+    <figure>
+      <span class="rekonstrukce-stit">Rekonstrukce</span>
+      <img src="img/pr/pr9-vyvoj-karbonsky-les.webp" alt="Rekonstrukce karbonského močálového lesa s plavuněmi, přesličkami, kapradinami a velkou vážkou." width="1152" height="768">
+      <figcaption><b>Karbonský les</b>Z odumřelé biomasy rozsáhlých močálů později vznikala ložiska černého uhlí.</figcaption>
+    </figure>
+    <figure>
+      <span class="rekonstrukce-stit">Rekonstrukce</span>
+      <img src="img/pr/pr9-vyvoj-druhohory.webp" alt="Rekonstrukce druhohorní krajiny se sauropodem, stegosaurem, ptakoještěrem, jehličnany a kapradinami." width="1152" height="768">
+      <figcaption><b>Druhohorní krajina</b>Souši dominovali dinosauři; běžné byly jehličnany, cykasy, jinany a kapradiny.</figcaption>
+    </figure>
+    <figure>
+      <span class="rekonstrukce-stit">Rekonstrukce</span>
+      <img src="img/pr/pr9-vyvoj-ctvrtohorni-tundra.webp" alt="Rekonstrukce čtvrtohorní stepní tundry se stádem mamutů, soby a srstnatým nosorožcem." width="1152" height="768">
+      <figcaption><b>Čtvrtohorní stepní tundra</b>Chladné suché krajině dob ledových se přizpůsobili mamuti, sobi i srstnatí nosorožci.</figcaption>
+    </figure>
+  </section>
 
   <div class="plocha" id="plocha"></div>
 

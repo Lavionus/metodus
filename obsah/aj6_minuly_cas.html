@@ -21,6 +21,9 @@
       padding: 6px 12px; font-size: 0.8rem; color: var(--text-muted);
     }
     .tabulka b { color: var(--text); }
+    .pribeh-obrazek { width: min(100%, 560px); aspect-ratio: 3 / 2; object-fit: cover; border-radius: 14px;
+      border: 1px solid var(--border); box-shadow: 0 5px 18px #0002; }
+    .pribeh-krok { color: var(--text-faint); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.04em; }
   </style>
 </head>
 <body>
@@ -32,6 +35,7 @@
     <button data-rezim="nepravidelna">⭐ Nepravidelná slovesa</button>
     <button data-rezim="otazkaZapor">❓ Otázka a zápor</button>
     <button data-rezim="signaly">🕐 Patří tam minulý čas?</button>
+    <button data-rezim="pribeh">🏖️ Výlet k moři</button>
   </div>
 
   <div class="plocha" id="plocha"></div>
@@ -90,6 +94,16 @@ const SIGNALY = [
   { v: 'We ___ in the sea last summer.', minuly: true, spr: 'swam', zaklad: 'swim' },
   { v: 'Tom always ___ to school by bus.', minuly: false, spr: 'goes', zaklad: 'go' },
 ];
+
+const PRIBEH = [
+  { img: 'img/aj/aj6-vylet-baleni.webp', alt: 'Dívka si ráno balí kufr na cestu k moři.', veta: 'She ___ her suitcase in the morning.', a: 'packed', b: ['pack', 'packted', 'packs'] },
+  { img: 'img/aj/aj6-vylet-vlak.webp', alt: 'Dívka cestuje vlakem a z okna poprvé vidí moře.', veta: 'She ___ to the coast by train.', a: 'travelled', b: ['travel', 'travels', 'travelling'] },
+  { img: 'img/aj/aj6-vylet-plaz.webp', alt: 'Dívka staví na slunečné pláži hrad z písku.', veta: 'She ___ a sandcastle on the beach.', a: 'built', b: ['build', 'builded', 'builds'] },
+  { img: 'img/aj/aj6-vylet-dest.webp', alt: 'Dívku na pláži překvapil prudký déšť.', veta: 'Then it ___ to rain.', a: 'started', b: ['start', 'startted', 'starts'] },
+  { img: 'img/aj/aj6-vylet-kavarna.webp', alt: 'Dívka čeká v kavárně a pije teplé kakao.', veta: 'She ___ hot cocoa in a cafe.', a: 'drank', b: ['drink', 'drinked', 'drinks'] },
+  { img: 'img/aj/aj6-vylet-navrat.webp', alt: 'Dívka se večer vrátila domů a ukazuje mušli.', veta: 'She ___ home in the evening.', a: 'returned', b: ['return', 'returnt', 'returns'] },
+];
+let pribehIndex = 0;
 
 /* ---- Tvar slovesa -------------------------------------------------------------------- */
 function tvar() {
@@ -192,7 +206,29 @@ function signaly() {
   p.appendChild(odezva);
 }
 
-const REZIMY = { tvar, nepravidelna, otazkaZapor, signaly };
+/* ---- Obrázkový příběh --------------------------------------------------------------- */
+function pribeh() {
+  const p = $('plocha');
+  const u = PRIBEH[pribehIndex];
+  p.innerHTML = `<div class="pribeh-krok">PŘÍBĚH · ${pribehIndex + 1} / ${PRIBEH.length}</div>
+    <img class="pribeh-obrazek" src="${u.img}" alt="${u.alt}" width="1152" height="768">
+    <div class="zadani">Doplň sloveso v minulém čase:</div>
+    <div class="karta"><div class="veta-en">${u.veta.replace('___', '<span class="mezera">?</span>')}</div></div>`;
+  const odezva = document.createElement('div');
+  odezva.className = 'odezva';
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: Uloha.zamichej([u.a, ...u.b]).map(t => ({ klic: t, popis: t })),
+    spravnyKlic: u.a,
+    zpravaOk: `✅ ${u.veta.replace('___', u.a)}`,
+    zpravaChyba: 'Příběh se už stal – potřebuješ tvar slovesa v minulém čase.',
+    poSpravne: napoprve => { skore.vyhodnot(napoprve); pribehIndex = (pribehIndex + 1) % PRIBEH.length; },
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+const REZIMY = { tvar, nepravidelna, otazkaZapor, signaly, pribeh };
 function novaUloha() { REZIMY[rezim](); }
 
 document.querySelectorAll('#rezimy button').forEach(b => b.addEventListener('click', () => {
