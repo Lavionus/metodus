@@ -19,6 +19,21 @@
       background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 20px;
       padding: 5px 12px; font-size: 0.82rem; color: var(--text-muted);
     }
+    .atlas-bezobratlych { margin: 24px auto; max-width: 1100px; }
+    .atlas-bezobratlych h2 { text-align: center; margin-bottom: 6px; }
+    .atlas-uvod { text-align: center; color: var(--text-muted); margin: 0 auto 18px; }
+    .atlas-mrizka { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+    .atlas-karta { background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 16px; padding: 12px; }
+    .atlas-karta img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 11px; display: block; }
+    .atlas-karta h3 { margin: 10px 0 2px; }
+    .atlas-kmen { color: var(--text-muted); font-size: .86rem; margin: 0 0 9px; }
+    .hotspoty { display: flex; flex-wrap: wrap; gap: 6px; }
+    .hotspoty button { min-height: 38px; padding: 7px 10px; border-radius: 999px; }
+    .hotspoty button[aria-pressed="true"] { outline: 3px solid var(--accent); outline-offset: 1px; }
+    .hotspot-popis { min-height: 3.1em; margin: 9px 0 0; font-size: .88rem; line-height: 1.45; color: var(--text-muted); }
+    .bezobratly-img { width: min(260px, 75vw); aspect-ratio: 1; object-fit: cover; border-radius: 14px; }
+    @media (max-width: 820px) { .atlas-mrizka { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 520px) { .atlas-mrizka { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
@@ -31,6 +46,19 @@
     <button data-rezim="stavba">🧩 Stavba těla</button>
     <button data-rezim="vyznam">⚖️ Význam pro člověka</button>
   </div>
+
+  <section class="atlas-bezobratlych" aria-labelledby="atlas-nadpis">
+    <h2 id="atlas-nadpis">Obrazový atlas stavby těla</h2>
+    <p class="atlas-uvod">Vyber část těla a zjisti, jak živočichovi slouží.</p>
+    <div class="atlas-mrizka">
+      <article class="atlas-karta"><picture><source srcset="img/pr/pr6-bezobratli-nezmar.webp" type="image/webp"><img src="img/pr/pr6-bezobratli-nezmar.png" alt="Nezmar s chapadly, pupenem, nožním terčem a průřezem tělní dutinou" width="768" height="768" loading="lazy"></picture><h3>Nezmar</h3><p class="atlas-kmen">žahavci</p><div class="hotspoty" aria-label="Části těla nezmara"><button data-vysvetleni="Chapadla nesou žahavé buňky, kterými nezmar ochromí drobnou kořist." aria-pressed="false">1 Chapadla</button><button data-vysvetleni="Láčka je jediná trávicí dutina; potrava i nestrávené zbytky procházejí ústním otvorem." aria-pressed="false">2 Láčka</button><button data-vysvetleni="Pupen vyroste na těle rodiče a později se oddělí — jde o nepohlavní rozmnožování." aria-pressed="false">3 Pupen</button></div><p class="hotspot-popis" aria-live="polite">Vyber očíslovanou část.</p></article>
+      <article class="atlas-karta"><picture><source srcset="img/pr/pr6-bezobratli-plostenka.webp" type="image/webp"><img src="img/pr/pr6-bezobratli-plostenka.png" alt="Ploštěnka s očky, vychlípitelným hltanem a rozvětvenou trávicí dutinou" width="768" height="768" loading="lazy"></picture><h3>Ploštěnka</h3><p class="atlas-kmen">ploštěnci</p><div class="hotspoty" aria-label="Části těla ploštěnky"><button data-vysvetleni="Jednoduchá očka rozlišují světlo a tmu; nevytvářejí ostrý obraz." aria-pressed="false">1 Očka</button><button data-vysvetleni="Vychlípitelný hltan nasává potravu otvorem na břišní straně." aria-pressed="false">2 Hltan</button><button data-vysvetleni="Rozvětvená trávicí dutina rozvádí živiny plochým tělem, které nemá cévní soustavu." aria-pressed="false">3 Střevo</button></div><p class="hotspot-popis" aria-live="polite">Vyber očíslovanou část.</p></article>
+      <article class="atlas-karta"><picture><source srcset="img/pr/pr6-bezobratli-skrkavka.webp" type="image/webp"><img src="img/pr/pr6-bezobratli-skrkavka.png" alt="Škrkavka s válcovitým nečlánkovaným tělem a průřezem vnitřními orgány" width="768" height="768" loading="lazy"></picture><h3>Škrkavka</h3><p class="atlas-kmen">hlísti</p><div class="hotspoty" aria-label="Části těla škrkavky"><button data-vysvetleni="Pevná kutikula chrání cizopasníka před trávicími šťávami hostitele." aria-pressed="false">1 Kutikula</button><button data-vysvetleni="Trávicí trubice má ústní i řitní otvor, potrava tedy postupuje jedním směrem." aria-pressed="false">2 Trávicí trubice</button><button data-vysvetleni="Samice vytváří obrovské množství vajíček, která odcházejí z těla hostitele." aria-pressed="false">3 Pohlavní orgány</button></div><p class="hotspot-popis" aria-live="polite">Vyber očíslovanou část.</p></article>
+      <article class="atlas-karta"><picture><source srcset="img/pr/pr6-bezobratli-hlemyzd.webp" type="image/webp"><img src="img/pr/pr6-bezobratli-hlemyzd.png" alt="Hlemýžď s ulitou, svalnatou nohou, tykadly a odkrytými vnitřními orgány" width="768" height="768" loading="lazy"></picture><h3>Hlemýžď</h3><p class="atlas-kmen">měkkýši — plži</p><div class="hotspoty" aria-label="Části těla hlemýždě"><button data-vysvetleni="Ulita chrání měkké tělo a hlemýžď se do ní může zatáhnout." aria-pressed="false">1 Ulita</button><button data-vysvetleni="Svalnatá noha klouže po vrstvě slizu a umožňuje pomalý pohyb." aria-pressed="false">2 Noha</button><button data-vysvetleni="Plášť vystýlá ulitu; jeho dutina u suchozemských plžů slouží jako plíce." aria-pressed="false">3 Plášť</button></div><p class="hotspot-popis" aria-live="polite">Vyber očíslovanou část.</p></article>
+      <article class="atlas-karta"><picture><source srcset="img/pr/pr6-bezobratli-zizala.webp" type="image/webp"><img src="img/pr/pr6-bezobratli-zizala.png" alt="Žížala s článkovaným tělem, opaskem, štětinkami a odkrytou trávicí trubicí" width="768" height="768" loading="lazy"></picture><h3>Žížala</h3><p class="atlas-kmen">kroužkovci</p><div class="hotspoty" aria-label="Části těla žížaly"><button data-vysvetleni="Opakující se články umožňují pružný pohyb a dávají kmenu jméno kroužkovci." aria-pressed="false">1 Články</button><button data-vysvetleni="Drobné štětinky se zachycují o půdu, když se svaly těla stahují." aria-pressed="false">2 Štětinky</button><button data-vysvetleni="Zduřelý opasek vytváří kokon, do něhož žížala ukládá vajíčka." aria-pressed="false">3 Opasek</button></div><p class="hotspot-popis" aria-live="polite">Vyber očíslovanou část.</p></article>
+      <article class="atlas-karta"><picture><source srcset="img/pr/pr6-bezobratli-skeble.webp" type="image/webp"><img src="img/pr/pr6-bezobratli-skeble.png" alt="Otevřená škeble se dvěma lasturami, žábrami, pláštěm a svalnatou nohou" width="768" height="768" loading="lazy"></picture><h3>Škeble</h3><p class="atlas-kmen">měkkýši — mlži</p><div class="hotspoty" aria-label="Části těla škeble"><button data-vysvetleni="Dvě lastury spojené vazem chrání měkké tělo mlže." aria-pressed="false">1 Lastury</button><button data-vysvetleni="Žábry získávají kyslík a zachycují drobné částečky potravy z vody." aria-pressed="false">2 Žábry</button><button data-vysvetleni="Klínovitá svalnatá noha pomáhá škebli zahrabat se do dna." aria-pressed="false">3 Noha</button></div><p class="hotspot-popis" aria-live="polite">Vyber očíslovanou část.</p></article>
+    </div>
+  </section>
 
   <div class="plocha" id="plocha"></div>
 
@@ -60,29 +88,34 @@ const KMENY = {
 const ZIVOCICHOVE = [
   { n: 'medúza', e: '🪼', kmen: 'zahavci', popis: 'rosolovité tělo se žahavými buňkami na ramenech',
     znaky: ['žahavé buňky', 'paprsčitá souměrnost', 'žije v moři'] },
-  { n: 'nezmar', e: '🌱', kmen: 'zahavci', popis: 'drobný sladkovodní žahavec přisedlý na rostlinách',
+  { n: 'nezmar', e: '🌱', img: 'nezmar', alt: 'Nezmar s chapadly a pupenem', kmen: 'zahavci', popis: 'drobný sladkovodní žahavec přisedlý na rostlinách',
     znaky: ['žahavé buňky', 'pučení', 'sladká voda'] },
   { n: 'korál', e: '🪸', kmen: 'zahavci', popis: 'přisedlý mořský živočich tvořící vápenaté útesy',
     znaky: ['přisedlý', 'kolonie', 'tvoří útesy'] },
   { n: 'tasemnice', e: '📏', kmen: 'plostenci', popis: 'cizopasník ve střevě, tělo tvoří dlouhá řada článků',
     znaky: ['cizopasník', 'ploché tělo', 'bez trávicí soustavy'] },
-  { n: 'ploštěnka mléčná', e: '🫓', kmen: 'plostenci', popis: 'ploché tělo, žije pod kameny v potocích',
+  { n: 'ploštěnka mléčná', e: '🫓', img: 'plostenka', alt: 'Ploštěnka s očky a rozvětvenou trávicí dutinou', kmen: 'plostenci', popis: 'ploché tělo, žije pod kameny v potocích',
     znaky: ['ploché tělo', 'sladká voda', 'velká schopnost regenerace'] },
-  { n: 'škrkavka dětská', e: '🪱', kmen: 'hlisti', popis: 'oblý cizopasník žijící ve střevě člověka',
+  { n: 'škrkavka dětská', e: '🪱', img: 'skrkavka', alt: 'Škrkavka s válcovitým tělem', kmen: 'hlisti', popis: 'oblý cizopasník žijící ve střevě člověka',
     znaky: ['oblé tělo', 'cizopasník', 'nakažení špinavýma rukama'] },
   { n: 'roup dětský', e: '〰️', kmen: 'hlisti', popis: 'drobný oblý cizopasník způsobující svědění',
     znaky: ['oblé tělo', 'cizopasník', 'hygiena jako prevence'] },
-  { n: 'hlemýžď zahradní', e: '🐌', kmen: 'mekkysi', popis: 'plž s ulitou, pohybuje se pomocí svalnaté nohy',
+  { n: 'hlemýžď zahradní', e: '🐌', img: 'hlemyzd', alt: 'Hlemýžď s ulitou a svalnatou nohou', kmen: 'mekkysi', popis: 'plž s ulitou, pohybuje se pomocí svalnaté nohy',
     znaky: ['ulita', 'svalnatá noha', 'strouhací jazýček'] },
-  { n: 'škeble rybničná', e: '🦪', kmen: 'mekkysi', popis: 'mlž se dvěma miskami, filtruje vodu',
+  { n: 'škeble rybničná', e: '🦪', img: 'skeble', alt: 'Otevřená škeble se žábrami a nohou', kmen: 'mekkysi', popis: 'mlž se dvěma miskami, filtruje vodu',
     znaky: ['dvě lastury', 'filtruje vodu', 'bez hlavy'] },
   { n: 'chobotnice', e: '🐙', kmen: 'mekkysi', popis: 'hlavonožec s osmi rameny a vyspělým mozkem',
     znaky: ['ramena s přísavkami', 'inteligentní', 'mořský'] },
-  { n: 'žížala obecná', e: '🪱', kmen: 'krouzkovci', popis: 'článkované tělo, prokypřuje a provzdušňuje půdu',
+  { n: 'žížala obecná', e: '🪱', img: 'zizala', alt: 'Žížala s články, štětinkami a opaskem', kmen: 'krouzkovci', popis: 'článkované tělo, prokypřuje a provzdušňuje půdu',
     znaky: ['článkované tělo', 'žije v půdě', 'prospěšná'] },
   { n: 'pijavka lékařská', e: '🩸', kmen: 'krouzkovci', popis: 'kroužkovec s přísavkami, saje krev',
     znaky: ['přísavky', 'saje krev', 'využití v medicíně'] },
 ];
+
+function obrazekBezobratle(u) {
+  if (!u.img) return u.e;
+  return `<picture><source srcset="img/pr/pr6-bezobratli-${u.img}.webp" type="image/webp"><img class="bezobratly-img" src="img/pr/pr6-bezobratli-${u.img}.png" alt="${u.alt}" width="768" height="768"></picture>`;
+}
 
 const STAVBA_OTAZKY = [
   { o: 'Čím se žahavci brání a loví kořist?', spr: 'žahavými buňkami',
@@ -115,7 +148,7 @@ function kmen() {
   const p = $('plocha');
   const u = Uloha.nahodne(ZIVOCICHOVE);
   p.innerHTML = `<div class="zadani">Do kterého kmene tento živočich patří?</div>
-    <div class="karta"><div class="obrazek">${u.e}</div><div class="nazev-z">${u.n}</div></div>`;
+    <div class="karta"><div class="obrazek">${obrazekBezobratle(u)}</div><div class="nazev-z">${u.n}</div></div>`;
   const odezva = document.createElement('div');
   odezva.className = 'odezva';
   Uloha.vyber({
@@ -138,7 +171,7 @@ function poznej() {
   const u = Uloha.nahodne(ZIVOCICHOVE);
   const jine = Uloha.zamichej(ZIVOCICHOVE.filter(x => x.n !== u.n)).slice(0, 3);
   p.innerHTML = `<div class="zadani">O kterého živočicha jde?</div>
-    <div class="karta"><div class="obrazek">🔎</div><div class="popis-z">${u.popis}</div></div>`;
+    <div class="karta"><div class="obrazek">${obrazekBezobratle(u)}</div><div class="popis-z">${u.popis}</div></div>`;
   const znaky = document.createElement('div');
   znaky.className = 'znaky';
   znaky.innerHTML = u.znaky.map(z => `<span>${z}</span>`).join('');
@@ -211,6 +244,11 @@ document.querySelectorAll('#rezimy button').forEach(b => b.addEventListener('cli
   novaUloha();
 }));
 $('btnDalsi').addEventListener('click', novaUloha);
+document.querySelectorAll('.hotspoty button').forEach(button => button.addEventListener('click', () => {
+  const skupina = button.closest('.atlas-karta');
+  skupina.querySelectorAll('.hotspoty button').forEach(jiny => jiny.setAttribute('aria-pressed', String(jiny === button)));
+  skupina.querySelector('.hotspot-popis').textContent = button.dataset.vysvetleni;
+}));
 document.addEventListener('keydown', e => {
   if (e.key === 'ArrowRight' || e.key === 'Enter') { e.preventDefault(); novaUloha(); }
 });

@@ -36,6 +36,7 @@
     .park-bod.cil { opacity: 1; background: #d13c3566; border: 3px solid #d13c35; outline: 3px solid #fff; animation: parkPulse 1.15s ease-in-out infinite alternate; }
     .park-bod:focus-visible { outline: 4px solid var(--focus, #ffbf47); opacity: 1; }
     .park-vyzva { margin: 0 0 8px; font-weight: 700; color: var(--text-muted); text-align: center; }
+    .cas-obrazek { width: min(100%, 300px); aspect-ratio: 1; object-fit: cover; border-radius: 12px; margin-bottom: 8px; }
     @keyframes parkPulse { to { scale: 1.2; } }
     @media (prefers-reduced-motion: reduce) { .park-bod.cil { animation: none; } }
   </style>
@@ -110,9 +111,9 @@ const OBRAZKY = [
 ];
 
 const ROZDIL = [
-  { v: 'Look! The baby ___ .', spr: 'prubehovy', cz: 'Podívej! Miminko spí (právě teď).', tvar: 'is sleeping' },
-  { v: 'I ___ to school every day.', spr: 'prosty', cz: 'Chodím do školy každý den (opakovaně).', tvar: 'go' },
-  { v: 'She ___ TV at the moment.', spr: 'prubehovy', cz: 'Právě teď se dívá na televizi.', tvar: 'is watching' },
+  { v: 'Look! The boy ___ .', spr: 'prubehovy', cz: 'Podívej! Chlapec spí (právě teď).', tvar: 'is sleeping', img: 'spi', alt: 'Chlapec právě spí v posteli.' },
+  { v: 'He ___ to school every day.', spr: 'prosty', cz: 'Chodí do školy každý den (opakovaně).', tvar: 'goes', img: 'skola', alt: 'Chlapec pravidelně chodí do školy.' },
+  { v: 'He ___ TV at the moment.', spr: 'prubehovy', cz: 'Právě teď se dívá na televizi.', tvar: 'is watching', img: 'televize', alt: 'Chlapec se právě dívá na televizi.' },
   { v: 'We usually ___ dinner at six.', spr: 'prosty', cz: 'Obvykle večeříme v šest.', tvar: 'have' },
   { v: 'Listen! They ___ a song.', spr: 'prubehovy', cz: 'Poslouchej! Zpívají píseň.', tvar: 'are singing' },
   { v: 'My dad ___ in a bank.', spr: 'prosty', cz: 'Táta pracuje v bance (dlouhodobě).', tvar: 'works' },
@@ -173,7 +174,7 @@ function rozdil() {
   const p = $('plocha');
   const u = Uloha.nahodne(ROZDIL);
   p.innerHTML = `<div class="zadani">Který čas patří do věty?</div>
-    <div class="karta"><div class="veta-en">${u.v}</div>
+    <div class="karta">${u.img ? `<img class="cas-obrazek" src="img/aj/aj4-den-${u.img}.webp" alt="${u.alt}" width="768" height="768">` : ''}<div class="veta-en">${u.v}</div>
     <div class="preklad">${u.cz}</div></div>`;
   const odezva = document.createElement('div');
   odezva.className = 'odezva';

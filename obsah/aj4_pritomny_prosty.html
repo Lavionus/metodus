@@ -21,6 +21,14 @@
       padding: 6px 12px; font-size: 0.8rem; color: var(--text-muted);
     }
     .tabulka b { color: var(--text); }
+    .denni-rezim { width: min(100%, 1080px); margin: 18px 0 22px; }
+    .denni-rezim h2 { margin: 0 0 5px; font-size: 1.2rem; }
+    .denni-rezim > p { margin: 0 0 12px; color: var(--text-muted); }
+    .denni-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+    .denni-grid figure { margin: 0; padding: 6px; border: 1px solid var(--border); border-radius: 13px; background: var(--bg-panel); text-align: center; }
+    .denni-grid img { display: block; width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 9px; }
+    .denni-grid figcaption { padding: 7px 2px 2px; font-size: .84rem; font-weight: 700; }
+    @media (max-width: 720px) { .denni-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   </style>
 </head>
 <body>
@@ -33,6 +41,21 @@
     <button data-rezim="zapor">🚫 Zápor</button>
     <button data-rezim="spravne">🔍 Je to správně?</button>
   </div>
+
+  <section class="denni-rezim" aria-labelledby="denni-rezim-nadpis">
+    <h2 id="denni-rezim-nadpis">Tom's daily routine</h2>
+    <p>Prohlédni si celý den. Přítomný čas prostý říká, co Tom dělá pravidelně.</p>
+    <div class="denni-grid">
+      <figure><img src="img/aj/aj4-den-vstava.webp" alt="Tom ráno vstává a protahuje se vedle postele." width="768" height="768"><figcaption>He gets up.</figcaption></figure>
+      <figure><img src="img/aj/aj4-den-snida.webp" alt="Tom snídá cereálie u kuchyňského stolu." width="768" height="768"><figcaption>He has breakfast.</figcaption></figure>
+      <figure><img src="img/aj/aj4-den-skola.webp" alt="Tom jde s batohem do školy." width="768" height="768"><figcaption>He goes to school.</figcaption></figure>
+      <figure><img src="img/aj/aj4-den-fotbal.webp" alt="Tom odpoledne hraje fotbal." width="768" height="768"><figcaption>He plays football.</figcaption></figure>
+      <figure><img src="img/aj/aj4-den-ukoly.webp" alt="Tom píše domácí úkol u pracovního stolu." width="768" height="768"><figcaption>He does his homework.</figcaption></figure>
+      <figure><img src="img/aj/aj4-den-televize.webp" alt="Tom se večer dívá na televizi." width="768" height="768"><figcaption>He watches TV.</figcaption></figure>
+      <figure><img src="img/aj/aj4-den-cte.webp" alt="Tom večer čte knihu v křesle." width="768" height="768"><figcaption>He reads a book.</figcaption></figure>
+      <figure><img src="img/aj/aj4-den-spi.webp" alt="Tom v noci spí v posteli." width="768" height="768"><figcaption>He sleeps.</figcaption></figure>
+    </div>
+  </section>
 
   <div class="plocha" id="plocha"></div>
 

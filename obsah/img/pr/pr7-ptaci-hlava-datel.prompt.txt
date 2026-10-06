@@ -1,0 +1,9 @@
+Use case: scientific-educational
+Asset type: square comparative anatomy card for Czech grade-7 biology
+Scene/backdrop: plain warm off-white paper background, isolated subject.
+Style/medium: precise natural-history watercolor with fine colored-pencil detail, scientifically credible, consistent museum field-guide style.
+Composition/framing: head and upper neck only, strict left-facing profile, eye and complete beak visible, centered at identical scale with generous margin.
+Lighting/mood: soft neutral daylight.
+Constraints: no text, letters, numbers, arrows, labels, border, watermark, extra animals, food or habitat; no open beak; preserve diagnostic beak anatomy.
+Subject: adult great spotted woodpecker (Dendrocopos major), black-and-white head with red nape patch, strong straight chisel-shaped dark beak.
+

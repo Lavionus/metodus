@@ -26,8 +26,19 @@
     .chrup-grid img { display: block; width: 100%; aspect-ratio: 1; object-fit: contain; background: #f7f1e5; }
     .chrup-grid summary { padding: 9px 11px; cursor: pointer; font-weight: 750; color: var(--text); }
     .chrup-grid p { margin: 0; padding: 0 11px 12px; color: var(--text-muted); font-size: .84rem; line-height: 1.45; }
+    .ptaci-atlas { width: min(100%, 1100px); margin: 0 0 22px; }
+    .ptaci-atlas h2 { margin: 0 0 5px; font-size: 1.2rem; }
+    .ptaci-atlas > p { margin: 0 0 12px; color: var(--text-muted); }
+    .ptaci-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+    .ptaci-grid.nohy { grid-template-columns: repeat(6, minmax(0, 1fr)); margin-top: 10px; }
+    .ptaci-karta { margin: 0; padding: 6px; border: 1px solid var(--border); border-radius: 13px; background: var(--bg-panel); text-align: center; }
+    .ptaci-karta img, .zobak-obrazek { display: block; width: 100%; aspect-ratio: 1; object-fit: contain; border-radius: 9px; background: #f7f1e5; }
+    .ptaci-karta figcaption { padding: 6px 2px 2px; font-size: .82rem; font-weight: 700; }
+    .zobak-obrazek { width: min(100%, 300px); }
     @media (max-width: 720px) { .chrup-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-    @media (max-width: 390px) { .chrup-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 850px) { .ptaci-grid.nohy { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+    @media (max-width: 620px) { .ptaci-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 390px) { .chrup-grid { grid-template-columns: 1fr; } .ptaci-grid.nohy { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   </style>
 </head>
 <body>
@@ -41,6 +52,29 @@
     <button data-rezim="rady">🗂️ Řády savců</button>
     <button data-rezim="chrup">🦷 Chrup a potrava</button>
   </div>
+
+  <section class="ptaci-atlas" aria-labelledby="ptaci-atlas-nadpis">
+    <h2 id="ptaci-atlas-nadpis">Jak potrava a pohyb mění tělo ptáků?</h2>
+    <p>Porovnej tvary zobáků ve stejném profilu a stavbu nohou. Podoba každého „nástroje“ odpovídá způsobu života.</p>
+    <div class="ptaci-grid">
+      <figure class="ptaci-karta"><img src="img/pr/pr7-ptaci-hlava-datel.webp" alt="Hlava strakapouda s rovným zobákem ve tvaru dláta." width="768" height="768"><figcaption>datel · tesání</figcaption></figure>
+      <figure class="ptaci-karta"><img src="img/pr/pr7-ptaci-hlava-kachna.webp" alt="Hlava kachny s širokým plochým zobákem." width="768" height="768"><figcaption>kachna · cezení</figcaption></figure>
+      <figure class="ptaci-karta"><img src="img/pr/pr7-ptaci-hlava-kane.webp" alt="Hlava káněte se silným zahnutým zobákem." width="768" height="768"><figcaption>káně · trhání</figcaption></figure>
+      <figure class="ptaci-karta"><img src="img/pr/pr7-ptaci-hlava-penkava.webp" alt="Hlava pěnkavy s krátkým kuželovitým zobákem." width="768" height="768"><figcaption>pěnkava · semena</figcaption></figure>
+      <figure class="ptaci-karta"><img src="img/pr/pr7-ptaci-hlava-cap.webp" alt="Hlava čápa s dlouhým rovným špičatým zobákem." width="768" height="768"><figcaption>čáp · lov ve vodě</figcaption></figure>
+      <figure class="ptaci-karta"><img src="img/pr/pr7-ptaci-hlava-kos.webp" alt="Hlava kosa se štíhlým špičatým zobákem." width="768" height="768"><figcaption>kos · bezobratlí</figcaption></figure>
+      <figure class="ptaci-karta"><img src="img/pr/pr7-ptaci-hlava-vlastovka.webp" alt="Hlava vlaštovky s velmi krátkým široce nasazeným zobákem." width="768" height="768"><figcaption>vlaštovka · hmyz za letu</figcaption></figure>
+      <figure class="ptaci-karta"><img src="img/pr/pr7-ptaci-hlava-sykora.webp" alt="Hlava sýkory s krátkým jemným špičatým zobákem." width="768" height="768"><figcaption>sýkora · drobný hmyz</figcaption></figure>
+    </div>
+    <div class="ptaci-grid nohy">
+      <figure class="ptaci-karta"><img src="img/pr/pr7-ptaci-noha-plovaci.webp" alt="Kachní noha se třemi prsty spojenými plovací blánou." width="768" height="768"><figcaption>plovací</figcaption></figure>
+      <figure class="ptaci-karta"><img src="img/pr/pr7-ptaci-noha-dravci.webp" alt="Dravčí noha se silnými prsty a zahnutými ostrými drápy." width="768" height="768"><figcaption>dravčí</figcaption></figure>
+      <figure class="ptaci-karta"><img src="img/pr/pr7-ptaci-noha-splhava.webp" alt="Datlí šplhavá noha se dvěma prsty vpřed a dvěma vzad." width="768" height="768"><figcaption>šplhavá 2 + 2</figcaption></figure>
+      <figure class="ptaci-karta"><img src="img/pr/pr7-ptaci-noha-behava.webp" alt="Pštrosí běhavá noha se dvěma prsty." width="768" height="768"><figcaption>běhavá</figcaption></figure>
+      <figure class="ptaci-karta"><img src="img/pr/pr7-ptaci-noha-pevci.webp" alt="Pěvčí noha se třemi prsty vpřed a jedním vzad svírá větev." width="768" height="768"><figcaption>pěvčí</figcaption></figure>
+      <figure class="ptaci-karta"><img src="img/pr/pr7-ptaci-noha-brodiva.webp" alt="Brodivá noha s dlouhými široce roztaženými prsty." width="768" height="768"><figcaption>brodivá</figcaption></figure>
+    </div>
+  </section>
 
   <section class="atlas-chrupu" aria-labelledby="atlas-chrupu-nadpis">
     <h2 id="atlas-chrupu-nadpis">Co prozradí chrup savce?</h2>
@@ -75,17 +109,17 @@ function odezvaEl() { const d = document.createElement('div'); d.className = 'od
 
 /* Zjednodušené tvary zobáků – tvar prozradí potravu */
 const ZOBAKY = [
-  { klic: 'dravec', popis: 'hákovitý zobák', potrava: 'trhá maso ulovené kořisti', priklad: 'káně, orel, sokol',
+  { klic: 'dravec', obrazek: 'kane', alt: 'Hlava káněte se zahnutým zobákem.', popis: 'hákovitý zobák', potrava: 'trhá maso ulovené kořisti', priklad: 'káně, orel, sokol',
     tvar: '<path d="M20 60 L110 40 C140 40 150 55 130 70 C150 74 120 96 90 84 Z"/>' },
-  { klic: 'zrnozravec', popis: 'krátký kuželovitý zobák', potrava: 'louská semena a zrní', priklad: 'zvonek, dlask, vrabec',
+  { klic: 'zrnozravec', obrazek: 'penkava', alt: 'Hlava pěnkavy s kuželovitým zobákem.', popis: 'krátký kuželovitý zobák', potrava: 'louská semena a zrní', priklad: 'zvonek, dlask, vrabec',
     tvar: '<polygon points="20,50 90,40 90,80 20,70"/><polygon points="90,40 130,60 90,80"/>' },
-  { klic: 'hmyzozravec', popis: 'tenký špičatý zobák', potrava: 'sbírá drobný hmyz', priklad: 'sýkora, střízlík, rehek',
+  { klic: 'hmyzozravec', obrazek: 'sykora', alt: 'Hlava sýkory s jemným špičatým zobákem.', popis: 'tenký špičatý zobák', potrava: 'sbírá drobný hmyz', priklad: 'sýkora, střízlík, rehek',
     tvar: '<polygon points="20,50 90,55 145,60 90,68 20,70"/>' },
-  { klic: 'kachna', popis: 'plochý široký zobák', potrava: 'cedí potravu z vody a bahna', priklad: 'kachna, husa, labuť',
+  { klic: 'kachna', obrazek: 'kachna', alt: 'Hlava kachny s plochým širokým zobákem.', popis: 'plochý široký zobák', potrava: 'cedí potravu z vody a bahna', priklad: 'kachna, husa, labuť',
     tvar: '<path d="M20 50 L120 48 C145 50 145 72 120 74 L20 72 Z"/>' },
-  { klic: 'brodivy', popis: 'dlouhý dýkovitý zobák', potrava: 'loví ryby a žáby v mělké vodě', priklad: 'volavka, čáp',
+  { klic: 'brodivy', obrazek: 'cap', alt: 'Hlava čápa s dlouhým špičatým zobákem.', popis: 'dlouhý dýkovitý zobák', potrava: 'loví ryby a žáby v mělké vodě', priklad: 'volavka, čáp',
     tvar: '<polygon points="20,52 170,58 170,64 20,70"/>' },
-  { klic: 'datel', popis: 'silný rovný zobák jako dláto', potrava: 'tesá do dřeva a hledá larvy', priklad: 'strakapoud, datel',
+  { klic: 'datel', obrazek: 'datel', alt: 'Hlava strakapouda s rovným zobákem jako dláto.', popis: 'silný rovný zobák jako dláto', potrava: 'tesá do dřeva a hledá larvy', priklad: 'strakapoud, datel',
     tvar: '<polygon points="20,48 140,56 140,66 20,72"/>' },
 ];
 function zobaky() {
@@ -94,7 +128,7 @@ function zobaky() {
   const ptameSeNaPotravu = Math.random() < 0.5;
   p.innerHTML = `<div class="zadani">${ptameSeNaPotravu
     ? 'Čím se živí pták s takovým zobákem?' : 'Který zobák patří ptákovi, který ' + z.potrava + '?'}</div>
-    ${ptameSeNaPotravu ? `<div class="karta"><svg class="zobak" viewBox="0 0 190 120">${z.tvar}</svg>
+    ${ptameSeNaPotravu ? `<div class="karta"><img class="zobak-obrazek" src="img/pr/pr7-ptaci-hlava-${z.obrazek}.webp" alt="${z.alt}" width="768" height="768">
       <div class="popis">${z.popis}</div></div>` : ''}`;
   const odezva = odezvaEl();
   Uloha.vyber({

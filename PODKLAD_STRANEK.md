@@ -339,7 +339,7 @@ Společné pro celou češtinu: 🔗 jedna paleta pro větné členy a slovní d
   - Chybná slova vrátit na konci série v jiné větě.
   - 🔗 Stejné domečky použít v `vyjmenovana_slova` a `doplnovacky` (obojetné souhlásky jako třetí domeček).
 - **Obrázky:**
-  - `IMG-cj-02` ⚪ **B** · dva domečky: tvrdý (kamenný, hranatý) a měkký (dřevěný s polštáři) — pozadí pomůcky
+  - `IMG-cj-02` ✅ **B** · dva domečky: tvrdý (kamenný, hranatý) a měkký (dřevěný s polštáři) — zapojeno jako obrazová pomůcka u obou skupin souhlásek
     - ✅ Hotovo a zapojeno 23. 9. 2026: `obsah/img/cj/cj2-tvrde-mekke-domek-{tvrdy,mekky}.webp`, originály PNG a zadání `.prompt.txt`.
 
 #### Abeceda a řazení slov · [cj2_abeceda.html](obsah/cj2_abeceda.html)
@@ -1349,7 +1349,7 @@ Společné pro jazyky: 🔗 gramatika se učí **v krátkém dialogu nebo scénc
   - Denní režim jednoho školáka (obrázkový komiks), žák popisuje, co dělá každý den.
   - Barevně putující -s: „He plays“ → „Does he play?“ (-s se přesune do does).
 - **Obrázky:**
-  - `IMG-aj-04` 🟠 **A** · 8 scén běžného dne jednoho školáka (vstává, snídá, jede do školy, hraje fotbal, dělá úkoly, dívá se na TV, čte, spí) — obrázkový denní režim; použít i v `aj5_pritomny_prubehovy`
+  - `IMG-aj-04` ✅ **A** · 8 scén běžného dne jednoho školáka (vstává, snídá, jde do školy, hraje fotbal, dělá úkoly, dívá se na TV, čte, spí) — zapojeno jako obrázkový denní režim a sdíleno s `aj5_pritomny_prubehovy`
 
 #### Předložky místa a času · [aj4_predlozky.html](obsah/aj4_predlozky.html)
 - **Zařazení:** Cizí jazyky › Gramatika · AJ 4.–5. r. · lekce A
@@ -2296,7 +2296,7 @@ Společné pro přírodopis: čtyři stránky (`bunka`, `pr7_rostliny`, `anatomi
   - Srovnávací tabule stavby těla (žahavec, ploštěnec, hlístice, měkkýš, kroužkovec) — stejné pohledy a měřítko.
   - Žák určuje znak, podle něhož zařazuje.
 - **Obrázky:**
-  - `IMG-pr-04` 🟠 **B** · 6 karet stavby těla v botanickém stylu (nezmar, ploštěnka, škrkavka, hlemýžď v řezu, žížala s články, škeble) — srovnávací tabule s hotspoty
+  - `IMG-pr-04` ✅ **B** · 6 karet stavby těla v botanickém stylu (nezmar, ploštěnka, škrkavka, hlemýžď v řezu, žížala s články, škeble) — zapojeno jako přístupný srovnávací atlas s interaktivními body a do poznávačky
   - fotografie do poznávačky: součást `IMG-pr-05`
 
 #### Stavba buňky · [bunka.html](obsah/bunka.html)
@@ -2331,7 +2331,7 @@ Společné pro přírodopis: čtyři stránky (`bunka`, `pr7_rostliny`, `anatomi
   - Škála velikostí s přiblížením (vlas → buňka → bakterie → virus).
   - Užitečné bakterie (jogurt, kořenové hlízky) jako protiváha.
 - **Obrázky:**
-  - `IMG-pr-09` 🟠 **B** · 5 schematických karet v jednotném stylu (bakterie s bičíkem, virus s obalem, trepka, měňavka, kvasinka) — ne mikrofotografie, ale čitelný model
+  - `IMG-pr-09` ✅ **B** · 5 schematických karet v jednotném stylu (bakterie s bičíkem, virus s obalem, trepka, měňavka, kvasinka) — zapojeno jako srovnávací atlas a do poznávačky; výslovně označeno jako model, ne mikrofotografie
 
 #### Stavba a systém rostlin · [pr7_rostliny.html](obsah/pr7_rostliny.html)
 - **Zařazení:** Přírodní vědy › Přírodopis · 7. r. · lekce B (atlas)
@@ -2367,7 +2367,7 @@ Společné pro přírodopis: čtyři stránky (`bunka`, `pr7_rostliny`, `anatomi
   - Obrázkové páry zobák → potrava (datel, kachna, káně, pěnkava, čáp) a končetina → způsob života.
   - Úloha „navrhni ptáka“ — žák složí zobák a nohy pro dané prostředí.
 - **Obrázky:**
-  - `IMG-pr-13` 🔴 **B** · 8 karet hlav ptáků se zobáky ve stejném pohledu z profilu (datel, kachna, káně, pěnkava, čáp, kos, vlaštovka, sýkora) a 6 karet nohou (kachní plovací, dravčí pařát, datlí šplhavá, pštrosí běhavá, pěvčí, brodivá)
+  - `IMG-pr-13` ✅ **B** · 8 karet hlav ptáků se zobáky ve stejném pohledu z profilu (datel, kachna, káně, pěnkava, čáp, kos, vlaštovka, sýkora) a 6 karet nohou (kachní plovací, dravčí pařát, datlí šplhavá, pštrosí běhavá, pěvčí, brodivá) — zapojeno do srovnávacího atlasu a procvičování
   - `IMG-pr-14` ✅ **B** · 6 karet chrupu savců (šelma, hlodavec, přežvýkavec, hmyzožravec, všežravec, zajíc) — zapojeno jako rozbalovací atlas a procvičovací režim
 
 #### Rozmnožování a vývoj člověka · [pr8_rozmnozovani.html](obsah/pr8_rozmnozovani.html)
@@ -3312,7 +3312,7 @@ Při výrobě sady v jednom stylu zadávat všechny karty v jedné dávce se ste
 | `IMG-pr-01` | C | fotografie 14 druhů hub, u každého 2–3 pohledy (hřib smrkový, hřib kovář, klouzek, bedla vysoká, liška obecná, václavka, pečárka, muchomůrka červená, muchomůrka zelená, muchomůrka tygrovaná, hřib satan, čirůvka tygrovaná, pavučinec plyšový, ucháč obecný) — **nikdy generované** | [pr6_houby](obsah/pr6_houby.html) |
 | `IMG-pr-07` | B ✅ | 4 karty stavby těla ve stejném měřítku a pohledu shora (včela, křižák, rak, stonožka); hotovo a zapojeno | [pr6_clenovci](obsah/pr6_clenovci.html) |
 | `IMG-pr-05` | C | fotografie 40 zástupců pro poznávačky přírodopisu 6.–7. r. (bezobratlí, ryby, obojživelníci, plazi, ptáci, savci ČR); **společná sada** pro `pr6_bezobratli`, tuto stránku, `pr7_ptaci_savci`, `potravni_retezec` | [pr7_obratlovci_studenokrevni](obsah/pr7_obratlovci_studenokrevni.html) |
-| `IMG-pr-13` | B | 8 karet hlav ptáků se zobáky ve stejném pohledu z profilu (datel, kachna, káně, pěnkava, čáp, kos, vlaštovka, sýkora) a 6 karet nohou (kachní plovací, dravčí pařát, datlí šplhavá, pštrosí běhavá, pěvčí, brodivá) | [pr7_ptaci_savci](obsah/pr7_ptaci_savci.html) |
+| `IMG-pr-13` | B ✅ | 8 karet hlav ptáků se zobáky ve stejném pohledu z profilu a 6 karet nohou — zapojeno do srovnávacího atlasu a procvičování zobáků | [pr7_ptaci_savci](obsah/pr7_ptaci_savci.html) |
 | `IMG-pr-17` | B | 8 karet postupu (kontrola bezpečí, oslovení a zatřesení, záklon hlavy a kontrola dechu, volání 155, stlačování hrudníku — poloha rukou, zotavovací poloha, zástava krvácení tlakem, chlazení popáleniny) — věcné, bez krve; nechat zkontrolovat zdravotníkem | [pr8_prvni_pomoc](obsah/pr8_prvni_pomoc.html) |
 | `IMG-inf-04` | A ✅ | pracovní stůl s počítačem a deseti zařízeními; hotovo s přístupnými hotspoty | [inf4_hardware](obsah/inf4_hardware.html) |
 | `IMG-inf-06` | A ✅ | „fotka z telefonu“ se školákem, domem, ulicí a zastávkou; hotovo se čtyřmi hotspoty soukromí | [inf6_digitalni_stopa](obsah/inf6_digitalni_stopa.html) |
@@ -3334,7 +3334,7 @@ Při výrobě sady v jednom stylu zadávat všechny karty v jedné dávce se ste
 | `IMG-m-08` | C | fotografie 8 referenčních předmětů s přibližnou velikostí a hmotností (kancelářská sponka, jablko, litrová láhev, dveře, balení mouky 1 kg, lžička, kostka cukru, fotbalové hřiště z výšky) — odhad jednotek | [prevody_jednotek](obsah/prevody_jednotek.html) |
 | `IMG-m-09` | C | 12 fotografií předmětů tvaru těles (kostka cukru, krabice mléka, plechovka, míč, kornout, pyramida, stan, toblerone, válcová pastelka…) — poznávání těles v okolí | [geo_tvary](obsah/geo_tvary.html) |
 | `IMG-aj-03` | A ✅ | 4 scénky setkání podle denní doby; hotovo a zapojeno | [aj3_pozdravy](obsah/aj3_pozdravy.html) |
-| `IMG-aj-04` | A | 8 scén běžného dne jednoho školáka (vstává, snídá, jede do školy, hraje fotbal, dělá úkoly, dívá se na TV, čte, spí) — obrázkový denní režim; použít i v `aj5_pritomny_prubehovy` | [aj4_pritomny_prosty](obsah/aj4_pritomny_prosty.html) |
+| `IMG-aj-04` | A ✅ | 8 scén běžného dne jednoho školáka — zapojeno jako denní režim a do srovnání prostého a průběhového času | [aj4_pritomny_prosty](obsah/aj4_pritomny_prosty.html) |
 | `IMG-aj-05` | B | pokoj s krabicí, stolem, židlí a postelí + samostatná karta kočky (průhledné pozadí) — kočka se přetahuje na různá místa | [aj4_predlozky](obsah/aj4_predlozky.html) |
 | `IMG-aj-07` | B | 8 cedulí bez textu (zákaz koupání, zákaz psů, zákaz telefonu, povinná přilba, zákaz jízdy na kole, ticho v knihovně, povinnost mýt ruce, zákaz krmení zvířat) — piktogramy v jednotném stylu | [aj5_modalni](obsah/aj5_modalni.html) |
 | `IMG-aj-08` | A | 6 obrázků příběhu „Výlet k moři“ (balení, vlak, pláž, déšť, kavárna, návrat) — vyprávění v minulém čase | [aj6_minuly_cas](obsah/aj6_minuly_cas.html) |
@@ -3412,7 +3412,7 @@ Při výrobě sady v jednom stylu zadávat všechny karty v jedné dávce se ste
 | ID | Styl | Co vyrobit nebo sehnat | Stránka |
 |---|---|---|---|
 | `IMG-00-02` | B | sada 11 ilustrací předmětů (kniha a pero, geometrické těleso a pravítko, glóbus, baňka, list s buňkou, lupa nad mapou, hrad, notebook, anglický a německý slovník, domek se stromem, atom) ve stejném stylu — dlaždice předmětů na přehledu a v osnově | [prehled](obsah/prehled.html) |
-| `IMG-cj-02` | B | dva domečky: tvrdý (kamenný, hranatý) a měkký (dřevěný s polštáři) — pozadí pomůcky | [cj2_tvrde_mekke](obsah/cj2_tvrde_mekke.html) |
+| `IMG-cj-02` | B ✅ | dva domečky: tvrdý (kamenný, hranatý) a měkký (dřevěný s polštáři) — zapojeno do pomůcky | [cj2_tvrde_mekke](obsah/cj2_tvrde_mekke.html) |
 | `IMG-cj-10` | A | jedna ilustrace ke každému textu 1. stupně (odhadem 10–15) — motivace a kontext, bez prozrazení odpovědí | [cteni_s_porozumenim](obsah/cteni_s_porozumenim.html) |
 | `IMG-cj-12` | A | 4 malé vinety žánrů (pohádkový zámek, skutečný hrad s pověstí, Olymp, liška s havranem) — záhlaví rámečků žánrů | [cj6_baje](obsah/cj6_baje.html) |
 | `IMG-cj-13` | E | portréty 10–12 autorů (Čapek, Seifert, Hrabal, Škvorecký, Kundera, Havel…) z volných zdrojů, obálky samizdatových edic (Edice Petlice) — karty autorů | [cj9_literatura_20](obsah/cj9_literatura_20.html) |

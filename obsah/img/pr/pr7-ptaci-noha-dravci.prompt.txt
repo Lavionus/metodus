@@ -1,0 +1,9 @@
+Use case: scientific-educational
+Asset type: square comparative anatomy card for Czech grade-7 biology
+Scene/backdrop: plain warm off-white paper background, isolated subject.
+Style/medium: precise natural-history watercolor with fine colored-pencil detail, scientifically credible, consistent museum field-guide style.
+Composition/framing: lower leg and complete foot only, side/three-quarter view, centered at identical scale with every toe and claw visible, generous margin.
+Lighting/mood: soft neutral daylight.
+Constraints: no text, letters, numbers, arrows, labels, border, watermark, whole bird, habitat or perch unless explicitly requested; anatomically correct toe count and orientation.
+Subject: common buzzard raptorial foot, yellow scaled leg, three strong toes forward and one backward, long sharply curved black talons built to seize prey.
+

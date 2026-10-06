@@ -16,6 +16,19 @@
     .popis-o { color: var(--text-muted); max-width: 560px; line-height: 1.55; }
     .mikroskop { width: min(260px, 66vw); }
     .mikroskop .zorne-pole { fill: var(--bg-deep); stroke: var(--border-strong); stroke-width: 3; }
+    .mikro-img { width: min(280px, 72vw); aspect-ratio: 1; object-fit: contain; border-radius: 14px;
+      border: 1px solid var(--border); background: #f8f1df; }
+    .atlas-mikro { width: min(100%, 980px); margin: 0 0 20px; }
+    .atlas-mikro h2 { margin: 0 0 4px; font-size: 1.2rem; }
+    .atlas-mikro > p { margin: 0 0 12px; color: var(--text-muted); }
+    .mikro-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 9px; }
+    .mikro-grid details { min-width: 0; overflow: hidden; border: 1px solid var(--border); border-radius: 13px;
+      background: var(--bg-panel); }
+    .mikro-grid img { display: block; width: 100%; aspect-ratio: 1; object-fit: contain; background: #f8f1df; }
+    .mikro-grid summary { padding: 8px 9px; cursor: pointer; font-size: .82rem; font-weight: 750; }
+    .mikro-grid p { margin: 0; padding: 0 9px 10px; color: var(--text-muted); font-size: .75rem; line-height: 1.4; }
+    @media (max-width: 760px) { .mikro-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 360px) { .mikro-grid { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
@@ -28,6 +41,18 @@
     <button data-rezim="uzitek">⚖️ Prospěšné, či škodlivé</button>
     <button data-rezim="prevence">🧼 Jak se chránit</button>
   </div>
+
+  <section class="atlas-mikro" aria-labelledby="atlas-mikro-nadpis">
+    <h2 id="atlas-mikro-nadpis">Modely mikrosvěta</h2>
+    <p>Jde o zvětšené výukové modely, ne mikrofotografie. Každý zvýrazňuje znaky důležité pro rozlišení.</p>
+    <div class="mikro-grid">
+      <details><summary>Bakterie</summary><img src="img/pr/pr6-mikro-bakterie.webp" alt="Model tyčinkovité bakterie s buněčnými obaly, nukleoidem, plazmidy, pili a bičíkem." width="768" height="768"><p>Buňka bez pravého jádra; DNA je volně v cytoplazmě.</p></details>
+      <details><summary>Obalený virus</summary><img src="img/pr/pr6-mikro-virus.webp" alt="Model obalené virové částice s povrchovými výběžky, bílkovinným obalem a RNA." width="768" height="768"><p>Není to buňka a bez hostitele se nedokáže množit.</p></details>
+      <details><summary>Trepka</summary><img src="img/pr/pr6-mikro-trepka.webp" alt="Model trepky s brvami, ústní rýhou, jádry a pulzujícími vakuolami." width="768" height="768"><p>Jednobuněčný prvok; pohybuje se pomocí brv.</p></details>
+      <details><summary>Měňavka</summary><img src="img/pr/pr6-mikro-menavka.webp" alt="Model měňavky s panožkami, jádrem, potravními a pulzující vakuolou." width="768" height="768"><p>Mění tvar a panožkami se pohybuje i přijímá potravu.</p></details>
+      <details><summary>Kvasinka</summary><img src="img/pr/pr6-mikro-kvasinka.webp" alt="Model pučících kvasinek s buněčnou stěnou, jádrem a velkou vakuolou." width="768" height="768"><p>Jednobuněčná houba; na obrázku je vidět pučení.</p></details>
+    </div>
+  </section>
 
   <div class="plocha" id="plocha"></div>
 
@@ -48,12 +73,12 @@ const skore = Uloha.skore('metodus_pr6_mikro', $('skore'));
 let rezim = 'poznej';
 
 const ORGANISMY = [
-  { n: 'bakterie', e: '🦠', popis: 'jednobuněčný organismus bez jádra, množí se dělením', typ: 'bakterie' },
-  { n: 'virus', e: '🧬', popis: 'nebuněčná částice, která se množí jen uvnitř hostitelské buňky', typ: 'virus' },
-  { n: 'trepka velká', e: '💧', popis: 'jednobuněčný prvok pohybující se pomocí brv', typ: 'prvok' },
-  { n: 'měňavka', e: '🫧', popis: 'prvok, který se pohybuje pomocí panožek', typ: 'prvok' },
+  { n: 'bakterie', e: '🦠', img: 'img/pr/pr6-mikro-bakterie.webp', alt: 'Model tyčinkovité bakterie s nukleoidem a bičíkem.', popis: 'jednobuněčný organismus bez jádra, množí se dělením', typ: 'bakterie' },
+  { n: 'virus', e: '🧬', img: 'img/pr/pr6-mikro-virus.webp', alt: 'Model obalené virové částice s RNA.', popis: 'nebuněčná částice, která se množí jen uvnitř hostitelské buňky', typ: 'virus' },
+  { n: 'trepka velká', e: '💧', img: 'img/pr/pr6-mikro-trepka.webp', alt: 'Model trepky s brvami, jádry a vakuolami.', popis: 'jednobuněčný prvok pohybující se pomocí brv', typ: 'prvok' },
+  { n: 'měňavka', e: '🫧', img: 'img/pr/pr6-mikro-menavka.webp', alt: 'Model měňavky s panožkami, jádrem a vakuolami.', popis: 'prvok, který se pohybuje pomocí panožek', typ: 'prvok' },
   { n: 'sinice', e: '🟢', popis: 'bakterie schopná fotosyntézy, přemnožuje se v teplé vodě', typ: 'bakterie' },
-  { n: 'kvasinka', e: '🍞', popis: 'jednobuněčná houba, kterou využíváme při kvašení', typ: 'houba' },
+  { n: 'kvasinka', e: '🍞', img: 'img/pr/pr6-mikro-kvasinka.webp', alt: 'Model pučících kvasinek s jádrem a vakuolou.', popis: 'jednobuněčná houba, kterou využíváme při kvašení', typ: 'houba' },
   { n: 'krásnoočko', e: '🟩', popis: 'jednobuněčný organismus s bičíkem a zelenými barvivy', typ: 'prvok' },
   { n: 'plíseň', e: '🧫', popis: 'houba tvořící vlákna, roste na starém pečivu', typ: 'houba' },
 ];
@@ -95,10 +120,10 @@ function poznej() {
   const jine = Uloha.zamichej(ORGANISMY.filter(x => x.n !== u.n)).slice(0, 3);
   p.innerHTML = `<div class="zadani">O jaký organismus jde?</div>
     <div class="karta">
-      <svg class="mikroskop" viewBox="0 0 200 200">
+      ${u.img ? `<img class="mikro-img" src="${u.img}" alt="${u.alt}" width="768" height="768">` : `<svg class="mikroskop" viewBox="0 0 200 200">
         <circle class="zorne-pole" cx="100" cy="100" r="88"/>
         <text x="100" y="118" font-size="56" text-anchor="middle">${u.e}</text>
-      </svg>
+      </svg>`}
       <div class="popis-o">${u.popis}</div></div>`;
   const odezva = document.createElement('div');
   odezva.className = 'odezva';
