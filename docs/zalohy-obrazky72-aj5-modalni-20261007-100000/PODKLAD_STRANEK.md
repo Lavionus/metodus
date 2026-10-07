@@ -1402,7 +1402,7 @@ Společné pro jazyky: 🔗 gramatika se učí **v krátkém dialogu nebo scénc
   - Značky a pravidla jako skutečné cedule (koupaliště, knihovna, silnice).
   - Dvojice „mustn't × don't have to“ na situacích.
 - **Obrázky:**
-  - `IMG-aj-07` ✅ **B** · 8 cedulí bez textu (zákaz koupání, zákaz psů, zákaz telefonu, povinná přilba, zákaz jízdy na kole, ticho, povinnost mýt ruce, zákaz krmení zvířat) — zapojeno do přehledu a poznávačky pravidel
+  - `IMG-aj-07` 🟠 **B** · 8 cedulí bez textu (zákaz koupání, zákaz psů, zákaz telefonu, povinná přilba, zákaz jízdy na kole, ticho v knihovně, povinnost mýt ruce, zákaz krmení zvířat) — piktogramy v jednotném stylu
 
 #### Minulý čas prostý · [aj6_minuly_cas.html](obsah/aj6_minuly_cas.html)
 - **Zařazení:** Cizí jazyky › Gramatika · AJ 6.–7. r. · lekce A
@@ -3260,7 +3260,7 @@ Nástroje bez vazby na předmět. 🔗 Mají stejnou hlavičku (proužek „Nás
   - Obrázek titulní strany a tiráže knihy s hotspoty „odkud údaj opsat“.
   - 🔗 Propojit s `inf8_licence`.
 - **Obrázky:**
-  - `IMG-00-05` ✅ **B** · titulní strana a tiráž fiktivní knihy (autor, název, nakladatel, rok, ISBN, vydání) bez skutečných značek — 7 přístupných hotspotů pro výuku citování; text kreslí web
+  - `IMG-00-05` ⚪ **B** · titulní strana a tiráž fiktivní knihy (autor, název, nakladatel, rok, ISBN, vydání) bez skutečných značek — hotspoty pro výuku citování; text kreslí web
 
 #### Generátor pracovních listů · [pracovni_listy.html](obsah/pracovni_listy.html)
 - **Zařazení:** Další výuka › Pro učitele · nástroj E
@@ -3336,7 +3336,7 @@ Při výrobě sady v jednom stylu zadávat všechny karty v jedné dávce se ste
 | `IMG-aj-03` | A ✅ | 4 scénky setkání podle denní doby; hotovo a zapojeno | [aj3_pozdravy](obsah/aj3_pozdravy.html) |
 | `IMG-aj-04` | A ✅ | 8 scén běžného dne jednoho školáka — zapojeno jako denní režim a do srovnání prostého a průběhového času | [aj4_pritomny_prosty](obsah/aj4_pritomny_prosty.html) |
 | `IMG-aj-05` | B ✅ | pokoj s krabicí, stolem, židlí a postelí + samostatná kočka — zapojeno do poznávačky a přetahovacího trenažéru | [aj4_predlozky](obsah/aj4_predlozky.html) |
-| `IMG-aj-07` | B ✅ | 8 cedulí bez textu — zapojeno do obrazového přehledu a poznávačky pravidel | [aj5_modalni](obsah/aj5_modalni.html) |
+| `IMG-aj-07` | B | 8 cedulí bez textu (zákaz koupání, zákaz psů, zákaz telefonu, povinná přilba, zákaz jízdy na kole, ticho v knihovně, povinnost mýt ruce, zákaz krmení zvířat) — piktogramy v jednotném stylu | [aj5_modalni](obsah/aj5_modalni.html) |
 | `IMG-aj-08` | A | 6 obrázků příběhu „Výlet k moři“ (balení, vlak, pláž, déšť, kavárna, návrat) — vyprávění v minulém čase | [aj6_minuly_cas](obsah/aj6_minuly_cas.html) |
 | `IMG-aj-09` | B | 5 trojic ke srovnání (tři psi různé velikosti, tři auta, tři domy, tři hory, tři dorty) — stejný styl, na kartě jeden objekt | [aj6_stupnovani](obsah/aj6_stupnovani.html) |
 | `IMG-aj-11` | B | 12 karet nádob a porcí (láhev, bochník, kus, sklenice, balíček, plechovka, miska, šálek, kostka, plátek, pytel, krabice) — míry nepočitatelných věcí | [aj7_pocitatelnost](obsah/aj7_pocitatelnost.html) |
@@ -3472,7 +3472,7 @@ Při výrobě sady v jednom stylu zadávat všechny karty v jedné dávce se ste
 | `IMG-inf-08` | B | 20 karet jablek a 20 karet hrušek různých odrůd, barev a úhlů + 4 „zavádějící“ (zelené jablko podobné hrušce) — data pro mini-model třídění | [inf9_ai_etika](obsah/inf9_ai_etika.html) |
 | `IMG-00-03` | B | dvě ruce na klávesnici ve výchozí poloze (prsty na ASDF a JKL) shora — ukázka správného držení | [typing_trainer](obsah/typing_trainer.html) |
 | `IMG-00-04` | B | 12 odznaků v jednotném stylu (medailonky: první den, týden v řadě, 100 úloh, každý předmět…) — nahradit emoji | [edu_progress](obsah/edu_progress.html) |
-| `IMG-00-05` | B ✅ | titulní strana a tiráž fiktivní knihy (autor, název, nakladatel, rok, ISBN, vydání) bez skutečných značek — 7 přístupných hotspotů pro výuku citování; text kreslí web | [citation_generator](obsah/citation_generator.html) |
+| `IMG-00-05` | B | titulní strana a tiráž fiktivní knihy (autor, název, nakladatel, rok, ISBN, vydání) bez skutečných značek — hotspoty pro výuku citování; text kreslí web | [citation_generator](obsah/citation_generator.html) |
 
 
 ---

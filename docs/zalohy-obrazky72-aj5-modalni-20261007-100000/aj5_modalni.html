@@ -15,15 +15,7 @@
     .veta-en { font-size: clamp(1.2rem, 4.5vw, 1.8rem); font-weight: 700; line-height: 1.45; max-width: 620px; }
     .veta-en .mezera { color: var(--accent); border-bottom: 3px solid var(--accent); padding: 0 12px; }
     .preklad { color: var(--text-faint); font-size: 0.95rem; font-style: italic; }
-    .znacka-img { display: block; width: min(100%, 300px); aspect-ratio: 1; object-fit: contain; border-radius: 13px; }
-    .znacky-atlas { width: min(100%, 1000px); margin: 18px 0 22px; }
-    .znacky-atlas h2 { margin: 0 0 5px; font-size: 1.2rem; }
-    .znacky-atlas > p { margin: 0 0 12px; color: var(--text-muted); }
-    .znacky-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
-    .znacky-grid figure { margin: 0; padding: 6px; border: 1px solid var(--border); border-radius: 13px; background: var(--bg-panel); text-align: center; }
-    .znacky-grid img { display: block; width: 100%; aspect-ratio: 1; object-fit: contain; border-radius: 9px; }
-    .znacky-grid figcaption { padding: 7px 2px 2px; font-size: .82rem; font-weight: 700; }
-    @media (max-width: 700px) { .znacky-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    .znacka { font-size: clamp(2.6rem, 10vw, 4rem); }
   </style>
 </head>
 <body>
@@ -36,21 +28,6 @@
     <button data-rezim="pravidla">🚸 Značky a pravidla</button>
     <button data-rezim="tvar">🔧 Správný tvar</button>
   </div>
-
-  <section class="znacky-atlas" aria-labelledby="znackyNadpis">
-    <h2 id="znackyNadpis">Signs and rules</h2>
-    <p>Červený přeškrtnutý kruh vyjadřuje zákaz — <b>mustn't</b>. Modrý kruh ukládá povinnost — <b>must</b>.</p>
-    <div class="znacky-grid">
-      <figure><img src="img/aj/aj5-modalni-zakaz-koupani.webp" alt="Zákaz koupání." width="768" height="768"><figcaption>You mustn't swim.</figcaption></figure>
-      <figure><img src="img/aj/aj5-modalni-zakaz-psu.webp" alt="Zákaz vstupu se psy." width="768" height="768"><figcaption>You mustn't bring dogs.</figcaption></figure>
-      <figure><img src="img/aj/aj5-modalni-zakaz-telefonu.webp" alt="Zákaz používání telefonu." width="768" height="768"><figcaption>You mustn't use your phone.</figcaption></figure>
-      <figure><img src="img/aj/aj5-modalni-prilba.webp" alt="Povinná ochranná přilba." width="768" height="768"><figcaption>You must wear a helmet.</figcaption></figure>
-      <figure><img src="img/aj/aj5-modalni-zakaz-kola.webp" alt="Zákaz jízdy na kole." width="768" height="768"><figcaption>You mustn't ride a bike.</figcaption></figure>
-      <figure><img src="img/aj/aj5-modalni-ticho.webp" alt="Povinnost zachovat ticho." width="768" height="768"><figcaption>You must be quiet.</figcaption></figure>
-      <figure><img src="img/aj/aj5-modalni-myti-rukou.webp" alt="Povinnost umýt si ruce." width="768" height="768"><figcaption>You must wash your hands.</figcaption></figure>
-      <figure><img src="img/aj/aj5-modalni-zakaz-krmeni.webp" alt="Zákaz krmení zvířat." width="768" height="768"><figcaption>You mustn't feed animals.</figcaption></figure>
-    </div>
-  </section>
 
   <div class="plocha" id="plocha"></div>
 
@@ -93,14 +70,14 @@ const VETY = [
 ];
 
 const ZNACKY = [
-  { img: 'zakaz-koupani', alt: 'Zákaz koupání.', spr: "mustn't", t: 'You ___ swim here.', cz: 'Tady se nesmí plavat.' },
-  { img: 'zakaz-psu', alt: 'Zákaz vstupu se psy.', spr: "mustn't", t: 'You ___ bring dogs here.', cz: 'Sem nesmíš vodit psy.' },
-  { img: 'zakaz-telefonu', alt: 'Zákaz používání telefonu.', spr: "mustn't", t: 'You ___ use your phone here.', cz: 'Tady nesmíš používat telefon.' },
-  { img: 'prilba', alt: 'Povinná ochranná přilba.', spr: 'must', t: 'You ___ wear a helmet.', cz: 'Musíš mít přilbu.' },
-  { img: 'zakaz-kola', alt: 'Zákaz jízdy na kole.', spr: "mustn't", t: 'You ___ ride a bike here.', cz: 'Tady nesmíš jezdit na kole.' },
-  { img: 'ticho', alt: 'Povinnost zachovat ticho.', spr: 'must', t: 'You ___ be quiet.', cz: 'Musíš být potichu.' },
-  { img: 'myti-rukou', alt: 'Povinnost umýt si ruce.', spr: 'must', t: 'You ___ wash your hands.', cz: 'Musíš si umýt ruce.' },
-  { img: 'zakaz-krmeni', alt: 'Zákaz krmení zvířat.', spr: "mustn't", t: 'You ___ feed the animals.', cz: 'Nesmíš krmit zvířata.' },
+  { e: '🚭', spr: "mustn't", t: 'You ___ smoke here.', cz: 'Tady se nesmí kouřit.' },
+  { e: '🤫', spr: "mustn't", t: 'You ___ talk in the library.', cz: 'V knihovně se nesmí mluvit.' },
+  { e: '🅿️', spr: 'can', t: 'You ___ park here.', cz: 'Tady smíš parkovat.' },
+  { e: '🚸', spr: 'must', t: 'You ___ stop for children.', cz: 'Musíš zastavit kvůli dětem.' },
+  { e: '📵', spr: "mustn't", t: 'You ___ use your phone here.', cz: 'Tady nesmíš používat telefon.' },
+  { e: '🏊', spr: 'can', t: 'You ___ swim here.', cz: 'Tady smíš plavat.' },
+  { e: '🪖', spr: 'must', t: 'You ___ wear a helmet.', cz: 'Musíš mít přilbu.' },
+  { e: '🍽️', spr: "don't have to", t: 'You ___ bring your own food.', cz: 'Nemusíš si nosit vlastní jídlo.' },
 ];
 
 const TVARY = [
@@ -165,7 +142,7 @@ function pravidla() {
   const jine = Uloha.zamichej(["can", "can't", "must", "mustn't", "don't have to"]
     .filter(x => x !== u.spr)).slice(0, 3);
   p.innerHTML = `<div class="zadani">Co říká tato značka?</div>
-    <div class="karta"><img class="znacka-img" src="img/aj/aj5-modalni-${u.img}.webp" alt="${u.alt}" width="768" height="768">
+    <div class="karta"><div class="znacka">${u.e}</div>
     <div class="veta-en">${u.t.replace('___', '<span class="mezera">?</span>')}</div></div>`;
   const odezva = document.createElement('div');
   odezva.className = 'odezva';

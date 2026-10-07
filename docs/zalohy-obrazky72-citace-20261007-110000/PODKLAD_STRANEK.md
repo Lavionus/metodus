@@ -3260,7 +3260,7 @@ Nástroje bez vazby na předmět. 🔗 Mají stejnou hlavičku (proužek „Nás
   - Obrázek titulní strany a tiráže knihy s hotspoty „odkud údaj opsat“.
   - 🔗 Propojit s `inf8_licence`.
 - **Obrázky:**
-  - `IMG-00-05` ✅ **B** · titulní strana a tiráž fiktivní knihy (autor, název, nakladatel, rok, ISBN, vydání) bez skutečných značek — 7 přístupných hotspotů pro výuku citování; text kreslí web
+  - `IMG-00-05` ⚪ **B** · titulní strana a tiráž fiktivní knihy (autor, název, nakladatel, rok, ISBN, vydání) bez skutečných značek — hotspoty pro výuku citování; text kreslí web
 
 #### Generátor pracovních listů · [pracovni_listy.html](obsah/pracovni_listy.html)
 - **Zařazení:** Další výuka › Pro učitele · nástroj E
@@ -3472,7 +3472,7 @@ Při výrobě sady v jednom stylu zadávat všechny karty v jedné dávce se ste
 | `IMG-inf-08` | B | 20 karet jablek a 20 karet hrušek různých odrůd, barev a úhlů + 4 „zavádějící“ (zelené jablko podobné hrušce) — data pro mini-model třídění | [inf9_ai_etika](obsah/inf9_ai_etika.html) |
 | `IMG-00-03` | B | dvě ruce na klávesnici ve výchozí poloze (prsty na ASDF a JKL) shora — ukázka správného držení | [typing_trainer](obsah/typing_trainer.html) |
 | `IMG-00-04` | B | 12 odznaků v jednotném stylu (medailonky: první den, týden v řadě, 100 úloh, každý předmět…) — nahradit emoji | [edu_progress](obsah/edu_progress.html) |
-| `IMG-00-05` | B ✅ | titulní strana a tiráž fiktivní knihy (autor, název, nakladatel, rok, ISBN, vydání) bez skutečných značek — 7 přístupných hotspotů pro výuku citování; text kreslí web | [citation_generator](obsah/citation_generator.html) |
+| `IMG-00-05` | B | titulní strana a tiráž fiktivní knihy (autor, název, nakladatel, rok, ISBN, vydání) bez skutečných značek — hotspoty pro výuku citování; text kreslí web | [citation_generator](obsah/citation_generator.html) |
 
 
 ---

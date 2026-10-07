@@ -39,21 +39,6 @@ textarea{resize:vertical;min-height:60px}
 .citItem .actions{display:flex;gap:6px;flex-shrink:0}
 .citItem .actions button{font-size:.78rem;padding:5px 9px}
 .empty{padding:30px;text-align:center;color:var(--text-faint)}
-.kniha-pomucka p{margin:0 0 12px;color:var(--text-muted);font-size:.84rem}
-.kniha-scena{position:relative;max-width:780px;margin:0 auto;border-radius:10px;overflow:hidden;background:#eee6d5;box-shadow:0 4px 16px #0002}
-.kniha-scena>img{display:block;width:100%;height:auto}
-.kniha-text{position:absolute;color:#34424a;text-align:center;font-family:Georgia,serif;line-height:1.15;pointer-events:none;text-shadow:0 1px #fff8}
-.kniha-autor{left:17%;top:18%;width:24%;font-size:clamp(.52rem,1.5vw,.86rem);letter-spacing:.08em}
-.kniha-nazev{left:14%;top:28%;width:30%;font-size:clamp(.7rem,2.2vw,1.35rem);font-weight:700}
-.kniha-udaj{left:59%;width:25%;text-align:left;font-size:clamp(.5rem,1.4vw,.82rem)}
-.kniha-vydani{top:22%}.kniha-misto{top:32%}.kniha-nakladatel{top:42%}.kniha-rok{top:52%}.kniha-isbn{top:62%}
-.kniha-bod{position:absolute;display:grid;place-items:center;width:clamp(22px,3.5vw,30px);aspect-ratio:1;border:2px solid #fff;border-radius:50%;background:#1d6473;color:#fff;font-weight:700;box-shadow:0 2px 6px #0006;cursor:pointer;transform:translate(-50%,-50%)}
-.kniha-bod:hover,.kniha-bod:focus-visible,.kniha-bod[aria-pressed="true"]{background:#b65a32;outline:3px solid #fff8;outline-offset:2px}
-.kniha-bod[data-pole="autor"]{left:13%;top:19%}.kniha-bod[data-pole="nazev"]{left:13%;top:30%}
-.kniha-bod[data-pole="vydani"]{left:56%;top:23%}.kniha-bod[data-pole="misto"]{left:56%;top:33%}.kniha-bod[data-pole="nakladatel"]{left:56%;top:43%}.kniha-bod[data-pole="rok"]{left:56%;top:53%}.kniha-bod[data-pole="isbn"]{left:56%;top:63%}
-.kniha-vysvetleni{min-height:2.8em;margin:12px 0 10px;padding:9px 12px;border-left:4px solid var(--accent);background:var(--bg-elevated);border-radius:0 7px 7px 0;font-size:.82rem}
-.kniha-akce{display:flex;justify-content:center}
-@media(max-width:520px){.kniha-bod{border-width:1px}.kniha-pomucka{padding:14px 10px}.kniha-vysvetleni{font-size:.76rem}}
 </style>
 </head>
 <body>
@@ -61,30 +46,6 @@ textarea{resize:vertical;min-height:60px}
   <h1>📚 Generátor citací</h1>
   <p class="sub">Vyplň zdroj, přidej do seznamu a spravuj bibliografii ve stylu ISO 690 nebo APA 7. Vše zůstává jen v tomto prohlížeči.</p>
   <div class="note">Generátor pokrývá nejběžnější případy. U specifických typů zdrojů (normy, patenty, audiovizuální díla…) ověř formát podle aktuální normy nebo pokynů školy/redakce.</div>
-
-  <section class="card kniha-pomucka" aria-labelledby="knihaNadpis">
-    <h2 id="knihaNadpis">Kde najdu údaje o knize?</h2>
-    <p>Vyber očíslovaný bod na titulní straně nebo v tiráži. Popisky jsou ukázkové; u skutečné knihy mohou být uspořádané jinak.</p>
-    <div class="kniha-scena">
-      <img src="img/00/citace-kniha-tiraz.webp" alt="Otevřená kniha: vlevo titulní strana, vpravo tiráž s řádky pro bibliografické údaje.">
-      <span class="kniha-text kniha-autor">EVA NOVOTNÁ</span>
-      <span class="kniha-text kniha-nazev">TAJEMSTVÍ LESA</span>
-      <span class="kniha-text kniha-udaj kniha-vydani">2. vydání</span>
-      <span class="kniha-text kniha-udaj kniha-misto">Praha</span>
-      <span class="kniha-text kniha-udaj kniha-nakladatel">Modrý list</span>
-      <span class="kniha-text kniha-udaj kniha-rok">2026</span>
-      <span class="kniha-text kniha-udaj kniha-isbn">ISBN 978-80-00000-00-0</span>
-      <button class="kniha-bod" data-pole="autor" type="button" aria-label="1: autor" aria-pressed="false">1</button>
-      <button class="kniha-bod" data-pole="nazev" type="button" aria-label="2: název knihy" aria-pressed="false">2</button>
-      <button class="kniha-bod" data-pole="vydani" type="button" aria-label="3: vydání" aria-pressed="false">3</button>
-      <button class="kniha-bod" data-pole="misto" type="button" aria-label="4: místo vydání" aria-pressed="false">4</button>
-      <button class="kniha-bod" data-pole="nakladatel" type="button" aria-label="5: nakladatel" aria-pressed="false">5</button>
-      <button class="kniha-bod" data-pole="rok" type="button" aria-label="6: rok vydání" aria-pressed="false">6</button>
-      <button class="kniha-bod" data-pole="isbn" type="button" aria-label="7: ISBN" aria-pressed="false">7</button>
-    </div>
-    <div class="kniha-vysvetleni" id="knihaVysvetleni" aria-live="polite">Vyber bod 1–7 a zjisti, k čemu údaj v citaci slouží.</div>
-    <div class="kniha-akce"><button class="btn" id="btnUkazka" type="button">Přenést ukázkové údaje do formuláře</button></div>
-  </section>
 
   <div class="card">
     <h2>Nový zdroj</h2>
@@ -181,26 +142,6 @@ function renderDynFields(){
   }
 }
 $('fTyp').addEventListener('change', renderDynFields);
-
-const POPIS_POLE={
-  autor:'Autor je člověk, který knihu napsal. Do formuláře zapisujeme „Příjmení, Jméno“.',
-  nazev:'Název přesně opisujeme z titulní strany knihy.',
-  vydani:'Číslo vydání rozlišuje různé verze téže knihy. První vydání se často neuvádí.',
-  misto:'Místo vydání je město, ve kterém sídlí nakladatel uvedený v knize.',
-  nakladatel:'Nakladatel knihu vydal; nepleť si ho s tiskárnou.',
-  rok:'Rok vydání patří ke konkrétnímu vydání knihy.',
-  isbn:'ISBN je jedinečný identifikátor konkrétního vydání knihy.'
-};
-document.querySelectorAll('.kniha-bod').forEach(bod=>bod.addEventListener('click',()=>{
-  document.querySelectorAll('.kniha-bod').forEach(jiny=>jiny.setAttribute('aria-pressed',String(jiny===bod)));
-  $('knihaVysvetleni').textContent=POPIS_POLE[bod.dataset.pole];
-}));
-$('btnUkazka').addEventListener('click',()=>{
-  $('fTyp').value='kniha'; renderDynFields();
-  $('fAutori').value='Novotná, Eva'; $('fNazev').value='Tajemství lesa'; $('fRok').value='2026';
-  $('f_vydani').value='2. vydání'; $('f_misto').value='Praha'; $('f_nakladatel').value='Modrý list'; $('f_isbn').value='978-80-00000-00-0';
-  $('fAutori').focus();
-});
 
 function parseAuthors(text){
   return (text||'').split('\n').map(l=>l.trim()).filter(Boolean).map(l=>{
