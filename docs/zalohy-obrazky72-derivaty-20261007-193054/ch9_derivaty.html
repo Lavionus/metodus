@@ -18,8 +18,6 @@
       color: var(--text-faint); font-size: 0.79rem; }
     .lista span { background: var(--bg-control); border: 1px solid var(--border);
       border-radius: 8px; padding: 5px 11px; }
-    .vyrobek-karta { width:min(300px,82vw); padding:8px; }
-    .vyrobek-karta img { display:block; width:100%; aspect-ratio:1; object-fit:contain; border-radius:9px; background:#f7f1e6; }
   </style>
 </head>
 <body>
@@ -31,7 +29,6 @@
     <button data-rezim="kviz2">🍷 Alkoholy</button>
     <button data-rezim="kviz3">🧪 Kyseliny a estery</button>
     <button data-rezim="kviz4">🏠 Deriváty v praxi</button>
-    <button data-rezim="vyrobky">🧴 Poznej výrobek</button>
   </div>
 
   <div class="plocha" id="plocha"></div>
@@ -374,26 +371,9 @@ function kviz(klic) {
   p.appendChild(odezva);
 }
 
-const VYROBKY = [
-  {id:'ocet',nazev:'láhev octa',q:'Který derivát dává tomuto výrobku typickou kyselou chuť?',a:'kyselina octová',b:['ethanol','aceton','ethylenglykol']},
-  {id:'dezinfekce',nazev:'dezinfekční gel',q:'Která látka bývá hlavní účinnou složkou tohoto výrobku?',a:'ethanol nebo propan-2-ol',b:['kyselina octová','polyethylentereftalát','kyselina salicylová']},
-  {id:'odlakovac',nazev:'odlakovač',q:'Které běžné rozpouštědlo může tento výrobek obsahovat?',a:'aceton',b:['glycerol','methan','kyselina mravenčí']},
-  {id:'aspirin',nazev:'tableta léčiva',q:'Od které látky je odvozen aspirin?',a:'od kyseliny salicylové',b:['od methanolu','od ethylenglykolu','od acetonu']},
-  {id:'parfem',nazev:'parfém',q:'Která skupina derivátů často vytváří ovocné vůně?',a:'estery',b:['halogenderiváty','aminy','alkyny']},
-  {id:'nemrznouci',nazev:'nemrznoucí směs',q:'Který vícesytný alkohol se používá v nemrznoucích směsích?',a:'ethylenglykol',b:['ethanol v nápojích','kyselina octová','aceton']},
-  {id:'pet',nazev:'PET láhev',q:'Co znamená zkratka PET?',a:'polyethylentereftalát',b:['polyethanol','propan-ethyl-toluen','polyethylamin']},
-  {id:'mydlo',nazev:'mýdlo',q:'Jak mýdlo vzniká?',a:'zmýdelněním tuků hydroxidem',b:['kvašením cukru','destilací ropy','spalováním alkoholu']},
-];
-function vyrobky(){
-  const p=$('plocha'),u=Uloha.nahodne(VYROBKY);
-  p.innerHTML=`<div class="zadani uloha-text">${u.q}</div><div class="karta vyrobek-karta"><img src="img/ch/ch9-derivaty-${u.id}.webp" alt="${u.nazev}" width="768" height="768"></div>`;
-  const odezva=odezvaEl(); Uloha.vyber({kam:p,odezva,moznosti:Uloha.zamichej([u.a,...u.b]).map(t=>({klic:t,popis:t})),spravnyKlic:u.a,zpravaOk:`✅ ${u.a}`,zpravaChyba:'Propoj výrobek s látkou nebo reakcí, kterou znáš z předchozích režimů.',poSpravne:skore.vyhodnot,dalsi:novaUloha});p.appendChild(odezva);
-}
-
 const REZIMY = {
   kviz1: () => kviz('kviz1'), kviz2: () => kviz('kviz2'),
   kviz3: () => kviz('kviz3'), kviz4: () => kviz('kviz4'),
-  vyrobky,
 };
 function novaUloha() { REZIMY[rezim](); }
 

@@ -2256,7 +2256,7 @@ Společné pro chemii: 🔗 **jeden molekulový model** (🧩 molekula a atom) p
   - Záměna funkční skupiny na stejném řetězci a sledování změny třídy a názvu.
   - Karty výrobků (ocet, líh, aceton, aspirin) propojené se strukturou.
 - **Obrázky:**
-  - `IMG-ch-10` ✅ **B** · 8 karet běžných výrobků s deriváty (láhev octa, dezinfekce, odlakovač, aspirin, parfém, nemrznoucí směs, PET láhev, mýdlo) bez značek — zapojeno do poznávačky
+  - `IMG-ch-10` ⚪ **B** · 8 karet běžných výrobků s deriváty (láhev octa, dezinfekce, odlakovač, aspirin, parfém, nemrznoucí směs, PET láhev, mýdlo) bez značek
 
 ### 7.9 Přírodopis (17 stránek)
 
@@ -3447,7 +3447,7 @@ Při výrobě sady v jednom stylu zadávat všechny karty v jedné dávce se ste
 | `IMG-ch-05` | C | fotografie skutečných aparatur (filtrace, destilace, odpařování, dělicí nálevka, chromatografie na papíře) jako protějšek animací | [ch8_smesi](obsah/ch8_smesi.html) |
 | `IMG-ch-07` | C | fotografie koroze (rezavý hřebík, měděná střecha s patinou), pozinkovaného plechu, citronové baterie | [ch9_redoxni](obsah/ch9_redoxni.html) |
 | `IMG-ch-08` | A ✅ | řez frakční destilační kolonou; hotovo a zapojeno | [ch9_uhlovodiky](obsah/ch9_uhlovodiky.html) |
-| `IMG-ch-10` | B ✅ | 8 karet běžných výrobků s deriváty (láhev octa, dezinfekce, odlakovač, aspirin, parfém, nemrznoucí směs, PET láhev, mýdlo) bez značek — zapojeno do poznávačky | [ch9_derivaty](obsah/ch9_derivaty.html) |
+| `IMG-ch-10` | B | 8 karet běžných výrobků s deriváty (láhev octa, dezinfekce, odlakovač, aspirin, parfém, nemrznoucí směs, PET láhev, mýdlo) bez značek | [ch9_derivaty](obsah/ch9_derivaty.html) |
 | `IMG-pr-03` | C | fotografie 4 typů lišejníků (terčovník, provazovka, dutohlávka, mapovník) | [pr6_houby](obsah/pr6_houby.html) |
 | `IMG-pr-19` | C | fotografie 6 geologických jevů v ČR (Pravčická brána, propast Macocha, Říp, Komorní hůrka, Adršpašské skály, meandry Lužnice) — vnitřní a vnější děje v krajině | [pr9_geologicke_deje](obsah/pr9_geologicke_deje.html) |
 | `IMG-pr-22` | A | 4 rekonstrukce krajin (prvohorní moře, karbonský les, druhohorní krajina s dinosaury, čtvrtohorní tundra s mamuty) — označit jako rekonstrukce | [pr9_vyvoj_zeme](obsah/pr9_vyvoj_zeme.html) |

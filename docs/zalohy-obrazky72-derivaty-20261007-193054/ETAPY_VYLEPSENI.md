@@ -688,7 +688,7 @@ Níže je úplný seznam 260 stránek z auditu. Každá má vlastní doporučen�
 - `IMG-aj-06` je zapojená do režimu Popiš obrázek v `aj5_pritomny_prubehovy`: jedna parková scéna obsahuje přesně deset osob s deseti odlišnými činnostmi a web nad ní střídá deset přístupně popsaných hotspotů.
 - `IMG-prv-01` je zapojená v `prv1_rodina`: rodokmen nyní skládá osm obrazových členů rozšířené rodiny a stejné portréty používají otázky Kdo je kdo. Pět postav se sdílí s `IMG-aj-02`, nově vznikly teta, strýc a bratranec.
 - `IMG-prv-03` nahrazuje schematické SVG v `prv1_cesta_skola`: akvarelová vesnice obsahuje dům, školu, dva druhy přechodu, zastávku, zaparkovaná i jedoucí auta a deset přístupných hotspotů. Rybník, kostel a lípa jsou pevné orientační body pro další společné scény vesnice.
-- Všech 473 ilustrací má projektový PNG originál, optimalizovaný WebP, přesné zadání, alt text a záznam původu v `obsah/img/kapitola-7-2.json`; plně dokončeno je 79 sad, jedna sada (`IMG-aj-02`) je rozpracovaná a dokončit zbývá 89 sad. Nově přibyla sada `IMG-ch-10` s osmi výrobky, zapojená do poznávačky derivátů.
+- Všech 465 ilustrací má projektový PNG originál, optimalizovaný WebP, přesné zadání, alt text a záznam původu v `obsah/img/kapitola-7-2.json`; plně dokončeno je 78 sad, jedna sada (`IMG-aj-02`) je rozpracovaná a dokončit zbývá 90 sad. Nově přibyla sada `IMG-f-15` s osmi zdroji zvuku, zapojená do interaktivní decibelové stupnice.
 - Ověření: obrazový test byl rozšířen o `inf7_site.html`, `inf7_sifrovani.html` a `typing_trainer.html`. Současná cache v132 zůstala zachována. Veřejné nasazení neproběhlo.
 
 

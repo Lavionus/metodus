@@ -2022,7 +2022,7 @@ Společné pro fyziku: web má **výborné simulace** (páka, optika, elektřina
   - Tónový generátor (WebAudio, omezená hlasitost) s nezávislými posuvníky frekvence a amplitudy a živou vlnou.
   - Hlukové situace na stupnici decibelů (šepot, třída, sekačka, koncert).
 - **Obrázky:**
-  - `IMG-f-15` ✅ **B** · 8 karet zdrojů zvuku pro interaktivní decibelovou stupnici (list, šepot, rozhovor, třída, sekačka, motorka, koncert, letadlo)
+  - `IMG-f-15` ⚪ **B** · 8 karet zdrojů zvuku pro decibelovou stupnici (list, šepot, rozhovor, třída, sekačka, motorka, koncert, letadlo)
 
 #### Střídavý proud a rozvod elektřiny · [f9_stridavy_proud.html](obsah/f9_stridavy_proud.html)
 - **Zařazení:** Přírodní vědy › Fyzika · 9. r. · lekce A
@@ -2256,7 +2256,7 @@ Společné pro chemii: 🔗 **jeden molekulový model** (🧩 molekula a atom) p
   - Záměna funkční skupiny na stejném řetězci a sledování změny třídy a názvu.
   - Karty výrobků (ocet, líh, aceton, aspirin) propojené se strukturou.
 - **Obrázky:**
-  - `IMG-ch-10` ✅ **B** · 8 karet běžných výrobků s deriváty (láhev octa, dezinfekce, odlakovač, aspirin, parfém, nemrznoucí směs, PET láhev, mýdlo) bez značek — zapojeno do poznávačky
+  - `IMG-ch-10` ⚪ **B** · 8 karet běžných výrobků s deriváty (láhev octa, dezinfekce, odlakovač, aspirin, parfém, nemrznoucí směs, PET láhev, mýdlo) bez značek
 
 ### 7.9 Přírodopis (17 stránek)
 
@@ -3439,7 +3439,7 @@ Při výrobě sady v jednom stylu zadávat všechny karty v jedné dávce se ste
 | `IMG-f-09` | B ✅ | 4 karty situací Newtonových zákonů (bruslař na ledě, raketa, dva bruslaři se odstrkují, autobus brzdí a cestující se nakloní) — zapojeno do procvičování zákonů | [f7_sila](obsah/f7_sila.html) |
 | `IMG-f-11` | C | fotografie přílivu a odlivu na stejném místě (dvojice) — skutečný rozdíl hladin | [vodni_hladina](obsah/vodni_hladina.html) |
 | `IMG-f-14` | C | fotografie JE Temelín a Dukovany (chladicí věže), palivového souboru (muzejní model) | [f9_jaderna](obsah/f9_jaderna.html) |
-| `IMG-f-15` | B ✅ | 8 karet zdrojů zvuku zapojených do interaktivní decibelové stupnice (list, šepot, rozhovor, třída, sekačka, motorka, koncert, letadlo) | [f9_zvuk](obsah/f9_zvuk.html) |
+| `IMG-f-15` | B | 8 karet zdrojů zvuku pro decibelovou stupnici (list, šepot, rozhovor, třída, sekačka, motorka, koncert, letadlo) | [f9_zvuk](obsah/f9_zvuk.html) |
 | `IMG-f-16` | C | fotografie rozvodny, stožárů vysokého napětí, transformátoru na sloupu, domovní pojistkové skříně | [f9_stridavy_proud](obsah/f9_stridavy_proud.html) |
 | `IMG-f-17` | A | jemné obrysové kresby 12 souhvězdí (Velký vůz/Velká medvědice, Kasiopeja, Orion, Labuť, Lyra, Orel, Blíženci, Býk, Lev, Štír, Pegas, Malý vůz) na průhledném pozadí — volitelná vrstva nad mapou | [star_map](obsah/star_map.html) |
 | `IMG-f-18` | C | fotografie 8 fází Měsíce ze stejného místa (volná licence) a fotografie meteoru — obrázková řada fází | [sky_events](obsah/sky_events.html) |
@@ -3447,7 +3447,7 @@ Při výrobě sady v jednom stylu zadávat všechny karty v jedné dávce se ste
 | `IMG-ch-05` | C | fotografie skutečných aparatur (filtrace, destilace, odpařování, dělicí nálevka, chromatografie na papíře) jako protějšek animací | [ch8_smesi](obsah/ch8_smesi.html) |
 | `IMG-ch-07` | C | fotografie koroze (rezavý hřebík, měděná střecha s patinou), pozinkovaného plechu, citronové baterie | [ch9_redoxni](obsah/ch9_redoxni.html) |
 | `IMG-ch-08` | A ✅ | řez frakční destilační kolonou; hotovo a zapojeno | [ch9_uhlovodiky](obsah/ch9_uhlovodiky.html) |
-| `IMG-ch-10` | B ✅ | 8 karet běžných výrobků s deriváty (láhev octa, dezinfekce, odlakovač, aspirin, parfém, nemrznoucí směs, PET láhev, mýdlo) bez značek — zapojeno do poznávačky | [ch9_derivaty](obsah/ch9_derivaty.html) |
+| `IMG-ch-10` | B | 8 karet běžných výrobků s deriváty (láhev octa, dezinfekce, odlakovač, aspirin, parfém, nemrznoucí směs, PET láhev, mýdlo) bez značek | [ch9_derivaty](obsah/ch9_derivaty.html) |
 | `IMG-pr-03` | C | fotografie 4 typů lišejníků (terčovník, provazovka, dutohlávka, mapovník) | [pr6_houby](obsah/pr6_houby.html) |
 | `IMG-pr-19` | C | fotografie 6 geologických jevů v ČR (Pravčická brána, propast Macocha, Říp, Komorní hůrka, Adršpašské skály, meandry Lužnice) — vnitřní a vnější děje v krajině | [pr9_geologicke_deje](obsah/pr9_geologicke_deje.html) |
 | `IMG-pr-22` | A | 4 rekonstrukce krajin (prvohorní moře, karbonský les, druhohorní krajina s dinosaury, čtvrtohorní tundra s mamuty) — označit jako rekonstrukce | [pr9_vyvoj_zeme](obsah/pr9_vyvoj_zeme.html) |

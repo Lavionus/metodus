@@ -19,13 +19,6 @@
     .uloha-text { max-width: 640px; font-size: 1.02rem; line-height: 1.6; }
     .uloha-text b { color: var(--accent); }
     .vzorec { font-family: 'Courier New', monospace; color: var(--text-muted); font-size: 0.95rem; }
-    .hluk-grid { display:grid; grid-template-columns:repeat(4,minmax(125px,1fr)); gap:10px; width:min(860px,96vw); }
-    .hluk-karta { padding:6px; border:1px solid var(--border); border-radius:10px; background:var(--bg-panel); color:var(--text); cursor:pointer; text-align:center; }
-    .hluk-karta:hover,.hluk-karta:focus-visible,.hluk-karta[aria-pressed="true"] { border-color:var(--accent); outline:2px solid var(--accent-soft); }
-    .hluk-karta img { display:block; width:100%; aspect-ratio:1; object-fit:cover; border-radius:7px; }
-    .hluk-karta b { display:block; margin-top:5px; font-size:.8rem; }
-    .hluk-vysledek { min-height:3em; max-width:640px; margin-top:10px; color:var(--text-muted); line-height:1.5; }
-    @media(max-width:650px){.hluk-grid{grid-template-columns:repeat(2,minmax(120px,1fr))}}
   </style>
 </head>
 <body>
@@ -37,7 +30,6 @@
     <button data-rezim="rychlost">📏 Rychlost zvuku a ozvěna</button>
     <button data-rezim="vlastnosti">🎚️ Výška a hlasitost</button>
     <button data-rezim="sluch">👂 Sluch a hluk</button>
-    <button data-rezim="decibely">📶 Stupnice hluku</button>
   </div>
 
   <div class="plocha" id="plocha"></div>
@@ -212,28 +204,7 @@ function sluch() {
   p.appendChild(odezva);
 }
 
-const HLUKY = [
-  {id:'list',nazev:'šustění listu',db:10,popis:'Velmi tichý zvuk, slyšitelný hlavně v klidném prostředí.'},
-  {id:'sepot',nazev:'šepot',db:30,popis:'Tichá řeč z malé vzdálenosti.'},
-  {id:'rozhovor',nazev:'rozhovor',db:60,popis:'Běžný rozhovor z přibližně jednoho metru.'},
-  {id:'trida',nazev:'rušná třída',db:75,popis:'Dlouhý pobyt už může být únavný a zhoršuje soustředění.'},
-  {id:'sekacka',nazev:'sekačka',db:90,popis:'Při delší práci je vhodná ochrana sluchu.'},
-  {id:'motorka',nazev:'motorka',db:100,popis:'Bez ochrany je bezpečná doba poslechu krátká.'},
-  {id:'koncert',nazev:'koncert',db:110,popis:'Hrozí poškození sluchu; použij špunty a dělej přestávky.'},
-  {id:'letadlo',nazev:'letadlo při startu',db:120,popis:'Velmi hlasitý zvuk blízko hranice bolesti.'},
-];
-function decibely(){
-  const p=$('plocha');
-  p.innerHTML=`<div class="zadani uloha-text">Vyber zdroj zvuku a zjisti jeho přibližnou hladinu. Stupnice decibelů je <b>logaritmická</b>: rozdíl 10 dB vnímáme zhruba jako dvojnásobnou hlasitost.</div>
-    <div class="hluk-grid">${HLUKY.map((h,i)=>`<button class="hluk-karta" type="button" data-i="${i}" aria-pressed="false"><img src="img/f/f9-zvuk-${h.id}.webp" alt="${h.nazev}" width="768" height="768"><b>${h.nazev}</b></button>`).join('')}</div>
-    <div class="hluk-vysledek" id="hlukVysledek" aria-live="polite">Karty jsou seřazené od nejtiššího zdroje po nejhlasitější.</div>`;
-  p.querySelectorAll('.hluk-karta').forEach(b=>b.addEventListener('click',()=>{
-    p.querySelectorAll('.hluk-karta').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));
-    const h=HLUKY[+b.dataset.i]; $('hlukVysledek').innerHTML=`<b>${h.nazev}: přibližně ${h.db} dB.</b> ${h.popis}`;
-  }));
-}
-
-const REZIMY = { vlna, rychlost, vlastnosti, sluch, decibely };
+const REZIMY = { vlna, rychlost, vlastnosti, sluch };
 function novaUloha() { REZIMY[rezim](); }
 
 document.querySelectorAll('#rezimy button').forEach(b => b.addEventListener('click', () => {
