@@ -20,8 +20,6 @@
     .scena .zeme { stroke: var(--border-strong); stroke-width: 3; }
     .scena .tez { fill: var(--danger); }
     .vzorec { font-family: 'Courier New', monospace; color: var(--text-muted); font-size: 0.98rem; }
-    .newton-karta { width: min(330px, 88vw); padding: 8px; }
-    .newton-karta img { display: block; width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 10px; }
   </style>
 </head>
 <body>
@@ -195,23 +193,21 @@ const ZAKONY = {
   treti: '3. zákon akce a reakce – síly působí vzájemně a jsou stejně velké',
 };
 const PRIKLADY = [
-  { text: 'Autobus prudce zabrzdí a cestující se nakloní dopředu.', z: 'prvni', obrazek: 'autobus', alt: 'Cestující v brzdícím autobusu se naklánějí dopředu.' },
-  { text: 'Bruslař na hladkém ledě pokračuje v pohybu, dokud ho nezpomalí tření.', z: 'prvni', obrazek: 'bruslar', alt: 'Bruslař volně klouže po ledě.' },
+  { text: 'Autobus prudce zabrzdí a cestující se nakloní dopředu.', z: 'prvni' },
   { text: 'Kámen položený na stole zůstává v klidu, dokud do něj někdo nestrčí.', z: 'prvni' },
   { text: 'Ubrus se rychle vytrhne zpod talířů a talíře zůstanou stát.', z: 'prvni' },
   { text: 'Čím větší silou kopneš do míče, tím větší zrychlení míč dostane.', z: 'druhy' },
   { text: 'Těžší vozík se stejnou silou rozjíždí pomaleji než lehký.', z: 'druhy' },
   { text: 'Auto zrychluje, protože motor vyvíjí sílu.', z: 'druhy' },
   { text: 'Plavec se odrazí od stěny bazénu a stěna odstrčí jeho.', z: 'treti' },
-  { text: 'Raketa vypuzuje plyny dozadu a sama letí dopředu.', z: 'treti', obrazek: 'raketa', alt: 'Raketa stoupá vzhůru a spaliny proudí dolů.' },
+  { text: 'Raketa vypuzuje plyny dozadu a sama letí dopředu.', z: 'treti' },
   { text: 'Když udeříš do zdi, zabolí tě ruka.', z: 'treti' },
-  { text: 'Bruslař odstrčí kamaráda a sám se rozjede opačným směrem.', z: 'treti', obrazek: 'bruslari', alt: 'Dva bruslaři se po vzájemném odstrčení rozjíždějí opačnými směry.' },
+  { text: 'Bruslař odstrčí kamaráda a sám se rozjede opačným směrem.', z: 'treti' },
 ];
 function zakony() {
   const p = $('plocha');
   const u = Uloha.nahodne(PRIKLADY);
-  p.innerHTML = `<div class="zadani uloha-text">${u.text}<br>Který Newtonův zákon to popisuje?</div>
-    ${u.obrazek ? `<div class="karta newton-karta"><img src="img/f/f7-newton-${u.obrazek}.webp" alt="${u.alt}" width="768" height="768"></div>` : ''}`;
+  p.innerHTML = `<div class="zadani uloha-text">${u.text}<br>Který Newtonův zákon to popisuje?</div>`;
   const odezva = odezvaEl();
   Uloha.vyber({
     kam: p, odezva,

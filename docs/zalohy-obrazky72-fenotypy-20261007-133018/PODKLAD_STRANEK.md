@@ -2463,7 +2463,7 @@ Společné pro přírodopis: čtyři stránky (`bunka`, `pr7_rostliny`, `anatomi
   - Znak s obrázkem (barva hrachu, barva srsti).
 - **Stav 23. 9. 2026:** 🧩 úkoly k modelu – nová simulace 4 / 40 / 400 potomků (podle návrhu karty) a 3 úkoly (Aa × Aa, uniformita AA × aa, náhoda u čtyř dětí), 8 otázek.
 - **Obrázky:**
-  - `IMG-pr-23` ✅ **B** · 8 karet znaků pro křížení (žlutý/zelený hrách, hladký/svraštělý hrách, černé/hnědé morče, červený/bílý květ hrachu) — zapojeno jako volba fenotypu a alel
+  - `IMG-pr-23` ⚪ **B** · karty znaků pro křížení (žlutý/zelený hrách, hladký/svraštělý hrách, černé/hnědé morče, červený/bílý květ hrachu) — fenotypy
 
 ### 7.10 Zeměpis (21 stránek)
 
@@ -3451,7 +3451,7 @@ Při výrobě sady v jednom stylu zadávat všechny karty v jedné dávce se ste
 | `IMG-pr-03` | C | fotografie 4 typů lišejníků (terčovník, provazovka, dutohlávka, mapovník) | [pr6_houby](obsah/pr6_houby.html) |
 | `IMG-pr-19` | C | fotografie 6 geologických jevů v ČR (Pravčická brána, propast Macocha, Říp, Komorní hůrka, Adršpašské skály, meandry Lužnice) — vnitřní a vnější děje v krajině | [pr9_geologicke_deje](obsah/pr9_geologicke_deje.html) |
 | `IMG-pr-22` | A | 4 rekonstrukce krajin (prvohorní moře, karbonský les, druhohorní krajina s dinosaury, čtvrtohorní tundra s mamuty) — označit jako rekonstrukce | [pr9_vyvoj_zeme](obsah/pr9_vyvoj_zeme.html) |
-| `IMG-pr-23` | B ✅ | 8 karet znaků pro křížení (žlutý/zelený hrách, hladký/svraštělý hrách, černé/hnědé morče, červený/bílý květ hrachu) — zapojeno jako volba fenotypu a alel | [punnett](obsah/punnett.html) |
+| `IMG-pr-23` | B | karty znaků pro křížení (žlutý/zelený hrách, hladký/svraštělý hrách, černé/hnědé morče, červený/bílý květ hrachu) — fenotypy | [punnett](obsah/punnett.html) |
 | `IMG-z-02` | A ✅ | svislý řez atmosférou; hotovo a zapojeno | [z6_atmosfera](obsah/z6_atmosfera.html) |
 | `IMG-z-06` | A | řez Zemí (kůra, plášť, vnější a vnitřní jádro) s výsekem — hotspoty vrstev | [z6_litosfera](obsah/z6_litosfera.html) |
 | `IMG-z-08` | C | 4 fotografie míst (Káhira s Nilem, Sahara, savana v Tanzanii, Kapské Město) | [z7_afrika](obsah/z7_afrika.html) |

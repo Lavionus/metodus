@@ -39,15 +39,6 @@
     .legenda { font-size: 0.85rem; color: var(--text-muted); line-height: 1.7; }
     .prikladbtn { background: var(--bg-control); border: 1px solid var(--border-strong); color: var(--text-muted); border-radius: 6px; padding: 6px 12px; font-size: 0.82rem; cursor: pointer; margin-right: 6px; margin-top: 6px; }
     .prikladbtn:hover { border-color: var(--accent); color: var(--text); }
-    .fenotypy { max-width: 900px; }
-    .fenotypy h2 { font-size: 1rem; margin-bottom: 5px; }
-    .fenotypy > p { color: var(--text-muted); font-size: .84rem; margin-bottom: 12px; }
-    .fenotyp-grid { display: grid; grid-template-columns: repeat(4,minmax(128px,1fr)); gap: 10px; }
-    .fenotyp-volba { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; padding: 5px; background: var(--bg-control); color: var(--text); border: 1px solid var(--border-strong); border-radius: 9px; cursor: pointer; }
-    .fenotyp-volba:hover,.fenotyp-volba:focus-visible,.fenotyp-volba[aria-pressed="true"] { border-color: var(--accent); outline: 2px solid var(--accent-soft); }
-    .fenotyp-volba img { display: block; width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 6px; }
-    .fenotyp-volba span { grid-column: 1/-1; font-size: .76rem; font-weight: 700; text-align: center; padding: 3px; }
-    @media(max-width:680px){.fenotyp-grid{grid-template-columns:repeat(2,minmax(120px,1fr))}}
   
     /* simulace potomků: kolik jich skutečně vyjde s každým projevem */
     .simulace .radek { gap: 8px; align-items: center; }
@@ -64,25 +55,6 @@
 <body>
   <h1>🧬 Punnettův čtverec</h1>
   <p class="podtitul">Křížení jednoho znaku (monohybridismus). Zadej genotypy rodičů – jedna dominantní (velké písmeno) a jedna recesivní alela (malé). Např. <b>Aa × Aa</b>.</p>
-
-  <section class="panel fenotypy" aria-labelledby="fenotypNadpis">
-    <h2 id="fenotypNadpis">Vyber sledovaný znak</h2>
-    <p>Každá dvojice ukazuje dva fenotypy. Výběrem se nastaví heterozygotní rodiče a popis alel.</p>
-    <div class="fenotyp-grid">
-      <button class="fenotyp-volba" type="button" data-alela="A" data-z="A = žlutá semena, a = zelená semena" aria-pressed="false">
-        <img src="img/pr/pr9-genetika-hrach-zluty.webp" alt="Žlutá semena hrachu."><img src="img/pr/pr9-genetika-hrach-zeleny.webp" alt="Zelená semena hrachu."><span>barva semen</span>
-      </button>
-      <button class="fenotyp-volba" type="button" data-alela="R" data-z="R = hladká semena, r = svraštělá semena" aria-pressed="false">
-        <img src="img/pr/pr9-genetika-hrach-hladky.webp" alt="Hladká semena hrachu."><img src="img/pr/pr9-genetika-hrach-svrastely.webp" alt="Svraštělá semena hrachu."><span>povrch semen</span>
-      </button>
-      <button class="fenotyp-volba" type="button" data-alela="B" data-z="B = černá srst, b = hnědá srst" aria-pressed="false">
-        <img src="img/pr/pr9-genetika-morce-cerne.webp" alt="Černé morče."><img src="img/pr/pr9-genetika-morce-hnede.webp" alt="Hnědé morče."><span>barva srsti</span>
-      </button>
-      <button class="fenotyp-volba" type="button" data-alela="C" data-z="C = červený květ, c = bílý květ" aria-pressed="false">
-        <img src="img/pr/pr9-genetika-kvet-cerveny.webp" alt="Červený květ hrachu."><img src="img/pr/pr9-genetika-kvet-bily.webp" alt="Bílý květ hrachu."><span>barva květu</span>
-      </button>
-    </div>
-  </section>
 
   <div class="panel">
     <div class="radek">
@@ -216,12 +188,6 @@ function spocti() {
 document.querySelectorAll('.prikladbtn').forEach(b => b.onclick = () => {
   $('rodic1').value = b.dataset.p; $('rodic2').value = b.dataset.q; $('znak').value = b.dataset.z; spocti();
 });
-document.querySelectorAll('.fenotyp-volba').forEach(b => b.addEventListener('click', () => {
-  const A=b.dataset.alela, a=A.toLowerCase();
-  $('rodic1').value=A+a; $('rodic2').value=A+a; $('znak').value=b.dataset.z;
-  document.querySelectorAll('.fenotyp-volba').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));
-  spocti(); $('rodic1').focus();
-}));
 spocti();
 
 /* simulace potomků – historie posledních pokusů */

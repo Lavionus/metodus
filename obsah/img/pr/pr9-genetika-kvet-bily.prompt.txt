@@ -1,0 +1,4 @@
+Use case: scientific-educational
+Asset type: square phenotype card for genetics
+Primary request: Botanically recognizable garden pea stem with leaves, tendril and one clearly white pea flower, matching the red flower in scale and watercolor schoolbook style.
+Constraints: no pods, text, labels, arrows, formulas, logos, watermark, border or photorealism.

@@ -1,0 +1,4 @@
+Use case: scientific-educational
+Asset type: square phenotype card for genetics
+Primary request: Side view of one healthy short-haired guinea pig with uniformly warm brown fur, matching the black guinea pig in pose, scale and watercolor schoolbook style.
+Constraints: complete body; no text, labels, arrows, formulas, logos, watermark, border, photorealism or emoji style.

@@ -51,7 +51,6 @@ Vytvořeno 23. 9. 2026 vestavěným nástrojem `image_gen` podle `PODKLAD_STRANE
 - Dokončena a zapojena sada `IMG-aj-07`: osm beze slov čitelných cedulí zákazů a povinností ve sjednoceném akvarelovém stylu.
 - Dokončena a zapojena sada `IMG-00-05`: otevřená fiktivní kniha s titulní stranou a tiráží, sedmi přístupnými hotspoty a webem vykreslenými ukázkovými údaji.
 - Dokončena a zapojena sada `IMG-f-09`: bruslař, raketa, dva odstrkující se bruslaři a cestující v brzdícím autobusu jako čtyři kontexty Newtonových zákonů.
-- Dokončena a zapojena sada `IMG-pr-23`: osm fenotypových karet ve čtyřech dvojicích pro přímou volbu sledovaného znaku v Punnettově čtverci.
 - Dokončena a zapojena sada `IMG-pr-18`: tři stejně pojaté řezy rozbíhavým, sbíhavým a transformním rozhraním litosférických desek.
 - Dokončena a zapojena sada `IMG-pr-22`: prvohorní moře, karbonský les, druhohorní krajina a čtvrtohorní stepní tundra jako čtyři označené rekonstrukce.
 - Dokončena a zapojena sada `IMG-inf-04`: pracovní stůl s deseti přístupnými hotspoty počítačových zařízení.
@@ -70,4 +69,4 @@ Vytvořeno 23. 9. 2026 vestavěným nástrojem `image_gen` podle `PODKLAD_STRANE
 - WebP: karty 768 × 768 px do 60 000 B, scény 1152 × 768 px do 200 000 B.
 - [Kontrolní galerie](kapitola-7-2.html), [strojový seznam a alt texty](kapitola-7-2.json).
 - Všechny karty jsou generované, bez vloženého textu, čísel a značek. Vizuálně zkontrolováno jako jedna galerie.
-- Celkem 457 hotových ilustrací. Plně dokončeno 77 ze 168 obrazových sad, jedna sada (`IMG-aj-02`, 60 různých z přibližně 120 karet) je rozpracovaná a dokončit zbývá 91 sad. Fotografické sady C a historické doklady E se negenerují.
+- Celkem 449 hotových ilustrací. Plně dokončeno 76 ze 168 obrazových sad, jedna sada (`IMG-aj-02`, 60 různých z přibližně 120 karet) je rozpracovaná a dokončit zbývá 92 sad. Fotografické sady C a historické doklady E se negenerují.
