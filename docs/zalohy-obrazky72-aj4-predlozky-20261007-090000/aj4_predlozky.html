@@ -15,17 +15,9 @@
     .veta-en { font-size: clamp(1.2rem, 4.5vw, 1.9rem); font-weight: 700; line-height: 1.45; max-width: 620px; }
     .veta-en .mezera { color: var(--accent); border-bottom: 3px solid var(--accent); padding: 0 12px; }
     .preklad { color: var(--text-faint); font-size: 0.95rem; font-style: italic; }
-    .scenka { position: relative; width: min(420px, 86vw); aspect-ratio: 1; overflow: hidden; border-radius: 14px; box-shadow: var(--shadow); }
-    .scenka-pokoj { display: block; width: 100%; height: 100%; object-fit: cover; }
-    .scenka-kocka { position: absolute; left: var(--x); top: var(--y); width: 24%; height: auto; translate: -50% -78%; z-index: var(--z, 2); touch-action: none; user-select: none; filter: drop-shadow(0 2px 2px #0002); }
-    .trenazer { width: min(100%, 760px); margin: 18px 0; padding: 14px; border: 1px solid var(--border); border-radius: 16px; background: var(--bg-panel); }
-    .trenazer h2 { margin: 0 0 5px; font-size: 1.2rem; }
-    .trenazer > p { color: var(--text-muted); margin: 0 0 10px; }
-    .trenazer .scenka { margin: auto; }
-    .trenazer .scenka-kocka { cursor: grab; }
-    .trenazer .scenka-kocka:active { cursor: grabbing; }
-    .polohy-volby { display: flex; flex-wrap: wrap; justify-content: center; gap: 7px; margin-top: 10px; }
-    .trenazer-veta { min-height: 1.6em; text-align: center; font-weight: 700; margin: 10px 0 0; }
+    .scenka { width: min(280px, 70vw); }
+    .scenka .krabice { fill: none; stroke: var(--text-muted); stroke-width: 4; }
+    .scenka .kocka { font-size: 34px; }
     .tabulka { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; max-width: var(--sirka-obsahu, 900px); margin-top: 12px; }
     .tabulka span {
       background: var(--bg-panel); border: 1px solid var(--border); border-radius: 8px;
@@ -43,17 +35,6 @@
     <button data-rezim="cas">🕐 Předložky času</button>
     <button data-rezim="vyznam">🇨🇿 Co to znamená?</button>
   </div>
-
-  <section class="trenazer" aria-labelledby="trenazerNadpis">
-    <h2 id="trenazerNadpis">Move the cat</h2>
-    <p>Přetáhni kočku k nejbližšímu místu, nebo vyber předložku tlačítkem.</p>
-    <div class="scenka" id="trenazerScena">
-      <img class="scenka-pokoj" src="img/aj/aj4-predlozky-pokoj.webp" alt="Pokoj s postelí, stolem, židlí a otevřenou krabicí." width="768" height="768">
-      <img class="scenka-kocka" id="trenazerKocka" src="img/aj/aj4-predlozky-kocka.webp" alt="Přemístitelná mourovatá kočka." width="768" height="768" draggable="false">
-    </div>
-    <div class="polohy-volby" id="polohyVolby" aria-label="Vyber polohu kočky"></div>
-    <p class="trenazer-veta" id="trenazerVeta" aria-live="polite"></p>
-  </section>
 
   <div class="plocha" id="plocha"></div>
 
@@ -78,52 +59,15 @@ const $ = id => document.getElementById(id);
 const skore = Uloha.skore('metodus_aj4_predlozky', $('skore'));
 let rezim = 'misto';
 
-/* Poloha kočky vůči krabici v procentech obrázku. */
+/* poloha kočky vůči krabici: [x, y] v souřadnicích obrázku */
 const POLOHY = [
-  { klic: 'in', cz: 'v (uvnitř)', x: 50, y: 64, z: 3 },
-  { klic: 'on', cz: 'na', x: 50, y: 53, z: 3 },
-  { klic: 'under', cz: 'pod', x: 50, y: 79, z: 3 },
-  { klic: 'next to', cz: 'vedle', x: 73, y: 69, z: 3 },
-  { klic: 'behind', cz: 'za', x: 57, y: 55, z: 1 },
-  { klic: 'in front of', cz: 'před', x: 43, y: 76, z: 4 },
+  { klic: 'in', cz: 'v (uvnitř)', x: 140, y: 105 },
+  { klic: 'on', cz: 'na', x: 140, y: 48 },
+  { klic: 'under', cz: 'pod', x: 140, y: 168 },
+  { klic: 'next to', cz: 'vedle', x: 228, y: 105 },
+  { klic: 'behind', cz: 'za', x: 175, y: 62 },
+  { klic: 'in front of', cz: 'před', x: 105, y: 150 },
 ];
-
-function nastavKocku(el, poloha) {
-  el.style.setProperty('--x', poloha.x + '%');
-  el.style.setProperty('--y', poloha.y + '%');
-  el.style.setProperty('--z', poloha.z);
-}
-
-function nastavTrenazer(poloha) {
-  nastavKocku($('trenazerKocka'), poloha);
-  $('trenazerVeta').textContent = `The cat is ${poloha.klic} the box.`;
-  document.querySelectorAll('#polohyVolby button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.klic === poloha.klic)));
-}
-
-POLOHY.forEach(poloha => {
-  const b = document.createElement('button');
-  b.textContent = poloha.klic;
-  b.dataset.klic = poloha.klic;
-  b.setAttribute('aria-pressed', 'false');
-  b.addEventListener('click', () => nastavTrenazer(poloha));
-  $('polohyVolby').appendChild(b);
-});
-
-let tah = false;
-$('trenazerKocka').addEventListener('pointerdown', e => { tah = true; e.currentTarget.setPointerCapture(e.pointerId); });
-$('trenazerKocka').addEventListener('pointermove', e => {
-  if (!tah) return;
-  const r = $('trenazerScena').getBoundingClientRect();
-  const x = Math.max(8, Math.min(92, (e.clientX - r.left) / r.width * 100));
-  const y = Math.max(18, Math.min(92, (e.clientY - r.top) / r.height * 100));
-  e.currentTarget.style.setProperty('--x', x + '%'); e.currentTarget.style.setProperty('--y', y + '%'); e.currentTarget.style.setProperty('--z', 5);
-});
-$('trenazerKocka').addEventListener('pointerup', e => {
-  tah = false; const r = $('trenazerScena').getBoundingClientRect();
-  const x = (e.clientX - r.left) / r.width * 100, y = (e.clientY - r.top) / r.height * 100;
-  nastavTrenazer(POLOHY.reduce((a, b) => (b.x-x)**2 + (b.y-y)**2 < (a.x-x)**2 + (a.y-y)**2 ? b : a));
-});
-nastavTrenazer(POLOHY[0]);
 
 const CASY = [
   { v: '___ Monday', spr: 'on', proc: 'Dny v týdnu mají on.' },
@@ -154,7 +98,11 @@ function misto() {
   const poloha = Uloha.nahodne(POLOHY);
   p.innerHTML = `<div class="zadani">Where is the cat?</div>
     <div class="karta">
-      <div class="scenka"><img class="scenka-pokoj" src="img/aj/aj4-predlozky-pokoj.webp" alt="Pokoj s otevřenou krabicí." width="768" height="768"><img class="scenka-kocka" src="img/aj/aj4-predlozky-kocka.webp" alt="Kočka je ${poloha.cz} krabice." width="768" height="768" style="--x:${poloha.x}%;--y:${poloha.y}%;--z:${poloha.z}"></div>
+      <svg class="scenka" viewBox="0 0 280 200">
+        <rect class="krabice" x="100" y="80" width="80" height="55" rx="4"/>
+        <text class="kocka" x="${poloha.x}" y="${poloha.y}" text-anchor="middle">🐈</text>
+        <text x="140" y="192" text-anchor="middle" fill="var(--text-faint)" font-size="13">box</text>
+      </svg>
       <div class="veta-en">The cat is <span class="mezera">?</span> the box.</div>
     </div>`;
   const jine = Uloha.zamichej(POLOHY.filter(x => x.klic !== poloha.klic)).slice(0, 3);

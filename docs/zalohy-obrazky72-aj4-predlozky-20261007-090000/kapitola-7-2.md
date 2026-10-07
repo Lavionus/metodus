@@ -47,7 +47,6 @@ Vytvořeno 23. 9. 2026 vestavěným nástrojem `image_gen` podle `PODKLAD_STRANE
 - Dokončena a zapojena sada `IMG-cj-02`: kamenný hranatý domek pro tvrdé souhlásky a útulný dřevěný domek s polštáři pro měkké souhlásky.
 - Dokončena a zapojena sada `IMG-pr-13`: osm profilů ptačích hlav a šest anatomicky odlišných typů nohou ve srovnávacím atlasu a procvičování.
 - Dokončena a zapojena sada `IMG-aj-04`: osm scén jednoho školákova dne pro denní režim a srovnání přítomného času prostého a průběhového.
-- Dokončena a zapojena sada `IMG-aj-05`: pokoj a samostatná průhledná mourovatá kočka, stylově odvozené z existujících anglických karet a použité v přetahovacím trenažéru předložek.
 - Dokončena a zapojena sada `IMG-pr-18`: tři stejně pojaté řezy rozbíhavým, sbíhavým a transformním rozhraním litosférických desek.
 - Dokončena a zapojena sada `IMG-pr-22`: prvohorní moře, karbonský les, druhohorní krajina a čtvrtohorní stepní tundra jako čtyři označené rekonstrukce.
 - Dokončena a zapojena sada `IMG-inf-04`: pracovní stůl s deseti přístupnými hotspoty počítačových zařízení.
@@ -66,4 +65,4 @@ Vytvořeno 23. 9. 2026 vestavěným nástrojem `image_gen` podle `PODKLAD_STRANE
 - WebP: karty 768 × 768 px do 60 000 B, scény 1152 × 768 px do 200 000 B.
 - [Kontrolní galerie](kapitola-7-2.html), [strojový seznam a alt texty](kapitola-7-2.json).
 - Všechny karty jsou generované, bez vloženého textu, čísel a značek. Vizuálně zkontrolováno jako jedna galerie.
-- Celkem 436 hotových ilustrací. Plně dokončeno 73 ze 168 obrazových sad, jedna sada (`IMG-aj-02`, 60 různých z přibližně 120 karet) je rozpracovaná a dokončit zbývá 95 sad. Fotografické sady C a historické doklady E se negenerují.
+- Celkem 434 hotových ilustrací. Plně dokončeno 72 ze 168 obrazových sad, jedna sada (`IMG-aj-02`, 60 různých z přibližně 120 karet) je rozpracovaná a dokončit zbývá 96 sad. Fotografické sady C a historické doklady E se negenerují.

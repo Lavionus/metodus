@@ -1360,7 +1360,7 @@ Společné pro jazyky: 🔗 gramatika se učí **v krátkém dialogu nebo scénc
   - Žák sám přetáhne kočku na místo podle věty (a naopak napíše větu podle polohy).
   - Časové předložky na kalendáři a ciferníku (🧩), ne jako seznam.
 - **Obrázky:**
-  - `IMG-aj-05` ✅ **B** · pokoj s krabicí, stolem, židlí a postelí + samostatná kočka s průhledným pozadím — zapojeno do poznávačky a přístupného přetahovacího trenažéru
+  - `IMG-aj-05` 🟠 **B** · pokoj s krabicí, stolem, židlí a postelí + samostatná karta kočky (průhledné pozadí) — kočka se přetahuje na různá místa
 
 #### Množné číslo a členy · [aj4_mnozne_cislo.html](obsah/aj4_mnozne_cislo.html)
 - **Zařazení:** Cizí jazyky › Gramatika · AJ 4. r. · lekce A
@@ -3335,7 +3335,7 @@ Při výrobě sady v jednom stylu zadávat všechny karty v jedné dávce se ste
 | `IMG-m-09` | C | 12 fotografií předmětů tvaru těles (kostka cukru, krabice mléka, plechovka, míč, kornout, pyramida, stan, toblerone, válcová pastelka…) — poznávání těles v okolí | [geo_tvary](obsah/geo_tvary.html) |
 | `IMG-aj-03` | A ✅ | 4 scénky setkání podle denní doby; hotovo a zapojeno | [aj3_pozdravy](obsah/aj3_pozdravy.html) |
 | `IMG-aj-04` | A ✅ | 8 scén běžného dne jednoho školáka — zapojeno jako denní režim a do srovnání prostého a průběhového času | [aj4_pritomny_prosty](obsah/aj4_pritomny_prosty.html) |
-| `IMG-aj-05` | B ✅ | pokoj s krabicí, stolem, židlí a postelí + samostatná kočka — zapojeno do poznávačky a přetahovacího trenažéru | [aj4_predlozky](obsah/aj4_predlozky.html) |
+| `IMG-aj-05` | B | pokoj s krabicí, stolem, židlí a postelí + samostatná karta kočky (průhledné pozadí) — kočka se přetahuje na různá místa | [aj4_predlozky](obsah/aj4_predlozky.html) |
 | `IMG-aj-07` | B | 8 cedulí bez textu (zákaz koupání, zákaz psů, zákaz telefonu, povinná přilba, zákaz jízdy na kole, ticho v knihovně, povinnost mýt ruce, zákaz krmení zvířat) — piktogramy v jednotném stylu | [aj5_modalni](obsah/aj5_modalni.html) |
 | `IMG-aj-08` | A | 6 obrázků příběhu „Výlet k moři“ (balení, vlak, pláž, déšť, kavárna, návrat) — vyprávění v minulém čase | [aj6_minuly_cas](obsah/aj6_minuly_cas.html) |
 | `IMG-aj-09` | B | 5 trojic ke srovnání (tři psi různé velikosti, tři auta, tři domy, tři hory, tři dorty) — stejný styl, na kartě jeden objekt | [aj6_stupnovani](obsah/aj6_stupnovani.html) |

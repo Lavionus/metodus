@@ -1,0 +1,7 @@
+Use case: scientific-educational
+Asset type: square interactive room background.
+Reference images: aj4-den-ukoly.png and the existing bed, chair and table vocabulary cards; use strictly as style and object-design references.
+Primary request: Match their restrained natural-history watercolor, visible ivory paper texture, fine colored-pencil and ink edges, muted ochre-sage-blue palette, realistic child-friendly proportions, soft low-contrast daylight and amount of detail. Do not use glossy 3D or saturated cartoon rendering.
+Scene/backdrop: Straight-on, slightly elevated child's bedroom. Bed along the left wall, referenced wooden table and chair on the right, one open empty cardboard box near the center.
+Composition/framing: Preserve clearly readable spaces inside, on, under, behind, beside and in front of the box for a movable cat sprite. All objects fully visible and separated.
+Constraints: no cat, people, text, letters, numbers, logos, border, watermark or extra boxes.
