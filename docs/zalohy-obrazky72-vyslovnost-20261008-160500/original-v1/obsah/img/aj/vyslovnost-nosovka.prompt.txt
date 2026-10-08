@@ -1,0 +1,8 @@
+Use case: scientific-educational. Asset type: IMG-aj-01 style B articulation watercolor card, square 768x768. Single simplified anatomically coherent midsagittal cutaway profile of a generic adult head facing LEFT, including nose, nasal cavity, lips, upper/lower incisors, hard palate, soft palate, tongue, pharynx and upper neck. Whole head within even 12% ivory margins. Fine precise ink with light watercolor/gouache washes, uniform warm ivory paper, muted sage/jade/ochre; tongue soft terracotta, air spaces pale ivory, tissues pale peach. Clean educational book illustration not gory. Keep anatomy understated and the tongue contour and mouth opening very clear. No words, phonetic symbols, text, labels, numbers, arrows, motion lines, legend, insets, border or watermark. Pronunciation symbols in this prompt are instructions only and MUST NOT appear in picture. Articulation to depict: French /ɑ̃/ as one representative nasal vowel, not all nasal vowels. Jaw open, tongue low and somewhat back, lips relaxed mildly rounded. Crucially show the soft palate LOWERED so the pharynx connects openly to the nasal cavity, as well as an open oral passage.
+
+Correction prompt:
+
+
+Alt: Francouzské nosové /ɑ̃/: snížené měkké patro otevírá cestu do nosní dutiny.
+Generator: built-in image_gen
+Date: 2026-09-22

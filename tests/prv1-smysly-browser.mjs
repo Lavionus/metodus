@@ -39,14 +39,26 @@ assert.ok(await ev(`[...document.querySelectorAll('.postava-wrap .cast')].every(
 await ev(`document.querySelector('.postava-wrap .cast[data-cast="'+CASTI.find(c => c.nazev === document.querySelector('.zadani b').textContent).id+'"]').click()`);
 assert.ok(await ev(`document.querySelector('.odezva').textContent.includes('Správně')`));
 
+const vjemy = ['zvonek', 'citron', 'ruze', 'ohen', 'zmrzlina', 'trava', 'kocka', 'duha', 'bubinek', 'polstar'];
+assert.equal(await ev(`VJEMY.filter(v => v.img).length`), 10);
+await ev(`window.__puvodniVjemy = [...VJEMY]`);
+for (const motiv of vjemy) {
+  await ev(`VJEMY.splice(0, VJEMY.length, window.__puvodniVjemy.find(v => v.img === 'prv1-vjem-${motiv}')); vjem()`);
+  await ev(`document.querySelector('.vjem-obrazek').decode()`);
+  assert.ok(await ev(`document.querySelector('.vjem-obrazek').naturalWidth === 768`));
+  assert.ok(await ev(`document.querySelector('.vjem-obrazek').src.endsWith('prv1-vjem-${motiv}.webp')`));
+  assert.ok(await ev(`document.querySelector('.vjem-obrazek').alt.length > 15`));
+}
+await ev(`VJEMY.splice(0, VJEMY.length, ...window.__puvodniVjemy); delete window.__puvodniVjemy`);
+
 for (const width of [1366, 390, 320]) {
   await call('Emulation.setDeviceMetricsOverride', {width, height: 900, deviceScaleFactor: 1, mobile: width < 600});
   for (const theme of ['light', 'sepia-tmava']) {
     await ev(`document.documentElement.dataset.theme=${JSON.stringify(theme)}`);
     assert.equal(await ev(`document.documentElement.scrollWidth > document.documentElement.clientWidth`), false, `overflow ${width} ${theme}`);
-    assert.ok(await ev(`getComputedStyle(document.querySelector('.cast')).display !== 'none'`));
+    assert.ok(await ev(`getComputedStyle(document.querySelector('.vjem-obrazek')).display !== 'none'`));
   }
 }
 assert.deepEqual(runtimeErrors, []);
-console.log(JSON.stringify({results: ['prv1_smysly: image, 10 hotspots, answer, themes, widths OK'], runtimeErrors}));
+console.log(JSON.stringify({results: ['prv1_smysly: body image, 10 hotspots, 10 sense cards, answer, themes, widths OK'], runtimeErrors}));
 ws.close();

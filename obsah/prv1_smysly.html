@@ -30,6 +30,8 @@
     .zadani { color: var(--text-muted); font-size: 1rem; }
     .zadani b { color: var(--text); font-size: 1.25rem; }
     .obrazek { font-size: clamp(3.2rem, 12vw, 5rem); line-height: 1; }
+    .vjem-obrazek { display: block; width: min(100%, 260px); aspect-ratio: 1; object-fit: contain;
+      border: 1px solid var(--border); border-radius: 16px; background: #f7f1e5; }
     .popis { color: var(--text); font-size: 1.05rem; font-weight: 600; }
 
     /* Postava s přístupnými hotspoty */
@@ -136,22 +138,22 @@ const SMYSLY = {
 
 const VJEMY = [
   { e: '🎵', t: 'písnička v rádiu', s: 'sluch' },
-  { e: '🌈', t: 'duha na obloze', s: 'zrak' },
-  { e: '🍋', t: 'kyselý citron', s: 'chut' },
-  { e: '🌹', t: 'vonící růže', s: 'cich' },
+  { e: '🌈', t: 'duha na obloze', s: 'zrak', img: 'prv1-vjem-duha', alt: 'Barevná duha nad bílými mraky.' },
+  { e: '🍋', t: 'kyselý citron', s: 'chut', img: 'prv1-vjem-citron', alt: 'Celý žlutý citron se zeleným listem.' },
+  { e: '🌹', t: 'vonící růže', s: 'cich', img: 'prv1-vjem-ruze', alt: 'Červený květ růže se zelenými listy.' },
   { e: '🧊', t: 'studený led', s: 'hmat' },
   { e: '🐦', t: 'zpěv ptáčka', s: 'sluch' },
   { e: '🍫', t: 'sladká čokoláda', s: 'chut' },
-  { e: '🔥', t: 'teplo od ohně', s: 'hmat' },
+  { e: '🔥', t: 'teplo od ohně', s: 'hmat', img: 'prv1-vjem-ohen', alt: 'Malý oheň hořící nad třemi poleny.' },
   { e: '🌻', t: 'žlutá slunečnice', s: 'zrak' },
   { e: '🍞', t: 'vůně čerstvého chleba', s: 'cich' },
-  { e: '🐱', t: 'měkká kočičí srst', s: 'hmat' },
+  { e: '🐱', t: 'měkká kočičí srst', s: 'hmat', img: 'prv1-vjem-kocka', alt: 'Sedící mourovatá kočka s hebkou srstí.' },
   { e: '⛈️', t: 'hřmění bouřky', s: 'sluch' },
   { e: '🧅', t: 'štiplavá cibule', s: 'cich' },
   { e: '🍭', t: 'sladké lízátko', s: 'chut' },
   { e: '🌙', t: 'měsíc v noci', s: 'zrak' },
   { e: '🪶', t: 'lechtání peříčkem', s: 'hmat' },
-  { e: '🔔', t: 'zvonek u dveří', s: 'sluch' },
+  { e: '🔔', t: 'zvonění zvonku', s: 'sluch', img: 'prv1-vjem-zvonek', alt: 'Mosazný ruční zvonek s dřevěnou rukojetí.' },
   { e: '🧂', t: 'slaná polévka', s: 'chut' },
   { e: '☕', t: 'vůně kávy', s: 'cich' },
   { e: '🚦', t: 'červená na semaforu', s: 'zrak' },
@@ -179,6 +181,10 @@ const VJEMY = [
   { e: '🪨', t: 'hladký oblázek', s: 'hmat' },
   { e: '🌬️', t: 'studený vítr ve tváři', s: 'hmat' },
   { e: '🦔', t: 'pichlavý ježek', s: 'hmat' },
+  { e: '🍦', t: 'studená zmrzlina', s: 'hmat', img: 'prv1-vjem-zmrzlina', alt: 'Vanilková zmrzlina v oplatkovém kornoutu.' },
+  { e: '🌿', t: 'měkká tráva', s: 'hmat', img: 'prv1-vjem-trava', alt: 'Trs čerstvé zelené trávy.' },
+  { e: '🥁', t: 'bubnování na bubínek', s: 'sluch', img: 'prv1-vjem-bubinek', alt: 'Dřevěný bubínek se dvěma paličkami.' },
+  { e: '🛏️', t: 'měkký polštář', s: 'hmat', img: 'prv1-vjem-polstar', alt: 'Měkký světle modrý polštář.' },
 ];
 
 /* ---- Pomocné -------------------------------------------------------------- */
@@ -284,7 +290,7 @@ function vjem() {
     ({ klic, ikona: s.ikona, popis: s.nazev })));
   tlacitkovaUloha(
     `<div class="zadani">Kterým smyslem to poznáš?</div>
-     <div class="obrazek">${v.e}</div>
+     ${v.img ? `<img class="vjem-obrazek" src="img/prv/${v.img}.webp" alt="${v.alt}" width="768" height="768">` : `<div class="obrazek">${v.e}</div>`}
      <div class="popis">${v.t}</div>`,
     volby, v.s, SMYSLY[v.s].nazev, SMYSLY[v.s].nazev);
 }

@@ -309,8 +309,8 @@ Mezipředmětové cesty, které stojí za výslovné odkazy „Souvisí s…“:
   - Místo syntetického hlasu **nahrávky rodilých mluvčích** s volnou licencí (Wikimedia Commons, Lingua Libre, Forvo s licencí) pro sadu asi 60 slov na jazyk.
   - Do té doby vizuální režim: obrázek polohy úst a jazyka, minimální dvojice (ship/sheep, Bett/Beet, dessus/dessous).
 - **Obrázky:**
-  - `IMG-aj-01` 🟠 **B** · 8 karet „poloha úst a jazyka“ pro hlásky th (neznělé a znělé), w, æ, ə, ü, ö, francouzské nosovky — boční řez hlavou, zjednodušeně, bez textu
-    - ✅ Hotovo 22. 9. 2026: 8 karet `obsah/img/aj/vyslovnost-*.webp`, originály PNG a zadání `.prompt.txt`; [galerie a seznam](obsah/img/kapitola-7-1.html). Zapojeno do obrazového průvodce ve `vyslovnost.html` a sdíleně do `aj3_abeceda.html` a `dcj7_vyslovnost.html`. Poslechová hra zůstává vypnutá.
+  - `IMG-aj-01` ✅ **B** · 8 karet „poloha úst a jazyka“ pro hlásky th (neznělé a znělé), w, æ, ə, ü, ö, francouzskou nosovku — boční řez hlavou, zjednodušeně, bez textu
+    - ✅ Hotovo 22. 9. 2026, odborně zpřesněno 8. 10. 2026: nové karty zvýrazňují polohu jazyka a rtů i prostor proudění vzduchu; nosovka ukazuje otevřenou nosní i ústní cestu. Zapojeno do `vyslovnost.html`, `aj3_abeceda.html` a `dcj7_vyslovnost.html`.
 
 ### 7.2 Český jazyk (35 stránek)
 
@@ -1424,7 +1424,7 @@ Společné pro jazyky: 🔗 gramatika se učí **v krátkém dialogu nebo scénc
   - Tři objekty s měnitelnými vlastnostmi (velikost, rychlost, cena) — žák tvoří věty.
   - Stejné tři objekty, jiná vlastnost → jiné pořadí.
 - **Obrázky:**
-  - `IMG-aj-09` 🟠 **B** · 5 trojic ke srovnání (tři psi různé velikosti, tři auta, tři domy, tři hory, tři dorty) — stejný styl, na kartě jeden objekt
+  - `IMG-aj-09` ✅ **B** · 5 obrazových trojic ke srovnání (psi, auta, domy, hory a dorty) — zapojeno do procvičování 2. i 3. stupně
 
 #### Budoucí čas – will a going to · [aj7_budouci.html](obsah/aj7_budouci.html)
 - **Zařazení:** Cizí jazyky › Gramatika · AJ 7. r. · lekce A
@@ -1446,7 +1446,7 @@ Společné pro jazyky: 🔗 gramatika se učí **v krátkém dialogu nebo scénc
   - Nákupní seznam a nádoby (a bottle of, a loaf of, a piece of) přetahované k potravinám.
   - Nabídky se some v otázce („Would you like some tea?“).
 - **Obrázky:**
-  - `IMG-aj-11` 🟠 **B** · 12 karet nádob a porcí (láhev, bochník, kus, sklenice, balíček, plechovka, miska, šálek, kostka, plátek, pytel, krabice) — míry nepočitatelných věcí
+  - `IMG-aj-11` ✅ **B** · 12 karet nádob a porcí (láhev, bochník, kus, sklenice, balíček, plechovka, miska, šálek, kostka, plátek, pytel, krabice) — zapojeno do obrazového procvičování měr
 
 #### Členy a rod podstatných jmen (NJ/FJ) · [dcj7_cleny.html](obsah/dcj7_cleny.html)
 - **Zařazení:** Cizí jazyky › Gramatika · NJ/FJ 7.–8. r. · lekce A (hlavní lekce druhého jazyka)
@@ -1607,7 +1607,7 @@ Společné pro prvouku: 🔗 malý žák se učí z **obrazu a situace**, ne ze 
   - Pozorovací úkoly do třídy („zavři oči a poznej předmět hmatem“).
 - **Obrázky:**
   - `IMG-prv-08` ✅ **B** · celá postava dítěte zepředu v neutrálním postoji — zapojeno s 10 přístupnými hotspoty částí těla
-  - `IMG-prv-09` ⚪ **B** · 10 karet vjemů (zvonek, citron, růže, oheň, zmrzlina, tráva, kočka, duha, bubínek, polštář) — čím to poznám
+  - `IMG-prv-09` ✅ **B** · 10 karet vjemů (zvonek, citron, růže, oheň, zmrzlina, tráva, kočka, duha, bubínek, polštář) — zapojeno do režimu Čím to poznám
 
 #### Domácí a volně žijící zvířata · [prv2_zvirata.html](obsah/prv2_zvirata.html)
 - **Zařazení:** Prvouka › Příroda kolem nás · 2.–3. r. · lekce A
@@ -2381,7 +2381,7 @@ Společné pro přírodopis: čtyři stránky (`bunka`, `pr7_rostliny`, `anatomi
   - 🔗 Anatomické schéma ve stylu `anatomie` (atlas), citlivé a věcné.
 - **Obrázky:**
   - `IMG-pr-15` ✅ **B** · 8 karet etap života (novorozenec, batole, předškolák, školák, dospívající, dospělý, starší dospělý, senior) jako jedna rodina — zapojeno do obrázkové časové řady a režimu Etapy života
-  - `IMG-pr-16` 🟠 **A** · schématické řezy mužskou a ženskou rozmnožovací soustavou ve stylu atlasu anatomie, bez textu — hotspoty; zadání stejné techniky jako `organy-atlas`
+  - `IMG-pr-16` ✅ **A** · dvě atlasová schémata mužské a ženské rozmnožovací soustavy bez textu — zapojeno s přístupnými hotspoty a vysvětlením funkcí
 
 #### Zdraví a první pomoc · [pr8_prvni_pomoc.html](obsah/pr8_prvni_pomoc.html)
 - **Zařazení:** Přírodní vědy › Přírodopis · 8. r. · lekce A (hlavní lekce rodiny zdraví)
@@ -3321,7 +3321,7 @@ Při výrobě sady v jednom stylu zadávat všechny karty v jedné dávce se ste
 
 | ID | Styl | Co vyrobit nebo sehnat | Stránka |
 |---|---|---|---|
-| `IMG-aj-01` | B | 8 karet „poloha úst a jazyka“ pro hlásky th (neznělé a znělé), w, æ, ə, ü, ö, francouzské nosovky — boční řez hlavou, zjednodušeně, bez textu | [vyslovnost](obsah/vyslovnost.html) |
+| `IMG-aj-01` | B ✅ | 8 zpřesněných karet polohy mluvidel a proudění vzduchu pro th, w, æ, ə, ü, ö a francouzskou nosovku | [vyslovnost](obsah/vyslovnost.html) |
 | `IMG-cj-03` | B | dvojice karet slov, která znějí stejně: být/bít, mýt/mít, výr/vír, vít (věnec)/výt (vlk), případně další s jednoznačně kreslitelným významem — rozlišení významu obrázkem | [doplnovacky](obsah/doplnovacky.html) |
 | `IMG-cj-04` | B | ilustrace k vyjmenovaným slovům, 8 řad × 6–10 karet (například B: být, bydlet, obyvatel, byt, příbytek, nábytek, dobytek, kobyla, býk, Bydžov…) — pomůcka k zapamatování; u slov bez obrazu (bystrý, zbytek) vynechat | [vyjmenovana_slova](obsah/vyjmenovana_slova.html) |
 | `IMG-cj-05` | A ✅ | 4 scénky dětí pro čtyři druhy vět; hotovo a zapojeno | [cj2_druhy_vet](obsah/cj2_druhy_vet.html) |
@@ -3338,8 +3338,8 @@ Při výrobě sady v jednom stylu zadávat všechny karty v jedné dávce se ste
 | `IMG-aj-05` | B ✅ | pokoj s krabicí, stolem, židlí a postelí + samostatná kočka — zapojeno do poznávačky a přetahovacího trenažéru | [aj4_predlozky](obsah/aj4_predlozky.html) |
 | `IMG-aj-07` | B ✅ | 8 cedulí bez textu — zapojeno do obrazového přehledu a poznávačky pravidel | [aj5_modalni](obsah/aj5_modalni.html) |
 | `IMG-aj-08` | A | 6 obrázků příběhu „Výlet k moři“ (balení, vlak, pláž, déšť, kavárna, návrat) — vyprávění v minulém čase | [aj6_minuly_cas](obsah/aj6_minuly_cas.html) |
-| `IMG-aj-09` | B | 5 trojic ke srovnání (tři psi různé velikosti, tři auta, tři domy, tři hory, tři dorty) — stejný styl, na kartě jeden objekt | [aj6_stupnovani](obsah/aj6_stupnovani.html) |
-| `IMG-aj-11` | B | 12 karet nádob a porcí (láhev, bochník, kus, sklenice, balíček, plechovka, miska, šálek, kostka, plátek, pytel, krabice) — míry nepočitatelných věcí | [aj7_pocitatelnost](obsah/aj7_pocitatelnost.html) |
+| `IMG-aj-09` | B ✅ | 5 obrazových trojic ke srovnání (psi, auta, domy, hory a dorty) — zapojeno do procvičování 2. i 3. stupně | [aj6_stupnovani](obsah/aj6_stupnovani.html) |
+| `IMG-aj-11` | B ✅ | 12 karet nádob a porcí (láhev, bochník, kus, sklenice, balíček, plechovka, miska, šálek, kostka, plátek, pytel, krabice) — zapojeno do obrazového procvičování měr | [aj7_pocitatelnost](obsah/aj7_pocitatelnost.html) |
 | `IMG-prv-02` | A ✅ | řez rodinným domem se šesti částmi; hotovo a zapojeno | [prv1_rodina](obsah/prv1_rodina.html) |
 | `IMG-prv-04` | B | 8 karet dopravních značek a situací (přechod, semafor červená/zelená, dítě za autem, reflexní prvky, cyklista s přilbou) — piktogramy bez textu | [prv1_cesta_skola](obsah/prv1_cesta_skola.html) |
 | `IMG-prv-05` | B | karty záchranných složek (sanitka, hasiči, policie) a 6 situací (odřené koleno, krvácení z nosu, popálení, bodnutí vosou, pád z kola, cizí člověk v bezvědomí) — bez krve a drastických detailů | [prv2_zdravi](obsah/prv2_zdravi.html) |
@@ -3373,7 +3373,7 @@ Při výrobě sady v jednom stylu zadávat všechny karty v jedné dávce se ste
 | `IMG-pr-12` | B | vývoj žáby v 5 krocích (vajíčka, pulec, pulec s nohama, žabka, dospělá žába) | [pr7_obratlovci_studenokrevni](obsah/pr7_obratlovci_studenokrevni.html) |
 | `IMG-pr-14` | B | 6 karet chrupu savců (šelma, hlodavec, přežvýkavec, hmyzožravec, všežravec, zajíc) — lebky z boku | [pr7_ptaci_savci](obsah/pr7_ptaci_savci.html) |
 | `IMG-pr-15` | B | 8 karet etap života (novorozenec, batole, předškolák, školák, dospívající, dospělý, starší dospělý, senior) jako jedna rodina — řada etap | [pr8_rozmnozovani](obsah/pr8_rozmnozovani.html) |
-| `IMG-pr-16` | A | schématické řezy mužskou a ženskou rozmnožovací soustavou ve stylu atlasu anatomie, bez textu — hotspoty; zadání stejné techniky jako `organy-atlas` | [pr8_rozmnozovani](obsah/pr8_rozmnozovani.html) |
+| `IMG-pr-16` | A ✅ | dvě atlasová schémata mužské a ženské rozmnožovací soustavy bez textu — zapojeno s přístupnými hotspoty | [pr8_rozmnozovani](obsah/pr8_rozmnozovani.html) |
 | `IMG-pr-18` | A | 3 řezy deskovými rozhraními (středooceánský hřbet, subdukce s vulkanickým obloukem, transformní zlom) ve stejném stylu a měřítku — podklad animací | [pr9_geologicke_deje](obsah/pr9_geologicke_deje.html) |
 | `IMG-pr-20` | C | fotografie Mohsovy stupnice (10 minerálů) a vrypů na porcelánové destičce (hematit, pyrit, malachit) | [pr9_mineraly](obsah/pr9_mineraly.html) |
 | `IMG-pr-21` | C | fotografie 8 zkamenělin (trilobit, amonit, belemnit, přeslička z karbonu, zub žraloka, otisk kapradiny, jantar s hmyzem, archeopteryx — odlitek) | [pr9_vyvoj_zeme](obsah/pr9_vyvoj_zeme.html) |
@@ -3428,7 +3428,7 @@ Při výrobě sady v jednom stylu zadávat všechny karty v jedné dávce se ste
 | `IMG-m-11` | A ✅ | 4 scény k úlohám (žebřík opřený o dům, drak na provázku, zkratka přes trávník, stožár s kotvicím lanem) — zapojeno; rozměry kreslí web | [m8_pythagoras](obsah/m8_pythagoras.html) |
 | `IMG-m-12` | A ✅ | scéna „měření stínem“: strom a tyč na louce ve stejném slunci, dlouhé stíny — zapojeno; úsečky a čísla kreslí web | [m9_podobnost](obsah/m9_podobnost.html) |
 | `IMG-aj-10` | A | 4 situace s viditelným důkazem (tmavé mraky, sklenice na kraji stolu, prázdná nádrž, dívka s lístky na koncert) — kontext going to | [aj7_budouci](obsah/aj7_budouci.html) |
-| `IMG-prv-09` | B | 10 karet vjemů (zvonek, citron, růže, oheň, zmrzlina, tráva, kočka, duha, bubínek, polštář) — čím to poznám | [prv1_smysly](obsah/prv1_smysly.html) |
+| `IMG-prv-09` | B ✅ | 10 karet vjemů (zvonek, citron, růže, oheň, zmrzlina, tráva, kočka, duha, bubínek, polštář) — zapojeno do režimu Čím to poznám | [prv1_smysly](obsah/prv1_smysly.html) |
 | `IMG-prv-18` | C | 8 fotografií využití (dlažba ze žuly, pískovcová socha, vápenka, uhelný lom, sklo z písku, sádra, tužka, solnička) | [prv4_horniny](obsah/prv4_horniny.html) |
 | `IMG-prv-22` | E | 6 doložených vyobrazení (Karel IV. z Karlštejna, Svatováclavská koruna, Vyšehradský kodex, velkomoravský šperk…) — skutečné doklady | [prv4_nejstarsi_dejiny](obsah/prv4_nejstarsi_dejiny.html) |
 | `IMG-f-03` | C | 12 fotografií předmětů k třídění látka × těleso (sklenice, sklo, lžíce, ocel, svíčka, vosk, cihla, jíl…) — dvojice těleso–látka | [f6_vlastnosti_latek](obsah/f6_vlastnosti_latek.html) |

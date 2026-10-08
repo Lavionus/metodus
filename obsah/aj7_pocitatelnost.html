@@ -15,6 +15,8 @@
     .preklad { color: var(--text-faint); font-size: 0.9rem; }
     .veta-en { font-size: clamp(1.1rem, 4.2vw, 1.55rem); font-weight: 600; max-width: 620px; line-height: 1.5; }
     .veta-en .mezera { color: var(--accent); border-bottom: 2px dashed var(--accent); padding: 0 12px; }
+    .mira-obrazek { display: block; width: min(100%, 260px); aspect-ratio: 1; object-fit: contain;
+      border: 1px solid var(--border); border-radius: 16px; background: #f7f1e5; }
     .tabulka { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; max-width: 740px;
       margin-top: 10px; color: var(--text-faint); font-size: 0.8rem; }
     .tabulka span { background: var(--bg-control); border: 1px solid var(--border); border-radius: 8px; padding: 6px 12px; }
@@ -79,14 +81,18 @@ const SLOVA = [
 ];
 
 const MIRY = [
-  { spravne: 'a glass of water', slovo: 'water', jine: ['a piece of water', 'a slice of water', 'a loaf of water'] },
-  { spravne: 'a piece of bread', slovo: 'bread', jine: ['a glass of bread', 'a bottle of bread', 'a cup of bread'] },
-  { spravne: 'a bottle of milk', slovo: 'milk', jine: ['a slice of milk', 'a bar of milk', 'a piece of milk'] },
-  { spravne: 'a bar of chocolate', slovo: 'chocolate', jine: ['a glass of chocolate', 'a loaf of chocolate', 'a bowl of chocolate'] },
-  { spravne: 'a kilo of sugar', slovo: 'sugar', jine: ['a slice of sugar', 'a bottle of sugar', 'a piece of sugar'] },
-  { spravne: 'a slice of cheese', slovo: 'cheese', jine: ['a glass of cheese', 'a bottle of cheese', 'a loaf of cheese'] },
-  { spravne: 'a loaf of bread', slovo: 'bread (celý bochník)', jine: ['a bar of bread', 'a glass of bread', 'a bowl of bread'] },
-  { spravne: 'a cup of tea', slovo: 'tea', jine: ['a piece of tea', 'a bar of tea', 'a slice of tea'] },
+  { spravne: 'a glass of water', slovo: 'water', img: 'sklenice', alt: 'A glass of water.', jine: ['a piece of water', 'a slice of water', 'a loaf of water'] },
+  { spravne: 'a piece of cake', slovo: 'cake', img: 'kus', alt: 'A piece of cake.', jine: ['a glass of cake', 'a bottle of cake', 'a bowl of cake'] },
+  { spravne: 'a bottle of milk', slovo: 'milk', img: 'lahev', alt: 'A bottle of milk.', jine: ['a slice of milk', 'a bar of milk', 'a piece of milk'] },
+  { spravne: 'a loaf of bread', slovo: 'bread', img: 'bochnik', alt: 'A loaf of bread.', jine: ['a bar of bread', 'a glass of bread', 'a bowl of bread'] },
+  { spravne: 'a packet of rice', slovo: 'rice', img: 'balicek', alt: 'A packet of rice.', jine: ['a slice of rice', 'a loaf of rice', 'a cup of rice'] },
+  { spravne: 'a can of lemonade', slovo: 'lemonade', img: 'plechovka', alt: 'A can of lemonade.', jine: ['a loaf of lemonade', 'a slice of lemonade', 'a piece of lemonade'] },
+  { spravne: 'a bowl of rice', slovo: 'rice', img: 'miska', alt: 'A bowl of rice.', jine: ['a loaf of rice', 'a bottle of rice', 'a slice of rice'] },
+  { spravne: 'a cup of tea', slovo: 'tea', img: 'salek', alt: 'A cup of tea.', jine: ['a piece of tea', 'a bar of tea', 'a slice of tea'] },
+  { spravne: 'a cube of sugar', slovo: 'sugar', img: 'kostka', alt: 'A cube of sugar.', jine: ['a slice of sugar', 'a bottle of sugar', 'a loaf of sugar'] },
+  { spravne: 'a slice of cheese', slovo: 'cheese', img: 'platek', alt: 'A slice of cheese.', jine: ['a glass of cheese', 'a bottle of cheese', 'a loaf of cheese'] },
+  { spravne: 'a bag of flour', slovo: 'flour', img: 'pytel', alt: 'A bag of flour.', jine: ['a cup of flour', 'a slice of flour', 'a can of flour'] },
+  { spravne: 'a box of cereal', slovo: 'cereal', img: 'krabice', alt: 'A box of cereal.', jine: ['a bottle of cereal', 'a slice of cereal', 'a glass of cereal'] },
 ];
 
 /* ---- Počitatelné, či ne ----------------------------------------------------------------- */
@@ -178,7 +184,8 @@ function miry() {
   const p = $('plocha');
   const u = Uloha.nahodne(MIRY);
   p.innerHTML = `<div class="zadani">Jak správně vyjádříš množství?</div>
-    <div class="karta"><div class="slovo-en">${u.slovo}</div></div>`;
+    <div class="karta"><img class="mira-obrazek" src="img/aj/aj7-mira-${u.img}.webp" alt="${u.alt}" width="768" height="768">
+      <div class="slovo-en">${u.slovo}</div></div>`;
   const odezva = odezvaEl();
   Uloha.vyber({
     kam: p, odezva,

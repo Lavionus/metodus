@@ -39,6 +39,18 @@ assert.ok(await ev(`[...document.querySelectorAll('.etapy-rada img')].every(i =>
 assert.deepEqual(await ev(`[...document.querySelectorAll('.etapy-rada figcaption')].map(x => x.textContent.trim())`),
   ['novorozenec', 'batole', 'předškolák', 'školák', 'dospívající', 'dospělý', 'starší dospělý', 'senior']);
 assert.equal(await ev(`ETAPY.length`), 8);
+assert.equal(await ev(`document.querySelectorAll('[data-atlas]').length`), 2);
+assert.equal(await ev(`document.querySelectorAll('.hotspot').length`), 4);
+await ev(`document.querySelector('#atlasObrazek img').decode()`);
+assert.ok(await ev(`document.querySelector('#atlasObrazek img').naturalWidth === 768`));
+await ev(`document.querySelector('.hotspot').click()`);
+assert.ok(await ev(`document.querySelector('#atlasDetail h3').textContent.includes('Vaječník')`));
+assert.equal(await ev(`document.querySelector('.hotspot').getAttribute('aria-pressed')`), 'true');
+await ev(`document.querySelector('[data-atlas="muzska"]').click(); document.querySelector('#atlasObrazek img').decode()`);
+assert.ok(await ev(`document.querySelector('#atlasObrazek img').src.endsWith('pr8-soustava-muzska.webp')`));
+assert.equal(await ev(`document.querySelectorAll('.hotspot').length`), 4);
+await ev(`document.querySelector('.hotspot').focus()`);
+assert.ok(await ev(`document.activeElement.classList.contains('hotspot')`));
 
 for (const mode of ['soustava', 'predNarozenim', 'etapy', 'dospivani']) {
   await ev(`document.querySelector('[data-rezim="${mode}"]').click()`);
@@ -59,5 +71,5 @@ for (const width of [1366, 390, 320]) {
   }
 }
 assert.deepEqual(runtimeErrors, []);
-console.log(JSON.stringify({results: ['IMG-pr-15: 8 life stages, timeline, 4 modes, themes and widths OK'], runtimeErrors}));
+console.log(JSON.stringify({results: ['IMG-pr-15: 8 life stages and timeline OK', 'IMG-pr-16: 2 atlas diagrams, 8 hotspots, keyboard focus, 4 modes, themes and widths OK'], runtimeErrors}));
 ws.close();

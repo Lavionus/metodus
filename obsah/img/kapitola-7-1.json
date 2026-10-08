@@ -159,11 +159,11 @@
     "alt": "Neznělé th: špička jazyka mezi řezáky.",
     "webp": "aj/vyslovnost-th-neznele.webp",
     "png": "aj/vyslovnost-th-neznele.png",
-    "bytes": 48446,
+    "bytes": 40272,
     "puvod": {
       "typ": "generovano",
       "nastroj": "OpenAI image_gen",
-      "datum": "2026-09-22",
+      "datum": "2026-10-08",
       "zadani": "aj/vyslovnost-th-neznele.prompt.txt"
     }
   },
@@ -173,11 +173,11 @@
     "alt": "Znělé th: špička jazyka mezi řezáky; znělost musí doplnit zvuk.",
     "webp": "aj/vyslovnost-th-znele.webp",
     "png": "aj/vyslovnost-th-znele.png",
-    "bytes": 55252,
+    "bytes": 43032,
     "puvod": {
       "typ": "generovano",
       "nastroj": "OpenAI image_gen",
-      "datum": "2026-09-22",
+      "datum": "2026-10-08",
       "zadani": "aj/vyslovnost-th-znele.prompt.txt"
     }
   },
@@ -187,11 +187,11 @@
     "alt": "W: zaokrouhlené rty a zadní část jazyka zdvižená k měkkému patru.",
     "webp": "aj/vyslovnost-w.webp",
     "png": "aj/vyslovnost-w.png",
-    "bytes": 54460,
+    "bytes": 40562,
     "puvod": {
       "typ": "generovano",
       "nastroj": "OpenAI image_gen",
-      "datum": "2026-09-22",
+      "datum": "2026-10-08",
       "zadani": "aj/vyslovnost-w.prompt.txt"
     }
   },
@@ -201,11 +201,11 @@
     "alt": "Æ: otevřená ústa, nezaokrouhlené rty, jazyk vpředu a nízko.",
     "webp": "aj/vyslovnost-ae.webp",
     "png": "aj/vyslovnost-ae.png",
-    "bytes": 44148,
+    "bytes": 36052,
     "puvod": {
       "typ": "generovano",
       "nastroj": "OpenAI image_gen",
-      "datum": "2026-09-22",
+      "datum": "2026-10-08",
       "zadani": "aj/vyslovnost-ae.prompt.txt"
     }
   },
@@ -215,11 +215,11 @@
     "alt": "Ə: uvolněné rty a jazyk ve střední poloze.",
     "webp": "aj/vyslovnost-schwa.webp",
     "png": "aj/vyslovnost-schwa.png",
-    "bytes": 44066,
+    "bytes": 40584,
     "puvod": {
       "typ": "generovano",
       "nastroj": "OpenAI image_gen",
-      "datum": "2026-09-22",
+      "datum": "2026-10-08",
       "zadani": "aj/vyslovnost-schwa.prompt.txt"
     }
   },
@@ -229,11 +229,11 @@
     "alt": "Dlouhé ü: jazyk vysoko vpředu a rty zaokrouhlené.",
     "webp": "aj/vyslovnost-ue.webp",
     "png": "aj/vyslovnost-ue.png",
-    "bytes": 57386,
+    "bytes": 33600,
     "puvod": {
       "typ": "generovano",
       "nastroj": "OpenAI image_gen",
-      "datum": "2026-09-22",
+      "datum": "2026-10-08",
       "zadani": "aj/vyslovnost-ue.prompt.txt"
     }
   },
@@ -243,11 +243,11 @@
     "alt": "Dlouhé ö: jazyk vpředu ve středově vysoké poloze a rty zaokrouhlené.",
     "webp": "aj/vyslovnost-oe.webp",
     "png": "aj/vyslovnost-oe.png",
-    "bytes": 57300,
+    "bytes": 36614,
     "puvod": {
       "typ": "generovano",
       "nastroj": "OpenAI image_gen",
-      "datum": "2026-09-22",
+      "datum": "2026-10-08",
       "zadani": "aj/vyslovnost-oe.prompt.txt"
     }
   },
@@ -257,11 +257,11 @@
     "alt": "Francouzské nosové /ɑ̃/: snížené měkké patro otevírá cestu do nosní dutiny.",
     "webp": "aj/vyslovnost-nosovka.webp",
     "png": "aj/vyslovnost-nosovka.png",
-    "bytes": 45530,
+    "bytes": 45344,
     "puvod": {
       "typ": "generovano",
       "nastroj": "OpenAI image_gen",
-      "datum": "2026-09-22",
+      "datum": "2026-10-08",
       "zadani": "aj/vyslovnost-nosovka.prompt.txt"
     }
   }

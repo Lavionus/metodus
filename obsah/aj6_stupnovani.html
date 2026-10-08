@@ -15,9 +15,11 @@
     .veta-en { font-size: clamp(1.15rem, 4.4vw, 1.8rem); font-weight: 700; line-height: 1.45; max-width: 640px; }
     .veta-en .mezera { color: var(--accent); border-bottom: 3px solid var(--accent); padding: 0 12px; }
     .preklad { color: var(--text-faint); font-size: 0.95rem; font-style: italic; }
-    .porovnani { display: flex; gap: 24px; justify-content: center; align-items: flex-end; }
-    .porovnani div { display: flex; flex-direction: column; align-items: center; gap: 5px; font-size: 0.9rem; }
-    .porovnani .ikona { font-size: 2.4rem; }
+    .porovnani { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; width: min(100%, 660px); }
+    .porovnani figure { margin: 0; display: grid; gap: 5px; text-align: center; font-size: 0.9rem; }
+    .porovnani img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 12px; border: 1px solid var(--border); background: #fffaf0; }
+    .porovnani figcaption { color: var(--text-muted); }
+    @media (max-width: 480px) { .porovnani { gap: 6px; } .porovnani figcaption { font-size: 0.72rem; } }
     .tabulka { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; max-width: var(--sirka-obsahu, 900px); margin-top: 12px; }
     .tabulka span {
       background: var(--bg-panel); border: 1px solid var(--border); border-radius: 8px;
@@ -87,12 +89,11 @@ const TYPY = {
 };
 
 const OBRAZKY = [
-  { a: { e: '🐘', t: 'elephant' }, b: { e: '🐁', t: 'mouse' }, prid: 'big', spr: 'a' },
-  { a: { e: '🐆', t: 'cheetah' }, b: { e: '🐢', t: 'turtle' }, prid: 'fast', spr: 'a' },
-  { a: { e: '🏔️', t: 'mountain' }, b: { e: '⛰️', t: 'hill' }, prid: 'high', spr: 'a' },
-  { a: { e: '🐜', t: 'ant' }, b: { e: '🦒', t: 'giraffe' }, prid: 'small', spr: 'a' },
-  { a: { e: '💎', t: 'diamond' }, b: { e: '🪨', t: 'stone' }, prid: 'expensive', spr: 'a' },
-  { a: { e: '🐌', t: 'snail' }, b: { e: '🚀', t: 'rocket' }, prid: 'slow', spr: 'a' },
+  { noun: 'dog', prid: 'big', tvary: ['small dog', 'medium dog', 'large dog'], soubory: ['pes-maly', 'pes-stredni', 'pes-velky'] },
+  { noun: 'car', prid: 'big', tvary: ['small car', 'medium car', 'large car'], soubory: ['auto-male', 'auto-stredni', 'auto-velke'] },
+  { noun: 'house', prid: 'big', tvary: ['small house', 'medium house', 'large house'], soubory: ['dum-maly', 'dum-stredni', 'dum-velky'] },
+  { noun: 'mountain', prid: 'high', tvary: ['low mountain', 'medium mountain', 'high mountain'], soubory: ['hora-nizka', 'hora-stredni', 'hora-vysoka'] },
+  { noun: 'cake', prid: 'big', tvary: ['small cake', 'medium cake', 'large cake'], soubory: ['dort-maly', 'dort-stredni', 'dort-velky'] },
 ];
 
 const VETY = [
@@ -195,25 +196,33 @@ function veta() {
 function porovnani() {
   const p = $('plocha');
   const u = Uloha.nahodne(OBRAZKY);
-  const spravny = tvarStupne(u.prid, 2);
+  const stupen = Math.random() < 0.5 ? 2 : 3;
+  const spravny = tvarStupne(u.prid, stupen);
+  const veta = stupen === 2
+    ? `The medium ${u.noun} is <span class="mezera">?</span> than the small ${u.noun}.`
+    : `The large ${u.noun} is <span class="mezera">?</span>.`;
 
-  p.innerHTML = `<div class="zadani">Doplň druhý stupeň slova <b>${u.prid}</b>:</div>
+  p.innerHTML = `<div class="zadani">Doplň <b>${stupen}. stupeň</b> slova <b>${u.prid}</b>:</div>
     <div class="karta">
       <div class="porovnani">
-        <div><span class="ikona">${u.a.e}</span><span>${u.a.t}</span></div>
-        <div><span class="ikona">${u.b.e}</span><span>${u.b.t}</span></div>
+        ${u.soubory.map((soubor, i) => `<figure><img src="img/aj/aj6-stupnovani-${soubor}.webp" alt="${u.tvary[i]}" width="768" height="768"><figcaption>${u.tvary[i]}</figcaption></figure>`).join('')}
       </div>
-      <div class="veta-en">The ${u.a.t} is <span class="mezera">?</span> than the ${u.b.t}.</div>
+      <div class="veta-en">${veta}</div>
     </div>`;
-  const chybne = [u.prid, 'the ' + u.prid + 'est', 'more ' + u.prid].filter(t => t !== spravny);
+  const chybne = [u.prid, tvarStupne(u.prid, stupen === 2 ? 3 : 2), 'more ' + u.prid, 'the most ' + u.prid]
+    .filter((t, i, a) => t !== spravny && a.indexOf(t) === i);
   const odezva = document.createElement('div');
   odezva.className = 'odezva';
   Uloha.vyber({
     kam: p, odezva,
     moznosti: Uloha.zamichej([spravny, ...chybne.slice(0, 3)]).map(t => ({ klic: t, popis: t })),
     spravnyKlic: spravny,
-    zpravaOk: `✅ The ${u.a.t} is ${spravny} than the ${u.b.t}.`,
-    zpravaChyba: 'Porovnáváme dvě věci – patří sem druhý stupeň se slovem than.',
+    zpravaOk: stupen === 2
+      ? `✅ The medium ${u.noun} is ${spravny} than the small ${u.noun}.`
+      : `✅ The large ${u.noun} is ${spravny}.`,
+    zpravaChyba: stupen === 2
+      ? 'Porovnáváme dvě věci – patří sem druhý stupeň se slovem than.'
+      : 'Vybíráme jednu věc ze tří – patří sem třetí stupeň se slovem the.',
     poSpravne: napoprve => {
       skore.vyhodnot(napoprve);
       p.querySelector('.mezera').textContent = spravny;

@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lidské tělo a smysly</title>
+  <link rel="stylesheet" href="../common.css">
+  <script src="../theme.js"></script>
+  <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
+  <script src="../rec.js"></script>
+  <script src="../uloha.js"></script>
+  <style>
+    body { background-color: var(--bg-deep); padding: 20px clamp(12px, 3vw, 36px); min-height: 100vh; }
+    h1 { font-size: 1.35rem; margin-bottom: 3px; }
+    .podtitul { color: var(--text-muted); font-size: 0.86rem; margin-bottom: 14px; }
+
+    .rezimy { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+    .rezimy button {
+      background: var(--bg-control); border: 1px solid var(--border-strong); color: var(--text-muted);
+      border-radius: 6px; padding: 8px 14px; font-size: 0.86rem; font-family: inherit; cursor: pointer;
+    }
+    .rezimy button.active { background: var(--accent); border-color: var(--accent); color: var(--na-akcentu, #fff); font-weight: 600; }
+
+    .plocha {
+      background: var(--bg-panel); border: 1px solid var(--border); border-radius: var(--radius);
+      max-width: var(--sirka-obsahu, 900px); padding: 22px; text-align: center; min-height: 340px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px;
+    }
+    .zadani { color: var(--text-muted); font-size: 1rem; }
+    .zadani b { color: var(--text); font-size: 1.25rem; }
+    .obrazek { font-size: clamp(3.2rem, 12vw, 5rem); line-height: 1; }
+    .popis { color: var(--text); font-size: 1.05rem; font-weight: 600; }
+
+    /* Postava s přístupnými hotspoty */
+    .postava-wrap { position: relative; width: min(100%, 400px); aspect-ratio: 2 / 3; }
+    .postava { display: block; width: 100%; height: 100%; object-fit: contain; border-radius: 18px; }
+    .cast {
+      position: absolute; width: clamp(30px, 5vh, 42px); aspect-ratio: 1; border-radius: 50%;
+      border: 3px solid color-mix(in srgb, var(--accent) 84%, white); background: color-mix(in srgb, var(--bg-panel) 32%, transparent);
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--bg-panel) 70%, transparent), 0 2px 8px #0005;
+      transform: translate(-50%, -50%); cursor: pointer; transition: transform 0.15s ease, background 0.15s ease;
+    }
+    .cast:hover, .cast:focus-visible { background: color-mix(in srgb, var(--accent) 34%, transparent); transform: translate(-50%, -50%) scale(1.14); outline: 3px solid var(--text); outline-offset: 2px; }
+    .cast.spravne { background: var(--ok); border-color: white; }
+    .cast.spatne { background: var(--danger); border-color: white; }
+    .hotspot-hlava { left: 50%; top: 10%; }
+    .hotspot-oko { left: 46%; top: 13%; }
+    .hotspot-ucho { left: 37%; top: 15%; }
+    .hotspot-nos { left: 50%; top: 16%; }
+    .hotspot-usta { left: 50%; top: 19%; }
+    .hotspot-krk { left: 50%; top: 23%; }
+    .hotspot-bricho { left: 50%; top: 43%; }
+    .hotspot-ruka { left: 21%; top: 56%; }
+    .hotspot-noha { left: 43%; top: 72%; }
+    .hotspot-chodidlo { left: 39%; top: 91%; }
+
+    /* Možnosti */
+    .moznosti { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .moznosti button {
+      min-width: 108px; padding: 14px 16px; border-radius: 12px;
+      background: var(--bg-elevated); border: 2px solid var(--border); color: var(--text);
+      font-size: 0.95rem; font-family: inherit; cursor: pointer; transition: all 0.15s ease;
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+    }
+    .moznosti button .ikona { font-size: 2rem; line-height: 1; }
+    .moznosti button:hover:not(:disabled) { border-color: var(--accent); transform: translateY(-3px); }
+    .moznosti button.spravne { background: var(--ok); border-color: var(--ok); color: var(--na-akcentu, #fff); }
+    .moznosti button.spatne { background: var(--danger); border-color: var(--danger); color: var(--na-akcentu, #fff); }
+    .moznosti button:disabled { cursor: default; }
+
+    .odezva { font-size: 1.05rem; font-weight: 600; min-height: 28px; }
+    .odezva.ok { color: var(--ok); }
+    .odezva.chyba { color: var(--danger); }
+
+    .ovladani { display: flex; gap: 10px; align-items: center; margin-top: 14px; max-width: var(--sirka-obsahu, 900px); flex-wrap: wrap; }
+    .ovladani button {
+      background: var(--bg-control); border: 1px solid var(--border-strong); color: var(--text);
+      border-radius: 6px; padding: 10px 18px; font-size: 0.92rem; font-family: inherit; cursor: pointer;
+    }
+    .ovladani button.hlavni { background: var(--accent); border-color: var(--accent); color: var(--na-akcentu, #fff); font-weight: 600; }
+    .ovladani button.hlavni:hover { background: var(--accent-hover); }
+    .skore { margin-left: auto; color: var(--text-muted); font-size: 0.9rem; font-variant-numeric: tabular-nums; }
+    .skore b { color: var(--ok); }
+    .napoveda { max-width: var(--sirka-obsahu, 900px); margin-top: 12px; color: var(--text-faint); font-size: 0.8rem; line-height: 1.5; }
+  </style>
+</head>
+<body>
+  <h1>👁️ Lidské tělo a smysly</h1>
+  <p class="podtitul">Pro 1.–2. ročník: pojmenuj části těla a poznej, kterým smyslem co vnímáme.</p>
+
+  <div class="rezimy" id="rezimy">
+    <button data-rezim="telo" class="active">🧍 Části těla</button>
+    <button data-rezim="vjem">🎵 Čím to poznám?</button>
+    <button data-rezim="organ">👂 Smysl a orgán</button>
+  </div>
+
+  <div class="plocha" id="plocha"></div>
+
+  <div class="ovladani">
+    <button class="hlavni" id="btnDalsi">Přeskočit →</button>
+    <button id="btnCist" title="Přečíst zadání nahlas">🔊 Přečti</button>
+    <span class="skore" id="skore"></span>
+  </div>
+
+  <p class="napoveda">
+    Máme <b>pět smyslů</b>: zrak (oči), sluch (uši), čich (nos), chuť (jazyk) a hmat (kůže, hlavně na rukou).
+    Smysly nám říkají, co se kolem nás děje – proto je musíme chránit.
+  </p>
+
+<script>
+const $ = id => document.getElementById(id);
+const KLIC = 'metodus_prv1_smysly';
+
+/* ---- Data ----------------------------------------------------------------- */
+const CASTI = [
+  { id: 'hlava', nazev: 'hlava' },
+  { id: 'oko', nazev: 'oko' },
+  { id: 'ucho', nazev: 'ucho' },
+  { id: 'nos', nazev: 'nos' },
+  { id: 'usta', nazev: 'ústa' },
+  { id: 'krk', nazev: 'krk' },
+  { id: 'bricho', nazev: 'břicho' },
+  { id: 'ruka', nazev: 'ruka' },
+  { id: 'noha', nazev: 'noha' },
+  { id: 'chodidlo', nazev: 'chodidlo' },
+];
+
+const SMYSLY = {
+  zrak:  { ikona: '👁️', nazev: 'zrak',  organ: 'oko',            organIkona: '👁️' },
+  sluch: { ikona: '👂', nazev: 'sluch', organ: 'ucho',           organIkona: '👂' },
+  cich:  { ikona: '👃', nazev: 'čich',  organ: 'nos',            organIkona: '👃' },
+  chut:  { ikona: '👅', nazev: 'chuť',  organ: 'jazyk',          organIkona: '👅' },
+  hmat:  { ikona: '✋', nazev: 'hmat',  organ: 'kůže na rukou',  organIkona: '✋' },
+};
+
+const VJEMY = [
+  { e: '🎵', t: 'písnička v rádiu', s: 'sluch' },
+  { e: '🌈', t: 'duha na obloze', s: 'zrak' },
+  { e: '🍋', t: 'kyselý citron', s: 'chut' },
+  { e: '🌹', t: 'vonící růže', s: 'cich' },
+  { e: '🧊', t: 'studený led', s: 'hmat' },
+  { e: '🐦', t: 'zpěv ptáčka', s: 'sluch' },
+  { e: '🍫', t: 'sladká čokoláda', s: 'chut' },
+  { e: '🔥', t: 'teplo od ohně', s: 'hmat' },
+  { e: '🌻', t: 'žlutá slunečnice', s: 'zrak' },
+  { e: '🍞', t: 'vůně čerstvého chleba', s: 'cich' },
+  { e: '🐱', t: 'měkká kočičí srst', s: 'hmat' },
+  { e: '⛈️', t: 'hřmění bouřky', s: 'sluch' },
+  { e: '🧅', t: 'štiplavá cibule', s: 'cich' },
+  { e: '🍭', t: 'sladké lízátko', s: 'chut' },
+  { e: '🌙', t: 'měsíc v noci', s: 'zrak' },
+  { e: '🪶', t: 'lechtání peříčkem', s: 'hmat' },
+  { e: '🔔', t: 'zvonek u dveří', s: 'sluch' },
+  { e: '🧂', t: 'slaná polévka', s: 'chut' },
+  { e: '☕', t: 'vůně kávy', s: 'cich' },
+  { e: '🚦', t: 'červená na semaforu', s: 'zrak' },
+  { e: '📖', t: 'písmenka v knížce', s: 'zrak' },
+  { e: '🎆', t: 'ohňostroj na obloze', s: 'zrak' },
+  { e: '🦓', t: 'pruhy na zebře', s: 'zrak' },
+  { e: '🕯️', t: 'plamínek svíčky', s: 'zrak' },
+  { e: '🐕', t: 'štěkot psa', s: 'sluch' },
+  { e: '🚑', t: 'houkačka sanitky', s: 'sluch' },
+  { e: '🎹', t: 'hra na klavír', s: 'sluch' },
+  { e: '💧', t: 'kapání vody z kohoutku', s: 'sluch' },
+  { e: '🚂', t: 'houkání vlaku', s: 'sluch' },
+  { e: '🍓', t: 'sladké jahody', s: 'chut' },
+  { e: '🍏', t: 'kyselé jablko', s: 'chut' },
+  { e: '🌶️', t: 'pálivá paprika', s: 'chut' },
+  { e: '🍵', t: 'hořký čaj', s: 'chut' },
+  { e: '🥨', t: 'slaný preclík', s: 'chut' },
+  { e: '🧄', t: 'vůně česneku', s: 'cich' },
+  { e: '🌲', t: 'vůně lesa po dešti', s: 'cich' },
+  { e: '🧼', t: 'voňavé mýdlo', s: 'cich' },
+  { e: '🥐', t: 'vůně čerstvého pečiva', s: 'cich' },
+  { e: '🍊', t: 'vůně pomeranče', s: 'cich' },
+  { e: '🏖️', t: 'horký písek pod nohama', s: 'hmat' },
+  { e: '🧽', t: 'drsná houba na nádobí', s: 'hmat' },
+  { e: '🪨', t: 'hladký oblázek', s: 'hmat' },
+  { e: '🌬️', t: 'studený vítr ve tváři', s: 'hmat' },
+  { e: '🦔', t: 'pichlavý ježek', s: 'hmat' },
+];
+
+/* ---- Pomocné -------------------------------------------------------------- */
+const nahodne = pole => pole[Math.floor(Math.random() * pole.length)];
+function zamichej(pole) {
+  const p = [...pole];
+  for (let i = p.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [p[i], p[j]] = [p[j], p[i]];
+  }
+  return p;
+}
+// čtení nahlas řeší sdílený rec.js – pozná i chybějící hlas v systému
+const precti = (text, rychlost = 0.85) => Rec.mluv(text, { rychlost });
+
+let spravne = 0, pokusy = 0, cteniZadani = '';
+try {
+  const s = JSON.parse(localStorage.getItem(KLIC));
+  if (s) { spravne = s.spravne; pokusy = s.pokusy; }
+} catch { /* bez trvalé paměti */ }
+
+function ulozSkore() {
+  try { localStorage.setItem(KLIC, JSON.stringify({ spravne, pokusy })); } catch { /* bez paměti */ }
+}
+function zobrazSkore() { $('skore').innerHTML = `Správně: <b>${spravne}</b> z ${pokusy}`; }
+function vyhodnot(napoprve) { pokusy++; if (napoprve) spravne++; ulozSkore(); zobrazSkore(); }
+
+/* ---- Postava s obrazovým podkladem a HTML hotspoty ------------------------ */
+function svgPostava() {
+  return `
+  <div class="postava-wrap" role="group" aria-label="Postava dítěte s místy pro části těla">
+    <img class="postava" src="img/prv/prv1-smysly-postava.webp" alt="Dítě stojící zepředu v neutrálním postoji">
+    ${CASTI.map(c => `<button type="button" class="cast hotspot-${c.id}" data-cast="${c.id}" aria-label="${c.nazev}"></button>`).join('')}
+  </div>`;
+}
+
+/* ---- Režim: části těla ---------------------------------------------------- */
+function telo() {
+  const p = $('plocha');
+  const cil = nahodne(CASTI);
+  cteniZadani = 'Kde je ' + cil.nazev + '?';
+  p.innerHTML = `<div class="zadani">Klepni na obrázku na: <b>${cil.nazev}</b></div>${svgPostava()}`;
+  const odezva = document.createElement('div');
+  odezva.className = 'odezva';
+  const svg = p.querySelector('.postava-wrap');
+  const stav = { chyboval: false, hotovo: false };
+  svg.querySelectorAll('.cast').forEach(g => {
+    g.addEventListener('click', () => {
+      if (stav.hotovo) return;
+      const zvolena = CASTI.find(c => c.id === g.dataset.cast);
+      if (g.dataset.cast !== cil.id) {
+        stav.chyboval = true;
+        Uloha.trhni(svg);
+        g.classList.add('spatne');
+        setTimeout(() => g.classList.remove('spatne'), 420);
+        odezva.className = 'odezva chyba';
+        odezva.textContent = `To je ${zvolena.nazev}. Hledáme ${cil.nazev} – zkus to znovu.`;
+        return;
+      }
+      stav.hotovo = true;
+      g.classList.add('spravne');
+      odezva.className = 'odezva ok';
+      odezva.textContent = '✅ Správně, to je ' + cil.nazev + '!';
+      vyhodnot(!stav.chyboval);
+      precti(cil.nazev, 0.8);
+      Uloha.posun(novaUloha, Uloha.PRODLEVA);
+    });
+  });
+  p.appendChild(odezva);
+}
+
+/* ---- Společné vyhodnocení tlačítkových úloh ------------------------------- */
+function tlacitkovaUloha(zadaniHtml, volby, spravnyKlic, popisSpravne, hlaskaOk) {
+  const p = $('plocha');
+  p.innerHTML = zadaniHtml;
+  const m = document.createElement('div');
+  m.className = 'moznosti';
+  const odezva = document.createElement('div');
+  odezva.className = 'odezva';
+  const stav = { chyboval: false, hotovo: false };
+  volby.forEach(v => {
+    const b = document.createElement('button');
+    b.innerHTML = `<span class="ikona">${v.ikona}</span><span>${v.popis}</span>`;
+    b.dataset.klic = v.klic;
+    b.addEventListener('click', () => Uloha.odpoved({
+      prvek: b,
+      spravne: v.klic === spravnyKlic,
+      stav, odezva,
+      zpravaOk: '✅ Správně – ' + popisSpravne + '!',
+      poSpravne: napoprve => { vyhodnot(napoprve); if (hlaskaOk) precti(hlaskaOk, 0.85); },
+      dalsi: novaUloha,
+    }));
+    m.appendChild(b);
+  });
+  p.append(m, odezva);
+}
+
+/* ---- Režim: čím to poznám ------------------------------------------------- */
+function vjem() {
+  const v = nahodne(VJEMY);
+  cteniZadani = 'Kterým smyslem poznáš: ' + v.t;
+  const volby = zamichej(Object.entries(SMYSLY).map(([klic, s]) =>
+    ({ klic, ikona: s.ikona, popis: s.nazev })));
+  tlacitkovaUloha(
+    `<div class="zadani">Kterým smyslem to poznáš?</div>
+     <div class="obrazek">${v.e}</div>
+     <div class="popis">${v.t}</div>`,
+    volby, v.s, SMYSLY[v.s].nazev, SMYSLY[v.s].nazev);
+}
+
+/* ---- Režim: smysl a orgán ------------------------------------------------- */
+function organ() {
+  const klice = Object.keys(SMYSLY);
+  const cil = nahodne(klice);
+  const s = SMYSLY[cil];
+  cteniZadani = 'Čím vnímáme ' + s.nazev + '?';
+  const volby = zamichej(klice.map(k =>
+    ({ klic: k, ikona: SMYSLY[k].organIkona, popis: SMYSLY[k].organ })));
+  tlacitkovaUloha(
+    `<div class="zadani">Čím vnímáme <b>${s.nazev}</b>?</div>
+     <div class="obrazek">${s.ikona}</div>`,
+    volby, cil, s.organ, s.organ);
+}
+
+/* ---- Ovládání ------------------------------------------------------------- */
+const REZIMY = { telo, vjem, organ };
+let rezim = 'telo';
+function novaUloha() { REZIMY[rezim](); }
+
+document.querySelectorAll('#rezimy button').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('#rezimy button').forEach(x => x.classList.remove('active'));
+  b.classList.add('active');
+  rezim = b.dataset.rezim;
+  novaUloha();
+}));
+$('btnDalsi').addEventListener('click', novaUloha);
+$('btnCist').addEventListener('click', () => precti(cteniZadani));
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === 'Enter') { e.preventDefault(); novaUloha(); }
+});
+
+Rec.hlidejTlacitko($('btnCist'));
+Rec.poznamkaOHlasu(document.querySelector('.napoveda').parentNode);
+
+zobrazSkore();
+novaUloha();
+</script>
+</body>
+</html>

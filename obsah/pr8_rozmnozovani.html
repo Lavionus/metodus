@@ -33,6 +33,20 @@
       border-radius: 16px; background: var(--bg-panel); }
     .atlas-etap h2 { margin: 0 0 4px; font-size: 1.2rem; }
     .atlas-etap > p { margin: 0 0 12px; color: var(--text-muted); }
+    .atlas-soustav { width: min(100%, 900px); margin: 0 0 20px; padding: 14px; border: 1px solid var(--border);
+      border-radius: 16px; background: var(--bg-panel); }
+    .atlas-soustav h2 { margin: 0 0 4px; font-size: 1.2rem; }
+    .atlas-soustav > p { margin: 0 0 10px; color: var(--text-muted); }
+    .atlas-prepinac { display: flex; gap: 8px; margin-bottom: 12px; }
+    .atlas-prepinac button[aria-pressed="true"] { background: var(--accent); color: var(--na-akcentu, #fff); border-color: var(--accent); }
+    .atlas-telo { display: grid; grid-template-columns: minmax(240px, 420px) minmax(220px, 1fr); gap: 18px; align-items: center; }
+    .atlas-obrazek { position: relative; width: min(100%, 420px); margin: auto; }
+    .atlas-obrazek img { display: block; width: 100%; height: auto; border-radius: 12px; background: #f7f1e5; }
+    .hotspot { position: absolute; width: 34px; height: 34px; padding: 0; transform: translate(-50%, -50%); border: 3px solid #fff;
+      border-radius: 50%; background: var(--accent); color: var(--na-akcentu, #fff); font-weight: 800; box-shadow: 0 1px 7px #0008; cursor: pointer; }
+    .hotspot:hover, .hotspot:focus-visible, .hotspot[aria-pressed="true"] { outline: 3px solid var(--text); outline-offset: 2px; transform: translate(-50%, -50%) scale(1.12); }
+    .atlas-detail { min-height: 150px; padding: 16px; border-radius: 12px; background: var(--bg-control); border: 1px solid var(--border); }
+    .atlas-detail h3 { margin: 0 0 7px; color: var(--accent); }
     .etapy-rada { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 7px; list-style: none;
       margin: 0; padding: 0; counter-reset: etapa-zivota; }
     .etapy-rada li { min-width: 0; counter-increment: etapa-zivota; }
@@ -40,7 +54,7 @@
       border-radius: 9px; background: #f7f1e5; }
     .etapy-rada figcaption { padding-top: 5px; text-align: center; font-size: .7rem; line-height: 1.25; font-weight: 700; }
     .etapy-rada figcaption::before { content: counter(etapa-zivota) ". "; color: var(--accent); }
-    @media (max-width: 760px) { .etapy-rada { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+    @media (max-width: 760px) { .etapy-rada { grid-template-columns: repeat(4, minmax(0, 1fr)); } .atlas-telo { grid-template-columns: 1fr; } }
     @media (max-width: 420px) { .etapy-rada { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   </style>
 </head>
@@ -54,6 +68,21 @@
     <button data-rezim="etapy">📅 Etapy života</button>
     <button data-rezim="dospivani">🌱 Dospívání</button>
   </div>
+
+  <section class="atlas-soustav" aria-labelledby="atlas-soustav-nadpis">
+    <h2 id="atlas-soustav-nadpis">Prozkoumej rozmnožovací soustavy</h2>
+    <p>Přepni schéma a vyber očíslovaný bod. Barvy jsou zjednodušené; obrázek slouží k orientaci, ne jako skutečný preparát.</p>
+    <div class="atlas-prepinac" role="group" aria-label="Zobrazená rozmnožovací soustava">
+      <button type="button" data-atlas="zenska" aria-pressed="true">Ženská soustava</button>
+      <button type="button" data-atlas="muzska" aria-pressed="false">Mužská soustava</button>
+    </div>
+    <div class="atlas-telo">
+      <div class="atlas-obrazek" id="atlasObrazek"></div>
+      <article class="atlas-detail" id="atlasDetail" aria-live="polite">
+        <h3>Začni výběrem bodu</h3><p>Pomocí klávesy Tab projdi orgány v obrázku a potvrď Enterem nebo mezerníkem.</p>
+      </article>
+    </div>
+  </section>
 
   <section class="atlas-etap" aria-labelledby="atlas-etap-nadpis">
     <h2 id="atlas-etap-nadpis">Člověk se mění po celý život</h2>
@@ -93,6 +122,46 @@ const $ = id => document.getElementById(id);
 const skore = Uloha.skore('metodus_pr8_rozmnozovani', $('skore'));
 let rezim = 'soustava';
 function odezvaEl() { const d = document.createElement('div'); d.className = 'odezva'; return d; }
+
+const ATLASY = {
+  zenska: {
+    src: 'img/pr/pr8-soustava-zenska.webp', alt: 'Výukové schéma ženské rozmnožovací soustavy s dělohou, vejcovody a vaječníky.',
+    body: [
+      {n: 1, x: 20, y: 35, o: 'Vaječník', f: 'Tvoří a uvolňuje vajíčka a produkuje ženské pohlavní hormony.'},
+      {n: 2, x: 29, y: 25, o: 'Vejcovod', f: 'Zachytí uvolněné vajíčko a vede je k děloze; obvykle zde dochází k oplození.'},
+      {n: 3, x: 50, y: 40, o: 'Děloha', f: 'Svalnatý orgán, v jehož sliznici se může uchytit zárodek a vyvíjet plod.'},
+      {n: 4, x: 50, y: 65, o: 'Děložní hrdlo', f: 'Úzká dolní část dělohy, která ji spojuje s pochvou.'}
+    ]
+  },
+  muzska: {
+    src: 'img/pr/pr8-soustava-muzska.webp', alt: 'Výukové schéma mužské rozmnožovací soustavy s varlaty, chámovody a prostatou.',
+    body: [
+      {n: 1, x: 28, y: 76, o: 'Varle', f: 'Tvoří spermie a mužský pohlavní hormon testosteron.'},
+      {n: 2, x: 23, y: 69, o: 'Nadvarle', f: 'Spermie v něm dozrávají a shromažďují se.'},
+      {n: 3, x: 19, y: 43, o: 'Chámovod', f: 'Svalová trubice, která odvádí spermie z nadvarlete směrem k močové trubici.'},
+      {n: 4, x: 50, y: 47, o: 'Prostata', f: 'Žláza pod močovým měchýřem; její sekret je součástí spermatu.'}
+    ]
+  }
+};
+function vykresliAtlas(klic) {
+  const data = ATLASY[klic];
+  const box = $('atlasObrazek');
+  box.innerHTML = `<img src="${data.src}" alt="${data.alt}" width="768" height="1152">` + data.body.map(b =>
+    `<button type="button" class="hotspot" style="left:${b.x}%;top:${b.y}%" data-atlas-bod="${b.n}" aria-label="${b.n}. ${b.o}" aria-pressed="false">${b.n}</button>`
+  ).join('');
+  box.querySelectorAll('.hotspot').forEach((tlacitko, i) => tlacitko.addEventListener('click', () => {
+    box.querySelectorAll('.hotspot').forEach(b => b.setAttribute('aria-pressed', 'false'));
+    tlacitko.setAttribute('aria-pressed', 'true');
+    const bod = data.body[i];
+    $('atlasDetail').innerHTML = `<h3>${bod.n}. ${bod.o}</h3><p>${bod.f}</p>`;
+  }));
+  $('atlasDetail').innerHTML = '<h3>Začni výběrem bodu</h3><p>Pomocí klávesy Tab projdi orgány v obrázku a potvrď Enterem nebo mezerníkem.</p>';
+}
+document.querySelectorAll('[data-atlas]').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('[data-atlas]').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+  vykresliAtlas(b.dataset.atlas);
+}));
+vykresliAtlas('zenska');
 
 const ORGANY = [
   { o: 'vaječník', f: 'tvoří vajíčka a ženské pohlavní hormony' },

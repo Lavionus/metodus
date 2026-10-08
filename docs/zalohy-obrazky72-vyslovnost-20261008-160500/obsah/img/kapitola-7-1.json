@@ -1,0 +1,268 @@
+[
+  {
+    "folder": "00",
+    "name": "prehled-kniha-pero",
+    "alt": "Otevřená kniha s perem.",
+    "webp": "00/prehled-kniha-pero.webp",
+    "png": "00/prehled-kniha-pero.png",
+    "bytes": 28190,
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-22",
+      "zadani": "00/prehled-kniha-pero.prompt.txt"
+    }
+  },
+  {
+    "folder": "00",
+    "name": "prehled-teleso-pravitko",
+    "alt": "Krychle s pravítkem bez čísel.",
+    "webp": "00/prehled-teleso-pravitko.webp",
+    "png": "00/prehled-teleso-pravitko.png",
+    "bytes": 34358,
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-22",
+      "zadani": "00/prehled-teleso-pravitko.prompt.txt"
+    }
+  },
+  {
+    "folder": "00",
+    "name": "prehled-globus",
+    "alt": "Glóbus na stojánku.",
+    "webp": "00/prehled-globus.webp",
+    "png": "00/prehled-globus.png",
+    "bytes": 57320,
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-22",
+      "zadani": "00/prehled-globus.prompt.txt"
+    }
+  },
+  {
+    "folder": "00",
+    "name": "prehled-banka",
+    "alt": "Laboratorní baňka s kapalinou.",
+    "webp": "00/prehled-banka.webp",
+    "png": "00/prehled-banka.png",
+    "bytes": 23130,
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-22",
+      "zadani": "00/prehled-banka.prompt.txt"
+    }
+  },
+  {
+    "folder": "00",
+    "name": "prehled-list-bunka",
+    "alt": "Zelený list s detailem rostlinných buněk.",
+    "webp": "00/prehled-list-bunka.webp",
+    "png": "00/prehled-list-bunka.png",
+    "bytes": 56944,
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-22",
+      "zadani": "00/prehled-list-bunka.prompt.txt"
+    }
+  },
+  {
+    "folder": "00",
+    "name": "prehled-lupa-mapa",
+    "alt": "Lupa nad rozloženou mapou.",
+    "webp": "00/prehled-lupa-mapa.webp",
+    "png": "00/prehled-lupa-mapa.png",
+    "bytes": 59100,
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-22",
+      "zadani": "00/prehled-lupa-mapa.prompt.txt"
+    }
+  },
+  {
+    "folder": "00",
+    "name": "prehled-hrad",
+    "alt": "Kamenný hrad s věží a hradbami.",
+    "webp": "00/prehled-hrad.webp",
+    "png": "00/prehled-hrad.png",
+    "bytes": 59104,
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-22",
+      "zadani": "00/prehled-hrad.prompt.txt"
+    }
+  },
+  {
+    "folder": "00",
+    "name": "prehled-notebook",
+    "alt": "Otevřený notebook bez značek a textu.",
+    "webp": "00/prehled-notebook.webp",
+    "png": "00/prehled-notebook.png",
+    "bytes": 41718,
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-22",
+      "zadani": "00/prehled-notebook.prompt.txt"
+    }
+  },
+  {
+    "folder": "00",
+    "name": "prehled-slovniky",
+    "alt": "Dva slovníky se záložkami v barvách britské a německé vlajky.",
+    "webp": "00/prehled-slovniky.webp",
+    "png": "00/prehled-slovniky.png",
+    "bytes": 44776,
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-22",
+      "zadani": "00/prehled-slovniky.prompt.txt"
+    }
+  },
+  {
+    "folder": "00",
+    "name": "prehled-domek-strom",
+    "alt": "Domek s listnatým stromem.",
+    "webp": "00/prehled-domek-strom.webp",
+    "png": "00/prehled-domek-strom.png",
+    "bytes": 59214,
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-22",
+      "zadani": "00/prehled-domek-strom.prompt.txt"
+    }
+  },
+  {
+    "folder": "00",
+    "name": "prehled-atom",
+    "alt": "Symbolický model atomu s jádrem a elektrony.",
+    "webp": "00/prehled-atom.webp",
+    "png": "00/prehled-atom.png",
+    "bytes": 27722,
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-22",
+      "zadani": "00/prehled-atom.prompt.txt"
+    }
+  },
+  {
+    "folder": "aj",
+    "name": "vyslovnost-th-neznele",
+    "alt": "Neznělé th: špička jazyka mezi řezáky.",
+    "webp": "aj/vyslovnost-th-neznele.webp",
+    "png": "aj/vyslovnost-th-neznele.png",
+    "bytes": 48446,
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-22",
+      "zadani": "aj/vyslovnost-th-neznele.prompt.txt"
+    }
+  },
+  {
+    "folder": "aj",
+    "name": "vyslovnost-th-znele",
+    "alt": "Znělé th: špička jazyka mezi řezáky; znělost musí doplnit zvuk.",
+    "webp": "aj/vyslovnost-th-znele.webp",
+    "png": "aj/vyslovnost-th-znele.png",
+    "bytes": 55252,
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-22",
+      "zadani": "aj/vyslovnost-th-znele.prompt.txt"
+    }
+  },
+  {
+    "folder": "aj",
+    "name": "vyslovnost-w",
+    "alt": "W: zaokrouhlené rty a zadní část jazyka zdvižená k měkkému patru.",
+    "webp": "aj/vyslovnost-w.webp",
+    "png": "aj/vyslovnost-w.png",
+    "bytes": 54460,
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-22",
+      "zadani": "aj/vyslovnost-w.prompt.txt"
+    }
+  },
+  {
+    "folder": "aj",
+    "name": "vyslovnost-ae",
+    "alt": "Æ: otevřená ústa, nezaokrouhlené rty, jazyk vpředu a nízko.",
+    "webp": "aj/vyslovnost-ae.webp",
+    "png": "aj/vyslovnost-ae.png",
+    "bytes": 44148,
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-22",
+      "zadani": "aj/vyslovnost-ae.prompt.txt"
+    }
+  },
+  {
+    "folder": "aj",
+    "name": "vyslovnost-schwa",
+    "alt": "Ə: uvolněné rty a jazyk ve střední poloze.",
+    "webp": "aj/vyslovnost-schwa.webp",
+    "png": "aj/vyslovnost-schwa.png",
+    "bytes": 44066,
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-22",
+      "zadani": "aj/vyslovnost-schwa.prompt.txt"
+    }
+  },
+  {
+    "folder": "aj",
+    "name": "vyslovnost-ue",
+    "alt": "Dlouhé ü: jazyk vysoko vpředu a rty zaokrouhlené.",
+    "webp": "aj/vyslovnost-ue.webp",
+    "png": "aj/vyslovnost-ue.png",
+    "bytes": 57386,
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-22",
+      "zadani": "aj/vyslovnost-ue.prompt.txt"
+    }
+  },
+  {
+    "folder": "aj",
+    "name": "vyslovnost-oe",
+    "alt": "Dlouhé ö: jazyk vpředu ve středově vysoké poloze a rty zaokrouhlené.",
+    "webp": "aj/vyslovnost-oe.webp",
+    "png": "aj/vyslovnost-oe.png",
+    "bytes": 57300,
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-22",
+      "zadani": "aj/vyslovnost-oe.prompt.txt"
+    }
+  },
+  {
+    "folder": "aj",
+    "name": "vyslovnost-nosovka",
+    "alt": "Francouzské nosové /ɑ̃/: snížené měkké patro otevírá cestu do nosní dutiny.",
+    "webp": "aj/vyslovnost-nosovka.webp",
+    "png": "aj/vyslovnost-nosovka.png",
+    "bytes": 45530,
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "OpenAI image_gen",
+      "datum": "2026-09-22",
+      "zadani": "aj/vyslovnost-nosovka.prompt.txt"
+    }
+  }
+]

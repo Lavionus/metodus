@@ -62,7 +62,7 @@
     const detail = document.createElement('div'); detail.className = 'atlas-detail'; detail.id = 'atlas-detail-' + index;
     const figure = document.createElement('figure');
     const img = document.createElement('img'); img.width = 768; img.height = 768; img.loading = 'lazy'; img.decoding = 'async';
-    const caption = document.createElement('figcaption'); caption.textContent = 'Zjednodušený boční řez; obličej směřuje doleva.';
+    const caption = document.createElement('figcaption'); caption.textContent = 'Zjednodušený boční řez; obličej směřuje doleva. Modře je zvýrazněný prostor, kudy proudí vzduch.';
     figure.append(img, caption);
     const vyklad = document.createElement('div'); vyklad.className = 'atlas-vyklad';
     detail.append(figure, vyklad);
