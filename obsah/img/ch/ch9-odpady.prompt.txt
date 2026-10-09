@@ -1,0 +1,51 @@
+Sada: IMG-ch-06 — třídění odpadu
+Datum: 2026-10-09
+Nástroj: OpenAI image_gen
+
+Společný výtvarný pokyn pro předměty:
+Square educational object card for Czech lower-secondary science lesson, warm hand-painted watercolor and colored-pencil illustration on a softly textured cream paper background, one centered isolated object, clear silhouette, realistic recognizable materials, gentle soft shadow, no border, no labels, no letters, no numbers, no symbols, no logos, no brand marks, no people, no hands, consistent classroom flashcard style.
+
+Společný výtvarný pokyn pro nádoby:
+Square educational container card for Czech lower-secondary science lesson, warm hand-painted watercolor and colored-pencil illustration on a softly textured cream paper background, one centered isolated modern wheeled recycling bin with closed lid and front opening, three-quarter view, clear silhouette, gentle soft shadow, no surrounding rubbish, no border, no labels, no letters, no numbers, no recycling symbol, no logos, no people, no hands, consistent classroom flashcard style.
+
+Jednotlivé předměty:
+- ch9-odpad-kelimek: an empty clean white plastic yogurt cup with its foil lid peeled off and placed beside it; visibly used packaging ready for recycling
+- ch9-odpad-sampon: an empty rinsed translucent shampoo bottle with pump cap, visibly used plastic packaging ready for recycling
+- ch9-odpad-plastova-taska: a crumpled transparent plastic shopping bag, clean and empty, ready for recycling
+- ch9-odpad-praci-prostredek: an empty rinsed opaque plastic laundry detergent bottle with handle and cap, no label
+- ch9-odpad-polystyren: several small clean pieces of white expanded polystyrene protective packaging foam
+- ch9-odpad-noviny: a folded old newspaper with blocks of unreadable gray print texture, no legible text, ready for paper recycling
+- ch9-odpad-krabice: a flattened plain brown corrugated cardboard shipping box, clean, no tape or markings
+- ch9-odpad-papir: several used white office-paper sheets loosely stacked and slightly crumpled, blank with no writing
+- ch9-odpad-papirova-taska: an empty clean brown kraft paper shopping bag with twisted paper handles
+- ch9-odpad-plato-vajec: a clean empty gray molded-paper egg carton, lid open, no eggs
+- ch9-odpad-rolicka: an empty brown cardboard toilet-paper tube lying diagonally
+- ch9-odpad-sklenice: an empty clear glass preserving jar without lid, clean and intact
+- ch9-odpad-lahev-zelena: an empty green glass beverage bottle without label, clean and intact
+- ch9-odpad-lahev-hneda: an empty brown amber glass beverage bottle without label, clean and intact
+- ch9-odpad-flakon: an empty small clear glass perfume bottle with a simple glass stopper, no label, clean and intact
+- ch9-odpad-banan: a fresh yellow banana peel curled naturally, kitchen bio-waste
+- ch9-odpad-ohryzek: a red apple core with a stem and a few seeds visible, kitchen bio-waste
+- ch9-odpad-slupky-mrkve: a small loose pile of orange carrot peelings, kitchen bio-waste
+- ch9-odpad-kava-caj: a small mound of used dark brown coffee grounds beside a plain used paper tea bag with no tag or string, kitchen bio-waste
+- ch9-odpad-skorapky: several clean cracked brown eggshell halves, kitchen bio-waste
+- ch9-odpad-konzerva: an empty clean unlabelled silver food tin can with its detached lid safely tucked inside, no sharp edge visible
+- ch9-odpad-alobal: a loosely crumpled clean sheet of silver aluminum kitchen foil, ready for metal recycling
+- ch9-odpad-vicka: several clean silver metal jar lids and bottle caps grouped together, ready for metal recycling
+- ch9-odpad-baterie: one used cylindrical household battery with plain unbranded casing and clearly differentiated ends, intact, for a battery collection point
+- ch9-odpad-zarovka: one intact frosted LED light bulb with white base, unbranded, for an electrical-waste collection point
+- ch9-odpad-leky: two blister packs and a small plain medicine bottle representing expired medicines, no readable text, for return to a pharmacy
+- ch9-odpad-textil: a folded worn blue cotton T-shirt with one small repaired patch, clean textile for reuse or textile collection
+- ch9-odpad-zrcadlo: one broken rectangular mirror shard with rounded safe illustrated edges and a visible reflective surface, not ordinary packaging glass
+- ch9-odpad-napojovy-karton: an empty rinsed rectangular beverage carton with folded top, plain white and pale blue with no writing or logos, cap attached, ready for recycling
+- ch9-odpad-obal-chipsy: an empty crumpled shiny plastic snack chips packet, opened at the top, plain warm red color with no writing, logos, symbols, or food illustration
+
+Jednotlivé nádoby:
+- ch9-kontejner-plasty: a bright yellow recycling bin representing plastic packaging
+- ch9-kontejner-papir: a deep blue recycling bin representing paper and cardboard
+- ch9-kontejner-sklo: a green recycling bin representing colored and mixed container glass
+- ch9-kontejner-kartony: an orange recycling bin representing beverage cartons
+- ch9-kontejner-kovy: a medium gray recycling bin representing metal packaging
+- ch9-kontejner-bio: a warm brown recycling bin representing biodegradable kitchen and garden waste
+
+Poznámka: PET láhev a nápojová plechovka jsou v lekci znovu použity z již existujících sad IMG-ch-10 a IMG-aj-11. Lekce nabízí 32 předmětů, tedy o dva více než minimální rozsah plánu.

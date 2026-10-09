@@ -16,14 +16,18 @@
     .cislo-tisnove { font-size: 1.6rem; font-weight: 700; letter-spacing: 0.06em; }
     .situace { max-width: 560px; font-size: 1.05rem; line-height: 1.45; }
     .prehled-cisel {
-      display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;
+      display: grid; grid-template-columns: repeat(4, minmax(130px, 1fr)); gap: 10px;
       max-width: var(--sirka-obsahu, 900px); margin-top: 12px;
     }
     .prehled-cisel div {
       background: var(--bg-panel); border: 1px solid var(--border); border-radius: 10px;
-      padding: 8px 14px; font-size: 0.82rem; color: var(--text-muted);
+      padding: 8px; font-size: 0.82rem; color: var(--text-muted); text-align: center;
     }
     .prehled-cisel b { color: var(--text); }
+    .prehled-cisel img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 8px; display: block; margin-bottom: 7px; }
+    .prehled-cisel .jednotne { display: grid; place-content: center; min-height: 150px; }
+    .situace-obrazek { width: min(100%, 360px); aspect-ratio: 1; object-fit: cover; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 8px 22px #0002; }
+    @media (max-width: 650px) { .prehled-cisel { grid-template-columns: repeat(2, minmax(125px, 1fr)); } }
   </style>
 </head>
 <body>
@@ -44,10 +48,10 @@
   </div>
 
   <div class="prehled-cisel">
-    <div>🚑 <b>155</b> záchranka</div>
-    <div>🚒 <b>150</b> hasiči</div>
-    <div>🚓 <b>158</b> policie</div>
-    <div>🆘 <b>112</b> jednotné číslo tísňového volání</div>
+    <div><picture><source srcset="img/prv/prv2-zdravi-zachranka.webp" type="image/webp"><img src="img/prv/prv2-zdravi-zachranka.png" alt="Zdravotnická záchranná služba s vozem a dvěma záchranáři." loading="lazy"></picture><b>155</b> záchranka</div>
+    <div><picture><source srcset="img/prv/prv2-zdravi-hasici.webp" type="image/webp"><img src="img/prv/prv2-zdravi-hasici.png" alt="Hasičský záchranný sbor s vozem a dvěma hasiči." loading="lazy"></picture><b>150</b> hasiči</div>
+    <div><picture><source srcset="img/prv/prv2-zdravi-policie.webp" type="image/webp"><img src="img/prv/prv2-zdravi-policie.png" alt="Policie s vozem a dvěma policisty." loading="lazy"></picture><b>158</b> policie</div>
+    <div class="jednotne">🆘<br><b>112</b><br>jednotné číslo tísňového volání</div>
   </div>
 
   <p class="napoveda">
@@ -60,14 +64,31 @@ const $ = id => document.getElementById(id);
 const skore = Uloha.skore('metodus_prv2_zdravi', $('skore'));
 let rezim = 'cisla';
 
+const ZDRAVI_OBRAZKY = {
+  zachranka: { soubor: 'prv2-zdravi-zachranka', alt: 'Zdravotnická záchranná služba s vozem a dvěma záchranáři.' },
+  hasici: { soubor: 'prv2-zdravi-hasici', alt: 'Hasičský záchranný sbor s vozem a dvěma hasiči.' },
+  policie: { soubor: 'prv2-zdravi-policie', alt: 'Policie s vozem a dvěma policisty.' },
+  koleno: { soubor: 'prv2-zdravi-odrene-koleno', alt: 'Dospělá oplachuje dítěti odřené koleno čistou vodou.' },
+  nos: { soubor: 'prv2-zdravi-krvaceni-nos', alt: 'Dítě sedí v předklonu a stlačuje měkkou část nosu.' },
+  popalenina: { soubor: 'prv2-zdravi-popalenina', alt: 'Dítě chladí opařenou ruku proudem chladné vody.' },
+  vosa: { soubor: 'prv2-zdravi-vosa', alt: 'Dospělá přikládá na místo po vosím bodnutí chladný obklad.' },
+  kolo: { soubor: 'prv2-zdravi-pad-kolo', alt: 'Dítě po pádu z kola sedí v bezpečí a přivolaná dospělá kontroluje jeho stav.' },
+  bezvedomi: { soubor: 'prv2-zdravi-bezvedomi', alt: 'Dospělá kontroluje člověka v bezvědomí a dítě volá o pomoc.' },
+};
+
+function obrazek(klic) {
+  const o = ZDRAVI_OBRAZKY[klic];
+  return `<picture><source srcset="img/prv/${o.soubor}.webp" type="image/webp"><img class="situace-obrazek" src="img/prv/${o.soubor}.png" alt="${o.alt}"></picture>`;
+}
+
 // Tísňová čísla jsou společná data rodiny „Lidské tělo a zdraví" (data/tisnova_cisla.js).
 const CISLA = METODUS_TISNOVA.map(t => ({ klic: t.cislo, ikona: t.ikona, popis: `${t.cislo} ${t.kratce}` }));
 
 const SITUACE = [
-  { e: '🤕', t: 'Kamarád spadl z kola a nemůže vstát, bolí ho noha.', c: '155' },
+  { e: '🤕', img: 'kolo', t: 'Kamarád spadl z kola a nemůže vstát, bolí ho noha.', c: '155' },
   { e: '🔥', t: 'Ze sousedního domu jde hustý kouř.', c: '150' },
   { e: '🚗', t: 'Někdo poškrábal zaparkovaná auta a utekl.', c: '158' },
-  { e: '😵', t: 'Paní na ulici upadla a nereaguje.', c: '155' },
+  { e: '😵', img: 'bezvedomi', t: 'Paní na ulici upadla a nereaguje.', c: '155' },
   { e: '🌲', t: 'V lese hoří tráva u cesty.', c: '150' },
   { e: '🎒', t: 'Ve škole ti někdo ukradl batoh.', c: '158' },
   { e: '🩸', t: 'Bratr se pořezal a krev nejde zastavit.', c: '155' },
@@ -80,18 +101,32 @@ const SITUACE = [
 
 const POMOC = [
   {
-    e: '🩸', o: 'Kamarád má odřené koleno, které krvácí. Co uděláš?',
+    e: '🩸', img: 'koleno', o: 'Kamarád má odřené koleno, které krvácí. Co uděláš?',
     v: [{ t: 'Ránu opláchnu vodou a přelepím náplastí', ok: true },
         { t: 'Zakryju ji ušpiněným kapesníkem', ok: false },
         { t: 'Nechám to být, samo se to zahojí', ok: false }],
     proc: 'Ránu je potřeba omýt čistou vodou a zakrýt čistým obvazem nebo náplastí.',
   },
   {
-    e: '🔥', o: 'Opařil ses horkým čajem. Co uděláš nejdřív?',
-    v: [{ t: 'Chladím místo proudem vlažné vody', ok: true },
+    e: '🔥', img: 'popalenina', o: 'Opařil ses horkým čajem. Co uděláš nejdřív?',
+    v: [{ t: 'Chladím místo proudem chladné vody', ok: true },
         { t: 'Namažu to máslem', ok: false },
         { t: 'Propíchnu puchýř', ok: false }],
-    proc: 'Popálené místo se chladí vlažnou vodou aspoň 10 minut. Nikdy nic nemažeme a puchýře nepropichujeme.',
+    proc: 'Popálené místo se chladí chladnou tekoucí vodou nejméně 10 minut. Nepoužívej led ani masti a puchýře nepropichuj.',
+  },
+  {
+    e: '👃', img: 'nos', o: 'Kamarádovi teče krev z nosu. Jak mu pomůžeš?',
+    v: [{ t: 'Posadím ho, předkloním a stlačím měkkou část nosu', ok: true },
+        { t: 'Zakloním mu hlavu co nejvíc dozadu', ok: false },
+        { t: 'Položím ho rovně na záda', ok: false }],
+    proc: 'Sedí v mírném předklonu, dýchá ústy a měkkou část nosu stlačuje 10–15 minut. Když krvácení nepřestává, zavolej dospělého.',
+  },
+  {
+    e: '🐝', img: 'vosa', o: 'Bodla tě vosa do ruky. Co uděláš?',
+    v: [{ t: 'Odejdu do bezpečí, řeknu to dospělému a místo chladím přes látku', ok: true },
+        { t: 'Místo budu silně škrábat', ok: false },
+        { t: 'Nebudu to nikomu říkat, ani když se mi hůř dýchá', ok: false }],
+    proc: 'Místo omyj a chlaď přes látku. Při dušnosti, otoku úst nebo jazyka či mdlobě volej ihned 155.',
   },
   {
     e: '🤧', o: 'Kýcháš a kašleš. Jak to uděláš, aby ses nešířil nemoc?',
@@ -157,7 +192,7 @@ function cisla() {
   const p = $('plocha');
   const s = Uloha.nahodne(SITUACE);
   p.innerHTML = `<div class="zadani">Komu zavoláš?</div>
-    <div class="karta"><div class="obrazek">${s.e}</div><div class="situace">${s.t}</div></div>`;
+    <div class="karta"><div class="obrazek">${s.img ? obrazek(s.img) : s.e}</div><div class="situace">${s.t}</div></div>`;
   const odezva = document.createElement('div');
   odezva.className = 'odezva';
   Uloha.vyber({
@@ -176,7 +211,7 @@ function cisla() {
 function pomoc() {
   const p = $('plocha');
   const u = Uloha.nahodne(POMOC);
-  p.innerHTML = `<div class="zadani">${u.o}</div><div class="obrazek">${u.e}</div>`;
+  p.innerHTML = `<div class="zadani">${u.o}</div><div class="obrazek">${u.img ? obrazek(u.img) : u.e}</div>`;
   const odezva = document.createElement('div');
   odezva.className = 'odezva';
   const spravna = u.v.find(x => x.ok);

@@ -1559,7 +1559,7 @@ Společné pro prvouku: 🔗 malý žák se učí z **obrazu a situace**, ne ze 
   - Pohled „co vidí řidič / co vidí dítě“ za zaparkovaným autem.
 - **Obrázky:**
   - `IMG-prv-03` ✅ **A** · pohled shora na cestu do školy v naší vesnici (dům, chodník, přechod se semaforem, přechod bez semaforu, zastávka, zaparkovaná auta, škola) — zapojeno s 10 klikacími místy; rybník, kostel a lípa zakládají geografii pro `IMG-prv-07` a `IMG-prv-20`
-  - `IMG-prv-04` 🟠 **B** · 8 karet dopravních značek a situací (přechod, semafor červená/zelená, dítě za autem, reflexní prvky, cyklista s přilbou) — piktogramy bez textu
+  - `IMG-prv-04` ✅ **B** · 8 karet bezpečných a rizikových situací (přechod, semafor červená/zelená, dítě za autem, reflexní prvky, cyklista s přilbou, míč na silnici, autobus zakrývající výhled) — zapojeno do kvízu a režimu semaforu
 
 #### Zdraví, nemoc a první pomoc · [prv2_zdravi.html](obsah/prv2_zdravi.html)
 - **Zařazení:** Prvouka › Člověk a jeho svět · 2.–3. r. · lekce A
@@ -1570,7 +1570,7 @@ Společné pro prvouku: 🔗 malý žák se učí z **obrazu a situace**, ne ze 
   - Nacvičený telefonát: dispečer (text/hlas) se ptá, žák vybírá odpovědi (kdo, co, kde).
   - 🔗 Postupy převzít z revidované lekce `pr8_prvni_pomoc` (jeden zdroj pravdy), uvést datum revize.
 - **Obrázky:**
-  - `IMG-prv-05` 🟠 **B** · karty záchranných složek (sanitka, hasiči, policie) a 6 situací (odřené koleno, krvácení z nosu, popálení, bodnutí vosou, pád z kola, cizí člověk v bezvědomí) — bez krve a drastických detailů
+  - `IMG-prv-05` **B ✅** · 3 karty záchranných složek a 6 situací první pomoci bez drastických detailů — hotovo a zapojeno
 
 #### Zdravý životní styl · [prv5_zdravy_styl.html](obsah/prv5_zdravy_styl.html)
 - **Zařazení:** Prvouka › Člověk a jeho svět · 5. r. · lekce A
@@ -1582,7 +1582,7 @@ Společné pro prvouku: 🔗 malý žák se učí z **obrazu a situace**, ne ze 
   - Režim dne jako kruh 24 hodin (spánek, škola, pohyb, obrazovka).
   - Doporučení s věkovým rozsahem a zdrojem.
 - **Obrázky:**
-  - `IMG-prv-06` 🟠 **B** · 30 karet potravin (sdílet s jídlem v `IMG-aj-02`, doplnit celozrnné pečivo, luštěniny, ořechy, sladkosti, slazené nápoje) — skládání talíře
+  - `IMG-prv-06` **B ✅** · 30 sdílených a nových karet potravin — hotovo a zapojeno do pyramidy i porovnávání
 
 #### Roční období a čas · [prv1_rocni_obdobi.html](obsah/prv1_rocni_obdobi.html)
 - **Zařazení:** Prvouka › Příroda kolem nás · 1.–2. r. · samostatná F
@@ -1620,7 +1620,7 @@ Společné pro prvouku: 🔗 malý žák se učí z **obrazu a situace**, ne ze 
   - Statek a les z naší vesnice jako dvě scény, zvířata se přetahují.
 - **Obrázky:**
   - `IMG-prv-10` ✅ **B** · 30 karet zvířat: 19 nových a 11 sdílených; zapojeno do všech čtyř režimů
-  - `IMG-prv-11` 🟠 **B** · 12 karet mláďat k domácím zvířatům (tele, sele, kůzle, jehně, hříbě, kuře…) — dvojice dospělec–mládě
+  - `IMG-prv-11` **B ✅** · 12 karet mláďat domácích zvířat — hotovo a zapojeno do obrazového přiřazování
 
 #### Živá a neživá příroda · [prv3_ziva_neziva.html](obsah/prv3_ziva_neziva.html)
 - **Zařazení:** Prvouka › Příroda kolem nás · 3. r. · lekce A
@@ -2202,7 +2202,7 @@ Společné pro chemii: 🔗 **jeden molekulový model** (🧩 molekula a atom) p
   - Přetahování odpadu do barevných kontejnerů (obrázky předmětů, ne slova).
   - Životní cyklus plastové láhve jako kruh (výroba → použití → třídění → nový výrobek).
 - **Obrázky:**
-  - `IMG-ch-06` 🔴 **B** · 30 karet odpadu (PET láhev, kelímek od jogurtu, noviny, krabice od mléka, sklenice, plechovka, slupky, baterie, žárovka, textil, polystyren, obal od chipsů…) + karty 6 kontejnerů v barvách — třídění
+  - `IMG-ch-06` **B ✅** · 32 karet odpadu (30 nových, PET láhev a plechovka sdílené) + 6 barevných nádob — hotovo a zapojeno do obrazového třídicího kvízu; u společného sběru rozhoduje místní nálepka na nádobě
 
 #### Přírodní látky · [ch9_prirodni_latky.html](obsah/ch9_prirodni_latky.html)
 - **Zařazení:** Přírodní vědy › Chemie · 9. r. · lekce A
@@ -3308,7 +3308,7 @@ Při výrobě sady v jednom stylu zadávat všechny karty v jedné dávce se ste
 | `IMG-prv-17` | C | fotografie 16 vzorků (žula, pískovec, vápenec, čedič, břidlice, mramor, uhlí, křemen, živec, slída, kalcit, sůl kamenná, sádrovec, pyrit, grafit, magnetit) na neutrálním pozadí se stejným světlem; **sdílet s `pr9_mineraly`** | [prv4_horniny](obsah/prv4_horniny.html) |
 | `IMG-prv-20` | A ✅ | plán naší vesnice/městečka shora (obecní úřad, pošta, škola, lékař, obchod, knihovna, hasičská zbrojnice, kostel, nádraží, park) — hotspoty; stejné místo jako `IMG-prv-03` a `IMG-prv-07`; hotovo: ilustrační plán je zapojen před interaktivní mapou | [prv3_obec](obsah/prv3_obec.html) |
 | `IMG-prv-23` | E | přesné předlohy zbývajících symbolů: státní vlajka, vlajka prezidenta republiky, státní pečeť (SVG z Wikimedia Commons) + nahrávka hymny s volnou licencí | [prv5_statni_symboly](obsah/prv5_statni_symboly.html) |
-| `IMG-ch-06` | B | 30 karet odpadu (PET láhev, kelímek od jogurtu, noviny, krabice od mléka, sklenice, plechovka, slupky, baterie, žárovka, textil, polystyren, obal od chipsů…) + karty 6 kontejnerů v barvách — třídění | [ch9_zivotni_prostredi](obsah/ch9_zivotni_prostredi.html) |
+| `IMG-ch-06` | B ✅ | 32 karet odpadu (30 nových, PET láhev a plechovka sdílené) + 6 barevných nádob — zapojeno do obrazového třídicího kvízu s vysvětlením výjimek a místního společného sběru | [ch9_zivotni_prostredi](obsah/ch9_zivotni_prostredi.html) |
 | `IMG-pr-01` | C | fotografie 14 druhů hub, u každého 2–3 pohledy (hřib smrkový, hřib kovář, klouzek, bedla vysoká, liška obecná, václavka, pečárka, muchomůrka červená, muchomůrka zelená, muchomůrka tygrovaná, hřib satan, čirůvka tygrovaná, pavučinec plyšový, ucháč obecný) — **nikdy generované** | [pr6_houby](obsah/pr6_houby.html) |
 | `IMG-pr-07` | B ✅ | 4 karty stavby těla ve stejném měřítku a pohledu shora (včela, křižák, rak, stonožka); hotovo a zapojeno | [pr6_clenovci](obsah/pr6_clenovci.html) |
 | `IMG-pr-05` | C | fotografie 40 zástupců pro poznávačky přírodopisu 6.–7. r. (bezobratlí, ryby, obojživelníci, plazi, ptáci, savci ČR); **společná sada** pro `pr6_bezobratli`, tuto stránku, `pr7_ptaci_savci`, `potravni_retezec` | [pr7_obratlovci_studenokrevni](obsah/pr7_obratlovci_studenokrevni.html) |
@@ -3341,11 +3341,11 @@ Při výrobě sady v jednom stylu zadávat všechny karty v jedné dávce se ste
 | `IMG-aj-09` | B ✅ | 5 obrazových trojic ke srovnání (psi, auta, domy, hory a dorty) — zapojeno do procvičování 2. i 3. stupně | [aj6_stupnovani](obsah/aj6_stupnovani.html) |
 | `IMG-aj-11` | B ✅ | 12 karet nádob a porcí (láhev, bochník, kus, sklenice, balíček, plechovka, miska, šálek, kostka, plátek, pytel, krabice) — zapojeno do obrazového procvičování měr | [aj7_pocitatelnost](obsah/aj7_pocitatelnost.html) |
 | `IMG-prv-02` | A ✅ | řez rodinným domem se šesti částmi; hotovo a zapojeno | [prv1_rodina](obsah/prv1_rodina.html) |
-| `IMG-prv-04` | B | 8 karet dopravních značek a situací (přechod, semafor červená/zelená, dítě za autem, reflexní prvky, cyklista s přilbou) — piktogramy bez textu | [prv1_cesta_skola](obsah/prv1_cesta_skola.html) |
-| `IMG-prv-05` | B | karty záchranných složek (sanitka, hasiči, policie) a 6 situací (odřené koleno, krvácení z nosu, popálení, bodnutí vosou, pád z kola, cizí člověk v bezvědomí) — bez krve a drastických detailů | [prv2_zdravi](obsah/prv2_zdravi.html) |
-| `IMG-prv-06` | B | 30 karet potravin (sdílet s jídlem v `IMG-aj-02`, doplnit celozrnné pečivo, luštěniny, ořechy, sladkosti, slazené nápoje) — skládání talíře | [prv5_zdravy_styl](obsah/prv5_zdravy_styl.html) |
+| `IMG-prv-04` | B ✅ | 8 karet bezpečných a rizikových situací — zapojeno do kvízu a režimu semaforu | [prv1_cesta_skola](obsah/prv1_cesta_skola.html) |
+| `IMG-prv-05` | B ✅ | 3 karty záchranných složek a 6 situací první pomoci bez drastických detailů — zapojeno do přehledu a obou kvízů | [prv2_zdravi](obsah/prv2_zdravi.html) |
+| `IMG-prv-06` | B ✅ | 30 sdílených a nových karet potravin — zapojeno do pyramidy a obrazového porovnávání | [prv5_zdravy_styl](obsah/prv5_zdravy_styl.html) |
 | `IMG-prv-08` | B | celá postava dítěte zepředu v neutrálním postoji — hotspoty částí těla | [prv1_smysly](obsah/prv1_smysly.html) |
-| `IMG-prv-11` | B | 12 karet mláďat k domácím zvířatům (tele, sele, kůzle, jehně, hříbě, kuře…) — dvojice dospělec–mládě | [prv2_zvirata](obsah/prv2_zvirata.html) |
+| `IMG-prv-11` | B ✅ | 12 karet mláďat domácích zvířat — zapojeno do obrazového přiřazování dospělec–mládě | [prv2_zvirata](obsah/prv2_zvirata.html) |
 | `IMG-prv-12` | C | 16 fotografií přírodnin (kámen, krystal soli, semeno fazole, klíčící fazole, suchý list, zelený list, houba, mech, voda, oblak, šnek, mravenec, peří, kost, písek, jablko) | [prv3_ziva_neziva](obsah/prv3_ziva_neziva.html) |
 | `IMG-prv-14` | A ✅ | řez půdou s pěti klikacími vrstvami; hotovo a zapojeno | [prv3_voda_vzduch](obsah/prv3_voda_vzduch.html) |
 | `IMG-prv-19` | A ✅ | krajina s elektrárnami (vodní, větrná, solární pole, uhelná, jaderná, bioplynová stanice) propojená vedením k vesnici — hotspoty; hotovo: zapojeno do přehledu elektráren i cesty elektřiny | [prv5_energie](obsah/prv5_energie.html) |

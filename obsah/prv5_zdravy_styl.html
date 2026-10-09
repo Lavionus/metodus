@@ -24,6 +24,9 @@
     .pyramida div:nth-child(4) { width: 86%; }
     .pyramida div:nth-child(5) { width: 100%; }
     .rezim-den { color: var(--text-muted); max-width: 520px; font-size: 1rem; line-height: 1.5; }
+    .potravina-obrazek { width: min(100%, 320px); aspect-ratio: 1; object-fit: cover; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 8px 22px #0002; }
+    .moznosti .ikona:has(.volba-jidlo) { width: min(145px, 32vw); height: auto; }
+    .volba-jidlo { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 12px; border: 1px solid var(--border); display: block; }
   </style>
 </head>
 <body>
@@ -61,29 +64,59 @@ const PATRA = {
   4: { nazev: 'zelenina a ovoce', popis: 'několikrát denně – vitamíny a vláknina' },
   3: { nazev: 'mléko, sýry, jogurty', popis: 'denně – vápník pro kosti a zuby' },
   2: { nazev: 'maso, ryby, vejce, luštěniny', popis: 'několikrát týdně – bílkoviny' },
-  1: { nazev: 'sladkosti, chipsy, tučná jídla', popis: 'jen výjimečně, na špičce pyramidy' },
+  1: { nazev: 'sladkosti, slazené nápoje a tuky', popis: 'sladkosti jen výjimečně; tuky v malém množství a přednostně rostlinné' },
 };
 
+function obrazekJidla(p, trida = 'potravina-obrazek') {
+  const png = p.img.replace(/\.webp$/, '.png');
+  return `<picture><source srcset="${p.img}" type="image/webp"><img class="${trida}" src="${png}" alt="${p.alt}"></picture>`;
+}
+
 const POTRAVINY = [
-  { n: 'chléb', e: '🍞', patro: 5 }, { n: 'rýže', e: '🍚', patro: 5 }, { n: 'těstoviny', e: '🍝', patro: 5 },
-  { n: 'mrkev', e: '🥕', patro: 4 }, { n: 'jablko', e: '🍎', patro: 4 }, { n: 'brokolice', e: '🥦', patro: 4 },
-  { n: 'jogurt', e: '🥛', patro: 3 }, { n: 'sýr', e: '🧀', patro: 3 },
-  { n: 'ryba', e: '🐟', patro: 2 }, { n: 'vejce', e: '🥚', patro: 2 }, { n: 'čočka', e: '🫘', patro: 2 },
-  { n: 'čokoláda', e: '🍫', patro: 1 }, { n: 'chipsy', e: '🍟', patro: 1 }, { n: 'zákusek', e: '🍰', patro: 1 },
+  { n: 'chléb', patro: 5, img: 'img/aj/aj-slovicka-bread.webp', alt: 'Bochník chleba s ukrojeným krajícem.' },
+  { n: 'celozrnná houska', patro: 5, img: 'img/prv/prv5-jidlo-celozrnna-houska.webp', alt: 'Celozrnná houska se semínky.' },
+  { n: 'ovesná kaše', patro: 5, img: 'img/prv/prv5-jidlo-ovesna-kase.webp', alt: 'Miska uvařené ovesné kaše.' },
+  { n: 'rýže', patro: 5, img: 'img/aj/aj7-mira-miska.webp', alt: 'Miska uvařené rýže.' },
+  { n: 'těstoviny', patro: 5, img: 'img/prv/prv5-jidlo-testoviny.webp', alt: 'Miska uvařených těstovin penne.' },
+  { n: 'brambora', patro: 5, img: 'img/cj/cj1-pismena-brambora.webp', alt: 'Celá syrová brambora.' },
+  { n: 'jablko', patro: 4, img: 'img/aj/aj-slovicka-apple.webp', alt: 'Červené jablko.' },
+  { n: 'banán', patro: 4, img: 'img/aj/aj-slovicka-banana.webp', alt: 'Žlutý banán.' },
+  { n: 'jahoda', patro: 4, img: 'img/aj/aj-slovicka-strawberry.webp', alt: 'Zralá červená jahoda.' },
+  { n: 'mrkev', patro: 4, img: 'img/cj/cj1-pismena-mrkev.webp', alt: 'Celá oranžová mrkev.' },
+  { n: 'rajče', patro: 4, img: 'img/prv/prv5-jidlo-rajce.webp', alt: 'Zralé červené rajče.' },
+  { n: 'okurka', patro: 4, img: 'img/prv/prv5-jidlo-okurka.webp', alt: 'Celá zelená okurka.' },
+  { n: 'brokolice', patro: 4, img: 'img/prv/prv5-jidlo-brokolice.webp', alt: 'Zelená růžice brokolice.' },
+  { n: 'pomeranč', patro: 4, img: 'img/prv/prv5-jidlo-pomeranc.webp', alt: 'Celý zralý pomeranč s listem.' },
+  { n: 'mléko', patro: 3, img: 'img/aj/aj-slovicka-milk.webp', alt: 'Sklenice mléka.' },
+  { n: 'sýr', patro: 3, img: 'img/aj/aj-slovicka-cheese.webp', alt: 'Klínek žlutého sýra.' },
+  { n: 'jogurt', patro: 3, img: 'img/prv/prv5-jidlo-jogurt.webp', alt: 'Miska bílého přírodního jogurtu.' },
+  { n: 'vejce', patro: 2, img: 'img/aj/aj-slovicka-egg.webp', alt: 'Vařené vejce v kalíšku.' },
+  { n: 'ryba', patro: 2, img: 'img/aj/aj-slovicka-fish.webp', alt: 'Ryba jako zdroj bílkovin.' },
+  { n: 'kuřecí maso', patro: 2, img: 'img/prv/prv5-jidlo-kureci-maso.webp', alt: 'Grilovaný plátek kuřecího masa.' },
+  { n: 'čočka', patro: 2, img: 'img/prv/prv5-jidlo-cocka.webp', alt: 'Miska uvařené hnědé čočky.' },
+  { n: 'fazole', patro: 2, img: 'img/prv/prv5-jidlo-fazole.webp', alt: 'Miska uvařených červených fazolí.' },
+  { n: 'ořechy', patro: 2, img: 'img/prv/prv5-jidlo-orechy.webp', alt: 'Směs vlašských ořechů, mandlí a lískových ořechů.' },
+  { n: 'dort', patro: 1, img: 'img/aj/aj-slovicka-cake.webp', alt: 'Kousek dortu se šlehačkou a jahodou.' },
+  { n: 'čokoláda', patro: 1, img: 'img/aj/aj-slovicka-chocolate.webp', alt: 'Tabulka mléčné čokolády.' },
+  { n: 'slunečnicový olej', patro: 1, img: 'img/prv/prv5-jidlo-olej.webp', alt: 'Skleněná láhev slunečnicového oleje.' },
+  { n: 'máslo', patro: 1, img: 'img/prv/prv5-jidlo-maslo.webp', alt: 'Kostka másla na talířku.' },
+  { n: 'chipsy', patro: 1, img: 'img/prv/prv5-jidlo-chipsy.webp', alt: 'Miska bramborových chipsů.' },
+  { n: 'sušenka', patro: 1, img: 'img/prv/prv5-jidlo-susenka.webp', alt: 'Kulatá ovesná sušenka.' },
+  { n: 'slazená limonáda', patro: 1, img: 'img/aj/aj7-mira-plechovka.webp', alt: 'Neznačková plechovka slazené limonády.' },
 ];
 
 const VOLBY = [
-  { a: { t: 'sklenice vody', e: '💧' }, b: { t: 'slazená limonáda', e: '🥤' }, spr: 'a',
+  { a: { t: 'sklenice vody', img: 'img/aj/aj-slovicka-water.webp', alt: 'Sklenice čisté vody.' }, b: { t: 'slazená limonáda', img: 'img/aj/aj7-mira-plechovka.webp', alt: 'Plechovka slazené limonády.' }, spr: 'a',
     proc: 'Voda hydratuje bez cukru. V půllitru limonády bývá i 10 kostek cukru.' },
-  { a: { t: 'jablko', e: '🍎' }, b: { t: 'sušenka', e: '🍪' }, spr: 'a',
+  { a: { t: 'jablko', img: 'img/aj/aj-slovicka-apple.webp', alt: 'Červené jablko.' }, b: { t: 'sušenka', img: 'img/prv/prv5-jidlo-susenka.webp', alt: 'Ovesná sušenka.' }, spr: 'a',
     proc: 'Ovoce má vlákninu a vitamíny, sušenka hlavně cukr a tuk.' },
-  { a: { t: 'celozrnný chléb', e: '🍞' }, b: { t: 'bílá houska', e: '🥐' }, spr: 'a',
+  { a: { t: 'celozrnná houska', img: 'img/prv/prv5-jidlo-celozrnna-houska.webp', alt: 'Celozrnná houska se semínky.' }, b: { t: 'sladký dort', img: 'img/aj/aj-slovicka-cake.webp', alt: 'Kousek sladkého dortu.' }, spr: 'a',
     proc: 'Celozrnné pečivo zasytí na delší dobu a má víc vlákniny.' },
   { a: { t: 'procházka do školy', e: '🚶' }, b: { t: 'cesta autem na 500 metrů', e: '🚗' }, spr: 'a',
     proc: 'Krátká cesta pěšky je pohyb navíc a nic nestojí.' },
   { a: { t: 'spánek 9 hodin', e: '😴' }, b: { t: 'ponocování u mobilu', e: '📱' }, spr: 'a',
     proc: 'Ve spánku se tělo i mozek regenerují a ukládá se to, co ses naučil.' },
-  { a: { t: 'ořechy jako svačina', e: '🥜' }, b: { t: 'tyčinka s polevou', e: '🍫' }, spr: 'a',
+  { a: { t: 'ořechy jako svačina', img: 'img/prv/prv5-jidlo-orechy.webp', alt: 'Směs nesolených ořechů.' }, b: { t: 'čokoláda', img: 'img/aj/aj-slovicka-chocolate.webp', alt: 'Tabulka čokolády.' }, spr: 'a',
     proc: 'Ořechy mají zdravé tuky a bílkoviny, tyčinka hlavně cukr.' },
 ];
 
@@ -114,7 +147,7 @@ function pyramida() {
   const p = $('plocha');
   const u = Uloha.nahodne(POTRAVINY);
   p.innerHTML = `<div class="zadani">Do kterého patra pyramidy patří?</div>
-    <div class="karta"><div class="obrazek">${u.e}</div><div class="nazev-p">${u.n}</div></div>`;
+    <div class="karta"><div class="obrazek">${obrazekJidla(u)}</div><div class="nazev-p">${u.n}</div></div>`;
   const odezva = document.createElement('div');
   odezva.className = 'odezva';
   Uloha.vyber({
@@ -140,8 +173,8 @@ function volba() {
   Uloha.vyber({
     kam: p, odezva, trida: 'dve',
     moznosti: Uloha.zamichej([
-      { klic: 'a', ikona: u.a.e, popis: u.a.t },
-      { klic: 'b', ikona: u.b.e, popis: u.b.t },
+      { klic: 'a', ikona: u.a.img ? obrazekJidla(u.a, 'volba-jidlo') : u.a.e, popis: u.a.t },
+      { klic: 'b', ikona: u.b.img ? obrazekJidla(u.b, 'volba-jidlo') : u.b.e, popis: u.b.t },
     ]),
     spravnyKlic: u.spr,
     zpravaOk: '✅ ' + u.proc,

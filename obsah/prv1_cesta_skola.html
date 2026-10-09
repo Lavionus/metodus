@@ -52,6 +52,10 @@
     .svetlo.oranzova.sviti { background: #e8a33d; box-shadow: 0 0 22px #e8a33d; }
     .svetlo.zelena.sviti { background: #45c46a; box-shadow: 0 0 22px #45c46a; }
     .chodec { font-size: 3.4rem; }
+    .situace-obrazky { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; width: 100%; }
+    .situace-obrazek { width: min(100%, 320px); aspect-ratio: 1; object-fit: cover; border-radius: 12px; border: 1px solid var(--border); background: #faf6ec; box-shadow: 0 2px 10px #0002; }
+    .situace-obrazky.dvojice .situace-obrazek { width: min(46%, 260px); }
+    @media (max-width: 420px) { .situace-obrazky.dvojice .situace-obrazek { width: 100%; max-width: 300px; } }
 
     /* Možnosti */
     .moznosti { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
@@ -111,6 +115,21 @@
 const $ = id => document.getElementById(id);
 const KLIC = 'metodus_prv1_cesta';
 
+const BEZPECNOST_OBRAZKY = {
+  prechod: { alt: 'Dítě bezpečně čeká u přechodu, rozhlíží se a auto před přechodem zastavilo.' },
+  cervena: { alt: 'Dítě stojí za obrubníkem a na semaforu pro chodce svítí červená.' },
+  zelena: { alt: 'Dítě se před vstupem na přechod rozhlíží, semafor svítí zeleně a auta stojí.' },
+  'za-autem': { alt: 'Dítě mezi zaparkovanými auty je pro přijíždějícího řidiče téměř neviditelné.' },
+  reflexni: { alt: 'Reflexní vesta a pásky na dítěti se za šera jasně odrážejí ve světlech auta.' },
+  prilba: { alt: 'Dítě jede po cyklostezce s dobře nasazenou a zapnutou cyklistickou přilbou.' },
+  mic: { alt: 'Míč leží na silnici, ale dítě zůstává na chodníku a volá dospělého.' },
+  autobus: { alt: 'Dítě čeká v bezpečné vzdálenosti, protože stojící autobus zakrývá výhled na auto.' },
+};
+function obrazkySituace(klice) {
+  if (!klice?.length) return '';
+  return `<div class="situace-obrazky ${klice.length > 1 ? 'dvojice' : ''}">${klice.map(klic => `<img class="situace-obrazek" src="img/prv/prv1-bezpecnost-${klic}.webp" alt="${BEZPECNOST_OBRAZKY[klic].alt}" width="768" height="768">`).join('')}</div>`;
+}
+
 /* ---- Data ----------------------------------------------------------------- */
 const MISTA = [
   { id: 'prechod', nazev: 'přechod bez semaforu', x: 36, y: 48, w: 19, h: 18 },
@@ -127,7 +146,7 @@ const MISTA = [
 
 const KVIZ = [
   {
-    o: 'Míč ti spadl na silnici. Co uděláš?', e: '⚽',
+    o: 'Míč ti spadl na silnici. Co uděláš?', e: '⚽', obrazky: ['mic'],
     v: [
       { t: 'Rychle pro něj skočím', ok: false },
       { t: 'Zavolám dospělého a počkám', ok: true },
@@ -136,7 +155,7 @@ const KVIZ = [
     proc: 'Na silnici se nikdy nevbíhá – auto nestihne zastavit. Vždy poprosíš dospělého.',
   },
   {
-    o: 'Chceš přejít silnici. Kde to uděláš?', e: '🚸',
+    o: 'Chceš přejít silnici. Kde to uděláš?', e: '🚸', obrazky: ['prechod', 'za-autem'],
     v: [
       { t: 'Na přechodu pro chodce', ok: true },
       { t: 'Mezi zaparkovanými auty', ok: false },
@@ -154,7 +173,7 @@ const KVIZ = [
     proc: 'Proti autům na sebe vidíte navzájem a stihneš uhnout.',
   },
   {
-    o: 'Je tma a jdeš domů. Co pomůže?', e: '🦺',
+    o: 'Je tma a jdeš domů. Co pomůže?', e: '🦺', obrazky: ['reflexni'],
     v: [
       { t: 'Reflexní pásek nebo vesta', ok: true },
       { t: 'Tmavá bunda', ok: false },
@@ -163,7 +182,7 @@ const KVIZ = [
     proc: 'Reflexní materiál je vidět už z velké dálky – v tmavém oblečení tě řidič uvidí pozdě.',
   },
   {
-    o: 'U přechodu stojí autobus a nevidíš za něj. Co uděláš?', e: '🚌',
+    o: 'U přechodu stojí autobus a nevidíš za něj. Co uděláš?', e: '🚌', obrazky: ['autobus'],
     v: [
       { t: 'Počkám, až odjede a bude vidět', ok: true },
       { t: 'Proběhnu těsně kolem něj', ok: false },
@@ -172,7 +191,7 @@ const KVIZ = [
     proc: 'Za velkým autem může jet další – musíš mít volný výhled na oba směry.',
   },
   {
-    o: 'Jedeš na kole po stezce. Co musíš mít na hlavě?', e: '🚲',
+    o: 'Jedeš na kole po stezce. Co musíš mít na hlavě?', e: '🚲', obrazky: ['prilba'],
     v: [
       { t: 'Přilbu', ok: true },
       { t: 'Kšiltovku', ok: false },
@@ -181,7 +200,7 @@ const KVIZ = [
     proc: 'Do 18 let je přilba povinná a chrání hlavu i při pomalé jízdě.',
   },
   {
-    o: 'Na přechodu svítí zelená. Co uděláš jako první?', e: '🚦',
+    o: 'Na přechodu svítí zelená. Co uděláš jako první?', e: '🚦', obrazky: ['zelena'],
     v: [
       { t: 'Rozhlédnu se a pak jdu', ok: true },
       { t: 'Hned vyběhnu', ok: false },
@@ -294,6 +313,7 @@ function semafor() {
   const chodec = sviti === 'zelena' ? '🚶' : '🧍';
   p.innerHTML = `
     <div class="zadani">Na semaforu svítí tato barva. <b>Smíš přejít?</b></div>
+    ${sviti === 'cervena' || sviti === 'zelena' ? obrazkySituace([sviti]) : ''}
     <div class="semafor-obal">
       <div class="semafor">
         <div class="svetlo cervena ${sviti === 'cervena' ? 'sviti' : ''}"></div>
@@ -334,7 +354,8 @@ function kviz() {
   const u = nahodne(KVIZ);
   cteniZadani = u.o;
   p.innerHTML = `<div class="zadani">${u.o}</div>
-                 <div style="font-size:clamp(2.8rem,10vw,4.2rem);line-height:1">${u.e}</div>`;
+                 ${obrazkySituace(u.obrazky)}
+                 ${u.obrazky ? '' : `<div style="font-size:clamp(2.8rem,10vw,4.2rem);line-height:1">${u.e}</div>`}`;
   const m = document.createElement('div');
   m.className = 'moznosti';
   const odezva = document.createElement('div');

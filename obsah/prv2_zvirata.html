@@ -16,6 +16,8 @@
     .dvojice { display: flex; align-items: center; gap: 16px; justify-content: center; }
     .dvojice .sipka { font-size: 1.6rem; color: var(--text-faint); }
     .zvire-obrazek { width: min(250px, 58vw); aspect-ratio: 1; object-fit: contain; border-radius: 16px; background: #f8f1e5; }
+    .moznosti .ikona:has(.mlade-volba) { width: min(132px, 31vw); height: auto; }
+    .mlade-volba { width: 100%; aspect-ratio: 1; object-fit: contain; border-radius: 12px; background: #f8f1e5; display: block; }
   </style>
 </head>
 <body>
@@ -48,18 +50,18 @@ let rezim = 'kdeZije';
 
 /* zvíře, emoji, domácí?, mládě, příbytek, užitek (jen u domácích) */
 const ZVIRATA = [
-  { n:'kráva', img:'aj/aj-slovicka-cow.webp', domaci:true, mlade:'tele', dum:'chlév', uzitek:'mléko' },
-  { n:'prase', img:'aj/aj-slovicka-pig.webp', domaci:true, mlade:'sele', dum:'chlívek', uzitek:'maso' },
-  { n:'koza', img:'prv/prv2-zvire-koza.webp', domaci:true, mlade:'kůzle', dum:'chlév', uzitek:'mléko' },
-  { n:'ovce', img:'prv/prv2-zvire-ovce.webp', domaci:true, mlade:'jehně', dum:'ovčín', uzitek:'vlna' },
-  { n:'kůň', img:'aj/aj-slovicka-horse.webp', domaci:true, mlade:'hříbě', dum:'stáj', uzitek:'práce a jízda' },
-  { n:'slepice', img:'cj/cj1-pismena-slepice.webp', domaci:true, mlade:'kuře', dum:'kurník', uzitek:'vejce' },
-  { n:'husa', img:'prv/prv2-zvire-husa.webp', domaci:true, mlade:'house', dum:'husník', uzitek:'peří' },
-  { n:'kachna', img:'prv/prv2-zvire-kachna.webp', domaci:true, mlade:'káče', dum:'kachní výběh', uzitek:'maso' },
-  { n:'králík', img:'aj/aj-slovicka-rabbit.webp', domaci:true, mlade:'králíče', dum:'králíkárna', uzitek:'maso' },
-  { n:'pes', img:'aj/aj-slovicka-dog.webp', domaci:true, mlade:'štěně', dum:'bouda', uzitek:'hlídání' },
-  { n:'kočka', img:'aj/aj-slovicka-cat.webp', domaci:true, mlade:'kotě', dum:'dům', uzitek:'chytání myší' },
-  { n:'morče', img:'prv/prv2-zvire-morce.webp', domaci:true, mlade:'mládě morčete', dum:'klec', uzitek:'společnost' },
+  { n:'kráva', img:'aj/aj-slovicka-cow.webp', domaci:true, mlade:'tele', mladeImg:'prv/prv2-mlade-tele.webp', dum:'chlév', uzitek:'mléko' },
+  { n:'prase', img:'aj/aj-slovicka-pig.webp', domaci:true, mlade:'sele', mladeImg:'prv/prv2-mlade-sele.webp', dum:'chlívek', uzitek:'maso' },
+  { n:'koza', img:'prv/prv2-zvire-koza.webp', domaci:true, mlade:'kůzle', mladeImg:'prv/prv2-mlade-kuzle.webp', dum:'chlév', uzitek:'mléko' },
+  { n:'ovce', img:'prv/prv2-zvire-ovce.webp', domaci:true, mlade:'jehně', mladeImg:'prv/prv2-mlade-jehne.webp', dum:'ovčín', uzitek:'vlna' },
+  { n:'kůň', img:'aj/aj-slovicka-horse.webp', domaci:true, mlade:'hříbě', mladeImg:'prv/prv2-mlade-hribe.webp', dum:'stáj', uzitek:'práce a jízda' },
+  { n:'slepice', img:'cj/cj1-pismena-slepice.webp', domaci:true, mlade:'kuře', mladeImg:'prv/prv2-mlade-kure.webp', dum:'kurník', uzitek:'vejce' },
+  { n:'husa', img:'prv/prv2-zvire-husa.webp', domaci:true, mlade:'house', mladeImg:'prv/prv2-mlade-house.webp', dum:'husník', uzitek:'peří' },
+  { n:'kachna', img:'prv/prv2-zvire-kachna.webp', domaci:true, mlade:'káče', mladeImg:'prv/prv2-mlade-kace.webp', dum:'kachní výběh', uzitek:'maso' },
+  { n:'králík', img:'aj/aj-slovicka-rabbit.webp', domaci:true, mlade:'králíče', mladeImg:'prv/prv2-mlade-kralice.webp', dum:'králíkárna', uzitek:'maso' },
+  { n:'pes', img:'aj/aj-slovicka-dog.webp', domaci:true, mlade:'štěně', mladeImg:'prv/prv2-mlade-stene.webp', dum:'bouda', uzitek:'hlídání' },
+  { n:'kočka', img:'aj/aj-slovicka-cat.webp', domaci:true, mlade:'kotě', mladeImg:'prv/prv2-mlade-kote.webp', dum:'dům', uzitek:'chytání myší' },
+  { n:'morče', img:'prv/prv2-zvire-morce.webp', domaci:true, mlade:'mládě morčete', mladeImg:'prv/prv2-mlade-morce.webp', dum:'klec', uzitek:'společnost' },
   { n:'osel', img:'prv/prv2-zvire-osel.webp', domaci:true, mlade:'oslátko', dum:'stáj', uzitek:'práce a nošení nákladu' },
   { n:'krůta', img:'prv/prv2-zvire-kruta.webp', domaci:true, mlade:'krůtě', dum:'krůtník', uzitek:'maso' },
   { n:'včela', img:'cj/cj1-pismena-vcela.webp', domaci:true, mlade:'larva', dum:'úl', uzitek:'med' },
@@ -81,8 +83,10 @@ const ZVIRATA = [
 ];
 
 const obrazekZvirete = z => `<img class="zvire-obrazek" src="img/${z.img}" alt="${z.n}" width="768" height="768">`;
+const obrazekMladete = z => `<img class="mlade-volba" src="img/${z.mladeImg}" alt="${z.mlade}" width="640" height="640">`;
 
 const DOMACI = ZVIRATA.filter(z => z.domaci);
+const MLADATA = ZVIRATA.filter(z => z.mladeImg);
 
 /* ---- Domácí, nebo volně žijící? ------------------------------------------ */
 function kdeZije() {
@@ -112,15 +116,15 @@ function kdeZije() {
 /* ---- Mláďata --------------------------------------------------------------- */
 function mladata() {
   const p = $('plocha');
-  const z = Uloha.nahodne(ZVIRATA);
-  const jina = Uloha.zamichej(ZVIRATA.filter(x => x.mlade !== z.mlade)).slice(0, 3);
-  p.innerHTML = `<div class="zadani">Jak se jmenuje mládě?</div>
+  const z = Uloha.nahodne(MLADATA);
+  const jina = Uloha.zamichej(MLADATA.filter(x => x.mlade !== z.mlade)).slice(0, 3);
+  p.innerHTML = `<div class="zadani">Které mládě patří k tomuto dospělému zvířeti?</div>
     <div class="karta">${obrazekZvirete(z)}<div class="zvire-nazev">${z.n}</div></div>`;
   const odezva = document.createElement('div');
   odezva.className = 'odezva';
   Uloha.vyber({
     kam: p, odezva,
-    moznosti: Uloha.zamichej([z, ...jina]).map(x => ({ klic: x.mlade, popis: x.mlade })),
+    moznosti: Uloha.zamichej([z, ...jina]).map(x => ({ klic: x.mlade, ikona: obrazekMladete(x), popis: x.mlade })),
     spravnyKlic: z.mlade,
     zpravaOk: `✅ Mládě zvířete ${z.n} je ${z.mlade}.`,
     zpravaChyba: 'To je mládě jiného zvířete – zkus to znovu.',

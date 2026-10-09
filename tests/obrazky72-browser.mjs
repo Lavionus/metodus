@@ -509,6 +509,11 @@ try {
       assert.equal(await ev(`document.querySelectorAll('.scena .misto').length`), 10);
       await ev(`(() => { const cil = document.querySelector('.zadani b').textContent; const m = MISTA.find(x => x.nazev === cil); document.querySelector('[data-misto="'+m.id+'"]').click(); })()`);
       assert.equal(await ev(`document.querySelectorAll('.scena .misto.spravne').length`), 1);
+      assert.equal(await ev(`Object.keys(BEZPECNOST_OBRAZKY).length`), 8);
+      assert.equal(await ev(`new Set([...KVIZ.flatMap(x => x.obrazky || []), 'cervena']).size`), 8);
+      await ev(`document.querySelector('#plocha').innerHTML = obrazkySituace(Object.keys(BEZPECNOST_OBRAZKY)); Promise.all([...document.querySelectorAll('.situace-obrazek')].map(i => i.decode()))`);
+      assert.equal(await ev(`document.querySelectorAll('.situace-obrazek').length`), 8);
+      assert.ok(await ev(`[...document.querySelectorAll('.situace-obrazek')].every(i => i.naturalWidth === 768 && i.alt.length > 30)`));
       for (const mode of ['semafor', 'kviz', 'mapa']) {
         await ev(`document.querySelector('[data-rezim="${mode}"]').click()`);
         assert.ok(await ev(`document.querySelector('#plocha').textContent.trim().length > 10`));

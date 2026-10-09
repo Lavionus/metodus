@@ -1,0 +1,3 @@
+IMG-ch-06 · ch9-odpad-banan
+OpenAI image_gen · 2026-10-09
+Úplné zadání: ch9-odpady.prompt.txt, položka ch9-odpad-banan.

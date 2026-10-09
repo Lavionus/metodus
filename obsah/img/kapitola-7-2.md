@@ -30,10 +30,15 @@ Nove obrazky se budou drzet stylu jiz vytvorenych.
 - Dokončena a zapojena sada `IMG-aj-08`: šest navazujících scén příběhu Výlet k moři pro procvičení minulého času.
 - Dokončena a zapojena sada `IMG-prv-01`: osm obrazových členů rozšířené rodiny v rodokmenu a vztahových otázkách; teta, strýc a bratranec jsou nové karty, dalších pět postav se sdílí s `IMG-aj-02`.
 - Dokončena a zapojena sada `IMG-prv-03`: cesta od domu ke škole ve fiktivní vesnici s deseti klikacími místy; rybník, kostel a lípa zakládají společnou geografii pro `IMG-prv-07` a `IMG-prv-20`.
+- Dokončena a zapojena sada `IMG-prv-04`: osm karet bezpečných a rizikových situací na cestě do školy, včetně semaforu, viditelnosti mezi auty, reflexních prvků a přilby.
+- Dokončena a zapojena sada `IMG-prv-05`: tři karty záchranných složek a šest nekrvavých scén první pomoci; lekce nově procvičuje také krvácení z nosu a bodnutí vosou.
+- Dokončena a zapojena sada `IMG-prv-06`: třicet potravinových karet v pěti patrech pyramidy; čtrnáct motivů se sdílí z dřívějších sad a šestnáct nových doplňuje celozrnné pečivo, zeleninu, luštěniny, ořechy, tuky a pochutiny.
 - Dokončena a zapojena sada `IMG-prv-07`: tatáž vesnice ve čtyřech ročních obdobích.
 - Dokončena a zapojena sada `IMG-prv-08`: celá postava dítěte zepředu s deseti přístupnými hotspoty částí těla.
 - Dokončena a zapojena sada `IMG-prv-09`: deset akvarelových karet vjemů pro rozlišování zraku, sluchu, čichu, chuti a hmatu.
 - Dokončena a zapojena sada `IMG-prv-10`: 30 zvířecích karet; 19 nových a 11 sdílených z dřívějších sad.
+- Dokončena a zapojena sada `IMG-prv-11`: dvanáct karet mláďat domácích zvířat jako obrazové možnosti přiřazované k dospělcům.
+- Dokončena a zapojena sada `IMG-ch-06`: třicet dva obrazových karet odpadu a šest barevných nádob; PET lahev a plechovka se sdílejí z dřívějších sad. Třídicí kvíz zobrazuje skutečné předměty, vysvětluje výjimky a připomíná místní značení nádob.
 - Dokončena a zapojena sada `IMG-prv-13`: krajinná scéna celého koloběhu vody.
 - Dokončena a zapojena sada `IMG-prv-15`: řez lesem s pěti patry a typickými organismy.
 - Dokončena a zapojena sada `IMG-prv-16`: společná scéna louky a pole.
@@ -78,4 +83,4 @@ Nove obrazky se budou drzet stylu jiz vytvorenych.
 - WebP: karty 768 × 768 px do 60 000 B, scény 1152 × 768 px do 200 000 B.
 - [Kontrolní galerie](kapitola-7-2.html), [strojový seznam a alt texty](kapitola-7-2.json).
 - Všechny karty jsou generované, bez vloženého textu, čísel a značek. Vizuálně zkontrolováno jako jedna galerie.
-- Celkem 512 hotových ilustrací. Plně dokončeno 83 ze 168 obrazových sad, jedna sada (`IMG-aj-02`, 60 různých z přibližně 120 karet) je rozpracovaná a dokončit zbývá 85 sad. Fotografické sady C a historické doklady E se negenerují.
+- Celkem 593 hotových ilustrací. Plně dokončeno 88 ze 168 obrazových sad, jedna sada (`IMG-aj-02`, 60 různých z přibližně 120 karet) je rozpracovaná a dokončit zbývá 80 sad. Fotografické sady C a historické doklady E se negenerují.

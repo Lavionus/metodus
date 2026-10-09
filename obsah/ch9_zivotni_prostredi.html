@@ -14,10 +14,18 @@
     .uloha-text { max-width: 660px; font-size: 1.02rem; line-height: 1.62; }
     .uloha-text b { color: var(--accent); }
     .predmet { font-size: clamp(1.3rem, 5vw, 1.9rem); font-weight: 700; }
-    .lista { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; max-width: 780px;
-      color: var(--text-faint); font-size: 0.79rem; }
-    .lista span { background: var(--bg-control); border: 1px solid var(--border);
-      border-radius: 8px; padding: 5px 11px; }
+    .odpad-karta { width: min(230px, 66vw); margin: 4px auto 14px; overflow: hidden; }
+    .odpad-karta img { display: block; width: 100%; aspect-ratio: 1; object-fit: cover; }
+    .kontejnery { display: grid; grid-template-columns: repeat(6, minmax(92px, 1fr)); gap: 8px;
+      width: min(900px, calc(100% - 20px)); margin: 14px auto 8px; }
+    .kontejner { margin: 0; border: 1px solid var(--border); border-radius: 11px; overflow: hidden;
+      background: var(--bg-control); text-align: center; color: var(--text); }
+    .kontejner img { display: block; width: 100%; aspect-ratio: 1; object-fit: cover; }
+    .kontejner figcaption { padding: 5px 3px 7px; font-size: .72rem; line-height: 1.2; font-weight: 700; }
+    .misto-info { width: min(820px, calc(100% - 24px)); margin: 8px auto; text-align: center;
+      color: var(--text-faint); font-size: .78rem; line-height: 1.45; }
+    @media (max-width: 760px) { .kontejnery { grid-template-columns: repeat(3, minmax(88px, 1fr)); } }
+    @media (max-width: 390px) { .kontejnery { grid-template-columns: repeat(2, minmax(90px, 1fr)); } }
   </style>
 </head>
 <body>
@@ -38,7 +46,15 @@
     <span class="skore" id="skore"></span>
   </div>
 
-  <div class="lista"><span>žlutá – plasty</span><span>modrá – papír</span><span>zelená/bílá – sklo</span><span>hnědá – bioodpad</span><span>červená – elektro</span><span>sběrný dvůr – nebezpečný odpad</span></div>
+  <div class="kontejnery" aria-label="Přehled nádob na tříděný odpad">
+    <figure class="kontejner"><img src="img/ch/ch9-kontejner-plasty.webp" alt="Žlutá nádoba na plastové obaly." loading="lazy"><figcaption>žlutá · plasty</figcaption></figure>
+    <figure class="kontejner"><img src="img/ch/ch9-kontejner-papir.webp" alt="Modrá nádoba na papír a lepenku." loading="lazy"><figcaption>modrá · papír</figcaption></figure>
+    <figure class="kontejner"><img src="img/ch/ch9-kontejner-sklo.webp" alt="Zelená nádoba na barevné a směsné obalové sklo." loading="lazy"><figcaption>zelená · sklo</figcaption></figure>
+    <figure class="kontejner"><img src="img/ch/ch9-kontejner-kartony.webp" alt="Oranžová nádoba na nápojové kartony." loading="lazy"><figcaption>oranžová · kartony</figcaption></figure>
+    <figure class="kontejner"><img src="img/ch/ch9-kontejner-kovy.webp" alt="Šedá nádoba na kovové obaly." loading="lazy"><figcaption>šedá · kovy</figcaption></figure>
+    <figure class="kontejner"><img src="img/ch/ch9-kontejner-bio.webp" alt="Hnědá nádoba na bioodpad." loading="lazy"><figcaption>hnědá · bioodpad</figcaption></figure>
+  </div>
+  <p class="misto-info">Barva je pomůcka, ale rozhoduje nálepka na nádobě. Některé obce sbírají kovy či nápojové kartony společně s plasty. Baterie patří do sběrného boxu, léky do lékárny a elektro do místa zpětného odběru.</p>
 
   <p class="napoveda">Nejlepší odpad je ten, který <b>vůbec nevznikne</b>. Pak následuje opětovné použití, recyklace, energetické využití a až nakonec skládka. Nebezpečný odpad (baterie, barvy, léky, zářivky) nikdy nepatří do směsného koše.</p>
 
@@ -50,78 +66,38 @@ function odezvaEl() { const d = document.createElement('div'); d.className = 'od
 
 const SADY = {
   "kviz1": [
-    {
-      "q": "Kam patří PET lahev?",
-      "a": "do žlutého kontejneru na plasty",
-      "b": [
-        "do modrého",
-        "do směsného",
-        "do bioodpadu"
-      ]
-    },
-    {
-      "q": "Kam patří použitý papírový kapesník?",
-      "a": "do směsného odpadu",
-      "b": [
-        "do papíru",
-        "do plastů",
-        "do skla"
-      ]
-    },
-    {
-      "q": "Kam patří zbytky ovoce a zeleniny?",
-      "a": "do bioodpadu nebo na kompost",
-      "b": [
-        "do plastů",
-        "do skla",
-        "do nebezpečného odpadu"
-      ]
-    },
-    {
-      "q": "Kam patří vybité baterie?",
-      "a": "do sběrného boxu na baterie",
-      "b": [
-        "do směsného odpadu",
-        "do papíru",
-        "do bioodpadu"
-      ]
-    },
-    {
-      "q": "Kam patří rozbité zrcadlo?",
-      "a": "do směsného odpadu nebo sběrného dvora, ne do skla",
-      "b": [
-        "do zeleného kontejneru",
-        "do papíru",
-        "do plastů"
-      ]
-    },
-    {
-      "q": "Kam patří staré léky?",
-      "a": "do lékárny",
-      "b": [
-        "do směsného odpadu",
-        "do kanalizace",
-        "do bioodpadu"
-      ]
-    },
-    {
-      "q": "Proč se plasty před vhozením do kontejneru sešlapávají?",
-      "a": "zmenší se objem a odveze se jich víc najednou",
-      "b": [
-        "jinak se nerecyklují",
-        "kvůli barvě",
-        "kvůli hmotnosti"
-      ]
-    },
-    {
-      "q": "Kam patří kovová plechovka?",
-      "a": "do kontejneru na kovy (šedý), případně do žlutého tam, kde se sbírají společně",
-      "b": [
-        "do skla",
-        "do papíru",
-        "do bioodpadu"
-      ]
-    }
+    {"q":"Kam patří prázdná PET lahev?","a":"do nádoby označené PLASTY","b":["do papíru","do skla","do bioodpadu"],"img":"img/ch/ch9-derivaty-pet.webp","alt":"Prázdná PET lahev.","proc":"Sešlápnutá zabere méně místa."},
+    {"q":"Kam patří čistý kelímek od jogurtu?","a":"do nádoby označené PLASTY","b":["do papíru","do skla","do bioodpadu"],"img":"img/ch/ch9-odpad-kelimek.webp","alt":"Prázdný plastový kelímek s odděleným víčkem."},
+    {"q":"Kam patří prázdná plastová lahev od šamponu?","a":"do nádoby označené PLASTY","b":["do skla","do papíru","do bioodpadu"],"img":"img/ch/ch9-odpad-sampon.webp","alt":"Prázdná plastová lahev s pumpičkou."},
+    {"q":"Kam patří čistá plastová taška?","a":"do nádoby označené PLASTY","b":["do papíru","do skla","do bioodpadu"],"img":"img/ch/ch9-odpad-plastova-taska.webp","alt":"Zmačkaná průhledná plastová taška."},
+    {"q":"Kam patří prázdný plastový obal od pracího prostředku?","a":"do nádoby označené PLASTY","b":["do bioodpadu","do papíru","do skla"],"img":"img/ch/ch9-odpad-praci-prostredek.webp","alt":"Prázdný plastový obal s držadlem."},
+    {"q":"Kam patří malé čisté kusy obalového polystyrenu?","a":"do nádoby označené PLASTY","b":["do papíru","do skla","do bioodpadu"],"img":"img/ch/ch9-odpad-polystyren.webp","alt":"Kusy bílého pěnového polystyrenu."},
+    {"q":"Kam patří prázdný plastový obal od chipsů?","a":"do nádoby označené PLASTY","b":["do papíru","do kovů","do bioodpadu"],"img":"img/ch/ch9-odpad-obal-chipsy.webp","alt":"Prázdný zmačkaný sáček od chipsů.","proc":"Silně mastný či znečištěný obal patří do směsného odpadu."},
+    {"q":"Kam patří suché staré noviny?","a":"do nádoby označené PAPÍR","b":["do plastů","do skla","do bioodpadu"],"img":"img/ch/ch9-odpad-noviny.webp","alt":"Složené staré noviny."},
+    {"q":"Kam patří čistá rozložená kartonová krabice?","a":"do nádoby označené PAPÍR","b":["do plastů","do skla","do bioodpadu"],"img":"img/ch/ch9-odpad-krabice.webp","alt":"Rozložená krabice z vlnité lepenky."},
+    {"q":"Kam patří čisté listy kancelářského papíru?","a":"do nádoby označené PAPÍR","b":["do plastů","do skla","do bioodpadu"],"img":"img/ch/ch9-odpad-papir.webp","alt":"Několik použitých listů papíru."},
+    {"q":"Kam patří čistá papírová nákupní taška?","a":"do nádoby označené PAPÍR","b":["do plastů","do skla","do bioodpadu"],"img":"img/ch/ch9-odpad-papirova-taska.webp","alt":"Hnědá papírová nákupní taška."},
+    {"q":"Kam patří čisté papírové plato od vajec?","a":"do nádoby označené PAPÍR","b":["do plastů","do skla","do bioodpadu"],"img":"img/ch/ch9-odpad-plato-vajec.webp","alt":"Prázdné papírové plato na vejce."},
+    {"q":"Kam patří papírová rolička od toaletního papíru?","a":"do nádoby označené PAPÍR","b":["do plastů","do skla","do bioodpadu"],"img":"img/ch/ch9-odpad-rolicka.webp","alt":"Prázdná kartonová rolička."},
+    {"q":"Kam patří prázdná krabice od mléka?","a":"do nádoby označené NÁPOJOVÉ KARTONY","b":["do papíru vždy","do skla","do bioodpadu"],"img":"img/ch/ch9-odpad-napojovy-karton.webp","alt":"Prázdný nápojový karton s víčkem.","proc":"V některých obcích se sbírá společně s plasty či papírem; zkontroluj nálepku."},
+    {"q":"Kam patří prázdná čirá zavařovací sklenice?","a":"do nádoby označené SKLO","b":["do plastů","do papíru","do bioodpadu"],"img":"img/ch/ch9-odpad-sklenice.webp","alt":"Prázdná čirá zavařovací sklenice."},
+    {"q":"Kam patří prázdná zelená skleněná lahev?","a":"do nádoby na barevné nebo směsné SKLO","b":["do plastů","do papíru","do bioodpadu"],"img":"img/ch/ch9-odpad-lahev-zelena.webp","alt":"Prázdná zelená skleněná lahev."},
+    {"q":"Kam patří prázdná hnědá skleněná lahev?","a":"do nádoby na barevné nebo směsné SKLO","b":["do plastů","do papíru","do bioodpadu"],"img":"img/ch/ch9-odpad-lahev-hneda.webp","alt":"Prázdná hnědá skleněná lahev."},
+    {"q":"Kam patří prázdný skleněný flakon bez rozprašovače?","a":"do nádoby označené SKLO","b":["do plastů","do papíru","do bioodpadu"],"img":"img/ch/ch9-odpad-flakon.webp","alt":"Prázdný skleněný flakon."},
+    {"q":"Kam patří banánová slupka?","a":"do bioodpadu nebo na kompost","b":["do plastů","do skla","do papíru"],"img":"img/ch/ch9-odpad-banan.webp","alt":"Banánová slupka."},
+    {"q":"Kam patří ohryzek jablka?","a":"do bioodpadu nebo na kompost","b":["do plastů","do skla","do papíru"],"img":"img/ch/ch9-odpad-ohryzek.webp","alt":"Ohryzek červeného jablka."},
+    {"q":"Kam patří slupky z mrkve?","a":"do bioodpadu nebo na kompost","b":["do plastů","do skla","do papíru"],"img":"img/ch/ch9-odpad-slupky-mrkve.webp","alt":"Hromádka slupek z mrkve."},
+    {"q":"Kam patří kávová sedlina a běžný papírový čajový sáček?","a":"do bioodpadu nebo na kompost","b":["do plastů","do skla","do papíru"],"img":"img/ch/ch9-odpad-kava-caj.webp","alt":"Kávová sedlina a použitý čajový sáček.","proc":"Odstraň plastové či kovové části sáčku."},
+    {"q":"Kam patří skořápky od vajec?","a":"do bioodpadu nebo na kompost","b":["do plastů","do skla","do papíru"],"img":"img/ch/ch9-odpad-skorapky.webp","alt":"Rozbité skořápky od vajec."},
+    {"q":"Kam patří prázdná nápojová plechovka?","a":"do nádoby označené KOVY","b":["do skla","do papíru","do bioodpadu"],"img":"img/aj/aj7-mira-plechovka.webp","alt":"Prázdná kovová nápojová plechovka.","proc":"Někde se kovy sbírají společně s plasty; řiď se nálepkou."},
+    {"q":"Kam patří čistá prázdná konzerva?","a":"do nádoby označené KOVY","b":["do skla","do papíru","do bioodpadu"],"img":"img/ch/ch9-odpad-konzerva.webp","alt":"Prázdná kovová konzerva."},
+    {"q":"Kam patří čistý hliníkový alobal?","a":"do nádoby označené KOVY","b":["do papíru","do skla","do bioodpadu"],"img":"img/ch/ch9-odpad-alobal.webp","alt":"Zmačkaný čistý hliníkový alobal."},
+    {"q":"Kam patří kovová víčka a zátky?","a":"do nádoby označené KOVY","b":["do papíru","do skla","do bioodpadu"],"img":"img/ch/ch9-odpad-vicka.webp","alt":"Kovová víčka a zátky."},
+    {"q":"Kam patří vybitá baterie?","a":"do sběrného boxu na baterie","b":["do směsného odpadu","do papíru","do bioodpadu"],"img":"img/ch/ch9-odpad-baterie.webp","alt":"Použitá válcová baterie.","proc":"Baterie mohou obsahovat nebezpečné látky."},
+    {"q":"Kam patří vysloužilá LED žárovka?","a":"do místa zpětného odběru elektra","b":["do obalového skla","do papíru","do bioodpadu"],"img":"img/ch/ch9-odpad-zarovka.webp","alt":"Vysloužilá LED žárovka."},
+    {"q":"Kam patří nepoužité nebo prošlé léky?","a":"vrátit do lékárny","b":["do směsného odpadu","do kanalizace","do bioodpadu"],"img":"img/ch/ch9-odpad-leky.webp","alt":"Blistry a lahvička představující staré léky."},
+    {"q":"Kam patří čisté použitelné oblečení?","a":"k opětovnému použití nebo do nádoby na textil","b":["do papíru","do skla","do bioodpadu"],"img":"img/ch/ch9-odpad-textil.webp","alt":"Složené použité tričko.","proc":"Nejlepší je prodloužit život věci darováním či opravou."},
+    {"q":"Kam patří rozbité zrcadlo?","a":"do směsného odpadu nebo sběrného dvora, ne do obalového skla","b":["do nádoby na sklo","do papíru","do plastů"],"img":"img/ch/ch9-odpad-zrcadlo.webp","alt":"Střep z rozbitého zrcadla.","proc":"Zrcadlová vrstva mění vlastnosti materiálu."}
   ],
   "kviz2": [
     {
@@ -357,7 +333,8 @@ function kviz(klic) {
   const p = $('plocha');
   const u = Uloha.nahodne(SADY[klic]);
   p.innerHTML = `<div class="zadani uloha-text">${u.q}</div>`
-    + (u.p ? `<div class="karta"><div class="predmet">${u.p}</div></div>` : '');
+    + (u.img ? `<div class="karta odpad-karta"><img src="${u.img}" alt="${u.alt || ''}"></div>`
+      : (u.p ? `<div class="karta"><div class="predmet">${u.p}</div></div>` : ''));
   const odezva = odezvaEl();
   Uloha.vyber({
     kam: p, odezva,
