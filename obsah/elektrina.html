@@ -49,6 +49,29 @@ canvas{display:block;width:100%;height:100%;touch-action:none}
 .prepinac button+button{border-left:1px solid var(--border)}
 .prepinac button:hover{background:var(--bg-hover);color:var(--text)}
 .prepinac button.zap,.prepinac button.zap:hover{background:var(--accent);color: var(--na-akcentu, #fff)}
+.dilna{width:min(980px,calc(100% - 24px));max-height:calc(100vh - 24px);padding:0;
+  color:var(--text);background:var(--bg-elevated);border:1px solid var(--border-strong);
+  border-radius:14px;box-shadow:var(--shadow);overflow:auto}
+.dilna::backdrop{background:rgba(8,12,18,.68);backdrop-filter:blur(3px)}
+.dilna-hlava{position:sticky;top:0;z-index:2;display:flex;align-items:flex-start;gap:12px;
+  padding:14px 16px;background:var(--bg-elevated);border-bottom:1px solid var(--border)}
+.dilna-hlava h2{margin:0 0 3px;font-size:1.05rem}.dilna-hlava p{margin:0;color:var(--text-muted);font-size:.78rem}
+.dilna-zavri{margin-left:auto;flex:0 0 auto}.soucastky-grid{display:grid;
+  grid-template-columns:repeat(3,minmax(180px,1fr));gap:10px;padding:14px}
+.souc-karta{padding:0;overflow:hidden;text-align:left;background:var(--bg-panel);border:1px solid var(--border);
+  border-radius:11px;color:var(--text);min-width:0}
+.souc-karta:hover,.souc-karta:focus-visible{background:var(--bg-hover);color:var(--text);border-color:var(--accent)}
+.souc-vizual{position:relative;aspect-ratio:16/10;background:var(--bg-deep)}
+.souc-vizual img,.souc-znacka{position:absolute;inset:0;width:100%;height:100%}
+.souc-vizual img{object-fit:cover}.souc-znacka{display:none;place-items:center;padding:14px;color:var(--text)}
+.souc-znacka svg{width:100%;height:100%;max-height:118px;overflow:visible}
+.souc-karta[aria-pressed="true"] .souc-vizual img{display:none}
+.souc-karta[aria-pressed="true"] .souc-znacka{display:grid}
+.souc-popis{display:block;padding:9px 10px 10px}.souc-popis strong{display:block;font-size:.88rem}
+.souc-popis small{display:block;margin-top:3px;color:var(--text-muted);font-size:.7rem;line-height:1.35}
+.souc-tip{padding:0 16px 14px;color:var(--text-faint);font-size:.74rem;text-align:center}
+@media(max-width:700px){.soucastky-grid{grid-template-columns:repeat(2,minmax(130px,1fr));padding:10px}.dilna-hlava{padding:11px}.souc-popis small{font-size:.67rem}}
+@media(max-width:360px){.soucastky-grid{grid-template-columns:1fr}.souc-vizual{aspect-ratio:2/1}}
 </style>
 </head>
 <body>
@@ -61,8 +84,19 @@ canvas{display:block;width:100%;height:100%;touch-action:none}
     <button id="tabInd">🔄 Indukce</button>
     <button id="tabSpot">💡 Spotřeba a cena</button>
   </div>
+  <button id="btnSoucastky">🧰 Součástky</button>
   <button id="btnInfo">❓ Nápověda</button>
 </div>
+
+<dialog class="dilna" id="dilna" aria-labelledby="dilnaNadpis">
+  <div class="dilna-hlava">
+    <div><h2 id="dilnaNadpis">🧰 Od součástky ke značce</h2>
+      <p>Aktivuj kartu kliknutím nebo klávesou Enter a porovnej skutečný předmět s jeho značkou ve schématu.</p></div>
+    <button class="dilna-zavri" id="dilnaZavri" aria-label="Zavřít dílnu součástek">✕ Zavřít</button>
+  </div>
+  <div class="soucastky-grid" id="soucastkyGrid"></div>
+  <p class="souc-tip">Tip: ampérmetr se zapojuje do obvodu sériově, voltmetr paralelně ke měřené součástce. Kompas je měřicí pomůcka, nikoli součást obvodu.</p>
+</dialog>
 
 <div class="panel" id="panelOhm">
   <label>🔋 Napětí U <input type="range" id="u" min="1" max="24" step="0.5" value="9"><span class="hodnota" id="uV">9 V</span></label>
@@ -124,6 +158,37 @@ canvas{display:block;width:100%;height:100%;touch-action:none}
 const $=id=>document.getElementById(id);
 const canvas=$('c'), ctx=canvas.getContext('2d');
 const cz=(x,d=1)=>(Math.abs(x)<1e-9?0:x).toFixed(d).replace('.',',');
+
+const ZNAK_SVG=(obsah,extra='')=>`<svg viewBox="0 0 180 100" role="img" aria-hidden="true">
+  <g fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M8 50h35M137 50h35"/>${obsah}</g>${extra}</svg>`;
+const SOUCASTKY=[
+  {n:'Plochá baterie',img:'img/f/f8-soucastka-baterie.webp',alt:'Plochá baterie se dvěma mosaznými kontakty.',
+   p:'Zdroj napětí; delší čárka označuje kladný pól.',z:ZNAK_SVG('<path d="M43 22v56M61 34v32M75 22v56M93 34v32M107 22v56M125 34v32"/>')},
+  {n:'Žárovka',img:'img/f/f8-soucastka-zarovka.webp',alt:'Žárovka zašroubovaná v objímce.',
+   p:'Spotřebič, který mění elektrickou energii na světlo a teplo.',z:ZNAK_SVG('<circle cx="90" cy="50" r="32"/><path d="M68 28l44 44M112 28L68 72"/>')},
+  {n:'Spínač',img:'img/f/f8-soucastka-spinac.webp',alt:'Otevřený páčkový spínač.',
+   p:'Rozpojí nebo uzavře cestu elektrického proudu.',z:ZNAK_SVG('<circle cx="52" cy="50" r="5" fill="currentColor"/><circle cx="128" cy="50" r="5" fill="currentColor"/><path d="M52 50l62-30"/>')},
+  {n:'Rezistor',img:'img/f/f8-soucastka-rezistor.webp',alt:'Rezistor s barevnými proužky.',
+   p:'Omezuje proud; evropská značka je obdélník.',z:ZNAK_SVG('<rect x="43" y="32" width="94" height="36"/>')},
+  {n:'Ampérmetr',img:'img/f/f8-soucastka-ampermetr.webp',alt:'Analogový ampérmetr s písmenem A.',
+   p:'Měří proud a zapojuje se sériově.',z:ZNAK_SVG('<circle cx="90" cy="50" r="34"/>','<text x="90" y="62" text-anchor="middle" fill="currentColor" font-size="38" font-family="sans-serif" font-weight="700">A</text>')},
+  {n:'Voltmetr',img:'img/f/f8-soucastka-voltmetr.webp',alt:'Analogový voltmetr s písmenem V.',
+   p:'Měří napětí a zapojuje se paralelně.',z:ZNAK_SVG('<circle cx="90" cy="50" r="34"/>','<text x="90" y="62" text-anchor="middle" fill="currentColor" font-size="38" font-family="sans-serif" font-weight="700">V</text>')},
+  {n:'Pojistka',img:'img/f/f8-soucastka-pojistka.webp',alt:'Skleněná trubičková pojistka.',
+   p:'Při nebezpečně velkém proudu obvod přeruší.',z:ZNAK_SVG('<rect x="43" y="34" width="94" height="32"/><path d="M43 50h94"/>')},
+  {n:'Cívka',img:'img/f/f8-soucastka-civka.webp',alt:'Cívka z měděného drátu na duté trubici.',
+   p:'Proud v závitech vytváří magnetické pole.',z:ZNAK_SVG('<path d="M43 50c0-26 24-26 24 0s24 26 24 0 24-26 24 0 22 26 22 0"/>')},
+  {n:'Kompas',img:'img/f/f8-soucastka-kompas.webp',alt:'Kulatý kompas s červenou a tmavou střelkou.',
+   p:'Ukazuje směr magnetického pole; nemá značku obvodové součástky.',
+   z:`<svg viewBox="0 0 180 100" role="img" aria-hidden="true"><circle cx="90" cy="50" r="39" fill="none" stroke="currentColor" stroke-width="4"/><path d="M90 16l13 34-13 34-13-34z" fill="var(--accent)" stroke="currentColor" stroke-width="2"/><circle cx="90" cy="50" r="4" fill="currentColor"/></svg>`}
+];
+function vykresliSoucastky(){
+  $('soucastkyGrid').innerHTML=SOUCASTKY.map((s,i)=>`<button class="souc-karta" type="button" aria-pressed="false" data-souc="${i}" aria-label="${s.n}: zobrazit schématickou značku">
+    <span class="souc-vizual"><img src="${s.img}" alt="${s.alt}" loading="lazy"><span class="souc-znacka">${s.z}</span></span>
+    <span class="souc-popis"><strong>${s.n}</strong><small>${s.p}</small></span></button>`).join('');
+}
+vykresliSoucastky();
 
 let C={};
 function nactiBarvy(){
@@ -860,6 +925,15 @@ $('tabZapoj').onclick=()=>prepni('zapoj');
 $('tabMag').onclick=()=>prepni('mag');
 $('tabInd').onclick=()=>prepni('indukce');
 $('tabSpot').onclick=()=>prepni('spotreba');
+$('btnSoucastky').onclick=()=>{$('dilna').showModal();};
+$('dilnaZavri').onclick=()=>$('dilna').close();
+$('dilna').addEventListener('click',e=>{if(e.target===$('dilna')) $('dilna').close();});
+$('soucastkyGrid').addEventListener('click',e=>{
+  const karta=e.target.closest('.souc-karta'); if(!karta) return;
+  const znacka=karta.getAttribute('aria-pressed')!=='true';
+  karta.setAttribute('aria-pressed',String(znacka));
+  karta.setAttribute('aria-label',SOUCASTKY[+karta.dataset.souc].n+': '+(znacka?'zobrazit skutečnou součástku':'zobrazit schématickou značku'));
+});
 $('btnInfo').onclick=()=>$('infoBox').classList.toggle('skryto');
 $('zavriInfo').onclick=()=>$('infoBox').classList.add('skryto');
 

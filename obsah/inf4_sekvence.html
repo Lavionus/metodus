@@ -20,6 +20,9 @@
     .hriste .cil-zar { fill: none; stroke: var(--ok); stroke-width: 3; animation: cilPuls 1.8s ease-in-out infinite; }
     @keyframes cilPuls { 0%, 100% { opacity: 0.15; } 50% { opacity: 0.75; } }
     .hriste .znak { font-size: 32px; text-anchor: middle; dominant-baseline: central; pointer-events: none; }
+    .hriste .dlazdice-img { pointer-events: none; }
+    .hriste .sbirka.sebrano { opacity: 0; transform: scale(0.3); transform-box: fill-box;
+      transform-origin: center; transition: opacity .2s ease, transform .2s ease; }
     .hriste .stopa { fill: none; stroke: var(--accent); stroke-width: 5; stroke-linecap: round;
       stroke-linejoin: round; opacity: 0.45; stroke-dasharray: 2 10; }
     .hriste #robot { transition: transform 0.26s ease; }
@@ -96,7 +99,19 @@ let klavesnice = null;      // aktuální obsluha kláves, aby se nehromadila
 const SLOUPCU = 6, RADKU = 5, KROK = 60, OKRAJ = 12;
 const SMERY = { '⬆️': [0, -1], '⬇️': [0, 1], '⬅️': [-1, 0], '➡️': [1, 0] };
 const KLAVESY = { ArrowUp: '⬆️', ArrowDown: '⬇️', ArrowLeft: '⬅️', ArrowRight: '➡️' };
-const PREKAZKY_ZNAKY = ['🌳', '🪨', '🌵'];
+const SMER_OBRAZEK = {
+  '⬆️': 'img/inf/inf-robot-nahoru.webp', '⬇️': 'img/inf/inf-robot-dolu.webp',
+  '⬅️': 'img/inf/inf-robot-vlevo.webp', '➡️': 'img/inf/inf-robot-vpravo.webp'
+};
+const PREKAZKY = [
+  {typ:'strom', obrazek:'img/inf/inf-robot-strom.webp'},
+  {typ:'kámen', obrazek:'img/inf/inf-robot-kamen.webp'},
+  {typ:'voda', obrazek:'img/inf/inf-robot-voda.webp'}
+];
+const SBIRANE = [
+  {typ:'klíč', obrazek:'img/inf/inf-robot-klic.webp'},
+  {typ:'jablko', obrazek:'img/inf/inf-robot-jablko.webp'}
+];
 
 const stredX = s => OKRAJ + s * KROK + KROK / 2;
 const stredY = r => OKRAJ + r * KROK + KROK / 2;
@@ -113,17 +128,26 @@ function vykresliHriste(stav) {
       if (prekazka) tridy.push('prekazka');
       policka += `<rect class="${tridy.join(' ')}" rx="8"
         x="${OKRAJ + s * KROK + 2}" y="${OKRAJ + r * KROK + 2}" width="${KROK - 4}" height="${KROK - 4}"/>`;
-      if (prekazka) policka += `<text class="znak" x="${stredX(s)}" y="${stredY(r)}">${prekazka.znak || '🌳'}</text>`;
+      if (prekazka) policka += `<image class="dlazdice-img" href="${prekazka.obrazek}"
+        x="${OKRAJ + s * KROK + 6}" y="${OKRAJ + r * KROK + 6}" width="${KROK - 12}" height="${KROK - 12}"/>`;
     }
   }
+  const sbirka = stav.sbirka ? `<image class="dlazdice-img sbirka" id="sbirka" href="${stav.sbirka.obrazek}"
+    x="${OKRAJ + stav.sbirka.s * KROK + 8}" y="${OKRAJ + stav.sbirka.r * KROK + 8}"
+    width="${KROK - 16}" height="${KROK - 16}"><title>Bonus: ${stav.sbirka.typ}</title></image>` : '';
   return `<svg class="hriste" viewBox="0 0 ${OKRAJ * 2 + SLOUPCU * KROK} ${OKRAJ * 2 + RADKU * KROK}">
     ${policka}
     <rect class="cil-zar" rx="10" x="${OKRAJ + stav.cil.s * KROK - 2}" y="${OKRAJ + stav.cil.r * KROK - 2}"
       width="${KROK + 4}" height="${KROK + 4}"/>
-    <text class="znak" x="${stredX(stav.cil.s)}" y="${stredY(stav.cil.r)}">🏁</text>
+    <image class="dlazdice-img" href="img/inf/inf-robot-vlajka.webp"
+      x="${OKRAJ + stav.cil.s * KROK + 5}" y="${OKRAJ + stav.cil.r * KROK + 5}"
+      width="${KROK - 10}" height="${KROK - 10}"><title>Cíl</title></image>
+    ${sbirka}
     <path class="stopa" id="stopa" d=""/>
     <g id="robot" transform="translate(${stredX(stav.robot.s)}, ${stredY(stav.robot.r)})">
-      <text class="znak" x="0" y="0">🤖</text>
+      <image id="robotObrazek" class="dlazdice-img" href="${SMER_OBRAZEK['⬆️']}" x="-25" y="-25" width="50" height="50">
+        <title>Robot natočený nahoru</title>
+      </image>
     </g>
   </svg>`;
 }
@@ -139,11 +163,13 @@ function novyStav() {
       || prekazky.some(x => x.s === p.s && x.r === p.r);
     // spodní řadu a cílový sloupec necháme volné, ať vede aspoň jedna cesta
     if (!obsazeno && p.r !== start.r && p.s !== cil.s) {
-      p.znak = Uloha.nahodne(PREKAZKY_ZNAKY);
+      Object.assign(p, Uloha.nahodne(PREKAZKY));
       prekazky.push(p);
     }
   }
-  return { start, robot: { ...start }, cil, prekazky };
+  const predmet = Uloha.nahodne(SBIRANE);
+  const sbirka = {s:1, r:RADKU - 1, ...predmet};
+  return { start, robot: { ...start }, cil, prekazky, sbirka };
 }
 
 /* ---- Naveď robota ------------------------------------------------------------- */
@@ -152,7 +178,7 @@ function bludiste() {
   const stav = novyStav();
   const program = [];
   const nejkratsi = Math.abs(stav.cil.s - stav.start.s) + Math.abs(stav.cil.r - stav.start.r);
-  let chyboval = false, bezi = false, hotovo = false;
+  let chyboval = false, bezi = false, hotovo = false, sebral = false;
   let beh = null;                 // { i, poz } při krokování
 
   p.innerHTML = `<div class="zadani">Sestav program, který dovede robota do cíle 🏁</div>`;
@@ -173,7 +199,7 @@ function bludiste() {
 
   function prekresliInfo() {
     info.innerHTML = `Příkazů v programu: <b>${program.length}</b> · `
-      + `nejkratší cesta má <b>${nejkratsi}</b> kroků · kliknutím na příkaz ho smažeš`;
+      + `nejkratší cesta má <b>${nejkratsi}</b> kroků · bonus: <b>${sebral ? 'sebrán' : stav.sbirka.typ}</b> · kliknutím na příkaz ho smažeš`;
   }
 
   function prekresliProgram(indexBezi = -1) {
@@ -190,9 +216,19 @@ function bludiste() {
     prekresliInfo();
   }
 
-  function posunRobota(poz) {
+  function posunRobota(poz, smer = '⬆️') {
     const g = p.querySelector('#robot');
     if (g) g.setAttribute('transform', `translate(${stredX(poz.s)}, ${stredY(poz.r)})`);
+    const obrazek = p.querySelector('#robotObrazek');
+    if (obrazek) {
+      obrazek.setAttribute('href', SMER_OBRAZEK[smer] || SMER_OBRAZEK['⬆️']);
+      obrazek.querySelector('title').textContent = 'Robot natočený ' + ({'⬆️':'nahoru','⬇️':'dolů','⬅️':'vlevo','➡️':'vpravo'}[smer] || 'nahoru');
+    }
+    if (!sebral && stav.sbirka && poz.s === stav.sbirka.s && poz.r === stav.sbirka.r) {
+      sebral = true;
+      p.querySelector('#sbirka')?.classList.add('sebrano');
+      prekresliInfo();
+    }
   }
   function kresliStopu(body) {
     const stopa = p.querySelector('#stopa');
@@ -215,6 +251,8 @@ function bludiste() {
   }
   function resetBeh() {
     beh = null;
+    sebral = false;
+    p.querySelector('#sbirka')?.classList.remove('sebrano');
     posunRobota(stav.start);
     kresliStopu([]);
     prekresliProgram();
@@ -224,7 +262,8 @@ function bludiste() {
   function provedKrok() {
     if (!beh) beh = { i: 0, poz: { ...stav.start }, body: [{ ...stav.start }] };
     if (beh.i >= program.length) return 'konec';
-    const [ds, dr] = SMERY[program[beh.i]];
+    const smer = program[beh.i];
+    const [ds, dr] = SMERY[smer];
     const novy = { s: beh.poz.s + ds, r: beh.poz.r + dr };
     const mimo = novy.s < 0 || novy.s >= SLOUPCU || novy.r < 0 || novy.r >= RADKU;
     const naPrekazce = stav.prekazky.some(x => x.s === novy.s && x.r === novy.r);
@@ -240,7 +279,7 @@ function bludiste() {
     beh.poz = novy;
     beh.body.push({ ...novy });
     beh.i++;
-    posunRobota(beh.poz);
+    posunRobota(beh.poz, smer);
     kresliStopu(beh.body);
     prekresliProgram(beh.i - 1);
     return 'ok';
@@ -371,7 +410,7 @@ function najdiChybu() {
   const kde = Uloha.nahodneCislo(0, chybny.length - 1);
   chybny[kde] = chybny[kde] === '➡️' ? '⬅️' : '⬇️';
 
-  const stav = { start: { s: 0, r: RADKU - 1 }, robot: { s: 0, r: RADKU - 1 }, cil, prekazky: [] };
+  const stav = { start: { s: 0, r: RADKU - 1 }, robot: { s: 0, r: RADKU - 1 }, cil, prekazky: [], sbirka:null };
   p.innerHTML = `<div class="zadani">Robot má dojít do cíle. Ve kterém kroku je chyba?</div>
     ${vykresliHriste(stav)}`;
 
@@ -400,6 +439,8 @@ function najdiChybu() {
     if (stopa) stopa.setAttribute('d', body.map((b, i) => `${i ? 'L' : 'M'}${stredX(b.s)} ${stredY(b.r)}`).join(' '));
     const g = p.querySelector('#robot');
     if (g) g.setAttribute('transform', `translate(${stredX(cil.s)}, ${stredY(cil.r)})`);
+    const obrazek = p.querySelector('#robotObrazek');
+    if (obrazek) obrazek.setAttribute('href', SMER_OBRAZEK[spravny.at(-1)] || SMER_OBRAZEK['⬆️']);
     programEl.querySelectorAll('.prikaz')[kde].innerHTML =
       `<span class="poradi">${kde + 1}</span>${spravny[kde]}`;
   }

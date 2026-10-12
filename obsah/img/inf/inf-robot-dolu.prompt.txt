@@ -1,0 +1,3 @@
+IMG-inf-01 · inf-robot-dolu
+OpenAI image_gen · 2026-10-12
+Úplné zadání: inf-robot.prompt.txt, položka inf-robot-dolu.

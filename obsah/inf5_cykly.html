@@ -56,6 +56,10 @@ let rezim = 'zkrat';
 
 const SLOUPCU = 6, RADKU = 5, KROK = 58, OKRAJ = 8;
 const SMERY = { '⬆️': [0, -1], '⬇️': [0, 1], '⬅️': [-1, 0], '➡️': [1, 0] };
+const SMER_OBRAZEK = {
+  '⬆️': 'img/inf/inf-robot-nahoru.webp', '⬇️': 'img/inf/inf-robot-dolu.webp',
+  '⬅️': 'img/inf/inf-robot-vlevo.webp', '➡️': 'img/inf/inf-robot-vpravo.webp'
+};
 
 /* ---- Zkrať program cyklem ---------------------------------------------------------- */
 function zkrat() {
@@ -110,13 +114,15 @@ function kdeSkonci() {
         width="${KROK}" height="${KROK}"/>`;
     }
   }
-  const stred = poz2 => `x="${OKRAJ + poz2.s * KROK + KROK / 2}" y="${OKRAJ + poz2.r * KROK + KROK / 2 + 9}"`;
+  const robotX = OKRAJ + start.s * KROK + 5;
+  const robotY = OKRAJ + start.r * KROK + 5;
 
   p.innerHTML = `<div class="zadani">Kde robot skončí po provedení programu?</div>
     <div class="program-kod"><span class="klic">opakuj ${opakovani}×</span> [
       <span class="odsazeni">${telo.join(' ')}</span>]</div>
     <svg class="hriste" viewBox="0 0 ${OKRAJ * 2 + SLOUPCU * KROK} ${OKRAJ * 2 + RADKU * KROK}">
-      ${policka}<text ${stred(start)}>🤖</text>
+      ${policka}<image href="${SMER_OBRAZEK[telo[0]]}" x="${robotX}" y="${robotY}"
+        width="${KROK - 10}" height="${KROK - 10}"><title>Robot na startu</title></image>
     </svg>`;
 
   /* možnosti = správná pozice + tři jiné */

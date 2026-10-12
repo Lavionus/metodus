@@ -1931,9 +1931,9 @@ Společné pro fyziku: web má **výborné simulace** (páka, optika, elektřina
   - 🔗 Doporučené průchody pro 8. a 9. ročník a Ověř se.
   - 🧩 Obvodové schéma vedle „realistického“ zapojení (baterie, žárovky, dráty).
   - Spotřeba a cena → odkaz na `m9_financni` (rodinný rozpočet).
-- **Stav 23. 9. 2026:** 🧩 úkoly k modelu – 3 úkoly (napětí a proud, sériové a paralelní vyšroubování žárovky), 9 otázek včetně pole, indukce a spotřeby; Ověř se z otázek. Schéma vedle realistického zapojení a `IMG-f-10` zůstávají otevřené.
+- **Stav 12. 10. 2026:** 🧩 úkoly k modelu – 3 úkoly (napětí a proud, sériové a paralelní vyšroubování žárovky), 9 otázek včetně pole, indukce a spotřeby; Ověř se z otázek. `IMG-f-10` je zapojena jako přístupná dílna reálných součástek a schématických značek; samostatné dvojí schéma celého obvodu zůstává otevřené.
 - **Obrázky:**
-  - `IMG-f-10` 🟠 **B** · karty součástek realisticky (plochá baterie, žárovka v objímce, spínač, rezistor, ampérmetr, voltmetr, pojistka, cívka, kompas) — propojení se schématickými značkami
+  - `IMG-f-10` **B ✅** · devět realistických karet (plochá baterie, žárovka v objímce, spínač, rezistor, ampérmetr, voltmetr, pojistka, cívka, kompas) — hotovo a zapojeno do překlápěcích karet se schématickými značkami a funkcí
 
 #### Teplo a změny skupenství · [f8_teplo.html](obsah/f8_teplo.html)
 - **Zařazení:** Přírodní vědy › Fyzika · 8. r. · lekce A
@@ -2968,7 +2968,7 @@ Společné pro informatiku: 🔗 programování (4.–7. r.) má projít **jedn�
   - Při chybě se robot zastaví na prvním špatném kroku a žák opraví jediný příkaz.
   - Unplugged varianta: vytisknout mřížku pro hru ve dvojicích.
 - **Obrázky:**
-  - `IMG-inf-01` 🟠 **B** · postavička robota (4 natočení: nahoru, dolů, vlevo, vpravo), cíl (vlajka), překážky (kámen, strom, voda), sbíraný předmět (klíč, jablko) — sada dlaždic pro 🧩 robot, společná pro 4 lekce
+  - `IMG-inf-01` **B ✅** · čtyři natočení modrého robota, cíl, kámen, strom, voda, klíč a jablko — hotovo; dlaždice nahrazují emoji v `inf4_sekvence` a `inf5_cykly`, robot se v sekvencích natáčí podle příkazu
 
 #### Programování – cykly a větvení · [inf5_cykly.html](obsah/inf5_cykly.html)
 - **Zařazení:** Informatika › 5.–6. r. · lekce A
@@ -3355,7 +3355,7 @@ Při výrobě sady v jednom stylu zadávat všechny karty v jedné dávce se ste
 | `IMG-f-01` | B ✅ | 8 karet krychlí stejné velikosti z různých materiálů (dřevo, korek, led, hliník, železo, olovo, polystyren, sklo) — vzhled materiálu pro laboratoř; hotovo: zapojeno do výpočtů, vážení i porovnání | [f6_hustota](obsah/f6_hustota.html) |
 | `IMG-f-02` | C | 10 fotografií měřidel (pravítko, svinovací metr, posuvné měřidlo, kuchyňská váha, digitální váha, odměrný válec, teploměr lihový a digitální, stopky, siloměr) — poznávání měřidel | [f6_mereni](obsah/f6_mereni.html) |
 | `IMG-f-04` | C | 12 fotografií jednoduchých strojů v praxi (houpačka, nůžky, kleště, otvírák, kolečko, louskáček, pinzeta, stavební jeřáb s kladkostrojem, studna s rumpálem, převody jízdního kola, hodinový strojek, klika) — spojení modelu se světem | [paka](obsah/paka.html) |
-| `IMG-f-10` | B | karty součástek realisticky (plochá baterie, žárovka v objímce, spínač, rezistor, ampérmetr, voltmetr, pojistka, cívka, kompas) — propojení se schématickými značkami | [elektrina](obsah/elektrina.html) |
+| `IMG-f-10` | B ✅ | devět realistických karet součástek — zapojeno do přístupné dílny, kde se předmět překlápí na schématickou značku a vysvětlení funkce | [elektrina](obsah/elektrina.html) |
 | `IMG-f-12` | C | 6 fotografií optických jevů (lžíce „zlomená“ ve sklenici vody, duha, hranol s barevným spektrem, obraz v lžíci, lupa, odraz v klidném jezeře) | [optika](obsah/optika.html) |
 | `IMG-f-13` | C | fotografie 7 přístrojů (lupa, diaprojektor, Keplerův refraktor, divadelní kukátko, Cassegrainův teleskop, triedr, školní mikroskop) | [optika_soustava](obsah/optika_soustava.html) |
 | `IMG-ch-01` | A ✅ | školní laboratoř se šesti klikacími bezpečnostními chybami; hotovo | [ch8_bezpecnost](obsah/ch8_bezpecnost.html) |
@@ -3403,7 +3403,7 @@ Při výrobě sady v jednom stylu zadávat všechny karty v jedné dávce se ste
 | `IMG-d-21` | E | dobové fotografie (28. říjen 1918 v Praze, T. G. Masaryk, Baťovy závody, mobilizace 1938), plakát | [d9_csr](obsah/d9_csr.html) |
 | `IMG-d-22` | E | pečlivě vybrané dobové fotografie (Praha 15. 3. 1939, parašutisté operace Anthropoid, Lidice před a po, Terezín) a dětské kresby z Terezína (s licencí Židovského muzea) — **žádné generované obrazy** | [d9_druha_valka](obsah/d9_druha_valka.html) |
 | `IMG-d-23` | E | dobové fotografie (únor 1948, srpen 1968, Berlínská zeď, Václavské náměstí v listopadu 1989), prohlášení Charty 77 — sdílet s `IMG-prv-25` | [d9_studena_valka](obsah/d9_studena_valka.html) |
-| `IMG-inf-01` | B | postavička robota (4 natočení: nahoru, dolů, vlevo, vpravo), cíl (vlajka), překážky (kámen, strom, voda), sbíraný předmět (klíč, jablko) — sada dlaždic pro 🧩 robot, společná pro 4 lekce | [inf4_sekvence](obsah/inf4_sekvence.html) |
+| `IMG-inf-01` | B ✅ | čtyři natočení robota, cílová vlajka, kámen, strom, voda, klíč a jablko — zapojeno místo emoji v mřížkách sekvencí a cyklů; v sekvencích se robot natáčí a sbírá bonus | [inf4_sekvence](obsah/inf4_sekvence.html) |
 | `IMG-inf-02` | B | karty prvků sítě v jednotném stylu (notebook, telefon, Wi-Fi router, přepínač, serverovna, optický kabel, vysílač mobilní sítě, datové centrum) — uzly animace | [inf7_site](obsah/inf7_site.html) |
 | `IMG-inf-05` | B | rozložená počítačová skříň (základní deska, procesor, paměť RAM, disk, zdroj, grafická karta) — hotspoty součástí | [inf4_hardware](obsah/inf4_hardware.html) |
 
