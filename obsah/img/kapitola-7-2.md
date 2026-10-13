@@ -71,6 +71,10 @@ Nove obrazky se budou drzet stylu jiz vytvorenych.
 - Dokončena a zapojena sada `IMG-inf-04`: pracovní stůl s deseti přístupnými hotspoty počítačových zařízení.
 - Dokončena a zapojena sada `IMG-inf-06`: pouliční fotografie se čtyřmi klikacími stopami prozrazujícími soukromí.
 - Dokončena a zapojena sada `IMG-inf-01`: čtyři směry jednoho modrého robota, cílová vlajka, tři překážky a dva bonusové předměty. Dlaždice nahrazují emoji v sekvencích a cyklech; robot se při krokování natáčí podle právě provedeného příkazu.
+- Dokončena a zapojena sada `IMG-00-04`: dvanáct sjednocených medailonků pro milníky série, dokončení, aktivních dní a šíře procvičovaných předmětů; zamčené a získané stavy mají i slovní popis.
+- Vytvořena a zapojena sada `IMG-pr-17`: osm nekrvavých karet první pomoci podle ERC 2025 pro bezpečnost, reakci, dýchání, volání, stlačování hrudníku, polohu na boku, přímý tlak a chlazení popáleniny. Před definitivním uzavřením čeká na kontrolu zdravotníkem.
+- Dokončena a zapojena sada `IMG-inf-07`: šestnáct jednotných širokých ilustrací k celé prezentaci o AI, od principu učení přes agenty a rizika po praktický workshop; bez značek, vloženého textu a cizích licenčních podkladů.
+- Rozpracována sada `IMG-inf-08`: první dávka 10 různorodých jablek z plánovaných 44 trénovacích karet. Do mini-modelu bude zapojena až vyvážená sada jablek a hrušek.
 - Dokončena a zapojena sada `IMG-aj-03`: čtyři situace pozdravů podle denní doby.
 - Dokončena a zapojena sada `IMG-prv-02`: řez rodinným domem jako názorný podklad úloh o místnostech.
 - Dokončeny a zapojeny sady `IMG-prv-14`, `IMG-ch-01`, `IMG-ch-04`, `IMG-z-03` a `IMG-z-07`: půdní profil, bezpečnost laboratoře, úpravna vody, tok řeky a přírodní pásy Afriky.
@@ -85,4 +89,4 @@ Nove obrazky se budou drzet stylu jiz vytvorenych.
 - WebP: karty 768 × 768 px do 60 000 B, scény 1152 × 768 px do 200 000 B.
 - [Kontrolní galerie](kapitola-7-2.html), [strojový seznam a alt texty](kapitola-7-2.json).
 - Všechny karty jsou generované, bez vloženého textu, čísel a značek. Vizuálně zkontrolováno jako jedna galerie.
-- Celkem 612 hotových ilustrací. Plně dokončeno 90 ze 168 obrazových sad, jedna sada (`IMG-aj-02`, 60 různých z přibližně 120 karet) je rozpracovaná a dokončit zbývá 78 sad. Fotografické sady C a historické doklady E se negenerují.
+- Celkem 658 hotových ilustrací. Plně dokončeno 92 ze 168 obrazových sad; rozpracované jsou `IMG-aj-02` (60 různých z přibližně 120 karet), `IMG-pr-17` (8 karet zapojeno, čeká na odbornou kontrolu) a `IMG-inf-08` (10 z 44 karet). Dokončit zbývá 76 sad. Fotografické sady C a historické doklady E se negenerují.

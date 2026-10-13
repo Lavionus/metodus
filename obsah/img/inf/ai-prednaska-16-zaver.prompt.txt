@@ -1,0 +1,2 @@
+Společné zadání: ai-prednaska.prompt.txt
+Lidé sami volí cestu a drží směr, zatímco světelný nástroj AI pouze pomáhá cestu osvětlit.

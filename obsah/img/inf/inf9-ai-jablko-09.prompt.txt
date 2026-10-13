@@ -1,0 +1,2 @@
+Common specification: inf9-ai-ovoce.prompt.txt
+Variant: Russet brown-gold apple with rough skin and a squat round silhouette.

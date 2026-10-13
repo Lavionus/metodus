@@ -1,0 +1,2 @@
+Společné zadání: ai-prednaska.prompt.txt
+Člověk jako pilot ověřuje výstup; symboly možné chyby, zamčených soukromých dat a zaujatosti.

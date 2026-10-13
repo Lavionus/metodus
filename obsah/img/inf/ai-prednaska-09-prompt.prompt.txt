@@ -1,0 +1,2 @@
+Společné zadání: ai-prednaska.prompt.txt
+Tři prázdné díly představují kontext, úkol a formát, vstupují do modelu a tvoří uspořádaný výsledek.

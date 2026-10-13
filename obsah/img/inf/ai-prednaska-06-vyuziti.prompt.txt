@@ -1,0 +1,2 @@
+Společné zadání: ai-prednaska.prompt.txt
+Rodina u notebooku, kolem viněty vaření, vysvětlení zlomků, plánování cesty a formálního dopisu.

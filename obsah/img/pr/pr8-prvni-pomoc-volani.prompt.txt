@@ -1,0 +1,2 @@
+Společné zadání: pr8-prvni-pomoc.prompt.txt
+Scéna: pomocník volá pomoc telefonem na hlasitý odposlech a současně zapojuje druhého svědka; displej jen s obecným symbolem hovoru.

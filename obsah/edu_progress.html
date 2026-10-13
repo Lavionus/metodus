@@ -33,12 +33,14 @@ h1{font-size:1.35rem;margin-bottom:3px}
 .cal .d{aspect-ratio:1;border-radius:4px;background:var(--bg-control)}
 .cal .d.on{background:var(--ok)}
 .cal .d.rucne{background:var(--accent)}
-.badges{display:flex;flex-wrap:wrap;gap:10px}
+.badges{display:grid;grid-template-columns:repeat(auto-fit,minmax(112px,1fr));gap:10px}
 .badge{background:var(--bg-elevated);border:1px solid var(--border);border-radius:10px;padding:10px 12px;
-  text-align:center;min-width:88px;opacity:.35}
+  text-align:center;min-width:0;opacity:.38}
 .badge.earned{opacity:1;border-color:var(--accent)}
-.badge .ic{font-size:1.5rem}
-.badge .n{font-size:.7rem;color:var(--text-muted);margin-top:4px}
+.badge .ic img{display:block;width:72px;height:72px;object-fit:cover;border-radius:50%;margin:0 auto;filter:grayscale(.9)}
+.badge.earned .ic img{filter:none}
+.badge .n{font-size:.76rem;font-weight:650;color:var(--text);margin-top:7px}
+.badge .podminka{font-size:.66rem;line-height:1.3;color:var(--text-faint);margin-top:3px}
 .temata{display:flex;flex-direction:column;gap:6px}
 .tema{display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:8px 10px;border-radius:8px;background:var(--bg-elevated);
   border-left:3px solid var(--border);font-size:.88rem}
@@ -242,23 +244,32 @@ function renderTemata(denik){
     (silne.length?'<div class="vysvetleni" style="margin:6px 0 0">Další zaznamenaná témata:</div>'+silne.map(vypis).join(''):'');
 }
 
+function pocetSkupin(denik){
+  const skupiny=new Set();
+  Object.values(denik).forEach(den=>Object.keys(den).forEach(s=>skupiny.add(skupinaSouboru(s))));
+  return skupiny.size;
+}
 const ODZNAKY=[
-  {n:'První krok',ic:'🌱',cond:(dny)=>dny>=1},
-  {n:'3denní série',ic:'🔥',cond:(d,o,st)=>st>=3},
-  {n:'Týdenní série',ic:'⭐',cond:(d,o,st)=>st>=7},
-  {n:'Měsíční série',ic:'🏆',cond:(d,o,st)=>st>=30},
-  {n:'100 dokončení',ic:'📚',cond:(d,o)=>o>=100},
-  {n:'1000 dokončení',ic:'🎓',cond:(d,o)=>o>=1000},
-  {n:'Všestrannost',ic:'🌈',cond:(d,o,st,denik)=>{
-    const skupiny=new Set();
-    Object.values(denik).forEach(den=>Object.keys(den).forEach(s=>skupiny.add(skupinaSouboru(s))));
-    return skupiny.size>=5;
-  }},
+  {n:'První den',img:'prvni-den',popis:'1 aktivní den',cond:dny=>dny>=1},
+  {n:'Rozjezd',img:'serie-3',popis:'3 dny v řadě',cond:(d,o,st)=>st>=3},
+  {n:'Celý týden',img:'serie-7',popis:'7 dní v řadě',cond:(d,o,st)=>st>=7},
+  {n:'Měsíc v tempu',img:'serie-30',popis:'30 dní v řadě',cond:(d,o,st)=>st>=30},
+  {n:'Prvních 25',img:'ulohy-25',popis:'25 dokončení',cond:(d,o)=>o>=25},
+  {n:'Stovka',img:'ulohy-100',popis:'100 dokončení',cond:(d,o)=>o>=100},
+  {n:'Pětistovka',img:'ulohy-500',popis:'500 dokončení',cond:(d,o)=>o>=500},
+  {n:'Tisícovka',img:'ulohy-1000',popis:'1 000 dokončení',cond:(d,o)=>o>=1000},
+  {n:'Vytrvalost',img:'dny-10',popis:'10 aktivních dní',cond:dny=>dny>=10},
+  {n:'Čtyři týdny',img:'dny-28',popis:'28 aktivních dní',cond:dny=>dny>=28},
+  {n:'Všestrannost',img:'predmety-5',popis:'5 skupin předmětů',cond:(d,o,st,denik)=>pocetSkupin(denik)>=5},
+  {n:'Napříč Metodusem',img:'predmety-7',popis:'všech 7 skupin',cond:(d,o,st,denik)=>pocetSkupin(denik)>=7},
 ];
 function renderOdznaky(dny,odpovedi,serie,denik){
   $('badges').innerHTML=ODZNAKY.map(b=>{
     const ziskan=b.cond(dny,odpovedi,serie,denik);
-    return `<div class="badge ${ziskan?'earned':''}"><div class="ic">${b.ic}</div><div class="n">${b.n}</div></div>`;
+    const stav=ziskan?'získáno':'zatím nezískáno';
+    return `<div class="badge ${ziskan?'earned':''}" aria-label="${b.n}: ${stav}. Podmínka: ${b.popis}.">`+
+      `<div class="ic"><img src="img/00/progress-odznak-${b.img}.webp" alt="" width="72" height="72"></div>`+
+      `<div class="n">${b.n}</div><div class="podminka">${b.popis}</div></div>`;
   }).join('');
 }
 

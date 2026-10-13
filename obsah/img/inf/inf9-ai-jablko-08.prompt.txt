@@ -1,0 +1,2 @@
+Common specification: inf9-ai-ovoce.prompt.txt
+Variant: Large red apple with a broad golden patch, mildly asymmetrical, stem leaning right.

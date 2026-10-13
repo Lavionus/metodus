@@ -1,0 +1,2 @@
+Common specification: inf9-ai-ovoce.prompt.txt
+Variant: Pale-yellow apple with a pink blush on one side, slightly flattened and tilted forward.

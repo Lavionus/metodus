@@ -1,0 +1,6 @@
+Use case: scientific-educational
+Asset type: square image-classification training card for a classroom mini-model
+Primary request: exactly one whole apple, isolated and centered
+Style/medium: realistic botanical product illustration with natural texture, soft studio daylight
+Composition: entire fruit visible, stem visible, no cut fruit, no leaf unless specified, consistent pale warm-gray seamless background, subtle contact shadow, same camera distance across the dataset
+Constraints: scientifically recognizable apple silhouette; no text, label, logo, border, watermark, face, limbs, extra fruit, pear, plate, basket or scenery

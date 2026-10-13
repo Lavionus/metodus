@@ -2393,7 +2393,7 @@ Společné pro přírodopis: čtyři stránky (`bunka`, `pr7_rostliny`, `anatomi
   - Metronom 100–120/min k nácviku rytmu stlačování.
   - Odborná revize a datum; jeden zdroj pro `prv2_zdravi` a `ch8_bezpecnost`.
 - **Obrázky:**
-  - `IMG-pr-17` 🔴 **B** · 8 karet postupu (kontrola bezpečí, oslovení a zatřesení, záklon hlavy a kontrola dechu, volání 155, stlačování hrudníku — poloha rukou, zotavovací poloha, zástava krvácení tlakem, chlazení popáleniny) — věcné, bez krve; nechat zkontrolovat zdravotníkem
+  - `IMG-pr-17` 🔴 **B 🟡** · 8 karet postupu (kontrola bezpečí, reakce, dýchání, volání 155, stlačování hrudníku, zotavovací poloha, přímý tlak na krvácení, chlazení popáleniny) — vytvořeno a zapojeno podle ERC 2025, bez krve; před označením za definitivní nechat zkontrolovat zdravotníkem
 
 #### Biologie člověka · [anatomie.html](obsah/anatomie.html)
 - **Zařazení:** Přírodní vědy › Přírodopis · 8. r. · simulace E (atlas)
@@ -3142,7 +3142,7 @@ Společné pro informatiku: 🔗 programování (4.–7. r.) má projít **jedn�
   - 🔗 Převést do `prezentace.html` (stejný přehrávač slidů jako zbytek webu) a propojit s `inf9_ai_etika` jako výklad → procvičování.
   - Datum revize u nástrojů; aktivity místo konce „AI vás nahradí“: najdi chybu v odpovědi, ověř tvrzení.
 - **Obrázky:**
-  - `IMG-inf-07` ⚪ **A** · nahradit dnešní `Photo*.png` a `Cortana.png` jednotnými ilustracemi v A/B stylu (stejný počet slidů); stávající obrázky zkontrolovat z hlediska licence
+  - `IMG-inf-07` **A ✅** · 16 jednotných ilustrací bez textu a značek — hotovo; nahradily původní `Photo*.png` a `Cortana.png` na všech slidech bez změny ovládání prezentace
 
 #### Umělá inteligence a etika · [inf9_ai_etika.html](obsah/inf9_ai_etika.html)
 - **Zařazení:** Informatika › Bezpečnost a etika · 9. r. · lekce A
@@ -3154,7 +3154,7 @@ Společné pro informatiku: 🔗 programování (4.–7. r.) má projít **jedn�
   - Dilemata jako diskusní karty se zdůvodněním, bez jediné správné odpovědi (bez skóre).
   - Mini-model „naučím počítač třídit“ (obrázky jablek a hrušek, špatná data → špatný výsledek).
 - **Obrázky:**
-  - `IMG-inf-08` ⚪ **B** · 20 karet jablek a 20 karet hrušek různých odrůd, barev a úhlů + 4 „zavádějící“ (zelené jablko podobné hrušce) — data pro mini-model třídění
+  - `IMG-inf-08` 🟡 **B** · rozpracováno 10/44: prvních 10 různorodých karet jablek; mini-model bude zapojen až po vytvoření vyvážené sady jablek a hrušek
 
 ### 7.13 Další výuka (10 stránek)
 
@@ -3193,7 +3193,7 @@ Nástroje bez vazby na předmět. 🔗 Mají stejnou hlavičku (proužek „Nás
   - Doporučení „Zopakuj si“ s přímým odkazem do režimu, kde byly chyby.
   - Mapa dovedností po předmětech (ne jedno procento).
 - **Obrázky:**
-  - `IMG-00-04` ⚪ **B** · 12 odznaků v jednotném stylu (medailonky: první den, týden v řadě, 100 úloh, každý předmět…) — nahradit emoji
+  - `IMG-00-04` **B ✅** · 12 odznaků v jednotném stylu — hotovo; medailonky nahrazují emoji a rozlišují sérii, dokončení, aktivní dny i šíři procvičovaných předmětů
 
 #### Knihovna sad kartiček · [knihovna_sad.html](obsah/knihovna_sad.html)
 - **Zařazení:** Další výuka › Učení a opakování · nástroj F
@@ -3313,7 +3313,7 @@ Při výrobě sady v jednom stylu zadávat všechny karty v jedné dávce se ste
 | `IMG-pr-07` | B ✅ | 4 karty stavby těla ve stejném měřítku a pohledu shora (včela, křižák, rak, stonožka); hotovo a zapojeno | [pr6_clenovci](obsah/pr6_clenovci.html) |
 | `IMG-pr-05` | C | fotografie 40 zástupců pro poznávačky přírodopisu 6.–7. r. (bezobratlí, ryby, obojživelníci, plazi, ptáci, savci ČR); **společná sada** pro `pr6_bezobratli`, tuto stránku, `pr7_ptaci_savci`, `potravni_retezec` | [pr7_obratlovci_studenokrevni](obsah/pr7_obratlovci_studenokrevni.html) |
 | `IMG-pr-13` | B ✅ | 8 karet hlav ptáků se zobáky ve stejném pohledu z profilu a 6 karet nohou — zapojeno do srovnávacího atlasu a procvičování zobáků | [pr7_ptaci_savci](obsah/pr7_ptaci_savci.html) |
-| `IMG-pr-17` | B | 8 karet postupu (kontrola bezpečí, oslovení a zatřesení, záklon hlavy a kontrola dechu, volání 155, stlačování hrudníku — poloha rukou, zotavovací poloha, zástava krvácení tlakem, chlazení popáleniny) — věcné, bez krve; nechat zkontrolovat zdravotníkem | [pr8_prvni_pomoc](obsah/pr8_prvni_pomoc.html) |
+| `IMG-pr-17` | B 🟡 | 8 karet postupu vytvořeno a zapojeno podle ERC 2025; před definitivním uzavřením zbývá odborná kontrola zdravotníkem | [pr8_prvni_pomoc](obsah/pr8_prvni_pomoc.html) |
 | `IMG-inf-04` | A ✅ | pracovní stůl s počítačem a deseti zařízeními; hotovo s přístupnými hotspoty | [inf4_hardware](obsah/inf4_hardware.html) |
 | `IMG-inf-06` | A ✅ | „fotka z telefonu“ se školákem, domem, ulicí a zastávkou; hotovo se čtyřmi hotspoty soukromí | [inf6_digitalni_stopa](obsah/inf6_digitalni_stopa.html) |
 
@@ -3468,10 +3468,10 @@ Při výrobě sady v jednom stylu zadávat všechny karty v jedné dávce se ste
 | `IMG-d-11` | A | rekonstrukce hradiště (Mikulčice) — sdílet s `IMG-prv-21` | [d7_rany_stredovek](obsah/d7_rany_stredovek.html) |
 | `IMG-d-19` | C | fotografie budov Evropského parlamentu (Štrasburk), Evropské komise (Brusel), Soudního dvora (Lucemburk) | [eu_instituce](obsah/eu_instituce.html) |
 | `IMG-inf-03` | A | jedna fotografie podobného stylu (krajina) jako vzor pro ztrátovou kompresi — lze použít `ekologie-krajina-ilustrace` | [inf7_sifrovani](obsah/inf7_sifrovani.html) |
-| `IMG-inf-07` | A | nahradit dnešní `Photo*.png` a `Cortana.png` jednotnými ilustracemi v A/B stylu (stejný počet slidů); stávající obrázky zkontrolovat z hlediska licence | [AI_prednaska](obsah/AI_prednaska.html) |
-| `IMG-inf-08` | B | 20 karet jablek a 20 karet hrušek různých odrůd, barev a úhlů + 4 „zavádějící“ (zelené jablko podobné hrušce) — data pro mini-model třídění | [inf9_ai_etika](obsah/inf9_ai_etika.html) |
+| `IMG-inf-07` | A ✅ | 16 jednotných ilustrací bez textu a značek zapojeno na všech slidech místo původních `Photo*.png` a `Cortana.png` | [AI_prednaska](obsah/AI_prednaska.html) |
+| `IMG-inf-08` | B 🟡 | Rozpracováno 10/44: prvních 10 různorodých karet jablek; mini-model bude zapojen až po vytvoření vyvážené sady jablek a hrušek | [inf9_ai_etika](obsah/inf9_ai_etika.html) |
 | `IMG-00-03` | B | dvě ruce na klávesnici ve výchozí poloze (prsty na ASDF a JKL) shora — ukázka správného držení | [typing_trainer](obsah/typing_trainer.html) |
-| `IMG-00-04` | B | 12 odznaků v jednotném stylu (medailonky: první den, týden v řadě, 100 úloh, každý předmět…) — nahradit emoji | [edu_progress](obsah/edu_progress.html) |
+| `IMG-00-04` | B ✅ | 12 odznaků v jednotném stylu — zapojeno místo emoji; odemykají se za série, počty dokončení, aktivní dny a šíři předmětů | [edu_progress](obsah/edu_progress.html) |
 | `IMG-00-05` | B ✅ | titulní strana a tiráž fiktivní knihy (autor, název, nakladatel, rok, ISBN, vydání) bez skutečných značek — 7 přístupných hotspotů pro výuku citování; text kreslí web | [citation_generator](obsah/citation_generator.html) |
 
 

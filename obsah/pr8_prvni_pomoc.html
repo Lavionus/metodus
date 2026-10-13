@@ -26,6 +26,8 @@
     .kroky button.hotovy { background: var(--accent-soft); border-color: var(--accent); opacity: 0.7; }
     .kroky button.spatne { background: var(--danger); border-color: var(--danger); color: var(--na-akcentu, #fff); }
     .situace { font-size: 1.15rem; font-weight: 700; max-width: 600px; }
+    .karta-prvni-pomoc { width: min(100%, 360px); aspect-ratio: 1; object-fit: cover; border-radius: 14px;
+      border: 1px solid var(--border); box-shadow: 0 5px 18px #0002; }
     .lista { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; max-width: 740px;
       color: var(--text-faint); font-size: 0.8rem; }
     .lista span { background: var(--bg-control); border: 1px solid var(--border); border-radius: 8px; padding: 5px 11px; }
@@ -112,11 +114,14 @@ function tisnova() {
 
 const SITUACE = [
   { s: 'Kamarád má hluboce pořezanou ruku a silně krvácí.',
-    a: 'přiložit tlakový obvaz a přivolat záchrannou službu', b: ['omýt ránu v potoce', 'ránu vysušit fénem', 'dát ruku do teplé vody'] },
+    a: 'přitlačit čisté krytí přímo na ránu a přivolat záchrannou službu', b: ['omýt ránu v potoce', 'ránu vysušit fénem', 'dát ruku do teplé vody'],
+    img: 'krvaceni', alt: 'Pomocník v rukavicích tlačí čisté krytí na poraněné předloktí.' },
   { s: 'Někdo si opařil ruku horkou vodou.',
-    a: 'chladit tekoucí vlažnou vodou nejméně 10 minut', b: ['potřít máslem', 'propíchnout puchýře', 'zabalit do deky a zahřát'] },
+    a: 'chladit popáleninu tekoucí chladnou vodou 20 minut', b: ['potřít máslem', 'propíchnout puchýře', 'zabalit do deky a zahřát'],
+    img: 'popalenina', alt: 'Zarudlé předloktí se chladí proudem vody z kohoutku.' },
   { s: 'Člověk leží v bezvědomí, ale normálně dýchá.',
-    a: 'uložit do stabilizované polohy na boku a volat 155', b: ['posadit ho', 'dát mu napít', 'zahájit stlačování hrudníku'] },
+    a: 'pokud není podezření na úraz, uložit ho na bok, volat 155 a sledovat dýchání', b: ['posadit ho', 'dát mu napít', 'zahájit stlačování hrudníku'],
+    img: 'poloha', alt: 'Normálně dýchající člověk je uložený ve stabilní poloze na boku.' },
   { s: 'Kamarádka má podezření na zlomeninu nohy.',
     a: 'znehybnit končetinu v poloze, v jaké je, a volat pomoc', b: ['zkusit kost narovnat', 'nechat ji chodit', 'natáhnout nohu silou'] },
   { s: 'Někdo se dusí soustem a nemůže mluvit.',
@@ -133,7 +138,8 @@ const SITUACE = [
 function situace() {
   const p = $('plocha');
   const u = Uloha.nahodne(SITUACE);
-  p.innerHTML = `<div class="zadani uloha-text">${u.s}<br><b>Co uděláš?</b></div>`;
+  p.innerHTML = `${u.img ? `<img class="karta-prvni-pomoc" src="img/pr/pr8-prvni-pomoc-${u.img}.webp" alt="${u.alt}" width="768" height="768">` : ''}
+    <div class="zadani uloha-text">${u.s}<br><b>Co uděláš?</b></div>`;
   const odezva = odezvaEl();
   Uloha.vyber({
     kam: p, odezva,
@@ -148,12 +154,12 @@ function situace() {
 }
 
 const POSTUP = [
-  { t: 'zkontroluj bezpečnost místa', info: 'nesmíš se sám stát dalším zraněným' },
-  { t: 'zjisti, jestli postižený reaguje', info: 'oslov ho a jemně zatřes ramenem' },
-  { t: 'zprůchodni dýchací cesty a zjisti dýchání', info: 'záklon hlavy, sleduj hrudník asi 10 sekund' },
-  { t: 'zavolej 155 (nebo 112)', info: 'nahlas, co se stalo a kde jsi' },
-  { t: 'poskytni první pomoc podle stavu', info: 'stabilizovaná poloha, nebo resuscitace' },
-  { t: 'zůstaň u postiženého do příjezdu záchranky', info: 'sleduj jeho stav a udržuj ho v teple' },
+  { t: 'zkontroluj bezpečnost místa', info: 'nesmíš se sám stát dalším zraněným', img: 'bezpecnost', alt: 'Pomocník se před přiblížením rozhlíží po nebezpečí.' },
+  { t: 'zjisti, jestli postižený reaguje', info: 'hlasitě ho oslov a jemně zatřes rameny', img: 'reakce', alt: 'Pomocník hlasitě oslovuje člověka a kontroluje jeho reakci dotykem ramen.' },
+  { t: 'zprůchodni dýchací cesty a zjisti dýchání', info: 'zakloň hlavu, zvedni bradu a nejvýše 10 sekund sleduj normální dýchání', img: 'dychani', alt: 'Pomocník po záklonu hlavy sleduje dýchání člověka.' },
+  { t: 'zavolej 155 (nebo 112)', info: 'zapni hlasitý odposlech a řiď se pokyny operátora', img: 'volani', alt: 'Pomocník telefonuje na hlasitý odposlech a zapojuje dalšího svědka.' },
+  { t: 'poskytni první pomoc podle stavu', info: 'při nenormálním dýchání ihned zahaj stlačování hrudníku', img: 'stlacovani', alt: 'Pomocnice správně stlačuje hrudník dospělého na pevné podložce.' },
+  { t: 'zůstaň u postiženého do příjezdu záchranky', info: 'sleduj jeho stav a řiď se pokyny operátora', img: 'poloha', alt: 'Pomocnice sleduje dýchání člověka uloženého na boku.' },
 ];
 function postup() {
   const p = $('plocha');
@@ -162,7 +168,8 @@ function postup() {
   let chyboval = false, hotovo = false;
 
   p.innerHTML = `<div class="zadani uloha-text">Seřaď postup první pomoci –
-    klepej na kroky v pořadí, jak je uděláš.</div>`;
+    klepej na kroky v pořadí, jak je uděláš.</div>
+    <img class="karta-prvni-pomoc" id="obrazekPostupu" src="img/pr/pr8-prvni-pomoc-${POSTUP[0].img}.webp" alt="${POSTUP[0].alt}" width="768" height="768">`;
   const box = document.createElement('div');
   box.className = 'kroky';
   const odezva = odezvaEl();
@@ -185,6 +192,8 @@ function postup() {
       b.disabled = true;
       odezva.className = 'odezva ok';
       odezva.textContent = `${hotove.length}. ${k.t} – ${k.info}`;
+      const dalsi=POSTUP[hotove.length];
+      if(dalsi){$('obrazekPostupu').src=`img/pr/pr8-prvni-pomoc-${dalsi.img}.webp`;$('obrazekPostupu').alt=dalsi.alt;}
       if (hotove.length === POSTUP.length) {
         hotovo = true;
         odezva.textContent = '✅ Celý postup první pomoci je ve správném pořadí!';
@@ -211,7 +220,8 @@ const RESUSCITACE = [
 function resuscitace() {
   const p = $('plocha');
   const u = Uloha.nahodne(RESUSCITACE);
-  p.innerHTML = `<div class="zadani uloha-text">${u.q}</div>`;
+  p.innerHTML = `<img class="karta-prvni-pomoc" src="img/pr/pr8-prvni-pomoc-stlacovani.webp" alt="Pomocnice správně stlačuje hrudník dospělého na pevné podložce." width="768" height="768">
+    <div class="zadani uloha-text">${u.q}</div>`;
   const odezva = odezvaEl();
   Uloha.vyber({
     kam: p, odezva,

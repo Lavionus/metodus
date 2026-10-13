@@ -1,0 +1,2 @@
+Společné zadání: ai-prednaska.prompt.txt
+Čtyři obecné pracovní stanice pro konverzaci, tvorbu obrazů, produktivitu a programování.

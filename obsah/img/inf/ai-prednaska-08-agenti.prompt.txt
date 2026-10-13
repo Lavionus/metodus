@@ -1,0 +1,2 @@
+Společné zadání: ai-prednaska.prompt.txt
+Rozdělená scéna: chatbot dává jedinou odpověď, agent propojuje mapu, kalendář, hledání a zprávu k cíli.

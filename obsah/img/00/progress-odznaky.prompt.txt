@@ -1,0 +1,20 @@
+Sada: IMG-00-04 — studijní odznaky
+Datum: 2026-10-12
+Nástroj: OpenAI image_gen
+
+Společné zadání:
+Use case: stylized-concept. Asset type: square achievement badge for a Czech educational progress dashboard. Scene/backdrop: softly textured warm cream paper. Style/medium: polished hand-painted watercolor and colored-pencil enamel medallion, tactile metal rim, elegant school-library aesthetic, consistent family of badges. Composition/framing: one centered circular medallion seen straight-on, complete badge visible, bold simple emblem readable at 72 pixels, gentle shadow. Constraints: no words, no letters, no digits, no numerals, no logos, no watermark, no people, no hands, no extra objects outside the medallion.
+
+Jednotlivé motivy:
+- progress-odznak-prvni-den: a warm bronze medallion with a fresh green seedling emerging from dark soil, symbol of the first learning day
+- progress-odznak-serie-3: a copper medallion with three distinct rising flame shapes, symbol of a short learning streak
+- progress-odznak-serie-7: a silver medallion with a luminous seven-point star above a subtle continuous ribbon, symbol of a week-long streak
+- progress-odznak-serie-30: a gold medallion with a laurel wreath and a small classic trophy cup, symbol of a month-long streak
+- progress-odznak-ulohy-25: a bronze medallion with a bold green check mark over a small stack of completed task cards, symbol of early completed exercises
+- progress-odznak-ulohy-100: a deep blue enamel medallion with a neat stack of three closed books and one gold bookmark, symbol of many completed exercises
+- progress-odznak-ulohy-500: a teal enamel medallion with a small library bookshelf full of colorful book spines, symbol of hundreds of completed exercises
+- progress-odznak-ulohy-1000: a royal purple enamel medallion with a graduation cap and a tiny gold spark, symbol of a major completion milestone
+- progress-odznak-dny-10: a green medallion with a small calendar page represented only by a grid of colored dots and a single leaf, symbol of ten active study days
+- progress-odznak-dny-28: a midnight-blue medallion with a circular calendar wreath made from many small glowing dots, symbol of sustained study across many days
+- progress-odznak-predmety-5: a bright enamel medallion with five clearly separated colored rays forming a rainbow fan, symbol of learning across several subject groups
+- progress-odznak-predmety-7: a prestigious gold-rimmed medallion with a seven-segment multicolored compass rose, symbol of learning across every subject group

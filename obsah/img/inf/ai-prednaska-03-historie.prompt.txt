@@ -1,0 +1,2 @@
+Společné zadání: ai-prednaska.prompt.txt
+Vývojová cesta od raného počítače přes šachy, hlasového asistenta a Go k moderní generativní síti.

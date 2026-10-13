@@ -1,0 +1,2 @@
+Common specification: inf9-ai-ovoce.prompt.txt
+Variant: Green apple with a red blush and one healthy leaf, three-quarter view from slightly above.

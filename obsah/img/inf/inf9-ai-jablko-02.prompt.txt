@@ -1,0 +1,2 @@
+Common specification: inf9-ai-ovoce.prompt.txt
+Variant: Yellow-green Golden Delicious-like elongated apple, fine freckles, upright view.
