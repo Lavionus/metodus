@@ -1,0 +1,2 @@
+Common specification: inf9-ai-ovoce.prompt.txt
+Variant: Green-and-yellow apple with a broad red cheek on one side, irregular natural silhouette, viewed slightly from above.

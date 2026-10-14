@@ -1,0 +1,2 @@
+Common specification: inf9-ai-ovoce.prompt.txt
+Variant: Very small dark-red crabapple-like fruit, clearly an apple, long stem and one small leaf.

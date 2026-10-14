@@ -1,0 +1,2 @@
+Common specification: inf9-ai-ovoce.prompt.txt
+Variant: Warm orange-red apple with irregular yellow vertical stripes, tall conical silhouette, three-quarter view.

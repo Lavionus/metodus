@@ -3154,7 +3154,7 @@ Společné pro informatiku: 🔗 programování (4.–7. r.) má projít **jedn�
   - Dilemata jako diskusní karty se zdůvodněním, bez jediné správné odpovědi (bez skóre).
   - Mini-model „naučím počítač třídit“ (obrázky jablek a hrušek, špatná data → špatný výsledek).
 - **Obrázky:**
-  - `IMG-inf-08` 🟡 **B** · rozpracováno 10/44: prvních 10 různorodých karet jablek; mini-model bude zapojen až po vytvoření vyvážené sady jablek a hrušek
+  - `IMG-inf-08` 🟡 **B** · rozpracováno 20/44: hotových je všech 20 různorodých karet jablek; mini-model bude zapojen až po vytvoření vyvážené sady jablek a hrušek
 
 ### 7.13 Další výuka (10 stránek)
 
@@ -3469,7 +3469,7 @@ Při výrobě sady v jednom stylu zadávat všechny karty v jedné dávce se ste
 | `IMG-d-19` | C | fotografie budov Evropského parlamentu (Štrasburk), Evropské komise (Brusel), Soudního dvora (Lucemburk) | [eu_instituce](obsah/eu_instituce.html) |
 | `IMG-inf-03` | A | jedna fotografie podobného stylu (krajina) jako vzor pro ztrátovou kompresi — lze použít `ekologie-krajina-ilustrace` | [inf7_sifrovani](obsah/inf7_sifrovani.html) |
 | `IMG-inf-07` | A ✅ | 16 jednotných ilustrací bez textu a značek zapojeno na všech slidech místo původních `Photo*.png` a `Cortana.png` | [AI_prednaska](obsah/AI_prednaska.html) |
-| `IMG-inf-08` | B 🟡 | Rozpracováno 10/44: prvních 10 různorodých karet jablek; mini-model bude zapojen až po vytvoření vyvážené sady jablek a hrušek | [inf9_ai_etika](obsah/inf9_ai_etika.html) |
+| `IMG-inf-08` | B 🟡 | Rozpracováno 20/44: hotových je všech 20 různorodých karet jablek; mini-model bude zapojen až po vytvoření vyvážené sady jablek a hrušek | [inf9_ai_etika](obsah/inf9_ai_etika.html) |
 | `IMG-00-03` | B | dvě ruce na klávesnici ve výchozí poloze (prsty na ASDF a JKL) shora — ukázka správného držení | [typing_trainer](obsah/typing_trainer.html) |
 | `IMG-00-04` | B ✅ | 12 odznaků v jednotném stylu — zapojeno místo emoji; odemykají se za série, počty dokončení, aktivní dny a šíři předmětů | [edu_progress](obsah/edu_progress.html) |
 | `IMG-00-05` | B ✅ | titulní strana a tiráž fiktivní knihy (autor, název, nakladatel, rok, ISBN, vydání) bez skutečných značek — 7 přístupných hotspotů pro výuku citování; text kreslí web | [citation_generator](obsah/citation_generator.html) |
