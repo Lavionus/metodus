@@ -1,0 +1,2 @@
+Common specification: inf9-ai-ovoce.prompt.txt
+Variant: Golden-yellow ripe pear with tiny brown freckles, plump base and gently curved neck.

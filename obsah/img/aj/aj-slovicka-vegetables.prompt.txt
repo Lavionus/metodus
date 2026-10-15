@@ -1,0 +1,7 @@
+IMG-aj-02 · vegetables
+
+Use case: scientific-educational. Asset type: square vocabulary flashcard image for primary and lower-secondary language learning. Friendly realistic watercolor illustration with soft natural texture on a clean warm off-white paper background and subtle grounding shadow. One compact clearly recognizable group centered, entirely visible, generous margin. No text, letters, numbers, logo, brand, border, watermark, face, limbs, unrelated props or busy scenery. Subject: compact group of vegetables consisting of a carrot, red pepper, broccoli and pea pod.
+
+Nástroj: OpenAI image_gen
+Datum: 2026-10-14
+Výstup: aj-slovicka-vegetables.png, aj-slovicka-vegetables.webp

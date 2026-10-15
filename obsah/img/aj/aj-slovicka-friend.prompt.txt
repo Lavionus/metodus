@@ -1,0 +1,7 @@
+IMG-aj-02 · friend
+
+Use case: scientific-educational. Square vocabulary flashcard for language learning. Friendly realistic watercolor and gouache, delicate contours, warm ivory paper, subtle grounding shadow. Centered subjects visible from head to waist with generous margin. No text, logo, border, watermark or unrelated props. Subject: two school-age friends standing side by side with a natural friendly gesture, diverse appearance, no romantic cues.
+
+Nástroj: OpenAI image_gen
+Datum: 2026-10-15
+Výstup: aj-slovicka-friend.png, aj-slovicka-friend.webp

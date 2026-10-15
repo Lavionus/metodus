@@ -1,0 +1,7 @@
+IMG-aj-02 · wardrobe
+
+Use case: scientific-educational. Square vocabulary flashcard for language learning. Friendly realistic watercolor and gouache with delicate contours on warm ivory paper and a subtle grounding shadow. Exactly one centered household object, fully visible with generous margin. No readable text, logo, brand, border, watermark, people or unrelated props. Subject: a freestanding two-door wooden clothes wardrobe with closed doors.
+
+Nástroj: OpenAI image_gen
+Datum: 2026-10-15
+Výstup: aj-slovicka-wardrobe.png, aj-slovicka-wardrobe.webp

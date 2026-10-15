@@ -1,0 +1,7 @@
+IMG-aj-02 · giraffe
+
+Use case: scientific-educational. Square vocabulary flashcard for language learning. Friendly realistic watercolor and gouache with delicate contours on warm ivory paper and subtle grounding shadow. Exactly one centered subject, fully visible with generous margin. No text, logo, brand, border, watermark or unrelated props. Subject: a calm adult giraffe standing, full body visible.
+
+Nástroj: OpenAI image_gen
+Datum: 2026-10-15
+Výstup: aj-slovicka-giraffe.png, aj-slovicka-giraffe.webp

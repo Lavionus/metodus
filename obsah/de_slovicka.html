@@ -90,10 +90,12 @@ const SLOVA = [
   ['die','Farbe','🎨','barva','ostatni'], ['die','Straße','🛣️','ulice','ostatni'], ['das','Auto','🚗','auto','ostatni'],
 ];
 
-const OBRAZKY_DOMOV = {
+const OBRAZKY = {
   dům: 'img/aj/aj-slovicka-house.webp', byt: 'img/aj/aj-slovicka-apartment.webp', pokoj: 'img/aj/aj-slovicka-room.webp',
   kuchyně: 'img/aj/aj-slovicka-kitchen.webp', postel: 'img/aj/aj-slovicka-bed.webp', stůl: 'img/aj/aj-slovicka-table.webp',
   židle: 'img/aj/aj-slovicka-chair.webp', okno: 'img/aj/aj-slovicka-window.webp', dveře: 'img/aj/aj-slovicka-door.webp',
+  polévka: 'img/aj/aj-slovicka-soup.webp', káva: 'img/aj/aj-slovicka-coffee.webp',
+  dítě: 'img/aj/aj-slovicka-child.webp', přítel: 'img/aj/aj-slovicka-friend.webp', učitel: 'img/aj/aj-slovicka-teacher.webp',
 };
 
 function pravidlo(s) {
@@ -109,7 +111,7 @@ function pravidlo(s) {
 
 window.addEventListener('DOMContentLoaded', () => Slovicka.spust({
   klic: 'metodus_de_slovicka', lang: 'de-DE', jazyk: 'německy',
-  slova: SLOVA.map(([clen, slovo, emoji, cz, kat]) => ({ clen, slovo, emoji, cz, kat, obrazek: OBRAZKY_DOMOV[cz] })),
+  slova: SLOVA.map(([clen, slovo, emoji, cz, kat]) => ({ clen, slovo, emoji, cz, kat, obrazek: OBRAZKY[cz] })),
   kategorie: [
     { klic: 'domov', nazev: '🏠 Domov' }, { klic: 'jidlo', nazev: '🍎 Jídlo' },
     { klic: 'zvirata', nazev: '🐶 Zvířata' }, { klic: 'lide', nazev: '👪 Lidé' },

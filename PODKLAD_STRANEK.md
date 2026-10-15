@@ -1272,7 +1272,7 @@ Společné pro jazyky: 🔗 gramatika se učí **v krátkém dialogu nebo scénc
   - Poslech → výběr obrázku ze čtyř; pak krátká věta („The dog is under the table“) s obrázkem.
 - **Stav 23. 9. 2026:** převedeno pod společný modul `slovicka.js` (stejný pro AJ/NJ/FJ): kartičky, přehled s výslovností, témata pro všechny režimy, série obrázek → anglicky a anglicky → česky; čtení nahlas se řídí vypínačem v `rec.js`.
 - **Obrázky:**
-  - `IMG-aj-02` 🔴 **B** 🟡 · sada asi 120 karet slovíček v 6 tématech (zvířata, jídlo a pití, dům a nábytek, škola, oblečení, rodina a lidé) — hotovo 60 různých karet: zvířata (16), jídlo (10), škola (9), rodina (7), dům a nábytek (9; židle sdílená se školou) a oblečení (10); domácí motivy zapojeny také v `de_slovicka` a `fr_slovicka`; jednoznačný motiv, stejné světlo a okraj
+  - `IMG-aj-02` 🔴 **B** ✅ · 120 karet slovíček v 6 tématech — zvířata (21), jídlo (25), škola (19), rodina a lidé (17), dům a nábytek (19; židle sdílená se školou) a oblečení (20); domácí motivy, polévka, káva, dítě, přítel a učitel zapojeny také v `de_slovicka` a `fr_slovicka`; jednoznačný motiv, stejné světlo a okraj
 
 #### Pozdravy a představení · [aj3_pozdravy.html](obsah/aj3_pozdravy.html)
 - **Zařazení:** Cizí jazyky › Slovní zásoba · AJ 3. r. · lekce A
@@ -3154,7 +3154,7 @@ Společné pro informatiku: 🔗 programování (4.–7. r.) má projít **jedn�
   - Dilemata jako diskusní karty se zdůvodněním, bez jediné správné odpovědi (bez skóre).
   - Mini-model „naučím počítač třídit“ (obrázky jablek a hrušek, špatná data → špatný výsledek).
 - **Obrázky:**
-  - `IMG-inf-08` 🟡 **B** · rozpracováno 20/44: hotových je všech 20 různorodých karet jablek; mini-model bude zapojen až po vytvoření vyvážené sady jablek a hrušek
+  - `IMG-inf-08` **B ✅** · 44 vyvážených karet (20 jablek, 20 hrušek, 4 hraniční příklady) zapojeno do průhledného k-NN mini-modelu
 
 ### 7.13 Další výuka (10 stránek)
 
@@ -3296,7 +3296,7 @@ Při výrobě sady v jednom stylu zadávat všechny karty v jedné dávce se ste
 | ID | Styl | Co vyrobit nebo sehnat | Stránka |
 |---|---|---|---|
 | `IMG-cj-01` | B | sada 40 karet jednoduchých předmětů a zvířat pro první čtení (máma, les, pes, auto, ucho, chleba, dům, míč, kolo, ryba…) — jednoznačný motiv bez textu; sdílet s `slabiky` a `cj2_abeceda` | [cj1_pismena](obsah/cj1_pismena.html) |
-| `IMG-aj-02` | B 🟡 | sada asi 120 karet slovíček v 6 tématech (zvířata, jídlo a pití, dům a nábytek, škola, oblečení, rodina a lidé) — hotovo 60 různých karet: zvířata (16), jídlo (10), škola (9), rodina (7), dům a nábytek (9; židle sdílená se školou) a oblečení (10); domácí motivy zapojeny také v `de_slovicka` a `fr_slovicka`; jednoznačný motiv, stejné světlo a okraj | [aj_slovicka](obsah/aj_slovicka.html) |
+| `IMG-aj-02` | B ✅ | 120 karet slovíček v 6 tématech — zvířata (21), jídlo (25), škola (19), rodina a lidé (17), dům a nábytek (19; židle sdílená se školou) a oblečení (20); domácí motivy, polévka, káva, dítě, přítel a učitel zapojeny také v `de_slovicka` a `fr_slovicka`; jednoznačný motiv, stejné světlo a okraj | [aj_slovicka](obsah/aj_slovicka.html) |
 | `IMG-aj-06` | A ✅ | rušná scéna v parku s 10 osobami, z nichž každá dělá jednu jasnou činnost (běží, čte, jí zmrzlinu, venčí psa, hraje na kytaru, spí na lavičce, jede na kole, fotí, krmí kachny, maluje) — zapojeno; web střídá 10 hotspotů pro popis „právě teď“ | [aj5_pritomny_prubehovy](obsah/aj5_pritomny_prubehovy.html) |
 | `IMG-prv-01` | B ✅ | osm karet členů rozšířené fiktivní rodiny (babička, dědeček, máma, táta, teta, strýc, bratranec, mladší sourozenec) — zapojeno do rodokmenu i vztahových otázek; pět karet sdíleno s `IMG-aj-02`, tři nově vytvořeny | [prv1_rodina](obsah/prv1_rodina.html) |
 | `IMG-prv-03` | A ✅ | pohled shora na cestu do školy v naší vesnici (dům, chodník, přechod se semaforem, přechod bez semaforu, zastávka, zaparkovaná auta, škola) — zapojeno s 10 klikacími místy; společná geografie pro `IMG-prv-07` a `IMG-prv-20` | [prv1_cesta_skola](obsah/prv1_cesta_skola.html) |
@@ -3411,7 +3411,7 @@ Při výrobě sady v jednom stylu zadávat všechny karty v jedné dávce se ste
 
 | ID | Styl | Co vyrobit nebo sehnat | Stránka |
 |---|---|---|---|
-| `IMG-00-02` | B | sada 11 ilustrací předmětů (kniha a pero, geometrické těleso a pravítko, glóbus, baňka, list s buňkou, lupa nad mapou, hrad, notebook, anglický a německý slovník, domek se stromem, atom) ve stejném stylu — dlaždice předmětů na přehledu a v osnově | [prehled](obsah/prehled.html) |
+| `IMG-00-02` | B ✅ | 11 zapojených ilustrací předmětů (kniha a pero, geometrické těleso a pravítko, glóbus, baňka, list s buňkou, lupa nad mapou, hrad, notebook, anglický a německý slovník, domek se stromem, atom); PNG/WebP/prompty jsou evidované v kapitole 7.1 | [prehled](obsah/prehled.html) |
 | `IMG-cj-02` | B ✅ | dva domečky: tvrdý (kamenný, hranatý) a měkký (dřevěný s polštáři) — zapojeno do pomůcky | [cj2_tvrde_mekke](obsah/cj2_tvrde_mekke.html) |
 | `IMG-cj-10` | A | jedna ilustrace ke každému textu 1. stupně (odhadem 10–15) — motivace a kontext, bez prozrazení odpovědí | [cteni_s_porozumenim](obsah/cteni_s_porozumenim.html) |
 | `IMG-cj-12` | A | 4 malé vinety žánrů (pohádkový zámek, skutečný hrad s pověstí, Olymp, liška s havranem) — záhlaví rámečků žánrů | [cj6_baje](obsah/cj6_baje.html) |
@@ -3467,10 +3467,10 @@ Při výrobě sady v jednom stylu zadávat všechny karty v jedné dávce se ste
 | `IMG-d-09` | A | řez archeologickou sondou s vrstvami a nálezy — hotspoty | [d6_pravek](obsah/d6_pravek.html) |
 | `IMG-d-11` | A | rekonstrukce hradiště (Mikulčice) — sdílet s `IMG-prv-21` | [d7_rany_stredovek](obsah/d7_rany_stredovek.html) |
 | `IMG-d-19` | C | fotografie budov Evropského parlamentu (Štrasburk), Evropské komise (Brusel), Soudního dvora (Lucemburk) | [eu_instituce](obsah/eu_instituce.html) |
-| `IMG-inf-03` | A | jedna fotografie podobného stylu (krajina) jako vzor pro ztrátovou kompresi — lze použít `ekologie-krajina-ilustrace` | [inf7_sifrovani](obsah/inf7_sifrovani.html) |
+| `IMG-inf-03` | A ✅ | detailní krajina zapojená jako vzor pro interaktivní demonstraci ztrátové komprese | [inf7_sifrovani](obsah/inf7_sifrovani.html) |
 | `IMG-inf-07` | A ✅ | 16 jednotných ilustrací bez textu a značek zapojeno na všech slidech místo původních `Photo*.png` a `Cortana.png` | [AI_prednaska](obsah/AI_prednaska.html) |
-| `IMG-inf-08` | B 🟡 | Rozpracováno 20/44: hotových je všech 20 různorodých karet jablek; mini-model bude zapojen až po vytvoření vyvážené sady jablek a hrušek | [inf9_ai_etika](obsah/inf9_ai_etika.html) |
-| `IMG-00-03` | B | dvě ruce na klávesnici ve výchozí poloze (prsty na ASDF a JKL) shora — ukázka správného držení | [typing_trainer](obsah/typing_trainer.html) |
+| `IMG-inf-08` | B ✅ | 44 vyvážených karet zapojeno do průhledného k-NN mini-modelu s volbou velikosti trénovací sady a zobrazením sousedů | [inf9_ai_etika](obsah/inf9_ai_etika.html) |
+| `IMG-00-03` | B ✅ | pohled shora na obě ruce ve výchozí poloze (levá ASDF, pravá JKLů/středník, palce nad mezerníkem) — zapojeno s popisem správného držení | [typing_trainer](obsah/typing_trainer.html) |
 | `IMG-00-04` | B ✅ | 12 odznaků v jednotném stylu — zapojeno místo emoji; odemykají se za série, počty dokončení, aktivní dny a šíři předmětů | [edu_progress](obsah/edu_progress.html) |
 | `IMG-00-05` | B ✅ | titulní strana a tiráž fiktivní knihy (autor, název, nakladatel, rok, ISBN, vydání) bez skutečných značek — 7 přístupných hotspotů pro výuku citování; text kreslí web | [citation_generator](obsah/citation_generator.html) |
 

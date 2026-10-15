@@ -1,0 +1,7 @@
+IMG-aj-02 · ice-cream
+
+Use case: scientific-educational. Square vocabulary flashcard for language learning. Friendly realistic watercolor and gouache with delicate contours on warm ivory paper and subtle grounding shadow. Exactly one centered subject, fully visible with generous margin. No text, logo, brand, border, watermark or unrelated props. Subject: one waffle cone with strawberry and vanilla ice cream scoops.
+
+Nástroj: OpenAI image_gen
+Datum: 2026-10-15
+Výstup: aj-slovicka-ice-cream.png, aj-slovicka-ice-cream.webp

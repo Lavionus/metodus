@@ -1,0 +1,7 @@
+IMG-aj-02 · doctor
+
+Use case: scientific-educational. Square vocabulary flashcard for language learning. Friendly realistic watercolor and gouache, delicate contours, warm ivory paper, subtle grounding shadow. Centered subject visible from head to waist with generous margin. No text, logo, border, watermark or unrelated props. Subject: one friendly adult physician in a white coat with a simple stethoscope, no medical logo or text.
+
+Nástroj: OpenAI image_gen
+Datum: 2026-10-15
+Výstup: aj-slovicka-doctor.png, aj-slovicka-doctor.webp

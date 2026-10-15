@@ -18,6 +18,16 @@
       color: var(--text-faint); font-size: 0.79rem; }
     .lista span { background: var(--bg-control); border: 1px solid var(--border);
       border-radius: 8px; padding: 5px 11px; }
+    .model-wrap { width:min(760px,100%); display:grid; gap:14px; justify-items:center; }
+    .model-panel { display:flex; flex-wrap:wrap; gap:10px; align-items:center; justify-content:center; }
+    .model-panel label { font-weight:700; }
+    .model-panel input { width:150px; }
+    .model-card { width:min(330px,82vw); border:1px solid var(--border); border-radius:18px; padding:10px; background:var(--bg-control); box-shadow:0 8px 24px #0002; }
+    .model-card img { display:block; width:100%; aspect-ratio:1; object-fit:cover; border-radius:12px; }
+    .model-volby { display:flex; gap:10px; flex-wrap:wrap; justify-content:center; }
+    .model-vysledek { max-width:680px; line-height:1.55; padding:10px 14px; border-radius:12px; background:var(--bg-control); border:1px solid var(--border); }
+    .model-sousedi { display:flex; gap:6px; flex-wrap:wrap; justify-content:center; margin-top:8px; }
+    .model-sousedi img { width:58px; height:58px; object-fit:cover; border-radius:8px; border:2px solid var(--border); }
   </style>
 </head>
 <body>
@@ -29,6 +39,7 @@
     <button data-rezim="kviz2">⚠️ Kde AI chybuje</button>
     <button data-rezim="kviz3">⚖️ Etická dilemata</button>
     <button data-rezim="kviz4">🎓 AI ve škole</button>
+    <button data-rezim="model">🍎 Mini-model</button>
   </div>
 
   <div class="plocha" id="plocha"></div>
@@ -353,6 +364,53 @@ const NAPOVEDY = {
   "kviz4": "AI je nástroj – smysl má tam, kde ti pomůže se učit, ne učení obejít."
 };
 
+const modelData = [];
+for (let i = 1; i <= 20; i++) {
+  const n = String(i).padStart(2, '0');
+  modelData.push({label:'jablko', src:`img/inf/inf9-ai-jablko-${n}.webp`, neck:0.12+(i%5)*0.035, round:0.78+(i%4)*0.04});
+  modelData.push({label:'hruška', src:`img/inf/inf9-ai-hruska-${n}.webp`, neck:0.62+(i%5)*0.055, round:0.42+(i%4)*0.055});
+}
+modelData.push(
+  {label:'jablko',src:'img/inf/inf9-ai-hranice-jablko-01.webp',neck:0.48,round:0.58,hranice:true},
+  {label:'jablko',src:'img/inf/inf9-ai-hranice-jablko-02.webp',neck:0.43,round:0.55,hranice:true},
+  {label:'hruška',src:'img/inf/inf9-ai-hranice-hruska-01.webp',neck:0.30,round:0.82,hranice:true},
+  {label:'hruška',src:'img/inf/inf9-ai-hranice-hruska-02.webp',neck:0.38,round:0.72,hranice:true}
+);
+let modelAktualni = null;
+function vzdalenost(a,b) { return Math.hypot((a.neck-b.neck)*1.15, a.round-b.round); }
+function trenovaciData(pocet) {
+  const poTridach = {jablko:0,hruška:0};
+  return modelData.filter(x => !x.hranice && poTridach[x.label]++ < pocet);
+}
+function predikce(vzorek, pocet) {
+  const sousedi = trenovaciData(pocet).map(x=>({...x,d:vzdalenost(x,vzorek)})).sort((a,b)=>a.d-b.d).slice(0,5);
+  const hlasy = sousedi.reduce((s,x)=>(s[x.label]++,s),{jablko:0,hruška:0});
+  const label = hlasy.jablko >= hlasy.hruška ? 'jablko' : 'hruška';
+  return {label, jistota:Math.max(hlasy.jablko,hlasy.hruška)/5, sousedi};
+}
+function novyVzorek() {
+  const pocet = Number($('modelPocet')?.value || 12);
+  const kandidati = modelData.filter(x => x.hranice || Number(x.src.match(/(\d+)\.webp$/)?.[1] || 99) > pocet);
+  modelAktualni = Uloha.nahodne(kandidati);
+  $('modelObrazek').src = modelAktualni.src;
+  $('modelVysledek').hidden = true;
+  document.querySelectorAll('.model-volby button').forEach(b=>b.disabled=false);
+}
+function modelOdpoved(volba) {
+  const p = predikce(modelAktualni, Number($('modelPocet').value));
+  const spravne = volba === modelAktualni.label;
+  skore.vyhodnot(spravne);
+  $('modelVysledek').hidden = false;
+  $('modelVysledek').innerHTML = `<b>${spravne?'✅':'❌'} Správně je ${modelAktualni.label}.</b> Model hlasuje <b>${p.label}</b> (${Math.round(p.jistota*100)} % hlasů sousedů) a ${p.label===modelAktualni.label?'uspěl':'spletl se'}. ${modelAktualni.hranice?'Tohle je záměrně hraniční příklad. ':''}Model porovnává jen délku krčku a kulatost, nikoli celý obraz.<div class="model-sousedi" aria-label="Pět nejbližších trénovacích obrázků">${p.sousedi.map(x=>`<img src="${x.src}" alt="Nejbližší soused: ${x.label}">`).join('')}</div>`;
+  document.querySelectorAll('.model-volby button').forEach(b=>b.disabled=true);
+}
+function miniModel() {
+  $('plocha').innerHTML = `<div class="model-wrap"><div class="zadani uloha-text"><b>Průhledný mini-model k-NN:</b> rozhodni ty a potom porovnej odhad s pěti nejbližšími trénovacími kartami.</div><div class="model-panel"><label for="modelPocet">Příkladů každé třídy: <output id="modelPocetOut">12</output></label><input id="modelPocet" type="range" min="6" max="18" value="12"></div><div class="model-card"><img id="modelObrazek" alt="Ovoce k rozpoznání"></div><div class="model-volby"><button type="button" data-volba="jablko">🍎 Jablko</button><button type="button" data-volba="hruška">🍐 Hruška</button></div><div id="modelVysledek" class="model-vysledek" aria-live="polite" hidden></div></div>`;
+  $('modelPocet').addEventListener('input', e=>{ $('modelPocetOut').value=e.target.value; novyVzorek(); });
+  document.querySelectorAll('.model-volby button').forEach(b=>b.addEventListener('click',()=>modelOdpoved(b.dataset.volba)));
+  novyVzorek();
+}
+
 function kviz(klic) {
   const p = $('plocha');
   const u = Uloha.nahodne(SADY[klic]);
@@ -373,7 +431,7 @@ function kviz(klic) {
 
 const REZIMY = {
   kviz1: () => kviz('kviz1'), kviz2: () => kviz('kviz2'),
-  kviz3: () => kviz('kviz3'), kviz4: () => kviz('kviz4'),
+  kviz3: () => kviz('kviz3'), kviz4: () => kviz('kviz4'), model: miniModel,
 };
 function novaUloha() { REZIMY[rezim](); }
 

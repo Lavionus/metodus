@@ -8,12 +8,7 @@ Nove obrazky se budou drzet stylu jiz vytvorenych.
 
 Tento seznam je závazná pracovní fronta pro další generování. Pořadí upřednostňuje přímý přínos pro výukovou aktivitu, využití na více stránkách, názornost obtížně vysvětlitelného učiva a možnost skutečné interakce. Pouhá dekorace je až poslední. Fotografické sady C a historické doklady E do této fronty nepatří; musejí se získat z doložených licenčních zdrojů.
 
-1. **`IMG-inf-08` · dokončit rozpracovanou sadu (20/44)** — vyvážené karty jablek a hrušek umožní spustit nový mini-model třídění; bez celé sady aktivita nevznikne.
-2. **`IMG-aj-02` · dokončit rozpracovaný slovníkový základ (60/~120)** — karty se sdílejí mezi angličtinou, němčinou, francouzštinou, prvním čtením a dalšími kartičkovými aktivitami.
-3. **`IMG-00-03` · správná poloha rukou na klávesnici** — dvě názorné karty přímo opraví techniku psaní v praktickém trenažéru.
-4. **`IMG-00-02` · sjednocené dlaždice předmětů** — jedenáct motivů zlepší orientaci v přehledu a osnově napříč celým webem, ale hlavně navigačně.
-5. **`IMG-inf-03` · obraz pro demonstraci komprese** — potřebný pro názorné porovnání ztrátové komprese; před novou tvorbou prověřit opětovné použití existující krajiny.
-6. **`IMG-f-17` · obrysové vrstvy souhvězdí** — užitečná volitelná vrstva mapy oblohy, avšak základní funkce stránky na ní nezávisí.
+1. **`IMG-f-17` · obrysové vrstvy souhvězdí** — užitečná volitelná vrstva mapy oblohy, avšak základní funkce stránky na ní nezávisí.
 
 Mimo generovací frontu je **`IMG-pr-17`**: všech osm karet první pomoci už existuje a je zapojeno, sada však čeká na odbornou kontrolu zdravotníkem. Po jejím schválení se pouze označí jako dokončená.
 
@@ -89,7 +84,7 @@ Po dokončení položky se fronta znovu vyhodnotí podle aktuálního stavu str�
 - Dokončena a zapojena sada `IMG-00-04`: dvanáct sjednocených medailonků pro milníky série, dokončení, aktivních dní a šíře procvičovaných předmětů; zamčené a získané stavy mají i slovní popis.
 - Vytvořena a zapojena sada `IMG-pr-17`: osm nekrvavých karet první pomoci podle ERC 2025 pro bezpečnost, reakci, dýchání, volání, stlačování hrudníku, polohu na boku, přímý tlak a chlazení popáleniny. Před definitivním uzavřením čeká na kontrolu zdravotníkem.
 - Dokončena a zapojena sada `IMG-inf-07`: šestnáct jednotných širokých ilustrací k celé prezentaci o AI, od principu učení přes agenty a rizika po praktický workshop; bez značek, vloženého textu a cizích licenčních podkladů.
-- Rozpracována sada `IMG-inf-08`: hotových je všech 20 různorodých jablek z plánovaných 44 trénovacích karet. Do mini-modelu bude zapojena až vyvážená sada jablek a hrušek.
+- Dokončena a zapojena sada `IMG-inf-08`: 20 jablek, 20 hrušek a čtyři vyvážené hraniční příklady napájejí průhledný k-NN mini-model s volbou velikosti trénovací sady, zobrazením sousedů a vysvětlením omezení.
 - Dokončena a zapojena sada `IMG-aj-03`: čtyři situace pozdravů podle denní doby.
 - Dokončena a zapojena sada `IMG-prv-02`: řez rodinným domem jako názorný podklad úloh o místnostech.
 - Dokončeny a zapojeny sady `IMG-prv-14`, `IMG-ch-01`, `IMG-ch-04`, `IMG-z-03` a `IMG-z-07`: půdní profil, bezpečnost laboratoře, úpravna vody, tok řeky a přírodní pásy Afriky.
@@ -99,9 +94,10 @@ Po dokončení položky se fronta znovu vyhodnotí podle aktuálního stavu str�
 - Dokončena a zapojena sada `IMG-z-16`: šest zastávek dodavatelského řetězce mobilního telefonu od těžby po recyklaci.
 - Dokončena a zapojena sada `IMG-inf-02`: osm obrazových prvků sítě od koncových zařízení přes router a optický kabel po datové centrum.
 - Dokončena a zapojena sada `IMG-f-06`: pět názorných situací tlaku.
-- Rozpracována a zapojena sada `IMG-aj-02`: 60 různých karet z přibližně 120; Zvířata (16), Jídlo (10), Škola (9), Rodina (7), Dům a nábytek (9; židle je sdílená se školou) a Oblečení (10). Nově přibyly kachna, ovce, koza a slon. Domácí motivy sdílejí také německá a francouzská slovíčka.
+- Dokončena a zapojena sada `IMG-aj-02`: 120 různých karet; Zvířata (21), Jídlo (25), Škola (19), Rodina a lidé (17), Dům a nábytek (19; židle je sdílená se školou) a Oblečení (20). Závěrečnou dávku tvoří pět zvířat a pět potravin.
+- Opravena pracovní fronta podle skutečného stavu: `IMG-00-03` už obsahuje zapojenou kartu správné výchozí polohy obou rukou, `IMG-00-02` má 11 zapojených předmětových dlaždic evidovaných v kapitole 7.1 a `IMG-inf-03` používá zapojenou detailní krajinu v interaktivní demonstraci komprese. Všechny tři sady už byly zahrnuté v počtu dokončených sad.
 - Uložení: `obsah/img/cj/`, `obsah/img/m/` a `obsah/img/aj/`; každý motiv jako `.png`, `.webp` a `.prompt.txt`.
 - WebP: karty 768 × 768 px do 60 000 B, scény 1152 × 768 px do 200 000 B.
 - [Kontrolní galerie](kapitola-7-2.html), [strojový seznam a alt texty](kapitola-7-2.json).
 - Všechny karty jsou generované, bez vloženého textu, čísel a značek. Vizuálně zkontrolováno jako jedna galerie.
-- Celkem 668 hotových ilustrací. Plně dokončeno 92 ze 168 obrazových sad; rozpracované jsou `IMG-aj-02` (60 různých z přibližně 120 karet), `IMG-pr-17` (8 karet zapojeno, čeká na odbornou kontrolu) a `IMG-inf-08` (20 z 44 karet). Dokončit zbývá 76 sad. Fotografické sady C a historické doklady E se negenerují.
+- Celkem 752 hotových ilustrací. Plně dokončeno 94 ze 168 obrazových sad; rozpracovaná je `IMG-pr-17` (8 karet zapojeno, čeká na odbornou kontrolu). Dokončit zbývá 74 sad. Fotografické sady C a historické doklady E se negenerují.
