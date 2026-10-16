@@ -29,6 +29,7 @@ input{background:var(--bg-input);border:1px solid var(--border-strong);border-ra
 select{background:var(--bg-input);border:1px solid var(--border-strong);border-radius:4px;color:var(--text);padding:7px;font-size:.82rem}
 canvas{width:100%;border-radius:50%;background:#050510;display:block;margin:0 auto;max-width:760px}
 .legenda{color:var(--text-faint);font-size:.78rem;text-align:center;margin-top:10px;line-height:1.5}
+.vrstva{display:flex;justify-content:center;align-items:center;gap:8px;margin:0 0 12px;color:var(--text-muted);font-size:.85rem}.vrstva input{width:auto;accent-color:var(--accent)}
 </style>
 </head>
 <body>
@@ -51,6 +52,7 @@ canvas{width:100%;border-radius:50%;background:#050510;display:block;margin:0 au
     </div>
   </div>
   <div class="card">
+    <label class="vrstva"><input type="checkbox" id="kresby"> Kresby souhvězdí</label>
     <canvas id="nebe" width="760" height="760"></canvas>
     <div class="legenda">S = sever nahoře · velikost tečky = jasnost hvězdy · modré čáry = souhvězdí, jejich název se zobrazí, je-li nad obzorem dostatek hvězd souhvězdí<br>Souhvězdí v nabídce: Velký vůz, Kasiopeja, Orion, Labuť, Lyra, Orel, Blíženci, Lev, Býk, Malý vůz (s Polárkou)</div>
   </div>
@@ -73,6 +75,8 @@ const HVEZDY=[
 ['Kochab',14.85,74.16,2.08],['Pherkad',15.35,71.83,3.05],
 ['Sirius',6.75,-16.72,-1.46],['Procyon',7.66,5.22,0.34],['Capella',5.28,45.99,0.08],
 ['Arcturus',14.26,19.18,-0.05],['Spica',13.42,-11.16,0.97],['Antares',16.49,-26.43,1.09],
+['Acrab',16.09,-19.81,2.56],['Dschubba',16.01,-22.62,2.32],['Sargas',17.62,-42.99,1.86],['Shaula',17.56,-37.10,1.62],['Lesath',17.51,-37.30,2.70],
+['Markab',23.08,15.21,2.49],['Scheat',23.06,28.08,2.42],['Algenib',0.22,15.18,2.83],['Alpheratz',0.14,29.09,2.06],
 ];
 // souhvězdí: název -> spoje (indexy do HVEZDY) + seznam zapojených hvězd (pro popisek)
 const SOUHVEZDI={
@@ -86,7 +90,14 @@ const SOUHVEZDI={
   'Lev':{cary:[[33,35],[35,34]],hvezdy:[33,34,35]},
   'Býk':{cary:[[36,37]],hvezdy:[36,37]},
   'Malý vůz':{cary:[[0,38],[38,39]],hvezdy:[0,38,39]},
+  'Štír':{cary:[[46,47],[47,45],[45,48],[48,49],[49,50]],hvezdy:[45,46,47,48,49,50]},
+  'Pegas':{cary:[[51,52],[52,54],[54,53],[53,51]],hvezdy:[51,52,53,54]},
 };
+const KRESBY={
+  'Velký vůz':'ursa-major','Kasiopeja':'cassiopeia','Orion':'orion','Labuť':'cygnus','Lyra':'lyra','Orel':'aquila',
+  'Blíženci':'gemini','Býk':'taurus','Lev':'leo','Štír':'scorpius','Pegas':'pegasus','Malý vůz':'ursa-minor'
+};
+const OBRAZKY=Object.fromEntries(Object.entries(KRESBY).map(([k,n])=>{const i=new Image();i.src=`img/f/f9-souhvezdi-${n}.webp`;i.addEventListener('load',()=>kresli());return[k,i];}));
 // ploché pole všech spojů (pro vykreslení čar)
 const CARY=Object.values(SOUHVEZDI).flatMap(s=>s.cary);
 function julianske(d){return d.getTime()/86400000+2440587.5;}
@@ -135,6 +146,17 @@ function kresli(){
     // azimut 0=S nahoře, roste přes V (vpravo)
     return{x:cx+r*Math.sin(a),y:cy-r*Math.cos(a),mag,n};
   });
+  // Volitelné mytologické obrysy jsou jen poznávací pomůcka; přesná poloha zůstává ve hvězdách a spojnicích.
+  if($('kresby').checked){
+    ctx.save();ctx.globalAlpha=.24;ctx.globalCompositeOperation='screen';
+    Object.entries(SOUHVEZDI).forEach(([nazev,{hvezdy}])=>{
+      const ps=hvezdy.map(i=>poz[i]).filter(Boolean),img=OBRAZKY[nazev];
+      if(!img?.complete||ps.length<Math.max(2,Math.ceil(hvezdy.length*2/3)))return;
+      const x=ps.reduce((s,p)=>s+p.x,0)/ps.length,y=ps.reduce((s,p)=>s+p.y,0)/ps.length;
+      const span=Math.max(...ps.map(p=>Math.hypot(p.x-x,p.y-y)),42),size=Math.min(220,Math.max(105,span*2.8));
+      ctx.drawImage(img,x-size/2,y-size/2,size,size);
+    });ctx.restore();
+  }
   // čáry souhvězdí
   ctx.strokeStyle='rgba(106,166,253,.45)';ctx.lineWidth=1.2;
   CARY.forEach(([i,j])=>{
@@ -170,6 +192,7 @@ function ted(){
   zrusAktiv();
   kresli();
 }
+$('kresby').addEventListener('change',kresli);
 // ---- zkratky: roční období, měsíce, místa ----
 const OBDOBI=[['❄️ Zimní',1],['🌱 Jarní',4],['☀️ Letní',7],['🍂 Podzimní',10]];
 const MESICE=['Leden','Únor','Březen','Duben','Květen','Červen','Červenec','Srpen','Září','Říjen','Listopad','Prosinec'];

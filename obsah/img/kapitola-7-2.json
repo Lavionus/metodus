@@ -9985,5 +9985,53 @@
   {
     "id": "IMG-aj-02", "name": "aj-slovicka-ice-cream", "alt": "Kornout s jahodovým a vanilkovým kopečkem zmrzliny.", "bytes": 21036, "webp": "aj/aj-slovicka-ice-cream.webp", "png": "aj/aj-slovicka-ice-cream.png",
     "puvod": { "typ": "generovano", "nastroj": "OpenAI image_gen", "datum": "2026-10-15", "zadani": "aj/aj-slovicka-ice-cream.prompt.txt" }
+  },
+  {
+    "id": "IMG-f-17", "name": "f9-souhvezdi-aquila", "alt": "Jemná modrobílá obrysová kresba letícího orla.", "bytes": 59730, "webp": "f/f9-souhvezdi-aquila.webp", "png": "f/f9-souhvezdi-aquila.png",
+    "puvod": { "typ": "generovano", "nastroj": "OpenAI image_gen", "datum": "2026-10-15", "zadani": "f/f9-souhvezdi-aquila.prompt.txt" }
+  },
+  {
+    "id": "IMG-f-17", "name": "f9-souhvezdi-cassiopeia", "alt": "Jemná modrobílá obrysová kresba královny Kasiopeji na trůnu.", "bytes": 38970, "webp": "f/f9-souhvezdi-cassiopeia.webp", "png": "f/f9-souhvezdi-cassiopeia.png",
+    "puvod": { "typ": "generovano", "nastroj": "OpenAI image_gen", "datum": "2026-10-15", "zadani": "f/f9-souhvezdi-cassiopeia.prompt.txt" }
+  },
+  {
+    "id": "IMG-f-17", "name": "f9-souhvezdi-cygnus", "alt": "Jemná modrobílá obrysová kresba letící labutě.", "bytes": 33582, "webp": "f/f9-souhvezdi-cygnus.webp", "png": "f/f9-souhvezdi-cygnus.png",
+    "puvod": { "typ": "generovano", "nastroj": "OpenAI image_gen", "datum": "2026-10-15", "zadani": "f/f9-souhvezdi-cygnus.prompt.txt" }
+  },
+  {
+    "id": "IMG-f-17", "name": "f9-souhvezdi-gemini", "alt": "Jemná modrobílá obrysová kresba dvojice Blíženců.", "bytes": 55668, "webp": "f/f9-souhvezdi-gemini.webp", "png": "f/f9-souhvezdi-gemini.png",
+    "puvod": { "typ": "generovano", "nastroj": "OpenAI image_gen", "datum": "2026-10-15", "zadani": "f/f9-souhvezdi-gemini.prompt.txt" }
+  },
+  {
+    "id": "IMG-f-17", "name": "f9-souhvezdi-leo", "alt": "Jemná modrobílá obrysová kresba kráčejícího lva.", "bytes": 54684, "webp": "f/f9-souhvezdi-leo.webp", "png": "f/f9-souhvezdi-leo.png",
+    "puvod": { "typ": "generovano", "nastroj": "OpenAI image_gen", "datum": "2026-10-15", "zadani": "f/f9-souhvezdi-leo.prompt.txt" }
+  },
+  {
+    "id": "IMG-f-17", "name": "f9-souhvezdi-lyra", "alt": "Jemná modrobílá obrysová kresba antické lyry.", "bytes": 34708, "webp": "f/f9-souhvezdi-lyra.webp", "png": "f/f9-souhvezdi-lyra.png",
+    "puvod": { "typ": "generovano", "nastroj": "OpenAI image_gen", "datum": "2026-10-15", "zadani": "f/f9-souhvezdi-lyra.prompt.txt" }
+  },
+  {
+    "id": "IMG-f-17", "name": "f9-souhvezdi-orion", "alt": "Jemná modrobílá obrysová kresba lovce Oriona.", "bytes": 30202, "webp": "f/f9-souhvezdi-orion.webp", "png": "f/f9-souhvezdi-orion.png",
+    "puvod": { "typ": "generovano", "nastroj": "OpenAI image_gen", "datum": "2026-10-15", "zadani": "f/f9-souhvezdi-orion.prompt.txt" }
+  },
+  {
+    "id": "IMG-f-17", "name": "f9-souhvezdi-pegasus", "alt": "Jemná modrobílá obrysová kresba letícího Pegase.", "bytes": 58494, "webp": "f/f9-souhvezdi-pegasus.webp", "png": "f/f9-souhvezdi-pegasus.png",
+    "puvod": { "typ": "generovano", "nastroj": "OpenAI image_gen", "datum": "2026-10-15", "zadani": "f/f9-souhvezdi-pegasus.prompt.txt" }
+  },
+  {
+    "id": "IMG-f-17", "name": "f9-souhvezdi-scorpius", "alt": "Jemná modrobílá obrysová kresba štíra.", "bytes": 59720, "webp": "f/f9-souhvezdi-scorpius.webp", "png": "f/f9-souhvezdi-scorpius.png",
+    "puvod": { "typ": "generovano", "nastroj": "OpenAI image_gen", "datum": "2026-10-15", "zadani": "f/f9-souhvezdi-scorpius.prompt.txt" }
+  },
+  {
+    "id": "IMG-f-17", "name": "f9-souhvezdi-taurus", "alt": "Jemná modrobílá obrysová kresba býka.", "bytes": 58932, "webp": "f/f9-souhvezdi-taurus.webp", "png": "f/f9-souhvezdi-taurus.png",
+    "puvod": { "typ": "generovano", "nastroj": "OpenAI image_gen", "datum": "2026-10-15", "zadani": "f/f9-souhvezdi-taurus.prompt.txt" }
+  },
+  {
+    "id": "IMG-f-17", "name": "f9-souhvezdi-ursa-major", "alt": "Jemná modrobílá obrysová kresba Velké medvědice.", "bytes": 33938, "webp": "f/f9-souhvezdi-ursa-major.webp", "png": "f/f9-souhvezdi-ursa-major.png",
+    "puvod": { "typ": "generovano", "nastroj": "OpenAI image_gen", "datum": "2026-10-15", "zadani": "f/f9-souhvezdi-ursa-major.prompt.txt" }
+  },
+  {
+    "id": "IMG-f-17", "name": "f9-souhvezdi-ursa-minor", "alt": "Jemná modrobílá obrysová kresba Malé medvědice.", "bytes": 46230, "webp": "f/f9-souhvezdi-ursa-minor.webp", "png": "f/f9-souhvezdi-ursa-minor.png",
+    "puvod": { "typ": "generovano", "nastroj": "OpenAI image_gen", "datum": "2026-10-15", "zadani": "f/f9-souhvezdi-ursa-minor.prompt.txt" }
   }
 ]
