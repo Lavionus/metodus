@@ -123,7 +123,7 @@ const novaUlohaData = () => Uloha.nahodne(SABLONY)();
 const kartaUlohy = u => `<div class="karta">
   <figure class="scena-ulohy"><picture>
     <source srcset="img/m/m5-slovni-${u.scena}.webp" type="image/webp">
-    <img src="img/m/m5-slovni-${u.scena}.png" alt="${u.alt}" width="1536" height="1024">
+    <img src="img/m/m5-slovni-${u.scena}.webp" alt="${u.alt}" width="1536" height="1024">
   </picture><figcaption>${u.popisek} – potřebná čísla najdeš v zadání.</figcaption></figure>
   <div class="zadani-ulohy">${u.text}</div></div>`;
 

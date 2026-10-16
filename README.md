@@ -1073,6 +1073,23 @@ Nahrávání všech tří webů naráz obstará `upload.sh` v repozitáři hlavn
 python3 -m http.server 8000     # z téhle složky, pak http://localhost:8000/
 ```
 
+### Obrázky: na web jde jen WebP
+
+Ilustrace v `obsah/img/` mají tři soubory vedle sebe: `<název>.webp` (zmenšená
+verze pro stránky), `<název>.png` (originál v plném rozlišení) a
+`<název>.prompt.txt` (zadání). **PNG originály jsou v `.gitignore`** – zůstávají
+na disku, ale na web nejdou: dohromady mají přes 1,6 GB a GitHub Pages
+povoluje nejvýš 1 GB (od 16. 10. 2026; do té doby šly na web i PNG a web měl
+1,9 GB). Stejně tak zálohy `docs/zalohy-*/`.
+
+Z toho plyne jediné pravidlo: **stránky smí odkazovat jen na `.webp`** (žádný
+`<picture>` se záložním PNG). Odkaz na PNG by lokálně fungoval – soubor na
+disku je – ale na webu by obrázek chyběl. Hlídá to `node tests/obrazky-bez-png.mjs`.
+Pole `"png"` v `obsah/img/kapitola-7-*.json` je jen záznam, kde originál leží
+na disku; žádná stránka ho nenačítá.
+
+Originály PNG nejsou na GitHubu zálohované – zálohuj si složku `obsah/img/` jinak.
+
 Nahrávání dělá `upload.sh` v repozitáři hlavního webu — spouští se jednou
 a nahraje hlavní web, Metodus i ukázkovou stránku.
 
@@ -1095,6 +1112,7 @@ node tests/etapa04-vzhled.mjs     # soulad s motivem a kontrast textu na starš�
 node tests/motivy.mjs             # motivy: výklopný seznam, podle systému, tón, tmavé simulace, textury, kontrast (AAA u kontrastu), stejné písmo
 node tests/etapa05-odpoved.mjs    # rušení posunu, živá odezva, klávesnice, omezení pohybu
 node tests/etapa06-zlomky.mjs     # vzorová lekce: cíl, vedený příklad, tři obrázky, klávesnice
+node tests/obrazky-bez-png.mjs    # žádná stránka neodkazuje na PNG originál (bez serveru a prohlížeče)
 ```
 
 Testy používají vlastní profil prohlížeče, aby nepřepisovaly žákovské skóre;

@@ -68,8 +68,7 @@ const PATRA = {
 };
 
 function obrazekJidla(p, trida = 'potravina-obrazek') {
-  const png = p.img.replace(/\.webp$/, '.png');
-  return `<picture><source srcset="${p.img}" type="image/webp"><img class="${trida}" src="${png}" alt="${p.alt}"></picture>`;
+  return `<picture><source srcset="${p.img}" type="image/webp"><img class="${trida}" src="${p.img}" alt="${p.alt}"></picture>`;
 }
 
 const POTRAVINY = [

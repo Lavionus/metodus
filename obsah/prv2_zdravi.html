@@ -48,9 +48,9 @@
   </div>
 
   <div class="prehled-cisel">
-    <div><picture><source srcset="img/prv/prv2-zdravi-zachranka.webp" type="image/webp"><img src="img/prv/prv2-zdravi-zachranka.png" alt="Zdravotnická záchranná služba s vozem a dvěma záchranáři." loading="lazy"></picture><b>155</b> záchranka</div>
-    <div><picture><source srcset="img/prv/prv2-zdravi-hasici.webp" type="image/webp"><img src="img/prv/prv2-zdravi-hasici.png" alt="Hasičský záchranný sbor s vozem a dvěma hasiči." loading="lazy"></picture><b>150</b> hasiči</div>
-    <div><picture><source srcset="img/prv/prv2-zdravi-policie.webp" type="image/webp"><img src="img/prv/prv2-zdravi-policie.png" alt="Policie s vozem a dvěma policisty." loading="lazy"></picture><b>158</b> policie</div>
+    <div><picture><source srcset="img/prv/prv2-zdravi-zachranka.webp" type="image/webp"><img src="img/prv/prv2-zdravi-zachranka.webp" alt="Zdravotnická záchranná služba s vozem a dvěma záchranáři." loading="lazy"></picture><b>155</b> záchranka</div>
+    <div><picture><source srcset="img/prv/prv2-zdravi-hasici.webp" type="image/webp"><img src="img/prv/prv2-zdravi-hasici.webp" alt="Hasičský záchranný sbor s vozem a dvěma hasiči." loading="lazy"></picture><b>150</b> hasiči</div>
+    <div><picture><source srcset="img/prv/prv2-zdravi-policie.webp" type="image/webp"><img src="img/prv/prv2-zdravi-policie.webp" alt="Policie s vozem a dvěma policisty." loading="lazy"></picture><b>158</b> policie</div>
     <div class="jednotne">🆘<br><b>112</b><br>jednotné číslo tísňového volání</div>
   </div>
 
@@ -78,7 +78,7 @@ const ZDRAVI_OBRAZKY = {
 
 function obrazek(klic) {
   const o = ZDRAVI_OBRAZKY[klic];
-  return `<picture><source srcset="img/prv/${o.soubor}.webp" type="image/webp"><img class="situace-obrazek" src="img/prv/${o.soubor}.png" alt="${o.alt}"></picture>`;
+  return `<picture><source srcset="img/prv/${o.soubor}.webp" type="image/webp"><img class="situace-obrazek" src="img/prv/${o.soubor}.webp" alt="${o.alt}"></picture>`;
 }
 
 // Tísňová čísla jsou společná data rodiny „Lidské tělo a zdraví" (data/tisnova_cisla.js).
