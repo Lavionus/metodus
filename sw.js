@@ -6,7 +6,7 @@
 /* Při větší aktualizaci webu zvyš číslo verze — stará cache se u návštěvníků
    smaže a vše se stáhne čerstvé (jinak SWR ukáže novou verzi až na druhé načtení). */
 const PREFIX = 'metodus-';
-const CACHE = PREFIX + 'v156';
+const CACHE = PREFIX + 'v158';
 const JADRO = [
   './',
   './index.html',

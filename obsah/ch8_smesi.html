@@ -47,10 +47,19 @@
     .lab-steps li[aria-current=step] { border-color:var(--accent);background:var(--accent-soft);font-weight:700; }
     .particle { animation:drift 3s ease-in-out infinite alternate;transform-box:fill-box;transform-origin:center; }
     .particle:nth-child(3n) { animation-delay:-1.5s;animation-duration:4s; }
+    .realita { margin:28px 0; padding:20px; border:1px solid var(--border); border-radius:14px; background:var(--bg-deep); }
+    .realita h2 { margin:0 0 6px; font-size:1.35rem; }
+    .realita > p { margin:0 0 16px; color:var(--text-muted); }
+    .realita-grid { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:12px; }
+    .realita figure { margin:0; border:1px solid var(--border); border-radius:10px; overflow:hidden; background:var(--bg-control); }
+    .realita img { display:block; width:100%; aspect-ratio:1; object-fit:cover; }
+    .realita figcaption { padding:9px; font-weight:700; line-height:1.3; }
+    .realita small { display:block; margin-top:4px; color:var(--text-muted); font-weight:400; }
     .paused .particle { animation-play-state:paused; }
     @keyframes drift { to { transform:translate(4px,-5px); } }
     @media(prefers-reduced-motion:reduce) { .particle { animation:none; } }
-    @media(max-width:650px) { .lab-grid { grid-template-columns:1fr; } .plocha { padding:16px 12px; } }
+    @media(max-width:850px) { .realita-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+    @media(max-width:650px) { .lab-grid { grid-template-columns:1fr; } .plocha { padding:16px 12px; } .realita-grid { grid-template-columns:1fr; } }
   </style>
   <link rel="stylesheet" href="ch8_smesi.css">
 </head>
@@ -91,6 +100,18 @@
     <button class="hlavni" id="btnDalsi">Přeskočit →</button>
     <span class="skore" id="skore"></span>
   </div>
+
+  <section class="realita" aria-labelledby="realita-title">
+    <h2 id="realita-title">Model a skutečná aparatura</h2>
+    <p>Porovnej zjednodušené animace se skutečným laboratorním vybavením. Fotografie nejsou ve stejném měřítku.</p>
+    <div class="realita-grid">
+      <figure><img src="img/ch/ch8-smesi-filtrace.webp" alt="Büchnerova nálevka nasazená na odsávací baňce při vakuové filtraci" loading="lazy"><figcaption>Filtrace<small>Büchnerova nálevka a odsávací baňka</small></figcaption></figure>
+      <figure><img src="img/ch/ch8-smesi-destilace.webp" alt="Skleněná laboratorní destilační aparatura s chladičem" loading="lazy"><figcaption>Destilace<small>Baňka, chladič a jímání destilátu</small></figcaption></figure>
+      <figure><img src="img/ch/ch8-smesi-odparovani.webp" alt="Pracovník obsluhuje rotační odparku v chemické laboratoři" loading="lazy"><figcaption>Odpařování<small>Rotační odparka urychluje odpaření rozpouštědla</small></figcaption></figure>
+      <figure><img src="img/ch/ch8-smesi-delici-nalevka.webp" alt="Skleněná dělicí nálevka se dvěma nemísitelnými kapalnými vrstvami" loading="lazy"><figcaption>Dělicí nálevka<small>Rozhraní dvou nemísitelných kapalin</small></figcaption></figure>
+      <figure><img src="img/ch/ch8-smesi-chromatografie.webp" alt="Proužek papíru s barevně rozdělenými složkami při papírové chromatografii" loading="lazy"><figcaption>Chromatografie<small>Rozdělené barevné složky postupují papírem různě rychle</small></figcaption></figure>
+    </div>
+  </section>
 
   <details class="reference" id="tahak" data-faze="tahak"><summary>Rychlý tahák · co si odnést z laboratoře</summary>
     <div class="reference-grid"><section><h3>Směs, ne nová látka</h3><p>Směs obsahuje více látek. Při zde ukázaném oddělování využíváme jejich fyzikální vlastnosti, například rozpustnost, těkavost nebo hustotu.</p></section><section><h3>Čirá ≠ čistá</h3><p>Čirý roztok může obsahovat rozpuštěné látky. Filtrace sama neodstraní rozpuštěnou sůl. Ani čirá voda nemusí být pitná.</p></section><section><h3>Co chci získat?</h3><p>Pro sůl postačí odpařování. Chci-li zachytit i vodu, potřebuji destilaci. Neexistuje jediná nejlepší metoda pro každou směs a každý cíl.</p></section><section><h3>Koncentrace</h3><p>w = m(složky) / m(roztoku). Desetiprocentní roztok obsahuje 10 g složky ve 100 g celého roztoku, tedy například 10 g soli a 90 g vody.</p></section><section><h3>Nasycení</h3><p>Nasycený roztok už za daných podmínek další množství dané látky nerozpustí. Pevný zbytek patří do celé směsi, ale ne do kapalného roztoku.</p></section><section><h3>Model a skutečnost</h3><p>Obrázky nejsou v měřítku. Bilance misí jsou ideální a modelová látka X má záměrně zjednodušenou rozpustnost. Reálné látky se mohou chovat jinak.</p></section></div>

@@ -10033,5 +10033,33 @@
   {
     "id": "IMG-f-17", "name": "f9-souhvezdi-ursa-minor", "alt": "Jemná modrobílá obrysová kresba Malé medvědice.", "bytes": 46230, "webp": "f/f9-souhvezdi-ursa-minor.webp", "png": "f/f9-souhvezdi-ursa-minor.png",
     "puvod": { "typ": "generovano", "nastroj": "OpenAI image_gen", "datum": "2026-10-15", "zadani": "f/f9-souhvezdi-ursa-minor.prompt.txt" }
+  },
+  {
+    "id": "IMG-ch-05", "name": "ch8-smesi-filtrace", "alt": "Büchnerova nálevka nasazená na odsávací baňce při vakuové filtraci.", "bytes": 12548, "webp": "ch/ch8-smesi-filtrace.webp", "png": "ch/ch8-smesi-filtrace.png",
+    "puvod": { "typ": "fotografie", "autor": "Chino", "licence": "Public domain", "datum": "2026-10-16", "zdroj": "ch/ch8-smesi-filtrace.zdroj.txt" }
+  },
+  {
+    "id": "IMG-ch-05", "name": "ch8-smesi-destilace", "alt": "Skleněná laboratorní destilační aparatura s chladičem.", "bytes": 12132, "webp": "ch/ch8-smesi-destilace.webp", "png": "ch/ch8-smesi-destilace.png",
+    "puvod": { "typ": "fotografie", "autor": "Epop", "licence": "CC0 1.0", "datum": "2026-10-16", "zdroj": "ch/ch8-smesi-destilace.zdroj.txt" }
+  },
+  {
+    "id": "IMG-ch-05", "name": "ch8-smesi-odparovani", "alt": "Pracovník obsluhuje rotační odparku v chemické laboratoři.", "bytes": 45518, "webp": "ch/ch8-smesi-odparovani.webp", "png": "ch/ch8-smesi-odparovani.png",
+    "puvod": { "typ": "fotografie", "autor": "NCATS, Daniel Soñé Photography", "licence": "Public domain (NIH)", "datum": "2026-10-16", "zdroj": "ch/ch8-smesi-odparovani.zdroj.txt" }
+  },
+  {
+    "id": "IMG-ch-05", "name": "ch8-smesi-delici-nalevka", "alt": "Skleněná dělicí nálevka se dvěma nemísitelnými kapalnými vrstvami.", "bytes": 44856, "webp": "ch/ch8-smesi-delici-nalevka.webp", "png": "ch/ch8-smesi-delici-nalevka.png",
+    "puvod": { "typ": "fotografie", "autor": "Goodymeraj", "licence": "CC0 1.0", "datum": "2026-10-16", "zdroj": "ch/ch8-smesi-delici-nalevka.zdroj.txt" }
+  },
+  {
+    "id": "IMG-ch-05", "name": "ch8-smesi-chromatografie", "alt": "Papírová chromatografie s barevně rozdělenými složkami.", "bytes": 34266, "webp": "ch/ch8-smesi-chromatografie.webp", "png": "ch/ch8-smesi-chromatografie.png",
+    "puvod": { "typ": "fotografie", "autor": "Amitchell125", "licence": "CC BY-SA 4.0", "datum": "2026-10-16", "zdroj": "ch/ch8-smesi-chromatografie.zdroj.txt" }
+  },
+  {
+    "id": "IMG-f-11", "name": "f7-slapy-priliv", "alt": "Přílivem zaplněná nádrž řeky Washford ve Watchetu; voda sahá vysoko k domům.", "bytes": 103896, "webp": "f/f7-slapy-priliv.webp", "png": "f/f7-slapy-priliv.png",
+    "puvod": { "typ": "fotografie", "autor": "Rose and Trev Clough", "licence": "CC BY-SA 2.0", "datum": "2026-10-16", "zdroj": "f/f7-slapy-priliv.zdroj.txt" }
+  },
+  {
+    "id": "IMG-f-11", "name": "f7-slapy-odliv", "alt": "Tatáž nádrž řeky Washford ve Watchetu za odlivu; odkryté kamenité dno a úzký tok.", "bytes": 175856, "webp": "f/f7-slapy-odliv.webp", "png": "f/f7-slapy-odliv.png",
+    "puvod": { "typ": "fotografie", "autor": "Bill Boaden", "licence": "CC BY-SA 2.0", "datum": "2026-10-16", "zdroj": "f/f7-slapy-odliv.zdroj.txt" }
   }
 ]

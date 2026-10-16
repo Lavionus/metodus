@@ -1955,7 +1955,7 @@ Společné pro fyziku: web má **výborné simulace** (páka, optika, elektřina
   - U slapů společný čas pro glóbus a graf přístavu; poznámka o zjednodušení.
 - **Stav 23. 9. 2026:** 🧩 úkoly k modelu – 3 úkoly (frekvence a vlnová délka; dva přílivy denně s měřeným intervalem; skočný × hluchý příliv s měřeným rozkyvem), 8 otázek včetně interference.
 - **Obrázky:**
-  - `IMG-f-11` ⚪ **C** · fotografie přílivu a odlivu na stejném místě (dvojice) — skutečný rozdíl hladin
+  - `IMG-f-11` ⚪ **C ✅** · dvojice fotografií stejné přílivové nádrže řeky Washford ve Watchetu při přílivu a odlivu — zapojeno do režimu Slapové vlny; stejné souřadnice, vzájemně odkazované zdroje, doložené licence
 
 #### Světlo a optika – názorná lekce · [optika_lekce.html](obsah/optika_lekce.html)
 - **Zařazení:** Přírodní vědy › Fyzika · 8.–9. r. · interaktivní výklad (hlavní lekce rodiny světla od 24. 9. 2026)
@@ -2179,7 +2179,7 @@ Společné pro chemii: 🔗 **jeden molekulový model** (🧩 molekula a atom) p
   - 🔗 Vzor pro laboratorní vzhled chemie; stejné hlavičky a fáze jako ostatní lekce.
   - Hmotnostní zlomek jako 🧩 proužek hmotnosti (sůl + voda).
 - **Obrázky:**
-  - `IMG-ch-05` ⚪ **C** · fotografie skutečných aparatur (filtrace, destilace, odpařování, dělicí nálevka, chromatografie na papíře) jako protějšek animací
+  - `IMG-ch-05` ⚪ **C ✅** · pět skutečných fotografií aparatur (filtrace, destilace, odpařování, dělicí nálevka, chromatografie na papíře) zapojeno jako protějšek animací; u každé je uložen autor, licence a zdroj
 
 #### Vyčíslování chemických rovnic · [vycislovani_rovnic.html](obsah/vycislovani_rovnic.html)
 - **Zařazení:** Přírodní vědy › Chemie · 8.–9. r. · samostatná F
@@ -3437,14 +3437,14 @@ Při výrobě sady v jednom stylu zadávat všechny karty v jedné dávce se ste
 | `IMG-f-07` | C | fotografie proudového motoru v řezu (muzejní exponát) a dopravního letadla při startu | [proudove_motory](obsah/proudove_motory.html) |
 | `IMG-f-08` | C | 4 fotografie proudění ve skutečnosti (kouřový tunel, sněhové závěje za plotem, vlajka ve větru, cyklista ve skrčené poloze) | [vitr_tunel](obsah/vitr_tunel.html) |
 | `IMG-f-09` | B ✅ | 4 karty situací Newtonových zákonů (bruslař na ledě, raketa, dva bruslaři se odstrkují, autobus brzdí a cestující se nakloní) — zapojeno do procvičování zákonů | [f7_sila](obsah/f7_sila.html) |
-| `IMG-f-11` | C | fotografie přílivu a odlivu na stejném místě (dvojice) — skutečný rozdíl hladin | [vodni_hladina](obsah/vodni_hladina.html) |
+| `IMG-f-11` | C ✅ | dvojice stejné přílivové nádrže ve Watchetu při přílivu a odlivu — zapojeno, stejné souřadnice a doložené licence | [vodni_hladina](obsah/vodni_hladina.html) |
 | `IMG-f-14` | C | fotografie JE Temelín a Dukovany (chladicí věže), palivového souboru (muzejní model) | [f9_jaderna](obsah/f9_jaderna.html) |
 | `IMG-f-15` | B ✅ | 8 karet zdrojů zvuku zapojených do interaktivní decibelové stupnice (list, šepot, rozhovor, třída, sekačka, motorka, koncert, letadlo) | [f9_zvuk](obsah/f9_zvuk.html) |
 | `IMG-f-16` | C | fotografie rozvodny, stožárů vysokého napětí, transformátoru na sloupu, domovní pojistkové skříně | [f9_stridavy_proud](obsah/f9_stridavy_proud.html) |
 | `IMG-f-17` | A ✅ | 12 jemných obrysových kreseb souhvězdí na průhledném pozadí — zapojeno jako volitelná vrstva nad přesnou mapou; doplněny hvězdy a spojnice Štíra a Pegase | [star_map](obsah/star_map.html) |
 | `IMG-f-18` | C | fotografie 8 fází Měsíce ze stejného místa (volná licence) a fotografie meteoru — obrázková řada fází | [sky_events](obsah/sky_events.html) |
 | `IMG-f-19` | C | fotografie ISS (NASA, volné dílo) a snímek Země z paluby — skutečný pohled | [iss](obsah/iss.html) |
-| `IMG-ch-05` | C | fotografie skutečných aparatur (filtrace, destilace, odpařování, dělicí nálevka, chromatografie na papíře) jako protějšek animací | [ch8_smesi](obsah/ch8_smesi.html) |
+| `IMG-ch-05` | C ✅ | pět skutečných fotografií aparatur zapojeno jako protějšek animací; doložen autor, licence, zdroj a úpravy | [ch8_smesi](obsah/ch8_smesi.html) |
 | `IMG-ch-07` | C | fotografie koroze (rezavý hřebík, měděná střecha s patinou), pozinkovaného plechu, citronové baterie | [ch9_redoxni](obsah/ch9_redoxni.html) |
 | `IMG-ch-08` | A ✅ | řez frakční destilační kolonou; hotovo a zapojeno | [ch9_uhlovodiky](obsah/ch9_uhlovodiky.html) |
 | `IMG-ch-10` | B ✅ | 8 karet běžných výrobků s deriváty (láhev octa, dezinfekce, odlakovač, aspirin, parfém, nemrznoucí směs, PET láhev, mýdlo) bez značek — zapojeno do poznávačky | [ch9_derivaty](obsah/ch9_derivaty.html) |
