@@ -33,6 +33,10 @@
   .druh { display: block; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-faint); margin-bottom: 6px; }
   .rimske { font-family: Georgia, 'Times New Roman', serif; letter-spacing: 0.06em; }
   .prehled-chyb .druh { display: none; }
+  .rimske-kontext { display:block; width:min(430px,88vw); aspect-ratio:1; object-fit:cover; margin:10px auto; border-radius:14px; border:1px solid var(--border); }
+  .kontext-popis { display:block; max-width:560px; margin:8px auto 0; font-size:.86rem; color:var(--text-muted); line-height:1.45; }
+  .plocha .karta { width:min(680px,100%); max-width:100%; box-sizing:border-box; }
+  #autor-podpis { max-width:100%; box-sizing:border-box; }
 </style>
 </head>
 <body>
@@ -44,6 +48,7 @@
     <button data-rezim="cti">👀 Přečti</button>
     <button data-rezim="zapis">✍️ Zapiš</button>
     <button data-rezim="chyba">🔍 Najdi správný zápis</button>
+    <button data-rezim="kontext">🏙️ V praxi</button>
   </div>
 
   <div id="prehledObal">
@@ -181,6 +186,18 @@ function chybneTvary(n) {
 }
 let rezim = 'prevod';
 function generuj(r) {
+  if (r === 'kontext') {
+    const u = Uloha.nahodne([
+      {img:'img/m/m5-rimske-hodiny.webp', alt:'Ciferník věžních hodin Zytglogge v Bernu s římskými číslicemi.', kod:'XII', n:12, kde:'na horním okraji ciferníku'},
+      {img:'img/m/m5-rimske-stavba.webp', alt:'Kamenný stavební nápis na mostě Basteibrücke s letopočty MDCCCL a MDCCCLI.', kod:'MDCCCL', n:1850, kde:'jako první letopočet na kamenném nápisu'},
+      {img:'img/m/m5-rimske-nahrobek.webp', alt:'Historický náhrobní nápis v Malé Morávce zakončený římským letopočtem MDCCC.', kod:'MDCCC', n:1800, kde:'na konci náhrobního nápisu'},
+      {img:'img/m/m5-rimske-kapitola.webp', alt:'Sken historické knihy se záhlavím CHAPTER XIV.', kod:'XIV', n:14, kde:'v označení kapitoly'},
+    ]);
+    return {
+      zadani:`<span class="druh">Kolik znamená zápis ${u.kod} ${u.kde}?</span><img class="rimske-kontext" src="${u.img}" alt="${u.alt}" width="768" height="768"><span class="kontext-popis">Zapiš hodnotu arabskými číslicemi.</span>`,
+      odpoved:u.n, napoveda:`${u.kod} = ${u.n.toLocaleString('cs-CZ')}`,
+    };
+  }
   if (r === 'chyba') {
     let n, spatne;
     do { n = cislo(); spatne = Uloha.zamichej(chybneTvary(n)).slice(0, 3); } while (spatne.length < 3);

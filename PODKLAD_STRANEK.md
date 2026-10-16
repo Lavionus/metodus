@@ -807,7 +807,7 @@ Společné pro celou matematiku: 🔗 každé téma má jeden **názorný obraz*
   - Kde římské číslice potkáme: ciferník, letopočet na budově, kapitoly.
 - **Stav 23. 9. 2026:** převodník + série přečti / zapiš / najdi správný zápis, rozklad po řádech.
 - **Obrázky:**
-  - `IMG-m-03` ⚪ **C** · 4 fotografie římských číslic ve skutečnosti (ciferník věžních hodin, letopočet na průčelí, náhrobek, číslování kapitol) — čtení v kontextu
+  - `IMG-m-03` ⚪ **C ✅** · čtyři skutečné kontexty (věžní ciferník, stavební nápis, náhrobek a knižní kapitola) — zapojeno do režimu V praxi, licence a úpravy doloženy
 
 #### Mentální matematika · [mental_math.html](obsah/mental_math.html)
 - **Zařazení:** Matematika › Čísla a operace · 4.–9. r. · lekce A (dril)
@@ -3419,7 +3419,7 @@ Při výrobě sady v jednom stylu zadávat všechny karty v jedné dávce se ste
 | `IMG-cj-15` | A ✅ | jedna scéna (například cyklista na venkovské silnici) jako společné téma pro popis, vypravování a charakteristiku | [cj8_sloh](obsah/cj8_sloh.html) |
 | `IMG-m-01` | B ✅ | 6 karet předmětů k rozdělování (jablko, bonbon, pastelka, míček, kartička, krabička) — v jednotném stylu místo emoji | [m3_deleni_zbytkem](obsah/m3_deleni_zbytkem.html) |
 | `IMG-m-02` | B ✅ | 4 karty skutečných celků k dělení (pizza shora, tabulka čokolády, pás látky, skupina 12 dětí) — přenos zlomku do situace; dělicí čáry kreslí web | [m4_zlomky_uvod](obsah/m4_zlomky_uvod.html) |
-| `IMG-m-03` | C | 4 fotografie římských číslic ve skutečnosti (ciferník věžních hodin, letopočet na průčelí, náhrobek, číslování kapitol) — čtení v kontextu | [roman_numerals](obsah/roman_numerals.html) |
+| `IMG-m-03` | C ✅ | čtyři skutečné kontexty (věžní ciferník, stavební nápis, náhrobek a knižní kapitola) — zapojeno do režimu V praxi, licence a úpravy doloženy | [roman_numerals](obsah/roman_numerals.html) |
 | `IMG-m-04` | A ✅ | 6 scén ke slovním úlohám (obchod, výlet vlakem, zahrada, školní jídelna, sbírka, cyklovýlet) — zapojeno; čísla doplňuje web | [m5_slovni_ulohy](obsah/m5_slovni_ulohy.html) |
 | `IMG-m-05` | B ✅ | 3 karty kontextů (teploměr venku v zimě, výtah a potápěč pod hladinou) — zapojeno; číselné stupnice kreslí web | [m7_cela_cisla](obsah/m7_cela_cisla.html) |
 | `IMG-m-06` | B ✅ | 4 karty situací (cenovka se slevou bez čísel, výsledkový graf voleb bez popisků, etiketa potraviny, spořitelní kasička) — zapojeno; čísla vkládá web | [procenta](obsah/procenta.html) |

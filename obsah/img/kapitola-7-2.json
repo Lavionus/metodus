@@ -10113,5 +10113,21 @@
   {
     "id": "IMG-pr-03", "name": "pr6-lisejnik-mapovnik", "alt": "Žlutozelené plošky mapovníku zeměpisného oddělené černými liniemi na skále.", "bytes": 105286, "webp": "pr/pr6-lisejnik-mapovnik.webp", "png": "pr/pr6-lisejnik-mapovnik.png",
     "puvod": { "typ": "fotografie", "autor": "Tigerente", "licence": "CC BY-SA 3.0", "datum": "2026-10-16", "zdroj": "pr/pr6-lisejnik-mapovnik.zdroj.txt" }
+  },
+  {
+    "id": "IMG-m-03", "name": "m5-rimske-hodiny", "alt": "Ciferník věžních hodin Zytglogge v Bernu s římskými číslicemi.", "bytes": 41226, "webp": "m/m5-rimske-hodiny.webp", "png": "m/m5-rimske-hodiny.png",
+    "puvod": { "typ": "fotografie", "autor": "Sandstein", "licence": "Public domain", "datum": "2026-10-16", "zdroj": "m/m5-rimske-hodiny.zdroj.txt" }
+  },
+  {
+    "id": "IMG-m-03", "name": "m5-rimske-stavba", "alt": "Kamenný stavební nápis na mostě Basteibrücke s letopočty MDCCCL a MDCCCLI.", "bytes": 49828, "webp": "m/m5-rimske-stavba.webp", "png": "m/m5-rimske-stavba.png",
+    "puvod": { "typ": "fotografie", "autor": "Dr. Bernd Gross", "licence": "CC BY-SA 3.0", "datum": "2026-10-16", "zdroj": "m/m5-rimske-stavba.zdroj.txt" }
+  },
+  {
+    "id": "IMG-m-03", "name": "m5-rimske-nahrobek", "alt": "Historický náhrobní nápis v Malé Morávce zakončený římským letopočtem MDCCC.", "bytes": 183604, "webp": "m/m5-rimske-nahrobek.webp", "png": "m/m5-rimske-nahrobek.png",
+    "puvod": { "typ": "fotografie", "autor": "SchiDD", "licence": "CC BY-SA 4.0", "datum": "2026-10-16", "zdroj": "m/m5-rimske-nahrobek.zdroj.txt" }
+  },
+  {
+    "id": "IMG-m-03", "name": "m5-rimske-kapitola", "alt": "Sken historické knihy se záhlavím CHAPTER XIV.", "bytes": 39440, "webp": "m/m5-rimske-kapitola.webp", "png": "m/m5-rimske-kapitola.png",
+    "puvod": { "typ": "historicky sken", "autor": "Charles De Forest Hoxie", "licence": "Public domain", "datum": "2026-10-16", "zdroj": "m/m5-rimske-kapitola.zdroj.txt" }
   }
 ]
