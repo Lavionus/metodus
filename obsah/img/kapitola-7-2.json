@@ -10061,5 +10061,57 @@
   {
     "id": "IMG-f-11", "name": "f7-slapy-odliv", "alt": "Tatáž nádrž řeky Washford ve Watchetu za odlivu; odkryté kamenité dno a úzký tok.", "bytes": 175856, "webp": "f/f7-slapy-odliv.webp", "png": "f/f7-slapy-odliv.png",
     "puvod": { "typ": "fotografie", "autor": "Bill Boaden", "licence": "CC BY-SA 2.0", "datum": "2026-10-16", "zdroj": "f/f7-slapy-odliv.zdroj.txt" }
+  },
+  {
+    "id": "IMG-f-18", "name": "f9-mesic-nov", "alt": "Černá obloha při novu; osvětlená polokoule Měsíce směřuje od Země.", "bytes": 1110, "webp": "f/f9-mesic-nov.webp", "png": "f/f9-mesic-nov.png",
+    "puvod": { "typ": "fotografie", "autor": "Hamed Rajabpour; design Nariman Ghorbani", "licence": "CC BY-SA 4.0", "datum": "2026-10-16", "zdroj": "f/f9-mesic-faze.zdroj.txt" }
+  },
+  {
+    "id": "IMG-f-18", "name": "f9-mesic-dorustajici-srpek", "alt": "Úzký dorůstající srpek Měsíce osvětlený zprava.", "bytes": 4866, "webp": "f/f9-mesic-dorustajici-srpek.webp", "png": "f/f9-mesic-dorustajici-srpek.png",
+    "puvod": { "typ": "fotografie", "autor": "Hamed Rajabpour; design Nariman Ghorbani", "licence": "CC BY-SA 4.0", "datum": "2026-10-16", "zdroj": "f/f9-mesic-faze.zdroj.txt" }
+  },
+  {
+    "id": "IMG-f-18", "name": "f9-mesic-prvni-ctvrt", "alt": "Měsíc v první čtvrti s osvětlenou pravou částí kotouče.", "bytes": 13634, "webp": "f/f9-mesic-prvni-ctvrt.webp", "png": "f/f9-mesic-prvni-ctvrt.png",
+    "puvod": { "typ": "fotografie", "autor": "Hamed Rajabpour; design Nariman Ghorbani", "licence": "CC BY-SA 4.0", "datum": "2026-10-16", "zdroj": "f/f9-mesic-faze.zdroj.txt" }
+  },
+  {
+    "id": "IMG-f-18", "name": "f9-mesic-dorustajici", "alt": "Dorůstající Měsíc s osvětlenou většinou pravé části kotouče.", "bytes": 12690, "webp": "f/f9-mesic-dorustajici.webp", "png": "f/f9-mesic-dorustajici.png",
+    "puvod": { "typ": "fotografie", "autor": "Hamed Rajabpour; design Nariman Ghorbani", "licence": "CC BY-SA 4.0", "datum": "2026-10-16", "zdroj": "f/f9-mesic-faze.zdroj.txt" }
+  },
+  {
+    "id": "IMG-f-18", "name": "f9-mesic-uplnek", "alt": "Úplně osvětlený měsíční kotouč při úplňku.", "bytes": 19558, "webp": "f/f9-mesic-uplnek.webp", "png": "f/f9-mesic-uplnek.png",
+    "puvod": { "typ": "fotografie", "autor": "Hamed Rajabpour; design Nariman Ghorbani", "licence": "CC BY-SA 4.0", "datum": "2026-10-16", "zdroj": "f/f9-mesic-faze.zdroj.txt" }
+  },
+  {
+    "id": "IMG-f-18", "name": "f9-mesic-couvajici", "alt": "Couvající Měsíc s osvětlenou většinou levé části kotouče.", "bytes": 15488, "webp": "f/f9-mesic-couvajici.webp", "png": "f/f9-mesic-couvajici.png",
+    "puvod": { "typ": "fotografie", "autor": "Hamed Rajabpour; design Nariman Ghorbani", "licence": "CC BY-SA 4.0", "datum": "2026-10-16", "zdroj": "f/f9-mesic-faze.zdroj.txt" }
+  },
+  {
+    "id": "IMG-f-18", "name": "f9-mesic-posledni-ctvrt", "alt": "Měsíc v poslední čtvrti s osvětlenou levou částí kotouče.", "bytes": 8632, "webp": "f/f9-mesic-posledni-ctvrt.webp", "png": "f/f9-mesic-posledni-ctvrt.png",
+    "puvod": { "typ": "fotografie", "autor": "Hamed Rajabpour; design Nariman Ghorbani", "licence": "CC BY-SA 4.0", "datum": "2026-10-16", "zdroj": "f/f9-mesic-faze.zdroj.txt" }
+  },
+  {
+    "id": "IMG-f-18", "name": "f9-mesic-couvajici-srpek", "alt": "Úzký couvající srpek Měsíce osvětlený zleva.", "bytes": 16416, "webp": "f/f9-mesic-couvajici-srpek.webp", "png": "f/f9-mesic-couvajici-srpek.png",
+    "puvod": { "typ": "fotografie", "autor": "Hamed Rajabpour; design Nariman Ghorbani", "licence": "CC BY-SA 4.0", "datum": "2026-10-16", "zdroj": "f/f9-mesic-faze.zdroj.txt" }
+  },
+  {
+    "id": "IMG-f-18", "name": "f9-meteor", "alt": "Několik jasných stop meteorů během výbuchu roje Alfa Monocerotid.", "bytes": 22504, "webp": "f/f9-meteor.webp", "png": "f/f9-meteor.png",
+    "puvod": { "typ": "fotografie", "autor": "NASA Ames Research Center / S. Molau a P. Jenniskens", "licence": "Public domain (NASA)", "datum": "2026-10-16", "zdroj": "f/f9-meteor.zdroj.txt" }
+  },
+  {
+    "id": "IMG-pr-03", "name": "pr6-lisejnik-tercovnik", "alt": "Žlutooranžový terčovník zední s lupenitou stélkou a oranžovými terčíky na kůře.", "bytes": 58134, "webp": "pr/pr6-lisejnik-tercovnik.webp", "png": "pr/pr6-lisejnik-tercovnik.png",
+    "puvod": { "typ": "fotografie", "autor": "Björn Sothmann", "licence": "CC BY-SA 2.0", "datum": "2026-10-16", "zdroj": "pr/pr6-lisejnik-tercovnik.zdroj.txt" }
+  },
+  {
+    "id": "IMG-pr-03", "name": "pr6-lisejnik-provazovka", "alt": "Dlouhé šedozelené provazce provazovky vousaté visící z větví stromu.", "bytes": 77834, "webp": "pr/pr6-lisejnik-provazovka.webp", "png": "pr/pr6-lisejnik-provazovka.png",
+    "puvod": { "typ": "fotografie", "autor": "Rjcastillo", "licence": "CC BY-SA 3.0", "datum": "2026-10-16", "zdroj": "pr/pr6-lisejnik-provazovka.zdroj.txt" }
+  },
+  {
+    "id": "IMG-pr-03", "name": "pr6-lisejnik-dutohlavka", "alt": "Šedobílá bohatě rozvětvená dutohlávka sobí rostoucí v nízkém polštáři.", "bytes": 43636, "webp": "pr/pr6-lisejnik-dutohlavka.webp", "png": "pr/pr6-lisejnik-dutohlavka.png",
+    "puvod": { "typ": "fotografie", "autor": "Étienne Lacroix-Carignan", "licence": "CC0 1.0", "datum": "2026-10-16", "zdroj": "pr/pr6-lisejnik-dutohlavka.zdroj.txt" }
+  },
+  {
+    "id": "IMG-pr-03", "name": "pr6-lisejnik-mapovnik", "alt": "Žlutozelené plošky mapovníku zeměpisného oddělené černými liniemi na skále.", "bytes": 105286, "webp": "pr/pr6-lisejnik-mapovnik.webp", "png": "pr/pr6-lisejnik-mapovnik.png",
+    "puvod": { "typ": "fotografie", "autor": "Tigerente", "licence": "CC BY-SA 3.0", "datum": "2026-10-16", "zdroj": "pr/pr6-lisejnik-mapovnik.zdroj.txt" }
   }
 ]

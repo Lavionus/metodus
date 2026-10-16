@@ -28,6 +28,13 @@ th{color:var(--text-faint);font-size:.75rem;text-transform:uppercase}
 tr:last-child td{border-bottom:none}
 .moon-emoji{font-size:1.1rem;margin-right:4px}
 .note{font-size:.78rem;color:var(--text-faint);margin-top:10px;line-height:1.5}
+.phase-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.phase-grid figure,.meteor-photo{margin:0;background:#02040a;border:1px solid var(--border);border-radius:8px;overflow:hidden}
+.phase-grid img{display:block;width:100%;aspect-ratio:1;object-fit:cover}
+.phase-grid figcaption,.meteor-photo figcaption{padding:7px 5px;color:var(--text-faint);font-size:.72rem;line-height:1.3;text-align:center;background:var(--bg-elevated)}
+.meteor-photo{max-width:380px;margin:0 auto 14px}
+.meteor-photo img{display:block;width:100%;aspect-ratio:1;object-fit:cover}
+@media(max-width:560px){body{padding:12px}.card{padding:14px}.phase-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.controls{align-items:stretch}.btn{align-self:end}}
 </style>
 </head>
 <body>
@@ -40,8 +47,24 @@ tr:last-child td{border-bottom:none}
     <button class="btn" id="btnGo">Zobrazit</button>
   </div>
 
+  <section class="card" aria-labelledby="phaseTitle">
+    <h2 id="phaseTitle">🌙 Osm kroků měsíčního cyklu</h2>
+    <div class="phase-grid">
+      <figure><img src="img/f/f9-mesic-nov.webp" alt="Černá obloha při novu; osvětlená polokoule Měsíce směřuje od Země."><figcaption>1. Nov</figcaption></figure>
+      <figure><img src="img/f/f9-mesic-dorustajici-srpek.webp" alt="Úzký dorůstající srpek Měsíce osvětlený zprava."><figcaption>2. Dorůstající srpek</figcaption></figure>
+      <figure><img src="img/f/f9-mesic-prvni-ctvrt.webp" alt="Měsíc v první čtvrti s osvětlenou pravou částí kotouče."><figcaption>3. První čtvrť</figcaption></figure>
+      <figure><img src="img/f/f9-mesic-dorustajici.webp" alt="Dorůstající Měsíc s osvětlenou většinou pravé části kotouče."><figcaption>4. Dorůstající Měsíc</figcaption></figure>
+      <figure><img src="img/f/f9-mesic-uplnek.webp" alt="Úplně osvětlený měsíční kotouč při úplňku."><figcaption>5. Úplněk</figcaption></figure>
+      <figure><img src="img/f/f9-mesic-couvajici.webp" alt="Couvající Měsíc s osvětlenou většinou levé části kotouče."><figcaption>6. Couvající Měsíc</figcaption></figure>
+      <figure><img src="img/f/f9-mesic-posledni-ctvrt.webp" alt="Měsíc v poslední čtvrti s osvětlenou levou částí kotouče."><figcaption>7. Poslední čtvrť</figcaption></figure>
+      <figure><img src="img/f/f9-mesic-couvajici-srpek.webp" alt="Úzký couvající srpek Měsíce osvětlený zleva."><figcaption>8. Couvající srpek</figcaption></figure>
+    </div>
+    <p class="note"><strong>Proč je nov černý?</strong> Měsíc je tehdy na obloze blízko Slunce a jeho osvětlená polokoule směřuje od Země. Černá karta tedy není chybějící obrázek.</p>
+  </section>
+
   <div class="card">
     <h2>☄️ Meteorické roje</h2>
+    <figure class="meteor-photo"><img src="img/f/f9-meteor.webp" alt="Několik jasných stop meteorů během výbuchu roje Alfa Monocerotid."><figcaption>Meteorický výbuch roje Alfa Monocerotid · NASA</figcaption></figure>
     <table><thead><tr><th>Roj</th><th>Vrchol</th><th>Nejlepší pozorování</th></tr></thead><tbody id="showers"></tbody></table>
     <p class="note">Data vrcholu jsou přibližná a rok od roku se mohou lišit o 1–2 dny. Pro pozorování hledej co nejtmavší oblohu po půlnoci, ideálně bez měsíčního svitu.</p>
   </div>

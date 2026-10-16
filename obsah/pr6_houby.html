@@ -23,6 +23,8 @@
     .houba-svg .klobouk { stroke: var(--text); stroke-width: 2; }
     .houba-svg .trén { fill: #e8e0cc; stroke: var(--text); stroke-width: 2; }
     .houba-stavba-img { width:min(700px,100%); border-radius:16px; background:#f8f1df; }
+    .lisejnik-foto { width:min(390px,88vw); aspect-ratio:1; object-fit:cover; border-radius:14px; border:1px solid var(--border); }
+    .latinsky { color:var(--text-faint); font-size:.82rem; font-style:italic; }
   </style>
 </head>
 <body>
@@ -102,6 +104,21 @@ const LISEJNIKY = [
     proc: 'lišejník zvaný dutohlávka sobí je jejich důležitou potravou' },
 ];
 
+const LISEJNIK_DRUHY = [
+  { n:'terčovník zední', lat:'Xanthoria parietina', img:'img/pr/pr6-lisejnik-tercovnik.webp',
+    alt:'Žlutooranžový terčovník zední s lupenitou stélkou a oranžovými terčíky na kůře.',
+    znak:'žlutooranžová lupenitá stélka s miskovitými plodnicemi' },
+  { n:'provazovka vousatá', lat:'Usnea barbata', img:'img/pr/pr6-lisejnik-provazovka.webp',
+    alt:'Dlouhé šedozelené provazce provazovky vousaté visící z větví stromu.',
+    znak:'dlouhá keříčkovitá stélka visí z větví jako vousy' },
+  { n:'dutohlávka sobí', lat:'Cladonia rangiferina', img:'img/pr/pr6-lisejnik-dutohlavka.webp',
+    alt:'Šedobílá bohatě rozvětvená dutohlávka sobí rostoucí v nízkém polštáři.',
+    znak:'nízká šedobílá keříčkovitá stélka se opakovaně větví' },
+  { n:'mapovník zeměpisný', lat:'Rhizocarpon geographicum', img:'img/pr/pr6-lisejnik-mapovnik.webp',
+    alt:'Žlutozelené plošky mapovníku zeměpisného oddělené černými liniemi na skále.',
+    znak:'korovitá stélka tvoří žlutozelená políčka s černými okraji jako mapa' },
+];
+
 /* ---- Jedlá, či jedovatá ------------------------------------------------------------------ */
 function jedla() {
   const p = $('plocha');
@@ -174,6 +191,25 @@ function stavba() {
 /* ---- Lišejníky ------------------------------------------------------------------------------- */
 function lisejniky() {
   const p = $('plocha');
+  if (Math.random() < 0.55) {
+    const u = Uloha.nahodne(LISEJNIK_DRUHY);
+    p.innerHTML = `<div class="zadani">Který lišejník je na fotografii?</div>
+      <img class="lisejnik-foto" src="${u.img}" alt="${u.alt}" width="768" height="768">
+      <div class="latinsky">Určuj podle barvy, tvaru a způsobu růstu stélky.</div>`;
+    const odezva = document.createElement('div');
+    odezva.className = 'odezva';
+    Uloha.vyber({
+      kam: p, odezva,
+      moznosti: Uloha.zamichej(LISEJNIK_DRUHY).map(x => ({ klic:x.n, popis:x.n })),
+      spravnyKlic: u.n,
+      zpravaOk: `✅ ${u.n} (<i>${u.lat}</i>) – ${u.znak}.`,
+      zpravaChyba: 'Porovnej tvar stélky: korovitá pevně přirůstá, lupenitá má ploché laloky a keříčkovitá se větví.',
+      poSpravne: skore.vyhodnot,
+      dalsi: novaUloha,
+    });
+    p.appendChild(odezva);
+    return;
+  }
   const u = Uloha.nahodne(LISEJNIKY);
   p.innerHTML = `<div class="zadani">Je toto tvrzení pravdivé?</div>
     <div class="karta"><div class="obrazek">🌿</div><div class="popis-h">${u.t}</div></div>`;

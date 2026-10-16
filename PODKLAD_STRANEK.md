@@ -2083,7 +2083,7 @@ Společné: 🔗 jednotné ovládání (pauza, rychlost času, popisky) a spole�
   - Kalendář jako 🧩 časová osa roku s ikonami úkazů; klepnutí otevře `star_map` s nastaveným datem.
   - Fáze Měsíce jako obrázková řada.
 - **Obrázky:**
-  - `IMG-f-18` ⚪ **C** · fotografie 8 fází Měsíce ze stejného místa (volná licence) a fotografie meteoru — obrázková řada fází
+  - `IMG-f-18` ⚪ **C ✅** · osm kroků měsíčního cyklu z fotografické série pořízené z pevného místa a fotografie meteorického výbuchu — zapojeno, licence i úpravy doloženy
 
 #### Sluneční soustava · [solar_system.html](obsah/solar_system.html)
 - **Zařazení:** Přírodní vědy › Astronomie · 6. a 9. r. · simulace E (hlavní lekce rodiny vesmíru)
@@ -2285,7 +2285,7 @@ Společné pro přírodopis: čtyři stránky (`bunka`, `pr7_rostliny`, `anatomi
 - **Obrázky:**
   - `IMG-pr-01` 🔴 **C** · fotografie 14 druhů hub, u každého 2–3 pohledy (hřib smrkový, hřib kovář, klouzek, bedla vysoká, liška obecná, václavka, pečárka, muchomůrka červená, muchomůrka zelená, muchomůrka tygrovaná, hřib satan, čirůvka tygrovaná, pavučinec plyšový, ucháč obecný) — **nikdy generované**
   - `IMG-pr-02` ✅ **A** · řez houbou s podhoubím — zapojeno
-  - `IMG-pr-03` ⚪ **C** · fotografie 4 typů lišejníků (terčovník, provazovka, dutohlávka, mapovník)
+  - `IMG-pr-03` ⚪ **C ✅** · fotografie terčovníku, provazovky, dutohlávky a mapovníku — zapojeno do určování podle typu stélky, licence a úpravy doloženy
 
 #### Bezobratlí · [pr6_bezobratli.html](obsah/pr6_bezobratli.html)
 - **Zařazení:** Přírodní vědy › Přírodopis · 6.–7. r. · lekce A
@@ -3442,13 +3442,13 @@ Při výrobě sady v jednom stylu zadávat všechny karty v jedné dávce se ste
 | `IMG-f-15` | B ✅ | 8 karet zdrojů zvuku zapojených do interaktivní decibelové stupnice (list, šepot, rozhovor, třída, sekačka, motorka, koncert, letadlo) | [f9_zvuk](obsah/f9_zvuk.html) |
 | `IMG-f-16` | C | fotografie rozvodny, stožárů vysokého napětí, transformátoru na sloupu, domovní pojistkové skříně | [f9_stridavy_proud](obsah/f9_stridavy_proud.html) |
 | `IMG-f-17` | A ✅ | 12 jemných obrysových kreseb souhvězdí na průhledném pozadí — zapojeno jako volitelná vrstva nad přesnou mapou; doplněny hvězdy a spojnice Štíra a Pegase | [star_map](obsah/star_map.html) |
-| `IMG-f-18` | C | fotografie 8 fází Měsíce ze stejného místa (volná licence) a fotografie meteoru — obrázková řada fází | [sky_events](obsah/sky_events.html) |
+| `IMG-f-18` | C ✅ | osm kroků měsíčního cyklu z fotografické série pořízené z pevného místa a fotografie meteorického výbuchu — zapojeno, licence i úpravy doloženy | [sky_events](obsah/sky_events.html) |
 | `IMG-f-19` | C | fotografie ISS (NASA, volné dílo) a snímek Země z paluby — skutečný pohled | [iss](obsah/iss.html) |
 | `IMG-ch-05` | C ✅ | pět skutečných fotografií aparatur zapojeno jako protějšek animací; doložen autor, licence, zdroj a úpravy | [ch8_smesi](obsah/ch8_smesi.html) |
 | `IMG-ch-07` | C | fotografie koroze (rezavý hřebík, měděná střecha s patinou), pozinkovaného plechu, citronové baterie | [ch9_redoxni](obsah/ch9_redoxni.html) |
 | `IMG-ch-08` | A ✅ | řez frakční destilační kolonou; hotovo a zapojeno | [ch9_uhlovodiky](obsah/ch9_uhlovodiky.html) |
 | `IMG-ch-10` | B ✅ | 8 karet běžných výrobků s deriváty (láhev octa, dezinfekce, odlakovač, aspirin, parfém, nemrznoucí směs, PET láhev, mýdlo) bez značek — zapojeno do poznávačky | [ch9_derivaty](obsah/ch9_derivaty.html) |
-| `IMG-pr-03` | C | fotografie 4 typů lišejníků (terčovník, provazovka, dutohlávka, mapovník) | [pr6_houby](obsah/pr6_houby.html) |
+| `IMG-pr-03` | C ✅ | fotografie terčovníku, provazovky, dutohlávky a mapovníku — zapojeno do určování podle typu stélky, licence a úpravy doloženy | [pr6_houby](obsah/pr6_houby.html) |
 | `IMG-pr-19` | C | fotografie 6 geologických jevů v ČR (Pravčická brána, propast Macocha, Říp, Komorní hůrka, Adršpašské skály, meandry Lužnice) — vnitřní a vnější děje v krajině | [pr9_geologicke_deje](obsah/pr9_geologicke_deje.html) |
 | `IMG-pr-22` | A ✅ | 4 rekonstrukce krajin (prvohorní moře, karbonský les, druhohorní krajina s dinosaury, čtvrtohorní tundra s mamuty) — označit jako rekonstrukce | [pr9_vyvoj_zeme](obsah/pr9_vyvoj_zeme.html) |
 | `IMG-pr-23` | B ✅ | 8 karet znaků pro křížení (žlutý/zelený hrách, hladký/svraštělý hrách, černé/hnědé morče, červený/bílý květ hrachu) — zapojeno jako volba fenotypu a alel | [punnett](obsah/punnett.html) |

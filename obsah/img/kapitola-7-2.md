@@ -14,16 +14,14 @@ Mimo generovací frontu je **`IMG-pr-17`**: všech osm karet první pomoci už e
 
 ### Prioritní fronta dalšího obrazového doplňování
 
-Tato fronta už není generovací: jde o získání 68 zbývajících skutečných fotografických sad C a historických dokladů E z doložených licenčních zdrojů. Pořadí se řídí přímým přínosem pro aktivitu, obtížností nahradit obraz slovním popisem a možností sdílení mezi stránkami.
+Tato fronta už není generovací: jde o získání 66 zbývajících skutečných fotografických sad C a historických dokladů E z doložených licenčních zdrojů. Pořadí se řídí přímým přínosem pro aktivitu, obtížností nahradit obraz slovním popisem a možností sdílení mezi stránkami.
 
-1. `IMG-f-18` — skutečná řada fází Měsíce a fotografie meteoru.
-2. `IMG-pr-03` — čtyři typy lišejníků pro bezpečné určování.
-3. `IMG-m-03` — římské číslice v reálném prostředí.
-4. `IMG-f-19` — oficiální snímky ISS a Země z paluby.
-5. `IMG-ch-07` — koroze, ochrana kovu a citronová baterie v praxi.
-6. `IMG-pr-19` — šest geologických jevů v české krajině.
-7. `IMG-z-08`, `IMG-z-10`, `IMG-z-12` až `IMG-z-15` — ucelené série míst a krajin.
-8. Sady E — historické prameny a reprodukce, vždy podle ověřené předlohy a licence.
+1. `IMG-m-03` — římské číslice v reálném prostředí.
+2. `IMG-f-19` — oficiální snímky ISS a Země z paluby.
+3. `IMG-ch-07` — koroze, ochrana kovu a citronová baterie v praxi.
+4. `IMG-pr-19` — šest geologických jevů v české krajině.
+5. `IMG-z-08`, `IMG-z-10`, `IMG-z-12` až `IMG-z-15` — ucelené série míst a krajin.
+6. Sady E — historické prameny a reprodukce, vždy podle ověřené předlohy a licence.
 
 Před uzavřením této fronty stojí samostatný kontrolní krok `IMG-pr-17`: odborné posouzení zdravotníkem, nikoli výroba dalších obrázků. Po dokončení položky se pořadí znovu vyhodnotí podle aktuálního stavu stránek.
 
@@ -112,8 +110,10 @@ Před uzavřením této fronty stojí samostatný kontrolní krok `IMG-pr-17`: o
 - Dokončena a zapojena sada `IMG-f-17`: 12 průhledných obrysových kreseb souhvězdí ve volitelné vrstvě hvězdné mapy; doplněny hvězdy a spojnice Štíra a Pegase. Přesná astronomická data zůstávají oddělená od ilustrativních kreseb.
 - Dokončena a zapojena sada `IMG-ch-05`: pět skutečných fotografií filtrace, destilace, odpařování, dělicí nálevky a papírové chromatografie z Wikimedia Commons; u každé je uložen autor, zdroj, licence a popis úprav.
 - Dokončena a zapojena sada `IMG-f-11`: dvojice skutečných fotografií stejné přílivové nádrže řeky Washford ve Watchetu při přílivu a odlivu. Zdrojové stránky se navzájem uvádějí jako protějšky a mají stejné souřadnice; fotografie jsou přístupné z režimu Slapové vlny.
+- Dokončena a zapojena sada `IMG-f-18`: osm kroků měsíčního cyklu z licencované fotografické série pořízené z pevného místa a snímek meteorického výbuchu roje Alfa Monocerotid; stránka vysvětluje i záměrně černou kartu novu.
+- Dokončena a zapojena sada `IMG-pr-03`: skutečné fotografie terčovníku zedního, provazovky vousaté, dutohlávky sobí a mapovníku zeměpisného v poznávačce podle barvy, tvaru a způsobu růstu stélky.
 - Uložení: `obsah/img/cj/`, `obsah/img/m/` a `obsah/img/aj/`; každý motiv jako `.png`, `.webp` a `.prompt.txt`.
 - WebP: karty 768 × 768 px do 60 000 B, scény 1152 × 768 px do 200 000 B.
 - [Kontrolní galerie](kapitola-7-2.html), [strojový seznam a alt texty](kapitola-7-2.json).
 - Všechny karty jsou generované, bez vloženého textu, čísel a značek. Vizuálně zkontrolováno jako jedna galerie.
-- Celkem 771 hotových obrazových podkladů. Plně dokončeno 99 ze 168 obrazových sad; do součtu jsou zahrnuty také hotové sady `IMG-00-02` a `IMG-aj-01` evidované v kapitole 7.1. Dokončit zbývá 69 sad: `IMG-pr-17` má 8 karet zapojených a čeká na odbornou kontrolu, dalších 68 sad tvoří skutečné fotografie C a historické doklady E, které se negenerují.
+- Celkem 784 hotových obrazových podkladů. Plně dokončeno 101 ze 168 obrazových sad; do součtu jsou zahrnuty také hotové sady `IMG-00-02` a `IMG-aj-01` evidované v kapitole 7.1. Dokončit zbývá 67 sad: `IMG-pr-17` má 8 karet zapojených a čeká na odbornou kontrolu, dalších 66 sad tvoří skutečné fotografie C a historické doklady E, které se negenerují.
