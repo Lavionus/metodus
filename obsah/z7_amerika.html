@@ -15,6 +15,16 @@
     .uloha-text { max-width: 620px; font-size: 1.02rem; line-height: 1.6; }
     .uloha-text b { color: var(--accent); }
     .rez-scena { width:min(760px,100%); border-radius:16px; background:#f8f1df; }
+    .foto-atlas { width:min(1120px,100%); margin:18px auto 22px; }
+    .foto-atlas h2 { margin:0 0 5px; text-align:center; font-size:1.22rem; }
+    .foto-atlas > p { margin:0 auto 12px; max-width:780px; text-align:center; color:var(--text-muted,var(--text)); }
+    .foto-mrizka { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; }
+    .foto-karta { margin:0; overflow:hidden; border:1px solid var(--border); border-radius:14px; background:var(--bg-card); box-shadow:var(--shadow-sm); }
+    .foto-karta img { display:block; width:100%; aspect-ratio:4/3; object-fit:cover; }
+    .foto-karta figcaption { padding:10px 11px 12px; font-size:.9rem; line-height:1.35; }
+    .foto-karta strong { display:block; margin-bottom:3px; color:var(--accent); font-size:1rem; }
+    @media (max-width:820px) { .foto-mrizka { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+    @media (max-width:440px) { .foto-mrizka { grid-template-columns:1fr; } }
   </style>
 </head>
 <body>
@@ -28,6 +38,17 @@
     <button data-rezim="kvizHospodarstvi">🏭 Lidé a hospodářství</button>
     <button data-rezim="rez">🌎 Řez kontinentem</button>
   </div>
+
+  <section class="foto-atlas" aria-labelledby="foto-atlas-nadpis">
+    <h2 id="foto-atlas-nadpis">Čtyři tváře Ameriky</h2>
+    <p>Porovnej reliéf, vegetaci a osídlení. Snímky spojují polohu na mapě s přírodními podmínkami i lidskou činností.</p>
+    <div class="foto-mrizka">
+      <figure class="foto-karta"><img src="img/z/z7-amerika-grand-canyon.webp" alt="Hluboký Grand Canyon s odkrytými vodorovnými vrstvami hornin." width="1152" height="494" loading="lazy"><figcaption><strong>Grand Canyon, USA</strong>Řeka Colorado se zařezává do vyzdvižené plošiny a odhaluje vrstvy hornin.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/z/z7-amerika-new-york.webp" alt="Husté panorama mrakodrapů dolního Manhattanu přes řeku Hudson." width="1152" height="619" loading="lazy"><figcaption><strong>New York, USA</strong>Hustá výšková zástavba ukazuje význam světového hospodářského a dopravního centra.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/z/z7-amerika-machu-picchu.webp" alt="Kamenné stavby a terasy Machu Picchu vysoko v peruánských Andách." width="1152" height="772" loading="lazy"><figcaption><strong>Machu Picchu, Peru</strong>Incké město bylo vybudováno v členitém horském prostředí And ve výšce kolem 2 430 metrů.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/z/z7-amerika-amazonie.webp" alt="Letecký pohled na meandrující řeku Solimões obklopenou souvislým amazonským pralesem." width="1152" height="708" loading="lazy"><figcaption><strong>Amazonie, Brazílie</strong>Hustý tropický les a široká meandrující řeka dokládají teplé a velmi vlhké podnebí.</figcaption></figure>
+    </div>
+  </section>
 
   <div class="plocha" id="plocha"></div>
 

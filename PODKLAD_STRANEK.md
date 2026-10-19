@@ -2106,7 +2106,7 @@ Společné: 🔗 jednotné ovládání (pauza, rychlost času, popisky) a spole�
   - Úlohy: délka oběhu z rychlosti a výšky, kolikrát za den vidí posádka východ Slunce.
   - Označený záznam jednoho oběhu pro výuku bez internetu.
 - **Obrázky:**
-  - `IMG-f-19` ⚪ **C** · fotografie ISS (NASA, volné dílo) a snímek Země z paluby — skutečný pohled
+  - `IMG-f-19` ⚪ **C ✅** · oficiální fotografie ISS a snímek Země z paluby (NASA) — zapojeno do přístupné galerie „Skutečné snímky“
 
 ### 7.8 Chemie (13 stránek)
 
@@ -2223,7 +2223,7 @@ Společné pro chemii: 🔗 **jeden molekulový model** (🧩 molekula a atom) p
   - Animace přesunu elektronů a změny oxidačních čísel současně.
   - Daniellův článek a elektrolýza vedle sebe (směr energie).
 - **Obrázky:**
-  - `IMG-ch-07` ⚪ **C** · fotografie koroze (rezavý hřebík, měděná střecha s patinou), pozinkovaného plechu, citronové baterie
+  - `IMG-ch-07` ⚪ **C ✅** · čtyři licencované fotografie koroze, patiny, pozinkování a citronového článku — zapojeno do režimu Články a koroze
 
 #### Uhlovodíky · [ch9_uhlovodiky.html](obsah/ch9_uhlovodiky.html)
 - **Zařazení:** Přírodní vědy › Chemie · 9. r. · lekce A
@@ -2426,7 +2426,7 @@ Společné pro přírodopis: čtyři stránky (`bunka`, `pr7_rostliny`, `anatomi
   - 🧩 Mapa desek se sopkami a zemětřeseními (propojit se `z6_litosfera`).
 - **Obrázky:**
   - `IMG-pr-18` ✅ **A** · 3 řezy deskovými rozhraními (středooceánský hřbet, subdukce s vulkanickým obloukem, transformní zlom) ve stejném stylu a měřítku — zapojeno jako názorný přehled nad kvízem
-  - `IMG-pr-19` ⚪ **C** · fotografie 6 geologických jevů v ČR (Pravčická brána, propast Macocha, Říp, Komorní hůrka, Adršpašské skály, meandry Lužnice) — vnitřní a vnější děje v krajině
+  - `IMG-pr-19` ⚪ **C ✅** · šest licencovaných fotografií českých geologických jevů — zapojeno se stručným vysvětlením vnitřních a vnějších dějů
 
 #### Minerály a horniny · [pr9_mineraly.html](obsah/pr9_mineraly.html)
 - **Zařazení:** Přírodní vědy › Přírodopis · 9. r. · lekce A (hlavní lekce rodiny hornin)
@@ -2550,7 +2550,7 @@ Společné pro zeměpis: 🔗 **jedna datová sada států a jedna mapová kompo
   - Dva klimatogramy (Káhira, Kinshasa) a dva příběhy dětí z různých regionů.
 - **Obrázky:**
   - `IMG-z-07` ✅ **A** · přírodní pásy Afriky od Středomoří k tropickému lesu — zapojeno
-  - `IMG-z-08` ⚪ **C** · 4 fotografie míst (Káhira s Nilem, Sahara, savana v Tanzanii, Kapské Město)
+  - `IMG-z-08` ⚪ **C ✅** · 4 licencované fotografie míst (Káhira s Nilem, Sahara, savana v Tanzanii, Kapské Město) — zapojeno do srovnávacího atlasu
 
 #### Kvíz světových hlavních měst · [svetova_hlavni_mesta.html](obsah/svetova_hlavni_mesta.html)
 - **Zařazení:** Zeměpis › 7. a 9. r. · samostatná F
@@ -2573,7 +2573,7 @@ Společné pro zeměpis: 🔗 **jedna datová sada států a jedna mapová kompo
   - Srovnání dvou měst (Toronto × São Paulo).
 - **Obrázky:**
   - `IMG-z-09` ✅ **A** · řez Jižní Amerikou od Pacifiku k Atlantiku — zapojeno
-  - `IMG-z-10` ⚪ **C** · 4 fotografie míst (Grand Canyon, New York, Machu Picchu, Amazonie)
+  - `IMG-z-10` ⚪ **C ✅** · 4 licencované fotografie míst (Grand Canyon, New York, Machu Picchu, Amazonie) — zapojeno do srovnávacího atlasu
 
 #### Asie · [z7_asie.html](obsah/z7_asie.html)
 - **Zařazení:** Zeměpis › 7. r. · lekce A (s mapou)
@@ -2585,7 +2585,7 @@ Společné pro zeměpis: 🔗 **jedna datová sada států a jedna mapová kompo
   - Několik studijních regionů (Sibiř, Blízký východ, Indie, Čína, Japonsko).
 - **Obrázky:**
   - `IMG-z-11` ✅ **A** · stejná indická vesnice v suchu a za monzunu — zapojeno
-  - `IMG-z-12` ⚪ **C** · 4 fotografie míst (Himálaj, rýžové terasy, Tokio, poušť Gobi)
+  - `IMG-z-12` ⚪ **C ✅** · 4 licencované fotografie míst (Himálaj, rýžové terasy, Tokio, poušť Gobi) — zapojeno do srovnávacího atlasu
 
 #### Kvíz vlajky a města · [flags_quiz.html](obsah/flags_quiz.html)
 - **Zařazení:** Zeměpis › 7.–9. r. · samostatná F
@@ -3443,20 +3443,20 @@ Při výrobě sady v jednom stylu zadávat všechny karty v jedné dávce se ste
 | `IMG-f-16` | C | fotografie rozvodny, stožárů vysokého napětí, transformátoru na sloupu, domovní pojistkové skříně | [f9_stridavy_proud](obsah/f9_stridavy_proud.html) |
 | `IMG-f-17` | A ✅ | 12 jemných obrysových kreseb souhvězdí na průhledném pozadí — zapojeno jako volitelná vrstva nad přesnou mapou; doplněny hvězdy a spojnice Štíra a Pegase | [star_map](obsah/star_map.html) |
 | `IMG-f-18` | C ✅ | osm kroků měsíčního cyklu z fotografické série pořízené z pevného místa a fotografie meteorického výbuchu — zapojeno, licence i úpravy doloženy | [sky_events](obsah/sky_events.html) |
-| `IMG-f-19` | C | fotografie ISS (NASA, volné dílo) a snímek Země z paluby — skutečný pohled | [iss](obsah/iss.html) |
+| `IMG-f-19` | C ✅ | oficiální fotografie ISS a snímek Země z paluby (NASA) — zapojeno do přístupné galerie „Skutečné snímky“ | [iss](obsah/iss.html) |
 | `IMG-ch-05` | C ✅ | pět skutečných fotografií aparatur zapojeno jako protějšek animací; doložen autor, licence, zdroj a úpravy | [ch8_smesi](obsah/ch8_smesi.html) |
-| `IMG-ch-07` | C | fotografie koroze (rezavý hřebík, měděná střecha s patinou), pozinkovaného plechu, citronové baterie | [ch9_redoxni](obsah/ch9_redoxni.html) |
+| `IMG-ch-07` | C ✅ | čtyři licencované fotografie koroze, patiny, pozinkování a citronového článku — zapojeno do režimu Články a koroze | [ch9_redoxni](obsah/ch9_redoxni.html) |
 | `IMG-ch-08` | A ✅ | řez frakční destilační kolonou; hotovo a zapojeno | [ch9_uhlovodiky](obsah/ch9_uhlovodiky.html) |
 | `IMG-ch-10` | B ✅ | 8 karet běžných výrobků s deriváty (láhev octa, dezinfekce, odlakovač, aspirin, parfém, nemrznoucí směs, PET láhev, mýdlo) bez značek — zapojeno do poznávačky | [ch9_derivaty](obsah/ch9_derivaty.html) |
 | `IMG-pr-03` | C ✅ | fotografie terčovníku, provazovky, dutohlávky a mapovníku — zapojeno do určování podle typu stélky, licence a úpravy doloženy | [pr6_houby](obsah/pr6_houby.html) |
-| `IMG-pr-19` | C | fotografie 6 geologických jevů v ČR (Pravčická brána, propast Macocha, Říp, Komorní hůrka, Adršpašské skály, meandry Lužnice) — vnitřní a vnější děje v krajině | [pr9_geologicke_deje](obsah/pr9_geologicke_deje.html) |
+| `IMG-pr-19` | C ✅ | šest licencovaných fotografií českých geologických jevů — zapojeno se stručným vysvětlením vnitřních a vnějších dějů | [pr9_geologicke_deje](obsah/pr9_geologicke_deje.html) |
 | `IMG-pr-22` | A ✅ | 4 rekonstrukce krajin (prvohorní moře, karbonský les, druhohorní krajina s dinosaury, čtvrtohorní tundra s mamuty) — označit jako rekonstrukce | [pr9_vyvoj_zeme](obsah/pr9_vyvoj_zeme.html) |
 | `IMG-pr-23` | B ✅ | 8 karet znaků pro křížení (žlutý/zelený hrách, hladký/svraštělý hrách, černé/hnědé morče, červený/bílý květ hrachu) — zapojeno jako volba fenotypu a alel | [punnett](obsah/punnett.html) |
 | `IMG-z-02` | A ✅ | svislý řez atmosférou; hotovo a zapojeno | [z6_atmosfera](obsah/z6_atmosfera.html) |
 | `IMG-z-06` | A ✅ | řez Zemí (kůra, plášť, vnější a vnitřní jádro) s výsekem — hotspoty vrstev | [z6_litosfera](obsah/z6_litosfera.html) |
-| `IMG-z-08` | C | 4 fotografie míst (Káhira s Nilem, Sahara, savana v Tanzanii, Kapské Město) | [z7_afrika](obsah/z7_afrika.html) |
-| `IMG-z-10` | C | 4 fotografie míst (Grand Canyon, New York, Machu Picchu, Amazonie) | [z7_amerika](obsah/z7_amerika.html) |
-| `IMG-z-12` | C | 4 fotografie míst (Himálaj, rýžové terasy, Tokio, poušť Gobi) | [z7_asie](obsah/z7_asie.html) |
+| `IMG-z-08` | C ✅ | 4 licencované fotografie míst (Káhira s Nilem, Sahara, savana v Tanzanii, Kapské Město) — zapojeno do srovnávacího atlasu | [z7_afrika](obsah/z7_afrika.html) |
+| `IMG-z-10` | C ✅ | 4 licencované fotografie míst (Grand Canyon, New York, Machu Picchu, Amazonie) — zapojeno do srovnávacího atlasu | [z7_amerika](obsah/z7_amerika.html) |
+| `IMG-z-12` | C ✅ | 4 licencované fotografie míst (Himálaj, rýžové terasy, Tokio, poušť Gobi) — zapojeno do srovnávacího atlasu | [z7_asie](obsah/z7_asie.html) |
 | `IMG-z-13` | C | fotografie (Uluru, Velký bariérový útes, korálový atol, Antarktida s tučňáky, klokan, ptakopysk) | [z7_australie_oceanie](obsah/z7_australie_oceanie.html) |
 | `IMG-z-14` | C | 6 fotografií krajin ČR (Krkonoše, Šumava, Polabí, Českomoravská vrchovina, Beskydy, Pálava) | [z8_cr_prirodni](obsah/z8_cr_prirodni.html) |
 | `IMG-z-15` | C | 6 fotografií typických krajin regionů (fjord, Středomoří, Alpy, nížina Nizozemska, ruská tajga, britské pobřeží) | [z8_evropa_regiony](obsah/z8_evropa_regiony.html) |

@@ -1,0 +1,8 @@
+Sada: IMG-pr-19
+Soubor: pr9-geologie-macocha
+Popis: Propast Macocha v Moravském krasu, krasový jev vzniklý rozpouštěním vápence a zřícením dutiny.
+Autor: damianstaroscic
+Zdroj: https://commons.wikimedia.org/wiki/File:Macocha_abyss,_moravian_karst,_near_ostrov_u_macochy,_czech_republic_-_przepa%C5%9B%C4%87_macochy,_morawski_kras,_blisko_ostrov_u_macochy,_czechy_-_panoramio.jpg
+Licence: CC BY-SA 3.0
+Staženo: 2026-10-19
+Úpravy: automatická orientace, odstranění metadat, PNG do 1600 px; WebP 768 px q70

@@ -25,7 +25,15 @@
     .desky-prehled img { display: block; width: 100%; aspect-ratio: 2 / 1; object-fit: cover; }
     .desky-prehled figcaption { padding: 9px 11px 11px; color: var(--text-muted); font-size: 0.8rem; line-height: 1.4; }
     .desky-prehled b { display: block; color: var(--text); font-size: 0.9rem; margin-bottom: 3px; }
-    @media (max-width: 720px) { .desky-prehled { grid-template-columns: 1fr; } }
+    .cesko-prehled { width: min(100%, 1080px); margin: 0 0 20px; }
+    .cesko-prehled h2 { margin: 2px 0 10px; font-size: 1.05rem; }
+    .cesko-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+    .cesko-grid figure { margin: 0; overflow: hidden; background: var(--bg-panel); border: 1px solid var(--border); border-radius: 14px; }
+    .cesko-grid img { display: block; width: 100%; aspect-ratio: 3 / 2; object-fit: cover; }
+    .cesko-grid figcaption { padding: 9px 11px 11px; color: var(--text-muted); font-size: .79rem; line-height: 1.4; }
+    .cesko-grid b { display: block; color: var(--text); font-size: .9rem; margin-bottom: 3px; }
+    .typ-deje { display: inline-block; margin-top: 5px; padding: 2px 7px; border-radius: 999px; background: var(--bg-control); color: var(--accent); font-size: .7rem; font-weight: 700; }
+    @media (max-width: 720px) { .desky-prehled, .cesko-grid { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
@@ -52,6 +60,18 @@
       <img src="img/pr/pr9-desky-transform.webp" alt="Řez transformním zlomem se dvěma bloky kůry a stranově posunutým říčním korytem." width="1152" height="576">
       <figcaption><b>Transformní rozhraní</b>Desky se posouvají podél zlomu; kůra nevzniká ani nezaniká.</figcaption>
     </figure>
+  </section>
+
+  <section class="cesko-prehled" aria-labelledby="ceskoTitle">
+    <h2 id="ceskoTitle">Geologické děje v české krajině</h2>
+    <div class="cesko-grid">
+      <figure><img src="img/pr/pr9-geologie-pravcicka.webp" alt="Mohutný pískovcový oblouk Pravčické brány nad lesem." width="1152" height="864"><figcaption><b>Pravčická brána</b>Odolnější pískovec zůstal jako oblouk, okolní horninu rozrušilo zvětrávání a odnesla eroze.<span class="typ-deje">vnější děje</span></figcaption></figure>
+      <figure><img src="img/pr/pr9-geologie-macocha.webp" alt="Pohled do hluboké vápencové propasti Macocha se svislými skalními stěnami." width="768" height="1024"><figcaption><b>Propast Macocha</b>Voda rozpouštěla vápenec; zřícením stropu velké krasové dutiny se otevřela propast.<span class="typ-deje">vnější děje</span></figcaption></figure>
+      <figure><img src="img/pr/pr9-geologie-rip.webp" alt="Osamělá zalesněná hora Říp vystupující z rovné zemědělské krajiny." width="1152" height="662"><figcaption><b>Říp</b>Odolná sopečná hornina je pozůstatkem třetihorního vulkanismu, který okolní eroze obnažila.<span class="typ-deje">vnitřní i vnější</span></figcaption></figure>
+      <figure><img src="img/pr/pr9-geologie-komorni.webp" alt="Tmavé sopečné horniny vystupující v lese na Komorní hůrce." width="1152" height="769"><figcaption><b>Komorní hůrka</b>Horniny a strusky připomínají jednu z nejmladších sopek na území Česka.<span class="typ-deje">vnitřní děje</span></figcaption></figure>
+      <figure><img src="img/pr/pr9-geologie-adrspach.webp" alt="Vysoké členité pískovcové věže Adršpašských skal vystupující nad lesem." width="1152" height="769"><figcaption><b>Adršpašské skály</b>Pukliny, mráz a tekoucí voda rozčlenily pískovcovou tabuli na věže a soutěsky.<span class="typ-deje">vnější děje</span></figcaption></figure>
+      <figure><img src="img/pr/pr9-geologie-luznice.webp" alt="Letecký pohled na výrazně meandrující tok Lužnice v ploché mokřadní krajině." width="1152" height="864"><figcaption><b>Meandry Lužnice</b>Řeka na vnější straně oblouku břeh podemílá a na vnitřní straně ukládá sedimenty.<span class="typ-deje">vnější děje</span></figcaption></figure>
+    </div>
   </section>
 
   <div class="plocha" id="plocha"></div>

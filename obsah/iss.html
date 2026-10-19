@@ -48,6 +48,21 @@
     .toolbar button:hover, .toolbar a:hover { border-color: var(--primary); }
     .toolbar button.on { border-color: var(--primary); color: var(--primary); }
 
+    .photo-dialog {
+      width: min(960px, calc(100vw - 32px)); max-height: calc(100vh - 32px); overflow: auto;
+      color: var(--text); background: #101622; border: 1px solid rgba(127,212,212,.45);
+      border-radius: 16px; padding: 18px; box-shadow: 0 20px 70px #000;
+    }
+    .photo-dialog::backdrop { background: rgba(1,3,8,.82); backdrop-filter: blur(5px); }
+    .photo-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 14px; }
+    .photo-head h2 { font-size: 1.1rem; }
+    .photo-close { border: 1px solid var(--border); border-radius: 8px; padding: 7px 10px; color: var(--text); background: rgba(255,255,255,.06); cursor: pointer; }
+    .photo-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 14px; }
+    .photo-grid figure { margin: 0; overflow: hidden; border: 1px solid var(--border); border-radius: 12px; background: rgba(255,255,255,.035); }
+    .photo-grid img { display: block; width: 100%; aspect-ratio: 3 / 2; object-fit: cover; background: #000; }
+    .photo-grid figcaption { padding: 10px 12px; font-size: .78rem; line-height: 1.45; color: #c5ccda; }
+    .photo-grid strong { color: var(--text); }
+
     .panel {
       position: fixed; top: 92px; left: 20px; z-index: 10; width: 290px;
       background: var(--panel); border: 1px solid var(--border); border-radius: 14px;
@@ -88,7 +103,7 @@
     @keyframes puls { 50% { filter: drop-shadow(0 0 14px rgba(127,212,212,1)); } }
     .iss-marker .jm { font-size: 10px; font-weight: 700; color: #bfeeee; text-shadow: 0 1px 3px #000; }
 
-    @media (max-width: 640px) { .panel { width: calc(100% - 40px); } .hint { display: none; } }
+    @media (max-width: 640px) { .panel { width: calc(100% - 40px); } .hint { display: none; } .photo-grid { grid-template-columns: 1fr; } }
   
 </style>
 </head>
@@ -103,6 +118,7 @@
     <div class="toolbar">
       <button id="followBtn" class="on" title="Kamera sleduje stanici">🔭 Sledovat</button>
       <button id="dayNightBtn" class="on" title="Zobrazení den / noc">🌓 Den/noc</button>
+      <button id="photosBtn" type="button" title="Otevřít skutečné fotografie ISS a Země">📷 Skutečné snímky</button>
       <a href="planet_globe.html" title="3D glóbusy planet">🌐 Glóbusy</a>
     </div>
   </div>
@@ -138,6 +154,23 @@
     <div class="spinner"></div>
     <span>Načítám glóbus a polohu ISS…</span>
   </div>
+
+  <dialog class="photo-dialog" id="photoDialog" aria-labelledby="photoTitle">
+    <div class="photo-head">
+      <h2 id="photoTitle">Skutečný pohled z oběžné dráhy</h2>
+      <button class="photo-close" id="photosClose" type="button" aria-label="Zavřít fotografie">✕ Zavřít</button>
+    </div>
+    <div class="photo-grid">
+      <figure>
+        <img src="img/f/iss-stanice.webp" alt="Mezinárodní vesmírná stanice s rozvinutými solárními panely na černém pozadí vesmíru." width="1152" height="704">
+        <figcaption><strong>ISS zvenčí.</strong> Mozaika snímků pořízených při obletu stanice lodí Crew Dragon Endeavour v listopadu 2021. Zdroj: ESA / Thomas Pesquet, NASA.</figcaption>
+      </figure>
+      <figure>
+        <img src="img/f/iss-zeme-z-paluby.webp" alt="Tenké modré vrstvy zemské atmosféry nad oranžovým obzorem při východu Slunce." width="1152" height="768">
+        <figcaption><strong>Země z paluby ISS.</strong> Modré vrstvy atmosféry jsou proti rozměrům Země velmi tenké; oranžový pás osvětluje vycházející Slunce. Snímek ISS041-E-105277, NASA.</figcaption>
+      </figure>
+    </div>
+  </dialog>
 
   <script>
     const API = 'https://api.wheretheiss.at/v1/satellites/25544';
@@ -386,6 +419,12 @@
       this.classList.toggle('on', denNoc);
       aplikujMaterial();
     };
+    const photoDialog = document.getElementById('photoDialog');
+    document.getElementById('photosBtn').onclick = () => photoDialog.showModal();
+    document.getElementById('photosClose').onclick = () => photoDialog.close();
+    photoDialog.addEventListener('click', event => {
+      if (event.target === photoDialog) photoDialog.close();
+    });
 
     /* ================= Start ================= */
     const loader = document.getElementById('loader');

@@ -10099,6 +10099,54 @@
     "puvod": { "typ": "fotografie", "autor": "NASA Ames Research Center / S. Molau a P. Jenniskens", "licence": "Public domain (NASA)", "datum": "2026-10-16", "zdroj": "f/f9-meteor.zdroj.txt" }
   },
   {
+    "id": "IMG-f-19", "name": "iss-stanice", "alt": "Mezinárodní vesmírná stanice s rozvinutými solárními panely na černém pozadí vesmíru.", "bytes": 40566, "webp": "f/iss-stanice.webp", "png": "f/iss-stanice.png",
+    "puvod": { "typ": "oficialni fotografie", "autor": "ESA / Thomas Pesquet; NASA/JSC", "licence": "Public domain (NASA)", "datum": "2026-10-19", "zdroj": "f/iss-stanice.zdroj.txt" }
+  },
+  {
+    "id": "IMG-f-19", "name": "iss-zeme-z-paluby", "alt": "Tenké modré vrstvy zemské atmosféry nad oranžovým obzorem při východu Slunce.", "bytes": 7522, "webp": "f/iss-zeme-z-paluby.webp", "png": "f/iss-zeme-z-paluby.png",
+    "puvod": { "typ": "astronautska fotografie", "autor": "NASA / posádka Expedice 41", "licence": "Public domain (NASA)", "datum": "2026-10-19", "zdroj": "f/iss-zeme-z-paluby.zdroj.txt" }
+  },
+  {
+    "id": "IMG-ch-07", "name": "ch9-redox-rezavy-hrebik", "alt": "Silně zkorodovaný železný hřebík s hnědou vrstvou rzi.", "bytes": 21132, "webp": "ch/ch9-redox-rezavy-hrebik.webp", "png": "ch/ch9-redox-rezavy-hrebik.png",
+    "puvod": { "typ": "fotografie", "autor": "Thomas Maeder", "licence": "CC BY-SA 3.0", "datum": "2026-10-19", "zdroj": "ch/ch9-redox-rezavy-hrebik.zdroj.txt" }
+  },
+  {
+    "id": "IMG-ch-07", "name": "ch9-redox-medena-strecha", "alt": "Měděná střecha pokrytá zelenou patinou.", "bytes": 103172, "webp": "ch/ch9-redox-medena-strecha.webp", "png": "ch/ch9-redox-medena-strecha.png",
+    "puvod": { "typ": "fotografie", "autor": "W. Carter", "licence": "CC0 1.0", "datum": "2026-10-19", "zdroj": "ch/ch9-redox-medena-strecha.zdroj.txt" }
+  },
+  {
+    "id": "IMG-ch-07", "name": "ch9-redox-pozinkovany-plech", "alt": "Detail pozinkovaného ocelového plechu s krystalickou kresbou povlaku.", "bytes": 110258, "webp": "ch/ch9-redox-pozinkovany-plech.webp", "png": "ch/ch9-redox-pozinkovany-plech.png",
+    "puvod": { "typ": "fotografie", "autor": "Splarka", "licence": "Public domain", "datum": "2026-10-19", "zdroj": "ch/ch9-redox-pozinkovany-plech.zdroj.txt" }
+  },
+  {
+    "id": "IMG-ch-07", "name": "ch9-redox-citronova-baterie", "alt": "Dva citrony s kovovými elektrodami zapojené vodiči k rozsvícené LED.", "bytes": 44552, "webp": "ch/ch9-redox-citronova-baterie.webp", "png": "ch/ch9-redox-citronova-baterie.png",
+    "puvod": { "typ": "fotografie", "autor": "ChristianSW", "licence": "CC BY 3.0", "datum": "2026-10-19", "zdroj": "ch/ch9-redox-citronova-baterie.zdroj.txt" }
+  },
+  {
+    "id": "IMG-pr-19", "name": "pr9-geologie-pravcicka", "alt": "Mohutný pískovcový oblouk Pravčické brány nad lesem.", "bytes": 153428, "webp": "pr/pr9-geologie-pravcicka.webp", "png": "pr/pr9-geologie-pravcicka.png",
+    "puvod": { "typ": "fotografie", "autor": "ŠJů / Wikimedia Commons", "licence": "CC BY 4.0", "datum": "2026-10-19", "zdroj": "pr/pr9-geologie-pravcicka.zdroj.txt" }
+  },
+  {
+    "id": "IMG-pr-19", "name": "pr9-geologie-macocha", "alt": "Pohled do hluboké vápencové propasti Macocha se svislými skalními stěnami.", "bytes": 192120, "webp": "pr/pr9-geologie-macocha.webp", "png": "pr/pr9-geologie-macocha.png",
+    "puvod": { "typ": "fotografie", "autor": "damianstaroscic", "licence": "CC BY-SA 3.0", "datum": "2026-10-19", "zdroj": "pr/pr9-geologie-macocha.zdroj.txt" }
+  },
+  {
+    "id": "IMG-pr-19", "name": "pr9-geologie-rip", "alt": "Osamělá zalesněná hora Říp vystupující z rovné zemědělské krajiny.", "bytes": 65112, "webp": "pr/pr9-geologie-rip.webp", "png": "pr/pr9-geologie-rip.png",
+    "puvod": { "typ": "fotografie", "autor": "Lilili42", "licence": "CC BY-SA 4.0", "datum": "2026-10-19", "zdroj": "pr/pr9-geologie-rip.zdroj.txt" }
+  },
+  {
+    "id": "IMG-pr-19", "name": "pr9-geologie-komorni", "alt": "Tmavé sopečné horniny vystupující v lese na Komorní hůrce.", "bytes": 195184, "webp": "pr/pr9-geologie-komorni.webp", "png": "pr/pr9-geologie-komorni.png",
+    "puvod": { "typ": "fotografie", "autor": "Lubor Ferenc", "licence": "CC BY-SA 4.0", "datum": "2026-10-19", "zdroj": "pr/pr9-geologie-komorni.zdroj.txt" }
+  },
+  {
+    "id": "IMG-pr-19", "name": "pr9-geologie-adrspach", "alt": "Vysoké členité pískovcové věže Adršpašských skal vystupující nad lesem.", "bytes": 156012, "webp": "pr/pr9-geologie-adrspach.webp", "png": "pr/pr9-geologie-adrspach.png",
+    "puvod": { "typ": "fotografie", "autor": "Thalun", "licence": "CC BY-SA 4.0", "datum": "2026-10-19", "zdroj": "pr/pr9-geologie-adrspach.zdroj.txt" }
+  },
+  {
+    "id": "IMG-pr-19", "name": "pr9-geologie-luznice", "alt": "Letecký pohled na výrazně meandrující tok Lužnice v ploché mokřadní krajině.", "bytes": 108538, "webp": "pr/pr9-geologie-luznice.webp", "png": "pr/pr9-geologie-luznice.png",
+    "puvod": { "typ": "fotografie", "autor": "Kralpilot", "licence": "CC BY-SA 3.0", "datum": "2026-10-19", "zdroj": "pr/pr9-geologie-luznice.zdroj.txt" }
+  },
+  {
     "id": "IMG-pr-03", "name": "pr6-lisejnik-tercovnik", "alt": "Žlutooranžový terčovník zední s lupenitou stélkou a oranžovými terčíky na kůře.", "bytes": 58134, "webp": "pr/pr6-lisejnik-tercovnik.webp", "png": "pr/pr6-lisejnik-tercovnik.png",
     "puvod": { "typ": "fotografie", "autor": "Björn Sothmann", "licence": "CC BY-SA 2.0", "datum": "2026-10-16", "zdroj": "pr/pr6-lisejnik-tercovnik.zdroj.txt" }
   },
@@ -10129,5 +10177,53 @@
   {
     "id": "IMG-m-03", "name": "m5-rimske-kapitola", "alt": "Sken historické knihy se záhlavím CHAPTER XIV.", "bytes": 39440, "webp": "m/m5-rimske-kapitola.webp", "png": "m/m5-rimske-kapitola.png",
     "puvod": { "typ": "historicky sken", "autor": "Charles De Forest Hoxie", "licence": "Public domain", "datum": "2026-10-16", "zdroj": "m/m5-rimske-kapitola.zdroj.txt" }
+  },
+  {
+    "id": "IMG-z-08", "name": "z7-afrika-kahira", "alt": "Nil se zeleným pobřežím a hustá zástavba Káhiry v pozadí.", "bytes": 71456, "webp": "z/z7-afrika-kahira.webp", "png": "z/z7-afrika-kahira.png",
+    "puvod": { "typ": "fotografie", "autor": "Vyacheslav Argenberg", "licence": "CC BY 4.0", "datum": "2026-10-19", "zdroj": "z/z7-afrika-kahira.zdroj.txt" }
+  },
+  {
+    "id": "IMG-z-08", "name": "z7-afrika-sahara", "alt": "Písečné duny v oblasti Tassili n'Ajjer v alžírské Sahaře.", "bytes": 38128, "webp": "z/z7-afrika-sahara.webp", "png": "z/z7-afrika-sahara.png",
+    "puvod": { "typ": "fotografie", "autor": "Dagelf", "licence": "CC BY-SA 4.0", "datum": "2026-10-19", "zdroj": "z/z7-afrika-sahara.zdroj.txt" }
+  },
+  {
+    "id": "IMG-z-08", "name": "z7-afrika-serengeti", "alt": "Travnatá savana Serengeti v Tanzanii s rozptýlenými akáciemi.", "bytes": 115970, "webp": "z/z7-afrika-serengeti.webp", "png": "z/z7-afrika-serengeti.png",
+    "puvod": { "typ": "fotografie", "autor": "Bjørn Christian Tørrissen", "licence": "CC BY-SA 3.0", "datum": "2026-10-19", "zdroj": "z/z7-afrika-serengeti.zdroj.txt" }
+  },
+  {
+    "id": "IMG-z-08", "name": "z7-afrika-kapske-mesto", "alt": "Pohled ze Stolové hory na hustou zástavbu Kapského Města a pobřeží Atlantiku.", "bytes": 186896, "webp": "z/z7-afrika-kapske-mesto.webp", "png": "z/z7-afrika-kapske-mesto.png",
+    "puvod": { "typ": "fotografie", "autor": "Dietmar Rabich", "licence": "CC BY-SA 4.0", "datum": "2026-10-19", "zdroj": "z/z7-afrika-kapske-mesto.zdroj.txt" }
+  },
+  {
+    "id": "IMG-z-10", "name": "z7-amerika-grand-canyon", "alt": "Hluboký Grand Canyon s odkrytými vodorovnými vrstvami hornin.", "bytes": 122760, "webp": "z/z7-amerika-grand-canyon.webp", "png": "z/z7-amerika-grand-canyon.png",
+    "puvod": { "typ": "fotografie", "autor": "Paxson Woelber", "licence": "CC BY-SA 3.0", "datum": "2026-10-19", "zdroj": "z/z7-amerika-grand-canyon.zdroj.txt" }
+  },
+  {
+    "id": "IMG-z-10", "name": "z7-amerika-new-york", "alt": "Husté panorama mrakodrapů dolního Manhattanu přes řeku Hudson.", "bytes": 53524, "webp": "z/z7-amerika-new-york.webp", "png": "z/z7-amerika-new-york.png",
+    "puvod": { "typ": "fotografie", "autor": "Don Ramey Logan", "licence": "CC BY-SA 4.0", "datum": "2026-10-19", "zdroj": "z/z7-amerika-new-york.zdroj.txt" }
+  },
+  {
+    "id": "IMG-z-10", "name": "z7-amerika-machu-picchu", "alt": "Kamenné stavby a terasy Machu Picchu vysoko v peruánských Andách.", "bytes": 161638, "webp": "z/z7-amerika-machu-picchu.webp", "png": "z/z7-amerika-machu-picchu.png",
+    "puvod": { "typ": "fotografie", "autor": "W. Bulach", "licence": "CC BY-SA 4.0", "datum": "2026-10-19", "zdroj": "z/z7-amerika-machu-picchu.zdroj.txt" }
+  },
+  {
+    "id": "IMG-z-10", "name": "z7-amerika-amazonie", "alt": "Letecký pohled na meandrující řeku Solimões obklopenou souvislým amazonským pralesem.", "bytes": 112620, "webp": "z/z7-amerika-amazonie.webp", "png": "z/z7-amerika-amazonie.png",
+    "puvod": { "typ": "fotografie", "autor": "lubasi", "licence": "CC BY-SA 2.0", "datum": "2026-10-19", "zdroj": "z/z7-amerika-amazonie.zdroj.txt" }
+  },
+  {
+    "id": "IMG-z-12", "name": "z7-asie-himalaj", "alt": "Rozsáhlý zasněžený masiv Annapurny nad vysokohorským údolím v Nepálu.", "bytes": 69678, "webp": "z/z7-asie-himalaj.webp", "png": "z/z7-asie-himalaj.png",
+    "puvod": { "typ": "fotografie", "autor": "Dmitry A. Mottl", "licence": "CC BY-SA 3.0", "datum": "2026-10-19", "zdroj": "z/z7-asie-himalaj.zdroj.txt" }
+  },
+  {
+    "id": "IMG-z-12", "name": "z7-asie-ryzove-terasy", "alt": "Zelená rýžová pole uspořádaná do teras na strmých svazích filipínského Batadu.", "bytes": 198286, "webp": "z/z7-asie-ryzove-terasy.webp", "png": "z/z7-asie-ryzove-terasy.png",
+    "puvod": { "typ": "fotografie", "autor": "Ranieljosecastaneda", "licence": "CC BY-SA 4.0", "datum": "2026-10-19", "zdroj": "z/z7-asie-ryzove-terasy.zdroj.txt" }
+  },
+  {
+    "id": "IMG-z-12", "name": "z7-asie-tokio", "alt": "Hustá výšková zástavba tokijské čtvrti Šindžuku za jasného dne.", "bytes": 110872, "webp": "z/z7-asie-tokio.webp", "png": "z/z7-asie-tokio.png",
+    "puvod": { "typ": "fotografie", "autor": "Luke Ma", "licence": "CC BY 2.0", "datum": "2026-10-19", "zdroj": "z/z7-asie-tokio.zdroj.txt" }
+  },
+  {
+    "id": "IMG-z-12", "name": "z7-asie-gobi", "alt": "Rozlehlé písečné duny s řídkými keři v mongolské poušti Gobi.", "bytes": 53620, "webp": "z/z7-asie-gobi.webp", "png": "z/z7-asie-gobi.png",
+    "puvod": { "typ": "fotografie", "autor": "Richard Mortel", "licence": "CC BY 2.0", "datum": "2026-10-19", "zdroj": "z/z7-asie-gobi.zdroj.txt" }
   }
 ]

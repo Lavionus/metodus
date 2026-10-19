@@ -1,0 +1,11 @@
+Sada: IMG-f-19
+Soubor: iss-zeme-z-paluby
+Typ: astronautská fotografie Země
+Popis: Tenké vrstvy zemské atmosféry při východu Slunce, fotografované z Mezinárodní vesmírné stanice.
+Autor: NASA / posádka Expedice 41
+Identifikátor NASA: ISS041-E-105277
+Zdrojová stránka: https://eol.jsc.nasa.gov/collections/earthfromspace/images.pl?photo=ISS041-E-105277
+Přímý zdroj: https://eol.jsc.nasa.gov/DatabaseImages/EFS/highres/ISS041/ISS041-E-105277.JPG
+Licence: NASA image; public domain under U.S. law, subject to NASA Media Usage Guidelines
+Staženo: 2026-10-19
+Úpravy: převod JPEG do projektového PNG; převod do WebP q82 pro web

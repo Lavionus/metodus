@@ -1,0 +1,8 @@
+Sada: IMG-ch-07
+Soubor: ch9-redox-pozinkovany-plech
+Popis: Žárově pozinkovaný ocelový spojovací plech s viditelnou krystalickou kresbou zinkového povlaku.
+Autor: Splarka
+Zdroj: https://commons.wikimedia.org/wiki/File:Galvanized_surface.jpg
+Licence: Public domain
+Staženo: 2026-10-19
+Úpravy: automatická orientace a odstranění metadat; WebP 1152 px q82

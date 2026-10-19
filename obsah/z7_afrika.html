@@ -19,6 +19,16 @@
     .pasy-volby { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; }
     .pasy-volby button { background:var(--bg-control); border:2px solid var(--border-strong); color:var(--text); border-radius:10px; padding:8px 11px; font:inherit; cursor:pointer; }
     .pasy-volby button:hover { border-color:var(--accent); }
+    .foto-atlas { width:min(1120px,100%); margin:18px auto 22px; }
+    .foto-atlas h2 { margin:0 0 5px; text-align:center; font-size:1.22rem; }
+    .foto-atlas > p { margin:0 auto 12px; max-width:760px; text-align:center; color:var(--text-muted,var(--text)); }
+    .foto-mrizka { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; }
+    .foto-karta { margin:0; overflow:hidden; border:1px solid var(--border); border-radius:14px; background:var(--bg-card); box-shadow:var(--shadow-sm); }
+    .foto-karta img { display:block; width:100%; aspect-ratio:4/3; object-fit:cover; }
+    .foto-karta figcaption { padding:10px 11px 12px; font-size:.9rem; line-height:1.35; }
+    .foto-karta strong { display:block; margin-bottom:3px; color:var(--accent); font-size:1rem; }
+    @media (max-width:820px) { .foto-mrizka { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+    @media (max-width:440px) { .foto-mrizka { grid-template-columns:1fr; } }
   </style>
 </head>
 <body>
@@ -32,6 +42,17 @@
     <button data-rezim="kvizHospodarstvi">🏭 Lidé a hospodářství</button>
     <button data-rezim="pasy">🌿 Přírodní pásy</button>
   </div>
+
+  <section class="foto-atlas" aria-labelledby="foto-atlas-nadpis">
+    <h2 id="foto-atlas-nadpis">Čtyři tváře Afriky</h2>
+    <p>Porovnej vodu, vegetaci, reliéf a osídlení. Každý snímek ukazuje jinou vazbu mezi přírodními podmínkami a životem lidí.</p>
+    <div class="foto-mrizka">
+      <figure class="foto-karta"><img src="img/z/z7-afrika-kahira.webp" alt="Nil se zeleným pobřežím a hustá zástavba Káhiry v pozadí." width="1152" height="769" loading="lazy"><figcaption><strong>Káhira a Nil</strong>Voda umožňuje zemědělství i soustředění obyvatel uprostřed suché krajiny.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/z/z7-afrika-sahara.webp" alt="Písečné duny v oblasti Tassili n'Ajjer v alžírské Sahaře." width="1152" height="864" loading="lazy"><figcaption><strong>Sahara</strong>Nedostatek srážek a velké teplotní rozdíly omezují vegetaci i trvalé osídlení.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/z/z7-afrika-serengeti.webp" alt="Travnatá savana Serengeti v Tanzanii s rozptýlenými akáciemi." width="1152" height="664" loading="lazy"><figcaption><strong>Serengeti, Tanzanie</strong>Traviny a rozptýlené stromy odpovídají střídání období dešťů a sucha.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/z/z7-afrika-kapske-mesto.webp" alt="Pohled ze Stolové hory na hustou zástavbu Kapského Města a pobřeží Atlantiku." width="1152" height="769" loading="lazy"><figcaption><strong>Kapské Město</strong>Pobřežní velkoměsto leží mezi Atlantikem a výrazným masivem Stolové hory.</figcaption></figure>
+    </div>
+  </section>
 
   <div class="plocha" id="plocha"></div>
 

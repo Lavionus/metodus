@@ -18,6 +18,14 @@
       color: var(--text-faint); font-size: 0.79rem; }
     .lista span { background: var(--bg-control); border: 1px solid var(--border);
       border-radius: 8px; padding: 5px 11px; }
+    .foto-prehled { width: min(960px, 100%); margin: 0 auto 18px; display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+    .foto-prehled figure { margin: 0; overflow: hidden; border: 1px solid var(--border);
+      border-radius: 12px; background: var(--bg-card); }
+    .foto-prehled img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+    .foto-prehled figcaption { padding: 8px 9px; color: var(--text-faint); font-size: .76rem; line-height: 1.35; }
+    .foto-prehled strong { display: block; color: var(--text); font-size: .82rem; }
+    @media (max-width: 720px) { .foto-prehled { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   </style>
 </head>
 <body>
@@ -358,7 +366,13 @@ const NAPOVEDY = {
 function kviz(klic) {
   const p = $('plocha');
   const u = Uloha.nahodne(SADY[klic]);
-  p.innerHTML = `<div class="zadani uloha-text">${u.q}</div>`
+  const foto = klic === 'kviz4' ? `<section class="foto-prehled" aria-label="Koroze, ochrana kovu a galvanický článek">
+    <figure><img src="img/ch/ch9-redox-rezavy-hrebik.webp" alt="Silně zkorodovaný železný hřebík s hnědou vrstvou rzi." width="1152" height="384"><figcaption><strong>Rez železa</strong>Vlhkost a kyslík postupně spotřebovávají kov.</figcaption></figure>
+    <figure><img src="img/ch/ch9-redox-medena-strecha.webp" alt="Měděná střecha pokrytá zelenou patinou." width="1152" height="769"><figcaption><strong>Patina mědi</strong>Povrchová vrstva měď dále částečně chrání.</figcaption></figure>
+    <figure><img src="img/ch/ch9-redox-pozinkovany-plech.webp" alt="Detail pozinkovaného ocelového plechu s krystalickou kresbou povlaku." width="1152" height="768"><figcaption><strong>Pozinkování</strong>Zinek chrání ocel i při drobném porušení povrchu.</figcaption></figure>
+    <figure><img src="img/ch/ch9-redox-citronova-baterie.webp" alt="Dva citrony s kovovými elektrodami zapojené vodiči k rozsvícené LED." width="1152" height="864"><figcaption><strong>Citronový článek</strong>Dva různé kovy a elektrolyt vytvářejí napětí.</figcaption></figure>
+  </section>` : '';
+  p.innerHTML = foto + `<div class="zadani uloha-text">${u.q}</div>`
     + (u.p ? `<div class="karta"><div class="predmet">${u.p}</div></div>` : '');
   const odezva = odezvaEl();
   Uloha.vyber({

@@ -14,13 +14,10 @@ Mimo generovací frontu je **`IMG-pr-17`**: všech osm karet první pomoci už e
 
 ### Prioritní fronta dalšího obrazového doplňování
 
-Tato fronta už není generovací: jde o získání 65 zbývajících skutečných fotografických sad C a historických dokladů E z doložených licenčních zdrojů. Pořadí se řídí přímým přínosem pro aktivitu, obtížností nahradit obraz slovním popisem a možností sdílení mezi stránkami.
+Tato fronta už není generovací: jde o získání 59 zbývajících skutečných fotografických sad C a historických dokladů E z doložených licenčních zdrojů. Pořadí se řídí přímým přínosem pro aktivitu, obtížností nahradit obraz slovním popisem a možností sdílení mezi stránkami.
 
-1. `IMG-f-19` — oficiální snímky ISS a Země z paluby.
-2. `IMG-ch-07` — koroze, ochrana kovu a citronová baterie v praxi.
-3. `IMG-pr-19` — šest geologických jevů v české krajině.
-4. `IMG-z-08`, `IMG-z-10`, `IMG-z-12` až `IMG-z-15` — ucelené série míst a krajin.
-5. Sady E — historické prameny a reprodukce, vždy podle ověřené předlohy a licence.
+1. `IMG-z-13` až `IMG-z-15` — ucelené série míst a krajin.
+2. Sady E — historické prameny a reprodukce, vždy podle ověřené předlohy a licence.
 
 Před uzavřením této fronty stojí samostatný kontrolní krok `IMG-pr-17`: odborné posouzení zdravotníkem, nikoli výroba dalších obrázků. Po dokončení položky se pořadí znovu vyhodnotí podle aktuálního stavu stránek.
 
@@ -112,8 +109,14 @@ Před uzavřením této fronty stojí samostatný kontrolní krok `IMG-pr-17`: o
 - Dokončena a zapojena sada `IMG-f-18`: osm kroků měsíčního cyklu z licencované fotografické série pořízené z pevného místa a snímek meteorického výbuchu roje Alfa Monocerotid; stránka vysvětluje i záměrně černou kartu novu.
 - Dokončena a zapojena sada `IMG-pr-03`: skutečné fotografie terčovníku zedního, provazovky vousaté, dutohlávky sobí a mapovníku zeměpisného v poznávačce podle barvy, tvaru a způsobu růstu stélky.
 - Dokončena a zapojena sada `IMG-m-03`: věžní ciferník, stavební letopočet, náhrobní nápis a označení knižní kapitoly jako čtyři skutečné úlohy režimu V praxi.
+- Dokončena a zapojena sada `IMG-f-19`: oficiální mozaika ISS při obletu a astronautská fotografie tenkých vrstev zemské atmosféry; obě fotografie NASA jsou dostupné v modální galerii přímo nad živým glóbem a mají uložené zdroje i popis úprav.
+- Dokončena a zapojena sada `IMG-ch-07`: rezavý hřebík, měděná střecha s patinou, pozinkovaný plech a citronový galvanický článek jako čtyři licencované fotografie v režimu Články a koroze.
+- Dokončena a zapojena sada `IMG-pr-19`: šest licencovaných fotografií českých geologických lokalit propojuje Pravčickou bránu, Macochu, Říp, Komorní hůrku, Adršpašské skály a meandry Lužnice s konkrétními vnitřními a vnějšími ději.
+- Dokončena a zapojena sada `IMG-z-08`: čtyři licencované fotografie Káhiry s Nilem, Sahary, savany Serengeti a Kapského Města tvoří srovnávací atlas přírodních podmínek a osídlení Afriky.
+- Dokončena a zapojena sada `IMG-z-10`: čtyři licencované fotografie Grand Canyonu, New Yorku, Machu Picchu a Amazonie tvoří srovnávací atlas reliéfu, vegetace a osídlení Ameriky.
+- Dokončena a zapojena sada `IMG-z-12`: čtyři licencované fotografie Himálaje, rýžových teras, Tokia a pouště Gobi tvoří srovnávací atlas reliéfu, hospodaření, osídlení a vláhy v Asii.
 - Uložení: `obsah/img/cj/`, `obsah/img/m/` a `obsah/img/aj/`; každý motiv jako `.png`, `.webp` a `.prompt.txt`.
 - WebP: karty 768 × 768 px do 60 000 B, scény 1152 × 768 px do 200 000 B.
 - [Kontrolní galerie](kapitola-7-2.html), [strojový seznam a alt texty](kapitola-7-2.json).
 - Všechny karty jsou generované, bez vloženého textu, čísel a značek. Vizuálně zkontrolováno jako jedna galerie.
-- Celkem 788 hotových obrazových podkladů. Plně dokončeno 102 ze 168 obrazových sad; do součtu jsou zahrnuty také hotové sady `IMG-00-02` a `IMG-aj-01` evidované v kapitole 7.1. Dokončit zbývá 66 sad: `IMG-pr-17` má 8 karet zapojených a čeká na odbornou kontrolu, dalších 65 sad tvoří skutečné fotografie C a historické doklady E, které se negenerují.
+- Celkem 812 hotových obrazových podkladů. Plně dokončeno 108 ze 168 obrazových sad; do součtu jsou zahrnuty také hotové sady `IMG-00-02` a `IMG-aj-01` evidované v kapitole 7.1. Dokončit zbývá 60 sad: `IMG-pr-17` má 8 karet zapojených a čeká na odbornou kontrolu, dalších 59 sad tvoří skutečné fotografie C a historické doklady E, které se negenerují.
