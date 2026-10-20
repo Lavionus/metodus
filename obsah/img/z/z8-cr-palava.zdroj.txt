@@ -1,0 +1,7 @@
+Soubor: z8-cr-palava.png / z8-cr-palava.webp
+Původní dílo: Pálava panorama 2020.jpg
+Autor: Tadeáš Bednarz
+Zdroj: https://commons.wikimedia.org/wiki/File:Pálava_panorama_2020.jpg
+Licence: CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)
+Staženo: 2026-10-20
+Úpravy: automatické natočení, odstranění metadat, zmenšení na šířku 1600 px; výuková WebP kopie 1152 px.

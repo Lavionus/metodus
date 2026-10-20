@@ -10225,5 +10225,53 @@
   {
     "id": "IMG-z-12", "name": "z7-asie-gobi", "alt": "Rozlehlé písečné duny s řídkými keři v mongolské poušti Gobi.", "bytes": 53620, "webp": "z/z7-asie-gobi.webp", "png": "z/z7-asie-gobi.png",
     "puvod": { "typ": "fotografie", "autor": "Richard Mortel", "licence": "CC BY 2.0", "datum": "2026-10-19", "zdroj": "z/z7-asie-gobi.zdroj.txt" }
+  },
+  {
+    "id": "IMG-z-13", "name": "z7-australie-uluru", "alt": "Červený pískovcový monolit Uluru nad suchou krajinou australského vnitrozemí.", "bytes": 57038, "webp": "z/z7-australie-uluru.webp", "png": "z/z7-australie-uluru.png",
+    "puvod": { "typ": "fotografie", "autor": "LoksLoka", "licence": "CC BY-SA 4.0", "datum": "2026-10-19", "zdroj": "z/z7-australie-uluru.zdroj.txt" }
+  },
+  {
+    "id": "IMG-z-13", "name": "z7-australie-barirovy-utes", "alt": "Letecký pohled na světlé korálové útvary Velkého bariérového útesu v modrém moři.", "bytes": 40094, "webp": "z/z7-australie-barirovy-utes.webp", "png": "z/z7-australie-barirovy-utes.png",
+    "puvod": { "typ": "fotografie", "autor": "Ank Kumar", "licence": "CC BY-SA 4.0", "datum": "2026-10-19", "zdroj": "z/z7-australie-barirovy-utes.zdroj.txt" }
+  },
+  {
+    "id": "IMG-z-13", "name": "z7-australie-atol", "alt": "Nízký korálový atol tvořený prstencem ostrůvků kolem mělké tyrkysové laguny.", "bytes": 28544, "webp": "z/z7-australie-atol.webp", "png": "z/z7-australie-atol.png",
+    "puvod": { "typ": "fotografie", "autor": "Michael Coghlan", "licence": "CC BY-SA 2.0", "datum": "2026-10-19", "zdroj": "z/z7-australie-atol.zdroj.txt" }
+  },
+  {
+    "id": "IMG-z-13", "name": "z7-australie-tucnaci", "alt": "Dospělý tučňák císařský se skupinou mláďat na sněhu v Antarktidě.", "bytes": 40782, "webp": "z/z7-australie-tucnaci.webp", "png": "z/z7-australie-tucnaci.png",
+    "puvod": { "typ": "fotografie", "autor": "Dafna Ben nun", "licence": "CC BY-SA 4.0", "datum": "2026-10-19", "zdroj": "z/z7-australie-tucnaci.zdroj.txt" }
+  },
+  {
+    "id": "IMG-z-13", "name": "z7-australie-klokan", "alt": "Klokan obrovský stojící na trávě s mládětem vykukujícím z vaku.", "bytes": 116858, "webp": "z/z7-australie-klokan.webp", "png": "z/z7-australie-klokan.png",
+    "puvod": { "typ": "fotografie", "autor": "John Torcasio", "licence": "CC BY-SA 4.0", "datum": "2026-10-19", "zdroj": "z/z7-australie-klokan.zdroj.txt" }
+  },
+  {
+    "id": "IMG-z-13", "name": "z7-australie-ptakopysk", "alt": "Ptakopysk plavající v mělkém horském potoce.", "bytes": 155948, "webp": "z/z7-australie-ptakopysk.webp", "png": "z/z7-australie-ptakopysk.png",
+    "puvod": { "typ": "fotografie", "autor": "Maria Grist", "licence": "CC BY-SA 4.0", "datum": "2026-10-19", "zdroj": "z/z7-australie-ptakopysk.zdroj.txt" }
+  },
+  {
+    "id": "IMG-z-14", "name": "z8-cr-krkonose", "alt": "Horské hřbety Studniční hory a Sněžky vystupující nad jehličnatým lesem v Krkonoších.", "bytes": 179882, "webp": "z/z8-cr-krkonose.webp", "png": "z/z8-cr-krkonose.png",
+    "puvod": { "typ": "fotografie", "autor": "Stanislav Dusík", "licence": "CC BY-SA 4.0", "datum": "2026-10-20", "zdroj": "z/z8-cr-krkonose.zdroj.txt" }
+  },
+  {
+    "id": "IMG-z-14", "name": "z8-cr-sumava", "alt": "Čertovo jezero obklopené souvislým jehličnatým lesem a zamlženými svahy Šumavy.", "bytes": 93206, "webp": "z/z8-cr-sumava.webp", "png": "z/z8-cr-sumava.png",
+    "puvod": { "typ": "fotografie", "autor": "Doktory", "licence": "CC BY-SA 3.0", "datum": "2026-10-20", "zdroj": "z/z8-cr-sumava.zdroj.txt" }
+  },
+  {
+    "id": "IMG-z-14", "name": "z8-cr-polabi", "alt": "Letecký pohled na široké Labe, lužní zeleň a rovná zemědělská pole u Kostelce nad Labem.", "bytes": 155578, "webp": "z/z8-cr-polabi.webp", "png": "z/z8-cr-polabi.png",
+    "puvod": { "typ": "fotografie", "autor": "Al.trcka", "licence": "CC BY-SA 4.0", "datum": "2026-10-20", "zdroj": "z/z8-cr-polabi.zdroj.txt" }
+  },
+  {
+    "id": "IMG-z-14", "name": "z8-cr-vysocina", "alt": "Mírně zvlněná zemědělská krajina se zalesněnými hřbety Žďárských vrchů na obzoru.", "bytes": 56504, "webp": "z/z8-cr-vysocina.webp", "png": "z/z8-cr-vysocina.png",
+    "puvod": { "typ": "fotografie", "autor": "Josef Kreuz (PEPan)", "licence": "CC BY-SA 4.0", "datum": "2026-10-20", "zdroj": "z/z8-cr-vysocina.zdroj.txt" }
+  },
+  {
+    "id": "IMG-z-14", "name": "z8-cr-beskydy", "alt": "Vrstvy zalesněných beskydských hřbetů vystupující ráno nad mořem nízké oblačnosti.", "bytes": 79664, "webp": "z/z8-cr-beskydy.webp", "png": "z/z8-cr-beskydy.png",
+    "puvod": { "typ": "fotografie", "autor": "Rostislav Souček", "licence": "CC BY-SA 4.0", "datum": "2026-10-20", "zdroj": "z/z8-cr-beskydy.zdroj.txt" }
+  },
+  {
+    "id": "IMG-z-14", "name": "z8-cr-palava", "alt": "Panoramatický pohled přes pole a vinice k vápencovým hřbetům Pálavy.", "bytes": 39378, "webp": "z/z8-cr-palava.webp", "png": "z/z8-cr-palava.png",
+    "puvod": { "typ": "fotografie", "autor": "Tadeáš Bednarz", "licence": "CC BY-SA 4.0", "datum": "2026-10-20", "zdroj": "z/z8-cr-palava.zdroj.txt" }
   }
 ]

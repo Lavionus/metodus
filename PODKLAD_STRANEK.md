@@ -2607,7 +2607,7 @@ Společné pro zeměpis: 🔗 **jedna datová sada států a jedna mapová kompo
   - Srovnání tří prostředí (vnitrozemí Austrálie, korálový ostrov, Antarktida) stejnými měřítky.
   - Endemity Austrálie na fotografiích.
 - **Obrázky:**
-  - `IMG-z-13` ⚪ **C** · fotografie (Uluru, Velký bariérový útes, korálový atol, Antarktida s tučňáky, klokan, ptakopysk)
+  - `IMG-z-13` ⚪ **C ✅** · šest licencovaných fotografií (Uluru, Velký bariérový útes, korálový atol, Antarktida s tučňáky, klokan, ptakopysk) — zapojeno do srovnávacího atlasu prostředí a endemitů
 
 #### ČR – povrch, podnebí a vodstvo · [z8_cr_prirodni.html](obsah/z8_cr_prirodni.html)
 - **Zařazení:** Zeměpis › 8. r. · lekce A (s mapou)
@@ -2619,7 +2619,7 @@ Společné pro zeměpis: 🔗 **jedna datová sada států a jedna mapová kompo
   - „Kam doteče voda od naší školy?“ — sledování toku až k moři.
   - 🔗 Sloučit `reky_pohori` jako režim této lekce.
 - **Obrázky:**
-  - `IMG-z-14` ⚪ **C** · 6 fotografií krajin ČR (Krkonoše, Šumava, Polabí, Českomoravská vrchovina, Beskydy, Pálava)
+  - `IMG-z-14` ⚪ **C ✅** · šest licencovaných fotografií krajin ČR (Krkonoše, Šumava, Polabí, Českomoravská vrchovina, Beskydy, Pálava) — zapojeno do srovnávacího atlasu reliéfu a využití krajiny
 
 #### Evropa – regiony · [z8_evropa_regiony.html](obsah/z8_evropa_regiony.html)
 - **Zařazení:** Zeměpis › 8. r. · lekce A (s mapou)
@@ -3457,8 +3457,8 @@ Při výrobě sady v jednom stylu zadávat všechny karty v jedné dávce se ste
 | `IMG-z-08` | C ✅ | 4 licencované fotografie míst (Káhira s Nilem, Sahara, savana v Tanzanii, Kapské Město) — zapojeno do srovnávacího atlasu | [z7_afrika](obsah/z7_afrika.html) |
 | `IMG-z-10` | C ✅ | 4 licencované fotografie míst (Grand Canyon, New York, Machu Picchu, Amazonie) — zapojeno do srovnávacího atlasu | [z7_amerika](obsah/z7_amerika.html) |
 | `IMG-z-12` | C ✅ | 4 licencované fotografie míst (Himálaj, rýžové terasy, Tokio, poušť Gobi) — zapojeno do srovnávacího atlasu | [z7_asie](obsah/z7_asie.html) |
-| `IMG-z-13` | C | fotografie (Uluru, Velký bariérový útes, korálový atol, Antarktida s tučňáky, klokan, ptakopysk) | [z7_australie_oceanie](obsah/z7_australie_oceanie.html) |
-| `IMG-z-14` | C | 6 fotografií krajin ČR (Krkonoše, Šumava, Polabí, Českomoravská vrchovina, Beskydy, Pálava) | [z8_cr_prirodni](obsah/z8_cr_prirodni.html) |
+| `IMG-z-13` | C ✅ | šest licencovaných fotografií (Uluru, Velký bariérový útes, korálový atol, Antarktida s tučňáky, klokan, ptakopysk) — zapojeno do srovnávacího atlasu prostředí a endemitů | [z7_australie_oceanie](obsah/z7_australie_oceanie.html) |
+| `IMG-z-14` | C ✅ | šest licencovaných fotografií krajin ČR (Krkonoše, Šumava, Polabí, Českomoravská vrchovina, Beskydy, Pálava) — zapojeno do srovnávacího atlasu reliéfu a využití krajiny | [z8_cr_prirodni](obsah/z8_cr_prirodni.html) |
 | `IMG-z-15` | C | 6 fotografií typických krajin regionů (fjord, Středomoří, Alpy, nížina Nizozemska, ruská tajga, britské pobřeží) | [z8_evropa_regiony](obsah/z8_evropa_regiony.html) |
 | `IMG-z-16` | B ✅ | 6 karet fází výrobku (důl, továrna, kontejnerová loď, sklad, obchod, skládka/recyklace) — zastávky na mapě | [z9_hospodarstvi_svet](obsah/z9_hospodarstvi_svet.html) |
 | `IMG-z-17` | C | 4 fotografie sídel (vesnice v Sahelu, slum a mrakodrapy v Bombaji, předměstí USA, historické centrum evropského města) | [z9_obyvatelstvo](obsah/z9_obyvatelstvo.html) |

@@ -14,6 +14,16 @@
   <style>
     .uloha-text { max-width: 620px; font-size: 1.02rem; line-height: 1.6; }
     .uloha-text b { color: var(--accent); }
+    .foto-atlas { width:min(1120px,100%); margin:18px auto 22px; }
+    .foto-atlas h2 { margin:0 0 5px; text-align:center; font-size:1.22rem; }
+    .foto-atlas > p { margin:0 auto 12px; max-width:820px; text-align:center; color:var(--text-muted,var(--text)); }
+    .foto-mrizka { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
+    .foto-karta { margin:0; overflow:hidden; border:1px solid var(--border); border-radius:14px; background:var(--bg-card); box-shadow:var(--shadow-sm); }
+    .foto-karta img { display:block; width:100%; aspect-ratio:4/3; object-fit:cover; }
+    .foto-karta figcaption { padding:10px 11px 12px; font-size:.9rem; line-height:1.35; }
+    .foto-karta strong { display:block; margin-bottom:3px; color:var(--accent); font-size:1rem; }
+    @media (max-width:820px) { .foto-mrizka { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+    @media (max-width:440px) { .foto-mrizka { grid-template-columns:1fr; } }
   </style>
 </head>
 <body>
@@ -26,6 +36,19 @@
     <button data-rezim="kvizPriroda">🌦️ Příroda a zvláštnosti</button>
     <button data-rezim="kvizHospodarstvi">🧊 Polární oblasti</button>
   </div>
+
+  <section class="foto-atlas" aria-labelledby="foto-atlas-nadpis">
+    <h2 id="foto-atlas-nadpis">Tři prostředí a jedineční živočichové</h2>
+    <p>Porovnej suché australské vnitrozemí, korálové ostrovy a ledovou Antarktidu. Klokan a ptakopysk připomínají dlouhou izolaci Austrálie.</p>
+    <div class="foto-mrizka">
+      <figure class="foto-karta"><img src="img/z/z7-australie-uluru.webp" alt="Červený pískovcový monolit Uluru nad suchou krajinou australského vnitrozemí." width="1152" height="692" loading="lazy"><figcaption><strong>Uluru, Austrálie</strong>Posvátné místo Anangu stojí v suchém vnitrozemí; nejde o sopku, ale o odkrytý pískovcový monolit.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/z/z7-australie-barirovy-utes.webp" alt="Letecký pohled na světlé korálové útvary Velkého bariérového útesu v modrém moři." width="1152" height="769" loading="lazy"><figcaption><strong>Velký bariérový útes</strong>Soustava tisíců útesů leží při severovýchodním pobřeží Austrálie a je citlivá na oteplování oceánu.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/z/z7-australie-atol.webp" alt="Nízký korálový atol tvořený prstencem ostrůvků kolem mělké tyrkysové laguny." width="1152" height="864" loading="lazy"><figcaption><strong>Korálový atol, Tuvalu</strong>Prstenec ostrovů obklopuje lagunu. Nízká nadmořská výška zvyšuje ohrožení růstem hladiny oceánu.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/z/z7-australie-tucnaci.webp" alt="Dospělý tučňák císařský se skupinou mláďat na sněhu v Antarktidě." width="1152" height="768" loading="lazy"><figcaption><strong>Antarktida</strong>Tučňáci císařští žijí na jižní polokouli. Lední medvědi naopak patří do Arktidy.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/z/z7-australie-klokan.webp" alt="Klokan obrovský stojící na trávě s mládětem vykukujícím z vaku." width="1152" height="841" loading="lazy"><figcaption><strong>Klokan obrovský</strong>Vačnatec rodí velmi malé mládě, které pokračuje ve vývoji ve vaku.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/z/z7-australie-ptakopysk.webp" alt="Ptakopysk plavající v mělkém horském potoce." width="1152" height="592" loading="lazy"><figcaption><strong>Ptakopysk podivný</strong>Australský savec klade vejce; potravu vyhledává citlivým zobákem ve vodě.</figcaption></figure>
+    </div>
+  </section>
 
   <div class="plocha" id="plocha"></div>
 
