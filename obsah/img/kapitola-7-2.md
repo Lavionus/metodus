@@ -14,10 +14,10 @@ Mimo generovací frontu je **`IMG-pr-17`**: všech osm karet první pomoci už e
 
 ### Prioritní fronta dalšího obrazového doplňování
 
-Tato fronta už není generovací: jde o získání 57 zbývajících skutečných fotografických sad C a historických dokladů E z doložených licenčních zdrojů. Pořadí se řídí přímým přínosem pro aktivitu, obtížností nahradit obraz slovním popisem a možností sdílení mezi stránkami.
+Tato fronta už není generovací: jde o získání 56 zbývajících skutečných fotografických sad C a historických dokladů E z doložených licenčních zdrojů. Pořadí se řídí přímým přínosem pro aktivitu, obtížností nahradit obraz slovním popisem a možností sdílení mezi stránkami.
 
-1. `IMG-z-15` — ucelená série typických krajin evropských regionů.
-2. Sady E — historické prameny a reprodukce, vždy podle ověřené předlohy a licence.
+1. Sady E — historické prameny a reprodukce, vždy podle ověřené předlohy a licence.
+2. Zbývající sady C — skutečné fotografie podle aktuální výukové užitečnosti cílových stránek.
 
 Před uzavřením této fronty stojí samostatný kontrolní krok `IMG-pr-17`: odborné posouzení zdravotníkem, nikoli výroba dalších obrázků. Po dokončení položky se pořadí znovu vyhodnotí podle aktuálního stavu stránek.
 
@@ -117,8 +117,9 @@ Před uzavřením této fronty stojí samostatný kontrolní krok `IMG-pr-17`: o
 - Dokončena a zapojena sada `IMG-z-12`: čtyři licencované fotografie Himálaje, rýžových teras, Tokia a pouště Gobi tvoří srovnávací atlas reliéfu, hospodaření, osídlení a vláhy v Asii.
 - Dokončena a zapojena sada `IMG-z-13`: šest licencovaných fotografií propojuje Uluru, Velký bariérový útes, korálový atol a Antarktidu s endemickými savci Austrálie.
 - Dokončena a zapojena sada `IMG-z-14`: šest licencovaných fotografií Krkonoš, Šumavy, Polabí, Českomoravské vrchoviny, Beskyd a Pálavy tvoří srovnávací atlas reliéfu, lesnatosti a využití půdy v Česku.
+- Dokončena a zapojena sada `IMG-z-15`: šest licencovaných fotografií fjordu, Středomoří, Alp, nizozemského polderu, ruské tajgy a britského pobřeží tvoří srovnávací atlas evropského reliéfu, podnebí a vegetace.
 - Uložení: `obsah/img/cj/`, `obsah/img/m/` a `obsah/img/aj/`; každý motiv jako `.png`, `.webp` a `.prompt.txt`.
 - WebP: karty 768 × 768 px do 60 000 B, scény 1152 × 768 px do 200 000 B.
 - [Kontrolní galerie](kapitola-7-2.html), [strojový seznam a alt texty](kapitola-7-2.json).
 - Všechny karty jsou generované, bez vloženého textu, čísel a značek. Vizuálně zkontrolováno jako jedna galerie.
-- Celkem 824 hotových obrazových podkladů. Plně dokončeno 110 ze 168 obrazových sad; do součtu jsou zahrnuty také hotové sady `IMG-00-02` a `IMG-aj-01` evidované v kapitole 7.1. Dokončit zbývá 58 sad: `IMG-pr-17` má 8 karet zapojených a čeká na odbornou kontrolu, dalších 57 sad tvoří skutečné fotografie C a historické doklady E, které se negenerují.
+- Celkem 830 hotových obrazových podkladů. Plně dokončeno 111 ze 168 obrazových sad; do součtu jsou zahrnuty také hotové sady `IMG-00-02` a `IMG-aj-01` evidované v kapitole 7.1. Dokončit zbývá 57 sad: `IMG-pr-17` má 8 karet zapojených a čeká na odbornou kontrolu, dalších 56 sad tvoří skutečné fotografie C a historické doklady E, které se negenerují.

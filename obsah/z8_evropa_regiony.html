@@ -14,6 +14,16 @@
   <style>
     .uloha-text { max-width: 620px; font-size: 1.02rem; line-height: 1.6; }
     .uloha-text b { color: var(--accent); }
+    .foto-atlas { width:min(1120px,100%); margin:18px auto 22px; }
+    .foto-atlas h2 { margin:0 0 5px; text-align:center; font-size:1.22rem; }
+    .foto-atlas > p { margin:0 auto 12px; max-width:820px; text-align:center; color:var(--text-muted,var(--text)); }
+    .foto-mrizka { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
+    .foto-karta { margin:0; overflow:hidden; border:1px solid var(--border); border-radius:14px; background:var(--bg-card); box-shadow:var(--shadow-sm); }
+    .foto-karta img { display:block; width:100%; aspect-ratio:4/3; object-fit:cover; }
+    .foto-karta figcaption { padding:10px 11px 12px; font-size:.9rem; line-height:1.35; }
+    .foto-karta strong { display:block; margin-bottom:3px; color:var(--accent); font-size:1rem; }
+    @media (max-width:820px) { .foto-mrizka { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+    @media (max-width:440px) { .foto-mrizka { grid-template-columns:1fr; } }
   </style>
 </head>
 <body>
@@ -26,6 +36,19 @@
     <button data-rezim="kviz1">🧭 Regiony Evropy</button>
     <button data-rezim="kviz2">🏭 Hospodářství a EU</button>
   </div>
+
+  <section class="foto-atlas" aria-labelledby="foto-atlas-nadpis">
+    <h2 id="foto-atlas-nadpis">Šest tváří evropské krajiny</h2>
+    <p>Porovnej reliéf, podnebí, vegetaci a využití půdy. Fotografie ukazují, proč se evropské regiony liší přírodními podmínkami i způsobem života.</p>
+    <div class="foto-mrizka">
+      <figure class="foto-karta"><img src="img/z/z8-evropa-fjord.webp" alt="Úzký Geirangerfjord sevřený strmými zelenými horskými svahy se zbytky sněhu." width="1152" height="769" loading="lazy"><figcaption><strong>Severní Evropa — norský fjord</strong>Ledovec vyhloubil hluboké údolí, které po jeho ústupu zaplavilo moře.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/z/z8-evropa-stredomori.webp" alt="Skalnaté pobřeží Kréty omývané vlnami Středozemního moře." width="1152" height="765" loading="lazy"><figcaption><strong>Jižní Evropa — Středomoří</strong>Teplé suché léto, členité pobřeží a moře podporují cestovní ruch i středomořské zemědělství.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/z/z8-evropa-alpy.webp" alt="Široké zelené údolí Lauterbrunnen mezi strmými skalními stěnami a zasněženými Alpami." width="1152" height="864" loading="lazy"><figcaption><strong>Střední Evropa — Alpy</strong>Vysoké mladé pohoří má ostré štíty, ledovcová údolí a výraznou výškovou stupňovitost.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/z/z8-evropa-nizozemsko.webp" alt="Rovinatý zelený nizozemský polder pod širokou oblohou s odvodňovacími příkopy." width="1152" height="767" loading="lazy"><figcaption><strong>Západní Evropa — nizozemský polder</strong>Nízkou rovinu chrání hráze; hladinu vody řídí hustá síť kanálů a čerpacích zařízení.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/z/z8-evropa-tajga.webp" alt="Hustý smíšený les ruské tajgy s břízami, jehličnany a souvislým zeleným podrostem." width="1152" height="769" loading="lazy"><figcaption><strong>Východní Evropa — ruská tajga</strong>Chladné kontinentální podnebí vytváří rozsáhlý pás jehličnatých a smíšených lesů.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/z/z8-evropa-britske-pobrezi.webp" alt="Bílé křídové útesy Doveru vystupující z moře pod zataženou oblohou." width="1152" height="628" loading="lazy"><figcaption><strong>Západní Evropa — britské pobřeží</strong>Vlny a zvětrávání neustále modelují světlé křídové útesy otevřeného atlantského pobřeží.</figcaption></figure>
+    </div>
+  </section>
 
   <div class="plocha" id="plocha"></div>
 

@@ -2630,7 +2630,7 @@ Společné pro zeměpis: 🔗 **jedna datová sada států a jedna mapová kompo
   - Srovnávací karta regionů se stejnými kritérii (podnebí, reliéf, hustota, hlavní odvětví).
   - 🔗 Stejná data států jako `slepa_mapa_evropa`.
 - **Obrázky:**
-  - `IMG-z-15` ⚪ **C** · 6 fotografií typických krajin regionů (fjord, Středomoří, Alpy, nížina Nizozemska, ruská tajga, britské pobřeží)
+  - `IMG-z-15` ⚪ **C ✅** · šest licencovaných fotografií typických krajin regionů (fjord, Středomoří, Alpy, nizozemský polder, ruská tajga, britské pobřeží) — zapojeno do srovnávacího atlasu reliéfu, podnebí a vegetace
 
 #### Řeky a pohoří ČR · [reky_pohori.html](obsah/reky_pohori.html)
 - **Zařazení:** Zeměpis › 8. r. · samostatná F
@@ -3459,7 +3459,7 @@ Při výrobě sady v jednom stylu zadávat všechny karty v jedné dávce se ste
 | `IMG-z-12` | C ✅ | 4 licencované fotografie míst (Himálaj, rýžové terasy, Tokio, poušť Gobi) — zapojeno do srovnávacího atlasu | [z7_asie](obsah/z7_asie.html) |
 | `IMG-z-13` | C ✅ | šest licencovaných fotografií (Uluru, Velký bariérový útes, korálový atol, Antarktida s tučňáky, klokan, ptakopysk) — zapojeno do srovnávacího atlasu prostředí a endemitů | [z7_australie_oceanie](obsah/z7_australie_oceanie.html) |
 | `IMG-z-14` | C ✅ | šest licencovaných fotografií krajin ČR (Krkonoše, Šumava, Polabí, Českomoravská vrchovina, Beskydy, Pálava) — zapojeno do srovnávacího atlasu reliéfu a využití krajiny | [z8_cr_prirodni](obsah/z8_cr_prirodni.html) |
-| `IMG-z-15` | C | 6 fotografií typických krajin regionů (fjord, Středomoří, Alpy, nížina Nizozemska, ruská tajga, britské pobřeží) | [z8_evropa_regiony](obsah/z8_evropa_regiony.html) |
+| `IMG-z-15` | C ✅ | šest licencovaných fotografií typických krajin regionů (fjord, Středomoří, Alpy, nizozemský polder, ruská tajga, britské pobřeží) — zapojeno do srovnávacího atlasu | [z8_evropa_regiony](obsah/z8_evropa_regiony.html) |
 | `IMG-z-16` | B ✅ | 6 karet fází výrobku (důl, továrna, kontejnerová loď, sklad, obchod, skládka/recyklace) — zastávky na mapě | [z9_hospodarstvi_svet](obsah/z9_hospodarstvi_svet.html) |
 | `IMG-z-17` | C | 4 fotografie sídel (vesnice v Sahelu, slum a mrakodrapy v Bombaji, předměstí USA, historické centrum evropského města) | [z9_obyvatelstvo](obsah/z9_obyvatelstvo.html) |
 | `IMG-d-02` | A ✅ | rekonstrukce athénské agory se shromážděním (označit „rekonstrukce“) | [d6_recko](obsah/d6_recko.html) |

@@ -10273,5 +10273,29 @@
   {
     "id": "IMG-z-14", "name": "z8-cr-palava", "alt": "Panoramatický pohled přes pole a vinice k vápencovým hřbetům Pálavy.", "bytes": 39378, "webp": "z/z8-cr-palava.webp", "png": "z/z8-cr-palava.png",
     "puvod": { "typ": "fotografie", "autor": "Tadeáš Bednarz", "licence": "CC BY-SA 4.0", "datum": "2026-10-20", "zdroj": "z/z8-cr-palava.zdroj.txt" }
+  },
+  {
+    "id": "IMG-z-15", "name": "z8-evropa-fjord", "alt": "Úzký Geirangerfjord sevřený strmými zelenými horskými svahy se zbytky sněhu.", "bytes": 108852, "webp": "z/z8-evropa-fjord.webp", "png": "z/z8-evropa-fjord.png",
+    "puvod": { "typ": "fotografie", "autor": "Svein Magne Tunli", "licence": "CC BY-SA 4.0", "datum": "2026-10-20", "zdroj": "z/z8-evropa-fjord.zdroj.txt" }
+  },
+  {
+    "id": "IMG-z-15", "name": "z8-evropa-stredomori", "alt": "Skalnaté pobřeží Kréty omývané vlnami Středozemního moře.", "bytes": 148322, "webp": "z/z8-evropa-stredomori.webp", "png": "z/z8-evropa-stredomori.png",
+    "puvod": { "typ": "fotografie", "autor": "Volodymyr Vlasenko", "licence": "CC BY-SA 3.0", "datum": "2026-10-20", "zdroj": "z/z8-evropa-stredomori.zdroj.txt" }
+  },
+  {
+    "id": "IMG-z-15", "name": "z8-evropa-alpy", "alt": "Široké zelené údolí Lauterbrunnen mezi strmými skalními stěnami a zasněženými Alpami.", "bytes": 89508, "webp": "z/z8-evropa-alpy.webp", "png": "z/z8-evropa-alpy.png",
+    "puvod": { "typ": "fotografie", "autor": "Nick Gray", "licence": "CC BY-SA 2.0", "datum": "2026-10-20", "zdroj": "z/z8-evropa-alpy.zdroj.txt" }
+  },
+  {
+    "id": "IMG-z-15", "name": "z8-evropa-nizozemsko", "alt": "Rovinatý zelený nizozemský polder pod širokou oblohou s odvodňovacími příkopy.", "bytes": 52482, "webp": "z/z8-evropa-nizozemsko.webp", "png": "z/z8-evropa-nizozemsko.png",
+    "puvod": { "typ": "fotografie", "autor": "MetNL", "licence": "CC BY-SA 4.0", "datum": "2026-10-20", "zdroj": "z/z8-evropa-nizozemsko.zdroj.txt" }
+  },
+  {
+    "id": "IMG-z-15", "name": "z8-evropa-tajga", "alt": "Hustý smíšený les ruské tajgy s břízami, jehličnany a souvislým zeleným podrostem.", "bytes": 200674, "webp": "z/z8-evropa-tajga.webp", "png": "z/z8-evropa-tajga.png",
+    "puvod": { "typ": "fotografie", "autor": "Vyacheslav Argenberg", "licence": "CC BY 4.0", "datum": "2026-10-20", "zdroj": "z/z8-evropa-tajga.zdroj.txt" }
+  },
+  {
+    "id": "IMG-z-15", "name": "z8-evropa-britske-pobrezi", "alt": "Bílé křídové útesy Doveru vystupující z moře pod zataženou oblohou.", "bytes": 35948, "webp": "z/z8-evropa-britske-pobrezi.webp", "png": "z/z8-evropa-britske-pobrezi.png",
+    "puvod": { "typ": "fotografie", "autor": "Ad Meskens", "licence": "CC BY-SA 4.0", "datum": "2026-10-20", "zdroj": "z/z8-evropa-britske-pobrezi.zdroj.txt" }
   }
 ]
