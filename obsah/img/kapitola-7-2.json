@@ -10297,5 +10297,17 @@
   {
     "id": "IMG-z-15", "name": "z8-evropa-britske-pobrezi", "alt": "Bílé křídové útesy Doveru vystupující z moře pod zataženou oblohou.", "bytes": 35948, "webp": "z/z8-evropa-britske-pobrezi.webp", "png": "z/z8-evropa-britske-pobrezi.png",
     "puvod": { "typ": "fotografie", "autor": "Ad Meskens", "licence": "CC BY-SA 4.0", "datum": "2026-10-20", "zdroj": "z/z8-evropa-britske-pobrezi.zdroj.txt" }
+  },
+  {
+    "id": "IMG-prv-23", "name": "prv5-symbol-vlajka", "alt": "Státní vlajka České republiky s bílým a červeným pruhem a modrým klínem.", "bytes": 3656, "webp": "prv/prv5-symbol-vlajka.webp", "png": "prv/prv5-symbol-vlajka.png",
+    "puvod": { "typ": "státní symbol", "autor": "zákonná předloha", "licence": "PD-CzechGov", "datum": "2026-10-20", "zdroj": "prv/prv5-symbol-vlajka.zdroj.txt" }
+  },
+  {
+    "id": "IMG-prv-23", "name": "prv5-symbol-prezidentska-vlajka", "alt": "Vlajka prezidenta České republiky s velkým státním znakem, lipovými ratolestmi a heslem Pravda vítězí.", "bytes": 80754, "webp": "prv/prv5-symbol-prezidentska-vlajka.webp", "png": "prv/prv5-symbol-prezidentska-vlajka.png",
+    "puvod": { "typ": "státní symbol", "autor": "zákonná předloha; SVG Tlusťa", "licence": "PD-CzechGov", "datum": "2026-10-20", "zdroj": "prv/prv5-symbol-prezidentska-vlajka.zdroj.txt" }
+  },
+  {
+    "id": "IMG-prv-23", "name": "prv5-symbol-statni-pecet", "alt": "Kruhová státní pečeť České republiky s velkým státním znakem, lipovými ratolestmi a opisem Česká republika.", "bytes": 23506, "webp": "prv/prv5-symbol-statni-pecet.webp", "png": "prv/prv5-symbol-statni-pecet.png",
+    "puvod": { "typ": "státní symbol", "autor": "Czech official", "licence": "PD-CzechGov", "datum": "2026-10-20", "zdroj": "prv/prv5-symbol-statni-pecet.zdroj.txt" }
   }
 ]

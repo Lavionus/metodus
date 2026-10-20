@@ -615,7 +615,7 @@ Společné pro celou češtinu: 🔗 jedna paleta pro větné členy a slovní d
   - Nářeční mapa s ukázkou věty v každém nářečí (text, případně nahrávka z volných zdrojů).
   - Časová osa vývoje jazyka se skutečnými ukázkami (Hospodine, pomiluj ny; Kralická bible; obrozenecký text; dnešní text).
 - **Obrázky:**
-  - `IMG-cj-08` 🟠 **E** · sken rukopisu Hospodine, pomiluj ny, strana Bible kralické, titulní list Jungmannova slovníku — ukázky vývoje písma a pravopisu
+  - `IMG-cj-08` 🟠 **E ✅** · doložený rukopis Hospodine, pomiluj ny, titulní list Bible kralické a titulní list prvního vydání Jungmannova slovníku — zapojeno do srovnání vývoje písma a pravopisu
 
 #### Slabiky a první čtení · [slabiky.html](obsah/slabiky.html)
 - **Zařazení:** Čeština › Čtení a literatura · 1.–2. r. · samostatná F
@@ -1729,7 +1729,7 @@ Společné pro prvouku: 🔗 malý žák se učí z **obrazu a situace**, ne ze 
   - Přiřazení symbolu k situaci použití (budova úřadu, pas, sportovní utkání).
   - Tři moci jako tři budovy s rolí (Sněmovna, vláda, soud).
 - **Obrázky:**
-  - `IMG-prv-23` 🔴 **E** · přesné předlohy zbývajících symbolů: státní vlajka, vlajka prezidenta republiky, státní pečeť (SVG z Wikimedia Commons) + nahrávka hymny s volnou licencí
+  - `IMG-prv-23` 🔴 **E ✅** · přesné předlohy státní vlajky, vlajky prezidenta republiky a státní pečeti z Wikimedia Commons + volná nahrávka hymny — zapojeno do poznávačky všech sedmi symbolů
   - `IMG-prv-24` 🟠 **C** · fotografie budov Poslanecké sněmovny, Senátu, Úřadu vlády, Pražského hradu, Ústavního soudu
 
 #### 20. století v našich dějinách · [prv5_dejiny_20.html](obsah/prv5_dejiny_20.html)
@@ -3307,7 +3307,7 @@ Při výrobě sady v jednom stylu zadávat všechny karty v jedné dávce se ste
 | `IMG-prv-16` | A ✅ | louka a pole s typickými organismy — zapojeno | [prv4_ekosystemy](obsah/prv4_ekosystemy.html) |
 | `IMG-prv-17` | C | fotografie 16 vzorků (žula, pískovec, vápenec, čedič, břidlice, mramor, uhlí, křemen, živec, slída, kalcit, sůl kamenná, sádrovec, pyrit, grafit, magnetit) na neutrálním pozadí se stejným světlem; **sdílet s `pr9_mineraly`** | [prv4_horniny](obsah/prv4_horniny.html) |
 | `IMG-prv-20` | A ✅ | plán naší vesnice/městečka shora (obecní úřad, pošta, škola, lékař, obchod, knihovna, hasičská zbrojnice, kostel, nádraží, park) — hotspoty; stejné místo jako `IMG-prv-03` a `IMG-prv-07`; hotovo: ilustrační plán je zapojen před interaktivní mapou | [prv3_obec](obsah/prv3_obec.html) |
-| `IMG-prv-23` | E | přesné předlohy zbývajících symbolů: státní vlajka, vlajka prezidenta republiky, státní pečeť (SVG z Wikimedia Commons) + nahrávka hymny s volnou licencí | [prv5_statni_symboly](obsah/prv5_statni_symboly.html) |
+| `IMG-prv-23` | E ✅ | přesné předlohy státní vlajky, vlajky prezidenta republiky a státní pečeti z Wikimedia Commons + volná nahrávka hymny — zapojeno do poznávačky všech sedmi symbolů | [prv5_statni_symboly](obsah/prv5_statni_symboly.html) |
 | `IMG-ch-06` | B ✅ | 32 karet odpadu (30 nových, PET láhev a plechovka sdílené) + 6 barevných nádob — zapojeno do obrazového třídicího kvízu s vysvětlením výjimek a místního společného sběru | [ch9_zivotni_prostredi](obsah/ch9_zivotni_prostredi.html) |
 | `IMG-pr-01` | C | fotografie 14 druhů hub, u každého 2–3 pohledy (hřib smrkový, hřib kovář, klouzek, bedla vysoká, liška obecná, václavka, pečárka, muchomůrka červená, muchomůrka zelená, muchomůrka tygrovaná, hřib satan, čirůvka tygrovaná, pavučinec plyšový, ucháč obecný) — **nikdy generované** | [pr6_houby](obsah/pr6_houby.html) |
 | `IMG-pr-07` | B ✅ | 4 karty stavby těla ve stejném měřítku a pohledu shora (včela, křižák, rak, stonožka); hotovo a zapojeno | [pr6_clenovci](obsah/pr6_clenovci.html) |
@@ -3327,7 +3327,7 @@ Při výrobě sady v jednom stylu zadávat všechny karty v jedné dávce se ste
 | `IMG-cj-05` | A ✅ | 4 scénky dětí pro čtyři druhy vět; hotovo a zapojeno | [cj2_druhy_vet](obsah/cj2_druhy_vet.html) |
 | `IMG-cj-06` | B ✅ | šest karet mluvnických osob; hotovo a zapojeno | [cj3_slovesa](obsah/cj3_slovesa.html) |
 | `IMG-cj-07` | B ✅ | 8 trojic karet pro mnohoznačná slova a homonyma (koruna, kohoutek, oko, list, pero, zámek, jazyk, kolej) — význam podle obrázku | [cj6_slovni_zasoba](obsah/cj6_slovni_zasoba.html) |
-| `IMG-cj-08` | E | sken rukopisu Hospodine, pomiluj ny, strana Bible kralické, titulní list Jungmannova slovníku — ukázky vývoje písma a pravopisu | [cj9_vyvoj_jazyka](obsah/cj9_vyvoj_jazyka.html) |
+| `IMG-cj-08` | E ✅ | doložený rukopis Hospodine, pomiluj ny, titulní list Bible kralické a titulní list prvního vydání Jungmannova slovníku — zapojeno do srovnání vývoje písma a pravopisu | [cj9_vyvoj_jazyka](obsah/cj9_vyvoj_jazyka.html) |
 | `IMG-cj-09` | A ✅ | 10 jednoduchých scén k větám pro první čtení (Máma má mísu. Ema mele maso. Pes leží u domu…) — obrázek ke kontrole porozumění | [slabiky](obsah/slabiky.html) |
 | `IMG-cj-11` | E | antické zobrazení 8–10 řeckých bohů a hrdinů (vázy, sochy; Wikimedia Commons) — skutečné atributy bohů, ne vymyšlené | [cj6_baje](obsah/cj6_baje.html) |
 | `IMG-cj-14` | E | 8 reprodukcí volných děl výtvarného umění ke směrům (romantismus, realismus, impresionismus, symbolismus, kubismus, surrealismus…) — vizuální znak směru | [literarni_smery](obsah/literarni_smery.html) |

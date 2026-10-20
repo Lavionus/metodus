@@ -1,0 +1,9 @@
+Název: Slownjk česko-německý Josefa Jungmanna, díl I., titulní list
+Autor: Josef Jungmann
+Vydání: Praha, 1835
+Digitalizace: Google Books, exemplář Rakouské národní knihovny
+Zdroj svazku: https://books.google.com/books?id=iwxnAAAAcAAJ
+Zdroj stránky: https://books.google.com/books?id=iwxnAAAAcAAJ&pg=PR1
+Licence díla: public domain
+Staženo: 2026-10-20
+Úpravy: odstranění metadat a okrajů prohlížeče, převod titulního listu do projektového PNG a WebP; bez zvětšování zdroje.
