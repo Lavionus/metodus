@@ -664,9 +664,9 @@ Společné pro celou češtinu: 🔗 jedna paleta pro větné členy a slovní d
   - Krátké ukázky, v nichž žák označí znak žánru (kouzlo, skutečné místo, bůh, zvíře s ponaučením).
   - Rodokmen olympských bohů jako rozklikávací schéma se symboly.
 - **Obrázky:**
-  - `IMG-cj-11` 🟠 **E** · antické zobrazení 8–10 řeckých bohů a hrdinů (vázy, sochy; Wikimedia Commons) — skutečné atributy bohů, ne vymyšlené
+  - `IMG-cj-11` 🟠 **E ✅** · osm doložených antických zobrazení bohů a hrdinů (vázy, sochy a reliéf) — zapojeno do obrazového atlasu i poznávačky skutečných atributů
   - `IMG-cj-12` ⚪ **A** · 4 malé vinety žánrů (pohádkový zámek, skutečný hrad s pověstí, Olymp, liška s havranem) — záhlaví rámečků žánrů
-- **Stav 24. 9. 2026:** `IMG-cj-12` hotovo a zapojeno do čtyř žánrových rámečků; `IMG-cj-11` čeká na autentické volné antické reprodukce.
+- **Stav 20. 10. 2026:** `IMG-cj-12` i `IMG-cj-11` hotovo; stránka spojuje čtyři žánrové viněty s osmi autentickými volnými reprodukcemi antického umění.
 
 #### Literatura 20. století · [cj9_literatura_20.html](obsah/cj9_literatura_20.html)
 - **Zařazení:** Čeština › Čtení a literatura · 9. r. · lekce A
@@ -689,7 +689,7 @@ Společné pro celou češtinu: 🔗 jedna paleta pro větné členy a slovní d
   - 🧩 Časová osa směrů s překryvy, autor může zasahovat do více směrů.
   - Každý směr s jedním výtvarným dílem stejné doby (romantismus – Friedrich, realismus – Courbet…) jako vizuální kotva.
 - **Obrázky:**
-  - `IMG-cj-14` 🟠 **E** · 8 reprodukcí volných děl výtvarného umění ke směrům (romantismus, realismus, impresionismus, symbolismus, kubismus, surrealismus…) — vizuální znak směru
+  - `IMG-cj-14` 🟠 **E ✅** · osm doložených volných reprodukcí od renesance po surrealismus — zapojeno přímo k literárním směrům s vysvětlením vizuálního znaku
 
 #### Přímá řeč · [cj4_prima_rec.html](obsah/cj4_prima_rec.html)
 - **Zařazení:** Čeština › Sloh a komunikace · 4.–5. r. · lekce A
@@ -1742,7 +1742,7 @@ Společné pro prvouku: 🔗 malý žák se učí z **obrazu a situace**, ne ze 
   - Příběh jedné (fiktivní, ale věrohodné) rodiny přes celé století.
   - 🔗 Stejná osa a fotografie jako `d9_*` pro 9. ročník.
 - **Obrázky:**
-  - `IMG-prv-25` 🟠 **E** · 8 dobových fotografií s volnou licencí (28. říjen 1918, Masaryk, mobilizace 1938, osvobození 1945, únor 1948, srpen 1968, listopad 1989 na Václavském náměstí, první svobodné volby) — sdílet s dějepisem 9. r.
+  - `IMG-prv-25` 🟠 **E ✅** · 7 dobových fotografií a 1 úřední volební dokument s volnou licencí; hotovo a zapojeno, vybrané snímky sdílet s dějepisem 9. r.
 
 ### 7.6 Fyzika (23 stránek)
 
@@ -2929,7 +2929,7 @@ Společné pro dějepis: dnešní lekce mají stejnou čtveřici režimů (osobn
   - Dva dobové zdroje k Mnichovu (český a německý tisk).
   - 🔗 Navazuje na pramen z `d6_prameny` (zákon 11/1918).
 - **Obrázky:**
-  - `IMG-d-21` 🟠 **E** · dobové fotografie (28. říjen 1918 v Praze, T. G. Masaryk, Baťovy závody, mobilizace 1938), plakát
+  - `IMG-d-21` 🟠 **E ✅** · dobové fotografie 28. října 1918, T. G. Masaryka a mobilizace 1938, autentický plakát a současný dokumentační pohled na dochovanou Baťovu tovární budovu; hotovo a zapojeno
 
 #### Druhá světová válka a holokaust · [d9_druha_valka.html](obsah/d9_druha_valka.html)
 - **Zařazení:** Dějepis › 9. r. · lekce A (citlivé téma)
@@ -2952,7 +2952,7 @@ Společné pro dějepis: dnešní lekce mají stejnou čtveřici režimů (osobn
   - Svědectví různých lidí (disident, dělník, student) z Paměti národa.
   - Pramen: úryvek Charty 77.
 - **Obrázky:**
-  - `IMG-d-23` 🟠 **E** · dobové fotografie (únor 1948, srpen 1968, Berlínská zeď, Václavské náměstí v listopadu 1989), prohlášení Charty 77 — sdílet s `IMG-prv-25`
+  - `IMG-d-23` 🟠 **E ✅** · čtyři dobové fotografie a citovaný pramenný úryvek Charty 77; hotovo a zapojeno, tři snímky sdílí `IMG-prv-25`
 
 ### 7.12 Informatika (18 stránek)
 
@@ -3329,8 +3329,8 @@ Při výrobě sady v jednom stylu zadávat všechny karty v jedné dávce se ste
 | `IMG-cj-07` | B ✅ | 8 trojic karet pro mnohoznačná slova a homonyma (koruna, kohoutek, oko, list, pero, zámek, jazyk, kolej) — význam podle obrázku | [cj6_slovni_zasoba](obsah/cj6_slovni_zasoba.html) |
 | `IMG-cj-08` | E ✅ | doložený rukopis Hospodine, pomiluj ny, titulní list Bible kralické a titulní list prvního vydání Jungmannova slovníku — zapojeno do srovnání vývoje písma a pravopisu | [cj9_vyvoj_jazyka](obsah/cj9_vyvoj_jazyka.html) |
 | `IMG-cj-09` | A ✅ | 10 jednoduchých scén k větám pro první čtení (Máma má mísu. Ema mele maso. Pes leží u domu…) — obrázek ke kontrole porozumění | [slabiky](obsah/slabiky.html) |
-| `IMG-cj-11` | E | antické zobrazení 8–10 řeckých bohů a hrdinů (vázy, sochy; Wikimedia Commons) — skutečné atributy bohů, ne vymyšlené | [cj6_baje](obsah/cj6_baje.html) |
-| `IMG-cj-14` | E | 8 reprodukcí volných děl výtvarného umění ke směrům (romantismus, realismus, impresionismus, symbolismus, kubismus, surrealismus…) — vizuální znak směru | [literarni_smery](obsah/literarni_smery.html) |
+| `IMG-cj-11` | E ✅ | osm doložených antických zobrazení bohů a hrdinů (vázy, sochy a reliéf) — zapojeno do obrazového atlasu i poznávačky skutečných atributů | [cj6_baje](obsah/cj6_baje.html) |
+| `IMG-cj-14` | E ✅ | osm doložených volných reprodukcí od renesance po surrealismus — zapojeno přímo k literárním směrům s vysvětlením vizuálního znaku | [literarni_smery](obsah/literarni_smery.html) |
 | `IMG-m-08` | C | fotografie 8 referenčních předmětů s přibližnou velikostí a hmotností (kancelářská sponka, jablko, litrová láhev, dveře, balení mouky 1 kg, lžička, kostka cukru, fotbalové hřiště z výšky) — odhad jednotek | [prevody_jednotek](obsah/prevody_jednotek.html) |
 | `IMG-m-09` | C | 12 fotografií předmětů tvaru těles (kostka cukru, krabice mléka, plechovka, míč, kornout, pyramida, stan, toblerone, válcová pastelka…) — poznávání těles v okolí | [geo_tvary](obsah/geo_tvary.html) |
 | `IMG-aj-03` | A ✅ | 4 scénky setkání podle denní doby; hotovo a zapojeno | [aj3_pozdravy](obsah/aj3_pozdravy.html) |
@@ -3351,7 +3351,7 @@ Při výrobě sady v jednom stylu zadávat všechny karty v jedné dávce se ste
 | `IMG-prv-19` | A ✅ | krajina s elektrárnami (vodní, větrná, solární pole, uhelná, jaderná, bioplynová stanice) propojená vedením k vesnici — hotspoty; hotovo: zapojeno do přehledu elektráren i cesty elektřiny | [prv5_energie](obsah/prv5_energie.html) |
 | `IMG-prv-21` | A ✅ | 2 rekonstrukce každodenního života (slovanské hradiště 9. století, Praha za Karla IV.) označené jako rekonstrukce — srovnání; hotovo: dvě historicky kontrolované scény | [prv4_nejstarsi_dejiny](obsah/prv4_nejstarsi_dejiny.html) |
 | `IMG-prv-24` | C | fotografie budov Poslanecké sněmovny, Senátu, Úřadu vlády, Pražského hradu, Ústavního soudu | [prv5_statni_symboly](obsah/prv5_statni_symboly.html) |
-| `IMG-prv-25` | E | 8 dobových fotografií s volnou licencí (28. říjen 1918, Masaryk, mobilizace 1938, osvobození 1945, únor 1948, srpen 1968, listopad 1989 na Václavském náměstí, první svobodné volby) — sdílet s dějepisem 9. r. | [prv5_dejiny_20](obsah/prv5_dejiny_20.html) |
+| `IMG-prv-25` | E ✅ | 7 dobových fotografií a 1 úřední volební dokument s volnou licencí (28. říjen 1918, Masaryk, mobilizace 1938, osvobození 1945, únor 1948, srpen 1968, listopad 1989, první svobodné volby); hotovo a zapojeno do otázek | [prv5_dejiny_20](obsah/prv5_dejiny_20.html) |
 | `IMG-f-01` | B ✅ | 8 karet krychlí stejné velikosti z různých materiálů (dřevo, korek, led, hliník, železo, olovo, polystyren, sklo) — vzhled materiálu pro laboratoř; hotovo: zapojeno do výpočtů, vážení i porovnání | [f6_hustota](obsah/f6_hustota.html) |
 | `IMG-f-02` | C | 10 fotografií měřidel (pravítko, svinovací metr, posuvné měřidlo, kuchyňská váha, digitální váha, odměrný válec, teploměr lihový a digitální, stopky, siloměr) — poznávání měřidel | [f6_mereni](obsah/f6_mereni.html) |
 | `IMG-f-04` | C | 12 fotografií jednoduchých strojů v praxi (houpačka, nůžky, kleště, otvírák, kolečko, louskáček, pinzeta, stavební jeřáb s kladkostrojem, studna s rumpálem, převody jízdního kola, hodinový strojek, klika) — spojení modelu se světem | [paka](obsah/paka.html) |
@@ -3400,9 +3400,9 @@ Při výrobě sady v jednom stylu zadávat všechny karty v jedné dávce se ste
 | `IMG-d-17` | E | portréty Marie Terezie a Josefa II., Deklarace práv člověka a občana (dobový tisk), dobytí Bastily (dobový obraz) | [d8_osvicenstvi](obsah/d8_osvicenstvi.html) |
 | `IMG-d-18` | E | Lutherovy teze (dobový tisk), defenestrace 1618 (dobová rytina), Staroměstská exekuce (dobový leták), portrét Komenského | [d8_reformace](obsah/d8_reformace.html) |
 | `IMG-d-20` | E | dobové fotografie (zákopy, legionáři, fronta v Itálii, fronty na chléb v zázemí), válečná pohlednice | [d9_prvni_valka](obsah/d9_prvni_valka.html) |
-| `IMG-d-21` | E | dobové fotografie (28. říjen 1918 v Praze, T. G. Masaryk, Baťovy závody, mobilizace 1938), plakát | [d9_csr](obsah/d9_csr.html) |
+| `IMG-d-21` | E ✅ | 3 dobové fotografie, autentický plakát a současný dokumentační pohled na dochovanou Baťovu tovární budovu; hotovo a zapojeno | [d9_csr](obsah/d9_csr.html) |
 | `IMG-d-22` | E | pečlivě vybrané dobové fotografie (Praha 15. 3. 1939, parašutisté operace Anthropoid, Lidice před a po, Terezín) a dětské kresby z Terezína (s licencí Židovského muzea) — **žádné generované obrazy** | [d9_druha_valka](obsah/d9_druha_valka.html) |
-| `IMG-d-23` | E | dobové fotografie (únor 1948, srpen 1968, Berlínská zeď, Václavské náměstí v listopadu 1989), prohlášení Charty 77 — sdílet s `IMG-prv-25` | [d9_studena_valka](obsah/d9_studena_valka.html) |
+| `IMG-d-23` | E ✅ | 4 dobové fotografie a citovaný pramenný úryvek Charty 77; hotovo a zapojeno, 3 snímky sdílí `IMG-prv-25` | [d9_studena_valka](obsah/d9_studena_valka.html) |
 | `IMG-inf-01` | B ✅ | čtyři natočení robota, cílová vlajka, kámen, strom, voda, klíč a jablko — zapojeno místo emoji v mřížkách sekvencí a cyklů; v sekvencích se robot natáčí a sbírá bonus | [inf4_sekvence](obsah/inf4_sekvence.html) |
 | `IMG-inf-02` | B ✅ | karty prvků sítě v jednotném stylu (notebook, telefon, Wi-Fi router, přepínač, serverovna, optický kabel, vysílač mobilní sítě, datové centrum) — uzly animace | [inf7_site](obsah/inf7_site.html) |
 | `IMG-inf-05` | B ✅ | rozložená počítačová skříň (základní deska, procesor, paměť RAM, disk, zdroj, grafická karta) — hotspoty součástí | [inf4_hardware](obsah/inf4_hardware.html) |

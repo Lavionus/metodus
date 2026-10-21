@@ -22,6 +22,19 @@
   .prehled-chyb .druh { display: none; }
   .prehled-chyb .fakt { display: inline; font-size: inherit; }
   .moznosti button { max-width: 100%; }
+  .foto-atlas { width:min(1120px,100%); margin:22px auto; }
+  .foto-atlas h2 { margin:0 0 5px; text-align:center; font-size:1.22rem; }
+  .foto-atlas > p { margin:0 auto 12px; max-width:820px; text-align:center; color:var(--text-muted,var(--text)); }
+  .foto-atlas h3 { margin:16px 0 8px; font-size:1.02rem; }
+  .foto-mrizka { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
+  .foto-karta { margin:0; overflow:hidden; border:1px solid var(--border); border-radius:14px; background:var(--bg-card); box-shadow:var(--shadow-sm); }
+  .foto-karta img { display:block; width:100%; height:auto; aspect-ratio:4/3; object-fit:cover; }
+  .foto-karta img.cele { object-fit:contain; background:#1d1c1a; }
+  .foto-karta figcaption { padding:10px 11px 12px; font-size:.9rem; line-height:1.35; }
+  .foto-karta strong { display:block; margin-bottom:3px; color:var(--accent); font-size:1rem; }
+  @media (max-width:820px) { .foto-mrizka { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+  @media (max-width:440px) { .foto-mrizka { grid-template-columns:1fr; } }
+  .zadani-obrazek img { display:block; width:auto; max-width:min(100%,440px); max-height:260px; height:auto; margin:0 auto 10px; border-radius:10px; border:1px solid var(--border); }
 </style>
 </head>
 <body>
@@ -44,6 +57,17 @@
     <span class="skore" id="skore"></span>
   </div>
 
+  <section class="foto-atlas" aria-labelledby="budovyNadpis">
+    <h2 id="budovyNadpis">Kde EU skutečně sídlí</h2>
+    <p>Budovy tří institucí, o kterých se nejčastěji mluví. Instituce EU nesídlí v jednom městě, ale hlavně v Bruselu, Štrasburku a Lucemburku.</p>
+    <div class="foto-mrizka">
+      <figure class="foto-karta"><img class="cele" src="img/d/eu-instituce-parlament-strasburk.webp" alt="Prosklená kruhová budova Louise Weissové Evropského parlamentu ve Štrasburku s řadou vlajek členských států." width="1152" height="1604" loading="lazy"><figcaption><strong>Evropský parlament, Štrasburk</strong>Budova Louise Weissové. Sem jezdí poslanci, které volíme v eurovolbách, na plenární zasedání; výbory se scházejí v Bruselu.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/d/eu-instituce-parlament-sal.webp" alt="Půlkruhový zasedací sál Evropského parlamentu ve Štrasburku zaplněný poslanci při plenárním zasedání." width="1152" height="650" loading="lazy"><figcaption><strong>Zasedací sál parlamentu</strong>Poslanci sedí podle politických frakcí, ne podle států. Hlasují tu o zákonech a rozpočtu EU.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/d/eu-instituce-komise-berlaymont.webp" alt="Rozlehlá prosklená budova Berlaymont v Bruselu s velkým modrým praporem Evropské komise na průčelí." width="1152" height="648" loading="lazy"><figcaption><strong>Evropská komise, Brusel</strong>Budova Berlaymont. Pracují tu komisaři – z každé členské země jeden – a navrhují nové evropské zákony.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/d/eu-instituce-soudni-dvur.webp" alt="Dvě zlatavé výškové věže Soudního dvora Evropské unie v Lucemburku na pozadí modré oblohy." width="1152" height="864" loading="lazy"><figcaption><strong>Soudní dvůr EU, Lucemburk</strong>Věže soudu ve čtvrti Kirchberg. Soud dbá na jednotný výklad unijního práva; jeho rozsudky platí ve všech členských státech.</figcaption></figure>
+    </div>
+  </section>
+
   <p class="napoveda">Pozor na tři podobné názvy: <b>Rada Evropské unie</b> = ministři členských států, schvaluje zákony spolu s Parlamentem; <b>Evropská rada</b> = hlavy států a vlád, určuje směr EU; <b>Rada Evropy</b> ve Štrasburku do EU vůbec nepatří (hlídá lidská práva). Zákony navrhuje <b>Komise</b>, schvalují je <b>Parlament a Rada EU</b> společně.</p>
 
 <script>
@@ -57,6 +81,13 @@ const INSTITUCE = [
   { n: 'Evropská centrální banka', seat: 'Frankfurt nad Mohanem', d: 'Řídí měnovou politiku eurozóny a stará se o stabilitu cen.' },
   { n: 'Evropský účetní dvůr', seat: 'Lucemburk', d: 'Kontroluje, zda se finance EU vybírají a využívají správně.' },
 ];
+// fotografie budov (zdroje v seznamu na konci stránky) – ukazují se v otázkách na sídlo
+const FOTO = {
+  "Evropský parlament": { img: 'img/d/eu-instituce-parlament-strasburk.webp', w: 1152, h: 1604, alt: "Prosklená kruhová budova Louise Weissové Evropského parlamentu ve Štrasburku s řadou vlajek členských států." },
+  "Evropská komise": { img: 'img/d/eu-instituce-komise-berlaymont.webp', w: 1152, h: 648, alt: "Rozlehlá prosklená budova Berlaymont v Bruselu s velkým modrým praporem Evropské komise na průčelí." },
+  "Soudní dvůr EU": { img: 'img/d/eu-instituce-soudni-dvur.webp', w: 1152, h: 864, alt: "Dvě zlatavé výškové věže Soudního dvora Evropské unie v Lucemburku na pozadí modré oblohy." },
+};
+const fotoHtml = f => `<img src="${f.img}" alt="${f.alt}" width="${f.w}" height="${f.h}">`;
 // sídla jako možnosti – vždy různá (čtyři instituce sídlí v Bruselu)
 const SIDLA = ['Brusel', 'Štrasburk', 'Lucemburk', 'Frankfurt nad Mohanem', 'Haag', 'Ženeva'];
 let rezim = 'prehled';
@@ -72,6 +103,7 @@ function otazka(typ) {
       odpoved: i.seat,
       moznosti: Uloha.zamichej([i.seat, ...Uloha.zamichej(SIDLA.filter(s => s !== i.seat)).slice(0, 3)]),
       napoveda: i.pozn || '',
+      obrazekHtml: FOTO[i.n] ? fotoHtml(FOTO[i.n]) : '',
     };
   }
   return {

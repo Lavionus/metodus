@@ -1,0 +1,8 @@
+Soubor: d8-renesance-mona-lisa.png / d8-renesance-mona-lisa.webp
+Původní dílo: Mona Lisa, by Leonardo da Vinci, from C2RMF retouched.jpg
+Autor: Leonardo da Vinci
+Datum vzniku: between 1503 and 1506date QS:P,+1503-00-00T00:00:00Z/8,P1319,+1503-00-00T00:00:00Z/9,P1326,+1506-00-00T00:00:00Z/9
+Zdroj: https://commons.wikimedia.org/wiki/File:Mona_Lisa,_by_Leonardo_da_Vinci,_from_C2RMF_retouched.jpg
+Licence: Public domain
+Staženo: 2026-10-21
+Úpravy: automatické natočení, odstranění metadat, zmenšení na nejvýše 1600 px; výuková WebP kopie 1152 px.

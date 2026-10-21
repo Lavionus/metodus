@@ -20,6 +20,17 @@
     .symbol-audio audio { display:block; width:100%; }
     .popis-s { color: var(--text-muted); max-width: 540px; font-size: 1rem; line-height: 1.5; }
     .nazev-s { font-size: 1.2rem; font-weight: 700; }
+    .foto-uloha { display:block; width:min(560px,100%); aspect-ratio:4/3; object-fit:cover; border-radius:14px; border:1px solid var(--border); background:var(--bg-card); }
+    .foto-atlas { width:min(1120px,100%); margin:22px auto; }
+    .foto-atlas h2 { margin:0 0 5px; text-align:center; font-size:1.22rem; }
+    .foto-atlas > p { margin:0 auto 12px; max-width:820px; text-align:center; color:var(--text-muted,var(--text)); }
+    .foto-mrizka { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
+    .foto-karta { margin:0; overflow:hidden; border:1px solid var(--border); border-radius:14px; background:var(--bg-card); box-shadow:var(--shadow-sm); }
+    .foto-karta img { display:block; width:100%; aspect-ratio:4/3; object-fit:cover; }
+    .foto-karta figcaption { padding:10px 11px 12px; font-size:.9rem; line-height:1.35; }
+    .foto-karta strong { display:block; margin-bottom:3px; color:var(--accent); font-size:1rem; }
+    @media (max-width:820px) { .foto-mrizka { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+    @media (max-width:440px) { .foto-mrizka { grid-template-columns:1fr; } }
   </style>
 </head>
 <body>
@@ -31,6 +42,7 @@
     <button data-rezim="kdoResi">🏛️ Kdo to má na starost</button>
     <button data-rezim="moc">⚖️ Tři moci ve státě</button>
     <button data-rezim="svatky">📅 Státní svátky</button>
+    <button data-rezim="budovy">🏛️ Kdo tu sídlí</button>
   </div>
 
   <div class="plocha" id="plocha"></div>
@@ -47,6 +59,18 @@
     u hymny lze spustit poslech instrumentální nahrávky.
     <a href="https://www.psp.cz/docs/laws/1993/3.html">Výčet v zákoně o státních symbolech (§ 1)</a>.
   </p>
+
+  <section class="foto-atlas" aria-labelledby="budovyNadpis">
+    <h2 id="budovyNadpis">Kde sídlí nejvyšší státní instituce</h2>
+    <p>Skutečné budovy, ve kterých se rozhoduje o našem státě. Čtyři stojí v Praze, Ústavní soud v Brně.</p>
+    <div class="foto-mrizka" id="budovyAtlas">
+      <figure class="foto-karta"><img src="img/prv/prv5-budova-poslanecka-snemovna.webp" alt="Průčelí Thunovského paláce v Praze, sídla Poslanecké sněmovny, se štítem a českou vlajkou." width="1152" height="946" loading="lazy"><figcaption><strong>Poslanecká sněmovna</strong>Thunovský palác na Malé Straně v Praze: tady jednají poslanci a schvalují zákony.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/prv/prv5-budova-senat.webp" alt="Průčelí Valdštejnského paláce v Praze, sídla Senátu, s řadou oken a vikýřů na červené střeše." width="1152" height="768" loading="lazy"><figcaption><strong>Senát</strong>Valdštejnský palác na Malé Straně v Praze: tady zasedá 81 senátorů, druhá komora parlamentu.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/prv/prv5-budova-urad-vlady.webp" alt="Strakova akademie, sídlo Úřadu vlády, s kupolí uprostřed průčelí na nábřeží Vltavy v Praze." width="1152" height="768" loading="lazy"><figcaption><strong>Vláda (Úřad vlády)</strong>Strakova akademie na nábřeží Vltavy v Praze: tady se schází vláda a jedná o řízení státu.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/prv/prv5-budova-prazsky-hrad.webp" alt="Pražský hrad s katedrálou svatého Víta nad Malou Stranou, pohled od Vltavy." width="1152" height="554" loading="lazy"><figcaption><strong>Prezident republiky</strong>Pražský hrad: sídlo prezidenta republiky – hlavy státu; hrad byl sídlem českých knížat a králů už od 9. století.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/prv/prv5-budova-ustavni-soud.webp" alt="Rozlehlá budova Ústavního soudu v Joštově ulici v Brně se zdobeným průčelím." width="1152" height="772" loading="lazy"><figcaption><strong>Ústavní soud</strong>Budova bývalého Moravského zemského sněmu v Brně: tady soudci hlídají, aby zákony byly v souladu s Ústavou.</figcaption></figure>
+    </div>
+  </section>
 
 <script>
 const $ = id => document.getElementById(id);
@@ -97,6 +121,20 @@ const SVATKY = [
   { d: '28. října', n: 'Den vzniku samostatného Československa', proc: 'Československo vzniklo roku 1918' },
   { d: '17. listopadu', n: 'Den boje za svobodu a demokracii', proc: 'sametová revoluce začala roku 1989' },
 ];
+
+const BUDOVY = [
+  { n: 'Poslanecká sněmovna', img: 'prv5-budova-poslanecka-snemovna', w: 1152, h: 946, alt: 'Průčelí Thunovského paláce v Praze, sídla Poslanecké sněmovny, se štítem a českou vlajkou.',
+    b: 'Thunovský palác na Malé Straně v Praze', o: 'tady jednají poslanci a schvalují zákony' },
+  { n: 'Senát', img: 'prv5-budova-senat', w: 1152, h: 768, alt: 'Průčelí Valdštejnského paláce v Praze, sídla Senátu, s řadou oken a vikýřů na červené střeše.',
+    b: 'Valdštejnský palác na Malé Straně v Praze', o: 'tady zasedá 81 senátorů, druhá komora parlamentu' },
+  { n: 'vláda', img: 'prv5-budova-urad-vlady', w: 1152, h: 768, alt: 'Strakova akademie, sídlo Úřadu vlády, s kupolí uprostřed průčelí na nábřeží Vltavy v Praze.',
+    b: 'Strakova akademie na nábřeží Vltavy v Praze', o: 'tady se schází vláda a jedná o řízení státu' },
+  { n: 'prezident republiky', img: 'prv5-budova-prazsky-hrad', w: 1152, h: 554, alt: 'Pražský hrad s katedrálou svatého Víta nad Malou Stranou, pohled od Vltavy.',
+    b: 'Pražský hrad', o: 'sídlo prezidenta republiky – hlavy státu; hrad byl sídlem českých knížat a králů už od 9. století' },
+  { n: 'Ústavní soud', img: 'prv5-budova-ustavni-soud', w: 1152, h: 772, alt: 'Rozlehlá budova Ústavního soudu v Joštově ulici v Brně se zdobeným průčelím.',
+    b: 'budova bývalého Moravského zemského sněmu v Brně', o: 'tady soudci hlídají, aby zákony byly v souladu s Ústavou' },
+];
+const fotoBudova = (x, trida) => `<img class="${trida}" src="img/prv/${x.img}.webp" alt="${x.alt}" width="${x.w}" height="${x.h}">`;
 
 /* ---- Poznej symbol --------------------------------------------------------------- */
 function symboly() {
@@ -192,7 +230,27 @@ function svatky() {
   p.appendChild(odezva);
 }
 
-const REZIMY = { symboly, kdoResi, moc, svatky };
+/* ---- Kdo tu sídlí -------------------------------------------------------------------- */
+function budovy() {
+  const p = $('plocha');
+  const b = Uloha.nahodne(BUDOVY);
+  const jine = Uloha.zamichej(BUDOVY.filter(x => x.n !== b.n)).slice(0, 3);
+  p.innerHTML = `<div class="zadani">Kdo sídlí v této budově?</div>${fotoBudova(b, 'foto-uloha')}`;
+  const odezva = document.createElement('div');
+  odezva.className = 'odezva';
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: Uloha.zamichej([b, ...jine]).map(x => ({ klic: x.n, popis: x.n })),
+    spravnyKlic: b.n,
+    zpravaOk: `✅ ${b.b} – ${b.o}.`,
+    zpravaChyba: 'Zkus jinou instituci – je to hrad, palác, nebo budova v Brně?',
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+const REZIMY = { symboly, kdoResi, moc, svatky, budovy };
 function novaUloha() { REZIMY[rezim](); }
 
 document.querySelectorAll('#rezimy button').forEach(b => b.addEventListener('click', () => {

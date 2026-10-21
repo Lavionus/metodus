@@ -1,0 +1,8 @@
+Soubor: d6-pravek-pestni-klin.png / d6-pravek-pestni-klin.webp
+Původní dílo: Biface de St Acheul MHNT.jpg
+Autor: Didier Descouens, 13 April 2011
+Datum vzniku: between 500,000 and 300,000 BP (Acheuleanera QS:P2348,Q210774)
+Zdroj: https://commons.wikimedia.org/wiki/File:Biface_de_St_Acheul_MHNT.jpg
+Licence: CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0)
+Staženo: 2026-10-21
+Úpravy: automatické natočení, odstranění metadat, zmenšení na nejvýše 1600 px; výuková WebP kopie 768 px.

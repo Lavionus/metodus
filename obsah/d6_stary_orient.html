@@ -20,6 +20,20 @@
       padding: 7px 11px; font-size: 0.85rem; font-weight: 600;
     }
     .osa-cas .sipka { color: var(--text-faint); }
+    /* Fotografie v úloze s fotkou */
+    .foto-ukol { display:block; width:min(440px,80vw); height:auto; aspect-ratio:4/3; object-fit:contain; border-radius:12px; background:var(--bg-deep,var(--bg-card)); }
+    /* Foto-atlas */
+    .foto-atlas { width:min(1120px,100%); margin:22px auto; }
+    .foto-atlas h2 { margin:0 0 5px; text-align:center; font-size:1.22rem; }
+    .foto-atlas > p { margin:0 auto 12px; max-width:820px; text-align:center; color:var(--text-muted,var(--text)); }
+    .foto-mrizka { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
+    .foto-karta { margin:0; overflow:hidden; border:1px solid var(--border); border-radius:14px; background:var(--bg-card); box-shadow:var(--shadow-sm); }
+    .foto-karta img { display:block; width:100%; height:auto; aspect-ratio:4/3; object-fit:cover; }
+    .foto-karta img.cele { object-fit:contain; background:#1d1c1a; }
+    .foto-karta figcaption { padding:10px 11px 12px; font-size:.9rem; line-height:1.35; }
+    .foto-karta strong { display:block; margin-bottom:3px; color:var(--accent); font-size:1rem; }
+    @media (max-width:820px) { .foto-mrizka { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+    @media (max-width:440px) { .foto-mrizka { grid-template-columns:1fr; } }
   </style>
 </head>
 <body>
@@ -31,6 +45,7 @@
     <button data-rezim="pojmy">📖 Pojmy a stavby</button>
     <button data-rezim="udalosti">📜 Události a letopočty</button>
     <button data-rezim="poradi">↕️ Seřaď události</button>
+    <button data-rezim="fotky">📷 Poznej památku</button>
   </div>
 
   <div class="plocha" id="plocha"></div>
@@ -39,6 +54,19 @@
     <button class="hlavni" id="btnDalsi">Přeskočit →</button>
     <span class="skore" id="skore"></span>
   </div>
+
+  <section class="foto-atlas" id="atlasOrient" aria-labelledby="dokladyNadpis">
+    <h2 id="dokladyNadpis">Co se dochovalo z Egypta a Mezopotámie</h2>
+    <p>Skutečné památky, které můžeš vidět v muzeích nebo přímo na místě. Všímej si materiálu a písma.</p>
+    <div class="foto-mrizka">
+      <figure class="foto-karta" data-nazev="Chammurapiho zákoník" data-info="čedičová stéla se zákony babylonského krále, asi 1750 př. n. l., dnes v Louvru"><img class="cele" src="img/d/d6-orient-chammurapi.webp" alt="Vysoká čedičová stéla Chammurapiho zákoníku: nahoře reliéf krále před bohem Šamašem, pod ním řádky klínového písma." width="1152" height="1896" loading="lazy"><figcaption><strong>Stéla Chammurapiho zákoníku</strong>Přes 2 m vysoký kámen (asi 1750 př. n. l.). Nahoře král stojí před bohem spravedlnosti, pod ním je klínovým písmem vytesáno 282 zákonů.</figcaption></figure>
+      <figure class="foto-karta" data-nazev="klínopisná destička" data-info="hliněná destička s klínovým písmem vtlačeným rydlem"><img class="cele" src="img/d/d6-orient-klinopisna-desticka.webp" alt="Malá hliněná destička pokrytá vtlačenými klínovitými znaky klínového písma." width="768" height="847" loading="lazy"><figcaption><strong>Klínopisná destička</strong>Písař vtlačoval rydlo do měkké hlíny – znaky mají tvar klínků. Tahle destička ze starobabylonské doby zaznamenává práci dělníků.</figcaption></figure>
+      <figure class="foto-karta" data-nazev="Rosettská deska" data-info="stejný text ve třech písmech: hieroglyfy, démotické písmo a řečtina (196 př. n. l.)"><img class="cele" src="img/d/d6-orient-rosettska-deska.webp" alt="Tmavá kamenná Rosettská deska se třemi pásy textu: nahoře hieroglyfy, uprostřed démotické písmo, dole řečtina." width="768" height="899" loading="lazy"><figcaption><strong>Rosettská deska</strong>Jeden text třemi písmy: hieroglyfy (nahoře), démotické písmo a řečtina (dole). Podle řečtiny rozluštil Champollion roku 1822 hieroglyfy.</figcaption></figure>
+      <figure class="foto-karta" data-nazev="pyramidy v Gíze" data-info="hrobky faraonů Chufua, Rachefa a Menkaurea ze Staré říše"><img src="img/d/d6-orient-pyramidy-giza.webp" alt="Tři velké pyramidy v Gíze a menší pyramidy královen v poušti pod modrým nebem." width="1152" height="765" loading="lazy"><figcaption><strong>Pyramidy v Gíze</strong>Hrobky faraonů Chufua (Cheopse), Rachefa a Menkaurea z doby asi 2600–2500 př. n. l. Vpředu stojí menší pyramidy královen.</figcaption></figure>
+      <figure class="foto-karta" data-nazev="zikkurat v Uru" data-info="stupňovitá chrámová věž z pálených cihel, asi 21. stol. př. n. l."><img src="img/d/d6-orient-zikkurat-ur.webp" alt="Zrekonstruovaný stupňovitý zikkurat v Uru z pálených cihel s velkým schodištěm v průčelí." width="1152" height="864" loading="lazy"><figcaption><strong>Zikkurat v Uru</strong>Stupňovitá chrámová věž z cihel (asi 21. stol. př. n. l.). Na vrcholu stála svatyně boha Měsíce. V Mezopotámii bylo málo kamene, stavělo se z hliněných cihel.</figcaption></figure>
+      <figure class="foto-karta" data-nazev="papyrus s hieroglyfy" data-info="svitek Knihy mrtvých, který se dával zemřelým do hrobu"><img src="img/d/d6-orient-papyrus.webp" alt="Papyrus Knihy mrtvých se sloupci hieroglyfů a malovaným výjevem uprostřed." width="1152" height="768" loading="lazy"><figcaption><strong>Papyrus s hieroglyfy</strong>Část Knihy mrtvých – zaříkadel, která měla zemřelému pomoci na cestě do posmrtného světa. Papyrus se vyráběl z rostliny rostoucí u Nilu.</figcaption></figure>
+    </div>
+  </section>
 
   <p class="napoveda">První státy vznikaly v <b>úrodných údolích velkých řek</b> – v Egyptě u Nilu, v Mezopotámii mezi Eufratem a Tigridem. Zavlažování vyžadovalo spolupráci, a tak vznikla města, úředníci a <b>písmo</b>.</p>
 
@@ -256,7 +284,32 @@ function poradi() {
   p.append(osa, nabidka, odezva);
 }
 
-const REZIMY = { osobnosti, pojmy, udalosti, poradi };
+/* ---- Poznej památku (fotografie z atlasu pod úlohou) ----------------------------- */
+const FOTKY = [...document.querySelectorAll('#atlasOrient .foto-karta')].map(f => ({
+  n: f.dataset.nazev, info: f.dataset.info, img: f.querySelector('img'),
+}));
+function fotky() {
+  const p = $('plocha');
+  const u = Uloha.nahodne(FOTKY);
+  const jine = Uloha.zamichej(FOTKY.filter(x => x.n !== u.n)).slice(0, 3);
+  p.innerHTML = `<div class="zadani">Která památka je na fotografii?</div>
+    <div class="karta"><img class="foto-ukol" src="${u.img.getAttribute('src')}" alt="${u.img.alt.replace(/"/g, '&quot;')}"
+      width="${u.img.getAttribute('width')}" height="${u.img.getAttribute('height')}"></div>`;
+  const odezva = document.createElement('div');
+  odezva.className = 'odezva';
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: Uloha.zamichej([u, ...jine]).map(x => ({ klic: x.n, popis: x.n })),
+    spravnyKlic: u.n,
+    zpravaOk: `✅ ${u.n} – ${u.info}.`,
+    zpravaChyba: 'Všímej si materiálu a písma a zkus to znovu.',
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+const REZIMY = { osobnosti, pojmy, udalosti, poradi, fotky };
 function novaUloha() { REZIMY[rezim](); }
 
 document.querySelectorAll('#rezimy button').forEach(b => b.addEventListener('click', () => {

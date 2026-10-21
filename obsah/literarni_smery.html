@@ -28,6 +28,17 @@
     .smer tr.sviti td { color: var(--ok-text); }
     .dotaz { font-size: clamp(1.3rem, 5vw, 1.9rem); font-weight: 700; }
     .moznosti.smery button { max-width: 100%; text-align: left; font-size: 0.98rem; }
+    .vytvarne-kotvy { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin: 10px 0 12px; }
+    .vytvarna-kotva { margin: 0; padding: 8px; border-radius: 10px; background: var(--bg-deep); }
+    .vytvarna-kotva img { display: block; width: 100%; aspect-ratio: 1; object-fit: contain; border-radius: 8px; background: #eee8dc; }
+    .vytvarna-kotva figcaption { padding-top: 6px; color: var(--text-muted); font-size: 0.82rem; line-height: 1.35; }
+    .vytvarna-kotva strong { display: block; color: var(--accent); font-size: 0.9rem; }
+    @media (max-width: 520px) {
+      .vytvarne-kotvy { grid-template-columns: 1fr; }
+      .smer table { table-layout: fixed; }
+      .smer td { overflow-wrap: anywhere; }
+      .smer td:first-child { width: 42%; white-space: normal; }
+    }
   </style>
 </head>
 <body>
@@ -66,10 +77,10 @@ const SMERY = [
   { nazev: 'Středověk', obdobi: '5.–15. století',
     znaky: 'Náboženská i světská tvorba, legendy, kroniky, rytířská epika; anonymita autorů.',
     autori: [['(anonym)', 'Legenda o sv. Václavu'], ['Kosmas', 'Kronika česká'], ['(anonym)', 'Dalimilova kronika'], ['Jan Hus', 'O církvi, listy z Kostnice']] },
-  { nazev: 'Renesance a humanismus', obdobi: '14.–16. století',
+  { nazev: 'Renesance a humanismus', obdobi: '14.–16. století', obrazy: ['renesance'],
     znaky: 'Návrat k antice, zájem o člověka a pozemský život, rozvoj národních jazyků.',
     autori: [['Dante Alighieri', 'Božská komedie'], ['Giovanni Boccaccio', 'Dekameron'], ['William Shakespeare', 'Hamlet, Romeo a Julie'], ['Miguel de Cervantes', 'Důmyslný rytíř Don Quijote']] },
-  { nazev: 'Baroko', obdobi: '17.–18. století',
+  { nazev: 'Baroko', obdobi: '17.–18. století', obrazy: ['baroko'],
     znaky: 'Zbožnost, kontrasty, pomíjivost světa; v Čechách exulantská a lidová tvorba.',
     autori: [['Jan Amos Komenský', 'Labyrint světa a ráj srdce'], ['Bedřich Bridel', 'Co Bůh? Člověk?'], ['Hans Ch. von Grimmelshausen', 'Simplicius Simplicissimus']] },
   { nazev: 'Klasicismus a osvícenství', obdobi: '17.–18. století',
@@ -78,16 +89,16 @@ const SMERY = [
   { nazev: 'Národní obrození', obdobi: 'konec 18. – pol. 19. století',
     znaky: 'Obnova českého jazyka a kultury, sběr lidové slovesnosti, vlastenectví.',
     autori: [['Josef Dobrovský', 'Zevrubná mluvnice jazyka českého'], ['Josef Jungmann', 'Slovník česko-německý'], ['František Palacký', 'Dějiny národu českého'], ['Karel Jaromír Erben', 'Kytice'], ['Božena Němcová', 'Babička']] },
-  { nazev: 'Romantismus', obdobi: '1. pol. 19. století',
+  { nazev: 'Romantismus', obdobi: '1. pol. 19. století', obrazy: ['romantismus'],
     znaky: 'Cit, individualita, rozpor snu a skutečnosti, výjimečný hrdina, příroda.',
     autori: [['Karel Hynek Mácha', 'Máj'], ['Victor Hugo', 'Chrám Matky Boží v Paříži, Bídníci'], ['Alexandr S. Puškin', 'Evžen Oněgin'], ['E. A. Poe', 'Havran']] },
-  { nazev: 'Realismus a naturalismus', obdobi: '2. pol. 19. století',
+  { nazev: 'Realismus a naturalismus', obdobi: '2. pol. 19. století', obrazy: ['realismus'],
     znaky: 'Pravdivé zobrazení skutečnosti, typizace, kritika společnosti.',
     autori: [['Jan Neruda', 'Povídky malostranské'], ['Alois Jirásek', 'Staré pověsti české, F. L. Věk'], ['Honoré de Balzac', 'Otec Goriot'], ['Lev N. Tolstoj', 'Vojna a mír'], ['Fjodor M. Dostojevskij', 'Zločin a trest'], ['Émile Zola', 'Zabiják']] },
-  { nazev: 'Moderna přelomu století', obdobi: 'konec 19. – zač. 20. století',
+  { nazev: 'Moderna přelomu století', obdobi: 'konec 19. – zač. 20. století', obrazy: ['impresionismus', 'symbolismus'],
     znaky: 'Symbolismus, impresionismus, dekadence; důraz na dojem, symbol, hudebnost verše.',
     autori: [['Charles Baudelaire', 'Květy zla'], ['Paul Verlaine', 'Saturnské básně'], ['Antonín Sova', 'Květy intimních nálad'], ['Otokar Březina', 'Tajemné dálky'], ['Petr Bezruč', 'Slezské písně']] },
-  { nazev: 'Avantgarda', obdobi: '1. pol. 20. století',
+  { nazev: 'Avantgarda', obdobi: '1. pol. 20. století', obrazy: ['kubismus', 'surrealismus'],
     znaky: 'Experiment, poetismus a surrealismus; hravost, asociace, obraznost.',
     autori: [['Vítězslav Nezval', 'Edison, Sbohem a šáteček'], ['Jaroslav Seifert', 'Na vlnách TSF; nositel Nobelovy ceny'], ['Guillaume Apollinaire', 'Pásmo (Alkoholy)'], ['André Breton', 'Manifest surrealismu']] },
   { nazev: 'Meziválečná próza', obdobi: '20.–30. léta 20. století',
@@ -100,11 +111,35 @@ const SMERY = [
 
 const $ = id => document.getElementById(id);
 
+const VYTVARNE_KOTVY = {
+  renesance: { smer: 'Renesance', autor: 'Raffael Santi', dilo: 'Athénská škola', rok: '1509–1511',
+    znak: 'harmonická stavba prostoru, perspektiva a návrat k antice', img: 'img/cj/lit-smer-renesance.webp', alt: 'Raffaelova Athénská škola s antickými filozofy v souměrném renesančním prostoru.' },
+  baroko: { smer: 'Baroko', autor: 'Caravaggio', dilo: 'Povolání svatého Matouše', rok: '1599–1600',
+    znak: 'prudký kontrast světla a tmy, napětí a dramatické gesto', img: 'img/cj/lit-smer-baroko.webp', alt: 'Caravaggiovo Povolání svatého Matouše s dramatickým paprskem světla v temné místnosti.' },
+  romantismus: { smer: 'Romantismus', autor: 'Caspar David Friedrich', dilo: 'Poutník nad mořem mlhy', rok: 'kolem 1818',
+    znak: 'osamělý jedinec, tajemná příroda a silný cit', img: 'img/cj/lit-smer-romantismus.webp', alt: 'Friedrichův osamělý poutník stojí na skále nad mořem mlhy.' },
+  realismus: { smer: 'Realismus', autor: 'Gustave Courbet', dilo: 'Kameníci', rok: '1849',
+    znak: 'všední namáhavá práce bez idealizace', img: 'img/cj/lit-smer-realismus.webp', alt: 'Courbetovi Kameníci zachycují dva dělníky při těžké práci.' },
+  impresionismus: { smer: 'Impresionismus', autor: 'Claude Monet', dilo: 'Imprese, východ slunce', rok: '1872',
+    znak: 'okamžitý světelný a barevný dojem místo ostrých obrysů', img: 'img/cj/lit-smer-impresionismus.webp', alt: 'Monetův mlhavý přístav při východu slunce tvořený volnými barevnými tahy.' },
+  symbolismus: { smer: 'Symbolismus', autor: 'Gustave Moreau', dilo: 'Oidipus a Sfinga', rok: '1864',
+    znak: 'tajemný mytický výjev nese skrytý význam', img: 'img/cj/lit-smer-symbolismus.webp', alt: 'Moreauův Oidipus hledí do očí Sfingy v tajemném mytickém výjevu.' },
+  kubismus: { smer: 'Kubismus', autor: 'Juan Gris', dilo: 'Žaluzie', rok: '1914',
+    znak: 'předměty rozložené do geometrických ploch a více úhlů pohledu', img: 'img/cj/lit-smer-kubismus.webp', alt: 'Grisovo kubistické zátiší skládá předměty z překrývajících se geometrických ploch.' },
+  surrealismus: { smer: 'Surrealismus', autor: 'Yves Tanguy', dilo: 'Smrt pozorující svou rodinu', rok: '1927',
+    znak: 'snový nelogický prostor a podivné tvary vzniklé z představivosti', img: 'img/cj/lit-smer-surrealismus.webp', alt: 'Tanguyova surrealistická krajina s přízračnými tvary v nelogickém snovém prostoru.' },
+};
+
 /* ---------- přehled ---------- */
 $('prehled').innerHTML = SMERY.map(s => `
   <div class="smer" data-smer="${s.nazev}">
     <h2>${s.nazev} <span class="obdobi">${s.obdobi}</span></h2>
     <div class="znaky">${s.znaky}</div>
+    ${s.obrazy ? `<div class="vytvarne-kotvy">${s.obrazy.map(k => { const o = VYTVARNE_KOTVY[k]; return `
+      <figure class="vytvarna-kotva" data-kotva="${k}">
+        <img src="${o.img}" alt="${o.alt}" width="768" height="768" loading="lazy">
+        <figcaption><strong>${o.smer}: ${o.dilo}</strong>${o.autor}, ${o.rok}<br>Vizuální znak: ${o.znak}.</figcaption>
+      </figure>`; }).join('')}</div>` : ''}
     <table>${s.autori.map(([a, d]) =>
       `<tr data-autor="${a}"><td>${a}</td><td>${d}</td></tr>`).join('')}</table>
   </div>`).join('');

@@ -21,6 +21,16 @@
     .globus .bod.spravne { fill: var(--ok); }
     .globus .popisek { fill: var(--text-faint); font-size: 10px; text-anchor: middle; }
     .zadani-t { font-size: clamp(1.05rem, 4vw, 1.5rem); font-weight: 700; }
+    .foto-uloha { display:block; width:min(560px,100%); aspect-ratio:4/3; object-fit:cover; border-radius:14px; border:1px solid var(--border); background:var(--bg-card); }
+    .foto-atlas { width:min(1120px,100%); margin:22px auto; }
+    .foto-atlas h2 { margin:0 0 5px; text-align:center; font-size:1.22rem; }
+    .foto-atlas > p { margin:0 auto 12px; max-width:820px; text-align:center; color:var(--text-muted,var(--text)); }
+    .foto-mrizka { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+    .foto-karta { margin:0; overflow:hidden; border:1px solid var(--border); border-radius:14px; background:var(--bg-card); box-shadow:var(--shadow-sm); }
+    .foto-karta img { display:block; width:100%; aspect-ratio:4/3; object-fit:cover; }
+    .foto-karta figcaption { padding:10px 11px 12px; font-size:.9rem; line-height:1.35; }
+    .foto-karta strong { display:block; margin-bottom:3px; color:var(--accent); font-size:1rem; }
+    @media (max-width:440px) { .foto-mrizka { grid-template-columns:1fr; } }
   </style>
 </head>
 <body>
@@ -32,6 +42,7 @@
     <button data-rezim="souradnice">📍 Urči souřadnice</button>
     <button data-rezim="meritko">📏 Měřítko mapy</button>
     <button data-rezim="druhyMap">🗂️ Druhy map</button>
+    <button data-rezim="ukazkyMap">🖼️ Poznej mapu</button>
   </div>
 
   <div class="plocha" id="plocha"></div>
@@ -46,6 +57,12 @@
     od pólu k pólu (nultý prochází Greenwichem). Zeměpisná <b>šířka</b> se měří od rovníku
     na sever a na jih, zeměpisná <b>délka</b> od nultého poledníku na východ a na západ.
   </p>
+
+  <section class="foto-atlas" aria-labelledby="mapyNadpis">
+    <h2 id="mapyNadpis">Jedno místo – tři pohledy, a k tomu plán města</h2>
+    <p>První tři výřezy ukazují stejné území (Útěchov na okraji Brna) ve stejném měřítku. Porovnej, co která mapa zdůrazňuje a co vynechává. Čtvrtý obrázek je plán celého středu Brna v menším měřítku.</p>
+    <div class="foto-mrizka" id="mapyAtlas"></div>
+  </section>
 
 <script>
 const $ = id => document.getElementById(id);
@@ -88,6 +105,18 @@ const DRUHY_MAP = [
   { n: 'plán města', o: 'velmi podrobné zobrazení ulic v malém území' },
   { n: 'vrstevnicová mapa', o: 'nadmořskou výšku znázorňuje čárami spojujícími stejně vysoká místa' },
 ];
+
+const UKAZKY_MAP = [
+  { n: 'obecně zeměpisná (základní) mapa', img: 'z6-mapa-utechov-zakladni', w: 0, h: 0, alt: '',
+    o: 'ukazuje všechno důležité najednou: zástavbu, silnice, lesy, vodu, vrstevnice a názvy; výška terénu je vidět z vrstevnic' },
+  { n: 'turistická mapa', img: 'z6-mapa-utechov-turisticka', w: 0, h: 0, alt: '',
+    o: 'stejné území jako základní mapa, ale navíc barevné čáry značených turistických a cyklistických tras' },
+  { n: 'letecký snímek (ortofoto)', img: 'z6-mapa-utechov-letecka', w: 0, h: 0, alt: '',
+    o: 'skutečná fotografie krajiny shora, upravená tak, aby šla měřit jako mapa; nejsou na ní značky ani názvy – musíš je poznat sám' },
+  { n: 'plán města', img: 'z6-mapa-brno-osm', w: 0, h: 0, alt: '',
+    o: 'mapa z projektu OpenStreetMap ukazuje celý střed Brna – větší území, a proto menší měřítko; jednotlivé domy už nejsou vidět, zato celá síť ulic' },
+];
+const ukazkaMapy = (x, trida) => `<img class="${trida}" src="img/z/${x.img}.webp" alt="${x.alt}" width="${x.w}" height="${x.h}">`;
 
 /* ---- Zeměpisná síť ------------------------------------------------------------------- */
 function pojmy() {
@@ -190,7 +219,26 @@ function druhyMap() {
   p.appendChild(odezva);
 }
 
-const REZIMY = { pojmy, souradnice, meritko, druhyMap };
+/* ---- Poznej mapu ---------------------------------------------------------------------- */
+function ukazkyMap() {
+  const p = $('plocha');
+  const u = Uloha.nahodne(UKAZKY_MAP);
+  p.innerHTML = `<div class="zadani">Co je na obrázku?</div>${ukazkaMapy(u, 'foto-uloha')}`;
+  const odezva = document.createElement('div');
+  odezva.className = 'odezva';
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: Uloha.zamichej(UKAZKY_MAP).map(x => ({ klic: x.n, popis: x.n })),
+    spravnyKlic: u.n,
+    zpravaOk: `✅ ${u.n} – ${u.o}.`,
+    zpravaChyba: 'Je to fotografie, nebo kresba? Jsou tam barevné trasy? Vidíš jednotlivé domy, nebo celé město?',
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+const REZIMY = { pojmy, souradnice, meritko, druhyMap, ukazkyMap };
 function novaUloha() { REZIMY[rezim](); }
 
 document.querySelectorAll('#rezimy button').forEach(b => b.addEventListener('click', () => {

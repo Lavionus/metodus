@@ -1,0 +1,8 @@
+Soubor: d6-prameny-kronika.png / d6-prameny-kronika.webp
+Původní dílo: Budyšínský rukopis Kosmovy kroniky 102.jpg
+Autor: Cosmas of Prague
+Datum vzniku: 12th centurydate QS:P,+1150-00-00T00:00:00Z/7
+Zdroj: https://commons.wikimedia.org/wiki/File:Budy%C5%A1%C3%ADnsk%C3%BD_rukopis_Kosmovy_kroniky_102.jpg
+Licence: Public domain
+Staženo: 2026-10-21
+Úpravy: automatické natočení, odstranění metadat, zmenšení na nejvýše 1600 px; výuková WebP kopie 1152 px.

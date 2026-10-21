@@ -49,6 +49,7 @@ const JADRO = [
   './data/staty.js',
   './data/horniny.js',
   './data/tisnova_cisla.js',
+  './data/obrazky-zdroje.json',   // zdroje převzatých obrázků (kostra.js)
   './fonty/playwrite-cz.woff2',   // školní psací písmo (cj1_pismena)
   './manifest.webmanifest',
   './icon-192.png',

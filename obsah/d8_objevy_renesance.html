@@ -19,6 +19,18 @@
       color: var(--text-faint); font-size: 0.78rem; }
     .osa span { background: var(--bg-control); border: 1px solid var(--border);
       border-radius: 6px; padding: 4px 9px; }
+    .foto-atlas { width:min(1120px,100%); margin:22px auto; }
+    .foto-atlas h2 { margin:0 0 5px; text-align:center; font-size:1.22rem; }
+    .foto-atlas > p { margin:0 auto 12px; max-width:820px; text-align:center; color:var(--text-muted,var(--text)); }
+    .foto-atlas h3 { margin:16px 0 8px; font-size:1.02rem; }
+    .foto-mrizka { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
+    .foto-karta { margin:0; overflow:hidden; border:1px solid var(--border); border-radius:14px; background:var(--bg-card); box-shadow:var(--shadow-sm); }
+    .foto-karta img { display:block; width:100%; aspect-ratio:4/3; object-fit:cover; }
+    .foto-karta img.cele { object-fit:contain; background:#1d1c1a; }
+    .foto-karta figcaption { padding:10px 11px 12px; font-size:.9rem; line-height:1.35; }
+    .foto-karta strong { display:block; margin-bottom:3px; color:var(--accent); font-size:1rem; }
+    @media (max-width:820px) { .foto-mrizka { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+    @media (max-width:440px) { .foto-mrizka { grid-template-columns:1fr; } }
   </style>
 </head>
 <body>
@@ -40,6 +52,27 @@
   </div>
 
   <div class="osa"><span>1453 pád Konstantinopole</span><span>1492 Kolumbus v Americe</span><span>1498 Vasco da Gama do Indie</span><span>1519–1522 Magalhãesova výprava</span><span>1543 Koperník o pohybu Země</span></div>
+
+  <section class="foto-atlas" aria-labelledby="dokladyNadpis">
+    <h2 id="dokladyNadpis">Renesance na vlastní oči</h2>
+    <p>Skutečná díla a stavby z doby renesance. Všímej si, jak se umělci vracejí k antice a zajímají se o člověka a přírodu.</p>
+    <h3>Malířství a sochařství – člověk ve středu zájmu</h3>
+    <div class="foto-mrizka">
+      <figure class="foto-karta"><img class="cele" src="img/d/d8-renesance-mona-lisa.webp" alt="Obraz Mona Lisa od Leonarda da Vinci: žena se založenýma rukama a jemným úsměvem před krajinou v mlžném oparu." width="1152" height="1716" loading="lazy"><figcaption><strong>Leonardo da Vinci: Mona Lisa</strong>Kolem roku 1503–1519. Všimni si měkkých přechodů světla a stínu (sfumato) a krajiny ubíhající do dálky – perspektiva.</figcaption></figure>
+      <figure class="foto-karta"><img class="cele" src="img/d/d8-renesance-vitruvianus.webp" alt="Kresba Vitruviánského muže od Leonarda da Vinci: nahý muž s rozpaženými pažemi vepsaný do kruhu a čtverce, nad i pod ním zrcadlové písmo." width="1152" height="1566" loading="lazy"><figcaption><strong>Leonardo da Vinci: Vitruviánský muž</strong>Kresba asi z roku 1490. Leonardo podle antického stavitele Vitruvia hledal ideální proporce lidského těla.</figcaption></figure>
+      <figure class="foto-karta"><img class="cele" src="img/d/d8-renesance-david.webp" alt="Mramorová socha Davida od Michelangela v galerii Accademia ve Florencii, stojící nahý mladík s prakem přes rameno." width="1152" height="1845" loading="lazy"><figcaption><strong>Michelangelo: David</strong>Mramorová socha z let 1501–1504, vysoká přes 5 m. Biblický hrdina zobrazený jako nahý atlet podle antických vzorů.</figcaption></figure>
+      <figure class="foto-karta"><img class="cele" src="img/d/d8-renesance-zrozeni-venuse.webp" alt="Obraz Zrození Venuše od Sandra Botticelliho: bohyně stojí na lastuře na moři, vlevo ji ofukují větry, vpravo ji vítá žena s pláštěm." width="1152" height="724" loading="lazy"><figcaption><strong>Sandro Botticelli: Zrození Venuše</strong>Asi 1485. Místo světce je hlavní postavou antická bohyně lásky – renesance se vrací k řeckým a římským bájím.</figcaption></figure>
+    </div>
+    <h3>Renesanční stavby v Čechách</h3>
+    <div class="foto-mrizka">
+      <figure class="foto-karta"><img src="img/d/d8-renesance-litomysl.webp" alt="Renesanční zámek Litomyšl: bílá budova se sgrafitovou výzdobou, arkádami a zdobnými štíty na střeše." width="1152" height="742" loading="lazy"><figcaption><strong>Zámek Litomyšl</strong>Postaven v letech 1568–1581, zapsán na seznamu UNESCO. Typické znaky: vodorovné členění, arkády na nádvoří a zdobné štíty.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/d/d8-renesance-litomysl-sgrafito.webp" alt="Detail zdi zámku Litomyšl pokryté sgrafitem, které napodobuje vystupující kvádry." width="1152" height="762" loading="lazy"><figcaption><strong>Sgrafito</strong>Výzdoba vyškrabaná do dvou vrstev omítky. Na litomyšlském zámku napodobuje kvádry – je jich na fasádě téměř osm tisíc.</figcaption></figure>
+    </div>
+    <h3>Nový obraz světa</h3>
+    <div class="foto-mrizka">
+      <figure class="foto-karta"><img class="cele" src="img/d/d8-renesance-waldseemuller.webp" alt="Waldseemüllerova mapa světa z roku 1507 složená z dvanácti listů, vlevo dole úzký pruh nového světadílu s nápisem America." width="1152" height="638" loading="lazy"><figcaption><strong>Waldseemüllerova mapa (1507)</strong>Tištěná mapa světa, na které se poprvé objevil název America – podle mořeplavce Ameriga Vespucciho.</figcaption></figure>
+    </div>
+  </section>
 
   <p class="napoveda">Objevné plavby umožnily <b>kompas, astroláb a karavela</b>. Renesance se zrodila v Itálii ve 14. století a přinesla <b>humanismus</b> – zájem o člověka, přírodu a antickou vzdělanost.</p>
 

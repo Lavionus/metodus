@@ -19,6 +19,18 @@
       color: var(--text-faint); font-size: 0.78rem; }
     .osa span { background: var(--bg-control); border: 1px solid var(--border);
       border-radius: 6px; padding: 4px 9px; }
+    .foto-atlas { width:min(1120px,100%); margin:22px auto; }
+    .foto-atlas h2 { margin:0 0 5px; text-align:center; font-size:1.22rem; }
+    .foto-atlas > p { margin:0 auto 12px; max-width:820px; text-align:center; color:var(--text-muted,var(--text)); }
+    .foto-atlas h3 { margin:16px 0 8px; font-size:1.02rem; }
+    .foto-mrizka { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
+    .foto-karta { margin:0; overflow:hidden; border:1px solid var(--border); border-radius:14px; background:var(--bg-card); box-shadow:var(--shadow-sm); }
+    .foto-karta img { display:block; width:100%; height:auto; aspect-ratio:4/3; object-fit:cover; }
+    .foto-karta img.cele { object-fit:contain; background:#1d1c1a; }
+    .foto-karta figcaption { padding:10px 11px 12px; font-size:.9rem; line-height:1.35; }
+    .foto-karta strong { display:block; margin-bottom:3px; color:var(--accent); font-size:1rem; }
+    @media (max-width:820px) { .foto-mrizka { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+    @media (max-width:440px) { .foto-mrizka { grid-template-columns:1fr; } }
   </style>
 </head>
 <body>
@@ -40,6 +52,35 @@
   </div>
 
   <div class="osa"><span>1. 9. 1939 útok na Polsko</span><span>1941 útok na SSSR, Pearl Harbor</span><span>1942 atentát na Heydricha, Lidice</span><span>1943 Stalingrad</span><span>6. 6. 1944 vylodění v Normandii</span><span>5.–9. 5. 1945 Pražské povstání</span><span>8. 5. 1945 kapitulace Německa</span></div>
+
+  <section class="foto-atlas" aria-labelledby="fotoNadpis">
+    <h2 id="fotoNadpis">Protektorát, odboj a holokaust na dobových snímcích</h2>
+    <p>Skutečné fotografie a kresby z let 1939–1945. U každé si polož otázku: co přesně dokládá a proč si to dnes připomínáme?</p>
+    <h3>Okupace</h3>
+    <div class="foto-mrizka">
+      <figure class="foto-karta"><img src="img/d/d9-valka2-prazsky-hrad-1939.webp" alt="Německé vojenské jednotky s motocykly a přilbami na nádvoří Pražského hradu 15. března 1939." width="1152" height="1202" loading="lazy"><figcaption><strong>15. března 1939</strong>Německá armáda obsadila zbytek Česko-Slovenska, vojáci stáli i na Pražském hradě. Druhý den vznikl Protektorát Čechy a Morava.</figcaption></figure>
+    </div>
+    <h3>Odboj: operace Anthropoid</h3>
+    <div class="foto-mrizka">
+      <figure class="foto-karta"><img class="cele" src="img/d/d9-valka2-gabcik.webp" alt="Portrét Jozefa Gabčíka v uniformě československé armády ve Velké Británii." width="1152" height="1596" loading="lazy"><figcaption><strong>Jozef Gabčík</strong>Slovenský voják československé armády v Británii. Spolu s Janem Kubišem provedl 27. května 1942 v Praze atentát na Reinharda Heydricha.</figcaption></figure>
+      <figure class="foto-karta"><img class="cele" src="img/d/d9-valka2-kubis.webp" alt="Portrét Jana Kubiše v uniformě a čepici československé armády ve Velké Británii." width="1152" height="1383" loading="lazy"><figcaption><strong>Jan Kubiš</strong>Parašutista z Dolních Vilémovic na Třebíčsku. Úkryt v pražském kostele sv. Cyrila a Metoděje prozradil zrádce; oba zde 18. června 1942 zahynuli v boji s přesilou.</figcaption></figure>
+    </div>
+    <h3>Lidice – před a po</h3>
+    <div class="foto-mrizka">
+      <figure class="foto-karta"><img src="img/d/d9-valka2-lidice-pred.webp" alt="Náves obce Lidice s kostelem svatého Martina a venkovskými stavením před rokem 1942." width="1152" height="736" loading="lazy"><figcaption><strong>Lidice před válkou</strong>Obyčejná vesnice u Kladna s kostelem sv. Martina ze 14. století.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/d/d9-valka2-lidice-po.webp" alt="Rozvaliny srovnané se zemí v místě vypálené obce Lidice v roce 1942." width="1152" height="841" loading="lazy"><figcaption><strong>Lidice v roce 1942</strong>Jako pomstu za atentát nacisté 10. června 1942 zastřelili lidické muže, ženy a děti odvlekli a obec srovnali se zemí.</figcaption></figure>
+    </div>
+    <h3>Terezín</h3>
+    <div class="foto-mrizka">
+      <figure class="foto-karta"><img src="img/d/d9-valka2-terezin-mala-pevnost.webp" alt="Vstupní brána Malé pevnosti v Terezíně s pruhovaným průjezdem a kamenným mostem přes příkop." width="1152" height="765" loading="lazy"><figcaption><strong>Malá pevnost Terezín</strong>Za války věznice gestapa. Ve městě Terezín vedle ní nacisté zřídili ghetto pro Židy, odkud odjížděly transporty do vyhlazovacích táborů.</figcaption></figure>
+      <figure class="foto-karta"><img class="cele" src="img/d/d9-valka2-terezin-transport.webp" alt="Kresba vězně Ferdinanda Blocha zachycuje namačkaný zástup lidí s kufry při příjezdu transportu do terezínského ghetta." width="1152" height="791" loading="lazy"><figcaption><strong>Příjezd transportu</strong>Kresbu tajně pořídil vězeň ghetta Ferdinand Bloch. Lidé si směli vzít jen pár zavazadel a nevěděli, co je čeká.</figcaption></figure>
+      <figure class="foto-karta"><img class="cele" src="img/d/d9-valka2-terezin-detska-kresba.webp" alt="Dětská kresba Doris Weiserové z terezínského ghetta: barevný motýl nad loukou s květinami." width="1066" height="812" loading="lazy"><figcaption><strong>Dětská kresba z ghetta</strong>Doris Weiserová (1932–1944) malovala na tajných hodinách výtvarnice Friedl Dicker-Brandeisové. Zahynula v Osvětimi ve dvanácti letech.</figcaption></figure>
+    </div>
+    <h3>Konec války</h3>
+    <div class="foto-mrizka">
+      <figure class="foto-karta"><img src="img/prv/prv5-dejiny-osvobozeni.webp" alt="Pražané vítají maršála Koněva v květnu 1945." width="1152" height="735" loading="lazy"><figcaption><strong>Květen 1945</strong>Pražané vítají Rudou armádu a maršála Koněva. Po Pražském povstání skončila válka v Evropě 8. května 1945.</figcaption></figure>
+    </div>
+  </section>
 
   <p class="napoveda">Válka začala <b>1. září 1939</b> napadením Polska a v Evropě skončila <b>8. května 1945</b>. Nacistický režim během ní systematicky zavraždil přibližně <b>šest milionů Židů</b> a statisíce Romů a dalších pronásledovaných skupin.</p>
 

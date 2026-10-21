@@ -24,6 +24,20 @@
     .rekonstrukce img { display:block; width:100%; border-radius:14px; }
     .rekonstrukce figcaption { margin-top:8px; color:var(--text-muted); line-height:1.5; }
     .stit-rekonstrukce { font-weight:800; color:var(--accent); text-transform:uppercase; letter-spacing:.05em; }
+    /* Fotografie v úloze „Poznej podle fotky“ */
+    .foto-ukol { display:block; width:min(440px,80vw); height:auto; aspect-ratio:4/3; object-fit:contain; border-radius:12px; background:var(--bg-deep,var(--bg-card)); }
+    /* Foto-atlas: co se z Říma dochovalo */
+    .foto-atlas { width:min(1120px,100%); margin:22px auto; }
+    .foto-atlas h2 { margin:0 0 5px; text-align:center; font-size:1.22rem; }
+    .foto-atlas > p { margin:0 auto 12px; max-width:820px; text-align:center; color:var(--text-muted,var(--text)); }
+    .foto-mrizka { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
+    .foto-karta { margin:0; overflow:hidden; border:1px solid var(--border); border-radius:14px; background:var(--bg-card); box-shadow:var(--shadow-sm); }
+    .foto-karta img { display:block; width:100%; height:auto; aspect-ratio:4/3; object-fit:cover; }
+    .foto-karta img.cele { object-fit:contain; background:#1d1c1a; }
+    .foto-karta figcaption { padding:10px 11px 12px; font-size:.9rem; line-height:1.35; }
+    .foto-karta strong { display:block; margin-bottom:3px; color:var(--accent); font-size:1rem; }
+    @media (max-width:820px) { .foto-mrizka { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+    @media (max-width:440px) { .foto-mrizka { grid-template-columns:1fr; } }
   </style>
 </head>
 <body>
@@ -35,6 +49,7 @@
     <button data-rezim="pojmy">📖 Pojmy a stavby</button>
     <button data-rezim="udalosti">📜 Události a letopočty</button>
     <button data-rezim="poradi">↕️ Seřaď události</button>
+    <button data-rezim="fotky">📷 Poznej podle fotky</button>
   </div>
 
   <div class="plocha" id="plocha"></div>
@@ -48,6 +63,19 @@
     <img src="img/d/d6-rim-forum.webp" alt="Umělecká rekonstrukce římského fóra s chrámy, bazilikou, řečništěm, tržištěm a obyvateli Říma." width="1152" height="768" loading="lazy">
     <figcaption><span class="stit-rekonstrukce">Rekonstrukce:</span> Fórum spojovalo politiku, soudnictví, náboženství i obchod. Rozlehlé baziliky sloužily veřejným jednáním, nikoli původně jako kostely.</figcaption>
   </figure></section>
+
+  <section class="foto-atlas" id="atlasRim" aria-labelledby="dokladyNadpis">
+    <h2 id="dokladyNadpis">Co se z Říma dochovalo</h2>
+    <p>Skutečné stavby a předměty, které můžeš vidět dodnes. Podle čeho je poznáš?</p>
+    <div class="foto-mrizka">
+      <figure class="foto-karta" data-nazev="Koloseum" data-info="amfiteátr pro gladiátorské zápasy, dokončený roku 80 n. l."><img src="img/d/d6-rim-koloseum.webp" alt="Vnější zeď Kolosea v Římě se třemi patry oblouků a nejvyšším patrem s okny." width="1152" height="828" loading="lazy"><figcaption><strong>Koloseum</strong>Největší amfiteátr Říma (dokončen 80 n. l.) pro asi 50 000 diváků. Poznáš ho podle oválného tvaru a pater oblouků nad sebou.</figcaption></figure>
+      <figure class="foto-karta" data-nazev="akvadukt Pont du Gard" data-info="akvadukt přiváděl vodu do města Nîmes přes údolí řeky"><img src="img/d/d6-rim-pont-du-gard.webp" alt="Římský akvadukt Pont du Gard ve Francii se třemi řadami kamenných oblouků nad řekou." width="1152" height="860" loading="lazy"><figcaption><strong>Akvadukt Pont du Gard</strong>Most akvaduktu v dnešní Francii (1. stol. n. l.). Voda tekla žlabem úplně nahoře s nepatrným spádem – bez čerpadel.</figcaption></figure>
+      <figure class="foto-karta" data-nazev="římská silnice Via Appia" data-info="dlážděná silnice z Říma na jih Itálie, budovaná od roku 312 př. n. l."><img src="img/d/d6-rim-silnice.webp" alt="Dochovaná dlažba starověké silnice Via Appia z velkých plochých kamenů lemovaná stromy." width="1152" height="768" loading="lazy"><figcaption><strong>Via Appia</strong>„Královna silnic“ z roku 312 př. n. l. Pod dlažbou z velkých kamenů leží několik vrstev štěrku – proto silnice vydržela dodnes.</figcaption></figure>
+      <figure class="foto-karta" data-nazev="Pompeje" data-info="město zasypané popelem při výbuchu Vesuvu roku 79 n. l."><img src="img/d/d6-rim-pompeje.webp" alt="Ulice v ruinách Pompejí a v pozadí sopka Vesuv." width="1152" height="864" loading="lazy"><figcaption><strong>Pompeje</strong>Roku 79 n. l. je zasypal popel ze sopky Vesuv (vzadu). Díky tomu se zachovaly ulice, domy i malby – archeologové tu vidí každodenní život Římanů.</figcaption></figure>
+      <figure class="foto-karta" data-nazev="římská mince (denár)" data-info="stříbrná mince s hlavou císaře Augusta a jeho jménem"><img class="cele" src="img/d/d6-rim-mince.webp" alt="Stříbrný denár císaře Augusta: na líci hlava císaře s nápisem CAESAR, na rubu nápis a obětní nádoby." width="768" height="389" loading="lazy"><figcaption><strong>Denár císaře Augusta</strong>Stříbrná mince: na líci hlava a jméno panovníka. Mince šířily po celé říši podobu i jméno císaře.</figcaption></figure>
+      <figure class="foto-karta" data-nazev="nápis na Titově oblouku" data-info="latinský nápis: Senát a lid římský božskému Titovi"><img class="cele" src="img/d/d6-rim-napis-oblouk.webp" alt="Latinský nápis vytesaný velkými písmeny na Titově oblouku v Římě: SENATVS POPVLVSQVE ROMANVS DIVO TITO DIVI VESPASIANI F VESPASIANO AVGVSTO." width="1152" height="503" loading="lazy"><figcaption><strong>Nápis na Titově oblouku</strong>„Senát a lid římský božskému Titovi…“ Písmeno V se četlo i jako U. Latinská velká písmena jsou předlohou naší abecedy.</figcaption></figure>
+    </div>
+  </section>
 
   <p class="napoveda">Řím prošel třemi obdobími: <b>království</b>, <b>republika</b> (v čele dva konzulové a senát) a <b>císařství</b>. Římané byli skvělí stavitelé – akvadukty, silnice a beton používáme dodnes.</p>
 
@@ -265,7 +293,32 @@ function poradi() {
   p.append(osa, nabidka, odezva);
 }
 
-const REZIMY = { osobnosti, pojmy, udalosti, poradi };
+/* ---- Poznej podle fotky (fotografie z atlasu pod úlohou) ------------------------ */
+const FOTKY = [...document.querySelectorAll('#atlasRim .foto-karta')].map(f => ({
+  n: f.dataset.nazev, info: f.dataset.info, img: f.querySelector('img'),
+}));
+function fotky() {
+  const p = $('plocha');
+  const u = Uloha.nahodne(FOTKY);
+  const jine = Uloha.zamichej(FOTKY.filter(x => x.n !== u.n)).slice(0, 3);
+  p.innerHTML = `<div class="zadani">Co je na fotografii?</div>
+    <div class="karta"><img class="foto-ukol" src="${u.img.getAttribute('src')}" alt="${u.img.alt.replace(/"/g, '&quot;')}"
+      width="${u.img.getAttribute('width')}" height="${u.img.getAttribute('height')}"></div>`;
+  const odezva = document.createElement('div');
+  odezva.className = 'odezva';
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: Uloha.zamichej([u, ...jine]).map(x => ({ klic: x.n, popis: x.n })),
+    spravnyKlic: u.n,
+    zpravaOk: `✅ ${u.n} – ${u.info}.`,
+    zpravaChyba: 'Podívej se pozorně a zkus jinou možnost.',
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+const REZIMY = { osobnosti, pojmy, udalosti, poradi, fotky };
 function novaUloha() { REZIMY[rezim](); }
 
 document.querySelectorAll('#rezimy button').forEach(b => b.addEventListener('click', () => {

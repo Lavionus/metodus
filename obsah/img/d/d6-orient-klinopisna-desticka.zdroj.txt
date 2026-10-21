@@ -1,0 +1,8 @@
+Soubor: d6-orient-klinopisna-desticka.png / d6-orient-klinopisna-desticka.webp
+Původní dílo: Cuneiform Akkadian clay tablet 1.jpg
+Autor: Original author unknown. Translation help provided by Manuel Molina.
+Datum vzniku: ca. 2000 BCdate QS:P,-2000-00-00T00:00:00Z/9
+Zdroj: https://commons.wikimedia.org/wiki/File:Cuneiform_Akkadian_clay_tablet_1.jpg
+Licence: Public domain
+Staženo: 2026-10-21
+Úpravy: automatické natočení, odstranění metadat, zmenšení na nejvýše 1600 px; výuková WebP kopie 768 px.

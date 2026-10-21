@@ -70,6 +70,16 @@
     #plocha .rostlina { max-width: 420px; }
     #plocha .annotation { display: none; }
     .napoveda { max-width: none; }
+    .rostlina-foto { width: min(100%, 400px); aspect-ratio: 4 / 3; object-fit: cover; border-radius: 14px; border: 1px solid var(--border); display: block; }
+    .foto-atlas { margin-top: 22px; }
+    .foto-atlas h3 { margin: 16px 0 8px; }
+    .foto-mrizka { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+    .foto-karta { margin: 0; overflow: hidden; border: 1px solid var(--border); border-radius: 14px; background: var(--bg-card, var(--bg-panel)); min-width: 0; }
+    .foto-karta img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+    .foto-karta figcaption { padding: 10px 11px 12px; font-size: .9rem; line-height: 1.4; color: var(--text); }
+    .foto-karta strong { display: block; margin-bottom: 3px; color: var(--accent); font-size: 1rem; }
+    @media (max-width: 820px) { .foto-mrizka { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 440px) { .foto-mrizka { grid-template-columns: 1fr; } }
     @media (max-width: 760px) { .atlas, .cards { grid-template-columns: 1fr; } .plant-board, .detail, .study-card { padding: 16px; } th, td { padding: 10px; } }
     @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation: none !important; transition: none !important; } }
     @media print { .jump, .atlas-buttons, .study-button, #cviceni { display: none; } body { background: white; color: black; max-width: none; } .cards { grid-template-columns: 1fr; } .study-card, .plant-board, .detail { break-inside: avoid; } }
@@ -113,6 +123,9 @@
     <tr><th scope="row">Nahosemenné</th><td>Vajíčka a následně semena nejsou uzavřena v semeníku a plodu; u jehličnanů leží na šupinách šištic.</td><td>smrk, borovice, jedle</td></tr>
     <tr><th scope="row">Krytosemenné</th><td>Mají květy. Semena jsou uzavřena v plodech.</td><td>jabloň, fazole, pšenice</td></tr>
     </tbody></table></div>
+    <div class="foto-atlas" aria-labelledby="foto-atlas-title"><h3 id="foto-atlas-title" style="font-size:1.2rem">📷 Zástupci skupin na fotografiích</h3>
+      <p class="section-intro">U každé fotografie hledej znak, podle kterého rostlinu zařadíš: výtrusnice, šištice, nebo květ a plod.</p>
+      <div id="foto-atlas"></div></div>
   </section>
   <section id="cviceni" aria-labelledby="cviceni-title"><h2 id="cviceni-title">Teď už to zkus sám</h2><p class="section-intro">Poznej části bez popisků, přiřaď funkce nebo prověř životní děje a skupiny rostlin. Při chybě dostaneš nápovědu a můžeš odpovědět znovu.</p>
   <div class="rezimy" id="rezimy">
@@ -254,34 +267,61 @@ const SKUPINY = {
   krytosemenne: 'krytosemenné (semena v plodu, mají květy)',
 };
 const ROSTLINY = [
-  { n: 'ploník obecný', s: 'mechorosty', i: '🌱' },
+  { n: 'ploník obecný', s: 'mechorosty', i: '🌱', znak: 'lodyžky s drobnými lístky, výtrusy dozrávají v tobolkách na tenkých štětech' },
   { n: 'rašeliník', s: 'mechorosty', i: '🌱' },
-  { n: 'kapraď samec', s: 'kapradorosty', i: '🌿' },
-  { n: 'přeslička rolní', s: 'kapradorosty', i: '🌿' },
-  { n: 'plavuň vidlačka', s: 'kapradorosty', i: '🌿' },
-  { n: 'smrk ztepilý', s: 'nahosemenne', i: '🌲' },
-  { n: 'borovice lesní', s: 'nahosemenne', i: '🌲' },
+  { n: 'kapraď samec', s: 'kapradorosty', i: '🌿', znak: 'velké zpeřené listy, výtrusnice jsou na jejich spodní straně' },
+  { n: 'přeslička rolní', s: 'kapradorosty', i: '🌿', znak: 'článkovaná lodyha; jarní hnědá lodyha nese výtrusnicový klas' },
+  { n: 'plavuň vidlačka', s: 'kapradorosty', i: '🌿', znak: 'plazivé lodyhy s drobnými lístky, výtrusy ve vzpřímených klasech' },
+  { n: 'smrk ztepilý', s: 'nahosemenne', i: '🌲', znak: 'krátké čtyřhranné jehlice, šišky visí dolů a padají celé' },
+  { n: 'borovice lesní', s: 'nahosemenne', i: '🌲', znak: 'jehlice po dvou ve svazečku, šišky dozrávají dva roky' },
+  { n: 'tis červený', s: 'nahosemenne', i: '🌲', znak: 'ploché jehlice; semeno obaluje červený míšek – není to plod. Celá rostlina kromě míšku je jedovatá' },
   { n: 'jedle bělokorá', s: 'nahosemenne', i: '🌲' },
   { n: 'modřín opadavý', s: 'nahosemenne', i: '🌲' },
-  { n: 'pampeliška (smetánka)', s: 'krytosemenne', i: '🌼' },
+  { n: 'pryskyřník prudký', s: 'krytosemenne', i: '🌼', znak: 'lesklé žluté květy s pěti korunními lístky; jedovatý' },
+  { n: 'hrách setý', s: 'krytosemenne', i: '🫛', znak: 'motýlovité květy, plodem je lusk se semeny – hrášky' },
+  { n: 'pampeliška (smetánka)', s: 'krytosemenne', i: '🌼', znak: 'úbor z mnoha drobných jazykovitých květů, plody nažky s chmýrem' },
   { n: 'dub letní', s: 'krytosemenne', i: '🌳' },
   { n: 'lípa srdčitá', s: 'krytosemenne', i: '🌳' },
   { n: 'jabloň domácí', s: 'krytosemenne', i: '🍎' },
-  { n: 'pšenice setá', s: 'krytosemenne', i: '🌾' },
+  { n: 'pšenice setá', s: 'krytosemenne', i: '🌾', znak: 'drobné květy v klasu opyluje vítr, plodem je obilka' },
+  { n: 'tulipán zahradní', s: 'krytosemenne', i: '🌷', znak: 'nápadný květ s šesti okvětními lístky, jednoděložná rostlina s cibulí' },
   { n: 'kopřiva dvoudomá', s: 'krytosemenne', i: '🌿' },
 ];
+/* Fotografie zástupců (IMG-pr-10, Wikimedia Commons; zdroje vypisuje kostra.js). */
+/* FOTO_ROSTLINY:zacatek */
+const FOTO_ROSTLINY = {
+  "ploník obecný": { src: "img/pr/pr7-rostliny-plonik.webp", alt: "Porost ploníku obecného s lístkatými lodyžkami a tobolkami na tenkých štětech.", w: 768, h: 510 },
+  "kapraď samec": { src: "img/pr/pr7-rostliny-kapradi.webp", alt: "Trs kapradě samce s velkými zpeřenými listy v lese.", w: 768, h: 512 },
+  "přeslička rolní": { src: "img/pr/pr7-rostliny-preslicka.webp", alt: "Jarní hnědá lodyha přesličky rolní s výtrusnicovým klasem vedle zelených článkovaných lodyh.", w: 768, h: 1152 },
+  "plavuň vidlačka": { src: "img/pr/pr7-rostliny-plavun.webp", alt: "Plavuň vidlačka s plazivými lodyhami hustě porostlými drobnými lístky.", w: 768, h: 868 },
+  "smrk ztepilý": { src: "img/pr/pr7-rostliny-smrk.webp", alt: "Větve smrku ztepilého s krátkými jehlicemi a visícími hnědými šiškami.", w: 768, h: 568 },
+  "borovice lesní": { src: "img/pr/pr7-rostliny-borovice.webp", alt: "Větev borovice lesní s dlouhými jehlicemi po dvou a malou šiškou.", w: 768, h: 512 },
+  "tis červený": { src: "img/pr/pr7-rostliny-tis.webp", alt: "Větévka tisu červeného s plochými jehlicemi a semeny v červených dužnatých míšcích.", w: 768, h: 510 },
+  "pryskyřník prudký": { src: "img/pr/pr7-rostliny-pryskyrnik.webp", alt: "Lesklý žlutý květ pryskyřníku prudkého s pěti korunními lístky a vedle něj kulovité souplodí.", w: 768, h: 960 },
+  "hrách setý": { src: "img/pr/pr7-rostliny-hrach.webp", alt: "Rostlina hrachu setého se zpeřenými listy, úponky a zelenými lusky.", w: 768, h: 1024 },
+  "pampeliška (smetánka)": { src: "img/pr/pr7-rostliny-pampeliska.webp", alt: "Žlutý úbor pampelišky lékařské složený z mnoha jazykovitých kvítků.", w: 768, h: 768 },
+  "pšenice setá": { src: "img/pr/pr7-rostliny-psenice.webp", alt: "Zelený klas pšenice seté s klásky a vyčnívajícími prašníky.", w: 768, h: 1024 },
+  "tulipán zahradní": { src: "img/pr/pr7-rostliny-tulipan.webp", alt: "Červenožluté květy tulipánu zahradního na vzpřímených stoncích se širokými listy.", w: 768, h: 1024 },
+};
+/* FOTO_ROSTLINY:konec */
+ROSTLINY.forEach(r => { if (FOTO_ROSTLINY[r.n]) r.foto = FOTO_ROSTLINY[r.n]; });
+const NAZVY_SKUPIN = { mechorosty: 'Mechorosty', kapradorosty: 'Kapraďorosty', nahosemenne: 'Nahosemenné', krytosemenne: 'Krytosemenné' };
+$('foto-atlas').innerHTML = Object.keys(SKUPINY).map(k => {
+  const karty = ROSTLINY.filter(r => r.s === k && r.foto).map(r => `<figure class="foto-karta"><img src="${r.foto.src}" alt="${r.foto.alt}" width="${r.foto.w}" height="${r.foto.h}" loading="lazy"><figcaption><strong>${r.n}</strong>${r.znak[0].toUpperCase() + r.znak.slice(1)}.</figcaption></figure>`).join('');
+  return karty ? `<h3>${NAZVY_SKUPIN[k]}</h3><div class="foto-mrizka">${karty}</div>` : '';
+}).join('');
 
 function system() {
   const p = $('plocha');
   const r = Uloha.nahodne(ROSTLINY);
   p.innerHTML = `<div class="zadani">Do které skupiny patří tato rostlina?</div>
-    <div class="karta"><div class="obrazek">${r.i}</div><div class="popis">${r.n}</div></div>`;
+    <div class="karta">${r.foto ? `<img class="rostlina-foto" src="${r.foto.src}" alt="${r.foto.alt}" width="${r.foto.w}" height="${r.foto.h}">` : `<div class="obrazek">${r.i}</div>`}<div class="popis">${r.n}</div></div>`;
   const odezva = odezvaEl();
   Uloha.vyber({
     kam: p, odezva,
     moznosti: Uloha.zamichej(Object.entries(SKUPINY).map(([k, v]) => ({ klic: k, popis: v }))),
     spravnyKlic: r.s,
-    zpravaOk: `✅ ${r.n} – ${SKUPINY[r.s]}`,
+    zpravaOk: `✅ ${r.n} – ${SKUPINY[r.s]}${r.foto && r.znak ? `. Poznáš to: ${r.znak}.` : ''}`,
     zpravaChyba: 'Zeptej se: má rostlina květ a plod, šišku, výtrusy, nebo ani cévní svazky?',
     poSpravne: skore.vyhodnot,
     dalsi: dalsiPlatna(),

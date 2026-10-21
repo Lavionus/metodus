@@ -18,6 +18,19 @@
       background: var(--bg-panel); border: 1px solid var(--border); border-radius: 8px;
       padding: 6px 12px; font-size: 0.82rem; color: var(--text-muted);
     }
+    .prirodnina-foto { width: min(100%, 380px); aspect-ratio: 4 / 3; object-fit: cover; border-radius: 14px; border: 1px solid var(--border); display: block; }
+    .foto-atlas { width: min(1120px, 100%); margin: 26px auto; }
+    .foto-atlas h2 { margin: 0 0 5px; text-align: center; font-size: 1.22rem; }
+    .foto-atlas > p { margin: 0 auto 12px; max-width: 820px; text-align: center; color: var(--text-muted, var(--text)); }
+    .foto-atlas h3 { margin: 18px 0 8px; font-size: 1.05rem; }
+    .foto-mrizka { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+    .foto-karta { margin: 0; overflow: hidden; border: 1px solid var(--border); border-radius: 14px; background: var(--bg-card, var(--bg-elevated)); min-width: 0; }
+    .foto-karta img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+    .foto-karta figcaption { padding: 9px 10px 11px; font-size: .88rem; line-height: 1.38; }
+    .foto-karta strong { display: block; margin-bottom: 2px; color: var(--accent); font-size: 1rem; }
+    @media (max-width: 820px) { .foto-mrizka { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+    @media (max-width: 600px) { .foto-mrizka { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 360px) { .foto-mrizka { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
@@ -28,6 +41,7 @@
     <button data-rezim="zivot" class="active">🫀 Živé, nebo neživé?</button>
     <button data-rezim="skupina">🗂️ Do které skupiny patří</button>
     <button data-rezim="znaky">✅ Znaky života</button>
+    <button data-rezim="fotky">📷 Přírodniny na fotkách</button>
   </div>
 
   <div class="plocha" id="plocha"></div>
@@ -47,6 +61,12 @@
     <b>Neživá příroda</b> jsou horniny, nerosty, voda, vzduch a sluneční světlo –
     ty nerostou ani se nerozmnožují.
   </p>
+
+  <section class="foto-atlas" aria-labelledby="fotoAtlasNadpis">
+    <h2 id="fotoAtlasNadpis">📷 Přírodniny na fotografiích</h2>
+    <p>Některé přírodniny žijí, jiné nikdy nežily. A některé kdysi patřily živému tvoru – jako peří, kost nebo suchý list –, ale samy už nežijí.</p>
+    <div id="fotoAtlas"></div>
+  </section>
 
 <script>
 const $ = id => document.getElementById(id);
@@ -75,6 +95,63 @@ const VECI = [
   { n: 'kámen', e: '🪨', sk: 'neziva' },      { n: 'hlína', e: '🟤', sk: 'neziva' },
 ];
 
+/* Fotografie přírodnin (IMG-prv-12, Wikimedia Commons; zdroje vypisuje kostra.js). */
+/* FOTO_PRV:zacatek */
+const FOTO_PRV = {
+  "kamen": { src: "img/prv/prv3-priroda-kamen.webp", alt: "Oblé říční kameny různých barev a velikostí na břehu.", w: 768, h: 576 },
+  "sul": { src: "img/prv/prv3-priroda-sul.webp", alt: "Čtyři průhledné krystaly kamenné soli ve tvaru kostek.", w: 768, h: 706 },
+  "fazole-semeno": { src: "img/prv/prv3-priroda-fazole-semeno.webp", alt: "Hnědá suchá semena fazole s bílým jizvičkovitým místem.", w: 768, h: 772 },
+  "fazole-klici": { src: "img/prv/prv3-priroda-fazole-klici.webp", alt: "Řada fazolí od suchého semene přes vyklíčený kořínek až po mladou rostlinku s lístky.", w: 768, h: 548 },
+  "list-suchy": { src: "img/prv/prv3-priroda-list-suchy.webp", alt: "Hnědý suchý zkroucený list ležící na zelené trávě.", w: 768, h: 576 },
+  "list-zeleny": { src: "img/prv/prv3-priroda-list-zeleny.webp", alt: "Zelený list prosvícený světlem se zřetelnou žilnatinou.", w: 768, h: 576 },
+  "houba": { src: "img/prv/prv3-priroda-houba.webp", alt: "Velký hřib smrkový s hnědým kloboukem a světlým třeněm v lese.", w: 768, h: 565 },
+  "mech": { src: "img/prv/prv3-priroda-mech.webp", alt: "Zelený polštář mechu s drobnými lístky a tenkými štěty s tobolkami.", w: 768, h: 512 },
+  "voda": { src: "img/prv/prv3-priroda-voda.webp", alt: "Čistá voda potoka tekoucí mezi kameny v lese.", w: 768, h: 1152 },
+  "oblak": { src: "img/prv/prv3-priroda-oblak.webp", alt: "Bílé kupovité oblaky na modré obloze.", w: 768, h: 494 },
+  "snek": { src: "img/prv/prv3-priroda-snek.webp", alt: "Hlemýžď zahradní s hnědou ulitou a vysunutými tykadly leze po mechu.", w: 768, h: 512 },
+  "mravenec": { src: "img/prv/prv3-priroda-mravenec.webp", alt: "Mravenec lesní z boku s rezavě hnědou hrudí a tmavým zadečkem.", w: 768, h: 461 },
+  "peri": { src: "img/prv/prv3-priroda-peri.webp", alt: "Bílé husí pero s kapkami rosy ležící v trávě.", w: 768, h: 512 },
+  "kost": { src: "img/prv/prv3-priroda-kost.webp", alt: "Bílá vybělená lebka srnce z boku na černém pozadí.", w: 768, h: 910 },
+  "pisek": { src: "img/prv/prv3-priroda-pisek.webp", alt: "Světlý jemný písek zvlněný větrem.", w: 768, h: 768 },
+  "jablko": { src: "img/prv/prv3-priroda-jablko.webp", alt: "Červené jablko na bílém pozadí.", w: 768, h: 696 },
+};
+/* FOTO_PRV:konec */
+const TYPY = {
+  zive: { ikona: '🌱', popis: 'živé – žije' },
+  bylo: { ikona: '🍂', popis: 'bylo živé, už nežije' },
+  neziva: { ikona: '🪨', popis: 'neživé – nikdy nežilo' },
+};
+const PRIRODNINY = [
+  { k: 'kamen', n: 'kámen', typ: 'neziva', proc: 'nedýchá, nepřijímá potravu, neroste ani se nerozmnožuje' },
+  { k: 'sul', n: 'krystal soli', typ: 'neziva', proc: 'krystal sice v roztoku „roste“, ale nedýchá, nepřijímá potravu a nerozmnožuje se' },
+  { k: 'fazole-semeno', n: 'semeno fazole', typ: 'zive', proc: 'semeno je živé, jen „spí“ – ve vlhku vyklíčí a vyroste z něj nová rostlina' },
+  { k: 'fazole-klici', n: 'klíčící fazole', typ: 'zive', proc: 'ze semene roste kořínek a stonek – rostlina dýchá a roste' },
+  { k: 'list-suchy', n: 'suchý list', typ: 'bylo', proc: 'byl částí živého stromu, po opadnutí už nedýchá ani neroste' },
+  { k: 'list-zeleny', n: 'zelený list', typ: 'zive', proc: 'je živou částí rostliny – dýchá a vyrábí si potravu ze světla' },
+  { k: 'houba', n: 'houba', typ: 'zive', proc: 'houba je živý organismus – roste, dýchá a rozmnožuje se výtrusy' },
+  { k: 'mech', n: 'mech', typ: 'zive', proc: 'mech je drobná rostlina – roste a rozmnožuje se výtrusy' },
+  { k: 'voda', n: 'voda v potoce', typ: 'neziva', proc: 'voda je neživá, i když teče – sama nedýchá ani se nerozmnožuje' },
+  { k: 'oblak', n: 'oblak', typ: 'neziva', proc: 'oblak tvoří drobné kapičky vody; pohybuje se větrem, ale nežije' },
+  { k: 'snek', n: 'hlemýžď (šnek)', typ: 'zive', proc: 'je to živočich – dýchá, přijímá potravu, roste a klade vajíčka' },
+  { k: 'mravenec', n: 'mravenec', typ: 'zive', proc: 'je to živočich – hmyz, který dýchá, žere a rozmnožuje se' },
+  { k: 'peri', n: 'peří', typ: 'bylo', proc: 'pero vyrostlo na živém ptákovi, samo ale nedýchá ani neroste' },
+  { k: 'kost', n: 'kost (lebka srnce)', typ: 'bylo', proc: 'kost byla částí kostry živého srnce, sama už nežije' },
+  { k: 'pisek', n: 'písek', typ: 'neziva', proc: 'písek jsou drobná zrnka rozdrobených hornin' },
+  { k: 'jablko', n: 'jablko', typ: 'zive', proc: 'plod jabloně ještě dýchá a semínka uvnitř jsou živá – mohou vyklíčit' },
+].filter(x => FOTO_PRV[x.k]).map(x => ({ ...x, foto: FOTO_PRV[x.k] }));
+const fotoPrirodniny = f => `<img class="prirodnina-foto" src="${f.src}" alt="${f.alt}" width="${f.w}" height="${f.h}">`;
+const velke = t => t[0].toUpperCase() + t.slice(1);
+$('fotoAtlas').innerHTML = Object.entries(TYPY).map(([k, t]) => {
+  const karty = PRIRODNINY.filter(x => x.typ === k).map(x => `<figure class="foto-karta"><img src="${x.foto.src}" alt="${x.foto.alt}" width="${x.foto.w}" height="${x.foto.h}" loading="lazy"><figcaption><strong>${x.n}</strong>${velke(x.proc)}.</figcaption></figure>`).join('');
+  return karty ? `<h3>${t.ikona} ${velke(t.popis)}</h3><div class="foto-mrizka">${karty}</div>` : '';
+}).join('');
+/* stejné fotografie i v ostatních režimech */
+[['kámen', 'kamen'], ['písek', 'pisek'], ['voda v potoce', 'voda'], ['mravenec', 'mravenec'], ['hřib', 'houba']]
+  .forEach(([n, k]) => { const v = VECI.find(x => x.n === n); if (v && FOTO_PRV[k]) v.foto = FOTO_PRV[k]; });
+[['mech', 'rostlina', 'mech'], ['hlemýžď', 'zivocich', 'snek'], ['oblak', 'neziva', 'oblak']]
+  .forEach(([n, sk, k]) => { if (FOTO_PRV[k]) VECI.push({ n, e: '', sk, foto: FOTO_PRV[k] }); });
+const obrazekVeci = v => v.foto ? fotoPrirodniny(v.foto) : `<div class="obrazek">${v.e}</div>`;
+
 const ZNAKY = [
   { t: 'dýchá', ok: true }, { t: 'roste', ok: true }, { t: 'přijímá potravu', ok: true },
   { t: 'rozmnožuje se', ok: true }, { t: 'vylučuje odpadní látky', ok: true },
@@ -90,7 +167,7 @@ function zivot() {
   const v = Uloha.nahodne(VECI);
   const zive = v.sk !== 'neziva';
   p.innerHTML = `<div class="zadani">Patří to do živé, nebo neživé přírody?</div>
-    <div class="karta"><div class="obrazek">${v.e}</div><div class="nazev-veci">${v.n}</div></div>`;
+    <div class="karta">${obrazekVeci(v)}<div class="nazev-veci">${v.n}</div></div>`;
   const odezva = document.createElement('div');
   odezva.className = 'odezva';
   Uloha.vyber({
@@ -115,7 +192,7 @@ function skupina() {
   const p = $('plocha');
   const v = Uloha.nahodne(VECI);
   p.innerHTML = `<div class="zadani">Do které skupiny přírodnina patří?</div>
-    <div class="karta"><div class="obrazek">${v.e}</div><div class="nazev-veci">${v.n}</div></div>`;
+    <div class="karta">${obrazekVeci(v)}<div class="nazev-veci">${v.n}</div></div>`;
   const odezva = document.createElement('div');
   odezva.className = 'odezva';
   Uloha.vyber({
@@ -155,7 +232,27 @@ function znaky() {
   p.appendChild(odezva);
 }
 
-const REZIMY = { zivot, skupina, znaky };
+/* ---- Přírodniny na fotkách ------------------------------------------------- */
+function fotky() {
+  const p = $('plocha');
+  const x = Uloha.nahodne(PRIRODNINY);
+  p.innerHTML = `<div class="zadani">Žije to, nežije, nebo to bylo živé a už nežije?</div>
+    <div class="karta">${fotoPrirodniny(x.foto)}<div class="nazev-veci">${x.n}</div></div>`;
+  const odezva = document.createElement('div');
+  odezva.className = 'odezva';
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: Object.entries(TYPY).map(([klic, t]) => ({ klic, ikona: t.ikona, popis: t.popis })),
+    spravnyKlic: x.typ,
+    zpravaOk: `✅ ${velke(x.n)}: ${x.proc}.`,
+    zpravaChyba: 'Zkus to znovu. Zeptej se: dýchá to, roste a rozmnožuje se? A pochází to z živého tvora?',
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+const REZIMY = { zivot, skupina, znaky, fotky };
 function novaUloha() { REZIMY[rezim](); }
 
 document.querySelectorAll('#rezimy button').forEach(b => b.addEventListener('click', () => {

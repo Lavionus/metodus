@@ -20,6 +20,22 @@
     .pristroj .voda { fill: var(--accent); fill-opacity: 0.5; }
     .velicina-nazev { font-size: 1.3rem; font-weight: 700; }
     .prevod { font-size: clamp(1.2rem, 4.5vw, 1.8rem); font-weight: 700; font-variant-numeric: tabular-nums; }
+    /* Fotografie měřidla v úloze „Poznej měřidlo“ */
+    .foto-ukol { display: block; width: min(440px, 80vw); height: auto; aspect-ratio: 4 / 3; object-fit: contain;
+      border-radius: 12px; background: var(--bg-deep, var(--bg-card)); }
+
+    /* Foto-atlas měřidel */
+    .foto-atlas { width:min(1120px,100%); margin:22px auto; }
+    .foto-atlas h2 { margin:0 0 5px; text-align:center; font-size:1.22rem; }
+    .foto-atlas > p { margin:0 auto 12px; max-width:820px; text-align:center; color:var(--text-muted,var(--text)); }
+    .foto-mrizka { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
+    .foto-karta { margin:0; overflow:hidden; border:1px solid var(--border); border-radius:14px; background:var(--bg-card); box-shadow:var(--shadow-sm); }
+    .foto-karta img { display:block; width:100%; height:auto; aspect-ratio:4/3; object-fit:cover; }
+    .foto-karta img.cele { object-fit:contain; background:#1d1c1a; }
+    .foto-karta figcaption { padding:10px 11px 12px; font-size:.9rem; line-height:1.35; }
+    .foto-karta strong { display:block; margin-bottom:3px; color:var(--accent); font-size:1rem; }
+    @media (max-width:820px) { .foto-mrizka { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+    @media (max-width:440px) { .foto-mrizka { grid-template-columns:1fr; } }
   </style>
 </head>
 <body>
@@ -29,6 +45,7 @@
   <div class="rezimy" id="rezimy">
     <button data-rezim="jednotka" class="active">📐 Jaká je jednotka</button>
     <button data-rezim="meridlo">🔧 Čím se to měří</button>
+    <button data-rezim="poznejMeridlo">📷 Poznej měřidlo</button>
     <button data-rezim="prevody">🔄 Převody jednotek</button>
     <button data-rezim="odectiTeplomer">🌡️ Odečti hodnotu</button>
   </div>
@@ -45,6 +62,14 @@
     teplota <b>stupeň Celsia (°C)</b>, objem <b>metr krychlový (m³)</b> nebo litr.
     Objem tělesa nepravidelného tvaru zjistíš ponořením do odměrného válce.
   </p>
+
+  <section class="foto-atlas" aria-labelledby="atlasMeridel">
+    <h2 id="atlasMeridel">📷 Měřidla ve skutečnosti</h2>
+    <p>Takhle vypadají skutečná měřidla. Všimni si, kde mají stupnici nebo displej a v jakých jednotkách měří.</p>
+    <div class="foto-mrizka" id="atlasMeridla">
+@@ATLAS_MERIDLA@@
+    </div>
+  </section>
 
 <script>
 const $ = id => document.getElementById(id);
@@ -106,6 +131,31 @@ function meridlo() {
     spravnyKlic: u.meridlo,
     zpravaOk: `✅ ${u.n} měříme: ${u.meridlo}.`,
     zpravaChyba: 'Tímhle se měří jiná veličina.',
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+/* ---- Poznej měřidlo (fotografie z atlasu pod úlohou) ---------------------------------- */
+const MERIDLA = [...document.querySelectorAll('#atlasMeridla .foto-karta')].map(f => ({
+  n: f.dataset.nazev, v: f.dataset.velicina, img: f.querySelector('img'),
+}));
+function poznejMeridlo() {
+  const p = $('plocha');
+  const u = Uloha.nahodne(MERIDLA);
+  const jine = Uloha.zamichej(MERIDLA.filter(x => x.n !== u.n && x.v !== u.v)).slice(0, 3);
+  p.innerHTML = `<div class="zadani">Jak se jmenuje toto měřidlo?</div>
+    <div class="karta"><img class="foto-ukol" src="${u.img.getAttribute('src')}" alt="${u.img.alt.replace(/"/g, '&quot;')}"
+      width="${u.img.getAttribute('width')}" height="${u.img.getAttribute('height')}"></div>`;
+  const odezva = document.createElement('div');
+  odezva.className = 'odezva';
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: Uloha.zamichej([u, ...jine]).map(x => ({ klic: x.n, popis: x.n })),
+    spravnyKlic: u.n,
+    zpravaOk: `✅ Je to ${u.n} – měří se jím ${u.v}.`,
+    zpravaChyba: 'Podívej se na stupnici nebo displej: co a v jakých jednotkách ukazuje?',
     poSpravne: skore.vyhodnot,
     dalsi: novaUloha,
   });
@@ -213,7 +263,7 @@ function odectiTeplomer() {
   p.appendChild(odezva);
 }
 
-const REZIMY = { jednotka, meridlo, prevody, odectiTeplomer };
+const REZIMY = { jednotka, meridlo, poznejMeridlo, prevody, odectiTeplomer };
 function novaUloha() { REZIMY[rezim](); }
 
 document.querySelectorAll('#rezimy button').forEach(b => b.addEventListener('click', () => {

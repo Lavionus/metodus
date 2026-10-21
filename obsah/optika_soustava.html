@@ -74,6 +74,18 @@ body[data-rezim=stavba] #pruvodce{display:none}
 @media(max-width:950px){#vyberPristroje{grid-template-columns:repeat(4,minmax(0,1fr))}.vykladKroku{align-items:flex-start;flex-direction:column;gap:16px}.krokTlacitka{align-self:flex-end}#vysledekJednoduse:not([hidden]){align-items:flex-start;flex-direction:column}}
 @media(max-width:560px){.horni{padding:13px 16px}.horni h1{font-size:1.02rem}.rezimy{padding:10px 12px;gap:6px}.rezimy button{padding:9px 10px;font-size:.77rem;flex:1}#pruvodce{padding:18px 12px}.uvodPruvodce h2{font-size:1.1rem}.uvodPruvodce p{font-size:.8rem}#vyberPristroje{display:flex;overflow-x:auto;gap:8px;margin:13px 0 18px;padding-bottom:6px}#vyberPristroje button{min-width:145px;max-width:145px}#vyberPristroje svg{height:32px}.vyklad header{padding:14px}.vyklad header h2{font-size:1rem}.vyklad header button{font-size:.7rem;max-width:100px}.vyklad header .eyebrow{font-size:.56rem}.schemaScroll{position:relative}.voditko{padding:10px 14px;font-size:.65rem}.voditko:after{content:'↔ Posuň obrázek do strany a prohlédni si celý přístroj.'}.vykladKroku{padding:17px 14px}.krokPopis h3{font-size:1.08rem}.krokPopis p{font-size:.88rem}.krokTlacitka{align-self:stretch;justify-content:space-between}#krokyPristroje{padding:10px;gap:2px}#krokyPristroje button{display:block;font-size:.65rem;padding:6px}#krokyPristroje span{margin-bottom:6px}#vysledekJednoduse:not([hidden]){padding:18px 14px}.modelDetaily{padding:0 14px}}
 @media(max-width:560px){#schemaPristroje{min-width:0}#schemaPristroje svg{max-height:none}.voditko:after{content:"Na mobilu sleduj přístroj shora dolů."}}
+/* Foto-atlas – skutečné fotografie k tématu */
+.foto-atlas { width:min(1120px,100%); margin:22px auto; box-sizing:border-box; }
+.foto-atlas h2 { margin:0 0 5px; text-align:center; font-size:1.22rem; }
+.foto-atlas > p { margin:0 auto 12px; max-width:820px; text-align:center; color:var(--text-muted,var(--text)); line-height:1.5; }
+.foto-mrizka { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
+.foto-karta { margin:0; overflow:hidden; border:1px solid var(--border); border-radius:14px; background:var(--bg-card); box-shadow:var(--shadow-sm); text-align:left; }
+.foto-karta img { display:block; width:100%; height:auto; aspect-ratio:4/3; object-fit:cover; }
+.foto-karta img.cele { object-fit:contain; background:#1d1c1a; }
+.foto-karta figcaption { padding:10px 11px 12px; font-size:.9rem; line-height:1.35; color:var(--text); }
+.foto-karta strong { display:block; margin-bottom:3px; color:var(--accent); font-size:1rem; }
+@media (max-width:820px) { .foto-mrizka { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+@media (max-width:440px) { .foto-mrizka { grid-template-columns:1fr; } }
 </style>
 </head>
 <body>
@@ -163,6 +175,13 @@ body[data-rezim=stavba] #pruvodce{display:none}
 <div class="stav" id="stav" role="status"></div>
 </main><aside class="bocni"><section><div class="eyebrow">Co právě pozoruješ</div><h2 id="nazevSoustavy"></h2><div id="vysvetleni"></div><div class="pokus"><b>Vyzkoušej si</b><p id="pokusText"></p></div></section><section><h2 style="margin-top:20px">Prvky na lavici</h2><p style="margin-bottom:10px">Vyber prvek a uprav jeho polohu, ohnisko nebo průměr. Rozměry jsou v centimetrech.</p><div id="seznam"></div><button id="ulozit">↓ Uložit soustavu</button> <button id="nacist">↑ Načíst</button><input type="file" id="soubor" accept=".json,application/json" hidden><p id="oznameni" role="status"></p></section></aside></div>
 <div class="model"><strong>Jak číst model:</strong> tenké čočky a ideální zrcadla, paprsky blízko optické osy (paraxiální aproximace). Svislé měřítko je zvětšené. Náhled znázorňuje orientaci a zvětšení; nesimuluje ostrost oka, jas, difrakci ani optické vady. Zrcadla jsou v tomto osovém modelu oboustranná; Newtonův dalekohled s bočním okulárem vyžaduje jinou geometrii. <a href="https://openstax.org/books/university-physics-volume-3/pages/2-8-microscopes-and-telescopes" target="_blank" rel="noopener">Principy dalekohledů a mikroskopu ↗</a></div>
+  <section class="foto-atlas" aria-labelledby="atlasPristroju" style="padding:0 16px">
+    <h2 id="atlasPristroju">📷 Optické přístroje ve skutečnosti</h2>
+    <p>Takhle vypadají skutečné přístroje, jejichž chod světla si můžeš projít v průvodci nebo postavit na lavici.</p>
+    <div class="foto-mrizka">
+@@ATLAS@@
+    </div>
+  </section>
 <script>
 /* =====================================================================
    Optická lavice: prvky se skládají na jednu osu, světlo běží zleva

@@ -51,6 +51,12 @@ h1{font-size:1.6rem;margin-bottom:16px;font-weight:600;text-align:center}
 .kviz .moznosti button.spravne{background:#27ae60;color:#fff}
 .kviz .moznosti button.spatne{background:#c0392b;color:#fff}
 .kviz .skore{text-align:center;color:var(--text-faint);font-size:.85rem;margin-top:12px}
+/* fotografie vzorku v detailu prvku */
+.foto-prvku{margin:6px 0 12px;border:1px solid var(--border);border-radius:10px;overflow:hidden;background:#111}
+.foto-prvku img{display:block;width:100%;height:auto;max-height:300px;object-fit:contain}
+.foto-prvku figcaption{padding:7px 10px;font-size:.78rem;line-height:1.4;color:var(--text-muted);background:var(--bg-elevated)}
+.el.sfoto::after{content:'';position:absolute;bottom:2px;right:2px;width:5px;height:5px;border-radius:50%;background:currentColor;opacity:.75}
+.pozn-foto{text-align:center;font-size:.78rem;color:var(--text-muted);margin-top:4px}
 
 </style>
 </head>
@@ -63,6 +69,7 @@ h1{font-size:1.6rem;margin-bottom:16px;font-weight:600;text-align:center}
   </div>
   <div class="legend" id="legend"></div>
   <div class="table" id="table"></div>
+  <p class="pozn-foto">Prvky s tečkou v pravém dolním rohu mají v detailu skutečnou fotografii vzorku.</p>
 </div>
 <div class="modal" id="modal"><div class="modalcard" id="modalCard"></div></div>
 <script>
@@ -238,6 +245,52 @@ function slupky(z){
   return s.filter((_,i)=>s[i]>0);
 }
 
+/* ---------- fotografie vzorků (IMG-ch-03, zdroje vypisuje kostra.js) ---------- */
+const FOTO_PRVKU={
+  1:['pt-prvek-vodik',{{WH:ch/pt-prvek-vodik}},'{{ALT:ch/pt-prvek-vodik}}'],
+  2:['pt-prvek-helium',{{WH:ch/pt-prvek-helium}},'{{ALT:ch/pt-prvek-helium}}'],
+  3:['pt-prvek-lithium',{{WH:ch/pt-prvek-lithium}},'{{ALT:ch/pt-prvek-lithium}}'],
+  5:['pt-prvek-bor',{{WH:ch/pt-prvek-bor}},'{{ALT:ch/pt-prvek-bor}}'],
+  6:['pt-prvek-uhlik',{{WH:ch/pt-prvek-uhlik}},'{{ALT:ch/pt-prvek-uhlik}}'],
+  7:['pt-prvek-dusik',{{WH:ch/pt-prvek-dusik}},'{{ALT:ch/pt-prvek-dusik}}'],
+  8:['pt-prvek-kyslik',{{WH:ch/pt-prvek-kyslik}},'{{ALT:ch/pt-prvek-kyslik}}'],
+  10:['pt-prvek-neon',{{WH:ch/pt-prvek-neon}},'{{ALT:ch/pt-prvek-neon}}'],
+  11:['pt-prvek-sodik',{{WH:ch/pt-prvek-sodik}},'{{ALT:ch/pt-prvek-sodik}}'],
+  12:['pt-prvek-horcik',{{WH:ch/pt-prvek-horcik}},'{{ALT:ch/pt-prvek-horcik}}'],
+  13:['pt-prvek-hlinik',{{WH:ch/pt-prvek-hlinik}},'{{ALT:ch/pt-prvek-hlinik}}'],
+  14:['pt-prvek-kremik',{{WH:ch/pt-prvek-kremik}},'{{ALT:ch/pt-prvek-kremik}}'],
+  15:['pt-prvek-fosfor',{{WH:ch/pt-prvek-fosfor}},'{{ALT:ch/pt-prvek-fosfor}}'],
+  16:['pt-prvek-sira',{{WH:ch/pt-prvek-sira}},'{{ALT:ch/pt-prvek-sira}}'],
+  17:['pt-prvek-chlor',{{WH:ch/pt-prvek-chlor}},'{{ALT:ch/pt-prvek-chlor}}'],
+  18:['pt-prvek-argon',{{WH:ch/pt-prvek-argon}},'{{ALT:ch/pt-prvek-argon}}'],
+  19:['pt-prvek-draslik',{{WH:ch/pt-prvek-draslik}},'{{ALT:ch/pt-prvek-draslik}}'],
+  20:['pt-prvek-vapnik',{{WH:ch/pt-prvek-vapnik}},'{{ALT:ch/pt-prvek-vapnik}}'],
+  22:['pt-prvek-titan',{{WH:ch/pt-prvek-titan}},'{{ALT:ch/pt-prvek-titan}}'],
+  24:['pt-prvek-chrom',{{WH:ch/pt-prvek-chrom}},'{{ALT:ch/pt-prvek-chrom}}'],
+  25:['pt-prvek-mangan',{{WH:ch/pt-prvek-mangan}},'{{ALT:ch/pt-prvek-mangan}}'],
+  26:['pt-prvek-zelezo',{{WH:ch/pt-prvek-zelezo}},'{{ALT:ch/pt-prvek-zelezo}}'],
+  27:['pt-prvek-kobalt',{{WH:ch/pt-prvek-kobalt}},'{{ALT:ch/pt-prvek-kobalt}}'],
+  28:['pt-prvek-nikl',{{WH:ch/pt-prvek-nikl}},'{{ALT:ch/pt-prvek-nikl}}'],
+  29:['pt-prvek-med',{{WH:ch/pt-prvek-med}},'{{ALT:ch/pt-prvek-med}}'],
+  30:['pt-prvek-zinek',{{WH:ch/pt-prvek-zinek}},'{{ALT:ch/pt-prvek-zinek}}'],
+  31:['pt-prvek-gallium',{{WH:ch/pt-prvek-gallium}},'{{ALT:ch/pt-prvek-gallium}}'],
+  32:['pt-prvek-germanium',{{WH:ch/pt-prvek-germanium}},'{{ALT:ch/pt-prvek-germanium}}'],
+  33:['pt-prvek-arsen',{{WH:ch/pt-prvek-arsen}},'{{ALT:ch/pt-prvek-arsen}}'],
+  35:['pt-prvek-brom',{{WH:ch/pt-prvek-brom}},'{{ALT:ch/pt-prvek-brom}}'],
+  36:['pt-prvek-krypton',{{WH:ch/pt-prvek-krypton}},'{{ALT:ch/pt-prvek-krypton}}'],
+  47:['pt-prvek-stribro',{{WH:ch/pt-prvek-stribro}},'{{ALT:ch/pt-prvek-stribro}}'],
+  50:['pt-prvek-cin',{{WH:ch/pt-prvek-cin}},'{{ALT:ch/pt-prvek-cin}}'],
+  53:['pt-prvek-jod',{{WH:ch/pt-prvek-jod}},'{{ALT:ch/pt-prvek-jod}}'],
+  54:['pt-prvek-xenon',{{WH:ch/pt-prvek-xenon}},'{{ALT:ch/pt-prvek-xenon}}'],
+  56:['pt-prvek-baryum',{{WH:ch/pt-prvek-baryum}},'{{ALT:ch/pt-prvek-baryum}}'],
+  74:['pt-prvek-wolfram',{{WH:ch/pt-prvek-wolfram}},'{{ALT:ch/pt-prvek-wolfram}}'],
+  78:['pt-prvek-platina',{{WH:ch/pt-prvek-platina}},'{{ALT:ch/pt-prvek-platina}}'],
+  79:['pt-prvek-zlato',{{WH:ch/pt-prvek-zlato}},'{{ALT:ch/pt-prvek-zlato}}'],
+  80:['pt-prvek-rtut',{{WH:ch/pt-prvek-rtut}},'{{ALT:ch/pt-prvek-rtut}}'],
+  82:['pt-prvek-olovo',{{WH:ch/pt-prvek-olovo}},'{{ALT:ch/pt-prvek-olovo}}'],
+  83:['pt-prvek-bismut',{{WH:ch/pt-prvek-bismut}},'{{ALT:ch/pt-prvek-bismut}}']
+};
+
 /* ---------- tabulka ---------- */
 $('legend').innerHTML=Object.entries(CATS).map(([k,[n,c]])=>`<span data-cat="${k}"><i class="dot" style="background:${c}"></i>${n}</span>`).join('');
 /* Barvy skupin jsou významové a v každém motivu stejné – písmo na dlaždici se proto
@@ -250,7 +303,7 @@ function pismoNa(hex){
 function build(){
   $('table').innerHTML=EL.map(e=>{
     const[num,sym,name,group,period,cat]=e;const col=CATS[cat][1];
-    return `<div class="el" style="grid-column:${group};grid-row:${period};background:${col};color:${pismoNa(col)}" data-num="${num}">
+    return `<div class="el${FOTO_PRVKU[num]?' sfoto':''}" style="grid-column:${group};grid-row:${period};background:${col};color:${pismoNa(col)}" data-num="${num}">
       <span class="num">${num}</span><span class="sym">${sym}</span><span style="font-size:.42rem">${name.slice(0,7)}</span></div>`;
   }).join('');
   $('table').querySelectorAll('.el').forEach(el=>el.onclick=()=>showDetail(+el.dataset.num));
@@ -266,6 +319,7 @@ function showDetail(num){
       <div class="big" style="color:${CATS[cat][1]}">${sym}</div>
       <div><h2>${name}</h2><div class="kat">${CATS[cat][0]}</div></div>
     </div>
+    ${FOTO_PRVKU[n]?`<figure class="foto-prvku"><img src="img/ch/${FOTO_PRVKU[n][0]}.webp" alt="${FOTO_PRVKU[n][3]}" width="${FOTO_PRVKU[n][1]}" height="${FOTO_PRVKU[n][2]}" loading="lazy"><figcaption>Skutečný vzorek – ${name.toLowerCase()} (fotografie)</figcaption></figure>`:''}
     <div class="prop"><span>Protonové číslo</span><b>${n}</b></div>
     <div class="prop"><span>Relativní atomová hmotnost</span><b>${mass}</b></div>
     <div class="prop"><span>Skupina / perioda</span><b>${group<=18?group:'—'} / ${period<=7?period:'—'}</b></div>

@@ -1,0 +1,8 @@
+Soubor: z6-atmosfera-halo.png / z6-atmosfera-halo.webp
+Původní dílo: Halo-Großkrotzenburg-2020.09.06.jpg
+Autor: Patrick Looß
+Datum vzniku: 2020-09-06
+Zdroj: https://commons.wikimedia.org/wiki/File:Halo-Gro%C3%9Fkrotzenburg-2020.09.06.jpg
+Licence: CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0)
+Staženo: 2026-10-21
+Úpravy: automatické natočení, odstranění metadat, zmenšení na nejvýše 1600 px; výuková WebP kopie 1152 px.

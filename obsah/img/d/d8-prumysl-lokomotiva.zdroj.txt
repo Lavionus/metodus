@@ -1,0 +1,8 @@
+Soubor: d8-prumysl-lokomotiva.png / d8-prumysl-lokomotiva.webp
+Původní dílo: Locomotion, 1825.jpg
+Autor: Unknown author
+Datum vzniku: before 1915date QS:P,+1915-00-00T00:00:00Z/7,P1326,+1915-00-00T00:00:00Z/9
+Zdroj: https://commons.wikimedia.org/wiki/File:Locomotion,_1825.jpg
+Licence: Public domain
+Staženo: 2026-10-21
+Úpravy: automatické natočení, odstranění metadat, zmenšení na nejvýše 1600 px; výuková WebP kopie 1152 px.

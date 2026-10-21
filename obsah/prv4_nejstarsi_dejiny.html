@@ -26,6 +26,18 @@
     .historicke-sceny img { width:100%; height:auto; border-radius:12px; display:block; }
     .historicke-sceny figcaption { font-size:.8rem; color:var(--text-muted); margin-top:5px; }
     @media(max-width:560px){.historicke-sceny{grid-template-columns:1fr}}
+    .foto-atlas { width:min(1120px,100%); margin:22px auto; }
+    .foto-atlas h2 { margin:0 0 5px; text-align:center; font-size:1.22rem; }
+    .foto-atlas > p { margin:0 auto 12px; max-width:820px; text-align:center; color:var(--text-muted,var(--text)); }
+    .foto-atlas h3 { margin:16px 0 8px; font-size:1.02rem; }
+    .foto-mrizka { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
+    .foto-karta { margin:0; overflow:hidden; border:1px solid var(--border); border-radius:14px; background:var(--bg-card); box-shadow:var(--shadow-sm); }
+    .foto-karta img { display:block; width:100%; aspect-ratio:4/3; object-fit:cover; }
+    .foto-karta img.cele { object-fit:contain; background:#1d1c1a; }
+    .foto-karta figcaption { padding:10px 11px 12px; font-size:.9rem; line-height:1.35; }
+    .foto-karta strong { display:block; margin-bottom:3px; color:var(--accent); font-size:1rem; }
+    @media (max-width:820px) { .foto-mrizka { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+    @media (max-width:440px) { .foto-mrizka { grid-template-columns:1fr; } }
   </style>
 </head>
 <body>
@@ -50,6 +62,19 @@
     Přehled: Sámova říše (7. století) → Velká Morava (9. století) → Přemyslovci →
     Lucemburkové a Karel IV. (14. století). Letopočty si spoj s tím, co se tehdy stalo.
   </p>
+
+  <section class="foto-atlas" aria-labelledby="dokladyNadpis">
+    <h2 id="dokladyNadpis">Co se z nejstarších dob dochovalo</h2>
+    <p>To nejsou kresby z dneška, ale skutečné věci a obrazy z té doby. Podle nich víme, jak to opravdu bylo.</p>
+    <div class="foto-mrizka">
+      <figure class="foto-karta"><img src="img/d/d7-velkamorava-gombik.webp" alt="Zlatý kulovitý gombík zdobený jemnou tepanou a zrníčkovou výzdobou z knížecího hrobu v Kolíně." width="768" height="768" loading="lazy"><figcaption><strong>Šperk z doby Velké Moravy</strong>Zlatý knoflík gombík zdobený drobnými kuličkami. Nosili ho bohatí lidé v 9. století.</figcaption></figure>
+      <figure class="foto-karta"><img class="cele" src="img/prv/prv4-dejiny-vysehradsky-kodex.webp" alt="Iluminace z Vyšehradského kodexu: Kristus sedí na trůnu v mandorle obklopen anděly a symboly evangelistů." width="768" height="1002" loading="lazy"><figcaption><strong>Vyšehradský kodex</strong>Ručně psaná a malovaná kniha z doby, kdy se Vratislav II. stal prvním českým králem (asi 1085).</figcaption></figure>
+      <figure class="foto-karta"><img class="cele" src="img/d/d7-premyslovci-zlata-bula.webp" alt="Zlatá bula sicilská: pergamenová listina psaná latinou se zavěšenou zlatou pečetí." width="1152" height="1633" loading="lazy"><figcaption><strong>Zlatá bula sicilská</strong>Listina z roku 1212 se zlatou pečetí: od té doby jsou čeští panovníci králové.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/prv/prv4-dejiny-svatovaclavska-koruna.webp" alt="Svatováclavská koruna ze zlata s velkými barevnými drahokamy a křížkem nahoře, položená na polštáři." width="768" height="576" loading="lazy"><figcaption><strong>Svatováclavská koruna</strong>Dal ji vyrobit Karel IV. a věnoval ji svatému Václavovi. Je uložena na Pražském hradě.</figcaption></figure>
+      <figure class="foto-karta"><img class="cele" src="img/d/d7-lucemburkove-karel-karlstejn.webp" alt="Nástěnná malba z hradu Karlštejn: Karel IV. s korunou ukládá zlatý relikviářový kříž na oltář." width="768" height="1138" loading="lazy"><figcaption><strong>Karel IV. na Karlštejně</strong>Malba na zdi hradu Karlštejn z doby, kdy Karel IV. žil. Císař ukládá vzácný kříž.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/d/d7-lucemburkove-karluv-most.webp" alt="Kamenný Karlův most přes Vltavu se Staroměstskou mosteckou věží v Praze." width="1152" height="864" loading="lazy"><figcaption><strong>Karlův most</strong>Kamenný most přes Vltavu dal stavět Karel IV. od roku 1357. Stojí dodnes.</figcaption></figure>
+    </div>
+  </section>
 
 <script>
 const $ = id => document.getElementById(id);

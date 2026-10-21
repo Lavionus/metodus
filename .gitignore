@@ -6,3 +6,4 @@ __pycache__/
 # ale na web nejdou – stránky používají jen WebP. Zálohy z úprav taky ne.
 obsah/img/**/*.png
 docs/zalohy-*/
+obsah/img/kapitola-7-2.zamek

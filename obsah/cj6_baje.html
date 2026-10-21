@@ -26,6 +26,19 @@
       display: block; width: 100%; max-height: 150px; aspect-ratio: 16 / 9; object-fit: cover;
       margin: 0 0 10px; border-radius: 9px; background: #faf6ec;
     }
+    .antika-atlas { width: min(1120px, 100%); margin: 20px auto; }
+    .antika-atlas h2 { text-align: center; }
+    .antika-mrizka { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+    .antika-karta { margin: 0; padding: 10px; border-radius: 12px; background: var(--bg-deep); }
+    .antika-karta img, .antika-uloha {
+      display: block; width: 100%; aspect-ratio: 1; object-fit: contain;
+      border-radius: 9px; background: #eee8dc;
+    }
+    .antika-karta figcaption { padding-top: 8px; line-height: 1.35; }
+    .antika-karta strong { display: block; color: var(--accent); }
+    .antika-uloha { width: min(240px, 70vw); margin: 0 auto 10px; }
+    @media (max-width: 820px) { .antika-mrizka { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 440px) { .antika-mrizka { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
@@ -79,6 +92,22 @@
     </div>
   </div>
 
+  <section class="antika-atlas" aria-labelledby="antika-nadpis">
+    <h2 id="antika-nadpis">Bohové a hrdinové v antickém umění</h2>
+    <p>Postavy na vázách a sochách poznáváme podle jejich atributů. Prohlédni si skutečná
+      antická díla a hledej předmět nebo zvíře, které postavu prozradí.</p>
+    <div class="antika-mrizka">
+      <figure class="antika-karta"><img src="img/cj/cj6-antika-zeus.webp" alt="Zeus na červenofigurové váze drží blesk a před ním letí orel." width="768" height="768" loading="lazy"><figcaption><strong>Zeus</strong>blesk a orel</figcaption></figure>
+      <figure class="antika-karta"><img src="img/cj/cj6-antika-poseidon.webp" alt="Poseidón na korintské destičce drží vysoký trojzubec." width="768" height="768" loading="lazy"><figcaption><strong>Poseidón</strong>trojzubec</figcaption></figure>
+      <figure class="antika-karta"><img src="img/cj/cj6-antika-athena.webp" alt="Athéna na červenofigurové nádobě s přilbou, kopím a sovou." width="768" height="768" loading="lazy"><figcaption><strong>Athéna</strong>přilba, kopí a sova</figcaption></figure>
+      <figure class="antika-karta"><img src="img/cj/cj6-antika-apollon.webp" alt="Antická socha sedícího Apollóna s lyrou." width="768" height="768" loading="lazy"><figcaption><strong>Apollón</strong>lyra</figcaption></figure>
+      <figure class="antika-karta"><img src="img/cj/cj6-antika-artemis.webp" alt="Detail antické sochy Artemis při lovu se zvířetem." width="768" height="768" loading="lazy"><figcaption><strong>Artemis</strong>lov a laň</figcaption></figure>
+      <figure class="antika-karta"><img src="img/cj/cj6-antika-afrodita.webp" alt="Starořecká mramorová socha Afrodíté Mélské bez paží." width="768" height="768" loading="lazy"><figcaption><strong>Afrodita</strong>Afrodíté Mélská</figcaption></figure>
+      <figure class="antika-karta"><img src="img/cj/cj6-antika-hermes.webp" alt="Antická socha Herma s cestovním kloboukem a holí." width="768" height="768" loading="lazy"><figcaption><strong>Hermes</strong>cestovní klobouk a hůl</figcaption></figure>
+      <figure class="antika-karta"><img src="img/cj/cj6-antika-herakles.webp" alt="Antický reliéf Hérakla se lví kůží a kyjem." width="768" height="768" loading="lazy"><figcaption><strong>Héraklés</strong>lví kůže a kyj</figcaption></figure>
+    </div>
+  </section>
+
   <p class="napoveda">
     Nejsnazší rozlišení: <b>zvířata s lidskou povahou</b> → bajka · <b>bohové</b> → báje ·
     <b>skutečné místo</b> → pověst · <b>kouzla a „byl jednou jeden“</b> → pohádka.
@@ -119,23 +148,23 @@ const UKAZKY = [
 
 /* Ke každému bohu patří jeho odznak – podle něj se pozná na obrazech a sochách. */
 const BOHOVE = [
-  { n: 'Zeus', e: '⚡', o: 'nejvyšší bůh, vládce blesků a hromů',
+  { n: 'Zeus', e: '⚡', img: 'img/cj/cj6-antika-zeus.webp', alt: 'Zeus s bleskem a orlem na antické váze.', o: 'nejvyšší bůh, vládce blesků a hromů',
     atribut: 'blesk a orel', rim: 'Jupiter' },
-  { n: 'Poseidon', e: '🔱', o: 'bůh moří, zemětřesení a koní',
+  { n: 'Poseidon', e: '🔱', img: 'img/cj/cj6-antika-poseidon.webp', alt: 'Poseidón s trojzubcem na korintské destičce.', o: 'bůh moří, zemětřesení a koní',
     atribut: 'trojzubec', rim: 'Neptun' },
   { n: 'Hádes', e: '💀', o: 'vládce podsvětí a říše mrtvých',
     atribut: 'trojhlavý pes Kerberos', rim: 'Pluto' },
-  { n: 'Athéna', e: '🦉', o: 'bohyně moudrosti, řemesel a spravedlivé války',
+  { n: 'Athéna', e: '🦉', img: 'img/cj/cj6-antika-athena.webp', alt: 'Athéna s přilbou, kopím a sovou na antické nádobě.', o: 'bohyně moudrosti, řemesel a spravedlivé války',
     atribut: 'sova a štít', rim: 'Minerva' },
-  { n: 'Apollón', e: '🎵', o: 'bůh slunce, hudby a věštění',
+  { n: 'Apollón', e: '🎵', img: 'img/cj/cj6-antika-apollon.webp', alt: 'Antická socha Apollóna s lyrou.', o: 'bůh slunce, hudby a věštění',
     atribut: 'lyra a vavřínový věnec', rim: 'Apollo' },
-  { n: 'Artemis', e: '🏹', o: 'bohyně lovu a divoké přírody',
+  { n: 'Artemis', e: '🏹', img: 'img/cj/cj6-antika-artemis.webp', alt: 'Antická socha Artemis při lovu se zvířetem.', o: 'bohyně lovu a divoké přírody',
     atribut: 'luk a laň', rim: 'Diana' },
   { n: 'Áres', e: '⚔️', o: 'bůh krvavé války a bitevní vřavy',
     atribut: 'kopí a přilba', rim: 'Mars' },
-  { n: 'Afrodita', e: '🌹', o: 'bohyně lásky a krásy',
+  { n: 'Afrodita', e: '🌹', img: 'img/cj/cj6-antika-afrodita.webp', alt: 'Starořecká socha Afrodíté Mélské.', o: 'bohyně lásky a krásy',
     atribut: 'růže a mušle', rim: 'Venuše' },
-  { n: 'Hermes', e: '👟', o: 'posel bohů, ochránce obchodníků a cestovatelů',
+  { n: 'Hermes', e: '👟', img: 'img/cj/cj6-antika-hermes.webp', alt: 'Antická socha Herma s cestovním kloboukem a holí.', o: 'posel bohů, ochránce obchodníků a cestovatelů',
     atribut: 'okřídlené sandály a hůl', rim: 'Merkur' },
   { n: 'Héfaistos', e: '🔨', o: 'kovář bohů, bůh ohně a řemesel',
     atribut: 'kladivo a kovadlina', rim: 'Vulkán' },
@@ -143,7 +172,7 @@ const BOHOVE = [
 
 /* U hrdinů se dnes nejvíc cení to, co po nich zbylo v jazyce – rčení a pojmy. */
 const HRDINOVE = [
-  { n: 'Héraklés', e: '💪', o: 'vykonal dvanáct nadlidských úkolů, například zabil lernskou hydru',
+  { n: 'Héraklés', e: '💪', img: 'img/cj/cj6-antika-herakles.webp', alt: 'Antický reliéf Hérakla se lví kůží a kyjem.', o: 'vykonal dvanáct nadlidských úkolů, například zabil lernskou hydru',
     odkaz: 'odtud <b>„herkulovský výkon“</b> a <b>„augiášův chlév“</b> pro obrovský nepořádek' },
   { n: 'Théseus', e: '🧵', o: 'zabil Mínotaura v labyrintu a našel cestu ven podle nitě',
     odkaz: 'odtud <b>„Ariadnina nit“</b> – vodítko, které pomůže se vymotat ze složité situace' },
@@ -262,7 +291,7 @@ function bohove() {
   uloha = { rezim: 'bohove', u };
   const jine = Uloha.zamichej(BOHOVE.filter(x => x.n !== u.n)).slice(0, 3);
   p.innerHTML = `<div class="zadani">O kterého boha jde?</div>
-    <div class="karta"><div class="obrazek">${u.e}</div><div class="popis-p">${u.o}</div></div>`;
+    <div class="karta">${u.img ? `<img class="antika-uloha" src="${u.img}" alt="${u.alt}">` : `<div class="obrazek">${u.e}</div>`}<div class="popis-p">${u.o}</div></div>`;
   const odezva = odezvaEl();
   Uloha.vyber({
     kam: p, odezva,
@@ -290,7 +319,7 @@ function hrdinove() {
   uloha = { rezim: 'hrdinove', u };
   const jine = Uloha.zamichej(HRDINOVE.filter(x => x.n !== u.n)).slice(0, 3);
   p.innerHTML = `<div class="zadani">O kterém hrdinovi se to vypráví?</div>
-    <div class="karta"><div class="obrazek">${u.e}</div><div class="popis-p">${u.o}</div></div>`;
+    <div class="karta">${u.img ? `<img class="antika-uloha" src="${u.img}" alt="${u.alt}">` : `<div class="obrazek">${u.e}</div>`}<div class="popis-p">${u.o}</div></div>`;
   const odezva = odezvaEl();
   Uloha.vyber({
     kam: p, odezva,

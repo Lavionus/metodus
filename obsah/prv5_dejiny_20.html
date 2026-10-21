@@ -21,6 +21,8 @@
       padding: 7px 11px; font-size: 0.84rem; font-weight: 600;
     }
     .osa .sipka { color: var(--text-faint); }
+    .dobovy-snimhek { width: min(100%, 620px); max-height: 330px; object-fit: contain; border-radius: 10px; background: #191919; }
+    .pramen { margin-top: 7px; color: var(--text-faint); font-size: 0.82rem; }
   </style>
 </head>
 <body>
@@ -54,19 +56,20 @@ let rezim = 'rokUdalost';
 
 const UDALOSTI = [
   { rok: '1914', t: 'začala první světová válka', poradi: 1 },
-  { rok: '1918', t: 'vzniklo samostatné Československo', poradi: 2 },
-  { rok: '1938', t: 'Mnichovská dohoda odtrhla pohraničí', poradi: 3 },
+  { rok: '1918', t: 'vzniklo samostatné Československo', poradi: 2, img: 'img/prv/prv5-dejiny-1918.webp', alt: 'Dav na Václavském náměstí při vyhlášení Československa 28. října 1918.' },
+  { rok: '1938', t: 'Mnichovská dohoda odtrhla pohraničí', poradi: 3, img: 'img/prv/prv5-dejiny-mobilizace.webp', alt: 'Českoslovenští záložníci nastupují při mobilizaci v září 1938.' },
   { rok: '1939', t: 'začala druhá světová válka a vznikl protektorát', poradi: 4 },
-  { rok: '1945', t: 'skončila druhá světová válka', poradi: 5 },
-  { rok: '1948', t: 'moc ve státě převzali komunisté', poradi: 6 },
-  { rok: '1968', t: 'vojska Varšavské smlouvy obsadila Československo', poradi: 7 },
-  { rok: '1989', t: 'sametová revoluce ukončila vládu jedné strany', poradi: 8 },
-  { rok: '1993', t: 'Československo se rozdělilo na Česko a Slovensko', poradi: 9 },
-  { rok: '2004', t: 'Česká republika vstoupila do Evropské unie', poradi: 10 },
+  { rok: '1945', t: 'skončila druhá světová válka', poradi: 5, img: 'img/prv/prv5-dejiny-osvobozeni.webp', alt: 'Pražané vítají maršála Koněva v květnu 1945.' },
+  { rok: '1948', t: 'moc ve státě převzali komunisté', poradi: 6, img: 'img/prv/prv5-dejiny-unor-1948.webp', alt: 'Manifestace svolaná KSČ na Václavském náměstí 25. února 1948.' },
+  { rok: '1968', t: 'vojska Varšavské smlouvy obsadila Československo', poradi: 7, img: 'img/prv/prv5-dejiny-srpen-1968.webp', alt: 'Lidé s československou vlajkou procházejí kolem hořícího tanku v Praze roku 1968.' },
+  { rok: '1989', t: 'sametová revoluce ukončila vládu jedné strany', poradi: 8, img: 'img/prv/prv5-dejiny-listopad-1989.webp', alt: 'Noční demonstrace sametové revoluce na Václavském náměstí v listopadu 1989.' },
+  { rok: '1990', t: 'proběhly první svobodné parlamentní volby po pádu komunistického režimu', poradi: 9, img: 'img/prv/prv5-dejiny-volby-1990.webp', alt: 'Úřední pokyny pro voliče k československým volbám v červnu 1990.' },
+  { rok: '1993', t: 'Československo se rozdělilo na Česko a Slovensko', poradi: 10 },
+  { rok: '2004', t: 'Česká republika vstoupila do Evropské unie', poradi: 11 },
 ];
 
 const OSOBNOSTI = [
-  { n: 'Tomáš Garrigue Masaryk', e: '🎩', cin: 'první československý prezident, zasloužil se o vznik republiky v roce 1918' },
+  { n: 'Tomáš Garrigue Masaryk', e: '🎩', img: 'img/prv/prv5-dejiny-masaryk.webp', alt: 'Dobový portrét Tomáše Garrigua Masaryka.', cin: 'první československý prezident, zasloužil se o vznik republiky v roce 1918' },
   { n: 'Edvard Beneš', e: '📜', cin: 'prezident, který podepsal Mnichovskou dohodu a vedl exilovou vládu v Londýně' },
   { n: 'Václav Havel', e: '✌️', cin: 'dramatik a disident, po sametové revoluci se stal prezidentem' },
   { n: 'Alexander Dubček', e: '🌸', cin: 'vedl reformy pražského jara v roce 1968' },
@@ -80,7 +83,7 @@ function rokUdalost() {
   const u = Uloha.nahodne(UDALOSTI);
   const jine = Uloha.zamichej(UDALOSTI.filter(x => x.rok !== u.rok)).slice(0, 3);
   p.innerHTML = `<div class="zadani">Ve kterém roce se to stalo?</div>
-    <div class="karta"><div class="obrazek">📜</div><div class="udalost">${u.t}</div></div>`;
+    <div class="karta">${u.img ? `<img class="dobovy-snimhek" src="${u.img}" alt="${u.alt}">` : '<div class="obrazek">📜</div>'}<div class="udalost">${u.t}</div>${u.img ? '<div class="pramen">Dobový pramen · autor a licence jsou dole na stránce</div>' : ''}</div>`;
   const odezva = document.createElement('div');
   odezva.className = 'odezva';
   Uloha.vyber({
@@ -122,7 +125,7 @@ function osobnosti() {
   const o = Uloha.nahodne(OSOBNOSTI);
   const jine = Uloha.zamichej(OSOBNOSTI.filter(x => x.n !== o.n)).slice(0, 3);
   p.innerHTML = `<div class="zadani">O koho jde?</div>
-    <div class="karta"><div class="obrazek">${o.e}</div><div class="udalost">${o.cin}</div></div>`;
+    <div class="karta">${o.img ? `<img class="dobovy-snimhek" src="${o.img}" alt="${o.alt}">` : `<div class="obrazek">${o.e}</div>`}<div class="udalost">${o.cin}</div></div>`;
   const odezva = document.createElement('div');
   odezva.className = 'odezva';
   Uloha.vyber({

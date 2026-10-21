@@ -1,0 +1,8 @@
+Soubor: z6-litosfera-kanon.png / z6-litosfera-kanon.webp
+Původní dílo: Panorama Route, Part I- Blyde River Canyon - Panorama3847.jpg
+Autor: lumoplank
+Datum vzniku: before 8 May 2025date QS:P,+2025-05-08T00:00:00Z/7,P1326,+2025-05-08T00:00:00Z/11
+Zdroj: https://commons.wikimedia.org/wiki/File:Panorama_Route,_Part_I-_Blyde_River_Canyon_-_Panorama3847.jpg
+Licence: CC0 (http://creativecommons.org/publicdomain/zero/1.0/deed.en)
+Staženo: 2026-10-21
+Úpravy: automatické natočení, odstranění metadat, zmenšení na nejvýše 1600 px; výuková WebP kopie 1152 px.

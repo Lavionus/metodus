@@ -1,0 +1,8 @@
+Soubor: d9-valka1-fronta-potraviny.png / d9-valka1-fronta-potraviny.webp
+Původní dílo: Bundesarchiv Bild 183-N0703-343, Berlin, Schlangestehen nach Lebensmittel.jpg
+Autor: Donath
+Datum vzniku: 1917date QS:P571,+1917-00-00T00:00:00Z/9
+Zdroj: https://commons.wikimedia.org/wiki/File:Bundesarchiv_Bild_183-N0703-343,_Berlin,_Schlangestehen_nach_Lebensmittel.jpg
+Licence: CC BY-SA 3.0 de (https://creativecommons.org/licenses/by-sa/3.0/de/deed.en)
+Staženo: 2026-10-21
+Úpravy: automatické natočení, odstranění metadat, zmenšení na nejvýše 1600 px; výuková WebP kopie 790 px.

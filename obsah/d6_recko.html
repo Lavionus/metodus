@@ -24,6 +24,18 @@
     .rekonstrukce img { display:block; width:100%; border-radius:14px; }
     .rekonstrukce figcaption { margin-top:8px; color:var(--text-muted); line-height:1.5; }
     .stit-rekonstrukce { font-weight:800; color:var(--accent); text-transform:uppercase; letter-spacing:.05em; }
+    .foto-atlas { width:min(1120px,100%); margin:22px auto; }
+    .foto-atlas h2 { margin:0 0 5px; text-align:center; font-size:1.22rem; }
+    .foto-atlas > p { margin:0 auto 12px; max-width:820px; text-align:center; color:var(--text-muted,var(--text)); }
+    .foto-atlas h3 { margin:16px 0 8px; font-size:1.02rem; }
+    .foto-mrizka { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
+    .foto-karta { margin:0; overflow:hidden; border:1px solid var(--border); border-radius:14px; background:var(--bg-card); box-shadow:var(--shadow-sm); }
+    .foto-karta img { display:block; width:100%; aspect-ratio:4/3; object-fit:cover; }
+    .foto-karta img.cele { object-fit:contain; background:#1d1c1a; }
+    .foto-karta figcaption { padding:10px 11px 12px; font-size:.9rem; line-height:1.35; }
+    .foto-karta strong { display:block; margin-bottom:3px; color:var(--accent); font-size:1rem; }
+    @media (max-width:820px) { .foto-mrizka { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+    @media (max-width:440px) { .foto-mrizka { grid-template-columns:1fr; } }
   </style>
 </head>
 <body>
@@ -48,6 +60,27 @@
     <img src="img/d/d6-recko-athenska-agora.webp" alt="Umělecká rekonstrukce athénské agory s občany, tržištěm, sloupořadím a Akropolí v pozadí." width="1152" height="768" loading="lazy">
     <figcaption><span class="stit-rekonstrukce">Rekonstrukce:</span> Agora nebyla jen tržiště. Byla politickým, obchodním i náboženským středem obce; na kopci v pozadí stojí Akropolis.</figcaption>
   </figure></section>
+
+  <section class="foto-atlas" aria-labelledby="dokladyNadpis">
+    <h2 id="dokladyNadpis">Co se z Řecka dochovalo</h2>
+    <p>Skutečné stavby a nádoby, které můžeš vidět dodnes. Všímej si, podle čeho se od sebe liší.</p>
+    <h3>Tři sloupové řády – rozhoduje hlavice</h3>
+    <div class="foto-mrizka">
+      <figure class="foto-karta"><img src="img/d/d6-recko-rad-dorsky.webp" alt="Dórské sloupy Héfaistova chrámu v Athénách: bez patky, s jednoduchou plochou hlavicí." width="1152" height="1416" loading="lazy"><figcaption><strong>Dórský řád</strong>Nejstarší a nejprostší: sloup stojí bez patky, hlavice je jednoduchá plochá deska.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/d/d6-recko-rad-ionsky.webp" alt="Iónská hlavice sloupu Erechtheia se dvěma stočenými závitnicemi." width="600" height="450" loading="lazy"><figcaption><strong>Iónský řád</strong>Štíhlejší sloup s patkou; hlavici zdobí dvě stočené závitnice (voluty).</figcaption></figure>
+      <figure class="foto-karta"><img src="img/d/d6-recko-rad-korintsky.webp" alt="Korintský sloup Olympieia v Athénách s hlavicí zdobenou akantovými listy." width="1152" height="906" loading="lazy"><figcaption><strong>Korintský řád</strong>Nejzdobnější: hlavice připomíná koš obrostlý akantovými listy.</figcaption></figure>
+    </div>
+    <h3>Malované nádoby – dvě techniky</h3>
+    <div class="foto-mrizka">
+      <figure class="foto-karta"><img class="cele" src="img/d/d6-recko-vaza-cernofigurova.webp" alt="Attická černofigurová amfora: černé postavy bojovníků na oranžovém podkladu hlíny." width="760" height="1280" loading="lazy"><figcaption><strong>Černofigurová malba</strong>Starší technika (asi od 7. stol. př. n. l.): černé postavy na oranžové hlíně, detaily vyryté.</figcaption></figure>
+      <figure class="foto-karta"><img class="cele" src="img/d/d6-recko-vaza-cervenofigurova.webp" alt="Attický červenofigurový kalichový kratér: oranžové postavy Dionýsa a jeho družiny na černém podkladu." width="1152" height="1434" loading="lazy"><figcaption><strong>Červenofigurová malba</strong>Mladší (od konce 6. stol. př. n. l.): postavy zůstávají v barvě hlíny, pozadí je černé.</figcaption></figure>
+    </div>
+    <h3>Stavby</h3>
+    <div class="foto-mrizka">
+      <figure class="foto-karta"><img src="img/d/d6-recko-parthenon.webp" alt="Západní průčelí Parthenónu na athénské Akropoli s dórskými sloupy a restaurátorským lešením." width="1152" height="768" loading="lazy"><figcaption><strong>Parthenón</strong>Chrám bohyně Athény na Akropoli z 5. stol. př. n. l., postavený v dórském řádu. Lešení patří k dnešní obnově.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/d/d6-recko-olympie-stadion.webp" alt="Dlouhá rovná běžecká dráha antického stadionu v Olympii s travnatými náspy pro diváky." width="1152" height="769" loading="lazy"><figcaption><strong>Stadion v Olympii</strong>Dráha dlouhá asi 192 m. Diváci sledovali závody z travnatých náspů; olympijské hry se tu konaly od roku 776 př. n. l.</figcaption></figure>
+    </div>
+  </section>
 
   <p class="napoveda">Řecko tvořily samostatné <b>městské státy (polis)</b>. V <b>Athénách</b> vznikla demokracie – o veřejných věcech rozhodovali svobodní muži na sněmu. <b>Sparta</b> naopak vychovávala své občany hlavně jako vojáky.</p>
 

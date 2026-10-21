@@ -30,6 +30,20 @@
     .srovnani-sidel img { display:block; width:100%; border-radius:10px; }
     .srovnani-sidel figcaption { margin-top:8px; color:var(--text-muted); line-height:1.45; }
     .rekonstrukce-stit { color:var(--accent); font-weight:800; text-transform:uppercase; }
+    /* Fotografie v úloze s fotkou */
+    .foto-ukol { display:block; width:min(440px,80vw); height:auto; aspect-ratio:4/3; object-fit:contain; border-radius:12px; background:var(--bg-deep,var(--bg-card)); }
+    /* Foto-atlas */
+    .foto-atlas { width:min(1120px,100%); margin:22px auto; }
+    .foto-atlas h2 { margin:0 0 5px; text-align:center; font-size:1.22rem; }
+    .foto-atlas > p { margin:0 auto 12px; max-width:820px; text-align:center; color:var(--text-muted,var(--text)); }
+    .foto-mrizka { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
+    .foto-karta { margin:0; overflow:hidden; border:1px solid var(--border); border-radius:14px; background:var(--bg-card); box-shadow:var(--shadow-sm); }
+    .foto-karta img { display:block; width:100%; height:auto; aspect-ratio:4/3; object-fit:cover; }
+    .foto-karta img.cele { object-fit:contain; background:#1d1c1a; }
+    .foto-karta figcaption { padding:10px 11px 12px; font-size:.9rem; line-height:1.35; }
+    .foto-karta strong { display:block; margin-bottom:3px; color:var(--accent); font-size:1rem; }
+    @media (max-width:820px) { .foto-mrizka { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+    @media (max-width:440px) { .foto-mrizka { grid-template-columns:1fr; } }
   </style>
 </head>
 <body>
@@ -41,6 +55,7 @@
     <button data-rezim="poradi">↕️ Seřaď vývoj</button>
     <button data-rezim="predci">🧍 Vývoj člověka</button>
     <button data-rezim="zivot">🏹 Život v pravěku</button>
+    <button data-rezim="nalezy">🔍 Poznej nález</button>
   </div>
 
   <div class="plocha" id="plocha"></div>
@@ -54,6 +69,18 @@
     <figure><img src="img/d/d6-pravek-lovci.webp" alt="Rekonstrukce paleolitického tábora lovců a sběračů s koženými přístřešky." width="1152" height="768" loading="lazy"><figcaption><span class="rekonstrukce-stit">Rekonstrukce:</span> Paleolitický tábor byl dočasný. Lidé se přesouvali za zvěří a potravou, vyráběli štípané nástroje a používali oheň.</figcaption></figure>
     <figure><img src="img/d/d6-pravek-zemedelci.webp" alt="Rekonstrukce neolitické osady s dlouhými domy, poli a chovanými zvířaty." width="1152" height="768" loading="lazy"><figcaption><span class="rekonstrukce-stit">Rekonstrukce:</span> Neolitická osada byla trvalá. Pole, dobytek, zásoby, keramika a dlouhé domy změnily každodenní život.</figcaption></figure>
   </div></section>
+
+  <section class="foto-atlas" id="atlasNalezy" aria-labelledby="nalezyNadpis">
+    <h2 id="nalezyNadpis">Skutečné nálezy z pravěku</h2>
+    <p>Pravěk nezanechal písemné prameny – víme o něm díky předmětům z vykopávek. Podle materiálu a výzdoby poznáš, z kterého období jsou.</p>
+    <div class="foto-mrizka">
+      <figure class="foto-karta" data-nazev="pěstní klín" data-obdobi="starší doba kamenná (paleolit)"><img class="cele" src="img/d/d6-pravek-pestni-klin.webp" alt="Pěstní klín z pazourku ve tvaru kapky, ze všech stran opracovaný odbíjením úštěpů." width="768" height="768" loading="lazy"><figcaption><strong>Pěstní klín · paleolit</strong>Univerzální nástroj ze štípaného pazourku, který se držel v dlani. Vyráběli ho už předchůdci dnešního člověka.</figcaption></figure>
+      <figure class="foto-karta" data-nazev="Věstonická venuše" data-obdobi="starší doba kamenná (paleolit)"><img class="cele" src="img/d/d6-pravek-vestonicka-venuse.webp" alt="Věstonická venuše: soška ženy z pálené hlíny s velkými prsy a boky a hlavou bez obličeje." width="768" height="1500" loading="lazy"><figcaption><strong>Věstonická venuše · paleolit</strong>Asi 11 cm vysoká soška z pálené hlíny stará kolem 30 000 let, nalezená roku 1925 v Dolních Věstonicích. Vytvořili ji lovci mamutů.</figcaption></figure>
+      <figure class="foto-karta" data-nazev="nádoba s lineární keramikou" data-obdobi="mladší doba kamenná (neolit)"><img class="cele" src="img/d/d6-pravek-linearni-keramika.webp" alt="Hliněná nádoba s oblým dnem a malými uchy, zdobená rytými zakřivenými liniemi." width="768" height="1024" loading="lazy"><figcaption><strong>Lineární keramika · neolit</strong>Nádoba z Prahy-Bubenče z 6. tisíciletí př. n. l. Rytý ornament z čar dal jméno nejstarší zemědělské kultuře u nás.</figcaption></figure>
+      <figure class="foto-karta" data-nazev="bronzový meč" data-obdobi="doba bronzová"><img class="cele" src="img/d/d6-pravek-bronzovy-mec.webp" alt="Rukojeť bronzového meče z pozdní doby bronzové s kruhovou hlavicí a rytou spirálovou výzdobou." width="768" height="1152" loading="lazy"><figcaption><strong>Bronzový meč · doba bronzová</strong>Rukojeť meče, který kdosi obětoval řece Vltavě pod Vyšehradem. Bronz je slitina mědi a cínu – meče se odlévaly do forem.</figcaption></figure>
+      <figure class="foto-karta" data-nazev="keltská mince" data-obdobi="doba železná"><img class="cele" src="img/d/d6-pravek-keltska-mince.webp" alt="Zlatá keltská mince kmene Bójů (statér) s vyraženou stylizovanou hlavou." width="768" height="815" loading="lazy"><figcaption><strong>Keltská mince · doba železná</strong>Zlatý statér keltského kmene Bójů. Keltové razili první mince na našem území; podle Bójů vzniklo jméno Bohemia.</figcaption></figure>
+    </div>
+  </section>
 
   <section aria-labelledby="sondaNadpis"><h2 id="sondaNadpis">Čti archeologickou sondu</h2>
     <div class="sonda" id="sondaScena">
@@ -229,7 +256,31 @@ function zivot() {
   p.appendChild(odezva);
 }
 
-const REZIMY = { doby, poradi, predci, zivot };
+/* ---- Poznej nález (fotografie z atlasu pod úlohou) ----------------------------------------- */
+const NALEZY = [...document.querySelectorAll('#atlasNalezy .foto-karta')].map(f => ({
+  n: f.dataset.nazev, obdobi: f.dataset.obdobi, img: f.querySelector('img'),
+}));
+function nalezy() {
+  const p = $('plocha');
+  const u = Uloha.nahodne(NALEZY);
+  p.innerHTML = `<div class="zadani">Z kterého období pravěku pochází tento nález?</div>
+    <div class="karta"><img class="foto-ukol" src="${u.img.getAttribute('src')}" alt="${u.img.alt.replace(/"/g, '&quot;')}"
+      width="${u.img.getAttribute('width')}" height="${u.img.getAttribute('height')}"></div>`;
+  const odezva = document.createElement('div');
+  odezva.className = 'odezva';
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: [...DOBY].sort((a, b) => a.poradi - b.poradi).map(x => ({ klic: x.n, popis: x.n })),
+    spravnyKlic: u.obdobi,
+    zpravaOk: `✅ ${u.n} – ${u.obdobi}.`,
+    zpravaChyba: 'Podívej se, z jakého materiálu nález je a jak je zdobený.',
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+const REZIMY = { doby, poradi, predci, zivot, nalezy };
 function novaUloha() { REZIMY[rezim](); }
 
 document.querySelectorAll('#rezimy button').forEach(b => b.addEventListener('click', () => {

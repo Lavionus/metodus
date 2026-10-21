@@ -1,0 +1,8 @@
+Soubor: prv4-horniny-vyuziti-socha.png / prv4-horniny-vyuziti-socha.webp
+Původní dílo: Statue of Seti II, sandstone - Museo Egizio Turin C 1383 p06.jpg
+Autor: Museo Egizio
+Datum vzniku: between 1202 and 1198 BCdate QS:P,-1500-00-00T00:00:00Z/6,P1319,-1202-00-00T00:00:00Z/9,P1326,-1198-00-00T00:00:00Z/9 Egyptian Empire (circa 1550 BCdate QS:P,-1550-00-00T00:00:00Z/9,P1480,Q5727902–1070 BCdate QS:P,-1070-00-00T00:00:00Z/9)
+Zdroj: https://commons.wikimedia.org/wiki/File:Statue_of_Seti_II,_sandstone_-_Museo_Egizio_Turin_C_1383_p06.jpg
+Licence: CC0 (http://creativecommons.org/publicdomain/zero/1.0/deed.en)
+Staženo: 2026-10-21
+Úpravy: automatické natočení, odstranění metadat, zmenšení na nejvýše 1600 px; výuková WebP kopie 1152 px.

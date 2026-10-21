@@ -19,6 +19,18 @@
       color: var(--text-faint); font-size: 0.78rem; }
     .osa span { background: var(--bg-control); border: 1px solid var(--border);
       border-radius: 6px; padding: 4px 9px; }
+    .foto-atlas { width:min(1120px,100%); margin:22px auto; }
+    .foto-atlas h2 { margin:0 0 5px; text-align:center; font-size:1.22rem; }
+    .foto-atlas > p { margin:0 auto 12px; max-width:820px; text-align:center; color:var(--text-muted,var(--text)); }
+    .foto-atlas h3 { margin:16px 0 8px; font-size:1.02rem; }
+    .foto-mrizka { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
+    .foto-karta { margin:0; overflow:hidden; border:1px solid var(--border); border-radius:14px; background:var(--bg-card); box-shadow:var(--shadow-sm); }
+    .foto-karta img { display:block; width:100%; height:auto; aspect-ratio:4/3; object-fit:cover; }
+    .foto-karta img.cele { object-fit:contain; background:#1d1c1a; }
+    .foto-karta figcaption { padding:10px 11px 12px; font-size:.9rem; line-height:1.35; }
+    .foto-karta strong { display:block; margin-bottom:3px; color:var(--accent); font-size:1rem; }
+    @media (max-width:820px) { .foto-mrizka { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+    @media (max-width:440px) { .foto-mrizka { grid-template-columns:1fr; } }
   </style>
 </head>
 <body>
@@ -40,6 +52,28 @@
   </div>
 
   <div class="osa"><span>28. 6. 1914 atentát v Sarajevu</span><span>1914 vypuknutí války</span><span>1916 Verdun a Somma</span><span>1917 vstup USA, revoluce v Rusku</span><span>28. 10. 1918 vznik ČSR</span><span>11. 11. 1918 příměří</span><span>1919 versailleská smlouva</span></div>
+
+  <section class="foto-atlas" aria-labelledby="fotoNadpis">
+    <h2 id="fotoNadpis">Válka na dobových snímcích</h2>
+    <p>Skutečné fotografie a tiskoviny z let 1914–1918. Všímej si, jak se válka lišila na různých frontách a jak dopadla na lidi doma.</p>
+    <h3>Na frontě</h3>
+    <div class="foto-mrizka">
+      <figure class="foto-karta"><img src="img/d/d9-valka1-zakop-somme.webp" alt="Britští vojáci v dobytém německém zákopu u řeky Sommy v červenci 1916, jeden drží stráž s puškou." width="1152" height="867" loading="lazy"><figcaption><strong>Zákop na západní frontě</strong>Somma, 1916. Fronta strnula v zákopech; vojáci v nich žili celé měsíce v blátě, mezi krysami a pod palbou.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/d/d9-valka1-isonzo.webp" alt="Dva rakousko-uherští vojáci v ocelových přilbách hází granáty ze zákopu v kamenitém terénu na sočské frontě v roce 1917." width="1152" height="814" loading="lazy"><figcaption><strong>Italská fronta na Soči</strong>1917. Od roku 1915 tu Rakousko-Uhersko bojovalo s Itálií; v jeho armádě sloužilo mnoho Čechů. Ocelové přilby přinesla až tato válka.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/d/d9-valka1-horsky-zakop.webp" alt="Zákop vyztužený kameny a dřevem vysoko v zasněžených horách na italské frontě." width="1152" height="1551" loading="lazy"><figcaption><strong>Válka v horách</strong>Na italské frontě se bojovalo i ve výšce přes 2 000 m. Vojáky víc než nepřítel ohrožovaly mráz a laviny.</figcaption></figure>
+    </div>
+    <h3>Českoslovenští legionáři</h3>
+    <div class="foto-mrizka">
+      <figure class="foto-karta"><img src="img/d/d9-valka1-legie-rusko.webp" alt="Skupina československých legionářů s praporem před vyzdobeným železničním vagonem v Rusku." width="1152" height="765" loading="lazy"><figcaption><strong>Legie v Rusku</strong>Legionáři projeli Sibiř po magistrále ve vagonech, kterým říkali „těplušky“. Byli to dobrovolníci, kteří bojovali za samostatný stát.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/d/d9-valka1-legie-italie.webp" alt="Nastoupení vojáci československé legie při slavnostním předání praporu v Římě 24. května 1918." width="1152" height="811" loading="lazy"><figcaption><strong>Legie v Itálii</strong>Řím, květen 1918. Prapor dostala i legie v Itálii – dohodové státy tak uznávaly československý odboj.</figcaption></figure>
+    </div>
+    <h3>V zázemí</h3>
+    <div class="foto-mrizka">
+      <figure class="foto-karta"><img src="img/d/d9-valka1-fronta-potraviny.webp" alt="Dlouhá řada žen a dětí čeká před obchodem s máslem v Berlíně v roce 1917." width="790" height="560" loading="lazy"><figcaption><strong>Fronta na potraviny</strong>Berlín, 1917. Námořní blokáda a nedostatek mužů na polích způsobily hlad; hodiny ve frontách znaly i české země.</figcaption></figure>
+      <figure class="foto-karta"><img class="cele" src="img/d/d9-valka1-chlebenka.webp" alt="Dobová pohlednice s vyobrazením berlínské chlebové karty z roku 1915 a nápisem Chléb náš vezdejší dej nám dnes." width="734" height="471" loading="lazy"><figcaption><strong>Potraviny na lístky</strong>Pohlednice z roku 1915 s chlebovou kartou. Mouka, cukr či tuk se přidělovaly na příděl – kdo neměl lístek, nekoupil.</figcaption></figure>
+      <figure class="foto-karta"><img class="cele" src="img/d/d9-valka1-pohlednice.webp" alt="Válečná pohlednice se čtyřmi usměvavými chlapci v uniformách Německa, Rakouska-Uherska, Osmanské říše a Bulharska s nápisem Der lachende Vierbund." width="500" height="770" loading="lazy"><figcaption><strong>Válečná pohlednice</strong>„Smějící se čtyřspolek“: Ústřední mocnosti jako veselí chlapci. Propaganda chtěla, aby válka působila jako hra – i pro děti.</figcaption></figure>
+    </div>
+  </section>
 
   <p class="napoveda">Válka trvala od roku <b>1914 do 1918</b> a bojovala v ní <b>Dohoda</b> (Francie, Británie, Rusko, později Itálie a USA) proti <b>Ústředním mocnostem</b> (Německo, Rakousko-Uhersko, Osmanská říše, Bulharsko). Byla to první <b>totální válka</b> – zasáhla i civilní obyvatelstvo.</p>
 

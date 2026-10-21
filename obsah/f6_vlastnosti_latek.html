@@ -61,6 +61,22 @@
     .arch-cisla div.klic { border-left: 3px solid var(--accent); }
     .arch-tip { font-size: .78rem; color: var(--text-faint); max-width: 560px; text-align: center; line-height: 1.55; }
     .arch-tip b { color: var(--text-muted); }
+    /* Fotografie tělesa v úloze „Látka, či těleso?“ */
+    .foto-ukol { display: block; width: min(400px, 78vw); height: auto; aspect-ratio: 4 / 3; object-fit: cover;
+      border-radius: 12px; background: var(--bg-deep, var(--bg-card)); }
+
+    /* Foto-atlas: těleso a látka, ze které je */
+    .foto-atlas { width:min(1120px,100%); margin:22px auto; }
+    .foto-atlas h2 { margin:0 0 5px; text-align:center; font-size:1.22rem; }
+    .foto-atlas > p { margin:0 auto 12px; max-width:820px; text-align:center; color:var(--text-muted,var(--text)); }
+    .foto-mrizka { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
+    .foto-karta { margin:0; overflow:hidden; border:1px solid var(--border); border-radius:14px; background:var(--bg-card); box-shadow:var(--shadow-sm); }
+    .foto-karta img { display:block; width:100%; height:auto; aspect-ratio:4/3; object-fit:cover; }
+    .foto-karta img.cele { object-fit:contain; background:#1d1c1a; }
+    .foto-karta figcaption { padding:10px 11px 12px; font-size:.9rem; line-height:1.35; }
+    .foto-karta strong { display:block; margin-bottom:3px; color:var(--accent); font-size:1rem; }
+    @media (max-width:820px) { .foto-mrizka { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+    @media (max-width:440px) { .foto-mrizka { grid-template-columns:1fr; } }
   </style>
 </head>
 <body>
@@ -88,6 +104,14 @@
     tím rychleji. V ukázce <b>Archimédova zákona</b> můžeš tělesem táhnout myší nebo prstem.
   </p>
 
+  <section class="foto-atlas" aria-labelledby="atlasLatek">
+    <h2 id="atlasLatek">📷 Těleso a látka, ze které je</h2>
+    <p>Každý předmět na fotografii je <b>těleso</b>. Pod ním najdeš <b>látku</b>, ze které je vyrobený. Některá z těchto těles uvidíš i v úloze „Látka, či těleso?“.</p>
+    <div class="foto-mrizka" id="atlasLatky">
+@@ATLAS_LATKY@@
+    </div>
+  </section>
+
 <script>
 const $ = id => document.getElementById(id);
 const skore = Uloha.skore('metodus_f6_latky', $('skore'));
@@ -99,7 +123,17 @@ const DVOJICE = [
   { teleso: 'prsten', latka: 'zlato' }, { teleso: 'okno', latka: 'sklo' },
   { teleso: 'svetr', latka: 'vlna' }, { teleso: 'socha', latka: 'kámen' },
   { teleso: 'trubka', latka: 'měď' }, { teleso: 'sešit', latka: 'papír' },
+  { teleso: 'lžíce', latka: 'ocel' }, { teleso: 'svíčka', latka: 'vosk' },
+  { teleso: 'cihla', latka: 'pálená hlína' },
 ];
+/* Fotografie těles z atlasu pod úlohou (data-teleso = název tělesa v DVOJICE). */
+const FOTO_TELES = {};
+document.querySelectorAll('#atlasLatky .foto-karta').forEach(f => { FOTO_TELES[f.dataset.teleso] = f.querySelector('img'); });
+function fotoTelesa(teleso) {
+  const im = FOTO_TELES[teleso];
+  return im ? `<img class="foto-ukol" src="${im.getAttribute('src')}" alt="${im.alt.replace(/"/g, '&quot;')}"
+    width="${im.getAttribute('width')}" height="${im.getAttribute('height')}">` : '';
+}
 
 const SKUPENSTVI = {
   pevne: { nazev: 'pevné', popis: 'má stálý tvar i objem, částice kmitají na místě' },
@@ -142,8 +176,9 @@ function latkaTeleso() {
   const jeTeleso = Math.random() < 0.5;
   const slovo = jeTeleso ? u.teleso : u.latka;
 
-  p.innerHTML = `<div class="zadani">Je to látka, nebo těleso?</div>
-    <div class="karta"><div class="obrazek">🔍</div><div class="nazev-l">${slovo}</div></div>`;
+  const foto = fotoTelesa(u.teleso);
+  p.innerHTML = `<div class="zadani">${foto ? 'Na fotce je předmět. Je slovo pod fotkou látka, nebo těleso?' : 'Je to látka, nebo těleso?'}</div>
+    <div class="karta">${foto || '<div class="obrazek">🔍</div>'}<div class="nazev-l">${slovo}</div></div>`;
   const odezva = document.createElement('div');
   odezva.className = 'odezva';
   Uloha.vyber({

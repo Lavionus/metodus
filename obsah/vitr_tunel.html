@@ -36,6 +36,21 @@ canvas{display:block;width:100%;height:100%;touch-action:none;cursor:crosshair}
 .mereni .pruh.vztlak{background:#ffb35a}
 .napoveda{position:absolute;left:12px;bottom:12px;font-size:.74rem;color:#cfe1f2;background:rgba(8,20,32,.6);padding:4px 9px;border-radius:6px;pointer-events:none}
 @media(max-width:760px){.info{display:none}.panel{gap:10px;padding:8px 10px}input[type=range]{width:88px}.mereni{font-size:.7rem}}
+/* Foto-atlas „Ve skutečnosti“ – skutečné fotografie v okně mimo plátno simulace */
+.foto-dialog{width:min(1120px,calc(100% - 20px));max-height:calc(100% - 20px);padding:0;border:1px solid var(--border-strong);border-radius:14px;background:var(--bg-elevated);color:var(--text);box-shadow:var(--shadow)}
+.foto-dialog::backdrop{background:rgba(0,0,0,.6)}
+.foto-hlava{position:sticky;top:0;z-index:1;display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--bg-elevated);border-bottom:1px solid var(--border)}
+.foto-hlava h2{margin:0 auto 0 0;font-size:1.1rem}
+.foto-atlas{padding:12px 14px 16px}
+.foto-atlas > p{margin:0 auto 12px;max-width:820px;text-align:center;color:var(--text-muted,var(--text));font-size:.9rem;line-height:1.5}
+.foto-mrizka{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.foto-karta{margin:0;overflow:hidden;border:1px solid var(--border);border-radius:14px;background:var(--bg-card);box-shadow:var(--shadow-sm)}
+.foto-karta img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover}
+.foto-karta img.cele{object-fit:contain;background:#1d1c1a}
+.foto-karta figcaption{padding:10px 11px 12px;font-size:.9rem;line-height:1.35;color:var(--text)}
+.foto-karta strong{display:block;margin-bottom:3px;color:var(--accent);font-size:1rem}
+@media(max-width:820px){.foto-mrizka{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:440px){.foto-mrizka{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -43,6 +58,7 @@ canvas{display:block;width:100%;height:100%;touch-action:none;cursor:crosshair}
   <h1>💨 Vítr a překážky – aerodynamický tunel</h1>
   <button id="btnPauza">⏸️ Pauza</button>
   <button id="btnReset">🔄 Restart proudění</button>
+  <button id="btnFoto" type="button" title="Skutečné fotografie k tématu">📷 Ve skutečnosti</button>
   <button id="btnInfo">❓ Nápověda</button>
 </div>
 
@@ -1124,6 +1140,25 @@ Badani.start({
       vysvetleni:'Pomalý vítr unese méně sněhu – ten se usadí v závětří.' },
   ],
 });
+})();
+</script>
+<dialog class="foto-dialog" id="fotoAtlas" aria-labelledby="fotoAtlasNadpis">
+  <div class="foto-hlava"><h2 id="fotoAtlasNadpis">📷 Proudění vzduchu ve skutečnosti</h2><button type="button" class="foto-zavri">✕ Zavřít</button></div>
+  <section class="foto-atlas">
+    <p>Proudění vzduchu běžně nevidíme, ale poznáme ho podle kouře, sněhu, vlajky nebo podle toho, jak se sportovci snaží zmenšit odpor.</p>
+    <div class="foto-mrizka">
+@@ATLAS@@
+    </div>
+  </section>
+</dialog>
+<script>
+/* Foto-atlas v okně: simulaci nechává beze změny, klávesy uvnitř okna k ní nepropadnou. */
+(() => {
+  const d = document.getElementById('fotoAtlas');
+  document.getElementById('btnFoto').addEventListener('click', () => d.showModal());
+  d.querySelector('.foto-zavri').addEventListener('click', () => d.close());
+  d.addEventListener('click', e => { if (e.target === d) d.close(); });
+  d.addEventListener('keydown', e => { if (e.key !== 'Escape') e.stopPropagation(); });
 })();
 </script>
 </body>

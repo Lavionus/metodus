@@ -19,6 +19,18 @@
     .osa { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; max-width: 700px;
       color: var(--text-faint); font-size: 0.78rem; }
     .osa span { background: var(--bg-control); border: 1px solid var(--border); border-radius: 6px; padding: 4px 9px; }
+    .foto-atlas { width:min(1120px,100%); margin:22px auto; }
+    .foto-atlas h2 { margin:0 0 5px; text-align:center; font-size:1.22rem; }
+    .foto-atlas > p { margin:0 auto 12px; max-width:820px; text-align:center; color:var(--text-muted,var(--text)); }
+    .foto-atlas h3 { margin:16px 0 8px; font-size:1.02rem; }
+    .foto-mrizka { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
+    .foto-karta { margin:0; overflow:hidden; border:1px solid var(--border); border-radius:14px; background:var(--bg-card); box-shadow:var(--shadow-sm); }
+    .foto-karta img { display:block; width:100%; aspect-ratio:4/3; object-fit:cover; }
+    .foto-karta img.cele { object-fit:contain; background:#1d1c1a; }
+    .foto-karta figcaption { padding:10px 11px 12px; font-size:.9rem; line-height:1.35; }
+    .foto-karta strong { display:block; margin-bottom:3px; color:var(--accent); font-size:1rem; }
+    @media (max-width:820px) { .foto-mrizka { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+    @media (max-width:440px) { .foto-mrizka { grid-template-columns:1fr; } }
   </style>
 </head>
 <body>
@@ -49,6 +61,17 @@
     Přemyslovci vládli českým zemím zhruba od 9. století do roku <b>1306</b>. Nejdřív jako knížata,
     od <b>Zlaté buly sicilské (1212)</b> jako dědiční králové.
   </p>
+
+  <section class="foto-atlas" aria-labelledby="dokladyNadpis">
+    <h2 id="dokladyNadpis">Doklady z doby Přemyslovců</h2>
+    <p>Skutečné listiny, rukopisy a stavby, ze kterých historici poznávají první český stát.</p>
+    <div class="foto-mrizka">
+      <figure class="foto-karta"><img class="cele" src="img/d/d7-premyslovci-zlata-bula.webp" alt="Zlatá bula sicilská: pergamenová listina psaná latinou se zavěšenou zlatou pečetí." width="1152" height="1633" loading="lazy"><figcaption><strong>Zlatá bula sicilská (1212)</strong>Listina Fridricha II. potvrdila Přemyslu Otakarovi I. dědičný královský titul. Jméno má podle zlaté pečeti sicilského krále.</figcaption></figure>
+      <figure class="foto-karta"><img class="cele" src="img/d/d7-premyslovci-kosmas.webp" alt="Iluminace z Lipského rukopisu Kosmovy kroniky: děkan Kosmas v plášti s knihou v ruce." width="500" height="708" loading="lazy"><figcaption><strong>Kosmas</strong>Pražský děkan a autor Kroniky Čechů (do roku 1125) – nejstarší kroniky našich dějin. Obrázek je z Lipského rukopisu z konce 12. stol.</figcaption></figure>
+      <figure class="foto-karta"><img class="cele" src="img/d/d7-premyslovci-svatovaclavska-prilba.webp" alt="Svatováclavská přilba: železná kónická přilba s nánosníkem zdobeným křížem, zepředu a z boku." width="768" height="1316" loading="lazy"><figcaption><strong>Svatováclavská přilba</strong>Železná přilba s nánosníkem zdobeným křížem. Tradice ji spojuje se sv. Václavem; je uložena v pokladu svatovítské katedrály.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/d/d7-premyslovci-rotunda-znojmo.webp" alt="Kamenná románská rotunda svaté Kateřiny ve Znojmě s kuželovou střechou." width="1152" height="858" loading="lazy"><figcaption><strong>Rotunda sv. Kateřiny ve Znojmě</strong>Románská stavba Přemyslovců. Malby uvnitř (1134) zobrazují přemyslovská knížata i pověst o Přemyslu Oráči.</figcaption></figure>
+    </div>
+  </section>
 
 <script>
 const $ = id => document.getElementById(id);

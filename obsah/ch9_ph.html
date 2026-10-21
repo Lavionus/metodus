@@ -27,6 +27,21 @@
     .uloha-text { max-width: 640px; font-size: 1.02rem; line-height: 1.6; }
     .uloha-text b { color: var(--accent); }
     .vzorec { font-family: 'Courier New', monospace; color: var(--text-muted); font-size: 0.95rem; }
+    /* foto-atlas skutečných indikátorů (IMG-ch-09) */
+    .foto-atlas { width:min(1120px,100%); margin:22px auto; }
+    .foto-atlas h2 { margin:0 0 5px; text-align:center; font-size:1.22rem; }
+    .foto-atlas > p { margin:0 auto 12px; max-width:820px; text-align:center; color:var(--text-muted,var(--text)); }
+    .foto-mrizka { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
+    .foto-karta { margin:0; overflow:hidden; border:1px solid var(--border); border-radius:14px; background:var(--bg-card); box-shadow:var(--shadow-sm); }
+    .foto-karta img { display:block; width:100%; height:auto; aspect-ratio:4/3; object-fit:cover; }
+    .foto-karta img.cele { object-fit:contain; background:#1d1c1a; }
+    .foto-karta figcaption { padding:10px 11px 12px; font-size:.9rem; line-height:1.35; }
+    .foto-karta strong { display:block; margin-bottom:3px; color:var(--accent); font-size:1rem; }
+    .foto-karta.siroka { grid-column:1 / -1; }
+    .foto-karta.siroka img { aspect-ratio:auto; }
+    .foto-karta.dvoje { grid-column:span 2; }
+    @media (max-width:820px) { .foto-mrizka { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+    @media (max-width:440px) { .foto-mrizka { grid-template-columns:1fr; } .foto-karta.dvoje { grid-column:auto; } }
   </style>
 </head>
 <body>
@@ -80,6 +95,16 @@
     <p><a href="https://openstax.org/books/chemistry-atoms-first-2e/pages/14-2-ph-and-poh">OpenStax: pH a pOH</a> ·
       <a href="https://www2.chem.wisc.edu/deptfiles/genchem/tables/IndicatorTable.htm">University of Wisconsin: přechody indikátorů</a></p>
   </details>
+
+  <section class="foto-atlas" aria-labelledby="indikatoryFotoNadpis">
+    <h2 id="indikatoryFotoNadpis">Skutečné barvy indikátorů</h2>
+    <p>Barvy na stupnici výše jen označují druh prostředí. Takhle vypadají skutečné indikátory, když je přidáš do roztoků s různým pH.</p>
+    <div class="foto-mrizka">
+      <figure class="foto-karta siroka"><img src="img/ch/ch9-ph-zeli-banky.webp" alt="Řada baněk s výluhem červeného zelí v roztocích s rostoucím pH, od červené po žlutozelenou." width="1152" height="341" loading="lazy"><figcaption><strong>Výluh z červeného zelí v řadě</strong>Zleva doprava roste pH. Barvivo zelí (antokyany) je v silně kyselém roztoku červené, kolem neutrálního fialové a v zásaditém modrozelené až žluté.</figcaption></figure>
+      <figure class="foto-karta dvoje"><img class="cele" src="img/ch/ch9-ph-zeli-zkumavky.webp" alt="Osm zkumavek s výluhem červeného zelí, barvy od červené přes fialovou a modrou po zelenou a žlutou." width="1152" height="850" loading="lazy"><figcaption><strong>Zelí jako domácí indikátor</strong>Vlevo kyselé roztoky (červená, růžová), uprostřed neutrální až slabě zásadité (fialová, modrá), vpravo silně zásadité (zelená, žlutá). Výluh si připravíš z nakrájeného zelí a horké vody.</figcaption></figure>
+      <figure class="foto-karta"><img class="cele" src="img/ch/ch9-ph-papirek.webp" alt="{{ALT:ch/ch9-ph-papirek}}" {{R:ch/ch9-ph-papirek}} loading="lazy"><figcaption><strong>Univerzální indikátorový papírek</strong>Proužek namočíš do roztoku a jeho barvu porovnáš se stupnicí na obalu: červená = kyselé, zelená = neutrální, modrá a fialová = zásadité.</figcaption></figure>
+    </div>
+  </section>
 
   <nav class="navaznosti" aria-label="Navazující lekce"><h2>Kam dál</h2><a href="vycislovani_rovnic.html" data-lekce>Vyčíslování rovnic</a></nav>
 <script>

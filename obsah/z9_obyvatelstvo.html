@@ -14,6 +14,16 @@
   <style>
     .uloha-text { max-width: 640px; font-size: 1.02rem; line-height: 1.6; }
     .uloha-text b { color: var(--accent); }
+    .foto-uloha { display:block; width:min(560px,100%); aspect-ratio:4/3; object-fit:cover; border-radius:14px; border:1px solid var(--border); background:var(--bg-card); }
+    .foto-atlas { width:min(1120px,100%); margin:22px auto; }
+    .foto-atlas h2 { margin:0 0 5px; text-align:center; font-size:1.22rem; }
+    .foto-atlas > p { margin:0 auto 12px; max-width:820px; text-align:center; color:var(--text-muted,var(--text)); }
+    .foto-mrizka { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+    .foto-karta { margin:0; overflow:hidden; border:1px solid var(--border); border-radius:14px; background:var(--bg-card); box-shadow:var(--shadow-sm); }
+    .foto-karta img { display:block; width:100%; aspect-ratio:4/3; object-fit:cover; }
+    .foto-karta figcaption { padding:10px 11px 12px; font-size:.9rem; line-height:1.35; }
+    .foto-karta strong { display:block; margin-bottom:3px; color:var(--accent); font-size:1rem; }
+    @media (max-width:440px) { .foto-mrizka { grid-template-columns:1fr; } }
   </style>
 </head>
 <body>
@@ -25,6 +35,7 @@
     <button data-rezim="mapa2">🏙️ Velkoměsta světa</button>
     <button data-rezim="kviz1">📊 Obyvatelstvo</button>
     <button data-rezim="kviz2">🚶 Migrace a sídla</button>
+    <button data-rezim="foto">📷 Sídla na fotkách</button>
   </div>
 
   <div class="plocha" id="plocha"></div>
@@ -35,6 +46,12 @@
   </div>
 
   <p class="napoveda">Na Zemi žije přes <b>8 miliard</b> lidí, ale rozmístěni jsou velmi nerovnoměrně – nejhustěji je osídlena <b>jižní a východní Asie</b>. Roste podíl lidí žijících ve městech (<b>urbanizace</b>) a zvyšuje se počet <b>aglomerací</b> nad 10 milionů obyvatel.</p>
+
+  <section class="foto-atlas" aria-labelledby="sidlaNadpis">
+    <h2 id="sidlaNadpis">Jak lidé bydlí v různých částech světa</h2>
+    <p>Čtyři sídla, čtyři způsoby života. Všímej si stavebního materiálu, hustoty zástavby a toho, kolik místa připadá na jednoho člověka.</p>
+    <div class="foto-mrizka" id="sidlaAtlas"></div>
+  </section>
 
 <script>
 const $ = id => document.getElementById(id);
@@ -332,6 +349,34 @@ const KVIZ2 = [
   }
 ];
 
+const SIDLA = [
+  { n: 'vesnice v Sahelu', img: 'z9-obyvatelstvo-sahel-vesnice', w: 0, h: 0, alt: '',
+    o: 'nízké domy z hlíny a slámy rozptýlené v suché savaně; lidé žijí hlavně z pastevectví a pěstování prosa' },
+  { n: 'Bombaj – slum a mrakodrapy', img: 'z9-obyvatelstvo-bombaj', w: 0, h: 0, alt: '',
+    o: 'nouzové chatrče těsně vedle výškových budov; rychlá urbanizace – lidé z venkova přicházejí za prací rychleji, než stihne vzniknout bydlení' },
+  { n: 'předměstí v USA', img: 'z9-obyvatelstvo-predmesti-usa', w: 0, h: 0, alt: '',
+    o: 'rodinné domy se zahradou v pravidelných ulicích daleko od centra; suburbanizace – do práce a do obchodu se jezdí autem' },
+  { n: 'historické centrum evropského města', img: 'z9-obyvatelstvo-evropske-centrum', w: 0, h: 0, alt: '',
+    o: 'hustá zástavba starých domů kolem náměstí a kostela, úzké ulice; jádro města rostlo po staletí' },
+];
+const fotoSidlo = (x, trida) => `<img class="${trida}" src="img/z/${x.img}.webp" alt="${x.alt}" width="${x.w}" height="${x.h}">`;
+function foto() {
+  const p = $('plocha');
+  const u = Uloha.nahodne(SIDLA);
+  p.innerHTML = `<div class="zadani uloha-text">Jaké sídlo je na fotografii?</div>${fotoSidlo(u, 'foto-uloha')}`;
+  const odezva = odezvaEl();
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: Uloha.zamichej(SIDLA).map(x => ({ klic: x.n, popis: x.n })),
+    spravnyKlic: u.n,
+    zpravaOk: `✅ ${u.n} – ${u.o}.`,
+    zpravaChyba: 'Všimni si materiálu domů, hustoty zástavby a krajiny kolem.',
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
 function kviz(sada, napoveda) {
   const p = $('plocha');
   const u = Uloha.nahodne(sada);
@@ -351,7 +396,7 @@ function kviz(sada, napoveda) {
 const kviz1 = () => kviz(KVIZ1, 'Sleduj, kde jsou úrodné nížiny, mírné podnebí a dostatek vody.');
 const kviz2 = () => kviz(KVIZ2, 'Rozliš příčiny migrace: práce, bezpečí, studium, katastrofy.');
 
-const REZIMY = { mapa1, mapa2, kviz1, kviz2 };
+const REZIMY = { mapa1, mapa2, kviz1, kviz2, foto };
 function novaUloha() { REZIMY[rezim](); }
 
 document.querySelectorAll('#rezimy button').forEach(b => b.addEventListener('click', () => {

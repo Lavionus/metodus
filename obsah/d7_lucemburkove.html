@@ -29,6 +29,18 @@
     .osa { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; max-width: 720px;
       color: var(--text-faint); font-size: 0.78rem; }
     .osa span { background: var(--bg-control); border: 1px solid var(--border); border-radius: 6px; padding: 4px 9px; }
+    .foto-atlas { width:min(1120px,100%); margin:22px auto; }
+    .foto-atlas h2 { margin:0 0 5px; text-align:center; font-size:1.22rem; }
+    .foto-atlas > p { margin:0 auto 12px; max-width:820px; text-align:center; color:var(--text-muted,var(--text)); }
+    .foto-atlas h3 { margin:16px 0 8px; font-size:1.02rem; }
+    .foto-mrizka { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
+    .foto-karta { margin:0; overflow:hidden; border:1px solid var(--border); border-radius:14px; background:var(--bg-card); box-shadow:var(--shadow-sm); }
+    .foto-karta img { display:block; width:100%; aspect-ratio:4/3; object-fit:cover; }
+    .foto-karta img.cele { object-fit:contain; background:#1d1c1a; }
+    .foto-karta figcaption { padding:10px 11px 12px; font-size:.9rem; line-height:1.35; }
+    .foto-karta strong { display:block; margin-bottom:3px; color:var(--accent); font-size:1rem; }
+    @media (max-width:820px) { .foto-mrizka { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+    @media (max-width:440px) { .foto-mrizka { grid-template-columns:1fr; } }
   </style>
 </head>
 <body>
@@ -61,6 +73,24 @@
     rezidencí: vzniklo <b>Nové Město pražské</b>, <b>univerzita</b>, <b>Karlův most</b>
     i katedrála svatého Víta.
   </p>
+
+  <section class="foto-atlas" aria-labelledby="stavbyNadpis">
+    <h2 id="stavbyNadpis">Karel IV. a jeho stavby</h2>
+    <p>Dobové obrazy panovníka a stavby, které dal Karel IV. založit. Mnohé dodnes určují tvář Prahy.</p>
+    <h3>Jak vypadal Karel IV.</h3>
+    <div class="foto-mrizka">
+      <figure class="foto-karta"><img class="cele" src="img/d/d7-lucemburkove-karel-iv.webp" alt="Portrét Karla IV. z votivního obrazu Jana Očka: vousatý panovník s korunou klečí se sepjatýma rukama." width="768" height="1143" loading="lazy"><figcaption><strong>Portrét Karla IV.</strong>Detail votivního obrazu (kolem 1370) patří k nejvěrnějším podobiznám panovníka: vousy, výrazný nos, koruna.</figcaption></figure>
+      <figure class="foto-karta"><img class="cele" src="img/d/d7-lucemburkove-votivni-obraz.webp" alt="Horní část votivního obrazu Jana Očka: Panna Marie s Ježíškem, vlevo klečí Karel IV., vpravo jeho syn Václav IV., kolem čeští patroni." width="768" height="734" loading="lazy"><figcaption><strong>Votivní obraz Jana Očka</strong>Arcibiskup Jan Očko jej dal namalovat pro kapli svého hradu v Roudnici. Vlevo klečí Karel IV., vpravo jeho syn Václav IV., oba pod ochranou českých patronů.</figcaption></figure>
+      <figure class="foto-karta"><img class="cele" src="img/d/d7-lucemburkove-karel-karlstejn.webp" alt="Nástěnná malba z hradu Karlštejn: Karel IV. s korunou ukládá zlatý relikviářový kříž na oltář." width="768" height="1138" loading="lazy"><figcaption><strong>Karel IV. na Karlštejně</strong>Nástěnná malba z hradu (asi 1357) ukazuje císaře, jak ukládá relikviářový kříž – Karel sbíral ostatky svatých.</figcaption></figure>
+    </div>
+    <h3>Stavby Karla IV.</h3>
+    <div class="foto-mrizka">
+      <figure class="foto-karta"><img src="img/d/d7-lucemburkove-karlstejn.webp" alt="Letecký pohled na hrad Karlštejn s Velkou věží, palácem a hradbami na zalesněném kopci." width="1152" height="768" loading="lazy"><figcaption><strong>Hrad Karlštejn</strong>Založen roku 1348 jako bezpečné místo pro korunovační klenoty a svaté ostatky.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/d/d7-lucemburkove-karluv-most.webp" alt="Kamenný Karlův most přes Vltavu se Staroměstskou mosteckou věží v Praze." width="1152" height="864" loading="lazy"><figcaption><strong>Karlův most</strong>Základní kámen 1357, stavitel Petr Parléř. Staroměstská mostecká věž hlídala vstup do města; sochy přibyly až v baroku.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/d/d7-lucemburkove-katedrala.webp" alt="Jižní průčelí katedrály svatého Víta se Zlatou branou a mozaikou Posledního soudu." width="1152" height="930" loading="lazy"><figcaption><strong>Katedrála sv. Víta</strong>Stavba začala roku 1344 (Matyáš z Arrasu, po něm Petr Parléř). Mozaika Posledního soudu na Zlaté bráně je z doby Karla IV.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/d/d7-lucemburkove-karolinum.webp" alt="Budova Karolina v Praze s gotickým arkýřem kaple na nároží." width="1152" height="864" loading="lazy"><figcaption><strong>Karolinum</strong>Sídlo univerzity založené roku 1348. Z gotické stavby se zachoval arkýř kaple na nároží, ostatní průčelí je mladší.</figcaption></figure>
+    </div>
+  </section>
 
 <script>
 const $ = id => document.getElementById(id);

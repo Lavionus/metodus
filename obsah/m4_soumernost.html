@@ -23,6 +23,19 @@
     .utvar { width: min(240px, 60vw); }
     .utvar .tvar { fill: var(--accent); fill-opacity: 0.65; stroke: var(--accent); stroke-width: 3; }
     .utvar .osa { stroke: var(--danger); stroke-width: 2.5; stroke-dasharray: 6 4; }
+    /* fotografie souměrných objektů (IMG-m-10) */
+    .foto-soum { width: min(520px, 100%); margin: 0 auto 12px; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; background: var(--bg-card); }
+    .foto-soum img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; }
+    .foto-atlas { width: min(1120px, 100%); margin: 22px auto; }
+    .foto-atlas > summary { cursor: pointer; font-weight: 700; font-size: 1.05rem; text-align: center; }
+    .foto-atlas > p { margin: 8px auto 12px; max-width: 760px; text-align: center; color: var(--text-muted); }
+    .foto-mrizka { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+    .foto-karta { margin: 0; overflow: hidden; border: 1px solid var(--border); border-radius: 14px; background: var(--bg-card); box-shadow: var(--shadow-sm); }
+    .foto-karta img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; }
+    .foto-karta figcaption { padding: 10px 11px 12px; font-size: .9rem; line-height: 1.35; }
+    .foto-karta strong { display: block; margin-bottom: 3px; color: var(--accent); font-size: 1rem; }
+    @media (max-width: 820px) { .foto-mrizka { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 440px) { .foto-mrizka { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
@@ -33,6 +46,7 @@
     <button data-rezim="maOsu" class="active">🔍 Je souměrný?</button>
     <button data-rezim="pocetOs">🔢 Kolik má os?</button>
     <button data-rezim="dokresli">🖍️ Dokresli podle osy</button>
+    <button data-rezim="vePrirode">📷 Souměrnost kolem nás</button>
   </div>
 
   <div class="plocha" id="plocha"></div>
@@ -46,6 +60,12 @@
     Útvar je <b>osově souměrný</b>, když ho osa rozdělí na dvě části, které se přesně překryjí
     (jako by se přeložil papír). Čtverec má 4 osy, obdélník 2, rovnostranný trojúhelník 3, kruh nekonečně mnoho.
   </p>
+
+  <details class="foto-atlas">
+    <summary>📷 Souměrnost kolem nás – fotografie</summary>
+    <p>Příroda ani stavby nejsou souměrné úplně přesně, říkáme, že jsou <b>téměř souměrné</b>. Osu ale najdeš i tady.</p>
+    <div class="foto-mrizka" id="fotoMrizka"></div>
+  </details>
 
 <script>
 const $ = id => document.getElementById(id);
@@ -189,7 +209,45 @@ function dokresli() {
   });
 }
 
-const REZIMY = { maOsu, pocetOs, dokresli };
+/* ---- Souměrnost kolem nás (fotografie IMG-m-10, zdroje vypisuje kostra.js) ---- */
+const OSY_FOTO = {
+  svisla: 'jedna svislá osa',
+  obe: 'svislá i vodorovná osa',
+  vice: 'víc než dvě osy',
+};
+const FOTO_SOUM = [   // [soubor, šířka, výška, alt, název, osy, vysvětlení]
+  ['m4-soumernost-motyl', {{WH:m/m4-soumernost-motyl}}, '{{ALT:m/m4-soumernost-motyl}}', 'Motýl', 'svisla', 'Osa vede tělem motýla. Levá a pravá křídla jsou téměř zrcadlová – i s barevnými „oky“.'],
+  ['m4-soumernost-list', {{WH:m/m4-soumernost-list}}, '{{ALT:m/m4-soumernost-list}}', 'List', 'svisla', 'Osa vede stopkou a hlavní žilkou. Obě poloviny listu jsou si podobné, ale ne úplně stejné.'],
+  ['m4-soumernost-zamek', {{WH:m/m4-soumernost-zamek}}, '{{ALT:m/m4-soumernost-zamek}}', 'Průčelí zámku', 'svisla', 'Osa vede středem vchodu. Okna vlevo a vpravo si odpovídají – stavitelé souměrnost záměrně dodržovali.'],
+  ['m4-soumernost-vlocka', {{WH:m/m4-soumernost-vlocka}}, '{{ALT:m/m4-soumernost-vlocka}}', 'Sněhová vločka', 'vice', 'Vločka má šest ramen a 6 os souměrnosti: tři vedou rameny, tři mezi nimi.'],
+  ['m4-soumernost-hvezdice', {{WH:m/m4-soumernost-hvezdice}}, '{{ALT:m/m4-soumernost-hvezdice}}', 'Hvězdice', 'vice', 'Pět ramen, tedy 5 os – každá vede jedním ramenem a protější mezerou. Živá hvězdice je souměrná jen přibližně.'],
+  ['m4-soumernost-znacka', {{WH:m/m4-soumernost-znacka}}, '{{ALT:m/m4-soumernost-znacka}}', 'Dopravní značka', 'obe', 'Značka zákaz vjezdu má 2 osy: svislou a vodorovnou (podél bílého pruhu).'],
+  ['m4-soumernost-most', {{WH:m/m4-soumernost-most}}, '{{ALT:m/m4-soumernost-most}}', 'Most a jeho odraz', 'obe', 'Svislá osa vede vrcholem oblouku. Vodorovnou osou je vodní hladina – odraz je převrácený obraz mostu.'],
+];
+const fotoSoumImg = f => `<img src="img/m/${f[0]}.webp" alt="${f[3]}" width="${f[1]}" height="${f[2]}" loading="lazy">`;
+$('fotoMrizka').innerHTML = FOTO_SOUM.map(f =>
+  `<figure class="foto-karta">${fotoSoumImg(f)}<figcaption><strong>${f[4]}</strong>${f[6]}</figcaption></figure>`).join('');
+
+function vePrirode() {
+  const p = $('plocha');
+  const f = Uloha.nahodne(FOTO_SOUM);
+  p.innerHTML = `<div class="zadani">${f[4]}: kolik má os souměrnosti a kudy vedou?</div>
+    <div class="foto-soum">${fotoSoumImg(f)}</div>`;
+  const odezva = document.createElement('div');
+  odezva.className = 'odezva';
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: Object.entries(OSY_FOTO).map(([klic, popis]) => ({ klic, popis })),
+    spravnyKlic: f[5],
+    zpravaOk: `✅ ${f[6]}`,
+    zpravaChyba: 'Představ si, že fotku přeložíš svisle, vodorovně nebo šikmo. Kdy se obě poloviny téměř překryjí?',
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+const REZIMY = { maOsu, pocetOs, dokresli, vePrirode };
 function novaUloha() { REZIMY[rezim](); }
 
 document.querySelectorAll('#rezimy button').forEach(b => b.addEventListener('click', () => {

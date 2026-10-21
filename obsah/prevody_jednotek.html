@@ -44,6 +44,19 @@
     .stav { display: flex; justify-content: space-between; max-width: 720px; margin-top: 12px; color: var(--text-muted); font-size: 0.9rem; }
     .serie { color: var(--warn); }
     .prazdno { color: var(--danger); font-size: 0.95rem; }
+    /* foto-atlas referenčních předmětů (IMG-m-08) */
+    .foto-atlas { max-width: 1120px; margin: 26px 0 10px; }
+    .foto-atlas h2 { margin: 0 0 5px; font-size: 1.15rem; }
+    .foto-atlas > p { margin: 0 0 12px; max-width: 760px; color: var(--text-muted); font-size: .9rem; }
+    .foto-mrizka { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+    .foto-karta { margin: 0; overflow: hidden; border: 1px solid var(--border); border-radius: 14px; background: var(--bg-card, var(--bg-panel)); }
+    .foto-karta img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; }
+    .foto-karta figcaption { padding: 9px 11px 11px; font-size: .86rem; line-height: 1.4; }
+    .foto-karta strong { display: block; margin-bottom: 3px; color: var(--accent); font-size: .98rem; }
+    .foto-karta .mira { display: block; font-variant-numeric: tabular-nums; }
+    @media (max-width: 980px) { .foto-mrizka { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+    @media (max-width: 820px) { .foto-mrizka { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 440px) { .foto-mrizka { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
@@ -77,6 +90,21 @@
     <span class="serie" id="serie"></span>
     <span id="skore"></span>
   </div>
+
+  <section class="foto-atlas" aria-labelledby="meritkaNadpis">
+    <h2 id="meritkaNadpis">📐 Jak velké to je ve skutečnosti</h2>
+    <p>Předměty, které znáš, ti pomohou odhadnout, jestli výsledek převodu dává smysl. Čísla jsou přibližná – každé jablko i každé dveře jsou trochu jiné.</p>
+    <div class="foto-mrizka">
+      <figure class="foto-karta"><img src="img/m/prevody-sponka.webp" alt="{{ALT:m/prevody-sponka}}" {{R:m/prevody-sponka}} loading="lazy"><figcaption><strong>Kancelářská sponka</strong><span class="mira">délka asi 3 cm = 30 mm</span><span class="mira">hmotnost asi 1 g</span></figcaption></figure>
+      <figure class="foto-karta"><img src="img/m/prevody-kostky-cukru.webp" alt="{{ALT:m/prevody-kostky-cukru}}" {{R:m/prevody-kostky-cukru}} loading="lazy"><figcaption><strong>Kostka cukru</strong><span class="mira">hrana asi 1,5 cm (čárka vpravo dole měří 10 mm)</span><span class="mira">hmotnost asi 3–4 g</span></figcaption></figure>
+      <figure class="foto-karta"><img src="img/m/prevody-lzicka.webp" alt="{{ALT:m/prevody-lzicka}}" {{R:m/prevody-lzicka}} loading="lazy"><figcaption><strong>Čajová lžička</strong><span class="mira">délka asi 13 cm</span><span class="mira">vejde se do ní asi 5 ml</span></figcaption></figure>
+      <figure class="foto-karta"><img src="img/m/prevody-jablko.webp" alt="{{ALT:m/prevody-jablko}}" {{R:m/prevody-jablko}} loading="lazy"><figcaption><strong>Jablko</strong><span class="mira">průměr asi 7–8 cm</span><span class="mira">hmotnost asi 150–200 g = 15–20 dkg</span></figcaption></figure>
+      <figure class="foto-karta"><img src="img/m/prevody-lahev-litr.webp" alt="{{ALT:m/prevody-lahev-litr}}" {{R:m/prevody-lahev-litr}} loading="lazy"><figcaption><strong>Litrová láhev</strong><span class="mira">objem 1 l = 1 000 ml = 1 dm³</span><span class="mira">litr vody váží asi 1 kg</span></figcaption></figure>
+      <figure class="foto-karta"><img src="img/m/prevody-mouka-kilogram.webp" alt="{{ALT:m/prevody-mouka-kilogram}}" {{R:m/prevody-mouka-kilogram}} loading="lazy"><figcaption><strong>Balení mouky</strong><span class="mira">hmotnost 1 kg = 100 dkg = 1 000 g</span><span class="mira">dva sáčky dohromady 2 kg</span></figcaption></figure>
+      <figure class="foto-karta"><img src="img/m/prevody-dvere.webp" alt="{{ALT:m/prevody-dvere}}" {{R:m/prevody-dvere}} loading="lazy"><figcaption><strong>Dveře</strong><span class="mira">výška asi 2 m = 200 cm</span><span class="mira">šířka asi 80–90 cm</span></figcaption></figure>
+      <figure class="foto-karta"><img src="img/m/prevody-fotbalove-hriste.webp" alt="{{ALT:m/prevody-fotbalove-hriste}}" {{R:m/prevody-fotbalove-hriste}} loading="lazy"><figcaption><strong>Fotbalové hřiště</strong><span class="mira">délka asi 100 m, šířka asi 65 m</span><span class="mira">10 hřišť za sebou = asi 1 km</span></figcaption></figure>
+    </div>
+  </section>
 
 <script src="../uloha.js"></script>
 <script>

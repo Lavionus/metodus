@@ -18,6 +18,17 @@
     .pasy rect { stroke: var(--border); stroke-width: 1; }
     .pasy text { fill: var(--text); font-size: 11px; text-anchor: middle; font-weight: 700; }
     .atmosfera-img { width:min(720px,100%); border-radius:16px; background:#f8f1df; }
+    .foto-uloha { display:block; width:min(560px,100%); aspect-ratio:4/3; object-fit:cover; border-radius:14px; border:1px solid var(--border); background:var(--bg-card); }
+    .foto-atlas { width:min(1120px,100%); margin:22px auto; }
+    .foto-atlas h2 { margin:0 0 5px; text-align:center; font-size:1.22rem; }
+    .foto-atlas > p { margin:0 auto 12px; max-width:820px; text-align:center; color:var(--text-muted,var(--text)); }
+    .foto-mrizka { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
+    .foto-karta { margin:0; overflow:hidden; border:1px solid var(--border); border-radius:14px; background:var(--bg-card); box-shadow:var(--shadow-sm); }
+    .foto-karta img { display:block; width:100%; aspect-ratio:4/3; object-fit:cover; }
+    .foto-karta figcaption { padding:10px 11px 12px; font-size:.9rem; line-height:1.35; }
+    .foto-karta strong { display:block; margin-bottom:3px; color:var(--accent); font-size:1rem; }
+    @media (max-width:820px) { .foto-mrizka { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+    @media (max-width:440px) { .foto-mrizka { grid-template-columns:1fr; } }
   </style>
 </head>
 <body>
@@ -29,6 +40,7 @@
     <button data-rezim="vrstvy">🛰️ Vrstvy atmosféry</button>
     <button data-rezim="pocasi">🌦️ Počasí a podnebí</button>
     <button data-rezim="jevy">⛈️ Meteorologické jevy</button>
+    <button data-rezim="foto">📷 Poznej jev na fotce</button>
   </div>
 
   <div class="plocha" id="plocha"></div>
@@ -42,6 +54,21 @@
     <b>Počasí</b> je okamžitý stav ovzduší na určitém místě, <b>podnebí</b> je dlouhodobý průměr
     počasí za desítky let. Vzduch tvoří hlavně dusík (78 %) a kyslík (21 %).
   </p>
+
+  <section class="foto-atlas" aria-labelledby="jevyFotoNadpis">
+    <h2 id="jevyFotoNadpis">Jevy, které uvidíš na obloze i kolem sebe</h2>
+    <p>Skutečné fotografie osmi meteorologických jevů. Všímej si tvaru oblaků, světla a toho, kde se voda nebo led objevují.</p>
+    <div class="foto-mrizka" id="jevyAtlas">
+      <figure class="foto-karta"><img src="img/z/z6-atmosfera-kupovita-oblaka.webp" alt="Bílé kupovité mraky s plochou základnou a zaobleným vrcholem na modré obloze." width="1152" height="768" loading="lazy"><figcaption><strong>Kupovitá oblaka</strong>Bílé „chuchvalce“ s plochou spodní částí; vznikají, když teplý vzduch stoupá od zahřáté země – typické pro pěkné letní dopoledne.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/z/z6-atmosfera-bourkovy-oblak.webp" alt="Mohutný bouřkový oblak, jehož vrchol se rozlévá do široké ploché kovadliny." width="1152" height="864" loading="lazy"><figcaption><strong>Bouřkový oblak</strong>Mohutná kupovitá věž vysoká přes 10 km; vrchol se rozlévá do ploché „kovadliny“, přináší přívalový déšť, blesky a někdy kroupy.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/z/z6-atmosfera-mlha.webp" alt="Les v husté mlze, vzdálenější stromy mizí v šedém oparu." width="1152" height="768" loading="lazy"><figcaption><strong>Mlha</strong>Oblak ležící přímo na zemi – drobné kapičky vody snižují dohlednost pod 1 km, vzdálené předměty mizí.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/z/z6-atmosfera-jinovatka.webp" alt="Větvička pokrytá dlouhými jehličkovitými krystalky jinovatky proti modré obloze." width="1152" height="864" loading="lazy"><figcaption><strong>Jinovatka</strong>Ledové jehličky narostlé na větvích za mrazu z mlhy nebo vlhkého vzduchu – nepadá z oblaků, usazuje se na předmětech.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/z/z6-atmosfera-kroupy.webp" alt="Tři velké kroupy o průměru několika centimetrů na dlani." width="1152" height="864" loading="lazy"><figcaption><strong>Kroupy</strong>Kuličky ledu padající z bouřkového oblaku i v létě; rostou, když je silný výstupný proud vynáší znovu a znovu vzhůru.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/z/z6-atmosfera-duha.webp" alt="Dvojitá duha nad domy na tmavém pozadí dešťových mraků." width="1152" height="664" loading="lazy"><figcaption><strong>Duha</strong>Barevný oblouk, když Slunce svítí do padajícího deště; kapky rozloží bílé světlo na barvy – Slunce máš vždy za zády.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/z/z6-atmosfera-halo.webp" alt="Světelný kruh halo kolem Slunce na obloze se závojem vysokých řasových oblaků." width="1152" height="864" loading="lazy"><figcaption><strong>Halo</strong>Světelný kruh kolem Slunce nebo Měsíce; vzniká lomem světla v ledových krystalcích vysokých oblaků a často ohlašuje změnu počasí.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/z/z6-atmosfera-inverze.webp" alt="Údolí vyplněná mořem nízké oblačnosti, nad kterou vystupují vrcholky kopců do jasného počasí." width="1152" height="864" loading="lazy"><figcaption><strong>Inverze</strong>V údolí leží studený vzduch s mlhou nebo nízkou oblačností a na horách je tepleji a jasno – z kopce vidíš „moře mraků“.</figcaption></figure>
+    </div>
+  </section>
 
 <script>
 const $ = id => document.getElementById(id);
@@ -83,6 +110,26 @@ const JEVY = [
   { n: 'vlhkost vzduchu', o: 'množství vodní páry ve vzduchu, měří se vlhkoměrem' },
   { n: 'atmosférický tlak', o: 'tlak vzduchového sloupce, měří se barometrem v hektopascalech' },
 ];
+
+const FOTO_JEVY = [
+  { n: 'kupovitá oblaka', img: 'z6-atmosfera-kupovita-oblaka', w: 1152, h: 768, alt: 'Bílé kupovité mraky s plochou základnou a zaobleným vrcholem na modré obloze.',
+    o: 'bílé „chuchvalce“ s plochou spodní částí; vznikají, když teplý vzduch stoupá od zahřáté země – typické pro pěkné letní dopoledne' },
+  { n: 'bouřkový oblak', img: 'z6-atmosfera-bourkovy-oblak', w: 1152, h: 864, alt: 'Mohutný bouřkový oblak, jehož vrchol se rozlévá do široké ploché kovadliny.',
+    o: 'mohutná kupovitá věž vysoká přes 10 km; vrchol se rozlévá do ploché „kovadliny“, přináší přívalový déšť, blesky a někdy kroupy' },
+  { n: 'mlha', img: 'z6-atmosfera-mlha', w: 1152, h: 768, alt: 'Les v husté mlze, vzdálenější stromy mizí v šedém oparu.',
+    o: 'oblak ležící přímo na zemi – drobné kapičky vody snižují dohlednost pod 1 km, vzdálené předměty mizí' },
+  { n: 'jinovatka', img: 'z6-atmosfera-jinovatka', w: 1152, h: 864, alt: 'Větvička pokrytá dlouhými jehličkovitými krystalky jinovatky proti modré obloze.',
+    o: 'ledové jehličky narostlé na větvích za mrazu z mlhy nebo vlhkého vzduchu – nepadá z oblaků, usazuje se na předmětech' },
+  { n: 'kroupy', img: 'z6-atmosfera-kroupy', w: 1152, h: 864, alt: 'Tři velké kroupy o průměru několika centimetrů na dlani.',
+    o: 'kuličky ledu padající z bouřkového oblaku i v létě; rostou, když je silný výstupný proud vynáší znovu a znovu vzhůru' },
+  { n: 'duha', img: 'z6-atmosfera-duha', w: 1152, h: 664, alt: 'Dvojitá duha nad domy na tmavém pozadí dešťových mraků.',
+    o: 'barevný oblouk, když Slunce svítí do padajícího deště; kapky rozloží bílé světlo na barvy – Slunce máš vždy za zády' },
+  { n: 'halo', img: 'z6-atmosfera-halo', w: 1152, h: 864, alt: 'Světelný kruh halo kolem Slunce na obloze se závojem vysokých řasových oblaků.',
+    o: 'světelný kruh kolem Slunce nebo Měsíce; vzniká lomem světla v ledových krystalcích vysokých oblaků a často ohlašuje změnu počasí' },
+  { n: 'inverze', img: 'z6-atmosfera-inverze', w: 1152, h: 864, alt: 'Údolí vyplněná mořem nízké oblačnosti, nad kterou vystupují vrcholky kopců do jasného počasí.',
+    o: 'v údolí leží studený vzduch s mlhou nebo nízkou oblačností a na horách je tepleji a jasno – z kopce vidíš „moře mraků“' },
+];
+const fotoJev = (x, trida) => `<img class="${trida}" src="img/z/${x.img}.webp" alt="${x.alt}" width="${x.w}" height="${x.h}">`;
 
 /* ---- Podnebné pásy ---------------------------------------------------------------------- */
 function pasy() {
@@ -179,7 +226,27 @@ function jevy() {
   p.appendChild(odezva);
 }
 
-const REZIMY = { pasy, vrstvy, pocasi, jevy };
+/* ---- Poznej jev na fotce -------------------------------------------------------------- */
+function foto() {
+  const p = $('plocha');
+  const u = Uloha.nahodne(FOTO_JEVY);
+  const jine = Uloha.zamichej(FOTO_JEVY.filter(x => x.n !== u.n)).slice(0, 3);
+  p.innerHTML = `<div class="zadani">Jaký jev je na fotografii?</div>${fotoJev(u, 'foto-uloha')}`;
+  const odezva = document.createElement('div');
+  odezva.className = 'odezva';
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: Uloha.zamichej([u, ...jine]).map(x => ({ klic: x.n, popis: x.n })),
+    spravnyKlic: u.n,
+    zpravaOk: `✅ ${u.n} – ${u.o}.`,
+    zpravaChyba: 'Podívej se znovu: je to oblak, led, nebo hra světla?',
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+const REZIMY = { pasy, vrstvy, pocasi, jevy, foto };
 function novaUloha() { REZIMY[rezim](); }
 
 document.querySelectorAll('#rezimy button').forEach(b => b.addEventListener('click', () => {

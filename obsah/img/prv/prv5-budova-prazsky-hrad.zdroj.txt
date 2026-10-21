@@ -1,0 +1,8 @@
+Soubor: prv5-budova-prazsky-hrad.png / prv5-budova-prazsky-hrad.webp
+Původní dílo: Czech-2013-Prague-View from Charles Bridge of Prague Castle.jpg
+Autor: Godot13
+Datum vzniku: 2013-07-25 07:24:28
+Zdroj: https://commons.wikimedia.org/wiki/File:Czech-2013-Prague-View_from_Charles_Bridge_of_Prague_Castle.jpg
+Licence: CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0)
+Staženo: 2026-10-21
+Úpravy: automatické natočení, odstranění metadat, ořez, zmenšení na nejvýše 1600 px; výuková WebP kopie 1152 px.

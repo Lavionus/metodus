@@ -28,6 +28,19 @@
     .chyby-scena { position: relative; width: min(720px, 100%); }
     .chyby-scena img { display:block; width:100%; border-radius:16px; }
     .chyba-bod { position:absolute; transform:translate(-50%,-50%); width:30px; height:30px; padding:0; border-radius:50%; border:2px solid #fff; background:var(--danger); color:#fff; font-weight:800; cursor:pointer; box-shadow:0 2px 7px #0007; }
+    /* skutečné obaly s piktogramy (IMG-ch-02) */
+    .foto-obal { width:min(440px,100%); margin:0 auto 12px; border:1px solid var(--border); border-radius:14px; overflow:hidden; background:var(--bg-card); }
+    .foto-obal img { display:block; width:100%; height:auto; }
+    .foto-atlas { width:min(1120px,100%); margin:22px auto; }
+    .foto-atlas h2 { margin:0 0 5px; text-align:center; font-size:1.22rem; }
+    .foto-atlas > p { margin:0 auto 12px; max-width:820px; text-align:center; color:var(--text-muted,var(--text)); }
+    .foto-mrizka { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
+    .foto-karta { margin:0; overflow:hidden; border:1px solid var(--border); border-radius:14px; background:var(--bg-card); box-shadow:var(--shadow-sm); }
+    .foto-karta img { display:block; width:100%; height:auto; aspect-ratio:4/3; object-fit:cover; }
+    .foto-karta figcaption { padding:10px 11px 12px; font-size:.9rem; line-height:1.35; }
+    .foto-karta strong { display:block; margin-bottom:3px; color:var(--accent); font-size:1rem; }
+    @media (max-width:820px) { .foto-mrizka { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+    @media (max-width:440px) { .foto-mrizka { grid-template-columns:1fr; } }
   </style>
 </head>
 <body>
@@ -39,6 +52,7 @@
     <button data-rezim="kLatce">🧪 Značka k látce</button>
     <button data-rezim="prvniPomoc">🚑 První pomoc</button>
     <button data-rezim="pravidla">📋 Pravidla laboratoře</button>
+    <button data-rezim="doma">🏠 Značky doma</button>
     <button data-rezim="chyby">👀 Najdi chyby</button>
   </div>
 
@@ -55,6 +69,12 @@
     V laboratoři nikdy nejíme a nepijeme, chemikálie nezkoušíme čichem přímo z nádoby
     a <b>kyselinu vždy líjeme do vody</b>, nikdy naopak.
   </p>
+
+  <section class="foto-atlas" aria-labelledby="obalyNadpis">
+    <h2 id="obalyNadpis">Výstražné symboly na obalech doma</h2>
+    <p>Stejné kosočtverce jako v laboratoři najdeš i na čisticích prostředcích, sprejích a ředidlech. Než výrobek použiješ, podívej se na symbol a přečti si pokyny na etiketě.</p>
+    <div class="foto-mrizka" id="obalyMrizka"></div>
+  </section>
 
 <script>
 const $ = id => document.getElementById(id);
@@ -202,7 +222,52 @@ function chyby() {
   p.querySelectorAll('[data-chyba]').forEach(b => b.addEventListener('click',()=>{ b.textContent='✓'; b.disabled=true; p.querySelector('.odezva').textContent=`Chyba: ${b.dataset.chyba}.`; }));
 }
 
-const REZIMY = { poznej, kLatce, prvniPomoc, pravidla, chyby };
+/* ---- Značky doma: skutečné obaly (IMG-ch-02, zdroje vypisuje kostra.js) ---- */
+const OBALY = [   // [soubor, šířka, výška, alt, výrobek, klíče značek na obalu, vysvětlení]
+  ['ch8-bezpecnost-cistic-odpadu', {{WH:ch/ch8-bezpecnost-cistic-odpadu}}, '{{ALT:ch/ch8-bezpecnost-cistic-odpadu}}', 'Čistič odpadů', ['zirava'],
+    'Obsahuje hydroxid sodný, který leptá kůži i oči. Používej rukavice a brýle a nikdy ho nemíchej s jinými čističi.'],
+  ['ch8-bezpecnost-bielidlo', {{WH:ch/ch8-bezpecnost-bielidlo}}, '{{ALT:ch/ch8-bezpecnost-bielidlo}}', 'Bělidlo (chlornan sodný)', ['zirava', 'prostredi'],
+    'Žíravé a škodlivé pro vodní živočichy. Se kyselými čističi uvolňuje jedovatý chlor – nikdy je nesmíchávej.'],
+  ['ch8-bezpecnost-deodorant', {{WH:ch/ch8-bezpecnost-deodorant}}, '{{ALT:ch/ch8-bezpecnost-deodorant}}', 'Deodorant ve spreji', ['horlavy'],
+    'Hnací plyn (butan, propan) je extrémně hořlavý. Nestříkej do ohně, plechovku nezahřívej ani nepropichuj.'],
+  ['ch8-bezpecnost-cistic-trouby', {{WH:ch/ch8-bezpecnost-cistic-trouby}}, '{{ALT:ch/ch8-bezpecnost-cistic-trouby}}', 'Čistič trouby ve spreji', CISTIC_TROUBY,
+    'Silně zásaditý čistič leptá kůži a hnací plyn ve spreji je hořlavý. Stříkej jen do vychladlé trouby a v rukavicích.'],
+  ['ch8-bezpecnost-redidlo', {{WH:ch/ch8-bezpecnost-redidlo}}, '{{ALT:ch/ch8-bezpecnost-redidlo}}', 'Ředidlo do laků', REDIDLO,
+    'Páry ředidla jsou hořlavé a škodí zdraví. Pracuj venku nebo při otevřeném okně, daleko od ohně.'],
+];
+const obalImg = o => `<img src="img/ch/${o[0]}.webp" alt="${o[3]}" width="${o[1]}" height="${o[2]}" loading="lazy">`;
+$('obalyMrizka').innerHTML = OBALY.map(o => `<figure class="foto-karta">${obalImg(o)}<figcaption><strong>${o[4]}</strong>`
+  + `Na obalu: ${o[5].map(k => ZNACKY.find(z => z.klic === k).nazev).join(', ')}. ${o[6]}</figcaption></figure>`).join('');
+
+function doma() {
+  const p = $('plocha');
+  const o = Uloha.nahodne(OBALY);
+  const spravna = ZNACKY.find(z => z.klic === Uloha.nahodne(o[5]));
+  const nabidka = Uloha.zamichej([spravna, ...Uloha.zamichej(ZNACKY.filter(z => !o[5].includes(z.klic))).slice(0, 3)]);
+  const stav = { chyboval: false, hotovo: false };
+  p.innerHTML = `<div class="zadani uloha-text">Najdi na obalu výrobku <b>${o[4].toLowerCase()}</b> výstražný symbol. Který z těchto na něm je?</div>
+    <div class="foto-obal">${obalImg(o)}</div>`;
+  const rada = document.createElement('div');
+  rada.className = 'znacky-rada';
+  const odezva = odezvaEl();
+  nabidka.forEach(x => {
+    const b = document.createElement('button');
+    b.innerHTML = obrazekZnacky(x, 100);
+    b.setAttribute('aria-label', x.nazev);
+    b.addEventListener('click', () => Uloha.odpoved({
+      prvek: b, spravne: x.klic === spravna.klic, stav, odezva,
+      zpravaOk: `✅ ${spravna.nazev}. ${o[6]}`,
+      zpravaChyba: `Tahle značka znamená „${x.nazev}“ a na obalu není. Hledej červený kosočtverec na etiketě.`,
+      poSpravne: skore.vyhodnot,
+      dalsi: novaUloha,
+    }));
+    rada.appendChild(b);
+  });
+  p.appendChild(rada);
+  p.appendChild(odezva);
+}
+
+const REZIMY = { poznej, kLatce, prvniPomoc, pravidla, chyby, doma };
 function novaUloha() { REZIMY[rezim](); }
 
 document.querySelectorAll('#rezimy button').forEach(b => b.addEventListener('click', () => {

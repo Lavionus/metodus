@@ -194,3 +194,9 @@ body.kostra-overuje .kostra-faze button:not([data-faze="overse"]) { opacity: .55
   background: none; border: 0; box-shadow: none; padding: 0; margin: 0; border-radius: 0;
 }
 .kostra .kostra-rodina summary { display: list-item; font-size: inherit; font-weight: inherit; }
+
+/* Zdroje převzatých obrázků (pod obsahem stránky) */
+.zdroje-obrazku { max-width: 900px; margin: 28px auto 12px; padding: 0 16px; font-size: .82rem; color: var(--text-faint, var(--text)); }
+.zdroje-obrazku summary { cursor: pointer; }
+.zdroje-obrazku ol { margin: 8px 0 0; padding-left: 1.4em; line-height: 1.45; overflow-wrap: anywhere; }
+.zdroje-obrazku a { color: inherit; }

@@ -1,0 +1,8 @@
+Soubor: d9-valka2-terezin-transport.png / d9-valka2-terezin-transport.webp
+Původní dílo: A Transport Arrives in the Terezin (Theresienstadt) ghetto.jpg
+Autor: Ferdinand Bloch
+Datum vzniku: between 1942 and 1944date QS:P,+1942-00-00T00:00:00Z/8,P1319,+1942-00-00T00:00:00Z/9,P1326,+1944-00-00T00:00:00Z/9
+Zdroj: https://commons.wikimedia.org/wiki/File:A_Transport_Arrives_in_the_Terezin_(Theresienstadt)_ghetto.jpg
+Licence: Public domain
+Staženo: 2026-10-21
+Úpravy: automatické natočení, odstranění metadat, zmenšení na nejvýše 1600 px; výuková WebP kopie 1152 px.

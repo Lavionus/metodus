@@ -653,6 +653,36 @@
     otazka() { document.dispatchEvent(new CustomEvent('metodus:otazka', { detail: {} })); },
   };
 
+  /* ---- zdroje převzatých obrázků ------------------------------------ */
+  /* Licence CC BY a CC BY-SA vyžadují autora, licenci a odkaz na zdroj.
+     Seznam ke stránce sestavuje tools/zdroje_obrazku.py. */
+  function pripojZdroje() {
+    if (document.querySelector('.zdroje-obrazku')) return;
+    fetch(new URL('data/obrazky-zdroje.json', KOREN)).then(r => r.ok ? r.json() : null).then(d => {
+      const seznam = d && d.stranky[SOUBOR];
+      if (!seznam || !seznam.length) return;
+      const odkaz = (url, text) => {
+        if (!url) return document.createTextNode(text);
+        const a = el('a', null, text);
+        a.href = url;
+        a.rel = 'noopener';
+        a.target = '_blank';
+        return a;
+      };
+      const box = el('details', 'zdroje-obrazku');
+      box.append(el('summary', null, `Zdroje fotografií a reprodukcí (${seznam.length})`));
+      const ol = el('ol');
+      seznam.forEach(i => {
+        const z = d.zdroje[i];
+        const li = el('li');
+        li.append(odkaz(z.z, z.n), document.createTextNode(` — ${z.a}, `), odkaz(z.lu, z.l));
+        ol.append(li);
+      });
+      box.append(ol);
+      document.body.append(box);
+    }).catch(() => { /* bez seznamu zdrojů stránka funguje dál */ });
+  }
+
   /* ---- start ---------------------------------------------------------- */
   pripojStyl();
   function start() {
@@ -660,7 +690,7 @@
       const polozka = najdi(SOUBOR);
       if (!polozka) return;   // stránka mimo katalog (rozcestníky, testy)
       sestav(polozka);
-    }).catch(() => { /* bez katalogu stránka funguje jako dřív */ });
+    }).catch(() => { /* bez katalogu stránka funguje jako dřív */ }).then(pripojZdroje);
   }
   /* Kostra je `defer`, takže běží ještě před DOMContentLoaded – a před
      ostatními odloženými skripty stránky. Některé stránky si apps.js načítají

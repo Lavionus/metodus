@@ -1,0 +1,8 @@
+Soubor: pr9-mineraly-mastek.png / pr9-mineraly-mastek.webp
+Původní dílo: Talc-177589.jpg
+Autor: Robert M. Lavinsky
+Datum vzniku: before March 2010date QS:P,+2010-03-00T00:00:00Z/7,P1326,+2010-03-00T00:00:00Z/10
+Zdroj: https://commons.wikimedia.org/wiki/File:Talc-177589.jpg
+Licence: CC BY-SA 3.0 (https://creativecommons.org/licenses/by-sa/3.0)
+Staženo: 2026-10-21
+Úpravy: automatické natočení, odstranění metadat, zmenšení na nejvýše 1600 px; výuková WebP kopie 500 px.

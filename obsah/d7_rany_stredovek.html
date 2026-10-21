@@ -23,6 +23,18 @@
     .hradiste-rekonstrukce img { display:block; width:100%; border-radius:14px; }
     .hradiste-rekonstrukce figcaption { margin-top:8px; color:var(--text-muted); line-height:1.5; }
     .rekonstrukce-stit { color:var(--accent); font-weight:800; text-transform:uppercase; }
+    .foto-atlas { width:min(1120px,100%); margin:22px auto; }
+    .foto-atlas h2 { margin:0 0 5px; text-align:center; font-size:1.22rem; }
+    .foto-atlas > p { margin:0 auto 12px; max-width:820px; text-align:center; color:var(--text-muted,var(--text)); }
+    .foto-atlas h3 { margin:16px 0 8px; font-size:1.02rem; }
+    .foto-mrizka { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
+    .foto-karta { margin:0; overflow:hidden; border:1px solid var(--border); border-radius:14px; background:var(--bg-card); box-shadow:var(--shadow-sm); }
+    .foto-karta img { display:block; width:100%; aspect-ratio:4/3; object-fit:cover; }
+    .foto-karta img.cele { object-fit:contain; background:#1d1c1a; }
+    .foto-karta figcaption { padding:10px 11px 12px; font-size:.9rem; line-height:1.35; }
+    .foto-karta strong { display:block; margin-bottom:3px; color:var(--accent); font-size:1rem; }
+    @media (max-width:820px) { .foto-mrizka { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+    @media (max-width:440px) { .foto-mrizka { grid-template-columns:1fr; } }
   </style>
 </head>
 <body>
@@ -60,6 +72,22 @@
     V 6. století přicházejí do našich zemí <b>Slované</b>, v 7. století vzniká
     <b>Sámova říše</b> a v 9. století <b>Velká Morava</b>, na kterou navázal český stát Přemyslovců.
   </p>
+
+  <section class="foto-atlas" aria-labelledby="nalezyNadpis">
+    <h2 id="nalezyNadpis">Co po Velké Moravě zůstalo v zemi</h2>
+    <p>Skutečné nálezy archeologů a nejstarší slovanské písmo. Všímej si, co prozrazují o bohatství, víře a vzdělanosti.</p>
+    <h3>Šperky velmožů – práce zručných řemeslníků</h3>
+    <div class="foto-mrizka">
+      <figure class="foto-karta"><img src="img/d/d7-velkamorava-gombik.webp" alt="Zlatý kulovitý gombík zdobený jemnou tepanou a zrníčkovou výzdobou z knížecího hrobu v Kolíně." width="768" height="768" loading="lazy"><figcaption><strong>Gombík</strong>Kulovitý knoflík ze zlata nebo stříbra, ozdoba oděvu bohatých. Jemná zrníčková výzdoba (granulace) prozrazuje mistrovské šperkaře. Tento je z knížecího hrobu v Kolíně (9. stol.).</figcaption></figure>
+      <figure class="foto-karta"><img src="img/d/d7-velkamorava-nausnice.webp" alt="Pozlacená stříbrná náušnice veligradského typu s hroznovitým přívěskem z drobných kuliček granulace." width="768" height="791" loading="lazy"><figcaption><strong>Náušnice veligradského typu</strong>Hroznovitý přívěsek z drobných kuliček nosily urozené ženy. Muzeum ji složilo z nalezených zrníček podle velkomoravských vzorů.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/d/d7-mikulcice-krizek.webp" alt="Bronzový pozlacený křížek s rytými postavami z Mikulčic vystavený na podstavci." width="768" height="864" loading="lazy"><figcaption><strong>Křížek z Mikulčic</strong>Pozlacený křížek z okolí jednoho z mikulčických kostelů dokládá, že se na Velké Moravě šířilo křesťanství.</figcaption></figure>
+    </div>
+    <h3>Kostely a písmo – doklady křesťanství a vzdělanosti</h3>
+    <div class="foto-mrizka">
+      <figure class="foto-karta"><img src="img/d/d7-mikulcice-zaklady-baziliky.webp" alt="Obnovené kamenné základy velkomoravské baziliky v Mikulčicích na travnaté ploše u lesa." width="1152" height="864" loading="lazy"><figcaption><strong>Základy baziliky v Mikulčicích</strong>Největší z asi dvanácti kostelů hradiště. Kamenné základy objevili archeologové; dnes jsou zdi vyznačené obnoveným kamenem.</figcaption></figure>
+      <figure class="foto-karta"><img class="cele" src="img/d/d7-hlaholice-rukopis.webp" alt="Stránka středověkého rukopisu psaného hlaholicí s červeně zdobenými písmeny a ornamentem." width="768" height="964" loading="lazy"><figcaption><strong>Hlaholice</strong>Písmo, které pro slovanský jazyk sestavil Konstantin (Cyril). Stránka pochází z Asemanova evangeliáře (10.–11. stol.), opsaného na Balkáně.</figcaption></figure>
+    </div>
+  </section>
 
 <script>
 const $ = id => document.getElementById(id);

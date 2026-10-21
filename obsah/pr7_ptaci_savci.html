@@ -39,6 +39,18 @@
     @media (max-width: 850px) { .ptaci-grid.nohy { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
     @media (max-width: 620px) { .ptaci-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
     @media (max-width: 390px) { .chrup-grid { grid-template-columns: 1fr; } .ptaci-grid.nohy { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    .druh-foto { width: min(100%, 400px); aspect-ratio: 4 / 3; object-fit: cover; border-radius: 14px; border: 1px solid var(--border); }
+    .foto-atlas { width: min(1120px, 100%); margin: 26px auto; }
+    .foto-atlas h2 { margin: 0 0 5px; text-align: center; font-size: 1.22rem; }
+    .foto-atlas > p { margin: 0 auto 12px; max-width: 820px; text-align: center; color: var(--text-muted, var(--text)); }
+    .foto-atlas h3 { margin: 18px 0 8px; font-size: 1.05rem; }
+    .foto-mrizka { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+    .foto-karta { margin: 0; overflow: hidden; border: 1px solid var(--border); border-radius: 14px; background: var(--bg-card, var(--bg-elevated)); min-width: 0; }
+    .foto-karta img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+    .foto-karta figcaption { padding: 10px 11px 12px; font-size: .9rem; line-height: 1.38; }
+    .foto-karta strong { display: block; margin-bottom: 3px; color: var(--accent); font-size: 1rem; }
+    @media (max-width: 820px) { .foto-mrizka { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 440px) { .foto-mrizka { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
@@ -100,6 +112,12 @@
     Tvar zobáku, končetin i chrupu prozradí, <b>čím se živočich živí a kde žije</b>.
     Ptáci i savci jsou <b>teplokrevní</b> – udržují si stálou tělesnou teplotu.
   </p>
+
+  <section class="foto-atlas" aria-labelledby="fotoAtlasNadpis">
+    <h2 id="fotoAtlasNadpis">📷 Naši ptáci a savci na fotografiích</h2>
+    <p>Skutečné fotografie druhů z poznávačky. Hledej znaky z popisu – zbarvení, tvar zobáku, uši, ocas nebo parůžky.</p>
+    <div id="fotoAtlas"></div>
+  </section>
 
 <script>
 const $ = id => document.getElementById(id);
@@ -208,7 +226,7 @@ function rady() {
   const p = $('plocha');
   const s = Uloha.nahodne(SAVCI);
   p.innerHTML = `<div class="zadani">Do kterého řádu savců patří?</div>
-    <div class="karta"><div class="obrazek">${s.i}</div><div class="druh">${s.n}</div>
+    <div class="karta">${s.foto ? fotoDruhu(s.foto) : `<div class="obrazek">${s.i}</div>`}<div class="druh">${s.n}</div>
       <div class="popis" style="color:var(--text-faint);font-weight:400">${s.popis}</div></div>`;
   const odezva = odezvaEl();
   Uloha.vyber({
@@ -236,6 +254,38 @@ const PTACI = [
   { n: 'čáp bílý', i: '🕊️', popis: 'hnízdí na komínech, na zimu odlétá do Afriky' },
   { n: 'vlaštovka obecná', i: '🐦', popis: 'vidličnatý ocas, hnízdí ve stájích' },
 ];
+/* Fotografie zástupců (IMG-pr-05, Wikimedia Commons; zdroje vypisuje kostra.js). */
+/* FOTO_PS:zacatek */
+const FOTO_PS = {
+  "sýkora koňadra": { src: "img/pr/pr7-ptaci-savci-foto-sykora.webp", alt: "Sýkora koňadra z boku se žlutým bříškem s černým pruhem a černou hlavou s bílou lící.", w: 768, h: 536 },
+  "vrabec domácí": { src: "img/pr/pr7-ptaci-savci-foto-vrabec.webp", alt: "Samec vrabce domácího s šedým temenem, hnědými křídly a černou skvrnou na hrdle.", w: 768, h: 597 },
+  "kos černý": { src: "img/pr/pr7-ptaci-savci-foto-kos.webp", alt: "Samec kosa černého s černým peřím a oranžovým zobákem v trávě.", w: 768, h: 554 },
+  "strakapoud velký": { src: "img/pr/pr7-ptaci-savci-foto-strakapoud.webp", alt: "Samec strakapouda velkého s černobílým peřím a červenou skvrnou pod ocasem na kmeni.", w: 768, h: 512 },
+  "káně lesní": { src: "img/pr/pr7-ptaci-savci-foto-kane.webp", alt: "Mladá káně lesní s hnědě skvrnitým peřím sedící na pařezu v lese.", w: 768, h: 703 },
+  "poštolka obecná": { src: "img/pr/pr7-ptaci-savci-foto-postolka.webp", alt: "Samec poštolky obecné s rezavým hřbetem a šedou hlavou sedící na drátě.", w: 768, h: 1083 },
+  "sova pálená": { src: "img/pr/pr7-ptaci-savci-foto-sova.webp", alt: "Sova pálená se světlým srdčitým obličejovým závojem a tmavýma očima.", w: 768, h: 937 },
+  "labuť velká": { src: "img/pr/pr7-ptaci-savci-foto-labut.webp", alt: "Bílá labuť velká s oranžovým zobákem s černým hrbolkem hledá potravu ve vlnách.", w: 768, h: 511 },
+  "čáp bílý": { src: "img/pr/pr7-ptaci-savci-foto-cap.webp", alt: "Čáp bílý s bílým peřím, černými letkami, dlouhým červeným zobákem a červenýma nohama stojí na pařezu.", w: 768, h: 1152 },
+  "vlaštovka obecná": { src: "img/pr/pr7-ptaci-savci-foto-vlastovka.webp", alt: "Vlaštovka obecná s tmavě modrým hřbetem, rezavým hrdlem a dlouhým vidličnatým ocasem sedí na prkně.", w: 768, h: 491 },
+  "ježek západní": { src: "img/pr/pr7-ptaci-savci-foto-jezek.webp", alt: "Mladý ježek západní s hnědými bodlinami na hřbetě v trávě.", w: 768, h: 595 },
+  "krtek obecný": { src: "img/pr/pr7-ptaci-savci-foto-krtek.webp", alt: "Krtek obecný se sametově černou srstí a lopatovitými předními končetinami vylézá z krtiny.", w: 768, h: 512 },
+  "netopýr velký": { src: "img/pr/pr7-ptaci-savci-foto-netopyr.webp", alt: "Netopýr velký zimující v jeskyni, zavěšený s hnědou srstí a složenými křídly.", w: 768, h: 1160 },
+  "veverka obecná": { src: "img/pr/pr7-ptaci-savci-foto-veverka.webp", alt: "Veverka obecná s rezavou srstí, huňatým ocasem a štětičkami na uších drží potravu.", w: 768, h: 642 },
+  "bobr evropský": { src: "img/pr/pr7-ptaci-savci-foto-bobr.webp", alt: "Bobr evropský s hustou hnědou srstí sedící na břehu.", w: 768, h: 576 },
+  "liška obecná": { src: "img/pr/pr7-ptaci-savci-foto-liska.webp", alt: "Liška obecná s rezavou srstí a huňatým ocasem v trávě.", w: 768, h: 512 },
+  "rys ostrovid": { src: "img/pr/pr7-ptaci-savci-foto-rys.webp", alt: "Hlava rysa ostrovida s licousy a dlouhými štětičkami na uších.", w: 768, h: 512 },
+  "srnec obecný": { src: "img/pr/pr7-ptaci-savci-foto-srnec.webp", alt: "Srnec obecný s krátkými parůžky stojící na louce.", w: 768, h: 768 },
+  "prase divoké": { src: "img/pr/pr7-ptaci-savci-foto-prase.webp", alt: "Prase divoké s tmavou štětinatou srstí a dlouhým rypákem se pase v trávě.", w: 768, h: 512 },
+  "zajíc polní": { src: "img/pr/pr7-ptaci-savci-foto-zajic.webp", alt: "Zajíc polní s dlouhýma ušima s černými špičkami sedící v trávě.", w: 768, h: 576 },
+};
+/* FOTO_PS:konec */
+[...PTACI, ...SAVCI].forEach(z => { if (FOTO_PS[z.n]) z.foto = FOTO_PS[z.n]; });
+const fotoDruhu = f => `<img class="druh-foto" src="${f.src}" alt="${f.alt}" width="${f.w}" height="${f.h}">`;
+$('fotoAtlas').innerHTML = [['Ptáci', PTACI], ['Savci', SAVCI]].map(([nadpis, sada]) => {
+  const karty = sada.filter(z => z.foto).map(z => `<figure class="foto-karta"><img src="${z.foto.src}" alt="${z.foto.alt}" width="${z.foto.w}" height="${z.foto.h}" loading="lazy"><figcaption><strong>${z.n}</strong>${z.r ? RADY[z.r] + ' · ' : ''}${z.popis}.</figcaption></figure>`).join('');
+  return karty ? `<h3>${nadpis}</h3><div class="foto-mrizka">${karty}</div>` : '';
+}).join('');
+
 function poznavacka() {
   const p = $('plocha');
   const ptak = Math.random() < 0.5;
@@ -243,7 +293,7 @@ function poznavacka() {
   const z = Uloha.nahodne(sada);
   const jine = Uloha.zamichej(sada.filter(x => x.n !== z.n)).slice(0, 3).map(x => x.n);
   p.innerHTML = `<div class="zadani">Který druh to je?</div>
-    <div class="karta"><div class="obrazek">${z.i}</div>
+    <div class="karta">${z.foto ? fotoDruhu(z.foto) : `<div class="obrazek">${z.i}</div>`}
       <div class="popis" style="font-weight:400">${z.popis}</div></div>`;
   const odezva = odezvaEl();
   Uloha.vyber({

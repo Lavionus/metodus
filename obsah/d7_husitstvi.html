@@ -19,6 +19,18 @@
     .osa { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; max-width: 740px;
       color: var(--text-faint); font-size: 0.78rem; }
     .osa span { background: var(--bg-control); border: 1px solid var(--border); border-radius: 6px; padding: 4px 9px; }
+    .foto-atlas { width:min(1120px,100%); margin:22px auto; }
+    .foto-atlas h2 { margin:0 0 5px; text-align:center; font-size:1.22rem; }
+    .foto-atlas > p { margin:0 auto 12px; max-width:820px; text-align:center; color:var(--text-muted,var(--text)); }
+    .foto-atlas h3 { margin:16px 0 8px; font-size:1.02rem; }
+    .foto-mrizka { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
+    .foto-karta { margin:0; overflow:hidden; border:1px solid var(--border); border-radius:14px; background:var(--bg-card); box-shadow:var(--shadow-sm); }
+    .foto-karta img { display:block; width:100%; aspect-ratio:4/3; object-fit:cover; }
+    .foto-karta img.cele { object-fit:contain; background:#1d1c1a; }
+    .foto-karta figcaption { padding:10px 11px 12px; font-size:.9rem; line-height:1.35; }
+    .foto-karta strong { display:block; margin-bottom:3px; color:var(--accent); font-size:1rem; }
+    @media (max-width:820px) { .foto-mrizka { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+    @media (max-width:440px) { .foto-mrizka { grid-template-columns:1fr; } }
   </style>
 </head>
 <body>
@@ -50,6 +62,22 @@
     Husité žádali nápravu církve a shrnuli své požadavky do <b>čtyř artikulů pražských</b>.
     Bránili se pěti křížovým výpravám; proslulí byli <b>vozovou hradbou</b> a bojovou kázní.
   </p>
+
+  <section class="foto-atlas" aria-labelledby="svedectviNadpis">
+    <h2 id="svedectviNadpis">Husitství v dobových obrazech</h2>
+    <p>Iluminace z Jenského kodexu vznikly kolem roku 1500 a jejich malíř byl husitům nakloněn. Ukazují, jak si husitské dějiny pamatovali jejich stoupenci.</p>
+    <h3>Jan Hus</h3>
+    <div class="foto-mrizka">
+      <figure class="foto-karta"><img class="cele" src="img/d/d7-husitstvi-hus-kaze.webp" alt="Iluminace z Jenského kodexu: Jan Hus káže z dřevěné kazatelny zástupu posluchačů." width="768" height="1236" loading="lazy"><figcaption><strong>Hus káže</strong>Od roku 1402 kázal Jan Hus v Betlémské kapli česky, aby mu rozuměl každý. Kritizoval hříchy kněží a prodej odpustků.</figcaption></figure>
+      <figure class="foto-karta"><img class="cele" src="img/d/d7-husitstvi-hus-hranice.webp" alt="Iluminace z Jenského kodexu: Jan Hus s papírovou čepicí kacíře stojí v plamenech hranice." width="1152" height="1728" loading="lazy"><figcaption><strong>Upálení v Kostnici</strong>Hus odmítl odvolat své učení a 6. července 1415 byl upálen. Na hlavě má potupnou čepici kacíře.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/d/d7-husitstvi-betlemska-kaple.webp" alt="Betlémská kaple v Praze s bílým průčelím a dvěma vysokými špičatými štíty." width="1152" height="783" loading="lazy"><figcaption><strong>Betlémská kaple</strong>Místo Husových kázání na Starém Městě pražském. Dnešní budova je obnova z 50. let 20. století podle zbytků původních zdí.</figcaption></figure>
+    </div>
+    <h3>Husitské války</h3>
+    <div class="foto-mrizka">
+      <figure class="foto-karta"><img class="cele" src="img/d/d7-husitstvi-husite-bitva.webp" alt="Iluminace z Jenského kodexu: husité s praporem s kalichem bojují s rytíři křižáky." width="768" height="1100" loading="lazy"><figcaption><strong>Husité proti křižákům</strong>Na husitském praporu je kalich – znak přijímání pod obojí, tedy chleba i vína pro všechny věřící.</figcaption></figure>
+      <figure class="foto-karta"><img class="cele" src="img/d/d7-husitstvi-vozova-hradba.webp" alt="Dobová kresba husitské vozové hradby: kruh spojených bojových vozů s bojovníky a praporem uvnitř." width="960" height="1150" loading="lazy"><figcaption><strong>Vozová hradba</strong>Spojené vozy tvořily pohyblivou pevnost, z níž se střílelo z kuší a píšťal. Kresba z vojenské knihy 15. století.</figcaption></figure>
+    </div>
+  </section>
 
 <script>
 const $ = id => document.getElementById(id);

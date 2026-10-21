@@ -19,6 +19,15 @@
       color: var(--text-faint); font-size: 0.78rem; }
     .osa span { background: var(--bg-control); border: 1px solid var(--border);
       border-radius: 6px; padding: 4px 9px; }
+    .prameny { width: min(100%, 780px); margin: 18px auto; }
+    .prameny h2 { text-align: center; font-size: 1.2rem; }
+    .pramen-volby { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; margin-bottom: 10px; }
+    .pramen-volby button[aria-pressed="true"] { background: var(--accent); color: var(--na-akcentu, #fff); }
+    .pramen-karta { margin: 0; padding: 12px; border: 1px solid var(--border); border-radius: 12px; background: var(--bg-card); }
+    .pramen-karta img { display: block; width: 100%; max-height: 390px; object-fit: contain; border-radius: 8px; background: #181818; }
+    .pramen-karta blockquote { margin: 8px auto; max-width: 620px; font-size: 1.05rem; line-height: 1.6; }
+    .pramen-karta figcaption { margin-top: 9px; line-height: 1.45; }
+    .pramen-zdroj { font-size: 0.82rem; color: var(--text-faint); }
   </style>
 </head>
 <body>
@@ -41,6 +50,12 @@
 
   <div class="osa"><span>1948 únorový převrat</span><span>1949 NATO</span><span>1955 Varšavská smlouva</span><span>1961 Berlínská zeď</span><span>1962 karibská krize</span><span>1968 Pražské jaro a okupace</span><span>1977 Charta 77</span><span>17. 11. 1989 sametová revoluce</span></div>
 
+  <section class="prameny" aria-labelledby="pramenyNadpis">
+    <h2 id="pramenyNadpis">📷 Pět pramenů studené války</h2>
+    <div class="pramen-volby" id="pramenVolby" aria-label="Vyber historický pramen"></div>
+    <figure class="pramen-karta" id="pramenKarta" aria-live="polite"></figure>
+  </section>
+
   <p class="napoveda">Po roce 1945 se svět rozdělil na <b>západní demokratický</b> a <b>východní komunistický</b> blok. Soupeření bez přímé války se nazývá <b>studená válka</b>. V Československu skončil komunistický režim <b>sametovou revolucí v listopadu 1989</b>.</p>
 
 <script>
@@ -48,6 +63,28 @@ const $ = id => document.getElementById(id);
 const skore = Uloha.skore('metodus_d9_studena_valka', $('skore'));
 let rezim = 'osobnosti';
 function odezvaEl() { const d = document.createElement('div'); d.className = 'odezva'; return d; }
+
+const PRAMENY = [
+  { rok: '1948', nazev: 'Únorový převrat', img: 'img/prv/prv5-dejiny-unor-1948.webp', alt: 'Manifestace svolaná KSČ na Václavském náměstí 25. února 1948.', popis: 'Masová manifestace ukazuje, jak komunistická strana veřejně demonstrovala svou sílu v den převzetí moci.' },
+  { rok: '1961', nazev: 'Berlínská zeď', img: 'img/d/d9-studena-berlinska-zed.webp', alt: 'Východoněmečtí vojáci a policisté blokují Braniborskou bránu v srpnu 1961.', popis: 'Zátarasy u Braniborské brány zviditelnily rozdělení Berlína i celé Evropy.' },
+  { rok: '1968', nazev: 'Srpen v Praze', img: 'img/prv/prv5-dejiny-srpen-1968.webp', alt: 'Lidé s československou vlajkou procházejí kolem hořícího tanku v Praze roku 1968.', popis: 'Fotografie zachycuje odpor obyvatel proti invazi vojsk Varšavské smlouvy.' },
+  { rok: '1977', nazev: 'Charta 77', citat: 'Charta 77 je volné, neformální a otevřené společenství lidí různých přesvědčení.', popis: 'Krátký úryvek z prohlášení ukazuje, že nešlo o politickou stranu, ale o občanskou iniciativu na obranu práv.', odkaz: 'https://scriptum.cz/cs/periodika/charta-77' },
+  { rok: '1989', nazev: 'Sametová revoluce', img: 'img/prv/prv5-dejiny-listopad-1989.webp', alt: 'Noční demonstrace sametové revoluce na Václavském náměstí v listopadu 1989.', popis: 'Zaplněné Václavské náměstí dokládá masovou podporu demokratické změny.' }
+];
+
+function zobrazPramen(index) {
+  const p = PRAMENY[index];
+  document.querySelectorAll('#pramenVolby button').forEach((b, i) => b.setAttribute('aria-pressed', i === index ? 'true' : 'false'));
+  $('pramenKarta').innerHTML = `${p.img ? `<img src="${p.img}" alt="${p.alt}">` : `<blockquote>„${p.citat}“</blockquote>`}<figcaption><b>${p.rok} · ${p.nazev}</b><br>${p.popis}${p.odkaz ? `<br><a class="pramen-zdroj" href="${p.odkaz}" target="_blank" rel="noopener">Přepis a faksimile pramene ↗</a>` : '<br><span class="pramen-zdroj">Autor, licence a zdroj fotografie jsou v seznamu zdrojů dole na stránce.</span>'}</figcaption>`;
+}
+
+PRAMENY.forEach((p, index) => {
+  const b = document.createElement('button');
+  b.type = 'button'; b.textContent = `${p.rok} · ${p.nazev}`; b.setAttribute('aria-pressed', 'false');
+  b.addEventListener('click', () => zobrazPramen(index));
+  $('pramenVolby').appendChild(b);
+});
+zobrazPramen(0);
 
 const OSOBNOSTI = [
   {

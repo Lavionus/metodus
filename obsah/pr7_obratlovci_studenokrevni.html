@@ -35,6 +35,18 @@
       border: 1px solid var(--border); background: #f7f1e5; }
     .vyvoj-rada figcaption { padding-top: 6px; text-align: center; color: var(--text); font-size: .78rem; font-weight: 700; }
     .vyvoj-rada figcaption::before { content: counter(stadium) ". "; color: var(--accent); }
+    .druh-obrazek.druh-foto { object-fit: cover; aspect-ratio: 4 / 3; width: min(100%, 400px); background: var(--bg-panel); }
+    .foto-atlas { width: min(1120px, 100%); margin: 26px auto; }
+    .foto-atlas h2 { margin: 0 0 5px; text-align: center; font-size: 1.22rem; }
+    .foto-atlas > p { margin: 0 auto 12px; max-width: 820px; text-align: center; color: var(--text-muted, var(--text)); }
+    .foto-atlas h3 { margin: 18px 0 8px; font-size: 1.05rem; }
+    .foto-mrizka { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+    .foto-karta { margin: 0; overflow: hidden; border: 1px solid var(--border); border-radius: 14px; background: var(--bg-card, var(--bg-elevated)); min-width: 0; }
+    .foto-karta img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+    .foto-karta figcaption { padding: 10px 11px 12px; font-size: .9rem; line-height: 1.38; }
+    .foto-karta strong { display: block; margin-bottom: 3px; color: var(--accent); font-size: 1rem; }
+    @media (max-width: 820px) { .foto-mrizka { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 440px) { .foto-mrizka { grid-template-columns: 1fr; } }
     @media (max-width: 720px) {
       .atlas-trojice { grid-template-columns: 1fr; }
       .vyvoj-rada { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -98,6 +110,12 @@
     <b>plazi</b> dýchají plícemi a mají suchou šupinatou kůži.
   </p>
 
+  <section class="foto-atlas" aria-labelledby="fotoAtlasNadpis">
+    <h2 id="fotoAtlasNadpis">📷 Naši zástupci na fotografiích</h2>
+    <p>Skutečné fotografie druhů, které poznáváš v poznávačce. Všímej si tvaru těla, kůže a typických znaků zbarvení.</p>
+    <div id="fotoAtlas"></div>
+  </section>
+
 <script>
 const $ = id => document.getElementById(id);
 const skore = Uloha.skore('metodus_pr7_studenokrevni', $('skore'));
@@ -123,6 +141,29 @@ const ZIVOCICHOVE = [
   { n: 'slepýš křehký', s: 'plazi', i: '🦎', popis: 'beznohá ještěrka, často zaměňovaná s hadem' },
   { n: 'želva bahenní', s: 'plazi', i: '🐢', popis: 'vzácný vodní plaz s krunýřem' },
 ];
+/* Fotografie zástupců (IMG-pr-05, Wikimedia Commons; zdroje vypisuje kostra.js).
+   Ilustrace stavby těla (z.img) zůstávají v režimu „Do které skupiny“, poznávačka ukazuje fotografie. */
+/* FOTO_ZIV:zacatek */
+const FOTO_ZIV = {
+  "kapr obecný": { src: "img/pr/pr7-studenokrevni-foto-kapr.webp", alt: "Kapr obecný z boku s velkými zlatavými šupinami ležící v trávě.", w: 768, h: 576 },
+  "štika obecná": { src: "img/pr/pr7-studenokrevni-foto-stika.webp", alt: "Štika obecná s protáhlým zeleně skvrnitým tělem a dlouhou plochou tlamou ve vodě.", w: 768, h: 576 },
+  "pstruh obecný": { src: "img/pr/pr7-studenokrevni-foto-pstruh.webp", alt: "Pstruh obecný pod vodou s hustě tmavě skvrnitými boky.", w: 768, h: 960 },
+  "okoun říční": { src: "img/pr/pr7-studenokrevni-foto-okoun.webp", alt: "Okoun říční s tmavými svislými pruhy, ostnatou hřbetní ploutví a oranžovými břišními ploutvemi.", w: 768, h: 460 },
+  "úhoř říční": { src: "img/pr/pr7-studenokrevni-foto-uhor.webp", alt: "Úhoř říční s hadovitě protáhlým tělem na dně potoka.", w: 768, h: 576 },
+  "skokan hnědý": { src: "img/pr/pr7-studenokrevni-foto-skokan.webp", alt: "Skokan hnědý z boku s hnědou kůží a tmavou skvrnou za okem.", w: 768, h: 540 },
+  "ropucha obecná": { src: "img/pr/pr7-studenokrevni-foto-ropucha.webp", alt: "Ropucha obecná s hnědou bradavičnatou kůží sedící v trávě.", w: 768, h: 512 },
+  "mlok skvrnitý": { src: "img/pr/pr7-studenokrevni-foto-mlok.webp", alt: "Mlok skvrnitý s lesklou černou kůží a žlutými skvrnami.", w: 768, h: 498 },
+  "čolek obecný": { src: "img/pr/pr7-studenokrevni-foto-colek.webp", alt: "Samec čolka obecného s hnědým skvrnitým tělem a zploštělým ocasem v mechu.", w: 768, h: 576 },
+  "ještěrka obecná": { src: "img/pr/pr7-studenokrevni-foto-jesterka.webp", alt: "Samec ještěrky obecné se zelenými boky a hnědým hřbetem se vzorem na kmeni.", w: 768, h: 576 },
+  "užovka obojková": { src: "img/pr/pr7-studenokrevni-foto-uzovka.webp", alt: "Hlava užovky obojkové se žlutými půlměsíčitými skvrnami za hlavou a vyplazeným jazykem.", w: 768, h: 512 },
+  "zmije obecná": { src: "img/pr/pr7-studenokrevni-foto-zmije.webp", alt: "Zmije obecná stočená v trávě s tmavou klikatou čárou na hřbetě.", w: 768, h: 511 },
+  "slepýš křehký": { src: "img/pr/pr7-studenokrevni-foto-slepys.webp", alt: "Slepýš křehký s hladkým lesklým bronzovým tělem bez končetin.", w: 768, h: 479 },
+  "želva bahenní": { src: "img/pr/pr7-studenokrevni-foto-zelva.webp", alt: "Želva bahenní s tmavým klenutým krunýřem v trávě.", w: 768, h: 672 },
+};
+/* FOTO_ZIV:konec */
+ZIVOCICHOVE.forEach(z => { if (FOTO_ZIV[z.n]) z.foto = FOTO_ZIV[z.n]; });
+const fotoDruhu = f => `<img class="druh-obrazek druh-foto" src="${f.src}" alt="${f.alt}" width="${f.w}" height="${f.h}">`;
+const ilustraceDruhu = z => `<img class="druh-obrazek" src="${z.img}" alt="${z.alt}" width="768" height="768">`;
 const VYVOJ_ZABY = [
   { k: 'vajicka', n: 'vajíčka', img: 'img/pr/pr7-vyvoj-zaby-vajicka.webp', alt: 'Shluk žabích vajíček v rosolovitých obalech.' },
   { k: 'pulec', n: 'pulec', img: 'img/pr/pr7-vyvoj-zaby-pulec.webp', alt: 'Pulec bez končetin s dlouhým ocasem.' },
@@ -135,7 +176,7 @@ function skupina() {
   const p = $('plocha');
   const z = Uloha.nahodne(ZIVOCICHOVE);
   p.innerHTML = `<div class="zadani">Do které skupiny obratlovců patří?</div>
-    <div class="karta">${z.img ? `<img class="druh-obrazek" src="${z.img}" alt="${z.alt}" width="768" height="768">` : `<div class="obrazek">${z.i}</div>`}<div class="druh">${z.n}</div>
+    <div class="karta">${z.img ? ilustraceDruhu(z) : z.foto ? fotoDruhu(z.foto) : `<div class="obrazek">${z.i}</div>`}<div class="druh">${z.n}</div>
       <div class="popis" style="color:var(--text-faint);font-weight:400">${z.popis}</div></div>`;
   const odezva = odezvaEl();
   Uloha.vyber({
@@ -186,7 +227,7 @@ function poznavacka() {
   const z = Uloha.nahodne(ZIVOCICHOVE);
   const jine = Uloha.zamichej(ZIVOCICHOVE.filter(x => x.n !== z.n)).slice(0, 3).map(x => x.n);
   p.innerHTML = `<div class="zadani uloha-text">Který druh to je?</div>
-    <div class="karta">${z.img ? `<img class="druh-obrazek" src="${z.img}" alt="${z.alt}" width="768" height="768">` : `<div class="obrazek">${z.i}</div>`}
+    <div class="karta">${z.foto ? fotoDruhu(z.foto) : z.img ? ilustraceDruhu(z) : `<div class="obrazek">${z.i}</div>`}
       <div class="popis" style="font-weight:400">${z.popis}</div></div>`;
   const odezva = odezvaEl();
   Uloha.vyber({
@@ -252,6 +293,11 @@ function vyvoj() {
   });
   p.appendChild(odezva);
 }
+
+$('fotoAtlas').innerHTML = Object.entries(SKUPINY).map(([k, nazev]) => {
+  const karty = ZIVOCICHOVE.filter(z => z.s === k && z.foto).map(z => `<figure class="foto-karta"><img src="${z.foto.src}" alt="${z.foto.alt}" width="${z.foto.w}" height="${z.foto.h}" loading="lazy"><figcaption><strong>${z.n}</strong>${z.popis[0].toUpperCase() + z.popis.slice(1)}.</figcaption></figure>`).join('');
+  return karty ? `<h3>${nazev[0].toUpperCase() + nazev.slice(1)}</h3><div class="foto-mrizka">${karty}</div>` : '';
+}).join('');
 
 const REZIMY = { skupina, stavba, poznavacka, tvrzeni, vyvoj };
 function novaUloha() { REZIMY[rezim](); }
