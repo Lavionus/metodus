@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="../common.css">
   <script src="../theme.js"></script>
   <script src="../barvy-predmetu.js"></script>
+  <script src="../ikony.js"></script>
   <script src="../podpis.js" defer></script>
   <link rel="icon" href="../favicon.svg" type="image/svg+xml">
   <link rel="alternate icon" href="../favicon.ico" sizes="16x16 32x32 48x48">
@@ -357,7 +358,8 @@
         const { emoji, text } = rozdel(p.nazev);
         const e = document.createElement('span');
         e.className = 'emoji';
-        e.textContent = emoji;
+        const ik = window.MetodusIkony && MetodusIkony.img(p, { velikost: 32 });
+        if (ik) e.append(ik); else e.textContent = emoji;
         const n = document.createElement('span');
         n.className = 'nazev';
         n.textContent = text;
@@ -450,7 +452,7 @@
         const el = document.createElement('a');
         el.className = 'predmet';
         el.href = cil;
-        if (window.MetodusBarvy) MetodusBarvy.oznac(el, g.id);
+        if (window.MetodusBarvy) MetodusBarvy.oznac(el, g.id, { pruh: true });
         el.innerHTML =
           `<span class="nazev">${emoji} ${text}</span>` +
           `<span class="pocet">${pocet} ${pocet === 1 ? 'aplikace' : pocet < 5 ? 'aplikace' : 'aplikací'}` +

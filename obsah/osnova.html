@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="../common.css">
   <script src="../theme.js"></script>
   <script src="../barvy-predmetu.js"></script>
+  <script src="../ikony.js"></script>
   <script src="../podpis.js" defer></script>
   <style>
     body {
@@ -310,7 +311,8 @@
       z.className = 'znacka';
       z.textContent = p.stav === 'plan' ? '🚧' : '✅';
       const t = document.createElement('span');
-      t.textContent = p.nazev;
+      if (window.MetodusIkony) MetodusIkony.nazev(t, p, p.nazev, { velikost: 20 });
+      else t.textContent = p.nazev;
       a.append(z, t);
       a.addEventListener('click', ev => {
         if (vRozcestniku) {

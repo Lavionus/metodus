@@ -115,6 +115,41 @@ se ze zkoušky vyřadí: nemají `data-faze="procvic"`, nebo nevytvoří otázku
 ▶️ Spustit sérii / 🔄 Nová série · 💡 Nápověda · 👁️ Ukázat řešení · ⏸️ Pauza · ↺ Výchozí stav.
 „Další →“ zůstává jen u listování kartičkami.
 
+### Vlastní ikony stránek
+
+Každá stránka katalogu, každý předmět a hlavní stránky webu mají vlastní akvarelovou ikonu ve stylu ilustrací
+(slonovinová dlaždice se zaoblenými rohy, `obsah/img/ikony/<id>.webp`, 128 × 128). Id je název souboru bez `.html`
+(`cj4_pady`), předmět `predmet-<id>` (`predmet-cj`), dále `prehled`, `osnova`, `predstaveni`, `nastaveni`,
+`priprava_hodiny`, `projektor`, `nove_okno`, `oblibene`.
+
+- [ikony.js](ikony.js) (po `theme.js`): `MetodusIkony.img(polozka | 'cj4_pady', { velikost })` vrátí `<img>` nebo `null`,
+  `MetodusIkony.nazev(prvek, polozka, nazev, { velikost })` nahradí úvodní emoji názvu ikonou – když ikona chybí,
+  zůstane emoji. Používá ho menu rozcestníku (řádky, předměty, výběr předmětu, Oblíbené, tlačítka hlavičky),
+  úvod, osnova, stránka předmětu, Nastavení a hlavička lekce (kostra.js si ikony načte sama).
+- **Nová stránka = nová ikona:** námět (anglicky, jeden předmět) do `obsah/img/ikony/archy/namety.tsv`, pak
+  `python3 tools/ikony_archy.py <číslo archu>` (Codex CLI – jen se souhlasem uživatele; arch 4 × 4, zbytek 3 × 3),
+  případně ruční řez `python3 tools/ikony_rez.py arch.png id1 … id16 --nahled` a nakonec
+  `python3 tools/ikony_seznam.py` (zapíše seznam hotových ikon do ikony.js). Archy (PNG) a zadání jsou v
+  `obsah/img/ikony/archy/` – PNG na web nejdou.
+
+### Barvy předmětů a Nastavení
+
+Každý předmět má jemnou pastelovou barvu ([barvy-predmetu.js](barvy-predmetu.js), načítá se hned po `theme.js`).
+Podbarvují se jí bloky předmětů v levém menu (a řádky Oblíbených), dlaždice a seznamy na úvodu, řádky a karty osnovy,
+stránka předmětu a hlavička každé lekce (kostra.js si modul načte sama).
+
+- Ve stránce: `MetodusBarvy.oznac(prvek, 'cj')` nebo `MetodusBarvy.oznac(prvek, polozkaKatalogu)` – předmět se určí
+  z `predmet`, ze skupiny nebo ze souboru; nástroje mají šedou. Prvek dostane třídu `.podbarva` – barva se kreslí jako
+  průsvitná vrstva (`background-image`) nad vlastním pozadím prvku, hover i motivy fungují dál. S `{ pruh: true }` dostane prvek navíc
+  proužek v plné barvě vlevo (bloky menu, dlaždice, karty).
+- Síla vrstvy se řídí tónem motivu (na tmavém pozadí méně). Uložení: `localStorage['metodus_barvy_predmetu']`
+  (`zapnuto`, `sila`, jen změněné `barvy`); změnu dostanou ostatní okna událostí `storage`, rozcestník a rámec zprávou `{ metodusBarvy: 1 }`.
+- [obsah/nastaveni.html](obsah/nastaveni.html) (⚙️ v hlavičce rozcestníku): záložky **Barvy předmětů** (zapnutí, síla, barva
+  každého předmětu, výchozí), **Data v prohlížeči** (localStorage po skupinách s popisy, zobrazení a smazání položky, záloha do
+  souboru a obnovení, smazání výsledků/všeho s dvoukrokovým potvrzením; databáze IndexedDB s počty záznamů a mazáním) a
+  **Barevný motiv** (náhledy motivů). Záložka jde otevřít adresou `#barvy`, `#data`, `#motiv`.
+- Test: `tests/barvy-nastaveni-browser.mjs`.
+
 ### Výklad a vedený příklad
 
 `vyklad.js` + `vyklad.css` (22. 10. 2026) dávají každé lekci stejný 📖 výklad a 📘 vedený příklad. Obojí je statické

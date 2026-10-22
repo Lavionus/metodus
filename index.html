@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="common.css" />
   <script src="theme.js"></script>
   <script src="barvy-predmetu.js"></script>
+  <script src="ikony.js"></script>
   <script src="podpis.js" defer></script>
   <link rel="manifest" href="manifest.webmanifest" />
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
@@ -985,7 +986,9 @@
       const a = document.createElement('a');
       a.href = '#' + p.soubor;               // klik = změna hashe -> hashchange otevře aplikaci
       a.dataset.page = p.soubor;
-      a.textContent = p.nazev;
+      // vlastní ikona stránky místo úvodního emoji (ikony.js; chybí-li, zůstane emoji)
+      if (window.MetodusIkony) MetodusIkony.nazev(a, p, p.nazev, { velikost: 20 });
+      else a.textContent = p.nazev;
       a.dataset.hledani = norm([p.nazev, ...(p.tagy || []), p.hledatNavic || ''].join(' '));
       a.dataset.rocniky = (p.rocniky || []).join(',');
       if (p.stav === 'plan') {
@@ -1022,10 +1025,11 @@
       const h2 = document.createElement('h2');
       const ul = document.createElement('ul');
       h2.appendChild(hlavaSbalovani(div, nazev, polozky.length));
+      if (special && window.MetodusIkony) MetodusIkony.nazev(h2.querySelector('.nazev'), 'oblibene', nazev, { velikost: 18, hned: true });
       polozky.forEach(p => {
         const li = ul.appendChild(vytvorPolozku(p));
         // oblíbené míchají předměty – každý řádek nese barvu svého předmětu
-        if (special && window.MetodusBarvy) MetodusBarvy.oznac(li, p);
+        if (special && window.MetodusBarvy) MetodusBarvy.oznac(li, p, { pruh: true });
       });
       div.append(h2, ul);
       if (polozky.length === 1 && !special) div.classList.add('jedina');
@@ -1068,10 +1072,13 @@
       blok.dataset.skupina = g.id;
       blok.dataset.nazev = 'predmet:' + g.id;
       // jemné podbarvení celého bloku barvou předmětu (barvy-predmetu.js, mění se v Nastavení)
-      if (window.MetodusBarvy) MetodusBarvy.oznac(blok, g.id);
+      if (window.MetodusBarvy) MetodusBarvy.oznac(blok, g.id, { pruh: true });
       const h2 = document.createElement('h2');
       h2.className = 'predmet-hlava';
       h2.appendChild(hlavaSbalovani(blok, g.label, sekce.reduce((n, s) => n + s.polozky.length, 0)));
+      if (window.MetodusIkony && window.MetodusBarvy) {
+        MetodusIkony.nazev(h2.querySelector('.nazev'), 'predmet-' + MetodusBarvy.predmet(g.id), g.label, { velikost: 24, hned: true });
+      }
       const obsah = document.createElement('div');
       obsah.className = 'predmet-obsah';
       sekce.forEach(s => {
@@ -1238,6 +1245,15 @@
     document.getElementById('btnPredstaveni').addEventListener('click', () => {
       location.hash = 'obsah/predstaveni.html';
     });
+    // tlačítka hlavičky dostanou vlastní ikony (emoji zůstane, když ikona chybí)
+    if (window.MetodusIkony) {
+      Object.entries({ btnDomu: 'prehled', btnOsnova: 'osnova', btnUcitel: 'ucitel', btnPredstaveni: 'predstaveni',
+        btnNastaveni: 'nastaveni', btnProjektor: 'projektor', btnNoveOkno: 'nove_okno' }).forEach(([tl, ikona]) => {
+        const misto = document.querySelector('#' + tl + ' .ikona');
+        const i = MetodusIkony.img(ikona, { velikost: 22, hned: true });
+        if (misto && i) misto.replaceChildren(i);
+      });
+    }
     document.getElementById('btnNastaveni').addEventListener('click', () => {
       location.hash = 'obsah/nastaveni.html';
     });
@@ -1320,7 +1336,8 @@
       rocnikPills.forEach(p => p.classList.toggle('active', p.dataset.rocnik === aktivniRocnik));
       const aktivni = pills.find(p => p.dataset.skupina === aktivniSkupina);
       // popisek pilulky už vlastní emoji obsahuje, další prefix by se zdvojil
-      skupinyToggleLabel.textContent = aktivni ? aktivni.querySelector('span').textContent : '📚 Vše';
+      if (aktivni) skupinyToggleLabel.replaceChildren(...[...aktivni.querySelector('span').childNodes].map(n => n.cloneNode(true)));
+      else skupinyToggleLabel.textContent = '📚 Vše';
     }
     function vyberRocnik(r, zUzivatele = true) {
       if (!rocnikPills.some(p => p.dataset.rocnik === r)) return;
@@ -1359,6 +1376,9 @@
       b.className = 'skupina-pill';
       b.dataset.skupina = id;
       b.innerHTML = `<span>${label}</span><span class="pill-pocet">${skupinaPocet(id)}</span>`;
+      if (id !== 'vse' && window.MetodusIkony && window.MetodusBarvy) {
+        MetodusIkony.nazev(b.querySelector('span'), 'predmet-' + MetodusBarvy.predmet(id), label, { velikost: 18, hned: true });
+      }
       b.addEventListener('click', () => vyberSkupinu(id));
       skupinyEl.appendChild(b);
       pills.push(b);

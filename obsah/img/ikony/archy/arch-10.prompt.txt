@@ -1,0 +1,26 @@
+Vygeneruj jeden obrázek a ulož ho jako arch-10.png do aktuální složky.
+
+Asset: icon sprite sheet for the Metodus Czech educational website. Match the painting style of vzor-styl.png and arch-01.png in this folder (watercolor and gouache with fine dark ink outlines, warm ivory paper #faf6ec, muted sage / jade / ochre / brick / slate-blue palette, soft daylight from upper left), SIMPLIFIED FOR SMALL ICONS exactly like arch-01.png: one bold, chunky object or tight group per icon, strong clear silhouette, slightly thicker ink outline, few details, flat even ivory background, readable when shrunk to 24 px.
+
+Layout (very important): square 1:1 image, an exact 4 × 4 grid of 16 equal invisible cells, 4 rows and 4 columns, read left to right, top to bottom. Each icon is centered in its own cell and fills about 70 % of the cell, with clear empty ivory space between icons; nothing may cross into a neighbouring cell. No grid lines, no frames, no borders, no text, no words, no labels, no watermark. Single letters, digits or math symbols only where the description asks for them.
+
+Icons in order:
+1. Three arrow cards in a row: forward, turn, forward.
+2. A circular arrow loop around a small robot.
+3. A labeled cardboard box with a number card going in.
+4. A machine box with an input arrow and an output arrow.
+5. Bars of different heights being sorted from small to tall.
+6. Zeros and ones on small punched cards.
+7. A telegraph key with dots and dashes.
+8. A padlock with a small key and a cipher wheel.
+9. A small computer screen showing a wave graph and a flask.
+10. A spreadsheet table grid with a small bar chart.
+11. A stack of database disks (cylinders).
+12. A desktop computer with keyboard and mouse.
+13. A globe with network lines connecting dots.
+14. A magnifying glass over a web page with a check mark.
+15. Footprints made of pixels.
+16. A copyright sign © medal with a ribbon.
+
+Id: inf4_sekvence inf5_cykly inf6_promenne inf7_funkce eduSort inf4_data morse_code inf7_sifrovani inf9_model_simulace inf6_tabulky inf8_databaze inf4_hardware inf7_site inf5_zdroje inf6_digitalni_stopa inf8_licence
+Generator: Codex CLI (vestavěný ImageGen)

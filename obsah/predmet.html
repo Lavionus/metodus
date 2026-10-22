@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="../common.css">
   <script src="../theme.js"></script>
   <script src="../barvy-predmetu.js"></script>
+  <script src="../ikony.js"></script>
   <script src="../podpis.js" defer></script>
   <style>
     /* Stránka předmětu: skládá se celá z katalogu (apps.js) – okruhy, lekce, cíle, učební cesty.
@@ -146,7 +147,7 @@
         celkem += lekce.length;
         const karta = document.createElement('section');
         karta.className = 'okruh';
-        if (B) B.oznac(karta, skupina.id);
+        if (B) B.oznac(karta, skupina.id, { pruh: true });
         const h = document.createElement('h3');
         h.innerHTML = `<span></span><span class="pocet">${lekce.length}</span>`;
         h.firstChild.textContent = s.nazev;
@@ -156,7 +157,8 @@
           const a = odkaz('../index.html#' + p.soubor, '', p.soubor);
           if (hlavni.has(p.soubor)) { a.classList.add('hlavni'); a.title = 'Hlavní lekce tématu'; }
           const roc = document.createElement('span'); roc.className = 'roc'; roc.textContent = rozsah(p.rocniky);
-          const nazev = document.createElement('span'); nazev.textContent = p.nazev;
+          const nazev = document.createElement('span');
+          if (window.MetodusIkony) MetodusIkony.nazev(nazev, p, p.nazev, { velikost: 22 }); else nazev.textContent = p.nazev;
           a.append(roc, nazev);
           if (cile[p.soubor]) { const c = document.createElement('span'); c.className = 'cil'; c.textContent = '🎯 ' + cile[p.soubor]; a.append(c); }
           li.append(a); ul.append(li);
@@ -201,6 +203,7 @@
       const a = odkaz(`predmet.html?p=${g.id}${rocnik ? '&r=' + rocnik : ''}`, g.label);
       a.target = '_self';
       if (B) B.oznac(a, g.id);
+      if (window.MetodusIkony && B) MetodusIkony.nazev(a, 'predmet-' + B.predmet(g.id), g.label, { velikost: 20 });
       if (vRozcestniku) a.addEventListener('click', ev => { ev.preventDefault(); window.parent.postMessage({ otevri: `obsah/predmet.html?p=${g.id}${rocnik ? '&r=' + rocnik : ''}`, skupina: g.id }, '*'); });
       $('jinde').append(a);
     });

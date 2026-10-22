@@ -1,0 +1,26 @@
+Vygeneruj jeden obrázek a ulož ho jako arch-15.png do aktuální složky.
+
+Asset: icon sprite sheet for the Metodus Czech educational website. Match the painting style of vzor-styl.png and arch-01.png in this folder (watercolor and gouache with fine dark ink outlines, warm ivory paper #faf6ec, muted sage / jade / ochre / brick / slate-blue palette, soft daylight from upper left), SIMPLIFIED FOR SMALL ICONS exactly like arch-01.png: one bold, chunky object or tight group per icon, strong clear silhouette, slightly thicker ink outline, few details, flat even ivory background, readable when shrunk to 24 px.
+
+Layout (very important): square 1:1 image, an exact 4 × 4 grid of 16 equal invisible cells, 4 rows and 4 columns, read left to right, top to bottom. Each icon is centered in its own cell and fills about 70 % of the cell, with clear empty ivory space between icons; nothing may cross into a neighbouring cell. No grid lines, no frames, no borders, no text, no words, no labels, no watermark. Single letters, digits or math symbols only where the description asks for them.
+
+Icons in order:
+1. A hand holding a small green sprout with a recycling arrow.
+2. Grass, a grasshopper and a frog connected by arrows.
+3. An erupting volcano.
+4. A purple amethyst crystal cluster.
+5. An ammonite fossil and a dinosaur footprint.
+6. The Earth with its tilted axis and the Sun.
+7. A map grid with latitude and longitude lines and a pin.
+8. A stack of folded maps with a compass.
+9. A cross-section of earth layers with a mountain.
+10. A cloud with sun and rain drops and a thermometer.
+11. An ocean wave with a river flowing into it.
+12. A giraffe next to an acacia tree.
+13. A cactus and the Statue of Liberty torch.
+14. A pagoda and a bamboo stalk.
+15. A kangaroo and a small penguin on ice.
+16. A world map with several red city pins.
+
+Id: pr9_ekologie potravni_retezec pr9_geologicke_deje pr9_mineraly pr9_vyvoj_zeme z6_planeta_zeme z6_mapa_souradnice eduMaps z6_litosfera z6_atmosfera z6_hydrosfera z7_afrika z7_amerika z7_asie z7_australie_oceanie svetova_hlavni_mesta
+Generator: Codex CLI (vestavěný ImageGen)

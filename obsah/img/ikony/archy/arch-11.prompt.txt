@@ -1,0 +1,26 @@
+Vygeneruj jeden obrázek a ulož ho jako arch-11.png do aktuální složky.
+
+Asset: icon sprite sheet for the Metodus Czech educational website. Match the painting style of vzor-styl.png and arch-01.png in this folder (watercolor and gouache with fine dark ink outlines, warm ivory paper #faf6ec, muted sage / jade / ochre / brick / slate-blue palette, soft daylight from upper left), SIMPLIFIED FOR SMALL ICONS exactly like arch-01.png: one bold, chunky object or tight group per icon, strong clear silhouette, slightly thicker ink outline, few details, flat even ivory background, readable when shrunk to 24 px.
+
+Layout (very important): square 1:1 image, an exact 4 × 4 grid of 16 equal invisible cells, 4 rows and 4 columns, read left to right, top to bottom. Each icon is centered in its own cell and fills about 70 % of the cell, with clear empty ivory space between icons; nothing may cross into a neighbouring cell. No grid lines, no frames, no borders, no text, no words, no labels, no watermark. Single letters, digits or math symbols only where the description asks for them.
+
+Icons in order:
+1. A friendly small robot with a balance scale.
+2. A friendly robot head next to a presentation screen.
+3. A ruler, a stopwatch and a small weight.
+4. An ice cube, a drop of water and a puff of steam.
+5. A wooden block floating on water in a glass and a metal ball at the bottom.
+6. A formula notebook with a pencil and an atom symbol on the cover.
+7. A toy car with motion lines and a stopwatch.
+8. A spring scale (force meter) pulling a weight.
+9. A ball rolling down a wooden ramp.
+10. A seesaw lever with a heavy box and a small weight.
+11. A crowbar lifting a stone on a pivot.
+12. A large screw and a nut.
+13. A hand drill and a small vise.
+14. A balloon and a syringe.
+15. A windsock blowing in the wind.
+16. A small wind tunnel with a model airplane inside.
+
+Id: inf9_ai_etika AI_prednaska f6_mereni f6_vlastnosti_latek f6_hustota physics_ref f7_pohyb f7_sila physics_playground paka_lekce paka zavity_lekce vrtacka_lis f7_tlak vitr_lekce vitr_tunel
+Generator: Codex CLI (vestavěný ImageGen)

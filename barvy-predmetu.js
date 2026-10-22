@@ -9,6 +9,7 @@
      <script src="../barvy-predmetu.js"></script>
      MetodusBarvy.oznac(prvek, 'cj')           – prvek dostane podbarvení předmětu
      MetodusBarvy.oznac(prvek, polozkaKatalogu) – předmět podle položky (predmet/skupina)
+     MetodusBarvy.oznac(prvek, 'cj', { pruh: true }) – navíc proužek v plné barvě vlevo
    CSS: třída .podbarva kreslí barvu jako průsvitnou vrstvu nad vlastním
    pozadím prvku (background-image), takže hover a motivy fungují dál.
    Uložení: localStorage['metodus_barvy_predmetu'] = { zapnuto, sila, barvy: { id: '#rrggbb' } }.
@@ -34,10 +35,10 @@
     { id: 'hv', label: 'Hudební výchova', emoji: '🎼' },
     { id: 'nastroje', label: 'Nástroje pro učení a učitele', emoji: '🧰' },
   ];
-  // pastelové odstíny rozložené po barevném kruhu, ať se sousední předměty neslévají
+  // pastelové odstíny rozložené po barevném kruhu; nejbližší dvojice mají ΔE ≥ 20, ať se předměty neslévají
   const VYCHOZI = {
-    cj: '#f2b4b9', m: '#b4d3f2', aj: '#d6bdf2', dcj: '#f6cfaa', prv: '#cbe5a5', inf: '#c0c4f2', f: '#f5e6a3',
-    ch: '#f2b4d3', pr: '#b0e2c0', z: '#a6e0d6', d: '#d9c3b1', vo: '#b8d1da', hv: '#e7b9e7', nastroje: '#c9ccd0',
+    cj: '#f28b8b', m: '#7d9ff5', aj: '#a98cf5', dcj: '#ffaa5c', prv: '#c3dd5c', inf: '#5bbfe6', f: '#f5d547',
+    ch: '#f585b5', pr: '#74c98a', z: '#4fc6b0', d: '#c79a73', vo: '#8fa8c8', hv: '#e08ce6', nastroje: '#c4c4c4',
   };
   // skupina menu (KATALOG_SKUPINY) → předmět
   const SKUPINY = {
@@ -48,9 +49,9 @@
   };
   // podíl barvy ve vrstvě: světlé motivy snesou víc, na tmavém pozadí stačí málo
   const SILY = {
-    jemna: { label: 'Jemné', svetla: 42, tmava: 12 },
-    stredni: { label: 'Střední', svetla: 62, tmava: 19 },
-    vyrazna: { label: 'Výrazné', svetla: 85, tmava: 28 },
+    jemna: { label: 'Jemné', svetla: 28, tmava: 15 },
+    stredni: { label: 'Střední', svetla: 48, tmava: 23 },
+    vyrazna: { label: 'Výrazné', svetla: 72, tmava: 33 },
   };
   const HEX = /^#[0-9a-f]{6}$/i;
 
@@ -79,8 +80,10 @@
       + `:root[data-tone="dark"]{--podbarva-sila:${sila.tmava}%;}`
       + PREDMETY.map(p => `[data-podbarva="${p.id}"]{--podbarva:var(--podbarva-${p.id});}`).join('')
       + '.podbarva{background-image:linear-gradient(color-mix(in srgb,var(--podbarva,transparent) var(--podbarva-sila),transparent),'
-      + 'color-mix(in srgb,var(--podbarva,transparent) var(--podbarva-sila),transparent));}';
-    if (!s.zapnuto) t += '.podbarva{background-image:none;}';
+      + 'color-mix(in srgb,var(--podbarva,transparent) var(--podbarva-sila),transparent));}'
+      // proužek v plné barvě na levém okraji – předměty se rozliší na první pohled
+      + '.podbarva.pruh{box-shadow:inset 4px 0 0 var(--podbarva);}';
+    if (!s.zapnuto) t += '.podbarva{background-image:none;}.podbarva.pruh{box-shadow:none;}';
     return t;
   }
 
@@ -129,10 +132,12 @@
     return 'nastroje';
   }
 
-  function oznac(el, co) {
+  // volby.pruh: navíc barevný proužek vlevo (bloky menu, dlaždice, karty)
+  function oznac(el, co, volby) {
     if (!el) return el;
     el.dataset.podbarva = predmet(co);
     el.classList.add('podbarva');
+    if (volby && volby.pruh) el.classList.add('pruh');
     return el;
   }
 

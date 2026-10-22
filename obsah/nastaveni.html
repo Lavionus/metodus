@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="../common.css">
   <script src="../theme.js"></script>
   <script src="../barvy-predmetu.js"></script>
+  <script src="../ikony.js"></script>
   <script src="../podpis.js" defer></script>
   <link rel="icon" href="../favicon.svg" type="image/svg+xml">
   <style>
@@ -246,8 +247,10 @@
   B.PREDMETY.forEach(p => {
     const radek = document.createElement('div');
     radek.className = 'predmet'; radek.dataset.id = p.id;
-    B.oznac(radek, p.id);
-    const nazev = document.createElement('span'); nazev.className = 'nazev'; nazev.textContent = p.emoji + ' ' + p.label;
+    B.oznac(radek, p.id, { pruh: true });
+    const nazev = document.createElement('span'); nazev.className = 'nazev';
+    if (window.MetodusIkony) MetodusIkony.nazev(nazev, 'predmet-' + p.id, p.emoji + ' ' + p.label, { velikost: 22 });
+    else nazev.textContent = p.emoji + ' ' + p.label;
     const vstup = document.createElement('input'); vstup.type = 'color'; vstup.setAttribute('aria-label', 'Barva předmětu ' + p.label);
     const vratit = document.createElement('button'); vratit.type = 'button'; vratit.className = 'vratit'; vratit.textContent = '↺';
     vratit.title = 'Vrátit výchozí barvu'; vratit.setAttribute('aria-label', 'Vrátit výchozí barvu: ' + p.label);
@@ -267,7 +270,7 @@
     const p = B.PREDMETY.find(x => x.id === id);
     const d = document.createElement('div');
     d.innerHTML = `<b>${p.emoji} ${p.label}</b> · ukázka řádku v menu`;
-    B.oznac(d, id); $('ukazkaMenu').append(d);
+    B.oznac(d, id, { pruh: true }); $('ukazkaMenu').append(d);
   });
   window.addEventListener('metodus-barvy', vykresliBarvy);
   vykresliBarvy();

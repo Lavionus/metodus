@@ -6,7 +6,7 @@
 /* Při větší aktualizaci webu zvyš číslo verze — stará cache se u návštěvníků
    smaže a vše se stáhne čerstvé (jinak SWR ukáže novou verzi až na druhé načtení). */
 const PREFIX = 'metodus-';
-const CACHE = PREFIX + 'v168';
+const CACHE = PREFIX + 'v170';
 const JADRO = [
   './',
   './index.html',
@@ -40,6 +40,7 @@ const JADRO = [
   './vyklad.js',     // společný výklad a vedený příklad
   './vyklad.css',
   './barvy-predmetu.js',   // pastelové barvy předmětů (Nastavení)
+  './ikony.js',            // seznam vlastních ikon stránek (obsah/img/ikony/*.webp se ukládají při prvním zobrazení)
   './nazor.js',       // knihovna názorných prvků (osa, proužek, věta, časová osa)
   './nazor.css',
   './badani.js',      // úkoly k modelu u simulací (předpověz → vyzkoušej → vysvětli)

@@ -692,6 +692,25 @@ Níže je úplný seznam 260 stránek z auditu. Každá má vlastní doporučen�
 - Ověření: obrazový test byl rozšířen o `inf7_site.html`, `inf7_sifrovani.html` a `typing_trainer.html`. Současná cache v132 zůstala zachována. Veřejné nasazení neproběhlo.
 
 
+## Vlastní ikony stránek (22. 10. 2026)
+
+- **296 vlastních akvarelových ikon** ve stylu ilustrací webu (Codex CLI se souhlasem uživatele): každá z 274 stránek katalogu, 14 předmětů, úvod, osnova, živé ukázky, nastavení, příprava hodiny, projektor, nové okno a oblíbené. Vznikly na 19 arších (18 × 4 × 4, 1 × 3 × 3 – jedno volání Codexu na arch místo ~300), náměty v `obsah/img/ikony/archy/namety.tsv`, zadání `arch-NN.prompt.txt`, PNG archy mimo web.
+- **Řezání** [tools/ikony_rez.py](tools/ikony_rez.py): kresba se najde záplavou papíru, úlomky sousedních ikon u okraje buňky se zahodí (souvislé části), ikona se položí na slonovinovou dlaždici se zaoblenými rohy (průhledné pozadí dělalo na tmavých motivech díry ve světlých plochách bez obrysu) → `obsah/img/ikony/<id>.webp`, 128 px, celkem 1,9 MB. [tools/ikony_archy.py](tools/ikony_archy.py) vyrábí archy (hotové přeskočí, pozná vyčerpaný limit), [tools/ikony_seznam.py](tools/ikony_seznam.py) zapíše seznam do [ikony.js](ikony.js).
+- **Zobrazení** (`MetodusIkony`, chybějící ikona = původní emoji): řádky menu, nadpisy předmětů, výběr předmětu a Oblíbené v rozcestníku, tlačítka hlavičky, oblíbené a nedávné na úvodu, seznamy v osnově, lekce a ostatní předměty na stránce předmětu, předměty v Nastavení a hlavička každé lekce (ikona stránky + ikona předmětu; kostra.js si ikony načte sama).
+- Současně zjemněno podbarvení ve světlých motivech (28/48/72 %).
+- Ověření: náhledy všech archů na světlém i tmavém podkladu zkontrolovány okem (pořadí odpovídá námětům); kouřový test 274 stránek 0 problémů; prošly `barvy-nastaveni`, `etapa03-navigace`, `etapa04-vzhled`, `obrazky71`, `obrazky-bez-png`, `ramec-kostra`, `motivy`, `etapa08`; snímky rozcestníku (světlý, tmavý), stránky předmětu, osnovy a Nastavení.
+- Zálohy: `docs/zalohy-pokracovani-20261022/*.pred-ikony.*`. Cache `metodus-v170`. Nasazení na veřejný web nebylo provedeno.
+
+
+## Barvy předmětů a stránka Nastavení (22. 10. 2026)
+
+- **Globální pastelové barvy předmětů** ([barvy-predmetu.js](barvy-predmetu.js), 14 barev po barevném kruhu): jemně podbarvují bloky předmětů v levém menu a řádky Oblíbených, dlaždice předmětů, oblíbené a nedávné na úvodu, řádky mřížky, detail a karty učebních cest v osnově, stránku předmětu a hlavičku každé lekce (kostra.js). Barva je průsvitná vrstva nad vlastním pozadím – funguje ve všech motivech, na tmavých slaběji.
+- **Nová stránka [Nastavení](obsah/nastaveni.html)** (⚙️ v hlavičce, na mobilu v nabídce „Další“) se třemi záložkami: Barvy předmětů (zapnout/vypnout, síla jemné–střední–výrazné, barva každého předmětu, návrat k výchozím), Data v prohlížeči (využití místa, localStorage po skupinách s českými popisy a názvy lekcí, zobrazení a smazání položky, záloha do JSON a obnovení, smazání výsledků a historie / všeho s potvrzením; IndexedDB s úložišti, počty záznamů a mazáním) a Barevný motiv (karty s náhledem 9 motivů). Změny se hned projeví v rozcestníku i otevřené stránce.
+- Ověření: nový [tests/barvy-nastaveni-browser.mjs](tests/barvy-nastaveni-browser.mjs) (barva z Nastavení dorazí do menu, vypnutí, motiv, popisy dat, mazání výsledků nechá nastavení, výchozí barvy); kouřový test 274 stránek 0 problémů; prošly `etapa03-navigace` (nabídka s Nastavením), `etapa04-vzhled` (vrstva `.podbarva` není tmavý přechod), `motivy`, `ramec-kostra`, `obrazky71`, `etapa08`, `00-04-odznaky`. Snímky menu, úvodu, osnovy, předmětu, lekce a všech záložek Nastavení (světlý, tmavý, 390 px) zkontrolovány okem.
+- **Úprava po připomínce „barvy jsou si podobné“:** nová paleta s rozestoupenými odstíny (nejbližší dvojice ΔE ≈ 20 místo 8 – dřív splývaly VkO/nástroje, AJ/HV, CH/HV, AJ/INF), silnější podbarvení (světlé motivy 40/60/85 %, tmavé 15/23/33 %) a proužek v plné barvě předmětu vlevo u bloků menu, dlaždic úvodu, karet okruhů a v Nastavení (`oznac(…, { pruh: true })`).
+- Zálohy: `docs/zalohy-pokracovani-20261022/*.pred-barvy.*`. Cache `metodus-v169`. Nasazení na veřejný web nebylo provedeno.
+
+
 ## Výklad a vedený příklad, nové stránky, VkO a HV, úklid (22. 10. 2026)
 
 - **Nové předměty s ročníky:** Výchova k občanství (`vo`, 6.–9., okruh „🏛️ Stát, právo a Evropa“, dlaždice s ilustrací vah `img/00/prehled-vahy`) a Hudební výchova (`hv`, 1.–9., okruh „🎼 Noty a hudební nauka“). Rozcestník má 14 předmětů.

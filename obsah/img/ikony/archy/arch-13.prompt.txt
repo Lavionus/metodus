@@ -1,0 +1,26 @@
+Vygeneruj jeden obrázek a ulož ho jako arch-13.png do aktuální složky.
+
+Asset: icon sprite sheet for the Metodus Czech educational website. Match the painting style of vzor-styl.png and arch-01.png in this folder (watercolor and gouache with fine dark ink outlines, warm ivory paper #faf6ec, muted sage / jade / ochre / brick / slate-blue palette, soft daylight from upper left), SIMPLIFIED FOR SMALL ICONS exactly like arch-01.png: one bold, chunky object or tight group per icon, strong clear silhouette, slightly thicker ink outline, few details, flat even ivory background, readable when shrunk to 24 px.
+
+Layout (very important): square 1:1 image, an exact 4 × 4 grid of 16 equal invisible cells, 4 rows and 4 columns, read left to right, top to bottom. Each icon is centered in its own cell and fills about 70 % of the cell, with clear empty ivory space between icons; nothing may cross into a neighbouring cell. No grid lines, no frames, no borders, no text, no words, no labels, no watermark. Single letters, digits or math symbols only where the description asks for them.
+
+Icons in order:
+1. A comet flying past a planet.
+2. A small globe of planet Mars on a stand.
+3. A calendar page with a crescent moon and a shooting star.
+4. The Sun with three small planets in orbit.
+5. The International Space Station with solar panels.
+6. A small satellite on an elliptical orbit around a planet.
+7. Two planets pulling each other with curved arrows.
+8. A red-framed hazard diamond with an exclamation mark and safety goggles.
+9. A funnel with filter paper over a beaker.
+10. A glass of water and a small air bubble cloud.
+11. Three recycling bins in yellow, blue and green.
+12. A molecule model of three balls connected by sticks.
+13. A small grid of colored element tiles.
+14. A chemistry book with a flask on the cover.
+15. A balance scale holding colored molecule balls on both sides.
+16. A battery with plus and minus terminals and an electrode in a beaker.
+
+Id: pohyb_vesmirem planet_globe sky_events solar_system iss gravitacni_hriste gravitacni_hriste2 ch8_bezpecnost ch8_smesi ch8_voda_vzduch ch9_zivotni_prostredi ch8_atom periodic_table chem_nazvoslovi vycislovani_rovnic ch9_redoxni
+Generator: Codex CLI (vestavěný ImageGen)

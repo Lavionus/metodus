@@ -1,0 +1,26 @@
+Vygeneruj jeden obrázek a ulož ho jako arch-07.png do aktuální složky.
+
+Asset: icon sprite sheet for the Metodus Czech educational website. Match the painting style of vzor-styl.png and arch-01.png in this folder (watercolor and gouache with fine dark ink outlines, warm ivory paper #faf6ec, muted sage / jade / ochre / brick / slate-blue palette, soft daylight from upper left), SIMPLIFIED FOR SMALL ICONS exactly like arch-01.png: one bold, chunky object or tight group per icon, strong clear silhouette, slightly thicker ink outline, few details, flat even ivory background, readable when shrunk to 24 px.
+
+Layout (very important): square 1:1 image, an exact 4 × 4 grid of 16 equal invisible cells, 4 rows and 4 columns, read left to right, top to bottom. Each icon is centered in its own cell and fills about 70 % of the cell, with clear empty ivory space between icons; nothing may cross into a neighbouring cell. No grid lines, no frames, no borders, no text, no words, no labels, no watermark. Single letters, digits or math symbols only where the description asks for them.
+
+Icons in order:
+1. Theater masks of comedy and tragedy with a quill.
+2. A vintage typewriter.
+3. Three book spines of different eras on a shelf.
+4. A speech bubble with quotation marks.
+5. A fountain pen writing on a sheet of paper.
+6. An exam sheet with a pencil and a small stopwatch, language test with an open book.
+7. Picture flashcards with an apple, a cat and a ball.
+8. A waving hand with a small speech bubble.
+9. English alphabet blocks A, B, C with a tiny British flag.
+10. A daily calendar page with a repeating circular arrow.
+11. A boy running with motion lines (happening now).
+12. A clock with an arrow curving backwards.
+13. A clock with an arrow curving forwards and a small rocket.
+14. A clock with a check mark (already done).
+15. A thick grammar book with a red bookmark and a British flag sticker.
+16. A gear wheel with small word cards around it.
+
+Id: cj7_basnicke_prostredky cj9_literatura_20 literarni_smery cj4_prima_rec cj8_sloh cj9_prijimacky aj_slovicka aj3_pozdravy aj3_abeceda aj4_pritomny_prosty aj5_pritomny_prubehovy aj6_minuly_cas aj7_budouci aj8_predpritomny aj_slovesa casovani_sloves
+Generator: Codex CLI (vestavěný ImageGen)

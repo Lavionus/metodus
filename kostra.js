@@ -56,17 +56,19 @@
     });
   }
 
-  // jemné barvy předmětů (barvy-predmetu.js) – stránky lekcí je samy nenačítají
-  function nactiBarvy() {
-    if (window.MetodusBarvy) return Promise.resolve();
+  // jemné barvy předmětů a vlastní ikony (barvy-predmetu.js, ikony.js) – stránky lekcí je samy nenačítají
+  function nactiSkript(soubor, hotovo) {
+    if (hotovo()) return Promise.resolve();
     return new Promise(ok => {
       const s = document.createElement('script');
-      s.src = new URL('barvy-predmetu.js', KOREN).href;
+      s.src = new URL(soubor, KOREN).href;
       s.onload = ok;
-      s.onerror = ok;   // bez barev hlavička funguje dál
+      s.onerror = ok;   // bez nich hlavička funguje dál
       document.head.appendChild(s);
     });
   }
+  const nactiBarvy = () => nactiSkript('barvy-predmetu.js', () => window.MetodusBarvy);
+  const nactiIkony = () => nactiSkript('ikony.js', () => window.MetodusIkony);
 
   /* ---- pomocné -------------------------------------------------------- */
   const el = (znacka, trida, text) => {
@@ -451,7 +453,16 @@
 
     // 1) proužek předmětu
     const radek = el('p', 'kostra-radek');
-    radek.append(el('span', 'kostra-predmet', predmet ? `${predmet.emoji} ${predmet.label}` : '🧰 Nástroj'));
+    const predmetEl = el('span', 'kostra-predmet', predmet ? `${predmet.emoji} ${predmet.label}` : '🧰 Nástroj');
+    radek.append(predmetEl);
+    // ikona stránky před předmětem, ikona předmětu místo emoji
+    nactiIkony().then(() => {
+      const I = window.MetodusIkony;
+      if (!I) return;
+      I.nazev(predmetEl, 'predmet-' + (predmet ? predmet.id : 'nastroje'), predmet ? `${predmet.emoji} ${predmet.label}` : '🧰 Nástroj', { velikost: 20, hned: true });
+      const vlastni = I.img(polozka, { velikost: 40, hned: true, trida: 'kostra-ikona' });
+      if (vlastni) radek.prepend(vlastni);
+    });
     const sekce = nazevBezIkony(polozka.sekce);
     if (!predmet || sekce.toLowerCase() !== predmet.label.toLowerCase()) radek.append(el('span', 'kostra-sekce', sekce));
     const r = rocniky(polozka.rocniky);

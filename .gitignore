@@ -12,3 +12,4 @@ obsah/img/kapitola-7-2.zamek
 *.bak
 *.bak-*
 backups/
+obsah/img/ikony/archy/*.log

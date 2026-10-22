@@ -1,0 +1,26 @@
+Vygeneruj jeden obrázek a ulož ho jako arch-14.png do aktuální složky.
+
+Asset: icon sprite sheet for the Metodus Czech educational website. Match the painting style of vzor-styl.png and arch-01.png in this folder (watercolor and gouache with fine dark ink outlines, warm ivory paper #faf6ec, muted sage / jade / ochre / brick / slate-blue palette, soft daylight from upper left), SIMPLIFIED FOR SMALL ICONS exactly like arch-01.png: one bold, chunky object or tight group per icon, strong clear silhouette, slightly thicker ink outline, few details, flat even ivory background, readable when shrunk to 24 px.
+
+Layout (very important): square 1:1 image, an exact 4 × 4 grid of 16 equal invisible cells, 4 rows and 4 columns, read left to right, top to bottom. Each icon is centered in its own cell and fills about 70 % of the cell, with clear empty ivory space between icons; nothing may cross into a neighbouring cell. No grid lines, no frames, no borders, no text, no words, no labels, no watermark. Single letters, digits or math symbols only where the description asks for them.
+
+Icons in order:
+1. A pH test strip with a color scale and a lemon.
+2. An oil barrel and a gas flame.
+3. A small perfume bottle and a vinegar bottle.
+4. A loaf of bread, a piece of cheese and a bottle of oil.
+5. A plant cell with nucleus under a microscope lens.
+6. A microscope with a small green bacterium.
+7. A red fly agaric mushroom and a brown boletus.
+8. A potted green plant with roots visible.
+9. A snail and an earthworm.
+10. A ladybug and a spider.
+11. A fish, a frog and a lizard.
+12. An eagle and a deer.
+13. A human heart anatomical model.
+14. A baby in a cradle.
+15. An ambulance with a red cross.
+16. A 2 by 2 grid with purple and white pea flowers.
+
+Id: ch9_ph ch9_uhlovodiky ch9_derivaty ch9_prirodni_latky bunka pr6_mikroorganismy pr6_houby pr7_rostliny pr6_bezobratli pr6_clenovci pr7_obratlovci_studenokrevni pr7_ptaci_savci anatomie pr8_rozmnozovani pr8_prvni_pomoc punnett
+Generator: Codex CLI (vestavěný ImageGen)

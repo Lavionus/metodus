@@ -48,8 +48,10 @@ assert.deepEqual(JSON.parse(vysl.ulozeno).barvy, { cj: '#ff0000' }, 'ukládá se
 assert.equal(vysl.vypnuto, 'none', 'vypnutí podbarvení');
 assert.equal(vysl.motivRodic, 'sepia / sepia', 'motiv z Nastavení platí v rozcestníku');
 assert.ok(vysl.radky.includes('Oblíbené stránky (★)') && vysl.radky.some(r => r.includes('Pády a vzory')), 'popisy uložených dat');
-assert.deepEqual(vysl.poSmazani, ['metodus_barvy_predmetu', 'metodus_migrace_nazvu', 'webapp_theme'], 'smazání výsledků nechá nastavení');
-assert.equal(vysl.poObnoveni.trim(), '#f2b4b9', 'obnovení výchozích barev');
+assert.ok(vysl.poSmazani.includes('metodus_barvy_predmetu') && vysl.poSmazani.includes('webapp_theme'), 'smazání výsledků nechá nastavení');
+assert.ok(!['metodus_oblibene', 'metodus_nedavne', 'metodus_cj4_pady'].some(k => vysl.poSmazani.includes(k)), 'výsledky a historie smazány');
+assert.match(vysl.hlaska, /^Smazáno: \d+ položk(a|y|ek)\./, 'hláška se skloňováním');
+assert.equal(vysl.poObnoveni.trim(), '#f28b8b', 'obnovení výchozích barev');
 assert.equal(vysl.prete, false, 'bez přetečení');
 await c('Network.setCacheDisabled', { cacheDisabled: false }); await c('Network.setBypassServiceWorker', { bypass: false }); ws.close();
 console.log('OK: barvy předmětů a Nastavení');

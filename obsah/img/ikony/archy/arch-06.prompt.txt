@@ -1,0 +1,26 @@
+Vygeneruj jeden obrázek a ulož ho jako arch-06.png do aktuální složky.
+
+Asset: icon sprite sheet for the Metodus Czech educational website. Match the painting style of vzor-styl.png and arch-01.png in this folder (watercolor and gouache with fine dark ink outlines, warm ivory paper #faf6ec, muted sage / jade / ochre / brick / slate-blue palette, soft daylight from upper left), SIMPLIFIED FOR SMALL ICONS exactly like arch-01.png: one bold, chunky object or tight group per icon, strong clear silhouette, slightly thicker ink outline, few details, flat even ivory background, readable when shrunk to 24 px.
+
+Layout (very important): square 1:1 image, an exact 4 × 4 grid of 16 equal invisible cells, 4 rows and 4 columns, read left to right, top to bottom. Each icon is centered in its own cell and fills about 70 % of the cell, with clear empty ivory space between icons; nothing may cross into a neighbouring cell. No grid lines, no frames, no borders, no text, no words, no labels, no watermark. Single letters, digits or math symbols only where the description asks for them.
+
+Icons in order:
+1. A green book with seven small numbered bookmarks sticking out.
+2. A paint palette with brushes (describing words).
+3. A hand pointing next to number blocks 1, 2, 3.
+4. A small link chain of three plain metal links.
+5. Three speech bubbles with a dot, a question mark and an exclamation mark.
+6. Two puzzle pieces joined together.
+7. A sentence strip with words underlined in different colors.
+8. A small tree branch with leaves growing from it.
+9. Two train wagons coupled together.
+10. A sun and a moon side by side.
+11. Three wooden building blocks of different colors stacked into a word.
+12. A treasure chest full of small word cards.
+13. A small anvil with a hammer forging a glowing letter.
+14. An old parchment manuscript with a quill and a wax seal.
+15. A reading diary notebook with a bookmark ribbon and a pencil.
+16. A small green dragon curled around a book.
+
+Id: cj4_pady cj5_pridavna cj5_zajmena_cislovky cj7_neohebne cj2_druhy_vet cj5_skladebni_dvojice vetny_rozbor cj7_rozvijejici cj8_souveti synonyma_antonyma cj4_stavba_slova cj6_slovni_zasoba cj7_slovotvorba cj9_vyvoj_jazyka reading_log cj6_baje
+Generator: Codex CLI (vestavěný ImageGen)

@@ -1,0 +1,26 @@
+Vygeneruj jeden obrázek a ulož ho jako arch-09.png do aktuální složky.
+
+Asset: icon sprite sheet for the Metodus Czech educational website. Match the painting style of vzor-styl.png and arch-01.png in this folder (watercolor and gouache with fine dark ink outlines, warm ivory paper #faf6ec, muted sage / jade / ochre / brick / slate-blue palette, soft daylight from upper left), SIMPLIFIED FOR SMALL ICONS exactly like arch-01.png: one bold, chunky object or tight group per icon, strong clear silhouette, slightly thicker ink outline, few details, flat even ivory background, readable when shrunk to 24 px.
+
+Layout (very important): square 1:1 image, an exact 4 × 4 grid of 16 equal invisible cells, 4 rows and 4 columns, read left to right, top to bottom. Each icon is centered in its own cell and fills about 70 % of the cell, with clear empty ivory space between icons; nothing may cross into a neighbouring cell. No grid lines, no frames, no borders, no text, no words, no labels, no watermark. Single letters, digits or math symbols only where the description asks for them.
+
+Icons in order:
+1. A small village with a church tower and houses.
+2. A compass rose with a folded map.
+3. A cozy family house with a heart above it.
+4. The Czech flag on a small flagpole.
+5. A tree split into four seasons: blossom, green, orange leaves and snow.
+6. An old hill fort with wooden palisade.
+7. An old radio receiver and a vintage pocket watch.
+8. A cow and a fox together.
+9. A sprouting seedling next to a grey pebble.
+10. A water drop, a small cloud and a clump of soil.
+11. A forest pond with reeds and a tree.
+12. A few rocks and a sparkling crystal.
+13. A lightning bolt with a small wind turbine and a solar panel.
+14. An eye, an ear and a nose drawn as friendly simple shapes.
+15. A first aid box with a bandage.
+16. A bowl of salad with an apple and a jump rope.
+
+Id: prv3_obec prv4_mapy_smery prv1_rodina prv5_statni_symboly prv1_rocni_obdobi prv4_nejstarsi_dejiny prv5_dejiny_20 prv2_zvirata prv3_ziva_neziva prv3_voda_vzduch prv4_ekosystemy prv4_horniny prv5_energie prv1_smysly prv2_zdravi prv5_zdravy_styl
+Generator: Codex CLI (vestavěný ImageGen)
