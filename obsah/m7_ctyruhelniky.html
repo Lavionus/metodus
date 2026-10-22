@@ -6,6 +6,8 @@
   <title>Čtyřúhelníky a hranoly</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -26,6 +28,41 @@
 <body>
   <h1>🔷 Čtyřúhelníky a hranoly</h1>
   <p class="podtitul">Pro 7. ročník: druhy čtyřúhelníků, obsah rovnoběžníku a lichoběžníku, hranoly.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Čtyřúhelníky, jejich obsah a hranoly</summary>
+    <div class="obsah">
+      <p>Čtyřúhelníky třídíme podle toho, kolik mají dvojic <b>rovnoběžných stran</b>. <b>Rovnoběžníky</b> mají
+        obě dvojice protějších stran rovnoběžné: čtverec, obdélník, kosočtverec a kosodélník. <b>Lichoběžník</b> má
+        rovnoběžnou jen jednu dvojici – <b>základny</b> a, c. Deltoid má dvě dvojice stejně dlouhých sousedních stran.
+        Čtverec je zvláštní obdélník i zvláštní kosočtverec, proto pro něj platí vlastnosti obou.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Obsah rovnoběžníku</h3><p><b>S = a · v<sub>a</sub></b>. Když od kosodélníku
+          odřízneš trojúhelník u jedné strany a přiložíš ho na druhou, vznikne obdélník a × v<sub>a</sub>.</p></article>
+        <article class="vyklad-karta"><h3>Obsah lichoběžníku</h3><p><b>S = (a + c) · v : 2</b>. Dva stejné lichoběžníky,
+          jeden otočený, složí rovnoběžník se stranou a + c a výškou v; lichoběžník je jeho polovina.</p></article>
+        <article class="vyklad-karta"><h3>Hranol</h3><p>Objem <b>V = S<sub>p</sub> · v</b> (podstava krát výška,
+          v cm³). Povrch <b>S = 2 · S<sub>p</sub> + S<sub>pl</sub></b>, kde plášť S<sub>pl</sub> = obvod podstavy · v (v cm²).</p></article>
+      </div>
+      <p>Nejčastější chyba: místo výšky dosadíš délku šikmé strany (ramene). <b>Výška je kolmá vzdálenost</b>
+        mezi rovnoběžnými stranami, šikmá strana je vždy delší.</p>
+      <aside class="zapamatuj">Rovnoběžník S = a · v<sub>a</sub>, lichoběžník S = (a + c) · v : 2, hranol V = S<sub>p</sub> · v. Výška je vždy kolmá.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: obsah lichoběžníku</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Lichoběžník má základny a = 10 cm, c = 6 cm a výšku v = 4 cm. Jaký má obsah?</p>
+      <ol class="kroky">
+        <li>Je to lichoběžník, použiji vzorec S = (a + c) · v : 2.</li>
+        <li>Sečtu základny: a + c = 10 + 6 = 16 cm.</li>
+        <li>Vynásobím výškou: 16 · 4 = 64. To je obsah rovnoběžníku ze dvou takových lichoběžníků.</li>
+        <li>Vydělím dvěma: 64 : 2 = 32. Obsah je plocha, jednotka je cm².</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ S = 32 cm²</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="poznej" class="active">🔍 Poznej čtyřúhelník</button>
@@ -59,15 +96,19 @@ const TVARY = {
     popis: 'čtyři stejně dlouhé strany a čtyři pravé úhly' },
   obdelnik: { nazev: 'obdélník', body: '20,50 220,50 220,170 20,170',
     popis: 'protější strany stejné, všechny úhly pravé' },
-  kosoctverec: { nazev: 'kosočtverec', body: '120,20 220,110 120,200 20,110',
+  kosoctverec: { nazev: 'kosočtverec', body: '120,40 220,110 120,180 20,110',
     popis: 'čtyři stejně dlouhé strany, úhly nejsou pravé' },
   kosodelnik: { nazev: 'kosodélník', body: '60,50 230,50 180,170 10,170',
     popis: 'protější strany rovnoběžné a stejné, úhly nejsou pravé' },
   lichobeznik: { nazev: 'lichoběžník', body: '70,50 180,50 230,170 20,170',
     popis: 'jen jedna dvojice rovnoběžných stran (základny)' },
-  deltoid: { nazev: 'deltoid', body: '120,20 210,110 120,200 30,110',
+  deltoid: { nazev: 'deltoid', body: '120,20 200,80 120,200 40,80',
     popis: 'dvě dvojice sousedních stran stejné délky' },
 };
+
+/* Které názvy platí pro tvar zároveň (čtverec je i obdélník, kosočtverec a deltoid;
+   kosočtverec je i deltoid) – takové názvy nesmí být mezi „špatnými“ možnostmi. */
+const TAKY = { ctverec: ['obdelnik', 'kosoctverec', 'deltoid'], kosoctverec: ['deltoid'] };
 
 function svgTvar(klic, kota) {
   const t = TVARY[klic];
@@ -86,7 +127,8 @@ function poznej() {
   const odezva = odezvaEl();
   Uloha.vyber({
     kam: p, odezva,
-    moznosti: Uloha.zamichej([klic, ...Uloha.zamichej(Object.keys(TVARY).filter(k => k !== klic)).slice(0, 3)])
+    moznosti: Uloha.zamichej([klic, ...Uloha.zamichej(Object.keys(TVARY)
+        .filter(k => k !== klic && !(TAKY[klic] || []).includes(k))).slice(0, 3)])
       .map(k => ({ klic: k, popis: TVARY[k].nazev })),
     spravnyKlic: klic,
     zpravaOk: `✅ ${TVARY[klic].nazev} – ${TVARY[klic].popis}.`,

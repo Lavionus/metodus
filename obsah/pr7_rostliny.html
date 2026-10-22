@@ -215,6 +215,11 @@ function casti() {
 
   p.innerHTML = `<div class="zadani">Klepni na část rostliny, která <b>${ORGANY[klic].funkce}</b>.</div>
     ${obrazekRostliny()}`;
+  /* V kvízu nesmí název části prozradit popisek ani aria-label. */
+  p.querySelectorAll('.cast').forEach((g, i) => {
+    g.setAttribute('aria-label', `část rostliny ${i + 1}`);
+    g.querySelectorAll('.annotation').forEach(a => a.remove());
+  });
   const odezva = odezvaEl();
   p.querySelectorAll('.cast').forEach(g => g.addEventListener('click', () => Uloha.odpoved({
     prvek: g, spravne: g.dataset.klic === klic, stav, odezva,
@@ -256,14 +261,14 @@ const FOTO = [
   { q: 'Co rostlina při dýchání přijímá?', a: 'kyslík', b: ['oxid uhličitý', 'dusík', 'vodík'] },
   { q: 'Čím rostlina přijímá vodu?', a: 'kořenovými vlásky', b: ['listy', 'květy', 'plody'] },
   { q: 'Jak se nazývají otvory v listu, kterými proudí plyny?', a: 'průduchy', b: ['žilky', 'pletiva', 'blizny'] },
-  { q: 'Co se děje, když rostlinu necháme dlouho ve tmě?', a: 'nemůže fotosyntetizovat, žloutne a hyne', b: ['roste rychleji', 'více kvete', 'dýchá kyslík'] },
+  { q: 'Co se děje, když rostlinu necháme dlouho ve tmě?', a: 'nemůže fotosyntetizovat, žloutne a hyne', b: ['roste rychleji', 'více kvete', 'fotosyntetizuje rychleji'] },
 ];
 
 /* ---- Systém rostlin ---------------------------------------------------------------------- */
 const SKUPINY = {
   mechorosty: 'mechorosty (nemají pravé cévní svazky ani kořeny)',
   kapradorosty: 'kapraďorosty (mají cévní svazky, rozmnožují se výtrusy)',
-  nahosemenne: 'nahosemenné (semena v šišce, nemají pravé květy)',
+  nahosemenne: 'nahosemenné (semena nejsou uzavřena v plodu)',
   krytosemenne: 'krytosemenné (semena v plodu, mají květy)',
 };
 const ROSTLINY = [
@@ -322,7 +327,7 @@ function system() {
     moznosti: Uloha.zamichej(Object.entries(SKUPINY).map(([k, v]) => ({ klic: k, popis: v }))),
     spravnyKlic: r.s,
     zpravaOk: `✅ ${r.n} – ${SKUPINY[r.s]}${r.foto && r.znak ? `. Poznáš to: ${r.znak}.` : ''}`,
-    zpravaChyba: 'Zeptej se: má rostlina květ a plod, šišku, výtrusy, nebo ani cévní svazky?',
+    zpravaChyba: 'Zeptej se: má rostlina květ a plod, semena bez plodu (často v šišce), výtrusy, nebo ani cévní svazky?',
     poSpravne: skore.vyhodnot,
     dalsi: dalsiPlatna(),
   });

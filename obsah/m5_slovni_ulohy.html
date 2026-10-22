@@ -6,6 +6,8 @@
   <title>Slovní úlohy a úsudek</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -23,6 +25,43 @@
 <body>
   <h1>🧠 Slovní úlohy a úsudek</h1>
   <p class="podtitul">Pro 5.–6. ročník: úlohy o více krocích, odhad a hledání správného postupu.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Jak řešit slovní úlohu</summary>
+    <div class="obsah">
+      <p>Slovní úloha je příběh, ve kterém se schovávají čísla a otázka. Nejtěžší není samotný výpočet,
+        ale rozhodnout, <b>co</b> spočítat a <b>v jakém pořadí</b>. Proto je dobré nespěchat a postupovat
+        pokaždé stejně.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Údaje a otázka</h3><p>Vypiš si čísla s tím, co znamenají (cena 1 sešitu, počet sešitů…).
+          Pak najdi větu s otazníkem – ta říká, <b>co hledáš a v jakých jednotkách</b>.</p></article>
+        <article class="vyklad-karta"><h3>Plán</h3><p>Rozmysli, co potřebuješ znát dřív, než odpovíš na otázku.
+          Kolik vrátí, zjistíš, až když víš, <b>kolik nákup stál</b>. To je první krok.</p></article>
+        <article class="vyklad-karta"><h3>Výběr početní operace</h3><p>„Po“, „v každém“, „kolikrát“ → často násobení.
+          „Zbývá“, „vrátí“, „o kolik méně“ → odčítání. „Celkem“ může znamenat sčítání i násobení – rozhodne příběh.</p></article>
+        <article class="vyklad-karta"><h3>Odhad a ověření</h3><p>Zaokrouhli čísla a spočítej zhruba. Přesný výsledek musí být
+          blízko odhadu a musí dávat smysl – nazpátek nemůžeš dostat víc, než jsi dal.</p></article>
+      </div>
+      <p>Typická chyba je vzít čísla v tom pořadí, jak stojí v textu, a hned je spojit znaménkem. Třeba 200 − 23
+        u úlohy o šesti sešitech: odečetla by se cena jen jednoho sešitu.</p>
+      <aside class="zapamatuj">Přečti → zapiš údaje → najdi otázku → naplánuj kroky → spočítej → ověř a odpověz celou větou s jednotkou.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: nákup v papírnictví</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Sešit stojí 23 Kč. Maminka koupila 6 sešitů a platila bankovkou 200 Kč. Kolik korun dostane nazpátek?</p>
+      <ol class="kroky">
+        <li>Údaje: cena 1 sešitu <b>23 Kč</b>, počet <b>6</b>, zaplaceno <b>200 Kč</b>. Hledám, kolik Kč dostane zpět.</li>
+        <li>Abych věděl, kolik vrátí, musím nejdřív znát cenu celého nákupu. První krok: <b>23 × 6</b>.</li>
+        <li>Spočítám: 23 × 6 = 20 × 6 + 3 × 6 = 120 + 18 = <b>138 Kč</b>.</li>
+        <li>Druhý krok – co zbyde z bankovky: 200 − 138 = <b>62 Kč</b>.</li>
+        <li>Ověření: odhad 6 × 20 = 120 Kč, takže vrátí méně než 80 Kč. 62 Kč je méně, a 138 + 62 = 200. Sedí.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Maminka dostane nazpátek 62 Kč.</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="vyres" class="active">🧮 Vyřeš úlohu</button>
@@ -47,44 +86,55 @@ const $ = id => document.getElementById(id);
 const skore = Uloha.skore('metodus_m5_slovni', $('skore'));
 let rezim = 'vyres';
 
+/* Tvar slova podle čísla (1 sešit, 2 sešity, 5 sešitů) – jen slovo, číslo je zvlášť tučně. */
+const sl = (n, jeden, dva, pet) => n === 1 ? jeden : (n >= 2 && n <= 4) ? dva : pet;
+/* Zaokrouhlení údaje pro odhad: jednociferná čísla nechá, ostatní na desítky. */
+const zd = x => x < 10 ? x : Math.round(x / 10) * 10;
+/* Skutečné české bankovky – nejmenší, která stačí na zaplacení (i zaokrouhlené ceny). */
+const BANKOVKY = [100, 200, 500, 1000, 2000, 5000];
+
 /* Šest prostředí odpovídá šesti ilustracím IMG-m-04. Čísla zůstávají živá ve webu. */
 const SABLONY = [
   () => {
     const cena = Uloha.nahodneCislo(12, 45), kusu = Uloha.nahodneCislo(3, 9);
-    const platil = Math.ceil((cena * kusu + Uloha.nahodneCislo(10, 90)) / 50) * 50;
+    const zc = zd(cena), zaplatit = Math.max(cena * kusu, zc * kusu);
+    const platil = BANKOVKY.find(b => b >= zaplatit + 10);
     return {
-      text: `Sešit stojí <b>${cena} Kč</b>. Maminka koupila <b>${kusu}</b> sešitů a platila
+      text: `Sešit stojí <b>${cena} Kč</b>. Maminka koupila <b>${kusu}</b> ${sl(kusu, 'sešit', 'sešity', 'sešitů')} a platila
              bankovkou <b>${platil} Kč</b>. Kolik korun dostane nazpátek?`,
       scena: 'obchod', alt: 'Maminka s dítětem platí za sešity v papírnictví.', popisek: 'Nákup v papírnictví',
       vysledek: platil - cena * kusu, jednotka: 'Kč',
       prvni: `${cena} × ${kusu}`,
       spatnePrvni: [`${platil} − ${cena}`, `${platil} : ${kusu}`, `${platil} + ${cena}`],
+      odhad: { hodnota: platil - zc * kusu, postup: `${platil} − ${zc} × ${kusu} = ${platil - zc * kusu}` },
     };
   },
   () => {
     const vagony = Uloha.nahodneCislo(3, 7), vagon = Uloha.nahodneCislo(24, 48);
     return {
-      text: `Výletní vlak má <b>${vagony}</b> vagonů a v každém je <b>${vagon}</b> míst.
+      text: `Výletní vlak má <b>${vagony}</b> ${sl(vagony, 'vagon', 'vagony', 'vagonů')} a v každém je <b>${vagon}</b> míst.
              Kolik cestujících se do vlaku vejde?`,
       scena: 'vlak', alt: 'Skupina žáků s učiteli čeká u vlaku na nástupišti.', popisek: 'Školní výlet vlakem',
       vysledek: vagony * vagon, jednotka: 'cestujících',
       prvni: `${vagony} × ${vagon}`,
       spatnePrvni: [`${vagon} : ${vagony}`, `${vagon} − ${vagony}`, `${vagon} + ${vagony}`],
+      odhad: { hodnota: vagony * zd(vagon), postup: `${vagony} × ${zd(vagon)} = ${vagony * zd(vagon)}` },
     };
   },
   () => {
     const zahony = Uloha.nahodneCislo(3, 8), sazenic = Uloha.nahodneCislo(6, 12);
     return {
-      text: `Na školní zahradě je <b>${zahony}</b> záhonů. Do každého děti zasadí <b>${sazenic}</b> sazenic.
+      text: `Na školní zahradě je <b>${zahony}</b> ${sl(zahony, 'záhon', 'záhony', 'záhonů')}. Do každého děti zasadí <b>${sazenic}</b> sazenic.
              Kolik sazenic potřebují celkem?`,
       scena: 'zahrada', alt: 'Děti sázejí a zalévají zeleninu ve školní zahradě.', popisek: 'Práce na školní zahradě',
       vysledek: zahony * sazenic, jednotka: 'sazenic',
       prvni: `${zahony} × ${sazenic}`,
       spatnePrvni: [`${sazenic} : ${zahony}`, `${sazenic} + ${zahony}`, `${sazenic} − ${zahony}`],
+      odhad: { hodnota: zahony * zd(sazenic), postup: `${zahony} × ${zd(sazenic)} = ${zahony * zd(sazenic)}` },
     };
   },
   () => {
-    const porci = Uloha.nahodneCislo(80, 140), vydano = Uloha.nahodneCislo(35, 75);
+    const vydano = Uloha.nahodneCislo(35, 75), porci = vydano + Uloha.nahodneCislo(30, 65);
     return {
       text: `Školní jídelna připravila <b>${porci}</b> porcí. O první přestávce vydala <b>${vydano}</b> porcí.
              Kolik porcí ještě zbývá?`,
@@ -92,17 +142,19 @@ const SABLONY = [
       vysledek: porci - vydano, jednotka: 'porcí',
       prvni: `${porci} − ${vydano}`,
       spatnePrvni: [`${porci} + ${vydano}`, `${porci} : ${vydano}`, `${vydano} × 2`],
+      odhad: { hodnota: zd(porci) - zd(vydano), postup: `${zd(porci)} − ${zd(vydano)} = ${zd(porci) - zd(vydano)}` },
     };
   },
   () => {
     const krabice = Uloha.nahodneCislo(3, 6), kusu = Uloha.nahodneCislo(7, 14), navic = Uloha.nahodneCislo(2, 8);
     return {
-      text: `Ve sbírce je <b>${krabice}</b> krabic po <b>${kusu}</b> kamíncích a ještě <b>${navic}</b> kamínků leží vedle.
+      text: `Ve sbírce je <b>${krabice}</b> ${sl(krabice, 'krabice', 'krabice', 'krabic')} po <b>${kusu}</b> kamíncích a ještě <b>${navic}</b> ${sl(navic, 'kamínek', 'kamínky', 'kamínků')} leží vedle.
              Kolik kamínků je ve sbírce celkem?`,
       scena: 'sbirka', alt: 'Dívka třídí kamínky, mušle a další přírodniny do krabic.', popisek: 'Třídění sbírky',
       vysledek: krabice * kusu + navic, jednotka: 'kamínků',
       prvni: `${krabice} × ${kusu}`,
       spatnePrvni: [`${krabice} + ${kusu}`, `${kusu} − ${navic}`, `${kusu} : ${krabice}`],
+      odhad: { hodnota: krabice * zd(kusu) + navic, postup: `${krabice} × ${zd(kusu)} + ${navic} = ${krabice * zd(kusu) + navic}` },
     };
   },
   () => {
@@ -114,6 +166,7 @@ const SABLONY = [
       vysledek: dopoledne + odpoledne, jednotka: 'km',
       prvni: `${dopoledne} + ${odpoledne}`,
       spatnePrvni: [`${dopoledne} − ${odpoledne}`, `${dopoledne} × ${odpoledne}`, `${dopoledne} : ${odpoledne}`],
+      odhad: { hodnota: zd(dopoledne) + zd(odpoledne), postup: `${zd(dopoledne)} + ${zd(odpoledne)} = ${zd(dopoledne) + zd(odpoledne)}` },
     };
   },
 ];
@@ -179,10 +232,18 @@ function prvniKrok() {
 function odhad() {
   const p = $('plocha');
   const u = novaUlohaData();
-  const rad = u.vysledek < 100 ? 10 : u.vysledek < 1000 ? 100 : 1000;
-  const spravny = Math.round(u.vysledek / rad) * rad;
-  const jine = [spravny + rad, spravny - rad, spravny + 2 * rad]
-    .filter(x => x > 0 && x !== spravny);
+  /* Správný odhad = výpočet se zaokrouhlenými údaji (jak radí nápověda), zaokrouhlený na desítky.
+     Rušivé možnosti jsou zřetelně dál od přesného výsledku než správný odhad a nikdy se
+     nekryjí s pouhým zaokrouhlením přesného výsledku – i ten postup by byl dobrý odhad. */
+  const spravny = Math.round(u.odhad.hodnota / 10) * 10;
+  const chybaOdhadu = Math.abs(spravny - u.vysledek);
+  const zaokr = [10, 100].map(r => Math.round(u.vysledek / r) * r);
+  let jine = [];
+  for (let krok = spravny < 150 ? 20 : 50; jine.length < 3; krok *= 2) {
+    jine = Uloha.zamichej([-4, -3, -2, -1, 1, 2, 3, 4].map(k => spravny + k * krok))
+      .filter(x => x > 0 && Math.abs(x - u.vysledek) > chybaOdhadu + 10 && !zaokr.includes(x))
+      .sort((a, b) => Math.abs(a - spravny) - Math.abs(b - spravny));
+  }
 
   p.innerHTML = `<div class="zadani">Odhadni, kolik zhruba vyjde – bez přesného počítání.</div>
     ${kartaUlohy(u)}
@@ -194,7 +255,7 @@ function odhad() {
     moznosti: Uloha.zamichej([spravny, ...jine.slice(0, 3)])
       .map(v => ({ klic: String(v), popis: 'asi ' + v + ' ' + u.jednotka })),
     spravnyKlic: String(spravny),
-    zpravaOk: `✅ Přesný výsledek je ${u.vysledek} ${u.jednotka}, takže odhad ${spravny} sedí.`,
+    zpravaOk: `✅ Odhad: ${u.odhad.postup}, tedy asi ${spravny}. Přesný výsledek je ${u.vysledek} ${u.jednotka}.`,
     zpravaChyba: 'Zaokrouhli čísla v zadání a zkus to znovu.',
     poSpravne: skore.vyhodnot,
     dalsi: novaUloha,

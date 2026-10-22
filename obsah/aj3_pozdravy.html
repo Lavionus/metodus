@@ -6,6 +6,8 @@
   <title>Angličtina – pozdravy a představení</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -21,6 +23,47 @@
 <body>
   <h1>👋 Pozdravy a představení</h1>
   <p class="podtitul">Pro 3. ročník angličtiny: jak pozdravit, odpovědět a představit se.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Jak se zdravit anglicky</summary>
+    <div class="obsah">
+      <p>Když někoho potkáš, pozdravíš ho. Nejjednodušší je <b><span lang="en">Hello!</span></b> nebo
+        <b><span lang="en">Hi!</span></b> – hodí se kdykoli během dne. Když chceš být zdvořilý, vyber pozdrav
+        <b>podle denní doby</b>.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Při setkání</h3><p>🌅 ráno a dopoledne: <b><span lang="en">Good morning!</span></b><br>
+          ☀️ odpoledne: <b><span lang="en">Good afternoon!</span></b><br>
+          🌆 večer: <b><span lang="en">Good evening!</span></b></p></article>
+        <article class="vyklad-karta"><h3>Při loučení</h3><p><b><span lang="en">Goodbye!</span></b> = Na shledanou.<br>
+          <b><span lang="en">See you tomorrow!</span></b> = Uvidíme se zítra.<br>
+          🌙 <b><span lang="en">Good night!</span></b> = Dobrou noc – říkáš, když jdeš spát.</p></article>
+        <article class="vyklad-karta"><h3>Představ se</h3><p><span lang="en">What is your name?</span> → <b><span lang="en">My name is Tom.</span></b><br>
+          <span lang="en">How old are you?</span> → <b><span lang="en">I am nine years old.</span></b><br>
+          <span lang="en">Where are you from?</span> → <b><span lang="en">I am from Czechia.</span></b></p></article>
+      </div>
+      <p>Na otázku odpovídej tak, aby odpověď pasovala. Ptá se někdo, <b>jak se máš</b>
+        (<span lang="en">How are you?</span>)? Řekni <b><span lang="en">I am fine, thank you.</span></b>
+        Když ti někdo poděkuje (<span lang="en">Thank you!</span>), odpovíš <b><span lang="en">You are welcome.</span></b> – Není zač.</p>
+      <p>Pozor na častou chybu: <span lang="en">Good night</span> není večerní pozdrav při setkání.
+        Když večer přijdeš na návštěvu, řekneš <span lang="en">Good evening!</span></p>
+      <aside class="zapamatuj">Ráno <span lang="en">Good morning</span>, odpoledne <span lang="en">Good afternoon</span>,
+        večer <span lang="en">Good evening</span>. <span lang="en">Good night</span> jen na rozloučenou před spaním.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: pozdrav podle hodin</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Jsou 3 hodiny odpoledne (15:00). Potkáš paní učitelku. Jak ji pozdravíš?</p>
+      <ol class="kroky">
+        <li>Podívám se na hodiny: 15:00 je <b>po obědě</b>, tedy odpoledne.</li>
+        <li>Je to setkání, ne loučení – hledám <b>pozdrav</b>.</li>
+        <li>Odpoledne se řekne <span lang="en">afternoon</span>, takže pozdrav je <b><span lang="en">Good afternoon!</span></b></li>
+        <li>Zkontroluji: <span lang="en">Good night</span> to být nemůže – nejdu spát.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ <span lang="en">Good afternoon!</span> – Dobré odpoledne!</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="vyznam" class="active">🇨🇿 Co to znamená?</button>
@@ -135,7 +178,9 @@ function denniDoba() {
   const hodina = doba.klic === 'night'
     ? Uloha.nahodne([22, 23, 0, 1, 2, 3, 4, 5])
     : Uloha.nahodneCislo(doba.od, doba.do);
-  p.innerHTML = `<div class="zadani">Jak pozdravíš v tuto dobu?</div>
+  // Good night není pozdrav při setkání, ale přání na rozloučenou před spaním
+  const otazka = doba.klic === 'night' ? 'Co řekneš v tuto dobu, když jdeš spát?' : 'Jak pozdravíš v tuto dobu?';
+  p.innerHTML = `<div class="zadani">${otazka}</div>
     <div class="karta"><img class="pozdrav-scena" src="${doba.img}" alt="${doba.alt}">
     <div class="hodiny-cas">${String(hodina).padStart(2, '0')}:00</div></div>`;
   const odezva = document.createElement('div');
@@ -144,7 +189,8 @@ function denniDoba() {
     kam: p, odezva,
     moznosti: Uloha.zamichej(DENNI_DOBY).map(x => ({ klic: x.klic, popis: x.popis })),
     spravnyKlic: doba.klic,
-    zpravaOk: `✅ V ${hodina} hodin se říká „${doba.popis}“`,
+    zpravaOk: `✅ V ${String(hodina).padStart(2, '0')}:00 se říká „${doba.popis}“`
+      + (doba.klic === 'night' ? ' – jen na rozloučenou před spaním, při setkání večer řekneš Good evening.' : ''),
     zpravaChyba: 'V tuhle hodinu se používá jiný pozdrav.',
     poSpravne: skore.vyhodnot,
     dalsi: novaUloha,

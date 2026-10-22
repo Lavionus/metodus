@@ -6,6 +6,8 @@
   <title>Obvod a obsah čtverce a obdélníku</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -27,6 +29,40 @@
 <body>
   <h1>🟦 Obvod a obsah čtverce a obdélníku</h1>
   <p class="podtitul">Pro 4.–5. ročník: počítání ve čtvercové síti i podle vzorců.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Obvod a obsah</summary>
+    <div class="obsah">
+      <p><b>Obvod</b> a <b>obsah</b> se často pletou, ale měří úplně jiné věci. Představ si zahradu: obvod je délka
+        plotu kolem ní, obsah je velikost trávníku uvnitř.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Obvod o</h3><p>Sečteš délky všech stran. Obdélník má dvě strany a a dvě
+          strany b, proto <b>o = 2 × (a + b)</b>. Čtverec má čtyři stejné strany: <b>o = 4 × a</b>. Jednotka je
+          délková, třeba <b>cm</b>.</p></article>
+        <article class="vyklad-karta"><h3>Obsah S</h3><p>Počítáš, kolik čtverečků 1 cm × 1 cm se vejde dovnitř.
+          V jedné řadě je jich a, řad je b, proto <b>S = a × b</b>. U čtverce <b>S = a × a</b>. Jednotka je
+          čtvereční, třeba <b>cm²</b>.</p></article>
+      </div>
+      <p>Ve čtvercové síti nemusíš počítat čtverečky po jednom: spočítej jednu řadu a vynásob ji počtem řad.
+        Typická chyba je napsat u obsahu jen cm, nebo u obvodu sečíst jen dvě strany. Kontrola: obvod obdélníku
+        musí být víc než dvojnásobek delší strany.</p>
+      <aside class="zapamatuj">Obvod = okraj, sčítám strany, jednotka cm. Obsah = plocha uvnitř, násobím strany, jednotka cm².</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: obvod a obsah obdélníku</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Obdélník má strany a = 7 cm a b = 4 cm. Vypočítej jeho obvod a obsah.</p>
+      <ol class="kroky">
+        <li>Obvod je délka okraje. Obdélník má dvě strany 7 cm a dvě strany 4 cm: o = 2 × (7 + 4).</li>
+        <li>Nejdřív závorka: 7 + 4 = 11. Pak 2 × 11 = 22. Obvod je <b>22 cm</b>.</li>
+        <li>Obsah je počet čtverečků uvnitř: v řadě jich je 7 a řady jsou 4, takže S = 7 × 4 = 28.</li>
+        <li>Přidám správnou jednotku: obsah je plocha, proto <b>28 cm²</b>.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ o = 22 cm, S = 28 cm²</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="obsahSit" class="active">▦ Obsah ve čtvercové síti</button>

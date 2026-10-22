@@ -33,19 +33,37 @@ const Procvic = (function () {
 
   function normalizuj(v) {
     return String(v).trim().toLowerCase()
+      .replace(/[\u2212\u2013]/g, '-')   // typografické minus a pomlčka
       .replace(',', '.')            // 3,5 i 3.5
       .replace(/\s+/g, ' ');
   }
+  /* Číselná hodnota psané odpovědi: „1 130,4“, „−3“, „60 Kč“, „25 %“, „1/6“.
+     Jednotka za číslem se ignoruje – stránky ji samy uvádějí v zadání. */
+  function hodnota(v) {
+    let s = normalizuj(v);
+    if (s === '') return NaN;
+    s = s.replace(/(\d)[ \u00a0](?=\d{3}(\D|$))/g, '$1');      // mezery v tisících
+    s = s.replace(/^(-?[\d.]+(?:\/\d+)?)\s*(kč|%|‰|[a-zµ°]+[²³]?\.?)$/u, '$1');
+    const zlomek = s.match(/^(-?\d+)\/(\d+)$/);
+    if (zlomek) return Number(zlomek[2]) ? Number(zlomek[1]) / Number(zlomek[2]) : NaN;
+    return s === '' ? NaN : Number(s);
+  }
   function shoda(zadano, spravne, tolerance) {
     const a = normalizuj(zadano), b = normalizuj(spravne);
+    if (a === '') return false;            // prázdná odpověď není nula
     if (a === b) return true;
-    const ca = Number(a), cb = Number(b);
+    const ca = hodnota(zadano), cb = hodnota(spravne);
     // číselné odpovědi porovnáváme jako čísla (0.50 === 0.5);
     // u pravděpodobností apod. se hodí povolená odchylka
     if (Number.isFinite(ca) && Number.isFinite(cb)) {
       return Math.abs(ca - cb) <= (tolerance > 0 ? tolerance : 1e-9);
     }
     return false;
+  }
+  /* Výsledek pro žáka česky: desetinná čárka, mezery v tisících, znak −. */
+  function cesky(v) {
+    if (typeof v !== 'number' || !Number.isFinite(v)) return String(v);
+    return v.toLocaleString('cs-CZ', { maximumFractionDigits: 6 }).replace('-', '−');
   }
   // odpověď sedí na hlavní tvar nebo na některou uznávanou variantu
   // (presne: true = záleží na velikosti písmen, třeba u chemických vzorců CO × Co)
@@ -156,7 +174,8 @@ const Procvic = (function () {
       const pole = document.createElement('input');
       pole.className = 'odpoved-pole';
       pole.type = o.typ === 'number' ? 'number' : 'text';
-      if (o.typ === 'number') { pole.inputMode = 'decimal'; pole.step = 'any'; }
+      // bez inputMode=decimal: na iPhonu by klávesnice neměla minus (záporné výsledky)
+      if (o.typ === 'number') pole.step = 'any';
       pole.autocomplete = 'off';
       pole.setAttribute('aria-label', 'Tvoje odpověď');
       karta.appendChild(pole);
@@ -172,7 +191,7 @@ const Procvic = (function () {
     }
 
     function vysledekText() {
-      return `❌ Správně je ${aktualni.odpoved}.` + (aktualni.napoveda ? ` (${aktualni.napoveda})` : '');
+      return `❌ Správně je ${cesky(aktualni.odpoved)}.` + (aktualni.napoveda ? ` (${aktualni.napoveda})` : '');
     }
 
     function vyhodnot(pole, odezva, uzavri = () => {}) {
@@ -223,7 +242,7 @@ const Procvic = (function () {
         seznam.className = 'prehled-chyb';
         seznam.innerHTML = '<h2>Co nesedělo</h2>' + chyby.map(ch =>
           `<div class="chyba-radek"><span class="zadani-chyby">${ch.zadani}</span>` +
-          `<b>${ch.odpoved}</b>${ch.napoveda ? `<span class="napoveda-chyby">${ch.napoveda}</span>` : ''}</div>`
+          `<b>${cesky(ch.odpoved)}</b>${ch.napoveda ? `<span class="napoveda-chyby">${ch.napoveda}</span>` : ''}</div>`
         ).join('');
         karta.appendChild(seznam);
       } else {

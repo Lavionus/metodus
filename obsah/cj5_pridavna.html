@@ -6,6 +6,8 @@
   <title>Přídavná jména</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -30,6 +32,37 @@
 <body>
   <h1>🎨 Přídavná jména</h1>
   <p class="podtitul">Pro 5.–6. ročník: druhy přídavných jmen, vzory, koncovky a stupňování.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Druhy, vzory a stupňování přídavných jmen</summary>
+    <div class="obsah">
+      <p><b>Přídavná jména</b> vyjadřují vlastnost podstatného jména: jaký? který? čí? Stojí obvykle před podstatným jménem
+        a <b>shodují se s ním</b> v rodě, čísle a pádě: mladý strom, mladá louka, mladé stromy. Proto koncovku vždy odvozuješ od podstatného jména.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Tvrdá – vzor mladý</h3><p>V 1. pádě končí na <b>-ý</b> a mění se podle rodu: mladý, mladá, mladé. Mužský životný v množném čísle: mladí (chytří psi).</p></article>
+        <article class="vyklad-karta"><h3>Měkká – vzor jarní</h3><p>V 1. pádě končí na <b>-í</b> a ve všech rodech je stejné: jarní den, jarní louka, jarní počasí.</p></article>
+        <article class="vyklad-karta"><h3>Přivlastňovací – otcův, matčin</h3><p>Říkají, <b>komu něco patří</b>. Tvoří se příponou <b>-ův</b> (od mužského: otec → otcův) nebo <b>-in</b> (od ženského: matka → matčin).</p></article>
+        <article class="vyklad-karta"><h3>Stupňování</h3><p><b>1.</b> velký · <b>2.</b> větší · <b>3.</b> největší. Některá se stupňují nepravidelně: dobrý – lepší – nejlepší, špatný – horší – nejhorší.</p></article>
+      </div>
+      <p>Typická chyba: u „mlad_ stromy“ napsat -í. Stromy jsou ale rod mužský <b>neživotný</b>, a ten má -é (mladé stromy), zatímco životný -í (mladí muži).
+        Ženský rod má v množném čísle také -é (veselé děti, zelené louky), střední rod -á (nová auta).</p>
+      <aside class="zapamatuj">Urči druh (-ý tvrdé, -í měkké, -ův/-in přivlastňovací), pak rod, číslo a pád podstatného jména – a podle vzoru napiš koncovku.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: doplň koncovku přídavného jména</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Doplň koncovku: <b>chytř_ psi</b>.</p>
+      <ol class="kroky">
+        <li>Určím druh: v 1. pádě jednotného čísla je to chytrý, končí na -ý – tvrdé, vzor <b>mladý</b>.</li>
+        <li>Podívám se na podstatné jméno: psi – rod mužský <b>životný</b>, číslo množné, 1. pád.</li>
+        <li>Vzor mladý má v tomto tvaru <b>-í</b>: mladí psi (neživotný by měl -é: mladé stromy).</li>
+        <li>Doplním a přečtu spojení: chytří psi.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ chytří psi – vzor mladý, rod mužský životný, množné číslo → -í.</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="druh" class="active">🗂️ Druh přídavného jména</button>
@@ -87,16 +120,16 @@ const DRUHY = {
 
 /* spojení s vynechanou koncovkou: text, správná koncovka, vysvětlení */
 const KONCOVKY = [
-  { t: 'mlad_ stromy', k: 'é', proc: 'vzor mladý, 1. pád množného čísla rodu neživotného' },
-  { t: 'zelen_ louka', k: 'á', proc: 'vzor mladý, rod ženský' },
-  { t: 'jarn_ počasí', k: 'í', proc: 'měkké přídavné jméno má vždy -í' },
-  { t: 'ciz_ lidé', k: 'í', proc: 'měkké přídavné jméno má vždy -í' },
-  { t: 'chytř_ psi', k: 'í', proc: 'vzor mladý, rod mužský životný v množném čísle' },
-  { t: 'nov_ auto', k: 'é', proc: 'vzor mladý, rod střední' },
-  { t: 'otcov_ kabát', k: 'ý', proc: 'přivlastňovací, rod mužský' },
-  { t: 'matčin_ šátek', k: '', proc: 'přivlastňovací v 1. pádě rodu mužského je bez koncovky' },
-  { t: 'vesel_ děti', k: 'é', proc: 'vzor mladý, rod ženský v množném čísle' },
-  { t: 'letn_ prázdniny', k: 'í', proc: 'měkké přídavné jméno má vždy -í' },
+  { t: 'mlad_ stromy', k: 'é', d: 'tvrde', proc: 'vzor mladý, 1. pád množného čísla rodu neživotného' },
+  { t: 'zelen_ louka', k: 'á', d: 'tvrde', proc: 'vzor mladý, rod ženský' },
+  { t: 'jarn_ počasí', k: 'í', d: 'mekke', proc: 'měkké přídavné jméno má vždy -í' },
+  { t: 'ciz_ lidé', k: 'í', d: 'mekke', proc: 'měkké přídavné jméno má vždy -í' },
+  { t: 'chytř_ psi', k: 'í', d: 'tvrde', proc: 'vzor mladý, rod mužský životný v množném čísle' },
+  { t: 'nov_ auto', k: 'é', d: 'tvrde', proc: 'vzor mladý, rod střední' },
+  { t: 'otcov_ boty', k: 'y', d: 'privlastnovaci', proc: 'přivlastňovací (vzor otcův), rod ženský v množném čísle' },
+  { t: 'matčin_ šátek', k: '', d: 'privlastnovaci', proc: 'přivlastňovací v 1. pádě rodu mužského je bez koncovky' },
+  { t: 'vesel_ děti', k: 'é', d: 'tvrde', proc: 'vzor mladý, rod ženský v množném čísle' },
+  { t: 'letn_ prázdniny', k: 'í', d: 'mekke', proc: 'měkké přídavné jméno má vždy -í' },
 ];
 
 const STUPNOVANI = [
@@ -114,7 +147,7 @@ const STUPNOVANI = [
 
 /* U doplňovaček je potřeba vědět, jakého druhu přídavné jméno je – podle toho
    nápověda radí, kam se dívat, a kartička vysvětluje, proč koncovka vypadá takhle. */
-const DRUH_KONCOVKY = t => (/n[_]|z[_]|čn[_]|šn[_]/.test(t) ? 'mekke' : null);
+/* druh přídavného jména nese každá položka v poli d (podle koncovky se poznat nedá: zelen_ × jarn_) */
 
 /* ---- společné díly --------------------------------------------------------- */
 function odezvaEl() { const d = document.createElement('div'); d.className = 'odezva'; return d; }
@@ -195,7 +228,7 @@ function koncovka() {
   do { u = Uloha.nahodne(KONCOVKY); } while (u === posledni);
   posledni = u;
   uloha = { rezim: 'koncovka', u };
-  const moznosti = ['ý', 'í', 'é', 'á', ''].filter((x, i, a) => a.indexOf(x) === i);
+  const moznosti = ['ý', 'í', 'é', 'á', '', u.k].filter((x, i, a) => a.indexOf(x) === i);
 
   p.innerHTML = `<div class="zadani">Doplň správnou koncovku:</div>
     <div class="karta"><div class="spojeni">${u.t.replace('_', '<span class="mezera">?</span>')}</div></div>`;
@@ -207,7 +240,7 @@ function koncovka() {
     zpravaOk: `✅ ${u.t.replace('_', u.k)} – ${u.proc}.`,
     zpravaChyba: 'Urči nejdřív druh přídavného jména a rod podstatného jména.',
     poSpravne: napoprve => {
-      hotovo(p, napoprve, DRUH_KONCOVKY(u.t) || (u.proc.startsWith('přivlastňovací') ? 'privlastnovaci' : 'tvrde'));
+      hotovo(p, napoprve, u.d);
       p.querySelector('.mezera').textContent = u.k || '–';
       p.appendChild(pravidloEl('✏️', `<b>${u.t.replace('_', u.k)}</b> —
         <span class="vysledek">${u.proc}</span>.

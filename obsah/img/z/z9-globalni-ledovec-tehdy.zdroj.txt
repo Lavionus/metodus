@@ -1,0 +1,8 @@
+Soubor: z9-globalni-ledovec-tehdy.png / z9-globalni-ledovec-tehdy.webp
+Původní dílo: The Rhone Glacier, Glacier Hotel and Furka Road, Valais, Alps of, Switzerland-LCCN2001703310.jpg
+Autor: Photochrom Print Collection
+Datum vzniku: between 1890 and 1900date QS:P571,+1500-00-00T00:00:00Z/6,P1319,+1890-00-00T00:00:00Z/9,P1326,+1900-00-00T00:00:00Z/9
+Zdroj: https://commons.wikimedia.org/wiki/File:The_Rhone_Glacier,_Glacier_Hotel_and_Furka_Road,_Valais,_Alps_of,_Switzerland-LCCN2001703310.jpg
+Licence: Public domain
+Staženo: 2026-10-21
+Úpravy: automatické natočení, odstranění metadat, ořez, zmenšení na nejvýše 1600 px; výuková WebP kopie 1152 px.

@@ -139,17 +139,19 @@ const METODY = {
   magnet: 'oddělení magnetem – přitáhne železné částice',
   odstredovani: 'odstřeďování – rychlá rotace oddělí složky podle hustoty',
 };
+/* i = metody, které by u dané směsi také fungovaly – nejsou mezi rušivými možnostmi,
+   aby úloha měla jen jednu správnou odpověď. */
 const SMESI = [
-  { s: 'písek ve vodě', m: 'filtrace' },
-  { s: 'kalná voda z potoka (necháme stát)', m: 'usazovani' },
-  { s: 'sůl rozpuštěná ve vodě, chceme získat sůl a vodu nezachycujeme', m: 'odparovani' },
+  { s: 'písek ve vodě', m: 'filtrace', i: ['usazovani', 'odstredovani'] },
+  { s: 'kalná voda z potoka (necháme stát)', m: 'usazovani', i: ['filtrace', 'odstredovani'] },
+  { s: 'sůl rozpuštěná ve vodě, chceme získat sůl a vodu nezachycujeme', m: 'odparovani', i: ['krystalizace'] },
   { s: 'líh a voda', m: 'destilace' },
   { s: 'železné piliny a piliny dřevěné', m: 'magnet' },
-  { s: 'modrá skalice rozpuštěná ve vodě, chceme velké krystaly', m: 'krystalizace' },
-  { s: 'smetana v mléce (v mlékárně)', m: 'odstredovani' },
-  { s: 'čajové lístky v uvařeném čaji', m: 'filtrace' },
+  { s: 'modrá skalice rozpuštěná ve vodě, chceme velké krystaly', m: 'krystalizace', i: ['odparovani'] },
+  { s: 'smetana v mléce (v mlékárně)', m: 'odstredovani', i: ['usazovani'] },
+  { s: 'čajové lístky v uvařeném čaji', m: 'filtrace', i: ['usazovani'] },
   { s: 'mořská voda, chceme získat pitnou vodu', m: 'destilace' },
-  { s: 'hrubý písek ve vodě, necháme směs stát', m: 'usazovani' },
+  { s: 'hrubý písek ve vodě, necháme směs stát', m: 'usazovani', i: ['filtrace', 'odstredovani'] },
 ];
 function metoda() {
   const p = $('plocha');
@@ -160,7 +162,7 @@ function metoda() {
   const odezva = odezvaEl();
   Uloha.vyber({
     kam: p, odezva,
-    moznosti: Uloha.zamichej([u.m, ...Uloha.zamichej(Object.keys(METODY).filter(k => k !== u.m)).slice(0, 3)])
+    moznosti: Uloha.zamichej([u.m, ...Uloha.zamichej(Object.keys(METODY).filter(k => k !== u.m && !(u.i || []).includes(k))).slice(0, 3)])
       .map(k => ({ klic: k, popis: METODY[k].split(' – ')[0] })),
     spravnyKlic: u.m,
     zpravaOk: `✅ ${METODY[u.m]}`,
@@ -216,15 +218,15 @@ function zlomek() {
   let zadani, spravny, jednotka;
 
   if (typ === 'procenta') {
-    zadani = `V <b>${mVody} g</b> vody rozpustíme <b>${mLatky} g</b> soli.
+    zadani = `V <b>${fmt(mVody)} g</b> vody rozpustíme <b>${fmt(mLatky)} g</b> soli.
       Kolikaprocentní roztok vznikl?`;
     spravny = fmt(w); jednotka = '%';
   } else if (typ === 'hmotnostLatky') {
-    zadani = `Máme <b>${mRoztoku} g</b> ${fmt(w)}% roztoku. Kolik gramů rozpuštěné látky obsahuje?`;
+    zadani = `Máme <b>${fmt(mRoztoku)} g</b> ${fmt(w)}% roztoku. Kolik gramů rozpuštěné látky obsahuje?`;
     spravny = fmt(mLatky); jednotka = 'g';
   } else {
-    zadani = `Kolik gramů roztoku vznikne rozpuštěním <b>${mLatky} g</b> látky
-      v <b>${mVody} g</b> vody?`;
+    zadani = `Kolik gramů roztoku vznikne rozpuštěním <b>${fmt(mLatky)} g</b> látky
+      v <b>${fmt(mVody)} g</b> vody?`;
     spravny = fmt(mRoztoku); jednotka = 'g';
   }
   const jine = new Set([fmt(mLatky), fmt(mVody), fmt(mRoztoku), fmt(w), fmt(mLatky / mVody * 100)]);
@@ -239,7 +241,7 @@ function zlomek() {
     kam: p, odezva, trida: 'velke',
     moznosti: Uloha.zamichej([spravny, ...[...jine].slice(0, 3)]).map(t => ({ klic: t, popis: t + ' ' + jednotka })),
     spravnyKlic: spravny,
-    zpravaOk: `✅ Roztok váží ${mRoztoku} g, z toho ${mLatky} g je látka → w = ${fmt(w)} %.`,
+    zpravaOk: `✅ Roztok váží ${fmt(mRoztoku)} g, z toho ${fmt(mLatky)} g je látka → w = ${fmt(w)} %.`,
     zpravaChyba: 'Pozor: ve jmenovateli je hmotnost celého roztoku, ne jen rozpouštědla.',
     poSpravne: skore.vyhodnot,
     dalsi: novaUloha,

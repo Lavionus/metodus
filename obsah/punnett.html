@@ -78,8 +78,8 @@
       <button class="fenotyp-volba" type="button" data-alela="B" data-z="B = černá srst, b = hnědá srst" aria-pressed="false">
         <img src="img/pr/pr9-genetika-morce-cerne.webp" alt="Černé morče."><img src="img/pr/pr9-genetika-morce-hnede.webp" alt="Hnědé morče."><span>barva srsti</span>
       </button>
-      <button class="fenotyp-volba" type="button" data-alela="C" data-z="C = červený květ, c = bílý květ" aria-pressed="false">
-        <img src="img/pr/pr9-genetika-kvet-cerveny.webp" alt="Červený květ hrachu."><img src="img/pr/pr9-genetika-kvet-bily.webp" alt="Bílý květ hrachu."><span>barva květu</span>
+      <button class="fenotyp-volba" type="button" data-alela="C" data-z="C = fialový květ, c = bílý květ" aria-pressed="false">
+        <img src="img/pr/pr9-genetika-kvet-fialovy.webp" alt="Stonek hrachu s fialovým květem."><img src="img/pr/pr9-genetika-kvet-bily.webp" alt="Bílý květ hrachu."><span>barva květu</span>
       </button>
     </div>
   </section>
@@ -87,16 +87,16 @@
   <div class="panel">
     <div class="radek">
       <div class="pole">
-        <label>Rodič 1 (genotyp)</label>
+        <label for="rodic1">Rodič 1 (genotyp)</label>
         <input class="genotyp" id="rodic1" value="Aa" maxlength="2" autocomplete="off">
       </div>
       <div style="font-size:1.5rem;padding-bottom:8px">×</div>
       <div class="pole">
-        <label>Rodič 2 (genotyp)</label>
+        <label for="rodic2">Rodič 2 (genotyp)</label>
         <input class="genotyp" id="rodic2" value="Aa" maxlength="2" autocomplete="off">
       </div>
       <div class="pole" style="flex:1;min-width:180px">
-        <label>Popis znaku (nepovinné)</label>
+        <label for="znak">Popis znaku (nepovinné)</label>
         <input id="znak" placeholder="např. A = hnědé oči, a = modré oči" autocomplete="off">
       </div>
     </div>
@@ -105,7 +105,7 @@
       <button class="prikladbtn" data-p="Aa" data-q="Aa" data-z="A = hnědá barva (dominantní), a = modrá barva">Aa × Aa</button>
       <button class="prikladbtn" data-p="AA" data-q="aa" data-z="A = vysoký vzrůst, a = nízký vzrůst">AA × aa</button>
       <button class="prikladbtn" data-p="Aa" data-q="aa" data-z="A = hladká semena, a = svraštělá semena">Aa × aa</button>
-      <button class="prikladbtn" data-p="Bb" data-q="Bb" data-z="B = černá srst, b = bílá srst">Bb × Bb</button>
+      <button class="prikladbtn" data-p="Bb" data-q="Bb" data-z="B = černá srst, b = hnědá srst">Bb × Bb</button>
     </div>
   </div>
 
@@ -137,6 +137,8 @@ function normalizuj(g) {
   return g[0].toUpperCase() + pismeno;                            // heterozygot: velké první
 }
 function alely(g) { return [g[0], g[1]]; }
+const nsd = (a, b) => b ? nsd(b, a % b) : a;
+function zkratPomer(cisla) { const d = cisla.reduce(nsd); return d ? cisla.map(n => n / d) : cisla; }
 
 function spocti() {
   const r1 = normalizuj($('rodic1').value.trim());
@@ -188,7 +190,11 @@ function spocti() {
         `<td class="${g.includes(velke) ? 'dominant' : 'recesiv'}">${g}</td>`).join('')}</tr>`).join('')}
     </table>`;
 
-  const genRadky = Object.entries(genPocty).sort().map(([g, n]) =>
+  // pořadí AA : Aa : aa (ne podle četnosti) a poměr krácený největším společným dělitelem
+  const genPoradi = [velke + velke, velke + pismeno, pismeno + pismeno].filter(g => genPocty[g]);
+  const genPomer = zkratPomer(genPoradi.map(g => genPocty[g]));
+  const fenPomer = zkratPomer([dominant, recesiv]);
+  const genRadky = genPoradi.map(g => [g, genPocty[g]]).map(([g, n]) =>
     `<div class="radka"><span>${g}</span><span>${n}/4 (${n * 25} %)</span></div>`).join('');
 
   $('vystup').innerHTML = tabulka + `
@@ -197,14 +203,14 @@ function spocti() {
         <h3>Genotypový štěpný poměr</h3>
         ${genRadky}
         <div class="radka" style="border-top:1px solid var(--border);margin-top:4px;padding-top:6px">
-          <span>poměr</span><span>${Object.values(genPocty).sort((a, b) => b - a).join(' : ')}</span></div>
+          <span>poměr${genPoradi.length > 1 ? ' ' + genPoradi.join(' : ') : ''}</span><span>${genPoradi.length > 1 ? genPomer.join(' : ') : 'všichni ' + genPoradi[0]}</span></div>
       </div>
       <div class="blok fenotyp">
         <h3>Fenotypový štěpný poměr</h3>
         <div class="radka"><span class="dom">${popisDom}</span><span>${dominant}/4 (${dominant * 25} %)</span></div>
         <div class="radka"><span class="rec">${popisRec}</span><span>${recesiv}/4 (${recesiv * 25} %)</span></div>
         <div class="radka" style="border-top:1px solid var(--border);margin-top:4px;padding-top:6px">
-          <span>poměr</span><span>${dominant} : ${recesiv}</span></div>
+          <span>poměr</span><span>${recesiv === 0 ? 'všichni s dominantním projevem' : dominant === 0 ? 'všichni s recesivním projevem' : fenPomer.join(' : ')}</span></div>
       </div>
     </div>
     <div class="legenda" style="margin-top:14px;border-top:1px solid var(--border);padding-top:10px">
@@ -337,10 +343,10 @@ Badani.start({
         moznost('1 : 1',false,'1 : 1 vyjde u křížení Aa × aa.')],
       vysvetleni:'AA, Aa, aA, aa → 1 AA : 2 Aa : 1 aa.' },
     { otazka:'Pes s černou srstí může být BB, nebo Bb. Jak to zjistíš?',
-      moznosti:[moznost('Zkřížíš ho s bílým bb – objeví-li se bílé štěně, je Bb.',true),
+      moznosti:[moznost('Zkřížíš ho s hnědým bb – objeví-li se hnědé štěně, je Bb.',true),
         moznost('Podle odstínu černé barvy.',false,'Při úplné dominanci vypadají BB i Bb stejně. Rozhodne až zpětné křížení.'),
         moznost('Nijak, genotyp se zjistit nedá.',false,'Dá – zpětným křížením s recesivním homozygotem bb.')],
-      vysvetleni:'Zpětné křížení: BB × bb dá jen černá štěňata, Bb × bb polovinu bílých.' },
+      vysvetleni:'Zpětné křížení: BB × bb dá jen černá štěňata, Bb × bb v průměru polovinu hnědých.' },
     { otazka:'Pravděpodobnost, že dítě rodičů Aa × Aa bude aa, je ¼. Jaká je pravděpodobnost, že <b>dvě</b> jejich děti budou obě aa?',
       moznosti:[moznost('1/16',true),
         moznost('1/2',false,'U nezávislých jevů se pravděpodobnosti násobí: ¼ · ¼.'),

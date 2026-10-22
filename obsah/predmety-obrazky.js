@@ -3,11 +3,14 @@ window.PredmetyObrazky = (() => {
   const motivy = {
     cj: 'kniha-pero', m: 'teleso-pravitko', aj: 'slovniky', dcj: 'slovniky',
     prv: 'domek-strom', inf: 'notebook', f: 'atom', ch: 'banka',
-    pr: 'list-bunka', z: 'globus', d: 'hrad', mapa: 'lupa-mapa'
+    pr: 'list-bunka', z: 'globus', d: 'hrad', mapa: 'lupa-mapa',
+    hv: 'housle', vo: 'vahy', nastroje: 'karticky'
   };
+  // skupiny = předměty (KATALOG_SKUPINY)
   const skupiny = {
-    cestina: ['cj'], matematika: ['m'], jazyky: ['aj'], prvouka: ['prv'],
-    priroda: ['f', 'ch', 'pr'], spolecnost: ['z', 'mapa', 'd'], informatika: ['inf']
+    cestina: ['cj'], matematika: ['m'], anglictina: ['aj'], dalsi_jazyk: ['dcj'], prvouka: ['prv'],
+    informatika: ['inf'], fyzika: ['f'], chemie: ['ch'], prirodopis: ['pr'], zemepis: ['z'], dejepis: ['d'],
+    obcanska: ['vo'], hudba: ['hv'], nastroje: ['nastroje']
   };
   function obrazek(predmet) {
     if (!motivy[predmet]) return null;

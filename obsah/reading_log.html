@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Čtenářský deník</title>
   <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -65,24 +67,58 @@
   <h1>📚 Čtenářský deník</h1>
   <p class="podtitul">Evidence přečtených knih s hodnocením a poznámkami. Data zůstávají v prohlížeči; zálohujte exportem.</p>
 
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Jak napsat dobrý zápis o knize</summary>
+    <div class="obsah">
+      <p>Čtenářský deník není jen seznam přečtených knih. Zápis ti po čase pomůže <b>vybavit si, o čem kniha byla</b>,
+        a naučí tě říct, co si o ní myslíš a <b>proč</b>. Proto zapisuj hned po dočtení, dokud máš knihu v hlavě.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>📕 Základní údaje</h3><p><b>Název</b> a <b>autor</b> přesně podle obálky, k tomu stav (chci číst, čtu, přečtená) a datum dočtení.</p></article>
+        <article class="vyklad-karta"><h3>👤 Postavy a děj</h3><p>Kdo je <b>hlavní postava</b>, kde a kdy se příběh odehrává a co se v něm stane. Stačí pár vět – ne převyprávět celou knihu.</p></article>
+        <article class="vyklad-karta"><h3>⭐ Vlastní názor</h3><p>Hodnocení hvězdičkami doplň <b>zdůvodněním</b>: co tě zaujalo, co ne a komu bys knihu doporučil.</p></article>
+      </div>
+      <p>Nejčastější chyba je zápis typu „Bylo to dobré.“ Takový názor nic neříká. Zkus větu doplnit slovem
+        <b>protože</b>: „Líbilo se mi to, <i>protože</i> …“ Pak už musíš najít konkrétní důvod – napínavý děj,
+        postavu, se kterou souhlasíš, vtipný jazyk.</p>
+      <p>Děj a názor drž odděleně: nejdřív napiš, <b>co se v knize stalo</b>, potom <b>co si o tom myslíš ty</b>.
+        Čtenář tvého zápisu pozná, co je fakt z knihy a co tvůj dojem.</p>
+      <aside class="zapamatuj">Dobrý zápis: název a autor · hlavní postavy · krátce děj · můj názor s „protože“.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: zápis o knize Babička</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Zapiš do deníku přečtenou knihu <b>Babička</b> od Boženy Němcové.</p>
+      <ol class="kroky">
+        <li>Vyplním název <i>Babička</i>, autora <i>Božena Němcová</i>, stav „Přečtená“ a dnešní datum.</li>
+        <li>Do poznámek napíšu hlavní postavy: babička a její vnoučata, mezi nimi Barunka.</li>
+        <li>Krátce shrnu děj: babička přijde žít k rodině své dcery na Staré bělidlo a kniha vypráví o životě na venkově během roku.</li>
+        <li>Přidám vlastní názor s důvodem: „Babička se mi líbila, protože všem radí s laskavostí a moudrostí.“</li>
+        <li>Teprve potom zvolím počet hvězdiček, aby odpovídal mému zdůvodnění.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Zápis obsahuje údaje o knize, postavy, krátký děj a zdůvodněný názor.</p>
+    </div>
+  </details>
+
   <div class="listy">
     <div class="karta">
       <h2 style="font-size:0.95rem" id="formTitulek">Přidat knihu</h2>
-      <label>Název *</label>
+      <label for="fNazev">Název *</label>
       <input id="fNazev" placeholder="např. Babička">
-      <label>Autor</label>
+      <label for="fAutor">Autor</label>
       <input id="fAutor" placeholder="např. Božena Němcová">
-      <label>Stav</label>
+      <label for="fStav">Stav</label>
       <select id="fStav">
         <option value="chci">📖 Chci číst</option>
         <option value="ctu">👀 Právě čtu</option>
         <option value="prectena" selected>✅ Přečtená</option>
       </select>
-      <label>Datum dočtení</label>
+      <label for="fDatum">Datum dočtení</label>
       <input id="fDatum" type="date">
-      <label>Hodnocení</label>
-      <div class="hvezdicky" id="fHvezdy"></div>
-      <label>Poznámky / obsah</label>
+      <label id="fHvezdyPopis">Hodnocení</label>
+      <div class="hvezdicky" id="fHvezdy" role="group" aria-labelledby="fHvezdyPopis"></div>
+      <label for="fPozn">Poznámky / obsah</label>
       <textarea id="fPozn" placeholder="Hlavní postavy, děj, dojmy…"></textarea>
       <button class="btn" id="fUlozit">Uložit knihu</button>
       <button class="btn sekundarni" id="fZrusit" style="display:none">Zrušit úpravu</button>
@@ -94,14 +130,14 @@
 
     <div>
       <div class="nastroje">
-        <input type="search" id="hledani" placeholder="🔍 Hledat…">
-        <select id="filtrStav">
+        <input type="search" id="hledani" placeholder="🔍 Hledat…" aria-label="Hledat v deníku">
+        <select id="filtrStav" aria-label="Filtr podle stavu">
           <option value="">Vše</option>
           <option value="prectena">Přečtené</option>
           <option value="ctu">Právě čtu</option>
           <option value="chci">Chci číst</option>
         </select>
-        <select id="razeni">
+        <select id="razeni" aria-label="Řazení">
           <option value="pridani">Nejnovější</option>
           <option value="nazev">Podle názvu</option>
           <option value="hodnoceni">Podle hodnocení</option>
@@ -135,7 +171,10 @@
     let hodnoceni = 0;
 
     const $ = id => document.getElementById(id);
-    const uloz = () => localStorage.setItem(KEY, JSON.stringify(knihy));
+    const uloz = () => {
+      try { localStorage.setItem(KEY, JSON.stringify(knihy)); }
+      catch { /* úložiště je zablokované nebo plné – deník vydrží jen do zavření stránky */ }
+    };
 
     /* hvězdičky ve formuláři */
     const hvezdyEl = $('fHvezdy');

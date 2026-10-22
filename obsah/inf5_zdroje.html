@@ -6,6 +6,8 @@
   <title>Informace na internetu a ověřování</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -25,6 +27,38 @@
 <body>
   <h1>🔍 Informace na internetu a ověřování</h1>
   <p class="podtitul">Pro 5.–6. ročník: komu věřit, jak si informaci ověřit a jak poznat podvod.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Jak poznat, čemu věřit</summary>
+    <div class="obsah">
+      <p>Na internet může psát kdokoli – odborník, firma, která něco prodává, i člověk, který si něco vymyslel.
+        Hezký vzhled stránky ani počet zhlédnutí nic nedokazují. Proto se u každé informace ptej jako detektiv.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Kdo a kdy</h3><p>Je uvedený <b>autor</b> a jeho odbornost? Je tam <b>datum</b>? Bez autora a data nevíš, kdo za textem stojí a jestli není zastaralý.</p></article>
+        <article class="vyklad-karta"><h3>Odkud a proč</h3><p>Uvádí text <b>zdroje</b>? Patří web škole, muzeu nebo úřadu? Nebo chce stránka hlavně něco <b>prodat</b>? Pak může informace zkreslovat.</p></article>
+        <article class="vyklad-karta"><h3>Píše to i někdo další?</h3><p>Ověřuj aspoň ve <b>dvou nezávislých</b> zdrojích – v učebnici, na webu instituce. Spolužák, který viděl stejný příspěvek, není další zdroj.</p></article>
+        <article class="vyklad-karta"><h3>Zpráva, či reklama</h3><p>Reklama láká ke koupi, nabízí slevu, slibuje zázraky. Nápis „sponzorovaný obsah“ znamená placenou reklamu.</p></article>
+      </div>
+      <p>Varovné znaky: hodně vykřičníků, slova jako ŠOK, sliby, které zní příliš dobře, a informace, která je
+        jen na jediném webu. Když si nejsi jistý, nesdílej to dál a zeptej se dospělého.</p>
+      <aside class="zapamatuj">Kdo to napsal? Kdy? Odkud to má? Píše to i někdo další? Jeden zdroj nestačí.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: dá se tomu věřit?</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Na stránce, která prodává nápoj, čteš: „ZÁZRAK!!! Tento nápoj tě za týden naučí anglicky!“ Autor ani datum nejsou uvedené, pod textem je tlačítko Objednat. Dá se tomu věřit?</p>
+      <ol class="kroky">
+        <li><b>Kdo to napsal?</b> Autor chybí – nevím, kdo za tím stojí.</li>
+        <li><b>Kdy?</b> Datum chybí – nevím, kdy text vznikl.</li>
+        <li><b>Proč?</b> Stránka nápoj prodává, takže ho chce pochválit. Je to spíš reklama než zpráva.</li>
+        <li>Slibuje nemožné a láká vykřičníky. Naučit se jazyk vyžaduje učení, ne nápoj.</li>
+        <li>Kdybych váhal, ověřil bych to v nezávislém zdroji. Tady ale varovných znaků stačí hodně.</li>
+      </ol>
+      <p class="vysledek-ukazky">Buď opatrný – zdroj není důvěryhodný: chybí autor i datum, stránka prodává a slibuje zázrak.</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="duveryhodnost" class="active">🧐 Dá se tomu věřit?</button>

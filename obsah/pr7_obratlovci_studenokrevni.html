@@ -6,6 +6,8 @@
   <title>Ryby, obojživelníci a plazi</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -57,7 +59,45 @@
 </head>
 <body>
   <h1>🐟 Ryby, obojživelníci a plazi</h1>
-  <p class="podtitul">Pro 7. ročník: stavba těla studenokrevných obratlovců a naši zástupci.</p>
+  <p class="podtitul">Pro 7. ročník: stavba těla obratlovců s proměnlivou teplotou těla a naši zástupci.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Ryby, obojživelníci a plazi</summary>
+    <div class="obsah">
+      <p>Ryby, obojživelníci a plazi jsou <b>živočichové s proměnlivou teplotou těla</b>: jejich teplota se mění s teplotou okolí.
+        Proto se ještěrka ráno vyhřívá na slunci a obojživelníci i plazi přečkávají u nás zimu ukrytí v klidu.
+        Skupiny od sebe nejlépe rozlišíš podle <b>dýchání</b>, <b>pokryvu těla</b> a <b>rozmnožování</b>.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Ryby</h3><p>Dýchají <b>žábrami</b>, tělo kryjí <b>šupiny se slizem</b>, pohybují se ploutvemi.
+          <b>Postranní čára</b> vnímá proudění a chvění vody, <b>plynový měchýř</b> drží rybu v určité hloubce.</p></article>
+        <article class="vyklad-karta"><h3>Obojživelníci</h3><p>Mají <b>vlhkou kůži</b> bez šupin; dospělci dýchají <b>plícemi i kůží</b>.
+          Rozmnožují se ve vodě – žáby do ní kladou vajíčka. Pulec dýchá žábrami a <b>proměnou (metamorfózou)</b> se mění v žábu.</p></article>
+        <article class="vyklad-karta"><h3>Plazi</h3><p>Dýchají <b>plícemi</b>, mají <b>suchou kůži s rohovitými šupinami</b> a svlékají se.
+          Vejce s pevným obalem kladou <b>na souši</b>, a proto nepotřebují vodu k rozmnožování.</p></article>
+      </div>
+      <p><b>Typická chyba:</b> „Slepýš je had.“ Slepýš křehký je <b>beznohá ještěrka</b> – má pohyblivá oční víčka.
+        Podobně želva není obojživelník, ale plaz s krunýřem.</p>
+      <p>U nás žije jediný jedovatý had, <b>zmije obecná</b> s klikatým pruhem na hřbetě. Užovka obojková se žlutými půlměsíčky
+        za hlavou je nejedovatá.</p>
+      <aside class="zapamatuj">Ryby: žábry, šupiny. Obojživelníci: vlhká kůže, plíce i kůže, proměna pulce. Plazi: plíce, suché šupiny,
+        vejce na souši. Všichni mají proměnlivou teplotu těla.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: kam patří mlok skvrnitý?</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Mlok skvrnitý je černý se žlutými skvrnami, má čtyři nohy a ocas a žije ve vlhkých lesích.
+        Do které skupiny obratlovců patří?</p>
+      <ol class="kroky">
+        <li>Podle tvaru těla by mohl vypadat jako ještěrka – na tvar se proto spoléhat nebudu.</li>
+        <li>Prohlédnu kůži: je <b>lesklá a vlhká</b>, bez suchých rohovitých šupin – plaz to tedy není.</li>
+        <li>Nemá ploutve ani šupiny a dospělý mlok nedýchá žábrami – ryba to není.</li>
+        <li>Vlhkou kůži potřebují ti, kdo <b>dýchají i kůží</b>; to je znak obojživelníků. Proto mlok žije ve vlhku.</li>
+      </ol>
+      <p class="vysledek-ukazky">Mlok skvrnitý je <b>obojživelník</b> (ocasatý), ne plaz.</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="skupina" class="active">🗂️ Do které skupiny patří</button>
@@ -105,7 +145,7 @@
   </div>
 
   <p class="napoveda">
-    Všechny tři skupiny jsou <b>studenokrevné</b> – teplota jejich těla závisí na okolí.
+    Všechny tři skupiny mají <b>proměnlivou teplotu těla</b> – závisí na teplotě okolí.
     <b>Ryby</b> dýchají žábrami, <b>obojživelníci</b> plícemi i kůží a prodělávají proměnu,
     <b>plazi</b> dýchají plícemi a mají suchou šupinatou kůži.
   </p>
@@ -162,8 +202,9 @@ const FOTO_ZIV = {
 };
 /* FOTO_ZIV:konec */
 ZIVOCICHOVE.forEach(z => { if (FOTO_ZIV[z.n]) z.foto = FOTO_ZIV[z.n]; });
-const fotoDruhu = f => `<img class="druh-obrazek druh-foto" src="${f.src}" alt="${f.alt}" width="${f.w}" height="${f.h}">`;
-const ilustraceDruhu = z => `<img class="druh-obrazek" src="${z.img}" alt="${z.alt}" width="768" height="768">`;
+// Volitelný alt: neutrální text, když je obrázek sám otázkou (nesmí prozradit druh).
+const fotoDruhu = (f, alt) => `<img class="druh-obrazek druh-foto" src="${f.src}" alt="${alt || f.alt}" width="${f.w}" height="${f.h}">`;
+const ilustraceDruhu = (z, alt) => `<img class="druh-obrazek" src="${z.img}" alt="${alt || z.alt}" width="768" height="768">`;
 const VYVOJ_ZABY = [
   { k: 'vajicka', n: 'vajíčka', img: 'img/pr/pr7-vyvoj-zaby-vajicka.webp', alt: 'Shluk žabích vajíček v rosolovitých obalech.' },
   { k: 'pulec', n: 'pulec', img: 'img/pr/pr7-vyvoj-zaby-pulec.webp', alt: 'Pulec bez končetin s dlouhým ocasem.' },
@@ -199,7 +240,7 @@ const STAVBA = [
   { q: 'K čemu slouží rybě postranní čára?', a: 'vnímá proudění a chvění vody', b: ['dýchá jí', 'vylučuje jí sůl', 'plave díky ní'] },
   { q: 'Co pomáhá rybě udržet se v určité hloubce?', a: 'plynový měchýř', b: ['ploutve', 'šupiny', 'žábry'] },
   { q: 'Jak se nazývá proměna pulce v žábu?', a: 'metamorfóza', b: ['mimikry', 'symbióza', 'regenerace'] },
-  { q: 'Proč se plazi vyhřívají na slunci?', a: 'jsou studenokrevní a potřebují se zahřát', b: ['aby se opálili', 'aby lépe viděli', 'aby zrychlili dýchání'] },
+  { q: 'Proč se plazi vyhřívají na slunci?', a: 'mají proměnlivou teplotu těla a potřebují se zahřát', b: ['aby se opálili', 'aby lépe viděli', 'aby zrychlili dýchání'] },
   { q: 'Čím jsou kryta těla plazů?', a: 'suchými rohovitými šupinami', b: ['slizkou kůží', 'peřím', 'srstí'] },
   { q: 'Kde kladou vejce plazi?', a: 'na souši, vejce mají pevný obal', b: ['do vody bez obalu', 'do hnízd na stromech vždy', 'nekladou vejce'] },
   { q: 'Čím je zvláštní srdce plazů oproti obojživelníkům?', a: 'komora bývá částečně přepažená', b: ['má čtyři komory', 'nemá předsíně', 'je jednodílné'] },
@@ -227,7 +268,7 @@ function poznavacka() {
   const z = Uloha.nahodne(ZIVOCICHOVE);
   const jine = Uloha.zamichej(ZIVOCICHOVE.filter(x => x.n !== z.n)).slice(0, 3).map(x => x.n);
   p.innerHTML = `<div class="zadani uloha-text">Který druh to je?</div>
-    <div class="karta">${z.foto ? fotoDruhu(z.foto) : z.img ? ilustraceDruhu(z) : `<div class="obrazek">${z.i}</div>`}
+    <div class="karta">${z.foto ? fotoDruhu(z.foto, 'Fotografie živočicha k určení.') : z.img ? ilustraceDruhu(z, 'Obrázek živočicha k určení.') : `<div class="obrazek">${z.i}</div>`}
       <div class="popis" style="font-weight:400">${z.popis}</div></div>`;
   const odezva = odezvaEl();
   Uloha.vyber({
@@ -246,9 +287,9 @@ const TVRZENI = [
   { t: 'Zmije obecná je jediný jedovatý had žijící v České republice.', pravda: true },
   { t: 'Slepýš křehký je had.', pravda: false, proc: 'je to beznohá ještěrka – má pohyblivá oční víčka' },
   { t: 'Užovka obojková je nejedovatá.', pravda: true },
-  { t: 'Ryby mají stálou tělesnou teplotu.', pravda: false, proc: 'jsou studenokrevné, teplota závisí na vodě' },
+  { t: 'Ryby mají stálou tělesnou teplotu.', pravda: false, proc: 'mají proměnlivou teplotu těla, která závisí na teplotě vody' },
   { t: 'Pulec se líhne z vajíčka a nejprve dýchá žábrami.', pravda: true },
-  { t: 'Obojživelníci kladou vejce (vajíčka) do vody.', pravda: true },
+  { t: 'Skokan hnědý klade vajíčka (snůšku) do vody.', pravda: true },
   { t: 'Želvy patří mezi obojživelníky.', pravda: false, proc: 'jsou to plazi s rohovitým krunýřem' },
   { t: 'Ještěrka umí odvrhnout ocas a ten jí znovu doroste.', pravda: true },
   { t: 'Mlok skvrnitý je jedovatý pro člověka při dotyku.', pravda: false, proc: 'kožní výměšek dráždí sliznice, ale běžný dotek člověka neohrozí (poté je nutné umýt si ruce)' },
@@ -280,7 +321,7 @@ function vyvoj() {
   const p = $('plocha');
   const stadium = Uloha.nahodne(VYVOJ_ZABY);
   p.innerHTML = `<div class="zadani uloha-text">Které stadium vývoje žáby vidíš?</div>
-    <div class="karta"><img class="druh-obrazek" src="${stadium.img}" alt="${stadium.alt}" width="768" height="768"></div>`;
+    <div class="karta"><img class="druh-obrazek" src="${stadium.img}" alt="Obrázek stadia vývoje žáby k určení." width="768" height="768"></div>`;
   const odezva = odezvaEl();
   Uloha.vyber({
     kam: p, odezva,

@@ -6,6 +6,8 @@
   <title>Státní symboly a instituce</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -36,6 +38,38 @@
 <body>
   <h1>🇨🇿 Státní symboly a instituce</h1>
   <p class="podtitul">Pro 5. ročník: symboly našeho státu, kdo co řídí a jak se dělí moc.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Symboly státu a kdo stát řídí</summary>
+    <div class="obsah">
+      <p>Každý stát má své <b>symboly</b>. Podle nich ho poznáme doma i v cizině. Česká republika má <b>sedm státních
+        symbolů</b>. Vyjmenovává je zákon.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>🎌 Sedm symbolů</h3><p>Velký státní znak, malý státní znak, státní barvy, státní vlajka, vlajka prezidenta republiky, státní pečeť a státní hymna.</p></article>
+        <article class="vyklad-karta"><h3>🦁 Malý × velký znak</h3><p>Malý znak má jen českého lva. Velký znak má čtyři pole: lva, orlici moravskou a orlici slezskou.</p></article>
+        <article class="vyklad-karta"><h3>⚖️ Tři moci</h3><p><b>Zákonodárná</b> tvoří zákony (sněmovna, Senát). <b>Výkonná</b> řídí stát (vláda, prezident). <b>Soudní</b> rozhoduje spory (soudy).</p></article>
+      </div>
+      <p>Proč je moc rozdělená na tři části? Aby nikdo neměl všechnu moc sám. Ten, kdo zákony vymýšlí, o sporech nesoudí.
+        Jedna část hlídá druhou.</p>
+      <p>Pozor na záměnu: <b>státní barvy</b> jsou jen tři barvy za sebou (bílá, červená, modrá). <b>Vlajka</b> má
+        bílý a červený pruh a modrý klín od žerdi.</p>
+      <p>Ve <b>státní svátky</b> si připomínáme důležité události, například 28. října vznik Československa v roce 1918.</p>
+      <aside class="zapamatuj">Česko má sedm státních symbolů. Moc ve státě je rozdělená na zákonodárnou, výkonnou a soudní.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: Tři moci ve státě</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Ke které moci patří <b>Senát</b>?</p>
+      <ol class="kroky">
+        <li>Vzpomenu si, co Senát dělá. Je to druhá komora parlamentu.</li>
+        <li>Parlament projednává a schvaluje <b>zákony</b>.</li>
+        <li>Moc, která tvoří zákony, se jmenuje <b>zákonodárná</b>.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Senát patří k moci <b>zákonodárné</b>, stejně jako Poslanecká sněmovna.</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="symboly" class="active">🎌 Poznej symbol</button>
@@ -88,10 +122,10 @@ const SYMBOLY = [
     svg: `<rect x="10" y="20" width="160" height="26" fill="#fff"/>
           <rect x="10" y="47" width="160" height="26" fill="#d7141a"/>
           <rect x="10" y="74" width="160" height="26" fill="#11457e"/>` },
-  { n: 'vlajka prezidenta republiky', popis: 'bílá vlajka s nápisem Pravda vítězí a lipovými ratolestmi',
+  { n: 'vlajka prezidenta republiky', popis: 'bílá čtvercová vlajka s velkým státním znakem uprostřed, okrajem z plamenů v barvách trikolóry, heslem Pravda vítězí a lipovou ratolestí',
     img: 'img/prv/prv5-symbol-prezidentska-vlajka.svg' },
   { n: 'státní pečeť', popis: 'velký státní znak podložený lipovými ratolestmi a opis Česká republika',
-    img: 'img/prv/prv5-symbol-statni-pecet.png' },
+    img: 'img/prv/prv5-symbol-statni-pecet.webp' },
   { n: 'státní hymna', popis: 'píseň Kde domov můj z divadelní hry Fidlovačka',
     audio: 'audio/kde-domov-muj.ogg' },
 ];
@@ -119,7 +153,7 @@ const SVATKY = [
   { d: '6. července', n: 'Den upálení mistra Jana Husa', proc: 'Jan Hus byl upálen v Kostnici roku 1415' },
   { d: '28. září', n: 'Den české státnosti', proc: 'svátek svatého Václava, patrona české země' },
   { d: '28. října', n: 'Den vzniku samostatného Československa', proc: 'Československo vzniklo roku 1918' },
-  { d: '17. listopadu', n: 'Den boje za svobodu a demokracii', proc: 'sametová revoluce začala roku 1989' },
+  { d: '17. listopadu', n: 'Den boje za svobodu a demokracii a Mezinárodní den studentstva', proc: 'připomíná rok 1939, kdy nacisté zavřeli české vysoké školy, i rok 1989, kdy začala sametová revoluce' },
 ];
 
 const BUDOVY = [
@@ -134,7 +168,8 @@ const BUDOVY = [
   { n: 'Ústavní soud', img: 'prv5-budova-ustavni-soud', w: 1152, h: 772, alt: 'Rozlehlá budova Ústavního soudu v Joštově ulici v Brně se zdobeným průčelím.',
     b: 'budova bývalého Moravského zemského sněmu v Brně', o: 'tady soudci hlídají, aby zákony byly v souladu s Ústavou' },
 ];
-const fotoBudova = (x, trida) => `<img class="${trida}" src="img/prv/${x.img}.webp" alt="${x.alt}" width="${x.w}" height="${x.h}">`;
+// Fotka je sama otázkou – alt nesmí prozradit, čí je to sídlo.
+const fotoBudova = (x, trida) => `<img class="${trida}" src="img/prv/${x.img}.webp" alt="Fotografie budovy k určení." width="${x.w}" height="${x.h}">`;
 
 /* ---- Poznej symbol --------------------------------------------------------------- */
 function symboly() {

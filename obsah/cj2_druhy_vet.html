@@ -6,6 +6,8 @@
   <title>Druhy vět</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -43,6 +45,42 @@
 <body>
   <h1>❓ Druhy vět</h1>
   <p class="podtitul">Pro 2.–3. ročník: věta oznamovací, tázací, rozkazovací a přací – a znaménko na konci.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Jak poznám druh věty</summary>
+    <div class="obsah">
+      <p>Každou větu říkáme kvůli něčemu. Někdy chceme něco <b>sdělit</b>, jindy se <b>zeptat</b>,
+        někomu něco <b>přikázat</b> nebo si něco <b>přát</b>. Podle toho, co chce mluvčí větou udělat,
+        poznáš druh věty. A podle druhu věty víš, jaké znaménko napíšeš na konec.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>💬 Oznamovací</h3><p>Něco sděluje. Na konci je <b>tečka</b>.<br><i>Venku prší.</i></p></article>
+        <article class="vyklad-karta"><h3>❓ Tázací</h3><p>Ptá se. Často začíná slovem <b>kdo, co, kde, kdy, proč, jak, kolik</b>. Na konci je <b>otazník</b>.<br><i>Kde bydlí babička?</i></p></article>
+        <article class="vyklad-karta"><h3>❗ Rozkazovací</h3><p>Přikazuje, prosí nebo radí. Sloveso je v rozkazu: <b>zavři, přines, pojď</b>. Na konci je <b>vykřičník</b>.<br><i>Zavři okno!</i></p></article>
+        <article class="vyklad-karta"><h3>🌠 Přací</h3><p>Vyjadřuje přání. Začíná slovem <b>kéž</b> nebo <b>ať</b>. Na konci je <b>vykřičník</b>.<br><i>Kéž by nepršelo!</i></p></article>
+      </div>
+      <p>Pomůže ti, když si větu <b>přečteš nahlas</b>. U otázky hlas na konci často stoupne:
+        <i>Půjdeš se mnou ven?</i> Tady žádné tázací slovo není, a přesto je to otázka.</p>
+      <p>Pozor na častou chybu: vykřičník mají dva druhy vět. Rozkaz poznáš podle slovesa
+        (<i>Ukliď si hračky!</i>), přání podle slov <b>kéž</b> a <b>ať</b> (<i>Ať zítra neprší!</i>).
+        Když rozkaz nebo přání říkáme klidně, smí být na konci i tečka: <i>Zavři prosím okno.</i></p>
+      <aside class="zapamatuj">Sděluje → tečka. Ptá se → otazník. Přikazuje → vykřičník. Přeje si (kéž, ať) → vykřičník.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: jaká je to věta?</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Urči druh věty a doplň znaménko: <b>Kéž bych uměl plavat</b></p>
+      <ol class="kroky">
+        <li>Přečtu si větu nahlas a ptám se: co chce ten, kdo ji říká?</li>
+        <li>Nic se neptá – nemá tázací slovo a hlas na konci nestoupá.</li>
+        <li>Nikomu nic nepřikazuje – nikomu neříká, co má udělat.</li>
+        <li>Začíná slovem <b>kéž</b>. Mluvčí si něco přeje, takže je to věta <b>přací</b>.</li>
+        <li>Věta přací končí <b>vykřičníkem</b>.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Věta přací: Kéž bych uměl plavat!</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="druh" class="active">🏷️ Jaká je to věta?</button>
@@ -255,10 +293,14 @@ function znamenko() {
   p.innerHTML = `<div class="zadani">Jaké znaménko patří na konec věty?</div>
     <div class="karta"><div class="veta">${vetaHTML(v, '')}<span class="mezera">?</span></div></div>`;
   const odezva = odezvaEl();
-  Uloha.vyber({
+  /* Rozkaz i přání vyslovené bez důrazu smějí končit i tečkou (Zavři okno.) –
+     tečka se proto u nich uzná taky (tlačítko nese stejný klíč jako vykřičník). */
+  const muzeTecka = v.d === 'rozkazovaci' || v.d === 'praci';
+  let zvolene = DRUHY[v.d].znak;
+  const { prvek } = Uloha.vyber({
     kam: p, odezva, trida: 'velke',
     moznosti: [
-      { klic: '.', popis: '.' },
+      { klic: muzeTecka ? '!' : '.', popis: '.' },
       { klic: '?', popis: '?' },
       { klic: '!', popis: '!' },
     ],
@@ -267,11 +309,23 @@ function znamenko() {
     zpravaChyba: 'Zkus jiné znaménko – co ta věta dělá?',
     poSpravne: napoprve => {
       hotovo(p, napoprve, v.d);
-      p.querySelector('.mezera').textContent = DRUHY[v.d].znak;
+      p.querySelector('.mezera').textContent = zvolene;
       p.appendChild(pravidloEl(v));
+      if (muzeTecka) {
+        const pozn = document.createElement('div');
+        pozn.className = 'pravidlo ok';
+        pozn.innerHTML = '<span class="znak">ℹ️</span><div>Když rozkaz nebo přání říkáme klidně, bez důrazu, '
+          + 'smí věta končit i <b>tečkou</b>: <i>Zavři prosím okno.</i> Správně je vykřičník i tečka.</div>';
+        p.appendChild(pozn);
+      }
     },
     prodleva: PRODLEVA, dalsi: novaUloha,
   });
+  /* zachytávací fáze: zapamatuje si znaménko dřív, než tlačítko odpověď vyhodnotí */
+  prvek.addEventListener('click', e => {
+    const b = e.target.closest('button');
+    if (b) zvolene = b.textContent.trim();
+  }, true);
   p.appendChild(odezva);
 }
 

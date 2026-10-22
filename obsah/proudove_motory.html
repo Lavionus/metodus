@@ -306,7 +306,7 @@ const MOTORY = [
   přidá palivo, směs hoří za <b>držákem plamene</b> a horký plyn odchází
   tryskou nadzvukově.</p>
   <p><b>Háček:</b> ve stoje nemá žádný tah – musí být nejdřív rozlétaný
-  (raketou nebo jiným motorem) zhruba nad M 0,5, prakticky až nad M 2.
+  (raketou nebo jiným motorem) – použitelný tah dává zhruba od M 0,8, dobře pracuje až nad M 2.
   Pracuje asi do M 5.</p>
   <p><b>Zkus:</b> táhni rychlost letu od 0 nahoru a sleduj tlakový poměr –
   všechen tlak dělá jen rychlost.</p>`,
@@ -382,8 +382,10 @@ const MOTORY = [
   <b>Hrdlo</b> (nejužší místo) hlídá, kolik plynu smí ven, a udržuje v komoře
   tlak; v rozšiřující se části trysky se pak plyn urychlí na několikanásobek
   rychlosti zvuku.</p>
-  <p><b>Zkus:</b> barvu <b>tlak</b> – vidíš, jak tlak drží až do hrdla a pak
-  padá; a barvu <b>rychlost</b> – plyn se rozjede až za hrdlem.</p>`,
+  <p><b>Zkus:</b> barvu <b>tlak</b> – v komoře je tlak vysoký, v zužující se části
+  k hrdlu začne klesat (v hrdle je zhruba poloviční) a za hrdlem padá dál; a barvu
+  <b>rychlost</b> – plyn zrychluje už k hrdlu, kde dosáhne rychlosti zvuku, a za hrdlem
+  zrychlí na několikanásobek.</p>`,
   bezVzduchu: true,
   kanaly: [{ id:'jadro', hranice:[0, 1000], zdroj:[90, 645],
     kf: [kf(0,96,0), kf(650,96,0), kf(700,90,0), kf(790,36,0), kf(840,48,0),
@@ -1007,7 +1009,7 @@ Badani.start({
         vysvetleni:`F = (v výtoku − v letu) · 1 kg/s = ${ve-v0} N.` }; },
     { otazka:'Kterým směrem motor tlačí letadlo, když vyfukuje plyny dozadu?',
       moznosti:[moznost('Dopředu – plyny tlačí motor opačně, než je motor vrhá (akce a reakce).',true),
-        moznost('Dopředu, protože plyny se odrážejí od vzduchu za letadlem.',false,'Motor by táhl i ve vakuu – jako raketa. Tah vzniká tím, že motor plyny urychluje, ne odrazem od okolí.'),
+        moznost('Dopředu, protože plyny se odrážejí od vzduchu za letadlem.',false,'Plyny se o vzduch za letadlem „neopírají“ – raketa ostatně táhne i ve vakuu. Tah vzniká tím, že motor plyny urychluje dozadu, ne odrazem od okolí.'),
         moznost('Dozadu, stejně jako proudí plyny.',false,'Síla na motor má opačný směr než síla, kterou motor působí na plyny – 3. Newtonův zákon.')],
       vysvetleni:'Motor působí na plyn silou dozadu, plyn na motor stejně velkou silou dopředu.' },
     { otazka:'Proč <b>raketový motor</b> funguje i ve vesmíru?',
@@ -1049,7 +1051,9 @@ Badani.start({
   <section class="foto-atlas">
     <p>Muzejní exponát v řezu ukazuje stejné části jako simulace: dmychadlo, kompresor, spalovací komoru a turbínu.</p>
     <div class="foto-mrizka">
-@@ATLAS@@
+      <figure class="foto-karta"><img src="img/f/proudove-motory-rez-v2500.webp" alt="Model dvouproudového leteckého motoru IAE V2500 v řezu s dmychadlem, kompresorem, spalovací komorou a turbínou." width="1152" height="767" loading="lazy"><figcaption><strong>Dvouproudový motor v řezu</strong>Vpředu velké dmychadlo, za ním kompresor, spalovací komora a turbína. Většina vzduchu obtéká jádro motoru – jako v simulaci turbo-fanu.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/f/proudove-motory-rez-odstredivy.webp" alt="Barevně natřený řez starým proudovým motorem s odstředivým kompresorem v leteckém muzeu." width="1152" height="733" loading="lazy"><figcaption><strong>Starý proudový motor v řezu</strong>Muzejní exponát s barevně odlišenými částmi. Odstředivý kompresor vrhá vzduch ven do spalovacích komor.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/f/proudove-motory-start-letadla.webp" alt="Dopravní letadlo KLM se zvednutou přídí se právě odlepuje od vzletové dráhy." width="960" height="722" loading="lazy"><figcaption><strong>Dopravní letadlo při startu</strong>Motory jedou na vzletový výkon. Proud plynu vyletuje dozadu velkou rychlostí a podle zákona akce a reakce tlačí letadlo dopředu.</figcaption></figure>
     </div>
   </section>
 </dialog>
@@ -1061,6 +1065,10 @@ Badani.start({
   d.querySelector('.foto-zavri').addEventListener('click', () => d.close());
   d.addEventListener('click', e => { if (e.target === d) d.close(); });
   d.addEventListener('keydown', e => { if (e.key !== 'Escape') e.stopPropagation(); });
+  /* Seznam zdrojů fotografií (kostra.js ho připojí na konec body) patří k fotkám do okna –
+     pod celoobrazovkovou simulací by se nevešel. */
+  const presun = () => { const z = document.querySelector('body > .zdroje-obrazku'); if (z) d.append(z); return !!z; };
+  if (!presun()) { const mo = new MutationObserver(() => { if (presun()) mo.disconnect(); }); mo.observe(document.body, { childList: true }); }
 })();
 </script>
 </body>

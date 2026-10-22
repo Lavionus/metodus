@@ -1,0 +1,8 @@
+Soubor: z9-globalni-les-tehdy.png / z9-globalni-les-tehdy.webp
+Původní dílo: LandSat-Chiquitos, Santa Cruz, Bolivia 1984.jpg
+Autor: NASA Landsat
+Datum vzniku: 1984
+Zdroj: https://commons.wikimedia.org/wiki/File:LandSat-Chiquitos,_Santa_Cruz,_Bolivia_1984.jpg
+Licence: Public domain
+Staženo: 2026-10-21
+Úpravy: automatické natočení, odstranění metadat, zmenšení na nejvýše 1600 px; výuková WebP kopie 1152 px.

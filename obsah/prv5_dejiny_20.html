@@ -6,6 +6,8 @@
   <title>20. století v našich dějinách</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -28,6 +30,45 @@
 <body>
   <h1>🕰️ 20. století v našich dějinách</h1>
   <p class="podtitul">Pro 5. ročník: od vzniku Československa po sametovou revoluci.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Mezníky 20. století</summary>
+    <div class="obsah">
+      <p>20. století jsou roky 1901 až 2000. Naši prababičky a pradědové v něm zažili dvě světové války,
+        vznik vlastního státu, ztrátu svobody i její návrat. Důležitým událostem, které změnily život všech lidí,
+        říkáme <b>mezníky</b>.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Vlastní stát</h3><p><b>1918</b> – po první světové válce vzniklo
+          <b>Československo</b>. Prvním prezidentem byl <b>T. G. Masaryk</b>.</p></article>
+        <article class="vyklad-karta"><h3>Válka</h3><p><b>1938</b> Mnichovská dohoda nám vzala pohraničí.
+          <b>1939–1945</b> druhá světová válka, země byla obsazená jako protektorát.</p></article>
+        <article class="vyklad-karta"><h3>Bez svobody</h3><p><b>1948</b> převzali moc komunisté.
+          <b>1968</b> vojska Varšavské smlouvy obsadila Československo a ukončila pražské jaro.</p></article>
+        <article class="vyklad-karta"><h3>Zase svobodní</h3><p><b>1989</b> sametová revoluce, prezidentem se stal <b>Václav Havel</b>.
+          <b>1993</b> se stát rozdělil na Česko a Slovensko.</p></article>
+      </div>
+      <p>Jak si letopočty zapamatovat? Spoj si je do příběhu: stát vznikl (1918) → přišla válka (1939) → válka skončila (1945)
+        → přišli komunisté (1948) → obsazení (1968) → svoboda (1989) → dva státy (1993).</p>
+      <p>Typická chyba: plést si <b>1938</b> a <b>1939</b>. V roce 1938 byla Mnichovská dohoda, válka začala až o rok později.</p>
+      <aside class="zapamatuj">1918 vznik Československa · 1939–1945 válka · 1948 komunisté · 1968 okupace ·
+        1989 sametová revoluce · 1993 Česká republika.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: seřaď události</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Seřaď od nejstarší po nejnovější: sametová revoluce · vznik Československa ·
+        moc převzali komunisté · skončila druhá světová válka.</p>
+      <ol class="kroky">
+        <li>Ke každé události připíšu rok: sametová revoluce 1989, vznik Československa 1918, komunisté 1948, konec války 1945.</li>
+        <li>Najdu nejmenší číslo: 1918. Vznik Československa jde první.</li>
+        <li>Pak 1945 a 1948 – válka skončila dřív, než přišli komunisté.</li>
+        <li>Nakonec největší číslo 1989 – sametová revoluce.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ 1918 vznik Československa → 1945 konec války → 1948 komunisté → 1989 sametová revoluce.</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="rokUdalost" class="active">📅 Kdy se to stalo</button>
@@ -70,7 +111,7 @@ const UDALOSTI = [
 
 const OSOBNOSTI = [
   { n: 'Tomáš Garrigue Masaryk', e: '🎩', img: 'img/prv/prv5-dejiny-masaryk.webp', alt: 'Dobový portrét Tomáše Garrigua Masaryka.', cin: 'první československý prezident, zasloužil se o vznik republiky v roce 1918' },
-  { n: 'Edvard Beneš', e: '📜', cin: 'prezident, který podepsal Mnichovskou dohodu a vedl exilovou vládu v Londýně' },
+  { n: 'Edvard Beneš', e: '📜', cin: 'prezident, který musel přijmout Mnichovskou dohodu a za války vedl exilovou vládu v Londýně' },
   { n: 'Václav Havel', e: '✌️', cin: 'dramatik a disident, po sametové revoluci se stal prezidentem' },
   { n: 'Alexander Dubček', e: '🌸', cin: 'vedl reformy pražského jara v roce 1968' },
   { n: 'Jan Palach', e: '🕯️', cin: 'student, který se v lednu 1969 upálil na protest proti okupaci' },
@@ -83,7 +124,7 @@ function rokUdalost() {
   const u = Uloha.nahodne(UDALOSTI);
   const jine = Uloha.zamichej(UDALOSTI.filter(x => x.rok !== u.rok)).slice(0, 3);
   p.innerHTML = `<div class="zadani">Ve kterém roce se to stalo?</div>
-    <div class="karta">${u.img ? `<img class="dobovy-snimhek" src="${u.img}" alt="${u.alt}">` : '<div class="obrazek">📜</div>'}<div class="udalost">${u.t}</div>${u.img ? '<div class="pramen">Dobový pramen · autor a licence jsou dole na stránce</div>' : ''}</div>`;
+    <div class="karta">${u.img ? `<img class="dobovy-snimhek" src="${u.img}" alt="Dobová fotografie k události.">` : '<div class="obrazek">📜</div>'}<div class="udalost">${u.t}</div>${u.img ? '<div class="pramen">Dobový pramen · autor a licence jsou dole na stránce</div>' : ''}</div>`;
   const odezva = document.createElement('div');
   odezva.className = 'odezva';
   Uloha.vyber({
@@ -125,7 +166,7 @@ function osobnosti() {
   const o = Uloha.nahodne(OSOBNOSTI);
   const jine = Uloha.zamichej(OSOBNOSTI.filter(x => x.n !== o.n)).slice(0, 3);
   p.innerHTML = `<div class="zadani">O koho jde?</div>
-    <div class="karta">${o.img ? `<img class="dobovy-snimhek" src="${o.img}" alt="${o.alt}">` : `<div class="obrazek">${o.e}</div>`}<div class="udalost">${o.cin}</div></div>`;
+    <div class="karta">${o.img ? `<img class="dobovy-snimhek" src="${o.img}" alt="Dobový portrét osobnosti k určení.">` : `<div class="obrazek">${o.e}</div>`}<div class="udalost">${o.cin}</div></div>`;
   const odezva = document.createElement('div');
   odezva.className = 'odezva';
   Uloha.vyber({

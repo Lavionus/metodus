@@ -33,7 +33,7 @@ canvas{display:block;width:100%;height:100%;touch-action:none;cursor:crosshair}
 .info .zavri:hover{background:none;color:var(--accent)}
 .napoveda{position:absolute;left:12px;bottom:10px;font-size:.74rem;color:var(--text-faint);pointer-events:none}
 .skryto{display:none !important}
-@media(max-width:760px){.info{display:none}.panel{gap:10px;padding:8px 10px}input[type=range]{width:86px}}
+@media(max-width:760px){.info{left:12px;width:auto;max-height:calc(100% - 24px);overflow-y:auto;z-index:5}.panel{gap:10px;padding:8px 10px}input[type=range]{width:86px}}
 
 /* ovládací prvky jako přehledné dlaždice v panelu */
 .panel{gap:8px}
@@ -1037,7 +1037,7 @@ const NAPOVEDA={
     <b>Zkus si</b><br>• Táhni za <b>⭐ hvězdu</b> (úhel α), za <b>okulár</b> (ohnisko f₂) nebo za
     <b>okraj objektivu</b> (průměr D).<br>
     • V nabídce <b>🎬 Ukázka</b> jsou čísla skutečných přístrojů – od divadelního kukátka
-    přes dalekohled, kterým Galileo v roce 1609 poprvé uviděl měsíce Jupiteru, až po velký
+    přes dalekohled, kterým Galileo v lednu 1610 poprvé uviděl měsíce Jupiteru, až po velký
     amatérský přístroj.<br>
     • Zkrať okulár: zvětšení roste, ale <b>zorné pole se úží</b> – čárkovaný výřez v levém
     kroužku se viditelně zmenší.<br>
@@ -1374,7 +1374,13 @@ Badani.start({
   <section class="foto-atlas">
     <p>Odraz, lom a rozklad světla potkáváš každý den. U každé fotky si zkus říct, který jev z této stránky vidíš.</p>
     <div class="foto-mrizka">
-@@ATLAS@@
+      <figure class="foto-karta"><img class="cele" src="img/f/optika-lzice-ve-vode.webp" alt="Lžíce ve sklenici s vodou vypadá na rozhraní vody a vzduchu zlomená a pod hladinou zvětšená." width="1152" height="1444" loading="lazy"><figcaption><strong>„Zlomená“ lžíce</strong>Světlo se na rozhraní vody, skla a vzduchu láme, a tak část lžíce pod hladinou vidíme posunutou.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/f/optika-duha.webp" alt="Duha nad řekou a zelenými kopci po přeháňce." width="1152" height="720" loading="lazy"><figcaption><strong>Duha</strong>Sluneční světlo se v kapkách deště láme a odráží. Každá barva se láme trochu jinak, proto se světlo rozloží.</figcaption></figure>
+      <figure class="foto-karta"><img class="cele" src="img/f/optika-hranol-spektrum.webp" alt="Skleněný hranol ve tmě rozkládá paprsek světla na barevné spektrum." width="1152" height="1405" loading="lazy"><figcaption><strong>Hranol a spektrum</strong>Skleněný hranol láme fialové světlo víc než červené, a tak z bílého světla vytvoří barevný pás – spektrum.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/f/optika-obraz-v-lzici.webp" alt="Čtyři lesklé lžíce, ve kterých se jako ve vypuklém i dutém zrcadle odráží okno." width="1152" height="1083" loading="lazy"><figcaption><strong>Obraz v lžíci</strong>Vypuklá strana lžíce funguje jako vypuklé zrcadlo (obraz je zmenšený), dutá strana jako duté zrcadlo.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/f/optika-lupa.webp" alt="Lupa zvětšuje poštovní známku v albu." width="1152" height="768" loading="lazy"><figcaption><strong>Lupa</strong>Spojná čočka blízko předmětu dává zvětšený, vzpřímený obraz. Předmět musí být blíž, než je ohnisko.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/f/optika-spojka-obraz.webp" alt="Spojná čočka držená proti krajině ukazuje vzdálenou budovu a oblohu převrácené vzhůru nohama." width="1152" height="662" loading="lazy"><figcaption><strong>Převrácený obraz ve spojce</strong>Vzdálenou krajinu ukáže spojná čočka převrácenou a zmenšenou – stejně jako na stínítku v simulaci.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/f/optika-odraz-jezero.webp" alt="Hora a les se zrcadlí na klidné hladině horského jezera." width="1152" height="968" loading="lazy"><figcaption><strong>Odraz v klidné hladině</strong>Klidná voda odráží světlo jako rovinné zrcadlo: úhel dopadu je stejný jako úhel odrazu.</figcaption></figure>
     </div>
   </section>
 </dialog>
@@ -1386,6 +1392,10 @@ Badani.start({
   d.querySelector('.foto-zavri').addEventListener('click', () => d.close());
   d.addEventListener('click', e => { if (e.target === d) d.close(); });
   d.addEventListener('keydown', e => { if (e.key !== 'Escape') e.stopPropagation(); });
+  /* Seznam zdrojů fotografií (kostra.js ho připojí na konec body) patří k fotkám do okna –
+     pod celoobrazovkovou simulací by se nevešel. */
+  const presun = () => { const z = document.querySelector('body > .zdroje-obrazku'); if (z) d.append(z); return !!z; };
+  if (!presun()) { const mo = new MutationObserver(() => { if (presun()) mo.disconnect(); }); mo.observe(document.body, { childList: true }); }
 })();
 </script>
 </body>

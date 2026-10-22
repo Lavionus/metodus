@@ -147,7 +147,7 @@ button.vic.zap{background:var(--bg-control);border-color:var(--accent);color:var
     <span class="nadpisek">🌊 Voda</span>
     <label title="Rychlost šíření vln">💨 Rychlost <input type="range" id="rychlost" min="10" max="45" step="1" value="30"><span class="hodnota" id="rychlostV">30</span></label>
     <label title="Jak rychle vlny zanikají">🫧 Tlumení <input type="range" id="tlumeni" min="0" max="60" step="1" value="22"><span class="hodnota" id="tlumeniV">22</span></label>
-    <label class="prep" title="Mělká voda u břehu vlny brzdí (M)"><input type="checkbox" id="melcina" checked> 🌾 Mělčina tlumí</label>
+    <label class="prep" title="Mělká voda u břehu vlny navíc tlumí – ubírá jim energii (M). Zpomalení vln v mělčině platí vždy."><input type="checkbox" id="melcina" checked> 🌾 Mělčina tlumí</label>
     <div class="delic"></div>
     <span class="nadpisek">🧪 Pokusy</span>
     <label title="Stěna uprostřed rybníka">🧱 <select id="prekazka">
@@ -203,10 +203,10 @@ button.vic.zap{background:var(--bg-control);border-color:var(--accent);color:var
     • Vlož do rybníka <b>kámen</b> (vlny se od něj odrážejí), <b>kládu</b>
     (houpe se a sama vlny vysílá) nebo <b>rákosí</b> (vlny v něm dohasnou).<br>
     • <b>🌱 Nový rybník</b> vygeneruje jiné břehy. Stejné semínko = stejný rybník.<br>
-    • Zapni <b>dvě kapátka</b> – v místech, kde se hřeben potká s hřebenem,
-    vzniká <b>interference</b>.<br>
+    • Zapni <b>dvě kapátka</b> – vlny se skládají (<b>interference</b>): kde se hřeben
+    potká s hřebenem, vlna zesílí, kde hřeben s důlkem, hladina zůstane skoro klidná.<br>
     • <b>Dvě štěrbiny</b> + jedno kapátko = školní pokus s ohybem vlnění.<br>
-    • Zvyš <b>tlumení</b> – voda je „hustší“ a vlny utichnou dřív.<br><br>
+    • Zvyš <b>tlumení</b> – vlny rychleji ztrácejí energii (jako ve vazké tekutině) a utichnou dřív.<br><br>
     <b>Klávesy</b><br>
     <b>1</b>–<b>6</b> nástroj · <b>mezerník</b> pauza · <b>C</b> uklidnit ·
     <b>M</b> mělčina · <b>N</b> nový rybník<br>
@@ -1471,7 +1471,8 @@ $('btnPauza').addEventListener('click', () => {
 });
 $('btnInfo').addEventListener('click', () => {
   const b = $(rezimStr === 'slapy' ? 'infoSlapy' : 'infoBox');
-  b.style.display = b.style.display === 'none' ? 'block' : 'none';
+  // na úzké obrazovce skrývá nápovědu CSS – rozhoduje skutečný stav, ne jen inline styl
+  b.style.display = getComputedStyle(b).display === 'none' ? 'block' : 'none';
 });
 $('zavriInfo').addEventListener('click', () => $('infoBox').style.display = 'none');
 
@@ -1614,7 +1615,7 @@ Badani.start({
     { otazka:'Co se stane s vlnou, když připluje do <b>mělké vody u břehu</b>?',
       moznosti:[moznost('Zpomalí se a vlny se k sobě přiblíží.',true),
         moznost('Zrychlí se.',false,'V mělké vodě se vlna naopak zpomaluje – rychlost závisí na hloubce (√(g·h)).'),
-        moznost('Nic se nezmění.',false,'Rychlost vln na vodě závisí na hloubce – v mělčině klesá. Vyzkoušej přepínač Mělčina tlumí.')],
+        moznost('Nic se nezmění.',false,'Rychlost vln na vodě závisí na hloubce – v mělčině klesá. Pozoruj, jak se vlny u břehu zpomalí a zhustí.')],
       vysvetleni:'Rychlost vln na mělké vodě je √(g·h): menší hloubka, pomalejší vlna – proto se vlny stáčejí k břehu.' },
     { otazka:'Proč příliv nepřichází přesně každých 12 hodin, ale asi po <b>12 h 25 min</b>?',
       moznosti:[moznost('Měsíc se mezitím posune po své dráze a Země se musí pootočit o kousek víc.',true),

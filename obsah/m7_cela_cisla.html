@@ -6,6 +6,8 @@
   <title>Celá čísla</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <link rel="stylesheet" href="../nazor.css">
   <script src="../nazor.js"></script>
   <script src="../theme.js"></script>
@@ -52,6 +54,43 @@
       <figcaption>Hloubka leží pod úrovní hladiny.</figcaption>
     </figure>
   </section>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Celá čísla na ose a počítání s nimi</summary>
+    <div class="obsah">
+      <p>Celá čísla jsou kladná čísla 1, 2, 3…, nula a záporná čísla −1, −2, −3… Na číselné ose leží záporná čísla
+        <b>vlevo od nuly</b>. Čím je číslo víc vlevo, tím je <b>menší</b> – proto −8 &lt; −3, i když 8 je víc než 3.
+        Pomůže teploměr: −8 °C je větší mráz než −3 °C.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Opačné číslo a absolutní hodnota</h3><p>Opačné číslo leží na druhé straně
+          nuly ve stejné vzdálenosti: k 5 je to −5, k −5 je to 5. <b>Absolutní hodnota</b> |a| je vzdálenost od nuly,
+          proto nikdy není záporná: |−7| = 7, |7| = 7.</p></article>
+        <article class="vyklad-karta"><h3>Sčítání a odčítání</h3><p>Sčítání je posun po ose: přičtení kladného čísla
+          posouvá doprava, záporného doleva. <b>Odečíst záporné číslo je totéž jako přičíst opačné</b>:
+          4 − (−3) = 4 + 3 = 7.</p></article>
+        <article class="vyklad-karta"><h3>Násobení a dělení</h3><p>Nejdřív počítej bez znamének, pak urči znaménko:
+          <b>stejná znaménka → kladný výsledek</b>, různá znaménka → záporný. (−3) · (−6) = 18, (−24) : 3 = −8.</p></article>
+      </div>
+      <p>Typická chyba je „dvě minus dají plus“ i u sčítání: (−2) + (−5) není 7, ale −7 – posouváš se dvakrát doleva.
+        Pravidlo o znaménkách platí jen pro násobení a dělení.</p>
+      <aside class="zapamatuj">Vlevo na ose = menší. Odečíst záporné = přičíst kladné. Při násobení a dělení stejná
+        znaménka dávají plus, různá minus.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: odčítání záporného čísla</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Vypočítej (−4) − (−7).</p>
+      <ol class="kroky">
+        <li>Odčítám záporné číslo, takže ho nahradím přičtením opačného čísla: (−4) − (−7) = (−4) + 7.</li>
+        <li>Na ose začnu u −4.</li>
+        <li>Přičítám kladné číslo 7, posunu se o 7 kroků doprava: −3, −2, −1, 0, 1, 2, 3.</li>
+        <li>Kontrola: |7| je větší než |−4|, proto výsledek musí být kladný a rovná se 7 − 4 = 3.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ (−4) − (−7) = 3</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="osa" class="active">📏 Číslo na ose</button>
@@ -108,7 +147,10 @@ function osaPosunu(a, posun, popis) {
   });
 }
 
-const zapis = n => n < 0 ? `<span class="zap">(${n})</span>` : String(n);
+/* Záporná čísla vždy se znakem − (ne spojovníkem); v příkladu v závorce. */
+const c = n => Uloha.cislo(n);
+const zv = n => n < 0 ? `(${c(n)})` : String(n);
+const zapis = n => n < 0 ? `<span class="zap">(${c(n)})</span>` : String(n);
 function odezvaEl() { const d = document.createElement('div'); d.className = 'odezva'; return d; }
 
 /* ---- Číslo na ose ------------------------------------------------------------------ */
@@ -127,9 +169,9 @@ function osa() {
   const odezva = odezvaEl();
   Uloha.vyber({
     kam: p, odezva, trida: 'velke',
-    moznosti: Uloha.zamichej([String(bod), ...jine]).map(t => ({ klic: t, popis: t })),
+    moznosti: Uloha.zamichej([String(bod), ...jine]).map(t => ({ klic: t, popis: c(+t) })),
     spravnyKlic: String(bod),
-    zpravaOk: `✅ Šipka ukazuje na ${bod}.`,
+    zpravaOk: `✅ Šipka ukazuje na ${c(bod)}.`,
     zpravaChyba: 'Počítej od nuly – doprava kladná čísla, doleva záporná.',
     poSpravne: skore.vyhodnot,
     dalsi: novaUloha,
@@ -151,7 +193,7 @@ function porovnani() {
     kam: p, odezva, trida: 'velke',
     moznosti: [{ klic: '<', popis: '<' }, { klic: '=', popis: '=' }, { klic: '>', popis: '>' }],
     spravnyKlic: spravny,
-    zpravaOk: `✅ ${a} ${spravny} ${b} – na ose leží ${a < b ? a + ' vlevo od ' + b : (a > b ? a + ' vpravo od ' + b : 'obě čísla na stejném místě')}.`,
+    zpravaOk: `✅ ${c(a)} ${spravny} ${c(b)} – na ose leží ${a < b ? c(a) + ' vlevo od ' + c(b) : (a > b ? c(a) + ' vpravo od ' + c(b) : 'obě čísla na stejném místě')}.`,
     zpravaChyba: 'Menší je to číslo, které leží na ose více vlevo.',
     poSpravne: skore.vyhodnot,
     dalsi: novaUloha,
@@ -179,9 +221,9 @@ function operace() {
   const odezva = odezvaEl();
   Uloha.vyber({
     kam: p, odezva, trida: 'velke',
-    moznosti: Uloha.zamichej([String(vysledek), ...jine]).map(t => ({ klic: t, popis: t })),
+    moznosti: Uloha.zamichej([String(vysledek), ...jine]).map(t => ({ klic: t, popis: c(+t) })),
     spravnyKlic: String(vysledek),
-    zpravaOk: `✅ ${a} ${scitame ? '+' : '−'} ${b} = ${vysledek}` + (!scitame
+    zpravaOk: `✅ ${c(a)} ${scitame ? '+' : '−'} ${zv(b)} = ${c(vysledek)}` + (!scitame
       ? ` – odčítání ${b < 0 ? 'záporného čísla je přičítání' : 'znamená posun doleva'}.` : ''),
     zpravaChyba: 'Představ si posun po číselné ose: kladné doprava, záporné doleva.',
     poSpravne: napoprve => {
@@ -216,9 +258,9 @@ function soucin() {
   const stejna = (x < 0) === (b < 0);
   Uloha.vyber({
     kam: p, odezva, trida: 'velke',
-    moznosti: Uloha.zamichej([String(vysledek), ...jine]).map(t => ({ klic: t, popis: t })),
+    moznosti: Uloha.zamichej([String(vysledek), ...jine]).map(t => ({ klic: t, popis: c(+t) })),
     spravnyKlic: String(vysledek),
-    zpravaOk: `✅ ${x} ${nasobime ? '·' : ':'} ${b} = ${vysledek} – znaménka jsou ${stejna ? 'stejná, výsledek je kladný' : 'různá, výsledek je záporný'}.`,
+    zpravaOk: `✅ ${c(x)} ${nasobime ? '·' : ':'} ${zv(b)} = ${c(vysledek)} – znaménka jsou ${stejna ? 'stejná, výsledek je kladný' : 'různá, výsledek je záporný'}.`,
     zpravaChyba: 'Nejdřív spočítej čísla bez znamének, pak urči znaménko výsledku.',
     poSpravne: skore.vyhodnot,
     dalsi: novaUloha,
@@ -237,15 +279,15 @@ function absolutni() {
   jine.delete(String(vysledek));
 
   p.innerHTML = `<div class="zadani">${ptameSeNaAbsolutni ? 'Kolik je absolutní hodnota čísla?' : 'Které číslo je opačné k číslu?'}</div>
-    <div class="karta"><div class="priklad">${ptameSeNaAbsolutni ? `|${a}|` : zapis(a)}</div></div>`;
+    <div class="karta"><div class="priklad">${ptameSeNaAbsolutni ? `|${c(a)}|` : zapis(a)}</div></div>`;
   const odezva = odezvaEl();
   Uloha.vyber({
     kam: p, odezva, trida: 'velke',
-    moznosti: Uloha.zamichej([String(vysledek), ...jine]).map(t => ({ klic: t, popis: t })),
+    moznosti: Uloha.zamichej([String(vysledek), ...jine]).map(t => ({ klic: t, popis: c(+t) })),
     spravnyKlic: String(vysledek),
     zpravaOk: ptameSeNaAbsolutni
-      ? `✅ |${a}| = ${vysledek} – vzdálenost od nuly nemůže být záporná.`
-      : `✅ Opačné číslo k ${a} je ${vysledek}; jejich součet je 0.`,
+      ? `✅ |${c(a)}| = ${c(vysledek)} – vzdálenost od nuly nemůže být záporná.`
+      : `✅ Opačné číslo k ${c(a)} je ${c(vysledek)}; jejich součet je 0.`,
     zpravaChyba: ptameSeNaAbsolutni
       ? 'Absolutní hodnota je vzdálenost od nuly – vždy nezáporná.'
       : 'Opačné číslo má stejnou vzdálenost od nuly, ale druhé znaménko.',

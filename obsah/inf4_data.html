@@ -6,6 +6,8 @@
   <title>Data, informace a kódování</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -27,6 +29,38 @@
 <body>
   <h1>🔣 Data, informace a kódování</h1>
   <p class="podtitul">Pro 4.–5. ročník: obrázek zapsaný čísly, dvojkové zapisování a tajné zprávy.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Jak počítač zapisuje data čísly</summary>
+    <div class="obsah">
+      <p>Počítač neumí uložit obrázek ani písmeno tak, jak je vidíš ty. Všechno si zapíše jako <b>čísla</b>.
+        Aby čísla zase dávala smysl, musí se ten, kdo zapisuje, a ten, kdo čte, dohodnout na stejném pravidle.
+        Takovému pravidlu říkáme <b>kód</b>.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Obrázek z bodů</h3><p>Obrázek je mřížka bodů. Každý řádek zapíšeme zleva doprava: <b>1</b> = bod vybarvit, <b>0</b> = nechat prázdný. Řádek 10001 má vybarvený jen první a poslední bod.</p></article>
+        <article class="vyklad-karta"><h3>Dvojková soustava</h3><p>Má jen číslice 0 a 1. Každá pozice má svou hodnotu: zleva <b>8, 4, 2, 1</b>. Sečteš hodnoty pozic, kde je jednička.</p></article>
+        <article class="vyklad-karta"><h3>Písmena čísly</h3><p>Písmeno nahradíme jeho pořadím v abecedě: A = 1, B = 2, C = 3 … Slovo PES je 16 – 5 – 19.</p></article>
+      </div>
+      <p>Častá chyba u dvojkové soustavy je číst jedničky jako obyčejné číslo („deset“) nebo přiřadit hodnoty
+        pozicím v opačném pořadí. Vždycky si nad číslice napiš 8, 4, 2, 1 a pak sčítej. U obrázku jdi řádek po řádku
+        a ukazuj si prstem, ať žádný bod nevynecháš.</p>
+      <aside class="zapamatuj">Data jsou čísla zapsaná podle dohodnutého kódu. Ve dvojkové soustavě mají pozice hodnoty 8, 4, 2, 1.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: číslo ve dvojkové soustavě</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Jaké číslo je dvojkově zapsané jako 1011?</p>
+      <ol class="kroky">
+        <li>Nad číslice napíšu hodnoty pozic zleva: <b>8, 4, 2, 1</b>.</li>
+        <li>Podívám se, kde jsou jedničky: pod 8, pod 2 a pod 1. Pod 4 je nula.</li>
+        <li>Sečtu hodnoty pozic s jedničkou: 8 + 2 + 1 = <b>11</b>.</li>
+        <li>Zkontroluji: 11 = 8 + 2 + 1, čtyřka chybí – to sedí s nulou na druhém místě.</li>
+      </ol>
+      <p class="vysledek-ukazky">1011 ve dvojkové soustavě je číslo 11.</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="obrazekKod" class="active">🖼️ Obrázek podle kódu</button>
@@ -174,7 +208,8 @@ function binarne() {
 }
 
 /* ---- Tajná zpráva -------------------------------------------------------------- */
-const SLOVA = ['KOLO', 'PES', 'DUM', 'RYBA', 'SKOLA', 'MAPA', 'LES', 'KNIHA', 'AUTO', 'VODA'];
+/* Jen slova bez háčků a čárek – abeceda A–Z diakritiku nemá (DŮM, ŠKOLA by se zapsaly chybně). */
+const SLOVA = ['KOLO', 'PES', 'LAMPA', 'RYBA', 'SOVA', 'MAPA', 'LES', 'KNIHA', 'AUTO', 'VODA'];
 
 function sifra() {
   const p = $('plocha');

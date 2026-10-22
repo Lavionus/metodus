@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Předmět | Metodus</title>
+  <link rel="stylesheet" href="../common.css">
+  <script src="../theme.js"></script>
+  <script src="../podpis.js" defer></script>
+  <style>
+    /* Stránka předmětu: skládá se celá z katalogu (apps.js) – okruhy, lekce, cíle, učební cesty.
+       Adresa: predmet.html?p=<id skupiny>[&r=<ročník>]  (22. 10. 2026) */
+    body { background-color: var(--bg-deep); padding: 26px clamp(14px, 3vw, 40px); min-height: 100vh; }
+    header.uvod { display: flex; gap: 16px; align-items: center; margin-bottom: 18px; max-width: 900px; }
+    header.uvod .predmet-ilustrace { width: 84px; height: 84px; border-radius: 14px; flex-shrink: 0; }
+    header.uvod h1 { font-size: 1.55rem; font-weight: 650; margin-bottom: 4px; }
+    header.uvod p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.5; }
+    .rocniky { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 22px; }
+    .rocniky button {
+      border: 1px solid var(--border); background: var(--bg-panel); color: var(--text);
+      border-radius: 999px; padding: 6px 12px; font: inherit; font-size: 0.85rem; cursor: pointer;
+    }
+    .rocniky button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--na-akcentu, #fff); }
+    .rocniky button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    .rocniky button .pocet { color: inherit; opacity: .7; font-size: .75rem; margin-left: 4px; }
+    h2.oddil { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--accent); margin: 6px 0 10px; font-weight: 700; }
+    .okruhy { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); gap: 12px; margin-bottom: 28px; }
+    .okruh { background: var(--bg-panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px 14px; }
+    .okruh h3 { font-size: 1rem; margin-bottom: 8px; display: flex; gap: 8px; align-items: baseline; }
+    .okruh h3 .pocet { margin-left: auto; font-size: .75rem; color: var(--text-faint); font-weight: 600; }
+    .okruh ul { list-style: none; display: grid; gap: 6px; }
+    .okruh li a {
+      display: block; background: var(--bg-elevated); border: 1px solid var(--border); border-radius: 8px;
+      padding: 8px 10px; color: var(--text); text-decoration: none; font-size: .88rem; line-height: 1.35;
+    }
+    .okruh li a:hover, .okruh li a:focus-visible { border-color: var(--accent); background: var(--bg-hover); }
+    .okruh li a .cil { display: block; color: var(--text-muted); font-size: .8rem; margin-top: 3px; }
+    .okruh li a .roc { float: right; color: var(--text-faint); font-size: .72rem; margin-left: 8px; white-space: nowrap; }
+    .okruh li a.hlavni { border-left: 4px solid var(--accent); }
+    .cesty { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); gap: 12px; margin-bottom: 26px; }
+    .cesta { background: var(--bg-panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 10px 12px; font-size: .86rem; }
+    .cesta h3 { font-size: .95rem; margin-bottom: 3px; }
+    .cesta p { color: var(--text-muted); font-size: .8rem; margin-bottom: 6px; }
+    .cesta ol { margin: 0 0 0 1.3em; }
+    .cesta li { margin: 2px 0; }
+    .cesta a { color: var(--accent-hover); text-decoration: none; }
+    .cesta a:hover, .cesta a:focus-visible { text-decoration: underline; }
+    .prazdne { color: var(--text-faint); font-size: .9rem; margin-bottom: 20px; }
+    .predmety-jinde { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 20px; }
+    .predmety-jinde a {
+      border: 1px solid var(--border); border-radius: 999px; padding: 5px 11px; font-size: .82rem;
+      color: var(--text); text-decoration: none; background: var(--bg-panel);
+    }
+    .predmety-jinde a:hover, .predmety-jinde a:focus-visible { border-color: var(--accent); }
+    footer.pata { border-top: 1px solid var(--border); padding-top: 14px; margin-top: 8px; color: var(--text-faint); font-size: .8rem; }
+    @media (max-width: 520px) { header.uvod .predmet-ilustrace { width: 60px; height: 60px; } header.uvod h1 { font-size: 1.3rem; } }
+  </style>
+</head>
+<body>
+  <header class="uvod" id="hlavicka"><div><h1 id="nadpis">Předmět</h1><p id="popis"></p></div></header>
+  <div class="rocniky" id="rocniky" role="group" aria-label="Ročník"></div>
+  <h2 class="oddil" id="okruhyNadpis">Okruhy a lekce</h2>
+  <div class="okruhy" id="okruhy"></div>
+  <h2 class="oddil" id="cestyNadpis">Učební cesty</h2>
+  <div class="cesty" id="cesty"></div>
+  <h2 class="oddil">Další předměty</h2>
+  <nav class="predmety-jinde" id="jinde" aria-label="Další předměty"></nav>
+  <footer class="pata">Lekce a okruhy se skládají z katalogu Metodusu. Zvýrazněná lekce je hlavní lekcí svého tématu.</footer>
+
+  <script src="../apps.js"></script>
+  <link rel="stylesheet" href="predmety-obrazky.css">
+  <script src="predmety-obrazky.js"></script>
+  <script>
+    const vRozcestniku = window.parent !== window;
+    const $ = id => document.getElementById(id);
+    const param = new URLSearchParams(location.search);
+    const alias = typeof KATALOG_SKUPINY_ALIAS !== 'undefined' ? KATALOG_SKUPINY_ALIAS : {};
+    const id = alias[param.get('p')] || param.get('p') || KATALOG_SKUPINY[0].id;
+    const skupina = KATALOG_SKUPINY.find(g => g.id === id) || KATALOG_SKUPINY[0];
+    const sekce = KATALOG_SEKCE.filter(s => s.skupina === skupina.id);
+    const polozky = sekce.flatMap(s => s.polozky);
+    const cile = typeof KATALOG_CILE !== 'undefined' ? KATALOG_CILE : {};
+    const hlavni = new Set((typeof KATALOG_RODINY !== 'undefined' ? KATALOG_RODINY : []).map(r => r.hlavni));
+    const rocnikyPredmetu = [...new Set(polozky.flatMap(p => p.rocniky || []))].sort((a, b) => a - b);
+    let rocnik = Number(param.get('r')) || 0;
+    if (!rocnikyPredmetu.includes(rocnik)) rocnik = 0;
+
+    const rozdel = n => { const m = n.match(/^(\P{L}+)\s*(.*)$/u); return m && m[2] ? { emoji: m[1].trim(), text: m[2] } : { emoji: '', text: n }; };
+    const rozsah = r => !r || !r.length ? 'všechny ročníky' : r.length === 1 ? r[0] + '. ročník'
+      : r.every((x, i) => !i || x === r[i - 1] + 1) ? `${r[0]}.–${r[r.length - 1]}. ročník` : r.join(', ') + '. ročník';
+    const tvar = (n, a, b, c) => `${n} ${n === 1 ? a : n >= 2 && n <= 4 ? b : c}`;
+
+    function otevri(soubor) {
+      if (vRozcestniku) window.parent.postMessage({ otevri: soubor }, '*');
+      else location.href = '../index.html#' + soubor;
+    }
+    function odkaz(href, text, soubor) {
+      const a = document.createElement('a');
+      a.href = href; a.target = '_top';
+      if (text) a.textContent = text;
+      if (soubor) a.addEventListener('click', ev => { if (vRozcestniku) { ev.preventDefault(); otevri(soubor); } });
+      return a;
+    }
+
+    // hlavička
+    const { emoji, text } = rozdel(skupina.label);
+    document.title = text + ' | Metodus';
+    $('nadpis').textContent = `${emoji} ${text}`;
+    $('popis').textContent = `${tvar(polozky.length, 'lekce', 'lekce', 'lekcí')} v ${tvar(sekce.length, 'okruhu', 'okruzích', 'okruzích')} · ${rozsah(rocnikyPredmetu)}`;
+    const ilustrace = typeof PredmetyObrazky !== 'undefined' ? PredmetyObrazky.skupina(skupina.id) : null;
+    if (ilustrace) $('hlavicka').prepend(ilustrace.firstElementChild || ilustrace);
+
+    function vykresli() {
+      // přepínač ročníků
+      $('rocniky').replaceChildren();
+      [0, ...rocnikyPredmetu].forEach(r => {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.setAttribute('aria-pressed', String(r === rocnik));
+        const n = r ? polozky.filter(p => (p.rocniky || []).includes(r)).length : polozky.length;
+        b.innerHTML = `${r ? r + '. ročník' : 'Všechny ročníky'}<span class="pocet">${n}</span>`;
+        b.addEventListener('click', () => {
+          rocnik = r;
+          const u = new URL(location.href);
+          r ? u.searchParams.set('r', r) : u.searchParams.delete('r');
+          history.replaceState(null, '', u);
+          if (vRozcestniku && r) window.parent.postMessage({ rocnik: String(r), tise: true }, '*');
+          vykresli();
+          $('rocniky').querySelector(`[aria-pressed="true"]`)?.focus();
+        });
+        $('rocniky').appendChild(b);
+      });
+      const vRocniku = p => !rocnik || !(p.rocniky || []).length || p.rocniky.includes(rocnik);
+
+      // okruhy
+      $('okruhyNadpis').textContent = rocnik ? `Okruhy a lekce pro ${rocnik}. ročník` : 'Okruhy a lekce';
+      $('okruhy').replaceChildren();
+      let celkem = 0;
+      sekce.forEach(s => {
+        const lekce = s.polozky.filter(vRocniku);
+        if (!lekce.length) return;
+        celkem += lekce.length;
+        const karta = document.createElement('section');
+        karta.className = 'okruh';
+        const h = document.createElement('h3');
+        h.innerHTML = `<span></span><span class="pocet">${lekce.length}</span>`;
+        h.firstChild.textContent = s.nazev;
+        const ul = document.createElement('ul');
+        lekce.forEach(p => {
+          const li = document.createElement('li');
+          const a = odkaz('../index.html#' + p.soubor, '', p.soubor);
+          if (hlavni.has(p.soubor)) { a.classList.add('hlavni'); a.title = 'Hlavní lekce tématu'; }
+          const roc = document.createElement('span'); roc.className = 'roc'; roc.textContent = rozsah(p.rocniky);
+          const nazev = document.createElement('span'); nazev.textContent = p.nazev;
+          a.append(roc, nazev);
+          if (cile[p.soubor]) { const c = document.createElement('span'); c.className = 'cil'; c.textContent = '🎯 ' + cile[p.soubor]; a.append(c); }
+          li.append(a); ul.append(li);
+        });
+        karta.append(h, ul);
+        $('okruhy').append(karta);
+      });
+      if (!celkem) {
+        const p = document.createElement('p'); p.className = 'prazdne';
+        p.textContent = 'Pro tento ročník tu zatím žádná lekce není.';
+        $('okruhy').append(p);
+      }
+
+      // učební cesty = rodiny témat, jejichž hlavní lekce patří do předmětu
+      const soubory = new Set(polozky.map(p => p.soubor));
+      const podle = new Map(KATALOG_SEKCE.flatMap(s => s.polozky).map(p => [p.soubor, p]));
+      const rodiny = (typeof KATALOG_RODINY !== 'undefined' ? KATALOG_RODINY : [])
+        .filter(r => soubory.has(r.hlavni))
+        .filter(r => !rocnik || r.cesta.some(f => vRocniku(podle.get(f) || {})));
+      $('cesty').replaceChildren();
+      $('cestyNadpis').hidden = !rodiny.length;
+      rodiny.forEach(r => {
+        const d = document.createElement('div'); d.className = 'cesta';
+        const h = document.createElement('h3'); h.textContent = r.nazev;
+        const p = document.createElement('p'); p.textContent = r.popis || '';
+        const ol = document.createElement('ol');
+        r.cesta.forEach(f => {
+          const pol = podle.get(f); if (!pol) return;
+          const li = document.createElement('li');
+          li.append(odkaz('../index.html#' + f, pol.nazev, f));
+          const sm = document.createElement('small'); sm.textContent = ' · ' + rozsah(pol.rocniky);
+          sm.style.color = 'var(--text-faint)';
+          li.append(sm); ol.append(li);
+        });
+        d.append(h, p, ol); $('cesty').append(d);
+      });
+    }
+
+    // ostatní předměty
+    KATALOG_SKUPINY.filter(g => g.id !== skupina.id && KATALOG_SEKCE.some(s => s.skupina === g.id)).forEach(g => {
+      const a = odkaz(`predmet.html?p=${g.id}${rocnik ? '&r=' + rocnik : ''}`, g.label);
+      a.target = '_self';
+      if (vRozcestniku) a.addEventListener('click', ev => { ev.preventDefault(); window.parent.postMessage({ otevri: `obsah/predmet.html?p=${g.id}${rocnik ? '&r=' + rocnik : ''}`, skupina: g.id }, '*'); });
+      $('jinde').append(a);
+    });
+    vykresli();
+  </script>
+</body>
+</html>

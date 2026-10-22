@@ -6,6 +6,8 @@
   <title>Pohyb tělesa – dráha a rychlost</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -25,6 +27,46 @@
 <body>
   <h1>🏃 Pohyb tělesa – dráha a rychlost</h1>
   <p class="podtitul">Pro 7. ročník: s = v · t, převody jednotek rychlosti a graf dráhy.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Dráha, rychlost a čas</summary>
+    <div class="obsah">
+      <p>Těleso se pohybuje, když mění svou polohu vůči jinému tělesu. Délku čáry, po které se přitom
+        posune, nazýváme <b>dráha s</b>. <b>Rychlost v</b> říká, jakou dráhu těleso urazí za jednotku času:
+        rychlost 18 km/h znamená, že za každou hodinu ujede 18 km.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Tři tvary jednoho vztahu</h3><p><b>v = s : t</b> (rychlost),
+          <b>s = v · t</b> (dráha), <b>t = s : v</b> (čas). Stačí si pamatovat první, další z něj odvodíš.</p></article>
+        <article class="vyklad-karta"><h3>Jednotky rychlosti</h3><p><b>m/s</b> a <b>km/h</b>; 1 m/s = 3,6 km/h.
+          Z m/s na km/h násobíš 3,6, z km/h na m/s dělíš 3,6.</p></article>
+        <article class="vyklad-karta"><h3>Druhy pohybu</h3><p><b>Rovnoměrný</b>: rychlost se nemění.
+          <b>Nerovnoměrný</b>: těleso zrychluje nebo zpomaluje (rozjezd, brzdění, pád).</p></article>
+      </div>
+      <p>Proč zrovna 3,6? Za hodinu je 3600 sekund. Kdo jede 1 m za sekundu, ujede za hodinu 3600 m,
+        tedy 3,6 km. Typická chyba je dosadit dráhu v kilometrech a čas v minutách – jednotky musí
+        k sobě pasovat (km a h, nebo m a s).</p>
+      <p>V <b>grafu dráhy na čase</b> je čas na vodorovné ose a dráha na svislé. Rovnoměrný pohyb dává
+        přímku, a čím je strmější, tím je rychlost větší. Vodorovný úsek znamená, že dráha nepřibývá –
+        těleso stojí. U nerovnoměrného pohybu počítáme <b>průměrnou rychlost</b>: celá dráha : celý čas.</p>
+      <aside class="zapamatuj">v = s : t, s = v · t, t = s : v. 1 m/s = 3,6 km/h.
+        Přímka v grafu s(t) = rovnoměrný pohyb, vodorovná část = těleso stojí.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: jak dlouho pojede cyklista</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Cyklista musí urazit 54 km rychlostí 18 km/h. Jak dlouho pojede?</p>
+      <ol class="kroky">
+        <li>Zapíšu, co znám: <b>s = 54 km</b>, <b>v = 18 km/h</b>, hledám <b>t</b>.</li>
+        <li>Zkontroluji jednotky: dráha v km a rychlost v km/h k sobě pasují, čas vyjde v hodinách.</li>
+        <li>Vyberu tvar vzorce pro čas: <b>t = s : v</b>.</li>
+        <li>Dosadím a vypočítám: t = 54 : 18 = <b>3 h</b>.</li>
+        <li>Zkouška: za 3 hodiny po 18 km ujede 3 · 18 = 54 km. Sedí to.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Cyklista pojede 3 hodiny.</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="vypocet" class="active">🧮 Dráha, rychlost, čas</button>
@@ -54,10 +96,12 @@ let rezim = 'vypocet';
 const fmt = x => Number(Number(x).toFixed(2)).toLocaleString('cs-CZ');
 function odezvaEl() { const d = document.createElement('div'); d.className = 'odezva'; return d; }
 
+/* jede = přítomný čas, ujel = minulý čas, pojede = budoucí čas (aby chodec „šel“ a auto „ujelo“) */
+const JEDE = { jede: 'jede', ujel: 'ujel', pojede: 'pojede' };
 const DOPRAVA = [
-  { co: 'cyklista', ikona: '🚴', v: 18 }, { co: 'chodec', ikona: '🚶', v: 5 },
-  { co: 'auto', ikona: '🚗', v: 90 }, { co: 'vlak', ikona: '🚆', v: 120 },
-  { co: 'traktor', ikona: '🚜', v: 25 }, { co: 'běžec', ikona: '🏃', v: 12 },
+  { co: 'cyklista', ikona: '🚴', v: 18, ...JEDE }, { co: 'chodec', ikona: '🚶', v: 5, jede: 'jde', ujel: 'ušel', pojede: 'půjde' },
+  { co: 'auto', ikona: '🚗', v: 90, ...JEDE, ujel: 'ujelo' }, { co: 'vlak', ikona: '🚆', v: 120, ...JEDE },
+  { co: 'traktor', ikona: '🚜', v: 25, ...JEDE }, { co: 'běžec', ikona: '🏃', v: 12, jede: 'běží', ujel: 'uběhl', pojede: 'poběží' },
 ];
 
 /* ---- Dráha, rychlost, čas ---------------------------------------------------------------- */
@@ -70,16 +114,16 @@ function vypocet() {
 
   let zadani, vysledek, jednotka, vzorec;
   if (hledame === 's') {
-    zadani = `${d.ikona} ${d.co.charAt(0).toUpperCase() + d.co.slice(1)} jede stálou rychlostí
+    zadani = `${d.ikona} ${d.co.charAt(0).toUpperCase() + d.co.slice(1)} ${d.jede} stálou rychlostí
       <b>${d.v} km/h</b> po dobu <b>${t} h</b>. Jakou dráhu urazí?`;
     vysledek = s; jednotka = 'km'; vzorec = `s = v · t = ${d.v} · ${t} = ${s} km`;
   } else if (hledame === 'v') {
-    zadani = `${d.ikona} ${d.co.charAt(0).toUpperCase() + d.co.slice(1)} ujel <b>${s} km</b>
+    zadani = `${d.ikona} ${d.co.charAt(0).toUpperCase() + d.co.slice(1)} ${d.ujel} <b>${s} km</b>
       za <b>${t} h</b>. Jaká byla jeho průměrná rychlost?`;
     vysledek = d.v; jednotka = 'km/h'; vzorec = `v = s / t = ${s} / ${t} = ${d.v} km/h`;
   } else {
     zadani = `${d.ikona} ${d.co.charAt(0).toUpperCase() + d.co.slice(1)} musí urazit <b>${s} km</b>
-      rychlostí <b>${d.v} km/h</b>. Jak dlouho pojede?`;
+      rychlostí <b>${d.v} km/h</b>. Jak dlouho ${d.pojede}?`;
     vysledek = t; jednotka = 'h'; vzorec = `t = s / v = ${s} / ${d.v} = ${t} h`;
   }
 
@@ -181,7 +225,7 @@ function graf() {
   }
 
   p.innerHTML = `<div class="zadani uloha-text">Graf ukazuje závislost dráhy na čase.
-      Jakou dráhu mělo těleso ujeto v čase <b>${cas} h</b>?</div>
+      Jakou dráhu urazilo těleso do času <b>t = ${cas} h</b>?</div>
     <div class="karta">${svgGraf(body, 't [h]', 's [km]')}</div>`;
   const odezva = odezvaEl();
   Uloha.vyber({

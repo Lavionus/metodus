@@ -3,9 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>🌾 Potravní řetězce</title>
+  <title>Potravní řetězce</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -26,6 +28,45 @@
 <body>
   <h1>🌾 Potravní řetězce</h1>
   <p class="podtitul">Pro 6. a 9. ročník: kdo koho jí, kudy teče energie a co se stane, když jeden článek zmizí.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Kdo koho jí a kudy teče energie</summary>
+    <div class="obsah">
+      <p>Každý organismus potřebuje energii. Rostliny ji získávají ze světla, živočichové z potravy. Když seřadíš
+        organismy podle toho, kdo koho jí, vznikne <b>potravní řetězec</b>.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Producent</h3><p>Rostlina (i řasa) si <b>vyrábí živiny fotosyntézou</b>.
+          Proto každý řetězec začíná u ní.</p></article>
+        <article class="vyklad-karta"><h3>Konzumenti</h3><p><b>1. řádu</b> jedí rostliny (býložravci), <b>2. řádu</b> jedí býložravce,
+          <b>3. řádu</b> jedí konzumenty 2. řádu. Řád určuje <b>pozice v řetězci</b>, počítáno od rostliny.</p></article>
+        <article class="vyklad-karta"><h3>Rozkladači</h3><p>Houby a bakterie rozkládají <b>odumřelé zbytky všech článků</b>
+          a vracejí živiny do půdy.</p></article>
+      </div>
+      <p><b>Šipka ukazuje tok energie</b> – od toho, kdo je sněden, k tomu, kdo jí: tráva → zajíc → liška.
+        <b>Typická chyba:</b> kreslit šipku „kdo loví koho“ (liška → zajíc). Správně šipka míří k tomu, kdo energii získá.</p>
+      <p>Články na sobě závisí. Zmizí-li jeden článek, jeho <b>kořist se může přemnožit</b> (nikdo ji nežere)
+        a jeho <b>predátorům ubude potravy</b>. Ve skutečné přírodě se řetězce proplétají do <b>potravní sítě</b>
+        a většina živočichů má víc zdrojů potravy, takže dopad bývá menší.</p>
+      <aside class="zapamatuj">Producent → konzument 1. řádu → 2. řádu → 3. řádu; šipka = tok energie k tomu, kdo jí.
+        Zmizí článek: kořist přibude, predátor ubude.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: slož řetězec a urči role</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Seřaď do řetězce: užovka, tráva, žába, kobylka. Kdo je konzument 2. řádu?
+        A co se stane s kobylkami, když zmizí žáby?</p>
+      <ol class="kroky">
+        <li>Hledám producenta – jen <b>tráva</b> si vyrobí živiny sama. Je na začátku.</li>
+        <li>Kdo jí trávu? <b>Kobylka</b> – je to býložravec, konzument 1. řádu.</li>
+        <li>Kdo jí kobylku? <b>Žába</b> → konzument 2. řádu. Žábu jí <b>užovka</b> → konzument 3. řádu.</li>
+        <li>Zapíšu řetězec se šipkami ve směru toku energie: tráva → kobylka → žába → užovka.</li>
+        <li>Zmizí-li žáby, v tomto řetězci už kobylky nikdo nežere – jejich počet nejspíš <b>vzroste</b>.</li>
+      </ol>
+      <p class="vysledek-ukazky">Tráva → kobylka → žába → užovka. Konzument 2. řádu je <b>žába</b>; bez žab kobylek <b>přibude</b>.</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="sloz" class="active">🔗 Slož řetězec</button>
@@ -59,10 +100,10 @@ const ZAPIS = [
   ['🌾 obilí|obilí', '🐭 myš|myš', '🦉 sova|sovu'],
   ['🌿 tráva|trávu', '🐇 zajíc|zajíce', '🦊 liška|lišku'],
   ['🌿 tráva|trávu', '🦗 kobylka|kobylku', '🐸 žába|žábu', '🐍 užovka|užovku'],
-  ['🌿 bylina|bylinu', '🐜 mšice|mšici', '🐞 slunéčko|slunéčko'],
+  ['🌿 bylina|bylinu', '🟢 mšice|mšici', '🐞 slunéčko|slunéčko'],
   ['🌱 řasy|řasy', '🦐 perloočka|perloočku', '🐟 plotice|plotici', '🐟 štika|štiku'],
   ['🥬 list|list', '🐌 slimák|slimáka', '🦔 ježek|ježka', '🦉 výr|výra'],
-  ['🌰 bukvice|bukvice', '🐿️ veverka|veverku', '🦦 kuna|kunu'],
+  ['🌰 bukvice|bukvice', '🐿️ veverka|veverku', '🐾 kuna|kunu'],
   ['🌾 pšenice|pšenici', '🐛 housenka|housenku', '🐦 sýkora|sýkoru', '🦅 krahujec|krahujce'],
   ['🍃 list|list', '🦌 srnec|srnce', '🐺 vlk|vlka'],
   ['🌿 tráva|trávu', '🐄 kráva|krávu', '🧑 člověk|člověka'],
@@ -100,7 +141,7 @@ function sloz(r = Uloha.nahodne(RETEZCE), hotovo = 0) {
   // Doplňují se jen rostliny – živočich z jiného řetězce by kořist mohl jíst
   // i doopravdy (liška myš), a pak by „chybná“ odpověď byla pravdivá.
   const jmena = new Set(r.map(bez));
-  const rostliny = [...new Set(RETEZCE.map(x => x[0]))].filter(o => !jmena.has(bez(o)));
+  const rostliny = [...new Map(RETEZCE.map(x => [bez(x[0]), x[0]])).values()].filter(o => !jmena.has(bez(o)));  // bez dvou „list“
   const doplnek = hotovo === 0 ? [] : Uloha.zamichej(rostliny).slice(0, Math.max(0, 3 - (r.length - hotovo)));
   const zbyvajici = Uloha.zamichej([...r.slice(hotovo), ...doplnek]);
   Uloha.vyber({

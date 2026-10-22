@@ -6,6 +6,8 @@
   <title>Horniny a nerosty</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -42,6 +44,43 @@
   <h1>🪨 Horniny a nerosty</h1>
   <p class="podtitul">Pro 4.–5. ročník: poznávání podle vlastností, rozdíl mezi horninou a nerostem, využití.</p>
 
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Hornina, nebo nerost?</summary>
+    <div class="obsah">
+      <p>Kameny kolem nás nejsou všechny stejné. Geologové rozlišují <b>nerosty</b> a <b>horniny</b>.
+        Nerosty jsou jako stavební kostičky, horniny jsou stavby, které z nich příroda poskládala.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Nerost (minerál)</h3><p>Je <b>stejnorodý</b> – celý kus má stejné složení.
+          Často tvoří pravidelné krystaly. Křemen, slída, kalcit, pyrit, zlato.</p></article>
+        <article class="vyklad-karta"><h3>Hornina</h3><p>Tvoří <b>skály</b> a velké části zemské kůry.
+          Většinou je složená z více nerostů: <b>žula</b> = křemen + živec + slída.</p></article>
+        <article class="vyklad-karta"><h3>Jak je poznám</h3><p>Podle vlastností: barva, lesk, <b>tvrdost</b>
+          (křemen rýpe do skla, sádrovec rýpneš nehtem), vápenec a kalcit <b>šumí s octem</b>, magnetit přitahuje magnet.</p></article>
+      </div>
+      <p>Podívej se zblízka. Když vidíš <b>různá zrnka</b> vedle sebe (světlá a tmavá), je to nejspíš hornina.
+        Když je celý kus stejný a má rovné lesklé plošky, je to nejspíš nerost.</p>
+      <p>Pozor na výjimky: vápenec a mramor jsou horniny, i když jsou hlavně z jednoho nerostu – kalcitu.
+        Uhlí je hornina, která vznikla ze zbytků pravěkých rostlin.</p>
+      <p>Horniny a nerosty denně používáme: žula na dlažbu, vápenec na cement, křemen na sklo, grafit do tužek.</p>
+      <aside class="zapamatuj">Nerost je stejnorodý. Hornina tvoří skály a většinou se skládá z více nerostů.
+        Poznávám je podle barvy, lesku, tvrdosti a zkoušky s octem.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: je žula hornina, či nerost?</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Na kusu kamene vidíš světlá a tmavá zrnka. Je to žula. Patří mezi horniny, nebo nerosty?</p>
+      <ol class="kroky">
+        <li>Podívám se na vzorek: je <b>zrnitý</b> a zrnka mají různou barvu.</li>
+        <li>Různá zrnka znamenají různé nerosty. Ve žule jsou to křemen, živec a tmavá slída.</li>
+        <li>Přírodnina složená z více nerostů není stejnorodá – to je znak horniny.</li>
+        <li>Navíc žula tvoří celé skály a hory. I to sedí k hornině.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Žula je hornina – skládá se z křemene, živce a slídy.</p>
+    </div>
+  </details>
+
   <div class="rezimy" id="rezimy">
     <button data-rezim="foto" class="active">📷 Poznej na fotografii</button>
     <button data-rezim="poznej">🔍 Poznej podle popisu</button>
@@ -58,8 +97,48 @@
 
   <p class="napoveda">
     <b>Nerost</b> (minerál) je stejnorodá přírodnina – celý kus má stejné složení (sůl, křemen, zlato).
-    <b>Hornina</b> je směs více nerostů (žula, pískovec, vápenec).
+    <b>Hornina</b> tvoří skály a velké části zemské kůry. Většinou je složená z více nerostů (žula),
+    někdy hlavně z jednoho nerostu (vápenec a mramor z kalcitu) nebo ze zbytků rostlin (uhlí).
   </p>
+
+  <section class="foto-atlas" aria-labelledby="atlasHornin">
+    <h2 id="atlasHornin">📷 Fotoatlas vzorků</h2>
+    <p>Skutečné vzorky z geologických sbírek. Prohlédni si je dobře – stejné fotografie potkáš v poznávačce.</p>
+    <h3>🪨 Horniny – stavební kámen zemské kůry</h3>
+    <div class="foto-mrizka">
+      <figure class="foto-karta"><img class="cele" src="img/prv/prv4-horniny-zula.webp" alt="Úlomek žuly: světlá zrna živce a křemene s tmavými zrnky slídy." width="768" height="531" loading="lazy"><figcaption><strong>Žula</strong>Zrnitá a tvrdá. Vidíš zrnka živce (růžová a bílá), šedého křemene a černé slídy.</figcaption></figure>
+      <figure class="foto-karta"><img class="cele" src="img/prv/prv4-horniny-piskovec.webp" alt="Světle okrový úlomek jemnozrnného křemenného pískovce." width="768" height="644" loading="lazy"><figcaption><strong>Pískovec</strong>Stmelená zrnka písku, na omak drsný. Z pískovce jsou naše skalní města.</figcaption></figure>
+      <figure class="foto-karta"><img class="cele" src="img/prv/prv4-horniny-vapenec.webp" alt="Úlomek vápence s viditelnými zkamenělými schránkami měkkýšů." width="768" height="417" loading="lazy"><figcaption><strong>Vápenec</strong>Usazená hornina, často se zkamenělými schránkami. Kápni na ni ocet – zašumí.</figcaption></figure>
+      <figure class="foto-karta"><img class="cele" src="img/prv/prv4-horniny-cedic.webp" alt="Tmavý jemnozrnný úlomek čediče s hladkými lomovými plochami." width="768" height="778" loading="lazy"><figcaption><strong>Čedič</strong>Tmavý, těžký a velmi tvrdý. Vznikl ztuhnutím lávy ze sopek.</figcaption></figure>
+      <figure class="foto-karta"><img class="cele" src="img/prv/prv4-horniny-bridlice.webp" alt="Tmavě šedá deska břidlice s rovnými plochami." width="768" height="589" loading="lazy"><figcaption><strong>Břidlice</strong>Štípe se na tenké rovné desky – dřív se z ní dělaly střechy a školní tabulky.</figcaption></figure>
+      <figure class="foto-karta"><img class="cele" src="img/prv/prv4-horniny-mramor.webp" alt="Úlomek bílého mramoru s jemně zrnitým, třpytivým povrchem." width="768" height="406" loading="lazy"><figcaption><strong>Mramor</strong>Vznikl přeměnou vápence. Je zrnitý, třpytí se a dá se krásně vyleštit.</figcaption></figure>
+      <figure class="foto-karta"><img class="cele" src="img/prv/prv4-horniny-uhli.webp" alt="Černý vrstevnatý kus černého uhlí na bílém podkladu." width="768" height="747" loading="lazy"><figcaption><strong>Uhlí</strong>Černé, lehké a hořlavé. Vzniklo z pravěkých rostlin zasypaných bez vzduchu.</figcaption></figure>
+    </div>
+    <h3>💎 Nerosty – stejnorodé přírodniny</h3>
+    <div class="foto-mrizka">
+      <figure class="foto-karta"><img class="cele" src="img/prv/prv4-horniny-kremen.webp" alt="Shluk průhledných šestibokých krystalů křemene s hrotitými konci." width="500" height="466" loading="lazy"><figcaption><strong>Křemen</strong>Průhledné šestiboké krystaly s hrotem. Je tak tvrdý, že rýpe do skla.</figcaption></figure>
+      <figure class="foto-karta"><img class="cele" src="img/prv/prv4-horniny-zivec.webp" alt="Krystal živce ortoklasu krémové barvy s rovnými plochami." width="500" height="704" loading="lazy"><figcaption><strong>Živec</strong>Nejčastější nerost žuly. Bývá bílý až růžový a má rovné lesklé plochy.</figcaption></figure>
+      <figure class="foto-karta"><img class="cele" src="img/prv/prv4-horniny-slida.webp" alt="Narůžovělé průsvitné tabulky slídy muskovitu, které se odlupují v tenkých lístcích." width="768" height="671" loading="lazy"><figcaption><strong>Slída</strong>Odlupuje se v tenoučkých průsvitných lístcích, které se třpytí.</figcaption></figure>
+      <figure class="foto-karta"><img class="cele" src="img/prv/prv4-horniny-kalcit.webp" alt="Průsvitný nažloutlý krystal kalcitu s ostrými hranami." width="768" height="776" loading="lazy"><figcaption><strong>Kalcit</strong>Průsvitný nerost, se kterým ocet šumí. Tvoří vápenec i krápníky.</figcaption></figure>
+      <figure class="foto-karta"><img class="cele" src="img/prv/prv4-horniny-sul.webp" alt="Čtyři průhledné krychlové krystaly soli kamenné (halitu)." width="768" height="706" loading="lazy"><figcaption><strong>Sůl kamenná</strong>Krystaly tvaru krychle. Je slaná a rozpouští se ve vodě.</figcaption></figure>
+      <figure class="foto-karta"><img class="cele" src="img/prv/prv4-horniny-sadrovec.webp" alt="Průhledná deska sádrovce (selenitu) s jemnými rovnoběžnými vrstvičkami." width="768" height="566" loading="lazy"><figcaption><strong>Sádrovec</strong>Tak měkký, že do něj rýpneš nehtem. Pálením z něj vzniká sádra.</figcaption></figure>
+      <figure class="foto-karta"><img class="cele" src="img/prv/prv4-horniny-pyrit.webp" alt="Kovově lesklá krychle pyritu zarostlá v šedé hornině." width="768" height="614" loading="lazy"><figcaption><strong>Pyrit</strong>Kovově lesklé krychle, kterým se říká „kočičí zlato“. Ne všechno, co se blyští, je zlato!</figcaption></figure>
+      <figure class="foto-karta"><img class="cele" src="img/prv/prv4-horniny-grafit.webp" alt="Šedočerný kovově lesklý kus grafitu s jemně šupinatým povrchem." width="500" height="641" loading="lazy"><figcaption><strong>Grafit (tuha)</strong>Měkký a šedý, maže se a špiní prsty. Dělá se z něj tuha do tužek.</figcaption></figure>
+      <figure class="foto-karta"><img class="cele" src="img/prv/prv4-horniny-magnetit.webp" alt="Černé lesklé krystaly magnetitu ve tvaru osmistěnů." width="500" height="510" loading="lazy"><figcaption><strong>Magnetit</strong>Černý a těžký nerost, který přitahuje magnet. Je to železná ruda.</figcaption></figure>
+      <figure class="foto-karta"><img class="cele" src="img/prv/prv4-horniny-zlato.webp" alt="Rozvětvený kus ryzího zlata sytě žluté barvy." width="500" height="473" loading="lazy"><figcaption><strong>Zlato</strong>Ryzí kov: žlutý, lesklý a velmi těžký. Nerezaví, proto se z něj dělají šperky.</figcaption></figure>
+    </div>
+    <h3>🏗️ K čemu horniny a nerosty používáme</h3>
+    <div class="foto-mrizka">
+      <figure class="foto-karta"><img src="img/prv/prv4-horniny-vyuziti-dlazba.webp" alt="Dlažba ze žulových kostek skládaná do oblouků." width="1152" height="461" loading="lazy"><figcaption><strong>Dlažební kostky ze žuly</strong>Žula je tvrdá a vydrží chůzi, auta i mráz.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/prv/prv4-horniny-vyuziti-socha.webp" alt="Hlava pískovcové sochy egyptského faraona Setiho II." width="1152" height="768" loading="lazy"><figcaption><strong>Socha z pískovce</strong>Pískovec se dobře tesá. Tuto sochu faraona vytesali staří Egypťané před více než 3 000 lety.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/prv/prv4-horniny-vyuziti-vapenka.webp" alt="Stará kamenná vápenka – válcová pec na pálení vápence s otvorem dole." width="768" height="813" loading="lazy"><figcaption><strong>Vápenka</strong>V takové peci se pálil vápenec. Vzniklo vápno na maltu a omítky.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/prv/prv4-horniny-vyuziti-uhelny-lom.webp" alt="Rozlehlý povrchový hnědouhelný lom Bílina se stupňovitými svahy." width="1152" height="864" loading="lazy"><figcaption><strong>Uhelný lom</strong>Povrchový důl Bílina v severních Čechách – těží se tu hnědé uhlí pro elektrárny.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/prv/prv4-horniny-vyuziti-sklo.webp" alt="Rozžhavený otvor sklářské tavicí pece, ve které se taví sklovina." width="768" height="788" loading="lazy"><figcaption><strong>Sklářská pec</strong>Sklo se taví hlavně z křemenného písku. Rozžhavená sklovina se pak fouká nebo lije do forem.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/prv/prv4-horniny-vyuziti-sadra.webp" alt="Bílý sádrový odlitek lidské ruky." width="1152" height="864" loading="lazy"><figcaption><strong>Sádrový odlitek</strong>Sádra vzniká pálením a mletím sádrovce. Smíchaná s vodou ztvrdne do tvaru formy.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/prv/prv4-horniny-vyuziti-tuzka.webp" alt="Ořezaná špička tužky s tmavou tuhou z grafitu." width="1152" height="1536" loading="lazy"><figcaption><strong>Tužka</strong>Tuha v tužce je grafit smíchaný s jílem.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/prv/prv4-horniny-vyuziti-solnicka.webp" alt="Skleněná solnička s kovovým víčkem naplněná solí." width="1152" height="1372" loading="lazy"><figcaption><strong>Solnička</strong>Kuchyňská sůl je nerost sůl kamenná. Těží se v dolech nebo se odpařuje z mořské vody.</figcaption></figure>
+    </div>
+  </section>
 
 <script>
 const $ = id => document.getElementById(id);
@@ -72,7 +151,23 @@ const VZORKY = METODUS_HORNINY;
 /* Fotografie vzorků (IMG-prv-17, Wikimedia Commons; autoři a licence v seznamu zdrojů pod stránkou).
    Klíč = název vzorku. [soubor ve složce img/prv, šířka, výška, alt] */
 const FOTO = {
-/*FOTO*/
+  'žula': ['prv4-horniny-zula', 768, 531, 'Úlomek žuly: světlá zrna živce a křemene s tmavými zrnky slídy.'],
+  'pískovec': ['prv4-horniny-piskovec', 768, 644, 'Světle okrový úlomek jemnozrnného křemenného pískovce.'],
+  'vápenec': ['prv4-horniny-vapenec', 768, 417, 'Úlomek vápence s viditelnými zkamenělými schránkami měkkýšů.'],
+  'čedič': ['prv4-horniny-cedic', 768, 778, 'Tmavý jemnozrnný úlomek čediče s hladkými lomovými plochami.'],
+  'břidlice': ['prv4-horniny-bridlice', 768, 589, 'Tmavě šedá deska břidlice s rovnými plochami.'],
+  'mramor': ['prv4-horniny-mramor', 768, 406, 'Úlomek bílého mramoru s jemně zrnitým, třpytivým povrchem.'],
+  'uhlí': ['prv4-horniny-uhli', 768, 747, 'Černý vrstevnatý kus černého uhlí na bílém podkladu.'],
+  'křemen': ['prv4-horniny-kremen', 500, 466, 'Shluk průhledných šestibokých krystalů křemene s hrotitými konci.'],
+  'živec': ['prv4-horniny-zivec', 500, 704, 'Krystal živce ortoklasu krémové barvy s rovnými plochami.'],
+  'slída': ['prv4-horniny-slida', 768, 671, 'Narůžovělé průsvitné tabulky slídy muskovitu, které se odlupují v tenkých lístcích.'],
+  'kalcit': ['prv4-horniny-kalcit', 768, 776, 'Průsvitný nažloutlý krystal kalcitu s ostrými hranami.'],
+  'sůl kamenná': ['prv4-horniny-sul', 768, 706, 'Čtyři průhledné krychlové krystaly soli kamenné (halitu).'],
+  'sádrovec': ['prv4-horniny-sadrovec', 768, 566, 'Průhledná deska sádrovce (selenitu) s jemnými rovnoběžnými vrstvičkami.'],
+  'pyrit': ['prv4-horniny-pyrit', 768, 614, 'Kovově lesklá krychle pyritu zarostlá v šedé hornině.'],
+  'grafit (tuha)': ['prv4-horniny-grafit', 500, 641, 'Šedočerný kovově lesklý kus grafitu s jemně šupinatým povrchem.'],
+  'magnetit': ['prv4-horniny-magnetit', 500, 510, 'Černé lesklé krystaly magnetitu ve tvaru osmistěnů.'],
+  'zlato': ['prv4-horniny-zlato', 500, 473, 'Rozvětvený kus ryzího zlata sytě žluté barvy.'],
 };
 const fotoSrc = n => `img/prv/${FOTO[n][0]}.webp`;
 /* Vzorky, které nejsou ve společných datech, ale patří do poznávačky podle fotografií. */
@@ -85,6 +180,17 @@ const DOPLNKY = [
   { n: 'pyrit', hornina: false, znak: 'mosazně žluté kovově lesklé krychličky – „kočičí zlato“' },
   { n: 'magnetit', hornina: false, znak: 'černý, přitahuje ho magnet' },
 ];
+/* Z čeho se hornina skládá (ne každá je směs více nerostů). */
+const SLOZENI_HORNIN = {
+  'žula': 'je složená z více nerostů: křemene, živce a slídy',
+  'pískovec': 'je složená ze stmelených zrnek písku, nejčastěji křemene',
+  'vápenec': 'je složená hlavně z jednoho nerostu – kalcitu',
+  'mramor': 'vznikla přeměnou vápence a skládá se hlavně z kalcitu',
+  'čedič': 'vznikla ztuhnutím lávy a skládá se z drobných zrnek více nerostů',
+  'břidlice': 'skládá se z drobných šupinek více nerostů',
+  'uhlí': 'vzniklo ze zbytků pravěkých rostlin, ne z nerostů',
+  'sůl kamenná': 'skládá se hlavně z jednoho nerostu – halitu',
+};
 const VSECHNY = [...VZORKY.map(v => ({ n: v.n, hornina: v.hornina, znak: v.vlastnosti.join(', ') })), ...DOPLNKY];
 const S_FOTKOU = VSECHNY.filter(v => FOTO[v.n]);
 function obr(u) {
@@ -153,14 +259,14 @@ function druh() {
   Uloha.vyber({
     kam: p, odezva, trida: 'dve',
     moznosti: [
-      { klic: 'hornina', ikona: '🪨', popis: 'hornina (směs nerostů)' },
+      { klic: 'hornina', ikona: '🪨', popis: 'hornina (tvoří skály)' },
       { klic: 'nerost', ikona: '💎', popis: 'nerost (stejnorodý)' },
     ],
     spravnyKlic: u.hornina ? 'hornina' : 'nerost',
     zpravaOk: u.hornina
-      ? `✅ ${u.n} je hornina – je složená z více nerostů.`
+      ? `✅ ${u.n} je hornina – ${SLOZENI_HORNIN[u.n] || 'je složená ze zrnek nerostů'}.`
       : `✅ ${u.n} je nerost – celý kus má stejné složení.`,
-    zpravaChyba: 'Zkus druhou možnost – jde o směs, nebo stejnorodou látku?',
+    zpravaChyba: 'Zkus druhou možnost – tvoří to celé skály, nebo je to jeden stejnorodý nerost?',
     poSpravne: skore.vyhodnot,
     dalsi: novaUloha,
   });
@@ -180,7 +286,7 @@ function vyuziti() {
     kam: p, odezva,
     moznosti: Uloha.zamichej([u, ...jine]).map(x => ({ klic: x.vyuziti, popis: x.vyuziti })),
     spravnyKlic: u.vyuziti,
-    zpravaOk: `✅ ${u.n} se používá na ${u.vyuziti}.`,
+    zpravaOk: `✅ ${u.n} – využití: ${u.vyuziti}.`,
     zpravaChyba: 'To je využití jiné přírodniny.',
     poSpravne: skore.vyhodnot,
     dalsi: novaUloha,

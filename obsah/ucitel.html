@@ -229,16 +229,13 @@ body.tabule-rezim #tabule{display:flex;align-items:center;justify-content:center
   body.tisk-jmenovky #jmenovky,body.tisk-jmenovky #jmenovky *{visibility:visible}
 }
 </style>
-<link rel="stylesheet" href="../propojeni.css">
 <script src="../apps.js" defer></script>
-<script src="../propojeni.js" defer></script>
 </head>
 <body>
 <div class="wrap">
   <h1>🧑‍🏫 Kabinet učitele</h1>
   <div class="sub0">Co je v Metodusu pro přípravu i pro průběh hodiny. Nic se nikam neodesílá, vše zůstává v tomto prohlížeči.</div>
 
-  <section class="propojeni" id="ucelVyuky" aria-label="Výběr podle účelu"></section>
 <div class="casti" id="casti">
     <button data-c="priprava">📋 Příprava na hodinu</button>
     <button data-c="nastroje">🧰 Nástroje do hodiny</button>
@@ -503,6 +500,8 @@ const ODKAZY = [
   { ik: '🖥️', nm: 'Tvorba slidů a prezentace', ce: 'prezentace.html',
     po: 'Výklad na plátno – text, obrázky, kvíz s vyhodnocením, časovač i živá aplikace Metodusu ve slidu. '
       + 'Poznámky vidí jen učitel ve svém okně, z téže sady se tisknou podklady pro žáky.' },
+  { ik: '🧪', nm: 'Příprava hodiny (pH, 9. ročník)', ce: 'priprava_hodiny.html',
+    po: 'Ověřený průchod celou hodinou: aktivita na tabuli, pracovní list k tisku a závěrečná otázka.' },
   { ik: '🗺️', nm: 'Osnova učiva', ce: 'osnova.html',
     po: 'Mřížka ročníků a předmětů – co web k danému učivu nabízí.' },
   { ik: '◈', nm: 'Živé ukázky', ce: 'predstaveni.html',
@@ -562,7 +561,8 @@ function oznacZalozky(el, jeAktivni) {
   });
 }
 
-let cast = localStorage.getItem(KLIC_CAST) || 'priprava';
+let cast = 'priprava';
+try { cast = localStorage.getItem(KLIC_CAST) || 'priprava'; } catch { /* úložiště blokované */ }
 if (cast !== 'nastroje') cast = 'priprava';
 
 function prepniCast(id) {
@@ -598,7 +598,8 @@ const SKUPINY = [
 ];
 const VSE = SKUPINY.flatMap(s => s.deti.map(d => ({ ...d, skupina: s.id })));
 
-let aktivni = localStorage.getItem(KLIC_ZALOZKA) || 'casovac';
+let aktivni = 'casovac';
+try { aktivni = localStorage.getItem(KLIC_ZALOZKA) || 'casovac'; } catch { /* úložiště blokované */ }
 if (!VSE.some(n => n.id === aktivni)) aktivni = 'casovac';
 
 $('zalozky').innerHTML = SKUPINY.map(s => `<button data-s="${s.id}">${s.nm}</button>`).join('');

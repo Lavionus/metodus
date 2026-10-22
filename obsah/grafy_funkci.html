@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Grafy funkcí</title>
   <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -58,6 +60,21 @@
   <h1>📈 Grafy funkcí</h1>
   <p class="podtitul">Interaktivní vykreslování základních funkcí – posouvej parametry a sleduj, co se s grafem děje (9. ročník ZŠ, SŠ).</p>
 
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: z grafu paraboly urči parametry</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Šedý graf je parabola otevřená nahoru s vrcholem v bodě [0; −2], která prochází bodem [1; −1].
+        Jaké parametry a, b, c má předpis y = a·x² + b·x + c?</p>
+      <ol class="kroky">
+        <li>Vrchol leží na ose y, parabola tedy není posunutá do strany: <b>b = 0</b>.</li>
+        <li>Pro x = 0 je y = c. Vrchol [0; −2] proto dává <b>c = −2</b>.</li>
+        <li>Dosadím bod [1; −1]: −1 = a · 1² + 0 · 1 − 2, tedy −1 = a − 2, a proto <b>a = 1</b>.</li>
+        <li>Kontrola: a = 1 je kladné, parabola je opravdu otevřená nahoru.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ y = 1·x² + 0·x − 2, tedy y = x² − 2.</p>
+    </div>
+  </details>
+
   <div class="plocha">
     <div class="panel graf-obal"><canvas id="graf" width="640" height="480"></canvas></div>
     <div class="panel nastaveni">
@@ -83,35 +100,35 @@ const $ = id => document.getElementById(id);
 const canvas = $('graf'), ctx = canvas.getContext('2d');
 
 const FUNKCE = [
-  { id: 'lin', nazev: 'Lineární', predpis: p => `y = ${p.a}·x ${p.b < 0 ? '−' : '+'} ${Math.abs(p.b)}`,
+  { id: 'lin', nazev: 'Lineární', predpis: p => `y = ${fmtG(p.a)}·x ${p.b < 0 ? '−' : '+'} ${fmtG(Math.abs(p.b))}`,
     f: p => x => p.a * x + p.b,
     parametry: { a: [-5, 5, 0.1, 1], b: [-5, 5, 0.1, 0] },
     popis: 'Přímka. Parametr a určuje sklon (a > 0 roste, a < 0 klesá), b posouvá přímku po ose y.' },
-  { id: 'kvadr', nazev: 'Kvadratická', predpis: p => `y = ${p.a}·x² ${p.b < 0 ? '−' : '+'} ${Math.abs(p.b)}·x ${p.c < 0 ? '−' : '+'} ${Math.abs(p.c)}`,
+  { id: 'kvadr', nazev: 'Kvadratická', predpis: p => `y = ${fmtG(p.a)}·x² ${p.b < 0 ? '−' : '+'} ${fmtG(Math.abs(p.b))}·x ${p.c < 0 ? '−' : '+'} ${fmtG(Math.abs(p.c))}`,
     f: p => x => p.a * x * x + p.b * x + p.c,
     parametry: { a: [-3, 3, 0.1, 1], b: [-5, 5, 0.1, 0], c: [-5, 5, 0.1, 0] },
-    popis: 'Parabola. a určuje otevření (a > 0 nahoru, a < 0 dolů) a šířku, c posouvá vrchol po ose y.' },
-  { id: 'abs', nazev: '|x|', predpis: p => `y = ${p.a}·|x ${p.b < 0 ? '−' : '+'} ${Math.abs(p.b)}| ${p.c < 0 ? '−' : '+'} ${Math.abs(p.c)}`,
+    popis: 'Parabola. a určuje otevření (a > 0 nahoru, a < 0 dolů) a šířku, c posouvá celou parabolu nahoru a dolů (vrchol leží na ose y jen pro b = 0).' },
+  { id: 'abs', nazev: '|x|', predpis: p => `y = ${fmtG(p.a)}·|x ${p.b < 0 ? '−' : '+'} ${fmtG(Math.abs(p.b))}| ${p.c < 0 ? '−' : '+'} ${fmtG(Math.abs(p.c))}`,
     f: p => x => p.a * Math.abs(x + p.b) + p.c,
     parametry: { a: [-3, 3, 0.1, 1], b: [-5, 5, 0.1, 0], c: [-5, 5, 0.1, 0] },
     popis: 'Lomená čára tvaru V. Parametr b posouvá vrchol vodorovně, c svisle.' },
-  { id: 'neprima', nazev: 'k/x', predpis: p => `y = ${p.a} / x`,
+  { id: 'neprima', nazev: 'k/x', predpis: p => `y = ${fmtG(p.a)} / x`,
     f: p => x => p.a / x,
     parametry: { a: [-6, 6, 0.1, 2] },
     popis: 'Nepřímá úměrnost – hyperbola. Není definována pro x = 0. Znaménko a překlápí větve.' },
-  { id: 'sin', nazev: 'sinus', predpis: p => `y = ${p.a}·sin(${p.b}·x)`,
+  { id: 'sin', nazev: 'sinus', predpis: p => `y = ${fmtG(p.a)}·sin(${fmtG(p.b)}·x)`,
     f: p => x => p.a * Math.sin(p.b * x),
     parametry: { a: [-3, 3, 0.1, 1], b: [0.2, 4, 0.1, 1] },
     popis: 'Vlna. a je amplituda (výška vln), b frekvence (hustota vln).' },
-  { id: 'cos', nazev: 'kosinus', predpis: p => `y = ${p.a}·cos(${p.b}·x)`,
+  { id: 'cos', nazev: 'kosinus', predpis: p => `y = ${fmtG(p.a)}·cos(${fmtG(p.b)}·x)`,
     f: p => x => p.a * Math.cos(p.b * x),
     parametry: { a: [-3, 3, 0.1, 1], b: [0.2, 4, 0.1, 1] },
     popis: 'Stejná vlna jako sinus, posunutá o čtvrt periody – v x = 0 začíná v maximu.' },
-  { id: 'exp', nazev: 'exponenciální', predpis: p => `y = ${p.a}ˣ`,
+  { id: 'exp', nazev: 'exponenciální', predpis: p => `y = ${fmtG(p.a)}ˣ`,
     f: p => x => Math.pow(p.a, x),
     parametry: { a: [0.2, 3, 0.05, 2] },
     popis: 'Pro a > 1 prudce roste, pro 0 < a < 1 klesá. Vždy prochází bodem [0; 1].' },
-  { id: 'odm', nazev: '√x', predpis: p => `y = ${p.a}·√x`,
+  { id: 'odm', nazev: '√x', predpis: p => `y = ${fmtG(p.a)}·√x`,
     f: p => x => x < 0 ? NaN : p.a * Math.sqrt(x),
     parametry: { a: [-3, 3, 0.1, 1] },
     popis: 'Odmocnina je definována jen pro x ≥ 0. Je to „položená“ polovina paraboly.' },
@@ -420,11 +437,11 @@ Badani.start({
     ()=>{ let a,b,x,y;
       do { a=nahodne([-3,-2,2,3]); b=nahodne([-4,-1,1,5]); x=nahodne([-2,2,3]); y=a*x+b; }
       while(new Set([y,a*x-b,a+x+b]).size<3);   // chybné možnosti se nesmí trefit do výsledku
-      return { otazka:`Jaká je hodnota funkce <b>y = ${a}x ${b<0?'−':'+'} ${Math.abs(b)}</b> pro <b>x = ${x}</b>?`,
-        moznosti:[moznost(`${y}`,true),
-          moznost(`${a*x-b}`,false,'Pozor na znaménko u b – přičítá se, jak je v předpisu.'),
-          moznost(`${a+x+b}`,false,'a se s x násobí: a · x + b.')],
-        vysvetleni:`y = ${a} · ${x} ${b<0?'−':'+'} ${Math.abs(b)} = ${y}.` }; },
+      return { otazka:`Jaká je hodnota funkce <b>y = ${cis(a)}x ${b<0?'−':'+'} ${Math.abs(b)}</b> pro <b>x = ${cis(x)}</b>?`,
+        moznosti:[moznost(`${cis(y)}`,true),
+          moznost(`${cis(a*x-b)}`,false,'Pozor na znaménko u b – přičítá se, jak je v předpisu.'),
+          moznost(`${cis(a+x+b)}`,false,'a se s x násobí: a · x + b.')],
+        vysvetleni:`y = ${cis(a)} · ${x<0?'('+cis(x)+')':x} ${b<0?'−':'+'} ${Math.abs(b)} = ${cis(y)}.` }; },
     ()=>{ const a=nahodne([-3,-0.5,0.5,2]);
       return { otazka:`Je funkce <b>y = ${cis(a,1)}·x + 1</b> rostoucí, nebo klesající?`,
         moznosti:[moznost('rostoucí',a>0,'Rozhoduje znaménko a: kladné a = rostoucí, záporné = klesající.'),
@@ -433,17 +450,17 @@ Badani.start({
         vysvetleni:`a = ${cis(a,1)} je ${a>0?'kladné – funkce roste':'záporné – funkce klesá'}.`, poradi:true }; },
     ()=>{ const b=nahodne([-3,4,5]);   // b = 2 by splynulo se sklonem
       return { otazka:`Ve kterém bodě protne přímka <b>y = 2x ${b<0?'−':'+'} ${Math.abs(b)}</b> osu y?`,
-        moznosti:[moznost(`[0; ${b}]`,true),
-          moznost(`[${b}; 0]`,false,'Na ose y je x = 0. Dosaď: y = 2 · 0 + b = b.'),
+        moznosti:[moznost(`[0; ${cis(b)}]`,true),
+          moznost(`[${cis(b)}; 0]`,false,'Na ose y je x = 0. Dosaď: y = 2 · 0 + b = b.'),
           moznost('[0; 2]',false,'2 je sklon. Průsečík s osou y dostaneš pro x = 0: y = b.')],
-        vysvetleni:`Pro x = 0 je y = ${b}.` }; },
+        vysvetleni:`Pro x = 0 je y = ${cis(b)}.` }; },
     ()=>{ const x1=nahodne([0,1]), a=nahodne([2,3,-2]), b=nahodne([1,-1,4]), x2=x1+2;
       const y1=a*x1+b, y2=a*x2+b;
-      return { otazka:`Přímka prochází body <b>[${x1}; ${y1}]</b> a <b>[${x2}; ${y2}]</b>. Jaký má sklon a?`,
-        moznosti:[moznost(`${a}`,true),
-          moznost(`${y2-y1}`,false,'Rozdíl y je potřeba vydělit rozdílem x: a = (y₂ − y₁) / (x₂ − x₁).'),
+      return { otazka:`Přímka prochází body <b>[${x1}; ${cis(y1)}]</b> a <b>[${x2}; ${cis(y2)}]</b>. Jaký má sklon a?`,
+        moznosti:[moznost(`${cis(a)}`,true),
+          moznost(`${cis(y2-y1)}`,false,'Rozdíl y je potřeba vydělit rozdílem x: a = (y₂ − y₁) / (x₂ − x₁).'),
           moznost(`${cis((x2-x1)/(y2-y1),2)}`,false,'Podíl je obráceně: změna y lomeno změnou x.')],
-        vysvetleni:`a = (${y2} − ${y1}) / (${x2} − ${x1}) = ${a}.` }; },
+        vysvetleni:`a = (${cis(y2)} − ${y1 < 0 ? '(' + cis(y1) + ')' : y1}) / (${x2} − ${x1}) = ${cis(a)}.` }; },
     { otazka:'Kam je otevřená parabola <b>y = −2x² + 1</b>?',
       moznosti:[moznost('Dolů',true),
         moznost('Nahoru',false,'Záporné a (−2) otevírá parabolu dolů – vrchol je nejvyšší bod.'),
@@ -451,10 +468,10 @@ Badani.start({
       vysvetleni:'a < 0 → parabola otevřená dolů.' },
     ()=>{ const k=nahodne([1,3,4]), c=nahodne([-2,2,5].filter(c=>c!==k));
       return { otazka:`Kde je vrchol paraboly <b>y = (x − ${k})² ${c<0?'−':'+'} ${Math.abs(c)}</b>?`,
-        moznosti:[moznost(`[${k}; ${c}]`,true),
-          moznost(`[−${k}; ${c}]`,false,`Výraz v závorce je nula pro x = ${k} – odečtení posouvá doprava.`),
-          moznost(`[${c}; ${k}]`,false,'První souřadnice je poloha na ose x (z závorky), druhá svislý posun.')],
-        vysvetleni:`(x − ${k})² je nejmenší (nula) pro x = ${k}, a pak y = ${c}.` }; },
+        moznosti:[moznost(`[${k}; ${cis(c)}]`,true),
+          moznost(`[−${k}; ${cis(c)}]`,false,`Výraz v závorce je nula pro x = ${k} – odečtení posouvá doprava.`),
+          moznost(`[${cis(c)}; ${k}]`,false,'První souřadnice je poloha na ose x (ze závorky), druhá svislý posun.')],
+        vysvetleni:`(x − ${k})² je nejmenší (nula) pro x = ${k}, a pak y = ${cis(c)}.` }; },
     { otazka:'Proč funkce <b>y = 2/x</b> nemá hodnotu pro x = 0?',
       moznosti:[moznost('Nulou se dělit nedá.',true),
         moznost('Pro x = 0 je y = 0.',false,'2 / 0 není 0 – dělení nulou není definované, graf má v x = 0 mezeru.'),

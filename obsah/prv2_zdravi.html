@@ -6,6 +6,8 @@
   <title>Zdraví, nemoc a první pomoc</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -33,6 +35,44 @@
 <body>
   <h1>🩹 Zdraví, nemoc a první pomoc</h1>
   <p class="podtitul">Pro 2.–3. ročník: koho volat, co udělat při úrazu a jak se starat o zdraví.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Jak přivolat pomoc a ošetřit drobný úraz</summary>
+    <div class="obsah">
+      <p>Když se někomu něco stane, nejdřív zachovej klid. Pak <b>řekni dospělému</b>, nebo <b>zavolej pomoc</b>.
+        Každá záchranná služba má své telefonní číslo.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Tísňová čísla</h3><p><b>155</b> záchranka – někdo je zraněný nebo mu je zle.
+          <b>150</b> hasiči – požár, kouř, prasklá voda. <b>158</b> policie – krádež, někdo škodí.
+          <b>112</b> – když nevíš, koho volat.</p></article>
+        <article class="vyklad-karta"><h3>Co říct do telefonu</h3><p><b>Co se stalo</b>, <b>kde jsi</b> a <b>jak se jmenuješ</b>.
+          Nezavěšuj první – počkej, až to řekne operátor.</p></article>
+        <article class="vyklad-karta"><h3>Drobné úrazy</h3><p>Odřenina: opláchnout vodou, náplast. Popálenina: chladit
+          tekoucí vodou. Krev z nosu: <b>předklonit</b> se a stlačit měkkou část nosu.</p></article>
+      </div>
+      <p>Jak poznám, koho volat? Zeptám se: <b>Je někdo zraněný?</b> → 155. <b>Hoří nebo teče voda?</b> → 150.
+        <b>Někdo kradl nebo škodil?</b> → 158.</p>
+      <p>Typické chyby: při krvácení z nosu <b>nezakláníme</b> hlavu – krev by tekla do krku. Popáleninu
+        nemažeme máslem a puchýře nepropichujeme.</p>
+      <p>Zdraví si chráníme i každý den: jíme zeleninu a ovoce, pijeme vodu, hýbeme se venku, myjeme si ruce a dost spíme.</p>
+      <aside class="zapamatuj">155 záchranka, 150 hasiči, 158 policie, 112 když nevíš. Řekni co, kde a kdo jsi.
+        Nezavěšuj první.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: komu zavoláš?</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Ze sousedního domu jde hustý kouř. Komu zavoláš?</p>
+      <ol class="kroky">
+        <li>Zeptám se: je někdo zraněný? To nevím, vidím jen kouř.</li>
+        <li>Kouř znamená, že nejspíš <b>hoří</b>. Požár hasí hasiči.</li>
+        <li>Hasiči mají číslo <b>150</b>.</li>
+        <li>Do telefonu řeknu: „Ze sousedního domu jde kouř.“ Pak řeknu adresu a své jméno a počkám, až operátor zavěsí.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Zavolám hasiče na číslo 150.</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="cisla" class="active">📞 Komu zavolat</button>
@@ -129,7 +169,7 @@ const POMOC = [
     proc: 'Místo omyj a chlaď přes látku. Při dušnosti, otoku úst nebo jazyka či mdlobě volej ihned 155.',
   },
   {
-    e: '🤧', o: 'Kýcháš a kašleš. Jak to uděláš, aby ses nešířil nemoc?',
+    e: '🤧', o: 'Kýcháš a kašleš. Jak to uděláš, abys nešířil nemoc?',
     v: [{ t: 'Kýchnu do kapesníku nebo do rukávu', ok: true },
         { t: 'Kýchnu do dlaní', ok: false },
         { t: 'Kýchnu volně před sebe', ok: false }],

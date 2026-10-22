@@ -6,6 +6,8 @@
   <title>Dělení se zbytkem</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -33,6 +35,43 @@
 <body>
   <h1>➗ Dělení se zbytkem</h1>
   <p class="podtitul">Pro 3.–4. ročník: kolik celých skupin vznikne a kolik zbude.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Co je zbytek</summary>
+    <div class="obsah">
+      <p>Ne každé dělení vyjde beze zbytku. Když rozděluješ 17 bonbonů po 5, vzniknou 3 plné skupiny
+        (to je 15 bonbonů) a <b>2 bonbony zbydou</b>. Na další celou skupinu už nestačí.
+        Zapisujeme to <b>17 : 5 = 3 zb. 2</b>.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Jména čísel</h3><p>17 je <b>dělenec</b>, 5 je <b>dělitel</b>,
+          3 je <b>podíl</b> (počet celých skupin) a 2 je <b>zbytek</b>.</p></article>
+        <article class="vyklad-karta"><h3>Jak počítám</h3><p>Hledám v násobilce dělitele <b>největší násobek</b>, který se ještě vejde do dělence.
+          Pro 17 : 5 je to 15 = 3 × 5. Zbytek je rozdíl 17 − 15 = 2.</p></article>
+        <article class="vyklad-karta"><h3>Zbytek je menší než dělitel</h3><p>Kdyby zbylo 5 a víc bonbonů, udělal bys z nich ještě jednu skupinu.
+          Proto zbytek musí být vždy <b>menší než dělitel</b>.</p></article>
+        <article class="vyklad-karta"><h3>Zkouška</h3><p><b>podíl × dělitel + zbytek = dělenec</b>.
+          3 × 5 + 2 = 17, výpočet je správně.</p></article>
+      </div>
+      <p>Typická chyba: 17 : 5 = 2 zb. 7. Zkouška sice vyjde (2 × 5 + 7 = 17), ale zbytek 7 je větší než dělitel 5 –
+        skupin mohlo být víc. Kontroluj proto vždy obojí: zkoušku i velikost zbytku.</p>
+      <aside class="zapamatuj">Zbytek je vždy menší než dělitel. Zkouška: podíl × dělitel + zbytek = dělenec.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: 38 : 6</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Vyděl se zbytkem: 38 : 6.</p>
+      <ol class="kroky">
+        <li>Projdu násobilku šesti: 6, 12, 18, 24, 30, 36, 42.</li>
+        <li>42 je víc než 38, to se nevejde. Největší násobek, který se vejde, je <b>36 = 6 × 6</b>. Podíl je 6.</li>
+        <li>Zbytek spočítám odečtením: 38 − 36 = <b>2</b>.</li>
+        <li>Zbytek 2 je menší než dělitel 6 – v pořádku.</li>
+        <li>Zkouška: 6 × 6 + 2 = 36 + 2 = 38. Sedí.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ 38 : 6 = 6 zb. 2</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="vypocet" class="active">🧮 Vypočítej</button>
@@ -142,8 +181,8 @@ function obrazek() {
       zb.innerHTML = predmetHtml(predmet).repeat(u.zbytek);
       box.appendChild(zb);
     }
-    legenda.textContent = `${u.podil} plných skupin po ${u.delitel} předmětech`
-      + (u.zbytek ? ` a ${u.zbytek} zbývající` : ' beze zbytku');
+    legenda.textContent = `${Uloha.tvar(u.podil, 'plná skupina', 'plné skupiny', 'plných skupin')} po ${u.delitel}`
+      + (u.zbytek ? `, zbytek ${u.zbytek}` : ' beze zbytku');
     p.insertBefore(box, legenda);
   }
 

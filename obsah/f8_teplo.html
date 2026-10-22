@@ -6,6 +6,8 @@
   <title>Teplo a změny skupenství</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -16,6 +18,7 @@
     .graf .krivka { fill: none; stroke: var(--accent); stroke-width: 3; stroke-linejoin: round; }
     .graf .usek { stroke: var(--warn); stroke-width: 7; opacity: 0.45; stroke-linecap: round; }
     .graf .popis { fill: var(--text-faint); font-size: 11px; }
+    .graf .pomocna { stroke: var(--text-faint); stroke-width: 1; stroke-dasharray: 4 4; opacity: .6; }
     .graf .osaText { fill: var(--text-muted); font-size: 12px; font-weight: 600; }
     .uloha-text { max-width: 620px; font-size: 1.02rem; line-height: 1.6; }
     .uloha-text b { color: var(--accent); }
@@ -25,6 +28,46 @@
 <body>
   <h1>🌡️ Teplo a změny skupenství</h1>
   <p class="podtitul">Pro 8. ročník: výpočet tepla, měrná tepelná kapacita a změny skupenství.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Teplo, teplota a změny skupenství</summary>
+    <div class="obsah">
+      <p><b>Teplota</b> a <b>teplo</b> nejsou totéž. Teplota (°C) říká, jak je těleso teplé, a měříš ji
+        teploměrem. Teplo <b>Q</b> (J) je energie, kterou těleso přijme nebo odevzdá. Hrnek a vana vody
+        mohou mít stejnou teplotu 40 °C, ale na ohřátí vany bylo potřeba mnohem víc tepla.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Výpočet tepla</h3><p><b>Q = m · c · Δt</b> – hmotnost (kg) krát
+          měrná tepelná kapacita krát změna teploty (°C).</p></article>
+        <article class="vyklad-karta"><h3>Měrná tepelná kapacita c</h3><p>Kolik joulů potřebuje 1 kg látky
+          na ohřátí o 1 °C. Voda 4 200 J/(kg·°C), železo 450 J/(kg·°C).</p></article>
+        <article class="vyklad-karta"><h3>Změny skupenství</h3><p>Tání a tuhnutí, vypařování a var, kapalnění
+          (kondenzace), sublimace (pevná → plyn) a desublimace (plyn → pevná).</p></article>
+      </div>
+      <p>Čím větší má látka c, tím víc tepla potřebuje a tím <b>pomaleji se ohřívá</b> i chladne.
+        Kilogram železa se stejným ohřívačem ohřeje rychleji než kilogram vody. Proto moře v létě
+        mírní horko a v zimě mráz.</p>
+      <p>V <b>grafu ohřevu ledu</b> střídají šikmé a vodorovné úseky. Na šikmém úseku teplota roste.
+        Na <b>vodorovném úseku</b> látka teplo dál přijímá, ale teplota se nemění – energie se spotřebuje
+        na změnu skupenství: při 0 °C led taje, při 100 °C voda vře. Typická chyba: myslet si, že
+        na vodorovném úseku se nic neděje.</p>
+      <aside class="zapamatuj">Q = m · c · Δt. Velké c → látka se ohřívá pomalu. Vodorovný úsek grafu =
+        změna skupenství, teplota stojí.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: ohřátí vody v hrnci</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Kolik tepla přijmou 2 kg vody (c = 4 200 J/(kg·°C)) při ohřátí o 30 °C?</p>
+      <ol class="kroky">
+        <li>Zapíšu, co znám: <b>m = 2 kg</b>, <b>c = 4 200 J/(kg·°C)</b>, <b>Δt = 30 °C</b>, hledám <b>Q</b>.</li>
+        <li>Použiji vzorec <b>Q = m · c · Δt</b>.</li>
+        <li>Dosadím a vypočítám: Q = 2 · 4 200 · 30 = 8 400 · 30 = <b>252 000 J</b>.</li>
+        <li>Velké číslo převedu na kilojouly: 252 000 J : 1000 = <b>252 kJ</b>.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Voda přijme 252 000 J, tedy 252 kJ.</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="vypocet" class="active">🧮 Výpočet tepla</button>
@@ -99,8 +142,12 @@ function svgGrafOhrevu(zvyraznenyUsek) {
     <line class="osa" x1="24" y1="160" x2="312" y2="160"/>
     <path class="krivka" d="${body}"/>
     <path class="usek" d="${y}"/>
-    <text class="osaText" x="2" y="16">t [°C]</text>
-    <text class="osaText" x="262" y="176">čas</text>
+    <line class="pomocna" x1="24" y1="110" x2="140" y2="110"/>
+    <line class="pomocna" x1="24" y1="45" x2="200" y2="45"/>
+    <text class="popis" x="20" y="114" text-anchor="end">0</text>
+    <text class="popis" x="20" y="49" text-anchor="end">100</text>
+    <text class="osaText" x="28" y="12">t [°C]</text>
+    <text class="osaText" x="312" y="152" text-anchor="end">čas</text>
     <text class="popis" x="${(u.x1 + u.x2) / 2}" y="174" text-anchor="middle">označený úsek</text>
   </svg>`;
 }
@@ -173,9 +220,10 @@ function kapacita() {
     jine = ['voda odráží všechno sluneční záření', 'vzduch nad mořem je hustší', 'moře nepřijímá teplo vůbec'];
   }
 
+  /* u otázky „proč u moře…“ by karta se dvěma náhodnými látkami neměla s otázkou nic společného */
   p.innerHTML = `<div class="zadani uloha-text">${zadani}</div>
-    <div class="karta"><div class="vzorec">${a.n}: c = ${a.c.toLocaleString('cs-CZ')} J/(kg·°C)<br>
-      ${b.n}: c = ${b.c.toLocaleString('cs-CZ')} J/(kg·°C)</div></div>`;
+    ${typ === 'proc' ? '' : `<div class="karta"><div class="vzorec">${a.n}: c = ${a.c.toLocaleString('cs-CZ')} J/(kg·°C)<br>
+      ${b.n}: c = ${b.c.toLocaleString('cs-CZ')} J/(kg·°C)</div></div>`}`;
   const odezva = odezvaEl();
   Uloha.vyber({
     kam: p, odezva,

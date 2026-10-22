@@ -6,6 +6,8 @@
   <title>Reformace a třicetiletá válka</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -19,11 +21,64 @@
       color: var(--text-faint); font-size: 0.78rem; }
     .osa span { background: var(--bg-control); border: 1px solid var(--border);
       border-radius: 6px; padding: 4px 9px; }
+    .foto-atlas { width:min(1120px,100%); margin:22px auto; }
+    .foto-atlas h2 { margin:0 0 5px; text-align:center; font-size:1.22rem; }
+    .foto-atlas > p { margin:0 auto 12px; max-width:820px; text-align:center; color:var(--text-muted,var(--text)); }
+    .foto-atlas h3 { margin:16px 0 8px; font-size:1.02rem; }
+    .foto-mrizka { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
+    .foto-karta { margin:0; overflow:hidden; border:1px solid var(--border); border-radius:14px; background:var(--bg-card); box-shadow:var(--shadow-sm); }
+    .foto-karta img { display:block; width:100%; aspect-ratio:4/3; object-fit:cover; }
+    .foto-karta img.cele { object-fit:contain; background:#1d1c1a; }
+    .foto-karta figcaption { padding:10px 11px 12px; font-size:.9rem; line-height:1.35; }
+    .foto-karta strong { display:block; margin-bottom:3px; color:var(--accent); font-size:1rem; }
+    @media (max-width:820px) { .foto-mrizka { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+    @media (max-width:440px) { .foto-mrizka { grid-template-columns:1fr; } }
   </style>
 </head>
 <body>
   <h1>📜 Reformace a třicetiletá válka</h1>
   <p class="podtitul">Pro 8. ročník: rozdělení západního křesťanství a válka, která proměnila Evropu.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Reformace a třicetiletá válka</summary>
+    <div class="obsah">
+      <p>Na počátku 16. století lidem stále vadilo bohatství církve a <b>prodej odpustků</b> – podobně jako
+        o sto let dřív Janu Husovi. Roku <b>1517</b> proti odpustkům vystoupil německý kněz <b>Martin Luther</b>.
+        Přeložil bibli do němčiny, aby jí lidé rozuměli. Díky <b>knihtisku</b> se jeho spisy rychle šířily.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Reformace</h3><p>Západní křesťanství se rozdělilo. Vznikly církve
+          <b>luteránská</b>, <b>kalvínská</b> (Jan Kalvín v Ženevě) a <b>anglikánská</b> (Jindřich VIII.).
+          Jejich věřícím říkáme <b>protestanti</b>.</p></article>
+        <article class="vyklad-karta"><h3>Protireformace</h3><p>Katolická církev chtěla obnovit svůj vliv.
+          Nejvíc se prosadili <b>jezuité</b>, hlavně ve školství. Platila zásada „<b>čí země, toho víra</b>“.</p></article>
+        <article class="vyklad-karta"><h3>Třicetiletá válka</h3><p><b>1618–1648.</b> Začala v Praze <b>druhou
+          defenestrací</b>, skončila <b>vestfálským mírem</b>. Pro střední Evropu byla pohromou: hlad, epidemie, vylidnění.</p></article>
+      </div>
+      <p>V českých zemích vládli od roku <b>1526</b> katoličtí <b>Habsburkové</b>, ale většina obyvatel nebyla katolická.
+        Když stavové cítili ohrožení náboženské svobody, povstali (1618). Roku <b>1620</b> byli poraženi na
+        <b>Bílé hoře</b>, roku 1621 bylo popraveno 27 pánů a <b>Obnovené zřízení zemské</b> (1627) upevnilo moc Habsburků.
+        Nekatolíci museli přestoupit, nebo odejít – do exilu odešel i <b>Jan Amos Komenský</b>.</p>
+      <p>Pozor na záměnu: první pražská defenestrace (1419) patří k husitství, <b>druhá (1618)</b> zahájila třicetiletou válku.</p>
+      <aside class="zapamatuj">1517 Luther → rozdělení církve. 1618 defenestrace → 1620 Bílá hora → 1648 vestfálský mír.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: seřaď události po stavovském povstání</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Seřaď od nejstarší: poprava 27 českých pánů, Obnovené zřízení zemské, druhá pražská
+        defenestrace, bitva na Bílé hoře.</p>
+      <ol class="kroky">
+        <li>Hledám, co stálo <b>na začátku</b>: stavové povstali proti Habsburkům a vyhodili místodržící z oken.
+          První je <b>druhá pražská defenestrace (1618)</b>.</li>
+        <li>Na povstání odpověděl císař vojskem. Rozhodla <b>bitva na Bílé hoře (1620)</b>.</li>
+        <li>Po vítězství přišel trest pro vůdce povstání – <b>poprava 27 pánů (1621)</b>.</li>
+        <li>Nakonec Habsburkové změnili pravidla v zemi natrvalo – <b>Obnovené zřízení zemské (1627)</b>.</li>
+        <li>Kontrola: 1618 → 1620 → 1621 → 1627. Řetěz příčina → důsledek sedí s letopočty.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ defenestrace (1618) → Bílá hora (1620) → poprava 27 pánů (1621) → Obnovené zřízení zemské (1627)</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="osobnosti" class="active">👤 Osobnosti</button>
@@ -40,6 +95,21 @@
   </div>
 
   <div class="osa"><span>1517 Lutherovy teze</span><span>1526 Habsburkové na českém trůně</span><span>1618 druhá pražská defenestrace</span><span>1620 bitva na Bílé hoře</span><span>1621 poprava 27 pánů</span><span>1648 vestfálský mír</span></div>
+
+  <section class="foto-atlas" aria-labelledby="dokladyNadpis">
+    <h2 id="dokladyNadpis">Prameny doby reformace a třicetileté války</h2>
+    <p>Dobové tisky, rytiny a portrét. Takto se o událostech dozvídali lidé v 16. a 17. století.</p>
+    <h3>Reformace</h3>
+    <div class="foto-mrizka">
+      <figure class="foto-karta"><img class="cele" src="img/d/d8-reformace-luther-teze.webp" alt="První strana basilejského tisku Lutherových 95 tezí z roku 1517: latinský text s ozdobnou iniciálou a římskými čísly článků." width="1152" height="1571" loading="lazy"><figcaption><strong>Lutherovy teze (1517)</strong>Tisk 95 tezí proti prodeji odpustků, vydaný ještě roku 1517 v Basileji. Díky knihtisku se Lutherovy myšlenky rychle rozšířily po Evropě.</figcaption></figure>
+      <figure class="foto-karta"><img class="cele" src="img/d/d8-reformace-komensky.webp" alt="Malovaný portrét Jana Amose Komenského od Jürgena Ovense: starý muž s šedivým vousem a černou čepičkou v tmavém plášti s červeným lemem." width="1152" height="1328" loading="lazy"><figcaption><strong>Jan Amos Komenský</strong>Portrét od Jürgena Ovense z doby, kdy žil v exilu v Amsterdamu. Biskup jednoty bratrské a „učitel národů“, autor Velké didaktiky a Orbis pictus.</figcaption></figure>
+    </div>
+    <h3>Třicetiletá válka v českých zemích</h3>
+    <div class="foto-mrizka">
+      <figure class="foto-karta"><img src="img/d/d8-reformace-defenestrace.webp" alt="Dobová rytina pražské defenestrace 1618: muži v síni Pražského hradu vyhazují císařské místodržící oknem ven." width="1152" height="859" loading="lazy"><figcaption><strong>Pražská defenestrace (23. 5. 1618)</strong>Rytina z dílny Matthäa Meriana. Protestantští stavové vyhodili z okna Pražského hradu dva císařské místodržící a písaře – začalo stavovské povstání a třicetiletá válka.</figcaption></figure>
+      <figure class="foto-karta"><img class="cele" src="img/d/d8-reformace-exekuce.webp" alt="Kolorovaný dobový leták o Staroměstské exekuci 1621: popraviště uprostřed náměstí obklopené vojáky a davem, dole německý nápis." width="1152" height="821" loading="lazy"><figcaption><strong>Staroměstská exekuce (21. 6. 1621)</strong>Dobový leták. Po porážce na Bílé hoře bylo na Staroměstském náměstí popraveno 27 vůdců povstání; leták zprávu šířil po Evropě.</figcaption></figure>
+    </div>
+  </section>
 
   <p class="napoveda">Reformace začala roku <b>1517</b> vystoupením Martina Luthera proti odpustkům. Třicetiletá válka (<b>1618–1648</b>) začala v Praze druhou defenestrací a skončila <b>vestfálským mírem</b>.</p>
 
@@ -64,7 +134,7 @@ const OSOBNOSTI = [
   },
   {
     "jmeno": "Ferdinand II. Habsburský",
-    "popis": "katolický císař, proti kterému povstali čeští stavové roku 1618"
+    "popis": "katolický Habsburk, od roku 1617 český král a od 1619 císař; proti jeho vládě povstali čeští stavové roku 1618"
   },
   {
     "jmeno": "Albrecht z Valdštejna",

@@ -6,6 +6,8 @@
   <title>Bezpečnost práce a výstražné značky</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -47,6 +49,42 @@
   <h1>☣️ Bezpečnost práce a výstražné značky</h1>
   <p class="podtitul">Pro 8. ročník: výstražné symboly GHS, pravidla laboratoře a první pomoc.</p>
 
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Jak poznat nebezpečnou látku a jak se chovat v laboratoři</summary>
+    <div class="obsah">
+      <p>Mnoho látek kolem nás může ublížit – popálit kůži, otrávit nebo vzplanout. Proto má každý obal nebezpečné
+        chemikálie <b>etiketu</b> s výstražnými symboly. Stačí jeden pohled a víš, na co si dát pozor, i když látku neznáš.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Symboly GHS</h3><p><b>Červeně orámovaný kosočtverec</b> s černým znakem na bílém poli.
+          Je jich <b>devět</b>: plamen = hořlavá, lebka = toxická, poleptaná ruka = žíravá, uhynulá ryba a strom = nebezpečná pro přírodu.</p></article>
+        <article class="vyklad-karta"><h3>Etiketa</h3><p><b>H-věty</b> popisují, jaké nebezpečí hrozí. <b>P-věty</b> radí, jak s látkou bezpečně zacházet.</p></article>
+        <article class="vyklad-karta"><h3>Pravidla laboratoře</h3><p>Plášť, brýle a podle potřeby rukavice. Nejíme, nepijeme, nepipetujeme ústy,
+          zbytek chemikálie nevracíme do lahve. Zkumavku zahříváme ústím od sebe i od ostatních.</p></article>
+        <article class="vyklad-karta"><h3>První pomoc</h3><p>Nejdřív zabraň dalšímu poškození: kůži i oko <b>oplachuj velkým množstvím vody</b>,
+          nadýchaného vyveď na vzduch. Pak to vždy řekni vyučujícímu.</p></article>
+      </div>
+      <p>Jedna látka může mít <b>více symbolů</b> najednou – benzin je hořlavý, dráždivý, škodí zdraví i přírodě. Symbol neříká,
+        jak je látka „silná“, ale <b>jakým způsobem</b> škodí. Typická chyba: myslet si, že látka bez plamene na etiketě je neškodná.</p>
+      <p>Proč kyselinu lijeme <b>do vody</b>, a ne naopak? Při ředění se uvolňuje hodně tepla. Když liješ vodu do kyseliny,
+        může se voda prudce vařit a kyselina vystříknout.</p>
+      <aside class="zapamatuj">Před prací si přečti etiketu: symbol řekne, jak látka škodí, H- a P-věty co dělat. Při úrazu oplachuj vodou a hned to nahlas řekni dospělému.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: která značka patří na lahev lihu</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Na stole stojí lahev lihu (ethanolu). Která výstražná značka patří na její obal?</p>
+      <ol class="kroky">
+        <li>Uvědomím si, co o lihu vím: snadno se vznítí a hoří modravým plamenem (líh v lihovém kahanu).</li>
+        <li>Hledám symbol, který vyjadřuje <b>hoření</b> – to je kosočtverec s <b>plamenem</b>.</li>
+        <li>Pozor na záměnu: plamen <b>nad kroužkem</b> znamená oxidující látku, která sama nehoří, jen podporuje hoření jiných látek.</li>
+        <li>Ověřím, co z toho plyne: lahev s lihem nesmí stát u otevřeného ohně a hořící líh se nehasí vodou.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Na líh patří symbol <b>hořlavá látka</b> (plamen).</p>
+    </div>
+  </details>
+
   <div class="rezimy" id="rezimy">
     <button data-rezim="poznej" class="active">🔍 Poznej značku</button>
     <button data-rezim="kLatce">🧪 Značka k látce</button>
@@ -67,7 +105,7 @@
     Výstražné symboly GHS jsou <b>červeně orámované kosočtverce</b> s černým znakem na bílém poli.
     Je jich celkem <b>devět</b> a najdeš je na obalech chemikálií doma i ve školní laboratoři.
     V laboratoři nikdy nejíme a nepijeme, chemikálie nezkoušíme čichem přímo z nádoby
-    a <b>kyselinu vždy líjeme do vody</b>, nikdy naopak.
+    a <b>kyselinu vždy lijeme do vody</b>, nikdy naopak.
   </p>
 
   <section class="foto-atlas" aria-labelledby="obalyNadpis">
@@ -83,24 +121,47 @@ let rezim = 'poznej';
 function odezvaEl() { const d = document.createElement('div'); d.className = 'odezva'; return d; }
 
 const ZNACKY = [
-  { klic: 'vybusny', soubor: 'GHS01-vybusne.svg', nazev: 'výbušná látka', popis: 'může explodovat při nárazu, tření nebo zahřátí',
-    latky: ['nitroglycerin', 'černý střelný prach', 'třaskavina'] },
-  { klic: 'horlavy', soubor: 'GHS02-horlave.svg', nazev: 'hořlavá látka', popis: 'snadno se vznítí, drž ji dál od otevřeného ohně',
-    latky: ['benzin', 'líh (ethanol)', 'aceton'] },
-  { klic: 'oxidujici', soubor: 'GHS03-oxidujici.svg', nazev: 'oxidující látka', popis: 'sama nehoří, ale podporuje hoření jiných látek',
-    latky: ['dusičnan draselný', 'peroxid vodíku (koncentrovaný)', 'chlorečnan'] },
-  { klic: 'plyn', soubor: 'GHS04-plyn-pod-tlakem.svg', nazev: 'plyn pod tlakem', popis: 'tlaková nádoba může při zahřátí prasknout',
-    latky: ['propan-butan v lahvi', 'stlačený kyslík', 'oxid uhličitý v bombě'] },
-  { klic: 'zirava', soubor: 'GHS05-zirave.svg', nazev: 'žíravá látka', popis: 'poleptá kůži, oči i materiály',
-    latky: ['kyselina sírová', 'hydroxid sodný', 'čistič odpadů'] },
-  { klic: 'toxicky', soubor: 'GHS06-toxicke.svg', nazev: 'toxická látka', popis: 'může způsobit otravu i v malém množství',
-    latky: ['methanol', 'kyanid draselný', 'rtuť'] },
-  { klic: 'drazdiva', soubor: 'GHS07-drazdive.svg', nazev: 'dráždivá / zdraví škodlivá látka', popis: 'dráždí kůži, oči nebo dýchací cesty',
-    latky: ['saponát v koncentraci', 'peroxid vodíku 3 %', 'chlornan v úklidu'] },
-  { klic: 'zdravi', soubor: 'GHS08-zdravi-skodlive.svg', nazev: 'vážné poškození zdraví', popis: 'může poškodit orgány, plíce nebo způsobit rakovinu',
-    latky: ['benzen', 'azbestový prach', 'toluen'] },
-  { klic: 'prostredi', soubor: 'GHS09-zivotni-prostredi.svg', nazev: 'nebezpečná pro životní prostředí', popis: 'poškozuje vodní organismy',
-    latky: ['pesticid', 'motorový olej', 'rtuťové sloučeniny'] },
+  { klic: 'vybusny', soubor: 'GHS01-vybusne.svg', nazev: 'výbušná látka', popis: 'může explodovat při nárazu, tření nebo zahřátí' },
+  { klic: 'horlavy', soubor: 'GHS02-horlave.svg', nazev: 'hořlavá látka', popis: 'snadno se vznítí, drž ji dál od otevřeného ohně' },
+  { klic: 'oxidujici', soubor: 'GHS03-oxidujici.svg', nazev: 'oxidující látka', popis: 'sama nehoří, ale podporuje hoření jiných látek' },
+  { klic: 'plyn', soubor: 'GHS04-plyn-pod-tlakem.svg', nazev: 'plyn pod tlakem', popis: 'tlaková nádoba může při zahřátí prasknout' },
+  { klic: 'zirava', soubor: 'GHS05-zirave.svg', nazev: 'žíravá látka', popis: 'poleptá kůži, oči i materiály' },
+  { klic: 'toxicky', soubor: 'GHS06-toxicke.svg', nazev: 'toxická látka', popis: 'může způsobit otravu i v malém množství' },
+  { klic: 'drazdiva', soubor: 'GHS07-drazdive.svg', nazev: 'dráždivá / zdraví škodlivá látka', popis: 'dráždí kůži, oči nebo dýchací cesty' },
+  { klic: 'zdravi', soubor: 'GHS08-zdravi-skodlive.svg', nazev: 'vážné poškození zdraví', popis: 'může poškodit orgány, plíce nebo způsobit rakovinu' },
+  { klic: 'prostredi', soubor: 'GHS09-zivotni-prostredi.svg', nazev: 'nebezpečná pro životní prostředí', popis: 'poškozuje vodní organismy' },
+];
+
+/* Látky pro režim „Značka k látce“: z = všechny piktogramy, které látka podle CLP nese
+   (každý z nich je správnou odpovědí a žádný z nich nesmí být mezi rušivými),
+   t = piktogramy, které má jen některé balení nebo koncentrace – nejsou správnou
+   odpovědí, ale do rušivých se také nedávají. */
+const LATKY = [
+  { n: 'nitroglycerin', z: ['vybusny', 'toxicky', 'zdravi', 'prostredi'], t: ['horlavy'] },
+  { n: 'černý střelný prach', z: ['vybusny'] },
+  { n: 'benzin', z: ['horlavy', 'drazdiva', 'zdravi', 'prostredi'] },
+  { n: 'líh (ethanol)', z: ['horlavy'], t: ['drazdiva'] },
+  { n: 'aceton', z: ['horlavy', 'drazdiva'] },
+  { n: 'dusičnan draselný', z: ['oxidujici'] },
+  { n: 'peroxid vodíku (koncentrovaný)', z: ['oxidujici', 'zirava', 'drazdiva'] },
+  { n: 'chlorečnan draselný', z: ['oxidujici', 'drazdiva', 'prostredi'] },
+  { n: 'propan-butan v lahvi', z: ['horlavy', 'plyn'] },
+  { n: 'stlačený kyslík', z: ['oxidujici', 'plyn'] },
+  { n: 'oxid uhličitý v tlakové lahvi', z: ['plyn'] },
+  { n: 'kyselina sírová', z: ['zirava'] },
+  { n: 'hydroxid sodný', z: ['zirava'] },
+  { n: 'čistič odpadů', z: ['zirava'], t: ['drazdiva'] },
+  { n: 'chlornan sodný (bělidlo)', z: ['zirava', 'prostredi'] },
+  { n: 'methanol', z: ['horlavy', 'toxicky', 'zdravi'] },
+  { n: 'kyanid draselný', z: ['toxicky', 'zdravi', 'prostredi'], t: ['zirava'] },
+  { n: 'rtuť', z: ['toxicky', 'zdravi', 'prostredi'] },
+  { n: 'koncentrovaný saponát', z: ['drazdiva'], t: ['zirava'] },
+  { n: 'kyselina citronová', z: ['drazdiva'] },
+  { n: 'benzen', z: ['horlavy', 'drazdiva', 'zdravi'] },
+  { n: 'azbestový prach', z: ['zdravi'] },
+  { n: 'toluen', z: ['horlavy', 'drazdiva', 'zdravi'] },
+  { n: 'modrá skalice (síran měďnatý)', z: ['drazdiva', 'prostredi'] },
+  { n: 'oxid zinečnatý', z: ['prostredi'] },
 ];
 
 function obrazekZnacky(z, velikost = 170) {
@@ -128,21 +189,25 @@ function poznej() {
 
 function kLatce() {
   const p = $('plocha');
-  const z = Uloha.nahodne(ZNACKY);
-  const latka = Uloha.nahodne(z.latky);
-  const nabidka = Uloha.zamichej([z, ...Uloha.zamichej(ZNACKY.filter(x => x.klic !== z.klic)).slice(0, 3)]);
+  const latka = Uloha.nahodne(LATKY);
+  const z = ZNACKY.find(x => x.klic === Uloha.nahodne(latka.z));
+  const vyrad = [...latka.z, ...(latka.t || [])];
+  const nabidka = Uloha.zamichej([z, ...Uloha.zamichej(ZNACKY.filter(x => !vyrad.includes(x.klic))).slice(0, 3)]);
   const stav = { chyboval: false, hotovo: false };
+  const vsechny = latka.z.map(k => ZNACKY.find(x => x.klic === k).nazev).join(', ');
+  const dalsi = latka.z.length > 1 ? ` Na obalu má všechny tyto symboly: ${vsechny}.` : '';
 
-  p.innerHTML = `<div class="zadani uloha-text">Která značka patří na obal látky <b>${latka}</b>?</div>`;
+  p.innerHTML = `<div class="zadani uloha-text">Která značka patří na obal látky <b>${latka.n}</b>?</div>`;
   const rada = document.createElement('div');
   rada.className = 'znacky-rada';
   const odezva = odezvaEl();
   nabidka.forEach(x => {
     const b = document.createElement('button');
     b.innerHTML = obrazekZnacky(x, 100);
+    b.setAttribute('aria-label', x.nazev);
     b.addEventListener('click', () => Uloha.odpoved({
       prvek: b, spravne: x.klic === z.klic, stav, odezva,
-      zpravaOk: `✅ ${z.nazev} – ${z.popis}`,
+      zpravaOk: `✅ ${z.nazev} – ${z.popis}.${dalsi}`,
       zpravaChyba: `Tahle značka znamená „${x.nazev}“. Zkus jinou.`,
       poSpravne: skore.vyhodnot,
       dalsi: novaUloha,
@@ -196,7 +261,7 @@ const PRAVIDLA = [
   { q: 'Kde se pracuje s látkami uvolňujícími dráždivé páry?', a: 'v digestoři', b: ['u okna', 'na chodbě', 'kdekoli v učebně'] },
   { q: 'Co musíš vědět, než začneš pokus?', a: 'jaké látky používáš, jaká rizika mají a kde je hasicí přístroj', b: ['jen výsledek pokusu', 'nic, stačí následovat souseda', 'kolik to bude trvat'] },
   { q: 'Jak pipetuješ roztok?', a: 'balonkem nebo pipetovacím nástavcem, nikdy ústy', b: ['ústy, ale opatrně', 'nalitím z lahve', 'brčkem'] },
-  { q: 'Co znamená písmeno v označení „nebezpečné látky“ na obalu?', a: 'H-věty popisují nebezpečí, P-věty pokyny pro bezpečné zacházení', b: ['jde o cenu', 'značí datum výroby', 'určuje hmotnost'] },
+  { q: 'Co na etiketě nebezpečné látky znamenají H-věty a P-věty?', a: 'H-věty popisují nebezpečí, P-věty pokyny pro bezpečné zacházení', b: ['H-věty udávají cenu, P-věty počet kusů', 'H-věty značí datum výroby, P-věty datum spotřeby', 'H-věty udávají hmotnost, P-věty objem'] },
 ];
 function pravidla() {
   const p = $('plocha');
@@ -218,35 +283,37 @@ function pravidla() {
 function chyby() {
   const p = $('plocha');
   const body = [['bez ochranných brýlí',20,38],['rozpuštěné vlasy u kahanu',45,43],['jídlo mezi chemikáliemi',59,66],['otevřená láhev na kraji',70,62],['pipetování ústy',88,42],['rozlitá kapalina',91,77]];
-  p.innerHTML = `<div class="zadani">Najdi šest nebezpečných situací.</div><div class="chyby-scena"><img src="img/ch/ch8-bezpecnost-laborator.webp" alt="Školní laboratoř se šesti bezpečnostními chybami." width="1152" height="768">${body.map(([n,x,y])=>`<button class="chyba-bod" style="left:${x}%;top:${y}%" data-chyba="${n}" aria-label="${n}">?</button>`).join('')}</div><div class="odezva" aria-live="polite">Klepni na červené body a vysvětli, proč je situace nebezpečná.</div>`;
-  p.querySelectorAll('[data-chyba]').forEach(b => b.addEventListener('click',()=>{ b.textContent='✓'; b.disabled=true; p.querySelector('.odezva').textContent=`Chyba: ${b.dataset.chyba}.`; }));
+  p.innerHTML = `<div class="zadani">Najdi šest nebezpečných situací.</div><div class="chyby-scena"><img src="img/ch/ch8-bezpecnost-laborator.webp" alt="Školní laboratoř se šesti bezpečnostními chybami." width="1152" height="768">${body.map(([n,x,y],i)=>`<button class="chyba-bod" style="left:${x}%;top:${y}%" data-chyba="${n}" aria-label="Podezřelé místo ${i + 1}">?</button>`).join('')}</div><div class="odezva" aria-live="polite">Klepni na červené body a vysvětli, proč je situace nebezpečná.</div>`;
+  p.querySelectorAll('[data-chyba]').forEach(b => b.addEventListener('click',()=>{ b.textContent='✓'; b.disabled=true; b.setAttribute('aria-label',`Nalezeno: ${b.dataset.chyba}`); p.querySelector('.odezva').textContent=`Chyba: ${b.dataset.chyba}.`; }));
 }
 
 /* ---- Značky doma: skutečné obaly (IMG-ch-02, zdroje vypisuje kostra.js) ---- */
 const OBALY = [   // [soubor, šířka, výška, alt, výrobek, klíče značek na obalu, vysvětlení]
-  ['ch8-bezpecnost-cistic-odpadu', {{WH:ch/ch8-bezpecnost-cistic-odpadu}}, '{{ALT:ch/ch8-bezpecnost-cistic-odpadu}}', 'Čistič odpadů', ['zirava'],
+  ['ch8-bezpecnost-cistic-odpadu', 1152, 1074, 'Etiketa čističe odpadů s hydroxidem sodným a výstražným symbolem žíravé látky.', 'Čistič odpadů', ['zirava'],
     'Obsahuje hydroxid sodný, který leptá kůži i oči. Používej rukavice a brýle a nikdy ho nemíchej s jinými čističi.'],
-  ['ch8-bezpecnost-bielidlo', {{WH:ch/ch8-bezpecnost-bielidlo}}, '{{ALT:ch/ch8-bezpecnost-bielidlo}}', 'Bělidlo (chlornan sodný)', ['zirava', 'prostredi'],
-    'Žíravé a škodlivé pro vodní živočichy. Se kyselými čističi uvolňuje jedovatý chlor – nikdy je nesmíchávej.'],
-  ['ch8-bezpecnost-deodorant', {{WH:ch/ch8-bezpecnost-deodorant}}, '{{ALT:ch/ch8-bezpecnost-deodorant}}', 'Deodorant ve spreji', ['horlavy'],
+  ['ch8-bezpecnost-bielidlo', 1152, 1061, 'Láhev bělidla s chlornanem sodným, na etiketě symboly žíravé látky a nebezpečí pro životní prostředí.', 'Bělidlo (chlornan sodný)', ['zirava', 'prostredi'],
+    'Žíravé a škodlivé pro vodní živočichy. S kyselými čističi uvolňuje jedovatý chlor – nikdy je nesmíchávej.'],
+  ['ch8-bezpecnost-deodorant', 1152, 1205, 'Zadní strana spreje deodorantu s výstražným symbolem hořlavé látky.', 'Deodorant ve spreji', ['horlavy'],
     'Hnací plyn (butan, propan) je extrémně hořlavý. Nestříkej do ohně, plechovku nezahřívej ani nepropichuj.'],
-  ['ch8-bezpecnost-cistic-trouby', {{WH:ch/ch8-bezpecnost-cistic-trouby}}, '{{ALT:ch/ch8-bezpecnost-cistic-trouby}}', 'Čistič trouby ve spreji', CISTIC_TROUBY,
-    'Silně zásaditý čistič leptá kůži a hnací plyn ve spreji je hořlavý. Stříkej jen do vychladlé trouby a v rukavicích.'],
-  ['ch8-bezpecnost-redidlo', {{WH:ch/ch8-bezpecnost-redidlo}}, '{{ALT:ch/ch8-bezpecnost-redidlo}}', 'Ředidlo do laků', REDIDLO,
-    'Páry ředidla jsou hořlavé a škodí zdraví. Pracuj venku nebo při otevřeném okně, daleko od ohně.'],
+  ['ch8-bezpecnost-cistic-trouby', 575, 1228, 'Sprej na čištění trouby s výstražnými symboly na zadní straně plechovky.', 'Čistič trouby ve spreji', ['zirava', 'drazdiva', 'horlavy'],
+    'Silně zásaditý čistič leptá kůži a dráždí, hnací plyn ve spreji je hořlavý. Stříkej jen do vychladlé trouby, v rukavicích a při větrání.'],
+  ['ch8-bezpecnost-redidlo', 960, 1307, 'Láhev ředidla do laků s řadou výstražných symbolů na etiketě.', 'Ředidlo do laků', ['horlavy', 'drazdiva', 'zdravi', 'prostredi'],
+    'Páry ředidla jsou hořlavé, dráždí a při dlouhém vdechování poškozují zdraví; ředidlo škodí i vodním živočichům. Pracuj venku nebo při otevřeném okně, daleko od ohně.'],
 ];
-const obalImg = o => `<img src="img/ch/${o[0]}.webp" alt="${o[3]}" width="${o[1]}" height="${o[2]}" loading="lazy">`;
+const obalImg = (o, alt) => `<img src="img/ch/${o[0]}.webp" alt="${alt || o[3]}" width="${o[1]}" height="${o[2]}" loading="lazy">`;
 $('obalyMrizka').innerHTML = OBALY.map(o => `<figure class="foto-karta">${obalImg(o)}<figcaption><strong>${o[4]}</strong>`
   + `Na obalu: ${o[5].map(k => ZNACKY.find(z => z.klic === k).nazev).join(', ')}. ${o[6]}</figcaption></figure>`).join('');
 
 function doma() {
   const p = $('plocha');
   const o = Uloha.nahodne(OBALY);
-  const spravna = ZNACKY.find(z => z.klic === Uloha.nahodne(o[5]));
+  // klíč losujeme jednou – volání nahodne() uvnitř find() losovalo znovu u každé značky a občas nenašlo nic
+  const klicSpravne = Uloha.nahodne(o[5]);
+  const spravna = ZNACKY.find(z => z.klic === klicSpravne);
   const nabidka = Uloha.zamichej([spravna, ...Uloha.zamichej(ZNACKY.filter(z => !o[5].includes(z.klic))).slice(0, 3)]);
   const stav = { chyboval: false, hotovo: false };
   p.innerHTML = `<div class="zadani uloha-text">Najdi na obalu výrobku <b>${o[4].toLowerCase()}</b> výstražný symbol. Který z těchto na něm je?</div>
-    <div class="foto-obal">${obalImg(o)}</div>`;
+    <div class="foto-obal">${obalImg(o, 'Fotografie obalu výrobku k prohlédnutí.')}</div>`;  // alt by jinak vyjmenoval hledané symboly
   const rada = document.createElement('div');
   rada.className = 'znacky-rada';
   const odezva = odezvaEl();

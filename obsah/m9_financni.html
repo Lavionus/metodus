@@ -6,6 +6,8 @@
   <title>Finanční matematika</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -76,6 +78,20 @@
   <h1>💰 Finanční matematika</h1>
   <p class="podtitul">Pro 9. ročník: úroky, spoření, půjčky a rodinný rozpočet.</p>
 
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: složené a jednoduché úročení</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Uložíme 20 000 Kč na 3 roky s úrokem 5 % ročně. Kolik korun navíc přinese složené úročení oproti jednoduchému? (Daň neuvažuj.)</p>
+      <ol class="kroky">
+        <li>Jednoduchý úrok: ú = 20 000 · 5 : 100 · 3 = 3 000 Kč, na účtu bude <b>23 000 Kč</b>.</li>
+        <li>Složené úročení: úrok se každý rok přičte k jistině. Po 1. roce: 20 000 · 1,05 = 21 000 Kč.</li>
+        <li>Po 2. roce se úročí už 21 000 Kč: 21 000 · 1,05 = 22 050 Kč. Po 3. roce: 22 050 · 1,05 = <b>23 152,50 Kč</b>.</li>
+        <li>Rozdíl: 23 152,50 − 23 000 = <b>152,50 Kč</b>. Tolik přinesly „úroky z úroků“.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Složené úročení přinese o 152,50 Kč víc.</p>
+    </div>
+  </details>
+
   <div class="rezimy" id="rezimy">
     <button data-rezim="kalkulacka" data-faze="vyuka" class="active">💹 Kalkulačka</button>
     <button data-rezim="urok">📈 Jednoduchý úrok</button>
@@ -103,6 +119,7 @@ const skore = Uloha.skore('metodus_m9_financni', $('skore'));
 let rezim = 'kalkulacka';
 const kc = x => Math.round(x).toLocaleString('cs-CZ') + ' Kč';
 const fmt = x => Number(Number(x).toFixed(2)).toLocaleString('cs-CZ');
+const roku = n => Uloha.tvar(n, 'rok', 'roky', 'let');            // 1 rok, 2 roky, 5 let
 function odezvaEl() { const d = document.createElement('div'); d.className = 'odezva'; return d; }
 
 /* ---- Kalkulačka -----------------------------------------------------------------------
@@ -163,7 +180,17 @@ function kresliKalkulacku() {
     slozene.push(J * Math.pow(1 + u / 100, r));
     jednoduche.push(J * (1 + u / 100 * r));
   }
-  const maxV = Math.max(...slozene);
+  // půjčka (anuita): m = J·i / (1 − (1+i)^−N), i je měsíční úrok; po r letech je zaplaceno 12·r·m
+  // a zbývá dluh J·(1+i)^k − m·((1+i)^k − 1)/i, k = 12·r – dluh tedy klesá k nule
+  const iM = u / 100 / 12, NM = n * 12;
+  const splatka = iM > 0 ? J * iM / (1 - Math.pow(1 + iM, -NM)) : J / NM;
+  const zaplaceno = [], zbyva = [];
+  for (let r = 0; r <= n; r++) {
+    const k = 12 * r, q = Math.pow(1 + iM, k);
+    zaplaceno.push(splatka * k);
+    zbyva.push(Math.max(0, iM > 0 ? J * q - splatka * (q - 1) / iM : J - splatka * k));
+  }
+  const maxV = sporeni ? Math.max(...slozene) : Math.max(J, zaplaceno[n]);
 
   const ZEM = 200, X0 = 34, SIR = 480;
   const sirka = Math.max(2, Math.min(22, SIR / (n + 1) - 3));
@@ -179,10 +206,12 @@ function kresliKalkulacku() {
                   <rect class="sloup-jednoduchy" x="${x}" y="${ZEM - V(jednoduche[r])}"
                     width="${sirka * 0.5}" height="${V(jednoduche[r])}" rx="2"/>`;
     } else {
-      sloupce += `<rect class="sloup-slozeny" x="${x}" y="${ZEM - V(slozene[r])}"
-                    width="${sirka}" height="${V(slozene[r])}" rx="2"/>`;
+      sloupce += `<rect class="sloup-slozeny" x="${x}" y="${ZEM - V(zaplaceno[r])}"
+                    width="${sirka}" height="${V(zaplaceno[r])}" rx="2"/>
+                  <rect class="sloup-jednoduchy" x="${x}" y="${ZEM - V(zbyva[r])}"
+                    width="${sirka * 0.5}" height="${V(zbyva[r])}" rx="2"/>`;
     }
-    sloupce += `<rect class="jistina" x="${x}" y="${ZEM - V(J)}" width="${sirka}" height="${V(J)}" rx="2"/>`;
+    if (sporeni) sloupce += `<rect class="jistina" x="${x}" y="${ZEM - V(J)}" width="${sirka}" height="${V(J)}" rx="2"/>`;
   }
 
   const popisky = [0, Math.round(n / 2), n].filter((v, i, a) => a.indexOf(v) === i)
@@ -196,8 +225,8 @@ function kresliKalkulacku() {
     ? `<span><i style="background:var(--accent)"></i>složené úročení</span>
        <span><i style="background:var(--warn)"></i>jednoduché úročení</span>
        <span><i style="background:var(--text-faint)"></i>vložená částka</span>`
-    : `<span><i style="background:var(--accent)"></i>dluh s úroky</span>
-       <span><i style="background:var(--text-faint)"></i>půjčená částka</span>`;
+    : `<span><i style="background:var(--accent)"></i>zaplaceno dosud</span>
+       <span><i style="background:var(--warn)"></i>zbývá splatit</span>`;
 
   const konecne = slozene[n], jednoduchyKonec = jednoduche[n];
   if (sporeni) {
@@ -207,15 +236,12 @@ function kresliKalkulacku() {
        <div class="bunka c"><div class="nadpis">Navíc oproti jednoduchému</div>
          <div class="cislo">${kc(konecne - jednoduchyKonec)}</div></div>`;
     $('poznamkaKal').innerHTML = konecne >= 2 * J
-      ? `Za ${n} let se částka <b>více než zdvojnásobila</b>. Úroky se totiž počítají `
+      ? `Za ${roku(n)} se částka <b>více než zdvojnásobila</b>. Úroky se totiž počítají `
         + 'i z dříve připsaných úroků — proto modré sloupce rostou stále rychleji.'
       : `Úroky z úroků přidaly navíc <b>${kc(konecne - jednoduchyKonec)}</b>. `
         + 'Zkus prodloužit dobu — rozdíl poroste mnohem rychleji než lineárně.';
   } else {
-    // anuitní splátka: m = J·i / (1 − (1+i)^−N), i je měsíční úrok
-    const i = u / 100 / 12, N = n * 12;
-    const splatka = i > 0 ? J * i / (1 - Math.pow(1 + i, -N)) : J / N;
-    const celkem = splatka * N;
+    const celkem = splatka * NM;
     $('souhrnKal').innerHTML =
       `<div class="bunka a"><div class="nadpis">Měsíční splátka</div><div class="cislo">${kc(splatka)}</div></div>
        <div class="bunka b"><div class="nadpis">Zaplatíš celkem</div><div class="cislo">${kc(celkem)}</div></div>
@@ -227,7 +253,7 @@ function kresliKalkulacku() {
 
   $('hodJistina').textContent = kc(J);
   $('hodSazba').textContent = String(u).replace('.', ',') + ' %';
-  $('hodRoky').textContent = n + ' let';
+  $('hodRoky').textContent = roku(n);
 }
 
 function urok() {
@@ -243,7 +269,7 @@ function urok() {
   jine.delete(kc(vysledek));
 
   p.innerHTML = `<div class="zadani uloha-text">Uložíme <b>${kc(jistina)}</b> na účet s úrokem
-      <b>${fmt(sazba)} % ročně</b> na <b>${roky} ${roky === 1 ? 'rok' : roky < 5 ? 'roky' : 'let'}</b>.
+      <b>${fmt(sazba)} % ročně</b> na <b>${roku(roky)}</b>.
       ${naCelkem ? 'Kolik budeme mít na účtu celkem?' : 'Kolik korun činí úrok?'}
       (počítej jednoduchým úrokem, daň neuvažuj)</div>
     <div class="karta"><div class="vzorec">ú = jistina · p / 100 · t</div></div>`;
@@ -278,7 +304,7 @@ function slozeny() {
     jine = [kc(jednoduche), kc(jistina), kc(slozene * 1.1)];
   } else if (typ === 'rozdil') {
     zadani = `Kolik korun navíc přinese složené úročení oproti jednoduchému?
-      Jistina <b>${kc(jistina)}</b>, sazba <b>${sazba} %</b>, doba <b>${roky} let</b>.`;
+      Jistina <b>${kc(jistina)}</b>, sazba <b>${sazba} %</b>, doba <b>${roku(roky)}</b>.`;
     spravny = kc(slozene - jednoduche);
     jine = [kc(slozene), kc(jednoduche - jistina), kc(jistina * sazba / 100)];
   } else {
@@ -306,16 +332,20 @@ function slozeny() {
 function pujcky() {
   const p = $('plocha');
   const castka = Uloha.nahodne([20000, 30000, 50000, 80000]);
-  const nabidky = [
-    { n: 'Banka A', splatka: 0, mesicu: Uloha.nahodne([12, 24]), poplatek: Uloha.nahodne([0, 500]) },
-    { n: 'Banka B', splatka: 0, mesicu: Uloha.nahodne([24, 36]), poplatek: Uloha.nahodne([0, 1000]) },
-    { n: 'Půjčka C', splatka: 0, mesicu: Uloha.nahodne([12, 18]), poplatek: Uloha.nahodne([1500, 2500]) },
-  ];
-  nabidky.forEach(x => {
-    const navyseni = Uloha.nahodne([1.06, 1.1, 1.15, 1.22, 1.3]);
-    x.splatka = Math.round(castka * navyseni / x.mesicu / 10) * 10;
-    x.celkem = x.splatka * x.mesicu + x.poplatek;
-  });
+  // nejlevnější nabídka musí být jediná – při shodě celkových částek by byly správně dvě
+  let nabidky;
+  do {
+    nabidky = [
+      { n: 'Banka A', splatka: 0, mesicu: Uloha.nahodne([12, 24]), poplatek: Uloha.nahodne([0, 500]) },
+      { n: 'Banka B', splatka: 0, mesicu: Uloha.nahodne([24, 36]), poplatek: Uloha.nahodne([0, 1000]) },
+      { n: 'Půjčka C', splatka: 0, mesicu: Uloha.nahodne([12, 18]), poplatek: Uloha.nahodne([1500, 2500]) },
+    ];
+    nabidky.forEach(x => {
+      const navyseni = Uloha.nahodne([1.06, 1.1, 1.15, 1.22, 1.3]);
+      x.splatka = Math.round(castka * navyseni / x.mesicu / 10) * 10;
+      x.celkem = x.splatka * x.mesicu + x.poplatek;
+    });
+  } while (nabidky.filter(x => x.celkem === Math.min(...nabidky.map(y => y.celkem))).length > 1);
   const nejlevnejsi = nabidky.reduce((a, b) => (a.celkem <= b.celkem ? a : b));
   const radky = nabidky.map(x => `<tr><td>${x.n}</td><td>${kc(x.splatka)}</td><td>${x.mesicu}</td>
       <td>${kc(x.poplatek)}</td></tr>`).join('');

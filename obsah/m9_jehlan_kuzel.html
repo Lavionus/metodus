@@ -6,6 +6,8 @@
   <title>Jehlan, kužel a koule</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -100,6 +102,22 @@
   <h1>🔻 Jehlan, kužel a koule</h1>
   <p class="podtitul">Pro 9. ročník: objem a povrch prostorových těles.</p>
 
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: objem a povrch kužele</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Kužel má poloměr podstavy r = 3 cm a výšku v = 4 cm. Jaký má objem a jaký povrch? (π = 3,14)</p>
+      <ol class="kroky">
+        <li>Obsah podstavy: πr² = 3,14 · 3 · 3 = <b>28,26 cm²</b>.</li>
+        <li>Objem je třetina válce se stejnou podstavou a výškou: V = ⅓ · 28,26 · 4 = <b>37,68 cm³</b>.</li>
+        <li>Pro povrch potřebuji stranu s, ne výšku v. Výška, poloměr a strana tvoří pravoúhlý trojúhelník:
+          s² = r² + v² = 9 + 16 = 25, tedy <b>s = 5 cm</b>.</li>
+        <li>Plášť: πrs = 3,14 · 3 · 5 = <b>47,1 cm²</b>.</li>
+        <li>Povrch = podstava + plášť: S = 28,26 + 47,1 = <b>75,36 cm²</b>.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ V = 37,68 cm³, S = 75,36 cm².</p>
+    </div>
+  </details>
+
   <div class="rezimy" id="rezimy">
     <button data-rezim="modelarna" data-faze="vyuka" class="active">🔬 Modelárna</button>
     <button data-rezim="site" data-faze="vyuka">📐 Rozbal síť</button>
@@ -130,6 +148,7 @@ let rezim = 'modelarna';
 const PI = 3.14;
 const fmt = x => Number(Number(x).toFixed(2)).toLocaleString('cs-CZ');
 const fmt1 = x => Number(Number(x).toFixed(1)).toLocaleString('cs-CZ');
+const r2 = x => Math.round(x * 100) / 100;
 function odezvaEl() { const d = document.createElement('div'); d.className = 'odezva'; return d; }
 
 /* ============================================================
@@ -141,7 +160,8 @@ function modelarna() {
   const p = $('plocha');
   p.innerHTML = `
     <div class="zadani uloha-text">Posuvníky měň rozměry tělesa. Obrázek i dosazení
-      do vzorce se přepočítají <b>okamžitě</b> — zkus najít, kdy vyjde objem větší než povrch.</div>
+      do vzorce se přepočítají <b>okamžitě</b> — zkus těleso zvětšit dvakrát a sleduj, že objem roste
+      mnohem rychleji než povrch (objem a povrch mají různé jednotky, cm³ a cm², přímo je porovnat nelze).</div>
     <div class="prepinac-tvar" id="tvary">
       <button data-tvar="jehlan">🔻 Jehlan</button>
       <button data-tvar="kuzel" class="zap">🍦 Kužel</button>
@@ -202,7 +222,7 @@ function prekresliModel() {
 
   if (tvar === 'jehlan') {
     const a = r, ap = rp;                       // u jehlanu je „r“ hrana podstavy a
-    const hs = Math.sqrt((a / 2) * (a / 2) + v * v);   // výška stěny (apotéma)
+    const hs = r2(Math.sqrt((a / 2) * (a / 2) + v * v));   // výška stěny (apotéma), zaokrouhlená jako v dosazení
     const V = a * a * v / 3, S = a * a + 2 * a * hs;
     const x1 = STRED - ap / 2, x2 = STRED + ap / 2;
     const hloubka = ap * 0.42;
@@ -225,7 +245,7 @@ function prekresliModel() {
     dosazeniS = `= ${fmt1(a)}² + 2 · ${fmt1(a)} · ${fmt(hs)}`;
     hodnotaS = `S = ${fmt(S)} cm²`;
   } else if (tvar === 'kuzel') {
-    const s = Math.sqrt(r * r + v * v);
+    const s = r2(Math.sqrt(r * r + v * v));          // počítáme se stranou tak, jak je vypsaná
     const V = PI * r * r * v / 3, S = PI * r * r + PI * r * s;
     const ry = rp * 0.3;
     svg = `<path class="plast" d="M${STRED} ${ZEM - vp} L${STRED - rp} ${ZEM}
@@ -878,7 +898,7 @@ function jehlan() {
 function kuzel() {
   const p = $('plocha');
   const r = Uloha.nahodneCislo(2, 10), v = Uloha.nahodneCislo(3, 15);
-  const s = Math.sqrt(r * r + v * v);
+  const s = r2(Math.sqrt(r * r + v * v));   // povrch ze strany zaokrouhlené tak, jak ji žák vidí v zadání
   const V = PI * r * r * v / 3, S = PI * r * r + PI * r * s;
   const naObjem = Math.random() < 0.6;
   const vysledek = naObjem ? V : S;

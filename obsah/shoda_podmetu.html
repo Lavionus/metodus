@@ -6,6 +6,8 @@
   <title>Shoda podmětu s přísudkem</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -34,6 +36,38 @@
 <body>
   <h1>✏️ Shoda podmětu s přísudkem</h1>
   <p class="podtitul">Pro 6.–9. ročník: nejdřív najdi podmět, urči jeho rod – a teprve podle něj doplň koncovku.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Shoda podmětu s přísudkem</summary>
+    <div class="obsah">
+      <p>Přísudek se s podmětem <b>shoduje</b> v rodě a čísle. V množném čísle minulého času to vidíš na koncovce příčestí
+        <b>-li, -ly, -la</b>. Ty znějí stejně (-li a -ly), proto koncovku nikdy nehádáš podle sluchu, ale odvodíš ji z podmětu.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>-li</h3><p>Rod <b>mužský životný</b>: muži, psi, koně, učitelé pracovali. Sem patří i sněhuláci.</p></article>
+        <article class="vyklad-karta"><h3>-ly</h3><p>Rod <b>mužský neživotný</b> (stroje, vlaky, dny) a <b>ženský</b> (ženy, kočky): stroje pracovaly, ženy zpívaly.</p></article>
+        <article class="vyklad-karta"><h3>-la</h3><p>Rod <b>střední</b>: kuřata, auta, města, hejna: auta troubila.</p></article>
+        <article class="vyklad-karta"><h3>Několikanásobný podmět</h3><p>Je-li mezi členy aspoň jeden <b>mužský životný</b>, platí -li: chlapci a dívky soutěžili.</p></article>
+      </div>
+      <p>Postup: <b>1.</b> najdi přísudek a zeptej se „kdo, co + přísudek?“, tím najdeš podmět. <b>2.</b> urči jeho rod (pomůže „ti muži / ty stroje / ta kuřata“). <b>3.</b> napiš koncovku.</p>
+      <p>Typické chyby: podmět stojí <b>až za přísudkem</b> („Na louce se pásly krávy“), nebo vedle podmětu stojí jiné podstatné jméno
+        („Hejna ptáků odlétala“ – podmět je hejna, ne ptáků). Slova <b>děti, oči, uši</b> se v množném čísle chovají jako rod ženský: děti si hrály.</p>
+      <aside class="zapamatuj">Najdi podmět → urči rod → koncovka: mužský životný <b>-li</b>, mužský neživotný a ženský <b>-ly</b>, střední <b>-la</b>.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: doplň koncovku příčestí</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Doplň koncovku: „V bouřce padal_ staré stromy.“</p>
+      <ol class="kroky">
+        <li>Přísudek je <b>padal_</b>. Ptám se: kdo, co padal_? – <b>stromy</b>. Podmět stojí až na konci věty.</li>
+        <li>Určím rod: ten strom, ty stromy – rod <b>mužský neživotný</b>.</li>
+        <li>Mužský neživotný má v příčestí koncovku <b>-ly</b>.</li>
+        <li>Zkontroluji, že jsem nevzal jako podmět slovo bouřka: to je v 6. pádě (v bouřce), podmět bývá v 1. pádě.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ V bouřce padaly staré stromy.</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="koncovka" class="active">✏️ Doplň koncovku</button>
@@ -300,6 +334,15 @@ function prisudek(u) {
   return ocisti(slova[i] || '');
 }
 
+/* Rada „dej podmět do 1. pádu j. č.“ u slov děti, oči, uši selže (dítě, oko, ucho
+   jsou střední, v množném čísle se ale chovají jako ženský rod). */
+const ZENSKE_MN = /\b(děti|oči|uši)\b/i;
+function radaRod(u) {
+  return ZENSKE_MN.test(u.p)
+    ? 'Pozor: děti, oči a uši mají v množném čísle rod ženský (jako kosti) – proto -y.'
+    : 'Dej si podmět do 1. pádu jednotného čísla – tím poznáš rod a z něj koncovku.';
+}
+
 /* ---- Urči rod podmětu ------------------------------------------------------ */
 function rod() {
   const p = $('plocha');
@@ -316,7 +359,7 @@ function rod() {
       .map(k => ({ klic: k, ikona: RODY[k].ikona, popis: RODY[k].nazev })),
     spravnyKlic: u.rod,
     zpravaOk: '✅ Správně!',
-    zpravaChyba: 'Zkus si podmět dát do 1. pádu jednotného čísla – ten prozradí rod.',
+    zpravaChyba: ZENSKE_MN.test(u.p) ? radaRod(u) : 'Zkus si podmět dát do 1. pádu jednotného čísla – ten prozradí rod.',
     poSpravne: napoprve => hotovo(u, p, napoprve),
     prodleva: PRODLEVA, dalsi: novaUloha,
   });
@@ -362,7 +405,7 @@ function napoveda() {
   const el = document.createElement('div');
   el.className = 'pravidlo tip';
   el.innerHTML = `<span class="znak">🔎</span><div>Podmět věty je <b>${uloha.p}</b>.
-      Dej si ho do 1. pádu jednotného čísla – tím poznáš rod a z něj koncovku.</div>`;
+      ${radaRod(uloha)}</div>`;
   $('plocha').appendChild(el);
   napovedaVidet = true;
 }

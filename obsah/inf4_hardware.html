@@ -6,6 +6,8 @@
   <title>Hardware a bezpečné chování</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -25,6 +27,38 @@
 <body>
   <h1>🖥️ Hardware a bezpečné chování</h1>
   <p class="podtitul">Pro 4.–5. ročník: části počítače, vstupní a výstupní zařízení, hesla a bezpečnost.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Části počítače a bezpečné heslo</summary>
+    <div class="obsah">
+      <p>K počítači připojujeme různá zařízení. U každého se zeptej: <b>jdou tudy data do počítače, nebo ven z něj?</b>
+        Podle toho poznáš, jestli je to vstupní, nebo výstupní zařízení.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Vstupní zařízení</h3><p>Posílají data <b>do</b> počítače: klávesnice, myš, mikrofon, webkamera, skener.</p></article>
+        <article class="vyklad-karta"><h3>Výstupní zařízení</h3><p>Ukazují data <b>z</b> počítače: monitor, tiskárna, reproduktor, sluchátka.</p></article>
+        <article class="vyklad-karta"><h3>Uvnitř počítače</h3><p><b>Procesor</b> počítá a řídí, <b>operační paměť</b> drží to, s čím se právě pracuje, <b>disk</b> uchová soubory i po vypnutí. Nejsou to vstupy ani výstupy.</p></article>
+        <article class="vyklad-karta"><h3>Silné heslo</h3><p>Je <b>dlouhé</b>, míchá velká a malá písmena, číslice a znaky. Nesmí v něm být tvoje jméno, rok narození ani obyčejné slovo.</p></article>
+      </div>
+      <p>Pozor na záměnu: skener a tiskárna vypadají podobně, ale skener papír <b>čte</b> do počítače (vstup),
+        tiskárna na papír <b>tiskne</b> (výstup). Heslo nikomu neprozrazuj – ani kamarádovi, ani za odměnu ve hře.
+        Když tě něco na internetu vyleká nebo nevíš, co dělat, řekni to dospělému.</p>
+      <aside class="zapamatuj">Vstup = data do počítače, výstup = data ven. Silné heslo je dlouhé, pestré a nedá se uhodnout.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: je heslo bezpečné?</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Lucie si chce dát heslo <b>Lucie2014</b>. Je to bezpečné heslo?</p>
+      <ol class="kroky">
+        <li>Podívám se, z čeho se skládá: je to jméno <b>Lucie</b> a číslo <b>2014</b>.</li>
+        <li>Jméno Lucie zná celá třída a rok 2014 vypadá jako rok narození – to se dá snadno uhodnout.</li>
+        <li>Nemá žádný zvláštní znak (třeba + nebo !) a je spíš krátké.</li>
+        <li>Lepší heslo by spojilo dvě slova, která spolu nesouvisejí, a přidalo číslici a znak.</li>
+      </ol>
+      <p class="vysledek-ukazky">Heslo Lucie2014 je slabé – obsahuje jméno a rok, které o Lucii kdekdo ví.</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="kCemu" class="active">🔌 K čemu to je</button>

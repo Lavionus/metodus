@@ -42,20 +42,16 @@ try {
  await nav('prehled.html');
  const meta=await evaluate(`Object.entries(KATALOG_VYUKA)`);assert.equal(meta.length,5);
  for(const [file,m] of meta){assert.ok(m.cil&&m.typy.length&&m.rozsah==='pilot');for(const link of [file,...m.predchozi,...m.dalsi])assert.ok((await fetch(base+link)).ok,link);}
+ // Výběr „Co chci v hodině dělat?“ byl 22. 10. 2026 odstraněn z úvodu, osnovy i kabinetu;
+ // příprava hodiny je dál dostupná z kabinetu a pilotní vstupy fungují přímým odkazem.
  for(const file of ['prehled.html','osnova.html','ucitel.html']){
-  await nav(file);assert.equal(await evaluate(`document.querySelectorAll('#vysledkyUcelu .lekce').length`),5);
-  for(const [purpose,n] of [['model',3],['badani',1],['procvicovani',5],['vyklad',5]]){
-   await evaluate(`document.getElementById('ucel').value='${purpose}';document.getElementById('ucel').dispatchEvent(new Event('change'))`);
-   assert.equal(await evaluate(`document.querySelectorAll('#vysledkyUcelu .lekce').length`),n);
-  }
-  await evaluate(`document.getElementById('ucel').value='hodina';document.getElementById('ucel').dispatchEvent(new Event('change'))`);
-  assert.equal(await evaluate(`document.querySelector('#vysledkyUcelu a').getAttribute('href')`),'priprava_hodiny.html');
-  if(file==='osnova.html')assert.match(await evaluate(`document.getElementById('souhrn').textContent`),/neznamená úplné pokrytí/);
+  await nav(file);assert.equal(await evaluate(`!!document.getElementById('ucelVyuky')||!!document.getElementById('ucel')`),false,file);
  }
- // Purpose link opens actual practice, not the default guided example.
- await nav('prehled.html');
- await evaluate(`document.getElementById('ucel').value='procvicovani';document.getElementById('ucel').dispatchEvent(new Event('change'))`);
- await click('a[href*="m4_zlomky_uvod.html?"]');await pause(300);
+ await nav('ucitel.html');
+ assert.ok(await evaluate(`!!document.querySelector('#rozcestnik a[href="priprava_hodiny.html"]')`),'kabinet odkazuje na přípravu hodiny');
+ // Vstup „procvičování“ pilotu otevře rovnou procvičování, ne vedený příklad.
+ const zlomky=meta.find(([f])=>f.endsWith('m4_zlomky_uvod.html'))[1];
+ await nav('m4_zlomky_uvod.html'+zlomky.vstupy.procvicovani);await pause(300);
  assert.equal(await evaluate(`document.querySelector('#rezimy .active').dataset.rezim`),'prectiZlomek');
  // Preserve old data; count every attempt, including abandoned questions and support.
  await nav('ch9_ph.html');
@@ -104,7 +100,12 @@ try {
    const shot=await call('Page.captureScreenshot',{format:'png',captureBeyondViewport:true});await writeFile('docs/etapa-08/'+(file.startsWith('edu')?'denik':'list')+'-320.png',Buffer.from(shot.data,'base64'));
   }
  }
- await nav('edu_progress.html');await click('#resetBtn');assert.deepEqual(await evaluate(`Prubeh.read()`),{});assert.match(await evaluate(`document.getElementById('podrobnyPrubeh').textContent`),/Zatím nejsou/);
+ await nav('edu_progress.html');await click('#resetBtn');await pause(200);
+ // mazání se od 22. 10. 2026 potvrzuje dialogem (dialog.js), případně nativním confirm
+ await evaluate(`document.querySelector('.dlg-tlacitka button.hlavni')?.click()`);await pause(300);assert.deepEqual(await evaluate(`Prubeh.read()`),{});assert.match(await evaluate(`document.getElementById('podrobnyPrubeh').textContent`),/Zatím nejsou/);
  assert.equal(errors.length,0,JSON.stringify(errors));
- console.log(JSON.stringify({ok:true,pilots:5,purposeFilters:5,telemetry:data,legacyPreserved:true,teacherFlow:true,print:true,pages,widths:[1366,390,320],themes:2},null,2));
-}finally{ws.close();}
+ console.log(JSON.stringify({ok:true,pilots:5,purposeFilters:'odstraněno 22. 10. 2026',telemetry:data,legacyPreserved:true,teacherFlow:true,print:true,pages,widths:[1366,390,320],themes:2},null,2));
+}finally{
+ // nastavení záložky přetrvá – vrátit, jinak další testy čekají na líné obrázky bez cache
+ await call('Network.setCacheDisabled',{cacheDisabled:false}).catch(()=>{});await call('Network.setBypassServiceWorker',{bypass:false}).catch(()=>{});
+ ws.close();}

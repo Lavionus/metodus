@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Metodus | Interaktivní učení</title>
-  <meta name="description" content="Metodus – interaktivní výukové aplikace pro 1. a 2. stupeň ZŠ i střední školu. Čeština, matematika, přírodní vědy, zeměpis, dějepis a cizí jazyky. Zdarma a bez registrace. Uložené lekce lze používat offline; živá data vyžadují internet." />
+  <meta name="description" content="Metodus – interaktivní výukové aplikace pro 1. a 2. stupeň ZŠ. Čeština, matematika, přírodní vědy, zeměpis, dějepis a cizí jazyky. Zdarma a bez registrace. Uložené lekce lze používat offline; živá data vyžadují internet." />
   <link rel="stylesheet" href="common.css" />
   <script src="theme.js"></script>
   <script src="podpis.js" defer></script>
@@ -341,6 +341,50 @@
       border-bottom: 1px solid var(--border);
     }
 
+    /* Nadpisy bloků jsou tlačítka (klávesnice); vzhled přebírají z h2. */
+    .sekce h2 > .hlava, .predmet-hlava > .hlava {
+      all: unset;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      width: 100%;
+      cursor: pointer;
+      box-sizing: border-box;
+    }
+    .sekce h2 > .hlava:focus-visible, .predmet-hlava > .hlava:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+    .sekce h2 .nazev, .predmet-hlava .nazev { min-width: 0; }
+
+    /* 1. úroveň: předmět */
+    .predmet-blok { border-bottom: 1px solid var(--border); }
+    .predmet-blok:last-child { border-bottom: none; }
+    .predmet-hlava {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--text);
+      margin: 6px 10px;
+      padding: 8px 8px;
+      border-radius: 6px;
+      user-select: none;
+      transition: background-color 0.15s ease;
+    }
+    .predmet-hlava:hover { background-color: var(--bg-elevated); }
+    .predmet-hlava .pocet {
+      margin-left: auto; font-size: 0.72rem; color: var(--text-faint);
+      background-color: var(--bg-hover); border-radius: 10px; padding: 1px 8px; font-weight: 600;
+    }
+    .predmet-hlava .sipka { font-size: 0.75rem; color: var(--text-faint); transition: transform 0.2s ease; }
+    .predmet-blok.collapsed .predmet-hlava .sipka { transform: rotate(-90deg); }
+    .predmet-blok.collapsed .predmet-obsah { display: none; }
+    .predmet-blok.skryto { display: none; }
+    /* 2. úroveň: okruhy uvnitř předmětu – odsazené, bez vlastních čar */
+    .predmet-obsah .sekce { padding: 2px 0 4px 10px; border-bottom: none; }
+    .predmet-obsah .sekce h2 { margin: 4px 15px 4px 10px; }
+    .predmet-obsah .sekce.jediny-okruh { padding: 0 0 6px; }
+
     .sekce:last-child {
       border-bottom: none;
     }
@@ -467,7 +511,12 @@
       transition: opacity 0.15s ease, color 0.15s ease;
     }
 
-    .sekce li:hover .hvezda { opacity: 0.7; }
+    .sekce li:hover .hvezda, .hvezda:focus-visible { opacity: 0.7; }
+    .hvezda:focus-visible { outline: 2px solid var(--accent); border-radius: 4px; }
+    /* na dotykových zařízeních není hover – hvězdička musí být vidět a mít větší cíl */
+    @media (hover: none) {
+      .hvezda { opacity: 0.45; padding: 8px 10px; right: 0; }
+    }
     .hvezda:hover { opacity: 1 !important; color: var(--warn); }
     .hvezda.je-oblibena { opacity: 0.9; color: var(--warn); }
 
@@ -790,6 +839,8 @@
             <input type="search" id="hledatMenu" class="menu-search" placeholder="🔍 Hledat učivo… (Ctrl+K)" autocomplete="off" />
           </div>
           <div class="filtry" id="filtry">
+            <div class="filtr-nadpis">📅 Ročník</div>
+            <div class="rocniky" id="rocniky"></div>
             <div class="filtr-nadpis">📚 Předmět</div>
             <div class="predmet-drop">
               <button class="skupiny-toggle" id="skupinyToggle" aria-haspopup="true" aria-expanded="false" aria-controls="skupiny">
@@ -798,8 +849,6 @@
               </button>
               <div class="skupiny" id="skupiny" role="menu"></div>
             </div>
-            <div class="filtr-nadpis">📅 Ročník</div>
-            <div class="rocniky" id="rocniky"></div>
             <label class="prepinac" id="prepinacPlanObal">
               <input type="checkbox" id="prepinacPlan" checked>
               Zobrazit připravované 🚧
@@ -859,7 +908,7 @@
     // stránky, které nejsou aplikacemi v katalogu, ale smí se otevřít v ploše
     // (na vyslovnost.html pořád přesměrovává staré odkazy hlavní web)
     const STRANKY_MIMO_KATALOG = [DOMOVSKA, 'obsah/osnova.html', 'obsah/predstaveni.html',
-      'obsah/vyslovnost.html'];
+      'obsah/vyslovnost.html', 'obsah/priprava_hodiny.html', 'obsah/predmet.html'];
     const KEY_PAGE = 'metodus_current_page';
     const KEY_COLLAPSE = 'metodus_collapsed_sections';
     const KEY_SKUPINA = 'metodus_skupina';
@@ -902,9 +951,11 @@
     // Při první návštěvě (žádné uložené preference) start se všemi sekcemi
     // sbalenými — jinak by uvítal dlouhý sloupec stovek rozbalených položek.
     let collapsedSet = precti(localStorage, KEY_COLLAPSE) === null
-      ? new Set(KATALOG_SEKCE.map(s => s.nazev))
+      ? new Set([...KATALOG_SEKCE.map(s => s.nazev), ...KATALOG_SKUPINY.map(g => 'predmet:' + g.id)])
       : new Set(nactiJson(KEY_COLLAPSE, []));
-    let aktivniSkupina = precti(localStorage, KEY_SKUPINA) || 'vse';
+    // dřívější id skupin (před rozdělením po předmětech 22. 10. 2026) → nové
+    const noveIdSkupiny = id => (typeof KATALOG_SKUPINY_ALIAS !== 'undefined' && KATALOG_SKUPINY_ALIAS[id]) || id;
+    let aktivniSkupina = noveIdSkupiny(precti(localStorage, KEY_SKUPINA) || 'vse');
     let aktivniRocnik = precti(localStorage, KEY_ROCNIK) || 'vse';
     // připravované stránky (🚧) jsou ve výchozím stavu vidět – jsou to úkoly osnovy
     let zobrazPlan = precti(localStorage, KEY_PLAN) !== '0';
@@ -914,7 +965,11 @@
     // index katalogu: soubor -> {nazev, tagy, predmet, rocniky, stav}
     const podleSouboru = new Map();
     const VSECHNY = [];
+    const popisSkupiny = id => (KATALOG_SKUPINY.find(g => g.id === id) || {}).label || '';
     KATALOG_SEKCE.forEach(s => s.polozky.forEach(p => {
+      // hledá se i podle předmětu, okruhu a cíle lekce („zlomky“ najde všechny lekce o zlomcích)
+      const cil = (typeof KATALOG_CILE !== 'undefined' && KATALOG_CILE[p.soubor]) || '';
+      p.hledatNavic = [popisSkupiny(s.skupina), s.nazev, cil].join(' ');
       podleSouboru.set(p.soubor, p);
       VSECHNY.push({ ...p, skupina: s.skupina });
     }));
@@ -929,7 +984,7 @@
       a.href = '#' + p.soubor;               // klik = změna hashe -> hashchange otevře aplikaci
       a.dataset.page = p.soubor;
       a.textContent = p.nazev;
-      a.dataset.hledani = norm(p.nazev + ' ' + (p.tagy || []).join(' '));
+      a.dataset.hledani = norm([p.nazev, ...(p.tagy || []), p.hledatNavic || ''].join(' '));
       a.dataset.rocniky = (p.rocniky || []).join(',');
       if (p.stav === 'plan') {
         a.classList.add('plan');
@@ -943,6 +998,8 @@
       const st = document.createElement('button');
       st.className = 'hvezda';
       st.title = 'Přidat / odebrat z oblíbených';
+      st.setAttribute('aria-label', 'Oblíbené: ' + p.nazev);
+      st.setAttribute('aria-pressed', 'false');
       st.textContent = '★';
       st.addEventListener('click', e => {
         e.preventDefault();
@@ -961,25 +1018,64 @@
       div.dataset.skupina = skupina;
       if (special) div.dataset.special = '1';
       const h2 = document.createElement('h2');
-      const span = document.createElement('span');
-      span.textContent = nazev;
-      const badge = document.createElement('span');
-      badge.className = 'pocet';
-      badge.textContent = polozky.length;
-      const sipka = document.createElement('span');
-      sipka.className = 'sipka';
-      sipka.textContent = '▾';
-      h2.append(span, badge, sipka);
       const ul = document.createElement('ul');
+      h2.appendChild(hlavaSbalovani(div, nazev, polozky.length));
       polozky.forEach(p => ul.appendChild(vytvorPolozku(p)));
       div.append(h2, ul);
       if (polozky.length === 1 && !special) div.classList.add('jedina');
       else if (collapsedSet.has(nazev)) div.classList.add('collapsed');
-      h2.addEventListener('click', () => {
-        setCollapsed(div, !div.classList.contains('collapsed'));
+      nastavAria(div);
+      return div;
+    }
+
+    /* Nadpis sbalitelného bloku je tlačítko – menu jde ovládat i klávesnicí. */
+    function hlavaSbalovani(blok, nazev, pocet) {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'hlava';
+      const span = document.createElement('span');
+      span.className = 'nazev';
+      span.textContent = nazev;
+      const badge = document.createElement('span');
+      badge.className = 'pocet';
+      badge.textContent = pocet;
+      const sipka = document.createElement('span');
+      sipka.className = 'sipka';
+      sipka.setAttribute('aria-hidden', 'true');
+      sipka.textContent = '▾';
+      b.append(span, badge, sipka);
+      b.addEventListener('click', () => {
+        setCollapsed(blok, !blok.classList.contains('collapsed'));
         saveCollapsed();
       });
-      return div;
+      return b;
+    }
+    function nastavAria(blok) {
+      const b = blok.querySelector(':scope > h2 > .hlava');
+      if (b) b.setAttribute('aria-expanded', String(!blok.classList.contains('collapsed')));
+    }
+
+    /* Menu má dvě úrovně: předmět (KATALOG_SKUPINY) → okruhy (KATALOG_SEKCE). */
+    function vytvorPredmet(g, sekce) {
+      const blok = document.createElement('div');
+      blok.className = 'predmet-blok';
+      blok.dataset.skupina = g.id;
+      blok.dataset.nazev = 'predmet:' + g.id;
+      const h2 = document.createElement('h2');
+      h2.className = 'predmet-hlava';
+      h2.appendChild(hlavaSbalovani(blok, g.label, sekce.reduce((n, s) => n + s.polozky.length, 0)));
+      const obsah = document.createElement('div');
+      obsah.className = 'predmet-obsah';
+      sekce.forEach(s => {
+        const el = vytvorSekci(s.nazev, s.skupina, s.polozky, false);
+        // jediný okruh by jen opakoval název předmětu
+        if (sekce.length === 1) { el.classList.add('jedina', 'jediny-okruh'); el.classList.remove('collapsed'); }
+        obsah.appendChild(el);
+      });
+      blok.append(h2, obsah);
+      if (collapsedSet.has(blok.dataset.nazev)) blok.classList.add('collapsed');
+      nastavAria(blok);
+      return blok;
     }
 
     function renderMenu() {
@@ -987,8 +1083,11 @@
       // speciální sekce nahoře
       const obl = oblibene.map(f => podleSouboru.get(f)).filter(Boolean);
       if (obl.length) menuSekceEl.appendChild(vytvorSekci('⭐ Oblíbené', 'vse', obl, true));
-      // katalogové sekce
-      KATALOG_SEKCE.forEach(s => menuSekceEl.appendChild(vytvorSekci(s.nazev, s.skupina, s.polozky, false)));
+      // předměty a v nich okruhy
+      KATALOG_SKUPINY.forEach(g => {
+        const sekce = KATALOG_SEKCE.filter(s => s.skupina === g.id);
+        if (sekce.length) menuSekceEl.appendChild(vytvorPredmet(g, sekce));
+      });
       obnovHvezdy();
       updateActiveLink(aktualni);
       aplikujFiltr();
@@ -1003,15 +1102,17 @@
       s.classList.toggle('collapsed', collapsed);
       if (collapsed) collapsedSet.add(s.dataset.nazev);
       else collapsedSet.delete(s.dataset.nazev);
+      nastavAria(s);
     }
     const vsechnySekce = () => [...menuSekceEl.querySelectorAll('.sekce')];
+    const vsechnyPredmety = () => [...menuSekceEl.querySelectorAll('.predmet-blok')];
 
     document.getElementById('rozbalitVse').addEventListener('click', () => {
-      vsechnySekce().forEach(s => setCollapsed(s, false));
+      [...vsechnyPredmety(), ...vsechnySekce()].forEach(s => setCollapsed(s, false));
       saveCollapsed();
     });
     document.getElementById('sbalitVse').addEventListener('click', () => {
-      vsechnySekce().forEach(s => setCollapsed(s, true));
+      [...vsechnyPredmety(), ...vsechnySekce()].forEach(s => setCollapsed(s, true));
       saveCollapsed();
     });
 
@@ -1027,7 +1128,11 @@
       menuSekceEl.querySelectorAll('li').forEach(li => {
         const a = li.querySelector('a[data-page]');
         const st = li.querySelector('.hvezda');
-        if (a && st) st.classList.toggle('je-oblibena', oblibene.includes(a.dataset.page));
+        if (a && st) {
+          const je = oblibene.includes(a.dataset.page);
+          st.classList.toggle('je-oblibena', je);
+          st.setAttribute('aria-pressed', String(je));
+        }
       });
     }
     // Menu sekci „Nedávné“ nemá; historie se vede kvůli dlaždicím
@@ -1053,7 +1158,8 @@
        po každém načtení přepsalo. */
     function otevri(page, zUzivatele = true) {
       if (!page || page === aktualni) return;
-      if (!podleSouboru.has(page) && !STRANKY_MIMO_KATALOG.includes(page)) {
+      // stránky mimo katalog smějí mít parametry (predmet.html?p=fyzika&r=7)
+      if (!podleSouboru.has(page) && !STRANKY_MIMO_KATALOG.includes(page.split('?')[0])) {
         // neznámý hash – nechodit mimo katalog
         page = DOMOVSKA;
       }
@@ -1066,7 +1172,12 @@
       if (zUzivatele) {
         const a = menuSekceEl.querySelector(`a[data-page="${CSS.escape(page)}"]`);
         const s = a?.closest('.sekce');
-        if (s && !s.dataset.special) { setCollapsed(s, false); saveCollapsed(); }
+        if (s && !s.dataset.special) {
+          setCollapsed(s, false);
+          const blok = s.closest('.predmet-blok');
+          if (blok) setCollapsed(blok, false);
+          saveCollapsed();
+        }
       }
       if (window.matchMedia('(max-width: 1024px)').matches) closeMenu();
     }
@@ -1079,7 +1190,7 @@
         return;
       }
       if (hash.startsWith('rocnik=')) {
-        vyberRocnik(hash.slice(7));
+        vyberRocnik(hash.slice(7), zUzivatele);
         otevri(DOMOVSKA, zUzivatele);
         return;
       }
@@ -1094,12 +1205,15 @@
     window.addEventListener('message', e => {
       if (!e.data) return;
       if (typeof e.data.otevri === 'string') {
+        // dlaždice předmětu: otevře stránku předmětu a zároveň vybere předmět v menu
+        if (typeof e.data.skupina === 'string') vyberSkupinu(e.data.skupina, false);
         location.hash = e.data.otevri;
         otevri(e.data.otevri);
       } else if (typeof e.data.skupina === 'string') {
         vyberSkupinu(e.data.skupina);
       } else if (typeof e.data.rocnik === 'string') {
-        vyberRocnik(e.data.rocnik);
+        // z úvodu nebo ze stránky předmětu: filtr menu bez otevírání menu na mobilu
+        vyberRocnik(e.data.rocnik, !e.data.tise);
       }
     });
 
@@ -1197,16 +1311,19 @@
       // popisek pilulky už vlastní emoji obsahuje, další prefix by se zdvojil
       skupinyToggleLabel.textContent = aktivni ? aktivni.querySelector('span').textContent : '📚 Vše';
     }
-    function vyberRocnik(r) {
+    function vyberRocnik(r, zUzivatele = true) {
       if (!rocnikPills.some(p => p.dataset.rocnik === r)) return;
       aktivniRocnik = r;
       uloz(localStorage, KEY_ROCNIK, r);
       nastavDotaz('');
       updatePillState();
       aplikujFiltr();
+      // jako u předmětu: na úzké obrazovce je menu skryté – bez otevření by výběr nebyl vidět
+      if (zUzivatele && window.matchMedia('(max-width: 1024px)').matches) openMenu();
     }
 
     function vyberSkupinu(id, zUzivatele = true) {
+      id = noveIdSkupiny(id);
       if (!pills.some(p => p.dataset.skupina === id)) return;
       aktivniSkupina = id;
       uloz(localStorage, KEY_SKUPINA, id);
@@ -1222,7 +1339,7 @@
       updatePillState();
       aplikujFiltr();
       setSkupinyOpen(false);
-      if (window.matchMedia('(max-width: 1024px)').matches) openMenu();
+      if (zUzivatele && window.matchMedia('(max-width: 1024px)').matches) openMenu();
       menuEl.scrollTop = 0;
     }
 
@@ -1288,7 +1405,8 @@
        připravovaných stránek. Hledání je čtvrtá – platí přes všechny sekce. */
     function projdeRocnikem(rocniky) {
       if (aktivniRocnik === 'vse') return true;
-      return rocniky.includes(aktivniRocnik);
+      // nástroje bez ročníku (kabinet, kartičky, hudba…) platí pro všechny ročníky
+      return rocniky.length === 0 || rocniky.includes(aktivniRocnik);
     }
 
     function projdePolozka(p) {
@@ -1308,7 +1426,8 @@
       vsechnySekce().forEach(s => {
         // oblíbené se při hledání schovají (jinak by se položky zdvojily)
         if (q && s.dataset.special) { s.classList.add('skryto'); return; }
-        const patri = s.dataset.special || aktivniSkupina === 'vse'
+        // hledání platí napříč všemi předměty (i při zvoleném předmětu)
+        const patri = s.dataset.special || aktivniSkupina === 'vse' || !!q
           || s.dataset.skupina === aktivniSkupina;
         let shoda = 0;
         s.querySelectorAll('li').forEach(li => {
@@ -1325,6 +1444,15 @@
             !s.classList.contains('jedina') && collapsedSet.has(s.dataset.nazev));
           if (!s.dataset.special) celkemShod += shoda;
         }
+      });
+      vsechnyPredmety().forEach(blok => {
+        const vidim = [...blok.querySelectorAll('.sekce')].some(s => !s.classList.contains('skryto'));
+        blok.classList.toggle('skryto', !vidim);
+        // při hledání a u zvoleného předmětu je blok otevřený; jinak podle uloženého stavu
+        const otevrit = !!q || aktivniSkupina === blok.dataset.skupina;
+        blok.classList.toggle('collapsed', !otevrit && collapsedSet.has(blok.dataset.nazev));
+        nastavAria(blok);
+        blok.querySelectorAll('.sekce').forEach(nastavAria);
       });
       bezVysledku.classList.toggle('zobraz', celkemShod === 0);
       zobrazZruseni();
@@ -1370,7 +1498,8 @@
     let kbIndex = -1;
     function viditelneOdkazy() {
       return vsechnySekce()
-        .filter(s => !s.classList.contains('skryto') && !s.classList.contains('collapsed'))
+        .filter(s => !s.classList.contains('skryto') && !s.classList.contains('collapsed')
+          && !s.closest('.predmet-blok.collapsed'))
         .flatMap(s => [...s.querySelectorAll('li:not(.skryto) a[data-page]')]);
     }
     function zrusKbFokus() {

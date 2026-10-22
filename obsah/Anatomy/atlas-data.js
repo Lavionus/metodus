@@ -3,7 +3,7 @@ window.ANATOMY_MODULES = [
   {
     "id": "organy",
     "title": "Vnitřní orgány",
-    "image": "Prirodopis/organy-atlas-predek-v4.png",
+    "image": "Prirodopis/organy-atlas-predek-v4.webp",
     "viewBox": "0 0 1024 1536",
     "organs": [
       {
@@ -236,7 +236,7 @@ window.ANATOMY_MODULES = [
     "id": "organy-zada",
     "title": "Vnitřní orgány zezadu",
     "viewName": "pohled zezadu",
-    "image": "Prirodopis/organy-atlas-zada-v3.png",
+    "image": "Prirodopis/organy-atlas-zada-v3.webp",
     "viewBox": "0 0 1024 1536",
     "caption": "Pohled zezadu: pravá strana těla je vpravo. Páteř a ledviny překrývají hlouběji uložené části orgánů; srdce anatomicky leží před páteří. Střeva jsou odkryta průhledem a konečník okénkem v křížové kosti. Močový měchýř zůstává v předním pohledu.",
     "organs": [

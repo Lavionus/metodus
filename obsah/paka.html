@@ -2725,7 +2725,7 @@ Badani.start({
     { otazka:'Mezi dvě ozubená kola vložíš <b>mezikolo</b>. Co se změní?',
       moznosti:[moznost('Jen smysl otáčení – převodový poměr zůstane stejný.',true),
         moznost('Převodový poměr se zvětší.',false,'Zuby mezikola se v poměru vykrátí: z_m/z₁ · z₂/z_m = z₂/z₁. Vyzkoušej v modelu ➕ Mezikolo.'),
-        moznost('Nic se nezmění.',false,'Poměr ano, ale hnané kolo se teď točí stejným směrem jako hnací – dřív se točilo opačně.')],
+        moznost('Nic se nezmění.',false,'Převodový poměr se opravdu nezmění, ale hnané kolo se teď točí stejným směrem jako hnací – dřív se točilo opačně.')],
       vysvetleni:'Dvě kola v záběru se točí proti sobě; mezikolo směr ještě jednou obrátí.' },
     { otazka:'Co platí pro <b>všechny jednoduché stroje</b> – páku, kladkostroj i převody?',
       moznosti:[moznost('Co získáš na síle, ztratíš na dráze – práce zůstane stejná.',true),
@@ -2756,7 +2756,18 @@ Badani.start({
   <section class="foto-atlas">
     <p>Páky, kladky a kola najdeš na hřišti, v kuchyni, v dílně i na stavbě. U každé fotky hledej osu otáčení a místo, kde působí síla a kde břemeno.</p>
     <div class="foto-mrizka">
-@@ATLAS@@
+      <figure class="foto-karta"><img src="img/f/paka-houpacka.webp" alt="Dřevěná houpačka na dětském hřišti s osou otáčení uprostřed." width="1152" height="768" loading="lazy"><figcaption><strong>Houpačka – dvojzvratná páka</strong>Osa je uprostřed, děti sedí na opačných stranách. Těžší dítě si musí sednout blíž k ose.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/f/paka-nuzky.webp" alt="Nůžky s černými rukojetmi a kovovými čepelemi spojenými šroubkem." width="1152" height="960" loading="lazy"><figcaption><strong>Nůžky – dvojzvratná páka</strong>Osou je šroubek mezi rukojetí a čepelí. Tvrdý materiál stříháme u šroubku, kde je síla největší.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/f/paka-kleste.webp" alt="Ploché kleště s modrými rukojetmi a kloubem mezi čelistmi." width="1152" height="576" loading="lazy"><figcaption><strong>Kleště – dvojzvratná páka</strong>Dlouhé rukojeti a krátké čelisti: malá síla ruky se v čelistech mnohonásobně zvětší.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/f/paka-otvirak.webp" alt="Kovový otvírák na lahve s háčkem na jednom konci." width="1152" height="549" loading="lazy"><figcaption><strong>Otvírák – jednozvratná páka</strong>Osou je okraj víčka, o který se otvírák opře. Ruka působí na konci dlouhého ramene.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/f/paka-kolecko.webp" alt="Dvě stavební kolečka s korbou, kolem vpředu a dvěma rukojetmi vzadu." width="1152" height="671" loading="lazy"><figcaption><strong>Stavební kolečko – jednozvratná páka</strong>Osou je kolo, náklad leží blízko něj a ruce zvedají rukojeti daleko od osy.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/f/paka-louskacek.webp" alt="Kovový louskáček na ořechy se dvěma rameny a vroubkovanými čelistmi u kloubu." width="1152" height="768" loading="lazy"><figcaption><strong>Louskáček – jednozvratná páka</strong>Ořech leží blízko kloubu, ruka tiskne konce ramen. Proto stačí malá síla.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/f/paka-pinzeta.webp" alt="Tři pinzety s různě tvarovanými hroty." width="1152" height="448" loading="lazy"><figcaption><strong>Pinzeta – jednozvratná páka</strong>Prsty tisknou uprostřed, hroty jsou dál od kloubu. Síla se zmenší, ale pohyb je jemný a přesný.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/f/paka-jerab.webp" alt="Červený věžový jeřáb s kočkou na výložníku a hákem zavěšeným na lanech kladkostroje." width="1152" height="768" loading="lazy"><figcaption><strong>Jeřáb – kladkostroj</strong>Lano vede přes soustavu kladek v háku. Čím víc volných kladek, tím menší síla stačí na zvednutí břemene.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/f/paka-rumpal.webp" alt="Dřevěný rumpál s klikou a vědrem zavěšeným na laně nad otvorem šachty." width="1152" height="864" loading="lazy"><figcaption><strong>Studna s rumpálem – kolo na hřídeli</strong>Klika opisuje velký kruh, lano se navíjí na tenký válec. Vědro se zvedá malou silou.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/f/paka-kolo-prevod.webp" alt="Převod jízdního kola: řetěz vede přes ozubené kolo u šlapek." width="1152" height="768" loading="lazy"><figcaption><strong>Převody jízdního kola</strong>Řetěz spojuje ozubená kola u šlapek a u zadního kola. Poměr počtu zubů určuje, jak rychle a jak těžko se šlape.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/f/paka-hodinovy-strojek.webp" alt="Odkrytý hodinový strojek s ozubenými koly různých velikostí do sebe zapadajícími." width="500" height="444" loading="lazy"><figcaption><strong>Hodinový strojek – soukolí</strong>Ozubená kola za sebou zpomalují otáčení tak, aby minutová ručička oběhla ciferník za hodinu.</figcaption></figure>
+      <figure class="foto-karta"><img class="cele" src="img/f/paka-klika.webp" alt="Kovová klika s rukojetí na rameni, které otáčí hřídelí." width="960" height="1193" loading="lazy"><figcaption><strong>Klika – kolo na hřídeli</strong>Rukojeť na dlouhém rameni otáčí hřídelí. Delší rameno klikou = menší potřebná síla.</figcaption></figure>
     </div>
   </section>
 </dialog>
@@ -2768,6 +2779,10 @@ Badani.start({
   d.querySelector('.foto-zavri').addEventListener('click', () => d.close());
   d.addEventListener('click', e => { if (e.target === d) d.close(); });
   d.addEventListener('keydown', e => { if (e.key !== 'Escape') e.stopPropagation(); });
+  /* Seznam zdrojů fotografií (kostra.js ho připojí na konec body) patří k fotkám do okna –
+     pod celoobrazovkovou simulací by se nevešel. */
+  const presun = () => { const z = document.querySelector('body > .zdroje-obrazku'); if (z) d.append(z); return !!z; };
+  if (!presun()) { const mo = new MutationObserver(() => { if (presun()) mo.disconnect(); }); mo.observe(document.body, { childList: true }); }
 })();
 </script>
 </body>

@@ -31,7 +31,8 @@ const Slovicka = (function () {
   function spust(o) {
     const $ = id => document.getElementById(id);
     const esc = t => String(t).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
-    const plneHtml = o.plneHtml || (s => esc(o.plne(s)));
+    const plneHtml0 = o.plneHtml || (s => esc(o.plne(s)));
+    const plneHtml = s => `<span lang="${esc(o.lang)}">${plneHtml0(s)}</span>`;
     const motivHtml = (s, trida = '') => s.obrazek
       ? `<img${trida ? ` class="${trida}"` : ''} src="${esc(s.obrazek)}" alt="${esc(s.cz)}" loading="lazy">`
       : esc(s.emoji);
@@ -112,9 +113,11 @@ const Slovicka = (function () {
       posledni = s;
       return s;
     }
-    // tři jiné možnosti s jiným textem (některá slova mají stejný překlad)
+    // tři jiné možnosti s jiným textem (některá slova mají stejný překlad). Vynecháme i slova,
+    // která mají stejný cizí tvar nebo stejný překlad (orange = pomeranč i oranžová) – byla by správně taky.
     function moznosti(pool, s, text) {
-      const jine = [...new Set(Uloha.zamichej(pool.filter(x => x !== s)).map(text))].filter(t => t !== text(s));
+      const jine = [...new Set(Uloha.zamichej(pool.filter(x => x !== s && o.plne(x) !== o.plne(s) && x.cz !== s.cz))
+        .map(text))].filter(t => t !== text(s));
       return Uloha.zamichej([text(s), ...jine.slice(0, 3)]);
     }
     // po uzavření otázky celé slovo s překladem (a u členu tip), přečíst nahlas
@@ -131,7 +134,7 @@ const Slovicka = (function () {
         const s = vyberSlovo(pool);
         return {
           zadani: `<span class="obrazek-slova">${motivHtml(s)}</span><span class="druh">Který člen?</span>`
-            + `<span class="slovo-zadani">___ ${esc(s.slovo)}</span><span class="cesky-zadani">${esc(s.cz)}</span>`,
+            + `<span class="slovo-zadani">___ <span lang="${esc(o.lang)}">${esc(s.slovo)}</span></span><span class="cesky-zadani">${esc(s.cz)}</span>`,
           odpoved: s.clen,
           moznosti: [...o.cleny],
           tridaMoznosti: o.cleny.length === 2 ? 'dve' : 'cleny',

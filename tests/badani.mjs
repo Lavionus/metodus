@@ -189,10 +189,12 @@ try {
     // 1) panel a fáze kostry
     const zaklad = await evaluate(`({ panel: !!document.querySelector('.badani'), otevreno: !document.getElementById('badaniOkno').hidden,
       faze: [...document.querySelectorAll('.kostra-faze button')].map(b => b.dataset.faze),
+      ukazka: !!document.querySelector('.ukazka-kroky'),
       prekryvaVodorovne: document.documentElement.scrollWidth > innerWidth })`);
     assert.ok(zaklad.panel, 'panel existuje');
     assert.ok(zaklad.otevreno, 'na širší obrazovce se panel poprvé otevře');
-    assert.deepEqual(zaklad.faze, ['vyuka', 'procvic', 'overse', 'tahak'], 'fáze kostry');
+    // stránka s vedenou ukázkou (vyklad.js, např. grafy_funkci) má navíc fázi Ukázka
+    assert.deepEqual(zaklad.faze, zaklad.ukazka ? ['vyuka', 'ukazka', 'procvic', 'overse', 'tahak'] : ['vyuka', 'procvic', 'overse', 'tahak'], 'fáze kostry');
     assert.equal(zaklad.prekryvaVodorovne, false, 'bez vodorovného přetečení');
     // široká obrazovka: panel je boční sloupec a nic ze stránky nezakrývá
     const dok = await evaluate(`(() => { const p = document.querySelector('.badani').getBoundingClientRect();

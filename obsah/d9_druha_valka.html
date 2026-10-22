@@ -6,6 +6,8 @@
   <title>Druhá světová válka a holokaust</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -31,11 +33,56 @@
     .foto-karta strong { display:block; margin-bottom:3px; color:var(--accent); font-size:1rem; }
     @media (max-width:820px) { .foto-mrizka { grid-template-columns:repeat(2,minmax(0,1fr)); } }
     @media (max-width:440px) { .foto-mrizka { grid-template-columns:1fr; } }
+    .zamysleni { margin-top: 14px; padding: 10px 14px; border: 1px dashed var(--border-strong); border-radius: 10px; color: var(--text-muted); }
+    .zamysleni summary { cursor: pointer; font-weight: 600; }
+    .zamysleni p { margin: 8px 0 0; }
   </style>
 </head>
 <body>
   <h1>🕯️ Druhá světová válka a holokaust</h1>
   <p class="podtitul">Pro 9. ročník: průběh války, protektorát, odboj a připomínka obětí holokaustu.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Průběh války, protektorát a holokaust</summary>
+    <div class="obsah">
+      <p>Válku rozpoutalo nacistické Německo v čele s <b>Adolfem Hitlerem</b> útokem na <b>Polsko 1. září 1939</b>.
+        Zpočátku vítězilo <b>bleskovou válkou</b> – rychlými útoky tanků a letectva. Roku 1940 porazilo Francii,
+        Británie se pod vedením <b>Winstona Churchilla</b> ubránila v letecké bitvě o Británii.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Válka se stává světovou</h3><p>Roku <b>1941</b> Německo napadlo <b>SSSR</b>
+          a Japonsko zaútočilo na americký <b>Pearl Harbor</b>. Vznikla protihitlerovská koalice: Velká Británie, SSSR, USA.</p></article>
+        <article class="vyklad-karta"><h3>Obrat a konec</h3><p>Vítězství u <b>Stalingradu</b> (1943) obrátilo východní frontu,
+          <b>6. června 1944</b> se spojenci vylodili v Normandii. Německo kapitulovalo <b>8. května 1945</b>,
+          Japonsko až v srpnu 1945 po svržení atomových bomb.</p></article>
+        <article class="vyklad-karta"><h3>Protektorát a odboj</h3><p>České země byly <b>Protektorátem Čechy a Morava</b>.
+          Parašutisté <b>Kubiš a Gabčík</b> provedli roku <b>1942</b> atentát na Heydricha; nacisté se mstili vyhlazením
+          <b>Lidic a Ležáků</b>. Odboj působil i doma – sabotážemi, zpravodajstvím a ilegálním tiskem.</p></article>
+      </div>
+      <p><b>Holokaust</b> bylo systematické vyvražďování Židů nacistickým režimem. Zahynulo přibližně
+        <b>šest milionů Židů</b> a statisíce Romů a dalších pronásledovaných lidí. Z ghetta <b>Terezín</b> vedly
+        transporty do vyhlazovacích táborů. Za čísly jsou jednotlivé lidské životy – proto si oběti připomínáme jménem.</p>
+      <p>Typická chyba: 8. května 1945 skončila válka <b>v Evropě</b>, celá druhá světová válka až kapitulací Japonska.</p>
+      <aside class="zapamatuj">1. 9. 1939 Polsko → 1941 SSSR a USA ve válce → 1943 Stalingrad → 1944 Normandie →
+        8. 5. 1945 konec v Evropě. Holokaust: asi šest milionů zavražděných Židů.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: seřaď události podle příčiny a důsledku</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Seřaď od nejstarší: vítězství u Stalingradu, vylodění spojenců v Normandii,
+        německý útok na SSSR, atentát na Heydricha.</p>
+      <ol class="kroky">
+        <li>Bez německého útoku na Sovětský svaz by nebyla bitva u Stalingradu. Na začátek patří
+          <b>útok na SSSR (1941)</b>.</li>
+        <li>Atentát na Heydricha proběhl v protektorátu roku <b>1942</b>, ještě v době velké převahy Německa.</li>
+        <li>Pak přišel obrat na východní frontě – <b>Stalingrad (1943)</b>.</li>
+        <li>Až když Německo sláblo, otevřeli spojenci frontu na západě – <b>Normandie (6. 6. 1944)</b>.</li>
+        <li>Kontrola letopočty: 1941 → 1942 → 1943 → 1944.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ útok na SSSR (1941) → atentát na Heydricha (1942) → Stalingrad (1943) → Normandie (1944)</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="osobnosti" class="active">👤 Osobnosti</button>
@@ -295,17 +342,14 @@ const KVIZ2 = [
       "protest studentů"
     ],
     "proc": "bylo potlačeno, ale mělo velký symbolický význam"
-  },
-  {
-    "q": "Proč si připomínáme oběti holokaustu?",
-    "a": "aby se podobná nenávist a zločiny neopakovaly",
-    "b": [
-      "kvůli oslavám vítězství",
-      "jde jen o formalitu",
-      "kvůli výuce zeměpisu"
-    ]
   }
 ];
+/* Reflexní otázka nemá jednu „správnou“ odpověď k bodování – ukazuje se pod
+   kvízem jako zamyšlení, které se nehodnotí. */
+const ZAMYSLENI = {
+  q: 'Proč si připomínáme oběti holokaustu?',
+  podnet: 'Například proto, abychom nezapomněli na konkrétní lidi, kteří byli zavražděni, a aby se podobná nenávist a zločiny neopakovaly. Co si o tom myslíš ty?',
+};
 
 function osobnosti() {
   const p = $('plocha');
@@ -372,6 +416,12 @@ function kviz(sada, napoveda) {
     dalsi: novaUloha,
   });
   p.appendChild(odezva);
+  if (sada === KVIZ2) {
+    const z = document.createElement('details');
+    z.className = 'zamysleni';
+    z.innerHTML = `<summary>💭 Na zamyšlení (nehodnotí se): ${ZAMYSLENI.q}</summary><p>${ZAMYSLENI.podnet}</p>`;
+    p.appendChild(z);
+  }
 }
 const kviz1 = () => kviz(KVIZ1, 'Sleduj, jak se válka postupně přelila z Evropy do celého světa.');
 const kviz2 = () => kviz(KVIZ2, 'Připomínka obětí je součástí toho, proč se dějiny učíme.');

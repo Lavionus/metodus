@@ -6,6 +6,8 @@
   <title>Hustota</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -32,6 +34,36 @@
 <body>
   <h1>⚖️ Hustota</h1>
   <p class="podtitul">Pro 6.–7. ročník: výpočet hustoty, hmotnosti a objemu, plavání a potápění těles.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Co je hustota</summary>
+    <div class="obsah">
+      <p>Kilogram peří a kilogram železa váží stejně, ale peří zabere mnohem víc místa. Látky se liší tím,
+        <b>kolik hmotnosti se vejde do stejného objemu</b>. Tuto vlastnost látky popisuje <b>hustota ρ</b> (čti „ró“).</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Výpočet</h3><p><b>ρ = m : V</b> – hmotnost tělesa dělená jeho objemem.</p></article>
+        <article class="vyklad-karta"><h3>Jednotky</h3><p><b>g/cm³</b> nebo <b>kg/m³</b>; 1 g/cm³ = 1000 kg/m³. Voda má 1 g/cm³.</p></article>
+        <article class="vyklad-karta"><h3>Obrácené vzorce</h3><p><b>m = ρ · V</b> (hmotnost), <b>V = m : ρ</b> (objem).</p></article>
+      </div>
+      <p>Hustota patří <b>látce</b>, ne tělesu: malý i velký hřebík ze železa mají stejnou hustotu 7,8 g/cm³.
+        Těleso v kapalině <b>plave</b>, když má menší hustotu než kapalina; když větší, potopí se.</p>
+      <aside class="zapamatuj">ρ = m : V. Menší hustota než voda (1 g/cm³) → těleso ve vodě plave.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: hustota kostky</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Kostka má hmotnost 54 g a objem 20 cm³. Jaká je její hustota? Bude plavat ve vodě?</p>
+      <ol class="kroky">
+        <li>Zapíšu, co znám: <b>m = 54 g</b>, <b>V = 20 cm³</b>, hledám <b>ρ</b>.</li>
+        <li>Vyberu vzorec pro hustotu: <b>ρ = m : V</b>.</li>
+        <li>Dosadím a vypočítám: ρ = 54 : 20 = <b>2,7 g/cm³</b>.</li>
+        <li>Porovnám s vodou: 2,7 g/cm³ je víc než 1 g/cm³, takže se kostka <b>potopí</b>. (Taková hustota odpovídá hliníku.)</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ ρ = 2,7 g/cm³ – kostka se ve vodě potopí.</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="vypocet" class="active">🧮 Vypočítej hustotu</button>
@@ -109,7 +141,7 @@ function hmotnost() {
   const p = $('plocha');
   const l = Uloha.nahodne(LATKY);
   const V = Uloha.nahodneCislo(2, 15);
-  const m = +(l.ro * V).toFixed(1);
+  const m = +(l.ro * V).toFixed(2);
 
   p.innerHTML = `<div class="zadani">Jakou hmotnost má těleso?</div>
     <div class="karta">${obrazekLatky(l)}
@@ -117,7 +149,7 @@ function hmotnost() {
       hustota ${String(l.ro).replace('.', ',')} g/cm³</div>
     <div class="vzorec">m = ρ × V</div></div>`;
 
-  const jine = new Set([+(m / 2).toFixed(1), +(m * 2).toFixed(1), +(V / l.ro).toFixed(1)]
+  const jine = new Set([+(m / 2).toFixed(2), +(m * 2).toFixed(2), +(V / l.ro).toFixed(2)]
     .filter(x => x !== m && x > 0));
   const odezva = document.createElement('div');
   odezva.className = 'odezva';
@@ -191,8 +223,8 @@ function porovnej() {
       { klic: 'b', popis: b.n },
     ],
     spravnyKlic: tezsi,
-    zpravaOk: `✅ ${a.n}: ${String(+(a.ro * V).toFixed(1)).replace('.', ',')} g, `
-      + `${b.n}: ${String(+(b.ro * V).toFixed(1)).replace('.', ',')} g – při stejném objemu rozhoduje hustota.`,
+    zpravaOk: `✅ ${a.n}: ${String(+(a.ro * V).toFixed(2)).replace('.', ',')} g, `
+      + `${b.n}: ${String(+(b.ro * V).toFixed(2)).replace('.', ',')} g – při stejném objemu rozhoduje hustota.`,
     zpravaChyba: 'Při stejném objemu je těžší látka s větší hustotou.',
     poSpravne: skore.vyhodnot,
     dalsi: novaUloha,

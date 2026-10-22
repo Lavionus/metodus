@@ -6,6 +6,8 @@
 <title>🏳️ Kvíz vlajky a hlavní města</title>
 <link rel="stylesheet" href="../common.css">
 <link rel="stylesheet" href="../vyuka.css">
+<link rel="stylesheet" href="../vyklad.css">
+<script src="../vyklad.js" defer></script>
 <script src="../theme.js"></script>
 <script src="../podpis.js" defer></script>
 <script src="../kostra.js" defer></script>
@@ -14,9 +16,11 @@
 <script src="../data/staty.js"></script>
 <style>
   /* vlajka jako velký obrázek zadání, v přehledu chyb jen malá */
-  .vlajka { display: block; font-size: clamp(4.5rem, 16vw, 7rem); line-height: 1.1; margin-bottom: 6px; }
+  /* vlajka je místní SVG (obsah/img/vlajky, flag-icons, MIT) – emoji vlajky se na Windows
+     ukážou jako písmena „CZ“ a prozradí odpověď */
+  .vlajka { display: block; width: clamp(150px, 42vw, 220px); height: auto; aspect-ratio: 4 / 3; margin: 0 auto 8px; border: 1px solid var(--border-strong); border-radius: 4px; }
   .otazka-text { display: block; font-size: 1.15rem; font-weight: 500; color: var(--text-muted); }
-  .prehled-chyb .vlajka { display: inline; font-size: 1.4rem; margin: 0 6px 0 0; }
+  .prehled-chyb .vlajka { display: inline-block; width: 48px; vertical-align: middle; margin: 0 6px 0 0; }
   .prehled-chyb .otazka-text { display: inline; font-size: inherit; }
   .ovladani label { display: inline-flex; align-items: center; gap: 6px; color: var(--text-muted); font-size: 0.9rem; }
   .ovladani select { background: var(--bg-input); color: var(--text); border: 1px solid var(--border-strong); border-radius: 6px; padding: 8px 10px; font: inherit; }
@@ -25,6 +29,42 @@
 <body>
   <h1>🏳️ Kvíz: vlajky a hlavní města</h1>
   <p class="podtitul">Série deseti otázek o státech Evropy nebo celého světa. Po chybě máš druhý pokus, na konci uvidíš přehled chyb a můžeš si je zopakovat.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Jak poznat vlajku a hlavní město</summary>
+    <div class="obsah">
+      <p>Mnoho vlajek vypadá skoro stejně, protože státy používají podobné barvy a pruhy. Při poznávání proto nestačí
+        pohled „zhruba“ – postupuj od celku k detailu.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>1. Směr pruhů</h3><p>Jsou pruhy <b>svislé</b> (Francie, Itálie, Irsko),
+          nebo <b>vodorovné</b> (Německo, Rakousko, Rusko)? Je na vlajce kříž (severské státy)?</p></article>
+        <article class="vyklad-karta"><h3>2. Barvy a jejich pořadí</h3><p><b>Polsko</b> (bílá nahoře, červená dole) a <b>Indonésie</b>
+          (červená nahoře) jsou obrácené. <b>Irsko</b> a <b>Itálie</b> mají zelený a bílý pruh, třetí je oranžový, nebo červený.</p></article>
+        <article class="vyklad-karta"><h3>3. Znak</h3><p><b>Slovensko</b>, <b>Slovinsko</b> a <b>Rusko</b> mají bílou, modrou a červenou.
+          Rusko znak nemá; Slovensko a Slovinsko rozliší až jejich znak.</p></article>
+      </div>
+      <p>U hlavních měst pozor na nejčastější past: <b>hlavní město nemusí být největší</b>. Austrálie má Canberru (ne Sydney),
+        Turecko Ankaru (ne Istanbul), Kanada Ottawu, Švýcarsko Bern, Brazílie Brasílii.</p>
+      <p>Když si nejsi jistý, vylučuj: které možnosti určitě patří jinému státu? Pomáhá i jazyk názvu a poloha na mapě.
+        <b>Typická chyba:</b> odpovědět podle první barvy, kterou uvidíš, a nepodívat se na pořadí pruhů.</p>
+      <aside class="zapamatuj">Vlajku čti v pořadí: směr pruhů → barvy a jejich pořadí → znak nebo jiný detail.
+        Hlavní město = sídlo vlády, ne nutně největší město.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: vlajka → země</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Vlajka má tři svislé pruhy: zelený u žerdi, uprostřed bílý a vpravo oranžový. Vyber zemi: Itálie, Irsko, Francie, Maďarsko.</p>
+      <ol class="kroky">
+        <li>Směr pruhů: jsou <b>svislé</b>. Maďarsko má pruhy vodorovné, to vyřadím.</li>
+        <li>Barvy: Francie má modrou, bílou a červenou – žádnou zelenou, také ji vyřadím.</li>
+        <li>Zbývá Itálie a Irsko, obě mají zelený a bílý pruh. Rozhodne třetí pruh.</li>
+        <li>Třetí pruh je <b>oranžový</b> – takový má Irsko; Itálie má červený.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Je to vlajka Irska.</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="flag2country" class="active">🏳️ Vlajka → země</button>
@@ -45,36 +85,48 @@
     <span class="skore" id="skore"></span>
   </div>
 
-  <p class="napoveda">Hlavní město nemusí být největší město státu: Austrálie má <b>Canberru</b> (ne Sydney), Turecko <b>Ankaru</b> (ne Istanbul), Kanada <b>Ottawu</b>, Švýcarsko <b>Bern</b> a Brazílie <b>Brasílii</b>. Podobné vlajky rozliš podle detailu: <b>Slovensko, Slovinsko a Rusko</b> mají stejné barvy, liší se znakem; <b>Irsko a Itálie</b> mají zelený a bílý pruh, třetí je u Irska oranžový, u Itálie červený; <b>Polsko a Indonésie</b> jsou obrácené; <b>Rakousko a Lotyšsko</b> se liší odstínem červené a šířkou pruhu.</p>
+  <p class="napoveda">Hlavní město nemusí být největší město státu: Austrálie má <b>Canberru</b> (ne Sydney), Turecko <b>Ankaru</b> (ne Istanbul), Kanada <b>Ottawu</b>, Švýcarsko <b>Bern</b> a Brazílie <b>Brasílii</b>. Podobné vlajky rozliš podle detailu: <b>Slovensko, Slovinsko a Rusko</b> mají stejné barvy – Slovensko a Slovinsko se liší znakem, Rusko znak nemá; <b>Irsko a Itálie</b> mají zelený a bílý pruh, třetí je u Irska oranžový, u Itálie červený; <b>Polsko a Indonésie</b> jsou obrácené (Monako má skoro stejnou vlajku jako Indonésie, proto spolu v nabídce nejsou); <b>Rakousko a Lotyšsko</b> se liší odstínem červené a šířkou pruhu. Izrael za hlavní město považuje <b>Jeruzalém</b>, jeho status je ale mezinárodně sporný (většina velvyslanectví sídlí v Tel Avivu).</p>
 
 <script>
 const $ = id => document.getElementById(id);
 // Státy jsou společná data rodiny „Světadíly a státy" (data/staty.js),
 // stejná jako v kvízu hlavních měst. [vlajka, stát, hlavní město]
-const naPole = s => [s.vlajka, s.stat, s.mesto];
+const naPole = s => [s.kod, s.stat, s.mesto, s.pozn || ''];
 const EUROPE = METODUS_STATY.filter(s => s.svetadil === 'Evropa').map(naPole);
 const WORLD = METODUS_STATY.map(naPole);
+// Vlajky, které v obrázku 4 : 3 nejdou rozlišit – nesmí být spolu v nabídce.
+const ZAMENITELNE = [['mc', 'id']];
+const zamenitelne = (a, b) => ZAMENITELNE.some(([x, y]) => (a === x && b === y) || (a === y && b === x));
 let rezim = 'flag2country';
 
+const obrVlajky = (kod, alt) =>
+  `<img class="vlajka" src="img/vlajky/${kod}.svg" alt="${alt}" width="220" height="165" decoding="async">`;
+
 function generuj(r) {
-  const pool = $('region').value === 'europe' ? EUROPE : WORLD;
+  const vse = $('region').value === 'europe' ? EUROPE : WORLD;
   const typ = r === 'mix' ? Uloha.nahodne(['flag2country', 'country2capital', 'capital2country']) : r;
+  // u městských států (Monako, San Marino, Vatikán) je město = stát, otázka by prozradila odpověď
+  const pool = typ === 'flag2country' ? vse : vse.filter(s => s[1] !== s[2]);
   const stat = Uloha.nahodne(pool);
-  const [vlajka, zeme, mesto] = stat;
+  const [kod, zeme, mesto, pozn] = stat;
   const i = typ === 'country2capital' ? 2 : 1;          // co se hádá: stát, nebo město
   const spravne = stat[i];
-  const spatne = Uloha.zamichej(pool.filter(s => s[i] !== spravne)).slice(0, 3).map(s => s[i]);
+  const spatne = Uloha.zamichej(vse.filter(s => s[i] !== spravne && !(typ === 'flag2country' && zamenitelne(s[0], kod))))
+    .slice(0, 3).map(s => s[i]);
   const zadani = typ === 'flag2country'
-    ? `<span class="vlajka" role="img" aria-label="vlajka">${vlajka}</span><span class="otazka-text">Které zemi patří tato vlajka?</span>`
+    // alt je neutrální – název státu je odpověď
+    ? `${obrVlajky(kod, 'Vlajka k určení')}<span class="otazka-text">Které zemi patří tato vlajka?</span>`
     : typ === 'country2capital'
       ? `<span class="otazka-text">Jaké je hlavní město státu</span>${zeme}?`
       : `<span class="otazka-text">Kterého státu je hlavním městem</span>${mesto}?`;
+  // nápověda se vypisuje jako prostý text (bez emoji vlajky)
+  const napoveda = (typ === 'country2capital' ? zeme : `hlavní město ${mesto}`) + (pozn ? ` – ${pozn}` : '');
   return {
     zadani,
     odpoved: spravne,
     moznosti: Uloha.zamichej([spravne, ...spatne]),
     // po druhé chybě i souvislost, ať se žák něco dozví
-    napoveda: typ === 'country2capital' ? `${vlajka} ${zeme}` : `${vlajka} hlavní město ${mesto}`,
+    napoveda,
   };
 }
 

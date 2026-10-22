@@ -6,6 +6,8 @@
   <title>Redoxní reakce a elektrolýza</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -32,6 +34,44 @@
   <h1>🔋 Redoxní reakce a elektrolýza</h1>
   <p class="podtitul">Pro 9. ročník: oxidace a redukce, oxidační čísla, elektrolýza a galvanický článek.</p>
 
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Oxidace, redukce a oxidační čísla</summary>
+    <div class="obsah">
+      <p>Při mnoha reakcích si atomy <b>předávají elektrony</b>. Takovým reakcím říkáme redoxní – hoří při nich dřevo,
+        rezaví železo, ve vysoké peci vzniká železo z rudy a v baterii vzniká elektrický proud.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Oxidace a redukce</h3><p><b>Oxidace</b> = odevzdání elektronů, oxidační číslo <b>roste</b>.
+          <b>Redukce</b> = přijetí elektronů, oxidační číslo <b>klesá</b>. Probíhají vždy současně.</p></article>
+        <article class="vyklad-karta"><h3>Pravidla oxidačních čísel</h3><p>Prvek (Fe, O<sub>2</sub>) má 0. Vodík ve sloučeninách +I (v hydridech kovů −I),
+          kyslík −II, sodík +I. Součet v neutrální molekule je <b>nula</b>.</p></article>
+        <article class="vyklad-karta"><h3>Elektrolýza</h3><p>Rozklad látky <b>stejnosměrným proudem</b>. Na katodě (−) se vylučuje kov nebo vodík,
+          na anodě (+) nekov. Elektrolýza vody: 2 H<sub>2</sub>O → 2 H<sub>2</sub> + O<sub>2</sub>.</p></article>
+        <article class="vyklad-karta"><h3>Galvanický článek</h3><p>Obrácený děj: chemická reakce dodává <b>elektrickou energii</b>.
+          Akumulátor je článek, který jde opakovaně nabíjet.</p></article>
+      </div>
+      <p>Jak poznám, co se oxiduje? Porovnám oxidační čísla prvku před reakcí a po ní. Příklad: Zn + CuSO<sub>4</sub> → ZnSO<sub>4</sub> + Cu.
+        Zinek jde z 0 na +II – odevzdal 2 elektrony, <b>oxidoval se</b>. Měď jde z +II na 0 – elektrony přijala, <b>redukovala se</b>.
+        Látka, která elektrony přijímá (tady síran měďnatý), je <b>oxidační činidlo</b>.</p>
+      <p>Typická chyba: myslet si, že „redukce“ znamená, že něčeho ubude. Sníží se jen oxidační číslo, protože atom přijal záporně nabité elektrony.</p>
+      <aside class="zapamatuj">Oxidace = ztráta elektronů, oxidační číslo roste. Redukce = zisk elektronů, oxidační číslo klesá. Součet oxidačních čísel v molekule je 0.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: oxidační číslo síry v H<sub>2</sub>SO<sub>4</sub></summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Jaké oxidační číslo má síra v kyselině sírové H<sub>2</sub>SO<sub>4</sub>?</p>
+      <ol class="kroky">
+        <li>Zapíšu, co znám: vodík má +I, kyslík −II, síru neznám – označím ji <b>x</b>.</li>
+        <li>Spočítám atomy: 2 vodíky, 1 síra, 4 kyslíky.</li>
+        <li>Molekula je neutrální, součet je nula: 2 · (+1) + x + 4 · (−2) = 0.</li>
+        <li>Upravím: 2 + x − 8 = 0, tedy x = <b>+6</b>.</li>
+        <li>Zapíšu římskou číslicí: <b>+VI</b>. Sedí to i s názvem – koncovka <b>-ová</b> v názvu kyseliny sírové znamená +VI.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Síra má v H<sub>2</sub>SO<sub>4</sub> oxidační číslo <b>+VI</b>.</p>
+    </div>
+  </details>
+
   <div class="rezimy" id="rezimy">
     <button data-rezim="kviz1" class="active">🔢 Oxidační čísla</button>
     <button data-rezim="kviz2">🔁 Oxidace a redukce</button>
@@ -46,7 +86,7 @@
     <span class="skore" id="skore"></span>
   </div>
 
-  <div class="lista"><span>oxidace = odevzdání elektronů, oxidační číslo roste</span><span>redukce = přijetí elektronů, oxidační číslo klesá</span><span>oxidační číslo vodíku ve sloučeninách +I, kyslíku −II</span></div>
+  <div class="lista"><span>oxidace = odevzdání elektronů, oxidační číslo roste</span><span>redukce = přijetí elektronů, oxidační číslo klesá</span><span>oxidační číslo vodíku ve sloučeninách +I (v hydridech kovů −I), kyslíku −II</span></div>
 
   <p class="napoveda">Při <b>redoxní reakci</b> probíhá oxidace i redukce zároveň – elektrony jedna látka odevzdá a druhá přijme. <b>Elektrolýza</b> je rozklad látky elektrickým proudem, <b>galvanický článek</b> naopak z chemické reakce elektřinu vyrábí.</p>
 
@@ -188,7 +228,7 @@ const SADY = {
       ]
     },
     {
-      "q": "Co je redukce oxidu železa v vysoké peci?",
+      "q": "Co je redukce oxidu železa ve vysoké peci?",
       "a": "uhlík odebírá kyslík oxidu a vzniká železo",
       "b": [
         "železo přijímá kyslík",
@@ -310,7 +350,7 @@ const SADY = {
       ]
     },
     {
-      "q": "Proč se na auta v zimě podepisuje posyp solí?",
+      "q": "Proč zimní posyp silnic solí škodí autům?",
       "a": "sůl urychluje korozi karoserie",
       "b": [
         "sůl kov chrání",
@@ -346,8 +386,8 @@ const SADY = {
       ]
     },
     {
-      "q": "Co se stane, když spojíme zinek a měď v roztoku elektrolytu?",
-      "a": "vznikne článek, kterým teče proud",
+      "q": "Co se stane, když zinek a měď ponoříme do roztoku elektrolytu a vně roztoku je spojíme vodičem?",
+      "a": "vznikne galvanický článek a vodičem teče proud",
       "b": [
         "nic",
         "roztok zamrzne",
@@ -357,7 +397,7 @@ const SADY = {
   ]
 };
 const NAPOVEDY = {
-  "kviz1": "Ve sloučeninách má vodík +I a kyslík −II; součet oxidačních čísel je nula.",
+  "kviz1": "Ve většině sloučenin má vodík +I (jen v hydridech kovů −I) a kyslík −II; součet oxidačních čísel je nula.",
   "kviz2": "Kdo elektrony ztrácí, oxiduje se; kdo je přijímá, redukuje se.",
   "kviz3": "Na katodě (záporné) se vylučuje kov nebo vodík, na anodě nekov.",
   "kviz4": "Rozhoduje, který kov je ušlechtilejší a jak je chráněn před vlhkem a kyslíkem."

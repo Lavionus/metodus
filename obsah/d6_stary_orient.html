@@ -6,6 +6,8 @@
   <title>Starověký Egypt a Mezopotámie</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -39,6 +41,49 @@
 <body>
   <h1>🏺 Starověký Egypt a Mezopotámie</h1>
   <p class="podtitul">Pro 6. ročník: první státy u velkých řek, písmo, stavby a panovníci.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Proč první státy vznikly u řek</summary>
+    <div class="obsah">
+      <p>Kolem velkých řek byla v suché krajině úrodná půda. Řeka ale přinášela i povodně a sucha. Aby lidé
+        uživili víc obyvatel, museli stavět <b>zavlažovací kanály</b> a hráze – a to jeden člověk ani jedna vesnice
+        nezvládne. Bylo potřeba práci řídit, rozdělovat vodu a úrodu, vybírat daně.</p>
+      <p>Tak vznikla <b>města</b>, <b>úředníci</b>, panovníci a nakonec <b>stát</b>. A protože si úředníci
+        nemohli všechno pamatovat, vymysleli <b>písmo</b>. Řetěz si můžeš zapamatovat takto:
+        řeka → zavlažování → úroda → města → správa → písmo.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Egypt</h3><p>U řeky <b>Nil</b>. Vládl <b>faraon</b>, stavěly se <b>pyramidy</b>
+          jako hrobky. Písmo <b>hieroglyfy</b> se tesalo do kamene a psalo na <b>papyrus</b>.</p></article>
+        <article class="vyklad-karta"><h3>Mezopotámie</h3><p>„Země mezi řekami“ <b>Eufrat a Tigris</b>. Města měla
+          stupňovité chrámy – <b>zikkuraty</b>. <b>Klínové písmo</b> se vtlačovalo do hliněných destiček.</p></article>
+        <article class="vyklad-karta"><h3>Zákony</h3><p>Babylonský panovník <b>Chammurapi</b> nechal vytesat sbírku
+          zákonů do kamenné stély, aby platila pro všechny stejně.</p></article>
+      </div>
+      <p>Hieroglyfy dlouho nikdo neuměl přečíst. Klíčem se stala <b>Rosettská deska</b> se stejným textem ve třech
+        písmech; podle ní je rozluštil Francouz <b>Champollion</b>. Pozor na letopočty před naším letopočtem:
+        čím <b>větší číslo</b>, tím <b>dávnější</b> událost.</p>
+      <aside class="zapamatuj">První státy vznikly u velkých řek, protože zavlažování vyžadovalo společnou práci a řízení.
+        Egypt – Nil, hieroglyfy, pyramidy. Mezopotámie – Eufrat a Tigris, klínové písmo, zikkuraty.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: seřaď události před naším letopočtem</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Seřaď od nejstarší: Egypt se stal římskou provincií (30 př. n. l.), dokončena Velká pyramida
+        v Gíze (asi 2560 př. n. l.), v Mezopotámii vzniká klínové písmo (asi 3500 př. n. l.), na trůn usedl
+        Tutanchamon (1332 př. n. l.).</p>
+      <ol class="kroky">
+        <li>Všechny letopočty jsou <b>před naším letopočtem</b>. Počítáme je pozpátku od přelomu letopočtu, takže
+          <b>větší číslo znamená dřív</b>.</li>
+        <li>Najdu největší číslo: 3500. Nejstarší je <b>vznik klínového písma</b>.</li>
+        <li>Další v pořadí je 2560 – <b>Velká pyramida v Gíze</b>.</li>
+        <li>Pak 1332 – <b>Tutanchamon</b> a nakonec nejmenší číslo 30 – <b>Egypt římskou provincií</b>.</li>
+        <li>Kontrola smyslem: písmo bylo potřeba dřív než velké stavby a konec samostatného Egypta patří na konec.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ klínové písmo (asi 3500) → Velká pyramida (asi 2560) → Tutanchamon (1332) → Egypt římskou provincií (30 př. n. l.)</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="osobnosti" class="active">👤 Kdo to byl</button>
@@ -293,7 +338,7 @@ function fotky() {
   const u = Uloha.nahodne(FOTKY);
   const jine = Uloha.zamichej(FOTKY.filter(x => x.n !== u.n)).slice(0, 3);
   p.innerHTML = `<div class="zadani">Která památka je na fotografii?</div>
-    <div class="karta"><img class="foto-ukol" src="${u.img.getAttribute('src')}" alt="${u.img.alt.replace(/"/g, '&quot;')}"
+    <div class="karta"><img class="foto-ukol" src="${u.img.getAttribute('src')}" alt="Fotografie památky k určení."
       width="${u.img.getAttribute('width')}" height="${u.img.getAttribute('height')}"></div>`;
   const odezva = document.createElement('div');
   odezva.className = 'odezva';

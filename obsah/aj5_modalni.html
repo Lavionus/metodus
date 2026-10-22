@@ -6,6 +6,8 @@
   <title>Angličtina – can, must</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -29,6 +31,45 @@
 <body>
   <h1>🔑 Can, must – modální slovesa</h1>
   <p class="podtitul">Pro 5.–6. ročník: umět, smět, muset a nesmět.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Co umím, musím a nesmím</summary>
+    <div class="obsah">
+      <p><b>Modální slovesa</b> (<span lang="en">can, must, may, should</span>) neříkají, co se děje, ale jestli
+        něco <b>umíš, smíš, musíš</b> nebo <b>bys měl</b>. Stojí před jiným slovesem a mají svá vlastní pravidla.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Významy</h3><p><span lang="en"><b>can</b></span> = umět, moci · <span lang="en"><b>can't</b></span> = neumět, nemoci<br>
+          <span lang="en"><b>must</b></span> = muset · <span lang="en"><b>mustn't</b></span> = nesmět<br>
+          <span lang="en"><b>may</b></span> = smět (zdvořile) · <span lang="en"><b>should</b></span> = měl bys</p></article>
+        <article class="vyklad-karta"><h3>Tři pravidla tvaru</h3><p>1. Za modálním slovesem je sloveso <b>bez <span lang="en">to</span></b>: <span lang="en">I can swim.</span><br>
+          2. Ve 3. osobě <b>žádné -s</b>: <span lang="en">he can, she must</span>.<br>
+          3. Otázka a zápor bez <span lang="en">do</span>: <span lang="en">Can you dance? He can't swim.</span></p></article>
+        <article class="vyklad-karta"><h3>Zákaz × nepovinnost</h3><p><span lang="en"><b>mustn't</b></span> = nesmíš, je to zakázané: <span lang="en">You mustn't swim here.</span><br>
+          <span lang="en"><b>don't have to</b></span> = nemusíš, ale smíš: <span lang="en">We don't have to get up early.</span></p></article>
+      </div>
+      <p>Proč se pletou <span lang="en">mustn't</span> a <span lang="en">don't have to</span>? Česky obojí začíná „ne-“
+        a zní podobně, ale význam je opačný: jedno zakazuje, druhé jen říká, že povinnost není.
+        Ptej se: „Je to <b>zakázané</b>, nebo jen <b>zbytečné</b>?“</p>
+      <p>Na cedulích: červený přeškrtnutý kruh je zákaz (<span lang="en">mustn't</span>), modrý kruh je povinnost
+        (<span lang="en">must</span>).</p>
+      <aside class="zapamatuj">Modální sloveso + sloveso bez <span lang="en">to</span>, bez -s, bez <span lang="en">do</span>.
+        <span lang="en">mustn't</span> = nesmíš, <span lang="en">don't have to</span> = nemusíš.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: doplň sloveso</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Doplň: <span lang="en">It is Saturday – we ___ get up early.</span></p>
+      <ol class="kroky">
+        <li>Přeložím si situaci: je sobota, do školy se nejde.</li>
+        <li>Ptám se: je brzké vstávání <b>zakázané</b>? Ne – vstát brzo smíme, jen to není potřeba.</li>
+        <li>Žádný zákaz, jen chybí povinnost → ne <span lang="en">mustn't</span>, ale <span lang="en">don't have to</span>.</li>
+        <li>Podmět <span lang="en">we</span> → <span lang="en">don't</span> (ne <span lang="en">doesn't</span>).</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ <span lang="en">It is Saturday – we <b>don't have to</b> get up early.</span> – Nemusíme brzo vstávat.</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="vyznam" class="active">🇨🇿 Co to znamená?</button>
@@ -84,10 +125,10 @@ const VYZNAMY = [
 const VETY = [
   { v: 'A fish ___ swim very well.', spr: 'can', cz: 'Ryba umí výborně plavat.' },
   { v: 'You ___ do your homework before playing.', spr: 'must', cz: 'Musíš si udělat úkol, než si půjdeš hrát.' },
-  { v: "You ___ touch the hot oven!", spr: "mustn't", cz: 'Nesmíš sahat na horkou troubu!' },
+  { v: "You ___ touch the hot oven!", spr: "mustn't", taky: ["can't"], cz: 'Nesmíš sahat na horkou troubu!' },
   { v: 'A baby ___ read yet.', spr: "can't", cz: 'Miminko ještě neumí číst.' },
   { v: 'It is Saturday – we ___ get up early.', spr: "don't have to", cz: 'Je sobota, nemusíme brzo vstávat.' },
-  { v: '___ I open the window, please?', spr: 'may', cz: 'Mohu prosím otevřít okno?' },
+  { v: '___ I open the window, please?', spr: 'may', taky: ['can'], cz: 'Smím prosím otevřít okno? (zdvořilá žádost)' },
   { v: 'You ___ eat more vegetables.', spr: 'should', cz: 'Měl bys jíst víc zeleniny.' },
   { v: 'She ___ play the piano beautifully.', spr: 'can', cz: 'Krásně hraje na klavír.' },
 ];
@@ -104,12 +145,12 @@ const ZNACKY = [
 ];
 
 const TVARY = [
-  { spatne: 'He cans swim.', spravne: 'He can swim.', proc: 'modální sloveso nemá ve 3. osobě -s' },
-  { spatne: 'She must to go home.', spravne: 'She must go home.', proc: 'po must následuje infinitiv bez to' },
-  { spatne: 'Can you to help me?', spravne: 'Can you help me?', proc: 'po can následuje infinitiv bez to' },
-  { spatne: 'I can to ride a bike.', spravne: 'I can ride a bike.', proc: 'po can nikdy nedáváme to' },
-  { spatne: 'He doesn\'t can swim.', spravne: "He can't swim.", proc: 'zápor se tvoří přidáním not přímo k can' },
-  { spatne: 'Do you can dance?', spravne: 'Can you dance?', proc: 'otázka se tvoří přehozením can a podmětu' },
+  { spatne: ['He cans swim.', 'He can to swim.', 'He cans to swim.'], spravne: 'He can swim.', proc: 'modální sloveso nemá ve 3. osobě -s' },
+  { spatne: ['She must to go home.', 'She musts go home.', 'She must going home.'], spravne: 'She must go home.', proc: 'po must následuje infinitiv bez to' },
+  { spatne: ['Can you to help me?', 'Do you can help me?', 'Can you helping me?'], spravne: 'Can you help me?', proc: 'po can následuje infinitiv bez to' },
+  { spatne: ['I can to ride a bike.', 'I can riding a bike.', 'I can rode a bike.'], spravne: 'I can ride a bike.', proc: 'po can nikdy nedáváme to' },
+  { spatne: ['He doesn\'t can swim.', 'He can\'t to swim.', 'He don\'t can swim.'], spravne: "He can't swim.", proc: 'zápor se tvoří přidáním not přímo k can' },
+  { spatne: ['Do you can dance?', 'You can dance?', 'Can you to dance?'], spravne: 'Can you dance?', proc: 'otázka se tvoří přehozením can a podmětu' },
 ];
 
 /* ---- Co to znamená? ------------------------------------------------------------- */
@@ -137,7 +178,8 @@ function vyznam() {
 function doplnVetu() {
   const p = $('plocha');
   const u = Uloha.nahodne(VETY);
-  const jine = Uloha.zamichej(VYZNAMY.filter(x => x.en !== u.spr)).slice(0, 3).map(x => x.en);
+  // rušivé nesmí být tvar, který se do věty hodí taky (May I… = Can I…)
+  const jine = Uloha.zamichej(VYZNAMY.filter(x => x.en !== u.spr && !(u.taky || []).includes(x.en))).slice(0, 3).map(x => x.en);
   p.innerHTML = `<div class="zadani">Doplň správné sloveso:</div>
     <div class="karta"><div class="veta-en">${u.v.replace('___', '<span class="mezera">?</span>')}</div>
     <div class="preklad">${u.cz}</div></div>`;
@@ -162,8 +204,9 @@ function doplnVetu() {
 function pravidla() {
   const p = $('plocha');
   const u = Uloha.nahodne(ZNACKY);
+  // u zákazu je správně i „can't“ (You can't swim here.), proto ho mezi rušivé nedáváme
   const jine = Uloha.zamichej(["can", "can't", "must", "mustn't", "don't have to"]
-    .filter(x => x !== u.spr)).slice(0, 3);
+    .filter(x => x !== u.spr && !(u.spr === "mustn't" && x === "can't"))).slice(0, 3);
   p.innerHTML = `<div class="zadani">Co říká tato značka?</div>
     <div class="karta"><img class="znacka-img" src="img/aj/aj5-modalni-${u.img}.webp" alt="${u.alt}" width="768" height="768">
     <div class="veta-en">${u.t.replace('___', '<span class="mezera">?</span>')}</div></div>`;
@@ -188,14 +231,15 @@ function pravidla() {
 function tvar() {
   const p = $('plocha');
   const u = Uloha.nahodne(TVARY);
-  const jine = Uloha.zamichej(TVARY.filter(x => x.spravne !== u.spravne)).slice(0, 2).map(x => x.spravne);
+  // rušivé jsou jen chybné tvary téže věty – jiné správné věty by byly také správně
+  const jine = u.spatne;
   p.innerHTML = `<div class="zadani">Která věta je gramaticky správně?</div>
     <div class="karta"><div class="preklad">Pozor na tvar modálního slovesa.</div></div>`;
   const odezva = document.createElement('div');
   odezva.className = 'odezva';
   Uloha.vyber({
     kam: p, odezva,
-    moznosti: Uloha.zamichej([u.spravne, u.spatne, ...jine]).map(t => ({ klic: t, popis: t })),
+    moznosti: Uloha.zamichej([u.spravne, ...jine]).map(t => ({ klic: t, popis: t })),
     spravnyKlic: u.spravne,
     zpravaOk: `✅ ${u.spravne} – ${u.proc}.`,
     zpravaChyba: 'Zkontroluj: žádné to za modálním slovesem a žádné -s ve 3. osobě.',

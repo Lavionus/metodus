@@ -6,6 +6,8 @@
   <title>Litosféra a povrch Země</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -39,6 +41,43 @@
 <body>
   <h1>🪨 Litosféra a povrch Země</h1>
   <p class="podtitul">Pro 6. ročník: stavba Země, pohyb desek, sopky, zemětřesení a tvary povrchu.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Stavba Země a síly, které tvarují povrch</summary>
+    <div class="obsah">
+      <p>Země je stavěná jako cibule ze <b>čtyř vrstev</b>. Jen ta nejsvrchnější, tenká zemská kůra, tvoří povrch,
+        po kterém chodíme. Kůra spolu s nejsvrchnější částí pláště je rozlámaná na <b>litosférické desky</b>.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Vrstvy od povrchu</h3><p><b>Kůra</b> (nejtenčí) → <b>plášť</b> (nejmohutnější,
+          horké horniny pomalu proudí) → <b>vnější jádro</b> (tekuté železo a nikl) → <b>vnitřní jádro</b> (pevné kvůli obrovskému tlaku).</p></article>
+        <article class="vyklad-karta"><h3>🌋 Vnitřní děje</h3><p>Energie z nitra Země: pohyb desek, sopky, zemětřesení, vrásnění.
+          Povrch <b>vyzdvihují a členitější</b>, vznikají pohoří.</p></article>
+        <article class="vyklad-karta"><h3>💨 Vnější děje</h3><p>Působí zvenčí voda, vítr, led, mráz a slunce: zvětrávání, eroze, ukládání.
+          Povrch <b>obrušují a zarovnávají</b>.</p></article>
+      </div>
+      <p>Jak děj poznáš? Zeptej se, <b>odkud bere sílu</b>. Pokud z nitra Země (tlak, teplo, magma), je vnitřní.
+        Pokud z počasí, tekoucí vody nebo ledovce, je vnější. <b>Typická chyba:</b> sesuv půdy po dešti není vnitřní děj,
+        i když je náhlý – spustila ho voda.</p>
+      <p>Také tvar prozradí původce: řeka vyhloubí údolí tvaru <b>V</b>, ledovec široké údolí tvaru <b>U</b>, vítr navěje <b>duny</b>.
+        Pozor na dvojici <b>magma</b> (roztavená hornina pod povrchem) a <b>láva</b> (totéž, když vyteče na povrch).</p>
+      <aside class="zapamatuj">Kůra – plášť – vnější jádro (tekuté) – vnitřní jádro (pevné). Vnitřní děje povrch zvedají,
+        vnější ho zarovnávají; desky se posouvají jen o několik centimetrů za rok.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: vnitřní, nebo vnější děj?</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Je vymílání údolí řekou vnitřní, nebo vnější geologický děj?</p>
+      <ol class="kroky">
+        <li>Zeptám se, co ten děj pohání: je to <b>tekoucí voda</b> v řece.</li>
+        <li>Voda přichází z deště a tání sněhu, tedy <b>zvenčí</b>, ne z nitra Země.</li>
+        <li>Podívám se na výsledek: řeka materiál odnáší a povrch obrušuje – to dělají vnější děje.</li>
+        <li>Navíc vím, jaký tvar takto vzniká: údolí tvaru V.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Vymílání údolí řekou je vnější děj.</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="stavba" class="active">🌍 Stavba Země</button>
@@ -100,7 +139,7 @@ $('rezZeme').addEventListener('click', event => {
 
 const VRSTVY = [
   { n: 'zemská kůra', o: 'nejtenčí vnější vrstva, pod oceány jen asi 5–10 km silná' },
-  { n: 'zemský plášť', o: 'nejmohutnější vrstva z žhavých hornin, ve které proudí magma' },
+  { n: 'zemský plášť', o: 'nejmohutnější vrstva z horkých, převážně pevných hornin, které velmi pomalu proudí' },
   { n: 'vnější jádro', o: 'tekutá vrstva ze železa a niklu, vytváří magnetické pole Země' },
   { n: 'vnitřní jádro', o: 'pevná koule ze železa a niklu s teplotou přes 5000 °C' },
 ];
@@ -154,7 +193,8 @@ const FOTO_TVARY = [
   { n: 'útes', img: 'z6-litosfera-utes', w: 1152, h: 765, alt: 'Svislé bílé křídové útesy Seven Sisters v Anglii nad oblázkovou pláží a mořem.',
     o: 'strmá skalní stěna na pobřeží; příboj ji u paty podemílá, až se horní část zřítí' },
 ];
-const fotoTvar = (x, trida) => `<img class="${trida}" src="img/z/${x.img}.webp" alt="${x.alt}" width="${x.w}" height="${x.h}">`;
+// Fotka je sama otázkou – alt nesmí prozradit odpověď.
+const fotoTvar = (x, trida) => `<img class="${trida}" src="img/z/${x.img}.webp" alt="Fotografie krajiny k určení." width="${x.w}" height="${x.h}">`;
 
 /* ---- Stavba Země ---------------------------------------------------------------------- */
 function stavba() {

@@ -6,6 +6,8 @@
   <title>Zdravý životní styl</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -33,6 +35,44 @@
   <h1>🥗 Zdravý životní styl</h1>
   <p class="podtitul">Pro 5. ročník: pestrá strava, pohyb, spánek a péče o sebe.</p>
 
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Pestrá strava a režim dne</summary>
+    <div class="obsah">
+      <p>Tělo potřebuje různé látky: energii, vitamíny, bílkoviny, vápník. Žádná potravina nemá všechno,
+        proto jíme <b>pestře</b>. Kolik čeho jíst, ukazuje <b>potravinová pyramida</b>: čím níž, tím víc.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Základ pyramidy</h3><p><b>Obiloviny, pečivo, těstoviny, rýže</b> – energie na celý den.
+          Hned nad nimi <b>zelenina a ovoce</b> – vitamíny a vláknina, několikrát denně.</p></article>
+        <article class="vyklad-karta"><h3>Třetí patro</h3><p>Vedle sebe <b>mléko, sýry, jogurty</b> (vápník pro kosti)
+          a <b>maso, ryby, vejce, luštěniny</b> (bílkoviny). Jíme je střídměji.</p></article>
+        <article class="vyklad-karta"><h3>Špička</h3><p><b>Sladkosti, slazené nápoje a tuky</b> – nejméně.
+          Sladkosti jen výjimečně.</p></article>
+        <article class="vyklad-karta"><h3>Režim dne</h3><p>Asi <b>9–10 hodin spánku</b>, aspoň <b>60 minut pohybu</b> denně,
+          nevynechávat snídani, pít průběžně vodu.</p></article>
+      </div>
+      <p>Jak poznám, kam potravina patří? Zeptám se, z čeho je a co tělu dává. Z obilí nebo brambor → základ.
+        Ze zahrady nebo ze stromu → zelenina a ovoce. Z mléka → mléčné výrobky.</p>
+      <p>Pozor: <b>luštěniny</b> (čočka, fazole) a <b>ořechy</b> nepatří k zelenině. Mají hodně bílkovin, proto stojí
+        vedle masa a vajec. A olej s máslem jsou ve špičce, protože jsou to tuky.</p>
+      <aside class="zapamatuj">Nejvíc obilovin, zeleniny a ovoce, méně mléčných výrobků a masa, nejméně sladkostí a tuků.
+        Spánek 9–10 hodin, pohyb aspoň hodinu denně.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: kam v pyramidě patří čočka?</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Do které skupiny potravinové pyramidy patří čočka?</p>
+      <ol class="kroky">
+        <li>Čočka je semínko z lusku – je to <b>luštěnina</b>.</li>
+        <li>Není to obilí ani pečivo, takže do základu nepatří.</li>
+        <li>Roste na poli, ale k zelenině ji nedáváme – má hodně <b>bílkovin</b>, podobně jako maso.</li>
+        <li>Bílkoviny dává skupina maso, ryby, vejce, luštěniny ve třetím patře.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Čočka patří do skupiny maso, ryby, vejce, luštěniny.</p>
+    </div>
+  </details>
+
   <div class="rezimy" id="rezimy">
     <button data-rezim="pyramida" class="active">🔺 Potravinová pyramida</button>
     <button data-rezim="volba">⚖️ Co je zdravější?</button>
@@ -48,7 +88,8 @@
   </div>
 
   <p class="napoveda">
-    Základ pyramidy tvoří <b>obiloviny, zelenina a ovoce</b> – těch jíme nejvíc.
+    Základ pyramidy tvoří <b>obiloviny a pečivo</b>, hned nad nimi je <b>zelenina a ovoce</b> – těch jíme nejvíc.
+    Ve třetím patře stojí vedle sebe mléčné výrobky a maso, ryby, vejce a luštěniny.
     Nahoře jsou sladkosti a tučná jídla, kterých má být <b>nejméně</b>.
     Dítě potřebuje asi <b>9–10 hodin spánku</b> a aspoň hodinu pohybu denně.
   </p>
@@ -58,12 +99,13 @@ const $ = id => document.getElementById(id);
 const skore = Uloha.skore('metodus_prv5_zdravi', $('skore'));
 let rezim = 'pyramida';
 
-/* patra pyramidy: 1 = špička (nejméně), 5 = základna (nejvíc) */
+/* skupiny pyramidy: 1 = špička (nejméně), 5 = základna (nejvíc);
+   skupiny 3 a 2 stojí v pyramidě vedle sebe ve stejném (třetím) patře */
 const PATRA = {
   5: { nazev: 'obiloviny, pečivo, těstoviny, rýže', popis: 'základ jídelníčku – energie na celý den' },
   4: { nazev: 'zelenina a ovoce', popis: 'několikrát denně – vitamíny a vláknina' },
-  3: { nazev: 'mléko, sýry, jogurty', popis: 'denně – vápník pro kosti a zuby' },
-  2: { nazev: 'maso, ryby, vejce, luštěniny', popis: 'několikrát týdně – bílkoviny' },
+  3: { nazev: 'mléko, sýry, jogurty', popis: 'třetí patro vedle masa – 2–3 porce denně, vápník pro kosti a zuby' },
+  2: { nazev: 'maso, ryby, vejce, luštěniny', popis: 'třetí patro vedle mléčných výrobků – střídmě, asi 1–2 porce denně, bílkoviny' },
   1: { nazev: 'sladkosti, slazené nápoje a tuky', popis: 'sladkosti jen výjimečně; tuky v malém množství a přednostně rostlinné' },
 };
 
@@ -116,7 +158,7 @@ const VOLBY = [
   { a: { t: 'spánek 9 hodin', e: '😴' }, b: { t: 'ponocování u mobilu', e: '📱' }, spr: 'a',
     proc: 'Ve spánku se tělo i mozek regenerují a ukládá se to, co ses naučil.' },
   { a: { t: 'ořechy jako svačina', img: 'img/prv/prv5-jidlo-orechy.webp', alt: 'Směs nesolených ořechů.' }, b: { t: 'čokoláda', img: 'img/aj/aj-slovicka-chocolate.webp', alt: 'Tabulka čokolády.' }, spr: 'a',
-    proc: 'Ořechy mají zdravé tuky a bílkoviny, tyčinka hlavně cukr.' },
+    proc: 'Ořechy mají zdravé tuky, bílkoviny a vlákninu, čokoláda hlavně cukr a tuk.' },
 ];
 
 const REZIM_DNE = [
@@ -145,7 +187,7 @@ const MYTY = [
 function pyramida() {
   const p = $('plocha');
   const u = Uloha.nahodne(POTRAVINY);
-  p.innerHTML = `<div class="zadani">Do kterého patra pyramidy patří?</div>
+  p.innerHTML = `<div class="zadani">Do které skupiny potravinové pyramidy patří?</div>
     <div class="karta"><div class="obrazek">${obrazekJidla(u)}</div><div class="nazev-p">${u.n}</div></div>`;
   const odezva = document.createElement('div');
   odezva.className = 'odezva';

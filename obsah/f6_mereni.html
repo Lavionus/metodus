@@ -6,6 +6,8 @@
   <title>Měření fyzikálních veličin</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -42,6 +44,46 @@
   <h1>📏 Měření fyzikálních veličin</h1>
   <p class="podtitul">Pro 6. ročník: délka, objem, hmotnost, čas a teplota – jednotky, měřidla a převody.</p>
 
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Co znamená změřit veličinu</summary>
+    <div class="obsah">
+      <p>Změřit veličinu znamená <b>porovnat ji s jednotkou</b>: zjistit, kolikrát se jednotka do měřené
+        hodnoty vejde. Proto výsledek měření má vždy dvě části – <b>číslo a jednotku</b>. Zápis „délka je 12“
+        nic neříká: může jít o 12 mm, 12 cm i 12 m.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Veličina, značka, jednotka</h3><p>Délka <b>l</b> – metr (m), hmotnost <b>m</b> – kilogram (kg),
+          čas <b>t</b> – sekunda (s), objem <b>V</b> – m³ nebo litr, teplota <b>t</b> – °C, síla <b>F</b> – newton (N).</p></article>
+        <article class="vyklad-karta"><h3>Měřidla</h3><p>Délku měříš pravítkem, metrem nebo posuvným měřidlem, hmotnost váhami,
+          čas stopkami, objem kapaliny odměrným válcem, teplotu teploměrem a sílu siloměrem.</p></article>
+        <article class="vyklad-karta"><h3>Převody</h3><p>1 m = 100 cm, 1 km = 1000 m, 1 kg = 1000 g, 1 t = 1000 kg,
+          1 h = 60 min, 1 min = 60 s, 1 l = 1000 ml, 1 dm³ = 1000 cm³.</p></article>
+      </div>
+      <p>Při převodu se nejdřív zeptej: <b>převádím na menší, nebo na větší jednotku?</b> Na menší jednotku
+        číslo vyjde větší (násobíš), na větší jednotku vyjde menší (dělíš). Metr je větší než centimetr,
+        proto 2 m = 200 cm, ale 250 cm = 2,5 m.</p>
+      <p>Na stupnici nejdřív zjisti, <b>kolik má jeden dílek</b>: vezmi dvě sousední popsané rysky, odečti
+        jejich hodnoty a rozděl počtem dílků mezi nimi. U odměrného válce čteš v úrovni hladiny, oči máš
+        ve stejné výšce. Objem nepravidelného tělesa zjistíš tak, že ho ponoříš do válce s vodou: jeho objem
+        je rozdíl hladin po ponoření a před ním. Typická chyba: čtení shora nebo zdola – údaj pak vyjde jinak.</p>
+      <aside class="zapamatuj">Výsledek měření = číslo + jednotka. Na menší jednotku násobíš, na větší dělíš.
+        Než odečteš ze stupnice, urči hodnotu jednoho dílku.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: převod 1500 g na kilogramy</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Balík mouky má hmotnost 1500 g. Kolik je to kilogramů?</p>
+      <ol class="kroky">
+        <li>Zjistím vztah jednotek: <b>1 kg = 1000 g</b>.</li>
+        <li>Převádím z gramů na kilogramy, tedy na <b>větší</b> jednotku – číslo musí vyjít menší, budu dělit.</li>
+        <li>Vydělím: 1500 : 1000 = <b>1,5</b>.</li>
+        <li>Zkontroluji: 1,5 kg je kilogram a půl, tedy 1000 g + 500 g = 1500 g. Sedí to.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ 1500 g = 1,5 kg</p>
+    </div>
+  </details>
+
   <div class="rezimy" id="rezimy">
     <button data-rezim="jednotka" class="active">📐 Jaká je jednotka</button>
     <button data-rezim="meridlo">🔧 Čím se to měří</button>
@@ -58,8 +100,8 @@
   </div>
 
   <p class="napoveda">
-    Základní jednotky: délka <b>metr (m)</b>, hmotnost <b>kilogram (kg)</b>, čas <b>sekunda (s)</b>,
-    teplota <b>stupeň Celsia (°C)</b>, objem <b>metr krychlový (m³)</b> nebo litr.
+    Základní jednotky soustavy SI: délka <b>metr (m)</b>, hmotnost <b>kilogram (kg)</b>, čas <b>sekunda (s)</b>.
+    Teplotu běžně měříme ve <b>stupních Celsia (°C)</b>, objem v <b>metrech krychlových (m³)</b> (odvozená jednotka) nebo v litrech.
     Objem tělesa nepravidelného tvaru zjistíš ponořením do odměrného válce.
   </p>
 
@@ -67,7 +109,16 @@
     <h2 id="atlasMeridel">📷 Měřidla ve skutečnosti</h2>
     <p>Takhle vypadají skutečná měřidla. Všimni si, kde mají stupnici nebo displej a v jakých jednotkách měří.</p>
     <div class="foto-mrizka" id="atlasMeridla">
-@@ATLAS_MERIDLA@@
+      <figure class="foto-karta" data-nazev="pravítko" data-velicina="délka"><img src="img/f/f6-mereni-pravitko.webp" alt="Průhledné plastové pravítko s centimetrovou a milimetrovou stupnicí leží na dřevěném stole." width="1152" height="864" loading="lazy"><figcaption><strong>Pravítko</strong>Měří délku. Stupnice je v centimetrech, nejmenší dílek je 1 mm.</figcaption></figure>
+      <figure class="foto-karta" data-nazev="svinovací metr" data-velicina="délka"><img src="img/f/f6-mereni-svinovaci-metr.webp" alt="Kovový svinovací metr s vytaženým ocelovým pásmem se stupnicí." width="1152" height="829" loading="lazy"><figcaption><strong>Svinovací metr</strong>Měří delší délky – ocelové pásmo se vytáhne a samo se zase navine.</figcaption></figure>
+      <figure class="foto-karta" data-nazev="posuvné měřidlo" data-velicina="délka"><img class="cele" src="img/f/f6-mereni-posuvne-meridlo.webp" alt="Kovové posuvné měřidlo s čelistmi a pohyblivou stupnicí – noniem." width="1152" height="419" loading="lazy"><figcaption><strong>Posuvné měřidlo</strong>Měří délku velmi přesně, na desetiny milimetru. Pomocná stupnice se jmenuje nonius.</figcaption></figure>
+      <figure class="foto-karta" data-nazev="digitální váha" data-velicina="hmotnost"><img src="img/f/f6-mereni-digitalni-vaha.webp" alt="Digitální kuchyňská váha s oranžovou miskou a displejem, který ukazuje hmotnost." width="1152" height="864" loading="lazy"><figcaption><strong>Digitální kuchyňská váha</strong>Měří hmotnost. Displej ukazuje výsledek v gramech.</figcaption></figure>
+      <figure class="foto-karta" data-nazev="osobní váha" data-velicina="hmotnost"><img class="cele" src="img/f/f6-mereni-osobni-vaha.webp" alt="Veřejná osobní váha s velkým kulatým ciferníkem a ručičkou na červeném sloupku v parku." width="1152" height="1536" loading="lazy"><figcaption><strong>Osobní váha</strong>Měří hmotnost člověka v kilogramech. Ručička se otočí podle toho, jak moc se stlačí pružina uvnitř.</figcaption></figure>
+      <figure class="foto-karta" data-nazev="odměrný válec" data-velicina="objem"><img class="cele" src="img/f/f6-mereni-odmerny-valec.webp" alt="Skleněný odměrný válec na 250 ml s oranžovou stupnicí v mililitrech." width="1152" height="1627" loading="lazy"><figcaption><strong>Odměrný válec</strong>Měří objem kapaliny v mililitrech. Hodnotu odečítáme v úrovni hladiny.</figcaption></figure>
+      <figure class="foto-karta" data-nazev="lihový teploměr" data-velicina="teplota"><img class="cele" src="img/f/f6-mereni-teplomer-lihovy.webp" alt="Nástěnný kapalinový teploměr s červeně obarveným lihem a stupnicí ve stupních Celsia a v kelvinech." width="1152" height="2005" loading="lazy"><figcaption><strong>Kapalinový (lihový) teploměr</strong>Měří teplotu. Obarvený líh se při zahřátí roztahuje a stoupá v tenké trubičce.</figcaption></figure>
+      <figure class="foto-karta" data-nazev="digitální teploměr" data-velicina="teplota"><img class="cele" src="img/f/f6-mereni-teplomer-digitalni.webp" alt="Digitální lékařský teploměr s malým displejem leží na stole." width="1152" height="531" loading="lazy"><figcaption><strong>Digitální teploměr</strong>Měří teplotu čidlem ve špičce a ukáže ji na displeji ve °C.</figcaption></figure>
+      <figure class="foto-karta" data-nazev="stopky" data-velicina="čas"><img class="cele" src="img/f/f6-mereni-stopky.webp" alt="Ručičkové stopky s ciferníkem děleným na sekundy a s tlačítky pro spuštění a zastavení." width="1152" height="1423" loading="lazy"><figcaption><strong>Stopky</strong>Měří čas. Tlačítkem se spouštějí a zastavují, ručička ukazuje sekundy.</figcaption></figure>
+      <figure class="foto-karta" data-nazev="siloměr" data-velicina="síla"><img class="cele" src="img/f/f6-mereni-silomer.webp" alt="Pružinový siloměr s háčkem a stupnicí, po které se při natažení pružiny posouvá ukazatel." width="500" height="1770" loading="lazy"><figcaption><strong>Siloměr</strong>Měří sílu v newtonech. Čím větší síla, tím víc se pružina uvnitř natáhne.</figcaption></figure>
     </div>
   </section>
 
@@ -77,7 +128,7 @@ const skore = Uloha.skore('metodus_f6_mereni', $('skore'));
 let rezim = 'jednotka';
 
 const VELICINY = [
-  { n: 'délka', zn: 'l', j: 'metr (m)', meridlo: 'pravítko, metr, posuvné měřítko', e: '📏' },
+  { n: 'délka', zn: 'l', j: 'metr (m)', meridlo: 'pravítko, metr, posuvné měřidlo', e: '📏' },
   { n: 'hmotnost', zn: 'm', j: 'kilogram (kg)', meridlo: 'váhy', e: '⚖️' },
   { n: 'čas', zn: 't', j: 'sekunda (s)', meridlo: 'stopky, hodiny', e: '⏱️' },
   { n: 'teplota', zn: 't', j: 'stupeň Celsia (°C)', meridlo: 'teploměr', e: '🌡️' },
@@ -91,7 +142,7 @@ const PREVODY = [
   { z: '1 hodina', na: 'minut', v: 60 }, { z: '1 minuta', na: 'sekund', v: 60 },
   { z: '1 litr', na: 'ml', v: 1000 }, { z: '1 dm³', na: 'cm³', v: 1000 },
   { z: '250 cm', na: 'm', v: 2.5 }, { z: '1500 g', na: 'kg', v: 1.5 },
-  { z: '2,5 km', na: 'm', v: 2500 }, { z: '90 minut', na: 'hodin', v: 1.5 },
+  { z: '2,5 km', na: 'm', v: 2500 }, { z: '90 minut', na: 'h', v: 1.5 },
 ];
 
 /* ---- Jaká je jednotka ------------------------------------------------------------------ */
@@ -99,7 +150,7 @@ function jednotka() {
   const p = $('plocha');
   const u = Uloha.nahodne(VELICINY);
   const jine = Uloha.zamichej(VELICINY.filter(x => x.j !== u.j)).slice(0, 3);
-  p.innerHTML = `<div class="zadani">Jaká je hlavní jednotka této veličiny?</div>
+  p.innerHTML = `<div class="zadani">V jaké jednotce tuto veličinu nejčastěji měříme?</div>
     <div class="karta"><div class="obrazek">${u.e}</div>
     <div class="velicina-nazev">${u.n} (${u.zn})</div></div>`;
   const odezva = document.createElement('div');
@@ -146,7 +197,7 @@ function poznejMeridlo() {
   const u = Uloha.nahodne(MERIDLA);
   const jine = Uloha.zamichej(MERIDLA.filter(x => x.n !== u.n && x.v !== u.v)).slice(0, 3);
   p.innerHTML = `<div class="zadani">Jak se jmenuje toto měřidlo?</div>
-    <div class="karta"><img class="foto-ukol" src="${u.img.getAttribute('src')}" alt="${u.img.alt.replace(/"/g, '&quot;')}"
+    <div class="karta"><img class="foto-ukol" src="${u.img.getAttribute('src')}" alt="Fotografie měřidla k určení."
       width="${u.img.getAttribute('width')}" height="${u.img.getAttribute('height')}"></div>`;
   const odezva = document.createElement('div');
   odezva.className = 'odezva';

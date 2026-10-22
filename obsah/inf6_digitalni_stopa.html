@@ -6,6 +6,8 @@
   <title>Digitální stopa a bezpečnost</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -22,7 +24,7 @@
     .stopa-znak { font-size: clamp(2.4rem, 9vw, 3.6rem); }
     .stopa-fotka { position: relative; width: min(760px, 100%); margin: 18px 0; }
     .stopa-fotka img { display: block; width: 100%; aspect-ratio: 3 / 2; object-fit: cover; border-radius: 14px; background: #f8f1df; }
-    .stopa-hotspot { position: absolute; transform: translate(-50%, -50%); width: 30px; height: 30px; padding: 0; border-radius: 50%; border: 2px solid #fff; background: var(--danger); color: #fff; font-weight: 800; cursor: pointer; box-shadow: 0 2px 8px #0007; }
+    .stopa-hotspot { position: absolute; transform: translate(-50%, -50%); width: 30px; height: 30px; padding: 0; border-radius: 50%; border: 2px solid #fff; background: color-mix(in srgb, var(--danger) 72%, #000); color: #fff; font-weight: 800; cursor: pointer; box-shadow: 0 2px 8px #0007; }
     .stopa-hotspot:focus-visible { outline: 3px solid var(--focus, #ffd54f); outline-offset: 2px; }
     .stopa-vysledek { min-height: 1.6em; margin: 8px 0 0; color: var(--text-muted); font-weight: 600; }
   </style>
@@ -30,6 +32,39 @@
 <body>
   <h1>👣 Digitální stopa a bezpečnost</h1>
   <p class="podtitul">Pro 6.–7. ročník: co o tobě prozradí internet, ochrana soukromí a kyberšikana.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Digitální stopa a ochrana soukromí</summary>
+    <div class="obsah">
+      <p>Všechno, co na internetu zveřejníš, okomentuješ nebo vyhledáš, po sobě zanechá <b>digitální stopu</b>.
+        Stopa zůstává dlouho: smazaný příspěvek mohl mezitím někdo uložit jako snímek obrazovky. Proto je lepší
+        přemýšlet <b>před</b> zveřejněním, ne až potom.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Osobní údaj</h3><p>Informace, podle které lze poznat konkrétního člověka: jméno s adresou, telefon, škola, fotka obličeje, číslo dokladu.</p></article>
+        <article class="vyklad-karta"><h3>Skládání střípků</h3><p>Jeden příspěvek nic neřekne, ale víc dohromady ano: škola na mikině + zastávka + čas = kde a kdy tě lze potkat.</p></article>
+        <article class="vyklad-karta"><h3>Souhlas</h3><p>Fotku nebo zprávu někoho jiného zveřejníš jen s jeho <b>svolením</b>. Heslo nesdílíš s nikým, ani s kamarádem.</p></article>
+        <article class="vyklad-karta"><h3>Kyberšikana</h3><p>Opakované ubližování přes internet nebo mobil. Neodpovídej, ulož důkazy (snímky obrazovky) a řekni to dospělému.</p></article>
+      </div>
+      <p>Jak poznám rizikový příspěvek? Zeptám se: <b>co z něj vyčte cizí člověk</b> – kde bydlím, kde a kdy mě najde,
+        že doma nikdo není, nebo odpovědi na bezpečnostní otázky (jméno mazlíčka, datum narození)?
+        Častá chyba je myslet si, že to vidí jen kamarádi – u veřejného profilu to vidí kdokoli.</p>
+      <aside class="zapamatuj">Než něco zveřejníš, zeptej se: co z toho pozná cizí člověk a mohl by to zneužít? Nezveřejňuj nic, co bys nechtěl ukázat rodičům i učiteli.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: co prozradí příspěvek</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Příspěvek na veřejném profilu: „Každé úterý po tréninku v 17:30 jdu sám domů parkem za sportovní halou 🏀“. Co o tobě prozradí?</p>
+      <ol class="kroky">
+        <li>Hledám <b>místo</b>: park za sportovní halou – podle haly se dá park dohledat.</li>
+        <li>Hledám <b>čas</b>: každé úterý v 17:30 – to se pravidelně opakuje.</li>
+        <li>Hledám, <b>s kým</b> chodím: „sám“ – nikdo mě nedoprovází.</li>
+        <li>Složím střípky dohromady: kdokoli ví, kde a kdy tě pravidelně potká samotného.</li>
+      </ol>
+      <p class="vysledek-ukazky">Příspěvek prozradí tvůj denní režim. Takové údaje veřejně nesdílej.</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="prozradi" class="active">🕵️ Co to prozradí</button>

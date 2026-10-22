@@ -2403,7 +2403,8 @@
         const d = x => sePlus(x, 2) + ' D';
         return {
           zadani: `Jakou optickou mohutnost má ${f > 0 ? 'spojka' : 'rozptylka'} s ohniskovou vzdáleností ${cisK(f)} cm?`,
-          moznosti: [{ t: d(phi), ok: true }, { t: d(f), proc: 'Ohniskovou vzdálenost je potřeba dosadit v metrech.' }, { t: d(1 / f), proc: 'f je v centimetrech – převeď ji nejdřív na metry.' }, { t: d(-phi), proc: 'Spojka má kladnou optickou mohutnost, rozptylka zápornou.' }],
+          moznosti: [{ t: d(phi), ok: true }, (f !== phi ? { t: d(f), proc: 'Ohniskovou vzdálenost je potřeba dosadit v metrech.' }
+            : { t: d(phi / 10), proc: '10 cm je 0,1 m, ne 1 m – φ = 1 / 0,1 m.' }), { t: d(1 / f), proc: 'f je v centimetrech – převeď ji nejdřív na metry.' }, { t: d(-phi), proc: 'Spojka má kladnou optickou mohutnost, rozptylka zápornou.' }],
           napoveda: 'φ = 1/f, kde f je v metrech. Například 25 cm = 0,25 m.',
           vysvetleni: `f = ${cisK(f)} cm = ${cisK(f / 100, 2)} m, φ = 1 / (${cisK(f / 100, 2)} m) = ${d(phi)}.` };
       }
@@ -2414,7 +2415,9 @@
         moznosti: [{ t: `${velke(druh)}, f = ${cisK(f)} cm`, ok: true },
           { t: `${velke(opak)}, f = ${cisK(-f)} cm`, proc: 'Kladné dioptrie má spojka, záporné rozptylka.' },
           { t: `${velke(druh)}, f = ${cisK(D)} cm`, proc: 'f = 1/φ vychází v metrech: 1 / ' + cisK(Math.abs(D)) + ' = ' + cisK(Math.abs(f) / 100, 2) + ' m.' },
-          { t: `${velke(druh)}, f = ${cisK(D * 100)} cm`, proc: 'f = 1/φ, ne φ krát sto.' }],
+          Math.abs(D) === 1   // pro ±1 D by „φ krát sto“ dalo správnou hodnotu – použijeme jinou chybu
+            ? { t: `${velke(druh)}, f = ${cisK(f / 10)} cm`, proc: 'Převod jednotek: 1 m = 100 cm, ne 10 cm.' }
+            : { t: `${velke(druh)}, f = ${cisK(D * 100)} cm`, proc: 'f = 1/φ, ne φ krát sto.' }],
         napoveda: 'f = 1/φ (v metrech). Znaménko prozradí druh čočky.',
         vysvetleni: `f = 1 / (${sePlus(D, 1)}) m = ${cisK(f / 100, 2)} m = ${cisK(f)} cm. ${D > 0 ? 'Kladná mohutnost – spojka.' : 'Záporná mohutnost – rozptylka.'}` };
     } },

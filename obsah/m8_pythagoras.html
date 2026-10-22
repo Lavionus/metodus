@@ -6,6 +6,8 @@
   <title>Pythagorova věta</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -29,6 +31,44 @@
 <body>
   <h1>📐 Pythagorova věta</h1>
   <p class="podtitul">Pro 8. ročník: vztah mezi stranami pravoúhlého trojúhelníku a jeho užití.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Pythagorova věta</summary>
+    <div class="obsah">
+      <p>Věta platí jen v <b>pravoúhlém trojúhelníku</b>. Strana naproti pravému úhlu je <b>přepona c</b> – vždy
+        nejdelší. Dvě strany, které svírají pravý úhel, jsou <b>odvěsny a, b</b>.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Znění věty</h3><p><b>c² = a² + b²</b>. Obsah čtverce nad přeponou je roven
+          součtu obsahů čtverců nad oběma odvěsnami. Pro odvěsny 3 a 4: 9 + 16 = 25 = 5².</p></article>
+        <article class="vyklad-karta"><h3>Výpočet přepony</h3><p>Umocni odvěsny, sečti, odmocni:
+          <b>c = √(a² + b²)</b>.</p></article>
+        <article class="vyklad-karta"><h3>Výpočet odvěsny</h3><p>Od druhé mocniny přepony odečti druhou mocninu známé
+          odvěsny a odmocni: <b>a = √(c² − b²)</b>.</p></article>
+        <article class="vyklad-karta"><h3>Je pravoúhlý?</h3><p>Obrácená věta: když pro nejdelší stranu platí
+          c² = a² + b², trojúhelník je pravoúhlý. Když neplatí, pravoúhlý není.</p></article>
+      </div>
+      <p>Nejčastější chyba je sčítat strany místo jejich druhých mocnin: z odvěsen 3 a 4 nevyjde přepona 7, ale 5.
+        Kontrola: přepona musí být delší než každá odvěsna, ale kratší než jejich součet.</p>
+      <p>Ve slovních úlohách (žebřík u zdi, úhlopříčka obrazovky, cesta napříč parkem) si nejdřív nakresli
+        pravoúhlý trojúhelník a označ, která délka je přepona.</p>
+      <aside class="zapamatuj">c² = a² + b², c je přepona naproti pravému úhlu. Přepona: sčítám mocniny. Odvěsna: odčítám mocniny.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: výpočet odvěsny</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Pravoúhlý trojúhelník má přeponu c = 13 cm a odvěsnu b = 5 cm. Jak dlouhá je odvěsna a?</p>
+      <ol class="kroky">
+        <li>Hledám odvěsnu, takže od druhé mocniny přepony odečtu druhou mocninu známé odvěsny: a² = c² − b².</li>
+        <li>Umocním: c² = 13² = 169, b² = 5² = 25.</li>
+        <li>Odečtu: a² = 169 − 25 = 144.</li>
+        <li>Odmocním: a = √144 = 12 cm.</li>
+        <li>Kontrola: 12 &lt; 13, odvěsna je kratší než přepona. A 12² + 5² = 144 + 25 = 169 = 13².</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ a = 12 cm</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="dukaz" class="active">🧠 Jak věta funguje</button>
@@ -79,14 +119,15 @@ function dukaz() {
   const otazka = Uloha.nahodne(['soucet', 'ktera', 'plati']);
   const odezva = odezvaEl();
 
+  // čtverec nad přeponou: přepona (120,120)–(200,180) má směr (80, 60), ven od trojúhelníku je (60, −80)
   const kresba = `<svg class="kresba" viewBox="0 0 300 280" style="width:min(360px,90%)">
     <polygon class="troj" points="120,180 200,180 120,120"/>
     <rect class="ctverecB" x="120" y="180" width="80" height="80"/>
     <rect class="ctverecA" x="60" y="120" width="60" height="60"/>
-    <polygon class="ctverecC" points="120,120 200,180 240,128 160,68"/>
+    <polygon class="ctverecC" points="120,120 200,180 260,100 180,40"/>
     <text class="popis" x="160" y="226">b² = ${b * b}</text>
     <text class="popis" x="90" y="155">a² = ${a * a}</text>
-    <text class="popis" x="186" y="118">c² = ${c * c}</text>
+    <text class="popis" x="190" y="114">c² = ${otazka === 'soucet' ? '?' : c * c}</text>
   </svg>`;
 
   if (otazka === 'soucet') {

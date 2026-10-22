@@ -19,8 +19,10 @@ Složka `Anatomy` obsahuje kód, data a dokumentaci atlasu.
 | 3. Smyslové orgány | 5 | `anatomie-smysly.png` |
 | 4. Detail srdce | 14 | `anatomie-srdce-detail.png` |
 | 5. Nervová soustava | 11 | `anatomie-nervova.png` |
+| 6. Cévní soustava | 13 | `anatomie-cevni.webp` |
 
-Prompt nervové soustavy je v `../Prirodopis/anatomie-nervova-prompt.md`.
+Prompt nervové soustavy je v `../Prirodopis/anatomie-nervova-prompt.md`, cévní soustavy
+v `../Prirodopis/anatomie-cevni-prompt.md` (Codex CLI, 22. 10. 2026; na web jde jen WebP).
 
 Starší verzované PNG zůstávají zachované, ale stránka je nepoužívá.
 Zadní ilustraci svalů `anatomie-svaly_zadni.png` dodal uživatel; atlas ji používá beze změny.
@@ -85,6 +87,13 @@ Sdílená ID zachovávají průběh prohlížení mezi pohledy na stejný orgán
 
 Odborné podklady jsou odkazované v patičce stránky (NIH/NHLBI, NIDDK,
 NIDCD, NEI, NCBI a OpenStax). Jde o zjednodušené výukové ilustrace.
+
+- Cévní soustava je průhled zepředu: tepny červeně, žíly modře (výuková konvence,
+  vysvětlená v popisku). Kde tepna a žíla běží těsně vedle sebe (krk, paže, bérce,
+  pánev, ledviny), je jedna společná oblast; stehenní tepny a žíly jsou oddělené.
+  Obrysy vznikly z barevné masky ilustrace (řádkové skenování pásu cévy), oblast paží
+  je omezená hranicí podél boku. Plicní cévy text označuje jako výjimku z pravidla barev.
+  Test: `tests/anatomie-cevni-browser.mjs` (klik skutečnou myší na každou kotvu, kvíz 13/13).
 
 ## Kompaktní rozložení
 

@@ -6,6 +6,8 @@
   <title>Osová souměrnost</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -25,13 +27,13 @@
     .utvar .osa { stroke: var(--danger); stroke-width: 2.5; stroke-dasharray: 6 4; }
     /* fotografie souměrných objektů (IMG-m-10) */
     .foto-soum { width: min(520px, 100%); margin: 0 auto 12px; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; background: var(--bg-card); }
-    .foto-soum img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; }
+    .foto-soum img { display: block; width: 100%; height: auto; max-height: 62vh; object-fit: contain; background: #111; }
     .foto-atlas { width: min(1120px, 100%); margin: 22px auto; }
     .foto-atlas > summary { cursor: pointer; font-weight: 700; font-size: 1.05rem; text-align: center; }
     .foto-atlas > p { margin: 8px auto 12px; max-width: 760px; text-align: center; color: var(--text-muted); }
     .foto-mrizka { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
     .foto-karta { margin: 0; overflow: hidden; border: 1px solid var(--border); border-radius: 14px; background: var(--bg-card); box-shadow: var(--shadow-sm); }
-    .foto-karta img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; }
+    .foto-karta img { display: block; width: 100%; height: auto; }
     .foto-karta figcaption { padding: 10px 11px 12px; font-size: .9rem; line-height: 1.35; }
     .foto-karta strong { display: block; margin-bottom: 3px; color: var(--accent); font-size: 1rem; }
     @media (max-width: 820px) { .foto-mrizka { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
@@ -41,6 +43,40 @@
 <body>
   <h1>🪞 Osová souměrnost</h1>
   <p class="podtitul">Pro 4.–5. ročník: osa souměrnosti, počet os a dokreslování podle osy.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Co je osová souměrnost</summary>
+    <div class="obsah">
+      <p>Přelož papír s obrázkem napůl. Když se obě poloviny <b>přesně překryjí</b>, je obrázek <b>osově souměrný</b>
+        a čára přehybu je jeho <b>osa souměrnosti</b>. Každý bod na jedné straně má „dvojče“ na druhé straně:
+        stejně daleko od osy, jen na opačné straně.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Jak to poznám</h3><p>Zkus útvar v duchu přeložit svisle, vodorovně
+          i šikmo. Každý přehyb, při kterém se obě části kryjí, je jedna osa.</p></article>
+        <article class="vyklad-karta"><h3>Kolik os</h3><p>Čtverec má 4 osy, obdélník 2, rovnostranný trojúhelník 3,
+          rovnoramenný trojúhelník 1, kruh nekonečně mnoho. Obecný trojúhelník nemá žádnou.</p></article>
+        <article class="vyklad-karta"><h3>Dokreslování</h3><p>U každého čtverečku spočítej, jak daleko je od osy.
+          Na druhé straně vybarvi čtvereček ve stejné řadě a ve stejné vzdálenosti od osy.</p></article>
+      </div>
+      <p>Pozor na obdélník: úhlopříčka ho rozdělí na dva stejné trojúhelníky, ale po přeložení podle ní se
+        <b>nepřekryjí</b>. Proto úhlopříčka u obdélníku osou není. U čtverce ano.</p>
+      <aside class="zapamatuj">Osa souměrnosti = přehyb, po kterém se obě části přesně překryjí. Obraz bodu je stejně daleko od osy na druhé straně.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: kolik os má obdélník</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Kolik os souměrnosti má obdélník, který není čtverec?</p>
+      <ol class="kroky">
+        <li>Zkusím svislý přehyb uprostřed: levá a pravá polovina se překryjí. To je <b>1. osa</b>.</li>
+        <li>Zkusím vodorovný přehyb uprostřed: horní a dolní polovina se překryjí. To je <b>2. osa</b>.</li>
+        <li>Zkusím přehyb podle úhlopříčky: jeden roh přesáhne přes druhou část, poloviny se nepřekryjí. Úhlopříčka osou není.</li>
+        <li>Jiný přehyb už nefunguje, takže mám jen dvě osy.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Obdélník má 2 osy souměrnosti – svislou a vodorovnou.</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="maOsu" class="active">🔍 Je souměrný?</button>
@@ -79,11 +115,11 @@ const UTVARY = [
   { n: 'kruh', osy: 99, svg: '<circle class="tvar" cx="100" cy="100" r="70"/>' },
   { n: 'rovnostranný trojúhelník', osy: 3, svg: '<polygon class="tvar" points="100,35 165,150 35,150"/>' },
   { n: 'rovnoramenný trojúhelník', osy: 1, svg: '<polygon class="tvar" points="100,35 150,155 50,155"/>' },
-  { n: 'obecný trojúhelník', osy: 0, svg: '<polygon class="tvar" points="60,40 170,120 40,155"/>' },
+  { n: 'obecný trojúhelník', osy: 0, svg: '<polygon class="tvar" points="30,150 180,135 110,40"/>' },
   { n: 'kosočtverec', osy: 2, svg: '<polygon class="tvar" points="100,30 165,100 100,170 35,100"/>' },
   { n: 'pravidelný šestiúhelník', osy: 6, svg: '<polygon class="tvar" points="100,32 159,66 159,134 100,168 41,134 41,66"/>' },
   { n: 'lichoběžník s rameny stejné délky', osy: 1, svg: '<polygon class="tvar" points="65,55 135,55 170,145 30,145"/>' },
-  { n: 'nepravidelný čtyřúhelník', osy: 0, svg: '<polygon class="tvar" points="45,50 160,40 175,140 60,160"/>' },
+  { n: 'nepravidelný čtyřúhelník', osy: 0, svg: '<polygon class="tvar" points="35,55 170,45 150,165 50,120"/>' },
 ];
 
 const svgUtvar = u => `<svg class="utvar" viewBox="0 0 200 200">${u.svg}</svg>`;
@@ -216,15 +252,15 @@ const OSY_FOTO = {
   vice: 'víc než dvě osy',
 };
 const FOTO_SOUM = [   // [soubor, šířka, výška, alt, název, osy, vysvětlení]
-  ['m4-soumernost-motyl', {{WH:m/m4-soumernost-motyl}}, '{{ALT:m/m4-soumernost-motyl}}', 'Motýl', 'svisla', 'Osa vede tělem motýla. Levá a pravá křídla jsou téměř zrcadlová – i s barevnými „oky“.'],
-  ['m4-soumernost-list', {{WH:m/m4-soumernost-list}}, '{{ALT:m/m4-soumernost-list}}', 'List', 'svisla', 'Osa vede stopkou a hlavní žilkou. Obě poloviny listu jsou si podobné, ale ne úplně stejné.'],
-  ['m4-soumernost-zamek', {{WH:m/m4-soumernost-zamek}}, '{{ALT:m/m4-soumernost-zamek}}', 'Průčelí zámku', 'svisla', 'Osa vede středem vchodu. Okna vlevo a vpravo si odpovídají – stavitelé souměrnost záměrně dodržovali.'],
-  ['m4-soumernost-vlocka', {{WH:m/m4-soumernost-vlocka}}, '{{ALT:m/m4-soumernost-vlocka}}', 'Sněhová vločka', 'vice', 'Vločka má šest ramen a 6 os souměrnosti: tři vedou rameny, tři mezi nimi.'],
-  ['m4-soumernost-hvezdice', {{WH:m/m4-soumernost-hvezdice}}, '{{ALT:m/m4-soumernost-hvezdice}}', 'Hvězdice', 'vice', 'Pět ramen, tedy 5 os – každá vede jedním ramenem a protější mezerou. Živá hvězdice je souměrná jen přibližně.'],
-  ['m4-soumernost-znacka', {{WH:m/m4-soumernost-znacka}}, '{{ALT:m/m4-soumernost-znacka}}', 'Dopravní značka', 'obe', 'Značka zákaz vjezdu má 2 osy: svislou a vodorovnou (podél bílého pruhu).'],
-  ['m4-soumernost-most', {{WH:m/m4-soumernost-most}}, '{{ALT:m/m4-soumernost-most}}', 'Most a jeho odraz', 'obe', 'Svislá osa vede vrcholem oblouku. Vodorovnou osou je vodní hladina – odraz je převrácený obraz mostu.'],
+  ['m4-soumernost-motyl', 768, 513, 'Babočka paví oko s roztaženými křídly, každé křídlo s barevným okem.', 'Motýl', 'svisla', 'Osa vede tělem motýla. Levá a pravá křídla jsou téměř zrcadlová – i s barevnými „oky“.'],
+  ['m4-soumernost-list', 768, 1203, 'Žlutý podzimní list liliovníku se stopkou na bílém pozadí.', 'List', 'svisla', 'Osa vede stopkou a hlavní žilkou. Obě poloviny listu jsou si podobné, ale ne úplně stejné.'],
+  ['m4-soumernost-zamek', 768, 510, 'Hlavní průčelí zámku v Kupařovicích se vstupem uprostřed a dvěma stromy po stranách.', 'Průčelí zámku', 'svisla', 'Osa vede středem vchodu. Okna vlevo a vpravo si odpovídají – stavitelé souměrnost záměrně dodržovali.'],
+  ['m4-soumernost-vlocka', 768, 945, 'Detail šesticípé sněhové vločky s rozvětvenými rameny na modrém pozadí.', 'Sněhová vločka', 'vice', 'Vločka má šest ramen a 6 os souměrnosti: tři vedou rameny, tři mezi nimi.'],
+  ['m4-soumernost-hvezdice', 768, 758, 'Hvězdice obecná s pěti rameny ležící na mušlích.', 'Hvězdice', 'vice', 'Pět ramen, tedy 5 os – každá vede jedním ramenem a protější mezerou. Živá hvězdice je souměrná jen přibližně.'],
+  ['m4-soumernost-znacka', 768, 675, 'Kruhová dopravní značka zákaz vjezdu: červený kruh s vodorovným bílým pruhem uprostřed.', 'Dopravní značka', 'obe', 'Značka zákaz vjezdu má 2 osy: svislou a vodorovnou (podél bílého pruhu).'],
+  ['m4-soumernost-most', 768, 404, 'Obloukový most přes jezírko, který se zrcadlí na klidné vodní hladině.', 'Most a jeho odraz', 'obe', 'Svislá osa vede vrcholem oblouku. Vodorovnou osou je vodní hladina – odraz je převrácený obraz mostu.'],
 ];
-const fotoSoumImg = f => `<img src="img/m/${f[0]}.webp" alt="${f[3]}" width="${f[1]}" height="${f[2]}" loading="lazy">`;
+const fotoSoumImg = (f, alt) => `<img src="img/m/${f[0]}.webp" alt="${alt || f[3]}" width="${f[1]}" height="${f[2]}" loading="lazy">`;
 $('fotoMrizka').innerHTML = FOTO_SOUM.map(f =>
   `<figure class="foto-karta">${fotoSoumImg(f)}<figcaption><strong>${f[4]}</strong>${f[6]}</figcaption></figure>`).join('');
 
@@ -232,7 +268,7 @@ function vePrirode() {
   const p = $('plocha');
   const f = Uloha.nahodne(FOTO_SOUM);
   p.innerHTML = `<div class="zadani">${f[4]}: kolik má os souměrnosti a kudy vedou?</div>
-    <div class="foto-soum">${fotoSoumImg(f)}</div>`;
+    <div class="foto-soum">${fotoSoumImg(f, 'Fotografie k určení os souměrnosti.')}</div>`;  // alt nesmí prozradit počet os
   const odezva = document.createElement('div');
   odezva.className = 'odezva';
   Uloha.vyber({

@@ -41,7 +41,9 @@ try {
  document.querySelector('[data-action="'+stage+'"]').click();check(labStage===stage+1,'step');
  }
  check($('labStatus').textContent.includes('Získali'),'completion');$('labReset').click();check(labStage===0,'reset');
- document.querySelector('[data-rezim="roztok"]').click();$('solutionCheck').click();check($('solutionFeedback').textContent.includes('Správně'),'10 percent');
+ document.querySelector('[data-rezim="roztok"]').click();$('solutionCheck').click();check(!$('solutionFeedback').textContent.includes('Správně'),'výchozí směs nesmí být hned správně');
+ for(const [id,v] of [['saltMass',20],['waterMass',180]]){$(id).value=v;$(id).dispatchEvent(new Event('input',{bubbles:true}));}
+ $('solutionCheck').click();check($('solutionFeedback').textContent.includes('Správně'),'10 percent');
  $('dilute').click();check(solutionWater===230&&solutionSalt===20,'dilution');check($('solutionNumber').textContent==='8 %','8 percent');
  $('solutionCheck').click();check($('solutionFeedback').textContent.includes('Ještě'),'wrong solution');
  $('saltMass').value=0;$('saltMass').dispatchEvent(new Event('input'));check($('solutionMath').textContent.includes('čistou vodu'),'pure water');

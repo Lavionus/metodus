@@ -10,7 +10,12 @@ const call=(method,params={})=>new Promise((resolve,reject)=>{const requestId=++
 const ev=async expression=>{const result=await call('Runtime.evaluate',{expression,awaitPromise:true,returnByValue:true});if(result.exceptionDetails)throw Error(result.exceptionDetails.exception?.description||result.exceptionDetails.text);return result.result.value;};
 
 await call('Page.enable');await call('Runtime.enable');
+// test začíná bez pokroku: jiné testy (např. kouřový) mohou v profilu nechat skóre
 await call('Page.navigate',{url:'http://127.0.0.1:8766/obsah/edu_progress.html'});
+for(let i=0;i<100&&!(await ev(`document.readyState==='complete'`));i++)await new Promise(r=>setTimeout(r,50));
+await ev(`localStorage.clear()`);
+await call('Page.navigate',{url:'http://127.0.0.1:8766/obsah/edu_progress.html'});
+await new Promise(r=>setTimeout(r,300));
 for(let i=0;i<100&&!(await ev(`document.readyState==='complete'&&document.querySelectorAll('.badge').length===12`));i++)await new Promise(r=>setTimeout(r,50));
 
 assert.equal(await ev(`ODZNAKY.length`),12);

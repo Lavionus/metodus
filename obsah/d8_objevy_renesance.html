@@ -6,6 +6,8 @@
   <title>Zámořské objevy a renesance</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -36,6 +38,48 @@
 <body>
   <h1>⛵ Zámořské objevy a renesance</h1>
   <p class="podtitul">Pro 8. ročník: objevné plavby, jejich důsledky a kultura renesance.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Proč Evropané vypluli na oceán a co přinesla renesance</summary>
+    <div class="obsah">
+      <p>Koření, hedvábí a další zboží z Asie se do Evropy dováželo po souši. Roku <b>1453</b> ale Turci dobyli
+        <b>Konstantinopol</b> a obchodní cesty na východ ovládli a ztížili. Evropané proto hledali <b>námořní cestu do Indie</b>.
+        Vyplout na otevřený oceán jim umožnily <b>kompas</b> (směr), <b>astroláb</b> (poloha podle hvězd)
+        a <b>karavela</b> (obratná loď).</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Na východ kolem Afriky</h3><p>Portugalci postupovali podél Afriky:
+          <b>Bartolomeu Dias</b> obeplul její jižní cíp (1488), <b>Vasco da Gama</b> doplul do Indie (1498).</p></article>
+        <article class="vyklad-karta"><h3>Na západ přes Atlantik</h3><p><b>Kryštof Kolumbus</b> doplul roku <b>1492</b>
+          k ostrovům Ameriky, ale myslel si, že je v Indii. <b>Magalhãesova</b> výprava (1519–1522) poprvé obeplula svět.</p></article>
+        <article class="vyklad-karta"><h3>Renesance</h3><p>Zrodila se v <b>Itálii</b> ve 14. století. <b>Humanismus</b>
+          stavěl do středu zájmu člověka a vzdělání a vracel se k antice. Leonardo da Vinci, Michelangelo,
+          Koperník; Gutenbergův <b>knihtisk</b> šířil knihy.</p></article>
+      </div>
+      <p>Objevy měly velké <b>důsledky</b>. Evropské státy zakládaly <b>kolonie</b>, do Evropy se dostaly brambory,
+        kukuřice, rajčata, kakao a tabák. Pro původní obyvatele Ameriky znamenaly objevy epidemie, podrobení a zánik
+        říší Aztéků a Inků. Typická chyba: „objev“ je pohled Evropanů – v Americe přece lidé žili už dávno.</p>
+      <aside class="zapamatuj">1453 pád Konstantinopole → hledání námořní cesty do Indie → 1492 Kolumbus, 1498 Vasco da Gama,
+        1519–1522 obeplutí světa. Renesance a humanismus: člověk, rozum, antika.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: seřaď události podle příčiny a důsledku</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Seřaď od nejstarší: Vasco da Gama doplul do Indie, Turci dobyli Konstantinopol,
+        vyplula Magalhãesova výprava kolem světa, Bartolomeu Dias obeplul jižní cíp Afriky.</p>
+      <ol class="kroky">
+        <li>Hledám <b>příčinu</b>: plavby začaly proto, že se ztížila cesta na východ. Na začátek patří
+          <b>pád Konstantinopole (1453)</b>.</li>
+        <li>Portugalci postupovali krok za krokem podél Afriky. Nejdřív museli obeplout její jižní cíp –
+          <b>Dias (1488)</b>.</li>
+        <li>Teprve potom mohl někdo pokračovat až do Indie – <b>Vasco da Gama (1498)</b>.</li>
+        <li>Plavba kolem celého světa byla nejtěžší a přišla poslední – <b>Magalhães (1519)</b>.</li>
+        <li>Kontrola letopočty: 1453 → 1488 → 1498 → 1519. Sedí to.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ pád Konstantinopole (1453) → Dias (1488) → Vasco da Gama (1498) → Magalhãesova výprava (1519)</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="osobnosti" class="active">🧭 Mořeplavci a umělci</button>
@@ -120,7 +164,7 @@ const OSOBNOSTI = [
 const UDALOSTI = [
   {
     "rok": 1453,
-    "co": "Turci dobyli Konstantinopol a uzavřeli obchodní cestu na východ"
+    "co": "Turci dobyli Konstantinopol a ztížili obchodní cestu na východ"
   },
   {
     "rok": 1488,

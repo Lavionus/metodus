@@ -259,8 +259,8 @@ Mezipředmětové cesty, které stojí za výslovné odkazy „Souvisí s…“:
 
 #### Přehled učiva · [prehled.html](obsah/prehled.html)
 - **Zařazení:** web › úvodní plocha · rozcestník G
-- **Popis:** Úvodní stránka v pracovní ploše: ročníky, předměty, osnova, sekce pro učitele, tip na dnešek, oblíbené, naposledy otevřené, výběr podle účelu (etapa 08) a návod k přípravě hodiny bez internetu.
-- **Funkčnost:** dlaždice ročníků a předmětů filtrují menu, výběr podle účelu (vedený příklad, model, pramen, procvičování, příprava hodiny).
+- **Popis:** Úvodní stránka v pracovní ploše: ročníky, předměty (každý předmět vlastní dlaždicí, od 22. 10. 2026), osnova, sekce pro učitele, tip na dnešek, oblíbené, naposledy otevřené a návod k přípravě hodiny bez internetu.
+- **Funkčnost:** dlaždice ročníků a předmětů filtrují menu (předmět → okruhy). Výběr podle účelu byl 22. 10. 2026 odstraněn; příprava hodiny je v kabinetu.
 - **Cíl výuky:** Dát žákovi rychlý vstup „co dnes procvičit“ a učiteli „co použít v hodině“.
 - **Vylepšení:**
   - Pro žáka dlaždice **„Zopakuj si“** z deníku (lekce, kde byly chyby nebo které dlouho neotevřel).
@@ -273,7 +273,7 @@ Mezipředmětové cesty, které stojí za výslovné odkazy „Souvisí s…“:
 #### Osnova · [osnova.html](obsah/osnova.html)
 - **Zařazení:** web › přehled pokrytí · rozcestník G
 - **Popis:** Mřížka ročník × předmět s počtem hotových aplikací; kliknutím se vypíší témata. Výslovně uvádí, že nejde o posouzení pokrytí RVP.
-- **Funkčnost:** buňky s počty, výpis témat, filtr podle účelu (etapa 08), sekce nástrojů napříč ročníky.
+- **Funkčnost:** buňky s počty, výpis lekcí s jejich cíli, sekce nástrojů napříč ročníky (filtr podle účelu odstraněn 22. 10. 2026).
 - **Cíl výuky:** Učitel vidí, co je pro jeho ročník k dispozici a jak témata navazují.
 - **Vylepšení:**
   - V buňce kromě počtu i skladba typů (kolik lekcí má model, kolik jen procvičování) — ukáže, kde chybí názornost.
@@ -317,7 +317,7 @@ Mezipředmětové cesty, které stojí za výslovné odkazy „Souvisí s…“:
 Společné pro celou češtinu: 🔗 jedna paleta pro větné členy a slovní druhy (🧩 věta s členy), stejné pořadí „najdi → urči → zdůvodni“ a zdůvodnění jako součást odpovědi, ne jen volba správného tvaru. Obrázky potřebuje hlavně 1.–2. ročník; od 3. ročníku stačí dobře navržené SVG a jednoduché ilustrační scénky.
 
 #### Písmena a hlásky · [cj1_pismena.html](obsah/cj1_pismena.html)
-- **Zařazení:** Čeština › Pravopis · 1. r. · lekce A
+- **Zařazení:** Český jazyk › První čtení a psaní · 1. r. · lekce A
 - **Popis:** Rozklad slova na hlásky a skládání zpět, první a poslední hláska, velká a malá písmena. Předčítání hlasem.
 - **Funkčnost:** 5 režimů (Rozlož slovo, Slož slovo, První hláska, Poslední hláska, Velké a malé), tlačítko „🔊 Přečti“.
 - **Cíl výuky:** Žák dokáže sluchem rozložit krátké slovo na hlásky, složit ho z hlásek a poznat, že ch je jedna hláska a dvě písmena.
@@ -330,7 +330,7 @@ Společné pro celou češtinu: 🔗 jedna paleta pro větné členy a slovní d
     - ✅ Hotovo 23. 9. 2026: 40 karet `obsah/img/cj/cj1-pismena-*.webp`, originály PNG a zadání `.prompt.txt`; [galerie a seznam](obsah/img/kapitola-7-2.html).
 
 #### Tvrdé a měkké souhlásky · [cj2_tvrde_mekke.html](obsah/cj2_tvrde_mekke.html)
-- **Zařazení:** Čeština › Pravopis · 2. r. · lekce A
+- **Zařazení:** Český jazyk › Pravopis · 2. r. · lekce A
 - **Popis:** Doplňování i/y po tvrdých a měkkých souhláskách, třídění souhlásek, hledání chyby. Rámečky „tvrdé“ a „měkké“ souhlásky.
 - **Funkčnost:** 3 režimy, nápověda zvýrazní souhlásku, předčítání.
 - **Cíl výuky:** Žák určí souhlásku před i/y a podle ní správně doplní.
@@ -343,7 +343,7 @@ Společné pro celou češtinu: 🔗 jedna paleta pro větné členy a slovní d
     - ✅ Hotovo a zapojeno 23. 9. 2026: `obsah/img/cj/cj2-tvrde-mekke-domek-{tvrdy,mekky}.webp`, originály PNG a zadání `.prompt.txt`.
 
 #### Abeceda a řazení slov · [cj2_abeceda.html](obsah/cj2_abeceda.html)
-- **Zařazení:** Čeština › Pravopis · 2.–3. r. · lekce A
+- **Zařazení:** Český jazyk › První čtení a psaní · 2.–3. r. · lekce A
 - **Popis:** Chybějící písmeno v abecedě, které slovo je první, řazení slov. Abecední pás se rozsvěcuje podle úlohy.
 - **Funkčnost:** 3 režimy, abecední pás, nápověda.
 - **Cíl výuky:** Žák seřadí slova podle abecedy včetně slov se stejným začátkem a s CH.
@@ -353,7 +353,7 @@ Společné pro celou češtinu: 🔗 jedna paleta pro větné členy a slovní d
 - **Obrázky:** využít karty `IMG-cj-01` jako obrázky ke slovům.
 
 #### Doplňovačky i/y · [doplnovacky.html](obsah/doplnovacky.html)
-- **Zařazení:** Čeština › Pravopis · 3.–5. r. · lekce A
+- **Zařazení:** Český jazyk › Pravopis · 3.–5. r. · lekce A
 - **Popis:** Doplňování i/í, y/ý ve vyjmenovaných a příbuzných slovech, hledání chyby, výběr řady obojetné souhlásky.
 - **Funkčnost:** 2 režimy, volba řady, nápověda.
 - **Cíl výuky:** Žák doplní i/y po obojetné souhlásce a zdůvodní to vyjmenovaným nebo příbuzným slovem.
@@ -366,7 +366,7 @@ Společné pro celou češtinu: 🔗 jedna paleta pro větné členy a slovní d
     - ✅ Hotovo a zapojeno 23. 9. 2026: 8 karet `obsah/img/cj/doplnovacky-*.webp`, originály PNG a zadání `.prompt.txt`.
 
 #### Generátor diktátů · [diktat_gen.html](obsah/diktat_gen.html)
-- **Zařazení:** Čeština › Pravopis · 3.–9. r. · lekce A
+- **Zařazení:** Český jazyk › Pravopis · 3.–9. r. · lekce A
 - **Popis:** Věta se zobrazí s vynechanými písmeny; doplnit, nebo přepsat celou větu podle poslechu.
 - **Funkčnost:** 2 režimy, kontrola, ukázat správně.
 - **Cíl výuky:** Žák napíše větu bez chyb v procvičovaných jevech a sám najde, kde chyboval.
@@ -377,7 +377,7 @@ Společné pro celou češtinu: 🔗 jedna paleta pro větné členy a slovní d
 - **Obrázky:** žádné.
 
 #### Párové souhlásky · [cj3_parove.html](obsah/cj3_parove.html)
-- **Zařazení:** Čeština › Pravopis · 3. r. · lekce A
+- **Zařazení:** Český jazyk › Pravopis · 3. r. · lekce A
 - **Popis:** Doplnění b/p, d/t, z/s…, výběr ověřovacího slova, hledání chyby. Rámeček párů „jednu slyšíme, druhou píšeme“.
 - **Funkčnost:** 3 režimy, předčítání, nápověda.
 - **Cíl výuky:** Žák ověří párovou souhlásku změnou tvaru slova (dub → duby) a správně ji napíše.
@@ -388,7 +388,7 @@ Společné pro celou češtinu: 🔗 jedna paleta pro větné členy a slovní d
 - **Obrázky:** využít karty `IMG-cj-01` (dub, hrad, had, zub, led).
 
 #### Vyjmenovaná slova · [vyjmenovana_slova.html](obsah/vyjmenovana_slova.html)
-- **Zařazení:** Čeština › Pravopis · 3.–5. r. · lekce A (hlavní lekce rodiny i/y)
+- **Zařazení:** Český jazyk › Pravopis · 3.–5. r. · lekce A (hlavní lekce rodiny i/y)
 - **Popis:** Série slov k doplnění, doplnění řady zpaměti, přehled všech řad.
 - **Funkčnost:** 3 režimy, přehled, nápověda.
 - **Cíl výuky:** Žák zná řady vyjmenovaných slov, pozná slova příbuzná a rozliší je od stejně znějících nepříbuzných.
@@ -401,7 +401,7 @@ Společné pro celou češtinu: 🔗 jedna paleta pro větné členy a slovní d
     - ✅ Hotovo 23. 9. 2026: všechny řady B, L, M, P, S, V a Z, celkem 59 nových karet `obsah/img/cj/vyjmenovana-{b,l,m,p,s,v,z}-*.webp`; šest sdílených karet „být“, „mýt“, „myš“, „sýr“, „výr“ a „výt“ z dřívějších sad; zapojeno do přehledu i zpětné vazby lekce.
 
 #### Shoda podmětu s přísudkem · [shoda_podmetu.html](obsah/shoda_podmetu.html)
-- **Zařazení:** Čeština › Pravopis · 6.–7. r. · lekce A
+- **Zařazení:** Český jazyk › Pravopis · 6.–7. r. · lekce A
 - **Popis:** Doplnění koncovky přísudku, hledání podmětu, určení rodu, hledání chyby. Postup „najdi podmět → urči rod → doplň“.
 - **Funkčnost:** 4 režimy, nápověda „💡 Ukaž podmět“.
 - **Cíl výuky:** Žák najde podmět včetně nevyjádřeného a několikanásobného, určí jeho rod a životnost a podle toho doplní i/y/a v příčestí.
@@ -412,7 +412,7 @@ Společné pro celou češtinu: 🔗 jedna paleta pro větné členy a slovní d
 - **Obrázky:** žádné.
 
 #### Přejatá slova · [cj8_prejata.html](obsah/cj8_prejata.html)
-- **Zařazení:** Čeština › Pravopis · 8. r. · lekce A
+- **Zařazení:** Český jazyk › Pravopis · 8. r. · lekce A
 - **Popis:** Pravopis (s/z, dy/di…), český význam, skloňování, původ slova.
 - **Funkčnost:** 4 režimy.
 - **Cíl výuky:** Žák správně napíše a skloňuje běžná přejatá slova, zná jejich význam a přibližný původ.
@@ -423,7 +423,7 @@ Společné pro celou češtinu: 🔗 jedna paleta pro větné členy a slovní d
 - **Obrázky:** žádné.
 
 #### Příprava na přijímací zkoušky – ČJ · [cj9_prijimacky.html](obsah/cj9_prijimacky.html)
-- **Zařazení:** Čeština › Pravopis · 9. r. · lekce A (souhrnná)
+- **Zařazení:** Český jazyk › Přijímačky z češtiny · 9. r. · lekce A (souhrnná)
 - **Popis:** Úlohy ve stylu jednotné přijímací zkoušky: pravopis, tvarosloví, skladba, práce s textem, test na čas s rozborem.
 - **Funkčnost:** 5 režimů + test na čas.
 - **Cíl výuky:** Žák zvládne typové úlohy přijímací zkoušky a ví, které oblasti má dotrénovat.
@@ -434,7 +434,7 @@ Společné pro celou češtinu: 🔗 jedna paleta pro větné členy a slovní d
 - **Obrázky:** žádné.
 
 #### Druhy vět · [cj2_druhy_vet.html](obsah/cj2_druhy_vet.html)
-- **Zařazení:** Čeština › Tvarosloví a skladba · 2.–3. r. · lekce A
+- **Zařazení:** Český jazyk › Skladba · 2.–3. r. · lekce A
 - **Popis:** Určení druhu věty (oznamovací, tázací, rozkazovací, přací), doplnění znaménka, hledání věty daného druhu.
 - **Funkčnost:** 3 režimy, předčítání.
 - **Cíl výuky:** Žák pozná druh věty podle záměru mluvčího a napíše správné znaménko.
@@ -446,7 +446,7 @@ Společné pro celou češtinu: 🔗 jedna paleta pro větné členy a slovní d
     - ✅ Hotovo 23. 9. 2026: čtyři akvarelové scénky `obsah/img/cj/cj2-druhy-vet-{stul,hriste,trida,obchod}.webp`, originály PNG a zadání; zapojeno jako přepínatelná obrazová pomůcka se čtyřmi druhy vět.
 
 #### Slovní druhy · [slovni_druhy.html](obsah/slovni_druhy.html)
-- **Zařazení:** Čeština › Tvarosloví a skladba · 3.–6. r. · lekce A
+- **Zařazení:** Český jazyk › Tvarosloví · 3.–6. r. · lekce A
 - **Popis:** Určení slovního druhu, ohebný/neohebný, odpovídající otázka.
 - **Funkčnost:** 3 režimy.
 - **Cíl výuky:** Žák určí slovní druh slova ve větě a zdůvodní ho otázkou nebo ohebností.
@@ -457,7 +457,7 @@ Společné pro celou češtinu: 🔗 jedna paleta pro větné členy a slovní d
 - **Obrázky:** žádné.
 
 #### Slovesa – osoba, číslo, čas · [cj3_slovesa.html](obsah/cj3_slovesa.html)
-- **Zařazení:** Čeština › Tvarosloví a skladba · 3.–4. r. · lekce A
+- **Zařazení:** Český jazyk › Tvarosloví · 3.–4. r. · lekce A
 - **Popis:** Určení času, osoby a čísla, převod do jiného času. Rámečky čas/osoba/číslo.
 - **Funkčnost:** 4 režimy, předčítání.
 - **Cíl výuky:** Žák určí osobu, číslo a čas slovesa a převede větu do jiného času.
@@ -469,7 +469,7 @@ Společné pro celou češtinu: 🔗 jedna paleta pro větné členy a slovní d
     - ✅ Hotovo 24. 9. 2026: šest karet `obsah/img/cj/cj3-slovesa-{ja,ty,on-ona,my,vy,oni}.webp`, originály PNG a zadání; zapojeno do živé pomůcky osoby a čísla v lekci.
 
 #### Podstatná jména – rod a číslo · [cj3_podstatna.html](obsah/cj3_podstatna.html)
-- **Zařazení:** Čeština › Tvarosloví a skladba · 3.–4. r. · lekce A
+- **Zařazení:** Český jazyk › Tvarosloví · 3.–4. r. · lekce A
 - **Popis:** Určení rodu (ten/ta/to), čísla, převod do množného, hledání podstatného jména.
 - **Funkčnost:** 4 režimy, rámečky rodů, předčítání.
 - **Cíl výuky:** Žák určí rod a číslo podstatného jména včetně názvů vlastností a dějů.
@@ -480,7 +480,7 @@ Společné pro celou češtinu: 🔗 jedna paleta pro větné členy a slovní d
 - **Obrázky:** využít `IMG-cj-01` (jeden a více předmětů — generovat varianty „tři míče“ v téže sadě).
 
 #### Pády a vzory podstatných jmen · [cj4_pady.html](obsah/cj4_pady.html)
-- **Zařazení:** Čeština › Tvarosloví a skladba · 4.–5. r. · lekce A
+- **Zařazení:** Český jazyk › Tvarosloví · 4.–5. r. · lekce A
 - **Popis:** Pád podle otázky, určení pádu ve větě, doplnění tvaru, hledání vzoru; přehled vzorů podle rodů.
 - **Funkčnost:** 4 režimy, rámečky vzorů.
 - **Cíl výuky:** Žák určí pád podstatného jména ve větě podle otázky a přiřadí ho ke vzoru podle 1. a 2. pádu.
@@ -491,7 +491,7 @@ Společné pro celou češtinu: 🔗 jedna paleta pro větné členy a slovní d
 - **Obrázky:** žádné.
 
 #### Synonyma a antonyma · [synonyma_antonyma.html](obsah/synonyma_antonyma.html)
-- **Zařazení:** Čeština › Tvarosloví a skladba · 4.–7. r. · lekce A
+- **Zařazení:** Český jazyk › Slovní zásoba a vývoj jazyka · 4.–7. r. · lekce A
 - **Popis:** Mix synonym a antonym, jen synonyma, jen antonyma, určení vztahu.
 - **Funkčnost:** 4 režimy.
 - **Cíl výuky:** Žák najde slovo souznačné a protikladné a posoudí, zda je ve větě zaměnitelné.
@@ -501,7 +501,7 @@ Společné pro celou češtinu: 🔗 jedna paleta pro větné členy a slovní d
 - **Obrázky:** žádné.
 
 #### Stavba slova · [cj4_stavba_slova.html](obsah/cj4_stavba_slova.html)
-- **Zařazení:** Čeština › Tvarosloví a skladba · 4.–5. r. · lekce A
+- **Zařazení:** Český jazyk › Slovní zásoba a vývoj jazyka · 4.–5. r. · lekce A
 - **Popis:** Hledání kořene, určení části slova, slova příbuzná, předpona × předložka.
 - **Funkčnost:** 4 režimy, barevné rámečky předpona/kořen/přípona.
 - **Cíl výuky:** Žák rozloží slovo na předponu, kořen, příponu a koncovku a najde slova příbuzná.
@@ -512,7 +512,7 @@ Společné pro celou češtinu: 🔗 jedna paleta pro větné členy a slovní d
 - **Obrázky:** žádné.
 
 #### Přídavná jména · [cj5_pridavna.html](obsah/cj5_pridavna.html)
-- **Zařazení:** Čeština › Tvarosloví a skladba · 5.–6. r. · lekce A
+- **Zařazení:** Český jazyk › Tvarosloví · 5.–6. r. · lekce A
 - **Popis:** Druh přídavného jména, doplnění koncovky, stupňování, tvrdý a měkký vzor.
 - **Funkčnost:** 4 režimy, předčítání.
 - **Cíl výuky:** Žák určí druh a vzor přídavného jména a napíše správnou koncovku podle rodu, čísla a pádu.
@@ -523,7 +523,7 @@ Společné pro celou češtinu: 🔗 jedna paleta pro větné členy a slovní d
 - **Obrázky:** žádné.
 
 #### Základní skladební dvojice · [cj5_skladebni_dvojice.html](obsah/cj5_skladebni_dvojice.html)
-- **Zařazení:** Čeština › Tvarosloví a skladba · 5.–6. r. · lekce A (hlavní lekce rodiny „věta“)
+- **Zařazení:** Český jazyk › Skladba · 5.–6. r. · lekce A (hlavní lekce rodiny „věta“)
 - **Popis:** Hledání podmětu a přísudku, typ podmětu, zda patří k sobě; rámečky podmět (modrý), přísudek (žlutý), shoda.
 - **Funkčnost:** 4 režimy, předčítání.
 - **Cíl výuky:** Žák najde ve větě podmět a přísudek, pozná nevyjádřený podmět a spojí je ve skladební dvojici.
@@ -534,7 +534,7 @@ Společné pro celou češtinu: 🔗 jedna paleta pro větné členy a slovní d
 - **Obrázky:** žádné.
 
 #### Zájmena a číslovky · [cj5_zajmena_cislovky.html](obsah/cj5_zajmena_cislovky.html)
-- **Zařazení:** Čeština › Tvarosloví a skladba · 5.–6. r. · lekce A
+- **Zařazení:** Český jazyk › Tvarosloví · 5.–6. r. · lekce A
 - **Popis:** Druhy zájmen a číslovek, mě/mně, zájmeno × číslovka.
 - **Funkčnost:** 4 režimy, pomůcka tebe/tobě.
 - **Cíl výuky:** Žák určí druh zájmena a číslovky a správně napíše mě/mně.
@@ -544,7 +544,7 @@ Společné pro celou češtinu: 🔗 jedna paleta pro větné členy a slovní d
 - **Obrázky:** žádné.
 
 #### Rozbor věty – větné členy · [vetny_rozbor.html](obsah/vetny_rozbor.html)
-- **Zařazení:** Čeština › Tvarosloví a skladba · 6.–8. r. · lekce A
+- **Zařazení:** Český jazyk › Skladba · 6.–8. r. · lekce A
 - **Popis:** Určení větného členu, hledání ve větě, rozbor celé věty; postup od přísudku.
 - **Funkčnost:** 3 režimy.
 - **Cíl výuky:** Žák provede rozbor jednoduché věty a nakreslí závislosti členů.
@@ -554,7 +554,7 @@ Společné pro celou češtinu: 🔗 jedna paleta pro větné členy a slovní d
 - **Obrázky:** žádné.
 
 #### Slovní zásoba a význam slov · [cj6_slovni_zasoba.html](obsah/cj6_slovni_zasoba.html)
-- **Zařazení:** Čeština › Tvarosloví a skladba · 6.–7. r. · lekce A
+- **Zařazení:** Český jazyk › Slovní zásoba a vývoj jazyka · 6.–7. r. · lekce A
 - **Popis:** Vztahy mezi slovy (synonyma, antonyma, homonyma, nadřazenost), mnohoznačnost, význam v kontextu.
 - **Funkčnost:** 4 režimy, rámečky vztahů.
 - **Cíl výuky:** Žák rozliší mnohoznačné slovo od homonyma a určí význam slova podle kontextu.
@@ -566,7 +566,7 @@ Společné pro celou češtinu: 🔗 jedna paleta pro větné členy a slovní d
     - ✅ Hotovo 24. 9. 2026: 24 karet `obsah/img/cj/cj6-vyznam-*.webp`, originály PNG a zadání; zapojeno jako obrazový slovník s přepínáním osmi slov a trojic významů.
 
 #### Rozvíjející větné členy · [cj7_rozvijejici.html](obsah/cj7_rozvijejici.html)
-- **Zařazení:** Čeština › Tvarosloví a skladba · 7.–8. r. · lekce A
+- **Zařazení:** Český jazyk › Skladba · 7.–8. r. · lekce A
 - **Popis:** Předmět, přívlastek, příslovečné určení; druh příslovečného určení, hledání ve větě, co přívlastek rozvíjí.
 - **Funkčnost:** 4 režimy, rámečky členů.
 - **Cíl výuky:** Žák určí rozvíjející větný člen otázkou od řídícího slova a rozliší druhy příslovečného určení.
@@ -576,7 +576,7 @@ Společné pro celou češtinu: 🔗 jedna paleta pro větné členy a slovní d
 - **Obrázky:** žádné.
 
 #### Neohebné slovní druhy · [cj7_neohebne.html](obsah/cj7_neohebne.html)
-- **Zařazení:** Čeština › Tvarosloví a skladba · 7. r. · lekce A
+- **Zařazení:** Český jazyk › Tvarosloví · 7. r. · lekce A
 - **Popis:** Příslovce, předložky, spojky, částice, citoslovce; příslovce × předložka, spojky souřadicí/podřadicí.
 - **Funkčnost:** 4 režimy, rámečky druhů 6–10.
 - **Cíl výuky:** Žák určí neohebný slovní druh podle funkce ve větě.
@@ -586,7 +586,7 @@ Společné pro celou češtinu: 🔗 jedna paleta pro větné členy a slovní d
 - **Obrázky:** žádné.
 
 #### Slovotvorba · [cj7_slovotvorba.html](obsah/cj7_slovotvorba.html)
-- **Zařazení:** Čeština › Tvarosloví a skladba · 7. r. · lekce A
+- **Zařazení:** Český jazyk › Slovní zásoba a vývoj jazyka · 7. r. · lekce A
 - **Popis:** Odvozování, skládání, zkracování, stavba slova, tvoření slov, zkratky.
 - **Funkčnost:** 4 režimy, rámečky způsobů.
 - **Cíl výuky:** Žák pozná, jak slovo vzniklo, a sám vytvoří slovo odvozením nebo složením.
@@ -597,7 +597,7 @@ Společné pro celou češtinu: 🔗 jedna paleta pro větné členy a slovní d
 - **Obrázky:** žádné (případně 6 karet ze sady `IMG-cj-01` pro složená slova).
 
 #### Souvětí souřadné a podřadné · [cj8_souveti.html](obsah/cj8_souveti.html)
-- **Zařazení:** Čeština › Tvarosloví a skladba · 8.–9. r. · lekce A
+- **Zařazení:** Český jazyk › Skladba · 8.–9. r. · lekce A
 - **Popis:** Souřadné × podřadné, druh vedlejší věty, čárky, poměry mezi větami.
 - **Funkčnost:** 4 režimy, rámečky typů souvětí.
 - **Cíl výuky:** Žák určí stavbu souvětí, druh vedlejší věty a zdůvodní čárku.
@@ -607,7 +607,7 @@ Společné pro celou češtinu: 🔗 jedna paleta pro větné členy a slovní d
 - **Obrázky:** žádné.
 
 #### Útvary a vývoj českého jazyka · [cj9_vyvoj_jazyka.html](obsah/cj9_vyvoj_jazyka.html)
-- **Zařazení:** Čeština › Tvarosloví a skladba · 9. r. · lekce A (s mapou)
+- **Zařazení:** Český jazyk › Slovní zásoba a vývoj jazyka · 9. r. · lekce A (s mapou)
 - **Popis:** Spisovná a nespisovná čeština, nářeční oblasti na mapě, vývoj jazyka, stará a nová slova.
 - **Funkčnost:** 4 režimy, mapa nářečí (`mapy.js`).
 - **Cíl výuky:** Žák rozliší útvary jazyka, pozná hlavní nářeční oblasti a vysvětlí, jak se jazyk mění.
@@ -618,7 +618,7 @@ Společné pro celou češtinu: 🔗 jedna paleta pro větné členy a slovní d
   - `IMG-cj-08` 🟠 **E ✅** · doložený rukopis Hospodine, pomiluj ny, titulní list Bible kralické a titulní list prvního vydání Jungmannova slovníku — zapojeno do srovnání vývoje písma a pravopisu
 
 #### Slabiky a první čtení · [slabiky.html](obsah/slabiky.html)
-- **Zařazení:** Čeština › Čtení a literatura · 1.–2. r. · samostatná F
+- **Zařazení:** Český jazyk › První čtení a psaní · 1.–2. r. · samostatná F
 - **Popis:** Tabule s kartami: písmena → slabiky → slova → věty; barevné slabiky, automatické čtení.
 - **Funkčnost:** 4 úrovně, předchozí/další, předčítání, „Číst samo“.
 - **Cíl výuky:** Žák čte slabiky a krátká slova a rozumí přečtené větě.
@@ -632,7 +632,7 @@ Společné pro celou češtinu: 🔗 jedna paleta pro větné členy a slovní d
   - **Hotovo 24. 9. 2026:** deset scén je uloženo jako PNG + WebP + zadání a zobrazuje se přímo nad příslušnou větou; textové příklady v původním návrhu byly při realizaci sjednoceny se skutečnými větami stránky.
 
 #### Čtení s porozuměním · [cteni_s_porozumenim.html](obsah/cteni_s_porozumenim.html)
-- **Zařazení:** Čeština › Čtení a literatura · 2.–9. r. · lekce B
+- **Zařazení:** Český jazyk › První čtení a psaní · 2.–9. r. · lekce B
 - **Popis:** Text se čtyřmi otázkami, tři úrovně náročnosti, nápověda, předčítání.
 - **Funkčnost:** volba úrovně, start, nápověda (H), přečíst text.
 - **Cíl výuky:** Žák vyhledá informaci v textu, vyvodí z něj závěr a odpověď doloží místem v textu.
@@ -645,7 +645,7 @@ Společné pro celou češtinu: 🔗 jedna paleta pro větné členy a slovní d
 - **Stav 24. 9. 2026:** hotovo osm ilustrací podle skutečného počtu textů 1. stupně; PNG, WebP a zadání jsou zapojené přímo nad textem a u vyšších úrovní se obrazová plocha nezobrazuje.
 
 #### Čtenářský deník · [reading_log.html](obsah/reading_log.html)
-- **Zařazení:** Čeština › Čtení a literatura · 4.–9. r. · nástroj F
+- **Zařazení:** Český jazyk › Literatura · 4.–9. r. · nástroj F
 - **Popis:** Evidence knih (chci číst / čtu / přečtená), hodnocení, poznámky, export a import JSON, řazení a filtr.
 - **Funkčnost:** formulář, seznam, filtry, export/import.
 - **Cíl výuky:** Žák vede záznam o četbě a formuluje vlastní názor na knihu.
@@ -656,7 +656,7 @@ Společné pro celou češtinu: 🔗 jedna paleta pro větné členy a slovní d
 - **Obrázky:** žádné.
 
 #### Mýty, báje a pohádky · [cj6_baje.html](obsah/cj6_baje.html)
-- **Zařazení:** Čeština › Čtení a literatura · 6. r. · lekce A
+- **Zařazení:** Český jazyk › Literatura · 6. r. · lekce A
 - **Popis:** Určení žánru, řečtí bohové, báje a hrdinové, literární pojmy; rámečky pohádka, pověst, báje, bajka.
 - **Funkčnost:** 4 režimy.
 - **Cíl výuky:** Žák rozliší pohádku, pověst, báji a bajku podle znaků v ukázce.
@@ -669,7 +669,7 @@ Společné pro celou češtinu: 🔗 jedna paleta pro větné členy a slovní d
 - **Stav 20. 10. 2026:** `IMG-cj-12` i `IMG-cj-11` hotovo; stránka spojuje čtyři žánrové viněty s osmi autentickými volnými reprodukcemi antického umění.
 
 #### Literatura 20. století · [cj9_literatura_20.html](obsah/cj9_literatura_20.html)
-- **Zařazení:** Čeština › Čtení a literatura · 9. r. · lekce A
+- **Zařazení:** Český jazyk › Literatura · 9. r. · lekce A
 - **Popis:** Autor a dílo, poznej ukázku, směry, doba a literatura; oficiální literatura, samizdat, exil.
 - **Funkčnost:** 4 režimy, časová osa desetiletí.
 - **Cíl výuky:** Žák zařadí autora a dílo do doby a směru a doloží to znakem z ukázky.
@@ -681,7 +681,7 @@ Společné pro celou češtinu: 🔗 jedna paleta pro větné členy a slovní d
   - `IMG-cj-13` ⚪ **E** · portréty 10–12 autorů (Čapek, Seifert, Hrabal, Škvorecký, Kundera, Havel…) z volných zdrojů, obálky samizdatových edic (Edice Petlice) — karty autorů
 
 #### Literární směry a autoři · [literarni_smery.html](obsah/literarni_smery.html)
-- **Zařazení:** Čeština › Čtení a literatura · 9. r. (a SŠ) · lekce A
+- **Zařazení:** Český jazyk › Literatura · 9. r. (a SŠ) · lekce A
 - **Popis:** Přehled směrů, autor → směr, dílo → autor, směr → období.
 - **Funkčnost:** 4 režimy, přehled.
 - **Cíl výuky:** Žák přiřadí autora a dílo ke směru podle znaků, ne jen podle doby.
@@ -692,7 +692,7 @@ Společné pro celou češtinu: 🔗 jedna paleta pro větné členy a slovní d
   - `IMG-cj-14` 🟠 **E ✅** · osm doložených volných reprodukcí od renesance po surrealismus — zapojeno přímo k literárním směrům s vysvětlením vizuálního znaku
 
 #### Přímá řeč · [cj4_prima_rec.html](obsah/cj4_prima_rec.html)
-- **Zařazení:** Čeština › Sloh a komunikace · 4.–5. r. · lekce A
+- **Zařazení:** Český jazyk › Sloh a komunikace · 4.–5. r. · lekce A
 - **Popis:** Správný zápis, poloha uvozovací věty, přímá × nepřímá řeč; rámečky tří poloh.
 - **Funkčnost:** 3 režimy.
 - **Cíl výuky:** Žák zapíše přímou řeč s uvozovací větou vpředu, vzadu i uprostřed se správnou interpunkcí.
@@ -702,7 +702,7 @@ Společné pro celou češtinu: 🔗 jedna paleta pro větné členy a slovní d
 - **Obrázky:** žádné (bubliny kreslí web).
 
 #### Slohové útvary · [cj8_sloh.html](obsah/cj8_sloh.html)
-- **Zařazení:** Čeština › Sloh a komunikace · 8.–9. r. · lekce A
+- **Zařazení:** Český jazyk › Sloh a komunikace · 8.–9. r. · lekce A
 - **Popis:** Poznávání útvarů (výklad, úvaha, popis, vypravování, charakteristika, zpráva), jejich znaky, stavba a jazyk.
 - **Funkčnost:** 4 režimy, rámečky útvarů.
 - **Cíl výuky:** Žák rozpozná slohový útvar podle znaků a napíše krátký text podle zadání.
@@ -718,7 +718,7 @@ Společné pro celou češtinu: 🔗 jedna paleta pro větné členy a slovní d
 Společné pro celou matematiku: 🔗 každé téma má jeden **názorný obraz**, který se opakuje od prvního výkladu po procvičování (🧩 osa, proužek, pole, váhy, graf). Chyba se vysvětluje v tomto obrazu, ne jen textem. Obrázky kreslí kód (styl D); vyrobit je potřeba jen skutečné situace do slovních úloh a pár fotografií měřidel.
 
 #### Porovnávání a řady čísel · [m1_porovnavani.html](obsah/m1_porovnavani.html)
-- **Zařazení:** Matematika › Čísla a operace · 1.–2. r. · samostatná F
+- **Zařazení:** Matematika › Přirozená čísla a počítání · 1.–2. r. · samostatná F
 - **Popis:** Porovnání čísel, doplnění řady, které číslo je na ose, ukázání čísla; rozsah do 10/20/100.
 - **Funkčnost:** 4 režimy, volba rozsahu, předčítání; pomůcka „hladová pusa“.
 - **Cíl výuky:** Žák porovná čísla do 100, doplní číselnou řadu a najde číslo na číselné ose.
@@ -729,7 +729,7 @@ Společné pro celou matematiku: 🔗 každé téma má jeden **názorný obraz*
 - **Obrázky:** žádné (styl D).
 
 #### Počítání do 20 a 100 · [pocitani.html](obsah/pocitani.html)
-- **Zařazení:** Matematika › Čísla a operace · 1.–3. r. · samostatná F
+- **Zařazení:** Matematika › Přirozená čísla a počítání · 1.–3. r. · samostatná F
 - **Popis:** Série 10 příkladů na sčítání a odčítání s vysvědčením na konci.
 - **Funkčnost:** rozsah, operace, potvrzení.
 - **Cíl výuky:** Žák sčítá a odčítá do 20 s přechodem přes desítku a do 100.
@@ -741,7 +741,7 @@ Společné pro celou matematiku: 🔗 každé téma má jeden **názorný obraz*
 - **Obrázky:** žádné (styl D).
 
 #### Procvičování násobilky · [multiplication.html](obsah/multiplication.html)
-- **Zařazení:** Matematika › Čísla a operace · 2.–4. r. · lekce A (dril)
+- **Zařazení:** Matematika › Přirozená čísla a počítání · 2.–4. r. · lekce A (dril)
 - **Popis:** Rychlostní dril s deseti sekundami na příklad a přehledem chyb, rekordy.
 - **Funkčnost:** rozsah, počet příkladů, operace, start, Enter.
 - **Cíl výuky:** Žák zná zpaměti násobilku do 10 a odvodí dělení z násobení.
@@ -752,7 +752,7 @@ Společné pro celou matematiku: 🔗 každé téma má jeden **názorný obraz*
 - **Obrázky:** žádné.
 
 #### Dělení se zbytkem · [m3_deleni_zbytkem.html](obsah/m3_deleni_zbytkem.html)
-- **Zařazení:** Matematika › Čísla a operace · 3.–4. r. · lekce A
+- **Zařazení:** Matematika › Přirozená čísla a počítání · 3.–4. r. · lekce A
 - **Popis:** Výpočet, kolik zbude, zkouška; pravidlo „zbytek je menší než dělitel“.
 - **Funkčnost:** 3 režimy.
 - **Cíl výuky:** Žák vydělí se zbytkem a ověří výsledek zkouškou.
@@ -764,7 +764,7 @@ Společné pro celou matematiku: 🔗 každé téma má jeden **názorný obraz*
 - **Stav 24. 9. 2026:** hotovo a zapojeno do režimu „Kolik zbude?“; každá úloha náhodně volí jeden předmět a po správné odpovědi stejné obrázky přeskládá do celých skupin a zbytku.
 
 #### Písemné sčítání, odčítání a násobení · [m4_pisemne_operace.html](obsah/m4_pisemne_operace.html)
-- **Zařazení:** Matematika › Čísla a operace · 4. r. · lekce A
+- **Zařazení:** Matematika › Přirozená čísla a počítání · 4. r. · lekce A
 - **Popis:** Počítání pod sebou do milionu, hledání chyby.
 - **Funkčnost:** 3 režimy, pomůcka zápisu podle řádů (`pisemne.js`).
 - **Cíl výuky:** Žák písemně sčítá, odčítá a násobí a najde chybný krok v cizím výpočtu.
@@ -774,7 +774,7 @@ Společné pro celou matematiku: 🔗 každé téma má jeden **názorný obraz*
 - **Obrázky:** žádné.
 
 #### Písemné dělení · [m4_pisemne_deleni.html](obsah/m4_pisemne_deleni.html)
-- **Zařazení:** Matematika › Čísla a operace · 4.–5. r. · lekce A
+- **Zařazení:** Matematika › Přirozená čísla a počítání · 4.–5. r. · lekce A
 - **Popis:** Dělení jednociferným a dvojciferným dělitelem, první číslice podílu, zkouška.
 - **Funkčnost:** 4 režimy.
 - **Cíl výuky:** Žák písemně dělí a zdůvodní každý krok (dělím – násobím – odčítám – snáším).
@@ -784,7 +784,7 @@ Společné pro celou matematiku: 🔗 každé téma má jeden **názorný obraz*
 - **Obrázky:** žádné.
 
 #### Zlomky – části celku · [m4_zlomky_uvod.html](obsah/m4_zlomky_uvod.html)
-- **Zařazení:** Matematika › Čísla a operace · 4.–5. r. · pilot C (hlavní lekce rodiny zlomků)
+- **Zařazení:** Matematika › Zlomky, desetinná čísla a procenta · 4.–5. r. · pilot C (hlavní lekce rodiny zlomků)
 - **Popis:** Vzorová lekce: cíl, scénář pro učitele, ukázka krok za krokem, koláč, proužek a číselná osa se stejným celkem, adresné chyby, „Kam dál“.
 - **Funkčnost:** 5 režimů (ukázka, jaký je to zlomek, vybarvi, co je víc, část z počtu), ovládání klávesnicí.
 - **Cíl výuky:** Žák přečte a znázorní zlomek jako část celku a porovná dva zlomky.
@@ -797,7 +797,7 @@ Společné pro celou matematiku: 🔗 každé téma má jeden **názorný obraz*
 - **Stav 24. 9. 2026:** hotovo a zapojeno do galerie „Stejný zlomek ve skutečném světě“; všechny čtyři celky jsou neporušené a dělení na čtvrtiny, osminy či poloviny kreslí CSS nad obrázky.
 
 #### Římské číslice · [roman_numerals.html](obsah/roman_numerals.html)
-- **Zařazení:** Matematika › Čísla a operace · 4.–6. r. · samostatná F (převodník)
+- **Zařazení:** Matematika › Přirozená čísla a počítání · 4.–6. r. · samostatná F (převodník)
 - **Popis:** Obousměrný převodník arabských a římských číslic, tabulka základních hodnot, pravidlo odčítání.
 - **Funkčnost:** dvě pole s okamžitým převodem.
 - **Cíl výuky:** Žák přečte a zapíše římské číslo do 3999.
@@ -810,7 +810,7 @@ Společné pro celou matematiku: 🔗 každé téma má jeden **názorný obraz*
   - `IMG-m-03` ⚪ **C ✅** · čtyři skutečné kontexty (věžní ciferník, stavební nápis, náhrobek a knižní kapitola) — zapojeno do režimu V praxi, licence a úpravy doloženy
 
 #### Mentální matematika · [mental_math.html](obsah/mental_math.html)
-- **Zařazení:** Matematika › Čísla a operace · 4.–9. r. · lekce A (dril)
+- **Zařazení:** Matematika › Přirozená čísla a počítání · 4.–9. r. · lekce A (dril)
 - **Popis:** Rychlostní dril z hlavy s volbou operace, obtížnosti a délky, přehled problémových příkladů, rekordy.
 - **Funkčnost:** volby, start, Enter.
 - **Cíl výuky:** Žák pohotově počítá zpaměti a volí výhodnou strategii (zaokrouhlení, rozklad).
@@ -820,7 +820,7 @@ Společné pro celou matematiku: 🔗 každé téma má jeden **názorný obraz*
 - **Obrázky:** žádné.
 
 #### Desetinná čísla · [desetinna_cisla.html](obsah/desetinna_cisla.html)
-- **Zařazení:** Matematika › Čísla a operace · 5.–6. r. · dril D
+- **Zařazení:** Matematika › Zlomky, desetinná čísla a procenta · 5.–6. r. · dril D
 - **Popis:** Sčítání a odčítání, porovnávání, zaokrouhlování; druhá šance, přehled chyb.
 - **Funkčnost:** 3 režimy, nová série.
 - **Cíl výuky:** Žák porovná, zaokrouhlí a sečte desetinná čísla a ví, že 0,5 = 0,50.
@@ -832,7 +832,7 @@ Společné pro celou matematiku: 🔗 každé téma má jeden **názorný obraz*
 - **Obrázky:** žádné.
 
 #### Slovní úlohy a úsudek · [m5_slovni_ulohy.html](obsah/m5_slovni_ulohy.html)
-- **Zařazení:** Matematika › Čísla a operace · 5.–6. r. · lekce A
+- **Zařazení:** Matematika › Přirozená čísla a počítání · 5.–6. r. · lekce A
 - **Popis:** Úlohy o více krocích, co spočítat nejdřív, odhad výsledku.
 - **Funkčnost:** 3 režimy.
 - **Cíl výuky:** Žák rozloží slovní úlohu na údaje, otázku, plán a výpočet a odpoví s jednotkou.
@@ -844,7 +844,7 @@ Společné pro celou matematiku: 🔗 každé téma má jeden **názorný obraz*
   - `IMG-m-04` ✅ **A** · 6 scén ke slovním úlohám (obchod, výlet vlakem, zahrada, školní jídelna, sbírka, cyklovýlet) — zapojeno; čísla doplňuje web
 
 #### Kalkulačka zlomků · [fraction_calc.html](obsah/fraction_calc.html)
-- **Zařazení:** Matematika › Čísla a operace · 6.–7. r. · nástroj F
+- **Zařazení:** Matematika › Zlomky, desetinná čísla a procenta · 6.–7. r. · nástroj F
 - **Popis:** Zadání dvou zlomků a operace, výsledek.
 - **Funkčnost:** čtyři operace, výsledek.
 - **Cíl výuky:** Žák si ověří výsledek a pochopí postup výpočtu se zlomky.
@@ -855,7 +855,7 @@ Společné pro celou matematiku: 🔗 každé téma má jeden **názorný obraz*
 - **Obrázky:** žádné.
 
 #### Dělitelnost, prvočísla, NSD a NSN · [m6_delitelnost.html](obsah/m6_delitelnost.html)
-- **Zařazení:** Matematika › Čísla a operace · 6. r. · lekce A
+- **Zařazení:** Matematika › Přirozená čísla a počítání · 6. r. · lekce A
 - **Popis:** Znaky dělitelnosti, prvočíslo/složené, rozklad na prvočinitele, NSD a NSN.
 - **Funkčnost:** 4 režimy.
 - **Cíl výuky:** Žák použije znaky dělitelnosti, rozloží číslo na prvočinitele a spočítá NSD a NSN v úloze.
@@ -867,7 +867,7 @@ Společné pro celou matematiku: 🔗 každé téma má jeden **názorný obraz*
 - **Obrázky:** žádné.
 
 #### Poměr a měřítko · [m7_pomer.html](obsah/m7_pomer.html)
-- **Zařazení:** Matematika › Čísla a operace · 7. r. · lekce A
+- **Zařazení:** Matematika › Zlomky, desetinná čísla a procenta · 7. r. · lekce A
 - **Popis:** Krácení poměru, dělení v poměru, zvětšení a zmenšení, měřítko mapy.
 - **Funkčnost:** 4 režimy.
 - **Cíl výuky:** Žák rozdělí celek v daném poměru a použije měřítko mapy.
@@ -878,7 +878,7 @@ Společné pro celou matematiku: 🔗 každé téma má jeden **názorný obraz*
 - **Obrázky:** žádné.
 
 #### Celá čísla · [m7_cela_cisla.html](obsah/m7_cela_cisla.html)
-- **Zařazení:** Matematika › Čísla a operace · 7. r. · lekce A
+- **Zařazení:** Matematika › Celá čísla a mocniny · 7. r. · lekce A
 - **Popis:** Číslo na ose, porovnávání, sčítání a odčítání, násobení a dělení, opačné číslo a absolutní hodnota.
 - **Funkčnost:** 5 režimů, osa v SVG.
 - **Cíl výuky:** Žák počítá s celými čísly a vysvětlí sčítání a odčítání jako pohyb po ose.
@@ -889,7 +889,7 @@ Společné pro celou matematiku: 🔗 každé téma má jeden **názorný obraz*
   - `IMG-m-05` ✅ **B** · 3 karty kontextů (teploměr venku v zimě, výtah a potápěč pod hladinou) — zapojeno; číselné stupnice kreslí web
 
 #### Počítání se zlomky · [m7_zlomky_operace.html](obsah/m7_zlomky_operace.html)
-- **Zařazení:** Matematika › Čísla a operace · 7. r. · lekce A
+- **Zařazení:** Matematika › Zlomky, desetinná čísla a procenta · 7. r. · lekce A
 - **Popis:** Krácení a rozšiřování, sčítání a odčítání, násobení a dělení, porovnávání.
 - **Funkčnost:** 4 režimy.
 - **Cíl výuky:** Žák sčítá, odčítá, násobí a dělí zlomky a každý krok vysvětlí na obrázku.
@@ -900,7 +900,7 @@ Společné pro celou matematiku: 🔗 každé téma má jeden **názorný obraz*
 - **Obrázky:** žádné.
 
 #### Procenta a trojčlenka · [procenta.html](obsah/procenta.html)
-- **Zařazení:** Matematika › Čísla a operace · 7.–9. r. · samostatná F
+- **Zařazení:** Matematika › Zlomky, desetinná čísla a procenta · 7.–9. r. · samostatná F
 - **Popis:** Kolik je p % z čísla, kolik % je a z b, výpočet základu, trojčlenka.
 - **Funkčnost:** 4 typy úloh, potvrzení.
 - **Cíl výuky:** Žák vypočítá procentovou část, počet procent i základ a vysvětlí to pomocí 1 %.
@@ -913,7 +913,7 @@ Společné pro celou matematiku: 🔗 každé téma má jeden **názorný obraz*
   - `IMG-m-06` ✅ **B** · 4 karty situací (cenovka se slevou bez čísel, výsledkový graf voleb bez popisků, etiketa potraviny, spořitelní kasička) — zapojeno; čísla vkládá web
 
 #### Mocniny a odmocniny · [mocniny_odmocniny.html](obsah/mocniny_odmocniny.html)
-- **Zařazení:** Matematika › Čísla a operace · 8.–9. r. · dril D
+- **Zařazení:** Matematika › Celá čísla a mocniny · 8.–9. r. · dril D
 - **Popis:** Druhé a třetí mocniny, druhé odmocniny, mix; druhá šance.
 - **Funkčnost:** 4 režimy, nová série.
 - **Cíl výuky:** Žák zná druhé mocniny do 20, odhadne odmocninu mezi dvěma celými čísly.
@@ -924,7 +924,7 @@ Společné pro celou matematiku: 🔗 každé téma má jeden **názorný obraz*
 - **Obrázky:** žádné.
 
 #### Příprava na přijímací zkoušky – M · [m9_prijimacky.html](obsah/m9_prijimacky.html)
-- **Zařazení:** Matematika › Čísla a operace · 9. r. · lekce A (souhrnná)
+- **Zařazení:** Matematika › Přijímačky z matematiky · 9. r. · lekce A (souhrnná)
 - **Popis:** Typové úlohy (počítání, výrazy a rovnice, geometrie, slovní úlohy), test na čas.
 - **Funkčnost:** 5 režimů.
 - **Cíl výuky:** Žák zvládne typové úlohy přijímací zkoušky a zná své slabé oblasti.
@@ -959,7 +959,7 @@ Společné pro celou matematiku: 🔗 každé téma má jeden **názorný obraz*
   - `IMG-m-08` 🟠 **C** · fotografie 8 referenčních předmětů s přibližnou velikostí a hmotností (kancelářská sponka, jablko, litrová láhev, dveře, balení mouky 1 kg, lžička, kostka cukru, fotbalové hřiště z výšky) — odhad jednotek
 
 #### Geometrické tvary a tělesa · [geo_tvary.html](obsah/geo_tvary.html)
-- **Zařazení:** Matematika › Geometrie · 1.–5. r. · samostatná F
+- **Zařazení:** Matematika › Tělesa a prostor · 1.–5. r. · samostatná F
 - **Popis:** Přehled rovinných útvarů a těles, kvíz útvarů a těles.
 - **Funkčnost:** přehled, 2 kvízy.
 - **Cíl výuky:** Žák pozná a pojmenuje základní rovinné útvary a tělesa i v otočené poloze.
@@ -972,7 +972,7 @@ Společné pro celou matematiku: 🔗 každé téma má jeden **názorný obraz*
   - `IMG-m-09` 🟠 **C** · 12 fotografií předmětů tvaru těles (kostka cukru, krabice mléka, plechovka, míč, kornout, pyramida, stan, toblerone, válcová pastelka…) — poznávání těles v okolí
 
 #### Bod, přímka, úsečka · [m2_geo_zaklady.html](obsah/m2_geo_zaklady.html)
-- **Zařazení:** Matematika › Geometrie · 2.–3. r. · lekce A
+- **Zařazení:** Matematika › Geometrie v rovině · 2.–3. r. · lekce A
 - **Popis:** Poznávání útvarů, měření úsečky, rýsování podle zadání.
 - **Funkčnost:** 3 režimy, SVG pravítko.
 - **Cíl výuky:** Žák rozliší bod, přímku, polopřímku a úsečku, změří úsečku a narýsuje ji v dané délce.
@@ -982,7 +982,7 @@ Společné pro celou matematiku: 🔗 každé téma má jeden **názorný obraz*
 - **Obrázky:** žádné.
 
 #### Obvod a obsah čtverce a obdélníku · [m4_obvod_obsah.html](obsah/m4_obvod_obsah.html)
-- **Zařazení:** Matematika › Geometrie · 4.–5. r. · lekce A
+- **Zařazení:** Matematika › Geometrie v rovině · 4.–5. r. · lekce A
 - **Popis:** Obsah ve čtvercové síti, výpočet obvodu a obsahu, rýsování obdélníku.
 - **Funkčnost:** 4 režimy.
 - **Cíl výuky:** Žák spočítá obvod a obsah obdélníku a rozliší „obejít okraj“ od „pokrýt plochu“.
@@ -992,7 +992,7 @@ Společné pro celou matematiku: 🔗 každé téma má jeden **názorný obraz*
 - **Obrázky:** žádné.
 
 #### Osová souměrnost · [m4_soumernost.html](obsah/m4_soumernost.html)
-- **Zařazení:** Matematika › Geometrie · 4.–5. r. · lekce A
+- **Zařazení:** Matematika › Geometrie v rovině · 4.–5. r. · lekce A
 - **Popis:** Je útvar souměrný, kolik má os, dokreslení podle osy.
 - **Funkčnost:** 3 režimy.
 - **Cíl výuky:** Žák najde osu souměrnosti a dokreslí útvar souměrně podle osy.
@@ -1004,7 +1004,7 @@ Společné pro celou matematiku: 🔗 každé téma má jeden **názorný obraz*
   - `IMG-m-10` ⚪ **C** · 8 fotografií souměrných a téměř souměrných objektů (motýl, list, průčelí zámku, obličej, sněhová vločka, dopravní značka, logo, most) — hledání os ve skutečnosti
 
 #### Sítě těles · [m5_site_teles.html](obsah/m5_site_teles.html)
-- **Zařazení:** Matematika › Geometrie · 5.–6. r. · lekce A
+- **Zařazení:** Matematika › Tělesa a prostor · 5.–6. r. · lekce A
 - **Popis:** Která síť složí krychli, stěny/hrany/vrcholy, poznej těleso.
 - **Funkčnost:** 3 režimy.
 - **Cíl výuky:** Žák rozhodne, zda síť složí krychli, a určí počet stěn, hran a vrcholů tělesa.
@@ -1015,7 +1015,7 @@ Společné pro celou matematiku: 🔗 každé téma má jeden **názorný obraz*
 - **Obrázky:** žádné.
 
 #### Geometrické konstrukce kružítkem · [geometricke_konstrukce.html](obsah/geometricke_konstrukce.html)
-- **Zařazení:** Matematika › Geometrie · 6.–9. r. · simulace E (rýsovací nástroj)
+- **Zařazení:** Matematika › Geometrie v rovině · 6.–9. r. · simulace E (rýsovací nástroj)
 - **Popis:** Plnohodnotná rýsovací plocha s kružítkem a pravítkem, úlohy s postupem, kontrola konstrukce, mřížka, přichycení, export/import.
 - **Funkčnost:** nástroje, zpět/vpřed, zobrazení úhlů a délek, kontrola, export PNG/SVG.
 - **Cíl výuky:** Žák provede základní konstrukce (osa úsečky, osa úhlu, kolmice, trojúhelník) a zapíše postup.
@@ -1026,7 +1026,7 @@ Společné pro celou matematiku: 🔗 každé téma má jeden **názorný obraz*
 - **Obrázky:** žádné.
 
 #### Obvody, obsahy, objemy · [geometrie_vzorce.html](obsah/geometrie_vzorce.html)
-- **Zařazení:** Matematika › Geometrie · 6.–9. r. · samostatná F (tahák a výpočty)
+- **Zařazení:** Matematika › Geometrie v rovině · 6.–9. r. · samostatná F (tahák a výpočty)
 - **Popis:** Přehled vzorců pro útvary a tělesa a počítání příkladů.
 - **Funkčnost:** přehled, 2 typy úloh, potvrzení.
 - **Cíl výuky:** Žák vybere správný vzorec a dosadí s jednotkami.
@@ -1037,7 +1037,7 @@ Společné pro celou matematiku: 🔗 každé téma má jeden **názorný obraz*
 - **Obrázky:** žádné (styl D).
 
 #### Úhel a jeho velikost · [m6_uhly.html](obsah/m6_uhly.html)
-- **Zařazení:** Matematika › Geometrie · 6. r. · lekce A
+- **Zařazení:** Matematika › Geometrie v rovině · 6. r. · lekce A
 - **Popis:** Druh úhlu, kolik má stupňů, nastavení úhlu tažením, počítání s úhly.
 - **Funkčnost:** 4 režimy, SVG úhloměr.
 - **Cíl výuky:** Žák změří a narýsuje úhel úhloměrem a určí jeho druh.
@@ -1047,7 +1047,7 @@ Společné pro celou matematiku: 🔗 každé téma má jeden **názorný obraz*
 - **Obrázky:** žádné (případně fotografie z `IMG-m-10`).
 
 #### Krychle a kvádr – povrch a objem · [m6_krychle_kvadr.html](obsah/m6_krychle_kvadr.html)
-- **Zařazení:** Matematika › Geometrie · 6.–7. r. · lekce A (hlavní lekce rodiny těles)
+- **Zařazení:** Matematika › Tělesa a prostor · 6.–7. r. · lekce A (hlavní lekce rodiny těles)
 - **Popis:** Objem, povrch, převody jednotek, slovní úlohy.
 - **Funkčnost:** 4 režimy.
 - **Cíl výuky:** Žák spočítá objem a povrch kvádru a rozliší, kdy úloha chce povrch a kdy objem.
@@ -1057,7 +1057,7 @@ Společné pro celou matematiku: 🔗 každé téma má jeden **názorný obraz*
 - **Obrázky:** žádné.
 
 #### Trojúhelník – druhy a konstrukce · [m6_trojuhelnik.html](obsah/m6_trojuhelnik.html)
-- **Zařazení:** Matematika › Geometrie · 6. r. · lekce A
+- **Zařazení:** Matematika › Geometrie v rovině · 6. r. · lekce A
 - **Popis:** Druhy podle stran a úhlů, trojúhelníková nerovnost, věty o konstrukci.
 - **Funkčnost:** 4 režimy.
 - **Cíl výuky:** Žák určí druh trojúhelníku, rozhodne, zda jde sestrojit, a vybere konstrukční větu.
@@ -1067,7 +1067,7 @@ Společné pro celou matematiku: 🔗 každé téma má jeden **názorný obraz*
 - **Obrázky:** žádné.
 
 #### Shodnost trojúhelníků · [m7_shodnost.html](obsah/m7_shodnost.html)
-- **Zařazení:** Matematika › Geometrie · 7. r. · lekce A
+- **Zařazení:** Matematika › Geometrie v rovině · 7. r. · lekce A
 - **Popis:** Věty sss, sus, usu, zda údaje stačí, odpovídající prvky, postup konstrukce.
 - **Funkčnost:** 4 režimy.
 - **Cíl výuky:** Žák rozhodne podle vět o shodnosti, zda jsou trojúhelníky shodné, a přiřadí odpovídající prvky.
@@ -1077,7 +1077,7 @@ Společné pro celou matematiku: 🔗 každé téma má jeden **názorný obraz*
 - **Obrázky:** žádné.
 
 #### Čtyřúhelníky a hranoly · [m7_ctyruhelniky.html](obsah/m7_ctyruhelniky.html)
-- **Zařazení:** Matematika › Geometrie · 7. r. · lekce A
+- **Zařazení:** Matematika › Geometrie v rovině · 7. r. · lekce A
 - **Popis:** Poznávání čtyřúhelníků, vlastnosti, obsah a obvod, hranol.
 - **Funkčnost:** 4 režimy.
 - **Cíl výuky:** Žák třídí čtyřúhelníky podle vlastností a odvodí obsah rovnoběžníku a lichoběžníku.
@@ -1088,7 +1088,7 @@ Společné pro celou matematiku: 🔗 každé téma má jeden **názorný obraz*
 - **Obrázky:** žádné.
 
 #### Kruh a kružnice · [m8_kruh.html](obsah/m8_kruh.html)
-- **Zařazení:** Matematika › Geometrie · 8. r. · lekce A
+- **Zařazení:** Matematika › Geometrie v rovině · 8. r. · lekce A
 - **Popis:** Obvod a obsah, části kruhu, přímka a kružnice, poloměr a průměr.
 - **Funkčnost:** 4 režimy.
 - **Cíl výuky:** Žák vypočítá obvod a obsah kruhu a vysvětlí, odkud se bere π.
@@ -1098,7 +1098,7 @@ Společné pro celou matematiku: 🔗 každé téma má jeden **názorný obraz*
 - **Obrázky:** žádné.
 
 #### Pythagorova věta · [m8_pythagoras.html](obsah/m8_pythagoras.html)
-- **Zařazení:** Matematika › Geometrie · 8. r. · lekce A
+- **Zařazení:** Matematika › Geometrie v rovině · 8. r. · lekce A
 - **Popis:** Jak věta funguje (čtverce nad stranami), výpočet přepony a odvěsny, slovní úlohy.
 - **Funkčnost:** 4 režimy.
 - **Cíl výuky:** Žák najde přeponu v libovolně otočeném pravoúhlém trojúhelníku a vypočítá chybějící stranu.
@@ -1110,7 +1110,7 @@ Společné pro celou matematiku: 🔗 každé téma má jeden **názorný obraz*
   - `IMG-m-11` ✅ **A** · 4 scény k úlohám (žebřík opřený o dům, drak na provázku, zkratka přes trávník, stožár s kotvicím lanem) — zapojeno; rozměry kreslí web
 
 #### Válec · [m8_valec.html](obsah/m8_valec.html)
-- **Zařazení:** Matematika › Geometrie · 8. r. · lekce A
+- **Zařazení:** Matematika › Tělesa a prostor · 8. r. · lekce A
 - **Popis:** Síť válce, objem, povrch, slovní úlohy (oprava z etapy 01).
 - **Funkčnost:** 4 režimy.
 - **Cíl výuky:** Žák nakreslí síť válce a spočítá jeho povrch a objem.
@@ -1120,7 +1120,7 @@ Společné pro celou matematiku: 🔗 každé téma má jeden **názorný obraz*
 - **Obrázky:** žádné.
 
 #### Trigonometrie · [trigonometrie.html](obsah/trigonometrie.html)
-- **Zařazení:** Matematika › Geometrie · 9. r. · dril D
+- **Zařazení:** Matematika › Geometrie v rovině · 9. r. · dril D
 - **Popis:** Odvěsna z přepony, přepona z odvěsny, mix; canvas s trojúhelníkem.
 - **Funkčnost:** 3 režimy, nová série.
 - **Cíl výuky:** Žák použije sin, cos a tg k výpočtu strany pravoúhlého trojúhelníku.
@@ -1131,7 +1131,7 @@ Společné pro celou matematiku: 🔗 každé téma má jeden **názorný obraz*
 - **Obrázky:** využít `IMG-m-11` (strom, stožár).
 
 #### Podobnost · [m9_podobnost.html](obsah/m9_podobnost.html)
-- **Zařazení:** Matematika › Geometrie · 9. r. · lekce B
+- **Zařazení:** Matematika › Geometrie v rovině · 9. r. · lekce B
 - **Popis:** Zvětšovadlo, měření stínem, podobné/nepodobné, věty o podobnosti, poměr podobnosti, dopočet strany, plány a modely.
 - **Funkčnost:** 8 režimů, interaktivní modely.
 - **Cíl výuky:** Žák určí poměr podobnosti a dopočítá délky i obsahy podobných útvarů.
@@ -1143,7 +1143,7 @@ Společné pro celou matematiku: 🔗 každé téma má jeden **názorný obraz*
   - `IMG-m-12` ✅ **A** · scéna „měření stínem“: strom a tyč na louce ve stejném slunci, dlouhé stíny — zapojeno; úsečky a čísla kreslí web
 
 #### Jehlan, kužel a koule · [m9_jehlan_kuzel.html](obsah/m9_jehlan_kuzel.html)
-- **Zařazení:** Matematika › Geometrie · 9. r. · lekce B
+- **Zařazení:** Matematika › Tělesa a prostor · 9. r. · lekce B
 - **Popis:** Modelárna, rozbalení sítě, proč třetina, jehlan, kužel, koule, poznej vzorec.
 - **Funkčnost:** 7 režimů.
 - **Cíl výuky:** Žák spočítá objem a povrch jehlanu, kuželu a koule a vysvětlí třetinu v objemu.
@@ -1206,7 +1206,7 @@ Společné pro celou matematiku: 🔗 každé téma má jeden **názorný obraz*
 - **Obrázky:** žádné.
 
 #### Aritmetický průměr · [m5_prumer.html](obsah/m5_prumer.html)
-- **Zařazení:** Matematika › Data a finance · 5.–6. r. · lekce A
+- **Zařazení:** Matematika › Data, statistika a finance · 5.–6. r. · lekce A
 - **Popis:** Srovnávání sloupečků, výpočet průměru, doplnění chybějícího čísla, porovnání průměrů.
 - **Funkčnost:** 4 režimy, tažení sloupců.
 - **Cíl výuky:** Žák spočítá průměr a vysvětlí ho jako „rozdělení nastejno“.
@@ -1216,7 +1216,7 @@ Společné pro celou matematiku: 🔗 každé téma má jeden **názorný obraz*
 - **Obrázky:** žádné.
 
 #### Přímá a nepřímá úměrnost · [m7_umernost.html](obsah/m7_umernost.html)
-- **Zařazení:** Matematika › Data a finance · 7.–8. r. · lekce A
+- **Zařazení:** Matematika › Data, statistika a finance · 7.–8. r. · lekce A
 - **Popis:** Úměrnost naživo, přímá/nepřímá, trojčlenka, doplnění tabulky, poznání grafu.
 - **Funkčnost:** 5 režimů, živý model.
 - **Cíl výuky:** Žák rozliší přímou a nepřímou úměrnost v situaci, tabulce i grafu.
@@ -1226,7 +1226,7 @@ Společné pro celou matematiku: 🔗 každé téma má jeden **názorný obraz*
 - **Obrázky:** žádné.
 
 #### Statistika – průměr, medián, modus · [m8_statistika.html](obsah/m8_statistika.html)
-- **Zařazení:** Matematika › Data a finance · 8.–9. r. · lekce A
+- **Zařazení:** Matematika › Data, statistika a finance · 8.–9. r. · lekce A
 - **Popis:** Dílna dat, výpočet charakteristik, čtení diagramu, odlehlá hodnota, pojmy.
 - **Funkčnost:** 5 režimů, tažení hodnot.
 - **Cíl výuky:** Žák spočítá průměr, medián a modus a vybere vhodnou charakteristiku.
@@ -1236,7 +1236,7 @@ Společné pro celou matematiku: 🔗 každé téma má jeden **názorný obraz*
 - **Obrázky:** žádné.
 
 #### Kombinatorika a pravděpodobnost · [kombinatorika.html](obsah/kombinatorika.html)
-- **Zařazení:** Matematika › Data a finance · 9. r. · dril D
+- **Zařazení:** Matematika › Data, statistika a finance · 9. r. · dril D
 - **Popis:** Řazení a výběr, pravděpodobnost, mix; vzorce permutací a kombinací.
 - **Funkčnost:** 3 režimy, nová série.
 - **Cíl výuky:** Žák spočítá počet možností výpisem nebo stromem a určí pravděpodobnost jednoduchého jevu.
@@ -1247,7 +1247,7 @@ Společné pro celou matematiku: 🔗 každé téma má jeden **názorný obraz*
 - **Obrázky:** žádné.
 
 #### Finanční matematika · [m9_financni.html](obsah/m9_financni.html)
-- **Zařazení:** Matematika › Data a finance · 9. r. · lekce A
+- **Zařazení:** Matematika › Data, statistika a finance · 9. r. · lekce A
 - **Popis:** Kalkulačka, jednoduchý a složený úrok, porovnání půjček, rodinný rozpočet.
 - **Funkčnost:** 5 režimů.
 - **Cíl výuky:** Žák spočítá úrok, porovná nabídky půjček podle celkové částky a sestaví jednoduchý rozpočet.
@@ -1262,7 +1262,7 @@ Společné pro celou matematiku: 🔗 každé téma má jeden **názorný obraz*
 Společné pro jazyky: 🔗 gramatika se učí **v krátkém dialogu nebo scénce**, ne na izolovaných větách. 🧩 Dialog, 🧩 časová osa sloves a stálé barvy rodu (der/le modrá, die/la červená, das zelená) na všech stránkách. Emoji u slovíček nahradí karty B. Poslech řešit nahrávkami, ne syntetickým hlasem (viz `vyslovnost`).
 
 #### Angličtina – první slovíčka · [aj_slovicka.html](obsah/aj_slovicka.html)
-- **Zařazení:** Cizí jazyky › Slovní zásoba · AJ 3.–5. r. · samostatná F
+- **Zařazení:** Anglický jazyk › Slovní zásoba a komunikace · AJ 3.–5. r. · samostatná F
 - **Popis:** Obrázkové kartičky (emoji) se slovem, výslovností a překladem; kvíz „Co je to anglicky?“.
 - **Funkčnost:** kartičky, kvíz, čtení nahlas, ukázat překlad.
 - **Cíl výuky:** Žák pozná a pojmenuje anglicky asi 100 běžných věcí a zvířat.
@@ -1275,7 +1275,7 @@ Společné pro jazyky: 🔗 gramatika se učí **v krátkém dialogu nebo scénc
   - `IMG-aj-02` 🔴 **B** ✅ · 120 karet slovíček v 6 tématech — zvířata (21), jídlo (25), škola (19), rodina a lidé (17), dům a nábytek (19; židle sdílená se školou) a oblečení (20); domácí motivy, polévka, káva, dítě, přítel a učitel zapojeny také v `de_slovicka` a `fr_slovicka`; jednoznačný motiv, stejné světlo a okraj
 
 #### Pozdravy a představení · [aj3_pozdravy.html](obsah/aj3_pozdravy.html)
-- **Zařazení:** Cizí jazyky › Slovní zásoba · AJ 3. r. · lekce A
+- **Zařazení:** Anglický jazyk › Slovní zásoba a komunikace · AJ 3. r. · lekce A
 - **Popis:** Co pozdrav znamená, co odpovíš, pozdravy podle denní doby.
 - **Funkčnost:** 3 režimy, předčítání.
 - **Cíl výuky:** Žák pozdraví, odpoví na pozdrav a představí se podle situace a denní doby.
@@ -1287,7 +1287,7 @@ Společné pro jazyky: 🔗 gramatika se učí **v krátkém dialogu nebo scénc
   - `IMG-aj-03` ✅ **A** · 4 scénky setkání dvou dětí podle denní doby — zapojeno do režimu pozdravů
 
 #### Anglická nepravidelná slovesa · [aj_slovesa.html](obsah/aj_slovesa.html)
-- **Zařazení:** Cizí jazyky › Slovní zásoba · AJ 6.–9. r. · samostatná F
+- **Zařazení:** Anglický jazyk › Slovesné časy · AJ 6.–9. r. · samostatná F
 - **Popis:** Tabulka infinitiv – past simple – past participle – význam, doplňování tvarů.
 - **Funkčnost:** přehled, doplň tvary, kontrola.
 - **Cíl výuky:** Žák zná tři tvary nejčastějších nepravidelných sloves a použije je ve větě.
@@ -1299,7 +1299,7 @@ Společné pro jazyky: 🔗 gramatika se učí **v krátkém dialogu nebo scénc
 - **Obrázky:** žádné.
 
 #### Němčina – slovíčka · [de_slovicka.html](obsah/de_slovicka.html)
-- **Zařazení:** Cizí jazyky › Slovní zásoba · NJ 7.–9. r. · samostatná F
+- **Zařazení:** Další cizí jazyk › Slovní zásoba NJ a FJ · NJ 7.–9. r. · samostatná F
 - **Popis:** Slovíčka se členy der/die/das po tématech, přehled, kartičky, kvíz.
 - **Funkčnost:** 3 režimy, filtry témat.
 - **Cíl výuky:** Žák zná základní slovní zásobu vždy se členem.
@@ -1310,7 +1310,7 @@ Společné pro jazyky: 🔗 gramatika se učí **v krátkém dialogu nebo scénc
 - **Obrázky:** sdílet `IMG-aj-02`.
 
 #### Francouzština – slovíčka · [fr_slovicka.html](obsah/fr_slovicka.html)
-- **Zařazení:** Cizí jazyky › Slovní zásoba · FJ 7.–9. r. · samostatná F
+- **Zařazení:** Další cizí jazyk › Slovní zásoba NJ a FJ · FJ 7.–9. r. · samostatná F
 - **Popis:** Slovíčka se členy le/la/les po tématech, přehled, kartičky, kvíz.
 - **Funkčnost:** 3 režimy, filtry témat.
 - **Cíl výuky:** Žák zná základní slovní zásobu se členem a pozná rod.
@@ -1321,7 +1321,7 @@ Společné pro jazyky: 🔗 gramatika se učí **v krátkém dialogu nebo scénc
 - **Obrázky:** sdílet `IMG-aj-02`.
 
 #### Číslovky a určování času (NJ/FJ) · [dcj8_cislovky_cas.html](obsah/dcj8_cislovky_cas.html)
-- **Zařazení:** Cizí jazyky › Slovní zásoba · NJ/FJ 8. r. · lekce A
+- **Zařazení:** Další cizí jazyk › Slovní zásoba NJ a FJ · NJ/FJ 8. r. · lekce A
 - **Popis:** Číslovky a hodiny v němčině a francouzštině.
 - **Funkčnost:** 4 režimy, ciferník v SVG.
 - **Cíl výuky:** Žák přečte a řekne čísla do 100 a čas v NJ i FJ.
@@ -1331,7 +1331,7 @@ Společné pro jazyky: 🔗 gramatika se učí **v krátkém dialogu nebo scénc
 - **Obrázky:** žádné.
 
 #### Abeceda a hláskování (AJ) · [aj3_abeceda.html](obsah/aj3_abeceda.html)
-- **Zařazení:** Cizí jazyky › Gramatika a výslovnost · AJ 3.–4. r. · lekce A
+- **Zařazení:** Anglický jazyk › Slovní zásoba a komunikace · AJ 3.–4. r. · lekce A
 - **Popis:** Jak se čte písmeno, které písmeno slyším, hláskované slovo, co následuje.
 - **Funkčnost:** 4 režimy, předčítání.
 - **Cíl výuky:** Žák vyjmenuje anglickou abecedu a vyhláskuje své jméno.
@@ -1341,7 +1341,7 @@ Společné pro jazyky: 🔗 gramatika se učí **v krátkém dialogu nebo scénc
 - **Obrázky:** žádné.
 
 #### Přítomný čas prostý · [aj4_pritomny_prosty.html](obsah/aj4_pritomny_prosty.html)
-- **Zařazení:** Cizí jazyky › Gramatika · AJ 4.–5. r. · lekce A (hlavní lekce rodiny časů)
+- **Zařazení:** Anglický jazyk › Slovesné časy · AJ 4.–5. r. · lekce A (hlavní lekce rodiny časů)
 - **Popis:** Doplnění slovesa, do/does, zápor, hledání chyby.
 - **Funkčnost:** 4 režimy.
 - **Cíl výuky:** Žák tvoří oznamovací věty, otázky a zápory v přítomném čase prostém včetně 3. osoby.
@@ -1352,7 +1352,7 @@ Společné pro jazyky: 🔗 gramatika se učí **v krátkém dialogu nebo scénc
   - `IMG-aj-04` ✅ **A** · 8 scén běžného dne jednoho školáka (vstává, snídá, jde do školy, hraje fotbal, dělá úkoly, dívá se na TV, čte, spí) — zapojeno jako obrázkový denní režim a sdíleno s `aj5_pritomny_prubehovy`
 
 #### Předložky místa a času · [aj4_predlozky.html](obsah/aj4_predlozky.html)
-- **Zařazení:** Cizí jazyky › Gramatika · AJ 4.–5. r. · lekce A
+- **Zařazení:** Anglický jazyk › Jména, předložky a stupňování · AJ 4.–5. r. · lekce A
 - **Popis:** Kde je kočka (SVG), předložky času, význam.
 - **Funkčnost:** 3 režimy.
 - **Cíl výuky:** Žák popíše polohu předmětu předložkami in, on, under, next to, behind a použije in/on/at u času.
@@ -1363,7 +1363,7 @@ Společné pro jazyky: 🔗 gramatika se učí **v krátkém dialogu nebo scénc
   - `IMG-aj-05` ✅ **B** · pokoj s krabicí, stolem, židlí a postelí + samostatná kočka s průhledným pozadím — zapojeno do poznávačky a přístupného přetahovacího trenažéru
 
 #### Množné číslo a členy · [aj4_mnozne_cislo.html](obsah/aj4_mnozne_cislo.html)
-- **Zařazení:** Cizí jazyky › Gramatika · AJ 4. r. · lekce A
+- **Zařazení:** Anglický jazyk › Jména, předložky a stupňování · AJ 4. r. · lekce A
 - **Popis:** Množné číslo (-s, -es, -ies), nepravidelná množná čísla, a/an.
 - **Funkčnost:** 3 režimy.
 - **Cíl výuky:** Žák vytvoří množné číslo a zvolí a/an podle prvního zvuku.
@@ -1373,7 +1373,7 @@ Společné pro jazyky: 🔗 gramatika se učí **v krátkém dialogu nebo scénc
 - **Obrázky:** sdílet `IMG-aj-02` (varianty „jeden / tři“ u 20 karet).
 
 #### Trenažér časování sloves · [casovani_sloves.html](obsah/casovani_sloves.html)
-- **Zařazení:** Cizí jazyky › Gramatika · AJ/NJ/FJ 4.–9. r. · dril D
+- **Zařazení:** Anglický jazyk › Slovesné časy · AJ/NJ/FJ 4.–9. r. · dril D
 - **Popis:** Přítomný čas v angličtině, němčině a francouzštině, druhá šance.
 - **Funkčnost:** volba jazyka, nová série.
 - **Cíl výuky:** Žák správně vyčasuje pravidelná a nejčastější nepravidelná slovesa v přítomném čase.
@@ -1383,7 +1383,7 @@ Společné pro jazyky: 🔗 gramatika se učí **v krátkém dialogu nebo scénc
 - **Obrázky:** žádné.
 
 #### Přítomný čas průběhový · [aj5_pritomny_prubehovy.html](obsah/aj5_pritomny_prubehovy.html)
-- **Zařazení:** Cizí jazyky › Gramatika · AJ 5.–6. r. · lekce A
+- **Zařazení:** Anglický jazyk › Slovesné časy · AJ 5.–6. r. · lekce A
 - **Popis:** Tvar s -ing, am/is/are, prostý × průběhový, popis obrázku (dnes emoji).
 - **Funkčnost:** 4 režimy.
 - **Cíl výuky:** Žák popíše, co se právě děje, a rozliší to od toho, co se děje obvykle.
@@ -1394,7 +1394,7 @@ Společné pro jazyky: 🔗 gramatika se učí **v krátkém dialogu nebo scénc
   - `IMG-aj-06` ✅ **A** · rušná scéna v parku s 10 osobami, z nichž každá dělá jednu jasnou činnost (běží, čte, jí zmrzlinu, venčí psa, hraje na kytaru, spí na lavičce, jede na kole, fotí, krmí kachny, maluje) — zapojeno; web střídá 10 hotspotů pro popis „právě teď“
 
 #### Can, must – modální slovesa · [aj5_modalni.html](obsah/aj5_modalni.html)
-- **Zařazení:** Cizí jazyky › Gramatika · AJ 5.–6. r. · lekce A
+- **Zařazení:** Anglický jazyk › Větné konstrukce · AJ 5.–6. r. · lekce A
 - **Popis:** Význam, doplnění slovesa, značky a pravidla, správný tvar.
 - **Funkčnost:** 4 režimy.
 - **Cíl výuky:** Žák použije can, can't, must, mustn't a rozliší zákaz od nepovinnosti.
@@ -1405,7 +1405,7 @@ Společné pro jazyky: 🔗 gramatika se učí **v krátkém dialogu nebo scénc
   - `IMG-aj-07` ✅ **B** · 8 cedulí bez textu (zákaz koupání, zákaz psů, zákaz telefonu, povinná přilba, zákaz jízdy na kole, ticho, povinnost mýt ruce, zákaz krmení zvířat) — zapojeno do přehledu a poznávačky pravidel
 
 #### Minulý čas prostý · [aj6_minuly_cas.html](obsah/aj6_minuly_cas.html)
-- **Zařazení:** Cizí jazyky › Gramatika · AJ 6.–7. r. · lekce A
+- **Zařazení:** Anglický jazyk › Slovesné časy · AJ 6.–7. r. · lekce A
 - **Popis:** Tvar slovesa, nepravidelná slovesa, otázka a zápor s did, kdy patří minulý čas.
 - **Funkčnost:** 4 režimy.
 - **Cíl výuky:** Žák vypráví o včerejšku v minulém čase včetně otázek a záporů.
@@ -1416,7 +1416,7 @@ Společné pro jazyky: 🔗 gramatika se učí **v krátkém dialogu nebo scénc
   - `IMG-aj-08` ✅ **A** · 6 obrázků příběhu „Výlet k moři“ (balení, vlak, pláž, déšť, kavárna, návrat) — zapojeno jako samostatný režim vyprávění v minulém čase
 
 #### Stupňování přídavných jmen · [aj6_stupnovani.html](obsah/aj6_stupnovani.html)
-- **Zařazení:** Cizí jazyky › Gramatika · AJ 6.–7. r. · lekce A
+- **Zařazení:** Anglický jazyk › Jména, předložky a stupňování · AJ 6.–7. r. · lekce A
 - **Popis:** Druhý a třetí stupeň, pravidla, doplnění do věty, porovnání obrázků (emoji).
 - **Funkčnost:** 4 režimy.
 - **Cíl výuky:** Žák porovná dvě a více věcí správným stupněm přídavného jména.
@@ -1427,7 +1427,7 @@ Společné pro jazyky: 🔗 gramatika se učí **v krátkém dialogu nebo scénc
   - `IMG-aj-09` ✅ **B** · 5 obrazových trojic ke srovnání (psi, auta, domy, hory a dorty) — zapojeno do procvičování 2. i 3. stupně
 
 #### Budoucí čas – will a going to · [aj7_budouci.html](obsah/aj7_budouci.html)
-- **Zařazení:** Cizí jazyky › Gramatika · AJ 7. r. · lekce A
+- **Zařazení:** Anglický jazyk › Slovesné časy · AJ 7. r. · lekce A
 - **Popis:** will × going to, správný tvar, otázka a zápor, k čemu slouží.
 - **Funkčnost:** 4 režimy.
 - **Cíl výuky:** Žák rozliší okamžité rozhodnutí, plán a předpověď a zvolí will nebo going to.
@@ -1438,7 +1438,7 @@ Společné pro jazyky: 🔗 gramatika se učí **v krátkém dialogu nebo scénc
   - `IMG-aj-10` ✅ **A** · 4 situace s viditelným důkazem (tmavé mraky, sklenice na kraji stolu, prázdná nádrž, dívka s lístky na koncert) — zapojeno do voleb i určování funkce going to
 
 #### Počitatelná a nepočitatelná podstatná jména · [aj7_pocitatelnost.html](obsah/aj7_pocitatelnost.html)
-- **Zařazení:** Cizí jazyky › Gramatika · AJ 7. r. · lekce A
+- **Zařazení:** Anglický jazyk › Jména, předložky a stupňování · AJ 7. r. · lekce A
 - **Popis:** Počitatelné/nepočitatelné, some/any, much/many/a lot of, míry.
 - **Funkčnost:** 4 režimy.
 - **Cíl výuky:** Žák rozliší počitatelná a nepočitatelná podstatná jména a vyjádří množství.
@@ -1449,7 +1449,7 @@ Společné pro jazyky: 🔗 gramatika se učí **v krátkém dialogu nebo scénc
   - `IMG-aj-11` ✅ **B** · 12 karet nádob a porcí (láhev, bochník, kus, sklenice, balíček, plechovka, miska, šálek, kostka, plátek, pytel, krabice) — zapojeno do obrazového procvičování měr
 
 #### Členy a rod podstatných jmen (NJ/FJ) · [dcj7_cleny.html](obsah/dcj7_cleny.html)
-- **Zařazení:** Cizí jazyky › Gramatika · NJ/FJ 7.–8. r. · lekce A (hlavní lekce druhého jazyka)
+- **Zařazení:** Další cizí jazyk › Gramatika NJ a FJ · NJ/FJ 7.–8. r. · lekce A (hlavní lekce druhého jazyka)
 - **Popis:** der/die/das, rod podle koncovky, le/la, un/une.
 - **Funkčnost:** 4 režimy.
 - **Cíl výuky:** Žák se učí podstatná jména se členem a zná pomůcky pro určení rodu.
@@ -1460,7 +1460,7 @@ Společné pro jazyky: 🔗 gramatika se učí **v krátkém dialogu nebo scénc
 - **Obrázky:** sdílet `IMG-aj-02`.
 
 #### Výslovnost a abeceda (NJ/FJ) · [dcj7_vyslovnost.html](obsah/dcj7_vyslovnost.html)
-- **Zařazení:** Cizí jazyky › Gramatika a výslovnost · NJ/FJ 7. r. · lekce A
+- **Zařazení:** Další cizí jazyk › Výslovnost NJ a FJ · NJ/FJ 7. r. · lekce A
 - **Popis:** Jak se čte (NJ, FJ), hláskování, zvláštní znaky; český přepis.
 - **Funkčnost:** 4 režimy (bez hlasu).
 - **Cíl výuky:** Žák přečte typické skupiny hlásek (ei, ie, sch; ou, eau, oi) a napíše zvláštní znaky.
@@ -1470,7 +1470,7 @@ Společné pro jazyky: 🔗 gramatika se učí **v krátkém dialogu nebo scénc
 - **Obrázky:** sdílet `IMG-aj-01`.
 
 #### Časování pravidelných sloves (NJ/FJ) · [dcj8_casovani.html](obsah/dcj8_casovani.html)
-- **Zařazení:** Cizí jazyky › Gramatika · NJ/FJ 8. r. · lekce A
+- **Zařazení:** Další cizí jazyk › Gramatika NJ a FJ · NJ/FJ 8. r. · lekce A
 - **Popis:** Doplnění tvaru v NJ a FJ, tabulka, určení osoby.
 - **Funkčnost:** 4 režimy.
 - **Cíl výuky:** Žák vyčasuje pravidelné sloveso v přítomném čase.
@@ -1481,7 +1481,7 @@ Společné pro jazyky: 🔗 gramatika se učí **v krátkém dialogu nebo scénc
 - **Obrázky:** využít karty osob `IMG-cj-06`.
 
 #### Předpřítomný čas · [aj8_predpritomny.html](obsah/aj8_predpritomny.html)
-- **Zařazení:** Cizí jazyky › Gramatika · AJ 8. r. · lekce A
+- **Zařazení:** Anglický jazyk › Slovesné časy · AJ 8. r. · lekce A
 - **Popis:** have/has + příčestí, předpřítomný × minulý, ever/never/just/already/yet, zkušenosti.
 - **Funkčnost:** 4 režimy.
 - **Cíl výuky:** Žák použije předpřítomný čas pro zkušenosti a změny s dopadem na přítomnost a odliší ho od minulého.
@@ -1491,7 +1491,7 @@ Společné pro jazyky: 🔗 gramatika se učí **v krátkém dialogu nebo scénc
 - **Obrázky:** žádné.
 
 #### Trpný rod · [aj8_trpny_rod.html](obsah/aj8_trpny_rod.html)
-- **Zařazení:** Cizí jazyky › Gramatika · AJ 8.–9. r. · lekce A
+- **Zařazení:** Anglický jazyk › Větné konstrukce · AJ 8.–9. r. · lekce A
 - **Popis:** Převod do trpného rodu, tvar be, třetí tvar, kdy trpný rod použít.
 - **Funkčnost:** 4 režimy.
 - **Cíl výuky:** Žák převede větu do trpného rodu a zvolí ho, když je důležitý děj, ne původce.
@@ -1501,7 +1501,7 @@ Společné pro jazyky: 🔗 gramatika se učí **v krátkém dialogu nebo scénc
 - **Obrázky:** žádné.
 
 #### Minulý čas – úvod (NJ/FJ) · [dcj9_minuly.html](obsah/dcj9_minuly.html)
-- **Zařazení:** Cizí jazyky › Gramatika · NJ/FJ 9. r. · lekce A
+- **Zařazení:** Další cizí jazyk › Gramatika NJ a FJ · NJ/FJ 9. r. · lekce A
 - **Popis:** haben/sein, Partizip II, avoir/être, doplnění tvaru.
 - **Funkčnost:** 4 režimy.
 - **Cíl výuky:** Žák vytvoří perfektum a passé composé a zvolí pomocné sloveso.
@@ -1511,7 +1511,7 @@ Společné pro jazyky: 🔗 gramatika se učí **v krátkém dialogu nebo scénc
 - **Obrázky:** žádné.
 
 #### Nepřímá řeč · [aj9_neprima_rec.html](obsah/aj9_neprima_rec.html)
-- **Zařazení:** Cizí jazyky › Gramatika · AJ 9. r. · pilot C
+- **Zařazení:** Anglický jazyk › Větné konstrukce · AJ 9. r. · pilot C
 - **Popis:** Vzorová lekce: dialog učitelky a žáka s místem a časem, šest kroků posunu zájmen, času a místa, přepnutí vypravěče, procvičování.
 - **Funkčnost:** vedená aktivita, 4 režimy procvičování, návaznosti.
 - **Cíl výuky:** Žák převypráví sdělení podle mluvčího, adresáta, času a místa.
@@ -1522,7 +1522,7 @@ Společné pro jazyky: 🔗 gramatika se učí **v krátkém dialogu nebo scénc
 - **Obrázky:** využít karty osob `IMG-cj-06`.
 
 #### Podmínkové věty · [aj9_podminkove.html](obsah/aj9_podminkove.html)
-- **Zařazení:** Cizí jazyky › Gramatika · AJ 9. r. · lekce A
+- **Zařazení:** Anglický jazyk › Větné konstrukce · AJ 9. r. · lekce A
 - **Popis:** Který kondicionál, první a druhý kondicionál, reálné × nereálné.
 - **Funkčnost:** 4 režimy.
 - **Cíl výuky:** Žák rozliší reálnou a nereálnou podmínku a vytvoří věty nultého, prvního a druhého kondicionálu.
@@ -1536,7 +1536,7 @@ Společné pro jazyky: 🔗 gramatika se učí **v krátkém dialogu nebo scénc
 Společné pro prvouku: 🔗 malý žák se učí z **obrazu a situace**, ne ze slovního popisu. Zde je potřeba obrázků nejvíc. Doporučuji jednu společnou ilustrovanou **„naši vesnici“** (scéna A), ze které vycházejí plán obce, cesta do školy, roční období i ekosystémy. Stejná krajina ve čtyřech ročních obdobích spojí stránky do celku.
 
 #### Rodina a domov · [prv1_rodina.html](obsah/prv1_rodina.html)
-- **Zařazení:** Prvouka › Člověk a jeho svět · 1.–2. r. · samostatná F
+- **Zařazení:** Prvouka a vlastivěda › Lidé kolem nás · 1.–2. r. · samostatná F
 - **Popis:** Rodokmen, kdo je kdo, co se kde doma dělá; upozornění na různé podoby rodin.
 - **Funkčnost:** 3 režimy, předčítání.
 - **Cíl výuky:** Žák pojmenuje členy rodiny a jejich vztahy a přiřadí činnosti k místnostem.
@@ -1549,7 +1549,7 @@ Společné pro prvouku: 🔗 malý žák se učí z **obrazu a situace**, ne ze 
   - `IMG-prv-02` ✅ **A** · řez rodinným domem se šesti částmi domova — zapojeno do režimu Doma
 
 #### Cesta do školy a bezpečnost · [prv1_cesta_skola.html](obsah/prv1_cesta_skola.html)
-- **Zařazení:** Prvouka › Člověk a jeho svět · 1.–2. r. · samostatná F
+- **Zařazení:** Prvouka a vlastivěda › Místo, kde žijeme · 1.–2. r. · samostatná F
 - **Popis:** Co je na cestě, kdy smím přejít, jak se zachovám.
 - **Funkčnost:** 3 režimy, SVG, předčítání.
 - **Cíl výuky:** Žák bezpečně přejde silnici, pozná nebezpečná místa a ví, jak se zachovat.
@@ -1562,7 +1562,7 @@ Společné pro prvouku: 🔗 malý žák se učí z **obrazu a situace**, ne ze 
   - `IMG-prv-04` ✅ **B** · 8 karet bezpečných a rizikových situací (přechod, semafor červená/zelená, dítě za autem, reflexní prvky, cyklista s přilbou, míč na silnici, autobus zakrývající výhled) — zapojeno do kvízu a režimu semaforu
 
 #### Zdraví, nemoc a první pomoc · [prv2_zdravi.html](obsah/prv2_zdravi.html)
-- **Zařazení:** Prvouka › Člověk a jeho svět · 2.–3. r. · lekce A
+- **Zařazení:** Prvouka a vlastivěda › Člověk a jeho zdraví · 2.–3. r. · lekce A
 - **Popis:** Komu zavolat (155, 150, 158, 112), co udělat při úrazu, zdravé/nezdravé.
 - **Funkčnost:** 3 režimy, předčítání.
 - **Cíl výuky:** Žák zavolá pomoc, řekne, co se stalo a kde, a zvládne ošetření drobného poranění.
@@ -1573,7 +1573,7 @@ Společné pro prvouku: 🔗 malý žák se učí z **obrazu a situace**, ne ze 
   - `IMG-prv-05` **B ✅** · 3 karty záchranných složek a 6 situací první pomoci bez drastických detailů — hotovo a zapojeno
 
 #### Zdravý životní styl · [prv5_zdravy_styl.html](obsah/prv5_zdravy_styl.html)
-- **Zařazení:** Prvouka › Člověk a jeho svět · 5. r. · lekce A
+- **Zařazení:** Prvouka a vlastivěda › Člověk a jeho zdraví · 5. r. · lekce A
 - **Popis:** Potravinová pyramida, co je zdravější, režim dne, pravda/mýtus.
 - **Funkčnost:** 4 režimy.
 - **Cíl výuky:** Žák sestaví pestrý jídelníček a vyvážený režim dne.
@@ -1585,7 +1585,7 @@ Společné pro prvouku: 🔗 malý žák se učí z **obrazu a situace**, ne ze 
   - `IMG-prv-06` **B ✅** · 30 sdílených a nových karet potravin — hotovo a zapojeno do pyramidy i porovnávání
 
 #### Roční období a čas · [prv1_rocni_obdobi.html](obsah/prv1_rocni_obdobi.html)
-- **Zařazení:** Prvouka › Příroda kolem nás · 1.–2. r. · samostatná F
+- **Zařazení:** Prvouka a vlastivěda › Lidé a čas · 1.–2. r. · samostatná F
 - **Popis:** Které období, seřaď měsíce, měsíc a období, dny v týdnu.
 - **Funkčnost:** 4 režimy, předčítání.
 - **Cíl výuky:** Žák vyjmenuje roční období, měsíce a dny a pozná období podle znaků v přírodě.
@@ -1597,7 +1597,7 @@ Společné pro prvouku: 🔗 malý žák se učí z **obrazu a situace**, ne ze 
   - `IMG-prv-07` ✅ **A** · naše vesnice ze stejného úhlu ve 4 ročních obdobích (jaro, léto, podzim, zima), se stejným stromem, rybníkem, polem a zahradou — zapojeno jako obrazové volby
 
 #### Lidské tělo a smysly · [prv1_smysly.html](obsah/prv1_smysly.html)
-- **Zařazení:** Prvouka › Příroda kolem nás · 1.–2. r. · samostatná F
+- **Zařazení:** Prvouka a vlastivěda › Člověk a jeho zdraví · 1.–2. r. · samostatná F
 - **Popis:** Části těla, čím co poznám, smysl a orgán.
 - **Funkčnost:** 3 režimy, SVG postava, předčítání.
 - **Cíl výuky:** Žák pojmenuje části těla a přiřadí vjem ke smyslu a orgánu.
@@ -1610,7 +1610,7 @@ Společné pro prvouku: 🔗 malý žák se učí z **obrazu a situace**, ne ze 
   - `IMG-prv-09` ✅ **B** · 10 karet vjemů (zvonek, citron, růže, oheň, zmrzlina, tráva, kočka, duha, bubínek, polštář) — zapojeno do režimu Čím to poznám
 
 #### Domácí a volně žijící zvířata · [prv2_zvirata.html](obsah/prv2_zvirata.html)
-- **Zařazení:** Prvouka › Příroda kolem nás · 2.–3. r. · lekce A
+- **Zařazení:** Prvouka a vlastivěda › Rozmanitost přírody · 2.–3. r. · lekce A
 - **Popis:** Domácí × volně žijící, mláďata, kde bydlí, k čemu je chováme.
 - **Funkčnost:** 4 režimy (textové).
 - **Cíl výuky:** Žák rozliší domácí a volně žijící zvířata, pojmenuje mláďata a příbytky.
@@ -1623,7 +1623,7 @@ Společné pro prvouku: 🔗 malý žák se učí z **obrazu a situace**, ne ze 
   - `IMG-prv-11` **B ✅** · 12 karet mláďat domácích zvířat — hotovo a zapojeno do obrazového přiřazování
 
 #### Živá a neživá příroda · [prv3_ziva_neziva.html](obsah/prv3_ziva_neziva.html)
-- **Zařazení:** Prvouka › Příroda kolem nás · 3. r. · lekce A
+- **Zařazení:** Prvouka a vlastivěda › Rozmanitost přírody · 3. r. · lekce A
 - **Popis:** Živé/neživé, třídění přírodnin, znaky života.
 - **Funkčnost:** 3 režimy.
 - **Cíl výuky:** Žák rozliší živé a neživé přírodniny podle znaků života a zná hraniční případy.
@@ -1634,7 +1634,7 @@ Společné pro prvouku: 🔗 malý žák se učí z **obrazu a situace**, ne ze 
   - `IMG-prv-12` 🟠 **C** · 16 fotografií přírodnin (kámen, krystal soli, semeno fazole, klíčící fazole, suchý list, zelený list, houba, mech, voda, oblak, šnek, mravenec, peří, kost, písek, jablko)
 
 #### Voda, vzduch a půda · [prv3_voda_vzduch.html](obsah/prv3_voda_vzduch.html)
-- **Zařazení:** Prvouka › Příroda kolem nás · 3.–4. r. · lekce A
+- **Zařazení:** Prvouka a vlastivěda › Rozmanitost přírody · 3.–4. r. · lekce A
 - **Popis:** Skupenství vody, koloběh vody, vzduch a půda.
 - **Funkčnost:** 3 režimy.
 - **Cíl výuky:** Žák popíše skupenství vody a koloběh vody v přírodě a vysvětlí význam vzduchu a půdy.
@@ -1647,7 +1647,7 @@ Společné pro prvouku: 🔗 malý žák se učí z **obrazu a situace**, ne ze 
   - `IMG-prv-14` ✅ **A** · řez půdou s kořeny, humusem, podorniční vrstvou, horninou, žížalou a krtkem — zapojeno
 
 #### Ekosystémy – les, louka, voda · [prv4_ekosystemy.html](obsah/prv4_ekosystemy.html)
-- **Zařazení:** Prvouka › Příroda kolem nás · 4.–5. r. · lekce A
+- **Zařazení:** Prvouka a vlastivěda › Rozmanitost přírody · 4.–5. r. · lekce A
 - **Popis:** Kam organismus patří, potravní řetězec, kdo je kdo, lesní patra.
 - **Funkčnost:** 4 režimy (textové).
 - **Cíl výuky:** Žák přiřadí organismy k ekosystému, sestaví potravní řetězec a popíše patra lesa.
@@ -1661,7 +1661,7 @@ Společné pro prvouku: 🔗 malý žák se učí z **obrazu a situace**, ne ze 
   - pro rybník použít existující `Prirodopis/ekologie-rybnik-ilustrace`
 
 #### Horniny a nerosty · [prv4_horniny.html](obsah/prv4_horniny.html)
-- **Zařazení:** Prvouka › Příroda kolem nás · 4.–5. r. · lekce A
+- **Zařazení:** Prvouka a vlastivěda › Rozmanitost přírody · 4.–5. r. · lekce A
 - **Popis:** Poznej podle popisu, hornina × nerost, k čemu se používá (vše textově).
 - **Funkčnost:** 3 režimy.
 - **Cíl výuky:** Žák pozná běžné horniny a nerosty podle vzhledu a vlastností a ví, k čemu se používají.
@@ -1674,7 +1674,7 @@ Společné pro prvouku: 🔗 malý žák se učí z **obrazu a situace**, ne ze 
   - `IMG-prv-18` ⚪ **C** · 8 fotografií využití (dlažba ze žuly, pískovcová socha, vápenka, uhelný lom, sklo z písku, sádra, tužka, solnička)
 
 #### Energie a její zdroje · [prv5_energie.html](obsah/prv5_energie.html)
-- **Zařazení:** Prvouka › Příroda kolem nás · 5. r. · lekce A
+- **Zařazení:** Prvouka a vlastivěda › Rozmanitost přírody · 5. r. · lekce A
 - **Popis:** Obnovitelné zdroje, poznej elektrárnu, cesta elektřiny, jak ušetřit.
 - **Funkčnost:** 4 režimy.
 - **Cíl výuky:** Žák rozliší obnovitelné a neobnovitelné zdroje a popíše cestu elektřiny do zásuvky.
@@ -1685,7 +1685,7 @@ Společné pro prvouku: 🔗 malý žák se učí z **obrazu a situace**, ne ze 
   - `IMG-prv-19` ✅ **A** · krajina se šesti zdroji elektřiny propojená vedením k vesnici — zapojeno
 
 #### Naše obec a kraj · [prv3_obec.html](obsah/prv3_obec.html)
-- **Zařazení:** Prvouka › Naše vlast · 3.–4. r. · lekce A
+- **Zařazení:** Prvouka a vlastivěda › Místo, kde žijeme · 3.–4. r. · lekce A
 - **Popis:** Světové strany, plán obce, kam zajdeš (úřady a služby), kraje a města.
 - **Funkčnost:** 4 režimy, SVG plán.
 - **Cíl výuky:** Žák se orientuje na plánu obce podle světových stran a ví, kam jít pro jakou službu.
@@ -1697,7 +1697,7 @@ Společné pro prvouku: 🔗 malý žák se učí z **obrazu a situace**, ne ze 
   - `IMG-prv-20` ✅ **A** · plán naší vesnice/městečka shora — zapojeno jako přechod od obrazu k jednoduchému plánu
 
 #### Nejstarší české dějiny · [prv4_nejstarsi_dejiny.html](obsah/prv4_nejstarsi_dejiny.html)
-- **Zařazení:** Prvouka › Naše vlast a dějiny · 4.–5. r. · lekce A
+- **Zařazení:** Prvouka a vlastivěda › Lidé a čas · 4.–5. r. · lekce A
 - **Popis:** Kdo to byl, kdy to bylo, seřaď události, staré pověsti.
 - **Funkčnost:** 4 režimy.
 - **Cíl výuky:** Žák seřadí hlavní období od příchodu Slovanů po Karla IV. a odliší pověst od doložené události.
@@ -1710,7 +1710,7 @@ Společné pro prvouku: 🔗 malý žák se učí z **obrazu a situace**, ne ze 
   - `IMG-prv-22` ⚪ **E** · 6 doložených vyobrazení (Karel IV. z Karlštejna, Svatováclavská koruna, Vyšehradský kodex, velkomoravský šperk…) — skutečné doklady
 
 #### Mapa, plán a světové strany · [prv4_mapy_smery.html](obsah/prv4_mapy_smery.html)
-- **Zařazení:** Prvouka › Naše vlast · 4.–5. r. · lekce A
+- **Zařazení:** Prvouka a vlastivěda › Místo, kde žijeme · 4.–5. r. · lekce A
 - **Popis:** Mapové značky, kde to leží, měřítko mapy.
 - **Funkčnost:** 3 režimy, SVG.
 - **Cíl výuky:** Žák čte mapové značky, určí směr podle severky a změří vzdálenost podle měřítka.
@@ -1720,7 +1720,7 @@ Společné pro prvouku: 🔗 malý žák se učí z **obrazu a situace**, ne ze 
 - **Obrázky:** využít `IMG-prv-20` (plán) jako protějšek mapy.
 
 #### Státní symboly a instituce · [prv5_statni_symboly.html](obsah/prv5_statni_symboly.html)
-- **Zařazení:** Prvouka › Naše vlast · 5. r. · lekce A
+- **Zařazení:** Prvouka a vlastivěda › Lidé kolem nás · 5. r. · lekce A
 - **Popis:** Poznej symbol (dva státní znaky ve SVG), kdo co má na starost, tři moci, státní svátky.
 - **Funkčnost:** 4 režimy.
 - **Cíl výuky:** Žák pozná sedm státních symbolů, rozliší tři moci ve státě a zná státní svátky.
@@ -1733,7 +1733,7 @@ Společné pro prvouku: 🔗 malý žák se učí z **obrazu a situace**, ne ze 
   - `IMG-prv-24` 🟠 **C** · fotografie budov Poslanecké sněmovny, Senátu, Úřadu vlády, Pražského hradu, Ústavního soudu
 
 #### 20. století v našich dějinách · [prv5_dejiny_20.html](obsah/prv5_dejiny_20.html)
-- **Zařazení:** Prvouka › Naše vlast a dějiny · 5. r. · lekce A
+- **Zařazení:** Prvouka a vlastivěda › Lidé a čas · 5. r. · lekce A
 - **Popis:** Kdy se to stalo, co se stalo, kdo to byl, seřaď události (1918–1989).
 - **Funkčnost:** 4 režimy.
 - **Cíl výuky:** Žák seřadí hlavní mezníky 20. století a popíše, jak změnily život lidí.
@@ -1749,7 +1749,7 @@ Společné pro prvouku: 🔗 malý žák se učí z **obrazu a situace**, ne ze 
 Společné pro fyziku: web má **výborné simulace** (páka, optika, elektřina, tunel, vodní hladina), ale bez učební cesty, a **krátké kvízové lekce** bez modelu. 🔗 Spojit je: každá kvízová lekce A dostane fázi Výuka z příslušné simulace (odkaz s nastaveným stavem nebo vložený zjednodušený model) a každá simulace E tři úkoly „předpověz → vyzkoušej → vysvětli“ a fázi Ověř se. Jednotné značení veličin a stálé barvy: síla červená šipka, rychlost modrá, energie zelená; g = 9,81 N/kg s poznámkou „ve výpočtech 10“ na jednom místě webu. Obrázky potřebuje fyzika hlavně jako **fotografie skutečných přístrojů a situací**, samotné děje kreslí kód.
 
 #### Hustota · [f6_hustota.html](obsah/f6_hustota.html)
-- **Zařazení:** Přírodní vědy › Fyzika · 6.–7. r. · lekce A
+- **Zařazení:** Fyzika › Látky a měření · 6.–7. r. · lekce A
 - **Popis:** Výpočet hustoty, hmotnosti, bude plavat, co je těžší.
 - **Funkčnost:** 4 režimy, SVG.
 - **Cíl výuky:** Žák vypočítá hustotu z hmotnosti a objemu a předpoví, zda těleso plave.
@@ -1761,7 +1761,7 @@ Společné pro fyziku: web má **výborné simulace** (páka, optika, elektřina
   - `IMG-f-01` ✅ **B** · 8 karet krychlí stejné velikosti z různých materiálů — zapojeno do úloh o hustotě
 
 #### Fyzikální vzorce · [physics_ref.html](obsah/physics_ref.html)
-- **Zařazení:** Přírodní vědy › Fyzika · 6.–9. r. · nástroj F (tahák s modelem)
+- **Zařazení:** Fyzika › Látky a měření · 6.–9. r. · nástroj F (tahák s modelem)
 - **Popis:** Výběr vzorce, posuvníky, schéma a graf závislosti, tabulka konstant CODATA.
 - **Funkčnost:** výběr vzorce, posuvníky, živé schéma a graf.
 - **Cíl výuky:** Žák najde vzorec, pochopí závislost veličin a dosadí s jednotkami.
@@ -1772,7 +1772,7 @@ Společné pro fyziku: web má **výborné simulace** (páka, optika, elektřina
 - **Obrázky:** žádné.
 
 #### Měření fyzikálních veličin · [f6_mereni.html](obsah/f6_mereni.html)
-- **Zařazení:** Přírodní vědy › Fyzika · 6. r. · lekce A (hlavní lekce rodiny měření)
+- **Zařazení:** Fyzika › Látky a měření · 6. r. · lekce A (hlavní lekce rodiny měření)
 - **Popis:** Jednotky, čím se měří, převody, odečet hodnoty ze stupnice.
 - **Funkčnost:** 4 režimy, SVG stupnice.
 - **Cíl výuky:** Žák zvolí vhodné měřidlo, odečte hodnotu ze stupnice a zapíše ji s jednotkou.
@@ -1783,7 +1783,7 @@ Společné pro fyziku: web má **výborné simulace** (páka, optika, elektřina
   - `IMG-f-02` 🟠 **C** · 10 fotografií měřidel (pravítko, svinovací metr, posuvné měřidlo, kuchyňská váha, digitální váha, odměrný válec, teploměr lihový a digitální, stopky, siloměr) — poznávání měřidel
 
 #### Fyzikální hřiště – síla, pohyb a energie · [physics_playground.html](obsah/physics_playground.html)
-- **Zařazení:** Přírodní vědy › Fyzika · 7.–8. r. · interaktivní výklad (od 24. 9. 2026 místo simulace E na celou obrazovku; stará verze v `docs/zalohy-hriste-20260924-174636/`)
+- **Zařazení:** Fyzika › Pohyb, síla a stroje · 7.–8. r. · interaktivní výklad (od 24. 9. 2026 místo simulace E na celou obrazovku; stará verze v `docs/zalohy-hriste-20260924-174636/`)
 - **Popis:** Pět kapitol ve stylu `optika_lekce`: síla a pohyb (šipka síly, výsledná síla, tření, Newtonovy zákony), tíha a nakloněná rovina (rozklad tíhy, mezní úhel), polohová a pohybová energie (zákon zachování), kyvadlo (doba kmitu, měření s tabulkou a grafem, Země/Měsíc/Mars), srážky a hybnost (rozšiřující učivo).
 - **Funkčnost:** 5 živých modelů v SVG s animací (společná smyčka, 🐌 zpomalení): bedna s tahem, třením a grafem v(t); nakloněná rovina s úchopem sklonu, rovnoběžníkem sil a mezním úhlem; U-rampa se sloupci Ep/Ek/teplo/celkem; jedno nebo dvě kyvadla (RK4, měření doby kmitu z průchodů, tabulka měření + graf T(l) s teoretickou křivkou); srážky vozíků (pružina, guma, suchý zip) s bilancí hybnosti a energie a hotovými nastaveními. Fyzika s g = 9,81 N/kg, otázky s g = 10 N/kg.
 - **Rámec:** fáze Výuka (kapitoly), Ukázka (řešený příklad k energii s tlačítkem do modelu), Procvič (19 generátorů přes `uloha.js`, 5 témat), Ověř se, Tahák (6 karet). 7 předpovědí a 10 úkolů, které model sám pozná; postup a tabulka měření v `metodus_hriste`.
@@ -1792,7 +1792,7 @@ Společné pro fyziku: web má **výborné simulace** (páka, optika, elektřina
 - **Obrázky:** žádné nejsou potřeba (vše kreslí kód, styl D).
 
 #### Vlastnosti látek a těles · [f6_vlastnosti_latek.html](obsah/f6_vlastnosti_latek.html)
-- **Zařazení:** Přírodní vědy › Fyzika · 6. r. · lekce A s modely (hlavní lekce rodiny látek)
+- **Zařazení:** Fyzika › Látky a měření · 6. r. · lekce A s modely (hlavní lekce rodiny látek)
 - **Popis:** Látka × těleso, skupenství, částicová stavba, vlastnosti látek, Archimédův zákon.
 - **Funkčnost:** 5 režimů, canvas s částicemi a Archimédovou ukázkou.
 - **Cíl výuky:** Žák rozliší látku a těleso, popíše skupenství částicovým modelem a vysvětlí vztlak.
@@ -1803,7 +1803,7 @@ Společné pro fyziku: web má **výborné simulace** (páka, optika, elektřina
   - `IMG-f-03` ⚪ **C** · 12 fotografií předmětů k třídění látka × těleso (sklenice, sklo, lžíce, ocel, svíčka, vosk, cihla, jíl…) — dvojice těleso–látka
 
 #### Páka a jednoduché stroje · [paka.html](obsah/paka.html)
-- **Zařazení:** Přírodní vědy › Fyzika · 7.–8. r. · simulace E (velká)
+- **Zařazení:** Fyzika › Pohyb, síla a stroje · 7.–8. r. · simulace E (velká)
 - **Popis:** Páka (dvojzvratná, jednozvratná, páčidlo, vytržení pařezu), kladky a kladkostroj, ozubená kola a soukolí, hodinový strojek; úkoly a dopočítání rovnováhy.
 - **Funkčnost:** 3 hlavní části, mnoho scén, tažení, úkoly, nápověda.
 - **Cíl výuky:** Žák použije rovnováhu na páce (F₁ · r₁ = F₂ · r₂) a vysvětlí, co ušetří kladka a převod (sílu, ne práci).
@@ -1815,7 +1815,7 @@ Společné pro fyziku: web má **výborné simulace** (páka, optika, elektřina
   - `IMG-f-04` 🟠 **C** · 12 fotografií jednoduchých strojů v praxi (houpačka, nůžky, kleště, otvírák, kolečko, louskáček, pinzeta, stavební jeřáb s kladkostrojem, studna s rumpálem, převody jízdního kola, hodinový strojek, klika) — spojení modelu se světem
 
 #### Páka a jednoduché stroje – názorná lekce · [paka_lekce.html](obsah/paka_lekce.html)
-- **Zařazení:** Přírodní vědy › Fyzika · 7.–8. r. · interaktivní výklad (od 24. 9. 2026, v rodině „Síla, pohyb a stroje“ před laboratoří `paka`)
+- **Zařazení:** Fyzika › Pohyb, síla a stroje · 7.–8. r. · interaktivní výklad (od 24. 9. 2026, v rodině „Síla, pohyb a stroje“ před laboratoří `paka`)
 - **Popis:** Devět kapitol: jednoduché stroje, moment síly, rovnováha na páce, druhy pák, kladky, kolo na hřídeli, převody, nakloněná rovina (klín, šroub), zlaté pravidlo mechaniky.
 - **Funkčnost:** 11 živých modelů s úchopy (klíč, školní páka, houpačka, kolečko, předloktí, kladkostroj, rumpál, ozubená kola, jízdní kolo, rampa, graf práce) a třídička 10 předmětů.
 - **Rámec:** Výuka (kapitoly), Ukázka (houpačka, kladkostroj), Procvič (16 generátorů, 5 témat), Ověř se, Tahák (7 karet); 11 předpovědí a 15 úkolů, které model sám pozná; oddíl Pro učitele (scénáře 5/15/45 min, časté omyly).
@@ -1823,7 +1823,7 @@ Společné pro fyziku: web má **výborné simulace** (páka, optika, elektřina
 - **Obrázky:** vše kreslí kód (styl D); fotografie `IMG-f-04` by se hodily i sem.
 
 #### Závity a šrouby – názorná lekce · [zavity_lekce.html](obsah/zavity_lekce.html)
-- **Zařazení:** Přírodní vědy › Fyzika · 7.–9. r. · interaktivní výklad (od 1. 10. 2026, v rodině „Síla, pohyb a stroje“ hned za `paka_lekce`)
+- **Zařazení:** Fyzika › Pohyb, síla a stroje · 7.–9. r. · interaktivní výklad (od 1. 10. 2026, v rodině „Síla, pohyb a stroje“ hned za `paka_lekce`)
 - **Popis:** Devět kapitol: závit jako nakloněná rovina navinutá na válec, popis závitu (rozteč, stoupání, chody, profil, levý závit, značky), určení neznámého šroubu, síla na klice zvedáku a zlaté pravidlo, tření a samosvornost, utahování (moment a předpětí), mikrometr, dílna – hřiště, závity kolem nás.
 - **Funkčnost:** 8 živých modelů s úchopy (navíjení trojúhelníku na tužku, šroub s otáčivou maticí, posuvné měřítko a závitová měrka na neznámém šroubu, klíč na matici s ukazatelem předpětí, zvedák s rozvinutou otáčkou, matice na nakloněné rovině, mikrometr s lupou a měřením, dílna se 4 stroji a „Pustit kliku“) a třídička 10 předmětů (spojuje / zvedá a tlačí / měří / dopravuje).
 - **Rámec:** Výuka (kapitoly), Ukázka (4 řešené příklady), Procvič (16 generátorů, 6 témat), Ověř se, Tahák (7 karet); 7 předpovědí a 20 úkolů včetně tří výzev v dílně; oddíl Pro učitele (scénáře 5/15/45 min, časté omyly, pokusy).
@@ -1831,7 +1831,7 @@ Společné pro fyziku: web má **výborné simulace** (páka, optika, elektřina
 - **Obrázky:** vše kreslí kód (styl D); hodily by se fotografie skutečných závitů (profily M a Tr, zvedák, mikrometr) – zatím neobjednáno.
 
 #### Vrtačka a lis · [vrtacka_lis.html](obsah/vrtacka_lis.html)
-- **Zařazení:** Přírodní vědy › Fyzika · 7.–8. r. · simulace E
+- **Zařazení:** Fyzika › Pohyb, síla a stroje · 7.–8. r. · simulace E
 - **Popis:** Vrtačka (materiál, vrták, otáčky, posuv) a hydraulický lis (úkoly od ložiska po plechovku).
 - **Funkčnost:** 2 části, parametry, úkoly, doporučené otáčky.
 - **Cíl výuky:** Žák vysvětlí, jak hydraulický lis znásobí sílu za cenu delší dráhy pístu.
@@ -1843,7 +1843,7 @@ Společné pro fyziku: web má **výborné simulace** (páka, optika, elektřina
   - `IMG-f-05` ⚪ **C** · fotografie stojanové vrtačky a dílenského hydraulického lisu, hydraulického zvedáku auta — skutečné stroje
 
 #### Gravitační hřiště: vzájemná přitažlivost · [gravitacni_hriste2.html](obsah/gravitacni_hriste2.html)
-- **Zařazení:** Přírodní vědy › Fyzika · 7. a 9. r. · simulace E
+- **Zařazení:** Fyzika › Astronomie · 7. a 9. r. · simulace E
 - **Popis:** Tělesa se vzájemně přitahují, těžiště, pole, mřížka, lupy, přednastavené soustavy (dvojhvězda, planeta s měsícem, tři tělesa).
 - **Funkčnost:** mnoho scén, vytváření těles, přepínače zobrazení, údaje.
 - **Cíl výuky:** Žák pozoruje, že se přitahují obě tělesa, a vysvětlí, co je společné těžiště.
@@ -1854,7 +1854,7 @@ Společné pro fyziku: web má **výborné simulace** (páka, optika, elektřina
 - **Obrázky:** žádné.
 
 #### Tlak v kapalinách a plynech · [f7_tlak.html](obsah/f7_tlak.html)
-- **Zařazení:** Přírodní vědy › Fyzika · 7.–8. r. · lekce A
+- **Zařazení:** Fyzika › Kapaliny, plyny a proudění · 7.–8. r. · lekce A
 - **Popis:** Hydrostatický tlak, plave/potopí, hydraulický lis, tlak pevného tělesa.
 - **Funkčnost:** 4 režimy, SVG.
 - **Cíl výuky:** Žák vypočítá tlak a vysvětlí, na čem závisí hydrostatický tlak.
@@ -1866,7 +1866,7 @@ Společné pro fyziku: web má **výborné simulace** (páka, optika, elektřina
   - `IMG-f-06` ✅ **B** · 5 karet situací tlaku (sněžnice, jehla, housenkový pás, potápěč, přehrada) — zapojeno
 
 #### Kosmický prak: oběžné dráhy · [gravitacni_hriste.html](obsah/gravitacni_hriste.html)
-- **Zařazení:** Přírodní vědy › Fyzika · 7. a 9. r. · simulace F
+- **Zařazení:** Fyzika › Astronomie · 7. a 9. r. · simulace F
 - **Popis:** Vystřelování těles kolem Slunce, stopy, plochy (2. Keplerův zákon), elipsa, vektory, úniková rychlost.
 - **Funkčnost:** tažení, přepínače, 4 přednastavené pokusy, údaje.
 - **Cíl výuky:** Žák vysvětlí, proč těleso obíhá, a pozoruje Keplerovy zákony.
@@ -1877,7 +1877,7 @@ Společné pro fyziku: web má **výborné simulace** (páka, optika, elektřina
 - **Obrázky:** žádné.
 
 #### Pohyb tělesa – dráha a rychlost · [f7_pohyb.html](obsah/f7_pohyb.html)
-- **Zařazení:** Přírodní vědy › Fyzika · 7. r. · lekce A
+- **Zařazení:** Fyzika › Pohyb, síla a stroje · 7. r. · lekce A
 - **Popis:** s = v · t, převody m/s ↔ km/h, čtení grafu, rovnoměrný/nerovnoměrný pohyb.
 - **Funkčnost:** 4 režimy, SVG graf.
 - **Cíl výuky:** Žák vypočítá dráhu, rychlost a čas a přečte graf dráhy na čase.
@@ -1887,7 +1887,7 @@ Společné pro fyziku: web má **výborné simulace** (páka, optika, elektřina
 - **Obrázky:** žádné.
 
 #### Proudové motory · [proudove_motory.html](obsah/proudove_motory.html)
-- **Zařazení:** Přírodní vědy › Fyzika · 8.–9. r. · simulace E
+- **Zařazení:** Fyzika › Kapaliny, plyny a proudění · 8.–9. r. · simulace E
 - **Popis:** Proudění vzduchu motorem, barva podle rychlosti/teploty/tlaku, plyn a rychlost letu, průběh podél motoru.
 - **Funkčnost:** posuvníky, 3 barevné režimy, tempo, popisky, graf.
 - **Cíl výuky:** Žák popíše čtyři fáze proudového motoru a vysvětlí, co pohání kompresor.
@@ -1899,7 +1899,7 @@ Společné pro fyziku: web má **výborné simulace** (páka, optika, elektřina
   - `IMG-f-07` ⚪ **C** · fotografie proudového motoru v řezu (muzejní exponát) a dopravního letadla při startu
 
 #### Vítr a překážky – aerodynamický tunel · [vitr_tunel.html](obsah/vitr_tunel.html)
-- **Zařazení:** Přírodní vědy › Fyzika · 7.–8. r. · simulace E
+- **Zařazení:** Fyzika › Kapaliny, plyny a proudění · 7.–8. r. · simulace E
 - **Popis:** Proudění kolem válce, desky, křídla, budov, kopce; kreslení překážek, kouř, víry, tlak.
 - **Funkčnost:** mnoho překážek, zobrazení, kreslení, tempo, detail.
 - **Cíl výuky:** Žák pozoruje, jak tvar překážky ovlivní proudění, a vysvětlí vznik vírů a vztlaku na křídle.
@@ -1911,7 +1911,7 @@ Společné pro fyziku: web má **výborné simulace** (páka, optika, elektřina
   - `IMG-f-08` ⚪ **C** · 4 fotografie proudění ve skutečnosti (kouřový tunel, sněhové závěje za plotem, vlajka ve větru, cyklista ve skrčené poloze)
 
 #### Síla, těžiště a Newtonovy zákony · [f7_sila.html](obsah/f7_sila.html)
-- **Zařazení:** Přírodní vědy › Fyzika · 7. r. · lekce A (hlavní lekce rodiny síly)
+- **Zařazení:** Fyzika › Pohyb, síla a stroje · 7. r. · lekce A (hlavní lekce rodiny síly)
 - **Popis:** Výslednice sil, gravitační síla, těžiště, Newtonovy zákony.
 - **Funkčnost:** 4 režimy, SVG.
 - **Cíl výuky:** Žák složí síly, určí gravitační sílu a těžiště a použije Newtonovy zákony v situaci.
@@ -1923,7 +1923,7 @@ Společné pro fyziku: web má **výborné simulace** (páka, optika, elektřina
   - `IMG-f-09` ✅ **B** · 4 karty situací Newtonových zákonů (bruslař na ledě, raketa, dva bruslaři se odstrkují, autobus brzdí a cestující se nakloní) — zapojeno do procvičování zákonů
 
 #### Elektřina – obvody a magnetismus · [elektrina.html](obsah/elektrina.html)
-- **Zařazení:** Přírodní vědy › Fyzika · 8.–9. r. · simulace E (hlavní lekce rodiny elektřiny)
+- **Zařazení:** Fyzika › Elektřina · 8.–9. r. · simulace E (hlavní lekce rodiny elektřiny)
 - **Popis:** Ohmův zákon, sériové a paralelní zapojení, magnetické pole vodiče a cívky, indukce, spotřeba a cena.
 - **Funkčnost:** 5 částí, posuvníky, přepínače zapojení, pojistka.
 - **Cíl výuky:** Žák sestaví jednoduchý obvod, použije Ohmův zákon a vysvětlí rozdíl sériového a paralelního zapojení.
@@ -1936,7 +1936,7 @@ Společné pro fyziku: web má **výborné simulace** (páka, optika, elektřina
   - `IMG-f-10` **B ✅** · devět realistických karet (plochá baterie, žárovka v objímce, spínač, rezistor, ampérmetr, voltmetr, pojistka, cívka, kompas) — hotovo a zapojeno do překlápěcích karet se schématickými značkami a funkcí
 
 #### Teplo a změny skupenství · [f8_teplo.html](obsah/f8_teplo.html)
-- **Zařazení:** Přírodní vědy › Fyzika · 8. r. · lekce A
+- **Zařazení:** Fyzika › Energie a teplo · 8. r. · lekce A
 - **Popis:** Výpočet tepla, graf ohřevu, změny skupenství, měrná tepelná kapacita.
 - **Funkčnost:** 4 režimy, SVG graf.
 - **Cíl výuky:** Žák vypočítá teplo potřebné k ohřátí, vysvětlí graf ohřevu a odliší teplotu od tepla.
@@ -1946,7 +1946,7 @@ Společné pro fyziku: web má **výborné simulace** (páka, optika, elektřina
 - **Obrázky:** žádné.
 
 #### Vodní hladina – vlny a slapy · [vodni_hladina.html](obsah/vodni_hladina.html)
-- **Zařazení:** Přírodní vědy › Fyzika · 8.–9. r. · simulace E
+- **Zařazení:** Fyzika › Světlo, zvuk a vlnění · 8.–9. r. · simulace E
 - **Popis:** Vlny na hladině (kamínky, žabky, kámen, kláda, rákosí), slapové vlny, zobrazení výšky a vrstevnic.
 - **Funkčnost:** 2 části, mnoho nástrojů, nastavení.
 - **Cíl výuky:** Žák pozoruje šíření, odraz a interferenci vln a vysvětlí příčinu přílivu a odlivu.
@@ -1958,7 +1958,7 @@ Společné pro fyziku: web má **výborné simulace** (páka, optika, elektřina
   - `IMG-f-11` ⚪ **C ✅** · dvojice fotografií stejné přílivové nádrže řeky Washford ve Watchetu při přílivu a odlivu — zapojeno do režimu Slapové vlny; stejné souřadnice, vzájemně odkazované zdroje, doložené licence
 
 #### Světlo a optika – názorná lekce · [optika_lekce.html](obsah/optika_lekce.html)
-- **Zařazení:** Přírodní vědy › Fyzika · 8.–9. r. · interaktivní výklad (hlavní lekce rodiny světla od 24. 9. 2026)
+- **Zařazení:** Fyzika › Světlo, zvuk a vlnění · 8.–9. r. · interaktivní výklad (hlavní lekce rodiny světla od 24. 9. 2026)
 - **Popis:** Deset kapitol od toho, jak vidíme, po optické přístroje; každý jev má vlastní živý model (SVG) s úchopy, odečty a hláškou, co model právě ukazuje.
 - **Funkčnost:** 13 modelů – lampa a prostředí, stín a polostín, zákon odrazu (hladké × drsné), obraz v zrcadle, lom s vlnoplochami (2×, druhý pro mezní úhel), tužka ve vodě, optické vlákno, hranol s disperzí, duha v kapce, čočka počítaná přes obě plochy (i jako hranolky), zobrazení tenkou čočkou (krokování konstrukce, svazek, stínítko s náhledem), oko s akomodací a brýlemi (tlačítko „Nasadit brýle“ vloží správnou korekci a animací ukáže posun obrazu na sítnici; posun je v kresbě zveličený, dioptrie skutečné). Lom, odraz i podíl odraženého světla (Fresnel) počítá společný paprskový počítač; skla podle katalogu (BK7, SF11).
 - **Rámec:** fáze Výuka (kapitoly), Ukázka (řešený příklad k zobrazovací rovnici), Procvič (15 generátorů otázek přes `uloha.js`, témata, obrázky u čoček), Ověř se, Tahák (6 karet). 11 předpovědí „předpověz → vyzkoušej → vysvětli“ a 13 úkolů, které model sám pozná; postup v `metodus_optika_lekce`.
@@ -1967,7 +1967,7 @@ Společné pro fyziku: web má **výborné simulace** (páka, optika, elektřina
 - **Obrázky:** žádné nejsou potřeba (vše kreslí kód, styl D); fotografie jevů `IMG-f-12` by se hodily i sem.
 
 #### Optika – odraz, lom a čočky · [optika.html](obsah/optika.html)
-- **Zařazení:** Přírodní vědy › Fyzika · 8.–9. r. · simulace E (hlavní lekce rodiny světla)
+- **Zařazení:** Fyzika › Světlo, zvuk a vlnění · 8.–9. r. · simulace E (hlavní lekce rodiny světla)
 - **Popis:** Odraz a lom na rozhraní látek, čočky a zrcadla, hranol, dalekohled.
 - **Funkčnost:** 4 části, volba látek, úhly, typy čoček a dalekohledů.
 - **Cíl výuky:** Žák vysvětlí zákon odrazu a lom světla a sestrojí obraz spojkou.
@@ -1980,7 +1980,7 @@ Společné pro fyziku: web má **výborné simulace** (páka, optika, elektřina
   - `IMG-f-12` 🟠 **C** · 6 fotografií optických jevů (lžíce „zlomená“ ve sklenici vody, duha, hranol s barevným spektrem, obraz v lžíci, lupa, odraz v klidném jezeře)
 
 #### Stavba optické soustavy · [optika_soustava.html](obsah/optika_soustava.html)
-- **Zařazení:** Přírodní vědy › Fyzika · 8.–9. r. · simulace E
+- **Zařazení:** Fyzika › Světlo, zvuk a vlnění · 8.–9. r. · simulace E
 - **Popis:** Hotové přístroje (lupa, promítačka, Keplerův, Galileův, Cassegrainův a pozemní dalekohled, mikroskop) a stavba vlastní soustavy na lavici.
 - **Funkčnost:** dvě části (pochopit / postavit), krokování cesty světla, prvky na lavici.
 - **Cíl výuky:** Žák vysvětlí, jak přístroj vytváří zvětšený obraz, a sestaví jednoduchou soustavu.
@@ -1992,7 +1992,7 @@ Společné pro fyziku: web má **výborné simulace** (páka, optika, elektřina
   - `IMG-f-13` 🟠 **C** · fotografie 7 přístrojů (lupa, diaprojektor, Keplerův refraktor, divadelní kukátko, Cassegrainův teleskop, triedr, školní mikroskop)
 
 #### Práce, výkon a energie · [f8_prace_energie.html](obsah/f8_prace_energie.html)
-- **Zařazení:** Přírodní vědy › Fyzika · 8. r. · lekce A
+- **Zařazení:** Fyzika › Energie a teplo · 8. r. · lekce A
 - **Popis:** Práce, výkon, polohová a pohybová energie, přeměny energie.
 - **Funkčnost:** 4 režimy, SVG.
 - **Cíl výuky:** Žák vypočítá práci, výkon a energii a popíše přeměny energie včetně ztrát.
@@ -2002,7 +2002,7 @@ Společné pro fyziku: web má **výborné simulace** (páka, optika, elektřina
 - **Obrázky:** žádné.
 
 #### Jaderná energie · [f9_jaderna.html](obsah/f9_jaderna.html)
-- **Zařazení:** Přírodní vědy › Fyzika · 9. r. · lekce B (velká)
+- **Zařazení:** Fyzika › Energie a teplo · 9. r. · lekce B (velká)
 - **Popis:** Štěpení krok za krokem, řetězová reakce, rozpad naživo, elektrárna zblízka, havárie a chlazení, kvízy, provoz a zdroje.
 - **Funkčnost:** 8 částí, animace, kvízy.
 - **Cíl výuky:** Žák vysvětlí štěpení a řetězovou reakci, poločas rozpadu a princip jaderné elektrárny.
@@ -2014,7 +2014,7 @@ Společné pro fyziku: web má **výborné simulace** (páka, optika, elektřina
   - `IMG-f-14` ⚪ **C** · fotografie JE Temelín a Dukovany (chladicí věže), palivového souboru (muzejní model)
 
 #### Zvukové jevy · [f9_zvuk.html](obsah/f9_zvuk.html)
-- **Zařazení:** Přírodní vědy › Fyzika · 9. r. · lekce A
+- **Zařazení:** Fyzika › Světlo, zvuk a vlnění · 9. r. · lekce A
 - **Popis:** Čtení zvukové vlny, rychlost zvuku a ozvěna, výška a hlasitost, sluch a hluk.
 - **Funkčnost:** 4 režimy, SVG.
 - **Cíl výuky:** Žák spojí výšku tónu s frekvencí a hlasitost s amplitudou a vypočítá vzdálenost z ozvěny.
@@ -2025,7 +2025,7 @@ Společné pro fyziku: web má **výborné simulace** (páka, optika, elektřina
   - `IMG-f-15` ✅ **B** · 8 karet zdrojů zvuku pro interaktivní decibelovou stupnici (list, šepot, rozhovor, třída, sekačka, motorka, koncert, letadlo)
 
 #### Střídavý proud a rozvod elektřiny · [f9_stridavy_proud.html](obsah/f9_stridavy_proud.html)
-- **Zařazení:** Přírodní vědy › Fyzika · 9. r. · lekce A
+- **Zařazení:** Fyzika › Elektřina · 9. r. · lekce A
 - **Popis:** Cesta elektřiny, transformátor, vlastnosti proudu, bezpečnost.
 - **Funkčnost:** 4 režimy, SVG.
 - **Cíl výuky:** Žák popíše cestu elektřiny z elektrárny do zásuvky a vysvětlí, proč se přenáší vysokým napětím.
@@ -2040,7 +2040,7 @@ Společné pro fyziku: web má **výborné simulace** (páka, optika, elektřina
 Společné: 🔗 jednotné ovládání (pauza, rychlost času, popisky) a společná data planet napříč `solar_system`, `planet_globe`, gravitačními hřišti a `z6_planeta_zeme`. Záměrně tmavé stránky spojit s webem proužkem hlavičky v barvě fyziky.
 
 #### Hvězdná obloha · [star_map.html](obsah/star_map.html)
-- **Zařazení:** Přírodní vědy › Astronomie · 6. a 9. r. · simulace F
+- **Zařazení:** Fyzika › Astronomie · 6. a 9. r. · simulace F
 - **Popis:** Nejjasnější hvězdy a souhvězdí nad obzorem pro místo a čas.
 - **Funkčnost:** datum a čas, souřadnice, předvolby, tlačítko „Teď“.
 - **Cíl výuky:** Žák najde Polárku a hlavní souhvězdí a vysvětlí, proč se obloha během noci otáčí.
@@ -2053,7 +2053,7 @@ Společné: 🔗 jednotné ovládání (pauza, rychlost času, popisky) a spole�
   - `IMG-f-17` ⚪ **A** ✅ · 12 jemných obrysových kreseb souhvězdí na průhledném pozadí — zapojeno jako volitelná vrstva nad přesnou mapou; doplněny hvězdy Štíra a Pegase
 
 #### Pohyb vesmírem · [pohyb_vesmirem.html](obsah/pohyb_vesmirem.html)
-- **Zařazení:** Přírodní vědy › Astronomie · 6. a 9. r. · simulace F
+- **Zařazení:** Fyzika › Astronomie · 6. a 9. r. · simulace F
 - **Popis:** Země a Měsíc, let galaxií, oběh galaxií; stopy, pohled.
 - **Funkčnost:** 3 scény, pauza, stopy, přepínání pohledu.
 - **Cíl výuky:** Žák vysvětlí, že tvar dráhy závisí na tom, odkud pohyb pozorujeme.
@@ -2064,7 +2064,7 @@ Společné: 🔗 jednotné ovládání (pauza, rychlost času, popisky) a spole�
 - **Obrázky:** žádné.
 
 #### Glóbusy planet · [planet_globe.html](obsah/planet_globe.html)
-- **Zařazení:** Přírodní vědy › Astronomie · 6. a 9. r. · simulace E (záměrně tmavá)
+- **Zařazení:** Fyzika › Astronomie · 6. a 9. r. · simulace E (záměrně tmavá)
 - **Popis:** Otočné 3D glóbusy těles sluneční soustavy s texturami, srovnání velikostí, informace.
 - **Funkčnost:** výběr tělesa, rotace, srovnání velikostí, informace.
 - **Cíl výuky:** Žák porovná velikosti těles a popíše jejich povrch.
@@ -2075,7 +2075,7 @@ Společné: 🔗 jednotné ovládání (pauza, rychlost času, popisky) a spole�
 - **Obrázky:** existují textury; doplnit jen chybějící tělesa, pokud se rozšíří výběr.
 
 #### Astronomický kalendář úkazů · [sky_events.html](obsah/sky_events.html)
-- **Zařazení:** Přírodní vědy › Astronomie · 6. a 9. r. · nástroj F
+- **Zařazení:** Fyzika › Astronomie · 6. a 9. r. · nástroj F
 - **Popis:** Meteorické roje, slunovraty a rovnodennosti, úplňky a novy pro zvolený rok.
 - **Funkčnost:** volba roku, tabulky.
 - **Cíl výuky:** Žák najde příští astronomický úkaz a naplánuje jeho pozorování.
@@ -2086,7 +2086,7 @@ Společné: 🔗 jednotné ovládání (pauza, rychlost času, popisky) a spole�
   - `IMG-f-18` ⚪ **C ✅** · osm kroků měsíčního cyklu z fotografické série pořízené z pevného místa a fotografie meteorického výbuchu — zapojeno, licence i úpravy doloženy
 
 #### Sluneční soustava · [solar_system.html](obsah/solar_system.html)
-- **Zařazení:** Přírodní vědy › Astronomie · 6. a 9. r. · simulace E (hlavní lekce rodiny vesmíru)
+- **Zařazení:** Fyzika › Astronomie · 6. a 9. r. · simulace E (hlavní lekce rodiny vesmíru)
 - **Popis:** Oběh planet, popisky, dráhy, skutečné měřítko, fáze Měsíce, roční období.
 - **Funkčnost:** rychlost, pauza, přepínače, pohledy.
 - **Cíl výuky:** Žák popíše stavbu sluneční soustavy a vysvětlí fáze Měsíce a roční období.
@@ -2098,7 +2098,7 @@ Společné: 🔗 jednotné ovládání (pauza, rychlost času, popisky) a spole�
 - **Obrázky:** žádné.
 
 #### ISS živě · [iss.html](obsah/iss.html)
-- **Zařazení:** Přírodní vědy › Astronomie · 9. r. · simulace E (živá data, záměrně tmavá)
+- **Zařazení:** Fyzika › Astronomie · 9. r. · simulace E (živá data, záměrně tmavá)
 - **Popis:** Poloha ISS v reálném čase na 3D glóbu, den/noc, stáří dat, stav spojení (etapa 02).
 - **Funkčnost:** sledování, den/noc, zkusit znovu.
 - **Cíl výuky:** Žák spočítá, za jak dlouho ISS oběhne Zemi, a zjistí, kdy přeletí nad ČR.
@@ -2113,7 +2113,7 @@ Společné: 🔗 jednotné ovládání (pauza, rychlost času, popisky) a spole�
 Společné pro chemii: 🔗 **jeden molekulový model** (🧩 molekula a atom) pro atom, názvosloví, rovnice, uhlovodíky i pH. Stejné barvy prvků (C černá, O červená, H bílá, N modrá, Cl zelená — běžná konvence CPK). Laboratorní vzhled z `ch8_smesi` (nejpropracovanější chemická stránka) převzít jako vzor pro ostatní lekce s laboratoří. Obrázky: fotografie skutečných látek a pomůcek, GHS piktogramy už existují.
 
 #### Bezpečnost práce a výstražné značky · [ch8_bezpecnost.html](obsah/ch8_bezpecnost.html)
-- **Zařazení:** Přírodní vědy › Chemie · 8. r. · lekce A
+- **Zařazení:** Chemie › Látky, směsi a bezpečnost · 8. r. · lekce A
 - **Popis:** Poznej značku (GHS SVG), značka k látce, první pomoc, pravidla laboratoře.
 - **Funkčnost:** 4 režimy, 9 piktogramů GHS.
 - **Cíl výuky:** Žák pozná piktogramy GHS, přečte etiketu a ví, jak se chovat v laboratoři a při úrazu.
@@ -2126,7 +2126,7 @@ Společné pro chemii: 🔗 **jeden molekulový model** (🧩 molekula a atom) p
   - `IMG-ch-02` 🟠 **C** · fotografie 6 skutečných domácích výrobků s piktogramy (čistič odpadů, odstraňovač rzi, lak, plynová kartuše, hnojivo, líh) — piktogram v praxi; značky výrobců rozmazat
 
 #### Chemické názvosloví · [chem_nazvoslovi.html](obsah/chem_nazvoslovi.html)
-- **Zařazení:** Přírodní vědy › Chemie · 8.–9. r. · samostatná F (s dílnou)
+- **Zařazení:** Chemie › Atom, prvky a názvosloví · 8.–9. r. · samostatná F (s dílnou)
 - **Popis:** Od koncovky k oxidačnímu číslu, dílna vzorců (vyrovnání nábojů), procvičování vzorec ↔ název, přehled.
 - **Funkčnost:** 3 kroky, dílna, 3 režimy procvičování.
 - **Cíl výuky:** Žák odvodí vzorec z názvu a název ze vzorce u oxidů, halogenidů, hydroxidů a kyselin.
@@ -2138,7 +2138,7 @@ Společné pro chemii: 🔗 **jeden molekulový model** (🧩 molekula a atom) p
 - **Obrázky:** žádné.
 
 #### Atom, molekula a chemická vazba · [ch8_atom.html](obsah/ch8_atom.html)
-- **Zařazení:** Přírodní vědy › Chemie · 8. r. · lekce B (hlavní lekce rodiny stavby látek)
+- **Zařazení:** Chemie › Atom, prvky a názvosloví · 8. r. · lekce B (hlavní lekce rodiny stavby látek)
 - **Popis:** Stavebnice atomu, vznik vazby, molekuly, počty částic, model atomu, poznej vazbu, pojmy.
 - **Funkčnost:** 7 režimů, canvas a SVG, stavebnice.
 - **Cíl výuky:** Žák určí počet protonů, neutronů a elektronů, vysvětlí vznik iontu a kovalentní vazby.
@@ -2148,7 +2148,7 @@ Společné pro chemii: 🔗 **jeden molekulový model** (🧩 molekula a atom) p
 - **Obrázky:** žádné.
 
 #### Periodická tabulka · [periodic_table.html](obsah/periodic_table.html)
-- **Zařazení:** Přírodní vědy › Chemie · 8.–9. r. · simulace E (tabulka + kvíz)
+- **Zařazení:** Chemie › Atom, prvky a názvosloví · 8.–9. r. · simulace E (tabulka + kvíz)
 - **Popis:** Interaktivní tabulka prvků s detaily a kvízem.
 - **Funkčnost:** výběr prvku, kvíz.
 - **Cíl výuky:** Žák vyhledá prvek, přečte z tabulky základní údaje a vysvětlí uspořádání do skupin a period.
@@ -2160,7 +2160,7 @@ Společné pro chemii: 🔗 **jeden molekulový model** (🧩 molekula a atom) p
   - `IMG-ch-03` 🟠 **C** · fotografie vzorků asi 40 běžných prvků (Wikimedia Commons „Periodic table of elements“ fotografie s licencí CC BY) — detail prvku
 
 #### Voda a vzduch · [ch8_voda_vzduch.html](obsah/ch8_voda_vzduch.html)
-- **Zařazení:** Přírodní vědy › Chemie · 8. r. · lekce A
+- **Zařazení:** Chemie › Látky, směsi a bezpečnost · 8. r. · lekce A
 - **Popis:** Složení vzduchu, úprava vody, vlastnosti vody, znečištění.
 - **Funkčnost:** 4 režimy, SVG koláč.
 - **Cíl výuky:** Žák popíše složení vzduchu, postup úpravy pitné vody a zdroje znečištění.
@@ -2171,7 +2171,7 @@ Společné pro chemii: 🔗 **jeden molekulový model** (🧩 molekula a atom) p
   - `IMG-ch-04` ✅ **A** · řez úpravnou pitné vody od odběru k vodojemu — zapojeno do řazení kroků
 
 #### Směsi a jejich oddělování · [ch8_smesi.html](obsah/ch8_smesi.html)
-- **Zařazení:** Přírodní vědy › Chemie · 8. r. · lekce B (vzor laboratorní lekce)
+- **Zařazení:** Chemie › Látky, směsi a bezpečnost · 8. r. · lekce B (vzor laboratorní lekce)
 - **Popis:** Atlas aparatur, pod lupou, oddělovací laboratoř, namíchej roztok, laboratorní mise, jak směs oddělit, druh směsi, hmotnostní zlomek, pojmy.
 - **Funkčnost:** 10 režimů, animované aparatury.
 - **Cíl výuky:** Žák rozliší druhy směsí, zvolí metodu oddělení a vypočítá hmotnostní zlomek.
@@ -2182,7 +2182,7 @@ Společné pro chemii: 🔗 **jeden molekulový model** (🧩 molekula a atom) p
   - `IMG-ch-05` ⚪ **C ✅** · pět skutečných fotografií aparatur (filtrace, destilace, odpařování, dělicí nálevka, chromatografie na papíře) zapojeno jako protějšek animací; u každé je uložen autor, licence a zdroj
 
 #### Vyčíslování chemických rovnic · [vycislovani_rovnic.html](obsah/vycislovani_rovnic.html)
-- **Zařazení:** Přírodní vědy › Chemie · 8.–9. r. · samostatná F
+- **Zařazení:** Chemie › Chemické reakce · 8.–9. r. · samostatná F
 - **Popis:** Doplnění koeficientů, kontrola, nápověda.
 - **Funkčnost:** zkontrolovat, napovědět, další.
 - **Cíl výuky:** Žák vyčíslí rovnici a vysvětlí rozdíl mezi koeficientem a indexem.
@@ -2194,7 +2194,7 @@ Společné pro chemii: 🔗 **jeden molekulový model** (🧩 molekula a atom) p
 - **Obrázky:** žádné.
 
 #### Chemie a životní prostředí · [ch9_zivotni_prostredi.html](obsah/ch9_zivotni_prostredi.html)
-- **Zařazení:** Přírodní vědy › Chemie · 9. r. · lekce A
+- **Zařazení:** Chemie › Látky, směsi a bezpečnost · 9. r. · lekce A
 - **Popis:** Třídění odpadu, recyklace, paliva a emise, ochrana vody a ovzduší.
 - **Funkčnost:** 4 režimy.
 - **Cíl výuky:** Žák správně třídí odpad, popíše cestu recyklace a vliv spalování na ovzduší.
@@ -2205,7 +2205,7 @@ Společné pro chemii: 🔗 **jeden molekulový model** (🧩 molekula a atom) p
   - `IMG-ch-06` **B ✅** · 32 karet odpadu (30 nových, PET láhev a plechovka sdílené) + 6 barevných nádob — hotovo a zapojeno do obrazového třídicího kvízu; u společného sběru rozhoduje místní nálepka na nádobě
 
 #### Přírodní látky · [ch9_prirodni_latky.html](obsah/ch9_prirodni_latky.html)
-- **Zařazení:** Přírodní vědy › Chemie · 9. r. · lekce A
+- **Zařazení:** Chemie › Organická chemie · 9. r. · lekce A
 - **Popis:** Sacharidy, tuky a bílkoviny, vitaminy a minerály, energie ve stravě.
 - **Funkčnost:** 4 režimy.
 - **Cíl výuky:** Žák zařadí potraviny podle hlavních živin a spočítá energii z nutriční tabulky.
@@ -2215,7 +2215,7 @@ Společné pro chemii: 🔗 **jeden molekulový model** (🧩 molekula a atom) p
 - **Obrázky:** sdílet `IMG-prv-06`.
 
 #### Redoxní reakce a elektrolýza · [ch9_redoxni.html](obsah/ch9_redoxni.html)
-- **Zařazení:** Přírodní vědy › Chemie · 9. r. · lekce A
+- **Zařazení:** Chemie › Chemické reakce · 9. r. · lekce A
 - **Popis:** Oxidační čísla, oxidace a redukce, elektrolýza, články a koroze.
 - **Funkčnost:** 4 režimy.
 - **Cíl výuky:** Žák určí oxidační čísla, pozná oxidaci a redukci a popíše galvanický článek a elektrolýzu.
@@ -2226,7 +2226,7 @@ Společné pro chemii: 🔗 **jeden molekulový model** (🧩 molekula a atom) p
   - `IMG-ch-07` ⚪ **C ✅** · čtyři licencované fotografie koroze, patiny, pozinkování a citronového článku — zapojeno do režimu Články a koroze
 
 #### Uhlovodíky · [ch9_uhlovodiky.html](obsah/ch9_uhlovodiky.html)
-- **Zařazení:** Přírodní vědy › Chemie · 9. r. · lekce A
+- **Zařazení:** Chemie › Organická chemie · 9. r. · lekce A
 - **Popis:** Názvosloví, typy vazeb, ropa a paliva, uhlovodíky kolem nás.
 - **Funkčnost:** 4 režimy.
 - **Cíl výuky:** Žák pojmenuje jednoduché alkany, alkeny a alkyny a popíše zpracování ropy.
@@ -2237,7 +2237,7 @@ Společné pro chemii: 🔗 **jeden molekulový model** (🧩 molekula a atom) p
   - `IMG-ch-08` ✅ **A** · řez frakční destilační kolonou s patry — zapojeno
 
 #### Kyseliny, hydroxidy a pH · [ch9_ph.html](obsah/ch9_ph.html)
-- **Zařazení:** Přírodní vědy › Chemie · 9. r. · pilot C
+- **Zařazení:** Chemie › Chemické reakce · 9. r. · pilot C
 - **Popis:** Vzorová lekce: dva modelové roztoky, předpověď nižšího pH, poměr koncentrací, neutralizace s koeficienty; procvičování.
 - **Funkčnost:** vedená aktivita, 4 režimy, návaznosti, příprava hodiny.
 - **Cíl výuky:** Žák porovná pH dvou roztoků a vysvětlí vyčíslenou neutralizaci.
@@ -2248,7 +2248,7 @@ Společné pro chemii: 🔗 **jeden molekulový model** (🧩 molekula a atom) p
   - `IMG-ch-09` 🟠 **C** · řada 8 zkumavek s výluhem červeného zelí v roztocích od pH 1 po 13, fotografie pH papírku se stupnicí — skutečné barvy indikátorů
 
 #### Deriváty uhlovodíků · [ch9_derivaty.html](obsah/ch9_derivaty.html)
-- **Zařazení:** Přírodní vědy › Chemie · 9. r. · lekce A
+- **Zařazení:** Chemie › Organická chemie · 9. r. · lekce A
 - **Popis:** Funkční skupiny, alkoholy, kyseliny a estery, deriváty v praxi.
 - **Funkčnost:** 4 režimy.
 - **Cíl výuky:** Žák pozná funkční skupinu a přiřadí k ní třídu látek a příklad použití.
@@ -2263,7 +2263,7 @@ Společné pro chemii: 🔗 **jeden molekulový model** (🧩 molekula a atom) p
 Společné pro přírodopis: čtyři stránky (`bunka`, `pr7_rostliny`, `anatomie`, `pr9_ekologie`) jsou **nejlepší část webu**: atlas s ilustracemi, výklad souvislostí a procvičování. 🔗 Tento vzor přenést na ostatní lekce přírodopisu v jednodušší podobě: jedna ilustrace s hotspoty + dnešní režimy. Pro poznávačky a určování jen styl C (fotografie), pro stavbu těla styl A/B se stejnou technikou jako rostlina.
 
 #### Potravní řetězce · [potravni_retezec.html](obsah/potravni_retezec.html)
-- **Zařazení:** Přírodní vědy › Přírodopis · 6. a 9. r. · samostatná F
+- **Zařazení:** Přírodopis › Ekologie · 6. a 9. r. · samostatná F
 - **Popis:** Klikáním doplnit organismy do řetězce ve správném pořadí.
 - **Funkčnost:** skládání řetězce, kontrola, skóre.
 - **Cíl výuky:** Žák sestaví potravní řetězec a vysvětlí směr šipky jako tok energie.
@@ -2274,7 +2274,7 @@ Společné pro přírodopis: čtyři stránky (`bunka`, `pr7_rostliny`, `anatomi
 - **Obrázky:** karty organismů ze `IMG-prv-10` a `IMG-pr-05`.
 
 #### Houby a lišejníky · [pr6_houby.html](obsah/pr6_houby.html)
-- **Zařazení:** Přírodní vědy › Přírodopis · 6. r. · lekce A
+- **Zařazení:** Přírodopis › Houby a rostliny · 6. r. · lekce A
 - **Popis:** Jedlá/jedovatá, poznej houbu (podle slovního popisu znaků), stavba a rozmnožování, lišejníky.
 - **Funkčnost:** 4 režimy.
 - **Cíl výuky:** Žák popíše stavbu houby, pozná nejznámější jedlé a jedovaté druhy podle znaků a zná zásady bezpečného sběru.
@@ -2288,7 +2288,7 @@ Společné pro přírodopis: čtyři stránky (`bunka`, `pr7_rostliny`, `anatomi
   - `IMG-pr-03` ⚪ **C ✅** · fotografie terčovníku, provazovky, dutohlávky a mapovníku — zapojeno do určování podle typu stélky, licence a úpravy doloženy
 
 #### Bezobratlí · [pr6_bezobratli.html](obsah/pr6_bezobratli.html)
-- **Zařazení:** Přírodní vědy › Přírodopis · 6.–7. r. · lekce A
+- **Zařazení:** Přírodopis › Živočichové · 6.–7. r. · lekce A
 - **Popis:** Do kterého kmene, poznej živočicha, stavba těla, význam.
 - **Funkčnost:** 4 režimy.
 - **Cíl výuky:** Žák zařadí bezobratlého do kmene podle stavby těla a popíše jeho význam.
@@ -2300,7 +2300,7 @@ Společné pro přírodopis: čtyři stránky (`bunka`, `pr7_rostliny`, `anatomi
   - fotografie do poznávačky: součást `IMG-pr-05`
 
 #### Stavba buňky · [bunka.html](obsah/bunka.html)
-- **Zařazení:** Přírodní vědy › Přírodopis · 6. r. · lekce B (vzorový atlas)
+- **Zařazení:** Přírodopis › Buňka a mikroorganismy · 6. r. · lekce B (vzorový atlas)
 - **Popis:** Atlas živočišné a rostlinné buňky s ilustracemi a hotspoty, srovnání, spolupráce organel (od jádra po export), procvičování, časté záměny.
 - **Funkčnost:** průzkum, srovnání, animovaná spolupráce, 3 typy procvičování.
 - **Cíl výuky:** Žák pojmenuje hlavní části buňky, popíše jejich funkci a rozdíly rostlinné a živočišné buňky.
@@ -2311,7 +2311,7 @@ Společné pro přírodopis: čtyři stránky (`bunka`, `pr7_rostliny`, `anatomi
   - `IMG-pr-06` 🟠 **C** · mikrofotografie pokožky cibule, buněk ústní sliznice, listu mechu (chloroplasty), prvoka trepky — protějšek modelu
 
 #### Členovci · [pr6_clenovci.html](obsah/pr6_clenovci.html)
-- **Zařazení:** Přírodní vědy › Přírodopis · 6.–7. r. · lekce A
+- **Zařazení:** Přírodopis › Živočichové · 6.–7. r. · lekce A
 - **Popis:** Do které třídy, kolik má nohou, proměna hmyzu (emoji), význam.
 - **Funkčnost:** 4 režimy.
 - **Cíl výuky:** Žák zařadí členovce do třídy podle počtu nohou a článkování těla a popíše proměnu dokonalou a nedokonalou.
@@ -2323,7 +2323,7 @@ Společné pro přírodopis: čtyři stránky (`bunka`, `pr7_rostliny`, `anatomi
   - `IMG-pr-08` ✅ **B** · proměna dokonalá (babočka: vajíčko, housenka, kukla, motýl) a nedokonalá (kobylka: vajíčko, nymfa, dospělec) — 7 karet zapojených do atlasu a řazení proměny
 
 #### Bakterie, viry a jednobuněčné organismy · [pr6_mikroorganismy.html](obsah/pr6_mikroorganismy.html)
-- **Zařazení:** Přírodní vědy › Přírodopis · 6. r. · lekce A
+- **Zařazení:** Přírodopis › Buňka a mikroorganismy · 6. r. · lekce A
 - **Popis:** Poznej organismus, virus × bakterie, prospěšné/škodlivé, jak se chránit.
 - **Funkčnost:** 4 režimy, SVG.
 - **Cíl výuky:** Žák vysvětlí rozdíl mezi virem a bakterií a ví, jak se chránit před nákazou.
@@ -2334,7 +2334,7 @@ Společné pro přírodopis: čtyři stránky (`bunka`, `pr7_rostliny`, `anatomi
   - `IMG-pr-09` ✅ **B** · 5 schematických karet v jednotném stylu (bakterie s bičíkem, virus s obalem, trepka, měňavka, kvasinka) — zapojeno jako srovnávací atlas a do poznávačky; výslovně označeno jako model, ne mikrofotografie
 
 #### Stavba a systém rostlin · [pr7_rostliny.html](obsah/pr7_rostliny.html)
-- **Zařazení:** Přírodní vědy › Přírodopis · 7. r. · lekce B (atlas)
+- **Zařazení:** Přírodopis › Houby a rostliny · 7. r. · lekce B (atlas)
 - **Popis:** Botanická fazole s hotspoty šesti částí, spolupráce orgánů, fotosyntéza, dýchání, voda, od květu k semenu, skupiny rostlin, procvičování.
 - **Funkčnost:** atlas, výklad, 4 režimy.
 - **Cíl výuky:** Žák pojmenuje orgány rostliny a jejich funkce a vysvětlí fotosyntézu a dýchání.
@@ -2345,7 +2345,7 @@ Společné pro přírodopis: čtyři stránky (`bunka`, `pr7_rostliny`, `anatomi
   - `IMG-pr-10` 🟠 **C** · fotografie 12 zástupců skupin (mech ploník, kapraď samec, přeslička, plavuň, smrk, borovice, tis, pryskyřník, hrách, pampeliška, pšenice, tulipán) — systém rostlin
 
 #### Ryby, obojživelníci a plazi · [pr7_obratlovci_studenokrevni.html](obsah/pr7_obratlovci_studenokrevni.html)
-- **Zařazení:** Přírodní vědy › Přírodopis · 7. r. · lekce A
+- **Zařazení:** Přírodopis › Živočichové · 7. r. · lekce A
 - **Popis:** Do které skupiny, stavba těla a dýchání, poznávačka (textová), platí to?
 - **Funkčnost:** 4 režimy.
 - **Cíl výuky:** Žák porovná stavbu těla, dýchání a rozmnožování ryb, obojživelníků a plazů a pozná naše zástupce.
@@ -2359,7 +2359,7 @@ Společné pro přírodopis: čtyři stránky (`bunka`, `pr7_rostliny`, `anatomi
   - `IMG-pr-05` 🔴 **C** · fotografie 40 zástupců pro poznávačky přírodopisu 6.–7. r. (bezobratlí, ryby, obojživelníci, plazi, ptáci, savci ČR); **společná sada** pro `pr6_bezobratli`, tuto stránku, `pr7_ptaci_savci`, `potravni_retezec`
 
 #### Ptáci a savci · [pr7_ptaci_savci.html](obsah/pr7_ptaci_savci.html)
-- **Zařazení:** Přírodní vědy › Přírodopis · 7. r. · lekce A
+- **Zařazení:** Přírodopis › Živočichové · 7. r. · lekce A
 - **Popis:** Zobák a potrava, končetiny a způsob života, poznávačka, řády savců.
 - **Funkčnost:** 4 režimy (textové).
 - **Cíl výuky:** Žák vysvětlí přizpůsobení zobáku, končetin a chrupu potravě a prostředí a pozná naše zástupce.
@@ -2371,7 +2371,7 @@ Společné pro přírodopis: čtyři stránky (`bunka`, `pr7_rostliny`, `anatomi
   - `IMG-pr-14` ✅ **B** · 6 karet chrupu savců (šelma, hlodavec, přežvýkavec, hmyzožravec, všežravec, zajíc) — zapojeno jako rozbalovací atlas a procvičovací režim
 
 #### Rozmnožování a vývoj člověka · [pr8_rozmnozovani.html](obsah/pr8_rozmnozovani.html)
-- **Zařazení:** Přírodní vědy › Přírodopis · 8. r. · lekce A
+- **Zařazení:** Přírodopis › Člověk, zdraví a dědičnost · 8. r. · lekce A
 - **Popis:** Orgány a jejich funkce, vývoj před narozením, etapy života, dospívání.
 - **Funkčnost:** 4 režimy (textové).
 - **Cíl výuky:** Žák popíše rozmnožovací soustavu, vývoj plodu a etapy lidského života.
@@ -2384,7 +2384,7 @@ Společné pro přírodopis: čtyři stránky (`bunka`, `pr7_rostliny`, `anatomi
   - `IMG-pr-16` ✅ **A** · dvě atlasová schémata mužské a ženské rozmnožovací soustavy bez textu — zapojeno s přístupnými hotspoty a vysvětlením funkcí
 
 #### Zdraví a první pomoc · [pr8_prvni_pomoc.html](obsah/pr8_prvni_pomoc.html)
-- **Zařazení:** Přírodní vědy › Přírodopis · 8. r. · lekce A (hlavní lekce rodiny zdraví)
+- **Zařazení:** Přírodopis › Člověk, zdraví a dědičnost · 8. r. · lekce A (hlavní lekce rodiny zdraví)
 - **Popis:** Tísňová volání, co udělat, postup krok za krokem, resuscitace.
 - **Funkčnost:** 4 režimy.
 - **Cíl výuky:** Žák zavolá pomoc a poskytne základní první pomoc včetně resuscitace podle platných doporučení.
@@ -2396,7 +2396,7 @@ Společné pro přírodopis: čtyři stránky (`bunka`, `pr7_rostliny`, `anatomi
   - `IMG-pr-17` 🔴 **B 🟡** · 8 karet postupu (kontrola bezpečí, reakce, dýchání, volání 155, stlačování hrudníku, zotavovací poloha, přímý tlak na krvácení, chlazení popáleniny) — vytvořeno a zapojeno podle ERC 2025, bez krve; před označením za definitivní nechat zkontrolovat zdravotníkem
 
 #### Biologie člověka · [anatomie.html](obsah/anatomie.html)
-- **Zařazení:** Přírodní vědy › Přírodopis · 8. r. · simulace E (atlas)
+- **Zařazení:** Přírodopis › Člověk, zdraví a dědičnost · 8. r. · simulace E (atlas)
 - **Popis:** Interaktivní atlas orgánů zepředu a zezadu, kostra, svaly, nervová soustava, smysly, detail srdce, průchod oběhem, spolupráce soustav, procvičování.
 - **Funkčnost:** prozkoumat/procvičit, pohledy, zvětšení, filtry soustav.
 - **Cíl výuky:** Žák najde a pojmenuje hlavní orgány, popíše funkci soustav a jejich spolupráci.
@@ -2407,7 +2407,7 @@ Společné pro přírodopis: čtyři stránky (`bunka`, `pr7_rostliny`, `anatomi
 - **Obrázky:** existují; doplnit jen trávicí soustavu detailně, pokud chybí (viz `Prirodopis/anatomie-streva-zada-prompty.md`).
 
 #### Ekologie a ochrana přírody · [pr9_ekologie.html](obsah/pr9_ekologie.html)
-- **Zařazení:** Přírodní vědy › Přírodopis · 9. r. · lekce B (hlavní lekce rodiny ekosystémů)
+- **Zařazení:** Přírodopis › Ekologie · 9. r. · lekce B (hlavní lekce rodiny ekosystémů)
 - **Popis:** Populace, společenstvo, ekosystém, rybník, vztahy, energetická pyramida, rozklad, dopad zásahu, slepá mapa chráněných území, ochrana přírody.
 - **Funkčnost:** ilustrace s hotspoty, modely, 4 režimy, mapa.
 - **Cíl výuky:** Žák vysvětlí vztahy v ekosystému, tok energie a oběh látek a posoudí dopad zásahu do krajiny.
@@ -2417,7 +2417,7 @@ Společné pro přírodopis: čtyři stránky (`bunka`, `pr7_rostliny`, `anatomi
 - **Obrázky:** existují (`ekologie-rybnik`, `ekologie-krajina`).
 
 #### Geologické děje · [pr9_geologicke_deje.html](obsah/pr9_geologicke_deje.html)
-- **Zařazení:** Přírodní vědy › Přírodopis · 9. r. · lekce A
+- **Zařazení:** Přírodopis › Neživá příroda a vývoj Země · 9. r. · lekce A
 - **Popis:** Litosférické desky, sopky, zemětřesení, vnější děje.
 - **Funkčnost:** 4 režimy (textové).
 - **Cíl výuky:** Žák popíše typy rozhraní desek a vysvětlí vznik sopek, zemětřesení a působení vnějších dějů.
@@ -2429,7 +2429,7 @@ Společné pro přírodopis: čtyři stránky (`bunka`, `pr7_rostliny`, `anatomi
   - `IMG-pr-19` ⚪ **C ✅** · šest licencovaných fotografií českých geologických jevů — zapojeno se stručným vysvětlením vnitřních a vnějších dějů
 
 #### Minerály a horniny · [pr9_mineraly.html](obsah/pr9_mineraly.html)
-- **Zařazení:** Přírodní vědy › Přírodopis · 9. r. · lekce A (hlavní lekce rodiny hornin)
+- **Zařazení:** Přírodopis › Neživá příroda a vývoj Země · 9. r. · lekce A (hlavní lekce rodiny hornin)
 - **Popis:** Poznej minerál, vlastnosti a tvrdost, vznik hornin, suroviny.
 - **Funkčnost:** 4 režimy (textové).
 - **Cíl výuky:** Žák určí minerál podle vlastností (tvrdost, vryp, lesk, štěpnost) a zařadí horninu podle vzniku.
@@ -2441,7 +2441,7 @@ Společné pro přírodopis: čtyři stránky (`bunka`, `pr7_rostliny`, `anatomi
   - `IMG-pr-20` 🟠 **C** · fotografie Mohsovy stupnice (10 minerálů) a vrypů na porcelánové destičce (hematit, pyrit, malachit)
 
 #### Vývoj Země a života · [pr9_vyvoj_zeme.html](obsah/pr9_vyvoj_zeme.html)
-- **Zařazení:** Přírodní vědy › Přírodopis · 9. r. · lekce A
+- **Zařazení:** Přírodopis › Neživá příroda a vývoj Země · 9. r. · lekce A
 - **Popis:** Geologická období, vývoj života, zkameněliny, vývoj člověka.
 - **Funkčnost:** 4 režimy.
 - **Cíl výuky:** Žák seřadí geologická období, pozná typické zkameněliny a vysvětlí vývoj života jako větvení.
@@ -2453,7 +2453,7 @@ Společné pro přírodopis: čtyři stránky (`bunka`, `pr7_rostliny`, `anatomi
   - `IMG-pr-22` ✅ **A** · 4 rekonstrukce krajin (prvohorní moře, karbonský les, druhohorní krajina s dinosaury, čtvrtohorní tundra s mamuty) — zapojeno do časové galerie a označeno jako rekonstrukce
 
 #### Punnettův čtverec · [punnett.html](obsah/punnett.html)
-- **Zařazení:** Přírodní vědy › Přírodopis · 9. r. · nástroj F
+- **Zařazení:** Přírodopis › Člověk, zdraví a dědičnost · 9. r. · nástroj F
 - **Popis:** Zadání genotypů rodičů a vyplnění čtverce, popis znaku.
 - **Funkčnost:** vstup genotypů, předvolby, výsledek.
 - **Cíl výuky:** Žák sestaví Punnettův čtverec, určí poměr genotypů a fenotypů a vysvětlí pravděpodobnost.
@@ -2470,7 +2470,7 @@ Společné pro přírodopis: čtyři stránky (`bunka`, `pr7_rostliny`, `anatomi
 Společné pro zeměpis: 🔗 **jedna datová sada států a jedna mapová komponenta** (rozšířený `mapy.js`) pro slepé mapy, lekce světadílů, kvízy vlajek a hlavních měst i dějepisné mapy. Lekce světadílů mají stejnou stavbu (slepá mapa – státy, slepá mapa – příroda, přírodní poměry, lidé a hospodářství); doplnit každé stejnou čtveřici podkladů: **řez krajinou, dva klimatogramy, dvě fotografie míst, jeden příběh člověka**. Klimatogramy a řezy kreslí kód (🧩 graf), fotografie jsou styl C. Údaje o obyvatelstvu a hospodářství vždy s rokem a zdrojem.
 
 #### Atmosféra a počasí · [z6_atmosfera.html](obsah/z6_atmosfera.html)
-- **Zařazení:** Zeměpis a dějepis › Zeměpis · 6.–7. r. · lekce A
+- **Zařazení:** Zeměpis › Přírodní obal Země · 6.–7. r. · lekce A
 - **Popis:** Podnebné pásy, vrstvy atmosféry, počasí a podnebí, meteorologické jevy.
 - **Funkčnost:** 4 režimy, SVG.
 - **Cíl výuky:** Žák odliší počasí od podnebí, popíše vrstvy atmosféry a vysvětlí vznik podnebných pásů.
@@ -2483,7 +2483,7 @@ Společné pro zeměpis: 🔗 **jedna datová sada států a jedna mapová kompo
   - `IMG-z-02` ✅ **A** · svislý řez atmosférou od mraků k ISS — zapojeno
 
 #### Hydrosféra · [z6_hydrosfera.html](obsah/z6_hydrosfera.html)
-- **Zařazení:** Zeměpis › 6.–7. r. · lekce A
+- **Zařazení:** Zeměpis › Přírodní obal Země · lekce A
 - **Popis:** Vodstvo a pojmy, koloběh vody, oceány a moře, rekordy.
 - **Funkčnost:** 4 režimy.
 - **Cíl výuky:** Žák popíše složky hydrosféry a koloběh vody a ukáže na mapě oceány a velké řeky.
@@ -2495,7 +2495,7 @@ Společné pro zeměpis: 🔗 **jedna datová sada států a jedna mapová kompo
   - `IMG-z-03` ✅ **A** · řeka od pramene přes peřeje, údolí a meandry k deltě a moři — zapojeno
 
 #### Planeta Země – tvar a pohyby · [z6_planeta_zeme.html](obsah/z6_planeta_zeme.html)
-- **Zařazení:** Zeměpis › 6. r. · lekce A
+- **Zařazení:** Zeměpis › Planeta Země a mapa · lekce A
 - **Popis:** Který pohyb, důsledky pohybů, významné dny, fakta o Zemi.
 - **Funkčnost:** 4 režimy, SVG.
 - **Cíl výuky:** Žák vysvětlí střídání dne a noci a ročních období a časová pásma.
@@ -2506,7 +2506,7 @@ Společné pro zeměpis: 🔗 **jedna datová sada států a jedna mapová kompo
 - **Obrázky:** žádné (modely existují).
 
 #### Mapa, měřítko a souřadnice · [z6_mapa_souradnice.html](obsah/z6_mapa_souradnice.html)
-- **Zařazení:** Zeměpis › 6. r. · lekce A (hlavní lekce rodiny map)
+- **Zařazení:** Zeměpis › Planeta Země a mapa · lekce A (hlavní lekce rodiny map)
 - **Popis:** Zeměpisná síť, určení souřadnic, měřítko, druhy map.
 - **Funkčnost:** 4 režimy, SVG.
 - **Cíl výuky:** Žák určí zeměpisné souřadnice, použije měřítko a vybere vhodnou mapu k účelu.
@@ -2518,7 +2518,7 @@ Společné pro zeměpis: 🔗 **jedna datová sada států a jedna mapová kompo
   - `IMG-z-04` 🟠 **C** · 4 výřezy map stejného území v různých měřítkách a typech (OpenStreetMap, turistická mapa s licencí, ortofoto) — srovnání druhů map
 
 #### Mapy – lekce a průvodce · [eduMaps.html](obsah/eduMaps.html)
-- **Zařazení:** Zeměpis › 4.–9. r. · rozcestník F (opraveno v etapě 02)
+- **Zařazení:** Zeměpis › Planeta Země a mapa · rozcestník F (opraveno v etapě 02)
 - **Popis:** Rozcestník pěti mapových lekcí a historických map, tři aktivity pro učitele, příprava bez internetu.
 - **Funkčnost:** karty lekcí, tisk aktivit.
 - **Cíl výuky:** Učitel vybere mapovou aktivitu podle cíle.
@@ -2528,7 +2528,7 @@ Společné pro zeměpis: 🔗 **jedna datová sada států a jedna mapová kompo
 - **Obrázky:** žádné.
 
 #### Litosféra a povrch Země · [z6_litosfera.html](obsah/z6_litosfera.html)
-- **Zařazení:** Zeměpis › 6. r. · lekce A
+- **Zařazení:** Zeměpis › Přírodní obal Země · lekce A
 - **Popis:** Stavba Země, vnitřní a vnější děje, tvary povrchu, pojmy.
 - **Funkčnost:** 4 režimy, SVG.
 - **Cíl výuky:** Žák popíše stavbu Země a vysvětlí, jak vnitřní a vnější děje tvarují povrch.
@@ -2541,7 +2541,7 @@ Společné pro zeměpis: 🔗 **jedna datová sada států a jedna mapová kompo
   - `IMG-z-06` ✅ **A** · řez Zemí (kůra, plášť, vnější a vnitřní jádro) s výsekem — zapojeny hotspoty vrstev
 
 #### Afrika · [z7_afrika.html](obsah/z7_afrika.html)
-- **Zařazení:** Zeměpis › 7. r. · lekce A (s mapou)
+- **Zařazení:** Zeměpis › Světadíly a státy · lekce A (s mapou)
 - **Popis:** Slepá mapa států a přírody, přírodní poměry, lidé a hospodářství.
 - **Funkčnost:** 4 režimy, mapy.
 - **Cíl výuky:** Žák ukáže státy a přírodní útvary Afriky a vysvětlí souvislost podnebných pásů a způsobu života.
@@ -2553,7 +2553,7 @@ Společné pro zeměpis: 🔗 **jedna datová sada států a jedna mapová kompo
   - `IMG-z-08` ⚪ **C ✅** · 4 licencované fotografie míst (Káhira s Nilem, Sahara, savana v Tanzanii, Kapské Město) — zapojeno do srovnávacího atlasu
 
 #### Kvíz světových hlavních měst · [svetova_hlavni_mesta.html](obsah/svetova_hlavni_mesta.html)
-- **Zařazení:** Zeměpis › 7. a 9. r. · samostatná F
+- **Zařazení:** Zeměpis › Světadíly a státy · samostatná F
 - **Popis:** Kvíz hlavních měst podle kontinentu (15 otázek).
 - **Funkčnost:** volba kontinentu, start, skóre.
 - **Cíl výuky:** Žák zná hlavní města vybraných států a ukáže je na mapě.
@@ -2564,7 +2564,7 @@ Společné pro zeměpis: 🔗 **jedna datová sada států a jedna mapová kompo
 - **Obrázky:** žádné (vlajky jako SVG).
 
 #### Amerika · [z7_amerika.html](obsah/z7_amerika.html)
-- **Zařazení:** Zeměpis › 7. r. · lekce A (s mapou)
+- **Zařazení:** Zeměpis › Světadíly a státy · lekce A (s mapou)
 - **Popis:** Slepá mapa států a přírody, přírodní poměry, lidé a hospodářství.
 - **Funkčnost:** 4 režimy, mapy.
 - **Cíl výuky:** Žák ukáže státy a přírodní útvary Ameriky a vysvětlí vliv polohy a reliéfu na podnebí.
@@ -2576,7 +2576,7 @@ Společné pro zeměpis: 🔗 **jedna datová sada států a jedna mapová kompo
   - `IMG-z-10` ⚪ **C ✅** · 4 licencované fotografie míst (Grand Canyon, New York, Machu Picchu, Amazonie) — zapojeno do srovnávacího atlasu
 
 #### Asie · [z7_asie.html](obsah/z7_asie.html)
-- **Zařazení:** Zeměpis › 7. r. · lekce A (s mapou)
+- **Zařazení:** Zeměpis › Světadíly a státy · lekce A (s mapou)
 - **Popis:** Slepá mapa států a přírody, přírodní poměry, lidé a hospodářství.
 - **Funkčnost:** 4 režimy, mapy.
 - **Cíl výuky:** Žák ukáže státy a přírodní útvary Asie a vysvětlí monzun a jeho vliv na život.
@@ -2588,7 +2588,7 @@ Společné pro zeměpis: 🔗 **jedna datová sada států a jedna mapová kompo
   - `IMG-z-12` ⚪ **C ✅** · 4 licencované fotografie míst (Himálaj, rýžové terasy, Tokio, poušť Gobi) — zapojeno do srovnávacího atlasu
 
 #### Kvíz vlajky a města · [flags_quiz.html](obsah/flags_quiz.html)
-- **Zařazení:** Zeměpis › 7.–9. r. · samostatná F
+- **Zařazení:** Zeměpis › Světadíly a státy · samostatná F
 - **Popis:** Vlajka → země, země → hlavní město, město → země, smíšené; Evropa nebo svět.
 - **Funkčnost:** typ, region, počet otázek, série, skóre.
 - **Cíl výuky:** Žák pozná vlajky a hlavní města států.
@@ -2599,7 +2599,7 @@ Společné pro zeměpis: 🔗 **jedna datová sada států a jedna mapová kompo
 - **Obrázky:** žádné.
 
 #### Austrálie, Oceánie a polární oblasti · [z7_australie_oceanie.html](obsah/z7_australie_oceanie.html)
-- **Zařazení:** Zeměpis › 7. r. · lekce A (s mapou)
+- **Zařazení:** Zeměpis › Světadíly a státy · lekce A (s mapou)
 - **Popis:** Slepá mapa měst a přírody, příroda a zvláštnosti, polární oblasti.
 - **Funkčnost:** 4 režimy, mapy.
 - **Cíl výuky:** Žák popíše zvláštnosti Austrálie, Oceánie a polárních oblastí a ukáže je na mapě.
@@ -2610,7 +2610,7 @@ Společné pro zeměpis: 🔗 **jedna datová sada států a jedna mapová kompo
   - `IMG-z-13` ⚪ **C ✅** · šest licencovaných fotografií (Uluru, Velký bariérový útes, korálový atol, Antarktida s tučňáky, klokan, ptakopysk) — zapojeno do srovnávacího atlasu prostředí a endemitů
 
 #### ČR – povrch, podnebí a vodstvo · [z8_cr_prirodni.html](obsah/z8_cr_prirodni.html)
-- **Zařazení:** Zeměpis › 8. r. · lekce A (s mapou)
+- **Zařazení:** Zeměpis › Česko · lekce A (s mapou)
 - **Popis:** Slepá mapa pohoří a vodstva, řeky a úmoří, povrch a podnebí.
 - **Funkčnost:** 4 režimy, mapy.
 - **Cíl výuky:** Žák ukáže pohoří, nížiny a řeky ČR, určí úmoří a popíše podnebí.
@@ -2622,7 +2622,7 @@ Společné pro zeměpis: 🔗 **jedna datová sada států a jedna mapová kompo
   - `IMG-z-14` ⚪ **C ✅** · šest licencovaných fotografií krajin ČR (Krkonoše, Šumava, Polabí, Českomoravská vrchovina, Beskydy, Pálava) — zapojeno do srovnávacího atlasu reliéfu a využití krajiny
 
 #### Evropa – regiony · [z8_evropa_regiony.html](obsah/z8_evropa_regiony.html)
-- **Zařazení:** Zeměpis › 8. r. · lekce A (s mapou)
+- **Zařazení:** Zeměpis › Evropa · lekce A (s mapou)
 - **Popis:** Slepá mapa států a přírody, regiony Evropy, hospodářství a EU.
 - **Funkčnost:** 4 režimy, mapy.
 - **Cíl výuky:** Žák ukáže státy Evropy, zařadí je do regionů a porovná regiony podle přírody a hospodářství.
@@ -2633,7 +2633,7 @@ Společné pro zeměpis: 🔗 **jedna datová sada států a jedna mapová kompo
   - `IMG-z-15` ⚪ **C ✅** · šest licencovaných fotografií typických krajin regionů (fjord, Středomoří, Alpy, nizozemský polder, ruská tajga, britské pobřeží) — zapojeno do srovnávacího atlasu reliéfu, podnebí a vegetace
 
 #### Řeky a pohoří ČR · [reky_pohori.html](obsah/reky_pohori.html)
-- **Zařazení:** Zeměpis › 8. r. · samostatná F
+- **Zařazení:** Zeměpis › Česko · samostatná F
 - **Popis:** Kvíz řek a pohoří (12 otázek).
 - **Funkčnost:** volba, start, skóre.
 - **Cíl výuky:** Žák zná hlavní řeky a pohoří ČR a ukáže je na mapě.
@@ -2643,7 +2643,7 @@ Společné pro zeměpis: 🔗 **jedna datová sada států a jedna mapová kompo
 - **Obrázky:** žádné.
 
 #### ČR – obyvatelstvo a hospodářství · [z8_cr_hospodarstvi.html](obsah/z8_cr_hospodarstvi.html)
-- **Zařazení:** Zeměpis › 8.–9. r. · lekce A (s mapou)
+- **Zařazení:** Zeměpis › Česko · lekce A (s mapou)
 - **Popis:** Slepá mapa krajských měst a hospodářství, obyvatelstvo, hospodářství.
 - **Funkčnost:** 4 režimy, mapy.
 - **Cíl výuky:** Žák popíše rozmístění obyvatel a hospodářství ČR a vysvětlí příčiny.
@@ -2653,7 +2653,7 @@ Společné pro zeměpis: 🔗 **jedna datová sada států a jedna mapová kompo
 - **Obrázky:** žádné (data a mapy kódem).
 
 #### Slepá mapa Evropy · [slepa_mapa_evropa.html](obsah/slepa_mapa_evropa.html)
-- **Zařazení:** Zeměpis › 8. r. · simulace E (mapa)
+- **Zařazení:** Zeměpis › Evropa · simulace E (mapa)
 - **Popis:** Hledání států na slepé mapě, prohlížení, malé státy tečkou.
 - **Funkčnost:** 2 režimy, SVG mapa.
 - **Cíl výuky:** Žák najde na mapě všechny evropské státy.
@@ -2664,7 +2664,7 @@ Společné pro zeměpis: 🔗 **jedna datová sada států a jedna mapová kompo
 - **Obrázky:** žádné.
 
 #### Slepá mapa ČR · [slepa_mapa.html](obsah/slepa_mapa.html)
-- **Zařazení:** Zeměpis › 8. r. · simulace E (mapa)
+- **Zařazení:** Zeměpis › Česko · simulace E (mapa)
 - **Popis:** Kraje a krajská města, prohlížení.
 - **Funkčnost:** 3 režimy, SVG mapa.
 - **Cíl výuky:** Žák najde kraje a krajská města ČR.
@@ -2672,7 +2672,7 @@ Společné pro zeměpis: 🔗 **jedna datová sada států a jedna mapová kompo
 - **Obrázky:** žádné.
 
 #### Světové hospodářství a globalizace · [z9_hospodarstvi_svet.html](obsah/z9_hospodarstvi_svet.html)
-- **Zařazení:** Zeměpis › 9. r. · lekce A (s mapou)
+- **Zařazení:** Zeměpis › Lidé a globální svět · lekce A (s mapou)
 - **Popis:** Hospodářská centra, obchodní cesty a suroviny, sektory, globalizace.
 - **Funkčnost:** 4 režimy, mapy.
 - **Cíl výuky:** Žák popíše sektory hospodářství a na příkladu výrobku vysvětlí globální dodavatelský řetězec.
@@ -2683,7 +2683,7 @@ Společné pro zeměpis: 🔗 **jedna datová sada států a jedna mapová kompo
   - `IMG-z-16` ✅ **B** · 6 karet fází výrobku (důl, továrna, kontejnerová loď, sklad, obchod, recyklace) — zapojeno jako dodavatelský řetězec
 
 #### Obyvatelstvo a sídla světa · [z9_obyvatelstvo.html](obsah/z9_obyvatelstvo.html)
-- **Zařazení:** Zeměpis › 9. r. · lekce A (s mapou)
+- **Zařazení:** Zeměpis › Lidé a globální svět · lekce A (s mapou)
 - **Popis:** Oblasti zalidnění, velkoměsta, obyvatelstvo, migrace a sídla.
 - **Funkčnost:** 4 režimy, mapy.
 - **Cíl výuky:** Žák vysvětlí nerovnoměrné rozmístění obyvatel, porovná věkové pyramidy a popíše příčiny migrace.
@@ -2695,7 +2695,7 @@ Společné pro zeměpis: 🔗 **jedna datová sada států a jedna mapová kompo
   - `IMG-z-17` ⚪ **C** · 4 fotografie sídel (vesnice v Sahelu, slum a mrakodrapy v Bombaji, předměstí USA, historické centrum evropského města)
 
 #### Globální problémy a životní prostředí · [z9_globalni_problemy.html](obsah/z9_globalni_problemy.html)
-- **Zařazení:** Zeměpis › 9. r. · lekce A (s mapou)
+- **Zařazení:** Zeměpis › Lidé a globální svět · lekce A (s mapou)
 - **Popis:** Ohrožené oblasti, zásahy do krajiny, klimatická změna, řešení a udržitelnost.
 - **Funkčnost:** 4 režimy, mapy.
 - **Cíl výuky:** Žák rozliší pozorovaná data, výklad příčin a návrh řešení u globálních problémů.
@@ -2711,7 +2711,7 @@ Společné pro zeměpis: 🔗 **jedna datová sada států a jedna mapová kompo
 Společné pro dějepis: dnešní lekce mají stejnou čtveřici režimů (osobnosti, časová osa, události, pojmy) a učí hlavně **letopočty a jména**. 🔗 Do každé lekce přidat **pramen** (🧩 pramen podle vzoru `d6_prameny`), **mapu** a **příčinu a důsledek** (🧩 síť). Časová osa jedna pro celý web s pruhy ČR a svět. Obrázky: styl E (skutečné prameny, portréty, mapy, fotografie), rekonstrukce stylem A jen výslovně označené. U citlivých témat (holokaust, válka) žádné generované obrazy utrpení.
 
 #### Starověké Řecko · [d6_recko.html](obsah/d6_recko.html)
-- **Zařazení:** Zeměpis a dějepis › Dějepis · 6. r. · lekce A
+- **Zařazení:** Dějepis › Pravěk a starověk · 6. r. · lekce A
 - **Popis:** Kdo to byl, pojmy a stavby, události a letopočty, seřaď události.
 - **Funkčnost:** 4 režimy, předčítání.
 - **Cíl výuky:** Žák popíše městské státy, athénskou demokracii a přínos řecké kultury.
@@ -2724,7 +2724,7 @@ Společné pro dějepis: dnešní lekce mají stejnou čtveřici režimů (osobn
   - `IMG-d-02` ✅ **A** · rekonstrukce athénské agory se shromážděním — zapojeno a označeno „rekonstrukce“
 
 #### Starověký Řím · [d6_rim.html](obsah/d6_rim.html)
-- **Zařazení:** Dějepis › 6.–7. r. · lekce A
+- **Zařazení:** Dějepis › Pravěk a starověk · lekce A
 - **Popis:** Kdo to byl, pojmy a stavby, události a letopočty, seřaď.
 - **Funkčnost:** 4 režimy.
 - **Cíl výuky:** Žák popíše vývoj Říma od království po císařství a římský přínos (právo, stavby, jazyk).
@@ -2737,7 +2737,7 @@ Společné pro dějepis: dnešní lekce mají stejnou čtveřici režimů (osobn
   - `IMG-d-04` ✅ **A** · rekonstrukce římského fóra — zapojeno a označeno „rekonstrukce“
 
 #### Starověký Egypt a Mezopotámie · [d6_stary_orient.html](obsah/d6_stary_orient.html)
-- **Zařazení:** Dějepis › 6. r. · lekce A
+- **Zařazení:** Dějepis › Pravěk a starověk · lekce A
 - **Popis:** Kdo to byl, pojmy a stavby, události, seřaď.
 - **Funkčnost:** 4 režimy.
 - **Cíl výuky:** Žák vysvětlí, proč první státy vznikly u velkých řek, a popíše přínos písma a zákonů.
@@ -2748,7 +2748,7 @@ Společné pro dějepis: dnešní lekce mají stejnou čtveřici režimů (osobn
   - `IMG-d-05` 🟠 **E** · fotografie stély Chammurapiho zákoníku, klínopisné destičky, Rosettské desky, pyramid v Gíze, zikkuratu v Uru, papyru s hieroglyfy
 
 #### Kde najít historické mapy · [historicke_mapy_odkazy.html](obsah/historicke_mapy_odkazy.html)
-- **Zařazení:** Dějepis › 6.–9. r. · rozcestník F
+- **Zařazení:** Dějepis › Čas a práce historika · rozcestník F
 - **Popis:** Odkazy na externí sbírky historických map s návodem.
 - **Funkčnost:** odkazy.
 - **Cíl výuky:** Učitel i žák najdou historickou mapu a porovnají místo tehdy a dnes.
@@ -2758,7 +2758,7 @@ Společné pro dějepis: dnešní lekce mají stejnou čtveřici režimů (osobn
 - **Obrázky:** žádné.
 
 #### Časová osa světových dějin · [svetove_dejiny.html](obsah/svetove_dejiny.html)
-- **Zařazení:** Dějepis › 6.–9. r. · samostatná F
+- **Zařazení:** Dějepis › Čas a práce historika · samostatná F
 - **Popis:** Osa a kvíz (10 otázek).
 - **Funkčnost:** osa, kvíz, skóre.
 - **Cíl výuky:** Žák zařadí hlavní světové události do období a souvislostí.
@@ -2769,7 +2769,7 @@ Společné pro dějepis: dnešní lekce mají stejnou čtveřici režimů (osobn
 - **Obrázky:** karty událostí převzít z obrázků dějepisných lekcí.
 
 #### Čas, prameny a práce historika · [d6_prameny.html](obsah/d6_prameny.html)
-- **Zařazení:** Dějepis › 6. r. · pilot C (hlavní lekce rodiny dějepisu)
+- **Zařazení:** Dějepis › Čas a práce historika · pilot C (hlavní lekce rodiny dějepisu)
 - **Popis:** Vzorová lekce: úryvek zákona č. 11/1918 Sb., určení původce, doby, účelu a dokladu; počítání letopočtů přes přelom letopočtu; procvičování.
 - **Funkčnost:** vedená aktivita, 4 režimy, návaznosti.
 - **Cíl výuky:** Žák určí původ a účel pramene a doloží závěr jeho slovy.
@@ -2780,7 +2780,7 @@ Společné pro dějepis: dnešní lekce mají stejnou čtveřici režimů (osobn
   - `IMG-d-06` 🟠 **E** · fotografie 8 pramenů různých typů (pravěký nástroj, římská mince, středověká listina s pečetí, kronika, dobová fotografie, noviny z roku 1918, plakát, pohlednice) — třídění pramenů
 
 #### Pravěk · [d6_pravek.html](obsah/d6_pravek.html)
-- **Zařazení:** Dějepis › 6. r. · lekce A
+- **Zařazení:** Dějepis › Pravěk a starověk · lekce A
 - **Popis:** Které období, seřaď vývoj, vývoj člověka, život v pravěku.
 - **Funkčnost:** 4 režimy.
 - **Cíl výuky:** Žák popíše období pravěku podle materiálu nástrojů a vysvětlí význam zemědělství.
@@ -2793,7 +2793,7 @@ Společné pro dějepis: dnešní lekce mají stejnou čtveřici režimů (osobn
   - `IMG-d-09` ✅ **A** · řez archeologickou sondou s vrstvami a nálezy — zapojeny hotspoty
 
 #### Raný středověk a příchod Slovanů · [d7_rany_stredovek.html](obsah/d7_rany_stredovek.html)
-- **Zařazení:** Dějepis › 7. r. · lekce A (s mapou)
+- **Zařazení:** Dějepis › Středověk · lekce A (s mapou)
 - **Popis:** Mapa hradišť, časová osa, stěhování národů, Velká Morava.
 - **Funkčnost:** 4 režimy, mapa.
 - **Cíl výuky:** Žák popíše příchod Slovanů, Sámovu říši a Velkou Moravu a ukáže hradiště na mapě.
@@ -2805,7 +2805,7 @@ Společné pro dějepis: dnešní lekce mají stejnou čtveřici režimů (osobn
   - `IMG-d-11` ✅ **A** · rekonstrukce hradiště v Mikulčicích — zapojeno a označeno
 
 #### Husitství · [d7_husitstvi.html](obsah/d7_husitstvi.html)
-- **Zařazení:** Dějepis › 7.–8. r. · lekce A (s mapou)
+- **Zařazení:** Dějepis › Středověk · lekce A (s mapou)
 - **Popis:** Mapa bitev, časová osa, osobnosti, pojmy a myšlenky.
 - **Funkčnost:** 4 režimy, mapa.
 - **Cíl výuky:** Žák vysvětlí příčiny husitského hnutí, jeho požadavky a důsledky.
@@ -2817,7 +2817,7 @@ Společné pro dějepis: dnešní lekce mají stejnou čtveřici režimů (osobn
   - `IMG-d-12` 🟠 **E** · Jenský kodex (Hus na hranici, husité), Betlémská kaple, vozová hradba z dobové iluminace
 
 #### Lucemburkové a Karel IV. · [d7_lucemburkove.html](obsah/d7_lucemburkove.html)
-- **Zařazení:** Dějepis › 7. r. · lekce A (s mapou Prahy)
+- **Zařazení:** Dějepis › Středověk · lekce A (s mapou Prahy)
 - **Popis:** Stavby v Praze, kdo to byl, časová osa, doba Karla IV.
 - **Funkčnost:** 4 režimy, SVG mapa staveb.
 - **Cíl výuky:** Žák popíše vládu Karla IV. a jeho stavby a vysvětlí jejich význam pro Prahu.
@@ -2828,7 +2828,7 @@ Společné pro dějepis: dnešní lekce mají stejnou čtveřici režimů (osobn
   - `IMG-d-13` 🟠 **E** · fotografie Karlova mostu, Karlštejna, katedrály sv. Víta, Karolina, votivního obrazu Jana Očka (portrét Karla IV.)
 
 #### Přemyslovci · [d7_premyslovci.html](obsah/d7_premyslovci.html)
-- **Zařazení:** Dějepis › 7. r. · lekce A
+- **Zařazení:** Dějepis › Středověk · lekce A
 - **Popis:** Kdo to byl, letopočty, kdo vládl dřív, rodokmen.
 - **Funkčnost:** 4 režimy.
 - **Cíl výuky:** Žák seřadí nejvýznamnější Přemyslovce a vysvětlí vznik a upevnění českého státu.
@@ -2839,7 +2839,7 @@ Společné pro dějepis: dnešní lekce mají stejnou čtveřici režimů (osobn
   - `IMG-d-14` 🟠 **E** · Zlatá bula sicilská, svatováclavská přilba, Kosmova kronika (iluminace), rotunda sv. Kateřiny ve Znojmě
 
 #### Časová osa českých dějin · [casova_osa.html](obsah/casova_osa.html)
-- **Zařazení:** Dějepis › 7.–9. r. · samostatná F
+- **Zařazení:** Dějepis › Čas a práce historika · samostatná F
 - **Popis:** Přehled událostí a tři kvízy (rok → událost, událost → rok, napiš letopočet).
 - **Funkčnost:** osa, 3 kvízy.
 - **Cíl výuky:** Žák zná klíčové letopočty českých dějin a zařadí událost do období.
@@ -2850,7 +2850,7 @@ Společné pro dějepis: dnešní lekce mají stejnou čtveřici režimů (osobn
 - **Obrázky:** karty událostí z obrázků dějepisných lekcí.
 
 #### Zámořské objevy a renesance · [d8_objevy_renesance.html](obsah/d8_objevy_renesance.html)
-- **Zařazení:** Dějepis › 8. r. · lekce A
+- **Zařazení:** Dějepis › Raný novověk · lekce A
 - **Popis:** Mořeplavci a umělci, časová osa, objevy a důsledky, renesance a humanismus.
 - **Funkčnost:** 4 režimy.
 - **Cíl výuky:** Žák popíše objevné plavby a jejich důsledky pro různé skupiny obyvatel a pozná znaky renesance.
@@ -2862,7 +2862,7 @@ Společné pro dějepis: dnešní lekce mají stejnou čtveřici režimů (osobn
   - `IMG-d-15` 🟠 **E** · reprodukce (Leonardo — Mona Lisa, Vitruviánský muž; Michelangelo — David; Botticelli — Zrození Venuše), renesanční zámek Litomyšl, dobová mapa světa (Waldseemüller)
 
 #### Průmyslová revoluce a národní obrození · [d8_prumyslova_revoluce.html](obsah/d8_prumyslova_revoluce.html)
-- **Zařazení:** Dějepis › 8.–9. r. · lekce A
+- **Zařazení:** Dějepis › Modernizace a 19. století · lekce A
 - **Popis:** Osobnosti, časová osa, vynálezy a společnost, národní obrození.
 - **Funkčnost:** 4 režimy.
 - **Cíl výuky:** Žák vysvětlí, jak vynálezy změnily výrobu, město a práci, a popíše národní obrození.
@@ -2873,7 +2873,7 @@ Společné pro dějepis: dnešní lekce mají stejnou čtveřici režimů (osobn
   - `IMG-d-16` 🟠 **E** · dobové obrazy a fotografie (Wattův parní stroj, tovární haly, první lokomotiva, Národní divadlo, portréty Jungmanna a Palackého)
 
 #### Osvícenství a revoluce · [d8_osvicenstvi.html](obsah/d8_osvicenstvi.html)
-- **Zařazení:** Dějepis › 8. r. · lekce A
+- **Zařazení:** Dějepis › Raný novověk · lekce A
 - **Popis:** Osobnosti, časová osa, osvícenství a reformy, francouzská revoluce.
 - **Funkčnost:** 4 režimy.
 - **Cíl výuky:** Žák vysvětlí osvícenské myšlenky, reformy Marie Terezie a Josefa II. a příčiny francouzské revoluce.
@@ -2884,7 +2884,7 @@ Společné pro dějepis: dnešní lekce mají stejnou čtveřici režimů (osobn
   - `IMG-d-17` 🟠 **E** · portréty Marie Terezie a Josefa II., Deklarace práv člověka a občana (dobový tisk), dobytí Bastily (dobový obraz)
 
 #### Reformace a třicetiletá válka · [d8_reformace.html](obsah/d8_reformace.html)
-- **Zařazení:** Dějepis › 8. r. · lekce A
+- **Zařazení:** Dějepis › Raný novověk · lekce A
 - **Popis:** Osobnosti, časová osa, reformace, třicetiletá válka.
 - **Funkčnost:** 4 režimy.
 - **Cíl výuky:** Žák vysvětlí příčiny reformace a průběh a důsledky třicetileté války pro české země.
@@ -2895,7 +2895,7 @@ Společné pro dějepis: dnešní lekce mají stejnou čtveřici režimů (osobn
   - `IMG-d-18` 🟠 **E** · Lutherovy teze (dobový tisk), defenestrace 1618 (dobová rytina), Staroměstská exekuce (dobový leták), portrét Komenského
 
 #### Instituce Evropské unie · [eu_instituce.html](obsah/eu_instituce.html)
-- **Zařazení:** Dějepis a společnost › 9. r. · samostatná F
+- **Zařazení:** Dějepis › Dvacáté století a současnost · samostatná F
 - **Popis:** Přehled institucí a kvíz (10 otázek).
 - **Funkčnost:** přehled, kvíz.
 - **Cíl výuky:** Žák rozliší hlavní instituce EU a popíše, jak vzniká evropský předpis.
@@ -2908,7 +2908,7 @@ Společné pro dějepis: dnešní lekce mají stejnou čtveřici režimů (osobn
   - `IMG-d-19` ⚪ **C** · fotografie budov Evropského parlamentu (Štrasburk), Evropské komise (Brusel), Soudního dvora (Lucemburk)
 
 #### První světová válka · [d9_prvni_valka.html](obsah/d9_prvni_valka.html)
-- **Zařazení:** Dějepis › 9. r. · lekce A
+- **Zařazení:** Dějepis › Dvacáté století a současnost · lekce A
 - **Popis:** Osobnosti, časová osa, průběh války, důsledky a nové státy.
 - **Funkčnost:** 4 režimy.
 - **Cíl výuky:** Žák rozliší příčiny, spouštěč a důsledky války a popíše život na frontě a v zázemí.
@@ -2920,7 +2920,7 @@ Společné pro dějepis: dnešní lekce mají stejnou čtveřici režimů (osobn
   - `IMG-d-20` 🟠 **E** · dobové fotografie (zákopy, legionáři, fronta v Itálii, fronty na chléb v zázemí), válečná pohlednice
 
 #### Vznik ČSR a meziválečné období · [d9_csr.html](obsah/d9_csr.html)
-- **Zařazení:** Dějepis › 9. r. · lekce A
+- **Zařazení:** Dějepis › Dvacáté století a současnost · lekce A
 - **Popis:** Osobnosti, časová osa, stát a společnost, hospodářství a kultura.
 - **Funkčnost:** 4 režimy.
 - **Cíl výuky:** Žák popíše vznik a uspořádání první republiky, její národnostní složení a cestu k Mnichovu.
@@ -2932,7 +2932,7 @@ Společné pro dějepis: dnešní lekce mají stejnou čtveřici režimů (osobn
   - `IMG-d-21` 🟠 **E ✅** · dobové fotografie 28. října 1918, T. G. Masaryka a mobilizace 1938, autentický plakát a současný dokumentační pohled na dochovanou Baťovu tovární budovu; hotovo a zapojeno
 
 #### Druhá světová válka a holokaust · [d9_druha_valka.html](obsah/d9_druha_valka.html)
-- **Zařazení:** Dějepis › 9. r. · lekce A (citlivé téma)
+- **Zařazení:** Dějepis › Dvacáté století a současnost · lekce A (citlivé téma)
 - **Popis:** Osobnosti, časová osa, průběh války, protektorát, odboj a holokaust.
 - **Funkčnost:** 4 režimy.
 - **Cíl výuky:** Žák popíše průběh války, život v protektorátu, odboj a holokaust a vysvětlí, proč si oběti připomínáme.
@@ -2943,7 +2943,7 @@ Společné pro dějepis: dnešní lekce mají stejnou čtveřici režimů (osobn
   - `IMG-d-22` 🟠 **E** · pečlivě vybrané dobové fotografie (Praha 15. 3. 1939, parašutisté operace Anthropoid, Lidice před a po, Terezín) a dětské kresby z Terezína (s licencí Židovského muzea) — **žádné generované obrazy**
 
 #### Studená válka a rok 1989 · [d9_studena_valka.html](obsah/d9_studena_valka.html)
-- **Zařazení:** Dějepis › 9. r. · lekce A
+- **Zařazení:** Dějepis › Dvacáté století a současnost · lekce A
 - **Popis:** Osobnosti, časová osa, rozdělený svět, Československo 1948–1989.
 - **Funkčnost:** 4 režimy.
 - **Cíl výuky:** Žák popíše rozdělení světa, život v komunistickém Československu a události roku 1989.
@@ -2959,7 +2959,7 @@ Společné pro dějepis: dnešní lekce mají stejnou čtveřici režimů (osobn
 Společné pro informatiku: 🔗 programování (4.–7. r.) má projít **jedním prostředím**: 🧩 robot na mřížce s krokováním, které se od sekvencí přes cykly a proměnné dostane k funkcím. Žák tak nezačíná v každém ročníku v jiném rozhraní. Bezpečnost a etika stavět na fiktivních scénkách (příspěvky, zprávy, chaty) bez stálých postav. Obrázky: hlavně jednotné ilustrace hardwaru (styl B) a fiktivní ukázky obrazovek kreslené kódem (nikdy napodobeniny skutečných sítí a značek).
 
 #### Programování – sekvence příkazů · [inf4_sekvence.html](obsah/inf4_sekvence.html)
-- **Zařazení:** Informatika › Algoritmy a programování · 4. r. · lekce A (hlavní lekce rodiny programování)
+- **Zařazení:** Informatika › Algoritmizace a programování · 4. r. · lekce A (hlavní lekce rodiny programování)
 - **Popis:** Sestavení cesty robota k cíli, spuštění programu, hledání chyby v programu.
 - **Funkčnost:** 2 režimy, SVG mřížka, nová úloha.
 - **Cíl výuky:** Žák sestaví posloupnost příkazů, která dovede robota k cíli, a opraví chybný program.
@@ -2971,7 +2971,7 @@ Společné pro informatiku: 🔗 programování (4.–7. r.) má projít **jedn�
   - `IMG-inf-01` **B ✅** · čtyři natočení modrého robota, cíl, kámen, strom, voda, klíč a jablko — hotovo; dlaždice nahrazují emoji v `inf4_sekvence` a `inf5_cykly`, robot se v sekvencích natáčí podle příkazu
 
 #### Programování – cykly a větvení · [inf5_cykly.html](obsah/inf5_cykly.html)
-- **Zařazení:** Informatika › 5.–6. r. · lekce A
+- **Zařazení:** Informatika › Algoritmizace a programování · lekce A
 - **Popis:** Zkrácení programu cyklem, kde robot skončí, doplnění podmínky, kolikrát se to provede.
 - **Funkčnost:** 4 režimy, SVG.
 - **Cíl výuky:** Žák nahradí opakující se příkazy cyklem a použije podmínku.
@@ -2981,7 +2981,7 @@ Společné pro informatiku: 🔗 programování (4.–7. r.) má projít **jedn�
 - **Obrázky:** sdílet `IMG-inf-01`.
 
 #### Programování – proměnné a podmínky · [inf6_promenne.html](obsah/inf6_promenne.html)
-- **Zařazení:** Informatika › 6.–7. r. · lekce A
+- **Zařazení:** Informatika › Algoritmizace a programování · lekce A
 - **Popis:** Jaká je hodnota, co program vypíše, porovnávání, pojmy.
 - **Funkčnost:** 4 režimy.
 - **Cíl výuky:** Žák sleduje hodnotu proměnné během programu a předpoví výstup.
@@ -2992,7 +2992,7 @@ Společné pro informatiku: 🔗 programování (4.–7. r.) má projít **jedn�
 - **Obrázky:** sdílet `IMG-inf-01`.
 
 #### Programování – funkce a parametry · [inf7_funkce.html](obsah/inf7_funkce.html)
-- **Zařazení:** Informatika › 7.–8. r. · lekce A
+- **Zařazení:** Informatika › Algoritmizace a programování · lekce A
 - **Popis:** Co program udělá, správné volání, co dát do funkce, parametry a návratová hodnota.
 - **Funkčnost:** 4 režimy, SVG.
 - **Cíl výuky:** Žák vytvoří funkci s parametrem a použije ji opakovaně.
@@ -3002,7 +3002,7 @@ Společné pro informatiku: 🔗 programování (4.–7. r.) má projít **jedn�
 - **Obrázky:** žádné.
 
 #### Algoritmy řazení · [eduSort.html](obsah/eduSort.html)
-- **Zařazení:** Informatika › 8.–9. r. · simulace F (sjednocená v etapě 04)
+- **Zařazení:** Informatika › Algoritmizace a programování · simulace F (sjednocená v etapě 04)
 - **Popis:** Vizualizace sedmi algoritmů řazení s rychlostí, počtem prvků, statistikou a exportem.
 - **Funkčnost:** výběr algoritmu, start/pauza/reset, nová data, export statistik.
 - **Cíl výuky:** Žák popíše princip alespoň dvou algoritmů řazení a porovná jejich rychlost.
@@ -3014,7 +3014,7 @@ Společné pro informatiku: 🔗 programování (4.–7. r.) má projít **jedn�
 - **Obrázky:** žádné.
 
 #### Modely a simulace · [inf9_model_simulace.html](obsah/inf9_model_simulace.html)
-- **Zařazení:** Informatika › 9. r. · lekce A s modelem
+- **Zařazení:** Informatika › Data, informace a modelování · lekce A s modelem
 - **Popis:** Model populace, co udělá změna parametru, model a skutečnost, pojmy.
 - **Funkčnost:** 4 režimy, SVG graf.
 - **Cíl výuky:** Žák změní parametry modelu, předpoví výsledek a posoudí, co model zanedbává.
@@ -3024,7 +3024,7 @@ Společné pro informatiku: 🔗 programování (4.–7. r.) má projít **jedn�
 - **Obrázky:** žádné.
 
 #### Data, informace a kódování · [inf4_data.html](obsah/inf4_data.html)
-- **Zařazení:** Informatika › Data a sítě · 4.–5. r. · lekce A
+- **Zařazení:** Informatika › Data, informace a modelování · 4.–5. r. · lekce A
 - **Popis:** Obrázek podle kódu, dvojková soustava, tajná zpráva.
 - **Funkčnost:** 3 režimy, SVG mřížka.
 - **Cíl výuky:** Žák zakóduje a dekóduje jednoduchý obrázek a číslo ve dvojkové soustavě.
@@ -3034,7 +3034,7 @@ Společné pro informatiku: 🔗 programování (4.–7. r.) má projít **jedn�
 - **Obrázky:** žádné.
 
 #### Morseova abeceda · [morse_code.html](obsah/morse_code.html)
-- **Zařazení:** Informatika › Data a sítě · 5.–7. r. · nástroj F
+- **Zařazení:** Informatika › Data, informace a modelování · 5.–7. r. · nástroj F
 - **Popis:** Převod textu na Morse a zpět, přehrání zvukem, referenční tabulka.
 - **Funkčnost:** převod, přehrání, rychlost, tón.
 - **Cíl výuky:** Žák zakóduje a dekóduje krátkou zprávu v Morseově abecedě a vysvětlí princip kódování.
@@ -3046,7 +3046,7 @@ Společné pro informatiku: 🔗 programování (4.–7. r.) má projít **jedn�
 - **Obrázky:** žádné.
 
 #### Tabulkový procesor – vzorce · [inf6_tabulky.html](obsah/inf6_tabulky.html)
-- **Zařazení:** Informatika › Data a sítě · 6.–7. r. · pilot C
+- **Zařazení:** Informatika › Informační systémy · 6.–7. r. · pilot C
 - **Popis:** Vzorová lekce: editovatelná minitabulka se vzorci a okamžitým přepočtem, předpověď změny, procvičování adres, vzorců a funkcí.
 - **Funkčnost:** vedená aktivita, 4 režimy, návaznosti.
 - **Cíl výuky:** Žák změní vstupní buňku a vysvětlí přepočet vzorce.
@@ -3056,7 +3056,7 @@ Společné pro informatiku: 🔗 programování (4.–7. r.) má projít **jedn�
 - **Obrázky:** žádné.
 
 #### Počítačové sítě a internet · [inf7_site.html](obsah/inf7_site.html)
-- **Zařazení:** Informatika › Data a sítě · 7.–8. r. · lekce A
+- **Zařazení:** Informatika › Digitální technologie · 7.–8. r. · lekce A
 - **Popis:** Cesta dat, pojmy, prvky sítě, bezpečně na síti.
 - **Funkčnost:** 4 režimy, SVG.
 - **Cíl výuky:** Žák popíše cestu dat od zařízení k serveru (DNS, router, server) a pozná prvky sítě.
@@ -3067,7 +3067,7 @@ Společné pro informatiku: 🔗 programování (4.–7. r.) má projít **jedn�
   - `IMG-inf-02` ✅ **B** · osm karet prvků sítě v jednotném stylu — zapojeno do obrazového přehledu
 
 #### Šifrování a kódování dat · [inf7_sifrovani.html](obsah/inf7_sifrovani.html)
-- **Zařazení:** Informatika › Data a sítě · 7.–8. r. · lekce A
+- **Zařazení:** Informatika › Data, informace a modelování · 7.–8. r. · lekce A
 - **Popis:** Zašifruj (Caesar), rozlušti, komprese, kódování.
 - **Funkčnost:** 4 režimy.
 - **Cíl výuky:** Žák rozliší kódování, šifrování a kompresi a použije Caesarovu šifru.
@@ -3079,7 +3079,7 @@ Společné pro informatiku: 🔗 programování (4.–7. r.) má projít **jedn�
   - `IMG-inf-03` ✅ **A** · detailní krajina jako vzor pro ztrátovou kompresi — zapojeno s interaktivním náhledem kvality
 
 #### Databáze a strukturovaná data · [inf8_databaze.html](obsah/inf8_databaze.html)
-- **Zařazení:** Informatika › Data a sítě · 8.–9. r. · lekce A
+- **Zařazení:** Informatika › Informační systémy · 8.–9. r. · lekce A
 - **Popis:** Filtrování, řazení, návrh tabulky, pojmy.
 - **Funkčnost:** 4 režimy.
 - **Cíl výuky:** Žák filtruje a řadí záznamy a navrhne tabulku s jednoznačným klíčem.
@@ -3090,7 +3090,7 @@ Společné pro informatiku: 🔗 programování (4.–7. r.) má projít **jedn�
 - **Obrázky:** žádné.
 
 #### Hardware a bezpečné chování · [inf4_hardware.html](obsah/inf4_hardware.html)
-- **Zařazení:** Informatika › Bezpečnost a etika · 4.–5. r. · lekce A
+- **Zařazení:** Informatika › Digitální technologie · 4.–5. r. · lekce A
 - **Popis:** K čemu to je, vstup/výstup, bezpečné heslo, jak se zachovám.
 - **Funkčnost:** 4 režimy.
 - **Cíl výuky:** Žák pojmenuje části počítače, rozliší vstupní a výstupní zařízení a vytvoří bezpečné heslo.
@@ -3102,7 +3102,7 @@ Společné pro informatiku: 🔗 programování (4.–7. r.) má projít **jedn�
   - `IMG-inf-05` ✅ **B** · rozložená počítačová skříň (základní deska, procesor, paměť RAM, disk, zdroj, grafická karta) — zapojeny hotspoty součástí
 
 #### Informace na internetu a ověřování · [inf5_zdroje.html](obsah/inf5_zdroje.html)
-- **Zařazení:** Informatika › Bezpečnost a etika · 5.–6. r. · lekce A
+- **Zařazení:** Informatika › Digitální bezpečí a etika · 5.–6. r. · lekce A
 - **Popis:** Dá se tomu věřit, jak si to ověřím, zpráva × reklama, na čem poznáš kvalitu.
 - **Funkčnost:** 4 režimy.
 - **Cíl výuky:** Žák posoudí důvěryhodnost informace podle autora, data a zdroje a ověří ji.
@@ -3112,7 +3112,7 @@ Společné pro informatiku: 🔗 programování (4.–7. r.) má projít **jedn�
 - **Obrázky:** žádné (fiktivní stránky kreslí kód, ne napodobeniny skutečných médií).
 
 #### Digitální stopa a bezpečnost · [inf6_digitalni_stopa.html](obsah/inf6_digitalni_stopa.html)
-- **Zařazení:** Informatika › Bezpečnost a etika · 6.–7. r. · lekce A (hlavní lekce rodiny online bezpečí)
+- **Zařazení:** Informatika › Digitální bezpečí a etika · 6.–7. r. · lekce A (hlavní lekce rodiny online bezpečí)
 - **Popis:** Co to prozradí, sdílet/nesdílet, jak se zachovám, pojmy.
 - **Funkčnost:** 4 režimy.
 - **Cíl výuky:** Žák odhadne, co o sobě prozradí příspěvkem, a ví, jak se zachovat při kyberšikaně.
@@ -3123,7 +3123,7 @@ Společné pro informatiku: 🔗 programování (4.–7. r.) má projít **jedn�
   - `IMG-inf-06` ✅ **A** · „fotka z telefonu“ se školákem, domem, ulicí a zastávkou — zapojeno se čtyřmi hotspoty soukromí
 
 #### Autorská práva a licence · [inf8_licence.html](obsah/inf8_licence.html)
-- **Zařazení:** Informatika › Bezpečnost a etika · 8.–9. r. · lekce A
+- **Zařazení:** Informatika › Digitální bezpečí a etika · 8.–9. r. · lekce A
 - **Popis:** Smím to použít, Creative Commons, citace a zdroje, pojmy.
 - **Funkčnost:** 4 režimy.
 - **Cíl výuky:** Žák rozhodne, zda smí dílo použít, a správně ho uvede podle licence.
@@ -3134,7 +3134,7 @@ Společné pro informatiku: 🔗 programování (4.–7. r.) má projít **jedn�
 - **Obrázky:** využít vlastní fotografie stylu C z webu jako cvičné příklady.
 
 #### AI přednáška · [AI_prednaska.html](obsah/AI_prednaska.html)
-- **Zařazení:** Informatika › Bezpečnost a etika · 9. r. · prezentace F (záměrně tmavá)
+- **Zařazení:** Informatika › Digitální bezpečí a etika · 9. r. · prezentace F (záměrně tmavá)
 - **Popis:** Slidy pro laiky: co je AI, historie, typy, strojové a hluboké učení, použití, nástroje, agenti, prompting.
 - **Funkčnost:** přehled slidů, celá obrazovka, předchozí/další.
 - **Cíl výuky:** Žák a učitel pochopí, co AI je, co umí a kde chybuje.
@@ -3145,7 +3145,7 @@ Společné pro informatiku: 🔗 programování (4.–7. r.) má projít **jedn�
   - `IMG-inf-07` **A ✅** · 16 jednotných ilustrací bez textu a značek — hotovo; nahradily původní `Photo*.png` a `Cortana.png` na všech slidech bez změny ovládání prezentace
 
 #### Umělá inteligence a etika · [inf9_ai_etika.html](obsah/inf9_ai_etika.html)
-- **Zařazení:** Informatika › Bezpečnost a etika · 9. r. · lekce A
+- **Zařazení:** Informatika › Digitální bezpečí a etika · 9. r. · lekce A
 - **Popis:** Jak AI funguje, kde chybuje, etická dilemata, AI ve škole.
 - **Funkčnost:** 4 režimy.
 - **Cíl výuky:** Žák vysvětlí, jak AI vzniká z dat, rozpozná typické chyby a zodpovědně ji použije ve škole.
@@ -3161,7 +3161,7 @@ Společné pro informatiku: 🔗 programování (4.–7. r.) má projít **jedn�
 Nástroje bez vazby na předmět. 🔗 Mají stejnou hlavičku (proužek „Nástroj“ v neutrální barvě) a stejná tlačítka. Kartičky, knihovna sad a deník tvoří jeden systém opakování — měly by sdílet data a vzhled.
 
 #### Trenažér psaní · [typing_trainer.html](obsah/typing_trainer.html)
-- **Zařazení:** Další výuka › Učení a opakování · bez ročníku · nástroj F
+- **Zařazení:** Nástroje pro učení a učitele › Studijní dovednosti · bez ročníku · nástroj F
 - **Popis:** Psaní všemi deseti: lekce po řadách, slova, diakritika, věty, čísla, minutovka; klávesnice na obrazovce, WPM a přesnost.
 - **Funkčnost:** 9 režimů, nový/stejný text, zobrazení klávesnice.
 - **Cíl výuky:** Žák píše všemi deseti na české klávesnici s přesností nad 95 %.
@@ -3173,7 +3173,7 @@ Nástroje bez vazby na předmět. 🔗 Mají stejnou hlavičku (proužek „Nás
   - `IMG-00-03` ✅ **B** · dvě ruce na klávesnici ve výchozí poloze shora — zapojeno s popisem správného držení
 
 #### Kartičky (flashcards) · [flashcards.html](obsah/flashcards.html)
-- **Zařazení:** Další výuka › Učení a opakování · nástroj F
+- **Zařazení:** Nástroje pro učení a učitele › Opakování a pokrok · nástroj F
 - **Popis:** Učení a opakování kartiček metodou SM-2, správa sad, export/import, nastavení animací.
 - **Funkčnost:** otáčení, hodnocení 4 stupni, sady, nastavení.
 - **Cíl výuky:** Žák si efektivně opakuje slovíčka a pojmy v rozložených intervalech.
@@ -3184,7 +3184,7 @@ Nástroje bez vazby na předmět. 🔗 Mají stejnou hlavičku (proužek „Nás
 - **Obrázky:** využít karty `IMG-aj-02`, `IMG-prv-10`, `IMG-pr-05`.
 
 #### Studijní deník a odznaky · [edu_progress.html](obsah/edu_progress.html)
-- **Zařazení:** Další výuka › Učení a opakování · nástroj F
+- **Zařazení:** Nástroje pro učení a učitele › Opakování a pokrok · nástroj F
 - **Popis:** Deník dnů v řadě, posledních 28 dní, záznamy podle témat, průběh v pilotních lekcích (etapa 08), odznaky, ruční zápis.
 - **Funkčnost:** přehledy, ruční zápis, vymazání.
 - **Cíl výuky:** Žák vidí, co procvičoval, co mu jde a co zopakovat.
@@ -3196,7 +3196,7 @@ Nástroje bez vazby na předmět. 🔗 Mají stejnou hlavičku (proužek „Nás
   - `IMG-00-04` **B ✅** · 12 odznaků v jednotném stylu — hotovo; medailonky nahrazují emoji a rozlišují sérii, dokončení, aktivní dny i šíři procvičovaných předmětů
 
 #### Knihovna sad kartiček · [knihovna_sad.html](obsah/knihovna_sad.html)
-- **Zařazení:** Další výuka › Učení a opakování · nástroj F
+- **Zařazení:** Nástroje pro učení a učitele › Opakování a pokrok · nástroj F
 - **Popis:** Hotové sady k přidání do kartiček nebo ke stažení.
 - **Funkčnost:** seznam sad, přidání, stažení.
 - **Cíl výuky:** Žák najde hotovou sadu k tématu, které se učí.
@@ -3206,7 +3206,7 @@ Nástroje bez vazby na předmět. 🔗 Mají stejnou hlavičku (proužek „Nás
 - **Obrázky:** žádné.
 
 #### Hudební nauka · [music_theory.html](obsah/music_theory.html)
-- **Zařazení:** Další výuka › Hudba · nástroj F
+- **Zařazení:** Hudební výchova › Hudba · nástroj F
 - **Popis:** Stupnice a akordy s přehráním, kvintový kruh.
 - **Funkčnost:** základní tón, typ stupnice/akordu, přehrát.
 - **Cíl výuky:** Žák postaví durovou a mollovou stupnici a kvintakord a přiřadí předznamenání.
@@ -3218,7 +3218,7 @@ Nástroje bez vazby na předmět. 🔗 Mají stejnou hlavičku (proužek „Nás
 - **Obrázky:** žádné (klaviatura a noty kódem).
 
 #### Notová osnova – čtení not · [notes_reading.html](obsah/notes_reading.html)
-- **Zařazení:** Další výuka › Hudba · nástroj F
+- **Zařazení:** Hudební výchova › Hudba · nástroj F
 - **Popis:** Rychlé rozpoznávání not v houslovém klíči (c1–c2, c1–g2).
 - **Funkčnost:** 2 rozsahy, počitadlo.
 - **Cíl výuky:** Žák přečte noty v houslovém klíči a najde je na klaviatuře.
@@ -3230,7 +3230,7 @@ Nástroje bez vazby na předmět. 🔗 Mají stejnou hlavičku (proužek „Nás
 - **Obrázky:** žádné.
 
 #### Kabinet učitele · [ucitel.html](obsah/ucitel.html)
-- **Zařazení:** Další výuka › Pro učitele · nástroj E
+- **Zařazení:** Nástroje pro učení a učitele › Pro učitele · nástroj E
 - **Popis:** Příprava na hodinu, nástroje do hodiny (časovač, losování, kostka, mince, …), okno pro třídu, zálohování.
 - **Funkčnost:** dvě úrovně záložek, časovače, generátory, okno pro třídu.
 - **Cíl výuky:** Učitel má na jednom místě přípravu i nástroje pro průběh hodiny.
@@ -3240,7 +3240,7 @@ Nástroje bez vazby na předmět. 🔗 Mají stejnou hlavičku (proužek „Nás
 - **Obrázky:** žádné.
 
 #### Tvorba slidů a prezentace · [prezentace.html](obsah/prezentace.html)
-- **Zařazení:** Další výuka › Pro učitele · nástroj E
+- **Zařazení:** Nástroje pro učení a učitele › Pro učitele · nástroj E
 - **Popis:** Tvorba slidů, promítání, okno pro učitele s poznámkami, sestavení z textu, šablona hodiny, tisk podkladů; lze vložit celou aplikaci Metodusu.
 - **Funkčnost:** sady, úpravy, náhled, promítání, tisk, formát 16:9/4:3.
 - **Cíl výuky:** Učitel připraví výklad s vloženými interaktivními modely.
@@ -3251,7 +3251,7 @@ Nástroje bez vazby na předmět. 🔗 Mají stejnou hlavičku (proužek „Nás
 - **Obrázky:** žádné.
 
 #### Generátor citací · [citation_generator.html](obsah/citation_generator.html)
-- **Zařazení:** Další výuka › Pro učitele · nástroj F
+- **Zařazení:** Nástroje pro učení a učitele › Studijní dovednosti · nástroj F
 - **Popis:** Formulář zdroje (kniha, článek, web, kvalifikační práce), seznam v ISO 690 nebo APA 7, kopírování.
 - **Funkčnost:** typy zdrojů, 2 styly, seznam.
 - **Cíl výuky:** Žák správně ocituje knihu a webovou stránku.
@@ -3263,7 +3263,7 @@ Nástroje bez vazby na předmět. 🔗 Mají stejnou hlavičku (proužek „Nás
   - `IMG-00-05` ✅ **B** · titulní strana a tiráž fiktivní knihy (autor, název, nakladatel, rok, ISBN, vydání) bez skutečných značek — 7 přístupných hotspotů pro výuku citování; text kreslí web
 
 #### Generátor pracovních listů · [pracovni_listy.html](obsah/pracovni_listy.html)
-- **Zařazení:** Další výuka › Pro učitele · nástroj E
+- **Zařazení:** Nástroje pro učení a učitele › Pro učitele · nástroj E
 - **Popis:** Výběr ročníku, předmětu a témat, obtížnost, varianty A–D, vzhled, hlavička, řešení, kód listu.
 - **Funkčnost:** 5 kroků, živý náhled, tisk.
 - **Cíl výuky:** Učitel vytiskne list k tématu hodiny ve více variantách s řešením.
@@ -3305,13 +3305,13 @@ Při výrobě sady v jednom stylu zadávat všechny karty v jedné dávce se ste
 | `IMG-prv-13` | A ✅ | koloběh vody v krajině — zapojeno do řazení | [prv3_voda_vzduch](obsah/prv3_voda_vzduch.html) |
 | `IMG-prv-15` | A ✅ | les v řezu s patry a typickými organismy — zapojeno | [prv4_ekosystemy](obsah/prv4_ekosystemy.html) |
 | `IMG-prv-16` | A ✅ | louka a pole s typickými organismy — zapojeno | [prv4_ekosystemy](obsah/prv4_ekosystemy.html) |
-| `IMG-prv-17` | C | fotografie 16 vzorků (žula, pískovec, vápenec, čedič, břidlice, mramor, uhlí, křemen, živec, slída, kalcit, sůl kamenná, sádrovec, pyrit, grafit, magnetit) na neutrálním pozadí se stejným světlem; **sdílet s `pr9_mineraly`** | [prv4_horniny](obsah/prv4_horniny.html) |
+| `IMG-prv-17` | C ✅ | fotografie 16 vzorků (žula, pískovec, vápenec, čedič, břidlice, mramor, uhlí, křemen, živec, slída, kalcit, sůl kamenná, sádrovec, pyrit, grafit, magnetit) na neutrálním pozadí se stejným světlem; **sdílet s `pr9_mineraly`** | [prv4_horniny](obsah/prv4_horniny.html) |
 | `IMG-prv-20` | A ✅ | plán naší vesnice/městečka shora (obecní úřad, pošta, škola, lékař, obchod, knihovna, hasičská zbrojnice, kostel, nádraží, park) — hotspoty; stejné místo jako `IMG-prv-03` a `IMG-prv-07`; hotovo: ilustrační plán je zapojen před interaktivní mapou | [prv3_obec](obsah/prv3_obec.html) |
 | `IMG-prv-23` | E ✅ | přesné předlohy státní vlajky, vlajky prezidenta republiky a státní pečeti z Wikimedia Commons + volná nahrávka hymny — zapojeno do poznávačky všech sedmi symbolů | [prv5_statni_symboly](obsah/prv5_statni_symboly.html) |
 | `IMG-ch-06` | B ✅ | 32 karet odpadu (30 nových, PET láhev a plechovka sdílené) + 6 barevných nádob — zapojeno do obrazového třídicího kvízu s vysvětlením výjimek a místního společného sběru | [ch9_zivotni_prostredi](obsah/ch9_zivotni_prostredi.html) |
-| `IMG-pr-01` | C | fotografie 14 druhů hub, u každého 2–3 pohledy (hřib smrkový, hřib kovář, klouzek, bedla vysoká, liška obecná, václavka, pečárka, muchomůrka červená, muchomůrka zelená, muchomůrka tygrovaná, hřib satan, čirůvka tygrovaná, pavučinec plyšový, ucháč obecný) — **nikdy generované** | [pr6_houby](obsah/pr6_houby.html) |
+| `IMG-pr-01` | C ✅ | fotografie 14 druhů hub, u každého 2–3 pohledy (hřib smrkový, hřib kovář, klouzek, bedla vysoká, liška obecná, václavka, pečárka, muchomůrka červená, muchomůrka zelená, muchomůrka tygrovaná, hřib satan, čirůvka tygrovaná, pavučinec plyšový, ucháč obecný) — **nikdy generované** | [pr6_houby](obsah/pr6_houby.html) |
 | `IMG-pr-07` | B ✅ | 4 karty stavby těla ve stejném měřítku a pohledu shora (včela, křižák, rak, stonožka); hotovo a zapojeno | [pr6_clenovci](obsah/pr6_clenovci.html) |
-| `IMG-pr-05` | C | fotografie 40 zástupců pro poznávačky přírodopisu 6.–7. r. (bezobratlí, ryby, obojživelníci, plazi, ptáci, savci ČR); **společná sada** pro `pr6_bezobratli`, tuto stránku, `pr7_ptaci_savci`, `potravni_retezec` | [pr7_obratlovci_studenokrevni](obsah/pr7_obratlovci_studenokrevni.html) |
+| `IMG-pr-05` | C ✅ | fotografie 40 zástupců pro poznávačky přírodopisu 6.–7. r. (bezobratlí, ryby, obojživelníci, plazi, ptáci, savci ČR); **společná sada** pro `pr6_bezobratli`, tuto stránku, `pr7_ptaci_savci`, `potravni_retezec` | [pr7_obratlovci_studenokrevni](obsah/pr7_obratlovci_studenokrevni.html) |
 | `IMG-pr-13` | B ✅ | 8 karet hlav ptáků se zobáky ve stejném pohledu z profilu a 6 karet nohou — zapojeno do srovnávacího atlasu a procvičování zobáků | [pr7_ptaci_savci](obsah/pr7_ptaci_savci.html) |
 | `IMG-pr-17` | B 🟡 | 8 karet postupu vytvořeno a zapojeno podle ERC 2025; před definitivním uzavřením zbývá odborná kontrola zdravotníkem | [pr8_prvni_pomoc](obsah/pr8_prvni_pomoc.html) |
 | `IMG-inf-04` | A ✅ | pracovní stůl s počítačem a deseti zařízeními; hotovo s přístupnými hotspoty | [inf4_hardware](obsah/inf4_hardware.html) |
@@ -3331,8 +3331,8 @@ Při výrobě sady v jednom stylu zadávat všechny karty v jedné dávce se ste
 | `IMG-cj-09` | A ✅ | 10 jednoduchých scén k větám pro první čtení (Máma má mísu. Ema mele maso. Pes leží u domu…) — obrázek ke kontrole porozumění | [slabiky](obsah/slabiky.html) |
 | `IMG-cj-11` | E ✅ | osm doložených antických zobrazení bohů a hrdinů (vázy, sochy a reliéf) — zapojeno do obrazového atlasu i poznávačky skutečných atributů | [cj6_baje](obsah/cj6_baje.html) |
 | `IMG-cj-14` | E ✅ | osm doložených volných reprodukcí od renesance po surrealismus — zapojeno přímo k literárním směrům s vysvětlením vizuálního znaku | [literarni_smery](obsah/literarni_smery.html) |
-| `IMG-m-08` | C | fotografie 8 referenčních předmětů s přibližnou velikostí a hmotností (kancelářská sponka, jablko, litrová láhev, dveře, balení mouky 1 kg, lžička, kostka cukru, fotbalové hřiště z výšky) — odhad jednotek | [prevody_jednotek](obsah/prevody_jednotek.html) |
-| `IMG-m-09` | C | 12 fotografií předmětů tvaru těles (kostka cukru, krabice mléka, plechovka, míč, kornout, pyramida, stan, toblerone, válcová pastelka…) — poznávání těles v okolí | [geo_tvary](obsah/geo_tvary.html) |
+| `IMG-m-08` | C ✅ | fotografie 8 referenčních předmětů s přibližnou velikostí a hmotností (kancelářská sponka, jablko, litrová láhev, dveře, balení mouky 1 kg, lžička, kostka cukru, fotbalové hřiště z výšky) — odhad jednotek | [prevody_jednotek](obsah/prevody_jednotek.html) |
+| `IMG-m-09` | C ✅ | 12 fotografií předmětů tvaru těles (kostka cukru, krabice mléka, plechovka, míč, kornout, pyramida, stan, toblerone, válcová pastelka…) — poznávání těles v okolí | [geo_tvary](obsah/geo_tvary.html) |
 | `IMG-aj-03` | A ✅ | 4 scénky setkání podle denní doby; hotovo a zapojeno | [aj3_pozdravy](obsah/aj3_pozdravy.html) |
 | `IMG-aj-04` | A ✅ | 8 scén běžného dne jednoho školáka — zapojeno jako denní režim a do srovnání prostého a průběhového času | [aj4_pritomny_prosty](obsah/aj4_pritomny_prosty.html) |
 | `IMG-aj-05` | B ✅ | pokoj s krabicí, stolem, židlí a postelí + samostatná kočka — zapojeno do poznávačky a přetahovacího trenažéru | [aj4_predlozky](obsah/aj4_predlozky.html) |
@@ -3346,62 +3346,62 @@ Při výrobě sady v jednom stylu zadávat všechny karty v jedné dávce se ste
 | `IMG-prv-06` | B ✅ | 30 sdílených a nových karet potravin — zapojeno do pyramidy a obrazového porovnávání | [prv5_zdravy_styl](obsah/prv5_zdravy_styl.html) |
 | `IMG-prv-08` | B ✅ | celá postava dítěte zepředu v neutrálním postoji — hotspoty částí těla | [prv1_smysly](obsah/prv1_smysly.html) |
 | `IMG-prv-11` | B ✅ | 12 karet mláďat domácích zvířat — zapojeno do obrazového přiřazování dospělec–mládě | [prv2_zvirata](obsah/prv2_zvirata.html) |
-| `IMG-prv-12` | C | 16 fotografií přírodnin (kámen, krystal soli, semeno fazole, klíčící fazole, suchý list, zelený list, houba, mech, voda, oblak, šnek, mravenec, peří, kost, písek, jablko) | [prv3_ziva_neziva](obsah/prv3_ziva_neziva.html) |
+| `IMG-prv-12` | C ✅ | 16 fotografií přírodnin (kámen, krystal soli, semeno fazole, klíčící fazole, suchý list, zelený list, houba, mech, voda, oblak, šnek, mravenec, peří, kost, písek, jablko) | [prv3_ziva_neziva](obsah/prv3_ziva_neziva.html) |
 | `IMG-prv-14` | A ✅ | řez půdou s pěti klikacími vrstvami; hotovo a zapojeno | [prv3_voda_vzduch](obsah/prv3_voda_vzduch.html) |
 | `IMG-prv-19` | A ✅ | krajina s elektrárnami (vodní, větrná, solární pole, uhelná, jaderná, bioplynová stanice) propojená vedením k vesnici — hotspoty; hotovo: zapojeno do přehledu elektráren i cesty elektřiny | [prv5_energie](obsah/prv5_energie.html) |
 | `IMG-prv-21` | A ✅ | 2 rekonstrukce každodenního života (slovanské hradiště 9. století, Praha za Karla IV.) označené jako rekonstrukce — srovnání; hotovo: dvě historicky kontrolované scény | [prv4_nejstarsi_dejiny](obsah/prv4_nejstarsi_dejiny.html) |
-| `IMG-prv-24` | C | fotografie budov Poslanecké sněmovny, Senátu, Úřadu vlády, Pražského hradu, Ústavního soudu | [prv5_statni_symboly](obsah/prv5_statni_symboly.html) |
+| `IMG-prv-24` | C ✅ | fotografie budov Poslanecké sněmovny, Senátu, Úřadu vlády, Pražského hradu, Ústavního soudu | [prv5_statni_symboly](obsah/prv5_statni_symboly.html) |
 | `IMG-prv-25` | E ✅ | 7 dobových fotografií a 1 úřední volební dokument s volnou licencí (28. říjen 1918, Masaryk, mobilizace 1938, osvobození 1945, únor 1948, srpen 1968, listopad 1989, první svobodné volby); hotovo a zapojeno do otázek | [prv5_dejiny_20](obsah/prv5_dejiny_20.html) |
 | `IMG-f-01` | B ✅ | 8 karet krychlí stejné velikosti z různých materiálů (dřevo, korek, led, hliník, železo, olovo, polystyren, sklo) — vzhled materiálu pro laboratoř; hotovo: zapojeno do výpočtů, vážení i porovnání | [f6_hustota](obsah/f6_hustota.html) |
-| `IMG-f-02` | C | 10 fotografií měřidel (pravítko, svinovací metr, posuvné měřidlo, kuchyňská váha, digitální váha, odměrný válec, teploměr lihový a digitální, stopky, siloměr) — poznávání měřidel | [f6_mereni](obsah/f6_mereni.html) |
-| `IMG-f-04` | C | 12 fotografií jednoduchých strojů v praxi (houpačka, nůžky, kleště, otvírák, kolečko, louskáček, pinzeta, stavební jeřáb s kladkostrojem, studna s rumpálem, převody jízdního kola, hodinový strojek, klika) — spojení modelu se světem | [paka](obsah/paka.html) |
+| `IMG-f-02` | C ✅ | 10 fotografií měřidel (pravítko, svinovací metr, posuvné měřidlo, kuchyňská váha, digitální váha, odměrný válec, teploměr lihový a digitální, stopky, siloměr) — poznávání měřidel | [f6_mereni](obsah/f6_mereni.html) |
+| `IMG-f-04` | C ✅ | 12 fotografií jednoduchých strojů v praxi (houpačka, nůžky, kleště, otvírák, kolečko, louskáček, pinzeta, stavební jeřáb s kladkostrojem, studna s rumpálem, převody jízdního kola, hodinový strojek, klika) — spojení modelu se světem | [paka](obsah/paka.html) |
 | `IMG-f-10` | B ✅ | devět realistických karet součástek — zapojeno do přístupné dílny, kde se předmět překlápí na schématickou značku a vysvětlení funkce | [elektrina](obsah/elektrina.html) |
-| `IMG-f-12` | C | 6 fotografií optických jevů (lžíce „zlomená“ ve sklenici vody, duha, hranol s barevným spektrem, obraz v lžíci, lupa, odraz v klidném jezeře) | [optika](obsah/optika.html) |
-| `IMG-f-13` | C | fotografie 7 přístrojů (lupa, diaprojektor, Keplerův refraktor, divadelní kukátko, Cassegrainův teleskop, triedr, školní mikroskop) | [optika_soustava](obsah/optika_soustava.html) |
+| `IMG-f-12` | C ✅ | 6 fotografií optických jevů (lžíce „zlomená“ ve sklenici vody, duha, hranol s barevným spektrem, obraz v lžíci, lupa, odraz v klidném jezeře) | [optika](obsah/optika.html) |
+| `IMG-f-13` | C ✅ | fotografie 7 přístrojů (lupa, diaprojektor, Keplerův refraktor, divadelní kukátko, Cassegrainův teleskop, triedr, školní mikroskop) | [optika_soustava](obsah/optika_soustava.html) |
 | `IMG-ch-01` | A ✅ | školní laboratoř se šesti klikacími bezpečnostními chybami; hotovo | [ch8_bezpecnost](obsah/ch8_bezpecnost.html) |
-| `IMG-ch-02` | C | fotografie 6 skutečných domácích výrobků s piktogramy (čistič odpadů, odstraňovač rzi, lak, plynová kartuše, hnojivo, líh) — piktogram v praxi; značky výrobců rozmazat | [ch8_bezpecnost](obsah/ch8_bezpecnost.html) |
-| `IMG-ch-03` | C | fotografie vzorků asi 40 běžných prvků (Wikimedia Commons „Periodic table of elements“ fotografie s licencí CC BY) — detail prvku | [periodic_table](obsah/periodic_table.html) |
+| `IMG-ch-02` | C ✅ | fotografie 6 skutečných domácích výrobků s piktogramy (čistič odpadů, odstraňovač rzi, lak, plynová kartuše, hnojivo, líh) — piktogram v praxi; značky výrobců rozmazat | [ch8_bezpecnost](obsah/ch8_bezpecnost.html) |
+| `IMG-ch-03` | C ✅ | fotografie vzorků asi 40 běžných prvků (Wikimedia Commons „Periodic table of elements“ fotografie s licencí CC BY) — detail prvku | [periodic_table](obsah/periodic_table.html) |
 | `IMG-ch-04` | A ✅ | řez úpravnou pitné vody; hotovo a zapojeno do řazení kroků | [ch8_voda_vzduch](obsah/ch8_voda_vzduch.html) |
-| `IMG-ch-09` | C | řada 8 zkumavek s výluhem červeného zelí v roztocích od pH 1 po 13, fotografie pH papírku se stupnicí — skutečné barvy indikátorů | [ch9_ph](obsah/ch9_ph.html) |
+| `IMG-ch-09` | C ✅ | řada 8 zkumavek s výluhem červeného zelí v roztocích od pH 1 po 13, fotografie pH papírku se stupnicí — skutečné barvy indikátorů | [ch9_ph](obsah/ch9_ph.html) |
 | `IMG-pr-02` | A ✅ | řez houbou s podhoubím; hotovo a zapojeno | [pr6_houby](obsah/pr6_houby.html) |
 | `IMG-pr-04` | B ✅ | 6 karet stavby těla v botanickém stylu (nezmar, ploštěnka, škrkavka, hlemýžď v řezu, žížala s články, škeble) — srovnávací tabule s hotspoty | [pr6_bezobratli](obsah/pr6_bezobratli.html) |
-| `IMG-pr-06` | C | mikrofotografie pokožky cibule, buněk ústní sliznice, listu mechu (chloroplasty), prvoka trepky — protějšek modelu | [bunka](obsah/bunka.html) |
+| `IMG-pr-06` | C ✅ | mikrofotografie pokožky cibule, buněk ústní sliznice, listu mechu (chloroplasty), prvoka trepky — protějšek modelu | [bunka](obsah/bunka.html) |
 | `IMG-pr-08` | B ✅ | proměna dokonalá (babočka: vajíčko, housenka, kukla, motýl) a nedokonalá (kobylka: vajíčko, nymfa, dospělec) — 7 karet | [pr6_clenovci](obsah/pr6_clenovci.html) |
 | `IMG-pr-09` | B ✅ | 5 schematických karet v jednotném stylu (bakterie s bičíkem, virus s obalem, trepka, měňavka, kvasinka) — ne mikrofotografie, ale čitelný model | [pr6_mikroorganismy](obsah/pr6_mikroorganismy.html) |
-| `IMG-pr-10` | C | fotografie 12 zástupců skupin (mech ploník, kapraď samec, přeslička, plavuň, smrk, borovice, tis, pryskyřník, hrách, pampeliška, pšenice, tulipán) — systém rostlin | [pr7_rostliny](obsah/pr7_rostliny.html) |
+| `IMG-pr-10` | C ✅ | fotografie 12 zástupců skupin (mech ploník, kapraď samec, přeslička, plavuň, smrk, borovice, tis, pryskyřník, hrách, pampeliška, pšenice, tulipán) — systém rostlin | [pr7_rostliny](obsah/pr7_rostliny.html) |
 | `IMG-pr-11` | B ✅ | 3 karty stavby těla (kapr, skokan hnědý, ještěrka obecná) ze stejného úhlu — hotspoty | [pr7_obratlovci_studenokrevni](obsah/pr7_obratlovci_studenokrevni.html) |
 | `IMG-pr-12` | B ✅ | vývoj žáby v 5 krocích (vajíčka, pulec, pulec s nohama, žabka, dospělá žába) | [pr7_obratlovci_studenokrevni](obsah/pr7_obratlovci_studenokrevni.html) |
 | `IMG-pr-14` | B ✅ | 6 karet chrupu savců (šelma, hlodavec, přežvýkavec, hmyzožravec, všežravec, zajíc) — lebky z boku | [pr7_ptaci_savci](obsah/pr7_ptaci_savci.html) |
 | `IMG-pr-15` | B ✅ | 8 karet etap života (novorozenec, batole, předškolák, školák, dospívající, dospělý, starší dospělý, senior) jako jedna rodina — řada etap | [pr8_rozmnozovani](obsah/pr8_rozmnozovani.html) |
 | `IMG-pr-16` | A ✅ | dvě atlasová schémata mužské a ženské rozmnožovací soustavy bez textu — zapojeno s přístupnými hotspoty | [pr8_rozmnozovani](obsah/pr8_rozmnozovani.html) |
 | `IMG-pr-18` | A ✅ | 3 řezy deskovými rozhraními (středooceánský hřbet, subdukce s vulkanickým obloukem, transformní zlom) ve stejném stylu a měřítku — podklad animací | [pr9_geologicke_deje](obsah/pr9_geologicke_deje.html) |
-| `IMG-pr-20` | C | fotografie Mohsovy stupnice (10 minerálů) a vrypů na porcelánové destičce (hematit, pyrit, malachit) | [pr9_mineraly](obsah/pr9_mineraly.html) |
-| `IMG-pr-21` | C | fotografie 8 zkamenělin (trilobit, amonit, belemnit, přeslička z karbonu, zub žraloka, otisk kapradiny, jantar s hmyzem, archeopteryx — odlitek) | [pr9_vyvoj_zeme](obsah/pr9_vyvoj_zeme.html) |
-| `IMG-z-01` | C | fotografie 8 meteorologických jevů (kupovitá oblaka, bouřkový oblak, mlha, jinovatka, kroupy, duha, halo, inverze v údolí) | [z6_atmosfera](obsah/z6_atmosfera.html) |
+| `IMG-pr-20` | C ✅ | fotografie Mohsovy stupnice (10 minerálů) a vrypů na porcelánové destičce (hematit, pyrit, malachit) | [pr9_mineraly](obsah/pr9_mineraly.html) |
+| `IMG-pr-21` | C ✅ | fotografie 8 zkamenělin (trilobit, amonit, belemnit, přeslička z karbonu, zub žraloka, otisk kapradiny, jantar s hmyzem, archeopteryx — odlitek) | [pr9_vyvoj_zeme](obsah/pr9_vyvoj_zeme.html) |
+| `IMG-z-01` | C ✅ | fotografie 8 meteorologických jevů (kupovitá oblaka, bouřkový oblak, mlha, jinovatka, kroupy, duha, halo, inverze v údolí) | [z6_atmosfera](obsah/z6_atmosfera.html) |
 | `IMG-z-03` | A ✅ | řeka od pramene po ústí; hotovo s osmi pojmy | [z6_hydrosfera](obsah/z6_hydrosfera.html) |
-| `IMG-z-04` | C | 4 výřezy map stejného území v různých měřítkách a typech (OpenStreetMap, turistická mapa s licencí, ortofoto) — srovnání druhů map | [z6_mapa_souradnice](obsah/z6_mapa_souradnice.html) |
-| `IMG-z-05` | C | fotografie 8 tvarů povrchu (údolí V, ledovcové údolí U, kaňon, sopka, vrásy ve skále, písečné duny, meandry, útesy) — poznávání tvarů | [z6_litosfera](obsah/z6_litosfera.html) |
+| `IMG-z-04` | C ✅ | 4 výřezy map stejného území v různých měřítkách a typech (OpenStreetMap, turistická mapa s licencí, ortofoto) — srovnání druhů map | [z6_mapa_souradnice](obsah/z6_mapa_souradnice.html) |
+| `IMG-z-05` | C ✅ | fotografie 8 tvarů povrchu (údolí V, ledovcové údolí U, kaňon, sopka, vrásy ve skále, písečné duny, meandry, útesy) — poznávání tvarů | [z6_litosfera](obsah/z6_litosfera.html) |
 | `IMG-z-07` | A ✅ | přírodní pásy Afriky; hotovo s pěti pásy | [z7_afrika](obsah/z7_afrika.html) |
 | `IMG-z-09` | A ✅ | řez Jižní Amerikou; hotovo a zapojeno | [z7_amerika](obsah/z7_amerika.html) |
 | `IMG-z-11` | A ✅ | dvojice indické vesnice v suchu a monzunu; hotovo | [z7_asie](obsah/z7_asie.html) |
-| `IMG-z-18` | C | 3 dvojice fotografií „tehdy a dnes“ se stejným záběrem (ústup alpského ledovce, Aralské jezero ze satelitu, odlesňování v Amazonii ze satelitu) — NASA/ESA, volná díla | [z9_globalni_problemy](obsah/z9_globalni_problemy.html) |
-| `IMG-d-01` | E | fotografie Parthenónu, tří řádů sloupů (dórský, iónský, korintský), černofigurové a červenofigurové vázy, olympijského stadionu v Olympii | [d6_recko](obsah/d6_recko.html) |
-| `IMG-d-03` | E | fotografie Kolosea, Pont du Gard, římské silnice, Pompejí, římské mince, nápisu na oblouku | [d6_rim](obsah/d6_rim.html) |
-| `IMG-d-05` | E | fotografie stély Chammurapiho zákoníku, klínopisné destičky, Rosettské desky, pyramid v Gíze, zikkuratu v Uru, papyru s hieroglyfy | [d6_stary_orient](obsah/d6_stary_orient.html) |
-| `IMG-d-06` | E | fotografie 8 pramenů různých typů (pravěký nástroj, římská mince, středověká listina s pečetí, kronika, dobová fotografie, noviny z roku 1918, plakát, pohlednice) — třídění pramenů | [d6_prameny](obsah/d6_prameny.html) |
+| `IMG-z-18` | C ✅ | 3 dvojice fotografií „tehdy a dnes“ se stejným záběrem (ústup alpského ledovce, Aralské jezero ze satelitu, odlesňování v Amazonii ze satelitu) — NASA/ESA, volná díla | [z9_globalni_problemy](obsah/z9_globalni_problemy.html) |
+| `IMG-d-01` | E ✅ | fotografie Parthenónu, tří řádů sloupů (dórský, iónský, korintský), černofigurové a červenofigurové vázy, olympijského stadionu v Olympii | [d6_recko](obsah/d6_recko.html) |
+| `IMG-d-03` | E ✅ | fotografie Kolosea, Pont du Gard, římské silnice, Pompejí, římské mince, nápisu na oblouku | [d6_rim](obsah/d6_rim.html) |
+| `IMG-d-05` | E ✅ | fotografie stély Chammurapiho zákoníku, klínopisné destičky, Rosettské desky, pyramid v Gíze, zikkuratu v Uru, papyru s hieroglyfy | [d6_stary_orient](obsah/d6_stary_orient.html) |
+| `IMG-d-06` | E ✅ | fotografie 8 pramenů různých typů (pravěký nástroj, římská mince, středověká listina s pečetí, kronika, dobová fotografie, noviny z roku 1918, plakát, pohlednice) — třídění pramenů | [d6_prameny](obsah/d6_prameny.html) |
 | `IMG-d-07` | A ✅ | rekonstrukce dvou sídlišť: lovci a sběrači (starší doba kamenná) a první zemědělci (mladší doba kamenná, dlouhé domy) — označit | [d6_pravek](obsah/d6_pravek.html) |
-| `IMG-d-08` | E | fotografie nálezů (pěstní klín, Věstonická venuše, keramika s lineární výzdobou, bronzový meč, keltská mince) | [d6_pravek](obsah/d6_pravek.html) |
-| `IMG-d-10` | E | fotografie velkomoravských nálezů (gombíky, náušnice, základy kostela v Mikulčicích), hlaholice | [d7_rany_stredovek](obsah/d7_rany_stredovek.html) |
-| `IMG-d-12` | E | Jenský kodex (Hus na hranici, husité), Betlémská kaple, vozová hradba z dobové iluminace | [d7_husitstvi](obsah/d7_husitstvi.html) |
-| `IMG-d-13` | E | fotografie Karlova mostu, Karlštejna, katedrály sv. Víta, Karolina, votivního obrazu Jana Očka (portrét Karla IV.) | [d7_lucemburkove](obsah/d7_lucemburkove.html) |
-| `IMG-d-14` | E | Zlatá bula sicilská, svatováclavská přilba, Kosmova kronika (iluminace), rotunda sv. Kateřiny ve Znojmě | [d7_premyslovci](obsah/d7_premyslovci.html) |
-| `IMG-d-15` | E | reprodukce (Leonardo — Mona Lisa, Vitruviánský muž; Michelangelo — David; Botticelli — Zrození Venuše), renesanční zámek Litomyšl, dobová mapa světa (Waldseemüller) | [d8_objevy_renesance](obsah/d8_objevy_renesance.html) |
-| `IMG-d-16` | E | dobové obrazy a fotografie (Wattův parní stroj, tovární haly, první lokomotiva, Národní divadlo, portréty Jungmanna a Palackého) | [d8_prumyslova_revoluce](obsah/d8_prumyslova_revoluce.html) |
-| `IMG-d-17` | E | portréty Marie Terezie a Josefa II., Deklarace práv člověka a občana (dobový tisk), dobytí Bastily (dobový obraz) | [d8_osvicenstvi](obsah/d8_osvicenstvi.html) |
-| `IMG-d-18` | E | Lutherovy teze (dobový tisk), defenestrace 1618 (dobová rytina), Staroměstská exekuce (dobový leták), portrét Komenského | [d8_reformace](obsah/d8_reformace.html) |
-| `IMG-d-20` | E | dobové fotografie (zákopy, legionáři, fronta v Itálii, fronty na chléb v zázemí), válečná pohlednice | [d9_prvni_valka](obsah/d9_prvni_valka.html) |
+| `IMG-d-08` | E ✅ | fotografie nálezů (pěstní klín, Věstonická venuše, keramika s lineární výzdobou, bronzový meč, keltská mince) | [d6_pravek](obsah/d6_pravek.html) |
+| `IMG-d-10` | E ✅ | fotografie velkomoravských nálezů (gombíky, náušnice, základy kostela v Mikulčicích), hlaholice | [d7_rany_stredovek](obsah/d7_rany_stredovek.html) |
+| `IMG-d-12` | E ✅ | Jenský kodex (Hus na hranici, husité), Betlémská kaple, vozová hradba z dobové iluminace | [d7_husitstvi](obsah/d7_husitstvi.html) |
+| `IMG-d-13` | E ✅ | fotografie Karlova mostu, Karlštejna, katedrály sv. Víta, Karolina, votivního obrazu Jana Očka (portrét Karla IV.) | [d7_lucemburkove](obsah/d7_lucemburkove.html) |
+| `IMG-d-14` | E ✅ | Zlatá bula sicilská, svatováclavská přilba, Kosmova kronika (iluminace), rotunda sv. Kateřiny ve Znojmě | [d7_premyslovci](obsah/d7_premyslovci.html) |
+| `IMG-d-15` | E ✅ | reprodukce (Leonardo — Mona Lisa, Vitruviánský muž; Michelangelo — David; Botticelli — Zrození Venuše), renesanční zámek Litomyšl, dobová mapa světa (Waldseemüller) | [d8_objevy_renesance](obsah/d8_objevy_renesance.html) |
+| `IMG-d-16` | E ✅ | dobové obrazy a fotografie (Wattův parní stroj, tovární haly, první lokomotiva, Národní divadlo, portréty Jungmanna a Palackého) | [d8_prumyslova_revoluce](obsah/d8_prumyslova_revoluce.html) |
+| `IMG-d-17` | E ✅ | portréty Marie Terezie a Josefa II., Deklarace práv člověka a občana (dobový tisk), dobytí Bastily (dobový obraz) | [d8_osvicenstvi](obsah/d8_osvicenstvi.html) |
+| `IMG-d-18` | E ✅ | Lutherovy teze (dobový tisk), defenestrace 1618 (dobová rytina), Staroměstská exekuce (dobový leták), portrét Komenského | [d8_reformace](obsah/d8_reformace.html) |
+| `IMG-d-20` | E ✅ | dobové fotografie (zákopy, legionáři, fronta v Itálii, fronty na chléb v zázemí), válečná pohlednice | [d9_prvni_valka](obsah/d9_prvni_valka.html) |
 | `IMG-d-21` | E ✅ | 3 dobové fotografie, autentický plakát a současný dokumentační pohled na dochovanou Baťovu tovární budovu; hotovo a zapojeno | [d9_csr](obsah/d9_csr.html) |
-| `IMG-d-22` | E | pečlivě vybrané dobové fotografie (Praha 15. 3. 1939, parašutisté operace Anthropoid, Lidice před a po, Terezín) a dětské kresby z Terezína (s licencí Židovského muzea) — **žádné generované obrazy** | [d9_druha_valka](obsah/d9_druha_valka.html) |
+| `IMG-d-22` | E ✅ | pečlivě vybrané dobové fotografie (Praha 15. 3. 1939, parašutisté operace Anthropoid, Lidice před a po, Terezín) a dětské kresby z Terezína (s licencí Židovského muzea) — **žádné generované obrazy** | [d9_druha_valka](obsah/d9_druha_valka.html) |
 | `IMG-d-23` | E ✅ | 4 dobové fotografie a citovaný pramenný úryvek Charty 77; hotovo a zapojeno, 3 snímky sdílí `IMG-prv-25` | [d9_studena_valka](obsah/d9_studena_valka.html) |
 | `IMG-inf-01` | B ✅ | čtyři natočení robota, cílová vlajka, kámen, strom, voda, klíč a jablko — zapojeno místo emoji v mřížkách sekvencí a cyklů; v sekvencích se robot natáčí a sbírá bonus | [inf4_sekvence](obsah/inf4_sekvence.html) |
 | `IMG-inf-02` | B ✅ | karty prvků sítě v jednotném stylu (notebook, telefon, Wi-Fi router, přepínač, serverovna, optický kabel, vysílač mobilní sítě, datové centrum) — uzly animace | [inf7_site](obsah/inf7_site.html) |
@@ -3415,7 +3415,7 @@ Při výrobě sady v jednom stylu zadávat všechny karty v jedné dávce se ste
 | `IMG-cj-02` | B ✅ | dva domečky: tvrdý (kamenný, hranatý) a měkký (dřevěný s polštáři) — zapojeno do pomůcky | [cj2_tvrde_mekke](obsah/cj2_tvrde_mekke.html) |
 | `IMG-cj-10` | A ✅ | jedna ilustrace ke každému textu 1. stupně (odhadem 10–15) — motivace a kontext, bez prozrazení odpovědí | [cteni_s_porozumenim](obsah/cteni_s_porozumenim.html) |
 | `IMG-cj-12` | A ✅ | 4 malé vinety žánrů (pohádkový zámek, skutečný hrad s pověstí, Olymp, liška s havranem) — záhlaví rámečků žánrů | [cj6_baje](obsah/cj6_baje.html) |
-| `IMG-cj-13` | E | portréty 10–12 autorů (Čapek, Seifert, Hrabal, Škvorecký, Kundera, Havel…) z volných zdrojů, obálky samizdatových edic (Edice Petlice) — karty autorů | [cj9_literatura_20](obsah/cj9_literatura_20.html) |
+| `IMG-cj-13` | E ✅ | portréty 10–12 autorů (Čapek, Seifert, Hrabal, Škvorecký, Kundera, Havel…) z volných zdrojů, obálky samizdatových edic (Edice Petlice) — karty autorů | [cj9_literatura_20](obsah/cj9_literatura_20.html) |
 | `IMG-cj-15` | A ✅ | jedna scéna (například cyklista na venkovské silnici) jako společné téma pro popis, vypravování a charakteristiku | [cj8_sloh](obsah/cj8_sloh.html) |
 | `IMG-m-01` | B ✅ | 6 karet předmětů k rozdělování (jablko, bonbon, pastelka, míček, kartička, krabička) — v jednotném stylu místo emoji | [m3_deleni_zbytkem](obsah/m3_deleni_zbytkem.html) |
 | `IMG-m-02` | B ✅ | 4 karty skutečných celků k dělení (pizza shora, tabulka čokolády, pás látky, skupina 12 dětí) — přenos zlomku do situace; dělicí čáry kreslí web | [m4_zlomky_uvod](obsah/m4_zlomky_uvod.html) |
@@ -3424,23 +3424,23 @@ Při výrobě sady v jednom stylu zadávat všechny karty v jedné dávce se ste
 | `IMG-m-05` | B ✅ | 3 karty kontextů (teploměr venku v zimě, výtah a potápěč pod hladinou) — zapojeno; číselné stupnice kreslí web | [m7_cela_cisla](obsah/m7_cela_cisla.html) |
 | `IMG-m-06` | B ✅ | 4 karty situací (cenovka se slevou bez čísel, výsledkový graf voleb bez popisků, etiketa potraviny, spořitelní kasička) — zapojeno; čísla vkládá web | [procenta](obsah/procenta.html) |
 | `IMG-m-07` | B ✅ | 6 karet denních činností (vstávání, snídaně, škola, oběd, kroužek, spaní) — zapojeno; časy vkládá web | [clock_learning](obsah/clock_learning.html) |
-| `IMG-m-10` | C | 8 fotografií souměrných a téměř souměrných objektů (motýl, list, průčelí zámku, obličej, sněhová vločka, dopravní značka, logo, most) — hledání os ve skutečnosti | [m4_soumernost](obsah/m4_soumernost.html) |
+| `IMG-m-10` | C ✅ | 8 fotografií souměrných a téměř souměrných objektů (motýl, list, průčelí zámku, obličej, sněhová vločka, dopravní značka, logo, most) — hledání os ve skutečnosti | [m4_soumernost](obsah/m4_soumernost.html) |
 | `IMG-m-11` | A ✅ | 4 scény k úlohám (žebřík opřený o dům, drak na provázku, zkratka přes trávník, stožár s kotvicím lanem) — zapojeno; rozměry kreslí web | [m8_pythagoras](obsah/m8_pythagoras.html) |
 | `IMG-m-12` | A ✅ | scéna „měření stínem“: strom a tyč na louce ve stejném slunci, dlouhé stíny — zapojeno; úsečky a čísla kreslí web | [m9_podobnost](obsah/m9_podobnost.html) |
 | `IMG-aj-10` | A ✅ | 4 situace s viditelným důkazem (tmavé mraky, sklenice na kraji stolu, prázdná nádrž, dívka s lístky na koncert) — kontext going to | [aj7_budouci](obsah/aj7_budouci.html) |
 | `IMG-prv-09` | B ✅ | 10 karet vjemů (zvonek, citron, růže, oheň, zmrzlina, tráva, kočka, duha, bubínek, polštář) — zapojeno do režimu Čím to poznám | [prv1_smysly](obsah/prv1_smysly.html) |
-| `IMG-prv-18` | C | 8 fotografií využití (dlažba ze žuly, pískovcová socha, vápenka, uhelný lom, sklo z písku, sádra, tužka, solnička) | [prv4_horniny](obsah/prv4_horniny.html) |
-| `IMG-prv-22` | E | 6 doložených vyobrazení (Karel IV. z Karlštejna, Svatováclavská koruna, Vyšehradský kodex, velkomoravský šperk…) — skutečné doklady | [prv4_nejstarsi_dejiny](obsah/prv4_nejstarsi_dejiny.html) |
-| `IMG-f-03` | C | 12 fotografií předmětů k třídění látka × těleso (sklenice, sklo, lžíce, ocel, svíčka, vosk, cihla, jíl…) — dvojice těleso–látka | [f6_vlastnosti_latek](obsah/f6_vlastnosti_latek.html) |
-| `IMG-f-05` | C | fotografie stojanové vrtačky a dílenského hydraulického lisu, hydraulického zvedáku auta — skutečné stroje | [vrtacka_lis](obsah/vrtacka_lis.html) |
+| `IMG-prv-18` | C ✅ | 8 fotografií využití (dlažba ze žuly, pískovcová socha, vápenka, uhelný lom, sklo z písku, sádra, tužka, solnička) | [prv4_horniny](obsah/prv4_horniny.html) |
+| `IMG-prv-22` | E ✅ | 6 doložených vyobrazení (Karel IV. z Karlštejna, Svatováclavská koruna, Vyšehradský kodex, velkomoravský šperk…) — skutečné doklady | [prv4_nejstarsi_dejiny](obsah/prv4_nejstarsi_dejiny.html) |
+| `IMG-f-03` | C ✅ | 12 fotografií předmětů k třídění látka × těleso (sklenice, sklo, lžíce, ocel, svíčka, vosk, cihla, jíl…) — dvojice těleso–látka | [f6_vlastnosti_latek](obsah/f6_vlastnosti_latek.html) |
+| `IMG-f-05` | C ✅ | fotografie stojanové vrtačky a dílenského hydraulického lisu, hydraulického zvedáku auta — skutečné stroje | [vrtacka_lis](obsah/vrtacka_lis.html) |
 | `IMG-f-06` | B ✅ | karty situací tlaku (sněžnice ve sněhu, jehla, housenkový pás, potápěč, přehrada s tlustou hrází dole) — kontext; hotovo: pět situací se střídá v úloze o tlaku | [f7_tlak](obsah/f7_tlak.html) |
-| `IMG-f-07` | C | fotografie proudového motoru v řezu (muzejní exponát) a dopravního letadla při startu | [proudove_motory](obsah/proudove_motory.html) |
-| `IMG-f-08` | C | 4 fotografie proudění ve skutečnosti (kouřový tunel, sněhové závěje za plotem, vlajka ve větru, cyklista ve skrčené poloze) | [vitr_tunel](obsah/vitr_tunel.html) |
+| `IMG-f-07` | C ✅ | fotografie proudového motoru v řezu (muzejní exponát) a dopravního letadla při startu | [proudove_motory](obsah/proudove_motory.html) |
+| `IMG-f-08` | C ✅ | 4 fotografie proudění ve skutečnosti (kouřový tunel, sněhové závěje za plotem, vlajka ve větru, cyklista ve skrčené poloze) | [vitr_tunel](obsah/vitr_tunel.html) |
 | `IMG-f-09` | B ✅ | 4 karty situací Newtonových zákonů (bruslař na ledě, raketa, dva bruslaři se odstrkují, autobus brzdí a cestující se nakloní) — zapojeno do procvičování zákonů | [f7_sila](obsah/f7_sila.html) |
 | `IMG-f-11` | C ✅ | dvojice stejné přílivové nádrže ve Watchetu při přílivu a odlivu — zapojeno, stejné souřadnice a doložené licence | [vodni_hladina](obsah/vodni_hladina.html) |
-| `IMG-f-14` | C | fotografie JE Temelín a Dukovany (chladicí věže), palivového souboru (muzejní model) | [f9_jaderna](obsah/f9_jaderna.html) |
+| `IMG-f-14` | C ✅ | fotografie JE Temelín a Dukovany (chladicí věže), palivového souboru (muzejní model) | [f9_jaderna](obsah/f9_jaderna.html) |
 | `IMG-f-15` | B ✅ | 8 karet zdrojů zvuku zapojených do interaktivní decibelové stupnice (list, šepot, rozhovor, třída, sekačka, motorka, koncert, letadlo) | [f9_zvuk](obsah/f9_zvuk.html) |
-| `IMG-f-16` | C | fotografie rozvodny, stožárů vysokého napětí, transformátoru na sloupu, domovní pojistkové skříně | [f9_stridavy_proud](obsah/f9_stridavy_proud.html) |
+| `IMG-f-16` | C ✅ | fotografie rozvodny, stožárů vysokého napětí, transformátoru na sloupu, domovní pojistkové skříně | [f9_stridavy_proud](obsah/f9_stridavy_proud.html) |
 | `IMG-f-17` | A ✅ | 12 jemných obrysových kreseb souhvězdí na průhledném pozadí — zapojeno jako volitelná vrstva nad přesnou mapou; doplněny hvězdy a spojnice Štíra a Pegase | [star_map](obsah/star_map.html) |
 | `IMG-f-18` | C ✅ | osm kroků měsíčního cyklu z fotografické série pořízené z pevného místa a fotografie meteorického výbuchu — zapojeno, licence i úpravy doloženy | [sky_events](obsah/sky_events.html) |
 | `IMG-f-19` | C ✅ | oficiální fotografie ISS a snímek Země z paluby (NASA) — zapojeno do přístupné galerie „Skutečné snímky“ | [iss](obsah/iss.html) |
@@ -3461,12 +3461,12 @@ Při výrobě sady v jednom stylu zadávat všechny karty v jedné dávce se ste
 | `IMG-z-14` | C ✅ | šest licencovaných fotografií krajin ČR (Krkonoše, Šumava, Polabí, Českomoravská vrchovina, Beskydy, Pálava) — zapojeno do srovnávacího atlasu reliéfu a využití krajiny | [z8_cr_prirodni](obsah/z8_cr_prirodni.html) |
 | `IMG-z-15` | C ✅ | šest licencovaných fotografií typických krajin regionů (fjord, Středomoří, Alpy, nizozemský polder, ruská tajga, britské pobřeží) — zapojeno do srovnávacího atlasu | [z8_evropa_regiony](obsah/z8_evropa_regiony.html) |
 | `IMG-z-16` | B ✅ | 6 karet fází výrobku (důl, továrna, kontejnerová loď, sklad, obchod, skládka/recyklace) — zastávky na mapě | [z9_hospodarstvi_svet](obsah/z9_hospodarstvi_svet.html) |
-| `IMG-z-17` | C | 4 fotografie sídel (vesnice v Sahelu, slum a mrakodrapy v Bombaji, předměstí USA, historické centrum evropského města) | [z9_obyvatelstvo](obsah/z9_obyvatelstvo.html) |
+| `IMG-z-17` | C ✅ | 4 fotografie sídel (vesnice v Sahelu, slum a mrakodrapy v Bombaji, předměstí USA, historické centrum evropského města) | [z9_obyvatelstvo](obsah/z9_obyvatelstvo.html) |
 | `IMG-d-02` | A ✅ | rekonstrukce athénské agory se shromážděním (označit „rekonstrukce“) | [d6_recko](obsah/d6_recko.html) |
 | `IMG-d-04` | A ✅ | rekonstrukce římského fóra (označit) | [d6_rim](obsah/d6_rim.html) |
 | `IMG-d-09` | A ✅ | řez archeologickou sondou s vrstvami a nálezy — hotspoty | [d6_pravek](obsah/d6_pravek.html) |
 | `IMG-d-11` | A ✅ | rekonstrukce hradiště (Mikulčice) — sdílet s `IMG-prv-21` | [d7_rany_stredovek](obsah/d7_rany_stredovek.html) |
-| `IMG-d-19` | C | fotografie budov Evropského parlamentu (Štrasburk), Evropské komise (Brusel), Soudního dvora (Lucemburk) | [eu_instituce](obsah/eu_instituce.html) |
+| `IMG-d-19` | C ✅ | fotografie budov Evropského parlamentu (Štrasburk), Evropské komise (Brusel), Soudního dvora (Lucemburk) | [eu_instituce](obsah/eu_instituce.html) |
 | `IMG-inf-03` | A ✅ | detailní krajina zapojená jako vzor pro interaktivní demonstraci ztrátové komprese | [inf7_sifrovani](obsah/inf7_sifrovani.html) |
 | `IMG-inf-07` | A ✅ | 16 jednotných ilustrací bez textu a značek zapojeno na všech slidech místo původních `Photo*.png` a `Cortana.png` | [AI_prednaska](obsah/AI_prednaska.html) |
 | `IMG-inf-08` | B ✅ | 44 vyvážených karet zapojeno do průhledného k-NN mini-modelu s volbou velikosti trénovací sady a zobrazením sousedů | [inf9_ai_etika](obsah/inf9_ai_etika.html) |

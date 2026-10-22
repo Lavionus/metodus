@@ -6,6 +6,8 @@
   <title>Angličtina – přítomný čas průběhový</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -45,6 +47,46 @@
   <h1>🏃 Přítomný čas průběhový</h1>
   <p class="podtitul">Pro 5.–6. ročník: am/is/are + -ing a rozdíl proti prostému času.</p>
 
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Co se děje právě teď</summary>
+    <div class="obsah">
+      <p>Přítomný čas průběhový (<span lang="en">present continuous</span>) popisuje děj, který
+        <b>právě probíhá</b> – teď, v tuto chvíli. Skládá se ze dvou částí: tvaru slovesa
+        <b><span lang="en">be</span></b> (<span lang="en">am / is / are</span>) a slovesa s koncovkou <b>-ing</b>.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>am / is / are</h3><p><span lang="en">I <b>am</b> reading.</span><br>
+          <span lang="en">He / she / it <b>is</b> reading.</span><br>
+          <span lang="en">You / we / they <b>are</b> reading.</span></p></article>
+        <article class="vyklad-karta"><h3>Jak přidat -ing</h3><p>běžně jen -ing: <span lang="en">play → playing</span><br>
+          němé -e zmizí: <span lang="en">make → making, write → writing</span><br>
+          krátké sloveso na samohlásku + souhlásku ji zdvojí: <span lang="en">run → running, sit → sitting</span></p></article>
+        <article class="vyklad-karta"><h3>Signální slova</h3><p>průběhový: <span lang="en">now, at the moment, Look!, Listen!</span><br>
+          prostý: <span lang="en">every day, usually, always</span></p></article>
+      </div>
+      <p>Jak poznáš, který čas použít? Zeptej se: děje se to <b>teď</b>, nebo <b>obvykle a opakovaně</b>?
+        <span lang="en">He goes to school every day.</span> (obvykle) ×
+        <span lang="en">He is watching TV at the moment.</span> (právě teď).</p>
+      <p>Typická chyba je vynechat <span lang="en">am / is / are</span>: <span lang="en">She reading.</span> ✗ –
+        správně <span lang="en">She is reading.</span></p>
+      <aside class="zapamatuj">Právě teď = <span lang="en">am / is / are</span> + sloveso s <b>-ing</b>.
+        Obvykle = přítomný čas prostý.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: prostý, či průběhový?</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Doplň sloveso <span lang="en">sing</span>: <span lang="en">Listen! They ___ a song.</span></p>
+      <ol class="kroky">
+        <li>Hledám signál: <span lang="en">Listen!</span> – poslouchej, zpívají <b>právě teď</b>.</li>
+        <li>Použiji tedy průběhový čas: <span lang="en">am / is / are</span> + -ing.</li>
+        <li>Podmět je <span lang="en">they</span>, k němu patří <b><span lang="en">are</span></b>.</li>
+        <li><span lang="en">sing</span> nekončí na -e ani se nezdvojuje → <span lang="en">singing</span>.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ <span lang="en">Listen! They <b>are singing</b> a song.</span></p>
+    </div>
+  </details>
+
   <div class="rezimy" id="rezimy">
     <button data-rezim="tvarIng" class="active">➕ Tvar s -ing</button>
     <button data-rezim="pomocne">🔤 am, is, nebo are?</button>
@@ -75,25 +117,25 @@ const $ = id => document.getElementById(id);
 const skore = Uloha.skore('metodus_aj5_prubehovy', $('skore'));
 let rezim = 'tvarIng';
 
-/* sloveso, tvar s -ing, český význam, pravidlo tvoření */
+/* sloveso, tvar s -ing, český význam, pravidlo tvoření, doplnění do věty */
 const SLOVESA = [
-  { z: 'play', ing: 'playing', cz: 'hrát si', pravidlo: 'běžné sloveso → jen -ing' },
-  { z: 'read', ing: 'reading', cz: 'číst', pravidlo: 'běžné sloveso → jen -ing' },
-  { z: 'eat', ing: 'eating', cz: 'jíst', pravidlo: 'běžné sloveso → jen -ing' },
-  { z: 'sing', ing: 'singing', cz: 'zpívat', pravidlo: 'běžné sloveso → jen -ing' },
-  { z: 'make', ing: 'making', cz: 'dělat, vyrábět', pravidlo: 'němé -e na konci mizí' },
-  { z: 'write', ing: 'writing', cz: 'psát', pravidlo: 'němé -e na konci mizí' },
-  { z: 'ride', ing: 'riding', cz: 'jezdit', pravidlo: 'němé -e na konci mizí' },
-  { z: 'dance', ing: 'dancing', cz: 'tančit', pravidlo: 'němé -e na konci mizí' },
-  { z: 'run', ing: 'running', cz: 'běžet', pravidlo: 'krátká slabika → zdvojená souhláska' },
-  { z: 'sit', ing: 'sitting', cz: 'sedět', pravidlo: 'krátká slabika → zdvojená souhláska' },
-  { z: 'swim', ing: 'swimming', cz: 'plavat', pravidlo: 'krátká slabika → zdvojená souhláska' },
-  { z: 'get', ing: 'getting', cz: 'dostat', pravidlo: 'krátká slabika → zdvojená souhláska' },
+  { z: 'play', ing: 'playing', cz: 'hrát si', pravidlo: 'běžné sloveso → jen -ing', d: 'football' },
+  { z: 'read', ing: 'reading', cz: 'číst', pravidlo: 'běžné sloveso → jen -ing', d: 'a book' },
+  { z: 'eat', ing: 'eating', cz: 'jíst', pravidlo: 'běžné sloveso → jen -ing', d: 'an apple' },
+  { z: 'sing', ing: 'singing', cz: 'zpívat', pravidlo: 'běžné sloveso → jen -ing', d: 'a song' },
+  { z: 'make', ing: 'making', cz: 'dělat, vyrábět', pravidlo: 'němé -e na konci mizí', d: 'a cake' },
+  { z: 'write', ing: 'writing', cz: 'psát', pravidlo: 'němé -e na konci mizí', d: 'a letter' },
+  { z: 'ride', ing: 'riding', cz: 'jezdit', pravidlo: 'němé -e na konci mizí', d: 'a bike' },
+  { z: 'dance', ing: 'dancing', cz: 'tančit', pravidlo: 'němé -e na konci mizí', d: 'in the kitchen' },
+  { z: 'run', ing: 'running', cz: 'běžet', pravidlo: 'krátká slabika → zdvojená souhláska', d: 'in the park' },
+  { z: 'sit', ing: 'sitting', cz: 'sedět', pravidlo: 'krátká slabika → zdvojená souhláska', d: 'on the sofa' },
+  { z: 'swim', ing: 'swimming', cz: 'plavat', pravidlo: 'krátká slabika → zdvojená souhláska', d: 'in the pool' },
+  { z: 'get', ing: 'getting', cz: 'dostat', pravidlo: 'krátká slabika → zdvojená souhláska', d: 'dressed' },
 ];
 
 const PODMETY = [
   { s: 'I', pom: 'am' }, { s: 'He', pom: 'is' }, { s: 'She', pom: 'is' },
-  { s: 'It', pom: 'is' }, { s: 'You', pom: 'are' }, { s: 'We', pom: 'are' },
+  { s: 'Tom', pom: 'is' }, { s: 'You', pom: 'are' }, { s: 'We', pom: 'are' },
   { s: 'They', pom: 'are' }, { s: 'My sister', pom: 'is' }, { s: 'The children', pom: 'are' },
 ];
 
@@ -111,9 +153,9 @@ const OBRAZKY = [
 ];
 
 const ROZDIL = [
-  { v: 'Look! The boy ___ .', spr: 'prubehovy', cz: 'Podívej! Chlapec spí (právě teď).', tvar: 'is sleeping', img: 'spi', alt: 'Chlapec právě spí v posteli.' },
-  { v: 'He ___ to school every day.', spr: 'prosty', cz: 'Chodí do školy každý den (opakovaně).', tvar: 'goes', img: 'skola', alt: 'Chlapec pravidelně chodí do školy.' },
-  { v: 'He ___ TV at the moment.', spr: 'prubehovy', cz: 'Právě teď se dívá na televizi.', tvar: 'is watching', img: 'televize', alt: 'Chlapec se právě dívá na televizi.' },
+  { v: 'Look! The boy ___ .', spr: 'prubehovy', cz: 'Podívej! Chlapec spí (právě teď).', tvar: 'is sleeping', img: 'spi', alt: 'Chlapec v posteli.' },
+  { v: 'He ___ to school every day.', spr: 'prosty', cz: 'Chodí do školy každý den (opakovaně).', tvar: 'goes', img: 'skola', alt: 'Chlapec na cestě do školy.' },
+  { v: 'He ___ TV at the moment.', spr: 'prubehovy', cz: 'Právě teď se dívá na televizi.', tvar: 'is watching', img: 'televize', alt: 'Chlapec u televize.' },
   { v: 'We usually ___ dinner at six.', spr: 'prosty', cz: 'Obvykle večeříme v šest.', tvar: 'have' },
   { v: 'Listen! They ___ a song.', spr: 'prubehovy', cz: 'Poslouchej! Zpívají píseň.', tvar: 'are singing' },
   { v: 'My dad ___ in a bank.', spr: 'prosty', cz: 'Táta pracuje v bance (dlouhodobě).', tvar: 'works' },
@@ -151,14 +193,14 @@ function pomocne() {
   const sloveso = Uloha.nahodne(SLOVESA);
 
   p.innerHTML = `<div class="zadani">Doplň pomocné sloveso:</div>
-    <div class="karta"><div class="veta-en">${podmet.s} <span class="mezera">?</span> ${sloveso.ing} now.</div></div>`;
+    <div class="karta"><div class="veta-en">${podmet.s} <span class="mezera">?</span> ${sloveso.ing} ${sloveso.d} now.</div></div>`;
   const odezva = document.createElement('div');
   odezva.className = 'odezva';
   Uloha.vyber({
     kam: p, odezva, trida: 'velke',
     moznosti: Uloha.zamichej(['am', 'is', 'are']).map(t => ({ klic: t, popis: t })),
     spravnyKlic: podmet.pom,
-    zpravaOk: `✅ ${podmet.s} ${podmet.pom} ${sloveso.ing} now.`,
+    zpravaOk: `✅ ${podmet.s} ${podmet.pom} ${sloveso.ing} ${sloveso.d} now.`,
     zpravaChyba: 'I → am, he/she/it → is, you/we/they → are.',
     poSpravne: napoprve => {
       skore.vyhodnot(napoprve);
@@ -202,7 +244,7 @@ function popisObrazku(vybrany = null) {
     <p class="park-vyzva">Popiš činnost osoby označené červeným bodem.</p>
     <div class="park-scena">
       <img src="img/aj/aj5-prubehovy-park.webp" alt="Deset lidí v parku právě běží, čte, jí zmrzlinu, venčí psa, hraje na kytaru, spí, jede na kole, fotografuje, krmí kachny a maluje.">
-      ${OBRAZKY.map((x, i) => `<button type="button" class="park-bod ${x === o ? 'cil' : ''}" style="--x:${x.x}%;--y:${x.y}%" aria-label="Vybrat osobu: ${x.cz}" title="${x.cz}" data-osoba="${i}" ${x === o ? 'aria-current="true"' : ''}></button>`).join('')}
+      ${OBRAZKY.map((x, i) => `<button type="button" class="park-bod ${x === o ? 'cil' : ''}" style="--x:${x.x}%;--y:${x.y}%" aria-label="Vybrat osobu ${i + 1}" data-osoba="${i}" ${x === o ? 'aria-current="true"' : ''}></button>`).join('')}
     </div>`;
   p.querySelectorAll('.park-bod').forEach(b => b.addEventListener('click', () => popisObrazku(OBRAZKY[Number(b.dataset.osoba)])));
   const odezva = document.createElement('div');

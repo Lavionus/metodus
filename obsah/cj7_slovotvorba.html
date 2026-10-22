@@ -6,6 +6,8 @@
   <title>Slovotvorba</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -40,6 +42,41 @@
 <body>
   <h1>🧩 Slovotvorba</h1>
   <p class="podtitul">Pro 7. ročník: odvozování, skládání, zkracování a stavba slova.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Jak vznikají nová slova</summary>
+    <div class="obsah">
+      <p>Nová slova obvykle nevznikají z ničeho – tvoříme je ze slov, která už máme. Čeština k tomu používá
+        tři hlavní způsoby. Který z nich se uplatnil, poznáš z <b>počtu kořenů</b> a z toho, jestli slovo
+        vzniklo ze zkrácených částí.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>🌱 Odvozování</h3><p>K základu se přidá <b>předpona nebo přípona</b>: <i>les → lesník</i>, <i>skočit → přeskočit</i>. Kořen zůstává <b>jeden</b>.</p></article>
+        <article class="vyklad-karta"><h3>🧲 Skládání</h3><p>Spojí se <b>dva základy</b>, často spojovací samohláskou -o- nebo -e-: <i>voda + padat → vodopád</i>. Ve slově najdeš <b>dva kořeny</b>.</p></article>
+        <article class="vyklad-karta"><h3>🔠 Zkracování</h3><p>Ze začátečních písmen nebo slabik vznikne <b>zkratka</b> (<i>ČR, atd.</i>) nebo <b>zkratkové slovo</b> (<i>Čedok</i>).</p></article>
+      </div>
+      <p>Při rozboru stavby slova hledej nejdřív <b>kořen</b> – společnou část slov příbuzných. Před ním stojí
+        <b>předpona</b>, za ním <b>přípona</b> a na konci <b>koncovka</b>, která se mění při skloňování nebo časování:
+        <i>pře | skoč | i | t</i>. Kořen má každé slovo, ostatní části chybět mohou (<i>výlet</i> nemá příponu ani koncovku).</p>
+      <p>Typická chyba: slovo s předponou i příponou (<i>podzemní</i>) vypadá složitě, ale má jen jeden kořen
+        (<i>zem</i>), takže je <b>odvozené</b>, ne složené. U zkratek rozhoduje výslovnost: zkratku čteš rozepsanou
+        (<i>atd.</i> = „a tak dále“), zkratkové slovo vyslovuješ a skloňuješ jako běžné slovo (<i>jet s Čedokem</i>).</p>
+      <aside class="zapamatuj">Jeden kořen + předpona/přípona = odvozování. Dva kořeny = skládání. Začáteční písmena či slabiky = zkracování.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: jak vzniklo slovo vodopád</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Urči, jakým způsobem vzniklo slovo <b>vodopád</b>.</p>
+      <ol class="kroky">
+        <li>Nejde o zkratku – slovo nevzniklo ze začátečních písmen a čte se tak, jak je napsané.</li>
+        <li>Hledám kořeny: <i>vod</i> (voda, vodní) a <i>pád</i> (padat, spadnout).</li>
+        <li>Mezi nimi je spojovací samohláska <b>-o-</b>: <i>vod-o-pád</i>.</li>
+        <li>Slovo má <b>dva kořeny</b>, vzniklo tedy spojením dvou základů: voda + padat.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ vodopád vzniklo skládáním (voda + padat).</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="zpusob" class="active">🏭 Jak slovo vzniklo</button>
@@ -113,7 +150,7 @@ const SLOVA_ZPUSOB = [
   { s: 'životopis', z: 'sklad', vysvetleni: 'život + psát' },
   { s: 'ČR', z: 'zkrac', vysvetleni: 'Česká republika – zkratka z počátečních písmen' },
   { s: 'MHD', z: 'zkrac', vysvetleni: 'městská hromadná doprava' },
-  { s: 'Čedok', z: 'zkrac', vysvetleni: 'zkratkové slovo: Česká dopravní kancelář' },
+  { s: 'Čedok', z: 'zkrac', vysvetleni: 'zkratkové slovo: Československá dopravní kancelář' },
   { s: 'atd.', z: 'zkrac', vysvetleni: 'a tak dále – grafická zkratka' },
   { s: 'sněhulák', z: 'odvoz', vysvetleni: 'sníh + přípona -ulák' },
   { s: 'malíř', z: 'odvoz', vysvetleni: 'malovat + přípona -íř' },
@@ -124,7 +161,7 @@ const SLOVA_ZPUSOB = [
 const STAVBA = [
   { casti: ['', 'les', 'ník', ''], slovo: 'lesník' },
   { casti: ['pře', 'skoč', 'i', 't'], slovo: 'přeskočit' },
-  { casti: ['', 'zahrad', 'k', 'a'], slovo: 'zahrádka' },
+  { casti: ['', 'zahrád', 'k', 'a'], slovo: 'zahrádka' },
   { casti: ['pod', 'zem', 'n', 'í'], slovo: 'podzemní' },
   { casti: ['ná', 'kup', '', ''], slovo: 'nákup' },
   { casti: ['', 'uč', 'itel', ''], slovo: 'učitel' },

@@ -65,7 +65,7 @@ canvas{display:block;width:100%;height:100%;touch-action:none;cursor:crosshair}
 <div class="panel">
   <label>🧭 Směr <input type="range" id="smer" min="-180" max="180" step="1" value="0"><span class="hodnota" id="smerV">0°</span><span class="sipka" id="smerS">➡️</span></label>
   <label>🌬️ Síla <input type="range" id="sila" min="1" max="12" step="1" value="8"><span class="hodnota" id="silaV">8</span></label>
-  <label>🌀 Turbulence <input type="range" id="turbulence" min="0" max="100" step="1" value="70"><span class="hodnota" id="turbulenceV">70</span></label>
+  <label title="Posuvník mění vazkost (vnitřní tření) vzduchu: vlevo vazký jako med, vpravo řídký – snadno v něm vznikají víry (turbulence). Hustota se nemění.">🍯 Vazký ↔ řídký 🌀 <input type="range" id="turbulence" min="0" max="100" step="1" value="70"><span class="hodnota" id="turbulenceV">70</span></label>
   <label class="prep"><input type="checkbox" id="poryvy"> 💨 Poryvy</label>
   <label>🏗️ <select id="prekazka">
       <option value="valec">Válec</option>
@@ -126,7 +126,7 @@ canvas{display:block;width:100%;height:100%;touch-action:none;cursor:crosshair}
     Při velkém úhlu se proud odtrhne a vztlak spadne – to je pád letadla.<br>
     • Porovnej odpor <b>válce</b> a <b>kolmé desky</b> při stejné síle větru.<br>
     • <b>Dvě budovy</b>: mezi nimi se vítr zrychlí (ulička).<br>
-    • Sniž <b>turbulenci</b> – vzduch je „hustší“ jako med a proudí klidně.<br><br>
+    • Posuň posuvník <b>Vazký ↔ řídký</b> doleva – vzduch bude <b>vazký</b> jako med (víc vnitřního tření, hustota zůstává stejná) a proudí klidně, bez vírů.<br><br>
     <b>Ovládání</b><br>
     Táhni myší = kreslíš/mažeš překážku nebo pouštíš kouř (viz štětec).
     Mezerník = pauza, C = smazat překážky.<br><br>
@@ -930,7 +930,8 @@ $('btnPauza').addEventListener('click', () => {
 $('btnReset').addEventListener('click', restart);
 $('btnInfo').addEventListener('click', () => {
   const b = $('infoBox');
-  b.style.display = b.style.display === 'none' ? 'block' : 'none';
+  // na úzké obrazovce skrývá nápovědu CSS – rozhoduje skutečný stav, ne jen inline styl
+  b.style.display = getComputedStyle(b).display === 'none' ? 'block' : 'none';
 });
 $('zavriInfo').addEventListener('click', () => $('infoBox').style.display = 'none');
 
@@ -1077,13 +1078,13 @@ Badani.start({
           moznost('Při 10° se křídlo stane nesouměrným.',false,'Tvar křídla zůstal stejný. Rozhoduje úhel náběhu – natočení vůči proudu vzduchu.')]},
       shrnuti:'<b>Vztlak</b> je síla kolmá na směr proudění. S úhlem náběhu roste – proto letadlo při startu zvedá příď. Při příliš velkém úhlu se proud od křídla odtrhne a vztlak přestane růst (pád letadla).' },
 
-    { id:'vazkost', nazev:'Vzduch hustý jako med',
+    { id:'vazkost', nazev:'Vzduch vazký jako med',
       predpoved:{
-        otazka:'Posuvník <b>Turbulence</b> stáhneš na 0 – vzduch se bude chovat jako hustá, vazká tekutina (třeba med). Co se stane s odporem válce?',
+        otazka:'Posuvník <b>Vazký ↔ řídký</b> stáhneš na 0 – vzduch se bude chovat jako vazká tekutina (třeba med). Co se stane s odporem válce?',
         moznosti:['Zmenší se – proudění bude klidnější','Nezmění se','Zvětší se'],
         spravna:2 },
       priprava(){ vychozi('valec'); },
-      pokus:'Počkej, až se změří odpor válce, pak stáhni <b>Turbulenci na 0</b> a porovnej.',
+      pokus:'Počkej, až se změří odpor válce, pak stáhni posuvník <b>Vazký ↔ řídký</b> na 0 a porovnej.',
       splneno:()=>!!(hodnota('valec','0','8','70')&&hodnota('valec','0','8','0')),
       ukaz(){ potom(()=>hodnota('valec','0','8','70'),()=>N({'#turbulence':0})); },
       pozorovani:()=>{ const a=hodnota('valec','0','8','70').odpor, b=hodnota('valec','0','8','0').odpor;
@@ -1147,7 +1148,10 @@ Badani.start({
   <section class="foto-atlas">
     <p>Proudění vzduchu běžně nevidíme, ale poznáme ho podle kouře, sněhu, vlajky nebo podle toho, jak se sportovci snaží zmenšit odpor.</p>
     <div class="foto-mrizka">
-@@ATLAS@@
+      <figure class="foto-karta"><img src="img/f/vitr-kourovy-tunel.webp" alt="Výzkumník sleduje, jak kouř puštěný do větrného tunelu proudí mezi modely městských budov." width="1152" height="778" loading="lazy"><figcaption><strong>Kouřový tunel</strong>Kouř zviditelní proudění vzduchu kolem modelů budov – stejně jako barevné stopy v simulaci tunelu.</figcaption></figure>
+      <figure class="foto-karta"><img class="cele" src="img/f/vitr-snehova-zavej.webp" alt="Za kamennou zídkou se v závětří nahromadil sníh do vysoké závěje." width="330" height="440" loading="lazy"><figcaption><strong>Závěj za překážkou</strong>Za zídkou nebo plotem vzniká závětří: vzduch se zpomalí a víří, a proto tam vypadává sníh.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/f/vitr-vlajka.webp" alt="Vlajka na stožáru se ve větru napíná a vlní proti obloze s mraky." width="1152" height="923" loading="lazy"><figcaption><strong>Vlajka ve větru</strong>Za stožárem se tvoří víry, které se střídavě odtrhávají – proto se vlajka neustále vlní a pleská.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/f/vitr-cyklista.webp" alt="Cyklista na časovkářském kole jede skrčený nízko nad řídítky, s aerodynamickou přilbou a diskovým kolem." width="1152" height="768" loading="lazy"><figcaption><strong>Cyklista ve skrčené poloze</strong>Časovkář jede nízko a úzce, má aerodynamickou přilbu i kolo. Menší čelní plocha a hladší tvar = menší odpor vzduchu.</figcaption></figure>
     </div>
   </section>
 </dialog>
@@ -1159,6 +1163,10 @@ Badani.start({
   d.querySelector('.foto-zavri').addEventListener('click', () => d.close());
   d.addEventListener('click', e => { if (e.target === d) d.close(); });
   d.addEventListener('keydown', e => { if (e.key !== 'Escape') e.stopPropagation(); });
+  /* Seznam zdrojů fotografií (kostra.js ho připojí na konec body) patří k fotkám do okna –
+     pod celoobrazovkovou simulací by se nevešel. */
+  const presun = () => { const z = document.querySelector('body > .zdroje-obrazku'); if (z) d.append(z); return !!z; };
+  if (!presun()) { const mo = new MutationObserver(() => { if (presun()) mo.disconnect(); }); mo.observe(document.body, { childList: true }); }
 })();
 </script>
 </body>

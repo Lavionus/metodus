@@ -6,6 +6,8 @@
   <title>Příprava na přijímací zkoušky – ČJ</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -33,6 +35,42 @@
   <h1>🎯 Příprava na přijímací zkoušky – ČJ</h1>
   <p class="podtitul">Pro 9. ročník: úlohy podle jednotné přijímací zkoušky, test na čas a rozbor chyb.</p>
 
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Jak řešit úlohy přijímací zkoušky</summary>
+    <div class="obsah">
+      <p>Přijímací zkouška z češtiny nezkouší nic nového – opakuje učivo základní školy. Body se ale často ztrácejí
+        ne kvůli neznalosti, nýbrž kvůli <b>nepozornému čtení zadání</b> a spěchu. Proto se vyplatí řešit každou
+        úlohu stejným postupem.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>✍️ Pravopis</h3><p>Hledej <b>důvod</b>, ne pocit: vyjmenované slovo, předpona, shoda podmětu s přísudkem (<i>psi štěkali</i>), vzor.</p></article>
+        <article class="vyklad-karta"><h3>📗 Tvarosloví</h3><p>Slovní druh i pád urči <b>ve větě</b> a otázkou: <i>šli kolem čeho?</i> → předložka; <i>bál se koho, čeho?</i> → 2. pád.</p></article>
+        <article class="vyklad-karta"><h3>🔗 Skladba</h3><p>Spočítej přísudky (tolik je vět), druh vedlejší věty urči otázkou z věty hlavní, čárku piš před spojku vedlejší věty.</p></article>
+        <article class="vyklad-karta"><h3>📖 Práce s textem</h3><p>Odpovídej <b>jen podle textu</b>, ne podle toho, co víš odjinud. Správné tvrzení musíš v textu umět ukázat.</p></article>
+      </div>
+      <p>Pozorně čti, na co se úloha ptá. „Ve které možnosti je <b>chyba</b>?“ a „Ve které větě je <b>vše správně</b>?“
+        vyžadují opačné hledání. Když si nejsi jistý, <b>vyřazuj</b>: u každé možnosti si řekni, proč je špatně.
+        Co zbude, bývá správná odpověď.</p>
+      <p>Hlídej si čas. Skutečná zkouška trvá 60 minut. Úlohu, která tě zdrží, přeskoč a vrať se k ní na konci –
+        jinak nestihneš snadné úlohy, které ti body přinesou jistě.</p>
+      <aside class="zapamatuj">Přečti zadání dvakrát · hledej pravidlo, ne pocit · vyřazuj špatné možnosti · u textu dokládej odpověď z textu · těžkou úlohu nech na konec.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: práce s textem</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Text: <i>Knihovna bude od pondělí 3. dubna otevřena v novém provozu: v pracovní dny od 9 do 18 hodin, v sobotu od 9 do 12 hodin. Registrace nových čtenářů do 15 let je zdarma.</i><br>
+        Které tvrzení z textu vyplývá? A) Registrace je zdarma pro všechny. B) V sobotu je otevřeno déle než ve všední den. C) Knihovna je v pondělí zavřená. D) Čtrnáctiletý čtenář za registraci nezaplatí.</p>
+      <ol class="kroky">
+        <li>Ověřím A: text říká zdarma jen <b>do 15 let</b>, ne pro všechny – vyřazuji.</li>
+        <li>Ověřím B: sobota 9–12 jsou 3 hodiny, všední den 9–18 je 9 hodin. Tvrzení je opačně – vyřazuji.</li>
+        <li>Ověřím C: pondělí je pracovní den, takže je otevřeno – vyřazuji.</li>
+        <li>Zbývá D: čtrnáctiletý je mladší než 15 let, na něj se registrace zdarma vztahuje. Doklad je ve druhé větě textu.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ D) Čtrnáctiletý čtenář za registraci nezaplatí.</p>
+    </div>
+  </details>
+
   <div class="rezimy" id="rezimy">
     <button data-rezim="test" class="active">⏱️ Test na čas</button>
     <button data-rezim="pravopis">✍️ Pravopis</button>
@@ -49,7 +87,7 @@
   </div>
 
   <p class="napoveda">
-    Jednotná přijímací zkouška z češtiny trvá <b>70 minut</b> a obsahuje úlohy na pravopis,
+    Jednotná přijímací zkouška z češtiny trvá <b>60 minut</b> a obsahuje úlohy na pravopis,
     tvarosloví, skladbu, slovní zásobu a práci s textem. Tady si můžeš zkusit zkrácenou verzi:
     <b>10 úloh za 8 minut</b>.
   </p>

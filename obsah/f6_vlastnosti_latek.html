@@ -6,6 +6,8 @@
   <title>Vlastnosti látek a těles</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -62,7 +64,7 @@
     .arch-tip { font-size: .78rem; color: var(--text-faint); max-width: 560px; text-align: center; line-height: 1.55; }
     .arch-tip b { color: var(--text-muted); }
     /* Fotografie tělesa v úloze „Látka, či těleso?“ */
-    .foto-ukol { display: block; width: min(400px, 78vw); height: auto; aspect-ratio: 4 / 3; object-fit: cover;
+    .foto-ukol { display: block; width: min(400px, 78vw); height: auto; aspect-ratio: 4 / 3; object-fit: contain;
       border-radius: 12px; background: var(--bg-deep, var(--bg-card)); }
 
     /* Foto-atlas: těleso a látka, ze které je */
@@ -82,6 +84,46 @@
 <body>
   <h1>🧊 Vlastnosti látek a těles</h1>
   <p class="podtitul">Pro 6. ročník: látka a těleso, skupenství, částicová stavba a vlastnosti látek.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Látky, tělesa a částice</summary>
+    <div class="obsah">
+      <p><b>Těleso</b> je konkrétní předmět, kterého se můžeš dotknout: sklenice, hřebík, svíčka.
+        <b>Látka</b> je materiál, ze kterého je těleso vyrobené: sklo, železo, vosk. Ze stejné látky
+        může být mnoho různých těles (ze skla sklenice i okno) a jedno těleso může být z více látek.
+        Jak to poznám? Zeptám se: „Je to jeden předmět, nebo to, z čeho je?“</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Pevné skupenství</h3><p>Stálý tvar i objem. Částice jsou
+          v pravidelné mřížce a kmitají na místě (led, železo, kámen).</p></article>
+        <article class="vyklad-karta"><h3>Kapalné skupenství</h3><p>Stálý objem, ale ne tvar – kapalina
+          zaujme tvar nádoby. Částice jsou těsně u sebe bez řádu a posouvají se (voda, olej).</p></article>
+        <article class="vyklad-karta"><h3>Plynné skupenství</h3><p>Nemá stálý tvar ani objem, vyplní
+          celý prostor. Částice jsou daleko od sebe a volně létají (vzduch, vodní pára).</p></article>
+      </div>
+      <p>Všechny látky se skládají z <b>částic</b>, mezi nimiž jsou mezery. Částice se <b>neustále pohybují</b>,
+        i když látku nezahříváš – teplota jen mění, jak rychle. Proto při zahřátí většina látek
+        zvětšuje objem a proto se částice samovolně promíchávají: tomu se říká <b>difuze</b>
+        (vůni parfému ucítíš i na druhé straně místnosti).</p>
+      <p>Mezery mezi částicemi vysvětlují i stlačitelnost: plyn stlačíš snadno, kapalinu téměř vůbec.
+        Typická chyba: myslet si, že částice v pevné látce stojí – i ty kmitají.</p>
+      <aside class="zapamatuj">Těleso = předmět, látka = materiál. Pevné: tvar i objem, kapalné: jen objem,
+        plynné: ani jedno. Částice se pohybují stále, s teplotou rychleji.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: jaké skupenství má olej</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Jaké skupenství má olej za běžných podmínek?</p>
+      <ol class="kroky">
+        <li>Zeptám se, jestli má olej <b>stálý tvar</b>: když ho přeliji z láhve do misky, tvar se změní – stálý tvar nemá.</li>
+        <li>Zeptám se, jestli má <b>stálý objem</b>: litr oleje zůstane litrem v láhvi i v misce – objem stálý má.</li>
+        <li>Stálý objem, ale ne tvar – to je znak <b>kapalného</b> skupenství.</li>
+        <li>Ověřím částicemi: částice oleje jsou těsně u sebe, ale mohou se posouvat, proto olej teče.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Olej má kapalné skupenství.</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="latkaTeleso" class="active">🔤 Látka, či těleso?</button>
@@ -108,7 +150,18 @@
     <h2 id="atlasLatek">📷 Těleso a látka, ze které je</h2>
     <p>Každý předmět na fotografii je <b>těleso</b>. Pod ním najdeš <b>látku</b>, ze které je vyrobený. Některá z těchto těles uvidíš i v úloze „Látka, či těleso?“.</p>
     <div class="foto-mrizka" id="atlasLatky">
-@@ATLAS_LATKY@@
+      <figure class="foto-karta" data-teleso="sklenice"><img src="img/f/f6-latky-sklenice.webp" alt="Skleněná sklenice na stopce s jemným broušeným vzorem stojí na stole." width="768" height="512" loading="lazy"><figcaption><strong>sklenice → sklo</strong>Těleso: sklenice. Látka: sklo – průhledné, tvrdé a křehké.</figcaption></figure>
+      <figure class="foto-karta" data-teleso="lžíce"><img class="cele" src="img/f/f6-latky-lzice.webp" alt="Lesklá lžíce z nerezové oceli na bílém podkladu." width="768" height="1024" loading="lazy"><figcaption><strong>lžíce → ocel</strong>Těleso: lžíce. Látka: nerezová ocel – pevná a nerezaví.</figcaption></figure>
+      <figure class="foto-karta" data-teleso="svíčka"><img src="img/f/f6-latky-svicka.webp" alt="Silná bílá svíčka ze vosku hoří třemi knoty." width="768" height="432" loading="lazy"><figcaption><strong>svíčka → vosk</strong>Těleso: svíčka. Látka: vosk (nebo parafín) – teplem měkne a taje.</figcaption></figure>
+      <figure class="foto-karta" data-teleso="cihla"><img src="img/f/f6-latky-cihla.webp" alt="Červená pálená cihla se třemi otvory leží na dřevěné desce." width="768" height="512" loading="lazy"><figcaption><strong>cihla → pálená hlína</strong>Těleso: cihla. Látka: pálená hlína (jíl) – vypálením v peci ztvrdne.</figcaption></figure>
+      <figure class="foto-karta" data-teleso="hřebík"><img class="cele" src="img/f/f6-latky-hrebik.webp" alt="Starý kovaný železný hřebík s ohnutou špičkou." width="768" height="1028" loading="lazy"><figcaption><strong>hřebík → železo</strong>Těleso: hřebík. Látka: železo – kov, který na vlhku rezaví.</figcaption></figure>
+      <figure class="foto-karta" data-teleso="prsten"><img src="img/f/f6-latky-prsten.webp" alt="Zlatý prsten s černým kamenem na průhledné podložce." width="768" height="577" loading="lazy"><figcaption><strong>prsten → zlato</strong>Těleso: prsten. Látka: zlato – lesklý kov, který nekoroduje.</figcaption></figure>
+      <figure class="foto-karta" data-teleso="svetr"><img class="cele" src="img/f/f6-latky-svetr.webp" alt="Šedý pletený svetr z ovčí vlny rozložený na bílém podkladu." width="768" height="366" loading="lazy"><figcaption><strong>svetr → vlna</strong>Těleso: svetr. Látka: vlna – ovčí srst spředená do příze.</figcaption></figure>
+      <figure class="foto-karta" data-teleso="socha"><img class="cele" src="img/f/f6-latky-socha.webp" alt="Kamenná socha sedícího Buddhy na kamenném podstavci v zahradě chrámu." width="768" height="1152" loading="lazy"><figcaption><strong>socha → kámen</strong>Těleso: socha. Látka: kámen – tvrdý a těžký, vydrží staletí.</figcaption></figure>
+      <figure class="foto-karta" data-teleso="trubka"><img src="img/f/f6-latky-trubka.webp" alt="Měděné trubky vedené pod stropem, část z nich je obalená izolací." width="768" height="576" loading="lazy"><figcaption><strong>trubka → měď</strong>Těleso: trubka. Látka: měď – načervenalý kov, dobře vede teplo i elektřinu.</figcaption></figure>
+      <figure class="foto-karta" data-teleso="sešit"><img src="img/f/f6-latky-sesit.webp" alt="Barevné sešity s papírovými deskami narovnané na sobě." width="768" height="512" loading="lazy"><figcaption><strong>sešit → papír</strong>Těleso: sešit. Látka: papír – vyrábí se ze dřeva.</figcaption></figure>
+      <figure class="foto-karta" data-teleso="stůl"><img src="img/f/f6-latky-stul.webp" alt="Malý dřevěný stolek s nohami spojenými příčkami." width="768" height="510" loading="lazy"><figcaption><strong>stůl → dřevo</strong>Těleso: stůl. Látka: dřevo – dá se řezat, brousit a hoří.</figcaption></figure>
+      <figure class="foto-karta" data-teleso="pravítko"><img class="cele" src="img/f/f6-latky-pravitko.webp" alt="Průhledné plastové pravítko ve tvaru trojúhelníku se stupnicí." width="768" height="1364" loading="lazy"><figcaption><strong>pravítko → plast</strong>Těleso: pravítko (trojúhelník). Látka: plast – lehký, ohebný a nerezaví.</figcaption></figure>
     </div>
   </section>
 

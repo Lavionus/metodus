@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Převody jednotek</title>
   <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -50,7 +52,7 @@
     .foto-atlas > p { margin: 0 0 12px; max-width: 760px; color: var(--text-muted); font-size: .9rem; }
     .foto-mrizka { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
     .foto-karta { margin: 0; overflow: hidden; border: 1px solid var(--border); border-radius: 14px; background: var(--bg-card, var(--bg-panel)); }
-    .foto-karta img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; }
+    .foto-karta img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: contain; background: var(--bg-deep); }
     .foto-karta figcaption { padding: 9px 11px 11px; font-size: .86rem; line-height: 1.4; }
     .foto-karta strong { display: block; margin-bottom: 3px; color: var(--accent); font-size: .98rem; }
     .foto-karta .mira { display: block; font-variant-numeric: tabular-nums; }
@@ -63,6 +65,41 @@
   <h1>📏 Převody jednotek</h1>
   <p class="podtitul">Délka, hmotnost, objem a čas – metricky i v jednotkách, které se používají v USA.
     Desetinná čísla piš s čárkou i tečkou, jak chceš. Napiš odpověď a stiskni Enter.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Jak převádět jednotky</summary>
+    <div class="obsah">
+      <p>Převod jednotek nemění velikost věci, mění jen to, <b>jakým „metrem“ ji měříš</b>. Stůl je dlouhý pořád stejně,
+        ať napíšeš 1,2 m, nebo 120 cm. Proto platí jednoduché pravidlo: když převádíš na <b>menší</b> jednotku,
+        vyjde <b>větší číslo</b> (násobíš). Když převádíš na <b>větší</b> jednotku, vyjde <b>menší číslo</b> (dělíš).</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Délka</h3><p>1 km = 1 000 m, 1 m = 10 dm = 100 cm, 1 dm = 10 cm,
+          1 cm = 10 mm. Sousední jednotky mm–cm–dm–m se liší desetkrát.</p></article>
+        <article class="vyklad-karta"><h3>Hmotnost a objem</h3><p>1 t = 1 000 kg, 1 kg = 100 dkg = 1 000 g,
+          1 dkg = 10 g. 1 hl = 100 l, 1 l = 1 000 ml.</p></article>
+        <article class="vyklad-karta"><h3>Čas</h3><p>Čas není desítkový: 1 min = 60 s, 1 h = 60 min = 3 600 s,
+          1 den = 24 h, 1 týden = 7 dní. Tady desetinnou čárku jen posunout nejde.</p></article>
+      </div>
+      <p>U desítkových jednotek stačí násobit nebo dělit 10, 100 či 1 000, tedy posunout desetinnou čárku o tolik míst,
+        kolik je v čísle nul. Americké jednotky (palec, stopa, libra, galon) desítkové nejsou – tam vždy násobíš nebo dělíš
+        jejich převodním číslem. Na konci si výsledek zkontroluj odhadem: kilometr je zhruba deset fotbalových hřišť za sebou.</p>
+      <aside class="zapamatuj">Na menší jednotku → násobím (číslo roste). Na větší jednotku → dělím (číslo klesá).</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: kilometry na metry</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Převeď 1,25 km na metry.</p>
+      <ol class="kroky">
+        <li>Zjistím vztah jednotek: 1 km = 1 000 m.</li>
+        <li>Metr je menší jednotka než kilometr, takže číslo musí vyjít větší – budu násobit.</li>
+        <li>Vynásobím: 1,25 · 1 000. Násobím tisícem, posunu desetinnou čárku o 3 místa doprava: 1,25 → 1 250.</li>
+        <li>Zkontroluji odhadem: kilometr a čtvrt je o něco víc než 1 000 m, 1 250 m dává smysl.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ 1,25 km = 1 250 m</p>
+    </div>
+  </details>
 
   <div class="volby">
     <div class="skupina" id="obtiznost">
@@ -95,14 +132,14 @@
     <h2 id="meritkaNadpis">📐 Jak velké to je ve skutečnosti</h2>
     <p>Předměty, které znáš, ti pomohou odhadnout, jestli výsledek převodu dává smysl. Čísla jsou přibližná – každé jablko i každé dveře jsou trochu jiné.</p>
     <div class="foto-mrizka">
-      <figure class="foto-karta"><img src="img/m/prevody-sponka.webp" alt="{{ALT:m/prevody-sponka}}" {{R:m/prevody-sponka}} loading="lazy"><figcaption><strong>Kancelářská sponka</strong><span class="mira">délka asi 3 cm = 30 mm</span><span class="mira">hmotnost asi 1 g</span></figcaption></figure>
-      <figure class="foto-karta"><img src="img/m/prevody-kostky-cukru.webp" alt="{{ALT:m/prevody-kostky-cukru}}" {{R:m/prevody-kostky-cukru}} loading="lazy"><figcaption><strong>Kostka cukru</strong><span class="mira">hrana asi 1,5 cm (čárka vpravo dole měří 10 mm)</span><span class="mira">hmotnost asi 3–4 g</span></figcaption></figure>
-      <figure class="foto-karta"><img src="img/m/prevody-lzicka.webp" alt="{{ALT:m/prevody-lzicka}}" {{R:m/prevody-lzicka}} loading="lazy"><figcaption><strong>Čajová lžička</strong><span class="mira">délka asi 13 cm</span><span class="mira">vejde se do ní asi 5 ml</span></figcaption></figure>
-      <figure class="foto-karta"><img src="img/m/prevody-jablko.webp" alt="{{ALT:m/prevody-jablko}}" {{R:m/prevody-jablko}} loading="lazy"><figcaption><strong>Jablko</strong><span class="mira">průměr asi 7–8 cm</span><span class="mira">hmotnost asi 150–200 g = 15–20 dkg</span></figcaption></figure>
-      <figure class="foto-karta"><img src="img/m/prevody-lahev-litr.webp" alt="{{ALT:m/prevody-lahev-litr}}" {{R:m/prevody-lahev-litr}} loading="lazy"><figcaption><strong>Litrová láhev</strong><span class="mira">objem 1 l = 1 000 ml = 1 dm³</span><span class="mira">litr vody váží asi 1 kg</span></figcaption></figure>
-      <figure class="foto-karta"><img src="img/m/prevody-mouka-kilogram.webp" alt="{{ALT:m/prevody-mouka-kilogram}}" {{R:m/prevody-mouka-kilogram}} loading="lazy"><figcaption><strong>Balení mouky</strong><span class="mira">hmotnost 1 kg = 100 dkg = 1 000 g</span><span class="mira">dva sáčky dohromady 2 kg</span></figcaption></figure>
-      <figure class="foto-karta"><img src="img/m/prevody-dvere.webp" alt="{{ALT:m/prevody-dvere}}" {{R:m/prevody-dvere}} loading="lazy"><figcaption><strong>Dveře</strong><span class="mira">výška asi 2 m = 200 cm</span><span class="mira">šířka asi 80–90 cm</span></figcaption></figure>
-      <figure class="foto-karta"><img src="img/m/prevody-fotbalove-hriste.webp" alt="{{ALT:m/prevody-fotbalove-hriste}}" {{R:m/prevody-fotbalove-hriste}} loading="lazy"><figcaption><strong>Fotbalové hřiště</strong><span class="mira">délka asi 100 m, šířka asi 65 m</span><span class="mira">10 hřišť za sebou = asi 1 km</span></figcaption></figure>
+      <figure class="foto-karta"><img src="img/m/prevody-sponka.webp" alt="Hromada barevných kancelářských sponek." width="768" height="512" loading="lazy"><figcaption><strong>Kancelářská sponka</strong><span class="mira">délka asi 3 cm = 30 mm</span><span class="mira">hmotnost asi 1 g</span></figcaption></figure>
+      <figure class="foto-karta"><img src="img/m/prevody-kostky-cukru.webp" alt="Hromádka kostek cukru na černém podkladu s měřítkem 10 milimetrů." width="768" height="639" loading="lazy"><figcaption><strong>Kostka cukru</strong><span class="mira">hrana asi 1,5 cm (čárka vpravo dole měří 10 mm)</span><span class="mira">hmotnost asi 3–4 g</span></figcaption></figure>
+      <figure class="foto-karta"><img src="img/m/prevody-lzicka.webp" alt="Kovová čajová lžička položená na bílém ubrusu." width="768" height="1023" loading="lazy"><figcaption><strong>Čajová lžička</strong><span class="mira">délka asi 13 cm</span><span class="mira">vejde se do ní asi 5 ml</span></figcaption></figure>
+      <figure class="foto-karta"><img src="img/m/prevody-jablko.webp" alt="Červené jablko na bílém pozadí." width="768" height="696" loading="lazy"><figcaption><strong>Jablko</strong><span class="mira">průměr asi 7–8 cm</span><span class="mira">hmotnost asi 150–200 g = 15–20 dkg</span></figcaption></figure>
+      <figure class="foto-karta"><img src="img/m/prevody-lahev-litr.webp" alt="Plastová láhev minerální vody o objemu jeden litr." width="768" height="1036" loading="lazy"><figcaption><strong>Litrová láhev</strong><span class="mira">objem 1 l = 1 000 ml = 1 dm³</span><span class="mira">litr vody váží asi 1 kg</span></figcaption></figure>
+      <figure class="foto-karta"><img src="img/m/prevody-mouka-kilogram.webp" alt="Dva papírové sáčky hladké mouky, každý o hmotnosti jeden kilogram." width="768" height="576" loading="lazy"><figcaption><strong>Balení mouky</strong><span class="mira">hmotnost 1 kg = 100 dkg = 1 000 g</span><span class="mira">dva sáčky dohromady 2 kg</span></figcaption></figure>
+      <figure class="foto-karta"><img src="img/m/prevody-dvere.webp" alt="Staré dřevěné vchodové dveře v omítnuté zdi." width="768" height="1365" loading="lazy"><figcaption><strong>Dveře</strong><span class="mira">výška asi 2 m = 200 cm</span><span class="mira">šířka asi 80–90 cm</span></figcaption></figure>
+      <figure class="foto-karta"><img src="img/m/prevody-fotbalove-hriste.webp" alt="Fotbalové hřiště s bílými čarami vyfotografované z výšky na okraji vesnice." width="768" height="576" loading="lazy"><figcaption><strong>Fotbalové hřiště</strong><span class="mira">délka asi 100 m, šířka asi 65 m</span><span class="mira">10 hřišť za sebou = asi 1 km</span></figcaption></figure>
     </div>
   </section>
 
@@ -147,7 +184,7 @@ const PREVODNIK = {
 const KLIC_VYBER = 'metodus_prevody_vyber';
 let obtiznost = 1;
 let uloha = null, serie = 0, chyboval = false, hotovo = false;
-let casovac = null, casovacPsani = null;
+let casovacPsani = null;
 
 /* ---- výběr jednotek ---------------------------------------------------- */
 let zapnute = {};   // klic sady -> pole symbolů
@@ -236,7 +273,9 @@ function dostupneSady() {
   return SADY.filter(s => zapnute[s.klic].length >= 2);
 }
 function nova() {
-  clearTimeout(casovac);
+  // Uloha.posun() nevrací id časovače – naplánovaný posun ruší jen Uloha.zrusPosun()
+  Uloha.zrusPosun();
+  clearTimeout(casovacPsani);
   const moznosti = dostupneSady();
   if (!moznosti.length) {
     uloha = null;
@@ -325,7 +364,7 @@ function spravne() {
   $('zprava').className = 'zprava ok';
   $('zprava').textContent = '✅ ' + sCislem(uloha.hodnota, uloha.z) + ' = ' + sCislem(uloha.vysledek, uloha.na);
   bod.vyhodnot(!chyboval);
-  casovac = Uloha.posun(nova, Uloha.PRODLEVA);
+  Uloha.posun(nova, Uloha.PRODLEVA);
 }
 function spatne() {
   chyboval = true;
@@ -348,7 +387,7 @@ function ukazReseni() {
   $('zprava').className = 'zprava';
   $('zprava').textContent = 'Řešení: ' + sCislem(uloha.hodnota, uloha.z) + ' = ' + sCislem(uloha.vysledek, uloha.na);
   bod.vyhodnot(false);
-  casovac = Uloha.posun(nova, 2200);
+  Uloha.posun(nova, 2200);
 }
 
 /* Odpověď se přijme sama, jakmile v poli stojí správné číslo a dítě chvilku

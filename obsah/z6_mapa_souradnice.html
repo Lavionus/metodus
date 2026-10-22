@@ -6,6 +6,8 @@
   <title>Mapa, měřítko a souřadnice</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -37,6 +39,43 @@
   <h1>🗺️ Mapa, měřítko a souřadnice</h1>
   <p class="podtitul">Pro 6. ročník: zeměpisná síť, souřadnice, měřítko a mapové značky.</p>
 
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Zeměpisná síť, souřadnice a měřítko</summary>
+    <div class="obsah">
+      <p>Aby šlo každé místo na Zemi přesně popsat, je glóbus pokrytý pomyslnou <b>zeměpisnou sítí</b>.
+        Skládá se ze dvou druhů čar a každá čára má své číslo ve stupních.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Rovnoběžky → šířka</h3><p>Vodorovné kružnice. Nejdelší je <b>rovník (0°)</b>,
+          k pólům se zkracují. <b>Zeměpisná šířka</b> se měří od rovníku k pólům: 0° až 90° <b>s. š.</b> nebo <b>j. š.</b></p></article>
+        <article class="vyklad-karta"><h3>Poledníky → délka</h3><p>Polokružnice od pólu k pólu, všechny stejně dlouhé.
+          <b>Nultý poledník</b> prochází Greenwichem. <b>Zeměpisná délka</b>: 0° až 180° <b>v. d.</b> nebo <b>z. d.</b></p></article>
+        <article class="vyklad-karta"><h3>Měřítko mapy</h3><p>1 : 50 000 znamená, že 1 cm na mapě je 50 000 cm ve skutečnosti,
+          tedy <b>0,5 km</b>. Škrtni pět nul a dostaneš kilometry (100 000 cm = 1 km).</p></article>
+      </div>
+      <p>Souřadnice se zapisují v pořadí <b>nejdřív šířka, potom délka</b>, a vždy se směrem: Praha leží asi na 50° s. š., 14° v. d.
+        Směr poznáš podle polokoule: sever, nebo jih od rovníku? Východ, nebo západ od Greenwiche?
+        <b>Typická chyba:</b> zapomenout směr – „34°, 151°“ může ležet na čtyřech různých místech.</p>
+      <p>Čím menší číslo za dvojtečkou, tím <b>větší měřítko</b> a podrobnější mapa menšího území (plán města).
+        Účelu odpovídá i druh mapy: turistická ukazuje značené trasy, automapa silnice, tematická jeden jev.</p>
+      <aside class="zapamatuj">Šířka od rovníku (s./j.), délka od nultého poledníku (v./z.), zapisuj šířku první.
+        Skutečná vzdálenost = délka na mapě × kolik km odpovídá 1 cm.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: převod měřítkem</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Na mapě s měřítkem 1 : 50 000 naměříš mezi dvěma obcemi 7 cm. Kolik kilometrů je to ve skutečnosti?</p>
+      <ol class="kroky">
+        <li>Měřítko říká: 1 cm na mapě = 50 000 cm ve skutečnosti.</li>
+        <li>Převedu na kilometry: 1 km = 100 000 cm, takže 50 000 cm = <b>0,5 km</b>. Tedy 1 cm na mapě = 0,5 km.</li>
+        <li>Vynásobím naměřenou délkou: 7 × 0,5 = <b>3,5 km</b>.</li>
+        <li>Zkontroluji odhadem: 2 cm jsou 1 km, 7 cm je o něco víc než 3 km – sedí to.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Obce jsou ve skutečnosti od sebe 3,5 km (vzdušnou čarou).</p>
+    </div>
+  </details>
+
   <div class="rezimy" id="rezimy">
     <button data-rezim="pojmy" class="active">🌐 Zeměpisná síť</button>
     <button data-rezim="souradnice">📍 Urči souřadnice</button>
@@ -61,7 +100,12 @@
   <section class="foto-atlas" aria-labelledby="mapyNadpis">
     <h2 id="mapyNadpis">Jedno místo – tři pohledy, a k tomu plán města</h2>
     <p>První tři výřezy ukazují stejné území (Útěchov na okraji Brna) ve stejném měřítku. Porovnej, co která mapa zdůrazňuje a co vynechává. Čtvrtý obrázek je plán celého středu Brna v menším měřítku.</p>
-    <div class="foto-mrizka" id="mapyAtlas"></div>
+    <div class="foto-mrizka" id="mapyAtlas">
+      <figure class="foto-karta"><img src="img/z/z6-mapa-utechov-zakladni.webp" alt="Základní mapa Útěchova u Brna: zástavba, silnice, lesy, vrstevnice a názvy míst." width="1152" height="1085" loading="lazy"><figcaption><strong>Obecně zeměpisná (základní) mapa</strong>Ukazuje všechno důležité najednou: zástavbu, silnice, lesy, vodu, vrstevnice a názvy; výška terénu je vidět z vrstevnic.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/z/z6-mapa-utechov-turisticka.webp" alt="Turistická mapa Útěchova u Brna se stejným výřezem a barevně vyznačenými turistickými a cyklistickými trasami." width="1152" height="1090" loading="lazy"><figcaption><strong>Turistická mapa</strong>Stejné území jako základní mapa, ale navíc barevné čáry značených turistických a cyklistických tras.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/z/z6-mapa-utechov-letecka.webp" alt="Letecký snímek (ortofoto) Útěchova u Brna: střechy domů, ulice, pole a souvislé lesy." width="840" height="795" loading="lazy"><figcaption><strong>Letecký snímek (ortofoto)</strong>Skutečná fotografie krajiny shora, upravená tak, aby šla měřit jako mapa; nejsou na ní značky ani názvy – musíš je poznat sám.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/z/z6-mapa-brno-osm.webp" alt="Plán středu Brna z OpenStreetMap s hustou sítí ulic, hlavními silnicemi a zelení parků." width="915" height="1079" loading="lazy"><figcaption><strong>Plán města</strong>Mapa z projektu OpenStreetMap ukazuje celý střed Brna – větší území, a proto menší měřítko; jednotlivé domy už nejsou vidět, zato celá síť ulic.</figcaption></figure>
+    </div>
   </section>
 
 <script>
@@ -107,16 +151,17 @@ const DRUHY_MAP = [
 ];
 
 const UKAZKY_MAP = [
-  { n: 'obecně zeměpisná (základní) mapa', img: 'z6-mapa-utechov-zakladni', w: 0, h: 0, alt: '',
+  { n: 'obecně zeměpisná (základní) mapa', img: 'z6-mapa-utechov-zakladni', w: 1152, h: 1085, alt: 'Základní mapa Útěchova u Brna: zástavba, silnice, lesy, vrstevnice a názvy míst.',
     o: 'ukazuje všechno důležité najednou: zástavbu, silnice, lesy, vodu, vrstevnice a názvy; výška terénu je vidět z vrstevnic' },
-  { n: 'turistická mapa', img: 'z6-mapa-utechov-turisticka', w: 0, h: 0, alt: '',
+  { n: 'turistická mapa', img: 'z6-mapa-utechov-turisticka', w: 1152, h: 1090, alt: 'Turistická mapa Útěchova u Brna se stejným výřezem a barevně vyznačenými turistickými a cyklistickými trasami.',
     o: 'stejné území jako základní mapa, ale navíc barevné čáry značených turistických a cyklistických tras' },
-  { n: 'letecký snímek (ortofoto)', img: 'z6-mapa-utechov-letecka', w: 0, h: 0, alt: '',
+  { n: 'letecký snímek (ortofoto)', img: 'z6-mapa-utechov-letecka', w: 840, h: 795, alt: 'Letecký snímek (ortofoto) Útěchova u Brna: střechy domů, ulice, pole a souvislé lesy.',
     o: 'skutečná fotografie krajiny shora, upravená tak, aby šla měřit jako mapa; nejsou na ní značky ani názvy – musíš je poznat sám' },
-  { n: 'plán města', img: 'z6-mapa-brno-osm', w: 0, h: 0, alt: '',
+  { n: 'plán města', img: 'z6-mapa-brno-osm', w: 915, h: 1079, alt: 'Plán středu Brna z OpenStreetMap s hustou sítí ulic, hlavními silnicemi a zelení parků.',
     o: 'mapa z projektu OpenStreetMap ukazuje celý střed Brna – větší území, a proto menší měřítko; jednotlivé domy už nejsou vidět, zato celá síť ulic' },
 ];
-const ukazkaMapy = (x, trida) => `<img class="${trida}" src="img/z/${x.img}.webp" alt="${x.alt}" width="${x.w}" height="${x.h}">`;
+// Obrázek je sám otázkou – alt nesmí prozradit druh mapy.
+const ukazkaMapy = (x, trida) => `<img class="${trida}" src="img/z/${x.img}.webp" alt="Mapa nebo snímek k určení." width="${x.w}" height="${x.h}">`;
 
 /* ---- Zeměpisná síť ------------------------------------------------------------------- */
 function pojmy() {

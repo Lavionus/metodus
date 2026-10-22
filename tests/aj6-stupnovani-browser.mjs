@@ -42,7 +42,7 @@ for (let i = 0; i < 5; i++) {
   assert.ok(await ev(`[...document.querySelectorAll('.porovnani img')].every(x => x.naturalWidth === 768 && x.alt.length > 5)`));
   assert.ok(await ev(`document.querySelector('.veta-en').textContent.includes('than')`));
   await ev(`Math.random = () => 0.9; porovnani(); Promise.all([...document.querySelectorAll('.porovnani img')].map(x => x.decode()))`);
-  assert.ok(await ev(`document.querySelector('.veta-en').textContent.includes('large') && !document.querySelector('.veta-en').textContent.includes('than')`));
+  assert.ok(await ev(`/\\b(large|big)\\b/.test(document.querySelector('.veta-en').textContent) && !document.querySelector('.veta-en').textContent.includes('than')`));
 }
 await ev(`Uloha.nahodne = window.__puvodniNahodne; Math.random = window.__puvodniRandom`);
 for (const mode of ['stupen', 'pravidlo', 'veta', 'porovnani']) {

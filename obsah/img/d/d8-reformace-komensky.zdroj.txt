@@ -1,0 +1,8 @@
+Soubor: d8-reformace-komensky.png / d8-reformace-komensky.webp
+Původní dílo: Portret van Jan Amos Comenius, SK-A-2161.jpg
+Autor: Rijksmuseum
+Datum vzniku: between 1650 and 1670date QS:P,+1650-00-00T00:00:00Z/7,P1319,+1650-00-00T00:00:00Z/9,P1326,+1670-00-00T00:00:00Z/9
+Zdroj: https://commons.wikimedia.org/wiki/File:Portret_van_Jan_Amos_Comenius,_SK-A-2161.jpg
+Licence: CC0 (http://creativecommons.org/publicdomain/zero/1.0/deed.en)
+Staženo: 2026-10-21
+Úpravy: automatické natočení, odstranění metadat, zmenšení na nejvýše 1600 px; výuková WebP kopie 1152 px.

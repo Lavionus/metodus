@@ -6,6 +6,8 @@
   <title>Rozmnožování a vývoj člověka</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -62,6 +64,45 @@
   <h1>👶 Rozmnožování a vývoj člověka</h1>
   <p class="podtitul">Pro 8. ročník: rozmnožovací soustava, vývoj před narozením a etapy lidského života.</p>
 
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Od oplození po stáří</summary>
+    <div class="obsah">
+      <p>Člověk se rozmnožuje <b>pohlavně</b>: nový jedinec vzniká <b>oplozením</b>, tedy splynutím <b>vajíčka</b> a <b>spermie</b>.
+        Vznikne <b>zygota</b> – první buňka nového člověka, která nese dědičnou informaci od obou rodičů.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Ženská soustava</h3><p><b>Vaječník</b> tvoří vajíčka a ženské pohlavní hormony,
+          <b>vejcovod</b> vede vajíčko k děloze (obvykle v něm dochází k oplození), v <b>děloze</b> se vyvíjí plod.</p></article>
+        <article class="vyklad-karta"><h3>Mužská soustava</h3><p><b>Varle</b> tvoří spermie a testosteron, v <b>nadvarleti</b>
+          spermie dozrávají, <b>chámovod</b> je z nadvarlete odvádí.</p></article>
+        <article class="vyklad-karta"><h3>Spojení s matkou</h3><p><b>Placenta</b> zásobuje plod živinami a kyslíkem z krve matky,
+          <b>pupečník</b> spojuje plod s placentou.</p></article>
+      </div>
+      <p><b>Vývoj před narozením</b> má pevné pořadí: oplození → rýhování (zárodek se dělí a putuje do dělohy) → uhnízdění
+        v děložní sliznici (asi týden po oplození) → <b>zárodečné období</b> do 8. týdne, kdy se zakládají všechny orgány →
+        <b>období plodu</b> od 9. týdne, kdy orgány dozrávají → porod kolem 40. týdne těhotenství.</p>
+      <p><b>Typická chyba:</b> 40 týdnů se počítá od prvního dne poslední menstruace, ne od oplození; od oplození je to asi 38 týdnů.</p>
+      <p>Po narození následují etapy: novorozenec (prvních 28 dní), kojenec, batole, předškolní a mladší školní věk, <b>dospívání</b>,
+        dospělost a stáří. V dospívání řídí změny těla <b>pohlavní hormony</b>; tempo je u každého jiné.</p>
+      <aside class="zapamatuj">Oplození = splynutí vajíčka a spermie, vzniká zygota. Orgány se zakládají do 8. týdne.
+        Placenta a pupečník spojují plod s matkou.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: seřaď vývoj před narozením</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Seřaď: období plodu · oplození · uhnízdění v děložní sliznici · zárodečné období · rýhování a putování do dělohy.</p>
+      <ol class="kroky">
+        <li>Na začátku musí vzniknout zygota – první je <b>oplození</b>, obvykle ve vejcovodu.</li>
+        <li>Zygota se začne dělit a zároveň putuje vejcovodem: <b>rýhování a putování do dělohy</b>.</li>
+        <li>Teprve v děloze se zárodek může uchytit: <b>uhnízdění v děložní sliznici</b>, asi týden po oplození.</li>
+        <li>Pak se zakládají všechny orgány – <b>zárodečné období</b> do 8. týdne.</li>
+        <li>Od 9. týdne orgány jen dozrávají a plod roste – <b>období plodu</b>.</li>
+      </ol>
+      <p class="vysledek-ukazky">Oplození → rýhování a putování do dělohy → uhnízdění → zárodečné období → období plodu (a kolem 40. týdne porod).</p>
+    </div>
+  </details>
+
   <div class="rezimy" id="rezimy">
     <button data-rezim="soustava" class="active">🫀 Orgány a jejich funkce</button>
     <button data-rezim="predNarozenim">🥚 Vývoj před narozením</button>
@@ -89,6 +130,7 @@
     <p>Porovnej tělesné proporce a seřaď životní etapy od narození po stáří.</p>
     <ol class="etapy-rada">
       <li><figure><img src="img/pr/pr8-etapy-novorozenec.webp" alt="Novorozené dítě zavinuté v lehké přikrývce." width="768" height="768"><figcaption>novorozenec</figcaption></figure></li>
+      <li><figure><img src="img/pr/pr8-etapy-kojenec.webp" alt="Kojenec asi v osmi měsících sedí sám na zemi a usmívá se." width="768" height="768"><figcaption>kojenec</figcaption></figure></li>
       <li><figure><img src="img/pr/pr8-etapy-batole.webp" alt="Dvouleté batole stojící v širokém začátečnickém postoji." width="768" height="768"><figcaption>batole</figcaption></figure></li>
       <li><figure><img src="img/pr/pr8-etapy-predskolak.webp" alt="Pětileté dítě v předškolním věku." width="768" height="768"><figcaption>předškolák</figcaption></figure></li>
       <li><figure><img src="img/pr/pr8-etapy-skolak.webp" alt="Devítileté dítě mladšího školního věku." width="768" height="768"><figcaption>školák</figcaption></figure></li>
@@ -107,14 +149,14 @@
   </div>
 
   <div class="osa-zivota">
-    <span>novorozenec (do 28 dní)</span><span>batole (1–3)</span><span>předškolní věk (3–6)</span>
+    <span>novorozenec (do 28 dní)</span><span>kojenec (do 1 roku)</span><span>batole (1–3)</span><span>předškolní věk (3–6)</span>
     <span>mladší školní věk (6–11)</span><span>dospívání (11–18)</span><span>dospělost</span>
     <span>starší dospělost</span><span>stáří (přibližně od 65 let)</span>
   </div>
 
   <p class="napoveda">
     Nový jedinec vzniká <b>oplozením</b> – splynutím vajíčka a spermie. Vývoj v děloze trvá
-    přibližně <b>9 měsíců (40 týdnů)</b>. V dospívání řídí tělesné změny <b>pohlavní hormony</b>.
+    přibližně <b>9 měsíců</b> – asi 40 týdnů počítaných od prvního dne poslední menstruace (od oplození zhruba 38 týdnů). V dospívání řídí tělesné změny <b>pohlavní hormony</b>.
   </p>
 
 <script>
@@ -204,7 +246,7 @@ const VYVOJ = [
   { t: 'uhnízdění v děložní sliznici', info: 'asi týden po oplození' },
   { t: 'zárodečné období (do 8. týdne)', info: 'zakládají se všechny orgány, vzniká placenta' },
   { t: 'období plodu (od 9. týdne)', info: 'orgány dozrávají, plod roste' },
-  { t: 'porod asi po 40 týdnech', info: 'narodí se novorozenec' },
+  { t: 'porod kolem 40. týdne těhotenství', info: 'týdny se počítají od prvního dne poslední menstruace, od oplození je to asi 38 týdnů; narodí se novorozenec' },
 ];
 function predNarozenim() {
   const p = $('plocha');
@@ -251,6 +293,7 @@ function predNarozenim() {
 
 const ETAPY = [
   { e: 'novorozenec', v: 'prvních 28 dní života', img: 'img/pr/pr8-etapy-novorozenec.webp', alt: 'Novorozené dítě zavinuté v lehké přikrývce.' },
+  { e: 'kojenec', v: 'od 1 měsíce do 1 roku', img: 'img/pr/pr8-etapy-kojenec.webp', alt: 'Kojenec asi v osmi měsících sedí sám na zemi a usmívá se.' },
   { e: 'batole', v: 'od 1 do 3 let', img: 'img/pr/pr8-etapy-batole.webp', alt: 'Dvouleté batole v širokém postoji.' },
   { e: 'předškolní věk', v: 'od 3 do 6 let', img: 'img/pr/pr8-etapy-predskolak.webp', alt: 'Pětileté dítě předškolního věku.' },
   { e: 'mladší školní věk', v: 'od 6 do 11 let', img: 'img/pr/pr8-etapy-skolak.webp', alt: 'Devítileté dítě mladšího školního věku.' },
@@ -265,9 +308,9 @@ function etapy() {
   const naVek = Math.random() < 0.5;
   p.innerHTML = naVek
     ? `<div class="zadani">Jaký věk odpovídá etapě</div>
-       <div class="karta"><img class="etapy-obrazek" src="${u.img}" alt="${u.alt}" width="768" height="768"><div class="etapa">${u.e}</div></div>`
+       <div class="karta"><img class="etapy-obrazek" src="${u.img}" alt="Obrázek člověka v jedné z etap života." width="768" height="768"><div class="etapa">${u.e}</div></div>`
     : `<div class="zadani">Jak se nazývá etapa života</div>
-       <div class="karta"><img class="etapy-obrazek" src="${u.img}" alt="${u.alt}" width="768" height="768"><div class="etapa">${u.v}</div></div>`;
+       <div class="karta"><img class="etapy-obrazek" src="${u.img}" alt="Obrázek člověka v jedné z etap života." width="768" height="768"><div class="etapa">${u.v}</div></div>`;
   const odezva = odezvaEl();
   Uloha.vyber({
     kam: p, odezva,
@@ -286,14 +329,14 @@ function etapy() {
 }
 
 const DOSPIVANI = [
-  { q: 'Co řídí tělesné změny v dospívání?', a: 'pohlavní hormony', b: ['vitaminy', 'množství spánku', 'krevní skupina'] },
-  { q: 'Co je puberta?', a: 'období, kdy tělo dospívá a stává se schopným rozmnožování', b: ['nemoc', 'období těsně po narození', 'stárnutí buněk'] },
-  { q: 'Které změny jsou v dospívání běžné?', a: 'rychlý růst, změna hlasu, růst ochlupení, výkyvy nálad', b: ['ztráta paměti', 'úbytek kostí', 'zpomalení růstu na nulu'] },
-  { q: 'Proč je v dospívání důležitá důkladná hygiena?', a: 'zvyšuje se činnost potních a mazových žláz', b: ['kůže přestává dýchat', 'mizí imunita', 'roste tělesná teplota'] },
-  { q: 'Kdy začíná dospívání u dívek obvykle dřív než u chlapců?', a: 'ano, zpravidla asi o rok až dva', b: ['ne, vždy stejně', 'ne, chlapci vždy dřív', 'nedá se to určit'] },
-  { q: 'Co dělat, když si nejsi jistý změnami na svém těle?', a: 'poradit se s rodiči, lékařem nebo jiným dospělým, kterému věříš', b: ['nikomu to neříkat', 'hledat jen na anonymních fórech', 'počkat, až to přejde'] },
-  { q: 'Jak se liší tempo dospívání mezi lidmi?', a: 'je velmi individuální, není žádná „správná“ rychlost', b: ['u všech je stejné', 'závisí jen na výšce', 'je dané ročním obdobím'] },
-  { q: 'Co patří ke zdravému životnímu stylu v dospívání?', a: 'pravidelný pohyb, dostatek spánku a pestrá strava', b: ['vynechávání snídaně', 'noční ponocování u telefonu', 'držení přísných diet'] },
+  { q: 'Co řídí tělesné změny v dospívání?', a: 'pohlavní hormony', b: ['vitaminy z potravy', 'délka spánku', 'krevní skupina'] },
+  { q: 'Co je puberta?', a: 'období, kdy tělo dospívá a stává se schopným rozmnožování', b: ['nakažlivá nemoc, která postihuje hlavně dospívající', 'období těsně po narození, kdy se dítě kojí', 'stárnutí buněk, které začíná kolem padesáti let'] },
+  { q: 'Které změny jsou v dospívání běžné?', a: 'rychlý růst, změna hlasu, růst ochlupení, výkyvy nálad', b: ['ztráta paměti, šedivění vlasů a hluboké vrásky', 'úbytek kostní hmoty, řídnutí kostí a nižší postava', 'zastavení růstu, ztráta svalové síly a ochablost'] },
+  { q: 'Proč je v dospívání důležitá důkladná hygiena?', a: 'zvyšuje se činnost potních a mazových žláz', b: ['kůže přestává dýchat a potřebuje pomoc', 'imunita úplně mizí a tělo se nebrání', 'tělesná teplota trvale stoupá nad 38 °C'] },
+  { q: 'Začíná dospívání u dívek obvykle dřív než u chlapců?', a: 'ano, zpravidla asi o rok až dva', b: ['ne, u všech začíná ve stejném věku', 'ne, chlapci začínají vždy dřív', 'nedá se to vůbec nijak určit'] },
+  { q: 'Co dělat, když si nejsi jistý změnami na svém těle?', a: 'poradit se s rodiči, lékařem nebo jiným dospělým, kterému věříš', b: ['nikomu nic neříkat a doufat, že se to samo spraví', 'hledat odpovědi jen na anonymních internetových fórech', 'nevšímat si toho a počkat několik let, až to přejde'] },
+  { q: 'Jak se liší tempo dospívání mezi lidmi?', a: 'je velmi individuální, není žádná „správná“ rychlost', b: ['u všech je stejné, liší se nejvýš o pár dní', 'závisí jen na tělesné výšce v deseti letech', 'je dané ročním obdobím, ve kterém se člověk narodil'] },
+  { q: 'Co patří ke zdravému životnímu stylu v dospívání?', a: 'pravidelný pohyb, dostatek spánku a pestrá strava', b: ['vynechávání snídaně a jídlo jen večer', 'ponocování u telefonu do pozdní noci', 'držení přísných diet bez porady s lékařem'] },
 ];
 function dospivani() {
   const p = $('plocha');

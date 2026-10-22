@@ -6,6 +6,8 @@
   <title>Krychle a kvádr – povrch a objem</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -23,6 +25,42 @@
 <body>
   <h1>📦 Krychle a kvádr – povrch a objem</h1>
   <p class="podtitul">Pro 6.–7. ročník: výpočet povrchu a objemu, jednotky a slovní úlohy.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Objem a povrch kvádru a krychle</summary>
+    <div class="obsah">
+      <p>U každého tělesa se můžeš ptát na dvě různé věci. <b>Kolik se do něj vejde?</b> To je <b>objem</b>.
+        <b>Kolik materiálu je potřeba na jeho obal?</b> To je <b>povrch</b> – součet obsahů všech stěn.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Objem</h3><p>Kvádr si představ poskládaný z krychliček 1 cm³. Na dno jich vejde a · b,
+          vrstev je c, proto <b>V = a · b · c</b>. Krychle: <b>V = a · a · a = a³</b>.</p></article>
+        <article class="vyklad-karta"><h3>Povrch</h3><p>Kvádr má 6 stěn, vždy dvě protější stejné. Sečti tři různé stěny a vynásob dvěma:
+          <b>S = 2 · (ab + bc + ac)</b>. Krychle má 6 stejných čtverců: <b>S = 6 · a²</b>.</p></article>
+        <article class="vyklad-karta"><h3>Jednotky</h3><p>Objem je v krychlových jednotkách (cm³, dm³, m³), povrch ve čtverečních (cm², m²).
+          1 l = 1 dm³, 1 dm³ = 1000 cm³, 1 m³ = 1000 dm³ = 1000 l.</p></article>
+      </div>
+      <p>Proč je mezi dm³ a cm³ převod 1000, a ne 10? Krychle o hraně 1 dm má hranu 10 cm, takže se do ní vejde
+        10 · 10 · 10 = 1000 krychliček o hraně 1 cm.</p>
+      <p>Typická chyba: ve slovní úloze spočítáš povrch, i když se ptá na objem, nebo naopak. Pomůže otázka:
+        jde o to, co je <b>uvnitř</b> (voda v akváriu), nebo co je <b>na povrchu</b> (papír na krabici)?</p>
+      <aside class="zapamatuj">Objem V = a · b · c (cm³) – kolik se vejde. Povrch S = 2 · (ab + bc + ac) (cm²) – kolik materiálu na obal.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: objem a povrch krabice</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Krabice tvaru kvádru má rozměry a = 5 cm, b = 3 cm, c = 4 cm. Jaký má objem a jaký povrch?</p>
+      <ol class="kroky">
+        <li>Zapíšu, co znám: <b>a = 5 cm</b>, <b>b = 3 cm</b>, <b>c = 4 cm</b>. Hledám objem V a povrch S.</li>
+        <li>Objem je součin všech tří rozměrů: V = 5 · 3 · 4 = <b>60 cm³</b>.</li>
+        <li>Pro povrch spočítám obsahy tří různých stěn: ab = 5 · 3 = 15, bc = 3 · 4 = 12, ac = 5 · 4 = 20 (cm²).</li>
+        <li>Každá stěna je na kvádru dvakrát: S = 2 · (15 + 12 + 20) = 2 · 47 = <b>94 cm²</b>.</li>
+        <li>Zkontroluji jednotky: objem v cm³ (tři rozměry), povrch v cm² (obsahy ploch).</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ V = 60 cm³, S = 94 cm².</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="objem" class="active">🧊 Objem</button>
@@ -131,20 +169,23 @@ const PREVODY = [
   { z: '1 hl', na: 'litrů', k: 100 }, { z: '250 litrů', na: 'm³', k: 0.25 },
 ];
 
+/* Číslo s desetinnou čárkou; „litrů“ se skloňuje podle čísla (1 litr, 2 litry, 0,5 litru). */
+const sJednotkou = (v, na) => na === 'litrů' ? Uloha.tvar(v, 'litr', 'litry', 'litrů', 'litru') : `${Uloha.cislo(v)} ${na}`;
+
 function jednotky() {
   const p = $('plocha');
   const u = Uloha.nahodne(PREVODY);
   p.innerHTML = `<div class="zadani">Kolik je to?</div>
     <div class="karta"><div class="rozmery">${u.z} = ? ${u.na}</div></div>`;
-  const jine = new Set([u.k * 10, u.k / 10, u.k * 100].filter(x => x > 0 && x !== u.k));
+  const jine = new Set([u.k * 10, u.k / 10, u.k * 100].map(x => Number(x.toFixed(6))).filter(x => x > 0 && x !== u.k));
   const odezva = document.createElement('div');
   odezva.className = 'odezva';
   Uloha.vyber({
     kam: p, odezva, trida: 'velke',
     moznosti: Uloha.zamichej([u.k, ...[...jine].slice(0, 3)])
-      .map(v => ({ klic: String(v), popis: v + ' ' + u.na })),
+      .map(v => ({ klic: String(v), popis: sJednotkou(v, u.na) })),
     spravnyKlic: String(u.k),
-    zpravaOk: `✅ ${u.z} = ${u.k} ${u.na}`,
+    zpravaOk: `✅ ${u.z} = ${sJednotkou(u.k, u.na)}`,
     zpravaChyba: 'Pamatuj: 1 l = 1 dm³, 1 m³ = 1000 dm³ = 1000 l, 1 dm³ = 1000 cm³.',
     poSpravne: skore.vyhodnot,
     dalsi: novaUloha,

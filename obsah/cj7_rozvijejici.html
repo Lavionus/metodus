@@ -6,6 +6,8 @@
   <title>Rozvíjející větné členy</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <link rel="stylesheet" href="../nazor.css">
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
@@ -39,6 +41,41 @@
 <body>
   <h1>🔗 Rozvíjející větné členy</h1>
   <p class="podtitul">Pro 7. ročník: předmět, přívlastek a příslovečné určení ve větě jednoduché.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Co rozvíjí sloveso a co jméno</summary>
+    <div class="obsah">
+      <p>Podmět a přísudek tvoří základ věty. Ostatní členy jsou <b>rozvíjející</b>: každý z nich patří k jednomu
+        <b>řídícímu slovu</b> a něco o něm upřesňuje. Člen proto určuješ tak, že najdeš slovo, ke kterému patří,
+        a <b>od něj se zeptáš</b>. Podle toho, co rozvíjí a jakou otázkou se na něj ptáš, poznáš, o jaký člen jde.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>🎯 Předmět</h3><p>Rozvíjí <b>sloveso</b>. Ptáš se pádem kromě 1. a 5.: <i>koho? co? komu? čím?</i> – <i>koupila (koho?) co? – boty</i>.</p></article>
+        <article class="vyklad-karta"><h3>🎨 Přívlastek</h3><p>Rozvíjí <b>podstatné jméno</b>, u kterého stojí: <i>jaký? který? čí?</i> – <i>jaké boty? – nové</i>.</p></article>
+        <article class="vyklad-karta"><h3>🧭 Příslovečné určení</h3><p>Rozvíjí <b>sloveso</b> a říká okolnosti: místa (<i>kde? kam?</i>), času (<i>kdy?</i>), způsobu (<i>jak?</i>), příčiny (<i>proč?</i>).</p></article>
+      </div>
+      <p>Předmět i příslovečné určení visí na slovese, a proto se nejčastěji pletou. Rozhoduje <b>otázka</b>:
+        <i>Učitel vysvětlil žákům</i> – <i>komu?</i> je pádová otázka, tedy předmět. <i>Běží do školy</i> –
+        <i>kam?</i> je otázka na místo, tedy příslovečné určení. Předložka patří k členu, který uvozuje
+        (<i>do školy, kvůli dešti</i>).</p>
+      <p>Druhá past: podstatné jméno na konci věty nemusí být předmět. Ve větě <i>V lese rostou houby</i>
+        se ptáš <i>co roste?</i> – <i>houby</i> jsou podmět.</p>
+      <aside class="zapamatuj">Najdi řídící slovo a zeptej se od něj. Sloveso + pádová otázka = předmět. Sloveso + kde/kdy/jak/proč = příslovečné určení. Podstatné jméno + jaký/který/čí = přívlastek.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: urči rozvíjející členy</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Urči členy ve větě: <b>Před domem stojí starý strom.</b></p>
+      <ol class="kroky">
+        <li>Najdu základ: co se děje? <b>stojí</b> – přísudek. Co stojí? <b>strom</b> – podmět (i když je na konci).</li>
+        <li><i>Před domem</i> patří ke slovesu: stojí kde? Je to otázka na místo, tedy <b>příslovečné určení místa</b>.</li>
+        <li><i>Starý</i> patří k podstatnému jménu: jaký strom? – <b>přívlastek</b>.</li>
+        <li>Zkontroluji, jestli zbylo něco s pádovou otázkou od slovesa – nezbylo, předmět věta nemá.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ před domem = příslovečné určení místa · starý = přívlastek (rozvíjí strom) · strom = podmět · stojí = přísudek.</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="urceni" class="active">🏷️ Urči větný člen</button>
@@ -102,7 +139,7 @@ const VETY = [
   [['Naše', 'pk'], ['babička', 'po'], ['peče', 'ps'], ['výbornou', 'pk'], ['bábovku', 'pt']],
   [['Zítra', 'puc'], ['pojedeme', 'ps'], ['na hory', 'pum']],
   [['Děti', 'po'], ['si hrají', 'ps'], ['na zahradě', 'pum']],
-  [['Kvůli dešti', 'pup'], ['zůstali jsme', 'ps'], ['doma', 'pum']],
+  [['Kvůli dešti', 'pup'], ['jsme zůstali', 'ps'], ['doma', 'pum']],
   [['Učitel', 'po'], ['vysvětlil', 'ps'], ['žákům', 'pt'], ['novou', 'pk'], ['látku', 'pt']],
   [['V lese', 'pum'], ['rostou', 'ps'], ['krásné', 'pk'], ['houby', 'po']],
   [['Martin', 'po'], ['napsal', 'ps'], ['dopis', 'pt'], ['babičce', 'pt']],
@@ -111,7 +148,7 @@ const VETY = [
   [['Kamarádi', 'po'], ['čekali', 'ps'], ['na nádraží', 'pum'], ['hodinu', 'puc']],
   [['Pes', 'po'], ['štěkal', 'ps'], ['ze strachu', 'pup']],
   [['Sestra', 'po'], ['koupila', 'ps'], ['nové', 'pk'], ['boty', 'pt']],
-  [['Odpoledne', 'puc'], ['šli jsme', 'ps'], ['do kina', 'pum']],
+  [['Odpoledne', 'puc'], ['jsme šli', 'ps'], ['do kina', 'pum']],
   [['Slunce', 'po'], ['svítilo', 'ps'], ['celý den', 'puc']],
   [['Chlapci', 'po'], ['hráli', 'ps'], ['fotbal', 'pt'], ['na hřišti', 'pum']],
   [['Pro nemoc', 'pup'], ['nepřišel', 'ps'], ['do školy', 'pum']],

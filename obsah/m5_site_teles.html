@@ -6,6 +6,8 @@
   <title>Sítě těles</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -29,6 +31,53 @@
 <body>
   <h1>📦 Sítě těles</h1>
   <p class="podtitul">Pro 5.–6. ročník: která síť složí krychli, počet stěn, hran a vrcholů.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Stěny, hrany, vrcholy a síť tělesa</summary>
+    <div class="obsah">
+      <p>Když krabici od bot rozstřihneš podél některých hran a rozložíš ji na stůl, dostaneš <b>síť</b>
+        tělesa. Síť je rovinný obrazec, ze kterého se dá těleso zase složit. Na tělese rozlišujeme tři části:</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Stěna</h3><p>Rovná plocha tělesa. Krychle má 6 stěn – všechny jsou stejné čtverce.
+          Kvádr má také 6 stěn, ale jsou to obdélníky; protější stěny jsou stejné.</p></article>
+        <article class="vyklad-karta"><h3>Hrana</h3><p>Úsečka, kde se potkají dvě stěny. Krychle i kvádr mají 12 hran:
+          4 nahoře, 4 dole a 4 svislé.</p></article>
+        <article class="vyklad-karta"><h3>Vrchol</h3><p>Roh, kde se potkají hrany. Krychle i kvádr mají 8 vrcholů:
+          4 nahoře a 4 dole.</p></article>
+        <article class="vyklad-karta"><h3>Oblá tělesa</h3><p>Válec má dvě kruhové podstavy a zakřivený plášť – nemá žádný vrchol.
+          Koule má jen zakřivený povrch, nemá hrany ani vrcholy.</p></article>
+      </div>
+      <p>Síť krychle má vždy <b>6 čtverců</b>. To ale nestačí: při skládání se nesmí dva čtverce
+        dostat na stejné místo. Proto třeba řada pěti čtverců nikdy krychli nesloží – kolem krychle
+        se dají ovinout jen čtyři stěny, pátá by překryla první. Různých sítí krychle je právě <b>11</b>.</p>
+      <p>Typická chyba při počítání: zapomeneš na <b>spodní stěnu</b> nebo spodní hrany, které na obrázku nevidíš.
+        Počítej po patrech – nahoře, dole, po stranách.</p>
+      <aside class="zapamatuj">Krychle a kvádr: 6 stěn, 12 hran, 8 vrcholů. Síť krychle má 6 čtverců a žádné dva se při skládání nesmí překrýt.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: složí tahle síť krychli?</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Čtyři čtverce leží v řadě vedle sebe. Nad druhým čtvercem je jeden čtverec a pod třetím také jeden.
+        Dá se z této sítě složit krychle?</p>
+      <svg viewBox="0 0 84 64" width="168" height="128" role="img" aria-label="Síť ze šesti čtverců: řada čtyř, jeden nad druhým, jeden pod třetím" style="display:block;margin:4px auto 10px">
+        <g style="fill:var(--accent);fill-opacity:.55;stroke:var(--accent);stroke-width:1.5">
+          <rect x="2" y="22" width="20" height="20"/><rect x="22" y="22" width="20" height="20"/>
+          <rect x="42" y="22" width="20" height="20"/><rect x="62" y="22" width="20" height="20"/>
+          <rect x="22" y="2" width="20" height="20"/><rect x="42" y="42" width="20" height="20"/>
+        </g>
+      </svg>
+      <ol class="kroky">
+        <li>Spočítám čtverce: 4 v řadě + 1 nahoře + 1 dole = <b>6</b>. Počet sedí, můžu zkoumat dál.</li>
+        <li>Řadu čtyř čtverců ohnu do „trubky“: tvoří čtyři boční stěny krychle a poslední čtverec se dotkne prvního.</li>
+        <li>Čtverec nad druhým čtvercem se sklopí dolů na trubku a zakryje <b>horní</b> otvor.</li>
+        <li>Čtverec pod třetím čtvercem se sklopí na druhou stranu a zakryje <b>dolní</b> otvor.</li>
+        <li>Zkontroluji překrývání: každá stěna krychle je obsazená právě jednou, žádné dva čtverce se nepřekryly.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Ano, tahle síť krychli složí.</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="ktereSit" class="active">🧩 Která síť složí krychli?</button>
@@ -56,19 +105,19 @@ let rezim = 'ktereSit';
 /* Sítě zapsané jako souřadnice [sloupec, řádek]. */
 const PLATNE_SITE = [
   [[1,0],[1,1],[1,2],[1,3],[0,2],[2,2]],
-  [[1,0],[1,1],[1,2],[1,3],[0,1],[2,1]],
+  [[0,0],[1,0],[2,0],[1,1],[1,2],[1,3]],
   [[0,0],[1,0],[1,1],[1,2],[1,3],[2,3]],
   [[0,1],[1,1],[2,1],[3,1],[1,0],[2,2]],
   [[0,0],[0,1],[1,1],[1,2],[2,2],[2,3]],
-  [[1,0],[0,1],[1,1],[2,1],[1,2],[1,3]],
+  [[0,0],[1,0],[2,0],[2,1],[3,1],[4,1]],
 ];
 const NEPLATNE_SITE = [
   [[0,0],[1,0],[2,0],[0,1],[1,1],[2,1]],
-  [[0,0],[1,0],[1,1],[2,1],[2,0],[3,0]],
+  [[0,0],[1,0],[2,0],[3,0],[4,0],[2,1]],
   [[1,0],[1,1],[1,2],[0,0],[2,0],[0,2]],
   [[0,0],[0,1],[0,2],[0,3],[1,0],[1,3]],
   [[0,0],[1,0],[2,0],[3,0],[1,1],[2,1]],
-  [[0,0],[1,0],[2,0],[3,0],[0,1],[3,1]],
+  [[0,0],[1,0],[2,0],[2,1],[2,2],[1,2]],
 ];
 
 const TELESA = [
@@ -76,8 +125,11 @@ const TELESA = [
   { n: 'kvádr', e: '📦', steny: 6, hrany: 12, vrcholy: 8, popis: 'stěny jsou obdélníky, protější jsou stejné' },
   { n: 'jehlan se čtvercovou podstavou', e: '🔺', steny: 5, hrany: 8, vrcholy: 5, popis: 'podstava je čtverec, boční stěny jsou trojúhelníky' },
   { n: 'trojboký hranol', e: '📐', steny: 5, hrany: 9, vrcholy: 6, popis: 'dvě trojúhelníkové podstavy a tři obdélníkové stěny' },
-  { n: 'válec', e: '🥫', steny: 3, hrany: 2, vrcholy: 0, popis: 'dvě kruhové podstavy a zakřivený plášť' },
-  { n: 'koule', e: '⚽', steny: 1, hrany: 0, vrcholy: 0, popis: 'zakřivený povrch bez hran a vrcholů' },
+  // oblá tělesa nemají stěny (rovinné mnohoúhelníky) – ptáme se jen na to, co je jednoznačné
+  { n: 'válec', e: '🥫', vrcholy: 0, ptat: ['vrcholy'], popis: 'dvě kruhové podstavy a zakřivený plášť',
+    shrnuti: 'válec má dvě kruhové podstavy a plášť, žádný vrchol' },
+  { n: 'koule', e: '⚽', hrany: 0, vrcholy: 0, ptat: ['hrany', 'vrcholy'], popis: 'zakřivený povrch bez hran a vrcholů',
+    shrnuti: 'koule má jen zakřivený povrch – žádnou hranu ani vrchol' },
 ];
 
 const KROK = 26;
@@ -128,7 +180,7 @@ function ktereSit() {
 function pocty() {
   const p = $('plocha');
   const t = Uloha.nahodne(TELESA);
-  const co = Uloha.nahodne(['steny', 'hrany', 'vrcholy']);
+  const co = Uloha.nahodne(t.ptat || ['steny', 'hrany', 'vrcholy']);
   const nazvy = { steny: 'stěn', hrany: 'hran', vrcholy: 'vrcholů' };
   const spravny = t[co];
 
@@ -147,7 +199,8 @@ function pocty() {
     kam: p, odezva, trida: 'velke',
     moznosti: Uloha.zamichej([spravny, ...jine]).map(v => ({ klic: String(v), popis: String(v) })),
     spravnyKlic: String(spravny),
-    zpravaOk: `✅ ${t.n} má ${t.steny} stěn, ${t.hrany} hran a ${t.vrcholy} vrcholů.`,
+    zpravaOk: t.shrnuti ? `✅ ${t.shrnuti[0].toUpperCase() + t.shrnuti.slice(1)}.`
+      : `✅ ${t.n[0].toUpperCase() + t.n.slice(1)} má ${Uloha.tvar(t.steny, 'stěnu', 'stěny', 'stěn')}, ${Uloha.tvar(t.hrany, 'hranu', 'hrany', 'hran')} a ${Uloha.tvar(t.vrcholy, 'vrchol', 'vrcholy', 'vrcholů')}.`,
     zpravaChyba: 'Představ si těleso a počítej postupně – nezapomeň na spodní stěnu.',
     poSpravne: skore.vyhodnot,
     dalsi: novaUloha,

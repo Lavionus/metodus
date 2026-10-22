@@ -42,10 +42,17 @@
     .kraj.spravne { fill: var(--ok); pointer-events: none; }
     .kraj.blik { fill: var(--danger); }
     .kraj.uceni:hover { fill: var(--accent); }
-    .mesto { fill: var(--accent); stroke: #fff; stroke-width: 1; cursor: pointer; transition: r 0.1s ease; }
-    .mesto:hover { r: 9; }
-    .mesto.spravne { fill: var(--ok); pointer-events: none; }
-    .mesto.blik { fill: var(--danger); }
+    /* město = skupina: neviditelná větší zásahová plocha + viditelná tečka */
+    .mesto { cursor: pointer; }
+    .mesto .zasah { fill: transparent; }
+    .mesto .bod { fill: var(--accent); stroke: #fff; stroke-width: 1; transition: r 0.1s ease; }
+    .mesto:hover .bod { r: 9; }
+    .mesto.spravne { pointer-events: none; }
+    .mesto.spravne .bod { fill: var(--ok); }
+    .mesto.blik .bod { fill: var(--danger); }
+    .kraj:focus, .mesto:focus { outline: none; }
+    .kraj:focus-visible { stroke: var(--text); stroke-width: 3; }
+    .mesto:focus-visible .bod { stroke: var(--text); stroke-width: 3; r: 9; }
     .popisek { fill: var(--text); font-size: 11px; pointer-events: none; text-anchor: middle; font-weight: 600;
       paint-order: stroke; stroke: var(--bg-deep); stroke-width: 3px; }
   </style>
@@ -134,16 +141,40 @@
     });
 
     const body = new Map();
+    /* zásahová plocha: nejvýš do půli vzdálenosti k nejbližšímu městu (Hradec × Pardubice) */
+    const zasahMesta = m => {
+      const min = Math.min(...MESTA.filter(x => x !== m).map(x => Math.hypot(px(m.lon) - px(x.lon), py(m.lat) - py(x.lat))));
+      return Math.max(7, Math.min(18, min / 2));
+    };
     MESTA.forEach(m => {
-      const c = document.createElementNS(NS, 'circle');
-      c.setAttribute('cx', px(m.lon));
-      c.setAttribute('cy', py(m.lat));
-      c.setAttribute('r', 7);
+      const c = document.createElementNS(NS, 'g');
+      const zasah = document.createElementNS(NS, 'circle');
+      zasah.setAttribute('cx', px(m.lon)); zasah.setAttribute('cy', py(m.lat));
+      zasah.setAttribute('r', zasahMesta(m).toFixed(1)); zasah.classList.add('zasah');
+      const bod = document.createElementNS(NS, 'circle');
+      bod.setAttribute('cx', px(m.lon)); bod.setAttribute('cy', py(m.lat));
+      bod.setAttribute('r', 7); bod.classList.add('bod');
+      c.append(zasah, bod);
+      c.dataset.cx = px(m.lon); c.dataset.cy = py(m.lat);
       c.classList.add('mesto');
       c.dataset.nazev = m.nazev;
       c.style.display = 'none';
       svg.appendChild(c);
       body.set(m.nazev, c);
+    });
+
+    /* ovládání klávesnicí: Tab na kraj či město, Enter/mezerník = klepnutí;
+       popis pro čtečku je neutrální (název by prozradil odpověď), v učení se doplní název */
+    svg.querySelectorAll('.kraj, .mesto').forEach(el => {
+      el.setAttribute('tabindex', '0'); el.setAttribute('role', 'button');
+    });
+    svg.removeAttribute('role');
+    svg.setAttribute('aria-label', 'Mapa České republiky – kraje a města jdou vybrat Tabem a Enterem');
+    svg.addEventListener('keydown', e => {
+      if (e.key !== 'Enter' && e.key !== ' ') return;
+      const cil = e.target.closest('.kraj, .mesto'); if (!cil) return;
+      e.preventDefault();
+      cil.dispatchEvent(new MouseEvent('click', { bubbles: true }));
     });
 
     /* stav kvízu */
@@ -181,11 +212,16 @@
       svg.querySelectorAll('.kraj').forEach(p => {
         p.classList.remove('spravne', 'blik', 'uceni');
         p.style.pointerEvents = '';
+        // v režimu měst kraje z pořadí Tabu vyřadit (klepnutí na ně se ignoruje)
+        p.setAttribute('tabindex', rezim === 'mesta' ? '-1' : '0');
+        p.setAttribute('aria-label', rezim === 'uceni' ? p.dataset.nazev : 'Kraj na mapě');
       });
       svg.querySelectorAll('.mesto').forEach(c => {
         c.classList.remove('spravne', 'blik');
         c.style.display = rezim === 'mesta' ? '' : 'none';
         c.style.pointerEvents = '';
+        c.setAttribute('tabindex', '0');
+        c.setAttribute('aria-label', rezim === 'uceni' ? c.dataset.nazev : 'Město na mapě');
       });
       svg.querySelectorAll('.popisek').forEach(t => t.remove());
       ukazSkore();
@@ -225,7 +261,7 @@
       if (rezim === 'uceni') {
         svg.querySelectorAll('.popisek').forEach(t => t.remove());
         if (cil.classList.contains('mesto')) {
-          popisek(+cil.getAttribute('cx'), +cil.getAttribute('cy'), nazev);
+          popisek(+cil.dataset.cx, +cil.dataset.cy, nazev);
         } else {
           const [x, y] = stredKraje(nazev);
           popisek(x, y, nazev);
@@ -240,7 +276,8 @@
       if (nazev === hledane) {
         spravneCelkem++;
         cil.classList.add('spravne');
-        if (jeMesto) popisek(+cil.getAttribute('cx'), +cil.getAttribute('cy'), nazev);
+        cil.setAttribute('tabindex', '-1'); cil.setAttribute('aria-label', nazev);
+        if (jeMesto) popisek(+cil.dataset.cx, +cil.dataset.cy, nazev);
         else { const [x, y] = stredKraje(nazev); popisek(x, y, nazev); }
         zpravaEl.textContent = '✓ Správně!';
         zpravaEl.className = 'ok';

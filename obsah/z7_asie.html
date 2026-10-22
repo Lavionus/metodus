@@ -6,6 +6,8 @@
   <title>Asie</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -32,6 +34,44 @@
 <body>
   <h1>🌏 Asie</h1>
   <p class="podtitul">Pro 7. ročník: největší světadíl – regiony, příroda, obyvatelstvo a hospodářství.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Asie – světadíl rekordů a monzunů</summary>
+    <div class="obsah">
+      <p>Asie je <b>největší a nejlidnatější světadíl</b>. Od Evropy ji odděluje pohoří <b>Ural</b>. Je tak rozlehlá,
+        že se v ní střídá mrazivá Sibiř, pouště, nejvyšší hory světa i tropické ostrovy.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>🏔️ Rekordy přírody</h3><p><b>Himálaj</b> s Mount Everestem (nejvyšší hora),
+          <b>Bajkal</b> (nejhlubší jezero), <b>Mrtvé moře</b> (nejnižší místo souše).</p></article>
+        <article class="vyklad-karta"><h3>❄️ Sever</h3><p><b>Sibiř</b>: jehličnatá <b>tajga</b>, dál na severu tundra
+          a <b>permafrost</b> – věčně zmrzlá půda.</p></article>
+        <article class="vyklad-karta"><h3>🌧️ Monzun</h3><p>Vítr, který mění směr podle ročního období. <b>V létě</b> vane z oceánu na pevninu
+          a přináší vydatné deště, <b>v zimě</b> vane z pevniny a je sucho.</p></article>
+      </div>
+      <p>Proč monzun vzniká? Pevnina se v létě ohřeje rychleji než oceán, teplý vzduch nad ní stoupá a od moře se nasává
+        vlhký vzduch. Monzun řídí život v jižní a jihovýchodní Asii: deště zavlažují <b>rýži</b>, ale když přijdou pozdě nebo
+        jsou příliš silné, hrozí sucho nebo povodně. <b>Typická chyba:</b> plést si monzun s pasáty – pasáty vanou celý rok
+        stejným směrem.</p>
+      <p>Lidé: nejvíc obyvatel na světě mají <b>Indie a Čína</b>. Čína je „továrnou světa“, Japonsko je známé elektronikou a auty,
+        okolí <b>Perského zálivu</b> těžbou ropy. Japonsko leží na styku litosférických desek, proto je tam hodně zemětřesení.</p>
+      <aside class="zapamatuj">Letní monzun = vlhký vítr z oceánu a deště, zimní monzun = suchý vítr z pevniny.
+        Himálaj, Bajkal, Mrtvé moře – světové rekordy Asie.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: kdy v Indii prší</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Vesnice v Indii je na jaře vyprahlá, v létě všude stojí voda. Vysvětli proč.</p>
+      <ol class="kroky">
+        <li>Indie leží v jižní Asii, kde podnebí řídí <b>monzun</b>.</li>
+        <li>V zimě a na jaře vane vítr z vnitrozemí pevniny – je suchý, a proto neprší.</li>
+        <li>V létě se pevnina silně ohřeje, vzduch nad ní stoupá a z Indického oceánu se nasává vlhký vzduch.</li>
+        <li>Vlhký letní monzun přinese vydatné deště – pole se zaplaví a začíná pěstování rýže.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Za rozdíl může monzun: zimní vítr z pevniny je suchý, letní vítr z oceánu přináší deště.</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="staty" class="active">🗺️ Slepá mapa – státy</button>
@@ -73,21 +113,21 @@ const STATY = [
     "popis": "Čína",
     "lon": 105,
     "lat": 35,
-    "info": "nejlidnatější stát světa spolu s Indií, obrovská průmyslová výroba"
+    "info": "druhý nejlidnatější stát světa (od roku 2023 ho předstihla Indie), obrovská průmyslová výroba"
   },
   {
     "klic": "indie",
     "popis": "Indie",
     "lon": 78,
     "lat": 22,
-    "info": "jižní Asie, monzunové podnebí, pěstování rýže a čaje"
+    "info": "nejlidnatější stát světa (od roku 2023), monzunové podnebí, pěstování rýže a čaje"
   },
   {
     "klic": "japonsko",
     "popis": "Japonsko",
     "lon": 138,
     "lat": 36,
-    "info": "ostrovní stát, špičkový průmysl, časté zemětřesení"
+    "info": "ostrovní stát, špičkový průmysl, častá zemětřesení"
   },
   {
     "klic": "rusko",
@@ -321,7 +361,8 @@ const KVIZ_HOSPODARSTVI = [
       "Rusko a Čína",
       "Indonésie a Japonsko",
       "Pákistán a Írán"
-    ]
+    ],
+    "proc": "od roku 2023 má podle OSN nejvíc obyvatel Indie, těsně za ní je Čína"
   },
   {
     "q": "Odkud pochází velká část světové těžby ropy v Asii?",

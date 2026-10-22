@@ -6,6 +6,8 @@
   <title>Mýty, báje a pohádky</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -44,6 +46,41 @@
 <body>
   <h1>🐉 Mýty, báje a pohádky</h1>
   <p class="podtitul">Pro 6. ročník: literární žánry, řecké báje a postavy pověstí.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Pohádka, pověst, báje, nebo bajka?</summary>
+    <div class="obsah">
+      <p>Všechny čtyři žánry jsou staré příběhy, které se dlouho předávaly vyprávěním. Na první pohled si
+        jsou podobné, ale každý má jiný <b>účel</b> a jiné <b>znaky</b>. Žánr poznáš, když si v ukázce všimneš,
+        <b>kdo v ní jedná</b> a <b>kde a kdy se děj odehrává</b>.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>🏰 Pohádka</h3><p>Vymyšlený příběh s <b>kouzly</b>, neurčitým místem a časem: <i>Byl jednou jeden…, za devatero horami</i>. Dobro vítězí nad zlem.</p></article>
+        <article class="vyklad-karta"><h3>🏛️ Pověst</h3><p>Váže se ke <b>skutečnému místu nebo osobě</b> (Říp, Praha, rabi Löw) a tváří se, že se opravdu stala.</p></article>
+        <article class="vyklad-karta"><h3>⚡ Báje (mýtus)</h3><p>Vypráví o <b>bozích a hrdinech</b> a vysvětluje vznik světa a přírodních jevů – třeba odkud mají lidé oheň.</p></article>
+        <article class="vyklad-karta"><h3>🦊 Bajka</h3><p><b>Zvířata jednají jako lidé</b> (personifikace) a krátký příběh končí <b>ponaučením</b>.</p></article>
+      </div>
+      <p>Každý žánr odpovídá na jinou otázku. Pohádka: <i>Kdy?</i> – nikde a nikdy. Pověst: <i>Kde?</i> – tady u nás.
+        Báje: <i>Proč to tak je?</i> Bajka: <i>Co si z toho vezmu?</i></p>
+      <p>Pozor na časté záměny. Zvíře, které mluví, najdeš i v pohádce – bajka ale bývá krátká a míří
+        k ponaučení (<i>nevěř tomu, kdo ti lichotí</i>). A hrdina se může objevit v pověsti i v báji: rozhoduje,
+        jestli děj řídí bohové (báje), nebo je spojen se skutečným místem (pověst).</p>
+      <aside class="zapamatuj">Kouzla a „byl jednou jeden“ → pohádka · skutečné místo → pověst · bohové → báje · zvířata a ponaučení → bajka.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: jaký je to žánr?</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Urči žánr ukázky: <b>Na půdě pražské Staronové synagogy prý dodnes leží golem, kterého stvořil rabi Löw.</b></p>
+      <ol class="kroky">
+        <li>Kdo jedná? Rabi Löw – skutečná historická osoba, ne bůh ani mluvící zvíře.</li>
+        <li>Kde se to děje? Ve <b>Staronové synagoze v Praze</b> – skutečné místo, které můžeš navštívit.</li>
+        <li>Golem je sice nadpřirozená bytost, ale příběh nezačíná „byl jednou jeden“ a nemá neurčité místo jako pohádka.</li>
+        <li>Slovo <i>prý</i> ukazuje, že se vyprávění tváří jako skutečná událost. Je to <b>pověst</b>.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Pověst – váže se ke skutečnému místu a historické osobě.</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="zanr" class="active">📖 Jaký je to žánr?</button>
@@ -138,7 +175,7 @@ const UKAZKY = [
     z: 'bajka', proc: 'zvířata jednají jako lidé a příběh končí ponaučením' },
   { t: 'Když Prométheus přinesl lidem oheň, Zeus ho nechal přikovat ke skále.',
     z: 'baje', proc: 'vysvětluje původ ohně skrze příběh bohů' },
-  { t: 'V pražských sklepeních prý dodnes žije golem, kterého stvořil rabi Löw.',
+  { t: 'Na půdě pražské Staronové synagogy prý dodnes leží golem, kterého stvořil rabi Löw.',
     z: 'povest', proc: 'váže se ke skutečnému místu a historické osobě' },
   { t: 'Mravenec celé léto pilně sbíral zásoby, zatímco cvrček jen hrál a zpíval.',
     z: 'bajka', proc: 'zvířecí postavy nesou lidské vlastnosti a příběh učí' },
@@ -173,7 +210,7 @@ const BOHOVE = [
 /* U hrdinů se dnes nejvíc cení to, co po nich zbylo v jazyce – rčení a pojmy. */
 const HRDINOVE = [
   { n: 'Héraklés', e: '💪', img: 'img/cj/cj6-antika-herakles.webp', alt: 'Antický reliéf Hérakla se lví kůží a kyjem.', o: 'vykonal dvanáct nadlidských úkolů, například zabil lernskou hydru',
-    odkaz: 'odtud <b>„herkulovský výkon“</b> a <b>„augiášův chlév“</b> pro obrovský nepořádek' },
+    odkaz: 'odtud <b>„herkulovský výkon“</b> a <b>„Augiášův chlév“</b> pro obrovský nepořádek' },
   { n: 'Théseus', e: '🧵', o: 'zabil Mínotaura v labyrintu a našel cestu ven podle nitě',
     odkaz: 'odtud <b>„Ariadnina nit“</b> – vodítko, které pomůže se vymotat ze složité situace' },
   { n: 'Ikaros', e: '🪶', o: 'letěl na křídlech z vosku, ale přiblížil se ke slunci a zřítil se',
@@ -291,7 +328,7 @@ function bohove() {
   uloha = { rezim: 'bohove', u };
   const jine = Uloha.zamichej(BOHOVE.filter(x => x.n !== u.n)).slice(0, 3);
   p.innerHTML = `<div class="zadani">O kterého boha jde?</div>
-    <div class="karta">${u.img ? `<img class="antika-uloha" src="${u.img}" alt="${u.alt}">` : `<div class="obrazek">${u.e}</div>`}<div class="popis-p">${u.o}</div></div>`;
+    <div class="karta">${u.img ? `<img class="antika-uloha" src="${u.img}" alt="Antické zobrazení k určení.">` : `<div class="obrazek">${u.e}</div>`}<div class="popis-p">${u.o}</div></div>`;
   const odezva = odezvaEl();
   Uloha.vyber({
     kam: p, odezva,
@@ -319,7 +356,7 @@ function hrdinove() {
   uloha = { rezim: 'hrdinove', u };
   const jine = Uloha.zamichej(HRDINOVE.filter(x => x.n !== u.n)).slice(0, 3);
   p.innerHTML = `<div class="zadani">O kterém hrdinovi se to vypráví?</div>
-    <div class="karta">${u.img ? `<img class="antika-uloha" src="${u.img}" alt="${u.alt}">` : `<div class="obrazek">${u.e}</div>`}<div class="popis-p">${u.o}</div></div>`;
+    <div class="karta">${u.img ? `<img class="antika-uloha" src="${u.img}" alt="Antické zobrazení k určení.">` : `<div class="obrazek">${u.e}</div>`}<div class="popis-p">${u.o}</div></div>`;
   const odezva = odezvaEl();
   Uloha.vyber({
     kam: p, odezva,

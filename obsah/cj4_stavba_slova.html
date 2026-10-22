@@ -6,6 +6,8 @@
   <title>Stavba slova</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -34,6 +36,41 @@
 <body>
   <h1>🧩 Stavba slova</h1>
   <p class="podtitul">Pro 4.–5. ročník: kořen, předpona a přípona, slova příbuzná a předpona versus předložka.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Z čeho se skládá slovo</summary>
+    <div class="obsah">
+      <p>Slovo se dá rozložit na menší části. Každá část má svůj úkol. Když části znáš, lépe slovům rozumíš
+        a snáz v nich píšeš správná písmena.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>🌱 Kořen</h3><p>Nese <b>hlavní význam</b>. Je stejný ve všech slovech příbuzných: <i><b>les</b>, <b>les</b>ník, <b>les</b>ní</i>.</p></article>
+        <article class="vyklad-karta"><h3>📎 Předpona</h3><p>Stojí <b>před kořenem</b> a mění význam: <i><b>pře</b>jezd, <b>pod</b>chod, <b>vý</b>let</i>. Píše se se slovem dohromady.</p></article>
+        <article class="vyklad-karta"><h3>🔚 Přípona a koncovka</h3><p>Stojí <b>za kořenem</b>. Příponou vzniká nové slovo (<i>les → les<b>ník</b></i>), koncovkou jiný tvar téhož slova (<i>zim<b>a</b>, zim<b>y</b></i>).</p></article>
+      </div>
+      <p><b>Jak najdeš kořen?</b> Vymysli dvě nebo tři slova příbuzná. Část, která se v nich opakuje, je kořen.
+        Slova příbuzná mají společný kořen a jsou si blízká významem. <i>Rybník</i>, <i>ryba</i> a <i>rybář</i>
+        jsou příbuzná. <i>Rybník</i> a <i>stůl</i> ne.</p>
+      <p><b>Předpona, nebo předložka?</b> Předložka je samostatné slovo a píše se zvlášť: <i>pod postelí</i>.
+        Zkus mezi ni a další slovo vložit jiné slovo: <i>pod (naší) postelí</i> – to jde. U předpony to nejde:
+        <i>pod(naší)epsat</i> nedává smysl. Předpona je kousek slova, předložka je slovo.</p>
+      <aside class="zapamatuj">Předpona + kořen + přípona (+ koncovka). Kořen najdeš ve slovech příbuzných. Předložku můžeš oddělit vloženým slovem, předponu ne.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: rozlož slovo podchod</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Najdi kořen a předponu ve slově <b>podchod</b>.</p>
+      <ol class="kroky">
+        <li>Vymyslím slova příbuzná: <i>chodit, chodník, průchod</i>.</li>
+        <li>Ve všech se opakuje <b>chod</b>. To je kořen – nese význam „chodit“.</li>
+        <li>Před kořenem zbylo <b>pod</b>. Stojí před kořenem a je se slovem srostlé, je to tedy předpona.</li>
+        <li>Ověřím: <i>pod(velký)chod</i> nedává smysl, takže nejde o předložku.</li>
+        <li>Za kořenem už nic není – slovo nemá příponu.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ pod | chod – předpona pod, kořen chod.</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="koren" class="active">🌱 Najdi kořen</button>
@@ -88,7 +125,7 @@ let uloha = null, posledni = null, serie = 0, napovedaVidet = false;
 /* slovo rozdělené na části: p = předpona, k = kořen, s = přípona/koncovka */
 const SLOVA = [
   { p: '', k: 'les', s: 'ník', pribuzna: ['lesní', 'lesík', 'zalesnit'] },
-  { p: 'za', k: 'hrad', s: 'a', pribuzna: ['hradní', 'ohrada', 'hrádek'] },
+  { p: 'pře', k: 'jezd', s: '', pribuzna: ['jezdit', 'jezdec', 'příjezd'] },
   { p: 'roz', k: 'kvet', s: 'lý', pribuzna: ['květina', 'rozkvést', 'květ'] },
   { p: 'ná', k: 'moř', s: 'ní', pribuzna: ['moře', 'mořský', 'přímoří'] },
   { p: 'pod', k: 'chod', s: '', pribuzna: ['chodit', 'chodník', 'průchod'] },
@@ -97,11 +134,11 @@ const SLOVA = [
   { p: '', k: 'zahrad', s: 'ník', pribuzna: ['zahrada', 'zahradní', 'zahrádka'] },
   { p: 'pře', k: 'stav', s: 'ba', pribuzna: ['stavět', 'stavba', 'stavitel'] },
   { p: '', k: 'ryb', s: 'ník', pribuzna: ['ryba', 'rybář', 'rybí'] },
-  { p: 'ú', k: 'kol', s: '', pribuzna: ['úkolovat', 'zaúkolovat', 'úkolník'] },
+  { p: 'po', k: 'tok', s: '', pribuzna: ['přítok', 'odtok', 'tok'] },
   { p: 'od', k: 'chod', s: '', pribuzna: ['chodit', 'příchod', 'chodec'] },
   { p: '', k: 'kniž', s: 'ní', pribuzna: ['kniha', 'knihovna', 'knížka'] },
   { p: 'na', k: 'kres', s: 'lit', pribuzna: ['kreslit', 'kresba', 'kreslíř'] },
-  { p: '', k: 'zim', s: 'ní', pribuzna: ['zima', 'zimní', 'přezimovat'] },
+  { p: '', k: 'zim', s: 'ní', pribuzna: ['zima', 'zimovat', 'přezimovat'] },
 ];
 
 const NEPRIBUZNA = ['stůl', 'mléko', 'auto', 'kolo', 'okno', 'míč', 'pero', 'talíř', 'kámen', 'vítr'];

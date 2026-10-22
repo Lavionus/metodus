@@ -11,11 +11,11 @@ const Vyjm = (function () {
   /* Řady podle Pravidel českého pravopisu; v závorce je běžná dnešní podoba. */
   const RADY = {
     B: ['být', 'bydlit (bydlet)', 'obyvatel', 'byt', 'příbytek', 'nábytek', 'dobytek',
-        'obyčej', 'bystrý', 'bylina', 'kobyla', 'býk', 'babyka'],
+        'obyčej', 'bystrý', 'bylina', 'kobyla', 'býk', 'Přibyslav', 'babyka'],
     L: ['slyšet', 'mlýn', 'blýskat se', 'polykat', 'plynout', 'plýtvat', 'vzlykat',
         'lysý', 'lýtko', 'lýko', 'lyže', 'pelyněk', 'plyš'],
     M: ['my', 'mýt', 'myslit (myslet)', 'mýlit se', 'hmyz', 'myš', 'hlemýžď', 'mýtit',
-        'zamykat', 'smýkat', 'dmýchat', 'chmýří', 'nachomýtnout se', 'mýto'],
+        'zamykat', 'smýkat', 'dmýchat', 'chmýří', 'nachomýtnout se', 'Litomyšl', 'mýto'],
     P: ['pýcha', 'pytel', 'pysk', 'netopýr', 'slepýš', 'pyl', 'kopyto', 'klopýtat',
         'třpytit se', 'zpytovat', 'pykat', 'pýr', 'pýřit se', 'čepýřit se'],
     S: ['syn', 'sytý', 'sýr', 'syrový', 'sychravý', 'usychat', 'sýkora', 'sýček',

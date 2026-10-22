@@ -6,6 +6,8 @@
   <title>Výrazy a jejich úpravy</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -61,6 +63,20 @@
 <body>
   <h1>🧮 Výrazy a jejich úpravy</h1>
   <p class="podtitul">Pro 8. ročník: roznásobování, vytýkání, vzorce a dosazování za proměnnou.</p>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: vytkni před závorku</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Vytkni před závorku co největšího činitele: 12x² + 18x.</p>
+      <ol class="kroky">
+        <li>Hledám největšího společného dělitele čísel 12 a 18. Dělitelé 12: 1, 2, 3, 4, 6, 12; dělitelé 18: 1, 2, 3, 6, 9, 18. Největší společný je <b>6</b>.</li>
+        <li>Proměnnou x obsahují oba členy (x² = x · x), takže vytknu i <b>x</b>. Před závorku tedy půjde <b>6x</b>.</li>
+        <li>Každý člen vydělím 6x: 12x² : 6x = <b>2x</b>, 18x : 6x = <b>3</b>.</li>
+        <li>Zapíšu výsledek a ověřím roznásobením: 6x · (2x + 3) = 12x² + 18x. Sedí to.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ 12x² + 18x = 6x · (2x + 3)</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="plocha" data-faze="vyuka" class="active">🟦 Roznásobení plochou</button>
@@ -249,7 +265,9 @@ const nsd = (a, b) => b ? nsd(b, Math.abs(a % b)) : Math.abs(a);
 function vytkni() {
   const p = $('plocha');
   const k = Uloha.nahodneCislo(2, 8);
-  const m = Uloha.nahodneCislo(1, 9), n = Uloha.nahodneCislo(1, 9);
+  // m a n nesoudělná – jinak by k nebyl největší společný činitel a správná odpověď by mezi možnostmi chyběla
+  let m, n;
+  do { m = Uloha.nahodneCislo(1, 9); n = Uloha.nahodneCislo(1, 9); } while (nsd(m, n) !== 1);
   const sX = Math.random() < 0.5;                    // vytýkáme i proměnnou
   const zadani = sX
     ? vyraz([[k * m, 'x', 2], [k * n, 'x', 1]])

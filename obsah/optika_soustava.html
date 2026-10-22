@@ -37,7 +37,7 @@ canvas{display:block;width:100%;height:100%;touch-action:none;cursor:crosshair}
 .info .zavri:hover{background:none;color:var(--accent)}
 .napoveda{position:absolute;left:12px;bottom:10px;font-size:.74rem;color:var(--text-faint);pointer-events:none;max-width:calc(100% - 24px)}
 .skryto{display:none !important}
-@media(max-width:760px){.info{display:none}.panel{gap:6px;padding:7px 9px}input[type=range]{width:78px}}
+@media(max-width:760px){.info{left:12px;width:auto;max-height:calc(100% - 24px);overflow-y:auto;z-index:5}.panel{gap:6px;padding:7px 9px}input[type=range]{width:78px}}
 
 /* Optická dílna: velká pracovní plocha a ovládání dostupné i na telefonu. */
 body{height:auto;min-height:100vh;overflow:auto}
@@ -179,7 +179,13 @@ body[data-rezim=stavba] #pruvodce{display:none}
     <h2 id="atlasPristroju">📷 Optické přístroje ve skutečnosti</h2>
     <p>Takhle vypadají skutečné přístroje, jejichž chod světla si můžeš projít v průvodci nebo postavit na lavici.</p>
     <div class="foto-mrizka">
-@@ATLAS@@
+      <figure class="foto-karta"><img class="cele" src="img/f/optika-soustava-lupa.webp" alt="Lupa – spojná čočka v kovové obrubě s černou rukojetí." width="1152" height="1826" loading="lazy"><figcaption><strong>Lupa</strong>Jediná spojná čočka. Předmět leží blíž než ohnisko, oko vidí zvětšený vzpřímený obraz.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/f/optika-soustava-diaprojektor.webp" alt="Starý diaprojektor se zasunutým rámečkem na diapozitiv, objektivem vpředu a vyjmutou žárovkou." width="1152" height="917" loading="lazy"><figcaption><strong>Diaprojektor (promítačka)</strong>Žárovka prosvítí diapozitiv a objektiv vytvoří na plátně velký převrácený obraz – proto se diák zasouvá vzhůru nohama.</figcaption></figure>
+      <figure class="foto-karta"><img class="cele" src="img/f/optika-soustava-refraktor.webp" alt="Historický čočkový dalekohled – refraktor s dlouhým tubusem na dřevěném stativu v knihovně." width="1152" height="1536" loading="lazy"><figcaption><strong>Keplerův dalekohled (refraktor)</strong>Dvě spojné čočky: objektiv vytvoří obraz vzdáleného předmětu a okulár ho zvětší jako lupa. Obraz je převrácený.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/f/optika-soustava-kukatko.webp" alt="Divadelní kukátko se dvěma krátkými tubusy a kolečkem na zaostření." width="1152" height="820" loading="lazy"><figcaption><strong>Divadelní kukátko</strong>Galileův dalekohled: spojný objektiv a rozptylný okulár. Je krátký a obraz je vzpřímený, zvětšuje ale málo.</figcaption></figure>
+      <figure class="foto-karta"><img class="cele" src="img/f/optika-soustava-cassegrain.webp" alt="Velký bílý zrcadlový dalekohled Schmidt-Cassegrain na montáži před hvězdárnou." width="1152" height="1727" loading="lazy"><figcaption><strong>Cassegrainův dalekohled</strong>Velké duté zrcadlo sbírá světlo, malé zrcátko ho vrací zpět otvorem k okuláru. Proto je tubus krátký.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/f/optika-soustava-triedr.webp" alt="Černý triedr 8×30 s lomenými tubusy, ve kterých jsou hranoly." width="1152" height="856" loading="lazy"><figcaption><strong>Triedr (pozemní dalekohled)</strong>Hranoly uvnitř obraz převrátí zpět, takže vidíme vzpřímeně. Lomená dráha světla zkracuje tubusy.</figcaption></figure>
+      <figure class="foto-karta"><img class="cele" src="img/f/optika-soustava-mikroskop.webp" alt="Školní mikroskop s okulárem nahoře, otočnou hlavicí objektivů, stolkem a zrcátkem dole." width="500" height="904" loading="lazy"><figcaption><strong>Školní mikroskop</strong>Objektiv blízko vzorku vytvoří zvětšený obraz a okulár ho zvětší ještě jednou. Zrcátko dole posvítí na vzorek.</figcaption></figure>
     </div>
   </section>
 <script>

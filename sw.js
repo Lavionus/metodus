@@ -6,13 +6,12 @@
 /* Při větší aktualizaci webu zvyš číslo verze — stará cache se u návštěvníků
    smaže a vše se stáhne čerstvé (jinak SWR ukáže novou verzi až na druhé načtení). */
 const PREFIX = 'metodus-';
-const CACHE = PREFIX + 'v161';
+const CACHE = PREFIX + 'v167';
 const JADRO = [
   './',
   './index.html',
   './apps.js',
   './propojeni.css',
-  './propojeni.js',
   './prubeh.js',
   './common.css',
   './sepia.css',      // motivy importované z common.css
@@ -38,6 +37,8 @@ const JADRO = [
   './vyuka.css',
   './kostra.js',      // společná kostra každé lekce (hlavička, fáze, rodina)
   './kostra.css',
+  './vyklad.js',     // společný výklad a vedený příklad
+  './vyklad.css',
   './nazor.js',       // knihovna názorných prvků (osa, proužek, věta, časová osa)
   './nazor.css',
   './badani.js',      // úkoly k modelu u simulací (předpověz → vyzkoušej → vysvětli)
@@ -60,6 +61,23 @@ const JADRO = [
   './favicon.ico',
   './logo.svg',        // značka v hlavičce (CSS maska)
   './obsah/prehled.html',
+  './obsah/predmety-obrazky.js',   // dlaždice předmětů na úvodu (i offline)
+  './obsah/predmety-obrazky.css',
+  './obsah/img/00/prehled-atom.webp',
+  './obsah/img/00/prehled-banka.webp',
+  './obsah/img/00/prehled-domek-strom.webp',
+  './obsah/img/00/prehled-globus.webp',
+  './obsah/img/00/prehled-housle.webp',
+  './obsah/img/00/prehled-hrad.webp',
+  './obsah/img/00/prehled-karticky.webp',
+  './obsah/img/00/prehled-kniha-pero.webp',
+  './obsah/img/00/prehled-list-bunka.webp',
+  './obsah/img/00/prehled-lupa-mapa.webp',
+  './obsah/img/00/prehled-notebook.webp',
+  './obsah/img/00/prehled-slovniky.webp',
+  './obsah/img/00/prehled-teleso-pravitko.webp',
+  './obsah/img/00/prehled-vahy.webp',
+  './obsah/predmet.html',
   './obsah/osnova.html',
   './obsah/predstaveni.html',
 ];

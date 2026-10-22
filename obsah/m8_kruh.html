@@ -6,6 +6,8 @@
   <title>Kruh a kružnice</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -26,6 +28,41 @@
 <body>
   <h1>⭕ Kruh a kružnice</h1>
   <p class="podtitul">Pro 8. ročník: obvod a obsah kruhu, části kruhu a poloha přímky ke kružnici.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Kružnice, kruh a číslo π</summary>
+    <div class="obsah">
+      <p><b>Kružnice</b> je čára – všechny body, které mají od středu S stejnou vzdálenost r (poloměr).
+        <b>Kruh</b> je celá plocha ohraničená kružnicí. Proto má kružnice jen délku (obvod), kdežto kruh má obsah.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Poloměr a průměr</h3><p>Průměr je tětiva procházející středem:
+          <b>d = 2r</b>, tedy r = d : 2. Tětiva spojuje dva body kružnice, oblouk je část kružnice mezi nimi.</p></article>
+        <article class="vyklad-karta"><h3>Obvod</h3><p>U každého kruhu je obvod asi 3,14krát delší než průměr.
+          Tomuto číslu říkáme <b>π</b> (pí). Proto <b>o = πd = 2πr</b>.</p></article>
+        <article class="vyklad-karta"><h3>Obsah</h3><p><b>S = πr²</b>. Rozstříháš-li kruh na úzké výseče a složíš je
+          střídavě vedle sebe, vznikne skoro obdélník se stranami πr (půlka obvodu) a r.</p></article>
+        <article class="vyklad-karta"><h3>Přímka a kružnice</h3><p>Porovnej vzdálenost přímky od středu s r:
+          menší → <b>sečna</b> (dva body), rovná → <b>tečna</b> (jeden bod), větší → <b>vnější přímka</b>.</p></article>
+      </div>
+      <p>Typická chyba: dosadit do S = πr² průměr místo poloměru. Výsledek pak vyjde čtyřikrát větší. Když máš zadaný
+        průměr, nejdřív ho vyděl dvěma.</p>
+      <aside class="zapamatuj">d = 2r, o = 2πr, S = πr², π ≈ 3,14. Obvod v cm, obsah v cm².</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: obsah kruhu ze zadaného průměru</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Kruh má průměr d = 10 cm. Jaký má obsah? (π = 3,14)</p>
+      <ol class="kroky">
+        <li>Ve vzorci S = πr² potřebuji poloměr, ne průměr.</li>
+        <li>Spočítám poloměr: r = d : 2 = 10 : 2 = 5 cm.</li>
+        <li>Umocním poloměr: r² = 5 · 5 = 25.</li>
+        <li>Vynásobím číslem π: S = 3,14 · 25 = 78,5. Jde o plochu, jednotka je cm².</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ S = 78,5 cm²</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="vypocet" class="active">🧮 Obvod a obsah</button>
@@ -70,10 +107,12 @@ function vypocet() {
       : `průměr <b>d = ${2 * r} cm</b>`}. Jaký má ${hledameObsah ? 'obsah' : 'obvod'}? (π = 3,14)</div>
     <div class="karta"><svg class="kresba" viewBox="0 0 220 200">
       <circle class="kruznice" cx="110" cy="100" r="70"/>
-      <line class="cara" x1="110" y1="100" x2="180" y2="100"/>
+      ${zeStredu
+        ? `<line class="cara" x1="110" y1="100" x2="180" y2="100"/>
+           <text class="popis" x="145" y="92">r = ${r}</text>`
+        : `<line class="cara" x1="40" y1="100" x2="180" y2="100"/>
+           <text class="popis" x="110" y="92">d = ${2 * r}</text>`}
       <circle class="stred" cx="110" cy="100" r="4"/>
-      <text class="popis" x="145" y="92">r = ${r}</text>
-      <text class="popis" x="110" y="188">${zeStredu ? '' : 'd = ' + 2 * r}</text>
     </svg><div class="vzorec">o = 2πr &nbsp;·&nbsp; S = πr²</div></div>`;
   const odezva = odezvaEl();
   Uloha.vyber({
@@ -81,9 +120,9 @@ function vypocet() {
     moznosti: Uloha.zamichej([fmt(vysledek), ...[...jine].slice(0, 3)])
       .map(t => ({ klic: t, popis: t + ' ' + jednotka })),
     spravnyKlic: fmt(vysledek),
-    zpravaOk: hledameObsah
-      ? `✅ S = π · ${r}² = ${fmt(obsah)} cm²`
-      : `✅ o = 2 · π · ${r} = ${fmt(obvod)} cm`,
+    zpravaOk: (zeStredu ? '✅ ' : `✅ r = d : 2 = ${2 * r} : 2 = ${r} cm; `) + (hledameObsah
+      ? `S = π · ${r}² = ${fmt(obsah)} cm²`
+      : `o = 2 · π · ${r} = ${fmt(obvod)} cm`),
     zpravaChyba: 'Nezaměň obvod a obsah: obvod je délka čáry, obsah je plocha.',
     poSpravne: skore.vyhodnot,
     dalsi: novaUloha,
@@ -93,7 +132,8 @@ function vypocet() {
 
 const CASTI = [
   { klic: 'tetiva', nazev: 'tětiva', popis: 'úsečka spojující dva body kružnice',
-    kresba: '<line class="cara" x1="55" y1="140" x2="170" y2="70"/>' },
+    // tětiva ve vzdálenosti 40 od středu – dřív vedla skoro středem a vypadala jako průměr
+    kresba: '<line class="cara" x1="49.4" y1="135" x2="97.8" y2="31.1"/>' },
   { klic: 'polomer', nazev: 'poloměr', popis: 'úsečka od středu k bodu kružnice',
     kresba: '<line class="cara" x1="110" y1="100" x2="180" y2="100"/>' },
   { klic: 'prumer', nazev: 'průměr', popis: 'tětiva procházející středem, je dvakrát delší než poloměr',
@@ -101,7 +141,7 @@ const CASTI = [
   { klic: 'vysec', nazev: 'kruhová výseč', popis: 'část kruhu ohraničená dvěma poloměry a obloukem',
     kresba: '<path class="vysec" d="M110 100 L180 100 A70 70 0 0 0 145 39 Z"/>' },
   { klic: 'usec', nazev: 'kruhová úseč', popis: 'část kruhu oddělená tětivou',
-    kresba: '<path class="vysec" d="M55 140 A70 70 0 0 0 170 70 Z"/>' },
+    kresba: '<path class="vysec" d="M49.4 135 A70 70 0 0 1 97.8 31.1 Z"/>' },
   { klic: 'oblouk', nazev: 'oblouk', popis: 'část samotné kružnice mezi dvěma body',
     kresba: '<path class="cara" fill="none" d="M180 100 A70 70 0 0 0 110 30"/>' },
 ];

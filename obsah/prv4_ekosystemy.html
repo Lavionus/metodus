@@ -6,6 +6,8 @@
   <title>Ekosystémy – les, louka, voda</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -25,6 +27,42 @@
 <body>
   <h1>🌳 Ekosystémy – les, louka, voda</h1>
   <p class="podtitul">Pro 4.–5. ročník: kdo kde žije, potravní řetězce a role organismů.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Společenstvo a potravní řetězec</summary>
+    <div class="obsah">
+      <p><b>Ekosystém</b> je místo v přírodě i se vším, co v něm žije – třeba les, louka, rybník nebo pole.
+        Organismy v něm na sobě navzájem závisí: jeden je potravou pro druhého.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Producenti</h3><p><b>Rostliny</b> si potravu vyrábějí samy ze slunečního světla,
+          vody a vzduchu. Smrk, jetel, rákos, pšenice.</p></article>
+        <article class="vyklad-karta"><h3>Konzumenti</h3><p>Živí se <b>jinými organismy</b> – rostlinami nebo živočichy.
+          Zajíc jí trávu, liška loví zajíce.</p></article>
+        <article class="vyklad-karta"><h3>Rozkladači</h3><p><b>Houby, bakterie, žížaly</b> rozkládají spadané listí
+          a odumřelé zbytky zpátky na živiny pro rostliny.</p></article>
+      </div>
+      <p><b>Potravní řetězec</b> ukazuje, kdo koho jí. Vždy začíná <b>rostlinou</b>, protože jen ona si umí potravu vyrobit.
+        Šipka znamená „je potravou pro“: tráva → kobylka → žába → volavka.</p>
+      <p>Les má navíc <b>patra</b> – zdola nahoru: mechové, bylinné, keřové a stromové. V každém patře žijí jiní tvorové.</p>
+      <p>Typická chyba: začít řetězec dravcem. Liška nebo sova patří na konec, protože loví ostatní zvířata v řetězci.</p>
+      <aside class="zapamatuj">Producent (rostlina) → konzumenti → … Rozkladači vracejí živiny do půdy.
+        Lesní patra zdola: mechové, bylinné, keřové, stromové.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: sestav potravní řetězec</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Seřaď do potravního řetězce: liška · obilí · křeček.</p>
+      <ol class="kroky">
+        <li>Hledám rostlinu, ta je vždy na začátku. Je to <b>obilí</b> – producent.</li>
+        <li>Kdo jí obilí? <b>Křeček</b> – sbírá zrní na poli. Dám ho za obilí.</li>
+        <li>Kdo loví křečka? <b>Liška</b>. Ta přijde na konec.</li>
+        <li>Zkontroluji šipky: obilí je potravou pro křečka, křeček je potravou pro lišku. Sedí to.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ obilí → křeček → liška</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="kamPatri" class="active">🏞️ Kam patří?</button>
@@ -62,18 +100,18 @@ const ORGANISMY = [
   { n: 'srnec', e: '🦌', p: 'les', role: 'konzument' },
   { n: 'veverka', e: '🐿️', p: 'les', role: 'konzument' },
   { n: 'smrk', e: '🌲', p: 'les', role: 'producent' },
-  { n: 'muchomůrka', e: '🍄', p: 'les', role: 'rozkladac' },
+  { n: 'plíseň na spadaném listí', e: '🍂', p: 'les', role: 'rozkladac' },
   { n: 'datel', e: '🪶', p: 'les', role: 'konzument' },
   { n: 'borůvka', e: '🫐', p: 'les', role: 'producent' },
   { n: 'kobylka', e: '🦗', p: 'louka', role: 'konzument' },
   { n: 'jetel', e: '🍀', p: 'louka', role: 'producent' },
   { n: 'motýl', e: '🦋', p: 'louka', role: 'konzument' },
-  { n: 'krtek', e: '🐀', p: 'louka', role: 'konzument' },
+  { n: 'krtek', e: '🕳️', p: 'louka', role: 'konzument' },
   { n: 'sedmikráska', e: '🌼', p: 'louka', role: 'producent' },
   { n: 'kapr', e: '🐟', p: 'voda', role: 'konzument' },
   { n: 'rákos', e: '🌾', p: 'voda', role: 'producent' },
   { n: 'žába', e: '🐸', p: 'voda', role: 'konzument' },
-  { n: 'volavka', e: '🦩', p: 'voda', role: 'konzument' },
+  { n: 'volavka', e: '🐦', p: 'voda', role: 'konzument' },
   { n: 'leknín', e: '🪷', p: 'voda', role: 'producent' },
   { n: 'pšenice', e: '🌾', p: 'pole', role: 'producent' },
   { n: 'zajíc', e: '🐇', p: 'pole', role: 'konzument' },
@@ -82,18 +120,18 @@ const ORGANISMY = [
 ];
 
 const ROLE = {
-  producent: { nazev: 'producent (rostlina)', ikona: '🌱' },
-  konzument: { nazev: 'konzument (živočich)', ikona: '🐾' },
-  rozkladac: { nazev: 'rozkladač', ikona: '🍄' },
+  producent: { nazev: 'producent (vyrábí si potravu)', ikona: '🌱' },
+  konzument: { nazev: 'konzument (živí se jinými organismy)', ikona: '🐾' },
+  rozkladac: { nazev: 'rozkladač (rozkládá odumřelé zbytky)', ikona: '🍄' },
 };
 
 const RETEZCE = [
-  ['🌾 tráva', '🦗 kobylka', '🐸 žába', '🦩 volavka'],
+  ['🌾 tráva', '🦗 kobylka', '🐸 žába', '🐦 volavka'],
   ['🌲 semínko smrku', '🐿️ veverka', '🦉 sova'],
   ['🌼 květ', '🦋 motýl', '🕷️ pavouk', '🐦 ptáček'],
   ['🌾 obilí', '🐹 křeček', '🦊 liška'],
-  ['🪷 řasy', '🐟 malá ryba', '🐠 dravá ryba', '🦦 vydra'],
-  ['🍃 listí', '🪱 žížala', '🦔 ježek', '🦅 dravec'],
+  ['🌿 řasy', '🐟 malá ryba', '🐠 dravá ryba', '🦦 vydra'],
+  ['🍃 listí', '🪱 žížala', '🦔 ježek', '🦉 výr'],
 ];
 
 const PATRA = [
@@ -117,7 +155,7 @@ function kamPatri() {
     moznosti: Uloha.zamichej(Object.entries(PROSTREDI))
       .map(([klic, x]) => ({ klic, ikona: x.ikona, popis: x.nazev })),
     spravnyKlic: o.p,
-    zpravaOk: `✅ ${o.n} patří do prostředí, kterým je ${PROSTREDI[o.p].nazev}.`,
+    zpravaOk: `✅ ${o.n[0].toUpperCase() + o.n.slice(1)} – prostředí: ${PROSTREDI[o.p].nazev}.`,
     zpravaChyba: 'Zkus jiné prostředí – kde má dost potravy a úkrytu?',
     poSpravne: skore.vyhodnot,
     dalsi: novaUloha,
@@ -191,7 +229,7 @@ function role() {
     // pořadí schválně nemícháme – role mají vždy stejné místo, ať se dají zapamatovat
     moznosti: Object.entries(ROLE).map(([klic, x]) => ({ klic, ikona: x.ikona, popis: x.nazev })),
     spravnyKlic: o.role,
-    zpravaOk: `✅ ${o.n} je ${ROLE[o.role].nazev}.`,
+    zpravaOk: `✅ ${o.n[0].toUpperCase() + o.n.slice(1)} je ${ROLE[o.role].nazev}.`,
     zpravaChyba: 'Vyrábí si potravu sám ze slunce, žere jiné organismy, nebo rozkládá zbytky?',
     poSpravne: skore.vyhodnot,
     dalsi: novaUloha,

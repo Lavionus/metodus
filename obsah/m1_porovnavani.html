@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Porovnávání a řady čísel</title>
   <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -114,6 +116,42 @@
 <body>
   <h1>⚖️ Porovnávání a řady čísel</h1>
   <p class="podtitul">Pro 1.–2. ročník: co je větší, co menší, jak čísla pokračují a kde leží na číselné ose.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Které číslo je větší</summary>
+    <div class="obsah">
+      <p>Čísla počítáme pořád dál: 0, 1, 2, 3… Každé další číslo je <b>o jedna větší</b>.
+        Proto platí: čím dál v řadě číslo je, tím je větší.</p>
+      <p>Na <b>číselné ose</b> jsou čísla seřazená zleva doprava. Vlevo jsou malá čísla, vpravo velká.
+        Číslo, které leží víc vpravo, je větší.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Znaménka</h3><p><b>5 &lt; 8</b> čteme „5 je menší než 8“.
+          <b>8 &gt; 5</b> čteme „8 je větší než 5“. <b>4 = 4</b> čteme „4 se rovná 4“.</p></article>
+        <article class="vyklad-karta"><h3>Hladová pusa</h3><p>Znaménko je otevřené jako pusa.
+          Pusa se vždy otvírá k <b>většímu</b> číslu, protože chce sníst víc.</p></article>
+        <article class="vyklad-karta"><h3>Čísla do 100</h3><p>Nejdřív porovnej <b>desítky</b>. 52 &gt; 38, protože 5 desítek je víc než 3.
+          Když jsou desítky stejné, rozhodnou <b>jednotky</b>: 47 &lt; 49.</p></article>
+        <article class="vyklad-karta"><h3>Řada čísel</h3><p>Zjisti, o kolik se sousední čísla liší.
+          Řada 2, 4, 6, 8 jde nahoru po 2. Řada 30, 25, 20 jde dolů po 5.</p></article>
+      </div>
+      <p>Pozor na častou chybu: 9 a 21. Číslice 9 je velká, ale <b>21 je větší</b> – má dvě desítky, 9 nemá žádnou.</p>
+      <aside class="zapamatuj">Vpravo na ose je větší číslo. Pusa znaménka se otvírá k většímu číslu.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: porovnej 46 a 64</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Doplň znaménko: 46 ? 64</p>
+      <ol class="kroky">
+        <li>Obě čísla mají dvě číslice. Podívám se nejdřív na <b>desítky</b>.</li>
+        <li>46 má <b>4 desítky</b>, 64 má <b>6 desítek</b>.</li>
+        <li>4 desítky jsou méně než 6 desítek, takže 46 je <b>menší</b> než 64. Na ose leží 46 víc vlevo.</li>
+        <li>Pusa se otevře k většímu číslu 64: napíšu <b>46 &lt; 64</b>.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ 46 &lt; 64 – „46 je menší než 64“.</p>
+    </div>
+  </details>
 
   <div class="lista" id="rezimy">
     <button data-rezim="porovnani" class="active">⚖️ Porovnej</button>
@@ -388,7 +426,9 @@ function osaUkaz() {
 
 /* ---- Ovládání ------------------------------------------------------------- */
 const REZIMY = { porovnani, rada, osaCti, osaUkaz };
-function novaUloha() { REZIMY[rezim](); }
+// stránka staví otázky bez Uloha.vyber(), takže naplánovaný posun ruší sama –
+// jinak by po přeskočení nebo přepnutí režimu doběhl a přeskočil i novou otázku
+function novaUloha() { Uloha.zrusPosun(); REZIMY[rezim](); }
 
 document.querySelectorAll('#rezimy button').forEach(b => b.addEventListener('click', () => {
   document.querySelectorAll('#rezimy button').forEach(x => x.classList.remove('active'));

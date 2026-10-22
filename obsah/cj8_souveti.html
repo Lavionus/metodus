@@ -6,6 +6,8 @@
   <title>Souvětí souřadné a podřadné</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -48,6 +50,40 @@
   <h1>🔗 Souvětí souřadné a podřadné</h1>
   <p class="podtitul">Pro 8. ročník: stavba souvětí, druhy vedlejších vět a psaní čárek.</p>
 
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Jak rozebrat souvětí</summary>
+    <div class="obsah">
+      <p>Souvětí je spojení dvou nebo více vět. Kolik je v něm <b>sloves v určitém tvaru</b>, tolik má vět.
+        Rozhodující je, jaký je mezi větami vztah: buď jsou si <b>rovnocenné</b>, nebo jedna <b>závisí</b> na druhé.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>↔️ Souřadné</h3><p>Dvě věty <b>hlavní</b>, každá by obstála sama. Spojuje je <b>poměr</b>: slučovací (a), stupňovací (nejen – ale i), odporovací (ale), vylučovací (nebo), příčinný (neboť), důsledkový (proto).</p></article>
+        <article class="vyklad-karta"><h3>↘️ Podřadné</h3><p>Věta <b>vedlejší závisí</b> na hlavní a nahrazuje v ní větný člen. Uvozuje ji spojka nebo vztažné slovo: <i>že, aby, když, protože, který, kdo</i>.</p></article>
+        <article class="vyklad-karta"><h3>❓ Druh vedlejší věty</h3><p>Zjistíš ho <b>otázkou z věty hlavní</b>, stejně jako u větných členů: <i>Co věděl?</i> → předmětná, <i>Kdy vyběhli?</i> → časová, <i>Která kniha?</i> → přívlastková.</p></article>
+      </div>
+      <p>Proč nestačí spojka? Stejná spojka může uvozovat různé druhy vět – rozhodne až otázka. Spojovací
+        výraz ti ale prozradí aspoň směr: <i>protože</i> uvozuje větu vedlejší (souvětí podřadné), kdežto <i>neboť</i>
+        a <i>totiž</i> spojují dvě věty hlavní v poměru příčinném.</p>
+      <p><b>Čárka</b> odděluje věty v souvětí. Patří před spojku nebo vztažné slovo (<i>Věděl, že…</i>), a když
+        vedlejší věta stojí na začátku, za její konec (<i>Když zazvonilo, žáci vyběhli.</i>). Před <i>a</i>
+        v poměru slučovacím se čárka nepíše.</p>
+      <aside class="zapamatuj">Spočítej slovesa v určitém tvaru → najdi hranice vět → zeptej se: obstojí obě samy (souřadné), nebo se na jednu ptám z druhé (podřadné)? Otázka z hlavní věty určí druh vedlejší.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: rozbor souvětí</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Urči druh souvětí a doplň čárku: <b>Učil se aby uspěl u zkoušky.</b></p>
+      <ol class="kroky">
+        <li>Hledám slovesa v určitém tvaru: <b>učil se</b> a <b>uspěl</b> – jsou to dvě věty.</li>
+        <li>Hranice je u spojky <b>aby</b>. Věta <i>aby uspěl u zkoušky</i> sama nedává smysl, závisí na <i>Učil se</i> – je to souvětí <b>podřadné</b>.</li>
+        <li>Zeptám se z věty hlavní: <i>Za jakým účelem se učil?</i> – aby uspěl. Vedlejší věta je <b>příslovečná účelová</b>.</li>
+        <li>Čárku napíšu na hranici vět, tedy před spojku <i>aby</i>.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Učil se, aby uspěl u zkoušky. – souvětí podřadné, vedlejší věta příslovečná účelová.</p>
+    </div>
+  </details>
+
   <div class="rezimy" id="rezimy">
     <button data-rezim="druh" class="active">⚖️ Souřadné, či podřadné</button>
     <button data-rezim="vedlejsi">🏷️ Druh vedlejší věty</button>
@@ -68,10 +104,10 @@
     <div class="skupina" data-h="sourad">
       <h2>↔️ Souvětí souřadné</h2>
       <div class="znaky">
-        <span class="znak" data-pomer="slucovaci">a, i, ani, nebo</span>
+        <span class="znak" data-pomer="slucovaci">a, i, ani, také</span>
         <span class="znak" data-pomer="stupnovaci">nejen – ale i, dokonce</span>
         <span class="znak" data-pomer="odporovaci">ale, avšak, však, nýbrž</span>
-        <span class="znak" data-pomer="vylucovaci">buď – anebo</span>
+        <span class="znak" data-pomer="vylucovaci">nebo, buď – (a)nebo</span>
         <span class="znak" data-pomer="pricinny">neboť, totiž, vždyť</span>
         <span class="znak" data-pomer="dusledkovy">proto, tedy, tudíž</span>
       </div>
@@ -132,10 +168,10 @@ const VV = {
   pripustkova: 'příslovečná přípustková (i přes co?)',
 };
 const POMERY = {
-  slucovaci: 'slučovací (a, i, ani, nebo)',
+  slucovaci: 'slučovací (a, i, ani, také)',
   stupnovaci: 'stupňovací (nejen – ale i, dokonce)',
   odporovaci: 'odporovací (ale, avšak, však, nýbrž)',
-  vylucovaci: 'vylučovací (nebo, buď – anebo)',
+  vylucovaci: 'vylučovací (nebo, buď – (a)nebo)',
   pricinny: 'příčinný (neboť, totiž, vždyť)',
   dusledkovy: 'důsledkový (proto, tedy, tudíž)',
 };

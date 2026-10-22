@@ -187,17 +187,14 @@
       line-height: 1.6;
     }
   </style>
-<link rel="stylesheet" href="../propojeni.css">
-<script src="../propojeni.js" defer></script>
 </head>
 <body>
   <header class="uvod">
     <h1><span class="symbol">🗺️</span> Osnova</h1>
-    <p>Přehled aplikací v katalogu podle ročníků a předmětů. Zelené číslo ukazuje,
-       kolik témat už má hotovou aplikaci. Kliknutím na políčko se vypíší jednotlivá témata.</p>
+    <p>Přehled aplikací v katalogu podle ročníků a předmětů. Číslo v políčku ukazuje počet lekcí
+       pro daný ročník a předmět (🚧 = připravované). Kliknutím na políčko se vypíší lekce a jejich cíle.</p>
   </header>
 
-<section class="propojeni" id="ucelVyuky" aria-label="Výběr podle účelu"></section>
   <div class="souhrn" id="souhrn"></div>
 
   <div class="tabulka-obal">
@@ -348,7 +345,11 @@
         const li = document.createElement('li');
         li.appendChild(odkazNaTema(p));
         const popis = document.createElement('p');
-        popis.textContent = p.vyuka ? p.vyuka.cil + ' · Pilotní rozsah; pokrytí výstupu neposouzeno.' : 'Cíl a rozsah výuky zatím nejsou v katalogu posouzené.';
+        // cíl lekce z katalogu (KATALOG_CILE); u pilotů má přednost cíl z KATALOG_VYUKA
+        const cil = p.vyuka ? p.vyuka.cil : (typeof KATALOG_CILE !== 'undefined' && KATALOG_CILE[p.soubor]) || p.cil || '';
+        popis.textContent = cil
+          ? '🎯 ' + cil + (p.vyuka ? ' · Pilotní rozsah; pokrytí výstupu neposouzeno.' : '')
+          : 'Cíl lekce zatím není v katalogu.';
         li.appendChild(popis);
         ul.appendChild(li);
       });

@@ -6,6 +6,8 @@
   <title>Houby a lišejníky</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -66,6 +68,48 @@
     (klobouk, spodní strana, třeň, prsten, pochva, místo růstu). Houbu, kterou bezpečně neznáš, nesbírej, neochutnávej
     a ukaž ji dospělému nebo v houbařské poradně. Nejjedovatější muchomůrka zelená může vypadat nenápadně.</p>
 
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Jak je houba postavená a proč nejde o rostlinu</summary>
+    <div class="obsah">
+      <p>Houby tvoří samostatnou říši. Na rozdíl od rostlin <b>nemají chlorofyl</b>, a proto si nedokážou vyrobit živiny
+        fotosyntézou. Živiny <b>vstřebávají z okolí</b> – z půdy, dřeva nebo odumřelých těl.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Podhoubí</h3><p>Vlastní tělo houby je <b>podhoubí (mycelium)</b> – síť jemných vláken
+          v půdě nebo ve dřevě. Žije i tehdy, když nad zemí nic nevidíš.</p></article>
+        <article class="vyklad-karta"><h3>Plodnice</h3><p>To, čemu říkáme „houba“, je jen <b>plodnice</b>: klobouk a třeň.
+          Vytváří <b>výtrusy</b>, kterými se houba rozmnožuje.</p></article>
+        <article class="vyklad-karta"><h3>Spodní strana klobouku</h3><p>Hřiby mají <b>rourky</b>, muchomůrky a pečárky
+          <b>lupeny</b>, liška nízké <b>lišty</b>. Je to jeden z hlavních znaků při poznávání.</p></article>
+        <article class="vyklad-karta"><h3>Lišejník</h3><p>Soužití <b>houby a řasy</b> (nebo sinice) – <b>symbióza</b>, prospěch mají oba.
+          Lišejníky rostou pomalu a jsou citlivé na znečištěné ovzduší.</p></article>
+      </div>
+      <p>Druh houby se nepozná podle jednoho znaku. Posuzuje se <b>vše najednou</b>: klobouk, spodní strana, třeň,
+        prsten, <b>pochva nebo hlíza u báze</b> a místo růstu. Některé jedlé a jedovaté druhy jsou si velmi podobné –
+        například zelenavé holubinky a smrtelně jedovatá muchomůrka zelená.</p>
+      <p><b>Pozor:</b> to, že houbu poznáš ve cvičení, neznamená, že ji smíš sbírat. Houbu, kterou bezpečně neznáš,
+        nesbírej, neochutnávej a ukaž ji dospělému nebo v houbařské poradně.</p>
+      <aside class="zapamatuj">Houba = podhoubí + plodnice, rozmnožuje se výtrusy, nemá chlorofyl. Lišejník = symbióza houby a řasy.
+        Poznávání slouží k učení, ne ke sběru.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: poznej houbu podle znaků</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Houba má zelenavý až olivový klobouk, bílé lupeny, bílý prsten na třeni a u báze blanitou
+        vakovitou pochvu. O kterou houbu jde a co z toho plyne?</p>
+      <ol class="kroky">
+        <li>Podívám se pod klobouk: jsou tam <b>lupeny</b>, ne rourky – hřib to tedy není.</li>
+        <li>Lupeny jsou <b>bílé</b>. Pečárka má lupeny růžové až hnědé, nikdy bílé – pečárka to být nemůže.</li>
+        <li>Zelenavý klobouk a bílé lupeny má i holubinka, ta ale <b>nemá prsten ani pochvu</b>.</li>
+        <li>Prsten a <b>pochva u báze</b> spolu se zelenavým kloboukem a bílými lupeny jsou znaky <b>muchomůrky zelené</b>.</li>
+        <li>Uvědomím si, proč je důležité vidět celý třeň i se spodní částí: právě pochva rozhoduje o záměně.</li>
+      </ol>
+      <p class="vysledek-ukazky">Jde o <b>muchomůrku zelenou</b> – nejjedovatější houbu u nás, otrava bývá smrtelná.
+        Takovou houbu nikdy nesbírej ani neochutnávej; ani správné určení ve cvičení není návod ke sběru.</p>
+    </div>
+  </details>
+
   <div class="rezimy" id="rezimy">
     <button data-rezim="jedla" class="active">☠️ Jedlá, či jedovatá</button>
     <button data-rezim="fotoHouba">📷 Poznej podle fotky</button>
@@ -105,10 +149,10 @@ const skore = Uloha.skore('metodus_pr6_houby', $('skore'));
 let rezim = 'jedla';
 
 const HOUBY = [
-  { n: 'hřib smrkový', e: '🍄‍🟫', foto: 'hrib-smrkovy', jedla: true, znaky: ['hnědý klobouk', 'houbovitý rourkatý', 'tlustý třeň'],
+  { n: 'hřib smrkový', e: '🍄‍🟫', foto: 'hrib-smrkovy', jedla: true, znaky: ['hnědý klobouk', 'rourky pod kloboukem', 'tlustý třeň'],
     popis: 'oblíbená jedlá houba s rourkami pod kloboukem a síťkou na třeni' },
-  { n: 'hřib kovář', e: '🍄‍🟫', foto: 'hrib-kovar', jedla: true, znaky: ['červené póry', 'tečkovaný třeň', 'dužnina modrá'],
-    popis: 'hřib s červenými póry a třeněm s červenými tečkami, jedlý jen po důkladné tepelné úpravě' },
+  { n: 'hřib kovář', e: '🍄‍🟫', foto: 'hrib-kovar', jedla: true, jed: 'uprava', znaky: ['červené póry', 'tečkovaný třeň', 'dužnina modrá'],
+    popis: 'hřib s červenými póry a třeněm s červenými tečkami; jedlý jen po důkladné tepelné úpravě, syrový je jedovatý' },
   { n: 'klouzek obecný', e: '🟤', foto: 'klouzek', jedla: true, znaky: ['slizký klobouk', 'žluté póry', 'prsten'],
     popis: 'hřibovitá houba se slizkým hnědým kloboukem, roste pod borovicemi' },
   { n: 'bedla vysoká', e: '☂️', foto: 'bedla', jedla: true, znaky: ['šupinatý klobouk', 'posuvný prsten', 'hadovitě kreslený třeň'],
@@ -119,7 +163,7 @@ const HOUBY = [
     popis: 'nejjedovatější houba u nás, otrava bývá smrtelná' },
   { n: 'muchomůrka tygrovaná', e: '🐯', foto: 'muchomurka-tygrovana', jedla: false, znaky: ['hnědý klobouk', 'bílé bradavky', 'hlíza s lemem'],
     popis: 'prudce jedovatá muchomůrka s hnědým kloboukem posetým bílými bradavkami' },
-  { n: 'liška obecná', e: '🟡', foto: 'liska', jedla: true, znaky: ['žlutá barva', 'lišty místo lupenů', 'roste v trsech'],
+  { n: 'liška obecná', e: '🟡', foto: 'liska', jedla: true, znaky: ['žlutá barva', 'lišty místo lupenů', 'nálevkovitý klobouk'],
     popis: 'žlutá jedlá houba, která má místo lupenů lišty sbíhající po třeni' },
   { n: 'pečárka (žampion)', e: '🤍', foto: 'pecarka', jedla: true, znaky: ['bílý klobouk', 'růžové až hnědé lupeny', 'pěstuje se'],
     popis: 'běžná jedlá houba, kterou lze pěstovat i uměle; nemá pochvu a lupeny nejsou nikdy bílé' },
@@ -131,12 +175,12 @@ const HOUBY = [
     popis: 'smrtelně jedovatá houba poškozující ledviny, příznaky se objeví až po několika dnech' },
   { n: 'ucháč obecný', e: '🧠', foto: 'uchac', jedla: false, znaky: ['mozkovitý klobouk', 'roste na jaře', 'hnědá barva'],
     popis: 'jarní houba s mozkovitě zprohýbaným kloboukem, smrtelně jedovatá' },
-  { n: 'hnojník inkoustový', e: '⚫', jedla: false, znaky: ['rozplývá se', 'černý inkoust', 'na hnojišti'],
-    popis: 'houba, jejíž plodnice se rozplývá v černou tekutinu' },
-  { n: 'václavka obecná', e: '🟤', foto: 'vaclavka', jedla: true, znaky: ['roste v trsech', 'na pařezech', 'nutná tepelná úprava'],
-    popis: 'jedlá houba rostoucí v trsech na dřevě, syrová je nestravitelná' },
-  { n: 'ucho Jidášovo', e: '👂', jedla: true, znaky: ['rosolovité', 'na bezu', 'ušní tvar'],
-    popis: 'rosolovitá houba rostoucí na bezu, používá se v asijské kuchyni' },
+  { n: 'hnojník inkoustový', e: '⚫', jedla: false, jed: 'jedovata', znaky: ['rozplývá se', 'černý inkoust', 'na hnojišti'],
+    popis: 'houba, jejíž plodnice se rozplývá v černou tekutinu; spolu s alkoholem (i vypitým několik dní před jídlem nebo po něm) způsobuje otravu, proto ho mezi jedlé houby neřadíme' },
+  { n: 'václavka obecná', e: '🟤', foto: 'vaclavka', jedla: true, jed: 'uprava', znaky: ['roste v trsech', 'na pařezech', 'prsten na třeni'],
+    popis: 'houba rostoucí v trsech na dřevě; jedlá jen po důkladné tepelné úpravě, syrová nebo nedovařená je jedovatá' },
+  { n: 'ucho Jidášovo', e: '👂', jedla: true, jed: 'uprava', znaky: ['rosolovité', 'na bezu', 'ušní tvar'],
+    popis: 'rosolovitá houba rostoucí na bezu, používá se v asijské kuchyni – jí se jen tepelně upravená' },
 ];
 
 /* Fotografie (IMG-pr-01, Wikimedia Commons, zdroje vypisuje kostra.js).
@@ -146,7 +190,7 @@ const FOTO_HOUBY = [
   { k: "hrib-smrkovy", n: "hřib smrkový", lat: "Boletus edulis", jed: "jedla", znaky: "Hnědý klobouk, pod ním bílé, později žlutozelené rourky; břichatý světlý třeň se síťkou; dužnina na řezu nemodrá.", zamena: "Zaměnitelný s hořkým hřibem žlučníkem (růžové rourky, tmavá síťka) a s jedovatým hřibem satanem.", foto: [{ src: "img/pr/pr6-houby-hrib-smrkovy-celek.webp", alt: "Dva hřiby smrkové s hnědým kloboukem a světlým břichatým třeněm se síťkou v lesním porostu.", w: 768, h: 512, pohled: "celá plodnice" }, { src: "img/pr/pr6-houby-hrib-smrkovy-mlady.webp", alt: "Mladý hřib smrkový s hnědým kloboukem a tlustým bílým třeněm.", w: 768, h: 512, pohled: "mladá plodnice" }, { src: "img/pr/pr6-houby-hrib-smrkovy-rourky.webp", alt: "Hřiby smrkové, jeden převrácený, se světlou houbovitou spodní stranou klobouku s rourkami.", w: 768, h: 512, pohled: "spodní strana" }] },
   { k: "hrib-kovar", n: "hřib kovář", lat: "Neoboletus erythropus", jed: "uprava", znaky: "Tmavě hnědý klobouk, červené póry, třeň hustě posetý červenými tečkami (bez síťky); žlutá dužnina na řezu okamžitě modrá. Syrový je jedovatý.", zamena: "Pozor na hřib satan – ten má bělavý klobouk a síťku na třeni.", foto: [{ src: "img/pr/pr6-houby-hrib-kovar-celek.webp", alt: "Hřib kovář s tmavě hnědým kloboukem a třeněm hustě posetým červenými tečkami.", w: 768, h: 531, pohled: "celá plodnice" }, { src: "img/pr/pr6-houby-hrib-kovar-pory.webp", alt: "Spodní strana klobouku hřibu kováře s červenými póry.", w: 768, h: 709, pohled: "spodní strana" }, { src: "img/pr/pr6-houby-hrib-kovar-modrani.webp", alt: "Rozříznutý hřib kovář, jehož žlutá dužnina rychle zmodrala, vedle oranžově červené spodní strany klobouku.", w: 768, h: 662, pohled: "řez – modrání" }] },
   { k: "klouzek", n: "klouzek obecný", lat: "Suillus luteus", jed: "jedla", znaky: "Slizký lesklý hnědý klobouk, žluté póry a blanitý prsten na třeni; roste pod borovicemi. Slizkou pokožku je třeba stáhnout.", foto: [{ src: "img/pr/pr6-houby-klouzek-celek.webp", alt: "Mladý klouzek obecný s lesklým hnědým kloboukem mezi šiškami borovice.", w: 768, h: 512, pohled: "mladá plodnice" }, { src: "img/pr/pr6-houby-klouzek-spodek.webp", alt: "Klouzek obecný ze shora i zespodu: žluté póry pod kloboukem a blanitý prsten na třeni.", w: 768, h: 514, pohled: "spodní strana a prsten" }] },
-  { k: "bedla", n: "bedla vysoká", lat: "Macrolepiota procera", jed: "jedla", znaky: "Velký šupinatý klobouk s hrbolem, vysoký třeň s hadovitou kresbou a volný posuvný prsten; u báze bez pochvy. Jí se jen klobouky.", zamena: "Mladé uzavřené „paličky“ nesbírej – snadno se zamění s muchomůrkami.", foto: [{ src: "img/pr/pr6-houby-bedla-klobouk.webp", alt: "Klobouk bedly vysoké shora s hnědými šupinami a tmavým hrbolem uprostřed.", w: 768, h: 576, pohled: "klobouk shora" }, { src: "img/pr/pr6-houby-bedla-prsten.webp", alt: "Bedla vysoká s vysokým tenkým třeněm s hadovitou kresbou a volným prstenem.", w: 768, h: 1039, pohled: "prsten a třeň" }, { src: "img/pr/pr6-houby-bedla-mlada.webp", alt: "Mladá bedla vysoká s kloboukem jako palička vedle dospělé s rozevřeným kloboukem v trávě.", w: 768, h: 956, pohled: "mladá a dospělá" }] },
+  { k: "bedla", n: "bedla vysoká", lat: "Macrolepiota procera", jed: "uprava", znaky: "Velký šupinatý klobouk s hrbolem, vysoký třeň s hadovitou kresbou a volný posuvný prsten; u báze bez pochvy. Jí se jen klobouky.", zamena: "Mladé uzavřené „paličky“ nesbírej – snadno se zamění s muchomůrkami.", foto: [{ src: "img/pr/pr6-houby-bedla-klobouk.webp", alt: "Klobouk bedly vysoké shora s hnědými šupinami a tmavým hrbolem uprostřed.", w: 768, h: 576, pohled: "klobouk shora" }, { src: "img/pr/pr6-houby-bedla-prsten.webp", alt: "Bedla vysoká s vysokým tenkým třeněm s hadovitou kresbou a volným prstenem.", w: 768, h: 1039, pohled: "prsten a třeň" }, { src: "img/pr/pr6-houby-bedla-mlada.webp", alt: "Mladá bedla vysoká s kloboukem jako palička vedle dospělé s rozevřeným kloboukem v trávě.", w: 768, h: 956, pohled: "mladá a dospělá" }] },
   { k: "liska", n: "liška obecná", lat: "Cantharellus cibarius", jed: "jedla", znaky: "Celá vaječně žlutá, klobouk nálevkovitý; místo lupenů nízké vidličnaté lišty sbíhající na třeň.", zamena: "Záměna s jedovatým pavučincem (pravé rezavé lupeny).", foto: [{ src: "img/pr/pr6-houby-liska-celek.webp", alt: "Žluté lišky obecné s nálevkovitým kloboukem rostoucí v mechu.", w: 768, h: 576, pohled: "celá plodnice" }, { src: "img/pr/pr6-houby-liska-listy.webp", alt: "Lišky obecné zespodu s vidličnatě větvenými lištami sbíhajícími na třeň.", w: 768, h: 1024, pohled: "spodní strana – lišty" }] },
   { k: "vaclavka", n: "václavka obecná", lat: "Armillaria mellea", jed: "uprava", znaky: "Roste v hustých trsech na pařezech a kořenech; medově hnědé klobouky s šupinkami, prsten na třeni. Syrová nebo nedovařená způsobuje otravu.", foto: [{ src: "img/pr/pr6-houby-vaclavka-trs.webp", alt: "Hustý trs medově žlutých václavek obecných rostoucích z dřeva v listí.", w: 768, h: 512, pohled: "trs na dřevě" }, { src: "img/pr/pr6-houby-vaclavka-detail.webp", alt: "Několik václavek s hnědými šupinatými klobouky a prstenem na třeni srostlých u báze.", w: 768, h: 580, pohled: "detail plodnic" }] },
   { k: "pecarka", n: "pečárka polní (žampion)", lat: "Agaricus campestris", jed: "jedla", znaky: "Bílý klobouk, lupeny nejprve růžové, později čokoládově hnědé (nikdy bílé); na třeni prsten, u báze bez pochvy; roste na loukách.", zamena: "Smrtelně nebezpečná záměna s muchomůrkou zelenou, která má bílé lupeny a pochvu.", foto: [{ src: "img/pr/pr6-houby-pecarka-celek.webp", alt: "Pečárka polní s bílým kloboukem a krátkým bílým třeněm v trávě.", w: 768, h: 512, pohled: "celá plodnice" }, { src: "img/pr/pr6-houby-pecarka-lupeny.webp", alt: "Pečárky polní, jedna převrácená s růžově hnědými lupeny pod bílým kloboukem.", w: 768, h: 512, pohled: "spodní strana – lupeny" }] },
@@ -163,7 +207,8 @@ const FOTO_HOUBY = [
 const JED_POPIS = { jedla: '🍲 jedlá', uprava: '🔥 jedlá jen po důkladné tepelné úpravě', jedovata: '☠️ jedovatá', smrtelna: '☠️ smrtelně jedovatá' };
 const FOTO_PODLE = Object.fromEntries(FOTO_HOUBY.map(h => [h.k, h]));
 const stitekJed = h => `<span class="jed-stitek ${h.jed}">${JED_POPIS[h.jed]}</span>`;
-const imgFoto = (f, trida) => `<img${trida ? ` class="${trida}"` : ''} src="${f.src}" alt="${f.alt}" width="${f.w}" height="${f.h}" loading="lazy">`;
+// Třetí argument: neutrální alt, když je fotka sama otázkou (alt nesmí prozradit druh).
+const imgFoto = (f, trida, alt) => `<img${trida ? ` class="${trida}"` : ''} src="${f.src}" alt="${alt || f.alt}" width="${f.w}" height="${f.h}" loading="lazy">`;
 const ZAMENY = [
   { a: 'muchomurka-zelena', b: 'holubinka', text: '<b>Muchomůrka zelená × holubinka nazelenalá:</b> obě mají zelenavý klobouk a <b>bílé lupeny</b>. Holubinka nemá prsten ani pochvu a její třeň se láme jako křída. Právě tato záměna bývá smrtelná – zelenavé houby s bílými lupeny začátečník nesbírá.' },
   { a: 'muchomurka-zelena', b: 'pecarka', text: '<b>Muchomůrka zelená × pečárka:</b> muchomůrka má <b>bílé lupeny</b> a u báze <b>blanitou pochvu</b>, pečárka má lupeny růžové až hnědé a pochvu nemá. Třeň proto vždy vyber celý i se spodní částí.' },
@@ -217,6 +262,11 @@ const LISEJNIK_DRUHY = [
 ];
 
 /* ---- Jedlá, či jedovatá ------------------------------------------------------------------ */
+/* Klíč odpovědi bere přednostně z pole `jed` atlasu (FOTO_HOUBY), aby kvíz a atlas nikdy nebyly v rozporu. */
+function klicJed(u) {
+  const jed = (u.foto && FOTO_PODLE[u.foto] && FOTO_PODLE[u.foto].jed) || u.jed || (u.jedla ? 'jedla' : 'jedovata');
+  return jed === 'smrtelna' ? 'jedovata' : jed;
+}
 function jedla() {
   const p = $('plocha');
   const u = Uloha.nahodne(HOUBY);
@@ -234,9 +284,10 @@ function jedla() {
     kam: p, odezva, trida: 'dve',
     moznosti: [
       { klic: 'jedla', ikona: '🍲', popis: 'jedlá' },
+      { klic: 'uprava', ikona: '🔥', popis: 'jen po tepelné úpravě' },
       { klic: 'jedovata', ikona: '☠️', popis: 'jedovatá' },
     ],
-    spravnyKlic: u.jedla ? 'jedla' : 'jedovata',
+    spravnyKlic: klicJed(u),
     zpravaOk: `✅ ${u.n} – ${u.popis}.`,
     zpravaChyba: 'Houbu, kterou si nejsi jistý, nikdy nesbírej ani neochutnávej.',
     poSpravne: skore.vyhodnot,
@@ -292,7 +343,7 @@ function lisejniky() {
   if (Math.random() < 0.55) {
     const u = Uloha.nahodne(LISEJNIK_DRUHY);
     p.innerHTML = `<div class="zadani">Který lišejník je na fotografii?</div>
-      <img class="lisejnik-foto" src="${u.img}" alt="${u.alt}" width="768" height="768">
+      <img class="lisejnik-foto" src="${u.img}" alt="Fotografie lišejníku k určení." width="768" height="768">
       <div class="latinsky">Určuj podle barvy, tvaru a způsobu růstu stélky.</div>`;
     const odezva = document.createElement('div');
     odezva.className = 'odezva';
@@ -337,7 +388,7 @@ function fotoHouba() {
   const zamena = ZAMENY.filter(z => z.a === h.k || z.b === h.k).map(z => z.a === h.k ? z.b : z.a).filter(k => FOTO_PODLE[k]);
   const jine = [...new Set([...zamena, ...Uloha.zamichej(FOTO_HOUBY.map(x => x.k).filter(k => k !== h.k))])].slice(0, 3);
   p.innerHTML = `<div class="zadani">Která houba je na fotografii?</div>
-    <div class="karta">${imgFoto(f, 'houba-foto')}<div class="latinsky">Pohled: ${f.pohled}. Sleduj klobouk, spodní stranu, třeň a jeho bázi.</div></div>`;
+    <div class="karta">${imgFoto(f, 'houba-foto', 'Fotografie houby k určení.')}<div class="latinsky">Pohled: ${f.pohled}. Sleduj klobouk, spodní stranu, třeň a jeho bázi.</div></div>`;
   const odezva = document.createElement('div');
   odezva.className = 'odezva';
   Uloha.vyber({

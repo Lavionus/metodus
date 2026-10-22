@@ -6,6 +6,8 @@
   <title>Písemné dělení</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -26,6 +28,44 @@
   <h1>➗ Písemné dělení</h1>
   <p class="podtitul">Pro 4.–5. ročník: dělení jednociferným i dvojciferným dělitelem, se zbytkem i bez.</p>
 
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Jak se dělí písemně</summary>
+    <div class="obsah">
+      <p>Písemné dělení rozloží velký příklad na řadu malých dělení, která zvládneš z násobilky.
+        Na rozdíl od sčítání a násobení se tu postupuje <b>zleva</b> – od nejvyššího řádu.
+        Každé kolo má stejné čtyři kroky.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>1. Dělím</h3><p>Vezmu zleva tolik číslic dělence, aby se do nich dělitel vešel aspoň jednou.
+          Zjistím, kolikrát se tam vejde – to je další číslice podílu.</p></article>
+        <article class="vyklad-karta"><h3>2. Násobím a 3. odčítám</h3><p>Číslici podílu vynásobím dělitelem a odečtu.
+          Vyjde zbytek, který musí být <b>menší než dělitel</b>.</p></article>
+        <article class="vyklad-karta"><h3>4. Snáším</h3><p>Ke zbytku připíšu (snesu) další číslici dělence a začnu znovu dělit.
+          Když už není co snést, poslední zbytek je zbytek celého dělení.</p></article>
+        <article class="vyklad-karta"><h3>Zkouška</h3><p><b>podíl × dělitel + zbytek = dělenec</b>.
+          Bez zbytku stačí podíl × dělitel.</p></article>
+      </div>
+      <p>Kolik číslic bude mít podíl, poznáš hned na začátku: když se dělitel vejde do první číslice, má podíl
+        tolik číslic jako dělenec; když potřebuješ dvě číslice, je o jednu kratší. Typická chyba je vynechat nulu:
+        když se dělitel do snesené části nevejde, musíš do podílu napsat <b>0</b> (408 : 4 = 102, ne 12).</p>
+      <aside class="zapamatuj">Dělím – násobím – odčítám – snáším. Každá snesená číslice přidá do podílu jednu číslici, i kdyby to byla nula.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: 857 : 4</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Vyděl písemně 857 : 4.</p>
+      <ol class="kroky">
+        <li>Čtyřka se vejde do první číslice 8, takže podíl bude mít <b>tři</b> číslice.</li>
+        <li>8 : 4 = <b>2</b>. Násobím 2 × 4 = 8, odčítám 8 − 8 = 0.</li>
+        <li>Snesu 5: mám 5. 5 : 4 = <b>1</b>, 1 × 4 = 4, 5 − 4 = 1.</li>
+        <li>Snesu 7: mám 17. 17 : 4 = <b>4</b>, 4 × 4 = 16, 17 − 16 = 1. Nic dalšího k snesení není, zbytek je 1.</li>
+        <li>Zkouška: 214 × 4 + 1 = 856 + 1 = 857. Sedí.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ 857 : 4 = 214 zb. 1</p>
+    </div>
+  </details>
+
   <div class="rezimy" id="rezimy">
     <button data-rezim="jednociferne" class="active">1️⃣ Dělitel do 9</button>
     <button data-rezim="dvojciferne">2️⃣ Dvojciferný dělitel</button>
@@ -42,7 +82,7 @@
 
   <p class="napoveda">
     Při písemném dělení postupuješ <b>zleva</b>: vezmeš první číslici (nebo dvě), vydělíš,
-    zbytek snížíš a přibereš další číslici. Výsledek ověříš zkouškou
+    ke zbytku připíšeš (sepíšeš) další číslici dělence a pokračuješ. Výsledek ověříš zkouškou
     <b>podíl × dělitel + zbytek = dělenec</b>.
   </p>
 

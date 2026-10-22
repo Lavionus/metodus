@@ -6,6 +6,8 @@
   <title>Členovci</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -49,6 +51,43 @@
   <h1>🕷️ Členovci</h1>
   <p class="podtitul">Pro 6.–7. ročník: hmyz, pavoukovci, korýši a stonožky – stavba těla i proměna.</p>
 
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Jak rozlišit skupiny členovců</summary>
+    <div class="obsah">
+      <p><b>Členovci</b> mají článkované tělo i končetiny a <b>vnější kostru</b> z pevné pokožky. Ta neroste,
+        a proto se členovci při růstu <b>svlékají</b>. Do skupin je nejsnáz roztřídíš podle <b>počtu nohou</b> a <b>členění těla</b>.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Hmyz</h3><p><b>3 páry nohou</b> (6), tělo z <b>hlavy, hrudi a zadečku</b>,
+          jeden pár tykadel, často křídla. Včela, mravenec, motýl.</p></article>
+        <article class="vyklad-karta"><h3>Pavoukovci</h3><p><b>4 páry nohou</b> (8), tělo z <b>hlavohrudi a zadečku</b>,
+          bez tykadel. Pavouk křižák, sekáč, klíště.</p></article>
+        <article class="vyklad-karta"><h3>Korýši</h3><p>Dýchají <b>žábrami</b>, mají <b>dva páry tykadel</b>.
+          Desetinožci (rak, krab) mají <b>5 párů</b> kráčivých nohou.</p></article>
+        <article class="vyklad-karta"><h3>Stonožky</h3><p>Dlouhé tělo z mnoha článků, na každém článku <b>jeden pár nohou</b>.</p></article>
+      </div>
+      <p><b>Proměna hmyzu.</b> Při <b>dokonalé proměně</b> (motýl, včela, slunéčko) se střídá vajíčko → larva → <b>kukla</b> → dospělec;
+        larva vypadá úplně jinak než dospělec. Při <b>nedokonalé proměně</b> (kobylka, vážka) chybí kukla: z vajíčka se líhne
+        <b>nymfa</b>, která se podobá dospělci, jen nemá vyvinutá křídla.</p>
+      <p><b>Typická chyba:</b> „Klíště je hmyz.“ Klíště má 8 nohou – patří k <b>pavoukovcům</b>.</p>
+      <aside class="zapamatuj">Hmyz 6 nohou, pavoukovci 8, desetinožci 10. Kukla = dokonalá proměna; bez kukly = nedokonalá.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: kam patří pavouk křižák?</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Pavouk křižák má tělo rozdělené na dvě části a tká kruhové sítě. Do které skupiny členovců patří
+        a kolik má nohou?</p>
+      <ol class="kroky">
+        <li>Spočítám nohy: křižák má <b>4 páry, tedy 8 nohou</b>.</li>
+        <li>Hmyz má jen 6 nohou – hmyz to být nemůže.</li>
+        <li>Podívám se na tělo: dvě části, <b>hlavohruď a zadeček</b>, a nemá tykadla.</li>
+        <li>Osm nohou a hlavohruď jsou znaky <b>pavoukovců</b>; žábry ani dva páry tykadel korýšů nemá.</li>
+      </ol>
+      <p class="vysledek-ukazky">Pavouk křižák patří k <b>pavoukovcům</b> a má <b>8 nohou</b>. Proměnu jako hmyz neprodělává.</p>
+    </div>
+  </details>
+
   <div class="rezimy" id="rezimy">
     <button data-rezim="trida" class="active">🗂️ Do které třídy</button>
     <button data-rezim="nohy">🦵 Kolik má nohou</button>
@@ -84,7 +123,7 @@
   <p class="napoveda">
     <b>Hmyz</b> má 3 páry nohou a tělo dělené na hlavu, hruď a zadeček.
     <b>Pavoukovci</b> mají 4 páry nohou a hlavohruď. <b>Korýši</b> dýchají žábrami
-    a mají 5 a více párů končetin. Všichni členovci mají vnější kostru a svlékají se.
+    a mají dva páry tykadel; desetinožci (rak, krab) mají 5 párů kráčivých nohou. Všichni členovci mají vnější kostru a svlékají se.
   </p>
 
 <script>
@@ -96,7 +135,7 @@ const TRIDY = {
   hmyz: 'hmyz (3 páry nohou)',
   pavoukovci: 'pavoukovci (4 páry nohou)',
   korysi: 'korýši (žábry)',
-  stonozky: 'stonožky a mnohonožky',
+  stonozky: 'stonožky (1 pár nohou na článku)',
 };
 
 const ZIVOCICHOVE = [
@@ -110,13 +149,13 @@ const ZIVOCICHOVE = [
     popis: 'skákavý hmyz se silnýma zadníma nohama, cvrká křídly' },
   { n: 'slunéčko sedmitečné', e: '🐞', t: 'hmyz', nohy: 6, promena: 'dokonala',
     popis: 'brouk s červenými krovkami, který požírá mšice' },
-  { n: 'vážka', e: '🪰', t: 'hmyz', nohy: 6, promena: 'nedokonala',
+  { n: 'vážka', e: '', t: 'hmyz', nohy: 6, promena: 'nedokonala',
     popis: 'dravý hmyz s dvěma páry blanitých křídel, larvy žijí ve vodě' },
   { n: 'pavouk křižák', e: '🕷️', img: 'img/pr/pr6-clenovci-krizak.webp', t: 'pavoukovci', nohy: 8, promena: null,
     popis: 'tká kruhovou síť a má na zadečku kříž' },
-  { n: 'klíště obecné', e: '🪲', t: 'pavoukovci', nohy: 8, promena: null,
+  { n: 'klíště obecné', e: '', t: 'pavoukovci', nohy: 8, promena: null,
     popis: 'saje krev a může přenášet boreliózu nebo encefalitidu' },
-  { n: 'sekáč', e: '🕸️', t: 'pavoukovci', nohy: 8, promena: null,
+  { n: 'sekáč', e: '', t: 'pavoukovci', nohy: 8, promena: null,
     popis: 'má velmi dlouhé nohy a nesplétá pavučinu' },
   { n: 'rak říční', e: '🦞', img: 'img/pr/pr6-clenovci-rak.webp', t: 'korysi', nohy: 10, promena: null,
     popis: 'žije v čistých potocích, má klepeta a dýchá žábrami' },
@@ -144,14 +183,14 @@ const VYZNAM = [
   { t: 'slunéčko sedmitečné na zahradě', dobre: true, proc: 'jedno slunéčko sežere stovky mšic' },
   { t: 'mšice na růžích', dobre: false, proc: 'saje šťávu z rostlin a oslabuje je' },
   { t: 'mravenci v lese', dobre: true, proc: 'čistí les a roznášejí semena rostlin' },
-  { t: 'komár bodavý', dobre: false, proc: 'saje krev a v tropech přenáší malárii' },
+  { t: 'komár bodavý', dobre: false, proc: 'samička saje krev a obtěžuje; malárii v tropech přenášejí jiní komáři – anofelové' },
   { t: 'rak říční v potoce', dobre: true, proc: 'je ukazatelem čisté vody a odstraňuje uhynulé zbytky' },
   { t: 'mol šatní ve skříni', dobre: false, proc: 'jeho larvy prokousávají vlněné oblečení' },
 ];
 
 const obrazekClenovce = u => u.img
   ? `<img class="clenovec-img" src="${u.img}" alt="${u.n} při pohledu shora.">`
-  : `<div class="obrazek">${u.e}</div>`;
+  : (u.e ? `<div class="obrazek">${u.e}</div>` : '');  /* bez vhodného emoji raději jen název */
 
 /* ---- Do které třídy -------------------------------------------------------------------- */
 function trida() {
@@ -186,7 +225,7 @@ function nohy() {
     moznosti: Uloha.zamichej([6, 8, 10, 4]).map(v => ({ klic: String(v), popis: String(v) })),
     spravnyKlic: String(u.nohy),
     zpravaOk: `✅ ${u.n} má ${u.nohy} nohou – ${TRIDY[u.t]}.`,
-    zpravaChyba: 'Hmyz 6, pavoukovci 8, korýši 10 a více.',
+    zpravaChyba: 'Hmyz 6, pavoukovci 8, desetinozí korýši (rak, krab) 10.',
     poSpravne: skore.vyhodnot,
     dalsi: novaUloha,
   });

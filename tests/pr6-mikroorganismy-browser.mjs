@@ -45,7 +45,7 @@ for (const mode of ['poznej', 'virusBakterie', 'uzitek', 'prevence']) {
 }
 await ev(`window.__puvodniNahodne=Uloha.nahodne; Uloha.nahodne=()=>ORGANISMY[1]; poznej(); document.querySelector('.mikro-img').decode()`);
 assert.ok(await ev(`document.querySelector('.mikro-img').src.endsWith('pr6-mikro-virus.webp')`));
-assert.ok(await ev(`document.querySelector('.mikro-img').alt.includes('virové částice')`));
+assert.equal(await ev(`document.querySelector('.mikro-img').alt`), 'Obrázek mikroorganismu k určení.');   // alt v kvízu neprozrazuje odpověď
 await ev(`[...document.querySelectorAll('#plocha .moznosti button')].find(b => b.textContent.trim() === 'virus').click()`);
 assert.ok(await ev(`document.querySelector('#plocha .odezva').textContent.includes('virus')`));
 await ev(`Uloha.nahodne=window.__puvodniNahodne`);

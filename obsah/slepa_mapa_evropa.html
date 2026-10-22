@@ -42,17 +42,26 @@
     .stat.spravne { fill: var(--ok); pointer-events: none; }
     .stat.blik { fill: var(--danger); }
     .stat.uceni:hover { fill: var(--accent); }
-    .tecka { fill: var(--accent); stroke: #fff; stroke-width: 0.8; cursor: pointer; }
-    .tecka:hover { r: 5; }
-    .tecka.spravne { fill: var(--ok); pointer-events: none; }
-    .tecka.blik { fill: var(--danger); }
+    /* malý stát = skupina: neviditelná větší zásahová plocha + viditelná tečka
+       (samotná tečka r = 3,5 měla na mobilu ~1 px) */
+    .tecka { cursor: pointer; }
+    .tecka .zasah { fill: transparent; }
+    .tecka .bod { fill: var(--accent); stroke: #fff; stroke-width: 1; }
+    .tecka:hover .bod { r: 7; }
+    .tecka.spravne { pointer-events: none; }
+    .tecka.spravne .bod { fill: var(--ok); }
+    .tecka.blik .bod { fill: var(--danger); }
+    .tecka.sporny .bod { stroke-dasharray: 2 1.5; }
+    .stat:focus, .tecka:focus { outline: none; }
+    .stat:focus-visible { stroke: var(--text); stroke-width: 2.5; }
+    .tecka:focus-visible .bod { stroke: var(--text); stroke-width: 2.5; r: 7; }
     .popisek { fill: var(--text); font-size: 9px; pointer-events: none; text-anchor: middle; font-weight: 600;
       paint-order: stroke; stroke: var(--bg-deep); stroke-width: 2.5px; }
   </style>
 </head>
 <body>
   <h1>🗺️ Slepá mapa Evropy</h1>
-  <p class="podtitul">Procvičování evropských států (6.–9. ročník ZŠ, SŠ). Malé státy jsou vyznačeny tečkou.</p>
+  <p class="podtitul">Procvičování evropských států (6.–9. ročník ZŠ, SŠ). Malé státy jsou vyznačeny tečkou. Tečkou je i <b>Kosovo</b> – nezávislost vyhlásilo v roce 2008, Česko ji uznává, Srbsko a některé další státy ne; na mapě proto leží v obrysu Srbska. Ovládání i klávesnicí: Tab a Enter.</p>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="staty" data-faze="procvic" data-kostra-overeni="ne" class="active">Hledej stát</button>
@@ -92,19 +101,55 @@ const ZEME=[{"n":"Albánie","c":"AL","t":[22.24,-50.14],"p":[[[21.64,-50.15],[21
       ).join('');
     }
 
+    /* Kosovo: hranice s ním data nemají (je v obrysu Srbska) → jako tečka u Prištiny,
+       souřadnice ve stejném Mercatoru (×100 km) jako ostatní data */
+    ZEME.push({ n: 'Kosovo', c: 'XK', sporny: true,
+      dot: [21.0 * Math.PI / 180 * 63.78137, -63.78137 * Math.log(Math.tan(Math.PI / 4 + 42.6 * Math.PI / 360))] });
+
     const tvary = new Map();      // název -> element
+    /* zásahová plocha tečky: co největší, ale nejvýš do půli vzdálenosti k nejbližší tečce */
+    const tecky = ZEME.filter(z => z.dot).map(z => [z.n, px(z.dot[0]), py(z.dot[1])]);
+    const zasahTecky = n => {
+      const [, x, y] = tecky.find(t => t[0] === n);
+      const min = Math.min(...tecky.filter(t => t[0] !== n).map(([, x2, y2]) => Math.hypot(x - x2, y - y2)));
+      return Math.max(6, Math.min(14, min / 2));
+    };
     ZEME.forEach(z => {
       if (z.dot) {
-        const c = document.createElementNS(NS, 'circle');
-        c.setAttribute('cx', px(z.dot[0])); c.setAttribute('cy', py(z.dot[1])); c.setAttribute('r', 3.5);
-        c.classList.add('tecka'); c.dataset.nazev = z.n;
-        svg.appendChild(c); tvary.set(z.n, c);
+        const g = document.createElementNS(NS, 'g');
+        const cx = px(z.dot[0]), cy = py(z.dot[1]);
+        const zasah = document.createElementNS(NS, 'circle');
+        zasah.setAttribute('cx', cx); zasah.setAttribute('cy', cy); zasah.setAttribute('r', zasahTecky(z.n).toFixed(1));
+        zasah.classList.add('zasah');
+        const bod = document.createElementNS(NS, 'circle');
+        bod.setAttribute('cx', cx); bod.setAttribute('cy', cy); bod.setAttribute('r', 5);
+        bod.classList.add('bod');
+        g.append(zasah, bod);
+        g.classList.add('tecka'); if (z.sporny) g.classList.add('sporny');
+        g.dataset.nazev = z.n;
+        svg.appendChild(g); tvary.set(z.n, g);
       } else {
         const p = document.createElementNS(NS, 'path');
         p.setAttribute('d', cesta(z.p));
         p.classList.add('stat'); p.dataset.nazev = z.n;
         svg.appendChild(p); tvary.set(z.n, p);
       }
+    });
+    // tečky (malé státy, Kosovo) navrch, aby je nepřekryl obrys sousedního státu
+    svg.querySelectorAll('.tecka').forEach(g => svg.appendChild(g));
+    // ovládání klávesnicí: Tab na stát, Enter/mezerník = klepnutí;
+    // popis pro čtečku je neutrální (název by prozradil odpověď), v učení se doplní název
+    svg.querySelectorAll('.stat, .tecka').forEach((el, i) => {
+      el.setAttribute('tabindex', '0'); el.setAttribute('role', 'button');
+      el.setAttribute('aria-label', 'Stát na mapě');
+    });
+    svg.removeAttribute('role');
+    svg.setAttribute('aria-label', 'Mapa Evropy – státy jdou vybrat Tabem a Enterem');
+    svg.addEventListener('keydown', e => {
+      if (e.key !== 'Enter' && e.key !== ' ') return;
+      const cil = e.target.closest('.stat, .tecka'); if (!cil) return;
+      e.preventDefault();
+      cil.dispatchEvent(new MouseEvent('click', { bubbles: true }));
     });
 
     let rezim = 'staty', fronta = [], hledane = null, spravneCelkem = 0, pokusy = 0;
@@ -136,7 +181,11 @@ const ZEME=[{"n":"Albánie","c":"AL","t":[22.24,-50.14],"p":[[[21.64,-50.15],[21
     }
     function restart() {
       spravneCelkem = 0; pokusy = 0;
-      svg.querySelectorAll('.stat, .tecka').forEach(el => { el.classList.remove('spravne', 'blik', 'uceni'); el.style.pointerEvents = ''; });
+      svg.querySelectorAll('.stat, .tecka').forEach(el => {
+        el.classList.remove('spravne', 'blik', 'uceni'); el.style.pointerEvents = '';
+        el.setAttribute('tabindex', '0');
+        el.setAttribute('aria-label', rezim === 'uceni' ? el.dataset.nazev : 'Stát na mapě');
+      });
       svg.querySelectorAll('.popisek').forEach(t => t.remove());
       ukazSkore();
       if (rezim === 'uceni') {
@@ -161,6 +210,7 @@ const ZEME=[{"n":"Albánie","c":"AL","t":[22.24,-50.14],"p":[[[21.64,-50.15],[21
       pokusy++;
       if (nazev === hledane) {
         spravneCelkem++; cil.classList.add('spravne');
+        cil.setAttribute('tabindex', '-1'); cil.setAttribute('aria-label', nazev);
         const [x, y] = stred(nazev); popisek(x, y, nazev);
         zpravaEl.textContent = '✓ Správně!'; zpravaEl.className = 'ok';
         ukazSkore(); setTimeout(dalsiOtazka, 650);

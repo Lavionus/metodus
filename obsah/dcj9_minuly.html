@@ -6,6 +6,8 @@
   <title>Minulý čas – úvod</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -23,6 +25,40 @@
 <body>
   <h1>⏪ Minulý čas – úvod</h1>
   <p class="podtitul">Pro 9. ročník: německé perfektum a francouzské passé composé.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Složený minulý čas</summary>
+    <div class="obsah">
+      <p>V češtině řekneš „hrál jsem“ – i tady je pomocné sloveso „jsem“. Němčina i francouzština tvoří běžný minulý čas
+        podobně, <b>ze dvou částí</b>: pomocné sloveso v přítomném čase + <b>příčestí minulé</b>. Pomocné sloveso se časuje
+        podle osoby, příčestí nese význam.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>🇩🇪 Perfektum</h3><p><span lang="de">haben/sein</span> + Partizip II <b>na konci věty</b>: <span lang="de">Ich habe Fußball gespielt.</span></p></article>
+        <article class="vyklad-karta"><h3>🇩🇪 Partizip II</h3><p>Pravidelná: <b>ge- + kmen + -t</b> (<span lang="de">machen → gemacht</span>). Nepravidelná mají <b>-en</b> a často jinou samohlásku (<span lang="de">trinken → getrunken</span>).</p></article>
+        <article class="vyklad-karta"><h3>🇫🇷 Passé composé</h3><p><span lang="fr">avoir/être</span> + participe passé: <span lang="fr">j’ai parlé</span>. Slovesa na -er mají <b>-é</b> (<span lang="fr">parler → parlé</span>), na -ir často <b>-i</b> (<span lang="fr">finir → fini</span>).</p></article>
+        <article class="vyklad-karta"><h3>Kdy sein / être</h3><p>U sloves <b>pohybu a změny stavu</b>: <span lang="de">ich bin gegangen</span>, <span lang="fr">je suis allé</span>. Ostatní slovesa mají <span lang="de">haben</span> / <span lang="fr">avoir</span>.</p></article>
+      </div>
+      <p>Jak volbu poznám? Zeptám se, jestli se podmět <b>někam přesouvá</b> (jít, jet, přijít, odjet). Pak beru
+        <span lang="de">sein</span> / <span lang="fr">être</span>. Patří sem i „zůstat“: <span lang="de">ich bin geblieben</span>, <span lang="fr">je suis resté</span>.</p>
+      <p>Ve francouzštině se příčestí u <span lang="fr">être</span> <b>shoduje s podmětem</b>: <span lang="fr">nous sommes allés</span>,
+        <span lang="fr">elle est allée</span>. U <span lang="fr">avoir</span> se nemění. Typická chyba v němčině je chybné příčestí <span lang="de">getrinkt</span> místo <span lang="de">getrunken</span>.</p>
+      <aside class="zapamatuj">Minulý čas = pomocné sloveso + příčestí minulé. Pohyb a změna stavu → sein / être, jinak haben / avoir.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: haben, nebo sein?</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Doplň pomocné sloveso do perfekta (<span lang="de">fahren</span> – jet): <span lang="de">wir … gefahren</span>.</p>
+      <ol class="kroky">
+        <li>Zjistím, co sloveso znamená: <span lang="de">fahren</span> = jet, tedy <b>pohyb</b> z místa na místo.</li>
+        <li>Slovesa pohybu tvoří perfektum se <span lang="de"><b>sein</b></span>.</li>
+        <li>Vyčasuji <span lang="de">sein</span> pro osobu <span lang="de">wir</span>: <span lang="de">wir sind</span>.</li>
+        <li>Příčestí <span lang="de">gefahren</span> nechám na konci věty.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ <span lang="de"><b>wir sind gefahren</b></span> – jeli jsme.</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="pomocneNJ" class="active">🇩🇪 haben, nebo sein?</button>
@@ -139,9 +175,13 @@ const FJ_SLOVESA = [
 ];
 const FJ_OSOBY = [
   { o: 'je', avoir: 'ai', etre: 'suis' }, { o: 'tu', avoir: 'as', etre: 'es' },
-  { o: 'il', avoir: 'a', etre: 'est' }, { o: 'nous', avoir: 'avons', etre: 'sommes' },
-  { o: 'vous', avoir: 'avez', etre: 'êtes' }, { o: 'ils', avoir: 'ont', etre: 'sont' },
+  { o: 'il', avoir: 'a', etre: 'est' }, { o: 'nous', avoir: 'avons', etre: 'sommes', mn: true },
+  { o: 'vous', avoir: 'avez', etre: 'êtes', mn: true }, { o: 'ils', avoir: 'ont', etre: 'sont', mn: true },
 ];
+/* Příčestí u être se shoduje s podmětem: nous sommes allés (u avoir se nemění). */
+const pricesti = (s, o) => s.pom === 'être' && o.mn ? s.pp + 's' : s.pp;
+/* je se před samohláskou zkracuje: j'ai parlé, ale je suis allé. */
+const sJe = (o, pom) => o.o === 'je' && /^[aeiouh]/i.test(pom) ? "j'" + pom : o.o + ' ' + pom;
 
 function pomocneFJ() {
   const p = $('plocha');
@@ -152,14 +192,14 @@ function pomocneFJ() {
 
   p.innerHTML = `<div class="zadani"><span class="vlajka">🇫🇷</span>
       Doplň pomocné sloveso do passé composé (${s.inf} – ${s.cz}):</div>
-    <div class="karta"><div class="veta-ciz">${o.o} <span class="mezera">?</span> ${s.pp}.</div></div>`;
+    <div class="karta"><div class="veta-ciz">${o.o === 'je' ? "je / j'" : o.o} <span class="mezera">?</span> ${pricesti(s, o)}.</div></div>`;
   const odezva = odezvaEl();
   Uloha.vyber({
     kam: p, odezva, trida: 'velke',
     moznosti: Uloha.zamichej([spravny, ...jine.filter(x => x !== spravny)]).map(t => ({ klic: t, popis: t })),
     spravnyKlic: spravny,
-    zpravaOk: `✅ ${o.o} ${spravny} ${s.pp}. – sloveso ${s.inf} se pojí s „${s.pom}“`
-      + (s.pom === 'être' ? ' (slovesa pohybu).' : '.'),
+    zpravaOk: `✅ ${sJe(o, spravny)} ${pricesti(s, o)}. – sloveso ${s.inf} se pojí s „${s.pom}“`
+      + (s.pom === 'être' ? (o.mn ? ' (slovesa pohybu; příčestí má -s jako podmět v množném čísle).' : ' (slovesa pohybu).') : '.'),
     zpravaChyba: 'Většina sloves má avoir; slovesa pohybu (aller, venir, partir, rester, arriver) mají être.',
     poSpravne: skore.vyhodnot,
     dalsi: novaUloha,

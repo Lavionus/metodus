@@ -6,6 +6,8 @@
   <title>Síla, těžiště a Newtonovy zákony</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -19,6 +21,7 @@
     .scena .popis { fill: var(--text-muted); font-size: 13px; text-anchor: middle; }
     .scena .zeme { stroke: var(--border-strong); stroke-width: 3; }
     .scena .tez { fill: var(--danger); }
+    .scena .tez:focus-visible { outline: none; stroke: var(--accent); stroke-width: 4; }
     .vzorec { font-family: 'Courier New', monospace; color: var(--text-muted); font-size: 0.98rem; }
     .newton-karta { width: min(330px, 88vw); padding: 8px; }
     .newton-karta img { display: block; width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 10px; }
@@ -27,6 +30,46 @@
 <body>
   <h1>💪 Síla, těžiště a Newtonovy zákony</h1>
   <p class="podtitul">Pro 7. ročník: skládání sil, gravitační síla, těžiště a tři pohybové zákony.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Co dělá síla a jak se síly skládají</summary>
+    <div class="obsah">
+      <p>Síla je vždy <b>působení jednoho tělesa na druhé</b>. Poznáš ji podle účinku: těleso se rozjede,
+        zastaví, změní směr nebo se zdeformuje. Sílu značíme <b>F</b>, měříme v <b>newtonech (N)</b>
+        siloměrem a kreslíme ji šipkou – délka šipky ukazuje velikost, hrot směr.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Výslednice</h3><p>Síly <b>stejného směru sčítáš</b>, síly <b>opačného
+          směru odčítáš</b>. Výslednice opačných sil míří ke větší z nich; když jsou stejně velké, vyruší se.</p></article>
+        <article class="vyklad-karta"><h3>Gravitační síla</h3><p><b>F<sub>g</sub> = m · g</b>, g ≈ 10 N/kg.
+          Na každý kilogram působí Země silou asi 10 N. Obráceně: m = F<sub>g</sub> : g.</p></article>
+        <article class="vyklad-karta"><h3>Těžiště</h3><p>Bod, kterým působí gravitační síla. U stejnorodé souměrné
+          desky leží ve středu souměrnosti, u trojúhelníku v průsečíku těžnic.</p></article>
+      </div>
+      <p>Pozor na rozdíl: <b>hmotnost</b> (kg) říká, kolik látky těleso obsahuje, <b>gravitační síla</b> (N)
+        je síla, kterou ho Země přitahuje. Batoh o hmotnosti 8 kg je přitahován silou 80 N.</p>
+      <p><b>Newtonovy zákony</b> rozlišíš otázkou, co se v situaci děje. Nepůsobí žádná síla (nebo se síly
+        vyruší) a těleso si drží klid či pohyb – <b>1. zákon setrvačnosti</b>. Síla mění rychlost, větší síla
+        nebo menší hmotnost dá větší zrychlení – <b>2. zákon síly</b>. Dvě tělesa na sebe působí navzájem
+        stejně velkými silami opačného směru – <b>3. zákon akce a reakce</b>. Akce a reakce se nevyruší,
+        protože každá působí na jiné těleso.</p>
+      <aside class="zapamatuj">Stejný směr sčítám, opačný odčítám. F<sub>g</sub> = m · 10 N/kg.
+        1. zákon: setrvačnost, 2. zákon: síla mění rychlost, 3. zákon: akce a reakce.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: výslednice dvou opačných sil</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Na bednu působí síla F₁ = 45 N doprava a síla F₂ = 20 N doleva. Jak velká je výslednice a kam míří?</p>
+      <ol class="kroky">
+        <li>Zjistím směry: síly míří <b>opačně</b>, proto je budu odčítat.</li>
+        <li>Od větší síly odečtu menší: 45 N − 20 N = <b>25 N</b>.</li>
+        <li>Směr výslednice je směr větší síly – F₁ míří doprava, takže výslednice míří <b>doprava</b>.</li>
+        <li>Kontrola: výslednice je menší než větší síla, ale nenulová – bedna se dá do pohybu doprava, pokud ji nebrzdí tření.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Výslednice má velikost 25 N a míří doprava.</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="vyslednice" class="active">➕ Výslednice sil</button>
@@ -66,7 +109,8 @@ function vyslednice() {
   const F2 = Uloha.nahodneCislo(2, 12) * 5;
   const stejnySmer = Math.random() < 0.5;
   const vysledek = stejnySmer ? F1 + F2 : Math.abs(F1 - F2);
-  const smer = stejnySmer ? 'vpravo' : (F1 > F2 ? 'vpravo' : (F1 < F2 ? 'vlevo' : 'žádný – síly se vyruší'));
+  const smer = stejnySmer || F1 > F2 ? 'vpravo' : 'vlevo';
+  const konec = vysledek === 0 ? 'výslednice je nulová – síly se vyruší' : `výslednice míří ${smer}`;
 
   /* šipky vycházejí z okrajů tělesa (170–230), aby nevedly skrz něj */
   const sipky = stejnySmer
@@ -94,8 +138,8 @@ function vyslednice() {
     moznosti: Uloha.zamichej([fmt(vysledek) + ' N', ...[...jine].slice(0, 3)]).map(x => ({ klic: x, popis: x })),
     spravnyKlic: fmt(vysledek) + ' N',
     zpravaOk: stejnySmer
-      ? `✅ Stejný směr: ${F1} + ${F2} = ${vysledek} N, výslednice míří ${smer}.`
-      : `✅ Opačný směr: |${F1} − ${F2}| = ${vysledek} N, výslednice míří ${smer}.`,
+      ? `✅ Stejný směr: ${F1} + ${F2} = ${vysledek} N, ${konec}.`
+      : `✅ Opačný směr: |${F1} − ${F2}| = ${vysledek} N, ${konec}.`,
     zpravaChyba: 'Stejný směr znamená sčítat, opačný odčítat.',
     poSpravne: skore.vyhodnot,
     dalsi: novaUloha,
@@ -171,18 +215,26 @@ function teziste() {
   /* jedna správná a tři nesprávné polohy */
   const body = [t.tez, [t.tez[0] - 55, t.tez[1] - 30], [t.tez[0] + 50, t.tez[1] + 25], [t.tez[0] - 40, t.tez[1] + 35]];
   const svgBody = karta.querySelector('#body');
+  let poradi = 0;
   Uloha.zamichej(body.map((b, i) => ({ b, spravne: i === 0 }))).forEach(({ b, spravne }) => {
     const c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
     c.setAttribute('cx', b[0]); c.setAttribute('cy', b[1]); c.setAttribute('r', 9);
     c.setAttribute('class', 'tez');
     c.style.cursor = 'pointer';
-    c.addEventListener('click', () => Uloha.odpoved({
+    /* ovládání i z klávesnice: Tab na bod, Enter nebo mezerník */
+    c.setAttribute('tabindex', '0'); c.setAttribute('role', 'button');
+    c.setAttribute('aria-label', `bod ${++poradi} ze 4`);
+    c.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); e.stopPropagation(); vyber(); }
+    });
+    const vyber = () => Uloha.odpoved({
       prvek: c, spravne, stav, odezva,
       zpravaOk: `✅ Těžiště leží ${t.popis}.`,
       zpravaChyba: 'Těžiště stejnorodého tělesa leží v jeho středu souměrnosti.',
       poSpravne: skore.vyhodnot,
       dalsi: novaUloha,
-    }));
+    });
+    c.addEventListener('click', vyber);
     svgBody.appendChild(c);
   });
   p.appendChild(odezva);
@@ -202,7 +254,7 @@ const PRIKLADY = [
   { text: 'Čím větší silou kopneš do míče, tím větší zrychlení míč dostane.', z: 'druhy' },
   { text: 'Těžší vozík se stejnou silou rozjíždí pomaleji než lehký.', z: 'druhy' },
   { text: 'Auto zrychluje, protože motor vyvíjí sílu.', z: 'druhy' },
-  { text: 'Plavec se odrazí od stěny bazénu a stěna odstrčí jeho.', z: 'treti' },
+  { text: 'Plavec se odrazí od stěny bazénu: on tlačí na stěnu a stěna stejně velkou silou tlačí na něj.', z: 'treti' },
   { text: 'Raketa vypuzuje plyny dozadu a sama letí dopředu.', z: 'treti', obrazek: 'raketa', alt: 'Raketa stoupá vzhůru a spaliny proudí dolů.' },
   { text: 'Když udeříš do zdi, zabolí tě ruka.', z: 'treti' },
   { text: 'Bruslař odstrčí kamaráda a sám se rozjede opačným směrem.', z: 'treti', obrazek: 'bruslari', alt: 'Dva bruslaři se po vzájemném odstrčení rozjíždějí opačnými směry.' },

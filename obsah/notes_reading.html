@@ -6,6 +6,8 @@
 <title>🎼 Notová osnova – čtení not</title>
 <link rel="stylesheet" href="../common.css">
 <link rel="stylesheet" href="../vyuka.css">
+<link rel="stylesheet" href="../vyklad.css">
+<script src="../vyklad.js" defer></script>
 <script src="../theme.js"></script>
 <script src="../podpis.js" defer></script>
 <script src="../kostra.js" defer></script>
@@ -20,6 +22,39 @@
 <body>
   <h1>🎼 Notová osnova – čtení not</h1>
   <p class="podtitul">Hudební výchova: rychlé čtení not v houslovém klíči. Po chybě se dozvíš, na které lince nebo v které mezeře nota leží.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Jak číst noty v houslovém klíči</summary>
+    <div class="obsah">
+      <p><b>Notová osnova</b> má pět linek. Linky se počítají <b>zdola</b>: nejspodnější je 1. linka. Mezi linkami jsou
+        čtyři mezery. Nota leží buď <b>na lince</b> (linka prochází jejím středem), nebo <b>v mezeře</b> (mezi dvěma linkami).</p>
+      <p>Čím výš nota leží, tím vyšší tón zní. Noty jdou po stupních jako abeceda tónů: <b>c d e f g a h c</b>.
+        Každý krok nahoru znamená střídání: linka – mezera – linka.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Houslový klíč</h3><p>Začíná se kreslit na <b>2. lince</b>. Tam leží nota <b>g1</b>, proto se mu říká i klíč G.</p></article>
+        <article class="vyklad-karta"><h3>Noty na linkách</h3><p>Zdola: <b>e1, g1, h1, d2, f2</b>.</p></article>
+        <article class="vyklad-karta"><h3>Noty v mezerách</h3><p>Zdola: <b>f1, a1, c2, e2</b>.</p></article>
+        <article class="vyklad-karta"><h3>Mimo osnovu</h3><p><b>d1</b> visí pod osnovou, <b>c1</b> leží ještě níž na pomocné lince, <b>g2</b> je nad osnovou.</p></article>
+      </div>
+      <p>Nemusíš znát všechny noty zpaměti. Stačí jedna <b>záchytná nota</b> – g1 na 2. lince – a od ní počítáš po krocích
+        nahoru nebo dolů. Typická chyba je počítat linky shora; počítej vždy od spodní linky.</p>
+      <aside class="zapamatuj">Linky se počítají zdola. Na 2. lince je g1. Od ní jdi po krocích: linka, mezera, linka…</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: nota na 3. lince</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Nota leží na <b>3. lince</b> zdola. Jak se jmenuje?</p>
+      <ol class="kroky">
+        <li>Najdu záchytnou notu: na 2. lince je <b>g1</b>.</li>
+        <li>O krok výš je mezera nad 2. linkou – to je další tón, <b>a1</b>.</li>
+        <li>O další krok výš je 3. linka – to je další tón po a, tedy <b>h1</b>.</li>
+        <li>Zkontroluji podle řady not na linkách: e1, g1, <b>h1</b> – sedí.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Nota na 3. lince je <b>h1</b>.</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="poloha">📏 Linka, nebo mezera?</button>
@@ -66,7 +101,8 @@ function osnova(krok) {
   const ny = y(krok), nahoru = krok < 6, sx = nahoru ? x + 10 : x - 10;
   h += `<ellipse cx="${x}" cy="${ny}" rx="11" ry="8" fill="var(--accent)" transform="rotate(-18 ${x} ${ny})"/>`;
   h += `<line x1="${sx}" y1="${ny}" x2="${sx}" y2="${nahoru ? ny - 55 : ny + 55}" stroke="var(--accent)" stroke-width="2"/>`;
-  return `<svg class="osnova" viewBox="0 0 460 180" role="img" aria-label="Nota ${poloha(krok)}">${h}</svg>`;
+  // popisek nesmí prozradit polohu noty – ta je odpovědí na otázku
+  return `<svg class="osnova" viewBox="0 0 460 180" role="img" aria-label="Notová osnova s houslovým klíčem a jednou notou">${h}</svg>`;
 }
 
 function novaUloha() {

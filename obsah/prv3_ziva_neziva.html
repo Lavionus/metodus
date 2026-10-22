@@ -6,6 +6,8 @@
   <title>Živá a neživá příroda</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -36,6 +38,42 @@
 <body>
   <h1>🌱 Živá a neživá příroda</h1>
   <p class="podtitul">Pro 3. ročník: co je živé, jaké má znaky a jak přírodniny třídíme.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Jak poznám, co je živé</summary>
+    <div class="obsah">
+      <p>Všechno kolem nás v přírodě jsou <b>přírodniny</b>. Některé žijí – pes, dub, hřib.
+        Jiné nikdy nežily – kámen, voda, vzduch. Rozlišíme je podle <b>znaků života</b>.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Znaky života</h3><p>Živý organismus <b>dýchá</b>, <b>přijímá potravu</b>,
+          <b>roste</b>, <b>rozmnožuje se</b>, a nakonec zaniká. Musí mít všechny znaky, ne jen jeden.</p></article>
+        <article class="vyklad-karta"><h3>Živá příroda</h3><p>Tři skupiny: <b>rostliny</b> (dub, tráva),
+          <b>živočichové</b> (pes, mravenec) a <b>houby</b> (hřib, plíseň, kvasinka).</p></article>
+        <article class="vyklad-karta"><h3>Neživá příroda</h3><p><b>Horniny a nerosty</b> (žula, písek), <b>voda</b>,
+          <b>vzduch</b> a <b>sluneční světlo</b>. Nerostou ani se nerozmnožují.</p></article>
+      </div>
+      <p>Pozor na chytáky. Voda v potoce se pohybuje a krystal soli „roste“. Přesto nežijí,
+        protože nedýchají, nepřijímají potravu a nerozmnožují se. Jeden znak nestačí.</p>
+      <p>A ještě jedna skupina: věci, které <b>byly živé, ale už nežijí</b> – suchý list, peří, kost.
+        Patřily živému tvoru, samy už ale nerostou ani nedýchají.</p>
+      <aside class="zapamatuj">Živé = dýchá, přijímá potravu, roste a rozmnožuje se. Živá příroda: rostliny,
+        živočichové, houby. Neživá: horniny, voda, vzduch, světlo.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: je sníh živý?</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Patří sníh do živé, nebo do neživé přírody?</p>
+      <ol class="kroky">
+        <li>Projdu znaky života. Dýchá sníh? Ne.</li>
+        <li>Přijímá potravu? Ne. Sněhu sice může přibývat, ale to jen padají další vločky – sníh sám neroste.</li>
+        <li>Rozmnožuje se? Ne, nové vločky nevznikají ze starých.</li>
+        <li>Sníh je zmrzlá voda a voda patří do neživé přírody.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Sníh patří do neživé přírody – nemá znaky života.</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="zivot" class="active">🫀 Živé, nebo neživé?</button>
@@ -74,10 +112,10 @@ const skore = Uloha.skore('metodus_prv3_ziva', $('skore'));
 let rezim = 'zivot';
 
 const SKUPINY = {
-  rostlina: { nazev: 'rostlina', ikona: '🌿' },
-  zivocich: { nazev: 'živočich', ikona: '🐾' },
-  houba: { nazev: 'houba', ikona: '🍄' },
-  neziva: { nazev: 'neživá příroda', ikona: '🪨' },
+  rostlina: { nazev: 'rostlina', ikona: '🌿', patri: 'mezi rostliny' },
+  zivocich: { nazev: 'živočich', ikona: '🐾', patri: 'mezi živočichy' },
+  houba: { nazev: 'houba', ikona: '🍄', patri: 'mezi houby' },
+  neziva: { nazev: 'neživá příroda', ikona: '🪨', patri: 'do neživé přírody' },
 };
 
 const VECI = [
@@ -178,8 +216,8 @@ function zivot() {
     ],
     spravnyKlic: zive ? 'ziva' : 'neziva',
     zpravaOk: zive
-      ? `✅ ${v.n} roste a rozmnožuje se – patří do živé přírody.`
-      : `✅ ${v.n} neroste ani se nerozmnožuje – patří do neživé přírody.`,
+      ? `✅ ${velke(v.n)} roste a rozmnožuje se – patří do živé přírody.`
+      : `✅ ${velke(v.n)} neroste ani se nerozmnožuje – patří do neživé přírody.`,
     zpravaChyba: 'Zkus druhou možnost – roste to a rozmnožuje se?',
     poSpravne: skore.vyhodnot,
     dalsi: novaUloha,
@@ -199,8 +237,10 @@ function skupina() {
     kam: p, odezva,
     moznosti: Object.entries(SKUPINY).map(([klic, s]) => ({ klic, ikona: s.ikona, popis: s.nazev })),
     spravnyKlic: v.sk,
-    zpravaOk: `✅ ${v.n} patří mezi skupinu ${SKUPINY[v.sk].nazev}.`,
-    zpravaChyba: 'Ještě ne. Houby nejsou rostliny – nemají zelené listy a nevyrábí si potravu.',
+    zpravaOk: `✅ ${velke(v.n)} patří ${SKUPINY[v.sk].patri}.`,
+    zpravaChyba: v.sk === 'houba' || v.sk === 'rostlina'
+      ? 'Ještě ne. Houby nejsou rostliny – nemají zelené listy a nevyrábí si potravu.'
+      : 'Ještě ne – zkus jinou skupinu. Je to živé? Pohybuje se to samo, nebo roste ze země?',
     poSpravne: skore.vyhodnot,
     dalsi: novaUloha,
   });

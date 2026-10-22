@@ -117,6 +117,15 @@ details p{display:block}
 .muted,.section-intro,.caption,dd{color:#333!important}
 }
 
+.foto-mrizka{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.foto-karta{margin:0;overflow:hidden;border:1px solid var(--border);border-radius:14px;background:var(--bg-card);box-shadow:var(--shadow-sm)}
+.foto-karta img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover}
+.foto-karta figcaption{padding:10px 11px 12px;font-size:.9rem;line-height:1.35}
+.foto-karta strong{display:block;margin-bottom:3px;color:var(--accent);font-size:1rem}
+@media(max-width:980px){.foto-mrizka{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:440px){.foto-mrizka{grid-template-columns:1fr}}
+@media print{.foto-mrizka{grid-template-columns:repeat(2,1fr)}.foto-karta{break-inside:avoid}}
+
 </style>
 </head>
 <body>
@@ -130,6 +139,7 @@ details p{display:block}
 <nav class="jump" aria-label="Části stránky">
 <a href="#atlas">🔎 Prozkoumat buňku</a>
 <a href="#srovnani">⚖️ Porovnat</a>
+<a href="#mikroskop">🔬 Pod mikroskopem</a>
 <a href="#spoluprace">🔄 Jak spolupracují</a>
 <a href="#cviceni">🎯 Procvičit</a>
 </nav>
@@ -235,6 +245,17 @@ details p{display:block}
 <p class="note">
 <b>Zapamatuj si:</b> Rostlinná buňka má membránu <b>i</b> stěnu. Zelená buňka má chloroplasty <b>i</b> mitochondrie. Fotosyntéza nenahrazuje buněčné dýchání.</p>
 </div>
+</section>
+<section id="mikroskop" class="foto-atlas" aria-labelledby="mikroskopNadpis">
+<h2 id="mikroskopNadpis">🔬 Skutečné buňky pod mikroskopem</h2>
+<p class="section-intro">Model výše je zjednodušený a barevný. Takto vypadají skutečné buňky ve školním mikroskopu – porovnej, co z modelu na nich poznáš.</p>
+<div class="foto-mrizka">
+      <figure class="foto-karta"><img src="img/pr/bunka-mikro-cibule.webp" alt="Mikrofotografie pokožky cibule: protáhlé buňky těsně vedle sebe, oddělené buněčnými stěnami." width="1152" height="864" loading="lazy"><figcaption><strong>Pokožka cibule</strong>🌱 Rostlinné buňky těsně u sebe, oddělené pevnými buněčnými stěnami. Chloroplasty nemají – suknice cibule rostou bez světla.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/pr/bunka-mikro-sliznice.webp" alt="Ploché buňky ústní sliznice obarvené methylenovou modří s tmavším jádrem." width="500" height="453" loading="lazy"><figcaption><strong>Buňky ústní sliznice</strong>🐾 Živočišné buňky obarvené methylenovou modří: ploché, nepravidelné, bez buněčné stěny; jádro je tmavší skvrnka.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/pr/bunka-mikro-mech.webp" alt="Buňky listu mechu prutníku s mnoha zelenými kulatými chloroplasty." width="768" height="683" loading="lazy"><figcaption><strong>List mechu</strong>🌱 Zelené rostlinné buňky prutníku. Drobná zelená zrníčka jsou chloroplasty, ve kterých probíhá fotosyntéza.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/pr/bunka-mikro-trepka.webp" alt="Trepky velké pod mikroskopem: protáhlé jednobuněčné organismy pokryté brvami." width="1152" height="864" loading="lazy"><figcaption><strong>Trepka velká</strong>🦠 Celý organismus tvoří jediná buňka. Plave pomocí tisíců drobných brv na povrchu.</figcaption></figure>
+</div>
+<p class="caption">Buňky na snímcích jsou zvětšené desítkykrát až stokrát. Barvivo (methylenová modř) zvýrazňuje jádro a okraj buňky.</p>
 </section>
 <section id="spoluprace">
 <h2>3. Buňka funguje jako tým</h2>
@@ -418,7 +439,7 @@ const ORGANELY={
   }
 };
 const ANIMAL=`<div class="bodywrap">
-  <img src="Prirodopis/bunka_zivocisna.png" alt="Ilustrace živočišné buňky">
+  <img src="Prirodopis/bunka_zivocisna.webp" alt="Ilustrace živočišné buňky">
   <svg viewBox="0 0 800 856" xmlns="http://www.w3.org/2000/svg">
     <path class="organ" data-o="membrana" fill-rule="evenodd" d="M415,9 L481,14 L543,34 L594,45 L627,59 L651,78 L670,108 L689,164 L738,216 L757,244 L769,270 L778,308 L781,371 L792,445 L789,504 L774,564 L718,679 L694,715 L633,772 L576,813 L516,836 L448,848 L385,844 L306,823 L202,782 L164,761 L134,739 L110,714 L89,684 L37,582 L17,529 L8,472 L12,393 L25,340 L42,304 L71,259 L87,209 L111,158 L132,128 L161,102 L201,80 L368,17 L415,9 Z M416,47 L372,54 L332,67 L201,118 L159,142 L125,209 L109,259 L80,304 L63,340 L50,393 L46,472 L52,516 L66,562 L124,679 L145,710 L202,744 L327,792 L391,807 L448,810 L504,801 L564,781 L607,755 L660,710 L680,679 L736,564 L751,504 L754,445 L743,371 L740,308 L731,270 L719,244 L700,216 L651,164 L626,97 L594,83 L543,72 L481,52 L416,47 Z"/>
     <path class="organ" data-o="cytoplazma" fill-rule="evenodd" d="M415,47 L481,52 L543,72 L594,83 L626,97 L651,164 L700,216 L719,244 L731,270 L740,308 L743,371 L754,445 L751,504 L736,564 L680,679 L660,710 L607,755 L564,781 L516,798 L448,810 L391,807 L327,792 L202,744 L145,710 L124,679 L66,562 L54,525 L46,472 L50,393 L63,340 L80,304 L109,259 L125,209 L159,142 L201,118 L332,67 L372,54 L415,47 Z"/>
@@ -464,7 +485,7 @@ const ANIMAL=`<div class="bodywrap">
 </div>`;
 
 const PLANT=`<div class="bodywrap">
-  <img src="Prirodopis/bunka_rostlinna.png" alt="Ilustrace rostlinné buňky">
+  <img src="Prirodopis/bunka_rostlinna.webp" alt="Ilustrace rostlinné buňky">
   <svg viewBox="0 0 800 993" xmlns="http://www.w3.org/2000/svg">
     <path class="organ" data-o="stena" fill-rule="evenodd" d="M645,9 L658,12 L668,26 L681,30 L689,41 L683,122 L711,182 L729,237 L759,385 L773,529 L774,705 L779,731 L792,757 L791,773 L774,829 L763,840 L743,844 L727,860 L706,894 L698,947 L694,953 L677,961 L664,960 L631,936 L612,933 L302,943 L270,947 L255,956 L227,984 L209,984 L199,977 L189,945 L95,866 L79,859 L50,862 L36,852 L19,787 L20,776 L37,755 L40,743 L29,676 L19,575 L18,448 L26,332 L23,322 L11,307 L10,246 L15,232 L36,210 L67,165 L76,77 L103,52 L113,53 L137,70 L183,75 L288,53 L367,46 L445,41 L595,46 L617,39 L645,9 Z M471,69 L373,74 L278,84 L202,98 L163,110 L137,123 L115,146 L94,179 L78,222 L59,312 L48,433 L52,553 L60,629 L75,706 L91,756 L104,774 L158,824 L194,850 L224,865 L267,873 L361,874 L527,870 L628,860 L658,850 L688,824 L718,783 L738,748 L745,703 L746,586 L737,458 L719,323 L699,235 L678,175 L648,117 L633,97 L619,87 L596,77 L578,74 L471,69 Z"/>
     <path class="organ" data-o="membrana" fill-rule="evenodd" d="M470,69 L578,74 L596,77 L619,87 L633,97 L648,117 L678,175 L699,235 L719,323 L737,458 L746,586 L745,703 L738,748 L718,783 L688,824 L658,850 L628,860 L527,870 L361,874 L267,873 L224,865 L194,850 L158,824 L104,774 L91,756 L75,706 L60,629 L52,553 L48,433 L59,312 L78,222 L94,179 L115,146 L137,123 L163,110 L202,98 L278,84 L373,74 L470,69 Z M441,80 L282,94 L214,106 L165,121 L139,137 L117,163 L98,197 L84,237 L67,323 L57,428 L61,560 L74,651 L89,720 L97,746 L114,769 L143,798 L203,844 L243,861 L310,865 L451,864 L624,851 L655,840 L676,822 L716,768 L731,733 L733,692 L736,690 L736,579 L733,577 L734,534 L731,532 L733,517 L730,515 L728,457 L725,455 L721,406 L706,313 L687,235 L662,165 L629,109 L605,92 L541,82 L441,80 Z"/>

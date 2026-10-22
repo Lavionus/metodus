@@ -6,6 +6,8 @@
   <title>Programování – funkce a parametry</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -31,6 +33,38 @@
 <body>
   <h1>🧩 Programování – funkce a parametry</h1>
   <p class="podtitul">Pro 7. ročník: rozdělení programu na části, které lze používat opakovaně.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Funkce, parametr a návratová hodnota</summary>
+    <div class="obsah">
+      <p>Když se v programu opakuje stejná skupina příkazů, dáme jí <b>jméno</b> a uložíme ji jako <b>funkci</b>.
+        Pak stačí napsat jméno funkce (<b>zavolat</b> ji) a celé její tělo se provede. Program je kratší a chybu
+        opravíš na jednom místě místo na pěti.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Definice a volání</h3><p><b>funkce ctverec(a): …</b> funkci jen popíše, sama nic nenakreslí. Kreslí se až při volání <b>ctverec(50)</b> – a při každém volání znovu.</p></article>
+        <article class="vyklad-karta"><h3>Parametr</h3><p>To, co se mezi opakováními <b>mění</b>, uděláme parametrem. Při volání ctverec(50) se za a dosadí 50, při ctverec(80) se dosadí 80.</p></article>
+        <article class="vyklad-karta"><h3>vrať</h3><p>Příkaz <b>vrať</b> předá výsledek zpět na místo volání. dvojnasobek(7) se pak chová jako číslo 14. Funkce, která nic nevrací, jen něco udělá, se nazývá <b>procedura</b>.</p></article>
+      </div>
+      <p>Jak poznám, co dát do funkce? Najdu část, která se opakuje, a zeptám se, čím se jednotlivá opakování liší –
+        to bude parametr. Častá chyba: myslet si, že se funkce provede už tím, že je napsaná, nebo zapomenout,
+        že dvě volání znamenají dvakrát celé tělo funkce.</p>
+      <aside class="zapamatuj">Funkce = pojmenovaný kus programu. Opakující se část dej do funkce, měnící se hodnotu do parametru, výsledek vrať příkazem vrať.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: co program vypíše</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">funkce trojnasobek(x): vrať x * 3. Program pak provede: piš trojnasobek(4) + trojnasobek(2). Co se vypíše?</p>
+      <ol class="kroky">
+        <li>Definice funkce sama nic nevypíše – jen říká, že funkce vrátí svůj parametr krát 3.</li>
+        <li>První volání trojnasobek(4): za x dosadím 4, funkce vrátí 4 · 3 = <b>12</b>.</li>
+        <li>Druhé volání trojnasobek(2): za x dosadím 2, funkce vrátí 2 · 3 = <b>6</b>.</li>
+        <li>Na místo obou volání dosadím vrácené hodnoty: 12 + 6 = <b>18</b> a to se vypíše.</li>
+      </ol>
+      <p class="vysledek-ukazky">Program vypíše 18.</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="cteni" class="active">🔍 Co program udělá</button>
@@ -89,7 +123,7 @@ piš dvojnasobek(7)`,
 
 ctverec(50)
 ctverec(50)`,
-    q: 'Kolik čar celkem robot nakreslí?', a: '8', b: ['4', '2', '16'],
+    q: 'Kolikrát se celkem provede příkaz „dopředu“?', a: '8', b: ['4', '2', '16'],
   },
   {
     kod: `funkce trojuhelnik(a):
@@ -156,14 +190,19 @@ function volani() {
   const p = $('plocha');
   const tvar = Uloha.nahodne(['ctverec', 'obdelnik', 'trojuhelnik']);
   const a = Uloha.nahodneCislo(2, 5) * KROK;
-  const b = Uloha.nahodneCislo(2, 4) * KROK;
+  let b = Uloha.nahodneCislo(2, 4) * KROK;
+  // obdélník se stejnými stranami by byl čtverec – pak by platilo i volání ctverec(a)
+  while (tvar === 'obdelnik' && b === a) b = Uloha.nahodneCislo(2, 4) * KROK;
   const spravny = tvar === 'ctverec' ? `ctverec(${a})`
     : tvar === 'obdelnik' ? `obdelnik(${a}, ${b})` : `trojuhelnik(${a})`;
   const jine = new Set([
     `ctverec(${a + KROK})`, `obdelnik(${b}, ${a})`, `trojuhelnik(${a + KROK})`,
     `ctverec(${a - KROK})`, `obdelnik(${a}, ${b + KROK})`,
   ]);
-  jine.delete(spravny);
+  // rušivé volání nesmí nakreslit stejný obrazec (např. obdelnik(40, 40) = ctverec(40))
+  const obrazec = t => { const [, f, x, y] = t.match(/^(\w+)\((\d+)(?:, (\d+))?\)$/);
+    return f === 'trojuhelnik' ? 'T' + x : 'R' + x + 'x' + (f === 'ctverec' ? x : y); };
+  [...jine].forEach(t => { if (obrazec(t) === obrazec(spravny)) jine.delete(t); });
 
   p.innerHTML = `<div class="zadani uloha-text">Které volání funkce nakreslí tento obrazec?</div>
     <div class="karta">${svgObrazec(tvar, a, b)}</div>
@@ -173,7 +212,7 @@ funkce trojuhelnik(a) …   # rovnostranný trojúhelník`)}</div>`;
   const odezva = odezvaEl();
   Uloha.vyber({
     kam: p, odezva,
-    moznosti: Uloha.zamichej([spravny, ...[...jine].slice(0, 3)]).map(t => ({ klic: t, popis: t })),
+    moznosti: Uloha.zamichej([spravny, ...Uloha.zamichej([...jine]).slice(0, 3)]).map(t => ({ klic: t, popis: t })),
     spravnyKlic: spravny,
     zpravaOk: `✅ ${spravny} – rozměry odečteš z mřížky (jeden čtvereček je ${KROK} kroků).`,
     zpravaChyba: 'Spočítej čtverečky mřížky a vynásob je dvaceti.',

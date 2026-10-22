@@ -6,6 +6,8 @@
   <title>Příprava na přijímací zkoušky – M</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -30,6 +32,42 @@
   <h1>🎯 Příprava na přijímací zkoušky – M</h1>
   <p class="podtitul">Pro 9. ročník: typové úlohy, test na čas a přehled, co dotrénovat.</p>
 
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Jak na typové úlohy přijímaček</summary>
+    <div class="obsah">
+      <p>Úlohy se tu dělí do čtyř skupin. V každé se opakuje pár pravidel – když je máš v hlavě, ušetříš čas
+        a vyhneš se chybám z nepozornosti.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Počítání</h3><p><b>Násobení a dělení má přednost</b> před sčítáním: 4 + 3 · 5 = 4 + 15 = 19, ne 35.
+          Procenta: p % z čísla c = c · p : 100. Součin dvou záporných čísel je kladný.</p></article>
+        <article class="vyklad-karta"><h3>Výrazy a rovnice</h3><p>Rovnici řeš ekvivalentními úpravami (na obou stranách totéž)
+          a udělej zkoušku dosazením. (a + b)(a − b) = a² − b². Při vytýkání hledej největšího společného dělitele.</p></article>
+        <article class="vyklad-karta"><h3>Geometrie</h3><p>Obvod obdélníku 2 · (a + b), obsah kruhu πr², objem kvádru a · b · c.
+          Pythagorova věta: c² = a² + b², kde c je přepona.</p></article>
+        <article class="vyklad-karta"><h3>Slovní úlohy</h3><p>Sleva o p % → platíš (100 − p) %. Dráha s = v · t.
+          Poměr a : b → celek rozděl na a + b dílů. Víc dělníků → méně dní (nepřímá úměrnost).</p></article>
+      </div>
+      <p>Na čas se vyplatí postup: nejdřív udělej úlohy, které umíš hned, těžší nech na konec.
+        U výsledku si udělej rychlý <b>odhad</b> – vyjde-li zlevněné zboží dražší než původní, něco je špatně.
+        Pohlídej si také <b>jednotky</b> (cm, cm², cm³).</p>
+      <aside class="zapamatuj">Přednost operací, zkouška u rovnice, odhad a jednotky u výsledku. Těžkou úlohu přeskoč a vrať se k ní.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: dělení v poměru</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Částku 360 Kč rozdělíme v poměru 4 : 5. Kolik Kč dostane ten první?</p>
+      <ol class="kroky">
+        <li>Poměr 4 : 5 znamená, že celek rozdělím na 4 + 5 = <b>9 stejných dílů</b>.</li>
+        <li>Jeden díl je 360 : 9 = <b>40 Kč</b>.</li>
+        <li>První dostane 4 díly: 4 · 40 = <b>160 Kč</b> (druhý 5 · 40 = 200 Kč).</li>
+        <li>Kontrola: 160 + 200 = 360 Kč a 160 : 200 = 4 : 5. Sedí to.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ První dostane 160 Kč.</p>
+    </div>
+  </details>
+
   <div class="rezimy" id="rezimy">
     <button data-rezim="test" class="active">⏱️ Test na čas</button>
     <button data-rezim="pocitani">🧮 Počítání</button>
@@ -46,7 +84,7 @@
   </div>
 
   <p class="napoveda">
-    Jednotná přijímací zkouška z matematiky trvá <b>85 minut</b>. Tady si vyzkoušíš zkrácenou verzi:
+    Jednotná přijímací zkouška z matematiky trvá <b>70 minut</b>. Tady si vyzkoušíš zkrácenou verzi:
     <b>10 úloh za 12 minut</b>. Po testu uvidíš, které typy úloh ti dělaly problém.
   </p>
 
@@ -54,7 +92,10 @@
 const $ = id => document.getElementById(id);
 const skore = Uloha.skore('metodus_m9_prijimacky', $('skore'));
 let rezim = 'test';
-const fmt = x => Number(Number(x).toFixed(2)).toLocaleString('cs-CZ');
+const fmt = x => Number(Number(x).toFixed(2)).toLocaleString('cs-CZ').replace('-', '−');
+/* tvar slova podle čísla: 1 den, 2 dny, 5 dní, 1,5 dne */
+const sl = (n, jeden, dva, pet, des = pet) => !Number.isInteger(n) ? des : n === 1 ? jeden : (n >= 2 && n <= 4) ? dva : pet;
+const nsd = (a, b) => b ? nsd(b, a % b) : a;
 function odezvaEl() { const d = document.createElement('div'); d.className = 'odezva'; return d; }
 
 const TYPY = { pocitani: 'počítání', vyrazy: 'výrazy a rovnice', geometrie: 'geometrie', slovni: 'slovní úlohy' };
@@ -86,9 +127,10 @@ const GENERATORY = {
         a: fmt(v), b: jineHodnoty(v, [(c1 + c2) / (j + j2), c1 / j * (c2 / j2), v + 0.5]) };
     },
     () => {
-      const a = Uloha.nahodneCislo(-12, 12), b = Uloha.nahodneCislo(-12, 12);
+      // bez nuly – s ní by z rušivých možností zbyla jediná
+      const a = Uloha.nahodne([-1, 1]) * Uloha.nahodneCislo(2, 12), b = Uloha.nahodne([-1, 1]) * Uloha.nahodneCislo(2, 12);
       const v = a * b;
-      return { q: `Vypočítej: (${a}) · (${b})`, a: fmt(v), b: jineHodnoty(v, [a + b, -v, a - b]) };
+      return { q: `Vypočítej: ${a < 0 ? `(${fmt(a)})` : a} · ${b < 0 ? `(${fmt(b)})` : b}`, a: fmt(v), b: jineHodnoty(v, [a + b, -v, a - b, v + a]) };
     },
   ],
   vyrazy: [
@@ -110,9 +152,16 @@ const GENERATORY = {
         b: [`x² + ${b * b}`, `x² − ${2 * b}x + ${b * b}`, `x² + ${2 * b}x − ${b * b}`] };
     },
     () => {
-      const k = Uloha.nahodneCislo(2, 8), m = Uloha.nahodneCislo(2, 9), n = Uloha.nahodneCislo(1, 9);
-      return { q: `Vytkni před závorku: ${k * m}x + ${k * n}`, a: `${k}·(${m}x + ${n})`,
-        b: [`${k * m}·(x + ${n})`, `${k}·(${m * k}x + ${n})`, `${m}·(${k}x + ${n})`] };
+      // m, n nesoudělná – jinak by k nebylo největší společný činitel a správná odpověď by chyběla
+      const k = Uloha.nahodneCislo(2, 8);
+      let m, n;
+      do { m = Uloha.nahodneCislo(2, 9); n = Uloha.nahodneCislo(1, 9); } while (nsd(m, n) !== 1);
+      const zapis = (f, a, b) => `${f}·(${a === 1 ? '' : a}x + ${b})`;
+      // rušivé: chybné roznásobení zpět (žádná nesmí mít stejnou hodnotu jako správná)
+      const kandidati = [[k * m, 1, n], [k, m * k, n], [k, m, k * n], [m, k, n], [k, m, n + k], [k * n, m, 1]]
+        .filter(([f, a, b]) => !(f * a === k * m && f * b === k * n));
+      const b = [...new Set(kandidati.map(t => zapis(...t)))].slice(0, 3);
+      return { q: `Vytkni před závorku co největší číslo: ${k * m}x + ${k * n}`, a: zapis(k, m, n), b };
     },
   ],
   geometrie: [
@@ -151,20 +200,25 @@ const GENERATORY = {
     () => {
       const rychlost = Uloha.nahodne([40, 60, 80, 90]), cas = Uloha.nahodneCislo(2, 5);
       const v = rychlost * cas;
-      return { q: `Auto jede stálou rychlostí ${rychlost} km/h. Jakou dráhu urazí za ${cas} hodiny?`,
+      return { q: `Auto jede stálou rychlostí ${rychlost} km/h. Jakou dráhu urazí za ${cas} ${sl(cas, 'hodinu', 'hodiny', 'hodin')}?`,
         a: fmt(v) + ' km', b: jineHodnoty(v, [rychlost / cas, rychlost + cas, v * 2]).map(t => t + ' km') };
     },
     () => {
-      const a = Uloha.nahodneCislo(1, 7), b = Uloha.nahodneCislo(1, 7), dil = Uloha.nahodneCislo(3, 20) * 5;
+      // a ≠ b a poměr v základním tvaru – při 3 : 3 by všechny rušivé splynuly se správnou
+      let a, b;
+      do { a = Uloha.nahodneCislo(1, 7); b = Uloha.nahodneCislo(1, 7); } while (a === b || nsd(a, b) !== 1);
+      const dil = Uloha.nahodneCislo(3, 20) * 5;
       const celek = (a + b) * dil;
       return { q: `Částku ${celek} Kč rozdělíme v poměru ${a} : ${b}. Kolik Kč dostane ten první?`,
-        a: fmt(a * dil) + ' Kč', b: jineHodnoty(a * dil, [b * dil, celek / 2, celek - a * dil]).map(t => t + ' Kč') };
+        a: fmt(a * dil) + ' Kč', b: jineHodnoty(a * dil, [b * dil, celek / 2, dil, (a + 1) * dil, celek / a]).map(t => t + ' Kč') };
     },
     () => {
       const delnici = Uloha.nahodneCislo(2, 6), dny = Uloha.nahodneCislo(2, 10), nasobek = Uloha.nahodne([2, 3]);
       const v = dny / nasobek;
-      return { q: `${delnici} dělníci postaví zeď za ${dny} dní. Za jak dlouho ji postaví ${delnici * nasobek} dělníků?`,
-        a: fmt(v) + ' dní', b: jineHodnoty(v, [dny * nasobek, dny + nasobek, dny]).map(t => t + ' dní') };
+      const dni = t => `${t} ${sl(Number(t.replace(',', '.')), 'den', 'dny', 'dní', 'dne')}`;
+      const d2 = delnici * nasobek;
+      return { q: `${delnici} ${sl(delnici, 'dělník', 'dělníci', 'dělníků')} postaví zeď za ${dny} ${sl(dny, 'den', 'dny', 'dní')}. Za jak dlouho ji postaví ${d2} ${sl(d2, 'dělník', 'dělníci', 'dělníků')}?`,
+        a: dni(fmt(v)), b: jineHodnoty(v, [dny * nasobek, dny + nasobek, dny]).map(dni) };
     },
   ],
 };
@@ -203,7 +257,7 @@ function test() {
   const poradiTypu = Uloha.zamichej([...Object.keys(TYPY), ...Object.keys(TYPY), 'pocitani', 'slovni']).slice(0, POCET_ULOH);
   testStav = {
     ulohy: poradiTypu.map(t => novaUlohaTypu(t)),
-    i: 0, spravne: 0, zbyva: LIMIT, chyby: [], bezi: true,
+    i: 0, spravne: 0, zbyva: LIMIT, chyby: [], dobre: [], bezi: true,
   };
   tikej();
   dalsiTestovaUloha();
@@ -232,7 +286,7 @@ function dalsiTestovaUloha() {
       <span>zbývá <span class="cas" id="cas">${m}:${String(s).padStart(2, '0')}</span></span>
     </div>`;
   zobrazUlohu(u, napoprve => {
-    if (napoprve) testStav.spravne++; else testStav.chyby.push(u);
+    if (napoprve) { testStav.spravne++; testStav.dobre.push(u); } else testStav.chyby.push(u);
     skore.vyhodnot(napoprve);
   }, () => { testStav.i++; dalsiTestovaUloha(); }, hlavicka);
 }
@@ -241,20 +295,21 @@ function vysledkyTestu(vyprselCas) {
   const p = $('plocha');
   const podleTypu = {};
   for (const t of Object.keys(TYPY)) {
+    // přeskočené a nestihnuté úlohy se počítají jako chybné, ne jako správné
     const celkem = testStav.ulohy.filter(x => x.typ === t).length;
-    const chybne = testStav.chyby.filter(x => x.typ === t).length;
+    const chybne = celkem - testStav.dobre.filter(x => x.typ === t).length;
     if (celkem) podleTypu[t] = { celkem, chybne };
   }
   const radky = Object.entries(podleTypu).map(([t, v]) =>
     `<tr><td>${TYPY[t]}</td><td>${v.celkem - v.chybne} / ${v.celkem}</td>
-      <td class="${v.chybne ? 'spatne' : 'dobre'}">${v.chybne ? v.chybne + ' chyb' : 'bez chyby'}</td></tr>`).join('');
+      <td class="${v.chybne ? 'spatne' : 'dobre'}">${v.chybne ? v.chybne + ' ' + sl(v.chybne, 'chyba', 'chyby', 'chyb') : 'bez chyby'}</td></tr>`).join('');
 
   p.innerHTML = `<div class="zadani">${vyprselCas ? '⏰ Čas vypršel!' : '🏁 Test dokončen'}</div>
     <div class="velke-cislo">${testStav.spravne} / ${testStav.ulohy.length}</div>
     <div class="vysledky">
       <table><tr><th>typ úlohy</th><th>napoprvé správně</th><th>chyby</th></tr>${radky}</table>
-      ${testStav.chyby.length
-        ? `<p style="margin-top:12px">Doporučené procvičení: <b>${[...new Set(testStav.chyby.map(x => TYPY[x.typ]))].join(', ')}</b></p>`
+      ${testStav.spravne < testStav.ulohy.length
+        ? `<p style="margin-top:12px">Doporučené procvičení: <b>${Object.keys(podleTypu).filter(t => podleTypu[t].chybne).map(t => TYPY[t]).join(', ')}</b></p>`
         : '<p style="margin-top:12px;color:var(--ok)">Všechno napoprvé správně – skvělá práce!</p>'}
     </div>`;
   const znovu = document.createElement('button');

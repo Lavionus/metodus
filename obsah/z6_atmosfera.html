@@ -6,6 +6,8 @@
   <title>Atmosféra a počasí</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -34,6 +36,43 @@
 <body>
   <h1>☁️ Atmosféra a počasí</h1>
   <p class="podtitul">Pro 6.–7. ročník: složení vzduchu, vrstvy atmosféry, počasí a podnebné pásy.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Vzduch, počasí a podnebí</summary>
+    <div class="obsah">
+      <p><b>Atmosféra</b> je plynný obal Země. Tvoří ji hlavně <b>dusík (78 %)</b> a <b>kyslík (21 %)</b>, zbytek jsou
+        další plyny a vodní pára. S výškou vzduch řídne a dělí se na vrstvy.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Vrstvy zdola</h3><p><b>Troposféra</b> (zhruba do 11 km, v ní je všechno počasí) →
+          <b>stratosféra</b> (ozonová vrstva) → <b>mezosféra</b> (shoří v ní většina meteoroidů) → <b>termosféra</b> (polární záře, družice).</p></article>
+        <article class="vyklad-karta"><h3>Počasí</h3><p><b>Okamžitý stav</b> ovzduší na určitém místě: teplota, srážky, vítr, oblačnost
+          dnes, zítra, právě teď.</p></article>
+        <article class="vyklad-karta"><h3>Podnebí</h3><p><b>Dlouhodobý průměr</b> počasí za desítky let. Popisuje, jaké to v kraji
+          obvykle bývá – průměrné teploty, roční srážky, typická léta a zimy.</p></article>
+      </div>
+      <p>Jak je poznáš? Hledej v textu <b>čas</b>. Slova „dnes, zítra, v noci, právě“ ukazují na počasí. Slova
+        „průměrně, ročně, bývá, celoročně“ ukazují na podnebí. <b>Typická chyba:</b> jedna horká zima ještě neznamená změnu
+        podnebí – to je jen počasí v jednom roce.</p>
+      <p>Podnebí určuje hlavně to, jak vysoko Slunce během roku vystupuje. Proto se od rovníku k pólům střídají
+        <b>podnebné pásy</b>: tropický, subtropický, mírný (Česko), subpolární a polární.</p>
+      <aside class="zapamatuj">Počasí = teď a tady, podnebí = dlouhodobý průměr. Veškeré počasí se odehrává v troposféře.
+        Tlaková níže přináší oblačnost a srážky, tlaková výše jasno.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: počasí, nebo podnebí?</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Rozhodni, zda věta popisuje počasí, nebo podnebí: „V Sahaře prší v průměru méně než 100 mm ročně.“</p>
+      <ol class="kroky">
+        <li>Hledám ve větě údaj o čase: je tam „v průměru“ a „ročně“.</li>
+        <li>Věta tedy nemluví o jednom dni, ale o tom, jak to v Sahaře <b>obvykle bývá</b> po mnoho let.</li>
+        <li>Dlouhodobý průměr počasí je podnebí.</li>
+        <li>Pro kontrolu si představím opak: „Dnes v Sahaře nepršelo“ by bylo počasí.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Věta popisuje podnebí.</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="pasy" class="active">🌡️ Podnebné pásy</button>
@@ -129,7 +168,8 @@ const FOTO_JEVY = [
   { n: 'inverze', img: 'z6-atmosfera-inverze', w: 1152, h: 864, alt: 'Údolí vyplněná mořem nízké oblačnosti, nad kterou vystupují vrcholky kopců do jasného počasí.',
     o: 'v údolí leží studený vzduch s mlhou nebo nízkou oblačností a na horách je tepleji a jasno – z kopce vidíš „moře mraků“' },
 ];
-const fotoJev = (x, trida) => `<img class="${trida}" src="img/z/${x.img}.webp" alt="${x.alt}" width="${x.w}" height="${x.h}">`;
+// Fotka je sama otázkou – alt nesmí prozradit odpověď.
+const fotoJev = (x, trida) => `<img class="${trida}" src="img/z/${x.img}.webp" alt="Fotografie k určení." width="${x.w}" height="${x.h}">`;
 
 /* ---- Podnebné pásy ---------------------------------------------------------------------- */
 function pasy() {

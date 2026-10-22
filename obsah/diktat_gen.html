@@ -6,6 +6,8 @@
   <title>Generátor diktátů</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -73,6 +75,38 @@
   <h1>✍️ Generátor diktátů</h1>
   <p class="podtitul">Věta se ukáže s vynechanými písmeny, na která je zaměřená – doplň je, nebo přepiš celou větu.</p>
 
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Jak psát diktát bez chyb</summary>
+    <div class="obsah">
+      <p>Diktát netrénuje jen rychlé psaní. Učí tě <b>zastavit se na místě, kde se rozhoduje</b>, a rozhodnout podle pravidla,
+        ne podle pocitu. V tomto diktátu jsou tři druhy takových míst.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>i/y po obojetných</h3><p>Po <b>b, f, l, m, p, s, v, z</b> píšeš y jen ve vyjmenovaných slovech a ve slovech s nimi příbuzných: vydra, bylinky, lyžaři. Jinak i: listí, pitná.</p></article>
+        <article class="vyklad-karta"><h3>Velká písmena</h3><p>Velkým písmenem začíná <b>každá věta</b> a <b>vlastní jména</b>: osoby (Petra, pan Novák), místa (Praha, Vltava, Krkonoše), ulice (Krátká ulice).</p></article>
+        <article class="vyklad-karta"><h3>Shoda podmětu s přísudkem</h3><p>Koncovka příčestí závisí na podmětu: <b>-i</b> u rodu mužského životného (chlapci běželi), <b>-y</b> u mužského neživotného a ženského (stromy se ohýbaly, dívky zpívaly), <b>-a</b> u středního (koťata se schovala).</p></article>
+      </div>
+      <p>Jak poznám, že mám zpomalit? Když slyším i a před ním je obojetná souhláska. Když jde o jméno osoby, města, řeky nebo hor.
+        Když sloveso končí na -l a píšu za ním i, nebo y. Pak se zeptám: proč?</p>
+      <p>Častá chyba: napsat větu správně podle zvuku a zapomenout, že i a y znějí stejně. Po napsání si větu vždy přečti ještě jednou a hledej právě tato místa.</p>
+      <aside class="zapamatuj">Na každém rozhodovacím místě si řekni pravidlo: vyjmenované nebo příbuzné slovo → y; vlastní jméno nebo začátek věty → velké písmeno; podmět určí koncovku -i, -y, -a.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: doplň písmena ve větě</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Doplň: „S_korky s_ na krm_tku zobaly sem_nka.“</p>
+      <ol class="kroky">
+        <li>Všechna místa jsou po obojetné souhlásce s nebo m, takže rozhoduji podle slova.</li>
+        <li>S_korky: sýkora patří do vyjmenovaných slov po s, píšu <b>ý</b> – sýkorky.</li>
+        <li>s_: zájmeno si není vyjmenované ani příbuzné, píšu <b>i</b>.</li>
+        <li>krm_tku: krmítko je od slovesa krmit, žádné vyjmenované slovo to není, píšu <b>í</b>.</li>
+        <li>sem_nka: semínko je od slova semeno, vyjmenované není, píšu <b>í</b>. Na konci větu přečtu znovu celou.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Sýkorky si na krmítku zobaly semínka.</p>
+    </div>
+  </details>
+
   <div class="rezimy" id="rezimy">
     <button data-rezim="doplnovani" class="active">✏️ Doplň písmena</button>
     <button data-rezim="prepis">⌨️ Přepiš celou větu</button>
@@ -99,7 +133,7 @@ const $ = id => document.getElementById(id);
 
 const VETY = {
   vyjm: [
-    'Vydra si vyla pelíšek u rybníka.',
+    'Vydra si vystlala pelíšek u rybníka.',
     'Slyšeli jsme, jak myslivec troubí na lesní roh.',
     'Bylinky voní po celé zahradě.',
     'Výr usedl na starý dub a zpytoval okolí.',

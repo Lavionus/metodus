@@ -6,6 +6,8 @@
   <title>Tlak v kapalinách a plynech</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -27,6 +29,47 @@
 <body>
   <h1>🎈 Tlak v kapalinách a plynech</h1>
   <p class="podtitul">Pro 7. ročník: hydrostatický tlak, Pascalův zákon, hydraulika a plavání těles.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Tlak v pevných látkách, kapalinách a plynech</summary>
+    <div class="obsah">
+      <p><b>Tlak</b> říká, jak velká síla připadá na jeden metr čtvereční plochy. Stejná síla rozložená
+        na velkou plochu tlačí málo, soustředěná na malou plochu tlačí hodně. Proto se ve sněžnicích
+        neboříš do sněhu a jehla snadno propíchne látku. Jednotkou je <b>pascal (Pa)</b>, 1 Pa = 1 N/m²,
+        1 kPa = 1000 Pa.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Tlak pevného tělesa</h3><p><b>p = F : S</b> – síla dělená
+          obsahem plochy, na kterou působí. Menší plocha → větší tlak.</p></article>
+        <article class="vyklad-karta"><h3>Hydrostatický tlak</h3><p><b>p = h · ρ · g</b> – hloubka
+          pod hladinou krát hustota kapaliny krát g (10 N/kg). Tvar nádoby nehraje roli.</p></article>
+        <article class="vyklad-karta"><h3>Pascalův zákon</h3><p>Tlak vyvolaný vnější silou se šíří kapalinou
+          všemi směry stejně. V hydraulickém lisu platí <b>F₁ : S₁ = F₂ : S₂</b>.</p></article>
+        <article class="vyklad-karta"><h3>Plavání</h3><p>Hustota tělesa menší než hustota kapaliny → plave,
+          stejná → vznáší se, větší → klesne ke dnu.</p></article>
+      </div>
+      <p>Proč tlak roste s hloubkou? Na každé místo v kapalině tlačí tíha kapaliny nad ním – čím hlouběji,
+        tím vyšší sloupec. Proto má přehradní hráz dole silnější zeď než nahoře. Typická chyba: dosadit
+        hloubku v centimetrech nebo zapomenout výsledek v pascalech převést na kPa (dělit 1000).</p>
+      <p>U hydraulického lisu je tlak pod oběma písty stejný. Má-li velký píst 5× větší obsah, působí
+        na něj 5× větší síla – malou silou tak zvedneš těžké auto.</p>
+      <aside class="zapamatuj">p = F : S, hydrostatický tlak p = h · ρ · g (h v metrech, ρ v kg/m³).
+        Kolikrát větší píst, tolikrát větší síla. Menší hustota než kapalina → plave.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: tlak v oleji v hloubce 4 m</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Jak velký je hydrostatický tlak v hloubce 4 m pod hladinou oleje (ρ = 900 kg/m³)? Použij g = 10 N/kg.</p>
+      <ol class="kroky">
+        <li>Zapíšu, co znám: <b>h = 4 m</b>, <b>ρ = 900 kg/m³</b>, <b>g = 10 N/kg</b>, hledám <b>p</b>.</li>
+        <li>Jednotky jsou základní (metry, kg/m³), mohu rovnou dosadit do <b>p = h · ρ · g</b>.</li>
+        <li>Vypočítám: p = 4 · 900 · 10 = <b>36 000 Pa</b>.</li>
+        <li>Převedu na kilopascaly: 36 000 : 1000 = <b>36 kPa</b>.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Tlak v hloubce 4 m je 36 kPa.</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="hydrostaticky" class="active">🌊 Hydrostatický tlak</button>

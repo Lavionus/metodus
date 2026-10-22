@@ -6,6 +6,8 @@
   <title>Procenta a trojčlenka</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <link rel="stylesheet" href="../nazor.css">
   <script src="../nazor.js"></script>
   <script src="../theme.js"></script>
@@ -39,6 +41,42 @@
     <figure class="procenta-kontext"><div class="procenta-obrazek"><img src="img/m/procenta-kasicka.webp" alt="Keramické prasátko s několika mincemi." width="768" height="768"><span class="procenta-udaj">+5 %</span></div><figcaption>Úrok z úspor</figcaption></figure>
   </section>
 
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Procenta přes jedno procento</summary>
+    <div class="obsah">
+      <p><b>Procento</b> znamená „setina“: 1 % je jedna setina celku. Celek, ze kterého procenta počítáme, se jmenuje
+        <b>základ</b> a odpovídá 100 %. Část základu je <b>procentová část</b> a číslo s % je <b>počet procent</b>.
+        Ze tří údajů vždy dva známe a třetí dopočítáme – nejjistěji přes 1 %.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Procentová část</h3><p>Kolik je 20 % z 300? 1 % je 300 : 100 = 3,
+          20 % je 20 · 3 = <b>60</b>. Vzorec: část = základ · p : 100.</p></article>
+        <article class="vyklad-karta"><h3>Počet procent</h3><p>Kolik % je 30 z 120? Podíl 30 : 120 = 0,25,
+          krát 100 = <b>25 %</b>. Vzorec: p = část : základ · 100.</p></article>
+        <article class="vyklad-karta"><h3>Základ</h3><p>40 % je 80. Pak 1 % je 80 : 40 = 2 a 100 % je
+          100 · 2 = <b>200</b>. Vzorec: základ = část : p · 100.</p></article>
+        <article class="vyklad-karta"><h3>Trojčlenka</h3><p>Nejdřív hodnota pro <b>jednu jednotku</b>. Přímá úměrnost (víc kusů → víc Kč): násob.
+          Nepřímá (víc dělníků → méně dní): součin zůstává stejný.</p></article>
+      </div>
+      <p>Jak poznám, co hledám? Číslo za slovem „z“ je obvykle základ. Když je v zadání neznámé celé číslo, hledám základ.
+        Typická chyba je dělit obráceně (120 : 30 místo 30 : 120). Kontrola odhadem: část menší než základ musí dát méně než 100 %.</p>
+      <aside class="zapamatuj">Základ = 100 %. Nejdřív spočítej 1 % a z něj cokoli dalšího.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: výpočet základu</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">25 % z neznámého čísla je 60. Jaké je celé číslo (základ)?</p>
+      <ol class="kroky">
+        <li>Známe procentovou část (60) a počet procent (25 %). Hledáme <b>základ</b>, tedy 100 %.</li>
+        <li>Spočítám 1 %: 60 : 25 = <b>2,4</b>.</li>
+        <li>Celek je 100 %: 100 · 2,4 = <b>240</b>.</li>
+        <li>Zkouška: 1 % z 240 je 2,4, a 25 % je 25 · 2,4 = 60. Sedí. (Také 25 % je čtvrtina a 240 : 4 = 60.)</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Základ je 240.</p>
+    </div>
+  </details>
+
   <div class="rezimy" id="rezimy">
     <button data-rezim="zceho" class="active">Kolik je p % z čísla</button>
     <button data-rezim="kolikpct">Kolik % je a z b</button>
@@ -68,22 +106,22 @@ const TROJCLENKY = [
   () => { const kusu = nahodnyPrvek([3, 4, 5, 6]), cena = nahodnyPrvek([12, 15, 18, 24, 30]), chci = kusu + nahodnyPrvek([1, 2, 3]);
     return { text: `${kusu} ${kusu < 5 ? 'sešity stojí' : 'sešitů stojí'} ${kusu * cena} Kč. Kolik zaplatíš za ${chci} ${chci < 5 ? 'sešity' : 'sešitů'}?`,
       vysledek: chci * cena, jednotka: 'Kč',
-      postup: `1 sešit … ${kusu * cena} ÷ ${kusu} = ${cena} Kč → ${chci} sešitů … ${chci} × ${cena} = ${chci * cena} Kč` }; },
+      postup: `1 sešit … ${kusu * cena} : ${kusu} = ${cena} Kč → ${chci} ${chci < 5 ? 'sešity' : 'sešitů'} … ${chci} · ${cena} = ${chci * cena} Kč` }; },
   () => { const os = nahodnyPrvek([2, 3, 4]), hod = nahodnyPrvek([6, 8, 10, 12]), os2 = os + nahodnyPrvek([1, 2, 3]);
     const v = cislo2(os * hod / os2);
     return { text: `${os} malíři vymalují dům za ${hod} hodin. Za jak dlouho ho ${os2 < 5 ? 'vymalují ' + os2 + ' malíři' : 'vymaluje ' + os2 + ' malířů'} (nepřímá úměra)?`,
       vysledek: v, jednotka: 'hodin',
-      postup: `Nepřímá úměra: ${os} × ${hod} = ${os * hod} „malířohodin“ → ${os * hod} ÷ ${os2} = ${fmt(v)} hodin` }; },
+      postup: `Nepřímá úměra: ${os} · ${hod} = ${os * hod} „malířohodin“ → ${os * hod} : ${os2} ${v === os * hod / os2 ? '=' : '≈'} ${fmt(v)} ${Number.isInteger(v) ? 'hodin' : 'hodiny'}` }; },
   () => { const km = nahodnyPrvek([90, 120, 150, 180]), l = nahodnyPrvek([6, 7, 8, 9]), km2 = nahodnyPrvek([200, 250, 300]);
     const v = cislo2(l / km * km2);
     return { text: `Auto spotřebuje na ${km} km celkem ${l} litrů benzínu. Kolik litrů spotřebuje na ${km2} km?`,
       vysledek: v, jednotka: 'l',
-      postup: `Na 1 km … ${l} ÷ ${km} l → na ${km2} km … ${km2} × ${l}/${km} = ${fmt(v)} l` }; },
+      postup: `Na 1 km … ${l} : ${km} l → na ${km2} km … ${km2} · ${l}/${km} ${v === l / km * km2 ? '=' : '≈'} ${fmt(v)} l` }; },
   () => { const prac = nahodnyPrvek([5, 6, 8]), dni = nahodnyPrvek([12, 18, 24]), prac2 = nahodnyPrvek([3, 4]);
     const v = cislo2(prac * dni / prac2);
     return { text: `${prac} dělníků postaví plot za ${dni} dní. Za kolik dní ho postaví ${prac2} dělníci (nepřímá úměra)?`,
       vysledek: v, jednotka: 'dní',
-      postup: `${prac} × ${dni} = ${prac * dni} „dělníkodní“ → ${prac * dni} ÷ ${prac2} = ${fmt(v)} dní` }; },
+      postup: `${prac} · ${dni} = ${prac * dni} „dělníkodní“ → ${prac * dni} : ${prac2} = ${fmt(v)} dní` }; },
 ];
 
 
@@ -93,20 +131,20 @@ function generuj(r) {
     const p = nahodnyPrvek([5, 10, 12, 15, 20, 25, 30, 40, 50, 75]);
     const z = nahodnyPrvek([40, 60, 80, 120, 150, 200, 240, 300, 500, 640, 800, 1200]);
     u = { vysledek: cislo2(z * p / 100), jednotka: '', obraz: [z * p / 100, z],
-      postup: `1 % z ${z} je ${fmt(z / 100)} → ${p} % je ${p} × ${fmt(z / 100)} = ${fmt(z * p / 100)}` };
+      postup: `1 % z ${z} je ${fmt(z / 100)} → ${p} % je ${p} · ${fmt(z / 100)} = ${fmt(z * p / 100)}` };
     zadani = `Kolik je ${p} % z čísla ${z}?`;
   } else if (r === 'kolikpct') {
     const b = nahodnyPrvek([40, 50, 80, 120, 200, 250, 400, 500]);
     const a = cislo2(b * nahodnyPrvek([5, 10, 15, 20, 25, 30, 40, 60, 75, 90]) / 100);
     u = { vysledek: cislo2(a / b * 100), jednotka: '%', obraz: [a, b],
-      postup: `${fmt(a)} ÷ ${b} = ${fmt(a / b)} → × 100 = ${fmt(a / b * 100)} %` };
+      postup: `${fmt(a)} : ${b} = ${fmt(a / b)} → · 100 = ${fmt(a / b * 100)} %` };
     zadani = `Kolik procent je ${fmt(a)} z čísla ${b}?`;
   } else if (r === 'zaklad') {
     const p = nahodnyPrvek([10, 20, 25, 40, 50, 60, 75, 80]);
     const zaklad = nahodnyPrvek([80, 120, 160, 200, 240, 300, 400, 500]);
     const c = cislo2(zaklad * p / 100);
     u = { vysledek: zaklad, jednotka: '', obraz: [c, zaklad],
-      postup: `${p} % je ${fmt(c)} → 1 % je ${fmt(c)} ÷ ${p} = ${fmt(c / p)} → 100 % = ${fmt(zaklad)}` };
+      postup: `${p} % je ${fmt(c)} → 1 % je ${fmt(c)} : ${p} = ${fmt(c / p)} → 100 % = ${fmt(zaklad)}` };
     zadani = `${p} % z neznámého čísla je ${fmt(c)}. Jaké je celé číslo (základ)?`;
   } else {
     u = nahodnyPrvek(TROJCLENKY)();

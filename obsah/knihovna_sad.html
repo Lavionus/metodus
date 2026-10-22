@@ -102,11 +102,13 @@ const SADY = [
     ['rabbit', 'králík'], ['bear', 'medvěd'], ['lion', 'lev'], ['fish', 'ryba'], ['bird', 'pták'],
     ['mouse', 'myš'], ['fox', 'liška'],
   ]},
+  /* Na líci je jen infinitiv: u sloves, kde je 2. tvar = 3. tvar (buy – bought – bought) nebo 3. = 1. (come – came – come),
+     by ukázaný tvar prozradil odpověď. */
   { predmet: 'Angličtina', stupen: '2. stupeň', name: 'Nepravidelná slovesa (výběr)', cards: [
-    ['go – ? – gone', 'went'], ['see – ? – seen', 'saw'], ['take – took – ?', 'taken'],
-    ['buy – ? – bought', 'bought'], ['make – ? – made', 'made'], ['come – came – ?', 'come'],
-    ['write – wrote – ?', 'written'], ['break – broke – ?', 'broken'], ['drink – ? – drunk', 'drank'],
-    ['speak – spoke – ?', 'spoken'], ['bring – ? – brought', 'brought'], ['think – ? – thought', 'thought'],
+    ['go – ? – ?', 'went – gone'], ['see – ? – ?', 'saw – seen'], ['take – ? – ?', 'took – taken'],
+    ['buy – ? – ?', 'bought – bought'], ['make – ? – ?', 'made – made'], ['come – ? – ?', 'came – come'],
+    ['write – ? – ?', 'wrote – written'], ['break – ? – ?', 'broke – broken'], ['drink – ? – ?', 'drank – drunk'],
+    ['speak – ? – ?', 'spoke – spoken'], ['bring – ? – ?', 'brought – brought'], ['think – ? – ?', 'thought – thought'],
   ]},
 ];
 
@@ -154,7 +156,8 @@ function pridatDoAplikace(s) {
   const novy = { id: uid(), name: s.name, cards: s.cards.map(c => [c[0], c[1]]) };
   state.decks.push(novy);
   state.currentId = novy.id;
-  localStorage.setItem(KEY, JSON.stringify(state));
+  try { localStorage.setItem(KEY, JSON.stringify(state)); }
+  catch (e) { toast('⚠️ Úložiště prohlížeče je zablokované – sadu stáhni jako JSON.'); return; }
   toast('✅ Sada „' + s.name + '“ přidána do Kartiček');
 }
 function stahnout(s) {

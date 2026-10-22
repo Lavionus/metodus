@@ -6,6 +6,8 @@
   <title>Osvícenství a revoluce</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -19,11 +21,67 @@
       color: var(--text-faint); font-size: 0.78rem; }
     .osa span { background: var(--bg-control); border: 1px solid var(--border);
       border-radius: 6px; padding: 4px 9px; }
+    .foto-atlas { width:min(1120px,100%); margin:22px auto; }
+    .foto-atlas h2 { margin:0 0 5px; text-align:center; font-size:1.22rem; }
+    .foto-atlas > p { margin:0 auto 12px; max-width:820px; text-align:center; color:var(--text-muted,var(--text)); }
+    .foto-atlas h3 { margin:16px 0 8px; font-size:1.02rem; }
+    .foto-mrizka { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
+    .foto-karta { margin:0; overflow:hidden; border:1px solid var(--border); border-radius:14px; background:var(--bg-card); box-shadow:var(--shadow-sm); }
+    .foto-karta img { display:block; width:100%; aspect-ratio:4/3; object-fit:cover; }
+    .foto-karta img.cele { object-fit:contain; background:#1d1c1a; }
+    .foto-karta figcaption { padding:10px 11px 12px; font-size:.9rem; line-height:1.35; }
+    .foto-karta strong { display:block; margin-bottom:3px; color:var(--accent); font-size:1rem; }
+    @media (max-width:820px) { .foto-mrizka { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+    @media (max-width:440px) { .foto-mrizka { grid-template-columns:1fr; } }
   </style>
 </head>
 <body>
   <h1>💡 Osvícenství a revoluce</h1>
   <p class="podtitul">Pro 8. ročník: osvícenské myšlenky, reformy Marie Terezie a Josefa II. a Velká francouzská revoluce.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Rozum, reformy a revoluce</summary>
+    <div class="obsah">
+      <p>V 18. století se vzdělanci začali ptát, proč by měl člověk věřit něčemu jen proto, že „tak to vždycky bylo“.
+        <b>Osvícenství</b> stavělo na <b>rozumu, vědě a vzdělání</b> a na myšlence, že každý člověk má
+        <b>přirozená práva</b> – rodí se svobodný.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Myslitelé</h3><p><b>Montesquieu</b> navrhl dělbu moci na zákonodárnou, výkonnou
+          a soudní. <b>Rousseau</b> psal o společenské smlouvě, <b>Voltaire</b> kritizoval náboženskou nesnášenlivost.</p></article>
+        <article class="vyklad-karta"><h3>Reformy shora</h3><p><b>Osvícenský absolutismus</b>: reformy prosazuje sám panovník.
+          <b>Marie Terezie</b> zavedla roku <b>1774</b> povinnou školní docházku. <b>Josef II.</b> roku <b>1781</b> vydal
+          toleranční patent a zrušil nevolnictví.</p></article>
+        <article class="vyklad-karta"><h3>Revoluce zdola</h3><p>Ve Francii vypukla roku <b>1789</b> dobytím <b>Bastily</b>
+          Velká francouzská revoluce. Heslo: <b>volnost, rovnost, bratrství</b>. Roku <b>1793</b> byl popraven král Ludvík XVI.</p></article>
+      </div>
+      <p>Ve Francii rozdělovala společnost <b>tři stavy</b>: duchovenstvo, šlechta a ostatní obyvatelé, kteří nesli
+        většinu daní. Revoluce výsady zrušila. Pak ale přišel <b>teror</b> jakobínů v čele s Robespierrem
+        a nakonec se k moci dostal generál <b>Napoleon Bonaparte</b> (císařem 1804, vítězství u Slavkova 1805,
+        porážka u Waterloo 1815).</p>
+      <p>Typická chyba: zrušení nevolnictví (1781) <b>nezrušilo robotu</b>. Poddaní se mohli stěhovat, ženit
+        a studovat bez souhlasu vrchnosti, ale robotovat museli dál – až do roku 1848.</p>
+      <aside class="zapamatuj">Osvícenství = rozum, vzdělání, přirozená práva. Habsburkové reformovali shora (1774 škola,
+        1781 toleranční patent), Francie prošla revolucí (1789).</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: práce s pramenem</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">První článek Deklarace práv člověka a občana (Francie, 1789) říká: „Lidé se rodí
+        a zůstávají svobodní a rovní v právech.“ Kdo a kdy text vydal a proti čemu se obracel?</p>
+      <ol class="kroky">
+        <li><b>Kdo a kdy:</b> Deklaraci přijalo roku <b>1789</b> francouzské Národní shromáždění, tedy na začátku
+          Velké francouzské revoluce, krátce po pádu Bastily.</li>
+        <li><b>Co tvrdí:</b> všichni lidé mají <b>stejná práva</b> od narození, nikdo je nedostává jen díky původu.</li>
+        <li><b>Proti čemu:</b> dosud měly duchovenstvo a šlechta <b>výsady</b> a třetí stav nesl většinu daní.
+          Věta „rovní v právech“ tyto výsady popírá.</li>
+        <li><b>Odkud myšlenka pochází:</b> z osvícenství – je to myšlenka <b>přirozených práv</b> člověka.</li>
+        <li>Svůj závěr doložím slovy pramene: „svobodní a rovní v právech“.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Revoluční Francie roku 1789 prohlásila rovnost v právech a postavila se tím proti výsadám šlechty a duchovenstva.</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="osobnosti" class="active">👤 Osobnosti</button>
@@ -40,6 +98,21 @@
   </div>
 
   <div class="osa"><span>1740 nástup Marie Terezie</span><span>1774 povinná školní docházka</span><span>1781 toleranční patent a zrušení nevolnictví</span><span>1789 pád Bastily</span><span>1793 poprava Ludvíka XVI.</span><span>1804 Napoleon císařem</span><span>1805 bitva u Slavkova</span></div>
+
+  <section class="foto-atlas" aria-labelledby="dokladyNadpis">
+    <h2 id="dokladyNadpis">Prameny doby osvícenství</h2>
+    <p>Dobové portréty, obraz a tisk. Podle nich poznáš, kdo reformy prosazoval a jak vypadal začátek francouzské revoluce.</p>
+    <h3>Osvícenští panovníci habsburské monarchie</h3>
+    <div class="foto-mrizka">
+      <figure class="foto-karta"><img class="cele" src="img/d/d8-osvicenstvi-marie-terezie.webp" alt="Portrét Marie Terezie od Martina van Meytense: panovnice v bohatých šatech s krajkami sedí vedle koruny." width="1152" height="1428" loading="lazy"><figcaption><strong>Marie Terezie (vládla 1740–1780)</strong>Roku 1774 zavedla povinnou školní docházku, sjednotila úřady a omezila robotu. Koruna vedle ní připomíná, že vládla jako královna česká a uherská.</figcaption></figure>
+      <figure class="foto-karta"><img class="cele" src="img/d/d8-osvicenstvi-josef-ii.webp" alt="Celopostavový portrét Josefa II. od Huberta Maurera z roku 1770: císař ve vojenské uniformě s řádovou hvězdou." width="1152" height="2122" loading="lazy"><figcaption><strong>Josef II. (vládl sám 1780–1790)</strong>Syn Marie Terezie. Roku 1781 vydal toleranční patent (svoboda vyznání pro protestanty a pravoslavné) a patent o zrušení nevolnictví.</figcaption></figure>
+    </div>
+    <h3>Francouzská revoluce</h3>
+    <div class="foto-mrizka">
+      <figure class="foto-karta"><img src="img/d/d8-osvicenstvi-bastila.webp" alt="Dobový obraz dobytí Bastily 14. července 1789: mohutná kamenná pevnost s kulatými věžemi zahalená kouřem ze střelby." width="1152" height="768" loading="lazy"><figcaption><strong>Dobytí Bastily (14. 7. 1789)</strong>Obraz z let 1789–1791. Pařížané zaútočili na vězení a zbrojnici, symbol královské moci. Tento den je dodnes francouzským státním svátkem.</figcaption></figure>
+      <figure class="foto-karta"><img class="cele" src="img/d/d8-osvicenstvi-deklarace.webp" alt="Dobová rytina Deklarace práv člověka a občana z roku 1789: text článků na dvou deskách, nad nimi alegorické postavy Francie a Zákona a vševidoucí oko." width="1152" height="1614" loading="lazy"><figcaption><strong>Deklarace práv člověka a občana (1789)</strong>Dobový tisk. Články jsou na dvou deskách jako desatero: lidé se rodí svobodní a rovní v právech, moc vychází z národa.</figcaption></figure>
+    </div>
+  </section>
 
   <p class="napoveda">Osvícenství stavělo na <b>rozumu, vzdělání a přirozených právech</b>. Marie Terezie zavedla roku <b>1774</b> povinnou školní docházku, Josef II. roku <b>1781</b> zrušil nevolnictví a vydal toleranční patent.</p>
 

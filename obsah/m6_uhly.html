@@ -6,6 +6,8 @@
   <title>Úhel a jeho velikost</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -19,12 +21,49 @@
     .uhlomer .popisek { fill: var(--text-faint); font-size: 11px; text-anchor: middle; }
     .uhlomer .vrchol { fill: var(--accent); }
     .uhlomer .tazna { cursor: pointer; }
+    #obalUhlu { touch-action: none; cursor: pointer; }   /* tažení prstem nesmí posouvat stránku */
     .vypocet { font-size: clamp(1.4rem, 5vw, 2.2rem); font-weight: 700; font-variant-numeric: tabular-nums; }
   </style>
 </head>
 <body>
   <h1>📐 Úhel a jeho velikost</h1>
   <p class="podtitul">Pro 6. ročník: druhy úhlů, měření úhloměrem a počítání s úhly.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Úhel, jeho druhy a měření</summary>
+    <div class="obsah">
+      <p><b>Úhel</b> tvoří dvě <b>ramena</b> (polopřímky), která vycházejí ze společného bodu – <b>vrcholu</b>.
+        Velikost úhlu neurčuje délka ramen, ale to, <b>jak moc je jedno rameno pootočené</b> vůči druhému.
+        Měříme ji ve stupních (°); celá otočka má 360°, polovina otočky 180°.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Druhy úhlů</h3><p><b>Ostrý</b> &lt; 90°, <b>pravý</b> = 90°,
+          <b>tupý</b> mezi 90° a 180°, <b>přímý</b> = 180° (ramena leží v jedné přímce). Rozhoduje porovnání
+          s pravým úhlem – rohem sešitu.</p></article>
+        <article class="vyklad-karta"><h3>Měření úhloměrem</h3><p>Střed úhloměru přilož na vrchol, nulu na jedno
+          rameno. Čti na té stupnici, která na tomto rameni začíná nulou. Kontrola odhadem: ostrý úhel nemůže mít 130°.</p></article>
+        <article class="vyklad-karta"><h3>Počítání s úhly</h3><p>Do pravého úhlu chybí 90° − α. <b>Vedlejší úhly</b>
+          dávají dohromady přímý úhel: 180° − α. Součet vnitřních úhlů trojúhelníku je vždy <b>180°</b>.</p></article>
+      </div>
+      <p>Proč 180° v trojúhelníku? Když odtrhneš tři rohy papírového trojúhelníku a přiložíš je vrcholy k sobě,
+        složí se přesně do přímého úhlu.</p>
+      <aside class="zapamatuj">Ostrý &lt; 90° = pravý &lt; tupý &lt; 180° = přímý. Vedlejší úhly: součet 180°. Úhly v trojúhelníku: součet 180°.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: třetí úhel trojúhelníku</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">V trojúhelníku jsou úhly 55° a 70°. Kolik stupňů má třetí úhel a jaký je to druh úhlu?</p>
+      <ol class="kroky">
+        <li>Vím, že součet všech tří úhlů v trojúhelníku je 180°.</li>
+        <li>Sečtu známé úhly: 55° + 70° = 125°.</li>
+        <li>Do 180° chybí: 180° − 125° = 55°.</li>
+        <li>Zkontroluji součet: 55° + 70° + 55° = 180°. Sedí.</li>
+        <li>Porovnám s pravým úhlem: 55° &lt; 90°, takže jde o úhel ostrý.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Třetí úhel má 55° a je ostrý.</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="druh" class="active">🔺 Jaký je to úhel?</button>
@@ -51,6 +90,8 @@ const skore = Uloha.skore('metodus_m6_uhly', $('skore'));
 let rezim = 'druh';
 
 const STRED = { x: 180, y: 150 }, DELKA = 120;
+// viewBox začíná nad nulou, aby se vešel i popisek 90 nad stupnicí
+const VB = { y: -14, sirka: 360, vyska: 204 };
 
 function druhUhlu(st) {
   if (st < 90) return 'ostry';
@@ -84,7 +125,7 @@ function svgUhel(stupne, sPopisky) {
                  y="${(STRED.y - 155 * Math.sin(ar) + 4).toFixed(1)}">${a}</text>`;
     }
   }
-  return `<svg class="uhlomer" viewBox="0 0 360 190">
+  return `<svg class="uhlomer" viewBox="0 ${VB.y} ${VB.sirka} ${VB.vyska}">
     ${rysky}
     <path class="oblouk" d="M${STRED.x} ${STRED.y} L${ox} ${oy} A${r} ${r} 0 ${velky} 0 ${oxk.toFixed(1)} ${oyk.toFixed(1)} Z"/>
     <line class="rameno" x1="${STRED.x}" y1="${STRED.y}" x2="${STRED.x + DELKA}" y2="${STRED.y}"/>
@@ -155,47 +196,50 @@ function nastav() {
   p.appendChild(odezva);
 
   let hotovo = false, chyboval = false, tahne = false;
-  const svg = p.querySelector('svg');
+  const obal = $('obalUhlu');
 
+  // Během tažení se jen překresluje – hodnotí se až po puštění ramene.
   function prekresli(st) {
     aktualni = st;
-    $('obalUhlu').innerHTML = svgUhel(st, true);
+    obal.innerHTML = svgUhel(st, true);
     $('aktualniUhel').textContent = st + '°';
-    napojTazeni();
-    if (st === cil && !hotovo) {
+  }
+  function vyhodnot() {
+    if (hotovo) return;
+    if (aktualni === cil) {
       hotovo = true;
       odezva.className = 'odezva ok';
       odezva.textContent = `✅ Přesně ${cil}° – úhel ${NAZVY[druhUhlu(cil)].split(' (')[0]}.`;
       skore.vyhodnot(!chyboval);
       Uloha.posun(novaUloha, Uloha.PRODLEVA + 400);
-    } else if (!hotovo) {
+    } else {
+      chyboval = true;
       odezva.className = 'odezva';
-      odezva.textContent = st < cil ? 'Ještě víc otoč nahoru.' : 'Trochu zpátky dolů.';
-      if (Math.abs(st - cil) > 25) chyboval = true;
+      odezva.textContent = `Máš ${aktualni}°. ` + (aktualni < cil ? 'Ještě víc otoč nahoru.' : 'Trochu zpátky dolů.');
     }
   }
 
-  function uhelZBodu(ev, prvek) {
-    const r = prvek.getBoundingClientRect();
-    const mx = (ev.clientX - r.left) / r.width * 360;
-    const my = (ev.clientY - r.top) / r.height * 190;
+  function uhelZBodu(ev) {
+    const r = obal.querySelector('svg').getBoundingClientRect();
+    const mx = (ev.clientX - r.left) / r.width * VB.sirka;
+    const my = VB.y + (ev.clientY - r.top) / r.height * VB.vyska;
     const a = Math.atan2(STRED.y - my, mx - STRED.x) * 180 / Math.PI;
     return Math.max(0, Math.min(180, Math.round(a / 5) * 5));
   }
 
-  function napojTazeni() {
-    const s = p.querySelector('svg');
-    const pohyb = ev => { if (tahne && !hotovo) { ev.preventDefault(); prekresli(uhelZBodu(ev, s)); } };
-    s.addEventListener('pointerdown', ev => {
-      if (hotovo) return;
-      tahne = true;
-      try { s.setPointerCapture(ev.pointerId); } catch { /* u syntetických událostí nevadí */ }
-      prekresli(uhelZBodu(ev, s));
-    });
-    s.addEventListener('pointermove', pohyb);
-    s.addEventListener('pointerup', () => { tahne = false; });
-  }
-  napojTazeni();
+  // Posluchače na stálém obalu – svg uvnitř se při každém pohybu kreslí znovu.
+  obal.addEventListener('pointerdown', ev => {
+    if (hotovo) return;
+    tahne = true;
+    try { obal.setPointerCapture(ev.pointerId); } catch { /* u syntetických událostí nevadí */ }
+    prekresli(uhelZBodu(ev));
+  });
+  obal.addEventListener('pointermove', ev => {
+    if (tahne && !hotovo) { ev.preventDefault(); prekresli(uhelZBodu(ev)); }
+  });
+  const pust = () => { if (!tahne) return; tahne = false; vyhodnot(); };
+  obal.addEventListener('pointerup', pust);
+  obal.addEventListener('pointercancel', () => { tahne = false; });
 }
 
 /* ---- Počítání s úhly ----------------------------------------------------------------- */

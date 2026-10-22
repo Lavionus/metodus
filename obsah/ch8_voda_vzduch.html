@@ -6,6 +6,8 @@
   <title>Voda a vzduch</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -13,6 +15,9 @@
   <style>
     .kolac { width: min(260px, 68%); }
     .kolac .popisek { fill: var(--text-muted); font-size: 12px; }
+    .kolac-legenda { list-style: none; margin: 8px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 4px 14px; justify-content: center; font-size: .88rem; }
+    .kolac-legenda li { display: flex; align-items: center; gap: 6px; }
+    .kolac-legenda i { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
     .kroky { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; max-width: 700px; }
     .kroky button {
       background: var(--bg-control); border: 2px solid var(--border-strong); color: var(--text);
@@ -31,6 +36,44 @@
   <h1>💨 Voda a vzduch</h1>
   <p class="podtitul">Pro 8. ročník: složení vzduchu, úprava pitné vody a ochrana ovzduší.</p>
 
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Z čeho je vzduch a jak se z řeky stane pitná voda</summary>
+    <div class="obsah">
+      <p>Vzduch i voda z kohoutku vypadají jako „čisté látky“, ale vzduch je <b>směs plynů</b> a voda v přírodě
+        obsahuje rozpuštěné soli, kaly i mikroorganismy. Než ji můžeme pít, musí projít úpravnou.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Složení vzduchu</h3><p><b>Dusík 78 %</b>, <b>kyslík 21 %</b>, argon a další vzácné plyny asi 0,9 %,
+          oxid uhličitý jen asi 0,04 %. Dýcháme kyslík, ale většinu vzduchu tvoří dusík.</p></article>
+        <article class="vyklad-karta"><h3>Vlastnosti vody</h3><p>Molekula H<sub>2</sub>O. Voda je dobré <b>rozpouštědlo</b>, největší hustotu má při <b>4 °C</b>,
+          led má menší hustotu, a proto plave. Tvrdost vody způsobují soli vápníku a hořčíku.</p></article>
+        <article class="vyklad-karta"><h3>Úprava pitné vody</h3><p>Odběr → česle a síta → čiření (vločky) → usazování → filtrace pískem →
+          dezinfekce → vodojem a rozvod.</p></article>
+        <article class="vyklad-karta"><h3>Znečištění</h3><p>Doprava a topeniště tvoří smog, oxidy síry a dusíku kyselé deště,
+          oxid uhličitý zesiluje skleníkový efekt.</p></article>
+      </div>
+      <p>Pořadí kroků úpravy má logiku: nejdřív se odstraní <b>největší</b> nečistoty, pak stále menší. Jemné částice jsou
+        tak malé, že by prošly filtrem, proto se při čiření nejdřív spojí do vloček, které klesnou ke dnu. Dezinfekce je až
+        na konci, aby zničila zárodky ve vodě, která už je čirá. Typická chyba: plést si úpravnu pitné vody
+        s <b>čistírnou odpadních vod</b>, kam teče voda z domácností kanalizací.</p>
+      <aside class="zapamatuj">Vzduch: dusík 78 %, kyslík 21 %. Úprava vody jde od hrubých nečistot k jemným a končí dezinfekcí.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: seřaď kroky úpravy vody</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Seřaď kroky: filtrace přes pískové filtry, odběr z řeky, dezinfekce, česle a síta, usazování vloček, čiření, rozvod přes vodojem.</p>
+      <ol class="kroky">
+        <li>Začátek je jasný: vodu musím nejdřív <b>odebrat</b> z řeky nebo nádrže.</li>
+        <li>Pak odstraním to největší – listí a větve zachytí <b>česle a síta</b>.</li>
+        <li>Jemné částice se samy neusadí, proto přidám činidla: <b>čiření</b> je spojí do vloček, a ty se pak <b>usadí</b> na dně nádrže.</li>
+        <li>Co zbylo, zachytí <b>pískový filtr</b>. Voda je čirá, ale mohou v ní být choroboplodné zárodky – proto přijde <b>dezinfekce</b>.</li>
+        <li>Hotová pitná voda putuje přes <b>vodojem</b> do domácností.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Odběr → česle a síta → čiření → usazování → filtrace → dezinfekce → vodojem.</p>
+    </div>
+  </details>
+
   <div class="rezimy" id="rezimy">
     <button data-rezim="slozeni" class="active">🥧 Složení vzduchu</button>
     <button data-rezim="uprava">🚰 Úprava vody</button>
@@ -46,9 +89,9 @@
   </div>
 
   <p class="napoveda">
-    Vzduch je <b>směs plynů</b>: dusík 78 %, kyslík 21 %, argon asi 1 % a stopové plyny včetně
-    oxidu uhličitého. Voda je výborné <b>rozpouštědlo</b>, největší hustotu má při <b>4 °C</b>
-    a led plave, protože je lehčí než kapalná voda.
+    Vzduch je <b>směs plynů</b>: dusík 78 %, kyslík 21 %, argon a další vzácné plyny asi 0,9 % a stopové plyny včetně
+    oxidu uhličitého (asi 0,04 %). Voda je výborné <b>rozpouštědlo</b>, největší hustotu má při <b>4 °C</b>
+    a led plave, protože má menší hustotu než kapalná voda.
   </p>
 
 <script>
@@ -65,9 +108,11 @@ const SLOZKY = [
 ];
 function svgKolac() {
   let uhel = -90, casti = '';
-  const legenda = [];
-  SLOZKY.forEach(s => {
-    const rozsah = Math.max(s.p, 1.6) / 101 * 360;   // nejmenší podíly zvětšíme, ať jsou vidět
+  // nejmenší podíly zvětšíme, ať jsou vidět – a výseče pak přepočítáme, aby dohromady daly 360°
+  const zobraz = SLOZKY.map(s => Math.max(s.p, 1.6));
+  const soucet = zobraz.reduce((a, b) => a + b, 0);
+  SLOZKY.forEach((s, i) => {
+    const rozsah = zobraz[i] / soucet * 360;
     const konec = uhel + rozsah;
     const rad = a => a * Math.PI / 180;
     const x1 = 100 + 80 * Math.cos(rad(uhel)), y1 = 100 + 80 * Math.sin(rad(uhel));
@@ -77,7 +122,9 @@ function svgKolac() {
       fill="${s.barva}" stroke="var(--bg-panel)" stroke-width="2"/>`;
     uhel = konec;
   });
-  return `<svg class="kolac" viewBox="0 0 200 200">${casti}</svg>`;
+  const legenda = SLOZKY.map(s => `<li><i style="background:${s.barva}"></i>${s.n}</li>`).join('');
+  return `<svg class="kolac" viewBox="0 0 200 200" role="img" aria-label="Koláčový graf složení vzduchu (nejmenší podíly jsou zvětšené, aby byly vidět)">${casti}</svg>`
+    + `<ul class="kolac-legenda">${legenda}</ul>`;
 }
 function slozeni() {
   const p = $('plocha');
@@ -90,21 +137,21 @@ function slozeni() {
       <div class="karta">${svgKolac()}</div>`;
     Uloha.vyber({
       kam: p, odezva, trida: 'velke',
-      moznosti: Uloha.zamichej(SLOZKY.map(x => `${x.p} %`)).map(t => ({ klic: t, popis: t })),
-      spravnyKlic: `${s.p} %`,
-      zpravaOk: `✅ ${s.n} tvoří ${s.p} % vzduchu.`,
+      moznosti: Uloha.zamichej(SLOZKY.map(x => `${Uloha.cislo(x.p)} %`)).map(t => ({ klic: t, popis: t })),
+      spravnyKlic: `${Uloha.cislo(s.p)} %`,
+      zpravaOk: `✅ ${s.n[0].toUpperCase() + s.n.slice(1)} tvoří ${Uloha.cislo(s.p)} % vzduchu.`,
       zpravaChyba: 'Největší podíl má dusík, druhý kyslík.',
       poSpravne: skore.vyhodnot, dalsi: novaUloha,
     });
   } else {
-    p.innerHTML = `<div class="zadani uloha-text">Který plyn tvoří <b>${s.p} %</b> vzduchu?</div>
+    p.innerHTML = `<div class="zadani uloha-text">Který plyn tvoří <b>${Uloha.cislo(s.p)} %</b> vzduchu?</div>
       <div class="karta">${svgKolac()}</div>`;
     Uloha.vyber({
       kam: p, odezva,
       moznosti: Uloha.zamichej(SLOZKY.map(x => x.n)).map(t => ({ klic: t, popis: t })),
       spravnyKlic: s.n,
-      zpravaOk: `✅ ${s.n} – ${s.p} %`,
-      zpravaChyba: 'Dusík 78 %, kyslík 21 %, argon asi 1 %, oxid uhličitý jen 0,04 %.',
+      zpravaOk: `✅ ${s.n} – ${Uloha.cislo(s.p)} %`,
+      zpravaChyba: 'Dusík 78 %, kyslík 21 %, argon a další vzácné plyny asi 0,9 %, oxid uhličitý jen 0,04 %.',
       poSpravne: skore.vyhodnot, dalsi: novaUloha,
     });
   }
@@ -113,11 +160,13 @@ function slozeni() {
 
 /* Úprava vody: kroky se klikají ve správném pořadí */
 const UPRAVA = [
-  { t: '1. odběr surové vody z řeky nebo studny', info: 'voda se čerpá ze zdroje' },
-  { t: '2. usazování hrubých nečistot', info: 'písek a kaly klesnou ke dnu' },
-  { t: '3. čeření a filtrace přes pískové filtry', info: 'zachytí se jemné částice' },
-  { t: '4. dezinfekce (chlorem nebo ozonem)', info: 'zneškodní se choroboplodné zárodky' },
-  { t: '5. rozvod k odběratelům', info: 'voda putuje vodojemem do domácností' },
+  { t: '1. odběr surové vody z řeky nebo nádrže', info: 'voda se čerpá ze zdroje' },
+  { t: '2. česle a síta zachytí hrubé nečistoty', info: 'zůstanou na nich listí, větve a odpadky' },
+  { t: '3. čiření – přidání činidel, která shlukují jemné nečistoty do vloček', info: 'drobné částice se spojí do větších vloček' },
+  { t: '4. usazování vloček v usazovací nádrži', info: 'vločky s nečistotami klesnou ke dnu' },
+  { t: '5. filtrace přes pískové filtry', info: 'zachytí se zbylé jemné částice' },
+  { t: '6. dezinfekce (chlorem, ozonem nebo UV zářením)', info: 'zneškodní se choroboplodné zárodky' },
+  { t: '7. rozvod přes vodojem k odběratelům', info: 'voda putuje potrubím do domácností' },
 ];
 function uprava() {
   const p = $('plocha');

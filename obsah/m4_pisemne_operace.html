@@ -6,6 +6,8 @@
   <title>Písemné sčítání, odčítání a násobení</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -26,6 +28,43 @@
 <body>
   <h1>✏️ Písemné sčítání, odčítání a násobení</h1>
   <p class="podtitul">Pro 4. ročník: počítání pod sebou v oboru do milionu.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Počítání pod sebou</summary>
+    <div class="obsah">
+      <p>Velká čísla se z hlavy počítají špatně, proto je píšeme <b>pod sebe</b> a počítáme po jednotlivých řádech.
+        Každá číslice má svůj řád: jednotky, desítky, stovky, tisíce… Sčítat smíš jen stejné řády –
+        jednotky s jednotkami, desítky s desítkami.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Zápis</h3><p>Čísla zarovnej <b>doprava</b>: jednotky pod jednotky.
+          Krátké číslo tedy začíná víc vpravo. Počítáš <b>zprava doleva</b>.</p></article>
+        <article class="vyklad-karta"><h3>Přenos při sčítání</h3><p>Když součet v řádu vyjde 10 a víc, napíšeš jen jednotky
+          a <b>1 desítku přeneseš</b> do vyššího řádu: 7 + 6 = 13, píšu 3, 1 dál.</p></article>
+        <article class="vyklad-karta"><h3>Odčítání</h3><p>Když je nahoře menší číslice než dole, počítej s <b>o 10 větší</b>:
+          3 − 8 nejde, tak 13 − 8 = 5 (8 a 5 je 13). Jedničku pak přičti k dolní číslici v dalším řádu.</p></article>
+        <article class="vyklad-karta"><h3>Násobení</h3><p>Jednociferným činitelem násob postupně každou číslici zprava.
+          K dalšímu součinu <b>přičti přenos</b> až po vynásobení.</p></article>
+      </div>
+      <p>Typické chyby: zapomenutý přenos, přenos přičtený dřív, než násobíš, nebo „menší od většího“ při odčítání
+        (z 3 − 8 udělat 8 − 3). Pomůže odhad: 4 538 × 6 je asi 4 500 × 6 = 27 000, takže výsledek kolem 27 tisíc.</p>
+      <aside class="zapamatuj">Řád pod řád, zprava doleva, přenos do vyššího řádu. Výsledek porovnej s odhadem.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: 4 538 × 6</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Vypočítej písemně 4 538 × 6.</p>
+      <ol class="kroky">
+        <li>Jednotky: 8 × 6 = 48. Píšu <b>8</b>, 4 přenáším.</li>
+        <li>Desítky: 3 × 6 = 18, přičtu přenos 4 → 22. Píšu <b>2</b>, 2 přenáším.</li>
+        <li>Stovky: 5 × 6 = 30, přičtu přenos 2 → 32. Píšu <b>2</b>, 3 přenáším.</li>
+        <li>Tisíce: 4 × 6 = 24, přičtu přenos 3 → 27. Píšu <b>27</b>, další řád už není.</li>
+        <li>Odhad: 4 500 × 6 = 27 000. Výsledek 27 228 je blízko, takže je věrohodný.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ 4 538 × 6 = 27 228</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="scitani" class="active">➕ Sčítání a odčítání</button>
@@ -60,16 +99,67 @@ function zapisPodSebou(a, b, znak, vysledek) {
   </div>`;
 }
 
-/* rozumné blízké chybné výsledky – typické chyby při přenosu */
-function blizkeVysledky(spravny, pocet, krok) {
-  const jine = new Set();
-  let pojistka = 0;
-  while (jine.size < pocet && pojistka++ < 60) {
-    const posun = Uloha.nahodne([-100, -10, -1, 1, 10, 100, krok, -krok]);
-    const k = spravny + posun;
-    if (k !== spravny && k > 0) jine.add(k);
+/* Typické chyby písemného počítání jako odchylky od správného výsledku.
+   Počítáme je z číslic zadání, takže rušivé možnosti nejsou jen „±1, ±10, ±100"
+   kolem správného výsledku (ten by se pak dal poznat jako střed možností):
+   - sčítání: zapomenutý přenos (−10^(k+1)), přenos navíc, splet v součtu řádu (±10^k)
+   - odčítání: zapomenuté „půjčení" (+10^(k+1)), „menší od většího" v řádu
+   - násobení: zapomenutý přenos, přenos přičtený před násobením, splet v násobilce (±b·10^k) */
+function typickeChyby(a, b, znak) {
+  const cif = n => String(n).split('').reverse().map(Number);
+  const A = cif(a), B = cif(b), d = new Set();
+  const r = k => 10 ** k;
+  if (znak === '+') {
+    let c = 0;
+    for (let k = 0; k < Math.max(A.length, B.length); k++) {
+      const s = (A[k] || 0) + (B[k] || 0) + c;
+      if (s >= 10) d.add(-r(k + 1)); else if (s === 9 && k > 0) d.add(r(k + 1));
+      d.add(Uloha.nahodne([-1, 1]) * r(k));
+      c = s >= 10 ? 1 : 0;
+    }
+  } else if (znak === '−') {
+    let p = 0;
+    for (let k = 0; k < A.length; k++) {
+      const x = A[k] - p, y = B[k] || 0;
+      if (x < y) {
+        d.add(r(k + 1));                                   // zapomněl, že si půjčil
+        d.add((y - x) * r(k) - (x + 10 - y) * r(k) + r(k + 1));  // „menší od většího"
+        p = 1;
+      } else p = 0;
+      d.add(Uloha.nahodne([-1, 1]) * r(k));
+    }
+  } else {
+    let c = 0;
+    for (let k = 0; k < A.length; k++) {
+      const s = A[k] * b + c;
+      if (c) d.add(c * (b - 1) * r(k));                    // přenos přičetl dřív, než násobil
+      const nc = Math.floor(s / 10);
+      if (nc) d.add(-nc * r(k + 1));                       // zapomenutý přenos
+      d.add(Uloha.nahodne([-1, 1]) * b * r(k));            // splet v násobilce
+      c = nc;
+    }
   }
-  return [...jine].slice(0, pocet);
+  d.delete(0);
+  return [...d];
+}
+
+/* Tři chybné výsledky z typických chyb. Kdyby každá rušivá možnost měla jen jednu
+   chybu, byl by správný výsledek „společným středem" všech možností a dal by se
+   uhodnout bez počítání. Proto se střídají tři skladby (e = jedna typická chyba):
+   v+e1, v+e2, v+e3 | v+e1, v+e1+e2, v+e1+e3 (středem je chybná) | v+e1, v+e2, v+e1+e2. */
+function chybneVysledky(a, b, znak, spravny, pocet = 3) {
+  const D = Uloha.zamichej(typickeChyby(a, b, znak));
+  const ok = v => v > 0 && v !== spravny;
+  const vyber = new Set();
+  const pridej = v => { if (vyber.size < pocet && ok(v)) vyber.add(v); };
+  const skladba = pocet < 3 || D.length < 3 ? 0 : Uloha.nahodne([0, 1, 1, 2]);
+  if (skladba === 1) { pridej(spravny + D[0]); pridej(spravny + D[0] + D[1]); pridej(spravny + D[0] + D[2]); }
+  else if (skladba === 2) { pridej(spravny + D[0]); pridej(spravny + D[1]); pridej(spravny + D[0] + D[1]); }
+  D.forEach(x => pridej(spravny + x));
+  for (let i = 0; i < D.length; i++) for (let j = i + 1; j < D.length; j++) pridej(spravny + D[i] + D[j]);
+  // pojistka pro zadání bez přenosů: splet v jednom řádu
+  for (let k = 0; vyber.size < pocet && k < 40; k++) pridej(spravny + Uloha.nahodne([-1, 1]) * 10 ** (k % 4));
+  return [...vyber];
 }
 
 /* ---- Sčítání a odčítání ---------------------------------------------------- */
@@ -89,7 +179,7 @@ function scitani() {
   odezva.className = 'odezva';
   Uloha.vyber({
     kam: p, odezva, trida: 'velke',
-    moznosti: Uloha.zamichej([vysledek, ...blizkeVysledky(vysledek, 3, 1000)])
+    moznosti: Uloha.zamichej([vysledek, ...chybneVysledky(a, b, scitame ? '+' : '−', vysledek)])
       .map(v => ({ klic: String(v), popis: String(v) })),
     spravnyKlic: String(vysledek),
     zpravaOk: `✅ ${a} ${scitame ? '+' : '−'} ${b} = ${vysledek}`,
@@ -116,7 +206,7 @@ function nasobeni() {
   odezva.className = 'odezva';
   Uloha.vyber({
     kam: p, odezva, trida: 'velke',
-    moznosti: Uloha.zamichej([vysledek, ...blizkeVysledky(vysledek, 3, a)])
+    moznosti: Uloha.zamichej([vysledek, ...chybneVysledky(a, b, '×', vysledek)])
       .map(v => ({ klic: String(v), popis: String(v) })),
     spravnyKlic: String(vysledek),
     zpravaOk: `✅ ${a} × ${b} = ${vysledek}`,
@@ -137,7 +227,7 @@ function chyba() {
   else { a = Uloha.nahodneCislo(2200, 9800); b = Uloha.nahodneCislo(200, 2000); spravny = a - b; }
 
   const jeSpravne = Math.random() < 0.5;
-  const zobrazeny = jeSpravne ? spravny : spravny + Uloha.nahodne([-100, -10, 10, 100, 1000]);
+  const zobrazeny = jeSpravne ? spravny : chybneVysledky(a, b, typ, spravny, 1)[0];
 
   p.innerHTML = `<div class="zadani">Je výsledek správný?</div>
     <div class="karta">${zapisPodSebou(a, b, typ, zobrazeny)}</div>`;

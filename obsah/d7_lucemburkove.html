@@ -6,6 +6,8 @@
   <title>Lucemburkové a Karel IV.</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -46,6 +48,49 @@
 <body>
   <h1>🏰 Lucemburkové a Karel IV.</h1>
   <p class="podtitul">Pro 7. ročník: čeští králové z rodu Lucemburků a proměna Prahy ve 14. století.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Lucemburkové a Praha Karla IV.</summary>
+    <div class="obsah">
+      <p>Po vymření Přemyslovců (1306) hledala česká šlechta nového krále. Roku <b>1310</b> se jím stal
+        <b>Jan Lucemburský</b>, který se oženil s přemyslovskou princeznou <b>Eliškou Přemyslovnou</b>. Jan trávil
+        mnoho času v cizině, proto mu říkali „král cizinec“. Padl roku <b>1346</b> v bitvě u Kresčaku.</p>
+      <p>Jeho syn <b>Karel IV.</b> byl českým králem a od roku <b>1355</b> i <b>římským císařem</b>. Praha se tak stala
+        císařským sídlem a Karel ji podle toho přestavěl. Říká se mu <b>Otec vlasti</b>, protože pozvedl české
+        země hospodářsky i kulturně – a území rozšiřoval spíš sňatky a diplomacií než válkou.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Církev</h3><p><b>1344</b> se pražské biskupství stalo arcibiskupstvím
+          a začala stavba gotické <b>katedrály sv. Víta</b> (Matyáš z Arrasu, po něm Petr Parléř).</p></article>
+        <article class="vyklad-karta"><h3>Vzdělání a město</h3><p><b>1348</b> vznikla <b>univerzita</b>, první ve střední
+          Evropě, a <b>Nové Město pražské</b>.</p></article>
+        <article class="vyklad-karta"><h3>Most a hrad</h3><p><b>1357</b> položen základní kámen <b>Karlova mostu</b>.
+          Hrad <b>Karlštejn</b> nechal Karel postavit pro uložení korunovačních klenotů.</p></article>
+      </div>
+      <p>Po Karlově smrti (<b>1378</b>) vládl jeho syn <b>Václav IV.</b>, za něhož vypukly spory s církví a působil
+        Jan Hus. Posledním Lucemburkem na českém trůně byl <b>Zikmund</b>.</p>
+      <p>Pozor na záměnu: <b>Zlatá bula sicilská</b> (1212) patří Přemyslovcům, <b>Zlatá bula Karla IV.</b> (1356)
+        upravovala volbu římského krále.</p>
+      <aside class="zapamatuj">Karel IV.: český král a římský císař. 1344 arcibiskupství a sv. Vít, 1348 univerzita
+        a Nové Město, 1357 Karlův most.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: seřaď události vlády Karla IV.</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Seřaď od nejstarší: základní kámen Karlova mostu, založení univerzity, povýšení biskupství
+        na arcibiskupství, císařská korunovace v Římě.</p>
+      <ol class="kroky">
+        <li>Vybavím si roky: Karlův most <b>1357</b>, univerzita <b>1348</b>, arcibiskupství <b>1344</b>,
+          korunovace <b>1355</b>.</li>
+        <li>Všechny roky jsou ve <b>14. století</b> a liší se jen posledními dvěma číslicemi: 44, 48, 55, 57.</li>
+        <li>Seřadím je od nejmenšího: 1344 → 1348 → 1355 → 1357.</li>
+        <li>Kontrola smyslem: arcibiskupství vzniklo ještě za života krále Jana (padl 1346), univerzita, korunovace
+          a most přišly až za vlády Karla IV.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ arcibiskupství (1344) → univerzita (1348) → korunovace císařem (1355) → Karlův most (1357)</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="stavby" class="active">🗺️ Stavby v Praze</button>
@@ -157,7 +202,7 @@ const PANOVNICI = [
   { jmeno: 'Jan Lucemburský', popis: '„král cizinec“, mnoho času trávil v cizině, padl roku 1346 v bitvě u Kresčaku' },
   { jmeno: 'Karel IV.', popis: 'český král a římský císař, „Otec vlasti“, zakladatel univerzity i Nového Města' },
   { jmeno: 'Václav IV.', popis: 'syn Karla IV., za jeho vlády vypukly spory s církví a působil Jan Hus' },
-  { jmeno: 'Zikmund Lucemburský', popis: 'římský císař, vedl křížové výpravy proti husitům, českým králem uznán až roku 1436' },
+  { jmeno: 'Zikmund Lucemburský', popis: 'uherský král, od roku 1433 římský císař, vedl křížové výpravy proti husitům, českým králem uznán až roku 1436' },
   { jmeno: 'Eliška Přemyslovna', popis: 'poslední přemyslovská princezna, matka Karla IV.' },
   { jmeno: 'Petr Parléř', popis: 'stavitel katedrály sv. Víta a Karlova mostu (nebyl panovník)' },
 ];

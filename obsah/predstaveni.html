@@ -1549,10 +1549,10 @@ function bod(cv, e) {
    leží na bílém podkladu, takže drží nezávisle na motivu stránky.
 
    Kvůli soběstačnosti stránky je model vložený rovnou v souboru jako data URI:
-   Prirodopis/bunka_rostlinna.png zmenšený na 96 barev a uložený jako
+   Prirodopis/bunka_rostlinna.webp zmenšený na 96 barev a uložený jako
    bezztrátový WebP (145 kB base64 místo 256 kB z původního PNG; vizuálně
    shodné). Při aktualizaci obrázku v bunka.html je potřeba převést znovu:
-     magick Prirodopis/bunka_rostlinna.png -dither None -colors 96 /tmp/b.png
+     magick Prirodopis/bunka_rostlinna.webp -dither None -colors 96 /tmp/b.png
      cwebp -lossless -z 9 -m 6 /tmp/b.png -o /tmp/b.webp && base64 -w0 /tmp/b.webp
    ============================================================ */
 {

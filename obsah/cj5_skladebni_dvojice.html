@@ -6,6 +6,8 @@
   <title>Základní skladební dvojice</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <link rel="stylesheet" href="../nazor.css">
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
@@ -37,6 +39,41 @@
 <body>
   <h1>🔗 Základní skladební dvojice</h1>
   <p class="podtitul">Pro 5.–6. ročník: podmět a přísudek, shoda a nevyjádřený podmět.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Podmět a přísudek</summary>
+    <div class="obsah">
+      <p>Většina vět má dva hlavní členy, které nesou jádro sdělení: <b>podmět</b> říká, <b>o kom nebo o čem</b>
+        věta mluví, a <b>přísudek</b> říká, co podmět <b>dělá</b> nebo <b>jaký je</b>. Dohromady tvoří
+        <b>základní skladební dvojici</b>. Ostatní slova věty jen něco upřesňují.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>🟠 Přísudek</h3><p>Bývá to <b>sloveso v určitém tvaru</b> (má osobu a číslo): <i>kreslí, přijel, pojedeme</i>. Hledej ho jako první.</p></article>
+        <article class="vyklad-karta"><h3>🔵 Podmět</h3><p>Zeptáš se <b>kdo? co?</b> + přísudek: <i>Kdo kreslí? – chlapec.</i> Bývá to podstatné jméno nebo zájmeno v <b>1. pádě</b>.</p></article>
+        <article class="vyklad-karta"><h3>👻 Nevyjádřený podmět</h3><p>Ve větě chybí jako slovo, ale poznáš ho z koncovky slovesa: <i>Napíšu dopis.</i> → (já).</p></article>
+        <article class="vyklad-karta"><h3>🌧️ Věta bezpodmětná</h3><p>Podmět nemá vůbec a doplnit se nedá: <i>Venku prší. Svítalo.</i></p></article>
+      </div>
+      <p>Proč začít přísudkem? Sloveso se ve větě najde snadno a otázka <b>kdo? co?</b> se na něj přímo ptá.
+        Typická chyba je vzít za podmět první podstatné jméno ve větě. Ve větě <i>Zítra pojedeme na výlet</i>
+        není podmětem <i>výlet</i>: na otázku <i>Kdo pojede?</i> odpovíš <b>my</b> – podmět je nevyjádřený.</p>
+      <p>Podmět a přísudek k sobě patří i tvarem: přísudek se <b>shoduje</b> s podmětem v osobě, čísle
+        a v minulém čase i v rodě (<i>chlapec kreslil × chlapci kreslili</i>).</p>
+      <aside class="zapamatuj">Nejdřív najdi přísudek (sloveso), pak se zeptej kdo? co? – odpověď je podmět. Když chybí, doplň ho z koncovky; když doplnit nejde, věta je bezpodmětná.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: najdi skladební dvojici</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Najdi podmět a přísudek ve větě: <b>Moji kamarádi přišli včas.</b></p>
+      <ol class="kroky">
+        <li>Hledám sloveso v určitém tvaru: <b>přišli</b>. To je přísudek.</li>
+        <li>Zeptám se na podmět: <b>Kdo přišel?</b> – <b>kamarádi</b>.</li>
+        <li>Ověřím 1. pád: <i>kamarádi</i> je podstatné jméno v 1. pádě čísla množného. Slovo <i>moji</i> jen říká, čí kamarádi.</li>
+        <li>Zkontroluji shodu: <i>kamarádi přišli</i> – oba tvary jsou v čísle množném, k sobě pasují.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Podmět: kamarádi (podstatné jméno) · přísudek: přišli.</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="najdiPodmet" class="active">🔵 Najdi podmět</button>
@@ -90,18 +127,18 @@ const VETY = [
   { s: ['Malý', 'chlapec', 'kreslí', 'obrázek'], podmet: 1, prisudek: 2, druh: 'podstatne' },
   { s: ['Naše', 'kočka', 'spí', 'na', 'gauči'], podmet: 1, prisudek: 2, druh: 'podstatne' },
   { s: ['Vlak', 'přijel', 'na', 'nádraží'], podmet: 0, prisudek: 1, druh: 'podstatne' },
-  { s: ['Děti', 'si', 'hrají', 'na', 'zahradě'], podmet: 0, prisudek: 2, druh: 'podstatne' },
+  { s: ['Děti', 'běhají', 'po', 'zahradě'], podmet: 0, prisudek: 1, druh: 'podstatne' },
   { s: ['Zítra', 'pojedeme', 'na', 'výlet'], podmet: -1, prisudek: 1, druh: 'nevyjadreny', kdo: 'my' },
-  { s: ['Napsal', 'jsem', 'dlouhý', 'dopis'], podmet: -1, prisudek: 0, druh: 'nevyjadreny', kdo: 'já' },
+  { s: ['Napíšu', 'dlouhý', 'dopis'], podmet: -1, prisudek: 0, druh: 'nevyjadreny', kdo: 'já' },
   { s: ['Sluníčko', 'krásně', 'svítí'], podmet: 0, prisudek: 2, druh: 'podstatne' },
   { s: ['Moji', 'kamarádi', 'přišli', 'včas'], podmet: 1, prisudek: 2, druh: 'podstatne' },
   { s: ['Venku', 'prší'], podmet: -1, prisudek: 1, druh: 'bezpodmetna' },
   { s: ['Celý', 'den', 'sněžilo'], podmet: -1, prisudek: 2, druh: 'bezpodmetna' },
-  { s: ['Ráno', 'se', 'brzy', 'rozednilo'], podmet: -1, prisudek: 3, druh: 'bezpodmetna' },
+  { s: ['Ráno', 'brzy', 'svítalo'], podmet: -1, prisudek: 2, druh: 'bezpodmetna' },
   { s: ['Půjdeme', 'do', 'kina'], podmet: -1, prisudek: 0, druh: 'nevyjadreny', kdo: 'my' },
   { s: ['Čteš', 'moc', 'rychle'], podmet: -1, prisudek: 0, druh: 'nevyjadreny', kdo: 'ty' },
   { s: ['Ona', 'zpívá', 'krásně'], podmet: 0, prisudek: 1, druh: 'zajmeno' },
-  { s: ['Pět', 'žáků', 'chybělo'], podmet: 1, prisudek: 2, druh: 'podstatne' },
+  { s: ['Dva', 'žáci', 'dnes', 'chyběli'], podmet: 1, prisudek: 3, druh: 'podstatne' },
   { s: ['My', 'čteme', 'knihu'], podmet: 0, prisudek: 1, druh: 'zajmeno' },
 ];
 

@@ -6,6 +6,8 @@
 <title>🇪🇺 Instituce EU</title>
 <link rel="stylesheet" href="../common.css">
 <link rel="stylesheet" href="../vyuka.css">
+<link rel="stylesheet" href="../vyklad.css">
+<script src="../vyklad.js" defer></script>
 <script src="../theme.js"></script>
 <script src="../podpis.js" defer></script>
 <script src="../kostra.js" defer></script>
@@ -40,6 +42,39 @@
 <body>
   <h1>🇪🇺 Instituce Evropské unie</h1>
   <p class="podtitul">Sedm hlavních institucí EU: co dělají a kde sídlí. Začni přehledem, pak si to ověř v sérii deseti otázek.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Kdo v EU navrhuje, schvaluje a kontroluje</summary>
+    <div class="obsah">
+      <p>Evropská unie nemá jednu vládu ani jeden parlament v jednom městě. Úkoly si dělí několik <b>institucí</b>.
+        Pomáhá stejná otázka jako u státu: kdo zákon <b>navrhuje</b>, kdo ho <b>schvaluje</b> a kdo <b>hlídá</b>, aby se dodržoval.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Navrhuje</h3><p><b>Evropská komise</b> (Brusel) – „vláda“ EU. Připravuje návrhy zákonů a dohlíží na dodržování smluv.</p></article>
+        <article class="vyklad-karta"><h3>Schvalují</h3><p><b>Evropský parlament</b> (poslanci, které volí občané) a <b>Rada EU</b> (ministři členských států) – společně.</p></article>
+        <article class="vyklad-karta"><h3>Určuje směr</h3><p><b>Evropská rada</b> – hlavy států a vlád. Stanovuje priority, zákony sama neschvaluje.</p></article>
+        <article class="vyklad-karta"><h3>Hlídají</h3><p><b>Soudní dvůr EU</b> – jednotný výklad práva; <b>Účetní dvůr</b> – peníze EU. <b>ECB</b> (Frankfurt) řídí euro.</p></article>
+      </div>
+      <p>Jak vzniká evropský předpis: Komise ho navrhne, Parlament a Rada EU o něm jednají a schválí ho. Když se pak
+        o jeho výkladu vede spor, rozhodne Soudní dvůr.</p>
+      <p>Typická chyba jsou tři podobné názvy. <b>Rada Evropské unie</b> = ministři. <b>Evropská rada</b> = nejvyšší představitelé
+        států. <b>Rada Evropy</b> ve Štrasburku vůbec není instituce EU – je to samostatná organizace pro lidská práva.</p>
+      <aside class="zapamatuj">Komise navrhuje, Parlament a Rada EU schvalují, Soudní dvůr vykládá právo. Rada Evropy do EU nepatří.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: Která instituce to dělá?</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Která instituce „zastupuje vlády členských států (ministři) a spolu s Parlamentem schvaluje legislativu“?</p>
+      <ol class="kroky">
+        <li>Hledám klíčová slova: <b>ministři</b> a <b>schvaluje spolu s Parlamentem</b>.</li>
+        <li>Komise to není – ta zákony navrhuje, neschvaluje.</li>
+        <li>Evropská rada to také není – tam sedí hlavy států a vlád, ne ministři, a zákony neschvaluje.</li>
+        <li>Ministři, kteří schvalují zákony s Parlamentem, tvoří <b>Radu Evropské unie</b>.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ <b>Rada Evropské unie</b> (sídlí v Bruselu).</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="prehled" data-faze="vyuka" class="active">📋 Přehled</button>
@@ -87,7 +122,8 @@ const FOTO = {
   "Evropská komise": { img: 'img/d/eu-instituce-komise-berlaymont.webp', w: 1152, h: 648, alt: "Rozlehlá prosklená budova Berlaymont v Bruselu s velkým modrým praporem Evropské komise na průčelí." },
   "Soudní dvůr EU": { img: 'img/d/eu-instituce-soudni-dvur.webp', w: 1152, h: 864, alt: "Dvě zlatavé výškové věže Soudního dvora Evropské unie v Lucemburku na pozadí modré oblohy." },
 };
-const fotoHtml = f => `<img src="${f.img}" alt="${f.alt}" width="${f.w}" height="${f.h}">`;
+// Fotka doprovází otázku „Kde sídlí?“ – popisný alt (s názvem města) by prozradil odpověď.
+const fotoHtml = f => `<img src="${f.img}" alt="Fotografie budovy instituce." width="${f.w}" height="${f.h}">`;
 // sídla jako možnosti – vždy různá (čtyři instituce sídlí v Bruselu)
 const SIDLA = ['Brusel', 'Štrasburk', 'Lucemburk', 'Frankfurt nad Mohanem', 'Haag', 'Ženeva'];
 let rezim = 'prehled';

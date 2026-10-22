@@ -87,7 +87,7 @@
 <script>
 const $ = id => document.getElementById(id);
 
-const SOUHLASKY = ['M', 'L', 'S', 'P', 'T', 'J', 'N', 'D', 'K', 'V', 'Z', 'R', 'B', 'C', 'H'];
+const SOUHLASKY = ['M', 'L', 'S', 'P', 'T', 'J', 'N', 'D', 'K', 'V', 'Z', 'R', 'B', 'C', 'H', 'CH'];
 const SAMOHLASKY = ['A', 'Á', 'E', 'É', 'I', 'Í', 'O', 'Ó', 'U', 'Ú', 'Y', 'Ý'];
 
 const OBRAZKY_SLOV = {
@@ -110,7 +110,8 @@ const OBRAZKY_VET = {
 };
 
 const DATA = {
-  pismena: [...'AÁBCČDĎEÉĚFGHIÍJKLMNŇOÓPRŘSŠTŤUÚVYÝZŽ'],
+  /* CH je samostatné písmeno české abecedy (za H) */
+  pismena: [...'AÁBCČDĎEÉĚFGH', 'CH', ...'IÍJKLMNŇOÓPRŘSŠTŤUÚŮVYÝZŽ'],
   slabiky: (() => {
     const s = [];
     for (const k of SOUHLASKY) for (const v of ['A', 'Á', 'E', 'É', 'I', 'Í', 'O', 'U', 'Y']) s.push(k + v.toLowerCase());
@@ -220,7 +221,7 @@ function start() {
 function vykresliRadu(slabika) {
   const rada = $('rada');
   if (rezim !== 'slabiky') { rada.innerHTML = ''; return; }
-  const souhlaska = slabika[0].toUpperCase();
+  const souhlaska = slabika.slice(0, -1).toUpperCase();   // slabika = souhláska (i CH) + samohláska
   const velka = $('chkVelka').checked;
   rada.innerHTML = SAMOHLASKY_RADY.map(v => {
     const cela = souhlaska + v.toLowerCase();

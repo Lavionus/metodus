@@ -6,6 +6,8 @@
   <title>Počítačové sítě a internet</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -36,6 +38,39 @@
 <body>
   <h1>🌐 Počítačové sítě a internet</h1>
   <p class="podtitul">Pro 7. ročník: jak putují data od tvého zařízení k serveru a zpět.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Jak putují data internetem</summary>
+    <div class="obsah">
+      <p>Internet není jeden velký počítač, ale <b>propojení mnoha nezávislých sítí</b>. Když otevřeš webovou stránku,
+        tvé zařízení pošle žádost na <b>server</b> a ten pošle stránku zpět. Data přitom necestují vcelku –
+        rozdělí se na malé <b>pakety</b>, každý s adresou odesílatele i příjemce, jako obálky s adresou.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>IP adresa a DNS</h3><p>Každé zařízení v síti má číselnou <b>IP adresu</b>. Lidé si pamatují jména (doménová jména), proto <b>DNS</b> nejdřív přeloží jméno stránky na IP adresu serveru.</p></article>
+        <article class="vyklad-karta"><h3>Router a přepínač</h3><p><b>Přepínač (switch)</b> propojí počítače v jedné místní síti (LAN). <b>Router (směrovač)</b> spojuje sítě navzájem a posílá pakety správným směrem podle IP adresy.</p></article>
+        <article class="vyklad-karta"><h3>Protokoly</h3><p>Dohodnutá pravidla komunikace. <b>HTTP</b> přenáší webové stránky, <b>HTTPS</b> totéž <b>šifrovaně</b> – poznáš ho podle https:// a zámku v prohlížeči.</p></article>
+      </div>
+      <p>Cesta dat k webovému serveru: tvůj počítač → domácí router → poskytovatel připojení (ISP) → páteřní síť
+        internetu → server. Odpověď putuje zpět. Častá chyba je zaměnit DNS za server se stránkou: DNS
+        jen prozradí adresu, stránku posílá webový server.</p>
+      <aside class="zapamatuj">Data putují v paketech. DNS: jméno → IP adresa. Router posílá pakety mezi sítěmi. HTTPS = šifrované spojení.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: cesta dat k webové stránce</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Doma na notebooku napíšeš adresu školního webu. Jakými prvky projdou data, než dorazí na webový server? IP adresu serveru už notebook zná od DNS.</p>
+      <ol class="kroky">
+        <li>Začátek je u mě: <b>můj počítač</b> vytvoří pakety s IP adresou serveru.</li>
+        <li>Z domácí sítě se ven dostanou jen přes <b>domácí router</b>, který ji spojuje s internetem.</li>
+        <li>Router je předá <b>poskytovateli připojení (ISP)</b>, od kterého máme internet.</li>
+        <li>Poskytovatel je pošle do <b>páteřní sítě</b>, kde je routery předávají blíž k cíli podle IP adresy.</li>
+        <li>Nakonec dorazí na <b>webový server</b>, který pošle stránku stejnou cestou zpět.</li>
+      </ol>
+      <p class="vysledek-ukazky">Pořadí: počítač → domácí router → poskytovatel (ISP) → páteřní síť → webový server.</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="cestaDat" class="active">📦 Cesta dat</button>
@@ -79,7 +114,7 @@ const CESTA = [
   { klic: 'pocitac', ikona: '💻', nazev: 'tvůj počítač', info: 'napíšeš adresu do prohlížeče' },
   { klic: 'router', ikona: '📶', nazev: 'domácí router', info: 'spojuje domácí síť s internetem' },
   { klic: 'poskytovatel', ikona: '🏢', nazev: 'poskytovatel (ISP)', info: 'předá data do páteřní sítě' },
-  { klic: 'dns', ikona: '📇', nazev: 'DNS server', info: 'přeloží doménové jméno na IP adresu' },
+  { klic: 'pater', ikona: '🌐', nazev: 'páteřní síť', info: 'routery internetu předávají data blíž k cíli podle IP adresy' },
   { klic: 'server', ikona: '🖥️', nazev: 'webový server', info: 'pošle zpět stránku, kterou jsi chtěl' },
 ];
 
@@ -111,7 +146,7 @@ function cestaDat() {
   const stav = { chyboval: false, hotovo: false };
 
   p.innerHTML = `<div class="zadani uloha-text">Klepej na prvky <b>v pořadí, jak jimi projdou data</b>
-    od tvého počítače k webovému serveru.</div>`;
+    od tvého počítače k webovému serveru.<br><small>IP adresu serveru už počítač zná – předem mu ji podle doménového jména zjistil DNS server.</small></div>`;
   const obal = document.createElement('div');
   obal.innerHTML = svgSchema(poradi, hotove);
   p.appendChild(obal);

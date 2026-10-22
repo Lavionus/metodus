@@ -6,6 +6,8 @@
   <title>Energie a její zdroje</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -26,6 +28,43 @@
 <body>
   <h1>⚡ Energie a její zdroje</h1>
   <p class="podtitul">Pro 5. ročník: odkud bereme energii, co je obnovitelné a jak šetřit.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Odkud bereme energii</summary>
+    <div class="obsah">
+      <p>Energii potřebujeme ke svícení, topení, vaření i jízdě autem. Bereme ji ze <b>zdrojů energie</b>.
+        Důležité je, jestli se zdroj sám doplňuje, nebo jednou dojde.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Obnovitelné zdroje</h3><p>Přirozeně se <b>doplňují</b>:
+          slunce, vítr, tekoucí voda, biomasa (dřevo, štěpka), zemské teplo.</p></article>
+        <article class="vyklad-karta"><h3>Neobnovitelné zdroje</h3><p>Vznikaly miliony let nebo se vytěží a <b>nedoplní</b>:
+          uhlí, ropa, zemní plyn, uran. Jednou dojdou.</p></article>
+        <article class="vyklad-karta"><h3>Elektrárny</h3><p>Vodní, větrná a solární využívají obnovitelné zdroje.
+          Uhelná a jaderná ohřívají vodu na <b>páru</b>, která roztáčí turbínu.</p></article>
+        <article class="vyklad-karta"><h3>Cesta elektřiny</h3><p>elektrárna → transformátor zvýší napětí → vedení
+          vysokého napětí → transformátor u obce napětí sníží → elektroměr v domě → zásuvka.</p></article>
+      </div>
+      <p>Jak poznám obnovitelný zdroj? Zeptám se: <b>Dorůstá, nebo se vrací sám od sebe?</b> Vítr fouká znovu,
+        stromy dorostou. Uhlí se ale za lidský život znovu nevytvoří.</p>
+      <p>Typická chyba: myslet si, že dřevo je neobnovitelné, protože se spálí. Dřevo je obnovitelné – vysadíme nové stromy.</p>
+      <aside class="zapamatuj">Obnovitelné: slunce, vítr, voda, biomasa, zemské teplo. Neobnovitelné: uhlí, ropa, plyn, uran.
+        Nejlevnější energie je ta, kterou nespotřebujeme.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: je ropa obnovitelný zdroj?</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Je ropa obnovitelný, nebo neobnovitelný zdroj energie?</p>
+      <ol class="kroky">
+        <li>Zeptám se, jak ropa vznikla: <b>miliony let</b> ze zbytků pravěkých organismů.</li>
+        <li>Doplní se, když ji vytěžíme? Ne – za tak krátkou dobu nová ropa nevznikne.</li>
+        <li>Porovnám s větrem nebo sluncem: ty se vracejí stále znovu, ropa ne.</li>
+        <li>Zdroj, jehož zásoby jednou dojdou, je neobnovitelný.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Ropa je neobnovitelný zdroj energie.</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="obnovitelne" class="active">♻️ Obnovitelný zdroj?</button>

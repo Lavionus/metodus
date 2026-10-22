@@ -6,6 +6,8 @@
 <title>🔤 Časování sloves</title>
 <link rel="stylesheet" href="../common.css">
 <link rel="stylesheet" href="../vyuka.css">
+<link rel="stylesheet" href="../vyklad.css">
+<script src="../vyklad.js" defer></script>
 <script src="../theme.js"></script>
 <script src="../podpis.js" defer></script>
 <script src="../kostra.js" defer></script>
@@ -15,6 +17,46 @@
 <body>
   <h1>🔤 Časování sloves</h1>
   <p class="podtitul">Přítomný čas v angličtině, němčině a francouzštině. Po chybě dostaneš druhou šanci.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Jak se časuje v přítomném čase</summary>
+    <div class="obsah">
+      <p><b>Časovat</b> znamená měnit tvar slovesa podle osoby: já, ty, on/ona/ono, my, vy, oni. Čeština má
+        pro každou osobu jinou koncovku (hraju, hraješ, hraje…). Cizí jazyky to dělají různě – angličtina
+        skoro vůbec, němčina a francouzština hodně.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>🇬🇧 Angličtina</h3><p>Mění se jen <b>3. osoba jednotného čísla</b>:
+          <span lang="en">I play, he plays</span>. Po -o, -sh, -ch přibývá <b>-es</b>: <span lang="en">goes, watches</span>.
+          Nepravidelné: <span lang="en">be – am, are, is</span>; <span lang="en">have – has</span>.</p></article>
+        <article class="vyklad-karta"><h3>🇩🇪 Němčina</h3><p>Ke kmeni (<span lang="de">spiel-en</span> → <span lang="de">spiel-</span>)
+          přidáš <b>-e, -st, -t, -en, -t, -en</b>: <span lang="de">ich spiele, du spielst, er spielt, wir spielen, ihr spielt, sie spielen</span>.
+          Nepravidelné: <span lang="de">sein – bin, bist, ist…</span></p></article>
+        <article class="vyklad-karta"><h3>🇫🇷 Francouzština</h3><p>Slovesa na <b>-er</b> (<span lang="fr">parler</span>) mají
+          <b>-e, -es, -e, -ons, -ez, -ent</b>: <span lang="fr">je parle, tu parles, il parle, nous parlons, vous parlez, ils parlent</span>.
+          Před samohláskou se <span lang="fr">je</span> zkrátí: <span lang="fr">j'aime, j'ai</span>.</p></article>
+      </div>
+      <p>Jak postupovat: nejdřív urči <b>osobu</b>, pak zjisti, jestli je sloveso <b>pravidelné</b>. Pravidelné
+        utvoříš podle koncovek, nepravidelné (<span lang="en">to be</span>, <span lang="de">sein</span>,
+        <span lang="fr">être, avoir, aller, faire</span>) se musíš naučit nazpaměť.</p>
+      <p>Typická chyba v angličtině: zapomenout na -s u <span lang="en">he / she / it</span>, nebo ho naopak dát
+        k <span lang="en">they</span>.</p>
+      <aside class="zapamatuj">Osoba → pravidelné, či nepravidelné? → koncovka. Angličtina: -s jen ve 3. osobě
+        jednotného čísla.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: doplň tvar slovesa</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Infinitiv: <span lang="en">to watch</span>. Doplň: <span lang="en">he/she/it ___</span></p>
+      <ol class="kroky">
+        <li>Určím osobu: <span lang="en">he/she/it</span> je 3. osoba jednotného čísla.</li>
+        <li>V angličtině jen tahle osoba dostává koncovku -s.</li>
+        <li>Sloveso <span lang="en">watch</span> končí na <b>-ch</b>, proto přidám <b>-es</b>, ne jen -s.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ <span lang="en">he/she/it <b>watches</b></span></p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="aj" class="active">🇬🇧 Angličtina</button>
@@ -79,8 +121,10 @@ function generuj(r) {
   const sada = SLOVESA[r];
   const sloveso = sada.verbs[Math.floor(Math.random() * sada.verbs.length)];
   const i = Math.floor(Math.random() * sada.pron.length);
+  // francouzské je se před samohláskou a němým h zkracuje: j'ai, j'aime
+  const zajmeno = r === 'fr' && i === 0 && /^[aeéèêiouyh]/i.test(sloveso.forms[i]) ? "j'" : sada.pron[i];
   return {
-    zadani: `<span class="zvyraz">${sada.pron[i]}</span> ___`,
+    zadani: `<span class="zvyraz">${zajmeno}</span>${zajmeno.endsWith("'") ? '' : ' '}___`,
     obrazekHtml: `<div class="popis">Infinitiv: ${sloveso.inf}</div>`,
     odpoved: sloveso.forms[i],
     napoveda: sada.pomoc,

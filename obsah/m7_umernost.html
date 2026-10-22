@@ -6,6 +6,8 @@
   <title>Přímá a nepřímá úměrnost</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -67,6 +69,20 @@
   <h1>📉 Přímá a nepřímá úměrnost</h1>
   <p class="podtitul">Pro 7. ročník: rozlišení úměrností, výpočet trojčlenkou a čtení grafu.</p>
 
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: trojčlenka u nepřímé úměrnosti</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">4 dělníci postaví zeď za 6 dní. Za kolik dní ji postaví 3 dělníci?</p>
+      <ol class="kroky">
+        <li>Zapíšu trojčlenku: 4 dělníci …… 6 dní, 3 dělníci …… ? dní.</li>
+        <li>Rozhodnu, o jakou úměrnost jde: méně dělníků → zeď jim potrvá déle. Kolikrát méně jednoho, tolikrát víc druhého – je to <b>nepřímá úměrnost</b> (šipky opačným směrem).</li>
+        <li>U nepřímé úměrnosti poměr obrátím: x = 6 · 4 : 3 = 24 : 3 = <b>8 dní</b>.</li>
+        <li>Kontrola: součin musí zůstat stejný. 4 · 6 = 24 a 3 · 8 = 24. Sedí to.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ 3 dělníci postaví zeď za 8 dní.</p>
+    </div>
+  </details>
+
   <div class="rezimy" id="rezimy">
     <button data-rezim="ziva" data-faze="vyuka" class="active">🔗 Úměrnost naživo</button>
     <button data-rezim="rozliseni">🔀 Přímá, nebo nepřímá?</button>
@@ -97,24 +113,33 @@ function odezvaEl() { const d = document.createElement('div'); d.className = 'od
 
 /* Úlohy: prima = přímá úměrnost, neprima = nepřímá.
    {a} první veličina, {b} druhá; hodnoty se dosazují za běhu. */
+/* {a|rohlík|rohlíky|rohlíků} = číslo a se slovem ve správném tvaru (Uloha.tvar). */
 const SITUACE = [
-  { druh: 'prima', text: '{a} rohlíků stojí {b} Kč.', otazka: 'Kolik Kč stojí {x} rohlíků?',
-    jedA: 'rohlíků', jedB: 'Kč', duvod: 'Víc rohlíků – víc peněz.' },
-  { druh: 'prima', text: 'Auto ujede za {a} hodiny {b} km.', otazka: 'Kolik km ujede za {x} hodiny?',
+  { druh: 'prima', text: '{a|rohlík|rohlíky|rohlíků} stojí {b} Kč.', otazka: 'Kolik Kč stojí {x|rohlík|rohlíky|rohlíků}?',
+    jedA: ['rohlík', 'rohlíky', 'rohlíků'], jedB: 'Kč', duvod: 'Víc rohlíků – víc peněz.' },
+  { druh: 'prima', text: 'Auto ujede za {a|hodinu|hodiny|hodin} {b} km.', otazka: 'Kolik km ujede za {x|hodinu|hodiny|hodin}?',
     jedA: 'h', jedB: 'km', duvod: 'Delší čas – delší dráha (při stejné rychlosti).' },
-  { druh: 'prima', text: 'Na {a} m² spotřebujeme {b} litrů barvy.', otazka: 'Kolik litrů na {x} m²?',
+  { druh: 'prima', text: 'Na {a} m² spotřebujeme {b|litr|litry|litrů} barvy.', otazka: 'Kolik litrů na {x} m²?',
     jedA: 'm²', jedB: 'l', duvod: 'Větší plocha – víc barvy.' },
-  { druh: 'prima', text: '{a} sešitů váží {b} gramů.', otazka: 'Kolik gramů váží {x} sešitů?',
-    jedA: 'sešitů', jedB: 'g', duvod: 'Víc sešitů – větší hmotnost.' },
-  { druh: 'neprima', text: '{a} dělníků postaví zeď za {b} dní.', otazka: 'Za kolik dní ji postaví {x} dělníků?',
-    jedA: 'dělníků', jedB: 'dní', duvod: 'Víc dělníků – kratší čas.' },
-  { druh: 'neprima', text: 'Při rychlosti {a} km/h trvá cesta {b} hodin.', otazka: 'Jak dlouho potrvá při {x} km/h?',
+  { druh: 'prima', text: '{a|sešit|sešity|sešitů} váží {b|gram|gramy|gramů}.', otazka: 'Kolik gramů váží {x|sešit|sešity|sešitů}?',
+    jedA: ['sešit', 'sešity', 'sešitů'], jedB: 'g', duvod: 'Víc sešitů – větší hmotnost.' },
+  { druh: 'neprima', text: '{a|dělník|dělníci|dělníků} postaví zeď za {b|den|dny|dní}.', otazka: 'Za kolik dní ji postaví {x|dělník|dělníci|dělníků}?',
+    jedA: ['dělník', 'dělníci', 'dělníků'], jedB: ['den', 'dny', 'dní'], duvod: 'Víc dělníků – kratší čas.' },
+  { druh: 'neprima', text: 'Při rychlosti {a} km/h trvá cesta {b|hodinu|hodiny|hodin}.', otazka: 'Jak dlouho potrvá při {x} km/h?',
     jedA: 'km/h', jedB: 'h', duvod: 'Vyšší rychlost – kratší čas.' },
-  { druh: 'neprima', text: 'Zásoby vystačí {a} lidem na {b} dní.', otazka: 'Na kolik dní vystačí {x} lidem?',
-    jedA: 'lidem', jedB: 'dní', duvod: 'Víc strávníků – kratší doba.' },
-  { druh: 'neprima', text: 'Bazén naplní {a} čerpadel za {b} minut.', otazka: 'Za kolik minut ho naplní {x} čerpadel?',
-    jedA: 'čerpadel', jedB: 'min', duvod: 'Víc čerpadel – kratší čas.' },
+  { druh: 'neprima', text: 'Zásoby vystačí {a} lidem na {b|den|dny|dní}.', otazka: 'Na kolik dní vystačí {x} lidem?',
+    jedA: 'lidem', jedB: ['den', 'dny', 'dní'], duvod: 'Víc strávníků – kratší doba.' },
+  { druh: 'neprima', text: 'Bazén naplní {a|čerpadlo|čerpadla|čerpadel} za {b|minutu|minuty|minut}.', otazka: 'Za kolik minut ho naplní {x|čerpadlo|čerpadla|čerpadel}?',
+    jedA: ['čerpadlo', 'čerpadla', 'čerpadel'], jedB: 'min', duvod: 'Víc čerpadel – kratší čas.' },
 ];
+/* Dosadí čísla do šablony; {a|1|2–4|5+} skloní slovo podle čísla. */
+function vypln(sablona, hodnoty) {
+  return sablona.replace(/\{(\w)(?:\|([^|}]*)\|([^|}]*)\|([^|}]*))?\}/g, (_, k, t1, t2, t5) =>
+    t1 === undefined ? fmt(hodnoty[k]) : Uloha.tvar(hodnoty[k], t1, t2, t5));
+}
+/* Jednotka první veličiny v trojčlence (skloněná podle čísla, nebo zkratka). */
+function jednotka(j, n) { return Array.isArray(j) ? Uloha.tvar(n, ...j) : `${fmt(n)} ${j}`; }
+const jednotkaA = (s, n) => jednotka(s.jedA, n);
 
 /* Vytvoří konkrétní čísla tak, aby výsledek vyšel hezky. */
 function priklad(situace) {
@@ -139,14 +164,14 @@ const ZU = { druh: 'prima', x: 4, situace: null, k: 12 };
 
 const ZIVE_SITUACE = {
   prima: [
-    { a: 'rohlíků', b: 'Kč', text: n => `${n} rohlíků`, text2: n => `${n} Kč`, k: 4 },
-    { a: 'hodin', b: 'km', text: n => `${n} h jízdy`, text2: n => `${n} km`, k: 60 },
-    { a: 'm²', b: 'l barvy', text: n => `${n} m² stěny`, text2: n => `${n} l barvy`, k: 3 },
+    { a: 'rohlíků', b: 'Kč', text: n => Uloha.tvar(n, 'rohlík', 'rohlíky', 'rohlíků'), text2: n => `${fmt(n)} Kč`, k: 4 },
+    { a: 'hodin', b: 'km', text: n => `${n} h jízdy`, text2: n => `${fmt(n)} km`, k: 60 },
+    { a: 'm²', b: 'l barvy', text: n => `${n} m² stěny`, text2: n => `${fmt(n)} l barvy`, k: 3 },
   ],
   neprima: [
-    { a: 'dělníků', b: 'dní', text: n => `${n} dělníků`, text2: n => `${n} dní`, k: 48 },
-    { a: 'km/h', b: 'h', text: n => `rychlost ${n} km/h`, text2: n => `${n} h cesty`, k: 240 },
-    { a: 'čerpadel', b: 'min', text: n => `${n} čerpadel`, text2: n => `${n} min`, k: 120 },
+    { a: 'dělníků', b: 'dní', text: n => Uloha.tvar(n, 'dělník', 'dělníci', 'dělníků'), text2: n => Uloha.tvar(Number(n.toFixed(2)), 'den', 'dny', 'dní', 'dne'), k: 48 },
+    { a: 'km/h', b: 'h', text: n => `rychlost ${n} km/h`, text2: n => `${fmt(n)} h cesty`, k: 240 },
+    { a: 'čerpadel', b: 'min', text: n => Uloha.tvar(n, 'čerpadlo', 'čerpadla', 'čerpadel'), text2: n => `${fmt(n)} min`, k: 120 },
   ],
 };
 
@@ -224,9 +249,9 @@ function kresliZivou() {
   $('jmenoVeliciny').textContent = s.a;
   $('hodZu').textContent = x;
   $('konstantaZu').innerHTML =
-    `<div class="radek">${s.text(x)} &nbsp;→&nbsp; <b>${s.text2(fmt(y))}</b></div>` +
+    `<div class="radek">${s.text(x)} &nbsp;→&nbsp; <b>${s.text2(y)}</b></div>` +
     (prima
-      ? `<div class="radek vysledek">podíl ${fmt(y)} ÷ ${x} = ${fmt(y / x)} (stálý)</div>`
+      ? `<div class="radek vysledek">podíl ${fmt(y)} : ${x} = ${fmt(y / x)} (stálý)</div>`
       : `<div class="radek vysledek">součin ${x} · ${fmt(y)} = ${fmt(x * y)} (stálý)</div>`);
 
   $('poznamkaZu').innerHTML = prima
@@ -241,7 +266,7 @@ function rozliseni() {
   const p = $('plocha');
   const s = Uloha.nahodne(SITUACE);
   const { a, b } = priklad(s);
-  p.innerHTML = `<div class="zadani uloha-text">${s.text.replace('{a}', a).replace('{b}', b)}
+  p.innerHTML = `<div class="zadani uloha-text">${vypln(s.text, { a, b })}
     <br>O jakou úměrnost jde?</div>`;
   const odezva = odezvaEl();
   Uloha.vyber({
@@ -273,21 +298,21 @@ function trojclenka() {
     if (k > 0 && k !== vysledek) jine.add(fmt(k));
   }
 
-  p.innerHTML = `<div class="zadani uloha-text">${s.text.replace('{a}', a).replace('{b}', b)}
-      <br><b>${s.otazka.replace('{x}', x)}</b></div>
+  p.innerHTML = `<div class="zadani uloha-text">${vypln(s.text, { a, b })}
+      <br><b>${vypln(s.otazka, { x })}</b></div>
     <div class="karta"><div class="trojclenka">
-      ${a} ${s.jedA} …… ${b} ${s.jedB}<br>
-      ${x} ${s.jedA} …… <span class="sipka">?</span> ${s.jedB}<br>
+      ${jednotkaA(s, a)} …… ${jednotka(s.jedB, b)}<br>
+      ${jednotkaA(s, x)} …… <span class="sipka">?</span> ${Array.isArray(s.jedB) ? s.jedB[2] : s.jedB}<br>
       <span style="color:var(--text-faint);font-size:0.8em">šipky ${prima ? 'stejným směrem (přímá)' : 'opačným směrem (nepřímá)'}</span>
     </div></div>`;
   const odezva = odezvaEl();
   Uloha.vyber({
     kam: p, odezva, trida: 'velke',
-    moznosti: Uloha.zamichej([fmt(vysledek), ...jine]).map(t => ({ klic: t, popis: t + ' ' + s.jedB })),
+    moznosti: Uloha.zamichej([fmt(vysledek), ...jine]).map(t => ({ klic: t, popis: Array.isArray(s.jedB) ? jednotka(s.jedB, +t.replace(/\D/g, '')) : t + ' ' + s.jedB })),
     spravnyKlic: fmt(vysledek),
     zpravaOk: prima
-      ? `✅ ${b} · ${x}/${a} = ${fmt(vysledek)} ${s.jedB}`
-      : `✅ ${b} · ${a}/${x} = ${fmt(vysledek)} ${s.jedB}`,
+      ? `✅ ${b} · ${x}/${a} = ${jednotka(s.jedB, vysledek)}`
+      : `✅ ${b} · ${a}/${x} = ${jednotka(s.jedB, vysledek)}`,
     zpravaChyba: prima
       ? 'U přímé úměrnosti násob poměrem, o který se první veličina zvětšila.'
       : 'U nepřímé úměrnosti poměr obrať – čím víc, tím míň.',
@@ -341,7 +366,7 @@ function svgGraf(druh) {
   if (druh === 'prima') d = 'M30 150 L170 30';
   else if (druh === 'neprima') {
     const body = [];
-    for (let x = 35; x <= 170; x += 5) body.push(`${x} ${Math.min(150, 30 + 2600 / (x - 20))}`);
+    for (let x = 35; x <= 170; x += 5) body.push(`${x} ${Math.max(20, 150 - 1800 / (x - 20)).toFixed(1)}`);
     d = 'M' + body.join(' L');
   } else d = 'M30 90 L170 90';   // konstantní závislost
   return `<svg class="graf" viewBox="0 0 200 180">

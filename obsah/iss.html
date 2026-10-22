@@ -215,7 +215,7 @@
       });
     })();
 
-    // den / noc — stejný shader jako na glóbusu počasí (lokální 8K textury)
+    // den / noc — stejný shader jako na glóbusu počasí (lokální 4K textury)
     const maxAniso = world.renderer().capabilities.getMaxAnisotropy();
     let dayNightMaterial = null, plainMaterial = null, denNoc = true;
     const dayNightShader = {
@@ -259,8 +259,8 @@
     const texLoader = new THREE.TextureLoader();
     const loadTex = (url) => new Promise(res => texLoader.load(url, t => { t.anisotropy = maxAniso; t.needsUpdate = true; res(t); }));
     const texReady = Promise.all([
-      loadTex('textures/8k_earth_daymap.jpg'),
-      loadTex('textures/8k_earth_nightmap.jpg')
+      loadTex('textures/4k_earth_daymap.jpg'),
+      loadTex('textures/4k_earth_nightmap.jpg')
     ]).then(([dayTex, nightTex]) => {
       dayNightMaterial = new THREE.ShaderMaterial({
         uniforms: {

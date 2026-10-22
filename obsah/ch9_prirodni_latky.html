@@ -6,6 +6,8 @@
   <title>Přírodní látky</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -23,6 +25,40 @@
 <body>
   <h1>🍞 Přírodní látky</h1>
   <p class="podtitul">Pro 9. ročník: sacharidy, tuky, bílkoviny a vitaminy – zdroje, funkce a energie.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Živiny v potravě a kolik nám dávají energie</summary>
+    <div class="obsah">
+      <p>Přírodní látky vznikají v živých organismech a my je přijímáme v potravě. Každá skupina má v těle jinou úlohu –
+        jedna dodává energii hned, druhá ji uchovává, třetí z ní tělo staví.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Sacharidy</h3><p>Rychlý zdroj energie. Glukóza C<sub>6</sub>H<sub>12</sub>O<sub>6</sub> vzniká v rostlinách fotosyntézou:
+          6 CO<sub>2</sub> + 6 H<sub>2</sub>O → C<sub>6</sub>H<sub>12</sub>O<sub>6</sub> + 6 O<sub>2</sub>. Škrob je zásobní sacharid (s jodem zmodrá), celulóza stavební – pro nás vláknina.</p></article>
+        <article class="vyklad-karta"><h3>Tuky</h3><p>Zásoba energie, tepelná izolace a ochrana orgánů. Vhodnější jsou nenasycené tuky (rostlinné oleje, ryby).</p></article>
+        <article class="vyklad-karta"><h3>Bílkoviny</h3><p>Stavební látky těla, enzymy, protilátky. Skládají se z <b>aminokyselin</b>. Teplem <b>denaturují</b> – bílek ztuhne.</p></article>
+        <article class="vyklad-karta"><h3>Vitaminy a minerály</h3><p>Stačí málo, ale nezbytně. A, D, E, K se rozpouštějí v tucích; vápník staví kosti, železo přenáší kyslík v krvi.</p></article>
+      </div>
+      <p>Energii živin porovnáme podle <b>1 gramu</b>: sacharidy i bílkoviny dodají asi 17 kJ, tuky asi 38 kJ – víc než dvakrát tolik.
+        Proto jsou tuky dobrou zásobou, ale v jídle se energie z nich nasčítá rychle. Voda a vláknina energii nedodávají.
+        Typická chyba: sčítat gramy různých živin a teprve pak násobit jedním číslem – každá živina se násobí <b>svou</b> hodnotou.</p>
+      <aside class="zapamatuj">Sacharidy = rychlá energie, tuky = zásoba, bílkoviny = stavba těla. 1 g sacharidů i bílkovin ≈ 17 kJ, 1 g tuků ≈ 38 kJ.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: kolik energie dodá svačina</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Svačina obsahuje 20 g sacharidů, 10 g tuků a 5 g bílkovin. Kolik energie zhruba dodá?</p>
+      <ol class="kroky">
+        <li>Zapíšu si hodnoty na 1 g: sacharidy 17 kJ, tuky 38 kJ, bílkoviny 17 kJ.</li>
+        <li>Sacharidy: 20 · 17 = <b>340 kJ</b>.</li>
+        <li>Tuky: 10 · 38 = <b>380 kJ</b> – jen 10 gramů, a přesto nejvíc energie.</li>
+        <li>Bílkoviny: 5 · 17 = <b>85 kJ</b>.</li>
+        <li>Sečtu: 340 + 380 + 85 = <b>805 kJ</b>.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Svačina dodá asi <b>805 kJ</b>, nejvíc z toho tuky.</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="kviz1" class="active">🥔 Sacharidy</button>

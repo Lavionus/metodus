@@ -149,8 +149,8 @@ body.kostra-stranka:has(> .plocha, > #plocha, > h1) > .kostra-zapati { margin-le
 }
 .kostra-dialog-tlacitka { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
 
-/* během ověření bez nápověd a pomůcek */
-body.kostra-overuje :is(#btnNapoveda, .pomucka, .napoveda, .pravidla, .tahak, [data-faze="tahak"], [data-faze="vyuka"]):not(.kostra *):not(.odezva) {
+/* během ověření bez nápověd a pomůcek (div.osa = časový pás s letopočty v lekcích; ne osy grafů) */
+body.kostra-overuje :is(#btnNapoveda, .pomucka, .napoveda, .pravidla, .tahak, div.osa:not(#prehled), [data-faze="tahak"], [data-faze="vyuka"], [data-faze="ukazka"]):not(.kostra *):not(.odezva) {
   display: none !important;
 }
 body.kostra-overuje .kostra-faze button:not([data-faze="overse"]) { opacity: .55; }

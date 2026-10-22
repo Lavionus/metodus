@@ -6,6 +6,8 @@
   <title>Uhlovodíky</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -24,6 +26,43 @@
 <body>
   <h1>🛢️ Uhlovodíky</h1>
   <p class="podtitul">Pro 9. ročník: alkany, alkeny, alkyny, aromáty a zpracování ropy.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Jak pojmenovat uhlovodík a odkud ho bereme</summary>
+    <div class="obsah">
+      <p>Uhlovodíky jsou sloučeniny jen <b>uhlíku a vodíku</b>. Uhlík je vždy <b>čtyřvazný</b> – z každého atomu uhlíku vedou
+        čtyři vazby. Atomy uhlíku se řetězí, a tak vzniká obrovské množství látek. Název ti prozradí, jak je molekula postavená.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Předpona = počet uhlíků</h3><p>1 meth-, 2 eth-, 3 prop-, 4 but-, 5 pent-.</p></article>
+        <article class="vyklad-karta"><h3>Koncovka = typ vazby</h3><p><b>-an</b> jen jednoduché vazby (alkany, nasycené), <b>-en</b> jedna dvojná vazba (alkeny),
+          <b>-yn</b> trojná vazba (alkyny). Benzen je aromatický uhlovodík.</p></article>
+        <article class="vyklad-karta"><h3>Obecné vzorce</h3><p>Alkany C<sub>n</sub>H<sub>2n+2</sub> (methan CH<sub>4</sub>), alkeny C<sub>n</sub>H<sub>2n</sub>
+          (ethen C<sub>2</sub>H<sub>4</sub>), alkyny C<sub>n</sub>H<sub>2n−2</sub> (ethyn C<sub>2</sub>H<sub>2</sub>).</p></article>
+        <article class="vyklad-karta"><h3>Ropa</h3><p>Frakční destilací se dělí podle teploty varu: nahoře plyny a benzin, uprostřed petrolej a nafta, dole těžké oleje a asfalt.</p></article>
+      </div>
+      <p>Proč mají alkeny méně vodíků než alkany? Dvojná vazba zabere každému z obou uhlíků jednu vazbu navíc, na vodíky tak zbudou o dvě místa méně.
+        Proto jsou alkeny a alkyny <b>nenasycené</b> a snadno reagují adicí nebo polymerací. Dokonalým spalováním vzniká
+        oxid uhličitý a voda, například u propanu: C<sub>3</sub>H<sub>8</sub> + 5 O<sub>2</sub> → 3 CO<sub>2</sub> + 4 H<sub>2</sub>O.
+        Při nedostatku kyslíku vzniká jedovatý <b>oxid uhelnatý</b> – proto se u plynových spotřebičů větrá.</p>
+      <p>Typická chyba: plést si eth<b>an</b> (jen jednoduchá vazba) a eth<b>en</b> (dvojná vazba) – liší se jediným písmenem.</p>
+      <aside class="zapamatuj">Předpona říká počet uhlíků, koncovka typ vazby: -an jednoduchá, -en dvojná, -yn trojná. Uhlík má vždy 4 vazby.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: pojmenuj uhlovodík CH<sub>3</sub>−CH=CH<sub>2</sub></summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Jak se jmenuje uhlovodík CH<sub>3</sub>−CH=CH<sub>2</sub> a jaký má souhrnný vzorec?</p>
+      <ol class="kroky">
+        <li>Spočítám uhlíky v řetězci: jsou <b>3</b> → předpona <b>prop-</b>.</li>
+        <li>Podívám se na vazby mezi uhlíky: jedna je <b>dvojná</b> (=) → koncovka <b>-en</b>, je to alken.</li>
+        <li>Složím název: <b>propen</b>.</li>
+        <li>Sečtu vodíky: 3 + 1 + 2 = <b>6</b>, souhrnný vzorec je C<sub>3</sub>H<sub>6</sub>.</li>
+        <li>Zkontroluji obecným vzorcem alkenů C<sub>n</sub>H<sub>2n</sub>: pro n = 3 je 2 · 3 = 6 vodíků. Sedí.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Je to <b>propen</b>, C<sub>3</sub>H<sub>6</sub>.</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="kviz1" class="active">🔤 Názvosloví</button>
@@ -123,7 +162,7 @@ const SADY = {
         "ethen",
         "butan"
       ],
-      "proc": "má šestičlenný kruh se střídajícími se vazbami"
+      "proc": "má šestičlenný kruh, v němž jsou elektrony dvojných vazeb rozprostřené (delokalizované) po celém kruhu – všechny vazby jsou stejné; střídání jednoduchých a dvojných vazeb ve vzorci je jen zjednodušený zápis"
     }
   ],
   "kviz2": [
@@ -379,7 +418,11 @@ const REZIMY = {
   kviz3: () => kviz('kviz3'), kviz4: () => kviz('kviz4'),
   kolona: () => { $('plocha').innerHTML='<div class="zadani">Lehčí frakce kondenzují výše, těžší níže.</div><img class="kolona-img" src="img/ch/ch9-frakcni-kolona.webp" alt="Řez frakční destilační kolonou s pecí, patry a bočními vývody." width="1152" height="768"><div class="odezva">Shora: plyny a benzin; uprostřed petrolej a nafta; dole těžké oleje a asfalt.</div>'; },
 };
-function novaUloha() { REZIMY[rezim](); }
+function novaUloha() {
+  // Frakční kolona je jen obrázek bez úlohy – tlačítko Přeskočit by nic nedělalo
+  $('btnDalsi').hidden = rezim === 'kolona';
+  REZIMY[rezim]();
+}
 
 document.querySelectorAll('#rezimy button').forEach(b => b.addEventListener('click', () => {
   document.querySelectorAll('#rezimy button').forEach(x => x.classList.remove('active'));

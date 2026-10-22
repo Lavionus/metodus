@@ -14,6 +14,37 @@
    Metodus (localStorage `metodus_posun`) a ovládá se tlačítkem, které se samo
    objeví v liště ovládání každé procvičovací stránky.
    ============================================================ */
+
+/* Globální klávesové zkratky stránek (Enter/→ = další otázka) nesmějí sebrat
+   Enter ani mezerník tlačítku či odkazu, na kterém stojí fokus – žák ovládající
+   web klávesnicí jimi odpovídá, přepíná režimy, rozbaluje nápovědu.
+   uloha.js se načítá před skripty stránek, proto obalí posluchače kláves, které
+   si stránka zaregistruje na document/window: v takové chvíli se nezavolají
+   (nativní aktivace prvku proběhne normálně). Pole formulářů se neřeší – Enter
+   v nich mají stránky vlastní. (22. 10. 2026, revize: ~50 stránek) */
+(function () {
+  const AKTIVNI = 'button, a[href], summary, select, [role="button"], [role="tab"], [role="radio"], [role="checkbox"]';
+  const zFokusu = e => (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar')
+    && e.target instanceof Element && e.target.closest(AKTIVNI);
+  const obaleni = new WeakMap();
+  for (const cil of [Document.prototype, Window.prototype]) {
+    const pridej = cil.addEventListener, odeber = cil.removeEventListener;
+    cil.addEventListener = function (typ, fn, opt) {
+      if ((typ === 'keydown' || typ === 'keypress') && typeof fn === 'function' && !fn.bezObalu) {
+        let obal = obaleni.get(fn);
+        if (!obal) {
+          obal = function (e) { if (!zFokusu(e)) return fn.call(this, e); };
+          obaleni.set(fn, obal);
+        }
+        return pridej.call(this, typ, obal, opt);
+      }
+      return pridej.call(this, typ, fn, opt);
+    };
+    cil.removeEventListener = function (typ, fn, opt) {
+      return odeber.call(this, typ, (typeof fn === 'function' && obaleni.get(fn)) || fn, opt);
+    };
+  }
+})();
 const Uloha = (function () {
   const PRODLEVA = 900;      // ms mezi správnou odpovědí a další otázkou
   const BLIK = 420;          // ms, po které svítí červená u chybné odpovědi
@@ -370,12 +401,14 @@ const Uloha = (function () {
      rovnou vygenerovala novou otázku. Aktivaci tlačítka necháme proběhnout
      (žádné preventDefault), jen zastavíme cestu ke globálnímu posluchači. */
   function chranKlavesovouOdpoved() {
-    document.addEventListener('keydown', e => {
+    const ochrana = e => {
       if (e.key !== 'Enter' && e.key !== ' ') return;
       const cil = e.target instanceof Element
         && e.target.closest('.moznosti button, button.pokracovat, .porada button');
       if (cil && !cil.disabled) e.stopPropagation();
-    }, true);
+    };
+    ochrana.bezObalu = true;   // pojistka i pro posluchače zaregistrované dřív než uloha.js
+    document.addEventListener('keydown', ochrana, true);
   }
 
   function vlozOvladani() {
@@ -450,8 +483,23 @@ const Uloha = (function () {
     vlozOvladani();
   }
 
+  /* Skloňování podle čísla: tvar(3, 'sešit', 'sešity', 'sešitů') → „3 sešity“.
+     Desetinná čísla mají 2. pád (2,5 litru) – předej ho jako čtvrtý argument. */
+  function tvar(n, jeden, dvaAzCtyri, pet, desetinne = pet) {
+    const a = Math.abs(n);
+    const slovo = !Number.isInteger(a) ? desetinne
+      : a === 1 ? jeden : (a >= 2 && a <= 4) ? dvaAzCtyri : pet;
+    return `${cislo(n)} ${slovo}`;
+  }
+  /* Číslo česky: desetinná čárka, mezera v tisících (od 10 000), znak − u záporných. */
+  function cislo(n, desetin = 6) {
+    if (typeof n !== 'number' || !Number.isFinite(n)) return String(n);
+    const s = Math.abs(n).toLocaleString('cs-CZ', { maximumFractionDigits: desetin, useGrouping: Math.abs(n) >= 10000 });
+    return (n < 0 ? '−' : '') + s;
+  }
+
   return {
-    odpoved, trhni, vyber, skore, ohlas, zamichej, nahodne, nahodneCislo, zapisAktivitu,
+    odpoved, trhni, vyber, skore, ohlas, zamichej, nahodne, nahodneCislo, zapisAktivitu, tvar, cislo,
     DENIK, PRODLEVA, posun, pauza, zrusPosun,
     cekaPosun: () => posunCekani !== null,
     nastaveni: () => ({ ...nastaveni }),

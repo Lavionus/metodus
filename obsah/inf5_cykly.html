@@ -6,6 +6,8 @@
   <title>Programování – cykly a větvení</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -29,6 +31,38 @@
 <body>
   <h1>🔁 Programování – cykly a větvení</h1>
   <p class="podtitul">Pro 5.–6. ročník: opakování příkazů, podmínky a zkracování programů.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Cyklus a podmínka</summary>
+    <div class="obsah">
+      <p>Když má robot udělat pětkrát stejný krok, nemusíš psát pět stejných příkazů. Stačí říct
+        „<b>opakuj 5× [ ➡️ ]</b>“. Takovému opakování se říká <b>cyklus</b>. Program je kratší,
+        přehlednější a snáz se opraví – počet změníš na jednom místě.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Cyklus</h3><p><b>opakuj N× [ … ]</b> provede všechno uvnitř hranatých závorek N-krát za sebou. Uvnitř může být i víc příkazů, třeba ➡️ ⬆️.</p></article>
+        <article class="vyklad-karta"><h3>Vnořený cyklus</h3><p>Cyklus uvnitř cyklu se <b>násobí</b>: opakuj 3× [ opakuj 2× [ krok ] ] udělá 3 · 2 = 6 kroků.</p></article>
+        <article class="vyklad-karta"><h3>Podmínka (větvení)</h3><p><b>když … tak … jinak …</b> – program se rozhodne podle toho, zda podmínka platí. Akce se provede jen v situaci, kterou podmínka přesně popisuje.</p></article>
+      </div>
+      <p>Jak poznám správný cyklus? Spočítám, kolikrát se stejný příkaz (nebo stejná skupina příkazů) opakuje.
+        Častá chyba: u vnořených cyklů počty <b>sečíst</b> místo vynásobit. Nebo u podmínky vybrat opak –
+        „když svítí červená“ místo „když svítí zelená“.</p>
+      <aside class="zapamatuj">Cyklus opakuje příkazy, podmínka mezi nimi vybírá. Vnořené cykly: vnější počet × vnitřní počet.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: kolikrát se příkaz provede</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Program: opakuj 3× [ opakuj 4× [ krok vpřed ] ]. Kolikrát se celkem provede „krok vpřed“?</p>
+      <ol class="kroky">
+        <li>Podívám se dovnitř: vnitřní cyklus udělá „krok vpřed“ <b>4×</b>.</li>
+        <li>Vnější cyklus celý vnitřní cyklus zopakuje <b>3×</b>.</li>
+        <li>Tři skupiny po čtyřech krocích: 4 + 4 + 4, tedy <b>3 · 4</b>.</li>
+        <li>Vypočítám: 3 · 4 = <b>12</b>. Sečíst 3 + 4 = 7 by byla chyba.</li>
+      </ol>
+      <p class="vysledek-ukazky">Příkaz „krok vpřed“ se provede 12×.</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="zkrat" class="active">✂️ Zkrať program cyklem</button>

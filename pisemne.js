@@ -56,24 +56,29 @@ const Pisemne = (function () {
   }
 
   /* Písemné počítání jde zprava doleva, takže po napsání číslice
-     skáče kurzor o políčko doleva. Šipky fungují oběma směry. */
+     skáče kurzor o políčko doleva. Výjimkou je podíl při dělení – ten
+     se píše zleva doprava (políčka .pb-podil), kurzor tam jde doprava
+     a zůstává v řádku podílu. Šipky fungují oběma směry. */
   function ovladaniKurzoru(korenovy) {
+    const smerPsani = el => el.classList.contains('pb-podil') ? 1 : -1;
     korenovy.addEventListener('input', e => {
       const el = e.target;
       if (!el.classList || !el.classList.contains('pb-vstup')) return;
       el.value = el.value.replace(/[^0-9]/g, '').slice(-1);
-      if (el.value) posun(korenovy, el, -1);
+      if (el.value) posun(korenovy, el, smerPsani(el));
     });
     korenovy.addEventListener('keydown', e => {
       const el = e.target;
       if (!el.classList || !el.classList.contains('pb-vstup')) return;
       if (e.key === 'ArrowLeft') { e.preventDefault(); posun(korenovy, el, -1); }
       else if (e.key === 'ArrowRight') { e.preventDefault(); posun(korenovy, el, 1); }
-      else if (e.key === 'Backspace' && !el.value) { e.preventDefault(); posun(korenovy, el, 1); }
+      else if (e.key === 'Backspace' && !el.value) { e.preventDefault(); posun(korenovy, el, -smerPsani(el)); }
     });
   }
   function posun(koren, el, smer) {
-    const vsechny = [...koren.querySelectorAll('.pb-vstup')];
+    // podíl a zbytek mřížky jsou dvě samostatné skupiny políček
+    const skupina = el.classList.contains('pb-podil') ? '.pb-podil' : '.pb-vstup:not(.pb-podil)';
+    const vsechny = [...koren.querySelectorAll(skupina)];
     const i = vsechny.indexOf(el) + smer;
     if (i >= 0 && i < vsechny.length) vsechny[i].focus();
   }
@@ -134,7 +139,7 @@ const Pisemne = (function () {
     hlava.appendChild(bunka(':', 'pb-znak'));
     radekCisla(hlava, delitel, 2);               // dělitel má vždy dvě políčka
     hlava.appendChild(bunka('=', 'pb-znak'));
-    for (let i = 0; i < cislic; i++) hlava.appendChild(vstup());
+    for (let i = 0; i < cislic; i++) hlava.appendChild(vstup('pb-podil'));
     koren.appendChild(hlava);
 
     const g = mrizka(cislic + 1);

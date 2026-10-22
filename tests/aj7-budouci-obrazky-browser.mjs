@@ -33,7 +33,7 @@ await call('Page.navigate', {url: 'http://127.0.0.1:8766/obsah/aj7_budouci.html'
 for (let i = 0; i < 100 && !(await ev(`document.readyState === 'complete' && typeof volba === 'function'`)); i++) {
   await new Promise(resolve => setTimeout(resolve, 50));
 }
-assert.equal(await ev(`SITUACE.filter(s => s.img).length`), 4);
+assert.equal(await ev(`SITUACE.filter(s => s.img).length`), 4);   // 22. 10. 2026: kanystr nahrazen palivoměrem
 assert.equal(await ev(`beTvar('The glass <span>?</span> fall.')`), 'is');
 assert.equal(await ev(`beTvar('The car <span>?</span> stop.')`), 'is');
 assert.equal(await ev(`beTvar('My sister <span>?</span> study.')`), 'is');

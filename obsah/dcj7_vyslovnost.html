@@ -6,6 +6,8 @@
   <title>Výslovnost a abeceda (NJ/FJ)</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -30,6 +32,40 @@
     <summary>Obrazový průvodce: poloha úst a jazyka</summary>
   </details>
 
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Jak se čte němčina a francouzština</summary>
+    <div class="obsah">
+      <p>Čeština se čte skoro tak, jak se píše. Němčina a francouzština ne: některé <b>skupiny písmen</b> se čtou
+        jako jedna hláska. Proto se slovo nečte písmeno po písmenu, ale po skupinách.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>🇩🇪 Skupiny</h3><p><b>ei</b> = aj, <b>ie</b> = í, <b>eu/äu</b> = oj, <b>sch</b> = š: <span lang="de">Zeit</span> [cajt], <span lang="de">Liebe</span> [líbe].</p></article>
+        <article class="vyklad-karta"><h3>🇩🇪 Jiná písmena</h3><p><b>z</b> = c, <b>v</b> = f, <b>w</b> = v; <b>sp, st</b> na začátku = šp, št; <b>ß</b> = ostré s.</p></article>
+        <article class="vyklad-karta"><h3>🇫🇷 Skupiny</h3><p><b>ou</b> = u, <b>eau</b> = ó, <b>ch</b> = š, <b>j</b> = ž: <span lang="fr">bonjour</span> [bonžúr].</p></article>
+        <article class="vyklad-karta"><h3>🇫🇷 Němé konce</h3><p>Koncové souhlásky a koncové e se často <b>nečtou</b>: <span lang="fr">chat</span> [ša], <span lang="fr">vous</span> [vu].</p></article>
+      </div>
+      <p>Pozor na <b>ie</b> a <b>ei</b> v němčině – snadno se spletou. <b>ie</b> je dlouhé [í]: <span lang="de">vier</span> [fír];
+        <b>ei</b> je [aj]: <span lang="de">mein</span> [majn]. Hlásky ü a ö v češtině nejsou: jazyk drží polohu
+        jako u i nebo e, rty se zakulatí jako u u nebo o.</p>
+      <p>Při <b>hláskování</b> se písmena jmenují jinak než česky. Německé V se jmenuje [fau], W [vé], J [jot], Z [cet].</p>
+      <aside class="zapamatuj">Najdi ve slově známé skupiny písmen a každou přečti jako jednu hlásku. Ve francouzštině se konec slova často nečte.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: jak se čte slovo</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Jak se čte francouzské slovo <span lang="fr"><b>beaucoup</b></span> (hodně)?</p>
+      <ol class="kroky">
+        <li>Rozdělím slovo na skupiny: <span lang="fr">b – eau – c – ou – p</span>.</li>
+        <li><b>eau</b> se čte [ó], takže začátek zní [bó].</li>
+        <li><b>ou</b> se čte [u], takže střed zní [ku].</li>
+        <li>Koncové <b>p</b> se nečte.</li>
+        <li>Složím to dohromady: [bóku].</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ <span lang="fr">beaucoup</span> = <b>[bóku]</b></p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="cteniNJ" class="active">🇩🇪 Jak se to čte</button>
@@ -103,9 +139,9 @@ const PISMENA_NJ = {
   U: 'ú', V: 'fau', W: 'vé', X: 'iks', Y: 'ypsilon', Z: 'cet',
 };
 const PISMENA_FJ = {
-  A: 'a', B: 'bé', C: 'sé', D: 'dé', F: 'ef', G: 'žé', H: 'aš', I: 'i', J: 'ži', K: 'ka',
+  A: 'a', B: 'bé', C: 'sé', D: 'dé', E: 'ö', F: 'ef', G: 'žé', H: 'aš', I: 'i', J: 'ži', K: 'ka',
   L: 'el', M: 'em', N: 'en', O: 'o', P: 'pé', Q: 'kü', R: 'er', S: 'es', T: 'té',
-  V: 'vé', W: 'dublvé', X: 'iks', Y: 'igrek', Z: 'zed',
+  U: 'ü', V: 'vé', W: 'dublvé', X: 'iks', Y: 'igrek', Z: 'zed',
 };
 const HLASKOVANA_SLOVA = ['HAUS', 'BUCH', 'ZEIT', 'NAME', 'HAND', 'TISCH', 'BLUME', 'KIND'];
 

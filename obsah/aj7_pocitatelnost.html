@@ -6,6 +6,8 @@
   <title>Počitatelná a nepočitatelná podstatná jména</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -25,6 +27,48 @@
 <body>
   <h1>🍎 Počitatelná a nepočitatelná podstatná jména</h1>
   <p class="podtitul">Pro 7. ročník: countable × uncountable, some/any, much/many a míry.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Dá se to spočítat?</summary>
+    <div class="obsah">
+      <p>Anglická podstatná jména se dělí na <b>počitatelná</b> (<span lang="en">countable</span>) a
+        <b>nepočitatelná</b> (<span lang="en">uncountable</span>). Počitatelné věci jdou spočítat po kusech:
+        <span lang="en">an apple, two apples</span>. Nepočitatelné jsou látky a pojmy bez jasných kusů:
+        <span lang="en">water, milk, sugar, rice, money, time</span>. Nemají množné číslo ani člen
+        <span lang="en">a / an</span>.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Test</h3><p>Zkus říct „<span lang="en">two …s</span>“. <span lang="en">Two books</span> zní dobře →
+          počitatelné. <span lang="en">Two waters</span> jako množství vody nejde → nepočitatelné.</p></article>
+        <article class="vyklad-karta"><h3><span lang="en">some / any</span></h3><p><span lang="en"><b>some</b></span> – kladná věta a zdvořilá nabídka:
+          <span lang="en">There is some milk. Would you like some tea?</span><br>
+          <span lang="en"><b>any</b></span> – otázka a zápor: <span lang="en">Have you got any brothers? We haven't got any bread.</span></p></article>
+        <article class="vyklad-karta"><h3><span lang="en">much / many</span></h3><p><span lang="en"><b>many</b></span> + počitatelné v množném čísle: <span lang="en">many books</span><br>
+          <span lang="en"><b>much</b></span> + nepočitatelné: <span lang="en">much water</span><br>
+          <span lang="en"><b>a lot of</b></span> jde k oběma, hlavně v kladné větě.</p></article>
+      </div>
+      <p>Jak spočítat nepočitatelné? Přes <b>míru nebo nádobu</b>: <span lang="en">a glass of water, a loaf of bread,
+        a slice of cheese, a cup of tea, a bag of flour</span>. Počítáš pak nádoby: <span lang="en">two bottles of milk</span>.</p>
+      <p>Pozor na slova, která jsou v češtině počitatelná: <span lang="en">information</span> a <span lang="en">homework</span>
+        jsou nepočitatelná – ne <span lang="en">informations</span> ✗, ale <span lang="en">a piece of information</span>.
+        Místo britského <span lang="en">Have you got…?</span> řekne Američan spíš <span lang="en">Do you have…?</span></p>
+      <aside class="zapamatuj"><span lang="en">many</span> + počitatelné, <span lang="en">much</span> + nepočitatelné.
+        <span lang="en">some</span> v kladné větě a nabídce, <span lang="en">any</span> v otázce a záporu.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: much, nebo many?</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Doplň <span lang="en">much</span>, nebo <span lang="en">many</span>: <span lang="en">How ___ sugar do you need?</span></p>
+      <ol class="kroky">
+        <li>Najdu podstatné jméno: <span lang="en">sugar</span> (cukr).</li>
+        <li>Zkusím test: „<span lang="en">two sugars</span>“ jako dva cukry na hromadě nedává smysl, cukr je látka → <b>nepočitatelné</b>.</li>
+        <li>Také tvar mi napoví: <span lang="en">sugar</span> stojí bez -s, ne v množném čísle.</li>
+        <li>K nepočitatelnému patří <span lang="en">much</span>.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ <span lang="en">How <b>much</b> sugar do you need?</span></p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="trideni" class="active">🗂️ Počitatelné, či ne</button>
@@ -85,13 +129,13 @@ const MIRY = [
   { spravne: 'a piece of cake', slovo: 'cake', img: 'kus', alt: 'A piece of cake.', jine: ['a glass of cake', 'a bottle of cake', 'a bowl of cake'] },
   { spravne: 'a bottle of milk', slovo: 'milk', img: 'lahev', alt: 'A bottle of milk.', jine: ['a slice of milk', 'a bar of milk', 'a piece of milk'] },
   { spravne: 'a loaf of bread', slovo: 'bread', img: 'bochnik', alt: 'A loaf of bread.', jine: ['a bar of bread', 'a glass of bread', 'a bowl of bread'] },
-  { spravne: 'a packet of rice', slovo: 'rice', img: 'balicek', alt: 'A packet of rice.', jine: ['a slice of rice', 'a loaf of rice', 'a cup of rice'] },
+  { spravne: 'a packet of rice', slovo: 'rice', img: 'balicek', alt: 'A packet of rice.', jine: ['a slice of rice', 'a loaf of rice', 'a bar of rice'] },
   { spravne: 'a can of lemonade', slovo: 'lemonade', img: 'plechovka', alt: 'A can of lemonade.', jine: ['a loaf of lemonade', 'a slice of lemonade', 'a piece of lemonade'] },
   { spravne: 'a bowl of rice', slovo: 'rice', img: 'miska', alt: 'A bowl of rice.', jine: ['a loaf of rice', 'a bottle of rice', 'a slice of rice'] },
   { spravne: 'a cup of tea', slovo: 'tea', img: 'salek', alt: 'A cup of tea.', jine: ['a piece of tea', 'a bar of tea', 'a slice of tea'] },
   { spravne: 'a cube of sugar', slovo: 'sugar', img: 'kostka', alt: 'A cube of sugar.', jine: ['a slice of sugar', 'a bottle of sugar', 'a loaf of sugar'] },
   { spravne: 'a slice of cheese', slovo: 'cheese', img: 'platek', alt: 'A slice of cheese.', jine: ['a glass of cheese', 'a bottle of cheese', 'a loaf of cheese'] },
-  { spravne: 'a bag of flour', slovo: 'flour', img: 'pytel', alt: 'A bag of flour.', jine: ['a cup of flour', 'a slice of flour', 'a can of flour'] },
+  { spravne: 'a bag of flour', slovo: 'flour', img: 'pytel', alt: 'A bag of flour.', jine: ['a bottle of flour', 'a slice of flour', 'a loaf of flour'] },
   { spravne: 'a box of cereal', slovo: 'cereal', img: 'krabice', alt: 'A box of cereal.', jine: ['a bottle of cereal', 'a slice of cereal', 'a glass of cereal'] },
 ];
 
@@ -184,7 +228,7 @@ function miry() {
   const p = $('plocha');
   const u = Uloha.nahodne(MIRY);
   p.innerHTML = `<div class="zadani">Jak správně vyjádříš množství?</div>
-    <div class="karta"><img class="mira-obrazek" src="img/aj/aj7-mira-${u.img}.webp" alt="${u.alt}" width="768" height="768">
+    <div class="karta"><img class="mira-obrazek" src="img/aj/aj7-mira-${u.img}.webp" alt="Obrázek k úloze – v jaké míře je ${u.slovo}?" width="768" height="768">
       <div class="slovo-en">${u.slovo}</div></div>`;
   const odezva = odezvaEl();
   Uloha.vyber({

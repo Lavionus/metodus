@@ -102,7 +102,7 @@
     <div class="foto-mrizka">
       <figure class="foto-karta siroka"><img src="img/ch/ch9-ph-zeli-banky.webp" alt="Řada baněk s výluhem červeného zelí v roztocích s rostoucím pH, od červené po žlutozelenou." width="1152" height="341" loading="lazy"><figcaption><strong>Výluh z červeného zelí v řadě</strong>Zleva doprava roste pH. Barvivo zelí (antokyany) je v silně kyselém roztoku červené, kolem neutrálního fialové a v zásaditém modrozelené až žluté.</figcaption></figure>
       <figure class="foto-karta dvoje"><img class="cele" src="img/ch/ch9-ph-zeli-zkumavky.webp" alt="Osm zkumavek s výluhem červeného zelí, barvy od červené přes fialovou a modrou po zelenou a žlutou." width="1152" height="850" loading="lazy"><figcaption><strong>Zelí jako domácí indikátor</strong>Vlevo kyselé roztoky (červená, růžová), uprostřed neutrální až slabě zásadité (fialová, modrá), vpravo silně zásadité (zelená, žlutá). Výluh si připravíš z nakrájeného zelí a horké vody.</figcaption></figure>
-      <figure class="foto-karta"><img class="cele" src="img/ch/ch9-ph-papirek.webp" alt="{{ALT:ch/ch9-ph-papirek}}" {{R:ch/ch9-ph-papirek}} loading="lazy"><figcaption><strong>Univerzální indikátorový papírek</strong>Proužek namočíš do roztoku a jeho barvu porovnáš se stupnicí na obalu: červená = kyselé, zelená = neutrální, modrá a fialová = zásadité.</figcaption></figure>
+      <figure class="foto-karta"><img class="cele" src="img/ch/ch9-ph-papirek.webp" alt="Kotouček indikátorového papírku s barevnou stupnicí, krabička se stupnicí a dva proužky papírku." width="1152" height="864" loading="lazy"><figcaption><strong>Univerzální indikátorový papírek</strong>Proužek namočíš do roztoku a jeho barvu porovnáš se stupnicí na obalu: červená = kyselé, zelená = neutrální, modrá a fialová = zásadité.</figcaption></figure>
     </div>
   </section>
 
@@ -181,8 +181,10 @@ function indikatory() {
   const p = $('plocha');
   const ind = Uloha.nahodne(INDIKATORY);
   const vzorek = Uloha.nahodne(ind.vzorky);
+  // rušivé barvy se se správnou nesmí překrývat („modrá“ × „modrá až fialová“)
+  const odstiny = t => t.split(' až ');
   const jine = [...new Set(INDIKATORY.flatMap(x => x.vzorky.map(v => v.barva)))]
-    .filter(x => x !== vzorek.barva);
+    .filter(x => !odstiny(x).some(o => odstiny(vzorek.barva).includes(o)));
   p.innerHTML = `<div class="zadani uloha-text">Jaké zbarvení ukáže <b>${ind.i}</b>
       při <b>pH ${String(vzorek.ph).replace('.', ',')}</b>?</div>
     <div class="karta" id="ukazkaIndikatoru">Vyber odpověď. Pak se zobrazí barva a vysvětlení.</div>`;
@@ -192,7 +194,7 @@ function indikatory() {
     moznosti: Uloha.zamichej([vzorek.barva, ...Uloha.zamichej(jine).slice(0, 3)])
       .map(t => ({ klic: t, popis: t })),
     spravnyKlic: vzorek.barva,
-    zpravaOk: `✅ pH ${vzorek.ph}: ${vzorek.barva}. ${ind.proc}`,
+    zpravaOk: `✅ pH ${String(vzorek.ph).replace('.', ',')}: ${vzorek.barva}. ${ind.proc}`,
     zpravaChyba: ind.proc,
     poSpravne: napoprve => {
       skore.vyhodnot(napoprve);
@@ -250,10 +252,10 @@ const CHEMIKALIE = [
   { q: 'Jak se jmenuje HCl?', a: 'kyselina chlorovodíková', b: ['kyselina chloritá', 'chlorid vodný', 'kyselina sírová'] },
   { q: 'Jak se jmenuje H₂SO₄?', a: 'kyselina sírová', b: ['kyselina siřičitá', 'síran vodíku', 'kyselina dusičná'] },
   { q: 'Jak se jmenuje NaOH?', a: 'hydroxid sodný', b: ['oxid sodný', 'chlorid sodný', 'uhličitan sodný'] },
-  { q: 'Kde v těle najdeme kyselinu chlorovodíkovou?', a: 'v žaludeční šťávě', b: ['v krvi', 've slinách', 'v slzách'] },
+  { q: 'Kde v těle najdeme kyselinu chlorovodíkovou?', a: 'v žaludeční šťávě', b: ['v krvi', 've slinách', 've slzách'] },
   { q: 'Čím jsou nebezpečné koncentrované kyseliny a hydroxidy?', a: 'jsou žíravé, leptají kůži i oči', b: ['jsou hořlavé', 'jsou radioaktivní', 'jsou neškodné'] },
   { q: 'Jak se ředí kyselina sírová?', a: 'kyselina se opatrně lije do vody', b: ['voda se lije do kyseliny', 'obojí se smíchá najednou', 'kyselina se zahřeje a pak zředí'] },
-  { q: 'Co způsobují kyselé deště?', a: 'oxidy síry a dusíku z ovzduší', b: ['sopečný popel jako jediná příčina', 'nadbytek kyslíku', 'vodní pára'] },
+  { q: 'Co způsobuje kyselé deště?', a: 'oxidy síry a dusíku z ovzduší', b: ['sopečný popel jako jediná příčina', 'nadbytek kyslíku', 'vodní pára'] },
   { q: 'Proč se do půdy někdy přidává vápno?', a: 'snižuje kyselost půdy', b: ['zvyšuje kyselost', 'nahrazuje vodu', 'ničí všechny živiny'] },
   { q: 'Která kyselina je v octě?', a: 'kyselina octová', b: ['kyselina citronová', 'kyselina sírová', 'kyselina uhličitá'] },
   { q: 'Co vzniká rozpuštěním oxidu uhličitého ve vodě?', a: 'kyselina uhličitá – proto je perlivá voda mírně kyselá', b: ['hydroxid vápenatý', 'kyselina sírová', 'chlorid sodný'] },
@@ -268,7 +270,7 @@ function latky() {
     moznosti: Uloha.zamichej([u.a, ...u.b]).map(t => ({ klic: t, popis: t })),
     spravnyKlic: u.a,
     zpravaOk: `✅ ${u.a}`,
-    zpravaChyba: 'Kyseliny mají ve vzorci vodík na začátku, hydroxidy skupinu OH.',
+    zpravaChyba: 'Kyseliny ve vodě odštěpují vodíkové kationty H⁺, hydroxidy obsahují skupinu OH. Zkus to znovu.',
     poSpravne: skore.vyhodnot,
     dalsi: novaUloha,
   });

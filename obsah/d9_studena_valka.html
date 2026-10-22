@@ -6,6 +6,8 @@
   <title>Studená válka a rok 1989</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -33,6 +35,47 @@
 <body>
   <h1>🧊 Studená válka a rok 1989</h1>
   <p class="podtitul">Pro 9. ročník: rozdělený svět, komunistické Československo a cesta ke svobodě.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Rozdělený svět a komunistické Československo</summary>
+    <div class="obsah">
+      <p>Po roce 1945 se vítězné velmoci rozešly. Svět se rozdělil na <b>západní demokratický blok</b> v čele s USA
+        a <b>východní komunistický blok</b> v čele se SSSR. Jejich soupeření bez přímé války mezi velmocemi
+        se nazývá <b>studená válka</b>. „Studená“ neznamená klidná – svět byl několikrát blízko jaderné války.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Dva bloky</h3><p><b>NATO</b> (1949) proti <b>Varšavské smlouvě</b> (1955).
+          Hranici mezi nimi střežila <b>železná opona</b>; roku <b>1961</b> vyrostla Berlínská zeď.</p></article>
+        <article class="vyklad-karta"><h3>Krize a soupeření</h3><p><b>Karibská krize</b> (1962) – spor o sovětské rakety
+          na Kubě. Soupeřilo se i ve vesmíru: SSSR vypustil první družici a člověka, USA přistály na Měsíci.</p></article>
+        <article class="vyklad-karta"><h3>Československo</h3><p><b>Únor 1948</b> převzetí moci komunisty, 50. léta politické
+          procesy (Milada Horáková), <b>1968</b> Pražské jaro a srpnová okupace, normalizace, <b>Charta 77</b>.</p></article>
+      </div>
+      <p>Pražské jaro vedené <b>Alexandrem Dubčekem</b> chtělo uvolnit poměry. V srpnu 1968 ho ukončil vpád vojsk
+        Varšavské smlouvy. V lednu 1969 se na protest upálil student <b>Jan Palach</b>. Následovala <b>normalizace</b>
+        (Gustáv Husák) – návrat tvrdé kontroly společnosti. Disidenti kolem <b>Václava Havla</b> upozorňovali
+        v Chartě 77 na porušování lidských práv.</p>
+      <p>Reformy <b>Michaila Gorbačova</b> uvolnily poměry ve východním bloku. Po potlačení studentské demonstrace
+        <b>17. listopadu 1989</b> začala <b>sametová revoluce</b> a komunistický režim padl.</p>
+      <aside class="zapamatuj">Studená válka = soupeření Východu a Západu bez přímé války velmocí. ČSR: 1948 převrat →
+        1968 Pražské jaro a okupace → normalizace → 1977 Charta 77 → 1989 sametová revoluce.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: seřaď události komunistického Československa</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Seřaď od nejstarší: vznik Charty 77, sametová revoluce, únorový převrat, Pražské jaro
+        a srpnová okupace.</p>
+      <ol class="kroky">
+        <li>Hledám začátek: komunistický režim musel nejdřív <b>převzít moc</b> – <b>únor 1948</b>.</li>
+        <li>Po letech tvrdé vlády přišel pokus o uvolnění – <b>Pražské jaro (1968)</b>, ukončené okupací.</li>
+        <li>Po okupaci nastala normalizace a proti porušování práv vystoupili disidenti – <b>Charta 77 (1977)</b>.</li>
+        <li>Režim padl až s uvolněním ve východním bloku – <b>sametová revoluce (1989)</b>.</li>
+        <li>Kontrola letopočty: 1948 → 1968 → 1977 → 1989.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ únorový převrat (1948) → Pražské jaro (1968) → Charta 77 (1977) → sametová revoluce (1989)</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="osobnosti" class="active">👤 Osobnosti</button>
@@ -105,7 +148,7 @@ const OSOBNOSTI = [
   },
   {
     "jmeno": "Milada Horáková",
-    "popis": "politička popravená roku 1950 v vykonstruovaném procesu"
+    "popis": "politička popravená roku 1950 ve vykonstruovaném procesu"
   },
   {
     "jmeno": "Michail Gorbačov",

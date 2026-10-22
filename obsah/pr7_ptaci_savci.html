@@ -6,6 +6,8 @@
   <title>Ptáci a savci</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -57,6 +59,43 @@
   <h1>🦅 Ptáci a savci</h1>
   <p class="podtitul">Pro 7. ročník: přizpůsobení stavby těla způsobu života a naši zástupci.</p>
 
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Tělo prozradí způsob života</summary>
+    <div class="obsah">
+      <p>Ptáci i savci jsou <b>živočichové se stálou teplotou těla</b> – udržují si ji bez ohledu na teplotu okolí.
+        Pomáhá jim v tom peří, nebo srst. U obou skupin platí, že <b>stavba těla odpovídá způsobu života</b>:
+        podle zobáku, končetin či zubů odhadneš, čím se živočich živí a kde žije.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Zobák ptáka</h3><p>Hákovitý zobák trhá maso (dravci), krátký kuželovitý louská semena
+          (zrnožravci), tenký špičatý sbírá hmyz, plochý široký cedí potravu z vody (kachna).</p></article>
+        <article class="vyklad-karta"><h3>Nohy</h3><p>Plovací blány = plavání. Dva prsty dopředu a dva dozadu = šplhání po kmeni
+          (strakapoud). Ostré zahnuté drápy = uchopení kořisti. Lopatovité přední končetiny = hrabání (krtek).</p></article>
+        <article class="vyklad-karta"><h3>Chrup savce</h3><p>Šelmy mají dlouhé <b>špičáky</b> a ostré trháky, hlodavci velké stále dorůstající
+          <b>řezáky</b> a bezzubou mezeru, přežvýkavci nemají horní řezáky a mají široké stoličky.</p></article>
+      </div>
+      <p>Savce třídíme do <b>řádů</b>: hmyzožravci (ježek, krtek), letouni (netopýr), hlodavci (veverka, bobr), zajícovci (zajíc, králík),
+        šelmy (liška, rys) a sudokopytníci (srnec, prase divoké).</p>
+      <p><b>Typická chyba:</b> „Zajíc je hlodavec.“ Zajíc má <b>dva páry horních řezáků</b>, a proto patří k <b>zajícovcům</b>.
+        Netopýr zase není pták – je to savec, jediný schopný aktivního letu.</p>
+      <aside class="zapamatuj">Ptáci a savci mají stálou teplotu těla. Tvar zobáku, nohou a zubů ukazuje potravu a způsob života.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: chrup prozradí řád</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Lebka savce má velké řezáky, za nimi bezzubou mezeru a v horní čelisti jen jeden pár řezáků.
+        Čím se živočich živí a do kterého řádu patří?</p>
+      <ol class="kroky">
+        <li>Hledám dlouhé špičáky – nejsou tu, takže to nebude šelma lovící kořist.</li>
+        <li>Velké řezáky a <b>bezzubá mezera</b> ukazují na hlodání tvrdé potravy, například semen a oříšků.</li>
+        <li>Takový chrup mají hlodavci i zajícovci; rozhodne <b>počet horních řezáků</b>.</li>
+        <li>Je tu jen <b>jeden pár</b> horních řezáků, zajícovci mají dva páry – jde tedy o <b>hlodavce</b>.</li>
+      </ol>
+      <p class="vysledek-ukazky">Živočich hlodá semena a plody; patří k <b>hlodavcům</b> (například veverka).</p>
+    </div>
+  </details>
+
   <div class="rezimy" id="rezimy">
     <button data-rezim="zobaky" class="active">🐦 Zobák a potrava</button>
     <button data-rezim="koncetiny">🦶 Končetiny a způsob života</button>
@@ -69,7 +108,7 @@
     <h2 id="ptaci-atlas-nadpis">Jak potrava a pohyb mění tělo ptáků?</h2>
     <p>Porovnej tvary zobáků ve stejném profilu a stavbu nohou. Podoba každého „nástroje“ odpovídá způsobu života.</p>
     <div class="ptaci-grid">
-      <figure class="ptaci-karta"><img src="img/pr/pr7-ptaci-hlava-datel.webp" alt="Hlava strakapouda s rovným zobákem ve tvaru dláta." width="768" height="768"><figcaption>datel · tesání</figcaption></figure>
+      <figure class="ptaci-karta"><img src="img/pr/pr7-ptaci-hlava-datel.webp" alt="Hlava strakapouda s rovným zobákem ve tvaru dláta." width="768" height="768"><figcaption>strakapoud · tesání</figcaption></figure>
       <figure class="ptaci-karta"><img src="img/pr/pr7-ptaci-hlava-kachna.webp" alt="Hlava kachny s širokým plochým zobákem." width="768" height="768"><figcaption>kachna · cezení</figcaption></figure>
       <figure class="ptaci-karta"><img src="img/pr/pr7-ptaci-hlava-kane.webp" alt="Hlava káněte se silným zahnutým zobákem." width="768" height="768"><figcaption>káně · trhání</figcaption></figure>
       <figure class="ptaci-karta"><img src="img/pr/pr7-ptaci-hlava-penkava.webp" alt="Hlava pěnkavy s krátkým kuželovitým zobákem." width="768" height="768"><figcaption>pěnkava · semena</figcaption></figure>
@@ -110,7 +149,7 @@
 
   <p class="napoveda">
     Tvar zobáku, končetin i chrupu prozradí, <b>čím se živočich živí a kde žije</b>.
-    Ptáci i savci jsou <b>teplokrevní</b> – udržují si stálou tělesnou teplotu.
+    Ptáci i savci mají <b>stálou teplotu těla</b> – udržují si ji bez ohledu na okolí.
   </p>
 
   <section class="foto-atlas" aria-labelledby="fotoAtlasNadpis">
@@ -146,7 +185,7 @@ function zobaky() {
   const ptameSeNaPotravu = Math.random() < 0.5;
   p.innerHTML = `<div class="zadani">${ptameSeNaPotravu
     ? 'Čím se živí pták s takovým zobákem?' : 'Který zobák patří ptákovi, který ' + z.potrava + '?'}</div>
-    ${ptameSeNaPotravu ? `<div class="karta"><img class="zobak-obrazek" src="img/pr/pr7-ptaci-hlava-${z.obrazek}.webp" alt="${z.alt}" width="768" height="768">
+    ${ptameSeNaPotravu ? `<div class="karta"><img class="zobak-obrazek" src="img/pr/pr7-ptaci-hlava-${z.obrazek}.webp" alt="Obrázek ptačí hlavy se zobákem k určení." width="768" height="768">
       <div class="popis">${z.popis}</div></div>` : ''}`;
   const odezva = odezvaEl();
   Uloha.vyber({
@@ -167,7 +206,7 @@ function zobaky() {
 
 const PRIZPUSOBENI = [
   { q: 'K čemu má kachna plovací blány mezi prsty?', a: 'k plavání – noha funguje jako veslo', b: ['k hrabání v zemi', 'k uchopení kořisti', 'k šplhání po stromech'] },
-  { q: 'Proč má datel dva prsty dopředu a dva dozadu?', a: 'aby se udržel na svislém kmeni', b: ['aby lépe plaval', 'aby rychleji běhal', 'aby unesl kořist'] },
+  { q: 'Proč má strakapoud (šplhavec) dva prsty dopředu a dva dozadu?', a: 'aby se udržel na svislém kmeni', b: ['aby lépe plaval', 'aby rychleji běhal', 'aby unesl kořist'] },
   { q: 'K čemu slouží dravci ostré zahnuté drápy?', a: 'k uchopení a usmrcení kořisti', b: ['k hrabání nory', 'k šplhání', 'k čištění peří'] },
   { q: 'Proč má krtek lopatovité přední končetiny?', a: 'hrabe jimi podzemní chodby', b: ['plave s nimi', 'šplhá po stromech', 'brání se jimi'] },
   { q: 'Čím se pohybuje netopýr?', a: 'létá – blána je napjatá mezi prsty', b: ['plachtí bez blány', 'jen leze', 'skáče'] },
@@ -206,11 +245,11 @@ const SAVCI = [
   { n: 'bobr evropský', r: 'hlodavci', i: '🦫', popis: 'staví hráze, kácí stromy zuby' },
   { n: 'myšice lesní', r: 'hlodavci', i: '🐭', popis: 'drobný noční hlodavec lesů' },
   { n: 'liška obecná', r: 'selmy', i: '🦊', popis: 'šelma s huňatým ocasem, loví hraboše' },
-  { n: 'kuna lesní', r: 'selmy', i: '🦡', popis: 'štíhlá lasicovitá šelma, šplhá po stromech' },
+  { n: 'kuna lesní', r: 'selmy', i: '🐾', popis: 'štíhlá lasicovitá šelma, šplhá po stromech' },
   { n: 'rys ostrovid', r: 'selmy', i: '🐆', popis: 'naše největší kočkovitá šelma se štětičkami na uších' },
   { n: 'srnec obecný', r: 'sudokopytnici', i: '🦌', popis: 'přežvýkavec s parůžky, žije v lesích a na polích' },
   { n: 'prase divoké', r: 'sudokopytnici', i: '🐗', popis: 'všežravec s rypákem, ryje v zemi' },
-  { n: 'jelen lesní', r: 'sudokopytnici', i: '🫎', popis: 'velký přežvýkavec s mohutným parožím' },
+  { n: 'jelen lesní', r: 'sudokopytnici', i: '🦌', popis: 'velký přežvýkavec s mohutným parožím' },
   { n: 'zajíc polní', r: 'zajici', i: '🐇', popis: 'dlouhé uši i zadní nohy, mláďata se rodí vidoucí' },
   { n: 'králík divoký', r: 'zajici', i: '🐰', popis: 'žije v norách v koloniích' },
 ];
@@ -280,7 +319,8 @@ const FOTO_PS = {
 };
 /* FOTO_PS:konec */
 [...PTACI, ...SAVCI].forEach(z => { if (FOTO_PS[z.n]) z.foto = FOTO_PS[z.n]; });
-const fotoDruhu = f => `<img class="druh-foto" src="${f.src}" alt="${f.alt}" width="${f.w}" height="${f.h}">`;
+// Volitelný alt: neutrální text, když je fotka sama otázkou (nesmí prozradit druh).
+const fotoDruhu = (f, alt) => `<img class="druh-foto" src="${f.src}" alt="${alt || f.alt}" width="${f.w}" height="${f.h}">`;
 $('fotoAtlas').innerHTML = [['Ptáci', PTACI], ['Savci', SAVCI]].map(([nadpis, sada]) => {
   const karty = sada.filter(z => z.foto).map(z => `<figure class="foto-karta"><img src="${z.foto.src}" alt="${z.foto.alt}" width="${z.foto.w}" height="${z.foto.h}" loading="lazy"><figcaption><strong>${z.n}</strong>${z.r ? RADY[z.r] + ' · ' : ''}${z.popis}.</figcaption></figure>`).join('');
   return karty ? `<h3>${nadpis}</h3><div class="foto-mrizka">${karty}</div>` : '';
@@ -293,7 +333,7 @@ function poznavacka() {
   const z = Uloha.nahodne(sada);
   const jine = Uloha.zamichej(sada.filter(x => x.n !== z.n)).slice(0, 3).map(x => x.n);
   p.innerHTML = `<div class="zadani">Který druh to je?</div>
-    <div class="karta">${z.foto ? fotoDruhu(z.foto) : `<div class="obrazek">${z.i}</div>`}
+    <div class="karta">${z.foto ? fotoDruhu(z.foto, 'Fotografie živočicha k určení.') : `<div class="obrazek">${z.i}</div>`}
       <div class="popis" style="font-weight:400">${z.popis}</div></div>`;
   const odezva = odezvaEl();
   Uloha.vyber({
@@ -312,7 +352,7 @@ function chrup() {
   const p = $('plocha');
   const c = Uloha.nahodne(CHRUPY);
   p.innerHTML = `<div class="zadani uloha-text">Kterému typu savce patří tento chrup?</div>
-    <div class="karta"><img class="chrup-obrazek" src="${c.img}" alt="${c.alt}" width="768" height="768">
+    <div class="karta"><img class="chrup-obrazek" src="${c.img}" alt="Obrázek lebky savce k určení." width="768" height="768">
       <div class="popis" style="font-weight:400">Nápověda: ${c.znak}</div></div>`;
   const odezva = odezvaEl();
   Uloha.vyber({

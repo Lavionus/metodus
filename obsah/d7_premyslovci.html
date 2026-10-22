@@ -6,6 +6,8 @@
   <title>Přemyslovci</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -36,6 +38,49 @@
 <body>
   <h1>👑 Přemyslovci</h1>
   <p class="podtitul">Pro 7. ročník: panovníci prvního českého státu od Bořivoje po Václava III.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Jak Přemyslovci vybudovali český stát</summary>
+    <div class="obsah">
+      <p>Podle pověsti, kterou zapsal kronikář <b>Kosmas</b>, založil rod <b>Přemysl Oráč</b> s kněžnou
+        <b>Libuší</b>. To je ale pověst, ne doložená historie. Prvním <b>historicky doloženým</b> Přemyslovcem je
+        kníže <b>Bořivoj I.</b>, který přijal křest od Metoděje.</p>
+      <p>Přemyslovci vládli přes čtyři století. Jejich vládu si rozděl na dvě části: nejdřív byli <b>knížaty</b>,
+        od roku <b>1212</b> <b>dědičnými králi</b>.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Upevnění státu</h3><p><b>Sv. Václav</b> byl roku <b>935</b> zavražděn bratrem
+          <b>Boleslavem I.</b>, který posílil moc knížete. Za Boleslava II. vzniklo roku <b>973</b> pražské biskupství
+          a roku 995 byli vyvražděni soupeři <b>Slavníkovci</b>.</p></article>
+        <article class="vyklad-karta"><h3>Královský titul</h3><p><b>Vratislav II.</b> získal roku <b>1085</b> královský titul
+          jen <b>pro sebe</b>. <b>Přemysl Otakar I.</b> dostal roku <b>1212</b> Zlatou bulu sicilskou – titul je od té doby
+          <b>dědičný</b>.</p></article>
+        <article class="vyklad-karta"><h3>Vrchol a konec</h3><p><b>Přemysl Otakar II.</b>, král železný a zlatý, padl
+          roku <b>1278</b> na Moravském poli. <b>Václav II.</b> zavedl roku 1300 pražský groš. Zavražděním
+          <b>Václava III.</b> roku <b>1306</b> rod po meči vymřel.</p></article>
+      </div>
+      <p>Typická chyba: zaměnit rok 1085 a 1212. První královský titul byl jen osobní, teprve Zlatá bula sicilská
+        zajistila, že králem bude i panovníkův nástupce. U stejných jmen pomáhá číslo za jménem:
+        <b>Přemysl Otakar I.</b> vládl dřív než <b>Přemysl Otakar II.</b></p>
+      <aside class="zapamatuj">Přemyslovci: knížata (Bořivoj, sv. Václav, Boleslavové) → 1212 dědiční králové →
+        1306 vymření po meči.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: kdo vládl dřív</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Seřaď panovníky od nejstaršího: Václav II., Boleslav I., Přemysl Otakar I., Vratislav II.</p>
+      <ol class="kroky">
+        <li>Ke každému panovníkovi si vybavím jednu jistou událost. <b>Boleslav I.</b> – bratr sv. Václava, vládl
+          od roku <b>935</b>.</li>
+        <li><b>Vratislav II.</b> – první královský titul roku <b>1085</b>, jen pro svou osobu.</li>
+        <li><b>Přemysl Otakar I.</b> – Zlatá bula sicilská roku <b>1212</b>, dědičný titul.</li>
+        <li><b>Václav II.</b> – syn Přemysla Otakara II., který padl roku 1278; Václav II. zavedl roku <b>1300</b> pražský groš.</li>
+        <li>Seřadím podle let: 935 → 1085 → 1212 → 1300. Kontrola smyslem: knížata před králi, osobní titul před dědičným.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Boleslav I. → Vratislav II. → Přemysl Otakar I. → Václav II.</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="ktoBy" class="active">🤴 Kdo to byl</button>
@@ -84,7 +129,7 @@ const PANOVNICI = [
   { jmeno: 'svatý Václav', od: 921, popis: 'vzdělaný kníže, zavražděn roku 935 ve Staré Boleslavi, později patron české země' },
   { jmeno: 'Boleslav I.', od: 935, popis: 'bratr sv. Václava, upevnil moc knížete a zavedl výběr daní' },
   { jmeno: 'Boleslav II.', od: 972, popis: 'za jeho vlády vzniklo roku 973 pražské biskupství, dal vyvraždit Slavníkovce' },
-  { jmeno: 'Vratislav II.', od: 1085, popis: 'získal jako první český panovník královský titul, ale jen pro svou osobu' },
+  { jmeno: 'Vratislav II.', od: 1061, popis: 'kníže od roku 1061; roku 1085 získal jako první český panovník královský titul, ale jen pro svou osobu' },
   { jmeno: 'Přemysl Otakar I.', od: 1197, popis: 'roku 1212 získal Zlatou bulu sicilskou – dědičný královský titul' },
   { jmeno: 'Václav I.', od: 1230, popis: 'ubránil zemi před vpádem Mongolů, podporoval zakládání měst' },
   { jmeno: 'Přemysl Otakar II.', od: 1253, popis: 'král železný a zlatý, padl roku 1278 v bitvě na Moravském poli' },

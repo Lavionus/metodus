@@ -40,8 +40,13 @@ try {
   await call('Page.enable');
   await call('Runtime.enable');
   for (const page of pages) {
+    if (process.env.PRUBEH) console.error('…', page);
     await call('Page.navigate', {url: base + 'obsah/' + page + '.html'});
     await ready(`document.readyState === 'complete' && document.querySelector('#plocha, #tabule, #gameCard, .container')`);
+    // líně načítané obrázky mimo obrazovku by se v prázdné cache nenačetly a decode() by visel
+    await call('Page.addScriptToEvaluateOnNewDocument', { source: '' }).catch(() => {});
+    await ev(`(() => { const ozivit = () => document.querySelectorAll('img[loading="lazy"]').forEach(i => { i.loading = 'eager'; });
+      ozivit(); new MutationObserver(ozivit).observe(document.body, { childList: true, subtree: true }); })()`);
 
     if (page === 'cj1_pismena') {
       assert.equal(await ev('SLOVA.length'), 40);
@@ -109,7 +114,7 @@ try {
     if (page === 'vyjmenovana_slova') {
       await ev(`document.querySelector('[data-rezim="prehled"]').click()`);
       assert.equal(await ev(`document.querySelectorAll('.obrazkova-rada img').length`), 65);
-      await ev(`Promise.all([...document.querySelectorAll('.obrazkova-rada img')].map(i => i.decode()))`);
+      await ev(`Promise.all([...document.querySelectorAll('.obrazkova-rada img')].map(i => (i.loading = 'eager', i.decode())))`);
       assert.ok(await ev(`[...document.querySelectorAll('.obrazkova-rada img')].every(i => i.naturalWidth > 0)`));
       assert.ok(await ev(`obrazekSlova('býk').includes('vyjmenovana-b-byk.webp')`));
       assert.ok(await ev(`obrazekSlova('pelyněk').includes('vyjmenovana-l-pelynek.webp')`));
@@ -122,7 +127,7 @@ try {
       await ev(`document.querySelector('[data-rezim="serie"]').click()`);
       assert.ok(await ev(`document.querySelector('#plocha').textContent.includes('Spustit sérii')`));
       await ev(`document.querySelector('[data-rezim="prehled"]').click()`);
-      await ev(`Promise.all([...document.querySelectorAll('.obrazkova-rada img')].map(i => i.decode()))`);
+      await ev(`Promise.all([...document.querySelectorAll('.obrazkova-rada img')].map(i => (i.loading = 'eager', i.decode())))`);
     }
     if (page === 'cj2_druhy_vet') {
       assert.equal(await ev(`document.querySelectorAll('#scenkyVolby button').length`), 4);
@@ -154,7 +159,7 @@ try {
       for (const slovo of ['koruna', 'kohoutek', 'oko', 'list', 'pero', 'zámek', 'jazyk', 'kolej']) {
         await ev(`document.querySelector('[data-slovo="${slovo}"]').click()`);
         assert.equal(await ev(`document.querySelectorAll('#vyznamyObrazky img').length`), 3);
-        await ev(`Promise.all([...document.querySelectorAll('#vyznamyObrazky img')].map(i => i.decode()))`);
+        await ev(`Promise.all([...document.querySelectorAll('#vyznamyObrazky img')].map(i => (i.loading = 'eager', i.decode())))`);
         assert.ok(await ev(`[...document.querySelectorAll('#vyznamyObrazky img')].every(i => i.naturalWidth > 0)`));
       }
       for (const mode of ['vztah', 'mnohoznacnost', 'vyznamVeVete', 'nadrazene']) {
@@ -164,7 +169,7 @@ try {
     }
     if (page === 'cj6_baje') {
       assert.equal(await ev(`document.querySelectorAll('.zanr-vineta').length`), 4);
-      await ev(`Promise.all([...document.querySelectorAll('.zanr-vineta')].map(i => i.decode()))`);
+      await ev(`Promise.all([...document.querySelectorAll('.zanr-vineta')].map(i => (i.loading = 'eager', i.decode())))`);
       assert.ok(await ev(`[...document.querySelectorAll('.zanr-vineta')].every(i => i.naturalWidth > 0 && i.alt.length > 12)`));
       assert.deepEqual(await ev(`[...document.querySelectorAll('.skupina')].map(x => [x.dataset.h, x.querySelector('.zanr-vineta').src.split('/').pop()])`), [
         ['pohadka', 'cj6-zanr-pohadka.webp'], ['povest', 'cj6-zanr-povest.webp'],
@@ -307,52 +312,52 @@ try {
       await ev(`document.querySelector('[data-rezim="stin"]').click()`);
     }
     if (page === 'aj_slovicka') {
-      assert.equal(await ev(`TEMATA['Zvířata'].length`), 16);
+      assert.equal(await ev(`TEMATA['Zvířata'].length`), 21);   // IMG-aj-02: Zvířata 21 karet
       assert.ok(await ev(`TEMATA['Zvířata'].every(s => s[4]?.endsWith('.webp'))`));
       assert.ok(await ev(`document.querySelector('#kEmoji img')?.naturalWidth > 0`));
       for (let i = 0; i < 16; i++) {
         await ev(`document.querySelector('#kDalsi').click(); document.querySelector('#kEmoji img').decode()`);
         assert.ok(await ev(`document.querySelector('#kEmoji img').naturalWidth > 0`));
       }
-      await ev(`document.querySelector('[data-rezim="prehled"]').click(); Promise.all([...document.querySelectorAll('.emoji-bunka img')].map(i => i.decode()))`);
-      assert.equal(await ev(`document.querySelectorAll('.emoji-bunka img').length`), 16);
+      await ev(`document.querySelector('[data-rezim="prehled"]').click(); Promise.all([...document.querySelectorAll('.emoji-bunka img')].map(i => (i.loading = 'eager', i.decode())))`);
+      assert.equal(await ev(`document.querySelectorAll('.emoji-bunka img').length`), 21);
       await ev(`document.querySelector('[data-rezim="slovo"]').click()`);
       assert.ok(await ev(`document.querySelector('.obrazek-slova img')?.naturalWidth > 0`));
-      assert.equal(await ev(`TEMATA['Jídlo'].length`), 10);
+      assert.equal(await ev(`TEMATA['Jídlo'].length`), 25);
       assert.ok(await ev(`TEMATA['Jídlo'].every(s => s[4]?.endsWith('.webp'))`));
-      await ev(`document.querySelector('[data-kat="Jídlo"]').click(); document.querySelector('[data-rezim="prehled"]').click(); Promise.all([...document.querySelectorAll('.emoji-bunka img')].map(i => i.decode()))`);
-      assert.equal(await ev(`document.querySelectorAll('.emoji-bunka img').length`), 10);
+      await ev(`document.querySelector('[data-kat="Jídlo"]').click(); document.querySelector('[data-rezim="prehled"]').click(); Promise.all([...document.querySelectorAll('.emoji-bunka img')].map(i => (i.loading = 'eager', i.decode())))`);
+      assert.equal(await ev(`document.querySelectorAll('.emoji-bunka img').length`), 25);
       await ev(`document.querySelector('[data-rezim="karticky"]').click()`);
       for (let i = 0; i < 10; i++) {
         await ev(`document.querySelector('#kDalsi').click(); document.querySelector('#kEmoji img').decode()`);
         assert.ok(await ev(`document.querySelector('#kEmoji img').naturalWidth > 0`));
       }
-      assert.equal(await ev(`TEMATA['Škola'].length`), 9);
+      assert.equal(await ev(`TEMATA['Škola'].length`), 19);
       assert.ok(await ev(`TEMATA['Škola'].every(s => s[4]?.endsWith('.webp'))`));
-      await ev(`document.querySelector('[data-kat="Škola"]').click(); document.querySelector('[data-rezim="prehled"]').click(); Promise.all([...document.querySelectorAll('.emoji-bunka img')].map(i => i.decode()))`);
-      assert.equal(await ev(`document.querySelectorAll('.emoji-bunka img').length`), 9);
+      await ev(`document.querySelector('[data-kat="Škola"]').click(); document.querySelector('[data-rezim="prehled"]').click(); Promise.all([...document.querySelectorAll('.emoji-bunka img')].map(i => (i.loading = 'eager', i.decode())))`);
+      assert.equal(await ev(`document.querySelectorAll('.emoji-bunka img').length`), 19);
       await ev(`document.querySelector('[data-rezim="karticky"]').click()`);
       for (let i = 0; i < 9; i++) {
         await ev(`document.querySelector('#kDalsi').click(); document.querySelector('#kEmoji img').decode()`);
         assert.ok(await ev(`document.querySelector('#kEmoji img').naturalWidth > 0`));
       }
-      assert.equal(await ev(`TEMATA['Rodina'].length`), 7);
+      assert.equal(await ev(`TEMATA['Rodina'].length`), 17);
       assert.ok(await ev(`TEMATA['Rodina'].every(s => s[4]?.endsWith('.webp'))`));
-      await ev(`document.querySelector('[data-kat="Rodina"]').click(); document.querySelector('[data-rezim="prehled"]').click(); Promise.all([...document.querySelectorAll('.emoji-bunka img')].map(i => i.decode()))`);
-      assert.equal(await ev(`document.querySelectorAll('.emoji-bunka img').length`), 7);
+      await ev(`document.querySelector('[data-kat="Rodina"]').click(); document.querySelector('[data-rezim="prehled"]').click(); Promise.all([...document.querySelectorAll('.emoji-bunka img')].map(i => (i.loading = 'eager', i.decode())))`);
+      assert.equal(await ev(`document.querySelectorAll('.emoji-bunka img').length`), 17);
       await ev(`document.querySelector('[data-rezim="karticky"]').click()`);
       for (let i = 0; i < 7; i++) {
         await ev(`document.querySelector('#kDalsi').click(); document.querySelector('#kEmoji img').decode()`);
         assert.ok(await ev(`document.querySelector('#kEmoji img').naturalWidth > 0`));
       }
-      assert.equal(await ev(`TEMATA['Dům a nábytek'].length`), 9);
+      assert.equal(await ev(`TEMATA['Dům a nábytek'].length`), 19);
       assert.ok(await ev(`TEMATA['Dům a nábytek'].every(s => s[4]?.endsWith('.webp'))`));
-      await ev(`document.querySelector('[data-kat="Dům a nábytek"]').click(); document.querySelector('[data-rezim="prehled"]').click(); Promise.all([...document.querySelectorAll('.emoji-bunka img')].map(i => i.decode()))`);
-      assert.equal(await ev(`document.querySelectorAll('.emoji-bunka img').length`), 9);
-      assert.equal(await ev(`TEMATA['Oblečení'].length`), 10);
+      await ev(`document.querySelector('[data-kat="Dům a nábytek"]').click(); document.querySelector('[data-rezim="prehled"]').click(); Promise.all([...document.querySelectorAll('.emoji-bunka img')].map(i => (i.loading = 'eager', i.decode())))`);
+      assert.equal(await ev(`document.querySelectorAll('.emoji-bunka img').length`), 19);
+      assert.equal(await ev(`TEMATA['Oblečení'].length`), 20);
       assert.ok(await ev(`TEMATA['Oblečení'].every(s => s[4]?.endsWith('.webp'))`));
-      await ev(`document.querySelector('[data-kat="Oblečení"]').click(); document.querySelector('[data-rezim="prehled"]').click(); Promise.all([...document.querySelectorAll('.emoji-bunka img')].map(i => i.decode()))`);
-      assert.equal(await ev(`document.querySelectorAll('.emoji-bunka img').length`), 10);
+      await ev(`document.querySelector('[data-kat="Oblečení"]').click(); document.querySelector('[data-rezim="prehled"]').click(); Promise.all([...document.querySelectorAll('.emoji-bunka img')].map(i => (i.loading = 'eager', i.decode())))`);
+      assert.equal(await ev(`document.querySelectorAll('.emoji-bunka img').length`), 20);
       assert.ok(await ev(`[...document.querySelectorAll('.emoji-bunka img')].every(i => i.naturalWidth > 0)`));
       await ev(`document.querySelector('[data-rezim="karticky"]').click()`);
       for (let i = 0; i < 10; i++) {
@@ -413,7 +418,7 @@ try {
       assert.ok(await ev(`document.querySelector('#rezZemePopis').textContent.includes('kůra')`));
     }
     if (page === 'd6_pravek') {
-      await ev(`Promise.all([...document.querySelectorAll('.srovnani-sidel img')].map(i => i.decode()))`);
+      await ev(`Promise.all([...document.querySelectorAll('.srovnani-sidel img')].map(i => (i.loading = 'eager', i.decode())))`);
       assert.equal(await ev(`document.querySelectorAll('.srovnani-sidel img').length`), 2);
       assert.ok(await ev(`[...document.querySelectorAll('.srovnani-sidel img')].every(i => i.naturalWidth > 0)`));
       await ev(`document.querySelector('#sondaScena img').decode()`);
@@ -427,12 +432,12 @@ try {
       assert.ok(await ev(`document.querySelector('.rekonstrukce-stit').textContent.includes('Rekonstrukce')`));
     }
     if (page === 'z9_hospodarstvi_svet') {
-      await ev(`Promise.all([...document.querySelectorAll('.cesta-vyrobku img')].map(i => i.decode()))`);
+      await ev(`Promise.all([...document.querySelectorAll('.cesta-vyrobku img')].map(i => (i.loading = 'eager', i.decode())))`);
       assert.equal(await ev(`document.querySelectorAll('.cesta-vyrobku img').length`), 6);
       assert.ok(await ev(`[...document.querySelectorAll('.cesta-vyrobku img')].every(i => i.naturalWidth > 0 && i.alt.length > 15)`));
     }
     if (page === 'inf7_site') {
-      await ev(`Promise.all([...document.querySelectorAll('.sit-prvky img')].map(i => i.decode()))`);
+      await ev(`Promise.all([...document.querySelectorAll('.sit-prvky img')].map(i => (i.loading = 'eager', i.decode())))`);
       assert.equal(await ev(`document.querySelectorAll('.sit-prvky img').length`), 8);
       assert.ok(await ev(`[...document.querySelectorAll('.sit-prvky img')].every(i => i.naturalWidth > 0 && i.alt.length > 12)`));
     }
@@ -443,7 +448,7 @@ try {
     if (page === 'inf7_sifrovani') {
       await ready(`document.querySelector('#kompreseCanvas')?.getContext('2d')`);
       await ev(`document.querySelector('#kvalitaObrazu').value=20; document.querySelector('#kvalitaObrazu').dispatchEvent(new Event('input'))`);
-      assert.ok(await ev(`document.querySelector('#kvalitaPopis').textContent.includes('20 %')`));
+      await ready(`/20[\\s\\u00a0]%/.test(document.querySelector('#kvalitaPopis').textContent)`);   // JPEG se kóduje asynchronně
     }
     if (page === 'd6_recko' || page === 'd6_rim') {
       await ev(`document.querySelector('.rekonstrukce img').decode()`);
@@ -474,7 +479,7 @@ try {
     if (page === 'aj6_stupnovani') {
       assert.equal(await ev(`OBRAZKY.length`), 5);
       assert.equal(await ev(`OBRAZKY.flatMap(x => x.soubory).length`), 15);
-      await ev(`document.querySelector('[data-rezim="porovnani"]').click(); Promise.all([...document.querySelectorAll('.porovnani img')].map(i => i.decode()))`);
+      await ev(`document.querySelector('[data-rezim="porovnani"]').click(); Promise.all([...document.querySelectorAll('.porovnani img')].map(i => (i.loading = 'eager', i.decode())))`);
       assert.equal(await ev(`document.querySelectorAll('.porovnani img').length`), 3);
       assert.ok(await ev(`[...document.querySelectorAll('.porovnani img')].every(i => i.naturalWidth === 768 && i.alt.length > 5)`));
     }
@@ -490,12 +495,12 @@ try {
     if (page === 'prv1_rodina') {
       assert.equal(await ev(`PATRA.flatMap(p => p.clenove).length`), 8);
       assert.ok(await ev(`PATRA.flatMap(p => p.clenove).every(x => x.img?.endsWith('.webp'))`));
-      await ev(`Promise.all([...document.querySelectorAll('.kartik img')].map(i => i.decode()))`);
+      await ev(`Promise.all([...document.querySelectorAll('.kartik img')].map(i => (i.loading = 'eager', i.decode())))`);
       assert.equal(await ev(`document.querySelectorAll('.kartik img').length`), 8);
       assert.ok(await ev(`[...document.querySelectorAll('.kartik img')].every(i => i.naturalWidth > 0)`));
       await ev(`for (const b of [...document.querySelectorAll('.kartik')]) { const p = PATRA.flatMap((x,i) => x.clenove.map(c => [c.id,i])).find(x => x[0] === b.dataset.id)[1]; b.click(); document.querySelector('.misto:not(.plne)[data-patro="'+p+'"]').click(); }`);
       assert.equal(await ev(`document.querySelectorAll('.misto.plne img').length`), 8);
-      await ev(`document.querySelector('[data-rezim="vztahy"]').click(); Promise.all([...document.querySelectorAll('.rodina-portret')].map(i => i.decode()))`);
+      await ev(`document.querySelector('[data-rezim="vztahy"]').click(); Promise.all([...document.querySelectorAll('.rodina-portret')].map(i => (i.loading = 'eager', i.decode())))`);
       assert.ok(await ev(`document.querySelectorAll('.moznosti .rodina-portret').length === 4 && [...document.querySelectorAll('.rodina-portret')].every(i => i.naturalWidth > 0)`));
       await ev(`document.querySelector('[data-rezim="domov"]').click(); document.querySelector('.dum-rez').decode()`);
       assert.ok(await ev(`document.querySelector('.dum-rez').naturalWidth > 0`));
@@ -511,7 +516,7 @@ try {
       assert.equal(await ev(`document.querySelectorAll('.scena .misto.spravne').length`), 1);
       assert.equal(await ev(`Object.keys(BEZPECNOST_OBRAZKY).length`), 8);
       assert.equal(await ev(`new Set([...KVIZ.flatMap(x => x.obrazky || []), 'cervena']).size`), 8);
-      await ev(`document.querySelector('#plocha').innerHTML = obrazkySituace(Object.keys(BEZPECNOST_OBRAZKY)); Promise.all([...document.querySelectorAll('.situace-obrazek')].map(i => i.decode()))`);
+      await ev(`document.querySelector('#plocha').innerHTML = obrazkySituace(Object.keys(BEZPECNOST_OBRAZKY)); Promise.all([...document.querySelectorAll('.situace-obrazek')].map(i => (i.loading = 'eager', i.decode())))`);
       assert.equal(await ev(`document.querySelectorAll('.situace-obrazek').length`), 8);
       assert.ok(await ev(`[...document.querySelectorAll('.situace-obrazek')].every(i => i.naturalWidth === 768 && i.alt.length > 30)`));
       for (const mode of ['semafor', 'kviz', 'mapa']) {
@@ -555,8 +560,8 @@ try {
     if (page === 'f6_hustota') { assert.equal(await ev(`Object.keys(OBRAZKY_LATKY).length`), 8); await ev(`document.querySelector('[data-rezim="porovnej"]').click(); Promise.all([...document.querySelectorAll('.material-img')].map(i=>i.decode()))`); }
     if (page === 'f7_tlak') { assert.equal(await ev(`TLAKOVE_SITUACE.length`), 5); await ev(`document.querySelector('[data-rezim="tlakPevne"]').click(); document.querySelector('.tlak-kontext').decode()`); assert.ok(await ev(`document.querySelector('.tlak-kontext').naturalWidth > 0`)); }
     if (page === 'de_slovicka' || page === 'fr_slovicka') {
-      assert.equal(await ev(`Object.keys(OBRAZKY_DOMOV).length`), 9);
-      await ev(`document.querySelector('[data-kat="domov"]').click(); document.querySelector('[data-rezim="prehled"]').click(); Promise.all([...document.querySelectorAll('.emoji-bunka img')].map(i => i.decode()))`);
+      assert.ok(await ev(`Object.keys(OBRAZKY).length >= 9`));   // dříve OBRAZKY_DOMOV, dnes společný slovník obrázků
+      await ev(`document.querySelector('[data-kat="domov"]').click(); document.querySelector('[data-rezim="prehled"]').click(); Promise.all([...document.querySelectorAll('.emoji-bunka img')].map(i => (i.loading = 'eager', i.decode())))`);
       assert.equal(await ev(`document.querySelectorAll('.emoji-bunka img').length`), 9);
       assert.ok(await ev(`[...document.querySelectorAll('.emoji-bunka img')].every(i => i.naturalWidth > 0)`));
       await ev(`document.querySelector('[data-rezim="karticky"]').click()`);
@@ -568,7 +573,7 @@ try {
 
     for (const width of [1280, 390, 320]) for (const theme of ['dark', 'light']) {
       await call('Emulation.setDeviceMetricsOverride', {width, height: 900, deviceScaleFactor: 1, mobile: false});
-      await ev(`document.documentElement.dataset.theme='${theme}'; Promise.all([...document.images].filter(i => i.hasAttribute('src')).map(i => i.decode()))`);
+      await ev(`document.documentElement.dataset.theme='${theme}'; Promise.all([...document.images].filter(i => i.hasAttribute('src')).map(i => (i.loading = 'eager', i.decode())))`);
       assert.equal(await ev(`document.documentElement.scrollWidth > innerWidth + 1`), false, page + ' overflow ' + width);
       assert.ok(await ev(`[...document.images].filter(i => i.hasAttribute('src')).every(i => i.naturalWidth > 0)`));
       if (width === 390 && theme === 'light') {

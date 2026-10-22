@@ -6,6 +6,8 @@
   <title>Práce, výkon a energie</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -25,6 +27,47 @@
 <body>
   <h1>🔧 Práce, výkon a energie</h1>
   <p class="podtitul">Pro 8. ročník: mechanická práce, výkon a přeměny energie.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Práce, výkon a energie</summary>
+    <div class="obsah">
+      <p>Ve fyzice <b>práci</b> konáš jen tehdy, když působíš silou a těleso se přitom <b>posune ve směru
+        síly</b>. Kdo táhne bednu po podlaze, koná práci; kdo jen drží těžkou tašku na místě, se sice
+        unaví, ale mechanickou práci nekoná – dráha je nulová.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Práce</h3><p><b>W = F · s</b>, jednotka <b>joule (J)</b>.
+          1 J vykoná síla 1 N po dráze 1 m.</p></article>
+        <article class="vyklad-karta"><h3>Výkon</h3><p><b>P = W : t</b>, jednotka <b>watt (W)</b>, 1 W = 1 J/s.
+          Výkon říká, jak <b>rychle</b> se práce koná. Obráceně t = W : P.</p></article>
+        <article class="vyklad-karta"><h3>Polohová energie</h3><p><b>E<sub>p</sub> = m · g · h</b> – má ji
+          těleso ve výšce. Roste s hmotností i výškou.</p></article>
+        <article class="vyklad-karta"><h3>Pohybová energie</h3><p><b>E<sub>k</sub> = ½ · m · v²</b> – má ji
+          pohybující se těleso. Rychlost je na druhou.</p></article>
+      </div>
+      <p>Dva jeřáby, které zvednou stejný náklad do stejné výšky, vykonají stejnou práci. Ten, který to
+        zvládne za kratší dobu, má <b>větší výkon</b>. Typická chyba: zaměnit práci (J) a výkon (W).</p>
+      <p>U pohybové energie pozor na druhou mocninu: při dvojnásobné rychlosti má těleso <b>čtyřikrát</b>
+        větší energii. Proto je rychlá jízda autem tak nebezpečná.</p>
+      <p>Energie nevzniká ani nezaniká, jen se <b>přeměňuje</b>. Padající míč mění polohovou energii
+        na pohybovou, brzdící auto pohybovou na teplo, baterie chemickou na elektrickou.</p>
+      <aside class="zapamatuj">W = F · s [J], P = W : t [W], E<sub>p</sub> = m · g · h, E<sub>k</sub> = ½ · m · v².
+        Energie se neztrácí, jen mění formu.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: pohybová energie míče</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Těleso o hmotnosti 4 kg se pohybuje rychlostí 6 m/s. Jakou má pohybovou energii?</p>
+      <ol class="kroky">
+        <li>Zapíšu, co znám: <b>m = 4 kg</b>, <b>v = 6 m/s</b>, hledám <b>E<sub>k</sub></b>.</li>
+        <li>Pohybová energie: <b>E<sub>k</sub> = ½ · m · v²</b>.</li>
+        <li>Nejdřív umocním rychlost: v² = 6 · 6 = <b>36</b>.</li>
+        <li>Dosadím: E<sub>k</sub> = ½ · 4 · 36 = 2 · 36 = <b>72 J</b>.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Těleso má pohybovou energii 72 J.</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="prace" class="active">💪 Práce</button>
@@ -160,7 +203,7 @@ function energie() {
 
 const PREMENY = [
   { s: 'Míč padá z výšky k zemi.', a: 'polohová energie se mění na pohybovou', b: ['pohybová na polohovou', 'teplo na světlo', 'chemická na jadernou'] },
-  { s: 'Sáňkař vyjíždí na kopec.', a: 'pohybová energie se mění na polohovou', b: ['polohová na pohybovou', 'elektrická na teplo', 'zvuková na světelnou'] },
+  { s: 'Rozjetý sáňkař vyjede bez odrážení setrvačností na protější svah a zpomaluje.', a: 'pohybová energie se mění na polohovou', b: ['polohová na pohybovou', 'elektrická na teplo', 'zvuková na světelnou'] },
   { s: 'Vodní elektrárna vyrábí proud.', a: 'polohová energie vody se mění na elektrickou', b: ['elektrická na polohovou', 'chemická na světelnou', 'jaderná na zvukovou'] },
   { s: 'Baterie napájí svítilnu.', a: 'chemická energie se mění na elektrickou a pak na světlo a teplo', b: ['světlo na chemickou', 'polohová na elektrickou', 'zvuk na teplo'] },
   { s: 'Auto brzdí a kotouče se zahřejí.', a: 'pohybová energie se mění na teplo', b: ['teplo na pohybovou', 'polohová na chemickou', 'elektrická na světelnou'] },

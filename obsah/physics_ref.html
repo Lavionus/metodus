@@ -250,7 +250,7 @@ const VZORCE = [
 
   { id: 'Q', kat: 'teplo', nazev: 'Teplo', tex: 'Q = m · c · Δt', j: 'J', schema: null,
     vst: [{ k: 'm', popis: 'hmotnost m (kg)', def: 1, min: 0.1, max: 50, krok: 0.1 },
-          { k: 'c', popis: 'měrná tep. kapacita c (J/kg·K)', def: 4180, min: 130, max: 4200, krok: 10 },
+          { k: 'c', popis: 'měrná tep. kapacita c [J/(kg·K)]', def: 4180, min: 130, max: 4200, krok: 10 },
           { k: 'dt', popis: 'ohřátí Δt (K)', def: 80, min: 1, max: 100, krok: 1 }],
     f: x => x.m * x.c * x.dt,
     dosazeni: x => `Q = ${cislo(x.m)} · ${cislo(x.c)} · ${cislo(x.dt)}`,

@@ -1910,10 +1910,10 @@
         ['Vztlak', cis(L / 1000, 1) + ' kN'], ['Tíha', cis(tiha / 1000, 1) + ' kN']]);
       m.zpravu(c.zak ? '⚠️ <b>Proud se od horní strany křídla odtrhl.</b> Nad křídlem vznikly víry, podtlak zmizel, vztlak klesl a odpor prudce vzrostl. To je <b>pád</b> – pilot musí hned sklopit příď.'
         : s.a === 0 && s.profil === 'soumerny' ? 'Souměrné křídlo rovně po proudu: nahoře i dole proudí vzduch stejně rychle, tlaky jsou stejné a <b>vztlak je nulový</b>.'
-          : stav === 'stoupa' ? 'Vztlak je větší než tíha – <b>letadlo stoupá</b>.'
+          : stav === 'stoupa' ? 'Vztlak je větší než tíha – výsledná síla míří nahoru a <b>letadlo začne stoupat</b>.'
             : stav === 'rovne' ? 'Vztlak se rovná tíze – <b>letadlo letí vodorovně</b>.'
               : L < 0 ? 'Záporný úhel tlačí křídlo <b>dolů</b> – takhle obrácené křídlo přitlačuje k silnici závodní auta.'
-                : 'Vztlak je menší než tíha – <b>letadlo klesá</b>. Pomůže větší úhel náběhu nebo větší rychlost.');
+                : 'Vztlak je menší než tíha – výsledná síla míří dolů a <b>letadlo začne klesat</b>. Pomůže větší úhel náběhu nebo větší rychlost.');
       kresliAnim();
     };
     const nastavProfil = segment($('#kr-profil'), s.profil, v => { s.profil = v; m.naplanuj(); });
@@ -2089,7 +2089,7 @@
       const [s1, s2] = vyber([[20, 10], [30, 10], [24, 6], [40, 10], [18, 6], [12, 4]]), v = vyber([2, 3, 4, 5]);
       const spr = v * s1 / s2;
       return {
-        zadani: `Vítr fouká rychlostí <b>${v} m/s</b> mezi dva řady domů vzdálené ${s1} m. Ulice se zúží na <b>${s2} m</b>. Jak rychle zhruba fouká v zúžení?`,
+        zadani: `Vítr fouká rychlostí <b>${v} m/s</b> mezi dvěma řadami domů vzdálenými od sebe ${s1} m. Ulice se zúží na <b>${s2} m</b>. Jak rychle zhruba fouká v zúžení?`,
         moznosti: [{ t: `${cisK(spr, 1)} m/s`, ok: true }, { t: `${cisK(v * s2 / s1, 1)} m/s`, proc: 'V užším místě vzduch zrychlí, nezpomalí.' },
           { t: `${v} m/s`, proc: 'Stejně rychle by užším místem prošlo méně vzduchu – kam by se zbytek poděl?' }, { t: `${cisK(v + s1 - s2, 1)} m/s`, proc: 'Rychlost se nepřičítá podle metrů – mění se v poměru šířek.' }],
         napoveda: 'Kolikrát je ulice užší, tolikrát rychleji musí vzduch proudit.',
@@ -2135,11 +2135,11 @@
           napoveda: 'Vzpomeň si na model křídla při 20°.', vysvetleni: 'Za kritickým úhlem se proud odtrhne – vztlak klesne, odpor vzroste. Tomu se říká pád (stall).' },
         (() => {
           const L = vyber([8, 9, 11, 12, 14]), W = 10;
-          const spr = L > W ? 'Stoupá.' : 'Klesá.';
+          const spr = L > W ? 'Začne stoupat.' : 'Začne klesat.';
           return { zadani: `Na letadlo působí tíha <b>${W} kN</b> a vztlak <b>${L} kN</b>. Co letadlo dělá?`,
-            moznosti: [{ t: spr, ok: true }, { t: L > W ? 'Klesá.' : 'Stoupá.', proc: L > W ? 'Vztlak je větší než tíha.' : 'Vztlak je menší než tíha.' },
+            moznosti: [{ t: spr, ok: true }, { t: L > W ? 'Začne klesat.' : 'Začne stoupat.', proc: L > W ? 'Vztlak je větší než tíha.' : 'Vztlak je menší než tíha.' },
               { t: 'Letí vodorovně.', proc: 'Vodorovně letí, když se vztlak rovná tíze.' }, { t: 'Padá volným pádem.', proc: 'Volný pád by byl bez vztlaku.' }],
-            napoveda: 'Porovnej vztlak a tíhu.', vysvetleni: L > W ? 'Vztlak převažuje nad tíhou – letadlo stoupá.' : 'Tíha převažuje nad vztlakem – letadlo klesá.' };
+            napoveda: 'Porovnej vztlak a tíhu.', vysvetleni: L > W ? 'Vztlak převažuje nad tíhou – výsledná síla míří nahoru, dráha letadla se stáčí vzhůru a letadlo začne stoupat.' : 'Tíha převažuje nad vztlakem – výsledná síla míří dolů a letadlo začne klesat.' };
         })(),
       ]);
     } },

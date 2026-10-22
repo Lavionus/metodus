@@ -1,0 +1,8 @@
+Soubor: z6-mapa-utechov-letecka.png / z6-mapa-utechov-letecka.webp
+Původní dílo: Brno, Útěchov - Mapy.cz, letecká (2019).jpg
+Autor: Mapy.cz: © Seznam.cz, a.s., © TopGis, s.r.o.
+Datum vzniku: 2019-11-04
+Zdroj: https://commons.wikimedia.org/wiki/File:Brno,_%C3%9At%C4%9Bchov_-_Mapy.cz,_leteck%C3%A1_(2019).jpg
+Licence: CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0)
+Staženo: 2026-10-22
+Úpravy: automatické natočení, odstranění metadat, zmenšení na nejvýše 1600 px; výuková WebP kopie 840 px.

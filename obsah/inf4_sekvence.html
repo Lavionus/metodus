@@ -6,6 +6,8 @@
   <title>Programování – sekvence příkazů</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -72,6 +74,37 @@
 <body>
   <h1>🧭 Programování – sekvence příkazů</h1>
   <p class="podtitul">Pro 4. ročník: sestav robotovi cestu k cíli a pak program spusť.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Co je sekvence příkazů</summary>
+    <div class="obsah">
+      <p>Robot sám nic nevymyslí. Udělá jen to, co mu přikážeš. Seznam příkazů se jmenuje <b>program</b>.
+        Když se příkazy provedou <b>jeden po druhém</b>, od prvního k poslednímu, říkáme tomu <b>sekvence</b>.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Jeden příkaz = jedno políčko</h3><p>Šipka ➡️ posune robota o jedno políčko doprava, ⬆️ o jedno nahoru. Na dvě políčka doprava potřebuješ dvě šipky ➡️➡️.</p></article>
+        <article class="vyklad-karta"><h3>Na pořadí záleží</h3><p>Stejné šipky v jiném pořadí můžou robota zavést jinudy – třeba rovnou do kamene nebo do vody.</p></article>
+        <article class="vyklad-karta"><h3>Hledání chyby</h3><p>Projdi program krok za krokem a prstem ukazuj, kde robot právě stojí. Chyba je v prvním kroku, kde robot uhne jinam, než má.</p></article>
+      </div>
+      <p>Než program spustíš, spočítej políčka: kolik jich robot musí ujít doprava a kolik nahoru nebo dolů.
+        Častá chyba je jedna šipka navíc nebo jedna chybějící – robot pak skončí vedle cíle.
+        Nejkratší cesta má nejméně příkazů.</p>
+      <aside class="zapamatuj">Program je seznam příkazů. Robot je provede přesně a postupně, jeden po druhém – ani o krok víc.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: cesta robota k cíli</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Robot stojí v levém dolním rohu. Cíl 🏁 je o 3 políčka doprava a o 2 políčka výš. V cestě nic není. Sestav program.</p>
+      <ol class="kroky">
+        <li>Spočítám, kolik políček musí robot ujít doprava: <b>3</b>. To jsou tři šipky ➡️➡️➡️.</li>
+        <li>Spočítám, kolik políček musí jít nahoru: <b>2</b>. To jsou dvě šipky ⬆️⬆️.</li>
+        <li>Seřadím je za sebe: ➡️➡️➡️⬆️⬆️. Program má <b>5 příkazů</b>.</li>
+        <li>Zkontroluji prstem krok za krokem: po třech šipkách doprava je robot pod cílem, po dvou šipkách nahoru stojí na cíli.</li>
+      </ol>
+      <p class="vysledek-ukazky">Program ➡️➡️➡️⬆️⬆️ dovede robota do cíle nejkratší cestou – 5 kroků.</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="bludiste" class="active">🤖 Naveď robota</button>

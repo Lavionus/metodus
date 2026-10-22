@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>⚛️ Periodická tabulka</title>
 <link rel="stylesheet" href="../common.css">
+<link rel="stylesheet" href="../vyklad.css">
+<script src="../vyklad.js" defer></script>
 <script src="../theme.js"></script>
 <script src="../podpis.js" defer></script>
 <script src="../kostra.js" defer></script>
@@ -16,7 +18,7 @@ h1{font-size:1.6rem;margin-bottom:16px;font-weight:600;text-align:center}
 .legend{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:16px;font-size:.76rem}
 .legend span{display:flex;align-items:center;gap:5px;cursor:pointer;padding:3px 8px;border-radius:6px}
 .legend span:hover{background:var(--bg-hover)}
-.legend span.on{background:#3a3a4d;outline:1px solid var(--accent)}
+.legend span.on{background:var(--bg-hover);outline:1px solid var(--accent)}
 .dot{width:12px;height:12px;border-radius:3px}
 .table{display:grid;grid-template-columns:repeat(18,1fr);gap:3px;overflow-x:auto;padding-bottom:10px}
 .el{aspect-ratio:1;border-radius:4px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;font-size:.5rem;min-width:30px;transition:transform .1s;position:relative}
@@ -24,6 +26,7 @@ h1{font-size:1.6rem;margin-bottom:16px;font-weight:600;text-align:center}
 .el .num{position:absolute;top:1px;left:2px;font-size:.42rem;opacity:.8}
 .el .sym{font-size:.85rem;font-weight:700}
 .el.dim{opacity:.25}
+.el:focus-visible{outline:3px solid var(--accent);outline-offset:1px;z-index:6}
 .controls{display:flex;gap:10px;justify-content:center;margin-bottom:14px;flex-wrap:wrap}
 .controls input{background:var(--bg-input);border:1px solid var(--border-strong);border-radius:6px;color:var(--text);padding:9px 14px;width:260px}
 .controls button{background:var(--accent);color: var(--na-akcentu, #fff);border:none;padding:9px 16px;border-radius:6px;cursor:pointer;font-weight:600}
@@ -38,18 +41,18 @@ h1{font-size:1.6rem;margin-bottom:16px;font-weight:600;text-align:center}
 .prop{display:flex;justify-content:space-between;gap:12px;padding:7px 0;border-bottom:1px solid var(--bg-hover);font-size:.85rem}
 .prop:last-child{border:none}.prop b{color:var(--accent);text-align:right}
 .prop b sup{font-size:.6em}
-.popis{font-size:.83rem;color:var(--text-muted);line-height:1.55;margin:12px 0;background:#242430;border-radius:8px;padding:12px}
+.popis{font-size:.83rem;color:var(--text-muted);line-height:1.55;margin:12px 0;background:var(--bg-hover);border-radius:8px;padding:12px}
 .bohrwrap{text-align:center}
 .bohrwrap canvas{background:#20202c;border-radius:10px}
-.bohrwrap .cfg{font-size:.72rem;color:#889;margin-top:4px;word-break:break-all}
+.bohrwrap .cfg{font-size:.72rem;color:var(--text-faint);margin-top:4px;word-break:break-all}
 .close{background:var(--accent);color: var(--na-akcentu, #fff);border:none;padding:10px;border-radius:6px;width:100%;margin-top:14px;cursor:pointer;font-weight:600}
 /* kvíz */
 .kviz .otazka{font-size:1.1rem;text-align:center;margin:14px 0}
 .kviz .moznosti{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.kviz .moznosti button{background:#3a3a4d;border:none;color:var(--text);border-radius:8px;padding:14px;font-size:1rem;font-weight:600;cursor:pointer}
-.kviz .moznosti button:hover{background:#4a4a5d}
-.kviz .moznosti button.spravne{background:#27ae60;color:#fff}
-.kviz .moznosti button.spatne{background:#c0392b;color:#fff}
+.kviz .moznosti button{background:var(--bg-hover);border:none;color:var(--text);border-radius:8px;padding:14px;font-size:1rem;font-weight:600;cursor:pointer}
+.kviz .moznosti button:hover{outline:2px solid var(--accent)}
+.kviz .moznosti button.spravne{background:var(--ok);color:#fff}
+.kviz .moznosti button.spatne{background:var(--danger);color:#fff}
 .kviz .skore{text-align:center;color:var(--text-faint);font-size:.85rem;margin-top:12px}
 /* fotografie vzorku v detailu prvku */
 .foto-prvku{margin:6px 0 12px;border:1px solid var(--border);border-radius:10px;overflow:hidden;background:#111}
@@ -63,6 +66,41 @@ h1{font-size:1.6rem;margin-bottom:16px;font-weight:600;text-align:center}
 <body>
 <div class="container">
   <h1>⚛️ Periodická tabulka prvků</h1>
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Jak číst periodickou tabulku</summary>
+    <div class="obsah">
+      <p>Periodická tabulka řadí všechny prvky podle <b>protonového čísla</b> – počtu protonů v jádře atomu. Vodík má 1 proton,
+        helium 2, lithium 3 a tak dál. Řádky a sloupce ale nejsou náhodné: prvky s podobnými vlastnostmi stojí pod sebou.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Políčko prvku</h3><p><b>Značka</b> (Na), <b>název</b> (sodík), <b>protonové číslo</b> (11)
+          a <b>relativní atomová hmotnost</b> (22,99). Značka začíná velkým písmenem, druhé písmeno je malé.</p></article>
+        <article class="vyklad-karta"><h3>Perioda = řádek</h3><p>Je jich 7. Číslo periody udává, kolik <b>elektronových slupek</b> atom má.
+          Sodík ve 3. periodě má 3 slupky: 2 · 8 · 1.</p></article>
+        <article class="vyklad-karta"><h3>Skupina = sloupec</h3><p>Je jich 18. Prvky v jedné skupině mají stejný počet <b>valenčních elektronů</b>,
+          a proto podobné vlastnosti – alkalické kovy (1. skupina) prudce reagují s vodou, vzácné plyny (18. skupina) téměř nereagují.</p></article>
+        <article class="vyklad-karta"><h3>Kovy a nekovy</h3><p>Kovy jsou vlevo a uprostřed, nekovy vpravo nahoře, mezi nimi polokovy.
+          Lanthanoidy a aktinoidy jsou kvůli šířce vypsané pod tabulkou.</p></article>
+      </div>
+      <p>Proč stojí sodík pod lithiem a nad draslíkem? Všechny tři mají ve vnější slupce <b>jeden elektron</b>, který snadno odevzdají –
+        proto se chovají podobně. Typická chyba: plést si protonové číslo (celé číslo, určuje prvek) s relativní atomovou hmotností
+        (desetinné číslo, porovnává hmotnost atomu). Druhá chyba: psát značku špatnou velikostí písmen – <b>Co</b> je kobalt, <b>CO</b> je oxid uhelnatý.</p>
+      <aside class="zapamatuj">Protonové číslo určuje prvek a jeho místo v tabulce. Perioda = počet slupek, skupina = podobné vlastnosti.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: který prvek má značku Ca</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Který prvek má značku <b>Ca</b>? Co o něm vyčteš z tabulky?</p>
+      <ol class="kroky">
+        <li>Značka má dvě písmena, velké C a malé a – nesmím ji zaměnit s uhlíkem (C) ani s kobaltem (Co).</li>
+        <li>Najdu ji v tabulce: je ve <b>4. periodě</b> a ve <b>2. skupině</b>, hned vedle draslíku. Je to <b>vápník</b>.</li>
+        <li>Přečtu políčko: protonové číslo <b>20</b> (20 protonů v jádře), relativní atomová hmotnost asi <b>40,08</b>.</li>
+        <li>Z polohy odvodím: 4. perioda → 4 slupky (2 · 8 · 8 · 2), 2. skupina → 2 valenční elektrony, je to kov alkalických zemin.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Ca je <b>vápník</b>: protonové číslo 20, 4. perioda, 2. skupina, kov.</p>
+    </div>
+  </details>
   <div class="controls">
     <input type="text" id="search" placeholder="🔍 Hledat (název, značka, číslo)…">
     <button id="quizBtn" data-faze="procvic" data-kostra-overeni="ne">🎓 Kvíz</button>
@@ -247,48 +285,48 @@ function slupky(z){
 
 /* ---------- fotografie vzorků (IMG-ch-03, zdroje vypisuje kostra.js) ---------- */
 const FOTO_PRVKU={
-  1:['pt-prvek-vodik',{{WH:ch/pt-prvek-vodik}},'{{ALT:ch/pt-prvek-vodik}}'],
-  2:['pt-prvek-helium',{{WH:ch/pt-prvek-helium}},'{{ALT:ch/pt-prvek-helium}}'],
-  3:['pt-prvek-lithium',{{WH:ch/pt-prvek-lithium}},'{{ALT:ch/pt-prvek-lithium}}'],
-  5:['pt-prvek-bor',{{WH:ch/pt-prvek-bor}},'{{ALT:ch/pt-prvek-bor}}'],
-  6:['pt-prvek-uhlik',{{WH:ch/pt-prvek-uhlik}},'{{ALT:ch/pt-prvek-uhlik}}'],
-  7:['pt-prvek-dusik',{{WH:ch/pt-prvek-dusik}},'{{ALT:ch/pt-prvek-dusik}}'],
-  8:['pt-prvek-kyslik',{{WH:ch/pt-prvek-kyslik}},'{{ALT:ch/pt-prvek-kyslik}}'],
-  10:['pt-prvek-neon',{{WH:ch/pt-prvek-neon}},'{{ALT:ch/pt-prvek-neon}}'],
-  11:['pt-prvek-sodik',{{WH:ch/pt-prvek-sodik}},'{{ALT:ch/pt-prvek-sodik}}'],
-  12:['pt-prvek-horcik',{{WH:ch/pt-prvek-horcik}},'{{ALT:ch/pt-prvek-horcik}}'],
-  13:['pt-prvek-hlinik',{{WH:ch/pt-prvek-hlinik}},'{{ALT:ch/pt-prvek-hlinik}}'],
-  14:['pt-prvek-kremik',{{WH:ch/pt-prvek-kremik}},'{{ALT:ch/pt-prvek-kremik}}'],
-  15:['pt-prvek-fosfor',{{WH:ch/pt-prvek-fosfor}},'{{ALT:ch/pt-prvek-fosfor}}'],
-  16:['pt-prvek-sira',{{WH:ch/pt-prvek-sira}},'{{ALT:ch/pt-prvek-sira}}'],
-  17:['pt-prvek-chlor',{{WH:ch/pt-prvek-chlor}},'{{ALT:ch/pt-prvek-chlor}}'],
-  18:['pt-prvek-argon',{{WH:ch/pt-prvek-argon}},'{{ALT:ch/pt-prvek-argon}}'],
-  19:['pt-prvek-draslik',{{WH:ch/pt-prvek-draslik}},'{{ALT:ch/pt-prvek-draslik}}'],
-  20:['pt-prvek-vapnik',{{WH:ch/pt-prvek-vapnik}},'{{ALT:ch/pt-prvek-vapnik}}'],
-  22:['pt-prvek-titan',{{WH:ch/pt-prvek-titan}},'{{ALT:ch/pt-prvek-titan}}'],
-  24:['pt-prvek-chrom',{{WH:ch/pt-prvek-chrom}},'{{ALT:ch/pt-prvek-chrom}}'],
-  25:['pt-prvek-mangan',{{WH:ch/pt-prvek-mangan}},'{{ALT:ch/pt-prvek-mangan}}'],
-  26:['pt-prvek-zelezo',{{WH:ch/pt-prvek-zelezo}},'{{ALT:ch/pt-prvek-zelezo}}'],
-  27:['pt-prvek-kobalt',{{WH:ch/pt-prvek-kobalt}},'{{ALT:ch/pt-prvek-kobalt}}'],
-  28:['pt-prvek-nikl',{{WH:ch/pt-prvek-nikl}},'{{ALT:ch/pt-prvek-nikl}}'],
-  29:['pt-prvek-med',{{WH:ch/pt-prvek-med}},'{{ALT:ch/pt-prvek-med}}'],
-  30:['pt-prvek-zinek',{{WH:ch/pt-prvek-zinek}},'{{ALT:ch/pt-prvek-zinek}}'],
-  31:['pt-prvek-gallium',{{WH:ch/pt-prvek-gallium}},'{{ALT:ch/pt-prvek-gallium}}'],
-  32:['pt-prvek-germanium',{{WH:ch/pt-prvek-germanium}},'{{ALT:ch/pt-prvek-germanium}}'],
-  33:['pt-prvek-arsen',{{WH:ch/pt-prvek-arsen}},'{{ALT:ch/pt-prvek-arsen}}'],
-  35:['pt-prvek-brom',{{WH:ch/pt-prvek-brom}},'{{ALT:ch/pt-prvek-brom}}'],
-  36:['pt-prvek-krypton',{{WH:ch/pt-prvek-krypton}},'{{ALT:ch/pt-prvek-krypton}}'],
-  47:['pt-prvek-stribro',{{WH:ch/pt-prvek-stribro}},'{{ALT:ch/pt-prvek-stribro}}'],
-  50:['pt-prvek-cin',{{WH:ch/pt-prvek-cin}},'{{ALT:ch/pt-prvek-cin}}'],
-  53:['pt-prvek-jod',{{WH:ch/pt-prvek-jod}},'{{ALT:ch/pt-prvek-jod}}'],
-  54:['pt-prvek-xenon',{{WH:ch/pt-prvek-xenon}},'{{ALT:ch/pt-prvek-xenon}}'],
-  56:['pt-prvek-baryum',{{WH:ch/pt-prvek-baryum}},'{{ALT:ch/pt-prvek-baryum}}'],
-  74:['pt-prvek-wolfram',{{WH:ch/pt-prvek-wolfram}},'{{ALT:ch/pt-prvek-wolfram}}'],
-  78:['pt-prvek-platina',{{WH:ch/pt-prvek-platina}},'{{ALT:ch/pt-prvek-platina}}'],
-  79:['pt-prvek-zlato',{{WH:ch/pt-prvek-zlato}},'{{ALT:ch/pt-prvek-zlato}}'],
-  80:['pt-prvek-rtut',{{WH:ch/pt-prvek-rtut}},'{{ALT:ch/pt-prvek-rtut}}'],
-  82:['pt-prvek-olovo',{{WH:ch/pt-prvek-olovo}},'{{ALT:ch/pt-prvek-olovo}}'],
-  83:['pt-prvek-bismut',{{WH:ch/pt-prvek-bismut}},'{{ALT:ch/pt-prvek-bismut}}']
+  1:['pt-prvek-vodik',768, 1365,'Výbojová trubice s vodíkem, který v elektrickém výboji září růžově.'],
+  2:['pt-prvek-helium',768, 768,'Skleněná ampule s heliem, které v elektrickém výboji září růžovofialově.'],
+  3:['pt-prvek-lithium',768, 432,'Stříbřité kousky lithia v zatavené skleněné ampuli s argonem.'],
+  5:['pt-prvek-bor',768, 768,'Černošedý zrnitý kousek boru.'],
+  6:['pt-prvek-uhlik',768, 768,'Černý váleček grafitu, jedné z podob uhlíku.'],
+  7:['pt-prvek-dusik',768, 1152,'Kapalný dusík vytékající z kovové nádoby a mlžící se ve vzduchu.'],
+  8:['pt-prvek-kyslik',768, 768,'Skleněná ampule s kyslíkem, který v elektrickém výboji září fialově.'],
+  10:['pt-prvek-neon',768, 768,'Skleněné trubice ve tvaru písmen Ne, ve kterých neon září oranžově červeně.'],
+  11:['pt-prvek-sodik',768, 576,'Stříbřité kusy sodíku s matně šedým povrchem a lesklou řeznou plochou.'],
+  12:['pt-prvek-horcik',768, 768,'Stříbřitě šedý krystalický kousek hořčíku.'],
+  13:['pt-prvek-hlinik',706, 706,'Lesklý stříbřitý kus hliníku s hladkou řeznou plochou.'],
+  14:['pt-prvek-kremik',768, 514,'Křemíková deska s čipy vedle lesklého tmavého kusu čistého křemíku.'],
+  15:['pt-prvek-fosfor',768, 576,'Hromádka červenohnědého práškového fosforu na bílém podkladu.'],
+  16:['pt-prvek-sira',768, 640,'Žluté krystaly přírodní síry narostlé na hornině.'],
+  17:['pt-prvek-chlor',768, 768,'Zkapalněný žlutý chlor v tenké zatavené skleněné ampuli.'],
+  18:['pt-prvek-argon',768, 768,'Skleněné trubice ve tvaru písmen Ar, ve kterých argon září fialově.'],
+  19:['pt-prvek-draslik',768, 576,'Stříbřité kusy draslíku s lesklou řeznou plochou.'],
+  20:['pt-prvek-vapnik',768, 430,'Stříbřitě šedé kousky vápníku ve skleněné trubici.'],
+  22:['pt-prvek-titan',768, 482,'Stříbřitá tyčinka titanu pokrytá drobnými krystaly.'],
+  24:['pt-prvek-chrom',768, 768,'Lesklý šedostříbrný úlomek chromu.'],
+  25:['pt-prvek-mangan',768, 768,'Tenké lesklé plátky manganu s nahnědlým nádechem.'],
+  26:['pt-prvek-zelezo',768, 768,'Šedý kovový váleček čistého železa.'],
+  27:['pt-prvek-kobalt',768, 439,'Šedé kovové úlomky kobaltu na bílém podkladu.'],
+  28:['pt-prvek-nikl',768, 768,'Lesklý hrbolatý kus elektrolyticky vyrobeného niklu.'],
+  29:['pt-prvek-med',768, 529,'Rozvětvený kus ryzí mědi na černém pozadí.'],
+  30:['pt-prvek-zinek',768, 768,'Šedostříbrná ztuhlá kapka zinku.'],
+  31:['pt-prvek-gallium',768, 768,'Stříbřitá tyčinka gallia a malá kulička roztaveného gallia.'],
+  32:['pt-prvek-germanium',768, 768,'Lesklý šedý úlomek germania s ostrými lomy.'],
+  33:['pt-prvek-arsen',720, 720,'Šedé kousky arsenu v zatavené skleněné ampuli.'],
+  35:['pt-prvek-brom',768, 768,'Tmavě červenohnědý kapalný brom v zatavené skleněné ampuli.'],
+  36:['pt-prvek-krypton',768, 768,'Skleněné trubice ve tvaru písmen Kr, ve kterých krypton září bělavě růžově.'],
+  47:['pt-prvek-stribro',768, 602,'Lesklé rozvětvené krystaly stříbra.'],
+  50:['pt-prvek-cin',768, 768,'Stříbřité tyčinky cínu položené na pravítku s centimetrovou stupnicí.'],
+  53:['pt-prvek-jod',768, 399,'Tmavě šedé lesklé krystalky jodu na bílé misce.'],
+  54:['pt-prvek-xenon',768, 768,'Skleněné trubice ve tvaru písmen Xe, ve kterých xenon září modrobíle.'],
+  56:['pt-prvek-baryum',710, 710,'Šedý kousek barya ve skleněné ampuli pod ochrannou atmosférou.'],
+  74:['pt-prvek-wolfram',768, 768,'Šedý kvádřík wolframu.'],
+  78:['pt-prvek-platina',768, 538,'Lesklé stříbřité krystaly platiny na čtverečkovaném podkladu.'],
+  79:['pt-prvek-zlato',768, 498,'Zlatožluté jehlicovité krystaly ryzího zlata.'],
+  80:['pt-prvek-rtut',768, 768,'Stříbřitá kapalná rtuť v průhledné nádobce.'],
+  82:['pt-prvek-olovo',768, 576,'Tmavě šedé kousky olova ve skleněné misce.'],
+  83:['pt-prvek-bismut',768, 768,'Stupňovitý krystal bismutu s duhovým povrchem.']
 };
 
 /* ---------- tabulka ---------- */
@@ -303,13 +341,23 @@ function pismoNa(hex){
 function build(){
   $('table').innerHTML=EL.map(e=>{
     const[num,sym,name,group,period,cat]=e;const col=CATS[cat][1];
-    return `<div class="el${FOTO_PRVKU[num]?' sfoto':''}" style="grid-column:${group};grid-row:${period};background:${col};color:${pismoNa(col)}" data-num="${num}">
+    return `<div class="el${FOTO_PRVKU[num]?' sfoto':''}" role="button" tabindex="0" aria-label="${num} ${name} (${sym})" style="grid-column:${group};grid-row:${period};background:${col};color:${pismoNa(col)}" data-num="${num}">
       <span class="num">${num}</span><span class="sym">${sym}</span><span style="font-size:.42rem">${name.slice(0,7)}</span></div>`;
   }).join('');
-  $('table').querySelectorAll('.el').forEach(el=>el.onclick=()=>showDetail(+el.dataset.num));
+  $('table').querySelectorAll('.el').forEach(el=>{
+    el.onclick=()=>showDetail(+el.dataset.num);
+    el.onkeydown=ev=>{if(ev.key==='Enter'||ev.key===' '){ev.preventDefault();showDetail(+el.dataset.num);}};
+  });
 }
 
 /* ---------- detail s Bohrovým modelem ---------- */
+/* Lanthanoidy a aktinoidy (kromě La a Ac) leží v tabulce v pomocných řádcích 9 a 10;
+   jejich sloupec v mřížce není skupina. Patří do 6., resp. 7. periody a do 3. skupiny (f-prvky). */
+function skupinaPerioda(e){
+  const[,,,group,period,cat]=e;
+  if(period===9||period===10)return `3 (${cat==='lanthanoidy'?'lanthanoidy':'aktinoidy'}, f-prvky) / ${period===9?6:7}`;
+  return `${group} / ${period}`;
+}
 let bohrAnim=null;
 function showDetail(num){
   const e=EL.find(x=>x[0]===num);const[n,sym,name,group,period,cat,mass]=e;
@@ -317,12 +365,12 @@ function showDetail(num){
   $('modalCard').innerHTML=`
     <div class="hlava">
       <div class="big" style="color:${CATS[cat][1]}">${sym}</div>
-      <div><h2>${name}</h2><div class="kat">${CATS[cat][0]}</div></div>
+      <div><h2>${name}</h2><div class="kat">${CATS[cat][0]}${n===4||n===12?' (2. skupina; beryllium a hořčík se k nim podle českého názvosloví nepočítají, mezi kovy alkalických zemin patří jen Ca, Sr, Ba a Ra)':''}</div></div>
     </div>
     ${FOTO_PRVKU[n]?`<figure class="foto-prvku"><img src="img/ch/${FOTO_PRVKU[n][0]}.webp" alt="${FOTO_PRVKU[n][3]}" width="${FOTO_PRVKU[n][1]}" height="${FOTO_PRVKU[n][2]}" loading="lazy"><figcaption>Skutečný vzorek – ${name.toLowerCase()} (fotografie)</figcaption></figure>`:''}
     <div class="prop"><span>Protonové číslo</span><b>${n}</b></div>
     <div class="prop"><span>Relativní atomová hmotnost</span><b>${mass}</b></div>
-    <div class="prop"><span>Skupina / perioda</span><b>${group<=18?group:'—'} / ${period<=7?period:'—'}</b></div>
+    <div class="prop"><span>Skupina / perioda</span><b>${skupinaPerioda(e)}</b></div>
     <div class="prop"><span>Skupenství (20 °C)</span><b>${skupenstvi(n)}</b></div>
     <div class="prop"><span>Objev</span><b>${objev}</b></div>
     <div class="prop"><span>El. konfigurace</span><b>${konfigurace(n)}</b></div>
@@ -405,8 +453,8 @@ function kvizOtazka(){
     if(!moznosti.includes(k))moznosti.push(k);
   }
   moznosti.sort(()=>Math.random()-0.5);
-  const otazka=typ?`Jakou značku má <b style="color:#6aa6fd">${spravny[2]}</b>?`
-                  :`Který prvek má značku <b style="color:#6aa6fd">${spravny[1]}</b>?`;
+  const otazka=typ?`Jakou značku má <b style="color:var(--accent)">${spravny[2]}</b>?`
+                  :`Který prvek má značku <b style="color:var(--accent)">${spravny[1]}</b>?`;
   $('modalCard').innerHTML=`<div class="kviz">
     <h2 style="text-align:center">🎓 Kvíz ${kvizKolo}/${KVIZ_KOL}</h2>
     <div class="otazka">${otazka}</div>
@@ -428,10 +476,10 @@ function kvizKonec(){
   const proc=Math.round(kvizSkore/KVIZ_KOL*100);
   $('modalCard').innerHTML=`<div class="kviz" style="text-align:center">
     <h2>${proc>=80?'🏆':proc>=50?'👍':'📖'} Výsledek kvízu</h2>
-    <div style="font-size:2.6rem;font-weight:700;color:#6aa6fd;margin:14px 0">${kvizSkore} / ${KVIZ_KOL}</div>
+    <div style="font-size:2.6rem;font-weight:700;color:var(--accent);margin:14px 0">${kvizSkore} / ${KVIZ_KOL}</div>
     <p style="color:var(--text-faint)">${proc>=80?'Výborně, chemie ti jde!':proc>=50?'Dobrá práce, jen tak dál.':'Proklikej si tabulku a zkus to znovu.'}</p>
     <button class="close" id="kvizZnovu">🔄 Nová série</button>
-    <button class="close" id="kvizZavrit" style="background:#404040">Zavřít</button></div>`;
+    <button class="close" id="kvizZavrit" style="background:var(--bg-hover);color:var(--text)">Zavřít</button></div>`;
   $('kvizZnovu').onclick=()=>{kvizSkore=0;kvizKolo=0;kvizOtazka();};
   $('kvizZavrit').onclick=zavriModal;
 }

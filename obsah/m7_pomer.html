@@ -6,6 +6,8 @@
   <title>Poměr a měřítko</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -26,6 +28,43 @@
 <body>
   <h1>⚖️ Poměr a měřítko</h1>
   <p class="podtitul">Pro 7. ročník: krácení poměru, dělení v poměru, změna v poměru a měřítko mapy.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Co říká poměr</summary>
+    <div class="obsah">
+      <p><b>Poměr</b> porovnává dvě veličiny dělením: poměr 3 : 2 říká, že na každé 3 díly první části připadají 2 díly druhé.
+        Celek má tedy 3 + 2 = 5 stejných dílů. Poměr se proto chová jako zlomek – můžeme ho krátit i rozšiřovat
+        a jeho význam se nezmění.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Krácení poměru</h3><p>Obě čísla vydělíme jejich <b>největším společným dělitelem</b>:
+          12 : 18 = 2 : 3 (dělíme 6). Základní tvar má nesoudělná celá čísla.</p></article>
+        <article class="vyklad-karta"><h3>Dělení v poměru</h3><p>Sečti díly, spočítej <b>jeden díl</b> (celek : počet dílů)
+          a vynásob ho čísly poměru. Části dohromady musí dát celek.</p></article>
+        <article class="vyklad-karta"><h3>Změna v poměru</h3><p>Číslo změnit v poměru a : b znamená vynásobit ho zlomkem
+          <b>a/b</b>. Když a &gt; b, číslo se zvětší; když a &lt; b, zmenší: 120 v poměru 3 : 4 je 120 · 3/4 = 90.</p></article>
+        <article class="vyklad-karta"><h3>Měřítko mapy</h3><p>1 : 50 000 znamená, že 1 cm na mapě je 50 000 cm skutečnosti.
+          Převod: 100 cm = 1 m, <b>100 000 cm = 1 km</b>, takže 1 cm odpovídá 500 m.</p></article>
+      </div>
+      <p>Typické chyby: při dělení v poměru 3 : 2 vydělit celek jen třemi nebo dvěma místo pěti; u měřítka zapomenout převést
+        centimetry na kilometry. Kontrola pomůže vždy: sečtené části = celek, a skutečná vzdálenost je mnohem větší než na mapě.</p>
+      <aside class="zapamatuj">Poměr krátíš jako zlomek. Dělení v poměru: součet dílů → jeden díl → části. Změna v poměru a : b = násobení a/b.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: rozděl 720 Kč v poměru 5 : 3</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Sourozenci si mají rozdělit 720 Kč v poměru 5 : 3. Kolik dostane každý?</p>
+      <ol class="kroky">
+        <li>Sečtu díly: 5 + 3 = <b>8 dílů</b>.</li>
+        <li>Jeden díl: 720 : 8 = <b>90 Kč</b>.</li>
+        <li>První sourozenec dostane 5 dílů: 5 · 90 = <b>450 Kč</b>.</li>
+        <li>Druhý dostane 3 díly: 3 · 90 = <b>270 Kč</b>.</li>
+        <li>Kontrola: 450 + 270 = 720 Kč a 450 : 270 = 5 : 3 (krátím 90). Sedí.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Sourozenci dostanou 450 Kč a 270 Kč.</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="kraceni" class="active">➗ Zkrať poměr</button>
@@ -103,7 +142,9 @@ const DELENI_PRIBEHY = [
 ];
 function deleni() {
   const p = $('plocha');
-  const a = Uloha.nahodneCislo(1, 7), b = Uloha.nahodneCislo(1, 7);
+  // poměr v základním tvaru a různé členy – jinak by šly jen tři různé možnosti (1 : 1)
+  let a, b;
+  do { a = Uloha.nahodneCislo(1, 7); b = Uloha.nahodneCislo(1, 7); } while (a === b || nsd(a, b) !== 1);
   const dil = Uloha.nahodneCislo(2, 40) * 5;
   const celek = (a + b) * dil;
   const pribeh = Uloha.nahodne(DELENI_PRIBEHY);
@@ -141,7 +182,9 @@ function deleni() {
 /* ---- Zvětši a zmenši v poměru ------------------------------------------------------ */
 function zmena() {
   const p = $('plocha');
-  const a = Uloha.nahodneCislo(2, 7), b = Uloha.nahodneCislo(2, 7);
+  // a ≠ b (poměr 3 : 3 číslo nezmění) a poměr v základním tvaru
+  let a, b;
+  do { a = Uloha.nahodneCislo(1, 7); b = Uloha.nahodneCislo(1, 7); } while (a === b || nsd(a, b) !== 1);
   const zaklad = Uloha.nahodneCislo(2, 25) * b;   // ať výsledek vyjde celý
   const vysledek = zaklad / b * a;
   const zvetsuje = a > b;

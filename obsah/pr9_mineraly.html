@@ -25,6 +25,22 @@
       color: var(--text-faint); font-size: 0.79rem; }
     .lista span { background: var(--bg-control); border: 1px solid var(--border);
       border-radius: 8px; padding: 5px 11px; }
+    .foto-mineral { display:block; width:min(380px,82vw); height:auto; aspect-ratio:4/3; object-fit:contain;
+      background:#1d1c1a; border:1px solid var(--border); border-radius:14px; }
+    .foto-atlas { width:min(1120px,100%); margin:22px auto; }
+    .foto-atlas h2 { margin:0 0 5px; text-align:center; font-size:1.22rem; }
+    .foto-atlas > p { margin:0 auto 12px; max-width:820px; text-align:center; color:var(--text-muted,var(--text)); }
+    .foto-atlas h3 { margin:16px 0 8px; font-size:1.02rem; }
+    .foto-mrizka { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
+    .foto-mrizka.mohs { grid-template-columns:repeat(5,minmax(0,1fr)); }
+    .foto-karta { margin:0; overflow:hidden; border:1px solid var(--border); border-radius:14px; background:var(--bg-card); box-shadow:var(--shadow-sm); }
+    .foto-karta img { display:block; width:100%; height:auto; aspect-ratio:4/3; object-fit:cover; }
+    .foto-karta img.cele { object-fit:contain; background:#1d1c1a; }
+    .foto-karta figcaption { padding:10px 11px 12px; font-size:.9rem; line-height:1.35; }
+    .foto-karta strong { display:block; margin-bottom:3px; color:var(--accent); font-size:1rem; }
+    @media (max-width:980px) { .foto-mrizka.mohs { grid-template-columns:repeat(3,minmax(0,1fr)); } }
+    @media (max-width:820px) { .foto-mrizka, .foto-mrizka.mohs { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+    @media (max-width:440px) { .foto-mrizka, .foto-mrizka.mohs { grid-template-columns:1fr; } }
   </style>
 </head>
 <body>
@@ -33,6 +49,7 @@
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="vzorky" data-faze="vyuka">🧪 Stůl vzorků</button>
+    <button data-rezim="foto">📷 Minerál na fotografii</button>
     <button data-rezim="kviz1" class="active">🔍 Poznej minerál</button>
     <button data-rezim="kviz2">🪨 Vlastnosti a tvrdost</button>
     <button data-rezim="kviz3">🌋 Vznik hornin</button>
@@ -49,6 +66,29 @@
   <div class="lista"><span>Mohsova stupnice: 1 mastek … 10 diamant</span><span>vyvřelé – z magmatu</span><span>usazené – z nánosů</span><span>přeměněné – tlakem a teplotou</span></div>
 
   <p class="napoveda"><b>Minerál</b> je stejnorodá přírodní látka s daným složením, <b>hornina</b> je směs minerálů. Minerály poznáváme podle <b>tvrdosti, barvy, vrypu, lesku a štěpnosti</b>.</p>
+
+  <section class="foto-atlas" aria-labelledby="atlasMohs">
+    <h2 id="atlasMohs">📏 Mohsova stupnice tvrdosti na skutečných vzorcích</h2>
+    <p>Každý minerál rýpe do všech předchozích a sám se nechá rýpnout všemi následujícími. Pro srovnání: nehet má tvrdost asi 2,5, měděná mince 3,5, sklo a ocelový nůž kolem 5,5.</p>
+    <div class="foto-mrizka mohs">
+      <figure class="foto-karta"><img class="cele" src="img/pr/pr9-mineraly-mastek.webp" alt="Světle zelený perleťově lesklý kus mastku." width="500" height="633" loading="lazy"><figcaption><strong>1. Mastek</strong>Nejměkčí minerál stupnice, rýpneš do něj nehtem; na omak je mastný.</figcaption></figure>
+      <figure class="foto-karta"><img class="cele" src="img/prv/prv4-horniny-sadrovec.webp" alt="Průhledná deska sádrovce (selenitu) s jemnými rovnoběžnými vrstvičkami." width="768" height="566" loading="lazy"><figcaption><strong>2. Sádrovec</strong>Nehet do něj ještě rýpne. Pálením vzniká sádra.</figcaption></figure>
+      <figure class="foto-karta"><img class="cele" src="img/prv/prv4-horniny-kalcit.webp" alt="Průsvitný nažloutlý krystal kalcitu s ostrými hranami." width="768" height="776" loading="lazy"><figcaption><strong>3. Kalcit</strong>Rýpne do něj měděná mince; s kyselinou šumí.</figcaption></figure>
+      <figure class="foto-karta"><img class="cele" src="img/pr/pr9-mineraly-fluorit.webp" alt="Fialové krychlové krystaly fluoritu." width="500" height="518" loading="lazy"><figcaption><strong>4. Fluorit</strong>Ocelový nůž ho rýpe snadno. Tvoří krychlové krystaly, často fialové.</figcaption></figure>
+      <figure class="foto-karta"><img class="cele" src="img/pr/pr9-mineraly-apatit.webp" alt="Modrozelený šestiboký sloupcovitý krystal apatitu." width="768" height="1311" loading="lazy"><figcaption><strong>5. Apatit</strong>Nůž ho rýpe jen s námahou. Příbuzný minerál tvoří kosti a zubní sklovinu.</figcaption></figure>
+      <figure class="foto-karta"><img class="cele" src="img/prv/prv4-horniny-zivec.webp" alt="Krystal živce ortoklasu krémové barvy s rovnými plochami." width="500" height="704" loading="lazy"><figcaption><strong>6. Ortoklas (živec)</strong>Nůž ho už nerýpe, sám rýpe do skla. Je hlavní součástí žuly.</figcaption></figure>
+      <figure class="foto-karta"><img class="cele" src="img/prv/prv4-horniny-kremen.webp" alt="Shluk průhledných šestibokých krystalů křemene s hrotitými konci." width="500" height="466" loading="lazy"><figcaption><strong>7. Křemen</strong>Rýpe do skla i do oceli. Je hlavní složkou písku.</figcaption></figure>
+      <figure class="foto-karta"><img class="cele" src="img/pr/pr9-mineraly-topaz.webp" alt="Hnědavý sloupcovitý krystal topazu s menšími srostlými krystaly." width="500" height="633" loading="lazy"><figcaption><strong>8. Topaz</strong>Tvrdší než křemen; hodí se jako drahý kámen.</figcaption></figure>
+      <figure class="foto-karta"><img class="cele" src="img/pr/pr9-mineraly-korund.webp" alt="Tři šestiboké tabulkovité krystaly korundu." width="768" height="656" loading="lazy"><figcaption><strong>9. Korund</strong>Jeho odrůdy jsou rubín a safír; užívá se i jako brusivo.</figcaption></figure>
+      <figure class="foto-karta"><img class="cele" src="img/pr/pr9-mineraly-diamant.webp" alt="Nebroušený nažloutle hnědý krystal diamantu s oblými plochami." width="500" height="473" loading="lazy"><figcaption><strong>10. Diamant</strong>Nejtvrdší přírodní látka. Je to čistý uhlík – stejně jako měkký grafit.</figcaption></figure>
+    </div>
+    <h3>🧪 Vryp – barva prášku na neglazované porcelánové destičce</h3>
+    <div class="foto-mrizka">
+      <figure class="foto-karta"><img src="img/pr/pr9-mineraly-vryp-hematit.webp" alt="Dva kusy hematitu a porcelánová destička s červenohnědým vrypem." width="960" height="410" loading="lazy"><figcaption><strong>Hematit</strong>Kusy bývají šedočerné i červené, vryp je ale vždy červenohnědý.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/pr/pr9-mineraly-vryp-pyrit.webp" alt="Krystal pyritu na bílé porcelánové destičce s černým vrypem, vedle rodochrozit na černé destičce." width="1152" height="873" loading="lazy"><figcaption><strong>Pyrit</strong>Mosazně žlutý minerál zanechá černý vryp – tím se liší od zlata, jehož vryp je žlutý.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/pr/pr9-mineraly-vryp-malachit.webp" alt="Zelený pruhovaný malachit a jeho světle zelený vryp na bílé destičce." width="1152" height="864" loading="lazy"><figcaption><strong>Malachit</strong>Tmavě zelený pruhovaný minerál má světle zelený vryp.</figcaption></figure>
+    </div>
+  </section>
 
 <script>
 const $ = id => document.getElementById(id);
@@ -104,12 +144,12 @@ const SADY = {
       ]
     },
     {
-      "q": "Z čeho je tvořena běžná sůl kamenná?",
+      "q": "Z kterého minerálu je tvořena hornina sůl kamenná?",
       "a": "halit (chlorid sodný)",
       "b": [
-        "kalcit",
-        "sádrovec",
-        "křemen"
+        "kalcit (uhličitan vápenatý)",
+        "sádrovec (síran vápenatý)",
+        "křemen (oxid křemičitý)"
       ]
     },
     {
@@ -118,16 +158,16 @@ const SADY = {
       "b": [
         "slída",
         "kalcit",
-        "živec vždy"
+        "živec"
       ]
     },
     {
       "q": "Co je vryp minerálu?",
-      "a": "barva prášku, který zůstane po rýpnutí o neglazovanou porcelánovou destičku",
+      "a": "barva prášku, který zůstane po otření o porcelánovou destičku",
       "b": [
-        "barva povrchu",
-        "tvar krystalu",
-        "hmotnost"
+        "barva povrchu minerálu, když ho otočíme ke světlu",
+        "tvar krystalu, který vznikne po rozlomení minerálu",
+        "rýha, kterou minerál udělá do skla nebo do oceli"
       ]
     }
   ],
@@ -136,9 +176,9 @@ const SADY = {
       "q": "Co udává Mohsova stupnice?",
       "a": "relativní tvrdost minerálů od 1 do 10",
       "b": [
-        "hustotu",
-        "barvu",
-        "stáří"
+        "hustotu minerálů v gramech na cm³",
+        "barvu minerálů od nejsvětlejší",
+        "stáří minerálů v milionech let"
       ]
     },
     {
@@ -154,54 +194,54 @@ const SADY = {
       "q": "Co znamená štěpnost minerálu?",
       "a": "schopnost štěpit se podle rovných ploch",
       "b": [
-        "rozpustnost ve vodě",
-        "lesk",
-        "magnetismus"
+        "schopnost rozpouštět se ve vodě",
+        "lesk na čerstvém lomu minerálu",
+        "schopnost přitahovat železné piliny"
       ]
     },
     {
       "q": "Co je krystal?",
       "a": "pravidelný tvar, ve kterém minerál roste",
       "b": [
-        "úlomek horniny",
-        "druh písku",
-        "sopečné sklo"
+        "úlomek horniny s ostrými hranami",
+        "drobné zrnko písku z řeky",
+        "sopečné sklo bez pravidelného tvaru"
       ]
     },
     {
       "q": "Podle čeho poznáme minerál nejspolehlivěji?",
-      "a": "podle kombinace více vlastností – tvrdosti, vrypu, štěpnosti i hustoty",
+      "a": "podle více vlastností najednou – tvrdosti, vrypu, štěpnosti, hustoty",
       "b": [
-        "jen podle barvy",
-        "jen podle velikosti",
-        "podle místa nálezu"
+        "jen podle barvy, protože ta je u každého minerálu stejná",
+        "jen podle velikosti a tvaru úlomku, který najdeme",
+        "podle místa nálezu, protože každý minerál je jen na jednom"
       ]
     },
     {
       "q": "Proč není barva spolehlivým znakem?",
       "a": "stejný minerál může mít různá zbarvení podle příměsí",
       "b": [
-        "barva se nedá určit",
-        "všechny minerály jsou bílé",
-        "barva se mění denně"
+        "barva se u minerálů vůbec nedá určit",
+        "všechny minerály jsou ve skutečnosti bílé",
+        "barva minerálu se každý den mění"
       ]
     },
     {
       "q": "Co je hustota minerálu?",
-      "a": "hmotnost jednotkového objemu, pomáhá při určování",
+      "a": "hmotnost jednotkového objemu minerálu",
       "b": [
-        "tvrdost",
-        "lesk",
-        "velikost krystalu"
+        "odolnost minerálu proti rýpnutí",
+        "způsob, jakým minerál odráží světlo",
+        "velikost krystalu měřená v centimetrech"
       ]
     },
     {
       "q": "Který nástroj se hodí k orientačnímu určení tvrdosti v terénu?",
       "a": "nehet, měděná mince a ocelový nůž",
       "b": [
-        "lupa",
-        "metr",
-        "kompas"
+        "lupa, pinzeta a lékárnička",
+        "svinovací metr a pravítko",
+        "kompas a turistická mapa"
       ]
     }
   ],
@@ -237,9 +277,9 @@ const SADY = {
       "q": "Jak vzniká vápenec?",
       "a": "usazováním schránek mořských organismů",
       "b": [
-        "tuhnutím lávy",
-        "přeměnou žuly",
-        "zvětráváním železa"
+        "tuhnutím lávy na povrchu sopky",
+        "přeměnou žuly za vysokého tlaku",
+        "zvětráváním železných rud v poušti"
       ]
     },
     {
@@ -264,18 +304,18 @@ const SADY = {
       "q": "Co je čedič?",
       "a": "vyvřelá výlevná hornina, tvoří i sloupcové útvary",
       "b": [
-        "usazená hornina",
-        "přeměněná hornina",
-        "druh minerálu soli"
+        "usazená hornina vzniklá stmelením písku",
+        "přeměněná hornina vzniklá z vápence",
+        "druh minerálu, ze kterého se získává sůl"
       ]
     },
     {
       "q": "Jak vzniklo černé uhlí?",
       "a": "z pravěkých rostlin bez přístupu vzduchu pod tlakem",
       "b": [
-        "z lávy",
-        "z mořské soli",
-        "z písku"
+        "z lávy, která rychle vychladla ve vodě",
+        "z mořské soli, která se odpařila v lagunách",
+        "z písku, který stmelil vápnitý tmel"
       ]
     }
   ],
@@ -284,27 +324,27 @@ const SADY = {
       "q": "K čemu se používá vápenec?",
       "a": "k výrobě vápna a cementu",
       "b": [
-        "k výrobě skla výhradně",
-        "na výrobu hliníku",
-        "jako palivo"
+        "výhradně k výrobě skla",
+        "k výrobě hliníku a mědi",
+        "jako palivo do kamen"
       ]
     },
     {
       "q": "Z čeho se vyrábí sklo?",
       "a": "hlavně z křemenného písku",
       "b": [
-        "z vápence",
-        "ze žuly",
-        "z jílu"
+        "hlavně z drceného vápence",
+        "hlavně z rozemleté žuly",
+        "hlavně z vypáleného jílu"
       ]
     },
     {
       "q": "K čemu slouží jíl a hlína?",
       "a": "k výrobě cihel a keramiky",
       "b": [
-        "k výrobě oceli",
-        "jako palivo",
-        "k výrobě skla"
+        "k výrobě oceli a železa",
+        "jako palivo do elektráren",
+        "k výrobě skla a zrcadel"
       ]
     },
     {
@@ -320,36 +360,36 @@ const SADY = {
       "q": "Proč je těžba surovin zásahem do krajiny?",
       "a": "mění reliéf, hladinu podzemní vody a ničí stanoviště",
       "b": [
-        "nemá žádný vliv",
-        "zlepšuje půdu",
-        "zvyšuje srážky"
+        "nemá na krajinu ani na vodu vůbec žádný vliv",
+        "zlepšuje půdu a zvyšuje úrodnost okolních polí",
+        "zvyšuje srážky a ochlazuje celé okolí lomu"
       ]
     },
     {
       "q": "Co se dělá s vytěženými lomy po ukončení těžby?",
-      "a": "rekultivují se – zalesní, zatopí nebo změní na chráněná stanoviště",
+      "a": "rekultivují se – zalesní, zatopí nebo ponechají přírodě",
       "b": [
-        "nechají se ležet ladem vždy",
-        "zasypou odpadem",
-        "zabetonují"
+        "vždy se nechají ležet ladem bez jakékoli péče",
+        "zasypou se komunálním odpadem a zabetonují",
+        "rozšíří se a těží se v nich dál jiná surovina"
       ]
     },
     {
       "q": "Které nerostné suroviny se v ČR těží nejvíc?",
       "a": "stavební kámen, štěrkopísky, vápenec a hnědé uhlí",
       "b": [
-        "ropa a zemní plyn",
-        "zlato a stříbro",
-        "uran ve velkém"
+        "ropa, zemní plyn a černé uhlí ve velkém",
+        "zlato, stříbro a další drahé kovy",
+        "uran, diamanty a jiné vzácné nerosty"
       ]
     },
     {
       "q": "Proč se recyklace kovů vyplatí i geologicky?",
       "a": "šetří rudy, které se neobnovují",
       "b": [
-        "kovy jsou nekonečné",
-        "ruda je zdarma",
-        "recyklace je dražší vždy"
+        "kovů je v zemské kůře nekonečně mnoho",
+        "ruda se v dolech těží úplně zdarma",
+        "recyklace je vždy dražší než těžba"
       ]
     }
   ]
@@ -391,8 +431,46 @@ function vzorky() {
     <tbody>${METODUS_HORNINY.map(radek).join('')}</tbody></table></div>`;
 }
 
+/* Fotografie minerálů (IMG-pr-20 a sdílené vzorky IMG-prv-17 ze 4. ročníku). */
+const FOTO_MINERALY = [
+  { n: 'mastek', img: 'img/pr/pr9-mineraly-mastek.webp', w: 500, h: 633, znak: 'tvrdost 1 podle Mohse' },
+  { n: 'sádrovec', img: 'img/prv/prv4-horniny-sadrovec.webp', w: 768, h: 566, znak: 'tvrdost 2 podle Mohse' },
+  { n: 'kalcit', img: 'img/prv/prv4-horniny-kalcit.webp', w: 768, h: 776, znak: 'tvrdost 3 podle Mohse' },
+  { n: 'fluorit', img: 'img/pr/pr9-mineraly-fluorit.webp', w: 500, h: 518, znak: 'tvrdost 4 podle Mohse' },
+  { n: 'apatit', img: 'img/pr/pr9-mineraly-apatit.webp', w: 768, h: 1311, znak: 'tvrdost 5 podle Mohse' },
+  { n: 'ortoklas (živec)', img: 'img/prv/prv4-horniny-zivec.webp', w: 500, h: 704, znak: 'tvrdost 6 podle Mohse' },
+  { n: 'křemen', img: 'img/prv/prv4-horniny-kremen.webp', w: 500, h: 466, znak: 'tvrdost 7 podle Mohse' },
+  { n: 'topaz', img: 'img/pr/pr9-mineraly-topaz.webp', w: 500, h: 633, znak: 'tvrdost 8 podle Mohse' },
+  { n: 'korund', img: 'img/pr/pr9-mineraly-korund.webp', w: 768, h: 656, znak: 'tvrdost 9 podle Mohse' },
+  { n: 'diamant', img: 'img/pr/pr9-mineraly-diamant.webp', w: 500, h: 473, znak: 'tvrdost 10 podle Mohse' },
+  { n: 'pyrit', img: 'img/prv/prv4-horniny-pyrit.webp', w: 768, h: 614, znak: 'krychlové krystaly s kovovým leskem, černý vryp' },
+  { n: 'magnetit', img: 'img/prv/prv4-horniny-magnetit.webp', w: 500, h: 510, znak: 'černé osmistěny, přitahuje magnet' },
+  { n: 'grafit', img: 'img/prv/prv4-horniny-grafit.webp', w: 500, h: 641, znak: 'měkký, šedý, maže se (tvrdost 1–2)' },
+  { n: 'halit', img: 'img/prv/prv4-horniny-sul.webp', w: 768, h: 706, znak: 'krychlové krystaly, slaný, rozpustný ve vodě; tvoří horninu sůl kamennou' },
+  { n: 'muskovit (slída)', img: 'img/prv/prv4-horniny-slida.webp', w: 768, h: 671, znak: 'štěpí se na tenké pružné lístky' },
+  { n: 'zlato', img: 'img/prv/prv4-horniny-zlato.webp', w: 500, h: 473, znak: 'ryzí kov, velmi těžký, žlutý vryp' },
+];
+function foto() {
+  const p = $('plocha');
+  const u = Uloha.nahodne(FOTO_MINERALY);
+  const jine = Uloha.zamichej(FOTO_MINERALY.filter(x => x.n !== u.n)).slice(0, 3);
+  p.innerHTML = `<div class="zadani uloha-text">Který minerál je na fotografii?</div>
+    <img class="foto-mineral" src="${u.img}" alt="Neznámý minerál k určení." width="${u.w}" height="${u.h}">`;
+  const odezva = odezvaEl();
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: Uloha.zamichej([u, ...jine]).map(x => ({ klic: x.n, popis: x.n })),
+    spravnyKlic: u.n,
+    zpravaOk: `✅ ${u.n} – ${u.znak}.`,
+    zpravaChyba: 'Všímej si tvaru krystalů, lesku a barvy – a vzpomeň si na Mohsovu stupnici.',
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
 const REZIMY = {
-  vzorky,
+  vzorky, foto,
   kviz1: () => kviz('kviz1'), kviz2: () => kviz('kviz2'),
   kviz3: () => kviz('kviz3'), kviz4: () => kviz('kviz4'),
 };

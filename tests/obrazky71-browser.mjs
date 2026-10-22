@@ -17,11 +17,11 @@ try {
   await call('Page.navigate',{url:base+'obsah/'+page+'.html'});
   await ready(`document.readyState==='complete' && document.querySelector('${['prehled','osnova'].includes(page)?'.predmet-ilustrace':'.atlas-detail img'}')!==null`);
   if(page==='prehled') {
-   assert.equal(await ev(`document.querySelectorAll('.predmet-ilustrace').length`),11);
-   assert.ok(await ev(`[...document.querySelectorAll('.predmet')].every(a=>a.href.includes('#skupina='))`));
+   assert.equal(await ev(`document.querySelectorAll('.predmet-ilustrace').length`),14);   // každý předmět má dlaždici s ilustrací (od 22. 10. 2026)
+   assert.ok(await ev(`[...document.querySelectorAll('.predmet')].every(a=>a.href.includes('predmet.html?p='))`));
   }
   if(page==='osnova') {
-   assert.equal(await ev(`document.querySelectorAll('#mrizka tbody th img').length`),11);
+   assert.equal(await ev(`document.querySelectorAll('#mrizka tbody th img').length`),13);   // + Výchova k občanství a Hudební výchova (22. 10. 2026)
    await ev(`document.querySelectorAll('#mrizka tbody tr')[9].querySelector('button').click()`);
    assert.ok(await ev(`document.querySelector('#detail h2 img').src.endsWith('prehled-lupa-mapa.webp')`));
   }
@@ -64,9 +64,10 @@ try {
  // Iframe contract: subject tiles still send the group filter to the parent.
  await call('Page.navigate',{url:base+'obsah/img/kapitola-7-1.html'});await ready(`document.readyState==='complete'`);
  await ev(`window.messages=[];addEventListener('message',e=>messages.push(e.data));const f=document.createElement('iframe');f.id='testFrame';f.src='../prehled.html';document.body.append(f)`);
- await ready(`document.querySelector('#testFrame').contentDocument.querySelectorAll('button.predmet').length===8`);
- await ev(`document.querySelector('#testFrame').contentDocument.querySelector('button.predmet').click()`);
- await ready(`messages.some(m=>m.skupina==='cestina')`);
+ await ready(`document.querySelector('#testFrame').contentDocument.querySelectorAll('.predmet').length===14`);   // 14 předmětů (od 22. 10. i VkO)
+ await ev(`document.querySelector('#testFrame').contentDocument.querySelector('.predmet').click()`);
+ // dlaždice otevře stránku předmětu a zároveň vybere předmět v menu
+ await ready(`messages.some(m=>m.skupina==='cestina' && (m.otevri||'').includes('predmet.html?p=cestina'))`);
  assert.deepEqual(errors,[]);
  console.log(JSON.stringify({results,iframeFilter:true,keyboard:true,runtimeErrors:errors},null,2));
 } finally {ws.close();}

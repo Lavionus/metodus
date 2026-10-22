@@ -9,6 +9,7 @@
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
+  <script src="../dialog.js" defer></script>
   <script src="../uloha.js"></script>
   <style>
     .sekce {
@@ -62,6 +63,7 @@
 
     /* dílna */
     .dilna-lista { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 10px; }
+    .dilna-lista select { max-width: 100%; min-width: 0; }   /* dlouhé názvy předloh nesmí roztáhnout stránku na mobilu */
     .dilna label { font-size: 0.82rem; color: var(--text-muted); }
     .dilna input[type=text] {
       background: var(--bg-input); border: 1px solid var(--border); color: var(--text);
@@ -100,8 +102,8 @@
       <div>
         <p>Když se něco pokazí, první nápad na příčinu bývá jen část pravdy. <b>Rybí kost</b> pomáhá
           promyslet <b>všechny</b> možné příčiny a roztřídit je do skupin.</p>
-        <p>Diagram vymyslel japonský inženýr <b>Kaoru Ishikawa</b> v 60. letech 20. století, aby
-          v továrnách hledal příčiny vadných výrobků. Dnes ho používají lékaři, vědci, firmy i škola.</p>
+        <p>Diagram vymyslel japonský inženýr <b>Kaoru Ishikawa</b> – poprvé ho použil ve 40. letech 20. století
+          a v 60. letech ho rozšířil do továren, kde se s ním hledaly příčiny vadných výrobků. Dnes ho používají lékaři, vědci, firmy i škola.</p>
         <p><b>Klepni na libovolnou část ryby</b> a dozvíš se, co znamená.</p>
         <div class="legenda" aria-label="Části diagramu" style="margin-bottom:4px">
           <button type="button" data-ukaz="hlava">🐟 hlava</button>
@@ -644,6 +646,8 @@ function pole(hodnota, data, placeholder) {
   i.setAttribute('aria-label', placeholder);
   return i;
 }
+/* potvrzení vlastním dialogem (dialog.js), bez něj aspoň oknem prohlížeče */
+const potvrd = text => typeof Dialog !== 'undefined' ? Dialog.potvrd(text) : Promise.resolve(window.confirm(text));
 function tlacitko(txt, titul, fn, trida) {
   const b = document.createElement('button');
   b.type = 'button'; b.textContent = txt; b.title = titul; b.setAttribute('aria-label', titul);
@@ -661,7 +665,10 @@ function sestavEditor() {
     const hlava = document.createElement('div');
     hlava.className = 'radek kost-nazev';
     hlava.append(pole(k.n, { pole: 'n', k: ki }, 'Název skupiny, např. 🏠 Doma'),
-      tlacitko('🗑', 'Smazat celou kost', () => { dilna.kosti.splice(ki, 1); vyberDilna = null; sestavEditor(); zmena(); }));
+      tlacitko('🗑', 'Smazat celou kost', async () => {
+        if (k.p.length && !await potvrd(`Smazat skupinu „${k.n || 'bez názvu'}“ i se všemi jejími příčinami?`)) return;
+        dilna.kosti.splice(ki, 1); vyberDilna = null; sestavEditor(); zmena();
+      }));
     blok.appendChild(hlava);
     k.p.forEach((p, pi) => {
       const r = document.createElement('div');
@@ -720,12 +727,12 @@ $('pridatKost').addEventListener('click', () => {
   sestavEditor(); zmena();
   document.querySelector(`[data-pole="n"][data-k="${dilna.kosti.length - 1}"]`)?.focus();
 });
-$('sablona').addEventListener('change', e => {
+$('sablona').addEventListener('change', async e => {
   const v = e.target.value;
   e.target.value = '';
   if (!v) return;
   const neprazdna = dilna.problem || dilna.kosti.some(k => k.p.length);
-  if (neprazdna && !confirm('Nahradit současný diagram šablonou?')) return;
+  if (neprazdna && !await potvrd('Nahradit současný diagram šablonou? Rozpracovaný diagram se ztratí.')) return;
   if (v === 'pozde') dilna = kopie(POZDE);
   else if (v === 'rostlina') dilna = kopie(ROSTLINA);
   else dilna = { problem: dilna.problem || '', kosti: SABLONY[v].map(n => ({ n, p: [] })) };

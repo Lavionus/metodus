@@ -8,6 +8,7 @@
 <script src="../theme.js"></script>
 <script src="../podpis.js" defer></script>
 <script src="../kostra.js" defer></script>
+<script src="../dialog.js" defer></script>
 <script src="../apps.js" defer></script>
 <script src="../uloha.js" defer></script>
 <script src="../prubeh.js" defer></script>
@@ -105,7 +106,7 @@ h1{font-size:1.35rem;margin-bottom:3px}
 <script>
 const $=id=>document.getElementById(id);
 const KLIC_RUCNE='edu_diary_v1';   // ruční zápisy si necháváme ve stejném klíči jako dřív
-const PREDMETY=['📖 Čeština','🔢 Matematika','🔬 Přírodní vědy','🌍 Zeměpis/Dějepis','🇬🇧 Jazyky','💻 Informatika','🎴 Kartičky'];
+const PREDMETY=['📖 Čeština','🔢 Matematika','🔬 Přírodní vědy','🌍 Zeměpis/Dějepis','🇬🇧 Jazyky','💻 Informatika','🧩 Ostatní'];
 
 /* Deník činnosti zapisuje uloha.js pod názvem souboru stránky.
    Předmět a hezký název si dohledáme v katalogu Metodusu. */
@@ -134,6 +135,9 @@ function nactiJson(klic,vychozi){
   try{const v=JSON.parse(localStorage.getItem(klic));return v||vychozi;}catch{return vychozi;}
 }
 let rucne=nactiJson(KLIC_RUCNE,{days:{}});
+if(!rucne.days||typeof rucne.days!=='object')rucne={days:{}};
+// starší ruční zápisy měly místo „Ostatní“ skupinu „Kartičky“
+Object.keys(rucne.days).forEach(d=>{if(Array.isArray(rucne.days[d]))rucne.days[d]=rucne.days[d].map(p=>p==='🎴 Kartičky'?'🧩 Ostatní':p);});
 function ulozRucne(){try{localStorage.setItem(KLIC_RUCNE,JSON.stringify(rucne));}catch{/* nevadí */}}
 
 const DENIK=(typeof Uloha!=='undefined')?Uloha.DENIK:'metodus_aktivita';
@@ -150,8 +154,9 @@ function klicDne(posun){
 
 function skupinaSouboru(soubor){
   const zaznam=KATALOG.get(soubor);
-  if(!zaznam||!zaznam.predmet)return '🎴 Kartičky';
-  return PREDMET_NA_SKUPINU[zaznam.predmet]||'🎴 Kartičky';
+  // stránky bez předmětu (hudba, nástroje, kartičky…) patří do skupiny Ostatní
+  if(!zaznam||!zaznam.predmet)return '🧩 Ostatní';
+  return PREDMET_NA_SKUPINU[zaznam.predmet]||'🧩 Ostatní';
 }
 
 /* Které předměty deník rozpoznal pro daný den. */
@@ -279,7 +284,10 @@ $('doneBtn').onclick=()=>{
   else rucne.days[dnes]=[...dnesRucne];
   ulozRucne();render();
 };
-$('resetBtn').onclick=()=>{
+$('resetBtn').onclick=async()=>{
+  const otazka='Opravdu vymazat celý deník? Smaže se záznam činnosti, ruční zápisy i průběh – nejde to vrátit.';
+  const ano=typeof Dialog!=='undefined'?await Dialog.potvrd(otazka):window.confirm(otazka);
+  if(!ano)return;
   try{localStorage.removeItem(DENIK);localStorage.removeItem(KLIC_RUCNE);localStorage.removeItem(Prubeh.KEY);}catch{/* nevadí */}
   rucne={days:{}};dnesRucne=new Set();render();window.renderPrubeh();
 };

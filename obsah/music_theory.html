@@ -6,6 +6,8 @@
 <title>🎼 Hudební nauka</title>
 <link rel="stylesheet" href="../common.css">
 <link rel="stylesheet" href="../vyuka.css">
+<link rel="stylesheet" href="../vyklad.css">
+<script src="../vyklad.js" defer></script>
 <script src="../theme.js"></script>
 <script src="../podpis.js" defer></script>
 <script src="../kostra.js" defer></script>
@@ -19,9 +21,10 @@
   .card select { background: var(--bg-input); border: 1px solid var(--border-strong); border-radius: 6px; color: var(--text); padding: 9px; width: 100%; margin-bottom: 12px; font: inherit; }
   .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
   @media (max-width: 520px) { .grid { grid-template-columns: 1fr; } }
-  .klaviatura { position: relative; display: flex; justify-content: center; height: 130px; user-select: none; margin: 14px 0; }
-  .bila { position: relative; width: 38px; height: 100%; background: #f5f5f5; border: 1px solid #8a8a8a; border-radius: 0 0 4px 4px; z-index: 1; }
-  .cerna { position: absolute; top: 0; width: 24px; height: 60%; background: #181818; border-radius: 0 0 3px 3px; z-index: 2; }
+  /* šířka se přizpůsobí úzkému displeji (14 bílých kláves po max. 38 px), černé klávesy v procentech */
+  .klaviatura { position: relative; display: flex; width: 100%; max-width: 532px; height: 130px; user-select: none; margin: 14px auto; }
+  .bila { position: relative; flex: 1 1 0; min-width: 0; height: 100%; background: #f5f5f5; border: 1px solid #8a8a8a; border-radius: 0 0 4px 4px; z-index: 1; }
+  .cerna { position: absolute; top: 0; width: calc(100% / 14 * 0.63); height: 60%; background: #181818; border-radius: 0 0 3px 3px; z-index: 2; }
   .bila.aktivni, .cerna.aktivni { background: #4f8fe8; }
   .bila.korenova, .cerna.korenova { background: #e67e22; }
   .noty { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin-top: 8px; }
@@ -39,6 +42,39 @@
 <body>
   <h1>🎼 Hudební nauka</h1>
   <p class="podtitul">Hudební výchova: stupnice a akordy na klaviatuře se zvukem, kvintový kruh a procvičování – předznamenání, dur a moll sluchem, tóny akordu.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Stupnice, předznamenání a akordy</summary>
+    <div class="obsah">
+      <p>Mezi sousedními klávesami (bílou i černou) je vzdálenost <b>půltón</b>; dva půltóny tvoří <b>celý tón</b>.
+        Stupnice je řada tónů, ve které se celé tóny a půltóny střídají v pevném pořadí. Právě toto pořadí dělá
+        stupnici durovou nebo mollovou – ne to, od kterého tónu začíná.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Durová stupnice</h3><p>Půltóny jsou mezi <b>3.–4. a 7.–8.</b> stupněm. Od C to vyjde jen na bílých klávesách: C D E F G A H C.</p></article>
+        <article class="vyklad-karta"><h3>Předznamenání</h3><p>Od jiného tónu musíš některé tóny zvýšit (♯, přípona <b>-is</b>) nebo snížit (♭, <b>-es</b>), aby pořadí sedělo. G dur má Fis.</p></article>
+        <article class="vyklad-karta"><h3>Kvintový kruh</h3><p>C → G → D → A…: každá další durová tónina o kvintu výš má o <b>jeden křížek</b> víc. C → F → B → Es…: přibývá <b>béčko</b>.</p></article>
+        <article class="vyklad-karta"><h3>Kvintakord</h3><p>Dur = velká tercie (4 půltóny) + malá tercie (3): <b>C E G</b>. Moll = malá + velká: <b>C Es G</b>.</p></article>
+      </div>
+      <p><b>Paralelní moll</b> má stejné předznamenání jako dur a leží o malou tercii níž: C dur a a moll nemají žádné
+        předznamenání. Dur zní jasně, moll tlumeněji – rozdíl dělá prostřední tón akordu.</p>
+      <p>Pozor na české názvy: tón, kterému se jinde říká B, je u nás <b>H</b>, a české <b>B</b> je H snížené.</p>
+      <aside class="zapamatuj">Dur: půltóny mezi 3.–4. a 7.–8. stupněm. Po kvintách nahoru přibývá křížek, dolů béčko. Paralelní moll je o malou tercii níž.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: předznamenání D dur</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Jaké předznamenání má <b>D dur</b>?</p>
+      <ol class="kroky">
+        <li>Začnu v kvintovém kruhu u C dur – nemá žádné předznamenání.</li>
+        <li>O kvintu výš je G dur: přibude první křížek, <b>Fis</b>.</li>
+        <li>O další kvintu výš je D dur: přibude druhý křížek, <b>Cis</b>.</li>
+        <li>Zkontroluji stupnici: D E Fis G A H Cis D – půltóny jsou mezi 3.–4. (Fis–G) a 7.–8. (Cis–D) stupněm.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ D dur má <b>2 křížky: Fis a Cis</b> (stejně jako h moll).</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="prehled" data-faze="vyuka" class="active">🎹 Stupnice a akordy</button>
@@ -153,9 +189,9 @@ function render() {
   for (let i = 0; i < 24; i++) if (JE_CERNA[i % 12]) {
     const d = document.createElement('div'); const st = mapa[i % 12];
     d.className = 'cerna' + (st === 'koren' ? ' korenova' : st ? ' aktivni' : '');
-    const pred = bile.filter(b => b.i < i).length - 1;
+    const pred = bile.filter(b => b.i < i).length;   // počet bílých kláves vlevo = hranice, na které černá leží
     kl.appendChild(d);
-    requestAnimationFrame(() => { const b = bile[pred].el; d.style.left = (b.offsetLeft + b.offsetWidth - 12) + 'px'; });
+    d.style.left = `calc(${(pred / 14 * 100).toFixed(4)}% - 100% / 14 * 0.315)`;
   }
   $('noty').innerHTML = sada.map(s => `<span class="notaTag ${s.jeKoren ? 'koren' : ''}">${s.jmeno}</span>`).join('');
 }

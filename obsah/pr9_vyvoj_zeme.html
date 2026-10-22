@@ -6,6 +6,8 @@
   <title>Vývoj Země a života</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -29,16 +31,70 @@
       border-radius: 999px; background: #201b16df; color: #fff; font-size: 0.72rem; font-weight: 800;
       letter-spacing: 0.04em; text-transform: uppercase; }
     @media (max-width: 700px) { .rekonstrukce-cas { grid-template-columns: 1fr; } }
+    .foto-zkamenelina { display:block; width:min(380px,82vw); height:auto; aspect-ratio:4/3; object-fit:contain;
+      background:#1d1c1a; border:1px solid var(--border); border-radius:14px; }
+    .foto-atlas { width:min(1120px,100%); margin:22px auto; }
+    .foto-atlas h2 { margin:0 0 5px; text-align:center; font-size:1.22rem; }
+    .foto-atlas > p { margin:0 auto 12px; max-width:820px; text-align:center; color:var(--text-muted,var(--text)); }
+    .foto-mrizka { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; }
+    .foto-karta { margin:0; overflow:hidden; border:1px solid var(--border); border-radius:14px; background:var(--bg-card); box-shadow:var(--shadow-sm); }
+    .foto-karta img { display:block; width:100%; height:auto; aspect-ratio:4/3; object-fit:cover; }
+    .foto-karta img.cele { object-fit:contain; background:#1d1c1a; }
+    .foto-karta figcaption { padding:10px 11px 12px; font-size:.9rem; line-height:1.35; }
+    .foto-karta strong { display:block; margin-bottom:3px; color:var(--accent); font-size:1rem; }
+    .foto-karta .doba { display:block; margin-bottom:4px; color:var(--text-muted); font-size:.8rem; }
+    @media (max-width:980px) { .foto-mrizka { grid-template-columns:repeat(3,minmax(0,1fr)); } }
+    @media (max-width:820px) { .foto-mrizka { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+    @media (max-width:440px) { .foto-mrizka { grid-template-columns:1fr; } }
   </style>
 </head>
 <body>
   <h1>🦕 Vývoj Země a života</h1>
   <p class="podtitul">Pro 9. ročník: geologická období, vývoj života a zkameněliny.</p>
 
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Dějiny Země čtené z hornin</summary>
+    <div class="obsah">
+      <p>Země je stará asi <b>4,6 miliardy let</b>. Nikdo u toho nebyl, a přesto víme, co se dělo: dějiny Země jsou zapsané
+        ve <b>vrstvách usazených hornin</b> a ve <b>zkamenělinách</b>, které v nich najdeme. Starší vrstvy obvykle leží níž, mladší nad nimi.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Geologická období</h3><p>Prahory a starohory → <b>prvohory</b> → <b>druhohory</b> →
+          <b>třetihory</b> → <b>čtvrtohory</b>. Hranice často vymezuje <b>hromadné vymírání</b>.</p></article>
+        <article class="vyklad-karta"><h3>Co je typické</h3><p>Prvohory: trilobiti, první suchozemské rostliny, karbonské uhlí.
+          Druhohory: dinosauři, první ptáci a kvetoucí rostliny. Třetihory: rozvoj savců. Čtvrtohory: doby ledové a člověk.</p></article>
+        <article class="vyklad-karta"><h3>Zkamenělina</h3><p>Zachovaný pozůstatek nebo stopa organismu (schránka, kostra, otisk,
+          hmyz v jantaru). <b>Vůdčí zkamenělina</b> patří druhu, který žil krátce a byl hojně rozšířený – proto určuje stáří vrstvy.</p></article>
+      </div>
+      <p>Život vznikl <b>ve vodě</b> a souš obsadil až později. Kyslík v atmosféře je výsledkem fotosyntézy sinic a rostlin.
+        Organismy se postupně vyvíjejí <b>přirozeným výběrem</b> – tuto teorii formuloval Charles Darwin.
+        U člověka byla klíčová <b>vzpřímená chůze</b>, výroba nástrojů a ovládnutí ohně; dnešní člověk vznikl asi před 300 tisíci lety v Africe.</p>
+      <p><b>Typická chyba:</b> „Lidé lovili dinosaury.“ Dinosauři vyhynuli na konci druhohor, člověk se objevil až ve čtvrtohorách –
+        dělí je desítky milionů let.</p>
+      <aside class="zapamatuj">Prvohory – trilobiti a uhlí, druhohory – dinosauři, třetihory – savci, čtvrtohory – doby ledové a člověk.
+        Vůdčí zkamenělina určuje stáří vrstvy.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: jak stará je vrstva s amonity?</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">V lomu najdeš ve vrstvě vápence spirálně stočené žebrované schránky. Co je to za zkamenělinu,
+        z jakého období vrstva pochází a v jakém prostředí vznikla?</p>
+      <ol class="kroky">
+        <li>Spirálně stočená schránka rozdělená přepážkami je typická pro <b>amonity</b> – mořské hlavonožce.</li>
+        <li>Amonit je <b>vůdčí zkamenělina</b>: žil v určitém období a byl hojný, takže podle něj datuji vrstvu.</li>
+        <li>Amonity byly nejhojnější v <b>druhohorách</b> – vrstva je tedy nejspíš druhohorní. (Přesné stáří určí geolog podle konkrétního druhu amonita.)</li>
+        <li>Amonit žil v moři, takže v době vzniku vrstvy bylo na tomto místě <b>moře</b>.</li>
+      </ol>
+      <p class="vysledek-ukazky">Jde o <b>amonity</b>; vrstva nejspíš pochází z <b>druhohor</b> a usadila se v <b>moři</b>.</p>
+    </div>
+  </details>
+
   <div class="rezimy" id="rezimy">
     <button data-rezim="kviz1" class="active">⏳ Geologická období</button>
     <button data-rezim="kviz2">🦴 Vývoj života</button>
     <button data-rezim="kviz3">🪨 Zkameněliny</button>
+    <button data-rezim="foto">📷 Poznej zkamenělinu</button>
     <button data-rezim="kviz4">🧬 Vývoj člověka</button>
   </div>
 
@@ -72,9 +128,24 @@
     <span class="skore" id="skore"></span>
   </div>
 
-  <div class="lista"><span>prahory a starohory – první život v moři</span><span>prvohory – trilobiti, první rostliny a obojživelníci</span><span>druhohory – dinosauři, první ptáci</span><span>třetihory – savci a květy</span><span>čtvrtohory – doby ledové a člověk</span></div>
+  <div class="lista"><span>prahory a starohory – první život v moři</span><span>prvohory – trilobiti, první rostliny a obojživelníci</span><span>druhohory – dinosauři, první ptáci a první kvetoucí rostliny</span><span>třetihory – rozvoj savců a krytosemenných rostlin</span><span>čtvrtohory – doby ledové a člověk</span></div>
 
   <p class="napoveda">Země je stará asi <b>4,6 miliardy let</b>. Dějiny života dělíme na geologická období, jejichž hranice často vymezuje <b>hromadné vymírání</b>. Podle <b>zkamenělin</b> určujeme stáří vrstev a poznáváme dávné prostředí.</p>
+
+  <section class="foto-atlas" aria-labelledby="atlasZkamenelin">
+    <h2 id="atlasZkamenelin">🦴 Zkameněliny ze sbírek</h2>
+    <p>Skutečné nálezy (archeopteryx je muzejní odlitek). U každé zkameněliny je doba, ze které pochází.</p>
+    <div class="foto-mrizka">
+      <figure class="foto-karta"><img class="cele" src="img/pr/pr9-vyvoj-zkamenelina-trilobit.webp" alt="Zkamenělý trilobit s článkovaným tělem rozděleným na tři podélné laloky." width="768" height="1152" loading="lazy"><figcaption><strong>Trilobit</strong><span class="doba">prvohory</span>Mořský členovec, jehož tělo je podélně rozdělené na tři laloky – odtud jméno. Hojně se nachází v Barrandienu u Berouna.</figcaption></figure>
+      <figure class="foto-karta"><img class="cele" src="img/pr/pr9-vyvoj-zkamenelina-amonit.webp" alt="Otisk spirálně stočené žebrované schránky amonitu v šedé hornině." width="768" height="576" loading="lazy"><figcaption><strong>Amonit</strong><span class="doba">druhohory</span>Mořský hlavonožec se spirálně stočenou, přepážkami rozdělenou schránkou. Důležitá vůdčí zkamenělina.</figcaption></figure>
+      <figure class="foto-karta"><img class="cele" src="img/pr/pr9-vyvoj-zkamenelina-belemnit.webp" alt="Zkamenělé doutníkovité rostrum belemnita s paprsčitou stavbou na lomu." width="768" height="484" loading="lazy"><figcaption><strong>Belemnit</strong><span class="doba">druhohory</span>Hlavonožec podobný sépii. Zachovává se hlavně jeho doutníkovité rostrum, lidově „hromová střela“.</figcaption></figure>
+      <figure class="foto-karta"><img class="cele" src="img/pr/pr9-vyvoj-zkamenelina-preslicka.webp" alt="Zkamenělý úsek stonku karbonské přesličky Calamites s podélným rýhováním." width="768" height="403" loading="lazy"><figcaption><strong>Přeslička z karbonu</strong><span class="doba">prvohory – karbon</span>Úsek kmene stromovité přesličky Calamites. Z karbonských bažinných lesů vzniklo černé uhlí.</figcaption></figure>
+      <figure class="foto-karta"><img class="cele" src="img/pr/pr9-vyvoj-zkamenelina-zub-zraloka.webp" alt="Velký trojúhelníkový zkamenělý zub žraloka megalodona s vroubkovaným ostřím." width="768" height="1054" loading="lazy"><figcaption><strong>Zub žraloka</strong><span class="doba">třetihory</span>Zub obřího žraloka megalodona. Chrupavčitá kostra žraloků se nezachová, tvrdé zuby ano.</figcaption></figure>
+      <figure class="foto-karta"><img class="cele" src="img/pr/pr9-vyvoj-zkamenelina-kapradina.webp" alt="Otisk zpeřených lístků karbonské kapradiny Pecopteris v šedé hornině." width="768" height="563" loading="lazy"><figcaption><strong>Otisk kapradiny</strong><span class="doba">prvohory – karbon</span>Otisk zpeřeného listu kapradiny Pecopteris; častý v hlušině uhelných dolů.</figcaption></figure>
+      <figure class="foto-karta"><img class="cele" src="img/pr/pr9-vyvoj-zkamenelina-jantar.webp" alt="Zlatavý jantar se zachovaným hmyzem uvnitř." width="768" height="513" loading="lazy"><figcaption><strong>Jantar s hmyzem</strong><span class="doba">třetihory</span>Zkamenělá pryskyřice stromů. Uvěznila hmyz i s jemnými detaily křídel a nohou.</figcaption></figure>
+      <figure class="foto-karta"><img class="cele" src="img/pr/pr9-vyvoj-zkamenelina-archeopteryx.webp" alt="Odlitek londýnského exempláře archeopteryxe s otisky per křídel a dlouhého ocasu." width="500" height="651" loading="lazy"><figcaption><strong>Archeopteryx (odlitek)</strong><span class="doba">druhohory – jura</span>Odlitek slavné zkameněliny ze Solnhofenu: peří a křídla jako pták, zuby, drápy a dlouhý ocas jako plaz.</figcaption></figure>
+    </div>
+  </section>
 
 <script>
 const $ = id => document.getElementById(id);
@@ -131,11 +202,11 @@ const SADY = {
     },
     {
       "q": "Co ukončilo druhohory?",
-      "a": "hromadné vymírání, při kterém vyhynuli dinosauři",
+      "a": "hromadné vymírání, kdy vyhynuli dinosauři",
       "b": [
-        "doba ledová",
-        "vznik Měsíce",
-        "rozpad Pangey"
+        "nástup velké doby ledové",
+        "vznik Měsíce po srážce s planetou",
+        "rozpad prakontinentu Pangey"
       ]
     },
     {
@@ -151,9 +222,9 @@ const SADY = {
       "q": "Co je geologická éra?",
       "a": "dlouhé časové období v dějinách Země",
       "b": [
-        "druh horniny",
-        "vrstva půdy",
-        "sopečný cyklus"
+        "druh horniny z dávných dob",
+        "vrstva půdy pod ornicí",
+        "pravidelný cyklus výbuchů sopek"
       ]
     }
   ],
@@ -171,9 +242,9 @@ const SADY = {
       "q": "Kdo jsou trilobiti?",
       "a": "vyhynulí členovci prvohorních moří",
       "b": [
-        "plazi",
-        "ryby",
-        "rostliny"
+        "dávní plazi z druhohor",
+        "pravěké ryby bez čelistí",
+        "vyhynulé stromovité přesličky"
       ]
     },
     {
@@ -189,18 +260,18 @@ const SADY = {
       "q": "Který živočich představuje přechod mezi plazy a ptáky?",
       "a": "Archaeopteryx (prapták)",
       "b": [
-        "tyranosaurus",
-        "mamut",
-        "trilobit"
+        "tyranosaurus (dravý dinosaurus)",
+        "mamut (srstnatý chobotnatec)",
+        "trilobit (prvohorní členovec)"
       ]
     },
     {
       "q": "Kdy se savci rozšířili po celé Zemi?",
       "a": "ve třetihorách, po vymření dinosaurů",
       "b": [
-        "v prvohorách",
-        "v prahorách",
-        "až ve čtvrtohorách"
+        "v prvohorách, ještě před dinosaury",
+        "v prahorách, hned po vzniku života",
+        "až ve čtvrtohorách, po době ledové"
       ]
     },
     {
@@ -236,9 +307,9 @@ const SADY = {
       "q": "Co je zkamenělina (fosilie)?",
       "a": "zachovaný pozůstatek nebo stopa dávného organismu",
       "b": [
-        "každý kámen",
-        "druh minerálu",
-        "sopečná hornina"
+        "každý kámen, který najdeme v lese",
+        "druh minerálu s pravidelnými krystaly",
+        "sopečná hornina, která rychle vychladla"
       ]
     },
     {
@@ -252,56 +323,56 @@ const SADY = {
     },
     {
       "q": "Co je vůdčí zkamenělina?",
-      "a": "druh, který žil krátce a rozšířil se široko – určuje stáří vrstvy",
+      "a": "druh, který žil krátce a byl hojně rozšířený – určuje stáří vrstvy",
       "b": [
-        "nejstarší nalezená zkamenělina",
-        "zkamenělina rostliny",
-        "největší zkamenělina"
+        "nejstarší zkamenělina, jaká byla kdy nalezena",
+        "zkamenělina rostliny, podle které se určuje podnebí",
+        "největší zkamenělina nalezená v dané vrstvě"
       ]
     },
     {
       "q": "Co nám zkameněliny prozradí kromě druhu?",
       "a": "jaké bylo v místě nálezu prostředí a podnebí",
       "b": [
-        "jen barvu organismu",
-        "jméno nálezce",
-        "chemické složení vzduchu dnes"
+        "jen barvu, jakou měl organismus za života",
+        "jméno nálezce a rok, kdy ji našel",
+        "chemické složení dnešního vzduchu"
       ]
     },
     {
       "q": "Co je otisk?",
-      "a": "stopa organismu zachovaná v hornině, například list nebo šlépěj",
+      "a": "stopa organismu v hornině, například otisk listu",
       "b": [
-        "celé tělo",
-        "druh minerálu",
-        "kost bez změny"
+        "celé tělo zachované i s měkkými částmi",
+        "druh minerálu, který vznikl v puklině",
+        "kost, která se vůbec nezměnila"
       ]
     },
     {
       "q": "Jak se určuje absolutní stáří hornin?",
       "a": "pomocí radioaktivního rozpadu prvků",
       "b": [
-        "podle barvy",
-        "podle hloubky uložení vždy",
-        "podle hmotnosti"
+        "podle barvy vrstvy horniny",
+        "podle hloubky, v jaké hornina leží",
+        "podle hmotnosti vzorku horniny"
       ]
     },
     {
       "q": "Co je jantar a proč je pro vědu cenný?",
-      "a": "zkamenělá pryskyřice, uvnitř bývá zachovaný hmyz",
+      "a": "zkamenělá pryskyřice, uvnitř které bývá zachovaný hmyz",
       "b": [
-        "druh vápence",
-        "sopečné sklo",
-        "druh kovu"
+        "druh vápence z mořských schránek, bez živočichů",
+        "sopečné sklo, které vzniká rychlým tuhnutím lávy",
+        "druh kovu, ze kterého se ve starověku kovaly zbraně"
       ]
     },
     {
       "q": "Které zkameněliny se u nás běžně nacházejí?",
       "a": "trilobiti u Berouna a zkamenělé dřevo",
       "b": [
-        "dinosauří kostry běžně",
-        "mamutí města",
-        "nic se u nás nenachází"
+        "celé kostry dinosaurů, běžně na polích",
+        "zbytky mamutích měst z doby ledové",
+        "nic, u nás se zkameněliny nenacházejí"
       ]
     }
   ],
@@ -310,72 +381,72 @@ const SADY = {
       "q": "Co je považováno za klíčový krok ve vývoji člověka?",
       "a": "vzpřímená chůze po dvou",
       "b": [
-        "ztráta srsti jako první krok",
-        "zvětšení zubů",
-        "život ve vodě"
+        "ztráta srsti jako úplně první krok",
+        "zvětšení zubů a čelistí",
+        "dlouhý život ve vodě"
       ]
     },
     {
       "q": "Který předek už vyráběl jednoduché kamenné nástroje?",
       "a": "člověk zručný (Homo habilis)",
       "b": [
-        "australopiték",
-        "neandertálec jako první",
-        "Homo sapiens jako první"
+        "australopiték afarský (Lucy)",
+        "žádný – nástroje vyrobil až Homo sapiens",
+        "žádný – nástroje vyráběli až neandertálci"
       ]
     },
     {
       "q": "Kdo jako první opustil Afriku a rozšířil se do Asie a Evropy?",
       "a": "člověk vzpřímený (Homo erectus)",
       "b": [
-        "Homo habilis",
-        "neandertálec",
-        "Homo sapiens"
+        "člověk zručný (Homo habilis)",
+        "člověk neandertálský",
+        "člověk moudrý (Homo sapiens)"
       ]
     },
     {
       "q": "Kdo byl neandertálec?",
       "a": "samostatný druh člověka žijící v Evropě v době ledové",
       "b": [
-        "přímý předek dnešního člověka",
-        "opice",
-        "druh australopitéka"
+        "přímý předek, ze kterého se vyvinul dnešní člověk",
+        "druh lidoopa, který žil v afrických pralesích",
+        "druh australopitéka žijícího v Evropě"
       ]
     },
     {
       "q": "Čím je významné ovládnutí ohně?",
       "a": "umožnilo teplo, ochranu a tepelnou úpravu potravy",
       "b": [
-        "nemělo velký význam",
-        "sloužilo jen k signalizaci",
-        "zabránilo lovu"
+        "nemělo pro vývoj člověka velký význam",
+        "sloužilo jen k dávání signálů na dálku",
+        "zabránilo lovu, protože plašilo zvěř"
       ]
     },
     {
       "q": "Kdy vznikl dnešní člověk (Homo sapiens)?",
       "a": "asi před 300 tisíci lety v Africe",
       "b": [
-        "před 10 tisíci lety v Evropě",
-        "před 5 miliony let",
-        "ve druhohorách"
+        "asi před 10 tisíci lety v Evropě",
+        "asi před 5 miliony let v Asii",
+        "už ve druhohorách mezi dinosaury"
       ]
     },
     {
       "q": "Co přinesla neolitická revoluce?",
       "a": "přechod od lovu a sběru k zemědělství",
       "b": [
-        "objev kovů jako první",
-        "vznik měst v Americe",
-        "konec doby ledové"
+        "objev kovů a výrobu prvních mečů",
+        "vznik prvních velkých měst v Americe",
+        "konec doby ledové a tání ledovců"
       ]
     },
     {
       "q": "Kde se u nás našly významné doklady pravěkých lovců?",
       "a": "v Dolních Věstonicích a Předmostí",
       "b": [
-        "v Praze na Vyšehradě",
-        "v Krkonoších",
-        "v Karlových Varech"
+        "v Praze na Vyšehradě a Petříně",
+        "na hřebenech Krkonoš a Jeseníků",
+        "v lázních Karlovy Vary a Teplice"
       ]
     }
   ]
@@ -405,7 +476,38 @@ function kviz(klic) {
   p.appendChild(odezva);
 }
 
+/* Fotografie zkamenělin (IMG-pr-21). */
+const ZKAMENELINY = [
+  { n: 'Trilobit', img: 'img/pr/pr9-vyvoj-zkamenelina-trilobit.webp', w: 768, h: 1152, doba: 'prvohory' },
+  { n: 'Amonit', img: 'img/pr/pr9-vyvoj-zkamenelina-amonit.webp', w: 768, h: 576, doba: 'druhohory' },
+  { n: 'Belemnit', img: 'img/pr/pr9-vyvoj-zkamenelina-belemnit.webp', w: 768, h: 484, doba: 'druhohory' },
+  { n: 'Přeslička z karbonu', img: 'img/pr/pr9-vyvoj-zkamenelina-preslicka.webp', w: 768, h: 403, doba: 'prvohory – karbon' },
+  { n: 'Zub žraloka', img: 'img/pr/pr9-vyvoj-zkamenelina-zub-zraloka.webp', w: 768, h: 1054, doba: 'třetihory' },
+  { n: 'Otisk kapradiny', img: 'img/pr/pr9-vyvoj-zkamenelina-kapradina.webp', w: 768, h: 563, doba: 'prvohory – karbon' },
+  { n: 'Jantar s hmyzem', img: 'img/pr/pr9-vyvoj-zkamenelina-jantar.webp', w: 768, h: 513, doba: 'třetihory' },
+  { n: 'Archeopteryx (odlitek)', img: 'img/pr/pr9-vyvoj-zkamenelina-archeopteryx.webp', w: 500, h: 651, doba: 'druhohory – jura' },
+];
+function foto() {
+  const p = $('plocha');
+  const u = Uloha.nahodne(ZKAMENELINY);
+  const jine = Uloha.zamichej(ZKAMENELINY.filter(x => x.n !== u.n)).slice(0, 3);
+  p.innerHTML = `<div class="zadani uloha-text">Která zkamenělina je na fotografii?</div>
+    <img class="foto-zkamenelina" src="${u.img}" alt="Neznámá zkamenělina k určení." width="${u.w}" height="${u.h}">`;
+  const odezva = odezvaEl();
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: Uloha.zamichej([u, ...jine]).map(x => ({ klic: x.n, popis: x.n })),
+    spravnyKlic: u.n,
+    zpravaOk: `✅ ${u.n} – ${u.doba}.`,
+    zpravaChyba: 'Prohlédni si tvar: je to schránka, kostra, rostlina, nebo otisk?',
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
 const REZIMY = {
+  foto,
   kviz1: () => kviz('kviz1'), kviz2: () => kviz('kviz2'),
   kviz3: () => kviz('kviz3'), kviz4: () => kviz('kviz4'),
 };

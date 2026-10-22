@@ -6,6 +6,8 @@
   <title>Bezobratlí</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -51,6 +53,46 @@
 <body>
   <h1>🐌 Bezobratlí</h1>
   <p class="podtitul">Pro 6.–7. ročník: žahavci, ploštěnci, hlísti, měkkýši a kroužkovci.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Jak poznat kmen bezobratlých</summary>
+    <div class="obsah">
+      <p><b>Bezobratlí</b> nemají vnitřní kostru s páteří. Do kmenů je třídíme podle <b>stavby těla</b>: jaký má tvar,
+        jestli je článkované, čím se živočich pohybuje a čím loví.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Žahavci</h3><p>Mají <b>žahavé buňky</b> na chapadlech, jedinou trávicí dutinu (láčku)
+          a paprsčitou souměrnost. Nezmar, medúza, korál.</p></article>
+        <article class="vyklad-karta"><h3>Ploštěnci</h3><p>Tělo <b>ploché</b>, nečlánkované. Ploštěnka žije pod kameny
+          v potocích, tasemnice je cizopasník ve střevě.</p></article>
+        <article class="vyklad-karta"><h3>Hlísti</h3><p>Tělo <b>oblé</b>, válcovité, nečlánkované, kryté pevnou kutikulou.
+          Škrkavka a roup jsou cizopasníci člověka.</p></article>
+        <article class="vyklad-karta"><h3>Měkkýši a kroužkovci</h3><p><b>Měkkýši</b> mají měkké tělo se svalnatou nohou, často ulitu
+          (plži) nebo dvě lastury (mlži); patří sem i chobotnice. <b>Kroužkovci</b> mají tělo <b>z mnoha článků</b> (žížala, pijavka).</p></article>
+      </div>
+      <p><b>Typická chyba:</b> „Tasemnice má články, takže je to kroužkovec.“ Tasemnice má ploché tělo, žije jako cizopasník
+        a nemá trávicí soustavu – živiny vstřebává povrchem těla. Patří k <b>ploštěncům</b>. Proto posuzuj víc znaků najednou.</p>
+      <p>Bezobratlí mají pro člověka různý význam: žížala provzdušňuje půdu, škeble filtruje vodu, kdežto škrkavka
+        nebo roupi cizopasí. Před nákazou cizopasníky chrání hlavně mytí rukou.</p>
+      <aside class="zapamatuj">Žahavci = žahavé buňky. Ploštěnci = ploché tělo. Hlísti = oblé tělo bez článků.
+        Měkkýši = svalnatá noha, často schránka. Kroužkovci = článkované tělo.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: do kterého kmene patří žížala?</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Žížala obecná žije v půdě, má dlouhé tělo, štětinky a dýchá celým povrchem vlhkého těla.
+        Do kterého kmene ji zařadíš?</p>
+      <ol class="kroky">
+        <li>Ověřím, že nemá páteř – je to <b>bezobratlý</b> živočich.</li>
+        <li>Prohlédnu tvar těla: není ploché, je dlouhé a válcovité – ploštěnci to nebudou.</li>
+        <li>Hledám články: tělo se skládá z <b>mnoha opakujících se článků</b> (kroužků). Hlísti články nemají.</li>
+        <li>Nemá žahavé buňky ani svalnatou nohu se schránkou – žahavec ani měkkýš to není.</li>
+        <li>Článkované tělo je hlavní znak <b>kroužkovců</b>; jméno kmene je podle kroužků.</li>
+      </ol>
+      <p class="vysledek-ukazky">Žížala patří ke <b>kroužkovcům</b>. Pro člověka je prospěšná – prokypřuje a provzdušňuje půdu.</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="kmen" class="active">🗂️ Do kterého kmene</button>
@@ -130,9 +172,9 @@ const ZIVOCICHOVE = [
     znaky: ['přísavky', 'saje krev', 'využití v medicíně'] },
 ];
 
-function obrazekBezobratle(u) {
+function obrazekBezobratle(u, alt) {
   if (!u.img) return u.e;
-  return `<picture><source srcset="img/pr/pr6-bezobratli-${u.img}.webp" type="image/webp"><img class="bezobratly-img" src="img/pr/pr6-bezobratli-${u.img}.webp" alt="${u.alt}" width="768" height="768"></picture>`;
+  return `<picture><source srcset="img/pr/pr6-bezobratli-${u.img}.webp" type="image/webp"><img class="bezobratly-img" src="img/pr/pr6-bezobratli-${u.img}.webp" alt="${alt || u.alt}" width="768" height="768"></picture>`;
 }
 
 /* Fotografie zástupců (IMG-pr-05, Wikimedia Commons; zdroje vypisuje kostra.js). */
@@ -147,9 +189,10 @@ const FOTO_BEZ = {
 };
 /* FOTO_BEZ:konec */
 ZIVOCICHOVE.forEach(z => { if (FOTO_BEZ[z.n]) z.foto = FOTO_BEZ[z.n]; });
+/* Jen pro režim Poznej živočicha: obrázek je sám otázkou, alt proto nesmí prozradit druh. */
 const fotoBezobratle = u => u.foto
-  ? `<img class="bezobratly-foto" src="${u.foto.src}" alt="${u.foto.alt}" width="${u.foto.w}" height="${u.foto.h}">`
-  : obrazekBezobratle(u);
+  ? `<img class="bezobratly-foto" src="${u.foto.src}" alt="Fotografie živočicha k určení." width="${u.foto.w}" height="${u.foto.h}">`
+  : obrazekBezobratle(u, 'Obrázek živočicha k určení.');
 $('fotoAtlas').innerHTML = ZIVOCICHOVE.filter(z => z.foto).map(z => `<figure class="foto-karta"><img src="${z.foto.src}" alt="${z.foto.alt}" width="${z.foto.w}" height="${z.foto.h}" loading="lazy"><figcaption><strong>${z.n}</strong>${KMENY[z.kmen]} · ${z.popis}.</figcaption></figure>`).join('');
 
 const STAVBA_OTAZKY = [

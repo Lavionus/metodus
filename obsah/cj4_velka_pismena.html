@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Velká písmena</title>
+  <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
+  <script src="../theme.js"></script>
+  <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
+  <script src="../rec.js"></script>
+  <script src="../uloha.js"></script>
+  <style>
+    .veta-uloha .hledane { color: var(--zvyraz-text); border-bottom: 2px solid var(--zvyraz-text); }
+    .veta-uloha .opraveno { color: var(--ok-text); border-bottom: 2px solid var(--ok-text); }
+    .moznosti button.ztlumeno { opacity: 0.35; }
+    .cedule { width: min(300px, 80vw); }
+    .cedule .deska { fill: var(--bg-elevated); stroke: var(--accent); stroke-width: 4; }
+    .cedule .text { fill: var(--text); font-weight: 700; font-family: inherit; }
+    .cedule .velke { fill: var(--accent); }
+    .cedule .popis { fill: var(--text-faint); font-size: 11px; font-family: inherit; }
+    .veta-uloha { overflow-wrap: anywhere; }
+  </style>
+</head>
+<body>
+  <h1>🔠 Velká písmena</h1>
+  <p class="podtitul">Pro 4.–6. ročník: vlastní jména osob a zvířat, zeměpisné a víceslovné názvy, instituce, svátky a začátek věty.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Kdy píšeme velké písmeno</summary>
+    <div class="obsah">
+      <p>Velké písmeno píšeme <b>na začátku věty</b> a na začátku <b>vlastních jmen</b>. Vlastní jméno patří jen jedné
+        osobě, jednomu zvířeti, místu nebo instituci: <i>Eva, pes Rex, Labe, Národní divadlo</i>. Obecná jména
+        (<i>holčička, pes, řeka, divadlo</i>) označují všechny věci stejného druhu a píšeme je malým.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>👤 Osoby a zvířata</h3><p>Každá část jména je velká: <i>Jan Amos Komenský</i>,
+          kočka <i>Micka</i>. Slova <i>babička, strýc, pes</i> jsou obecná: <i>babička Anna</i>.</p></article>
+        <article class="vyklad-karta"><h3>🏙️ Města a obce</h3><p>Velká jsou <b>všechna slova kromě předložek</b>:
+          <i>Nové Město na Moravě, Ústí nad Labem, Karlovy Vary</i>.</p></article>
+        <article class="vyklad-karta"><h3>🗺️ Ostatní zeměpisné názvy</h3><p>Velké je <b>první slovo</b> a slova, která jsou sama vlastním
+          jménem: <i>Česká republika, Krušné hory, Severní moře</i>, ale <i>Vysoké Tatry, Velká Británie</i>.</p></article>
+        <article class="vyklad-karta"><h3>🛣️ Ulice a náměstí</h3><p>Slovo <i>ulice, náměstí</i> je obecné: <i>náměstí Míru</i>.
+          Začíná-li název předložkou, je velká i ona a slovo po ní: <i>Na Příkopě</i>.</p></article>
+        <article class="vyklad-karta"><h3>🏛️ Instituce a svátky</h3><p>Velké je první slovo: <i>Národní muzeum, Ministerstvo
+          zdravotnictví, Štědrý den, Den matek, Vánoce</i>.</p></article>
+        <article class="vyklad-karta"><h3>🔡 Malým</h3><p>Dny a měsíce (<i>pondělí, květen</i>), jazyky (<i>čeština</i>),
+          přídavná jména od míst a národů (<i>pražský, český</i>). Velké jsou ale obyvatelé: <i>Pražan, Čech</i>.</p></article>
+      </div>
+      <svg class="cedule" viewBox="0 0 300 96" role="img" aria-label="Cedule ulice Na Příkopě: velké N a velké P">
+        <rect class="deska" x="6" y="8" width="288" height="62" rx="8"/>
+        <text class="text" x="150" y="50" font-size="28" text-anchor="middle"><tspan class="velke">N</tspan>a <tspan class="velke">P</tspan>říkopě</text>
+        <text class="popis" x="150" y="88" text-anchor="middle">předložka na začátku názvu ulice → velká je i ona, i slovo po ní</text>
+      </svg>
+      <aside class="zapamatuj">Vlastní jméno = velké písmeno. Ve městech jsou velká všechna slova kromě předložek,
+        jinde jen první slovo a vlastní jména. Obecná slova (ulice, náměstí, moře, hory) píšeme malým.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: oprav větu</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Oprav větu: „babička bydlí v ústí nad labem v ulici na příkopě.“</p>
+      <ol class="kroky">
+        <li>Začátek věty: <b>B</b>abička – první slovo věty je vždy velké.</li>
+        <li>Ústí nad Labem je <b>název města</b>: velká jsou všechna slova kromě předložky → <b>Ústí nad Labem</b>.</li>
+        <li>Slovo <i>ulice</i> je obecné, k názvu ho jen přidáváme → zůstává <b>malé</b>.</li>
+        <li>Název ulice začíná předložkou: velká je předložka i slovo po ní → <b>Na Příkopě</b>.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Babička bydlí v Ústí nad Labem v ulici Na Příkopě.</p>
+    </div>
+  </details>
+
+  <div class="rezimy" id="rezimy">
+    <button data-rezim="doplnovani" class="active">🔠 Velké, nebo malé?</button>
+    <button data-rezim="chyba">🔍 Najdi chybu</button>
+    <button data-rezim="nazvy">🗺️ Víceslovné názvy</button>
+    <button data-rezim="proc">❓ Proč velké?</button>
+  </div>
+
+  <div class="plocha" id="plocha"></div>
+
+  <div class="ovladani">
+    <button class="hlavni" id="btnDalsi">Přeskočit →</button>
+    <button id="btnNapoveda">💡 Nápověda</button>
+    <span class="serie" id="serie"></span>
+    <span class="skore" id="skore"></span>
+  </div>
+
+  <p class="napoveda">
+    📌 <b>Velké písmeno:</b> začátek věty · jména osob a zvířat (<i>Eva Malá, pes Rex</i>) · jména obyvatel (<i>Čech, Pražan</i>) ·
+    přivlastňovací přídavná jména (<i>Petrův, Janin</i>) · zeměpisné názvy · instituce (<i>Národní divadlo</i>) · svátky (<i>Vánoce, Štědrý den</i>).
+    <b>Města:</b> velká všechna slova kromě předložek (<i>Ústí nad Labem</i>). <b>Jiné názvy:</b> první slovo a vlastní jména
+    (<i>Česká republika, Vysoké Tatry</i>). <b>Ulice:</b> <i>náměstí Míru, ulice Na Příkopě</i>.
+    <b>Malým:</b> dny, měsíce, jazyky, <i>pražský, český, česky</i>.
+    Klávesy: <kbd>H</kbd> nápověda · <kbd>Enter</kbd> další.
+  </p>
+
+<script>
+const $ = id => document.getElementById(id);
+const skore = Uloha.skore('metodus_cj4_velka_pismena', $('skore'));
+let rezim = 'doplnovani';
+let serie = 0, napovedaVidet = false, aktualni = null, posledni = null;
+
+/* Druhy slov s velkým písmenem (a obecné slovo s malým). */
+const DRUHY = {
+  osoba: { nazev: 'jméno nebo příjmení konkrétní osoby', proc: 'jména a příjmení osob jsou vlastní jména – píšeme je velkým' },
+  zvire: { nazev: 'jméno zvířete', proc: 'jména zvířat jsou vlastní jména – píšeme je velkým' },
+  zem: { nazev: 'zeměpisný nebo místní název', proc: 'zeměpisné a místní názvy (města, řeky, hory, státy) jsou vlastní jména' },
+  inst: { nazev: 'název instituce', proc: 'první slovo názvu instituce píšeme velkým' },
+  svatek: { nazev: 'název svátku nebo významného dne', proc: 'názvy svátků a významných dnů píšeme velkým' },
+  zac: { nazev: 'začátek věty', proc: 'první slovo věty píšeme vždy velkým' },
+  priv: { nazev: 'přivlastňovací přídavné jméno od jména', proc: 'přivlastňovací přídavná jména od vlastních jmen (Petrův, Janin) píšeme velkým' },
+  obyv: { nazev: 'jméno obyvatel země nebo města', proc: 'jména obyvatel zemí a měst (Čech, Slovák, Pražan) píšeme velkým' },
+  male: { nazev: 'obecné slovo', proc: 'je to obecné slovo – píšeme ho malým' },
+};
+/* Záměny, které se v „Proč velké?“ nenabízejí, protože by si odporovaly. */
+const BEZ_ZAMENY = { osoba: ['obyv'], obyv: ['osoba'] };
+
+/* Důvody, které se opakují ve více větách. */
+const R = {
+  prib: 'babička, teta nebo strýc jsou obecná jména – píšeme je malým',
+  uliceSlovo: 'slova ulice a náměstí k vlastnímu názvu jen přidáváme – píšeme je malým',
+  ulicePred: 'název ulice začíná předložkou – i ta má velké písmeno',
+  uliceZaPred: 'po předložce na začátku názvu ulice píšeme velké i další slovo',
+  namesti: 'vlastní název náměstí nebo ulice začíná velkým písmenem',
+  zem1: 'první slovo zeměpisného názvu píšeme velkým',
+  zemObec: 'další slova zeměpisného názvu, která nejsou vlastními jmény, píšeme malým',
+  zemVlastni: 'to slovo je samo vlastním jménem, proto je velké i uprostřed názvu',
+  obec: 'v názvu města nebo obce píšeme velkým všechna slova kromě předložek',
+  obecPred: 'předložky uvnitř názvu města nebo obce píšeme malým',
+  inst1: 'první slovo názvu instituce píšeme velkým',
+  instDalsi: 'další slova v názvu instituce píšeme malým (pokud nejsou vlastními jmény)',
+  svatek1: 'první slovo názvu svátku píšeme velkým',
+  svatekDalsi: 'další slova v názvu svátku píšeme malým',
+  den: 'názvy dnů v týdnu píšeme malým',
+  mesic: 'názvy měsíců píšeme malým',
+  jazyk: 'názvy jazyků píšeme malým',
+  narodPrid: 'přídavná jména a příslovce od jmen národů (český, česky) píšeme malým',
+  mistoPrid: 'přídavná jména odvozená od názvů míst (pražský, brněnský) píšeme malým',
+  jmeno: 'každou část jména a příjmení osoby píšeme velkým',
+  priv: 'přivlastňovací přídavné jméno od jména Karel – píšeme velkým',
+};
+
+/* Věty: {slovo|druh|důvod}. Označená slova se dají hádat; ostatní jsou správně. */
+const VETY = [
+  '{V|zac} létě pojedeme s {babičkou|male|prib} {Marií|osoba} do {Krkonoš|zem}.',
+  '{Naše|zac} fena {Bára|zvire} ráda plave v {Labi|zem}.',
+  '{Bydlíme|zac} v {ulici|male|uliceSlovo} {Na|zem|ulicePred} {Příkopě|zem|uliceZaPred}.',
+  '{Sejdeme|zac} se na {náměstí|male|uliceSlovo} {Míru|zem|namesti}.',
+  '{Hlavním|zac} městem {České|zem|zem1} {republiky|male|zemObec} je {Praha|zem}.',
+  '{Na|zac} {Štědrý|svatek|svatek1} {den|male|svatekDalsi} zdobíme stromeček.',
+  '{O|zac} {Velikonocích|svatek} jsme byli u dědy {Josefa|osoba}.',
+  '{Večer|zac} jsme byli v {Národním|inst|inst1} {divadle|male|instDalsi}.',
+  '{Naše|zac} kočka {Micka|zvire} spí na peci.',
+  '{Nejvyšší|zac} horou {Česka|zem} je {Sněžka|zem}.',
+  '{Řeka|zac} {Vltava|zem} protéká {Prahou|zem}.',
+  '{Ve|zac} {čtvrtek|male|den} půjdeme do {Národního|inst|inst1} {muzea|male|instDalsi}.',
+  '{Můj|zac} strýc je {Slovák|obyv} a mluví {slovensky|male|narodPrid}.',
+  '{Na|zac} výlet přijeli {Pražané|obyv} i {Brňané|obyv}.',
+  '{V|zac} {pražských|male|mistoPrid} ulicích je rušno.',
+  '{Na|zac} lavici leží {Petrova|priv} taška.',
+  '{To|zac} je {Janino|priv} kolo.',
+  '{V|zac} {květnu|male|mesic} slavíme {Den|svatek|svatek1} {matek|male|svatekDalsi}.',
+  '{Moje|zac} sestra {Eva|osoba} bydlí v {Ústí|zem|obec} {nad|male|obecPred} {Labem|zem|obec}.',
+  '{Letos|zac} pojedeme k {Severnímu|zem|zem1} {moři|male|zemObec}.',
+  '{Lodě|zac} pluly přes {Tichý|zem|zem1} {oceán|male|zemObec}.',
+  '{V|zac} {Krušných|zem|zem1} {horách|male|zemObec} ještě leží sníh.',
+  '{Papoušek|zac} {Kuba|zvire} umí říct ahoj.',
+  '{Učitel|zac} nám vyprávěl o {Janu|osoba|jmeno} {Amosu|osoba|jmeno} {Komenském|osoba|jmeno}.',
+  '{Dopis|zac} přišel z {Ministerstva|inst|inst1} {zdravotnictví|male|instDalsi}.',
+  '{Pes|zac} {Rex|zvire} hlídá dům.',
+  '{Ve|zac} {Vysokých|zem|zem1} {Tatrách|zem|zemVlastni} jsme viděli kamzíky.',
+  '{Moje|zac} {babička|male|prib} {Anna|osoba} peče buchty.',
+  '{Letos|zac} oslavíme {Vánoce|svatek} na horách.',
+  '{Pojedeme|zac} do {Nového|zem|obec} {Města|zem|obec} {na|male|obecPred} {Moravě|zem|obec}.',
+  '{Babička|zac} bydlí v {Karlových|zem|obec} {Varech|zem|obec}.',
+  '{Doma|zac} mluvíme {česky|male|narodPrid} a ve škole se učíme {angličtinu|male|jazyk}.',
+  '{Ke|zac} kamarádce přijel bratranec z {Německa|zem}, je to {Němec|obyv}.',
+  '{Navštívili|zac} jsme {Ústav|inst|inst1} {pro|male|instDalsi} {jazyk|male|instDalsi} {český|male|instDalsi}.',
+  '{Na|zac} {Mezinárodní|svatek|svatek1} {den|male|svatekDalsi} {dětí|male|svatekDalsi} jsme šli do zoo.',
+  '{Našli|zac} jsme {Alíkovu|priv} misku.',
+  '{Na|zac} mapě {Evropy|zem} hledáme řeku {Dunaj|zem}.',
+  '{Kobyla|zac} {Hvězda|zvire} vyhrála závod.',
+  '{Spisovatelka|zac} {Božena|osoba|jmeno} {Němcová|osoba|jmeno} se narodila ve {Vídni|zem}.',
+];
+
+/* Víceslovné názvy ve větě; označená jsou jen slova názvu. typ řídí nápovědu. */
+const NAZVY = [
+  { typ: 'zem', v: 'Žijeme v {České|zem|zem1} {republice|male|zemObec}.' },
+  { typ: 'obec', v: 'Teta bydlí v {Ústí|zem|obec} {nad|male|obecPred} {Labem|zem|obec}.' },
+  { typ: 'obec', v: 'Jeli jsme do {Nového|zem|obec} {Města|zem|obec} {na|male|obecPred} {Moravě|zem|obec}.' },
+  { typ: 'obec', v: 'Lázně jsou v {Karlových|zem|obec} {Varech|zem|obec}.' },
+  { typ: 'obec', v: 'Strýc pracuje v {Hradci|zem|obec} {Králové|zem|obec}.' },
+  { typ: 'obec', v: 'Autobus jede do {Mladé|zem|obec} {Boleslavi|zem|obec}.' },
+  { typ: 'zem', v: 'Lyžovat jezdíme do {Krušných|zem|zem1} {hor|male|zemObec}.' },
+  { typ: 'zem', v: 'Kamzíci žijí ve {Vysokých|zem|zem1} {Tatrách|zem|zemVlastni}.' },
+  { typ: 'zem', v: 'Loď pluje po {Severním|zem|zem1} {moři|male|zemObec}.' },
+  { typ: 'zem', v: 'Velryby žijí v {Tichém|zem|zem1} {oceánu|male|zemObec}.' },
+  { typ: 'zem', v: 'Letadlo letělo do {Spojených|zem|zem1} {států|male|zemObec} {amerických|male|zemObec}.' },
+  { typ: 'zem', v: 'Strýc odjel do {Velké|zem|zem1} {Británie|zem|zemVlastni}.' },
+  { typ: 'zem', v: 'Na mapě ukaž {Jižní|zem|zem1} {Ameriku|zem|zemVlastni}.' },
+  { typ: 'zem', v: 'Kopce {Českomoravské|zem|zem1} {vrchoviny|male|zemObec} nejsou vysoké.' },
+  { typ: 'zem', v: 'Ostrava leží v {Moravskoslezském|zem|zem1} {kraji|male|zemObec}.' },
+  { typ: 'ulice', v: 'Bydlíme v ulici {Na|zem|ulicePred} {Příkopě|zem|uliceZaPred}.' },
+  { typ: 'ulice', v: 'Kamarád bydlí v ulici {Pod|zem|ulicePred} {Lesem|zem|uliceZaPred}.' },
+  { typ: 'ulice', v: 'Sraz máme na {náměstí|male|uliceSlovo} {Míru|zem|namesti}.' },
+  { typ: 'ulice', v: 'Prošli jsme se po {Václavském|zem|namesti} {náměstí|male|uliceSlovo}.' },
+  { typ: 'inst', v: 'Byli jsme v {Národním|inst|inst1} {divadle|male|instDalsi}.' },
+  { typ: 'inst', v: 'Obrazy visí v {Národní|inst|inst1} {galerii|male|instDalsi}.' },
+  { typ: 'inst', v: 'Dopis poslalo {Ministerstvo|inst|inst1} {zdravotnictví|male|instDalsi}.' },
+  { typ: 'inst', v: 'Bankovky vydává {Česká|inst|inst1} {národní|male|instDalsi} {banka|male|instDalsi}.' },
+  { typ: 'inst', v: 'Sestra studuje na {Univerzitě|inst|inst1} {Karlově|priv|priv}.' },
+  { typ: 'svatek', v: 'Na {Štědrý|svatek|svatek1} {den|male|svatekDalsi} zdobíme stromeček.' },
+  { typ: 'svatek', v: 'V neděli slavíme {Den|svatek|svatek1} {matek|male|svatekDalsi}.' },
+  { typ: 'svatek', v: 'Na {Mezinárodní|svatek|svatek1} {den|male|svatekDalsi} {dětí|male|svatekDalsi} jdeme do zoo.' },
+  { typ: 'svatek', v: 'Na {Zelený|svatek|svatek1} {čtvrtek|male|svatekDalsi} se jí špenát.' },
+  { typ: 'svatek', v: 'Na {Velký|svatek|svatek1} {pátek|male|svatekDalsi} se nechodí do školy.' },
+  { typ: 'osoba', v: 'Učitel vyprávěl o {Janu|osoba|jmeno} {Amosu|osoba|jmeno} {Komenském|osoba|jmeno}.' },
+  { typ: 'osoba', v: 'Knihu Babička napsala {Božena|osoba|jmeno} {Němcová|osoba|jmeno}.' },
+];
+
+const NAPOVEDA_TYPU = {
+  zem: 'Je to zeměpisný název (stát, hory, moře, kraj). Velké je první slovo a slova, která jsou sama vlastním jménem.',
+  obec: 'Je to název města nebo obce. Velká jsou všechna slova kromě předložek.',
+  ulice: 'Je to název ulice nebo náměstí. Slova ulice a náměstí jsou obecná; začíná-li název předložkou, je velká i ona.',
+  inst: 'Je to název instituce. Velké je první slovo a vlastní jména.',
+  svatek: 'Je to název svátku. Velké je první slovo.',
+  osoba: 'Je to jméno osoby. Velká je každá část jména.',
+};
+
+/* ---- rozbor zápisu ---------------------------------------------------------- */
+function rozloz(text) {
+  const casti = [];
+  const re = /\{([^|}]+)\|([^|}]+)(?:\|([^}]+))?\}/g;
+  let i = 0, m;
+  while ((m = re.exec(text))) {
+    if (m.index > i) casti.push({ t: text.slice(i, m.index) });
+    casti.push({ w: m[1], k: m[2], duvod: m[3] ? R[m[3]] : DRUHY[m[2]].proc });
+    i = re.lastIndex;
+  }
+  if (i < text.length) casti.push({ t: text.slice(i) });
+  return casti;
+}
+const VETY_R = VETY.map(rozloz);
+const NAZVY_R = NAZVY.map(n => ({ typ: n.typ, casti: rozloz(n.v) }));
+
+const delkaPrvni = w => (/^ch/i.test(w) ? 2 : 1);
+const jeVelke = w => w[0] !== w[0].toLowerCase();
+function prevrat(w) {
+  const d = delkaPrvni(w);
+  const z = w.slice(0, d);
+  const novy = jeVelke(w) ? z.toLowerCase() : z[0].toUpperCase() + z.slice(1).toLowerCase();
+  return novy + w.slice(d);
+}
+const velkePismeno = w => { const z = w.slice(0, delkaPrvni(w)); return z[0].toUpperCase() + z.slice(1).toLowerCase(); };
+const malePismeno = w => w.slice(0, delkaPrvni(w)).toLowerCase();
+const velkeSlovo = s => s[0].toUpperCase() + s.slice(1);
+
+/* Složí větu; zobraz(cast, index) vrací HTML označeného slova. */
+function slozVetu(casti, zobraz) {
+  let j = -1;
+  return casti.map(c => (c.t !== undefined ? c.t : zobraz(c, ++j))).join('');
+}
+const slova = casti => casti.filter(c => c.w !== undefined);
+
+function vyberVetu() {
+  let v;
+  do { v = Uloha.nahodne(VETY_R); } while (v === posledni && VETY_R.length > 1);
+  posledni = v;
+  return v;
+}
+/* Začátek věty je snadný – nabídne se jen občas. */
+function vyberSlovo(veta, jenVelka) {
+  const s = slova(veta).map((c, i) => ({ c, i })).filter(x => !jenVelka || (x.c.k !== 'male' && jeVelke(x.c.w)));
+  const tezsi = s.filter(x => x.c.k !== 'zac');
+  return (tezsi.length && Math.random() < 0.85) ? Uloha.nahodne(tezsi) : Uloha.nahodne(s);
+}
+
+/* ---- společné díly ---------------------------------------------------------- */
+function odezvaEl() { const d = document.createElement('div'); d.className = 'odezva'; return d; }
+function pravidloEl(html) {
+  const el = document.createElement('div');
+  el.className = 'pravidlo ok';
+  el.innerHTML = `<span class="znak">📏</span><div>${html}</div>`;
+  return el;
+}
+function hotovo(p, napoprve, html) {
+  skore.vyhodnot(napoprve);
+  serie = napoprve ? serie + 1 : 0;
+  $('serie').textContent = serie >= 3 ? '🔥 série ' + serie : '';
+  const tip = p.querySelector('.pravidlo.tip');
+  if (tip) tip.remove();
+  p.appendChild(pravidloEl(html));
+}
+const PRODLEVA = napoprve => (napoprve ? 2200 : 3200);
+
+/* ---- Velké, nebo malé? -------------------------------------------------------- */
+function doplnovani() {
+  const p = $('plocha');
+  const veta = vyberVetu();
+  const { c, i } = vyberSlovo(veta, false);
+  const velke = jeVelke(c.w);
+  aktualni = { rezim: 'doplnovani', spravny: velke ? 'velke' : 'male' };
+  const vetaHTML = doplneno => slozVetu(veta, (x, j) => {
+    if (j !== i) return x.w;
+    const d = delkaPrvni(x.w);
+    return doplneno
+      ? `<span class="mezera doplneno">${x.w.slice(0, d)}</span>${x.w.slice(d)}`
+      : `<span class="mezera prazdna">?</span>${x.w.slice(d)}`;
+  });
+  p.innerHTML = `<div class="zadani">Doplň na začátek slova velké, nebo malé písmeno.</div>
+    <div class="karta"><div class="veta-uloha" id="veta">${vetaHTML(false)}</div></div>`;
+  const odezva = odezvaEl();
+  Uloha.vyber({
+    kam: p, odezva, trida: 'dve',
+    moznosti: [
+      { klic: 'velke', ikona: velkePismeno(c.w), popis: 'velké' },
+      { klic: 'male', ikona: malePismeno(c.w), popis: 'malé' },
+    ],
+    spravnyKlic: aktualni.spravny,
+    zpravaOk: '✅ Správně!',
+    zpravaChyba: () => velke
+      ? `Ne – „${c.w}“ píšeme velkým: ${c.duvod}.`
+      : `Ne – „${c.w}“ píšeme malým: ${c.duvod}.`,
+    poSpravne: napoprve => {
+      $('veta').innerHTML = vetaHTML(true);
+      hotovo(p, napoprve, `<b>${c.w}</b> – ${c.duvod}.`);
+    },
+    prodleva: PRODLEVA, dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+/* ---- Najdi chybu -------------------------------------------------------------- */
+function chyba() {
+  const p = $('plocha');
+  const veta = vyberVetu();
+  const { c, i } = vyberSlovo(veta, false);
+  const spatne = prevrat(c.w);
+  const oznacena = slova(veta);
+  aktualni = { rezim: 'chyba', spravny: String(i) };
+  const vetaHTML = opravena => slozVetu(veta, (x, j) => (j !== i ? x.w
+    : opravena ? `<span class="opraveno">${x.w}</span>` : spatne));
+  p.innerHTML = `<div class="zadani">Ve větě je jedno slovo napsané špatně. Které?</div>
+    <div class="karta"><div class="veta-uloha" id="veta">${vetaHTML(false)}</div></div>`;
+  const odezva = odezvaEl();
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: oznacena.map((x, j) => ({ klic: String(j), popis: j === i ? spatne : x.w })),
+    spravnyKlic: String(i),
+    zpravaOk: `✅ Ano – správně je „${c.w}“.`,
+    zpravaChyba: k => {
+      const x = oznacena[+k];
+      return `„${x.w}“ je napsané dobře: ${x.duvod}.`;
+    },
+    poSpravne: napoprve => {
+      $('veta').innerHTML = vetaHTML(true);
+      hotovo(p, napoprve, `Správně je <b>${c.w}</b>, ne „${spatne}“ – ${c.duvod}.`);
+    },
+    prodleva: PRODLEVA, dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+/* ---- Víceslovné názvy ---------------------------------------------------------- */
+function nazvy() {
+  const p = $('plocha');
+  let n;
+  do { n = Uloha.nahodne(NAZVY_R); } while (n === posledni && NAZVY_R.length > 1);
+  posledni = n;
+  const sl = slova(n.casti);
+  const pocet = 1 << sl.length;
+  /* Varianta = maska převrácených slov; 0 = správný zápis. */
+  const masky = Uloha.zamichej([...Array(pocet).keys()].slice(1)).slice(0, 3);
+  const zapis = maska => sl.map((x, j) => (maska & (1 << j) ? prevrat(x.w) : x.w)).join(' ');
+  const varianty = Uloha.zamichej([0, ...masky]);
+  aktualni = { rezim: 'nazvy', spravny: '0', typ: n.typ };
+  const prvniI = n.casti.findIndex(x => x.w !== undefined);
+  const posledniI = n.casti.length - 1 - [...n.casti].reverse().findIndex(x => x.w !== undefined);
+  const pred = n.casti.slice(0, prvniI).map(x => x.t).join('');
+  const po = n.casti.slice(posledniI + 1).map(x => x.t).join('');
+  const vetaHTML = hotova => pred
+    + (hotova ? `<span class="opraveno">${zapis(0)}</span>` : '<span class="mezera prazdna">…</span>') + po;
+  p.innerHTML = `<div class="zadani">Který zápis názvu do věty patří?</div>
+    <div class="karta"><div class="veta-uloha" id="veta">${vetaHTML(false)}</div></div>`;
+  const odezva = odezvaEl();
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: varianty.map(m => ({ klic: String(m), popis: zapis(m) })),
+    spravnyKlic: '0',
+    zpravaOk: `✅ Ano – ${zapis(0)}.`,
+    zpravaChyba: k => {
+      const m = +k;
+      const j = sl.findIndex((x, idx) => m & (1 << idx));
+      const x = sl[j];
+      return `Pozor na slovo „${prevrat(x.w)}“ – správně „${x.w}“: ${x.duvod}.`;
+    },
+    poSpravne: napoprve => {
+      $('veta').innerHTML = vetaHTML(true);
+      hotovo(p, napoprve, sl.map(x => `<b>${x.w}</b> – ${x.duvod}`).join('<br>'));
+    },
+    prodleva: napoprve => (napoprve ? 2800 : 3800), dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+/* ---- Proč velké? ----------------------------------------------------------------- */
+function proc() {
+  const p = $('plocha');
+  const veta = vyberVetu();
+  const { c, i } = vyberSlovo(veta, true);
+  const zakazane = BEZ_ZAMENY[c.k] || [];
+  const jine = Uloha.zamichej(Object.keys(DRUHY)
+    .filter(k => k !== 'male' && k !== c.k && !zakazane.includes(k))).slice(0, 3);
+  aktualni = { rezim: 'proc', spravny: c.k };
+  p.innerHTML = `<div class="zadani">Proč má zvýrazněné slovo velké písmeno?</div>
+    <div class="karta"><div class="veta-uloha">${slozVetu(veta, (x, j) => (j === i ? `<span class="hledane">${x.w}</span>` : x.w))}</div></div>`;
+  const odezva = odezvaEl();
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: Uloha.zamichej([c.k, ...jine]).map(k => ({ klic: k, popis: velkeSlovo(DRUHY[k].nazev) })),
+    spravnyKlic: c.k,
+    zpravaOk: '✅ Správně!',
+    zpravaChyba: k => (k === 'zac'
+      ? `Ne – „${c.w}“ nestojí na začátku věty. Podívej se, co slovo pojmenovává.`
+      : `Ne – „${c.w}“ není ${DRUHY[k].nazev}. Podívej se, co slovo pojmenovává.`),
+    poSpravne: napoprve => hotovo(p, napoprve, `<b>${c.w}</b> je ${DRUHY[c.k].nazev}: ${c.duvod}.`),
+    prodleva: PRODLEVA, dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+/* ---- nápověda: zúží výběr, odpověď neřekne ---------------------------------------- */
+function napoveda() {
+  if (!aktualni || napovedaVidet) return;
+  const p = $('plocha');
+  const text = {
+    doplnovani: 'Zeptej se: Je slovo na začátku věty? Pojmenovává jednu konkrétní osobu, zvíře, místo, instituci nebo svátek? Je součástí víceslovného názvu? Když ne, je to obecné slovo – píše se malým.',
+    chyba: 'Projdi slova jedno po druhém. U každého se zeptej, jestli je to vlastní jméno, nebo obecné slovo. Půlku nabídky jsem ti ztlumil.',
+    nazvy: NAPOVEDA_TYPU[aktualni.typ] || '',
+    proc: 'Zeptej se, co slovo pojmenovává: osobu, zvíře, místo, instituci, svátek? Nebo stojí na začátku věty?',
+  }[aktualni.rezim];
+  const el = document.createElement('div');
+  el.className = 'pravidlo tip';
+  el.innerHTML = `<span class="znak">💡</span><div>${text}</div>`;
+  p.appendChild(el);
+  if (aktualni.rezim === 'chyba' || aktualni.rezim === 'nazvy' || aktualni.rezim === 'proc') {
+    const spatne = Uloha.zamichej([...p.querySelectorAll('.moznosti button')]
+      .filter(b => b.dataset.klic !== aktualni.spravny));
+    spatne.slice(0, Math.floor(spatne.length / 2)).forEach(b => { b.disabled = true; b.classList.add('ztlumeno'); });
+  }
+  napovedaVidet = true;
+}
+
+/* ---- ovládání -------------------------------------------------------------------- */
+const REZIMY = { doplnovani, chyba, nazvy, proc };
+function novaUloha() {
+  napovedaVidet = false;
+  REZIMY[rezim]();
+}
+document.querySelectorAll('#rezimy button').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('#rezimy button').forEach(x => x.classList.remove('active'));
+  b.classList.add('active');
+  rezim = b.dataset.rezim;
+  posledni = null;
+  novaUloha();
+}));
+$('btnDalsi').addEventListener('click', novaUloha);
+$('btnNapoveda').addEventListener('click', napoveda);
+document.addEventListener('keydown', e => {
+  if (e.target instanceof Element && e.target.closest('summary, input, textarea')) return;
+  if (e.key === 'ArrowRight' || e.key === 'Enter') { e.preventDefault(); novaUloha(); return; }
+  if (e.key === 'h' || e.key === 'H') napoveda();
+});
+
+novaUloha();
+</script>
+</body>
+</html>

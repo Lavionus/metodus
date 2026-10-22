@@ -6,6 +6,8 @@
   <title>Trpný rod</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -23,6 +25,50 @@
 <body>
   <h1>🔧 Trpný rod</h1>
   <p class="podtitul">Pro 8. ročník: passive voice – be + příčestí trpné.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Trpný rod</summary>
+    <div class="obsah">
+      <p>V činné větě je podmětem ten, kdo něco dělá: <span lang="en">Shakespeare wrote Hamlet.</span> V <b>trpném
+        rodě</b> (<span lang="en">passive voice</span>) se do popředí dostane to, <b>s čím se něco děje</b>:
+        <span lang="en">Hamlet was written by Shakespeare.</span> Používá se, když je důležitější děj než
+        původce, nebo když původce neznáme: <span lang="en">My bike was stolen.</span> Typicky ve zprávách,
+        návodech a dějepisu.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Tvar</h3><p><b><span lang="en">be</span> + 3. tvar slovesa</b> (příčestí trpné)<br>
+          přítomný: <span lang="en">am / is / are</span> + <span lang="en">built</span><br>
+          minulý: <span lang="en">was / were</span> + <span lang="en">built</span></p></article>
+        <article class="vyklad-karta"><h3>Převod krok za krokem</h3><p>1. Předmět činné věty se stane podmětem.<br>
+          2. Čas činné věty přeneseš do tvaru <span lang="en">be</span>.<br>
+          3. Přidáš 3. tvar slovesa.<br>
+          4. Původce, je-li důležitý, připojíš přes <b><span lang="en">by</span></b>.</p></article>
+        <article class="vyklad-karta"><h3>3. tvary</h3><p><span lang="en">write – written, take – taken, break – broken,
+          build – built, buy – bought, teach – taught</span>; pravidelná na -ed: <span lang="en">cleaned, painted</span>.</p></article>
+      </div>
+      <p>Tvar <span lang="en">be</span> se řídí <b>novým podmětem</b>: <span lang="en">The house is built</span>, ale
+        <span lang="en">New houses are built</span>. Původce jako <span lang="en">somebody, they, people</span>
+        se obvykle vynechá – nic nového neříká.</p>
+      <p>Typické chyby: použít základní tvar místo příčestí (<span lang="en">is build</span> ✗) nebo jiný čas, než měla
+        činná věta (<span lang="en">wrote</span> je minulost → <span lang="en">was written</span>, ne <span lang="en">is written</span>).</p>
+      <aside class="zapamatuj">Trpný rod = <span lang="en">be</span> ve stejném čase jako činná věta + 3. tvar slovesa;
+        původce přes <span lang="en">by</span>.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: převeď do trpného rodu</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Převeď do trpného rodu: <span lang="en">The teacher checks our homework.</span></p>
+      <ol class="kroky">
+        <li>Najdu předmět činné věty: <span lang="en">our homework</span> – ten bude novým podmětem.</li>
+        <li>Určím čas: <span lang="en">checks</span> je přítomný čas prostý.</li>
+        <li>Nový podmět <span lang="en">homework</span> je nepočitatelný, tedy jednotné číslo → <span lang="en">is</span>.</li>
+        <li>Přidám 3. tvar: <span lang="en">check – checked – checked</span>.</li>
+        <li>Původce je důležitý, připojím ho přes <span lang="en">by</span>: <span lang="en">by the teacher</span>.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ <span lang="en">Our homework <b>is checked</b> by the teacher.</span></p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="prevod" class="active">🔄 Převeď do trpného rodu</button>
@@ -67,8 +113,8 @@ const VETY = [
     jine: ['Our homework are checked by the teacher.', 'Our homework is check by the teacher.', 'Our homework was checked by the teacher.'] },
   { cinny: 'Millions of people watch this show.', trpny: 'This show is watched by millions of people.',
     jine: ['This show are watched by millions.', 'This show is watch by millions.', 'This show was watched by millions.'] },
-  { cinny: 'Karel IV. founded the university in 1348.', trpny: 'The university was founded in 1348.',
-    jine: ['The university is founded in 1348.', 'The university was found in 1348.', 'The university has founded in 1348.'] },
+  { cinny: 'Charles IV founded the university in 1348.', trpny: 'The university was founded by Charles IV in 1348.',
+    jine: ['The university is founded by Charles IV in 1348.', 'The university was found by Charles IV in 1348.', 'The university has founded by Charles IV in 1348.'] },
   { cinny: 'The company employs 200 people.', trpny: '200 people are employed by the company.',
     jine: ['200 people is employed by the company.', '200 people are employ by the company.', '200 people were employed by the company.'] },
 ];
@@ -90,10 +136,20 @@ function prevod() {
   p.appendChild(odezva);
 }
 
+/* Každý podmět má své sloveso a určení času, aby věta dávala smysl (null = v tom čase se nehodí). */
 const PODMETY = [
-  { t: 'The letter', mn: false }, { t: 'The letters', mn: true },
-  { t: 'This song', mn: false }, { t: 'These photos', mn: true },
-  { t: 'The bridge', mn: false }, { t: 'The rooms', mn: true },
+  { t: 'The letters', mn: true, p: 'sent', ted: 'every Monday', min: 'yesterday' },
+  { t: 'The newspaper', mn: false, p: 'delivered', ted: 'every morning', min: 'late yesterday' },
+  { t: 'This song', mn: false, p: 'sung', ted: 'at every concert', min: 'at the school concert last year' },
+  { t: 'These photos', mn: true, p: 'taken', ted: null, min: 'last summer' },
+  { t: 'The bridge', mn: false, p: 'built', ted: null, min: 'in 1890' },
+  { t: 'The fence', mn: false, p: 'painted', ted: 'every spring', min: 'last week' },
+  { t: 'The rooms', mn: true, p: 'cleaned', ted: 'every day', min: 'yesterday' },
+  { t: 'The windows', mn: true, p: 'broken', ted: null, min: 'during the storm' },
+  { t: 'The cakes', mn: true, p: 'made', ted: 'every morning', min: 'for the party yesterday' },
+  { t: 'The lost dog', mn: false, p: 'found', ted: null, min: 'last night' },
+  { t: 'English', mn: false, p: 'spoken', ted: 'in many countries', min: null },
+  { t: 'The tickets', mn: true, p: 'bought', ted: 'online', min: 'last week' },
 ];
 const PRICESTI = [
   { z: 'write', p: 'written' }, { z: 'send', p: 'sent' }, { z: 'build', p: 'built' },
@@ -104,21 +160,20 @@ const PRICESTI = [
 function tvarBe() {
   const p = $('plocha');
   const o = Uloha.nahodne(PODMETY);
-  const s = Uloha.nahodne(PRICESTI);
-  const minuly = Math.random() < 0.5;
+  const minuly = o.ted === null ? true : o.min === null ? false : Math.random() < 0.5;
   const spravny = minuly ? (o.mn ? 'were' : 'was') : (o.mn ? 'are' : 'is');
   const jine = ['is', 'are', 'was', 'were'].filter(x => x !== spravny);
 
   p.innerHTML = `<div class="zadani">Doplň správný tvar slovesa <b>be</b>
       (${minuly ? 'minulý' : 'přítomný'} čas):</div>
-    <div class="karta"><div class="veta-en">${o.t} <span class="mezera">?</span> ${s.p}
-      ${minuly ? 'last year' : 'every day'}.</div></div>`;
+    <div class="karta"><div class="veta-en">${o.t} <span class="mezera">?</span> ${o.p}
+      ${minuly ? o.min : o.ted}.</div></div>`;
   const odezva = odezvaEl();
   Uloha.vyber({
     kam: p, odezva, trida: 'velke',
     moznosti: Uloha.zamichej([spravny, ...jine]).map(t => ({ klic: t, popis: t })),
     spravnyKlic: spravny,
-    zpravaOk: `✅ ${o.t} ${spravny} ${s.p}… – podmět je ${o.mn ? 'množné' : 'jednotné'} číslo`
+    zpravaOk: `✅ ${o.t} ${spravny} ${o.p} ${minuly ? o.min : o.ted}. – podmět je ${o.mn ? 'množné' : 'jednotné'} číslo`
       + `, čas ${minuly ? 'minulý' : 'přítomný'}.`,
     zpravaChyba: 'Tvar be se řídí podmětem a časem: is/are pro přítomnost, was/were pro minulost.',
     poSpravne: skore.vyhodnot,

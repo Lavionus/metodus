@@ -6,6 +6,8 @@
   <title>Útvary a vývoj českého jazyka</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -42,6 +44,42 @@
 <body>
   <h1>🗿 Útvary a vývoj českého jazyka</h1>
   <p class="podtitul">Pro 9. ročník: spisovná i nespisovná čeština, nářečí a proměny jazyka v čase.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Útvary češtiny a jak se jazyk mění</summary>
+    <div class="obsah">
+      <p>Čeština není jen jedna. Jinak píšeš žádost do školy, jinak mluvíš s kamarády a jinak mluví babička na
+        Moravě. Těmto podobám jazyka říkáme <b>útvary</b>. Liší se tím, <b>kdo</b> jimi mluví, <b>kde</b> a <b>při
+        jaké příležitosti</b>.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>📘 Spisovná čeština</h3><p>Závazná pro veřejné a úřední projevy. Její mluvená, uvolněnější podoba je <b>hovorová čeština</b> (<i>dneska, asi</i>) – i ta je spisovná.</p></article>
+        <article class="vyklad-karta"><h3>🗣️ Obecná čeština</h3><p>Nespisovná, ale rozšířená skoro v celých Čechách: <i>mladej</i> místo <i>mladý</i>, <i>velký stromy</i>, <i>vokno</i>.</p></article>
+        <article class="vyklad-karta"><h3>🗺️ Nářečí</h3><p>Vázané na <b>jednu oblast</b>: <i>mosím, kúpit, ogar</i>. Jinde v republice se tak nemluví.</p></article>
+        <article class="vyklad-karta"><h3>👥 Slang a argot</h3><p>Mluva <b>skupiny lidí</b>: slang podle zájmu nebo profese (<i>matika, širokáč</i>), argot okraje společnosti (<i>čóra, chlupatí</i>).</p></article>
+      </div>
+      <p>Jazyk se mění i v čase. V 9. století přinesli Konstantin a Metoděj na Velkou Moravu <b>staroslověnštinu</b>,
+        souvislé české texty se objevují ve 13. a 14. století. Vzorem spisovné češtiny se stala <b>Bible kralická</b>
+        (1579–1594), po roce 1620 čeština ustoupila němčině a obrozenci ji pak znovu prosadili.</p>
+      <p>Nejrychleji se mění <b>slovní zásoba</b>. Slova zastarávají a vznikají nová. Pozor na rozdíl: u <b>archaismu</b>
+        zanikne jen slovo, věc zůstane (<i>apatykář → lékárník</i>); u <b>historismu</b> zanikne i věc (<i>biřic</i>).
+        <b>Neologismus</b> je slovo nové (<i>e-shop</i>).</p>
+      <aside class="zapamatuj">Útvar poznáš podle znaků v textu: spisovné tvary → spisovná; -ej, v-, -ý místo -é → obecná; místní slova → nářečí; slova jedné skupiny → slang či argot.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: ke kterému útvaru patří věta?</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Urči útvar: <b>Dneska sem byl u doktora, ale ten mladej doktor tam nebyl.</b></p>
+      <ol class="kroky">
+        <li>Hledám znaky nespisovnosti: <i>sem</i> místo <i>jsem</i> a <i>mladej</i> místo <i>mladý</i>.</li>
+        <li>Koncovka <b>-ej</b> místo -ý je typická pro obecnou češtinu, takže to spisovný ani hovorový útvar není.</li>
+        <li>Žádné slovo není vázané na jednu oblast, takže to není nářečí.</li>
+        <li>Nejsou tu ani výrazy jedné skupiny lidí – slang ani argot to není.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Obecná čeština (nespisovný útvar rozšířený v Čechách).</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="utvary" class="active">🗣️ Útvary jazyka</button>
@@ -116,7 +154,7 @@
 
   <p class="napoveda">
     Rozdíl mezi <b>archaismem</b> a <b>historismem</b>: u archaismu zanikne jen slovo
-    (apatykář → lékárník), u historismu zanikne <b>sama věc</b> (šenkýř, pacholek).
+    (apatykář → lékárník), u historismu zanikne <b>sama věc</b> (biřic, pacholek).
     Klávesy: <kbd>H</kbd> nápověda · <kbd>Enter</kbd> další.
   </p>
 
@@ -290,9 +328,9 @@ const VYVOJ = [
   { q: 'Co se s češtinou stalo po roce 1620?', a: 'ustoupila němčině ve veřejném životě, udržela se hlavně na venkově',
     b: ['zanikla úplně', 'stala se úředním jazykem říše', 'sloučila se s polštinou'], doba: 'temno',
     proc: 'Po Bílé hoře odešla česky mluvící vzdělaná vrstva do exilu. Čeština z úřadů a škol ustoupila, ale <b>v mluvené podobě na venkově žila dál</b> — proto se dala v obrození obnovit.' },
-  { q: 'Kdo v obrození obhájil češtinu jako jazyk vědy?', a: 'Josef Dobrovský a Josef Jungmann',
-    b: ['Karel IV.', 'Jan Hus', 'Bohuslav Balbín jako jediný'], doba: 'obrozeni',
-    proc: '<b>Dobrovský</b> češtinu popsal (mluvnice, dějiny jazyka), <b>Jungmann</b> pro ni vytvořil slovní zásobu a pětidílný slovník — teprve tím se stala jazykem vědy.' },
+  { q: 'Kdo v obrození prosadil češtinu jako jazyk, kterým lze psát i vědu?', a: 'Josef Jungmann',
+    b: ['Josef Dobrovský', 'Jan Hus', 'Karel IV.'], doba: 'obrozeni',
+    proc: '<b>Jungmann</b> obhajoval češtinu jako plnohodnotný jazyk (Rozmlouvání o jazyce českém, 1806), vytvořil pro ni odbornou slovní zásobu a pětidílný slovník. <b>Dobrovský</b> češtinu vědecky popsal (mluvnice, dějiny jazyka), ale psal německy a latinsky a o její budoucnosti pochyboval.' },
   { q: 'Co zavedl pravopis navržený v době Jana Husa?', a: 'diakritická znaménka (háčky a čárky) místo spřežek',
     b: ['latinku místo hlaholice', 'psaní velkých písmen', 'psaní zprava doleva'], doba: 'stara',
     proc: 'Dřív se psalo <b>spřežkami</b> (cz, rz, ss). Diakritický pravopis nahradil dvojice písmen jedním znakem s háčkem nebo čárkou — píšeme tak dodnes.' },
@@ -325,11 +363,11 @@ function vyvoj() {
 }
 
 const SLOVA = [
-  { s: 'šenkýř', typ: 'historismus', vyznam: 'hostinský – slovo zaniklo spolu s věcí' },
+  { s: 'biřic', typ: 'historismus', vyznam: 'soudní sluha, který vyhlašoval nařízení – úřad zanikl i se slovem' },
   { s: 'rytíř', typ: 'historismus', vyznam: 'označení, které patří k zaniklé době' },
   { s: 'pacholek', typ: 'historismus', vyznam: 'čeledín na statku, dnes už taková práce neexistuje' },
   { s: 'anžto', typ: 'archaismus', vyznam: 'zastaralé slovo pro „protože“, dnes říkáme jinak' },
-  { s: 'zajisté', typ: 'archaismus', vyznam: 'zastaralý výraz pro „určitě“' },
+  { s: 'lučba', typ: 'archaismus', vyznam: 'staré slovo pro chemii – obor existuje dodnes, zaniklo jen slovo' },
   { s: 'apatykář', typ: 'archaismus', vyznam: 'starý název pro lékárníka – ta práce existuje dodnes, zaniklo jen slovo' },
   { s: 'selfie', typ: 'neologismus', vyznam: 'nové slovo přejaté z angličtiny' },
   { s: 'e-shop', typ: 'neologismus', vyznam: 'nové slovo pro internetový obchod' },

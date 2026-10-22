@@ -6,6 +6,8 @@
   <title>Shodnost trojúhelníků</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -25,7 +27,43 @@
 </head>
 <body>
   <h1>📐 Shodnost trojúhelníků</h1>
-  <p class="podtitul">Pro 7. ročník: věty sss, sus, usu a jejich užití při konstrukci.</p>
+  <p class="podtitul">Pro 7. ročník: věty sss, sus, usu, Ssu a jejich užití při konstrukci.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Kdy jsou trojúhelníky shodné</summary>
+    <div class="obsah">
+      <p>Dva trojúhelníky jsou <b>shodné</b>, když je můžeš položit přesně na sebe (případně po překlopení).
+        Pak mají shodné všechny tři strany i všechny tři úhly. Zápis △ABC ≅ △KLM navíc říká, které vrcholy si
+        odpovídají: A ↔ K, B ↔ L, C ↔ M. Proto |AB| = |KL|, |BC| = |LM|, |AC| = |KM| a α = κ, β = λ, γ = μ.</p>
+      <p>Abychom shodnost dokázali, nemusíme porovnávat všech šest prvků. Stačí tři správně vybrané – ty, ze kterých
+        lze trojúhelník <b>sestrojit jen jedním způsobem</b>. Tak vznikly věty o shodnosti:</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>sss a sus</h3><p><b>sss</b> – všechny tři strany. <b>sus</b> – dvě strany
+          a úhel, který <b>svírají</b> (leží mezi nimi).</p></article>
+        <article class="vyklad-karta"><h3>usu</h3><p>Jedna strana a <b>oba úhly k ní přilehlé</b> (leží na jejích
+          koncích).</p></article>
+        <article class="vyklad-karta"><h3>Ssu</h3><p>Dvě strany a úhel <b>proti větší</b> z nich. Když úhel leží
+          proti kratší straně, mohou vyjít dva různé trojúhelníky.</p></article>
+      </div>
+      <p>Typická chyba: tři shodné úhly nestačí. Trojúhelníky pak mají stejný tvar, ale mohou být různě velké –
+        jsou jen podobné.</p>
+      <aside class="zapamatuj">Shodnost dokážeš větou sss, sus, usu nebo Ssu. Pořadí písmen v zápisu △ABC ≅ △KLM určuje odpovídající prvky.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: odpovídající úhel</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Trojúhelník ABC je shodný s trojúhelníkem KLM. Platí α = 50°, β = 60°. Jak velký je úhel μ?</p>
+      <ol class="kroky">
+        <li>Ze zápisu △ABC ≅ △KLM vyčtu dvojice vrcholů: A ↔ K, B ↔ L, C ↔ M.</li>
+        <li>Úhel μ je u vrcholu M, takže odpovídá úhlu γ u vrcholu C.</li>
+        <li>Úhel γ dopočítám ze součtu úhlů v trojúhelníku: γ = 180° − 50° − 60° = 70°.</li>
+        <li>Shodné trojúhelníky mají odpovídající úhly stejné, proto μ = γ.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ μ = 70°</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="veta" class="active">📏 Podle které věty</button>
@@ -43,7 +81,7 @@
 
   <p class="napoveda">
     <b>sss</b> – shodují se ve všech třech stranách. <b>sus</b> – dvě strany a úhel <i>jimi sevřený</i>.
-    <b>usu</b> – strana a oba úhly k ní přilehlé. Samotné tři úhly (uuu) shodnost nezaručují – vznikne
+    <b>usu</b> – strana a oba úhly k ní přilehlé. <b>Ssu</b> – dvě strany a úhel <i>proti větší</i> z nich. Samotné tři úhly (uuu) shodnost nezaručují – vznikne
     jen podobný trojúhelník.
   </p>
 
@@ -67,7 +105,9 @@ function svgTrojuhelnik(dane) {
       return [vrchol[0] + dx / d * 26, vrchol[1] + dy / d * 26];
     };
     const p1 = smer(s1), p2 = smer(s2);
-    return `<path class="oblouk" d="M${p1[0].toFixed(1)} ${p1[1].toFixed(1)} A26 26 0 0 1 ${p2[0].toFixed(1)} ${p2[1].toFixed(1)}"/>`;
+    // směr oblouku podle orientace ramen, ať se vždy vykreslí kratší oblouk se středem ve vrcholu
+    const vek = (s1[0] - vrchol[0]) * (s2[1] - vrchol[1]) - (s1[1] - vrchol[1]) * (s2[0] - vrchol[0]);
+    return `<path class="oblouk" d="M${p1[0].toFixed(1)} ${p1[1].toFixed(1)} A26 26 0 0 ${vek > 0 ? 1 : 0} ${p2[0].toFixed(1)} ${p2[1].toFixed(1)}"/>`;
   };
   return `<svg class="troj" viewBox="0 0 290 180">
     ${cara(A, B, 'c')}${cara(B, C, 'a')}${cara(C, A, 'b')}
@@ -89,11 +129,14 @@ const ZADANI = [
   { dane: ['c', 'A', 'B'], veta: 'usu', popis: '|AB| = |KL| a oba přilehlé úhly α = κ, β = λ' },
   { dane: ['a', 'B', 'C'], veta: 'usu', popis: '|BC| = |LM| a oba přilehlé úhly β = λ, γ = μ' },
   { dane: ['b', 'A', 'C'], veta: 'usu', popis: '|AC| = |KM| a oba přilehlé úhly α = κ, γ = μ' },
+  { dane: ['b', 'c', 'C'], veta: 'Ssu', popis: '|AB| = |KL|, |AC| = |KM| (|AB| > |AC|), úhel γ = úhel μ (proti větší straně)' },
+  { dane: ['a', 'b', 'B'], veta: 'Ssu', popis: '|AC| = |KM|, |BC| = |LM| (|AC| > |BC|), úhel β = úhel λ (proti větší straně)' },
 ];
 const VETY = {
   sss: 'sss – tři strany',
   sus: 'sus – dvě strany a úhel jimi sevřený',
   usu: 'usu – strana a oba přilehlé úhly',
+  Ssu: 'Ssu – dvě strany a úhel proti větší z nich',
 };
 
 /* ---- Podle které věty ------------------------------------------------------------------ */
@@ -127,6 +170,7 @@ const SADY = [
   { popis: 'jen dvě strany', staci: false, proc: 'chybí třetí údaj, úhel mezi nimi může být jakýkoli' },
   { popis: 'jen jedna strana a jeden úhel', staci: false, proc: 'údajů je málo, řešení je nekonečně mnoho' },
   { popis: 'dva úhly a strana mezi nimi', staci: true, proc: 'věta usu' },
+  { popis: 'dvě strany a úhel proti větší z nich', staci: true, proc: 'věta Ssu – trojúhelník je určen jednoznačně' },
 ];
 function staci() {
   const p = $('plocha');
@@ -142,7 +186,7 @@ function staci() {
     ],
     spravnyKlic: s.staci ? 'ano' : 'ne',
     zpravaOk: `✅ ${s.proc}`,
-    zpravaChyba: 'Vzpomeň si na věty sss, sus, usu – jiné kombinace jednoznačnost nezaručují.',
+    zpravaChyba: 'Vzpomeň si na věty sss, sus, usu a Ssu – jiné kombinace jednoznačnost nezaručují.',
     poSpravne: skore.vyhodnot,
     dalsi: novaUloha,
   });
@@ -155,7 +199,11 @@ function odpovidajici() {
   const strany = { AB: 'KL', BC: 'LM', AC: 'KM' };
   const uhly = { α: 'κ', β: 'λ', γ: 'μ' };
   const ptameSeNaStranu = Math.random() < 0.5;
-  const delky = { AB: Uloha.nahodneCislo(3, 9), BC: Uloha.nahodneCislo(3, 9), AC: Uloha.nahodneCislo(3, 9) };
+  // délky musí splňovat trojúhelníkovou nerovnost, jinak by takový trojúhelník neexistoval
+  let delky;
+  do {
+    delky = { AB: Uloha.nahodneCislo(3, 9), BC: Uloha.nahodneCislo(3, 9), AC: Uloha.nahodneCislo(3, 9) };
+  } while (Math.max(delky.AB, delky.BC, delky.AC) * 2 >= delky.AB + delky.BC + delky.AC);
   const alfa = Uloha.nahodneCislo(30, 80), beta = Uloha.nahodneCislo(30, 80);
   const stupne = { α: alfa, β: beta, γ: 180 - alfa - beta };
 
@@ -165,13 +213,17 @@ function odpovidajici() {
     zadani = `Trojúhelník ABC je shodný s trojúhelníkem KLM. Platí |AB| = ${delky.AB} cm,
       |BC| = ${delky.BC} cm, |AC| = ${delky.AC} cm. Jak dlouhá je strana <b>${strany[s]}</b>?`;
     spravny = delky[s] + ' cm';
-    moznosti = [...new Set([delky.AB, delky.BC, delky.AC, delky[s] + 1])].map(d => d + ' cm');
+    const m = new Set([delky.AB, delky.BC, delky.AC, delky[s] + 1]);
+    for (let d = 1; m.size < 4; d++) m.add(delky[s] + 1 + d);
+    moznosti = [...m].map(d => d + ' cm');
   } else {
     const u = Uloha.nahodne(Object.keys(uhly));
     zadani = `Trojúhelník ABC je shodný s trojúhelníkem KLM. Platí α = ${stupne.α}°, β = ${stupne.β}°.
       Jak velký je úhel <b>${uhly[u]}</b>?`;
     spravny = stupne[u] + '°';
-    moznosti = [...new Set([stupne.α, stupne.β, stupne.γ, stupne[u] + 10])].map(d => d + '°');
+    const m = new Set([stupne.α, stupne.β, stupne.γ, stupne[u] + 10]);
+    for (let d = 1; m.size < 4; d++) m.add(stupne[u] + 10 + 5 * d);
+    moznosti = [...m].map(d => d + '°');
   }
 
   p.innerHTML = `<div class="zadani kroky">${zadani}</div>`;

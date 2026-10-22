@@ -8,7 +8,8 @@
 
    Použití:
      const mapa = Mapy.svg('afrika', [{ klic:'egypt', lon:30, lat:26 }, …]);
-     plocha.innerHTML = mapa;   // značky mají class „znacka" a data-klic
+     plocha.innerHTML = mapa;   // značky mají class „znacka" a data-klic,
+                                // jdou zaměřit Tabem a „klepnout" Enterem/mezerníkem
    ============================================================ */
 const Mapy = (function () {
   const SIRKA = 460, VYSKA = 400, OKRAJ = 14;
@@ -112,21 +113,57 @@ const Mapy = (function () {
     return 'M' + body.map(([lon, lat]) => `${pr.x(lon).toFixed(1)} ${pr.y(lat).toFixed(1)}`).join(' L') + ' Z';
   }
 
+  /* Enter a mezerník na zaměřené značce vyvolají klepnutí (stránky poslouchají
+     „click“ na jednotlivých značkách). Posluchač i styl fokusu se přidají jednou. */
+  let klavesnicePripravena = false;
+  function pripravKlavesnici() {
+    if (klavesnicePripravena || typeof document === 'undefined') return;
+    klavesnicePripravena = true;
+    const naKlavesu = e => {
+      if (e.key !== 'Enter' && e.key !== ' ' && e.key !== 'Spacebar') return;
+      const g = e.target instanceof Element && e.target.closest('.mapa .znacka');
+      if (!g) return;
+      e.preventDefault();
+      e.stopPropagation();
+      g.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
+    };
+    naKlavesu.bezObalu = true;   // uloha.js obaluje posluchače kláves – tenhle obalit nechceme
+    document.addEventListener('keydown', naKlavesu, true);
+    const styl = document.createElement('style');
+    styl.textContent = '.mapa .znacka{outline:none}' +
+      '.mapa .znacka:focus-visible .terc{stroke:var(--text,#000);stroke-width:3.5;fill:var(--accent-soft,rgba(0,0,0,.15))}';
+    document.head.appendChild(styl);
+  }
+
   function svg(kontinent, body = [], volby = {}) {
     const k = KONTINENTY[kontinent];
     if (!k) return '';
     const pr = projekce(k.vyrez);
     const obrysy = (k.obrysy || [k.obrys, k.obrys2, k.obrys3]).filter(Boolean)
       .map(o => `<path class="pevnina" d="${cesta(o, pr)}"/>`).join('');
-    const znacky = body.map(b => {
-      const x = pr.x(b.lon).toFixed(1), y = pr.y(b.lat).toFixed(1);
+    const xy = body.map(b => [pr.x(b.lon), pr.y(b.lat)]);
+    /* Zásahová plocha: větší než viditelný terč (na mobilu je terč r = 11
+       jen ~16 px), ale nejvýš do půli vzdálenosti k nejbližší značce, aby se
+       sousední značky nepřekrývaly a klepnutí vždy trefilo tu viditelnou. */
+    const zasah = xy.map(([x, y], i) => {
+      let min = Infinity;
+      xy.forEach(([x2, y2], j) => { if (j !== i) min = Math.min(min, Math.hypot(x - x2, y - y2)); });
+      return Math.max(11, Math.min(17, min / 2));
+    });
+    const znacky = body.map((b, i) => {
+      const x = xy[i][0].toFixed(1), y = xy[i][1].toFixed(1);
       const popisek = volby.ukazPopisky && b.popis
         ? `<text class="popisek" x="${x}" y="${(+y - 13).toFixed(1)}">${b.popis}</text>` : '';
-      return `<g class="znacka" data-klic="${b.klic}">
+      /* Ovládání klávesnicí: Tab na značku, Enter/mezerník = klepnutí.
+         Popis pro čtečku je neutrální (místo s číslem), jinak by prozradil odpověď. */
+      const nazev = volby.ukazPopisky && b.popis ? b.popis : `Místo ${i + 1} na mapě`;
+      return `<g class="znacka" data-klic="${b.klic}" tabindex="0" role="button" aria-label="${nazev}">
+        <circle class="zasah" cx="${x}" cy="${y}" r="${zasah[i].toFixed(1)}" fill="transparent" stroke="none"/>
         <circle class="terc" cx="${x}" cy="${y}" r="11"/>
         <circle class="stred" cx="${x}" cy="${y}" r="4"/>
         ${popisek}</g>`;
     }).join('');
+    pripravKlavesnici();
     return `<svg class="mapa" viewBox="0 0 ${SIRKA} ${VYSKA}">
       <rect class="ocean" x="0" y="0" width="${SIRKA}" height="${VYSKA}"/>
       ${obrysy}${volby.pred || ''}${znacky}</svg>`;

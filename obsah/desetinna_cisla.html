@@ -6,6 +6,8 @@
 <title>0,5 Desetinná čísla</title>
 <link rel="stylesheet" href="../common.css">
 <link rel="stylesheet" href="../vyuka.css">
+<link rel="stylesheet" href="../vyklad.css">
+<script src="../vyklad.js" defer></script>
 <script src="../theme.js"></script>
 <script src="../podpis.js" defer></script>
 <script src="../kostra.js" defer></script>
@@ -15,6 +17,43 @@
 <body>
   <h1>0,5 Desetinná čísla</h1>
   <p class="podtitul">Sčítání a odčítání, porovnávání a zaokrouhlování. Po chybě máš druhý pokus, na konci uvidíš přehled chyb.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Desetinná čísla a řády</summary>
+    <div class="obsah">
+      <p>Desetinná čárka odděluje <b>celé</b> od <b>částí celku</b>. První místo za čárkou jsou <b>desetiny</b>,
+        druhé <b>setiny</b>, třetí tisíciny. V čísle 2,35 jsou 2 celé, 3 desetiny a 5 setin.
+        Stejně je to u délek: 2,35 m jsou 2 metry a 35 centimetrů.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Nuly na konci</h3><p>Nula na konci za čárkou nic nemění: <b>0,5 = 0,50</b>.
+          Pět desetin je totéž co padesát setin – jako 50 haléřů je půl koruny.</p></article>
+        <article class="vyklad-karta"><h3>Sčítání a odčítání</h3><p>Piš čísla <b>pod sebe podle desetinné čárky</b>, aby desetiny byly pod desetinami.
+          Chybějící místa doplň nulami a počítej jako s celými čísly.</p></article>
+        <article class="vyklad-karta"><h3>Porovnávání</h3><p>Nejdřív porovnej celé části. Když jsou stejné,
+          porovnávej <b>řád po řádu zleva</b>: desetiny, pak setiny.</p></article>
+        <article class="vyklad-karta"><h3>Zaokrouhlování</h3><p>Podívej se na <b>první číslici, kterou zahodíš</b>.
+          0–4 → dolů, 5–9 → nahoru. 3,46 na desetiny: zahazuji 6, tedy 3,5.</p></article>
+      </div>
+      <p>Nejčastější chyba: „0,12 &gt; 0,5, protože 12 &gt; 5“. Jenže 0,5 = 0,50 a 50 setin je víc než 12 setin,
+        takže <b>0,12 &lt; 0,5</b>. Dokud obě čísla nemají stejně míst za čárkou, nesrovnávej je jako celá čísla.</p>
+      <aside class="zapamatuj">Čárka pod čárku. Chybějící místa doplň nulami (0,5 = 0,50). Zaokrouhlení řídí první zahozená číslice.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: 12,5 + 3,75</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Vypočítej 12,5 + 3,75.</p>
+      <ol class="kroky">
+        <li>Napíšu čísla pod sebe tak, aby čárka byla <b>pod čárkou</b>.</li>
+        <li>12,5 má jen desetiny, 3,75 i setiny. Doplním nulu: <b>12,50</b> + 3,75.</li>
+        <li>Sčítám zprava jako celá čísla: setiny 0 + 5 = 5; desetiny 5 + 7 = 12, píšu 2 a 1 přenesu přes čárku k jednotkám.</li>
+        <li>Jednotky 2 + 3 + 1 = 6, desítky 1. Čárku napíšu do výsledku pod ostatní čárky: <b>16,25</b>.</li>
+        <li>Odhad: 12,5 + 4 je asi 16,5. Výsledek 16,25 je blízko.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ 12,5 + 3,75 = 16,25</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="add" class="active">➕ Sčítání a odčítání</button>
@@ -68,7 +107,9 @@ function generuj(r) {
   }
   const mist = Math.random() < 0.5 ? 0 : 1;
   const cislo = zaokrouhli(nahodneDes(200, 2));
-  const odp = mist === 0 ? Math.round(cislo) : Math.round(cislo * 10) / 10;
+  // počítáme v setinách jako s celým číslem – 1,45 · 10 je v počítači 14,4999…, a Math.round by dal 1,4
+  const setin = Math.round(cislo * 100);
+  const odp = mist === 0 ? Math.round(setin / 100) : Math.round(setin / 10) / 10;
   return {
     zadani: `Zaokrouhli ${String(cislo).replace('.', ',')} na ${mist === 0 ? 'celé číslo' : 'desetiny'}:`,
     odpoved: odp,

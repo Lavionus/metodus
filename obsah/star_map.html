@@ -132,7 +132,7 @@ function kresli(){
   // světové strany
   ctx.fillStyle='#888';ctx.font='bold 15px sans-serif';ctx.textAlign='center';
   ctx.fillText('S',cx,18);ctx.fillText('J',cx,S-6);
-  ctx.fillText('V',S-10,cy+5);ctx.fillText('Z',12,cy+5);
+  ctx.fillText('Z',S-10,cy+5);ctx.fillText('V',12,cy+5); // pohled vzhůru: V vlevo, Z vpravo
   const d=$('cas').valueAsDate||new Date($('cas').value)||new Date();
   const cas=$('cas').value?new Date($('cas').value):new Date();
   const lat=+$('lat').value||50,lon=+$('lon').value||14.4;
@@ -143,8 +143,8 @@ function kresli(){
     if(p.alt<=0)return null;
     const r=R*(90-p.alt)/90;
     const a=(p.az)*Math.PI/180;
-    // azimut 0=S nahoře, roste přes V (vpravo)
-    return{x:cx+r*Math.sin(a),y:cy-r*Math.cos(a),mag,n};
+    // azimut 0=S nahoře; při pohledu vzhůru na oblohu roste přes V doleva
+    return{x:cx-r*Math.sin(a),y:cy-r*Math.cos(a),mag,n};
   });
   // Volitelné mytologické obrysy jsou jen poznávací pomůcka; přesná poloha zůstává ve hvězdách a spojnicích.
   if($('kresby').checked){

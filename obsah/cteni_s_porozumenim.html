@@ -6,6 +6,8 @@
 <title>📖 Čtení s porozuměním</title>
 <link rel="stylesheet" href="../common.css">
 <link rel="stylesheet" href="../vyuka.css">
+<link rel="stylesheet" href="../vyklad.css">
+<script src="../vyklad.js" defer></script>
 <script src="../theme.js"></script>
 <script src="../podpis.js" defer></script>
 <script src="../kostra.js" defer></script>
@@ -42,6 +44,39 @@
 <body>
 <div class="container">
   <h1>📖 Čtení s porozuměním</h1>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Jak číst, abys rozuměl</summary>
+    <div class="obsah">
+      <p>Číst s porozuměním znamená nejen text přečíst, ale umět z něj <b>vytáhnout informaci</b> a <b>domyslet, co z něj plyne</b>.
+        Odpověď na otázku je vždycky v textu – buď přímo napsaná, nebo se z něj dá vyvodit. Proto se nespoléhej na paměť ani na to,
+        co víš odjinud, a vracej se do textu.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Odpověď stojí v textu</h3><p>Najdi v textu <b>slovo z otázky</b> a přečti si větu kolem něj. „Kde žila Micka?“ → věta „Kočka Micka žila na statku…“.</p></article>
+        <article class="vyklad-karta"><h3>Úsudek</h3><p>Odpověď napsaná <b>není</b>. Najdi větu, která k ní vede, a domysli, co z ní plyne. Otázky začínají třeba „Proč…“ nebo „Co z toho vyplývá…“.</p></article>
+        <article class="vyklad-karta"><h3>Význam slova</h3><p>Slovo si <b>dosaď zpátky do věty</b>, kde v textu stojí, a zkoušej místo něj nabízené významy. Sedí jen jeden.</p></article>
+      </div>
+      <p>Dobrý postup: nejdřív si přečti celý text, pak otázku, a teprve potom hledej. U každé možnosti si řekni, jestli ji text <b>podporuje</b>,
+        nebo jí <b>odporuje</b>. Typická chyba je vybrat odpověď, která zní rozumně, ale v textu pro ni nic není.</p>
+      <aside class="zapamatuj">Odpověď hledej v textu a najdi větu, která ji dokládá. Když tam přímo není, domysli ji z toho, co tam je.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: otázka na úsudek</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Text: „Přes den spí ježek ve staré hromadě listí… Na podzim se ježek pořádně nacpe a pak celou zimu prospí.
+        Kuba mu proto nechává hromadu listí na zahradě až do jara.“ Otázka: Proč Kuba nechává na zahradě hromadu listí?</p>
+      <ol class="kroky">
+        <li>Určím druh otázky: začíná „Proč“, takže jde nejspíš o <b>úsudek</b>.</li>
+        <li>Najdu v textu slova z otázky: „hromadu listí“ je v poslední větě. Ta začíná slovem <b>proto</b> – důvod je ve větách před ní.</li>
+        <li>Přečtu je: ježek v listí spí a celou zimu prospí. Z toho plyne, že listí potřebuje k přezimování.</li>
+        <li>Projdu možnosti: „je líný ji uklidit“ ani „aby listí shnilo“ text nepodporuje. Sedí „aby měl ježek kde přezimovat“.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Aby měl ježek kde přezimovat – dokládají to věty o tom, že ježek v listí spí a zimu prospí.</p>
+    </div>
+  </details>
+
   <div class="card" id="setupCard">
     <div class="setup">
       <div><label>Náročnost</label><select id="level">
@@ -132,9 +167,9 @@ qs:[
 {q:"Kdo Adamovi půjčil gumu?",o:["Paní učitelka","Maminka","Matěj","Nikdo"],a:2},
 {q:"Co Adamovi pomohlo, aby se přestal bát?",o:["Nové pastelky","Že si našel kamaráda","Že byl konec vyučování","Že uměl číst"],a:1}
 ]},
-{img:['cteni-hasici','Dva hasiči stojí před hasičským autem.'],t:`Když někde hoří, volá se číslo 150. Hasiči vyjíždějí ve velkém červeném autě, ve kterém vezou vodu, hadice a žebřík. Kromě požárů pomáhají i při nehodách a povodních. Někdy sundávají ze stromu kočku nebo vyprošťují lidi z výtahu. Aby všechno zvládli, musí být silní a hodně cvičit.`,
+{img:['cteni-hasici','Dva hasiči stojí před hasičským autem.'],t:`Když někde hoří, volá se číslo 150, nebo tísňová linka 112, která funguje v celé Evropě. Hasiči vyjíždějí ve velkém červeném autě, ve kterém vezou vodu, hadice a žebřík. Kromě požárů pomáhají i při nehodách a povodních. Někdy sundávají ze stromu kočku nebo vyprošťují lidi z výtahu. Aby všechno zvládli, musí být silní a hodně cvičit.`,
 qs:[
-{q:"Jaké číslo se volá k požáru?",o:["155","158","150","112 jen ve škole"],a:2},
+{q:"Jaké telefonní číslo mají hasiči?",o:["155","158","150","156"],a:2},
 {q:"Co hasiči vezou v autě?",o:["Vodu, hadice a žebřík","Jídlo","Písek","Nářadí na opravu silnic"],a:0},
 {q:"Z textu vyplývá, že hasiči…",o:["hasí jenom požáry","pomáhají i v jiných nesnázích","pracují jen v létě","jezdí pouze do lesa"],a:1}
 ]}

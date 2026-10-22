@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Rytmus a takt</title>
+  <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
+  <script src="../theme.js"></script>
+  <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
+  <script src="../rec.js"></script>
+  <script src="../uloha.js"></script>
+  <style>
+    .noty-svg { display: block; width: 100%; height: auto; margin: 0 auto; color: var(--text); }
+    .noty-svg .linka { stroke: var(--text-muted); stroke-width: 1.2; }
+    .noty-svg .cara { stroke: var(--text); stroke-width: 1.6; }
+    .noty-svg .cara-tlusta { stroke: var(--text); stroke-width: 4.5; }
+    .noty-svg .misto { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 1.6; stroke-dasharray: 5 4; }
+    .noty-svg .misto-text { fill: var(--accent); font-size: 22px; font-weight: 700; }
+    .noty-svg .znacka { stroke: var(--accent); stroke-width: 2; stroke-dasharray: 4 3; }
+    .noty-svg .znacka-kruh { fill: var(--accent); }
+    .noty-svg .znacka-text { fill: var(--na-akcentu, #fff); font-size: 12px; font-weight: 700; }
+    .noty-svg .taktovy-oznak { fill: currentColor; font-size: 21px; font-weight: 800; font-family: Georgia, 'Times New Roman', serif; }
+    .noty-svg .popisek { fill: var(--text-muted); font-size: 10px; }
+    .noty-svg g.hraje { color: var(--accent); }
+    .moznosti.symboly button { min-width: 84px; padding: 8px 10px; }
+    .moznosti.symboly svg { width: 56px; height: auto; display: block; }
+    .skryty-text { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+    .karta.noty { width: min(100%, 640px); padding: 14px 12px; }
+    .prehrat { font: inherit; font-size: 0.95rem; background: var(--bg-control); color: var(--text); border: 1px solid var(--border-strong); border-radius: 8px; padding: 8px 16px; cursor: pointer; }
+    .prehrat:hover { border-color: var(--accent); }
+    .prehrat:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+    .vyklad-obrazek { max-width: 520px; margin: 8px auto 12px; }
+    .zadani { text-align: center; }
+  </style>
+</head>
+<body>
+  <h1>🥁 Rytmus, délky not a takt</h1>
+  <p class="podtitul">Pro 3.–6. ročník: celá, půlová, čtvrťová a osminová nota, pomlky, tečka za notou, takt 2/4, 3/4 a 4/4 a taktová čára.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Jak dlouho nota zní</summary>
+    <div class="obsah">
+      <p>Hudba plyne v pravidelných <b>dobách</b> – jako když si potichu počítáš „raz, dva, tři, čtyři“ nebo ťukáš nohou.
+        Tvar noty říká, <b>kolik dob tón zní</b>. Ve škole počítáme, že jednu dobu trvá <b>čtvrťová nota</b>.</p>
+      <div class="vyklad-obrazek" id="vykladNoty"></div>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Noty</h3><p><b>Celá</b> (prázdná hlavička bez nožičky) = 4 doby,
+          <b>půlová</b> (prázdná s nožičkou) = 2 doby, <b>čtvrťová</b> (plná s nožičkou) = 1 doba,
+          <b>osminová</b> (s praporkem) = půl doby. Dvě osminové se často spojují trámečkem.</p></article>
+        <article class="vyklad-karta"><h3>Pomlky</h3><p>Pomlka je <b>ticho</b> stejně dlouhé jako nota stejného jména.
+          Celá pomlka visí pod 4. linkou, půlová leží na 3. lince, čtvrťová je klikatá čárka, osminová šikmá čárka s háčkem.</p></article>
+        <article class="vyklad-karta"><h3>Tečka</h3><p>Tečka za notou ji <b>prodlouží o polovinu</b> její délky:
+          půlová s tečkou = 2 + 1 = 3 doby, čtvrťová s tečkou = 1 + ½ = 1½ doby.</p></article>
+        <article class="vyklad-karta"><h3>Takt</h3><p>Doby se seskupují do <b>taktů</b>, které oddělují <b>taktové čáry</b>.
+          Na začátku skladby je <b>označení taktu</b>: horní číslo říká počet dob v taktu, dolní 4 znamená, že dobu
+          trvá čtvrťová nota. Takt 2/4 má 2 doby, 3/4 má 3 doby, 4/4 má 4 doby. Na konci skladby je dvojitá (závěrečná) čára.</p></article>
+      </div>
+      <p>V každém taktu musí délky not a pomlek <b>dát dohromady přesně tolik dob</b>, kolik určuje označení taktu.
+        Celou pomlkou se někdy zapisuje celý takt ticha v jakémkoli taktu – tady ji počítáme jako 4 doby v taktu 4/4.</p>
+      <aside class="zapamatuj">Celá 4 – půlová 2 – čtvrťová 1 – osminová ½ doby. Tečka přidá polovinu. Součet v taktu = horní číslo označení taktu.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: doplň takt 3/4</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">V taktu 3/4 je čtvrťová nota a dvě osminové noty. Kolik dob chybí a jakou jednou notou takt doplníš?</p>
+      <div class="vyklad-obrazek" id="ukazkaNoty"></div>
+      <ol class="kroky">
+        <li>Přečtu označení taktu: horní číslo je <b>3</b>, takt má tedy <b>3 doby</b>.</li>
+        <li>Čtvrťová nota trvá <b>1 dobu</b>.</li>
+        <li>Dvě osminové noty trvají ½ + ½ = <b>1 dobu</b>.</li>
+        <li>V taktu už jsou 1 + 1 = <b>2 doby</b>, chybí tedy 3 − 2 = <b>1 doba</b>.</li>
+        <li>Jednu dobu trvá <b>čtvrťová nota</b> (kdyby měl být takt na konci tichý, napíšu čtvrťovou pomlku).</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Chybí 1 doba – takt doplním čtvrťovou notou.</p>
+    </div>
+  </details>
+
+  <div class="rezimy" id="rezimy">
+    <button data-rezim="delka" class="active">⏱️ Jak dlouhá je nota?</button>
+    <button data-rezim="takt">🔢 Kolik dob má takt?</button>
+    <button data-rezim="chybi">🧩 Doplň takt: kolik chybí?</button>
+    <button data-rezim="dopln">🎵 Čím takt doplníš?</button>
+    <button data-rezim="cara">📏 Kde je taktová čára?</button>
+  </div>
+
+  <div class="plocha" id="plocha"></div>
+
+  <div class="ovladani">
+    <button class="hlavni" id="btnDalsi">Přeskočit →</button>
+    <span class="skore" id="skore"></span>
+  </div>
+
+  <details class="napoveda" data-faze="tahak">
+    <summary>📌 Tahák</summary>
+    <p><b>Celá nota</b> = 4 doby · <b>půlová</b> = 2 doby · <b>čtvrťová</b> = 1 doba · <b>osminová</b> = ½ doby.
+      Pomlka stejného jména trvá stejně dlouho, jen je to ticho.
+      <b>Tečka</b> přidá polovinu délky: půlová s tečkou 3 doby, čtvrťová s tečkou 1½ doby.
+      <b>Takt 2/4, 3/4, 4/4</b>: horní číslo = počet dob v taktu, dolní 4 = dobu trvá čtvrťová nota.
+      Takty odděluje <b>taktová čára</b>, součet délek v každém taktu se musí rovnat hornímu číslu.</p>
+  </details>
+
+<script>
+const $ = id => document.getElementById(id);
+const skore = Uloha.skore('metodus_hv_rytmus', $('skore'));
+let rezim = 'delka';
+
+/* ---- délky ---------------------------------------------------------------------
+   d = počet dob, když dobu trvá čtvrťová nota (takty x/4). */
+const ZAKLAD = {
+  cela:     { d: 4,   nota: 'celá nota',     pomlka: 'celá pomlka',     vzhledN: 'prázdná hlavička bez nožičky',          vzhledP: 'obdélníček visí pod 4. linkou' },
+  pulova:   { d: 2,   nota: 'půlová nota',   pomlka: 'půlová pomlka',   vzhledN: 'prázdná hlavička s nožičkou',           vzhledP: 'obdélníček leží na 3. lince' },
+  ctvrtova: { d: 1,   nota: 'čtvrťová nota', pomlka: 'čtvrťová pomlka', vzhledN: 'plná hlavička s nožičkou',              vzhledP: 'klikatá čárka' },
+  osminova: { d: 0.5, nota: 'osminová nota', pomlka: 'osminová pomlka', vzhledN: 'plná hlavička s nožičkou a praporkem',  vzhledP: 'šikmá čárka s háčkem' },
+};
+/* jediný znak (nota/pomlka) pro každou délku, kterou jde zapsat jedním znakem */
+const ZNAK_DELKY = { 4: ['cela', false], 2: ['pulova', false], 1: ['ctvrtova', false], 0.5: ['osminova', false], 3: ['pulova', true], 1.5: ['ctvrtova', true] };
+const DELKY_ZNAKU = [0.5, 1, 1.5, 2, 3, 4];
+
+function znak(typ, tecka = false, pomlka = false) {
+  return { typ, tecka, pomlka, d: ZAKLAD[typ].d * (tecka ? 1.5 : 1) };
+}
+function znakDelky(d, pomlka = false) { const [typ, tecka] = ZNAK_DELKY[d]; return znak(typ, tecka, pomlka); }
+function nazev(z) {
+  const zaklad = ZAKLAD[z.typ];
+  return (z.pomlka ? zaklad.pomlka : zaklad.nota) + (z.tecka ? ' s tečkou' : '');
+}
+function vzhled(z) {
+  const zaklad = ZAKLAD[z.typ];
+  return (z.pomlka ? zaklad.vzhledP : zaklad.vzhledN) + (z.tecka ? ' a za ní tečka' : '');
+}
+const velke = s => s.charAt(0).toUpperCase() + s.slice(1);
+
+/* „1 doba“, „2 doby“, „půl doby“, „1 a půl doby“; akuzativ = „trvá 1 dobu“ */
+function doby(d, akuzativ = false) {
+  const cele = Math.floor(d), pul = d - cele >= 0.5;
+  if (pul) return cele === 0 ? 'půl doby' : `${cele} a půl doby`;
+  if (cele === 1) return akuzativ ? '1 dobu' : '1 doba';
+  return Uloha.tvar(cele, 'doba', 'doby', 'dob');
+}
+/* číslo pro součty: 1½, ½, 2 */
+function cisloDob(d) {
+  const cele = Math.floor(d), pul = d - cele >= 0.5;
+  return pul ? (cele ? cele + '½' : '½') : String(cele);
+}
+
+/* ---- kreslení osnovy -------------------------------------------------------------
+   Všechny noty leží v 2. mezeře zdola (a1), rytmus se čte jen podle tvaru. */
+const S = 10, Y0 = 28;                 // rozestup linek, horní linka
+const LIN = i => Y0 + i * S;           // 0 = horní (5.) linka … 4 = spodní (1.) linka
+const HY = Y0 + 25;                    // střed hlavičky
+const NOZKA = 33;
+const sirka = d => 18 + 15 * d;
+
+function kresliZnak(z, cx, beztramecku) {
+  let h = '', nozka = null;
+  const c = 'currentColor';
+  if (!z.pomlka) {
+    if (z.typ === 'cela') {
+      h += `<ellipse cx="${cx}" cy="${HY}" rx="7.4" ry="5" fill="none" stroke="${c}" stroke-width="2.6" transform="rotate(-12 ${cx} ${HY})"/>`;
+    } else {
+      const plna = z.typ === 'ctvrtova' || z.typ === 'osminova';
+      h += `<ellipse cx="${cx}" cy="${HY}" rx="6.6" ry="4.6" transform="rotate(-20 ${cx} ${HY})" `
+        + (plna ? `fill="${c}"` : `fill="none" stroke="${c}" stroke-width="2"`) + '/>';
+      const sx = cx + 5.8, top = HY - NOZKA;
+      h += `<line x1="${sx}" y1="${HY - 1}" x2="${sx}" y2="${top}" stroke="${c}" stroke-width="1.6"/>`;
+      if (z.typ === 'osminova' && beztramecku) {
+        h += `<path d="M${sx} ${top} q1 8 8 12 q4 4 1 13" fill="none" stroke="${c}" stroke-width="2.2" stroke-linecap="round"/>`;
+      }
+      nozka = { x: sx, y: top };
+    }
+    if (z.tecka) h += `<circle cx="${cx + 13}" cy="${HY}" r="2"/>`;
+  } else {
+    if (z.typ === 'cela') h += `<rect x="${cx - 6}" y="${LIN(1)}" width="12" height="5"/>`;
+    else if (z.typ === 'pulova') h += `<rect x="${cx - 6}" y="${LIN(2) - 5}" width="12" height="5"/>`;
+    else if (z.typ === 'ctvrtova') {
+      h += `<path d="M${cx - 3} ${Y0 + 4} L${cx + 4} ${Y0 + 13} L${cx - 2} ${Y0 + 21} L${cx + 4} ${Y0 + 29} Q${cx - 6} ${Y0 + 26} ${cx - 1} ${Y0 + 37}" `
+        + `fill="none" stroke="${c}" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/>`;
+    } else {
+      h += `<circle cx="${cx - 3}" cy="${Y0 + 14}" r="2.7"/>`
+        + `<path d="M${cx - 3} ${Y0 + 16} Q${cx + 2} ${Y0 + 17} ${cx + 5} ${Y0 + 12} L${cx} ${Y0 + 34}" fill="none" stroke="${c}" stroke-width="1.8" stroke-linecap="round"/>`;
+    }
+    if (z.tecka) h += `<circle cx="${cx + 11}" cy="${Y0 + 15}" r="2"/>`;
+  }
+  return { h, nozka };
+}
+
+/* polozky: znaky ({typ,…}), { cara:true }, { misto:true }, { znacka:'A' }
+   volby: { takt: 2|3|4|null, konec: true, popis: 'text pro odečítač' } */
+function kresliOsnovu(polozky, volby = {}) {
+  let x = 10, h = '';
+  if (volby.takt) {
+    h += `<text class="taktovy-oznak" x="${x + 12}" y="${Y0 + 18}" text-anchor="middle">${volby.takt}</text>`
+      + `<text class="taktovy-oznak" x="${x + 12}" y="${Y0 + 38}" text-anchor="middle">4</text>`;
+    x += 34;
+  } else x += 10;
+  let tramStart = null, i = 0;
+  for (const p of polozky) {
+    if (p.cara) { x += 4; h += `<line class="cara" x1="${x}" y1="${LIN(0)}" x2="${x}" y2="${LIN(4)}"/>`; x += 14; continue; }
+    if (p.znacka) {
+      x += 3;
+      h += `<line class="znacka" x1="${x}" y1="${LIN(0) - 4}" x2="${x}" y2="${LIN(4) + 4}"/>`
+        + `<circle class="znacka-kruh" cx="${x}" cy="13" r="8.5"/>`
+        + `<text class="znacka-text" x="${x}" y="17.2" text-anchor="middle">${p.znacka}</text>`;
+      x += 13; continue;
+    }
+    if (p.misto) {
+      h += `<rect class="misto" x="${x}" y="${LIN(0) - 7}" width="44" height="${4 * S + 14}" rx="6"/>`
+        + `<text class="misto-text" x="${x + 22}" y="${LIN(2) + 8}" text-anchor="middle">?</text>`;
+      x += 54; continue;
+    }
+    const cx = x + 9;
+    const { h: hz, nozka } = kresliZnak(p, cx, !p.tram);
+    h += `<g class="znak" data-i="${i++}">${hz}</g>`;
+    if (p.tram === 1) tramStart = nozka;
+    if (p.tram === 2 && tramStart && nozka) {
+      h += `<rect x="${tramStart.x - 0.8}" y="${tramStart.y}" width="${nozka.x - tramStart.x + 1.6}" height="4.6"/>`;
+      tramStart = null;
+    }
+    x += sirka(p.d);
+  }
+  if (volby.konec !== false) {
+    x += 2;
+    h += `<line class="cara" x1="${x}" y1="${LIN(0)}" x2="${x}" y2="${LIN(4)}"/>`
+      + `<line class="cara-tlusta" x1="${x + 6}" y1="${LIN(0)}" x2="${x + 6}" y2="${LIN(4)}"/>`;
+    x += 9;
+  }
+  const W = Math.ceil(x + 6);
+  let linky = '';
+  for (let k = 0; k < 5; k++) linky += `<line class="linka" x1="4" y1="${LIN(k)}" x2="${W - 4}" y2="${LIN(k)}"/>`;
+  return `<svg class="noty-svg" viewBox="0 0 ${W} 82" style="max-width:${Math.round(W * 1.7)}px" role="img" aria-label="${volby.popis || 'Notový zápis'}">`
+    + linky + `<g fill="currentColor">${h}</g></svg>`;
+}
+
+/* malý obrázek jednoho znaku do tlačítka (barvu bere z tlačítka) */
+function obrazekZnaku(z) {
+  let linky = '';
+  for (let k = 0; k < 5; k++) linky += `<line x1="2" y1="${LIN(k)}" x2="58" y2="${LIN(k)}" stroke="currentColor" stroke-opacity="0.45" stroke-width="1"/>`;
+  return `<svg viewBox="0 14 60 62" aria-hidden="true">${linky}<g fill="currentColor">${kresliZnak(z, z.tecka ? 24 : 28, true).h}</g></svg>`
+    + `<span class="skryty-text">${nazev(z)}</span>`;
+}
+
+const popisZapisu = (polozky, takt) => (takt ? `Takt ${takt}/4: ` : '')
+  + polozky.map(p => p.cara ? 'taktová čára' : p.misto ? 'prázdné místo' : p.znacka ? 'značka ' + p.znacka : nazev(p)).join(', ');
+
+/* ---- náhodný obsah taktu -------------------------------------------------------
+   Takt se skládá ze skupin, které začínají na dobu – tak vypadá i školní zápis. */
+const SKUPINY = [
+  { d: 1, vaha: 4,   tvor: () => [znak('ctvrtova')] },
+  { d: 1, vaha: 1.2, tvor: () => [znak('ctvrtova', false, true)] },
+  { d: 1, vaha: 2.6, tvor: () => [{ ...znak('osminova'), tram: 1 }, { ...znak('osminova'), tram: 2 }] },
+  { d: 1, vaha: 0.6, tvor: () => [znak('osminova', false, true), znak('osminova')] },
+  { d: 2, vaha: 2.4, tvor: () => [znak('pulova')] },
+  { d: 2, vaha: 0.6, tvor: () => [znak('pulova', false, true)] },
+  { d: 2, vaha: 1,   tvor: () => [znak('ctvrtova', true), znak('osminova')] },
+  { d: 3, vaha: 1,   tvor: () => [znak('pulova', true)] },
+  { d: 4, vaha: 0.7, tvor: () => [znak('cela')], cela: true },
+];
+function vazeny(pole) {
+  let r = Math.random() * pole.reduce((s, g) => s + g.vaha, 0);
+  for (const g of pole) { r -= g.vaha; if (r < 0) return g; }
+  return pole[pole.length - 1];
+}
+/* celkem = celý počet dob; celá nota jen jako celý takt 4/4 */
+function naplnDoby(celkem) {
+  const out = [];
+  let pos = 0;
+  while (pos < celkem) {
+    const zbyva = celkem - pos;
+    const g = vazeny(SKUPINY.filter(s => s.d <= zbyva && (!s.cela || (pos === 0 && celkem === 4))));
+    out.push(...g.tvor());
+    pos += g.d;
+  }
+  return out;
+}
+const soucet = polozky => polozky.reduce((s, p) => s + (p.d || 0), 0);
+const rozpis = polozky => polozky.filter(p => p.d).map(p => cisloDob(p.d)).join(' + ');
+/* „1 + ½ + ½ = 2“, u jediného znaku jen „2“ */
+const souctem = polozky => polozky.filter(p => p.d).length > 1 ? `${rozpis(polozky)} = ${cisloDob(soucet(polozky))}` : cisloDob(soucet(polozky));
+
+/* takt, ve kterém něco chybí: { takt, obsah, chybi } */
+function neuplnyTakt() {
+  for (;;) {
+    const takt = Uloha.nahodne([2, 3, 4, 4, 3]);
+    const chybi = Uloha.nahodne(DELKY_ZNAKU.filter(d => d < takt));
+    const plne = takt - chybi;
+    const obsah = naplnDoby(Math.floor(plne));
+    if (plne % 1) obsah.push(znak('osminova'));
+    if (obsah.length) return { takt, obsah, chybi };
+  }
+}
+
+/* ---- přehrání (nepovinné – stránka funguje i bez zvuku) -------------------------- */
+const AudioTrida = typeof window !== 'undefined' && (window.AudioContext || window.webkitAudioContext);
+let actx = null, casovace = [];
+function prehraj(polozky, svg) {
+  if (!AudioTrida) return;
+  try { actx = actx || new AudioTrida(); } catch { return; }
+  if (actx.state === 'suspended') actx.resume();
+  casovace.forEach(clearTimeout); casovace = [];
+  const DOBA = 0.62, t0 = actx.currentTime + 0.12;
+  let t = 0;
+  const znaky = polozky.filter(p => p.d);
+  const gs = svg ? [...svg.querySelectorAll('g.znak')] : [];
+  znaky.forEach((z, i) => {
+    const zacatek = t0 + t, delka = z.d * DOBA;
+    if (!z.pomlka) {
+      const o = actx.createOscillator(), g = actx.createGain();
+      o.type = 'triangle'; o.frequency.value = 440;
+      o.connect(g); g.connect(actx.destination);
+      g.gain.setValueAtTime(0.0001, zacatek);
+      g.gain.exponentialRampToValueAtTime(0.3, zacatek + 0.015);
+      g.gain.setValueAtTime(0.3, zacatek + delka * 0.75);
+      g.gain.exponentialRampToValueAtTime(0.0001, zacatek + delka * 0.9);
+      o.start(zacatek); o.stop(zacatek + delka);
+    }
+    const el = gs[i];
+    if (el) {
+      casovace.push(setTimeout(() => el.classList.add('hraje'), (zacatek - actx.currentTime) * 1000));
+      casovace.push(setTimeout(() => el.classList.remove('hraje'), (zacatek + delka - actx.currentTime) * 1000 - 30));
+    }
+    t += delka;
+  });
+}
+
+/* ================================================================================
+   Generátory úloh – vrací { html, moznosti, spravnyKlic, zpravaOk, zpravaChyba, trida, hrat }
+   ================================================================================ */
+
+/* ---- Jak dlouhá je nota? ---- */
+function ulohaDelka() {
+  const typ = Uloha.nahodne(['cela', 'pulova', 'pulova', 'ctvrtova', 'ctvrtova', 'osminova', 'osminova']);
+  const pomlka = Math.random() < 0.35;
+  const tecka = (typ === 'pulova' || typ === 'ctvrtova') && Math.random() < 0.35;
+  const z = znak(typ, tecka, pomlka);
+  const zakladni = ZAKLAD[typ].d;
+  let jine = Uloha.zamichej(DELKY_ZNAKU.filter(v => v !== z.d && v !== zakladni));
+  if (tecka) jine = [zakladni, ...jine];
+  const hodnoty = [z.d, ...jine.slice(0, 3)].sort((a, b) => a - b);
+  return {
+    html: `<div class="zadani">Kolik dob trvá ${pomlka ? 'tahle pomlka' : 'tahle nota'}, když dobu trvá čtvrťová nota?</div>
+      <div class="karta noty">${kresliOsnovu([z], { popis: 'Jeden znak v notové osnově: ' + nazev(z) })}</div>`,
+    trida: 'dve',
+    moznosti: hodnoty.map(v => ({ klic: String(v), popis: doby(v) })),
+    spravnyKlic: String(z.d),
+    zpravaOk: `✅ ${velke(nazev(z))} trvá ${doby(z.d, true)}`
+      + (tecka ? ` (${cisloDob(zakladni)} + ${cisloDob(zakladni / 2)} za tečku).` : '.'),
+    zpravaChyba: k => {
+      const v = +k;
+      if (tecka && v === zakladni) {
+        return `Nezapomeň na tečku! ${velke(ZAKLAD[typ][pomlka ? 'pomlka' : 'nota'])} trvá ${doby(v, true)}, `
+          + 'tečka přidá ještě polovinu této délky.';
+      }
+      const jiny = znakDelky(v, pomlka);
+      return `${doby(v, true).replace(/^./, c => c.toUpperCase())} trvá ${nazev(jiny)}. Tady je ${nazev(z)}: ${vzhled(z)}.`;
+    },
+    hrat: [z],
+  };
+}
+
+/* ---- Kolik dob má takt? ---- */
+function ulohaTakt() {
+  let takt, obsah;
+  do { takt = Uloha.nahodne([2, 3, 4]); obsah = naplnDoby(takt); } while (obsah.length < 2);
+  return {
+    html: `<div class="zadani">Sečti délky not a pomlek. Kolik dob má tento takt?</div>
+      <div class="karta noty">${kresliOsnovu(obsah, { popis: popisZapisu(obsah) })}</div>`,
+    trida: 'dve',
+    moznosti: [2, 3, 4].map(n => ({ klic: String(n), popis: `${doby(n)} – takt ${n}/4` })),
+    spravnyKlic: String(takt),
+    zpravaOk: `✅ ${souctem(obsah)}, je to takt ${takt}/4.`,
+    zpravaChyba: k => {
+      const n = +k;
+      return `Takt ${n}/4 by měl ${doby(n)}. Sečti délky: ${obsah.filter(p => p.d).map(p => nazev(p) + ' ' + cisloDob(p.d)).join(', ')}`
+        + ` – vyjde ti ${takt > n ? 'víc' : 'méně'} než ${n}.`;
+    },
+    hrat: obsah,
+  };
+}
+
+/* ---- Doplň takt: kolik dob chybí? ---- */
+function ulohaChybi() {
+  const { takt, obsah, chybi } = neuplnyTakt();
+  const ma = soucet(obsah);
+  const kandidati = new Set();
+  [ma, takt, chybi + 0.5, chybi - 0.5, chybi + 1, chybi - 1].forEach(v => {
+    if (v > 0 && v <= 4 && v !== chybi) kandidati.add(v);
+  });
+  const hodnoty = [chybi, ...Uloha.zamichej([...kandidati]).slice(0, 3)].sort((a, b) => a - b);
+  const polozky = [...obsah, { misto: true }];
+  return {
+    html: `<div class="zadani">Takt <b>${takt}/4</b> není plný. Kolik dob v něm ještě chybí?</div>
+      <div class="karta noty">${kresliOsnovu(polozky, { takt, popis: popisZapisu(polozky, takt) })}</div>`,
+    trida: 'dve',
+    moznosti: hodnoty.map(v => ({ klic: String(v), popis: doby(v) })),
+    spravnyKlic: String(chybi),
+    zpravaOk: `✅ V taktu už je ${souctem(obsah)}, do ${takt} chybí ${doby(chybi)}.`,
+    zpravaChyba: k => {
+      const v = +k;
+      if (v === ma) return `To je délka not, které už v taktu jsou. Kolik ještě chybí do celého taktu ${takt}/4?`;
+      if (v === takt) return `${doby(takt).replace(/^./, c => c.toUpperCase())} má celý takt ${takt}/4 – část je ale už zaplněná.`;
+      const spolu = `${cisloDob(ma)} + ${cisloDob(v)} = ${cisloDob(ma + v)}`;
+      return v > chybi
+        ? `${velke(doby(v))} je moc: ${spolu}, a to je víc, než má takt ${takt}/4 (${doby(takt)}).`
+        : `${velke(doby(v))} je málo: ${spolu}, takt ${takt}/4 by ještě nebyl plný.`;
+    },
+    hrat: obsah,
+  };
+}
+
+/* ---- Čím takt doplníš? ---- */
+function ulohaDopln() {
+  const { takt, obsah, chybi } = neuplnyTakt();
+  const ma = soucet(obsah);
+  const pomlkou = Math.random() < 0.3;
+  const delky = [chybi, ...Uloha.zamichej(DELKY_ZNAKU.filter(d => d !== chybi)).slice(0, 3)];
+  const znaky = Uloha.zamichej(delky.map(d => znakDelky(d, d === chybi ? pomlkou : Math.random() < 0.3)));
+  const polozky = [...obsah, { misto: true }];
+  return {
+    html: `<div class="zadani">Kterým <b>jedním</b> znakem takt <b>${takt}/4</b> přesně doplníš?</div>
+      <div class="karta noty">${kresliOsnovu(polozky, { takt, popis: popisZapisu(polozky, takt) })}</div>`,
+    trida: 'symboly',
+    moznosti: znaky.map(z => ({ klic: String(z.d), popis: obrazekZnaku(z) })),
+    spravnyKlic: String(chybi),
+    zpravaOk: `✅ Chybí ${doby(chybi)}: ${nazev(znakDelky(chybi, pomlkou))}. ${cisloDob(ma)} + ${cisloDob(chybi)} = ${takt}.`,
+    zpravaChyba: k => {
+      const v = +k;
+      const z = znaky.find(x => String(x.d) === k);
+      return `${velke(nazev(z))} trvá ${doby(v, true)}. To je ${v > chybi ? 'víc' : 'méně'}, než chybí: `
+        + `v taktu už je ${cisloDob(ma)}, takt ${takt}/4 potřebuje ${takt}.`;
+    },
+    hrat: obsah,
+  };
+}
+
+/* ---- Kde je taktová čára? ---- */
+function ulohaCara() {
+  let takt, prvni, druhy;
+  do {
+    takt = Uloha.nahodne([2, 3, 4]);
+    prvni = naplnDoby(takt);
+    druhy = naplnDoby(takt);
+  } while (prvni.length + druhy.length < 4);
+  const vse = [...prvni, ...druhy];
+  /* mezery mezi znaky (za znakem i) a kolik dob je před nimi */
+  const mezery = [];
+  let s = 0;
+  for (let i = 0; i < vse.length - 1; i++) { s += vse[i].d; mezery.push({ i, pred: s }); }
+  const spravna = mezery.find(m => m.i === prvni.length - 1);
+  const vybrane = [spravna, ...Uloha.zamichej(mezery.filter(m => m !== spravna)).slice(0, 3)].sort((a, b) => a.i - b.i);
+  const PISMENA = 'ABCD';
+  vybrane.forEach((m, k) => { m.pismeno = PISMENA[k]; });
+  const polozky = [];
+  vse.forEach((z, i) => {
+    polozky.push(z);
+    const m = vybrane.find(x => x.i === i);
+    if (m) polozky.push({ znacka: m.pismeno });
+  });
+  return {
+    html: `<div class="zadani">Jsou to dva takty <b>${takt}/4</b>. Kam patří taktová čára mezi ně?</div>
+      <div class="karta noty">${kresliOsnovu(polozky, { takt, popis: popisZapisu(polozky, takt) })}</div>`,
+    trida: 'velke',
+    moznosti: vybrane.map(m => ({ klic: m.pismeno, popis: m.pismeno })),
+    spravnyKlic: spravna.pismeno,
+    zpravaOk: `✅ Do čáry ${spravna.pismeno}: ${souctem(prvni)}, to je celý takt ${takt}/4.`,
+    zpravaChyba: k => {
+      const m = vybrane.find(x => x.pismeno === k);
+      return m.pred < takt
+        ? `Do čáry ${k}: ${doby(m.pred)}. Takt ${takt}/4 má ale ${doby(takt)} – ještě není plný.`
+        : `Do čáry ${k}: už ${doby(m.pred)}. To je víc, než má takt ${takt}/4 (${doby(takt)}).`;
+    },
+    hrat: vse,
+  };
+}
+
+const GENERATORY = { delka: ulohaDelka, takt: ulohaTakt, chybi: ulohaChybi, dopln: ulohaDopln, cara: ulohaCara };
+
+/* ---- vykreslení úlohy ---- */
+function novaUloha() {
+  const p = $('plocha');
+  const u = GENERATORY[rezim]();
+  p.innerHTML = u.html;
+  if (AudioTrida && u.hrat) {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'prehrat'; b.textContent = '🔊 Přehrát rytmus';
+    b.addEventListener('click', () => prehraj(u.hrat, p.querySelector('.karta .noty-svg')));
+    (p.querySelector('.karta') || p).appendChild(b);
+  }
+  const odezva = document.createElement('div');
+  odezva.className = 'odezva';
+  Uloha.vyber({
+    kam: p, odezva, trida: u.trida, moznosti: u.moznosti, spravnyKlic: u.spravnyKlic,
+    zpravaOk: u.zpravaOk, zpravaChyba: u.zpravaChyba,
+    poSpravne: skore.vyhodnot, dalsi: novaUloha,
+    prodleva: napoprve => napoprve ? 1600 : 2600,
+  });
+  p.appendChild(odezva);
+}
+
+/* obrázky ve výkladu a ukázce */
+(function () {
+  const rada = [znak('cela'), { cara: true }, znak('pulova'), znak('pulova'), { cara: true },
+    znak('ctvrtova'), znak('ctvrtova'), znak('ctvrtova'), znak('ctvrtova'), { cara: true },
+    { ...znak('osminova'), tram: 1 }, { ...znak('osminova'), tram: 2 }, { ...znak('osminova'), tram: 1 }, { ...znak('osminova'), tram: 2 },
+    { ...znak('osminova'), tram: 1 }, { ...znak('osminova'), tram: 2 }, { ...znak('osminova'), tram: 1 }, { ...znak('osminova'), tram: 2 }];
+  const v = $('vykladNoty');
+  if (v) v.innerHTML = kresliOsnovu(rada, { takt: 4, popis: 'Čtyři takty 4/4: celá nota, dvě půlové, čtyři čtvrťové a osm osminových not – každý takt má 4 doby.' });
+  const u = $('ukazkaNoty');
+  const ukazka = [znak('ctvrtova'), { ...znak('osminova'), tram: 1 }, { ...znak('osminova'), tram: 2 }, { misto: true }];
+  if (u) u.innerHTML = kresliOsnovu(ukazka, { takt: 3, popis: popisZapisu(ukazka, 3) });
+})();
+
+document.querySelectorAll('#rezimy button').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('#rezimy button').forEach(x => x.classList.remove('active'));
+  b.classList.add('active');
+  rezim = b.dataset.rezim;
+  novaUloha();
+}));
+$('btnDalsi').addEventListener('click', novaUloha);
+document.addEventListener('keydown', e => {
+  if (e.target instanceof Element && e.target.closest('input, textarea, select')) return;
+  if (e.key === 'ArrowRight' || e.key === 'Enter') { e.preventDefault(); novaUloha(); }
+});
+novaUloha();
+</script>
+</body>
+</html>

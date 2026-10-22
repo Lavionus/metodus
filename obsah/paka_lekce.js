@@ -1794,7 +1794,7 @@
         { zadani: 'Mezi dvě ozubená kola vložíš <b>mezikolo</b>. Co se změní?',
           moznosti: [{ t: 'Jen smysl otáčení – převodový poměr zůstane stejný.', ok: true },
             { t: 'Převodový poměr se zvětší.', proc: 'Zuby mezikola se v poměru vykrátí: (z_m : z₁) · (z₂ : z_m) = z₂ : z₁.' },
-            { t: 'Nic se nezmění.', proc: 'Poměr ne, ale hnané kolo se teď točí stejně jako hnací – dřív se točilo opačně.' }],
+            { t: 'Nic se nezmění.', proc: 'Převodový poměr se opravdu nezmění, ale hnané kolo se teď točí stejným směrem jako hnací – dřív se točilo opačně.' }],
           napoveda: 'Každý záběr obrací směr.',
           vysvetleni: 'Dvě kola v záběru se točí proti sobě; mezikolo směr ještě jednou obrátí.' },
         { zadani: 'Jedeš na kole do kopce. Proč přeřadíš vzadu na <b>větší kolečko</b> (víc zubů)?',

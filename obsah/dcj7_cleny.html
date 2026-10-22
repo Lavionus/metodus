@@ -6,6 +6,8 @@
   <title>Členy a rod podstatných jmen</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -23,6 +25,40 @@
 <body>
   <h1>📗 Členy a rod podstatných jmen</h1>
   <p class="podtitul">Pro 7. ročník: der/die/das v němčině, le/la a un/une ve francouzštině.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Členy a rod v němčině a francouzštině</summary>
+    <div class="obsah">
+      <p><b>Člen</b> je malé slovo před podstatným jménem. Prozrazuje jeho <b>rod</b>. Čeština členy nemá, a proto se na ně
+        snadno zapomíná. V němčině i ve francouzštině ale člen patří ke slovu stejně pevně jako koncovka.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>🇩🇪 Tři rody</h3><p><span lang="de"><b>der</b></span> mužský, <span lang="de"><b>die</b></span> ženský, <span lang="de"><b>das</b></span> střední: <span lang="de">der Tisch, die Schule, das Haus</span>.</p></article>
+        <article class="vyklad-karta"><h3>🇩🇪 Koncovky</h3><p><b>-ung, -heit, -keit, -schaft</b> → die; <b>-chen, -lein</b> → das; <b>-ling, -ismus</b> a osoby na <b>-er</b> → der.</p></article>
+        <article class="vyklad-karta"><h3>🇫🇷 Dva rody</h3><p><span lang="fr"><b>le</b></span> mužský, <span lang="fr"><b>la</b></span> ženský, střední rod chybí. Před samohláskou <span lang="fr">l’</span>: <span lang="fr">l’école</span>.</p></article>
+        <article class="vyklad-karta"><h3>🇫🇷 Neurčitý člen</h3><p>Řídí se stejným rodem: <span lang="fr">le → un</span>, <span lang="fr">la → une</span>. <span lang="fr">un livre, une table</span>.</p></article>
+      </div>
+      <p>Proč nestačí čeština? Rod v cizím jazyce s ní často nesedí. Dívka je v němčině středního rodu
+        (<span lang="de">das Mädchen</span>) – rozhoduje zdrobnělá koncovka -chen, ne to, že jde o dívku. Stůl je ve francouzštině
+        ženského rodu (<span lang="fr">la table</span>).</p>
+      <p>Jak postupovat: nejdřív se podívej na koncovku. Když žádné pravidlo nesedí, musíš člen znát zpaměti.
+        Pozor, některá pravidla mají výjimky (němčina: -ment je většinou das, ale <span lang="de">der Moment</span>).</p>
+      <aside class="zapamatuj">Člen se učí spolu se slovem. Koncovka často napoví rod, čeština ne. Francouzština: le → un, la → une.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: neurčitý člen ve francouzštině</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Doplň neurčitý člen: <span lang="fr">… école</span> (škola).</p>
+      <ol class="kroky">
+        <li>Neurčitý člen se řídí rodem slova, takže nejdřív zjistím rod.</li>
+        <li>Určitý člen tu nepomůže: slovo začíná samohláskou, a proto se píše <span lang="fr">l’école</span>.</li>
+        <li>Musím si pamatovat, že škola je ve francouzštině ženského rodu (<span lang="fr">la</span>).</li>
+        <li>Ženský rod má neurčitý člen <span lang="fr">une</span>, ten se nezkracuje.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ <span lang="fr"><b>une école</b></span> – určitý člen: <span lang="fr">l’école</span>.</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="nemcinaClen" class="active">🇩🇪 der / die / das</button>
@@ -47,7 +83,8 @@
   <p class="napoveda">
     Rod v cizím jazyce často <b>neodpovídá</b> češtině: das Mädchen (dívka) je středního rodu,
     la table (stůl) je ženského. Pomáhají koncovky: -ung, -heit, -keit, -schaft → die;
-    -chen, -lein, -ment → das; ve francouzštině -tion, -té, -ette → la.
+    -chen, -lein → das, -ment → většinou das (ale der Moment); ve francouzštině -tion, -ette → la,
+    -té → většinou la (ale le côté, l’été).
   </p>
 
 <script>
@@ -70,7 +107,7 @@ const NEMCINA = [
   { s: 'Kind', clen: 'das', cz: 'dítě' }, { s: 'Wasser', clen: 'das', cz: 'voda' },
 ];
 
-/* Koncovky, podle kterých se rod v němčině pozná spolehlivě */
+/* Koncovky, podle kterých se rod v němčině většinou pozná (u -ment jsou výjimky) */
 const KONCOVKY = [
   { koncovka: '-ung', clen: 'die', priklady: 'die Zeitung, die Wohnung, die Übung' },
   { koncovka: '-heit', clen: 'die', priklady: 'die Freiheit, die Gesundheit' },
@@ -78,7 +115,7 @@ const KONCOVKY = [
   { koncovka: '-schaft', clen: 'die', priklady: 'die Freundschaft, die Mannschaft' },
   { koncovka: '-chen', clen: 'das', priklady: 'das Mädchen, das Häuschen' },
   { koncovka: '-lein', clen: 'das', priklady: 'das Fräulein, das Büchlein' },
-  { koncovka: '-ment', clen: 'das', priklady: 'das Instrument, das Dokument' },
+  { koncovka: '-ment (většinou)', clen: 'das', priklady: 'das Instrument, das Dokument; výjimky: der Moment (okamžik), der Zement' },
   { koncovka: '-er (u osob)', clen: 'der', priklady: 'der Lehrer, der Fahrer' },
   { koncovka: '-ling', clen: 'der', priklady: 'der Frühling, der Lehrling' },
   { koncovka: '-ismus', clen: 'der', priklady: 'der Tourismus, der Realismus' },
@@ -94,6 +131,9 @@ const FRANCOUZSTINA = [
   { s: 'jardin', clen: 'le', cz: 'zahrada' }, { s: 'professeur', clen: 'le', cz: 'učitel' },
   { s: 'stylo', clen: 'le', cz: 'pero' }, { s: 'cahier', clen: 'le', cz: 'sešit' },
 ];
+
+/* Určitý člen ve francouzštině se před samohláskou a němým h zkracuje: l’école, l’arbre. */
+const sClenem = u => /^[aeiouyéèêh]/i.test(u.s) ? 'l’' + u.s : u.clen + ' ' + u.s;
 
 /* ---- Německý člen ------------------------------------------------------------------------ */
 function nemcinaClen() {
@@ -150,8 +190,8 @@ function francouzstinaClen() {
     kam: p, odezva, trida: 'dve',
     moznosti: [{ klic: 'le', popis: 'le (mužský)' }, { klic: 'la', popis: 'la (ženský)' }],
     spravnyKlic: u.clen,
-    zpravaOk: `✅ ${u.clen} ${u.s} = ${u.cz}`
-      + (u.s.startsWith('é') || u.s.startsWith('e') ? ' (před samohláskou se píše l’: l’école)' : ''),
+    zpravaOk: `✅ ${sClenem(u)} = ${u.cz}`
+      + (sClenem(u).startsWith('l’') ? ` – slovo je rodu ${u.clen === 'la' ? 'ženského (la)' : 'mužského (le)'}, před samohláskou se člen zkracuje na l’` : ''),
     zpravaChyba: 'Francouzština nemá střední rod – slovo je buď mužské, nebo ženské.',
     poSpravne: skore.vyhodnot,
     dalsi: novaUloha,
@@ -171,7 +211,7 @@ function francouzstinaNeurcity() {
     kam: p, odezva, trida: 'dve',
     moznosti: [{ klic: 'un', popis: 'un (mužský)' }, { klic: 'une', popis: 'une (ženský)' }],
     spravnyKlic: spravny,
-    zpravaOk: `✅ ${spravny} ${u.s} – určitý člen je ${u.clen} ${u.s}.`,
+    zpravaOk: `✅ ${spravny} ${u.s} – určitý člen: ${sClenem(u)}.`,
     zpravaChyba: 'Neurčitý člen se řídí stejným rodem jako určitý: le → un, la → une.',
     poSpravne: skore.vyhodnot,
     dalsi: novaUloha,

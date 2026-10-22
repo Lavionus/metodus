@@ -6,6 +6,8 @@
   <title>Chemie a životní prostředí</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -20,7 +22,7 @@
       width: min(900px, calc(100% - 20px)); margin: 14px auto 8px; }
     .kontejner { margin: 0; border: 1px solid var(--border); border-radius: 11px; overflow: hidden;
       background: var(--bg-control); text-align: center; color: var(--text); }
-    .kontejner img { display: block; width: 100%; aspect-ratio: 1; object-fit: cover; }
+    .kontejner img { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; }
     .kontejner figcaption { padding: 5px 3px 7px; font-size: .72rem; line-height: 1.2; font-weight: 700; }
     .misto-info { width: min(820px, calc(100% - 24px)); margin: 8px auto; text-align: center;
       color: var(--text-faint); font-size: .78rem; line-height: 1.45; }
@@ -31,6 +33,43 @@
 <body>
   <h1>♻️ Chemie a životní prostředí</h1>
   <p class="podtitul">Pro 9. ročník: odpady a recyklace, paliva a emise, ochrana vody a ovzduší.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Odpady, paliva a čistota vody a ovzduší</summary>
+    <div class="obsah">
+      <p>Každá věc, kterou vyhodíme, a každé palivo, které spálíme, nějak zatíží přírodu. Chemie pomáhá pochopit, proč
+        tomu tak je a jak škody zmenšit.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Pořadí nakládání s odpadem</h3><p>1. odpad <b>nevytvářet</b>, 2. věc použít znovu, 3. <b>recyklovat</b>,
+          4. energeticky využít (spalovna s výrobou tepla a elektřiny), 5. až nakonec skládka.</p></article>
+        <article class="vyklad-karta"><h3>Recyklace</h3><p>Sklo jde recyklovat prakticky neomezeně, papír jen několikrát (vlákna se zkracují).
+          Recyklace hliníku ušetří velkou část energie oproti výrobě z rudy.</p></article>
+        <article class="vyklad-karta"><h3>Paliva a emise</h3><p>Spálením paliva s uhlíkem vzniká <b>oxid uhličitý</b>, např. methan:
+          CH<sub>4</sub> + 2 O<sub>2</sub> → CO<sub>2</sub> + 2 H<sub>2</sub>O. Spálením vodíku vzniká jen voda: 2 H<sub>2</sub> + O<sub>2</sub> → 2 H<sub>2</sub>O.</p></article>
+        <article class="vyklad-karta"><h3>Voda a ovzduší</h3><p>Splachy hnojiv vedou k přemnožení sinic a řas (<b>eutrofizace</b>).
+          Katalyzátor v autě snižuje škodliviny ve výfukových plynech.</p></article>
+      </div>
+      <p>Proč je skládka až poslední? Zabírá půdu, při rozkladu odpadu vzniká methan a výluhy mohou ohrozit
+        podzemní vodu. Proč se odpad třídí? Recyklovat lze jen <b>čistý a stejný</b> materiál – proto rozhoduje druh
+        materiálu, ne tvar nebo barva věci. Typická chyba: hodit do nádoby na sklo zrcadlo nebo porcelán, který se taví jinak.
+        Nebezpečný odpad (baterie, léky, barvy, zářivky) do směsného koše nepatří nikdy.</p>
+      <aside class="zapamatuj">Nejlepší odpad je ten, který nevznikne. Třídím podle materiálu a nálepky na nádobě, nebezpečný odpad nesu do sběru.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: kam patří rozbité zrcadlo</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Doma se rozbilo zrcadlo. Patří do nádoby na sklo?</p>
+      <ol class="kroky">
+        <li>Zeptám se, z jakého je <b>materiálu</b>: je to sklo, ale má na zadní straně zrcadlovou vrstvu.</li>
+        <li>Do nádoby na sklo patří jen <b>obalové sklo</b> – lahve, sklenice, flakony. Zrcadlo obal není.</li>
+        <li>Zrcadlová vrstva mění vlastnosti skla, takže by recyklaci obalového skla zkazila.</li>
+        <li>Zbývá směsný odpad, a když je střepů hodně, sběrný dvůr. Střepy zabalím, aby se nikdo neřízl.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Rozbité zrcadlo patří do <b>směsného odpadu</b> nebo na <b>sběrný dvůr</b>, ne do nádoby na sklo.</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="kviz1" class="active">🗑️ Třídění odpadu</button>
@@ -47,12 +86,12 @@
   </div>
 
   <div class="kontejnery" aria-label="Přehled nádob na tříděný odpad">
-    <figure class="kontejner"><img src="img/ch/ch9-kontejner-plasty.webp" alt="Žlutá nádoba na plastové obaly." loading="lazy"><figcaption>žlutá · plasty</figcaption></figure>
-    <figure class="kontejner"><img src="img/ch/ch9-kontejner-papir.webp" alt="Modrá nádoba na papír a lepenku." loading="lazy"><figcaption>modrá · papír</figcaption></figure>
-    <figure class="kontejner"><img src="img/ch/ch9-kontejner-sklo.webp" alt="Zelená nádoba na barevné a směsné obalové sklo." loading="lazy"><figcaption>zelená · sklo</figcaption></figure>
-    <figure class="kontejner"><img src="img/ch/ch9-kontejner-kartony.webp" alt="Oranžová nádoba na nápojové kartony." loading="lazy"><figcaption>oranžová · kartony</figcaption></figure>
-    <figure class="kontejner"><img src="img/ch/ch9-kontejner-kovy.webp" alt="Šedá nádoba na kovové obaly." loading="lazy"><figcaption>šedá · kovy</figcaption></figure>
-    <figure class="kontejner"><img src="img/ch/ch9-kontejner-bio.webp" alt="Hnědá nádoba na bioodpad." loading="lazy"><figcaption>hnědá · bioodpad</figcaption></figure>
+    <figure class="kontejner"><img src="img/ch/ch9-kontejner-plasty.webp" alt="Žlutá nádoba na plastové obaly." width="640" height="640" loading="lazy"><figcaption>žlutá · plasty</figcaption></figure>
+    <figure class="kontejner"><img src="img/ch/ch9-kontejner-papir.webp" alt="Modrá nádoba na papír a lepenku." width="640" height="640" loading="lazy"><figcaption>modrá · papír</figcaption></figure>
+    <figure class="kontejner"><img src="img/ch/ch9-kontejner-sklo.webp" alt="Zelená nádoba na barevné a směsné obalové sklo." width="640" height="640" loading="lazy"><figcaption>zelená · sklo</figcaption></figure>
+    <figure class="kontejner"><img src="img/ch/ch9-kontejner-kartony.webp" alt="Oranžová nádoba na nápojové kartony." width="640" height="640" loading="lazy"><figcaption>oranžová · kartony</figcaption></figure>
+    <figure class="kontejner"><img src="img/ch/ch9-kontejner-kovy.webp" alt="Šedá nádoba na kovové obaly." width="640" height="640" loading="lazy"><figcaption>šedá · kovy</figcaption></figure>
+    <figure class="kontejner"><img src="img/ch/ch9-kontejner-bio.webp" alt="Hnědá nádoba na bioodpad." width="640" height="640" loading="lazy"><figcaption>hnědá · bioodpad</figcaption></figure>
   </div>
   <p class="misto-info">Barva je pomůcka, ale rozhoduje nálepka na nádobě. Některé obce sbírají kovy či nápojové kartony společně s plasty. Baterie patří do sběrného boxu, léky do lékárny a elektro do místa zpětného odběru.</p>
 
@@ -155,7 +194,7 @@ const SADY = {
       ]
     },
     {
-      "q": "Co znamená zkratka na obalu s trojúhelníkem a číslem?",
+      "q": "Co znamená recyklační symbol na obalu – trojúhelník ze šipek s číslem nebo zkratkou uvnitř?",
       "a": "označení druhu materiálu pro recyklaci",
       "b": [
         "datum výroby",

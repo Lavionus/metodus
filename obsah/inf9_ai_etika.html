@@ -6,6 +6,8 @@
   <title>Umělá inteligence a etika</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -33,6 +35,39 @@
 <body>
   <h1>🤖 Umělá inteligence a etika</h1>
   <p class="podtitul">Pro 9. ročník: jak AI funguje, kde chybuje a jak ji používat zodpovědně.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Jak AI vzniká z dat a proč chybuje</summary>
+    <div class="obsah">
+      <p>Dnešní umělá inteligence se většinou neprogramuje pravidlem pro každý případ. Vzniká <b>strojovým učením</b>:
+        model dostane velké množství příkladů (<b>trénovací data</b>) a hledá v nich statistické vzory.
+        Jazykový model tak odhaduje, jaké pokračování textu je nejpravděpodobnější – nechápe význam jako člověk.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Data rozhodují</h3><p>Model umí jen to, co je v datech. Málo příkladů nebo špatně vybrané příklady znamenají špatné odpovědi. V mini-modelu to vidíš: ovoce zařadí podle nejpodobnějších trénovacích karet.</p></article>
+        <article class="vyklad-karta"><h3>Halucinace</h3><p>Přesvědčivě znějící, ale <b>vymyšlená</b> informace. Model se může mýlit sebejistě – délka ani jistý tón odpovědi nejsou důkazem.</p></article>
+        <article class="vyklad-karta"><h3>Zaujatost (bias)</h3><p>Když data obsahují lidské předsudky nebo některé skupiny lidí chybějí, model je převezme a u nich se plete častěji.</p></article>
+        <article class="vyklad-karta"><h3>Odpovědnost</h3><p>Za použití výsledku odpovídá vždy <b>člověk</b> nebo organizace, která nástroj nasadila. O důležitých věcech (přijetí do školy, diagnóza) nemá AI rozhodovat bez lidské kontroly.</p></article>
+      </div>
+      <p>Ve škole je AI užitečný pomocník: vysvětlí látku jinými slovy nebo vytvoří otázky na procvičení.
+        Výstup ale <b>ověř</b> ve spolehlivém zdroji, nevkládej do ní osobní údaje (své ani spolužáků) a napiš,
+        k čemu jsi ji použil. Bez vlastních znalostí chybu v odpovědi nepoznáš.</p>
+      <aside class="zapamatuj">AI hledá vzory v datech, nerozumí jako člověk a může se sebejistě mýlit. Ověřuj, chraň osobní údaje, přiznej použití – odpovědnost nese člověk.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: ověření odpovědi AI</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Do referátu se ptáš chatbota, kdy zemřel Karel IV. Odpoví sebejistě: „Karel IV. zemřel v roce 1400 v Praze.“ Jak s odpovědí naložíš?</p>
+      <ol class="kroky">
+        <li>Je to konkrétní fakt (rok) – právě takové údaje si model může vymyslet, proto ho nepřepíšu hned.</li>
+        <li>Sebejistý tón nic nedokazuje, ověřím údaj ve spolehlivém zdroji – v učebnici dějepisu a v encyklopedii.</li>
+        <li>Oba zdroje se shodují: Karel IV. zemřel v roce <b>1378</b> v Praze. Odpověď AI byla halucinace.</li>
+        <li>Do referátu napíšu ověřený údaj, uvedu skutečné zdroje a podle zadání zmíním, že jsem AI použil.</li>
+      </ol>
+      <p class="vysledek-ukazky">Údaj z AI neber jako hotovou pravdu: ověř ho ve dvou spolehlivých zdrojích. Správně je rok 1378, ne 1400.</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="kviz1" class="active">⚙️ Jak AI funguje</button>

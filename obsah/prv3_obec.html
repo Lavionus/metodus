@@ -6,6 +6,8 @@
   <title>Naše obec a kraj</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -34,6 +36,36 @@
 <body>
   <h1>🏘️ Naše obec a kraj</h1>
   <p class="podtitul">Pro 3.–4. ročník: orientace podle světových stran, plán obce, úřady a kraje ČR.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Jak se vyznám v obci</summary>
+    <div class="obsah">
+      <p>Abychom si rozuměli, kde co je, používáme <b>světové strany</b>. Na plánu a na mapě je <b>sever nahoře</b>.
+        Dole je jih, vpravo východ a vlevo západ.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>🧭 Čtyři hlavní strany</h3><p>Po směru hodinových ručiček: <b>S</b>ever, <b>V</b>ýchod, <b>J</b>ih, <b>Z</b>ápad. Pomůže věta: <b>S</b>everka <b>V</b>ečer <b>J</b>ede <b>Z</b>a mnou.</p></article>
+        <article class="vyklad-karta"><h3>↗️ Strany mezi nimi</h3><p>Mezi severem a východem je <b>severovýchod</b> (SV). Stejně JV, JZ a SZ. Sever nebo jih se říká vždy první.</p></article>
+        <article class="vyklad-karta"><h3>☀️ Slunce</h3><p>Slunce vychází na <b>východě</b> a zapadá na <b>západě</b>.</p></article>
+        <article class="vyklad-karta"><h3>🏛️ Kam zajdu</h3><p>Dopis → pošta. Doklady → obecní úřad. Požár → hasiči. Nemoc → lékař. Ztráta věci → policie.</p></article>
+      </div>
+      <p>Obec patří do <b>kraje</b>. Česko má 14 krajů. Každý kraj má své krajské město, například Jihomoravský kraj má Brno.
+        Praha je hlavní město a zároveň samostatný kraj.</p>
+      <aside class="zapamatuj">Na plánu je sever nahoře. Sever – východ – jih – západ jdou po směru hodinových ručiček.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: Kam ukazuje šipka?</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Šipka v růžici ukazuje <b>doprava dolů</b>, přesně mezi východ a jih. Jaká je to světová strana?</p>
+      <ol class="kroky">
+        <li>Nahoře je sever. Vpravo je tedy východ a dole jih.</li>
+        <li>Šipka je mezi dolní a pravou stranou – mezi jihem a východem.</li>
+        <li>Složím obě slova. Jih říkám první: jiho-východ.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Šipka ukazuje na <b>jihovýchod (JV)</b>.</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="strany" class="active">🧭 Světové strany</button>
@@ -102,6 +134,8 @@ const MISTA = {
 };
 
 const KRAJE = [
+  { kraj: 'Hlavní město Praha', mesto: 'Praha', pozn: 'Praha je hlavní město a zároveň samostatný kraj.' },
+  { kraj: 'Středočeský kraj', mesto: 'Praha', pozn: 'Krajský úřad Středočeského kraje sídlí v Praze, i když Praha do tohoto kraje nepatří.' },
   { kraj: 'Jihomoravský kraj', mesto: 'Brno' },
   { kraj: 'Moravskoslezský kraj', mesto: 'Ostrava' },
   { kraj: 'Plzeňský kraj', mesto: 'Plzeň' },
@@ -228,8 +262,9 @@ function kamZajdes() {
 function kraje() {
   const p = $('plocha');
   const k = Uloha.nahodne(KRAJE);
-  const jine = Uloha.zamichej(KRAJE.filter(x => x.mesto !== k.mesto)).slice(0, 3);
-  p.innerHTML = `<div class="zadani">Které město je krajským městem?</div>
+  const mesta = [...new Set(KRAJE.map(x => x.mesto))].filter(m => m !== k.mesto);
+  const jine = Uloha.zamichej(mesta).slice(0, 3).map(mesto => ({ mesto }));
+  p.innerHTML = `<div class="zadani">Ve kterém městě sídlí krajský úřad? <small>(Česko má 14 krajů.)</small></div>
     <div class="karta"><div class="obrazek">🇨🇿</div><div class="situace">${k.kraj}</div></div>`;
   const odezva = document.createElement('div');
   odezva.className = 'odezva';
@@ -237,8 +272,8 @@ function kraje() {
     kam: p, odezva,
     moznosti: Uloha.zamichej([k, ...jine]).map(x => ({ klic: x.mesto, popis: x.mesto })),
     spravnyKlic: k.mesto,
-    zpravaOk: `✅ Krajským městem je ${k.mesto}.`,
-    zpravaChyba: 'To je krajské město jiného kraje.',
+    zpravaOk: k.pozn ? `✅ ${k.pozn}` : `✅ Krajským městem je ${k.mesto}.`,
+    zpravaChyba: 'Tam sídlí úřad jiného kraje – zkus to znovu.',
     poSpravne: skore.vyhodnot,
     dalsi: novaUloha,
   });

@@ -101,15 +101,21 @@ function toRomanText(n){
   return `(${toRomanText(tisice)})${zbytek?zakladni(zbytek):''}`;
 }
 
+/* Převod zápisu na číslo; přijme jen ustálený tvar – ten, který by vytvořil toRomanText
+   (MMMM ani (I) neprojdou, správně je (IV) a M). */
 function fromRoman(vstup){
-  let s=vstup.toUpperCase().replace(/\s+/g,'');
+  const s=vstup.toUpperCase().replace(/\s+/g,'');
+  const v=rozeberRimske(s);
+  return v!==null&&toRomanText(v)===s?v:null;
+}
+function rozeberRimske(s){
   if(!s)return null;
   // závorky = nadtržení: obsah závorky se násobí tisícem
   const zavorka=s.match(/^\((.+)\)([IVXLCDM]*)$/);
   if(zavorka){
-    const uvnitr=fromRoman(zavorka[1]);
+    const uvnitr=rozeberRimske(zavorka[1]);
     if(uvnitr===null)return null;
-    const zbytek=zavorka[2]?fromRoman(zavorka[2]):0;
+    const zbytek=zavorka[2]?rozeberRimske(zavorka[2]):0;
     if(zbytek===null||zbytek>=1000)return null;
     return uvnitr*1000+zbytek;
   }
@@ -159,7 +165,13 @@ $('arabic').oninput = () => {
 $('roman').oninput = () => {
   $('err').textContent = '';
   const v = fromRoman($('roman').value.trim());
-  if (v === null) { $('err').textContent = 'Neplatné římské číslo. Nadtržení zapiš závorkami, například (V)M = 6000.'; $('breakdown').innerHTML = ''; return; }
+  if (v === null) {
+    const s = $('roman').value.trim().toUpperCase().replace(/\s+/g, ''), n = rozeberRimske(s);
+    $('err').textContent = n !== null && n !== 0
+      ? `Hodnota by byla ${n.toLocaleString('cs-CZ')}, ale ustálený zápis je ${toRomanText(n)}.`
+      : 'Neplatné římské číslo. Nadtržení zapiš závorkami, například (VI) = 6000.';
+    $('breakdown').innerHTML = ''; return;
+  }
   $('arabic').value = v; breakdown(v);
   $('nahled').innerHTML = v >= 4000 ? toRomanHtml(v) : '';
 };

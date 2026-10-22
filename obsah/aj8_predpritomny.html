@@ -6,6 +6,8 @@
   <title>Předpřítomný čas</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -22,6 +24,46 @@
 <body>
   <h1>🔄 Předpřítomný čas</h1>
   <p class="podtitul">Pro 8. ročník: present perfect – zkušenosti, změny a čerstvé zprávy.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Předpřítomný čas</summary>
+    <div class="obsah">
+      <p>Čeština má jen jeden minulý čas, angličtina dva. Předpřítomný čas (<span lang="en">present perfect</span>)
+        se dívá na minulost <b>z dnešního pohledu</b>: zajímá ho výsledek, zkušenost nebo čerstvá zpráva, ne přesné
+        <b>kdy</b>. Minulý čas prostý naopak vypráví o uzavřené minulosti v určitém čase.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Tvar</h3><p><span lang="en">I / you / we / they <b>have</b> + 3. tvar</span><br>
+          <span lang="en">he / she / it <b>has</b> + 3. tvar</span><br>
+          <span lang="en">go – went – <b>gone</b>, see – saw – <b>seen</b>, visit – visited – <b>visited</b></span></p></article>
+        <article class="vyklad-karta"><h3>Signální slova</h3><p><span lang="en"><b>ever</b></span> (někdy), <span lang="en"><b>never</b></span> (nikdy),
+          <span lang="en"><b>just</b></span> (právě), <span lang="en"><b>already</b></span> (už), <span lang="en"><b>yet</b></span> (už / ještě v otázce a záporu),
+          <span lang="en">for, since</span>. Stojí mezi <span lang="en">have</span> a příčestím, <span lang="en">yet</span> na konci věty.</p></article>
+        <article class="vyklad-karta"><h3>Kdy minulý čas</h3><p>Je-li ve větě určený čas v minulosti – <span lang="en">yesterday, last week, in 2019, two days ago</span> –
+          použij minulý čas prostý: <span lang="en">I lost my keys yesterday.</span></p></article>
+      </div>
+      <p>Porovnej: <span lang="en">I have lost my keys.</span> – klíče <b>pořád</b> nemám, proto nemůžu odemknout.
+        <span lang="en">I lost my keys yesterday.</span> – jen sděluji, kdy se to stalo.</p>
+      <p>Typická chyba: <span lang="en">I have seen him yesterday.</span> ✗ – s <span lang="en">yesterday</span> patří
+        <span lang="en">I saw him yesterday.</span> V americké angličtině se s <span lang="en">just, already, yet</span>
+        často užívá i minulý čas (<span lang="en">Did you eat yet?</span>), v britské je obvyklý předpřítomný.</p>
+      <aside class="zapamatuj"><span lang="en">have / has</span> + 3. tvar slovesa = výsledek nebo zkušenost do teď.
+        Určený čas v minulosti → minulý čas prostý.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: předpřítomný, či minulý?</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Doplň sloveso <span lang="en">finish</span>: <span lang="en">She ___ her homework, so she can go out now.</span></p>
+      <ol class="kroky">
+        <li>Hledám určený čas v minulosti (<span lang="en">yesterday, last…</span>) – <b>žádný tu není</b>.</li>
+        <li>Věta mluví o výsledku teď: úkol je hotový, <span lang="en">so she can go out now</span>. To je předpřítomný čas.</li>
+        <li>Podmět <span lang="en">she</span> → <span lang="en">has</span>.</li>
+        <li><span lang="en">finish</span> je pravidelné, 3. tvar je <span lang="en">finished</span>.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ <span lang="en">She <b>has finished</b> her homework, so she can go out now.</span></p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="tvar" class="active">✏️ Have / has + příčestí</button>
@@ -54,37 +96,36 @@ const skore = Uloha.skore('metodus_aj8_predpritomny', $('skore'));
 let rezim = 'tvar';
 function odezvaEl() { const d = document.createElement('div'); d.className = 'odezva'; return d; }
 
-/* sloveso: základní tvar, minulý čas, příčestí trpné, český význam */
+/* sloveso: základní tvar, minulý čas, příčestí trpné, český význam, doplnění, které se k němu hodí */
 const SLOVESA = [
-  { z: 'go', m: 'went', p: 'gone', cz: 'jít, jet' },
-  { z: 'see', m: 'saw', p: 'seen', cz: 'vidět' },
-  { z: 'eat', m: 'ate', p: 'eaten', cz: 'jíst' },
-  { z: 'write', m: 'wrote', p: 'written', cz: 'psát' },
-  { z: 'do', m: 'did', p: 'done', cz: 'dělat' },
-  { z: 'take', m: 'took', p: 'taken', cz: 'vzít' },
-  { z: 'be', m: 'was/were', p: 'been', cz: 'být' },
-  { z: 'make', m: 'made', p: 'made', cz: 'vyrobit' },
-  { z: 'drink', m: 'drank', p: 'drunk', cz: 'pít' },
-  { z: 'speak', m: 'spoke', p: 'spoken', cz: 'mluvit' },
-  { z: 'buy', m: 'bought', p: 'bought', cz: 'koupit' },
-  { z: 'find', m: 'found', p: 'found', cz: 'najít' },
-  { z: 'break', m: 'broke', p: 'broken', cz: 'rozbít' },
-  { z: 'forget', m: 'forgot', p: 'forgotten', cz: 'zapomenout' },
-  { z: 'visit', m: 'visited', p: 'visited', cz: 'navštívit' },
-  { z: 'finish', m: 'finished', p: 'finished', cz: 'dokončit' },
+  { z: 'go', m: 'went', p: 'gone', cz: 'jít, jet', d: ['to London', 'home', 'to the cinema'] },
+  { z: 'see', m: 'saw', p: 'seen', cz: 'vidět', d: ['the film', 'a rainbow', 'that photo'] },
+  { z: 'eat', m: 'ate', p: 'eaten', cz: 'jíst', d: ['all the cake', 'the sandwich', 'breakfast'] },
+  { z: 'write', m: 'wrote', p: 'written', cz: 'psát', d: ['a letter', 'an email', 'a poem'] },
+  { z: 'do', m: 'did', p: 'done', cz: 'dělat', d: ['the homework', 'the shopping', 'the exercise'] },
+  { z: 'take', m: 'took', p: 'taken', cz: 'vzít', d: ['the bus', 'a photo', 'the medicine'] },
+  { z: 'be', m: 'was/were', p: 'been', cz: 'být', d: ['to Paris', 'ill', 'at the zoo'] },
+  { z: 'make', m: 'made', p: 'made', cz: 'vyrobit', d: ['a cake', 'a mistake', 'dinner'] },
+  { z: 'drink', m: 'drank', p: 'drunk', cz: 'pít', d: ['all the milk', 'the tea', 'some water'] },
+  { z: 'speak', m: 'spoke', p: 'spoken', cz: 'mluvit', d: ['to the teacher', 'English', 'to the doctor'] },
+  { z: 'buy', m: 'bought', p: 'bought', cz: 'koupit', d: ['a new bike', 'the tickets', 'some bread'] },
+  { z: 'find', m: 'found', p: 'found', cz: 'najít', d: ['the keys', 'a coin', 'the answer'] },
+  { z: 'break', m: 'broke', p: 'broken', cz: 'rozbít', d: ['the window', 'a cup', 'the record'] },
+  { z: 'forget', m: 'forgot', p: 'forgotten', cz: 'zapomenout', d: ['the password', 'the address', 'the umbrella'] },
+  { z: 'visit', m: 'visited', p: 'visited', cz: 'navštívit', d: ['the museum', 'Prague', 'the castle'] },
+  { z: 'finish', m: 'finished', p: 'finished', cz: 'dokončit', d: ['the homework', 'the book', 'the exercise'] },
 ];
 const PODMETY = [
   { t: 'I', have: 'have' }, { t: 'You', have: 'have' }, { t: 'We', have: 'have' },
   { t: 'They', have: 'have' }, { t: 'He', have: 'has' }, { t: 'She', have: 'has' },
   { t: 'My brother', have: 'has' }, { t: 'Tom', have: 'has' },
 ];
-const PREDMETY = ['the film', 'my homework', 'this book', 'the news', 'that song', 'the exercise'];
 
 function tvar() {
   const p = $('plocha');
   const o = Uloha.nahodne(PODMETY);
   const s = Uloha.nahodne(SLOVESA);
-  const predmet = Uloha.nahodne(PREDMETY);
+  const predmet = Uloha.nahodne(s.d);
   const spravny = `${o.have} ${s.p}`;
   const jine = [`${o.have === 'have' ? 'has' : 'have'} ${s.p}`, `${o.have} ${s.m}`, `${o.have} ${s.z}`];
 
@@ -136,25 +177,26 @@ function rozliseni() {
 }
 
 const PRISLOVCE = [
-  { veta: 'Have you <span class="mezera">?</span> been to Paris?', spravne: 'ever', vyznam: 'někdy (v otázce na zkušenost)' },
-  { veta: 'I have <span class="mezera">?</span> seen a shark.', spravne: 'never', vyznam: 'nikdy – věta už je záporná' },
-  { veta: 'She has <span class="mezera">?</span> arrived, she is in the hall.', spravne: 'just', vyznam: 'právě teď' },
-  { veta: 'We have <span class="mezera">?</span> finished, you don\'t have to help.', spravne: 'already', vyznam: 'už (dřív, než se čekalo)' },
-  { veta: 'They haven\'t called <span class="mezera">?</span>.', spravne: 'yet', vyznam: 'zatím (v záporu a otázce, stojí na konci)' },
-  { veta: 'Have you finished your homework <span class="mezera">?</span>?', spravne: 'yet', vyznam: 'už (v otázce na konci věty)' },
-  { veta: 'I have <span class="mezera">?</span> lost my phone twice this year.', spravne: 'already', vyznam: 'už' },
-  { veta: 'Has he <span class="mezera">?</span> tried Czech food?', spravne: 'ever', vyznam: 'někdy' },
+  { veta: 'Have you <span class="mezera">?</span> been to Paris?', cz: 'Byl jsi někdy v Paříži?', spravne: 'ever', taky: ['already'], vyznam: 'někdy (v otázce na zkušenost)' },
+  { veta: 'I have <span class="mezera">?</span> seen a shark.', cz: 'Nikdy jsem neviděl žraloka.', spravne: 'never', taky: ['just', 'already'], vyznam: 'nikdy – v angličtině stačí jeden zápor' },
+  { veta: 'She has <span class="mezera">?</span> arrived, she is in the hall.', cz: 'Právě přišla, je v hale.', spravne: 'just', taky: ['already'], vyznam: 'právě teď' },
+  { veta: 'We have <span class="mezera">?</span> finished, you don\'t have to help.', cz: 'Už jsme hotovi, nemusíš pomáhat.', spravne: 'already', taky: ['just'], vyznam: 'už (dřív, než se čekalo)' },
+  { veta: 'They haven\'t called <span class="mezera">?</span>.', cz: 'Zatím nezavolali.', spravne: 'yet', vyznam: 'zatím (v záporu a otázce, stojí na konci)' },
+  { veta: 'Have you finished your homework <span class="mezera">?</span>?', cz: 'Máš už hotový úkol?', spravne: 'yet', taky: ['already'], vyznam: 'už (v otázce na konci věty)' },
+  { veta: 'I have <span class="mezera">?</span> lost my phone twice this year.', cz: 'Letos jsem už dvakrát ztratil telefon.', spravne: 'already', vyznam: 'už' },
+  { veta: 'Has he <span class="mezera">?</span> tried Czech food?', cz: 'Ochutnal někdy české jídlo?', spravne: 'ever', taky: ['already', 'just'], vyznam: 'někdy' },
 ];
 function prislovce() {
   const p = $('plocha');
   const u = Uloha.nahodne(PRISLOVCE);
   p.innerHTML = `<div class="zadani">Doplň správné příslovce:</div>
-    <div class="karta"><div class="veta-en">${u.veta}</div></div>`;
+    <div class="karta"><div class="veta-en">${u.veta}</div><div class="situace">${u.cz}</div></div>`;
   const odezva = odezvaEl();
+  // rušivé nesmí být příslovce, které by se do věty gramaticky hodilo taky
   Uloha.vyber({
     kam: p, odezva, trida: 'velke',
     moznosti: Uloha.zamichej([u.spravne,
-      ...Uloha.zamichej(['ever', 'never', 'just', 'already', 'yet'].filter(t => t !== u.spravne)).slice(0, 3)])
+      ...Uloha.zamichej(['ever', 'never', 'just', 'already', 'yet'].filter(t => t !== u.spravne && !(u.taky || []).includes(t))).slice(0, 3)])
       .map(t => ({ klic: t, popis: t })),
     spravnyKlic: u.spravne,
     zpravaOk: `✅ ${u.spravne} – ${u.vyznam}`,
@@ -171,9 +213,9 @@ const ZKUSENOSTI = [
   { cz: 'Už jsi někdy jedl sushi?', en: 'Have you ever eaten sushi?',
     jine: ['Did you ever eaten sushi?', 'Have you ever ate sushi?', 'Are you ever eating sushi?'] },
   { cz: 'Právě dopsala e-mail.', en: 'She has just written an email.',
-    jine: ['She just wrote an email now.', 'She has just wrote an email.', 'She is just write an email.'] },
+    jine: ['She has just writing an email.', 'She has just wrote an email.', 'She is just write an email.'] },
   { cz: 'Ještě jsme neviděli ten film.', en: "We haven't seen the film yet.",
-    jine: ['We don\'t have seen the film yet.', 'We haven\'t saw the film yet.', 'We didn\'t see the film yet.'] },
+    jine: ['We don\'t have seen the film yet.', 'We haven\'t saw the film yet.', 'We haven\'t see the film yet.'] },
   { cz: 'Bydlím tady od roku 2020.', en: 'I have lived here since 2020.',
     jine: ['I live here since 2020.', 'I have lived here for 2020.', 'I am living here since 2020.'] },
   { cz: 'Znám ho pět let.', en: 'I have known him for five years.',

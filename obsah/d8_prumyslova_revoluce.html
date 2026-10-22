@@ -6,6 +6,8 @@
   <title>Průmyslová revoluce a národní obrození</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -19,11 +21,65 @@
       color: var(--text-faint); font-size: 0.78rem; }
     .osa span { background: var(--bg-control); border: 1px solid var(--border);
       border-radius: 6px; padding: 4px 9px; }
+    .foto-atlas { width:min(1120px,100%); margin:22px auto; }
+    .foto-atlas h2 { margin:0 0 5px; text-align:center; font-size:1.22rem; }
+    .foto-atlas > p { margin:0 auto 12px; max-width:820px; text-align:center; color:var(--text-muted,var(--text)); }
+    .foto-atlas h3 { margin:16px 0 8px; font-size:1.02rem; }
+    .foto-mrizka { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
+    .foto-karta { margin:0; overflow:hidden; border:1px solid var(--border); border-radius:14px; background:var(--bg-card); box-shadow:var(--shadow-sm); }
+    .foto-karta img { display:block; width:100%; aspect-ratio:4/3; object-fit:cover; }
+    .foto-karta img.cele { object-fit:contain; background:#1d1c1a; }
+    .foto-karta figcaption { padding:10px 11px 12px; font-size:.9rem; line-height:1.35; }
+    .foto-karta strong { display:block; margin-bottom:3px; color:var(--accent); font-size:1rem; }
+    @media (max-width:820px) { .foto-mrizka { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+    @media (max-width:440px) { .foto-mrizka { grid-template-columns:1fr; } }
   </style>
 </head>
 <body>
   <h1>🏭 Průmyslová revoluce a národní obrození</h1>
   <p class="podtitul">Pro 8. ročník: stroje, továrny, proměna společnosti a zrod moderního českého národa.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Stroje, továrny a národní obrození</summary>
+    <div class="obsah">
+      <p><b>Průmyslová revoluce</b> začala v 18. století v <b>Anglii</b>. Dřív se vyrábělo ručně v dílnách,
+        teď začaly práci dělat <b>stroje</b>. Klíčový byl <b>parní stroj</b>, který zdokonalil <b>James Watt</b> (1769):
+        poháněl stroje v továrnách, lodě i lokomotivy. <b>George Stephenson</b> prosadil železnici – roku <b>1825</b>
+        vyjela v Anglii první veřejná parní železnice.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Nová společnost</h3><p>Vznikli <b>tovární dělníci</b> a <b>podnikatelé</b>.
+          Města rychle rostla. Dělníci trpěli dlouhou pracovní dobou, dětskou prací a špatným bydlením, a proto
+          zakládali <b>odbory</b> a stávkovali.</p></article>
+        <article class="vyklad-karta"><h3>České země</h3><p>Nejdřív se rozvíjela <b>textilní výroba</b>, později hutnictví
+          a strojírenství. Do Prahy přijel první parní vlak roku <b>1845</b>.</p></article>
+        <article class="vyklad-karta"><h3>Národní obrození</h3><p>Obnova češtiny a vědomí vlastních dějin:
+          <b>Dobrovský</b> (mluvnice), <b>Jungmann</b> (slovník), <b>Palacký</b> (Dějiny národu českého),
+          <b>Mácha</b> (Máj, 1836), <b>Němcová</b> (Babička, 1855).</p></article>
+      </div>
+      <p>Obojí spolu souvisí: s průmyslem rostla města, školy a noviny – a ty pomáhaly šířit češtinu mezi lidmi.
+        V revolučním roce <b>1848</b> byla zrušena <b>robota</b>. Roku <b>1868</b> byl položen základní kámen
+        <b>Národního divadla</b>, postaveného ze sbírek lidí po celé zemi.</p>
+      <p>Typická chyba: <b>koněspřežka</b> z Českých Budějovic do Lince nebyla parní železnice – vagony táhli koně.</p>
+      <aside class="zapamatuj">Anglie, 18. století, parní stroj → továrny a železnice → dělníci a podnikatelé.
+        Současně u nás národní obrození: čeština, literatura, dějiny.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: seřaď události doby páry</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Seřaď od nejstarší: do Prahy přijel první parní vlak, James Watt patentoval zdokonalený
+        parní stroj, koněspřežka zahájila provoz po celé trati, v Anglii vyjela první veřejná parní železnice.</p>
+      <ol class="kroky">
+        <li>Hledám <b>příčinu</b>: bez parního stroje by nebyla parní lokomotiva. Na začátek patří <b>Watt (1769)</b>.</li>
+        <li>Revoluce začala v Anglii, tam vyjela parní železnice dřív než u nás – <b>první veřejná železnice (1825)</b>.</li>
+        <li>Koněspřežka nepotřebovala páru, táhli ji koně. Po celé trati jezdila od roku <b>1832</b>.</li>
+        <li>Parní vlak dorazil do Prahy až později – <b>1845</b>.</li>
+        <li>Kontrola letopočty: 1769 → 1825 → 1832 → 1845.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Wattův stroj (1769) → železnice v Anglii (1825) → koněspřežka (1832) → parní vlak v Praze (1845)</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="osobnosti" class="active">👤 Osobnosti</button>
@@ -39,9 +95,26 @@
     <span class="skore" id="skore"></span>
   </div>
 
-  <div class="osa"><span>1769 Wattův parní stroj</span><span>1825 první veřejná železnice</span><span>1830 první koněspřežka Č. Budějovice–Linec</span><span>1836 Máchův Máj</span><span>1848 revoluční rok a zrušení roboty</span><span>1868 základní kámen Národního divadla</span></div>
+  <div class="osa"><span>1769 Wattův parní stroj</span><span>1825 první veřejná železnice</span><span>1832 koněspřežka Č. Budějovice–Linec v celé délce</span><span>1836 Máchův Máj</span><span>1848 revoluční rok a zrušení roboty</span><span>1868 základní kámen Národního divadla</span></div>
 
-  <p class="napoveda">Průmyslová revoluce začala v <b>Anglii</b> v 18. století. Klíčový byl <b>parní stroj</b>, který pohnal továrny, lodě i železnici. V českých zemích probíhalo současně <b>národní obrození</b> – obnova českého jazyka, literatury a vědomí vlastních dějin.</p>
+  <section class="foto-atlas" aria-labelledby="dokladyNadpis">
+    <h2 id="dokladyNadpis">Doba páry a obrození na vlastní oči</h2>
+    <p>Dobové obrazy, fotografie a portréty. Všímej si, jak stroje změnily práci a kdo stál u zrodu moderního českého národa.</p>
+    <h3>Stroje a továrny</h3>
+    <div class="foto-mrizka">
+      <figure class="foto-karta"><img src="img/d/d8-prumysl-wattuv-parni-stroj.webp" alt="Wattův parní stroj v muzeu: zelený litinový rám s vahadlem nahoře, válcem a velkým setrvačníkem." width="1024" height="760" loading="lazy"><figcaption><strong>Parní stroj Wattova typu</strong>James Watt stroj zdokonalil (patent 1769): oddělený kondenzátor ušetřil uhlí a velké kolo – setrvačník – měnilo pohyb pístu na otáčení. Stroj tak mohl pohánět stroje v továrnách.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/d/d8-prumysl-tovarni-hala.webp" alt="Dobová rytina tkalcovny z roku 1835: dlouhá hala plná mechanických stavů poháněných řemeny od stropních hřídelí, u strojů pracují ženy." width="1152" height="744" loading="lazy"><figcaption><strong>Tkalcovna v Anglii (1835)</strong>Desítky mechanických stavů pohání jediný parní stroj přes hřídele a řemeny pod stropem. Pracovaly tu hlavně ženy a děti, často 12 a více hodin denně.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/d/d8-prumysl-lokomotiva.webp" alt="Stará fotografie lokomotivy Locomotion z roku 1825 se svislým komínem a dvěma připojenými vozíky." width="1152" height="798" loading="lazy"><figcaption><strong>Lokomotiva Locomotion (1825)</strong>Parní lokomotiva George Stephensona pro první veřejnou železnici Stockton – Darlington v Anglii. Železnice zrychlila dopravu lidí i zboží.</figcaption></figure>
+    </div>
+    <h3>Národní obrození</h3>
+    <div class="foto-mrizka">
+      <figure class="foto-karta"><img class="cele" src="img/d/d8-prumysl-jungmann.webp" alt="Malovaný portrét Josefa Jungmanna od Antonína Machka: starší muž s rozcuchanými vlasy v tmavém plášti." width="1152" height="1536" loading="lazy"><figcaption><strong>Josef Jungmann</strong>Autor pětidílného Slovníku česko-německého (1834–1839). Dokazoval, že češtinou lze psát vědu i krásnou literaturu.</figcaption></figure>
+      <figure class="foto-karta"><img class="cele" src="img/d/d8-prumysl-palacky.webp" alt="Litografický portrét Františka Palackého od Eduarda Kaisera: muž v tmavém kabátě s motýlkem, pod obrazem podpis." width="1152" height="1756" loading="lazy"><figcaption><strong>František Palacký</strong>Historik zvaný otec národa, autor Dějin národu českého v Čechách a v Moravě; v revolučním roce 1848 přední český politik.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/d/d8-prumysl-narodni-divadlo.webp" alt="Černobílá dobová fotografie Národního divadla v Praze na nábřeží Vltavy s tmavou kupolí nad hledištěm." width="1152" height="816" loading="lazy"><figcaption><strong>Národní divadlo</strong>Postaveno ze sbírek celého národa: základní kámen 1868, otevřeno 1881 a po požáru znovu 1883. Dobová fotografie ukazuje budovu na nábřeží Vltavy.</figcaption></figure>
+    </div>
+  </section>
+
+  <p class="napoveda">Průmyslová revoluce začala v <b>Anglii</b> v 18. století. Klíčový byl <b>parní stroj</b>, který pohnal továrny, lodě i železnici. V českých zemích probíhalo současně <b>národní obrození</b> – obnova českého jazyka, literatury a vědomí vlastních dějin. Na koněspřežce z Českých Budějovic do Lince se na prvním úseku jezdilo od roku <b>1827</b>, po celé trati od roku <b>1832</b>.</p>
 
 <script>
 const $ = id => document.getElementById(id);
@@ -94,8 +167,8 @@ const UDALOSTI = [
     "co": "v Anglii vyjela první veřejná parní železnice"
   },
   {
-    "rok": 1830,
-    "co": "zahájen provoz koněspřežky z Českých Budějovic do Lince"
+    "rok": 1832,
+    "co": "koněspřežka z Českých Budějovic do Lince zahájila provoz po celé trati"
   },
   {
     "rok": 1836,

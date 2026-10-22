@@ -6,6 +6,8 @@
 <title>🏔️ Řeky a pohoří ČR</title>
 <link rel="stylesheet" href="../common.css">
 <link rel="stylesheet" href="../vyuka.css">
+<link rel="stylesheet" href="../vyklad.css">
+<script src="../vyklad.js" defer></script>
 <script src="../theme.js"></script>
 <script src="../podpis.js" defer></script>
 <script src="../kostra.js" defer></script>
@@ -21,6 +23,44 @@
 <body>
   <h1>🏔️ Řeky a pohoří ČR</h1>
   <p class="podtitul">Série dvanácti otázek: poznej řeku nebo pohoří podle popisu a zjisti, kam která řeka odvádí vodu. Po chybě máš druhý pokus, na konci přehled chyb.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Řeky jako strom, hory kolem hranic</summary>
+    <div class="obsah">
+      <p>Řeky si nepamatuj jednotlivě, ale jako <b>strom</b>: malé potoky se vlévají do řek, ty do větších řek a největší
+        do moře. Každá řeka se vlévá vždy do <b>nejbližšího většího toku</b>, ne rovnou do moře.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>🌊 Strom Labe</h3><p>Do <b>Vltavy</b> tečou Lužnice, Otava, Sázava a Berounka.
+          Vltava, Ohře, Jizera a Orlice tečou do <b>Labe</b> → Severní moře.</p></article>
+        <article class="vyklad-karta"><h3>🌊 Strom Moravy</h3><p>Jihlava → <b>Svratka</b> → <b>Dyje</b> → <b>Morava</b>; do Moravy teče i Bečva.
+          Morava → <b>Dunaj</b> → Černé moře.</p></article>
+        <article class="vyklad-karta"><h3>🌊 Strom Odry</h3><p><b>Opava</b> ústí u Ostravy do <b>Odry</b> → Baltské moře.</p></article>
+        <article class="vyklad-karta"><h3>⛰️ Pohoří po obvodu</h3><p>Sever: Lužické, Jizerské hory, <b>Krkonoše</b> (Sněžka 1 603 m).
+          Severozápad: Krušné hory. Západ: Český les. Jihozápad: <b>Šumava</b>. Jih: Novohradské hory. Východ: Orlické hory,
+          Jeseníky, <b>Beskydy</b>, Bílé Karpaty.</p></article>
+      </div>
+      <p>Uvnitř země leží nižší <b>Českomoravská vrchovina</b> (mezi Čechami a Moravou) a <b>Brdy</b> jihozápadně od Prahy.
+        Pohoří proto poznáš hlavně podle toho, <b>u které hranice</b> leží a se kterým sousedem.</p>
+      <p><b>Typická chyba:</b> na otázku „Kam se vlévá Vltava?“ odpovědět „do Severního moře“. Správně je <b>do Labe</b> –
+        moře je až konec celé cesty.</p>
+      <aside class="zapamatuj">Řeka se vlévá do nejbližšího většího toku. Labe → Severní moře, Odra → Baltské moře,
+        Morava → Dunaj → Černé moře. Hory hledej po obvodu republiky.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: kam se vlévá Jihlava</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Kam se vlévá řeka Jihlava? Možnosti: Morava, Svratka, Dunaj, Vltava.</p>
+      <ol class="kroky">
+        <li>Jihlava pramení na Českomoravské vrchovině a teče na jihovýchod, na Moravu – Vltava v Čechách to tedy není.</li>
+        <li>Vybavím si strom Moravy: Jihlava → Svratka → Dyje → Morava → Dunaj.</li>
+        <li>Ptají se, kam se vlévá, takže hledám <b>nejbližší</b> větší tok, ne konec cesty.</li>
+        <li>Nejbližší je <b>Svratka</b>; Morava a Dunaj jsou až dál po proudu.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Jihlava se vlévá do Svratky.</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="reky" class="active">🌊 Řeky</button>

@@ -60,7 +60,9 @@ function laborator() {
  }));
  $('labReset').addEventListener('click',()=>{labStage=0;laborator();});
 }
-let solutionSalt=20,solutionWater=180;
+/* výchozí směs záměrně NENÍ 10% – úkol by byl vyřešený předem */
+const SOLUTION_START=[15,200];
+let [solutionSalt,solutionWater]=SOLUTION_START;
 function roztokZaklad() {
  $('plocha').innerHTML=`<div class="lab-grid"><section class="lab-panel"><h2>Namíchej solný roztok</h2><p>Měň hmotnosti a sleduj, jak se mění podíl soli. Předpokládáme úplné rozpuštění a žádné ztráty.</p><label for="saltMass">Sůl: <output id="saltValue"></output><input id="saltMass" type="range" min="0" max="30" step="1" value="${solutionSalt}"></label><label for="waterMass">Voda: <output id="waterValue"></output><input id="waterMass" type="range" min="100" max="400" step="5" value="${solutionWater}"></label><div class="lab-controls"><button id="dilute">Přidat 50 g vody</button><button id="solutionReset">Výchozí směs</button></div></section><section class="lab-panel" aria-live="polite"><h2>Co je v celé směsi?</h2><div id="solutionNumber" class="lab-number"></div><div class="lab-meter" aria-hidden="true"><div class="solute" id="soluteBar"></div><div class="solvent" id="solventBar"></div></div><p>🟠 sůl · 🔵 voda<br>Pruh znázorňuje podíly hmotnosti, nikoli objemy ani barvu roztoku.</p><div id="solutionMath"></div></section></div><section class="lab-panel"><h2>Tvůj úkol: připrav 10% roztok</h2><p>Nastav posuvníky tak, aby sůl tvořila přesně desetinu celkové hmotnosti. Existuje více správných řešení.</p><div class="lab-controls"><button id="solutionCheck">Zkontrolovat</button><button id="solutionHint">Nápověda</button></div><p id="solutionFeedback" role="status"></p></section>`;
  const render=()=>{
@@ -73,8 +75,8 @@ function roztokZaklad() {
  };
  ['saltMass','waterMass'].forEach(id=>$(id).addEventListener('input',render));
  $('dilute').addEventListener('click',()=>{$('waterMass').value=solutionWater+50;render();$('solutionFeedback').textContent='Přidáním vody se roztok zředil. Hmotnost soli zůstala stejná.';});
- $('solutionReset').addEventListener('click',()=>{$('saltMass').value=20;$('waterMass').value=180;render();});
+ $('solutionReset').addEventListener('click',()=>{$('saltMass').value=SOLUTION_START[0];$('waterMass').value=SOLUTION_START[1];render();});
  $('solutionCheck').addEventListener('click',()=>{$('solutionFeedback').textContent=solutionSalt*9===solutionWater?'✓ Správně! Na 1 hmotnostní díl soli připadá 9 dílů vody.':'Ještě uprav poměr. Pro 10 % musí platit: hmotnost vody = 9 × hmotnost soli.';});
- $('solutionHint').addEventListener('click',()=>{$('solutionFeedback').textContent='Například 20 g soli + 180 g vody = 200 g roztoku. Sůl tvoří 20 / 200 = 0,1 = 10 %.';});
+ $('solutionHint').addEventListener('click',()=>{$('solutionFeedback').textContent='Například 10 g soli + 90 g vody = 100 g roztoku a sůl tvoří 10 / 100 = 0,1 = 10 %. Vody musí být vždy 9× víc než soli – najdi takovou dvojici na posuvnících.';});
  render();
 }

@@ -6,6 +6,8 @@
 <title>🌍 Světová hlavní města</title>
 <link rel="stylesheet" href="../common.css">
 <link rel="stylesheet" href="../vyuka.css">
+<link rel="stylesheet" href="../vyklad.css">
+<script src="../vyklad.js" defer></script>
 <script src="../theme.js"></script>
 <script src="../podpis.js" defer></script>
 <script src="../kostra.js" defer></script>
@@ -15,6 +17,7 @@
 <style>
   .svetadil { display: block; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-faint); margin-bottom: 4px; }
   .otazka-text { display: block; font-size: 1.05rem; font-weight: 500; color: var(--text-muted); }
+  .vlajka-mala { display: inline-block; width: 1.6em; height: auto; aspect-ratio: 4 / 3; vertical-align: -0.12em; border: 1px solid var(--border-strong); border-radius: 2px; }
   .prehled-chyb .svetadil { display: none; }
   .prehled-chyb .otazka-text { display: inline; font-size: inherit; }
 </style>
@@ -22,6 +25,42 @@
 <body>
   <h1>🌍 Světová hlavní města</h1>
   <p class="podtitul">Série patnácti států: vyber jejich hlavní město. Nabídka je vždy ze stejného světadílu, takže nestačí tipnout podle zeměpisu. Po chybě máš druhý pokus, na konci přehled chyb.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Jak si zapamatovat hlavní města</summary>
+    <div class="obsah">
+      <p><b>Hlavní město</b> je sídlo vlády, parlamentu a hlavy státu. Neznamená to, že je to největší nebo
+        nejznámější město. Právě tady se nejčastěji chybuje – a v tomto kvízu jsou nabídky vždy ze <b>stejného světadílu</b>,
+        takže tipování podle polohy nepomůže.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Ne největší město</h3><p>Austrálie → <b>Canberra</b> (ne Sydney), Kanada → <b>Ottawa</b>,
+          Turecko → <b>Ankara</b> (ne Istanbul), USA → <b>Washington</b>, Švýcarsko → <b>Bern</b> (ne Curych).</p></article>
+        <article class="vyklad-karta"><h3>Nově postavená</h3><p>Některé státy si hlavní město vybudovaly nebo přesunuly:
+          Brazílie → <b>Brasília</b>, Nigérie → <b>Abuja</b>.</p></article>
+        <article class="vyklad-karta"><h3>Pomůcky</h3><p>Jméno města je často podobné jménu státu (Mexiko → Ciudad de México,
+          Tunisko → Tunis, Lucembursko → Lucemburk). Pomáhá i jazyk: španělská jména v Latinské Americe, arabská v severní Africe.</p></article>
+      </div>
+      <p>Jak se učit: neber města jako seznam, ale <b>po světadílech</b> a vždy si město ukaž na mapě. Když neznáš správnou
+        odpověď, vylučuj: patří ostatní města k jiným státům, které znáš? Velké přístavní a obchodní město bývá
+        „past“ – zeptej se, zda je opravdu sídlem vlády.</p>
+      <aside class="zapamatuj">Hlavní město = sídlo vlády, ne nutně největší město. Uč se po světadílech a s mapou,
+        zvlášť si zapamatuj výjimky: Canberra, Ottawa, Ankara, Bern, Brasília, Abuja, Wellington.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: hlavní město Austrálie</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Vyber hlavní město Austrálie: Sydney, Melbourne, Canberra, Wellington.</p>
+      <ol class="kroky">
+        <li>Všechna města leží v Oceánii, poloha mi tedy nepomůže – musím přemýšlet.</li>
+        <li>Vyřadím <b>Wellington</b>: je to hlavní město Nového Zélandu, ne Austrálie.</li>
+        <li><b>Sydney</b> je nejznámější a největší australské město, ale to je typická past – největší neznamená hlavní.</li>
+        <li>Vybavím si výjimku z taháku: Austrálie má hlavní město <b>Canberru</b>, postavenou jako kompromis mezi Sydney a Melbourne.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Hlavním městem Austrálie je Canberra.</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="all" class="active">🌍 Celý svět</button>
@@ -40,26 +79,30 @@
     <span class="skore" id="skore"></span>
   </div>
 
-  <p class="napoveda">Hlavní město nemusí být největší město: <b>Canberra</b> (Austrálie), <b>Ottawa</b> (Kanada), <b>Brasília</b> (Brazílie), <b>Ankara</b> (Turecko), <b>Washington</b> (USA), <b>Abuja</b> (Nigérie), <b>Wellington</b> (Nový Zéland). Často se plete i <b>Bern</b> (Švýcarsko, ne Curych), <b>Rabat</b> (Maroko, ne Casablanca) a <b>Peking</b> (Čína, ne Šanghaj).</p>
+  <p class="napoveda">Hlavní město nemusí být největší město: <b>Canberra</b> (Austrálie), <b>Ottawa</b> (Kanada), <b>Brasília</b> (Brazílie), <b>Ankara</b> (Turecko), <b>Washington</b> (USA), <b>Abuja</b> (Nigérie), <b>Wellington</b> (Nový Zéland). Často se plete i <b>Bern</b> (Švýcarsko, ne Curych), <b>Rabat</b> (Maroko, ne Casablanca) a <b>Peking</b> (Čína, ne Šanghaj). Izrael za hlavní město považuje <b>Jeruzalém</b>, jeho status je ale mezinárodně sporný (většina velvyslanectví sídlí v Tel Avivu).</p>
 
 <script>
 const $ = id => document.getElementById(id);
 // Státy jsou společná data rodiny „Světadíly a státy" (data/staty.js),
-// stejná jako v kvízu vlajek. [stát, hlavní město, světadíl, vlajka]
-const STATY = METODUS_STATY.map(s => [s.stat, s.mesto, s.svetadil, s.vlajka]);
+// stejná jako v kvízu vlajek. [stát, hlavní město, světadíl, kód vlajky, poznámka]
+const STATY = METODUS_STATY.map(s => [s.stat, s.mesto, s.svetadil, s.kod, s.pozn || '']);
+// u městských států (Monako, San Marino, Vatikán) je město = stát – otázka by prozradila odpověď
+const OTAZKY = STATY.filter(s => s[0] !== s[1]);
 let rezim = 'all';
 
 function generuj(r) {
-  const pool = r === 'all' ? STATY : STATY.filter(s => s[2] === r);
-  const [stat, mesto, svetadil, vlajka] = Uloha.nahodne(pool);
+  const pool = r === 'all' ? OTAZKY : OTAZKY.filter(s => s[2] === r);
+  const [stat, mesto, svetadil, kod, pozn] = Uloha.nahodne(pool);
   // špatné možnosti ze stejného světadílu – jinak by šlo vylučovat podle zeměpisu
   const soused = STATY.filter(s => s[2] === svetadil && s[1] !== mesto);
   const spatne = Uloha.zamichej(soused.length >= 3 ? soused : STATY.filter(s => s[1] !== mesto)).slice(0, 3).map(s => s[1]);
+  // vlajka jako místní SVG (emoji vlajky se na Windows ukážou jako písmena); název státu je hned vedle → alt prázdný
+  const vlajka = `<img class="vlajka-mala" src="img/vlajky/${kod}.svg" alt="" width="32" height="24" decoding="async">`;
   return {
     zadani: `<span class="svetadil">${svetadil}</span><span class="otazka-text">Hlavní město státu</span>${vlajka} ${stat}`,
     odpoved: mesto,
     moznosti: Uloha.zamichej([mesto, ...spatne]),
-    napoveda: `${vlajka} ${stat}`,
+    napoveda: stat + (pozn ? ` – ${pozn}` : ''),
   };
 }
 

@@ -6,6 +6,8 @@
   <title>Afrika</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -34,6 +36,44 @@
 <body>
   <h1>🌍 Afrika</h1>
   <p class="podtitul">Pro 7. ročník: poloha států, přírodní poměry, obyvatelstvo a hospodářství.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Afrika – pásy podle rovníku</summary>
+    <div class="obsah">
+      <p>Afrika je <b>druhý největší světadíl</b>. Rovník jí prochází zhruba středem, a to je klíč k celé její přírodě:
+        čím dál od rovníku, tím méně prší. Proto se přírodní pásy <b>zrcadlově opakují</b> na sever i na jih.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>🌴 U rovníku</h3><p>Celoročně horko a vydatné deště → <b>tropický deštný les</b>
+          v povodí řeky <b>Kongo</b>.</p></article>
+        <article class="vyklad-karta"><h3>🦒 Dál od rovníku</h3><p>Střídá se období dešťů a sucha → <b>savana</b> (tráva s rozptýlenými stromy),
+          pak suchý přechodný <b>Sahel</b>.</p></article>
+        <article class="vyklad-karta"><h3>🏜️ Pouště a subtropy</h3><p>Na severu <b>Sahara</b> (největší horká poušť světa), na jihu
+          <b>Kalahari</b> a <b>Namib</b>. Na okrajích u moře <b>subtropy</b> s deštivou zimou.</p></article>
+      </div>
+      <p>Na mapě se orientuj podle velkých útvarů: <b>Nil</b> (nejdelší řeka Afriky) teče na sever do Středozemního moře,
+        <b>Viktoriino jezero</b> a <b>Kilimandžáro</b> (nejvyšší hora) leží na východě u rovníku, <b>Atlas</b> na severozápadě,
+        <b>Suezský průplav</b> spojuje Středozemní a Rudé moře.</p>
+      <p>Příroda určuje život lidí: v Egyptě se žije a hospodaří hlavně podél Nilu, který zavlažuje pole v poušti.
+        Mnoho států závisí na vývozu <b>jedné suroviny</b> (ropa, kakao, kovy). <b>Typická chyba:</b> plést si
+        nejlidnatější stát (<b>Nigérie</b>) s rozlohou největším (<b>Alžírsko</b>).</p>
+      <aside class="zapamatuj">Od rovníku k okrajům: deštný les → savana → Sahel → poušť → subtropy, na sever i na jih podobně.
+        Nil – nejdelší řeka, Kilimandžáro – nejvyšší hora, Sahara – největší horká poušť.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: proč se pásy opakují</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Proč najdeme poušť na severu Afriky (Sahara) i na jihu (Kalahari, Namib)?</p>
+      <ol class="kroky">
+        <li>Vybavím si mapu: rovník prochází Afrikou přibližně uprostřed.</li>
+        <li>Podnebí se mění hlavně se vzdáleností od rovníku – u rovníku je nejvíc srážek, dál od něj ubývají.</li>
+        <li>Na sever i na jih od rovníku se proto krajina mění stejně: deštný les → savana → poušť.</li>
+        <li>Sahara a Kalahari leží zhruba ve stejné vzdálenosti od rovníku, jen každá na jiné polokouli.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Protože rovník prochází středem světadílu, podnebné a přírodní pásy se zrcadlově opakují na sever i na jih.</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="staty" class="active">🗺️ Slepá mapa – státy</button>
@@ -181,7 +221,12 @@ function pasy() {
 }
 
 const REZIMY = { staty, priroda, kvizPriroda, kvizHospodarstvi, pasy };
-function novaUloha() { REZIMY[rezim](); }
+// režim „pasy“ je jen prohlížení obrázku (žádná úloha) – „Přeskočit“ by ho jen překreslil
+const BEZ_ULOHY = ['pasy'];
+function novaUloha() {
+  $('btnDalsi').hidden = BEZ_ULOHY.includes(rezim);
+  REZIMY[rezim]();
+}
 
 document.querySelectorAll('#rezimy button').forEach(b => b.addEventListener('click', () => {
   document.querySelectorAll('#rezimy button').forEach(x => x.classList.remove('active'));

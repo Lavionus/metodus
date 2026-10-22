@@ -347,7 +347,7 @@ function napoveda() {
 /* Sada slov na jeden zátah, na konci procenta, přehled chyb a osobní rekord. */
 const serie = { sada: [], idx: 0, spravne: 0, chyby: [], bezi: false };
 
-function rekord() { return +localStorage.getItem(REKORD_KLIC) || 0; }
+function rekord() { try { return +localStorage.getItem(REKORD_KLIC) || 0; } catch { return 0; } }
 
 function nastaveni() {
   serie.bezi = false;

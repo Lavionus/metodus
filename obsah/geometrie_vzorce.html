@@ -116,9 +116,12 @@ const TELESA = [
 let rezim = 'prehled';
 function generuj(r) {
   const u = nahodnyPrvek(r === 'rovinne' ? ROVINNE : TELESA)();
+  // U úloh s π uznáme i výpočet s π z kalkulačky nebo s 4/3 ≈ 1,33 (odchylka do 0,3 %),
+  // jinak jen zaokrouhlení na setiny.
+  const sPi = /π/.test(u.z);
   return {
-    zadani: `<span class="slovni">${u.z}</span><span class="jednotka-info">výsledek v ${u.j}</span>`,
-    odpoved: u.v, tolerance: 0.011, napoveda: '',
+    zadani: `<span class="slovni">${u.z}</span><span class="jednotka-info">výsledek v ${u.j}${sPi ? ' – uznáme i π z kalkulačky' : ''}</span>`,
+    odpoved: u.v, tolerance: sPi ? Math.max(0.011, Math.abs(u.v) * 0.003) : 0.011, napoveda: '',
     poVyhodnoceni: karta => karta.insertAdjacentHTML('beforeend', `<div class="reseni-postup">💡 ${u.p}</div>`),
   };
 }

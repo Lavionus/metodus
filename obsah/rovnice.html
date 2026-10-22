@@ -6,6 +6,8 @@
   <title>Lineární rovnice</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -86,6 +88,20 @@
   <h1>🧮 Lineární rovnice</h1>
   <p class="podtitul">Řešení rovnic o jedné neznámé (8.–9. ročník ZŠ). Všechny mají celočíselné řešení.</p>
 
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: neznámá na obou stranách</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Vyřeš rovnici 5x + 3 = 2x + 18.</p>
+      <ol class="kroky">
+        <li>Členy s x chci mít vlevo. Od obou stran odečtu 2x: 5x − 2x + 3 = 18, tedy <b>3x + 3 = 18</b>.</li>
+        <li>Čísla chci mít vpravo. Od obou stran odečtu 3: <b>3x = 15</b>.</li>
+        <li>Obě strany vydělím číslem u x, tedy 3: x = 15 : 3, <b>x = 5</b>.</li>
+        <li>Zkouška dosazením: levá strana 5 · 5 + 3 = 28, pravá strana 2 · 5 + 18 = 28. Obě strany se rovnají.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ x = 5</p>
+    </div>
+  </details>
+
   <div class="rezimy" id="rezimy">
     <button data-rezim="vahy" data-faze="vyuka">⚖️ Váhy</button>
     <button data-rezim="1" class="active">x + a = b</button>
@@ -131,6 +147,7 @@ const cst = (k, prvni) => (k < 0 ? (prvni ? '−' : '− ') : (prvni ? '' : '+ '
 /* Samostatné číslo: minus musí být typografické (−), ne spojovník, ať to sedí
    se zápisem členů výše – jinak vyjde nesourodé „x − 7 = -15“. */
 const cis = n => String(n).replace('-', '−');
+const del = n => n < 0 ? `(${cis(n)})` : String(n);              // dělitel: záporný do závorky
 
 /* Série rovnic přes procvic.js: druhý pokus, po uzavření postup krok za krokem. */
 function generuj(r) {
@@ -144,24 +161,25 @@ function generuj(r) {
   } else if (u === 2) {
     const a = neNula(-9, 9), b = a * x;
     zapis = `${clen(a, true)} = ${cis(b)}`;
-    kroky = [`x = ${cis(b)} ÷ (${cis(a)})`, `x = ${cis(x)}`];
+    kroky = [`x = ${cis(b)} : ${del(a)}`, `x = ${cis(x)}`];
   } else if (u === 3) {
     const a = neNula(-9, 9), b = neNula(-12, 12), c = a * x + b;
     zapis = `${clen(a, true)} ${cst(b)} = ${cis(c)}`;
     kroky = [`${clen(a, true)} = ${cis(c)} ${cst(-b)}`, `${clen(a, true)} = ${cis(c - b)}`,
-             `x = ${cis(c - b)} ÷ (${cis(a)})`, `x = ${cis(x)}`];
+             `x = ${cis(c - b)} : ${del(a)}`, `x = ${cis(x)}`];
   } else if (u === 4) {
-    let a = neNula(-8, 8), c = neNula(-8, 8);
-    if (a === c) a += (a < 8 ? 1 : -1);
+    // a ≠ c (jinak by x vypadlo) a obě nenulové – dřívější posun a + 1 dával u a = −1 člen „0x“
+    const a = neNula(-8, 8);
+    let c; do { c = neNula(-8, 8); } while (c === a);
     const b = neNula(-12, 12), d = (a - c) * x + b;   // a·x + b = c·x + d
     zapis = `${clen(a, true)} ${cst(b)} = ${clen(c, true)} ${cst(d)}`;
-    kroky = [`${clen(a - c, true)} = ${cis(d - b)}`, `x = ${cis(d - b)} ÷ (${cis(a - c)})`, `x = ${cis(x)}`];
+    kroky = [`${clen(a - c, true)} = ${cis(d - b)}`, `x = ${cis(d - b)} : ${del(a - c)}`, `x = ${cis(x)}`];
   } else {
     const a = neNula(-6, 6), b = neNula(-9, 9), k = neNula(2, 5);   // k·(a·x + b) = c
     const cc = k * (a * x + b);
     zapis = `${k}·(${clen(a, true)} ${cst(b)}) = ${cis(cc)}`;
     kroky = [`${clen(k * a, true)} ${cst(k * b)} = ${cis(cc)}`, `${clen(k * a, true)} = ${cis(cc - k * b)}`,
-             `x = ${cis(cc - k * b)} ÷ (${cis(k * a)})`, `x = ${cis(x)}`];
+             `x = ${cis(cc - k * b)} : ${del(k * a)}`, `x = ${cis(x)}`];
   }
   return {
     zadani: zapis, odpoved: x,
@@ -245,7 +263,7 @@ function postavOperace() {
   const lzeDelit = V.b === 0 && V.a > 1 && V.c % V.a === 0;
   $('operace').innerHTML =
     `<button id="opMinus"${lzeOdebrat ? '' : ' disabled'}>− 1 z obou misek</button>
-     <button id="opDelit"${lzeDelit ? '' : ' disabled'}>÷ ${V.a > 1 ? V.a : '…'} obě misky</button>
+     <button id="opDelit"${lzeDelit ? '' : ' disabled'}>: ${V.a > 1 ? V.a : '…'} obě misky</button>
      <button id="opNova" class="${V.hotovo ? 'hotovo' : ''}">🎲 Nová rovnice</button>`;
   $('opNova').onclick = novaVaha;
   if (lzeOdebrat) $('opMinus').onclick = () => {
@@ -256,7 +274,7 @@ function postavOperace() {
   if (lzeDelit) $('opDelit').onclick = () => {
     const d = V.a;
     V.c /= d; V.a = 1;
-    V.kroky.push(`÷ ${d} &nbsp;&nbsp; → &nbsp;&nbsp; ${zapisVahy()}`);
+    V.kroky.push(`: ${d} &nbsp;&nbsp; → &nbsp;&nbsp; ${zapisVahy()}`);
     poKroku();
   };
 }

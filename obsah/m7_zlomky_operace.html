@@ -6,6 +6,8 @@
   <title>Počítání se zlomky</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -29,6 +31,43 @@
 <body>
   <h1>🍕 Počítání se zlomky</h1>
   <p class="podtitul">Pro 7. ročník: krácení, rozšiřování, sčítání, odčítání, násobení a dělení zlomků.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Počítání se zlomky</summary>
+    <div class="obsah">
+      <p>Všechny operace se zlomky stojí na jedné myšlence: zlomek se nezmění, když jeho čitatele i jmenovatele
+        <b>vynásobíme nebo vydělíme stejným nenulovým číslem</b>. 2/3 = 4/6 = 6/9 – celek je jen rozdělený na
+        jemnější díly. Díky tomu můžeme zlomky upravit do tvaru, se kterým se dobře počítá.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Krácení a rozšiřování</h3><p>Krátíme dělením společným dělitelem (12/18 = 2/3, dělíme 6),
+          rozšiřujeme násobením (3/4 = 15/20, násobíme 5). <b>Základní tvar</b> už nejde dál krátit.</p></article>
+        <article class="vyklad-karta"><h3>Sčítání a odčítání</h3><p>Sčítat jde jen stejné díly: převeď zlomky na
+          <b>společného jmenovatele</b> (nejlépe NSN jmenovatelů), pak sečti čitatele. Jmenovatel zůstává.</p></article>
+        <article class="vyklad-karta"><h3>Násobení</h3><p>Čitatel · čitatel, jmenovatel · jmenovatel:
+          2/3 · 3/5 = 6/15 = 2/5. Polovina ze třetiny je šestina: 1/2 · 1/3 = 1/6.</p></article>
+        <article class="vyklad-karta"><h3>Dělení a porovnávání</h3><p>Dělíme <b>násobením převrácenou hodnotou</b>: 3/4 : 1/2 = 3/4 · 2/1 = 6/4 = 3/2.
+          Porovnáváme po převedení na společného jmenovatele.</p></article>
+      </div>
+      <p>Typická chyba: 1/2 + 1/3 = 2/5. Sečíst zvlášť čitatele a jmenovatele nejde – výsledek by byl menší než 1/2,
+        i když jsme k ní něco přidali. Správně 3/6 + 2/6 = 5/6. Při dělení se také často zapomíná převrátit <b>druhý</b> zlomek, ne první.</p>
+      <aside class="zapamatuj">Sčítání a odčítání: společný jmenovatel. Násobení: přímo nahoře a dole. Dělení: násob převrácenou hodnotou dělitele. Výsledek vždy zkrať.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: 5/6 − 3/10</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Vypočítej 5/6 − 3/10 a výsledek zkrať.</p>
+      <ol class="kroky">
+        <li>Jmenovatele jsou různé, takže hledám společného jmenovatele: NSN(6, 10) = <b>30</b>.</li>
+        <li>Rozšířím první zlomek: 30 : 6 = 5, tedy 5/6 = <b>25/30</b>.</li>
+        <li>Rozšířím druhý zlomek: 30 : 10 = 3, tedy 3/10 = <b>9/30</b>.</li>
+        <li>Odečtu čitatele, jmenovatel nechám: 25/30 − 9/30 = <b>16/30</b>.</li>
+        <li>Zkrátím: NSD(16, 30) = 2, tedy 16/30 = <b>8/15</b>. Dál to nejde, 8 a 15 nemají společného dělitele kromě 1.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ 5/6 − 3/10 = 8/15</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="kraceni" class="active">✂️ Krať a rozšiřuj</button>
@@ -60,6 +99,9 @@ const nsn = (a, b) => a / nsd(a, b) * b;
 function zkrat(c, j) { const d = nsd(c, j) || 1; return [c / d, j / d]; }
 const zl = (c, j) => `<span class="zlomek"><span class="c">${c}</span><span class="j">${j}</span></span>`;
 const klic = (c, j) => `${c}/${j}`;
+/* výsledek se jmenovatelem 1 je celé číslo – píšeme 4, ne 4/1 */
+const zlText = (c, j) => j === 1 ? String(c) : `${c}/${j}`;
+const zlHtml = (c, j) => +j === 1 ? `<span class="cele">${c}</span>` : zl(c, j);
 function odezvaEl() { const d = document.createElement('div'); d.className = 'odezva'; return d; }
 
 /* Pás rozdělený na `j` dílů, z nichž `c` je vybarveno. */
@@ -77,13 +119,15 @@ function moznostiZlomku(c, j) {
   while (jine.size < 3 && pojistka++ < 300) {
     const kandidat = Uloha.nahodne([
       [c + 1, j], [c, j + 1], [j, c], [c + 1, j + 1], [Math.max(1, c - 1), j], [c, Math.max(2, j - 1)],
+      ...(pojistka > 40 ? [[c + 2, j], [c, j + 2], [2 * c + 1, j]] : []),   // záloha, když blízkých různých hodnot není dost
     ]);
     const [x, y] = kandidat;
-    if (y > 0 && x > 0 && klic(x, y) !== spravny) jine.add(klic(x, y));
+    // rušivá nesmí mít stejnou hodnotu jako správná (2/2 = 1/1 = 1)
+    if (y > 0 && x > 0 && x * j !== y * c) jine.add(klic(x, y));
   }
   return Uloha.zamichej([spravny, ...jine]).map(t => {
     const [x, y] = t.split('/');
-    return { klic: t, popis: zl(x, y) };
+    return { klic: t, popis: zlHtml(x, y) };
   });
 }
 
@@ -140,7 +184,7 @@ function scitani() {
     moznosti: moznostiZlomku(vc, vj),
     spravnyKlic: klic(vc, vj),
     zpravaOk: `✅ Společný jmenovatel je ${spolecny}: ${c1 * (spolecny / j1)}/${spolecny} `
-      + `${scitame ? '+' : '−'} ${c2 * (spolecny / j2)}/${spolecny} = ${cit}/${spolecny} = ${vc}/${vj}`,
+      + `${scitame ? '+' : '−'} ${c2 * (spolecny / j2)}/${spolecny} = ${cit}/${spolecny} = ${zlText(vc, vj)}`,
     zpravaChyba: `Převeď oba zlomky na společného jmenovatele (nejmenší je ${spolecny}).`,
     poSpravne: skore.vyhodnot,
     dalsi: novaUloha,
@@ -164,8 +208,8 @@ function nasobeni() {
     moznosti: moznostiZlomku(vc, vj),
     spravnyKlic: klic(vc, vj),
     zpravaOk: nasobime
-      ? `✅ ${c1}·${c2} / ${j1}·${j2} = ${c1 * c2}/${j1 * j2} = ${vc}/${vj}`
-      : `✅ Dělení = násobení převrácenou hodnotou: ${c1}/${j1} · ${j2}/${c2} = ${c1 * j2}/${j1 * c2} = ${vc}/${vj}`,
+      ? `✅ ${c1}·${c2} / ${j1}·${j2} = ${c1 * c2}/${j1 * j2} = ${zlText(vc, vj)}`
+      : `✅ Dělení = násobení převrácenou hodnotou: ${c1}/${j1} · ${j2}/${c2} = ${c1 * j2}/${j1 * c2} = ${zlText(vc, vj)}`,
     zpravaChyba: nasobime
       ? 'Násob čitatel čitatelem a jmenovatel jmenovatelem.'
       : 'Druhý zlomek převrať a místo dělení násob.',

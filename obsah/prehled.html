@@ -36,7 +36,7 @@
       font-size: 0.95rem;
       line-height: 1.5;
     }
-    header.uvod .statistika {
+    .pata .statistika {
       color: var(--text-faint);
       font-size: 0.8rem;
       margin-top: 8px;
@@ -105,6 +105,11 @@
       background-color: var(--bg-elevated);
       transform: translateY(-2px);
     }
+    .rocniky button[aria-pressed="true"] {
+      background-color: var(--accent); border-color: var(--accent); color: var(--na-akcentu, #fff);
+    }
+    .rocniky button[aria-pressed="true"] .pocet { color: inherit; opacity: .8; }
+    .rocniky button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
     .rocniky button .pocet {
       display: block;
       color: var(--text-faint);
@@ -231,37 +236,23 @@
     .uvod-provoz summary { cursor: pointer; color: var(--accent); padding: 6px 0; }
     .uvod-provoz p { margin-top: 8px; }
   </style>
-<link rel="stylesheet" href="../propojeni.css">
-<script src="../propojeni.js" defer></script>
 </head>
 <body>
   <header class="uvod">
     <h1><svg class="symbol" viewBox="0 0 655 488" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><g transform="translate(0,488) scale(0.1,-0.1)"><path d="M5911 4824 c-708 -239 -1389 -584 -1876 -950 -352 -264 -547 -485 -738 -835 -22 -40 -20 -42 -92 91 -182 335 -566 695 -1067 999 -428 259 -1117 569 -1582 710 -225 69 -459 -49 -526 -266 -33 -109 -31 -4397 3 -4463 39 -78 132 -121 215 -100 247 62 474 296 558 575 17 56 18 153 21 1635 1 866 2 1588 3 1604 0 40 33 34 285 -50 976 -324 1596 -753 1810 -1254 117 -274 117 -276 124 -1170 7 -837 2 -784 71 -843 111 -95 297 -66 363 56 22 42 22 42 28 817 5 741 6 779 26 865 124 529 489 910 1200 1252 354 169 962 387 984 351 5 -7 9 -727 9 -1599 0 -1587 0 -1587 25 -1673 45 -155 115 -267 238 -382 223 -208 448 -238 531 -72 26 52 26 52 26 2204 0 1529 -3 2168 -11 2206 -41 199 -219 348 -413 348 -35 0 -102 -17 -215 -56z"/></g></svg> Metodus</h1>
-    <p>Interaktivní procvičování a názorné simulace pro 1. i 2. stupeň základní školy
-       a střední školu. Výukové úlohy běží přímo v prohlížeči – bez registrace a bez reklam.
+    <p>Interaktivní procvičování a názorné simulace pro 1. i 2. stupeň základní školy.
+       Výukové úlohy běží přímo v prohlížeči – bez registrace a bez reklam.
        Uložené lekce lze používat i bez internetu; živá data a externí zdroje vyžadují připojení.</p>
-    <details class="uvod-provoz">
-      <summary>Jak připravit výuku offline a kde se ukládají výsledky</summary>
-      <p>Nejprve otevři rozcestník online a načti vybrané lekce i jejich podklady. Před hodinou
-        je vyzkoušej bez připojení ve stejném prohlížeči. Pouhé otevření úvodu nestáhne celý web;
-        uložené soubory může prohlížeč později odstranit. Živá poloha ISS a externí mapové sbírky potřebují internet.</p>
-      <p>Skóre, deník a vlastní sady se ukládají místně v tomto prohlížeči a samy se nesynchronizují
-        mezi zařízeními. U vlastních podkladů využij nabízený export. Otevírání externích zdrojů,
-        načítání živých dat a některé hlasy mohou posílat požadavky příslušným službám.</p>
-    </details>
-    <div class="statistika" id="statistika"></div>
   </header>
 
-<section class="propojeni" id="ucelVyuky" aria-label="Výběr podle účelu"></section>
   <section>
     <h2>📅 Ročník</h2>
     <div class="rocniky" id="rocniky"></div>
   </section>
 
   <section>
-    <h2>📚 Předměty</h2>
+    <h2 id="predmetyNadpis">📚 Předměty</h2>
     <div class="predmety" id="predmety"></div>
-    <p class="atlas-odkaz"><a href="vyslovnost.html">Obrazový průvodce výslovností: angličtina, němčina a francouzština →</a></p>
   </section>
 
   <section>
@@ -319,6 +310,16 @@
 
   <footer class="pata">
     Obsah slouží k procvičování, ne jako náhrada učebnice.
+    <details class="uvod-provoz">
+      <summary>Jak připravit výuku offline a kde se ukládají výsledky</summary>
+      <p>Nejprve otevři rozcestník online a načti vybrané lekce i jejich podklady. Před hodinou
+        je vyzkoušej bez připojení ve stejném prohlížeči. Pouhé otevření úvodu nestáhne celý web;
+        uložené soubory může prohlížeč později odstranit. Živá poloha ISS a externí mapové sbírky potřebují internet.</p>
+      <p>Skóre, deník a vlastní sady se ukládají místně v tomto prohlížeči a samy se nesynchronizují
+        mezi zařízeními. U vlastních podkladů využij nabízený export. Otevírání externích zdrojů,
+        načítání živých dat a některé hlasy mohou posílat požadavky příslušným službám.</p>
+    </details>
+    <div class="statistika" id="statistika"></div>
   </footer>
 
   <script src="../apps.js"></script>
@@ -372,17 +373,30 @@
 
     const jeHotova = p => p.stav !== 'plan';
 
-    /* ---- Rychlá volba ročníku ---- */
+    /* ---- Ročník → předměty (22. 10. 2026) ----
+       Klik na ročník zůstane na úvodu: dlaždice předmětů se přepočítají pro ten ročník
+       a menu rozcestníku se tiše odfiltruje. Dlaždice předmětu otevře stránku předmětu. */
     const rocnikyEl = document.getElementById('rocniky');
-    for (let r = 1; r <= 9; r++) {
-      const pocet = vsechny.filter(p => (p.rocniky || []).includes(r) && jeHotova(p)).length;
+    let vybranyRocnik = 0;
+    try { vybranyRocnik = Number(localStorage.getItem('metodus_rocnik')) || 0; } catch { /* bez úložiště */ }
+    const tlacitkaRocniku = [];
+    function nastavRocnik(r) {
+      vybranyRocnik = r;
+      try { localStorage.setItem('metodus_rocnik', r ? String(r) : 'vse'); } catch { /* bez úložiště */ }
+      if (vRozcestniku) window.parent.postMessage({ rocnik: r ? String(r) : 'vse', tise: true }, '*');
+      tlacitkaRocniku.forEach(b => b.setAttribute('aria-pressed', String(Number(b.dataset.r) === r)));
+      vykresliPredmety();
+    }
+    for (let r = 0; r <= 9; r++) {
+      const pocet = vsechny.filter(p => (!r || (p.rocniky || []).includes(r)) && jeHotova(p)).length;
       const b = document.createElement('button');
-      b.innerHTML = `${r}. ročník<span class="pocet">${pocet} aplikací</span>`;
-      b.addEventListener('click', () => {
-        if (vRozcestniku) window.parent.postMessage({ rocnik: String(r) }, '*');
-        else window.top.location.href = '../index.html#rocnik=' + r;
-      });
+      b.type = 'button';
+      b.dataset.r = r;
+      b.innerHTML = `${r ? r + '. ročník' : 'Všechny'}<span class="pocet">${pocet} aplikací</span>`;
+      b.setAttribute('aria-pressed', String(r === vybranyRocnik));
+      b.addEventListener('click', () => nastavRocnik(r === vybranyRocnik ? 0 : r));
       rocnikyEl.appendChild(b);
+      tlacitkaRocniku.push(b);
     }
 
     /* ---- Odkaz na osnovu ---- */
@@ -414,35 +428,46 @@
 
     /* ---- Předměty ---- */
     const predmetyEl = document.getElementById('predmety');
-    KATALOG_SKUPINY.forEach(g => {
-      const sekce = KATALOG_SEKCE.filter(s => s.skupina === g.id);
-      if (!sekce.length) return;
-      const vsechnyVSkupine = sekce.flatMap(s => s.polozky);
-      const pocet = vsechnyVSkupine.filter(jeHotova).length;
-      const planovano = vsechnyVSkupine.length - pocet;
-      const { emoji, text } = rozdel(g.label);
+    const nadpisPredmetu = document.getElementById('predmetyNadpis');
+    function vykresliPredmety() {
+      predmetyEl.replaceChildren();
+      const r = vybranyRocnik;
+      if (nadpisPredmetu) nadpisPredmetu.textContent = r ? `📚 Předměty pro ${r}. ročník` : '📚 Předměty';
+      KATALOG_SKUPINY.forEach(g => {
+        const sekce = KATALOG_SEKCE.filter(s => s.skupina === g.id);
+        if (!sekce.length) return;
+        // nástroje a lekce bez ročníku platí pro všechny ročníky
+        const vRocniku = p => !r || !(p.rocniky || []).length || p.rocniky.includes(r);
+        const polozky = sekce.flatMap(s => s.polozky).filter(vRocniku);
+        if (!polozky.length) return;
+        const pocet = polozky.filter(jeHotova).length;
+        const planovano = polozky.length - pocet;
+        const { emoji, text } = rozdel(g.label);
+        const cil = 'predmet.html?p=' + g.id + (r ? '&r=' + r : '');
 
-      const el = document.createElement(vRozcestniku ? 'button' : 'a');
-      el.className = 'predmet';
-      if (!vRozcestniku) el.href = '../index.html#skupina=' + g.id;
-      el.innerHTML =
-        `<span class="nazev">${emoji} ${text}</span>` +
-        `<span class="pocet">${pocet} ${pocet === 1 ? 'aplikace' : pocet < 5 ? 'aplikace' : 'aplikací'}` +
-        (planovano ? ` · <span class="plan">${planovano} 🚧</span>` : '') + `</span>`;
-      const temata = document.createElement('span');
-      temata.className = 'temata';
-      temata.textContent = sekce.map(s => rozdel(s.nazev).text).join(' · ');
-      el.appendChild(temata);
-      const ilustrace = PredmetyObrazky.skupina(g.id);
-      if (ilustrace) el.prepend(ilustrace);
-      el.addEventListener('click', ev => {
-        if (vRozcestniku) {
-          ev.preventDefault();
-          window.parent.postMessage({ skupina: g.id }, '*');
-        }
+        const el = document.createElement('a');
+        el.className = 'predmet';
+        el.href = cil;
+        el.innerHTML =
+          `<span class="nazev">${emoji} ${text}</span>` +
+          `<span class="pocet">${pocet} ${pocet === 1 ? 'aplikace' : pocet < 5 ? 'aplikace' : 'aplikací'}` +
+          (planovano ? ` · <span class="plan">${planovano} 🚧</span>` : '') + `</span>`;
+        const temata = document.createElement('span');
+        temata.className = 'temata';
+        temata.textContent = sekce.filter(s => s.polozky.some(vRocniku)).map(s => rozdel(s.nazev).text).join(' · ');
+        el.appendChild(temata);
+        const ilustrace = typeof PredmetyObrazky !== 'undefined' ? PredmetyObrazky.skupina(g.id) : null;
+        if (ilustrace) el.prepend(ilustrace);
+        el.addEventListener('click', ev => {
+          if (vRozcestniku) {
+            ev.preventDefault();
+            window.parent.postMessage({ otevri: 'obsah/' + cil, skupina: g.id }, '*');
+          }
+        });
+        predmetyEl.appendChild(el);
       });
-      predmetyEl.appendChild(el);
-    });
+    }
+    vykresliPredmety();
 
     /* ---- Oblíbené a nedávné ---- */
     function naplnDlazdice(elId, soubory, prazdnyText) {
@@ -470,7 +495,7 @@
       // jinak by na úvodní stránce svítilo „a 0 připravovaných témat“.
       document.getElementById('statistika').textContent =
         `${h} hotových aplikací ` + (plan ? `a ${plan} připravovaných témat ` : '') +
-        `v ${KATALOG_SKUPINY.length} oblastech a ${KATALOG_SEKCE.length} tematických okruzích.`;
+        `v ${KATALOG_SKUPINY.length} předmětech a oblastech a ${KATALOG_SEKCE.length} tematických okruzích.`;
     }
 
     /* ---- Tip dne (deterministicky podle data) + náhodný výběr ---- */

@@ -6,6 +6,8 @@
   <title>Voda, vzduch a půda</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -24,6 +26,42 @@
   <h1>💧 Voda, vzduch a půda</h1>
   <p class="podtitul">Pro 3.–4. ročník: skupenství vody, koloběh vody v přírodě, vlastnosti vzduchu a půdy.</p>
 
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Voda, vzduch a půda</summary>
+    <div class="obsah">
+      <p>Bez vody, vzduchu a půdy by na Zemi nemohly žít rostliny, zvířata ani lidé. Voda se navíc umí
+        měnit: jednou je to led, jindy tekutina, jindy neviditelná pára.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Tři skupenství vody</h3><p><b>pevné</b> – led, sníh, kroupy;
+          <b>kapalné</b> – voda v řece, déšť, rosa; <b>plynné</b> – vodní pára. Voda mrzne při 0 °C a vaří se při 100 °C.</p></article>
+        <article class="vyklad-karta"><h3>Koloběh vody</h3><p>Slunce ohřeje vodu → voda se <b>vypaří</b> → pára se ochladí
+          a vzniknou <b>mraky</b> → <b>prší</b> nebo sněží → voda steče do řek → řeky ji odnesou do moře.</p></article>
+        <article class="vyklad-karta"><h3>Vzduch</h3><p>Směs plynů, nejvíc <b>dusíku</b>, pak <b>kyslíku</b>.
+          Kyslík dýcháme. Vzduch nevidíme, ale jeho pohyb cítíme jako vítr.</p></article>
+        <article class="vyklad-karta"><h3>Půda</h3><p>Úrodná půda má hodně <b>humusu</b> (tlející zbytky rostlin a živočichů).
+          Žížaly ji kypří. Vzniká velmi pomalu z hornin.</p></article>
+      </div>
+      <p>Typická chyba: bílý obláček nad hrncem nebo mlha <b>nejsou pára</b>. Vodní pára je neviditelná.
+        To, co vidíš, jsou drobné kapičky vody – tedy kapalné skupenství.</p>
+      <aside class="zapamatuj">Led – voda – pára. Vodní pára není vidět. Voda v přírodě koluje dokola:
+        vypaří se, udělá mraky, spadne jako déšť a steče zpět do moře.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: jaké skupenství má rosa?</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Ráno jsou na trávě kapky rosy. Jaké mají skupenství?</p>
+      <ol class="kroky">
+        <li>Podívám se, jak rosa vypadá: jsou to <b>kapky</b>, které stékají po stéblech.</li>
+        <li>Je to tvrdé jako led? Ne, kapka se rozteče. Pevné skupenství to není.</li>
+        <li>Je to neviditelné jako pára? Ne, kapky dobře vidím. Plynné to také není.</li>
+        <li>Teče to a dá se to vidět – je to tekutá voda.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Rosa má kapalné skupenství.</p>
+    </div>
+  </details>
+
   <div class="rezimy" id="rezimy">
     <button data-rezim="skupenstvi" class="active">🧊 Skupenství vody</button>
     <button data-rezim="kolobeh">🔄 Koloběh vody</button>
@@ -40,6 +78,7 @@
 
   <p class="napoveda">
     Voda má tři skupenství: <b>pevné</b> (led), <b>kapalné</b> (voda) a <b>plynné</b> (vodní pára).
+    Vodní pára je neviditelná – mlha, mraky i bílý obláček nad hrncem jsou drobné kapičky vody.
     V přírodě neustále koluje – vypařuje se, tvoří mraky, prší a stéká zpátky do moří.
   </p>
 
@@ -57,22 +96,23 @@ const SKUPENSTVI = [
   { n: 'déšť', e: '🌧️', s: 'kapalne' },
   { n: 'rosa na trávě', e: '💧', s: 'kapalne' },
   { n: 'voda v hrnci', e: '🥣', s: 'kapalne' },
-  { n: 'pára nad hrncem', e: '♨️', s: 'plynne' },
-  { n: 'mlha nad loukou', e: '🌫️', s: 'plynne' },
-  { n: 'vodní pára ve vzduchu', e: '💨', s: 'plynne' },
-  { n: 'obláček z konvice', e: '☁️', s: 'plynne' },
+  { n: 'bílý obláček nad hrncem', e: '♨️', s: 'kapalne', pozn: 'Bílý obláček, který vidíme, tvoří drobné kapičky vody. Samotná vodní pára je neviditelná.' },
+  { n: 'mlha nad loukou', e: '🌫️', s: 'kapalne', pozn: 'Mlha je oblak drobných kapiček vody u země – vodní pára by nebyla vidět.' },
+  { n: 'vodní pára ve vzduchu', e: '💨', s: 'plynne', pozn: 'Vodní pára je plyn – je ve vzduchu všude kolem nás, ale nevidíme ji.' },
+  { n: 'voda, která se vypařila z louže', e: '☀️', s: 'plynne', pozn: 'Vypařená voda se stala neviditelnou vodní párou ve vzduchu.' },
+  { n: 'voda vypařená z prádla na šňůře', e: '👕', s: 'plynne', pozn: 'Prádlo schne, protože se voda mění v neviditelnou vodní páru.' },
 ];
 
 const NAZVY_SKUPENSTVI = {
   pevne: { nazev: 'pevné (led)', ikona: '🧊' },
   kapalne: { nazev: 'kapalné (voda)', ikona: '💧' },
-  plynne: { nazev: 'plynné (pára)', ikona: '💨' },
+  plynne: { nazev: 'plynné (vodní pára)', ikona: '💨' },
 };
 
 const KOLOBEH = [
   '☀️ Slunce ohřeje vodu v moři',
   '💨 Voda se vypaří do vzduchu',
-  '☁️ Pára se ochladí a vzniknou mraky',
+  '☁️ Vodní pára se ochladí a vzniknou mraky z kapiček',
   '🌧️ Z mraků prší nebo sněží',
   '🏞️ Voda steče do potoků a řek',
   '🌊 Řeky odnesou vodu zpátky do moře',
@@ -103,8 +143,8 @@ function skupenstvi() {
     kam: p, odezva,
     moznosti: Object.entries(NAZVY_SKUPENSTVI).map(([klic, s]) => ({ klic, ikona: s.ikona, popis: s.nazev })),
     spravnyKlic: u.s,
-    zpravaOk: `✅ ${u.n} – skupenství ${NAZVY_SKUPENSTVI[u.s].nazev}.`,
-    zpravaChyba: 'Zkus to znovu – dá se to nabrat do dlaně, nalít, nebo je to jen ve vzduchu?',
+    zpravaOk: `✅ ${u.n} – skupenství ${NAZVY_SKUPENSTVI[u.s].nazev}.${u.pozn ? ' ' + u.pozn : ''}`,
+    zpravaChyba: 'Zkus to znovu – je to pevné, jsou to kapky vody (i ty drobné), nebo neviditelný plyn?',
     poSpravne: skore.vyhodnot,
     dalsi: novaUloha,
   });

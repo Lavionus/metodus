@@ -34,11 +34,11 @@ for (let i = 0; i < 100 && !(await ev(`document.readyState === 'complete' && doc
   await new Promise(resolve => setTimeout(resolve, 50));
 }
 await ev(`Promise.all([...document.querySelectorAll('.etapy-rada img')].map(i => i.decode()))`);
-assert.equal(await ev(`document.querySelectorAll('.etapy-rada li').length`), 8);
+assert.equal(await ev(`document.querySelectorAll('.etapy-rada li').length`), 9);   // + kojenec (22. 10. 2026)
 assert.ok(await ev(`[...document.querySelectorAll('.etapy-rada img')].every(i => i.naturalWidth === 768 && i.naturalHeight === 768 && i.alt.length > 20)`));
 assert.deepEqual(await ev(`[...document.querySelectorAll('.etapy-rada figcaption')].map(x => x.textContent.trim())`),
-  ['novorozenec', 'batole', 'předškolák', 'školák', 'dospívající', 'dospělý', 'starší dospělý', 'senior']);
-assert.equal(await ev(`ETAPY.length`), 8);
+  ['novorozenec', 'kojenec', 'batole', 'předškolák', 'školák', 'dospívající', 'dospělý', 'starší dospělý', 'senior']);
+assert.equal(await ev(`ETAPY.length`), 9);
 assert.equal(await ev(`document.querySelectorAll('[data-atlas]').length`), 2);
 assert.equal(await ev(`document.querySelectorAll('.hotspot').length`), 4);
 await ev(`document.querySelector('#atlasObrazek img').decode()`);
@@ -56,7 +56,7 @@ for (const mode of ['soustava', 'predNarozenim', 'etapy', 'dospivani']) {
   await ev(`document.querySelector('[data-rezim="${mode}"]').click()`);
   assert.ok(await ev(`document.querySelector('#plocha').textContent.trim().length > 10`));
 }
-await ev(`window.__puvodniNahodne=Uloha.nahodne; window.__puvodniRandom=Math.random; Uloha.nahodne=()=>ETAPY[7]; Math.random=()=>0; etapy(); document.querySelector('.etapy-obrazek').decode()`);
+await ev(`window.__puvodniNahodne=Uloha.nahodne; window.__puvodniRandom=Math.random; Uloha.nahodne=()=>ETAPY[8]; Math.random=()=>0; etapy(); document.querySelector('.etapy-obrazek').decode()`);
 assert.ok(await ev(`document.querySelector('.etapy-obrazek').src.endsWith('pr8-etapy-senior.webp')`));
 assert.ok(await ev(`document.querySelector('.etapa').textContent.includes('stáří')`));
 await ev(`[...document.querySelectorAll('#plocha .moznosti button')].find(b => b.textContent.includes('přibližně od 65 let')).click()`);

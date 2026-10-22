@@ -6,6 +6,8 @@
   <title>Deriváty uhlovodíků</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -26,6 +28,43 @@
   <h1>🧴 Deriváty uhlovodíků</h1>
   <p class="podtitul">Pro 9. ročník: funkční skupiny, alkoholy, kyseliny a jejich užití.</p>
 
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Funkční skupina dělá z uhlovodíku novou látku</summary>
+    <div class="obsah">
+      <p>Když v uhlovodíku nahradíme atom vodíku jinou skupinou atomů, vznikne <b>derivát uhlovodíku</b>. Tato skupina se jmenuje
+        <b>funkční</b>, protože určuje, jak se látka chová. Z plynného ethanu C<sub>2</sub>H<sub>6</sub> se tak stane kapalný ethanol
+        C<sub>2</sub>H<sub>5</sub>OH, který se mísí s vodou.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Alkoholy −OH</h3><p>Hydroxylová skupina. Ethanol C<sub>2</sub>H<sub>5</sub>OH vzniká kvašením cukrů,
+          methanol CH<sub>3</sub>OH je prudce jedovatý, glycerol je trojsytný alkohol.</p></article>
+        <article class="vyklad-karta"><h3>Karboxylové kyseliny −COOH</h3><p>Kyselina octová CH<sub>3</sub>COOH (ocet), mravenčí (kopřivy, mravenci),
+          citronová (citrusy), mléčná (kvašení mléka, svaly).</p></article>
+        <article class="vyklad-karta"><h3>Další skupiny</h3><p>−CHO aldehydy (formaldehyd), −CO− ketony (aceton), −NH<sub>2</sub> aminy,
+          halogen (F, Cl, Br, I) v halogenderivátech, např. ve freonech.</p></article>
+        <article class="vyklad-karta"><h3>Estery</h3><p>Vznikají reakcí kyseliny s alkoholem a voní ovocně:
+          CH<sub>3</sub>COOH + C<sub>2</sub>H<sub>5</sub>OH → CH<sub>3</sub>COOC<sub>2</sub>H<sub>5</sub> + H<sub>2</sub>O (octan ethylnatý).</p></article>
+      </div>
+      <p>Jak derivát poznám? Ve vzorci hledám, co je <b>navíc</b> oproti uhlovodíku – tedy jiný atom než C a H. Kostra z uhlíků
+        napoví počet uhlíků, funkční skupina druh látky. Typická chyba: považovat −OH v alkoholu za hydroxid. Alkohol není zásada,
+        skupina −OH je pevně vázaná na uhlík.</p>
+      <aside class="zapamatuj">Derivát = uhlovodík, ve kterém je vodík nahrazen funkční skupinou. −OH alkohol, −COOH karboxylová kyselina, kyselina + alkohol → ester + voda.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: co je látka CH<sub>3</sub>COOH</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Do které skupiny derivátů patří látka CH<sub>3</sub>COOH a jak se jmenuje?</p>
+      <ol class="kroky">
+        <li>Hledám ve vzorci, co není jen uhlík a vodík: na konci je skupina <b>−COOH</b>.</li>
+        <li>Skupina −COOH je <b>karboxylová</b>, látka je tedy <b>karboxylová kyselina</b>.</li>
+        <li>Spočítám uhlíky: jeden v CH<sub>3</sub> a jeden v COOH, celkem <b>2</b> – kostra odpovídá ethanu.</li>
+        <li>Kyselina se dvěma uhlíky je <b>kyselina octová</b> (systematicky ethanová), kterou znáš z octa.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ CH<sub>3</sub>COOH je <b>kyselina octová</b> – karboxylová kyselina.</p>
+    </div>
+  </details>
+
   <div class="rezimy" id="rezimy">
     <button data-rezim="kviz1" class="active">🔬 Funkční skupiny</button>
     <button data-rezim="kviz2">🍷 Alkoholy</button>
@@ -41,7 +80,7 @@
     <span class="skore" id="skore"></span>
   </div>
 
-  <div class="lista"><span>−OH hydroxylová (alkoholy)</span><span>−COOH karboxylová (kyseliny)</span><span>−CHO aldehydová</span><span>−NH₂ aminová</span><span>halogen (F, Cl, Br, I)</span></div>
+  <div class="lista"><span>−OH hydroxylová (alkoholy)</span><span>−COOH karboxylová (kyseliny)</span><span>−CHO aldehydová</span><span>−CO− ketonová (ketony)</span><span>−NH₂ aminová</span><span>halogen (F, Cl, Br, I)</span></div>
 
   <p class="napoveda">Derivát vznikne, když se v uhlovodíku nahradí atom vodíku <b>funkční skupinou</b>. Ta určuje vlastnosti látky: <b>−OH</b> dělá alkohol, <b>−COOH</b> karboxylovou kyselinu.</p>
 
@@ -279,7 +318,7 @@ const SADY = {
       "q": "K čemu slouží formaldehyd?",
       "a": "k dezinfekci a konzervaci preparátů",
       "b": [
-        "k slazení nápojů",
+        "ke slazení nápojů",
         "jako palivo",
         "jako hnojivo"
       ]

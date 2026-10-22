@@ -6,6 +6,8 @@
   <title>Amerika</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -30,6 +32,44 @@
 <body>
   <h1>🌎 Amerika</h1>
   <p class="podtitul">Pro 7. ročník: Severní a Jižní Amerika – poloha států, příroda a hospodářství.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Amerika – hory na západě, nížiny na východě</summary>
+    <div class="obsah">
+      <p>Amerika se táhne od polárních oblastí na severu až skoro k Antarktidě. Díky tomu v ní najdeš
+        <b>všechna podnebná pásma</b> – od tundry v Kanadě přes deštný prales v Amazonii po chladnou Ohňovou zemi.
+        Tvoří ji <b>Severní</b> a <b>Jižní Amerika</b>, spojené úzkou Střední Amerikou.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>⛰️ Západ: mladá pohoří</h3><p>Podél Tichého oceánu se táhnou <b>Kordillery</b>
+          (se Skalnatými horami) a <b>Andy</b> – nejdelší pohoří světa. Leží na okraji tichomořské desky, proto tu jsou
+          <b>sopky a zemětřesení</b>.</p></article>
+        <article class="vyklad-karta"><h3>🌾 Střed a východ</h3><p>Rozlehlé nížiny s velkými řekami: <b>Mississippi</b> v USA,
+          <b>Amazonka</b> (nejvodnatější řeka světa) v Brazílii; travnaté <b>prérie</b> a <b>pampy</b>, na východě staré vysočiny.</p></article>
+        <article class="vyklad-karta"><h3>🏙️ Lidé a hospodářství</h3><p><b>USA</b> mají největší ekonomiku, <b>Kanada</b> je rozlohou druhý
+          největší stát světa, <b>Brazílie</b> největší stát Jižní Ameriky. Chile těží měď, Brazílie pěstuje kávu.</p></article>
+      </div>
+      <p>Reliéf mění podnebí: hory zachytí vlhký vzduch z oceánu, a za nimi proto bývá sucho. Na jižní polokouli
+        leží poušť <b>Atacama</b>, nejsušší místo na Zemi. <b>Typická chyba:</b> hledat Andy na východě – obě velká pohoří
+        jsou vždy <b>u západního pobřeží</b>.</p>
+      <p>Dopravu zkracuje <b>Panamský průplav</b>, který spojuje Atlantský a Tichý oceán; lodě nemusí obeplouvat celou Jižní Ameriku.</p>
+      <aside class="zapamatuj">Na západě Kordillery a Andy (sopky, zemětřesení), na východě nížiny s Mississippi a Amazonkou.
+        Amerika má všechna podnebná pásma, protože se táhne od severu daleko na jih.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: proč jsou na západě sopky</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Proč je na západě obou Amerik hodně zemětřesení a sopek?</p>
+      <ol class="kroky">
+        <li>Podívám se na mapu, kde ty jevy jsou: podél Tichého oceánu, tam kde leží Kordillery a Andy.</li>
+        <li>Vzpomenu si z litosféry: sopky a zemětřesení jsou vnitřní děje, vznikají hlavně na okrajích litosférických desek.</li>
+        <li>Západní pobřeží Ameriky leží právě na okraji tichomořské desky, kde se desky tlačí proti sobě.</li>
+        <li>Ostatní možnosti (mořské proudy, těžba, monzuny) nejsou děje z nitra Země, takže je vyloučím.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Západ Ameriky leží na okraji tichomořské litosférické desky – proto sopky, zemětřesení i mladá pohoří.</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="staty" class="active">🗺️ Slepá mapa – státy</button>
@@ -172,7 +212,7 @@ const PRIRODA = [
     "popis": "Velká jezera",
     "lon": -85,
     "lat": 45,
-    "info": "největší zásoba sladké vody na světě"
+    "info": "největší soustava sladkovodních jezer na světě"
   },
   {
     "klic": "panama",
@@ -368,7 +408,7 @@ const KVIZ_HOSPODARSTVI = [
     ]
   },
   {
-    "q": "Které hlavní město leží nejvýše a bylo postaveno až ve 20. století?",
+    "q": "Které hlavní město bylo postaveno až ve 20. století jako plánované město?",
     "a": "Brasília",
     "b": [
       "Lima",

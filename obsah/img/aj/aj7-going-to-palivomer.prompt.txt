@@ -1,0 +1,5 @@
+Use case: scientific-educational. Square classroom picture card for an English grammar lesson (going to – prediction from evidence). A family car is still driving along a quiet country road; the view is from the back seat over the driver's shoulder to a simple round dashboard fuel gauge whose needle is right at the empty end with a glowing low-fuel lamp; through the windshield the open road continues with no petrol station in sight. Clear visual evidence that the car is going to run out of fuel soon. Refined watercolor and gouache with delicate ink contours on warm ivory paper, realistic schoolbook illustration, clear central story, 12% safe margins. No written words, letters, numbers on the gauge, labels, arrows, brands, logos, road danger, or watermark.
+
+Alt: Řidička jede po silnici a ručička palivoměru stojí na nule, svítí kontrolka paliva.
+Generator: Codex CLI (vestavěný ImageGen)
+Datum: 2026-10-22

@@ -6,6 +6,8 @@
   <title>Hydrosféra</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -30,6 +32,44 @@
 <body>
   <h1>🌊 Hydrosféra</h1>
   <p class="podtitul">Pro 6.–7. ročník: oceány, řeky, jezera, ledovce a koloběh vody.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Voda na Zemi a její koloběh</summary>
+    <div class="obsah">
+      <p><b>Hydrosféra</b> je všechna voda na Zemi: v oceánech, řekách, jezerech, ledovcích, pod zemí i ve vzduchu.
+        Voda pokrývá asi <b>71 %</b> povrchu, ale téměř všechna je slaná. Sladké vody jsou jen asi <b>3 %</b>
+        a většina z nich je zamrzlá v <b>ledovcích</b> – pít z nich nemůžeme.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>🔄 Koloběh vody</h3><p>Pohání ho <b>Slunce</b>: voda se vypaří, pára ve výšce
+          zchladne a <b>zkondenzuje</b> v oblaka, spadne jako srážky, odteče řekami nebo vsákne a vrátí se do moře.</p></article>
+        <article class="vyklad-karta"><h3>Povodí a úmoří</h3><p><b>Povodí</b> je území, odkud voda teče do <b>jedné řeky</b>.
+          <b>Úmoří</b> je území, odkud teče do <b>jednoho moře</b>. Hranici mezi nimi tvoří <b>rozvodí</b>, obvykle hřeben hor.</p></article>
+        <article class="vyklad-karta"><h3>Od pramene k ústí</h3><p>Řeka začíná <b>pramenem</b>, v horách teče prudce (peřeje, údolí),
+          v rovině se stáčí do <b>meandrů</b> a končí <b>ústím</b> – někdy rozvětvenou <b>deltou</b>. Menší řeka vlévající se do větší je <b>přítok</b>.</p></article>
+      </div>
+      <p><b>Typická chyba:</b> plést si povodí a úmoří. Pomůže slovo samo: <i>úmoří</i> obsahuje „moře“.
+        Většina vody z Česka odtéká Labem do <b>Severního moře</b>.</p>
+      <p>Oceány jsou pět: <b>Tichý</b> (největší a nejhlubší, s Mariánským příkopem), <b>Atlantský</b>, <b>Indický</b>,
+        <b>Jižní</b> kolem Antarktidy a <b>Severní ledový</b> (nejmenší).</p>
+      <aside class="zapamatuj">Voda koluje díky energii Slunce: vypařování → kondenzace (oblaka) → srážky → odtok a vsak → moře.
+        Sladká voda jsou jen asi 3 % a většina je v ledovcích.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: seřaď koloběh vody</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Seřaď kroky: srážky, Slunce ohřívá hladinu, pára tvoří oblaka, voda se vypařuje, řeky vedou vodu do moří, voda odtéká a vsakuje.</p>
+      <ol class="kroky">
+        <li>Začnu tím, co celý koloběh pohání: <b>Slunce ohřívá vodní hladinu</b>.</li>
+        <li>Ohřátá voda se <b>vypařuje</b> – stává se z ní neviditelná pára.</li>
+        <li>Pára stoupá, ve výšce chladne a <b>kondenzuje do oblaků</b>.</li>
+        <li>Z oblaků voda padá jako <b>srážky</b>; na zemi část <b>odtéká a část vsakuje</b> do půdy.</li>
+        <li>Nakonec <b>řeky přivedou vodu zpět do moří</b> a koloběh začíná znovu.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Slunce ohřívá hladinu → vypařování → oblaka → srážky → odtok a vsak → řeky do moří.</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="pojmy" class="active">📖 Vodstvo a pojmy</button>
@@ -217,7 +257,12 @@ function reka() {
 }
 
 const REZIMY = { pojmy, kolobeh, oceany, rekordy, reka };
-function novaUloha() { REZIMY[rezim](); }
+// režim „reka“ je jen prohlížení obrázku (žádná úloha) – „Přeskočit“ by ho jen překreslil
+const BEZ_ULOHY = ['reka'];
+function novaUloha() {
+  $('btnDalsi').hidden = BEZ_ULOHY.includes(rezim);
+  REZIMY[rezim]();
+}
 
 document.querySelectorAll('#rezimy button').forEach(b => b.addEventListener('click', () => {
   document.querySelectorAll('#rezimy button').forEach(x => x.classList.remove('active'));
@@ -227,6 +272,7 @@ document.querySelectorAll('#rezimy button').forEach(b => b.addEventListener('cli
 }));
 $('btnDalsi').addEventListener('click', novaUloha);
 document.addEventListener('keydown', e => {
+  if (BEZ_ULOHY.includes(rezim)) return;
   if (e.key === 'ArrowRight' || e.key === 'Enter') { e.preventDefault(); novaUloha(); }
 });
 novaUloha();

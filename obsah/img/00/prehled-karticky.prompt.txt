@@ -1,0 +1,5 @@
+Use case: scientific-educational. Asset type: style B watercolor subject card for Metodus Czech educational website, IMG-00-02. Natural-history watercolor and gouache with fine ink detail on uniform warm ivory paper (#faf6ec), muted sage/jade/ochre palette, soft daylight from upper left, contemporary educational book. One centered compact still life, three-quarter view, generous even 12 percent empty margins. Square 1:1, 768 by 768 pixels. No text, letters, labels, arrows, numbers, border, watermark, logos or extra props. Subject: A tidy study-tools still life: a small stack of blank colored flashcards held with a clip, a little brass hourglass and a sharpened yellow pencil leaning against them. Clearly a decorative emblem for learning and teacher tools; the cards are completely blank.
+
+Alt: Kartičky se sponou, přesýpací hodiny a tužka.
+Generator: Codex CLI (vestavěný ImageGen)
+Datum: 2026-10-22

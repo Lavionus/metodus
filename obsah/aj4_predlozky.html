@@ -6,6 +6,8 @@
   <title>Angličtina – předložky místa a času</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -38,6 +40,46 @@
   <h1>📍 Předložky místa a času</h1>
   <p class="podtitul">Pro 4.–5. ročník: in, on, at, under, next to a předložky u času.</p>
 
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Kde a kdy – in, on, at</summary>
+    <div class="obsah">
+      <p><b>Předložka</b> je malé slovo, které řekne, <b>kde</b> něco je, nebo <b>kdy</b> se něco děje.
+        V angličtině stojí před podstatným jménem stejně jako v češtině: <span lang="en">The cat is under the table.</span>
+        – Kočka je pod stolem.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Kde je to?</h3><p><span lang="en"><b>in</b></span> = uvnitř · <span lang="en"><b>on</b></span> = na povrchu ·
+          <span lang="en"><b>under</b></span> = pod · <span lang="en"><b>next to</b></span> = vedle ·
+          <span lang="en"><b>behind</b></span> = za · <span lang="en"><b>in front of</b></span> = před</p></article>
+        <article class="vyklad-karta"><h3>Kdy? – in, on, at</h3><p><span lang="en"><b>in</b></span> – měsíce, roky, roční období: <span lang="en">in July, in 2026, in winter</span><br>
+          <span lang="en"><b>on</b></span> – dny a data: <span lang="en">on Monday, on my birthday, on 5th May</span><br>
+          <span lang="en"><b>at</b></span> – přesný čas: <span lang="en">at 7 o'clock, at noon, at Christmas</span></p></article>
+        <article class="vyklad-karta"><h3>Části dne</h3><p><span lang="en">in the morning, in the afternoon, in the evening</span>,
+          ale <span lang="en"><b>at night</b></span>.<br>
+          Když přidáš den: <span lang="en"><b>on</b> Friday evening</span>.</p></article>
+      </div>
+      <p>U času pomáhá představa od velkého k malému: dlouhé období (rok, měsíc) má <span lang="en">in</span>,
+        jeden den <span lang="en">on</span>, přesný okamžik na hodinách <span lang="en">at</span>.</p>
+      <p>Pozor na chybu z češtiny: „na stole“ je <span lang="en">on the table</span>, ale „v pondělí“ není
+        <span lang="en">in Monday</span> ✗ – správně <span lang="en">on Monday</span>.
+        V americké angličtině se datum často píše <span lang="en">on May 5th</span>.</p>
+      <aside class="zapamatuj">Čas: rok a měsíc <span lang="en">in</span>, den <span lang="en">on</span>,
+        hodina <span lang="en">at</span>. Výjimka: <span lang="en">at night</span>.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: předložka času</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Doplň předložku: <span lang="en">___ Friday evening</span></p>
+      <ol class="kroky">
+        <li>Vidím slovo <span lang="en">evening</span> – samo by mělo <span lang="en">in the evening</span>.</li>
+        <li>Je tu ale i <span lang="en">Friday</span> – konkrétní den v týdnu.</li>
+        <li>Když je ve spojení konkrétní den, má přednost – dny mají <span lang="en">on</span>.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ <span lang="en"><b>on</b> Friday evening</span> – v pátek večer.</p>
+    </div>
+  </details>
+
   <div class="rezimy" id="rezimy">
     <button data-rezim="misto" class="active">🐈 Kde je kočka?</button>
     <button data-rezim="cas">🕐 Předložky času</button>
@@ -65,7 +107,7 @@
   <div class="tabulka">
     <span><b>in</b> – měsíce, roky, roční období: in July, in 2026</span>
     <span><b>on</b> – dny a data: on Monday, on 5th May</span>
-    <span><b>at</b> – hodiny a části dne: at 7 o'clock, at night</span>
+    <span><b>at</b> – hodiny a přesný čas: at 7 o'clock, at noon, at night (ale <b>in</b> the morning / afternoon / evening)</span>
   </div>
 
   <p class="napoveda">
@@ -80,12 +122,12 @@ let rezim = 'misto';
 
 /* Poloha kočky vůči krabici v procentech obrázku. */
 const POLOHY = [
-  { klic: 'in', cz: 'v (uvnitř)', x: 50, y: 64, z: 3 },
-  { klic: 'on', cz: 'na', x: 50, y: 53, z: 3 },
-  { klic: 'under', cz: 'pod', x: 50, y: 79, z: 3 },
-  { klic: 'next to', cz: 'vedle', x: 73, y: 69, z: 3 },
-  { klic: 'behind', cz: 'za', x: 57, y: 55, z: 1 },
-  { klic: 'in front of', cz: 'před', x: 43, y: 76, z: 4 },
+  { klic: 'in', cz: 'v (uvnitř)', veta: 'v krabici', x: 50, y: 64, z: 3 },
+  { klic: 'on', cz: 'na', veta: 'na krabici', x: 50, y: 53, z: 3 },
+  { klic: 'under', cz: 'pod', veta: 'pod krabicí', x: 50, y: 79, z: 3 },
+  { klic: 'next to', cz: 'vedle', veta: 'vedle krabice', x: 73, y: 69, z: 3 },
+  { klic: 'behind', cz: 'za', veta: 'za krabicí', x: 57, y: 55, z: 1 },
+  { klic: 'in front of', cz: 'před', veta: 'před krabicí', x: 43, y: 76, z: 4 },
 ];
 
 function nastavKocku(el, poloha) {
@@ -135,7 +177,7 @@ const CASY = [
   { v: '___ 2026', spr: 'in', proc: 'Roky mají in.' },
   { v: '___ my birthday', spr: 'on', proc: 'Konkrétní den má on.' },
   { v: '___ winter', spr: 'in', proc: 'Roční období mají in.' },
-  { v: '___ the weekend', spr: 'at', proc: 'V britské angličtině at the weekend.' },
+  { v: '___ noon', spr: 'at', proc: 'at noon = v poledne (přesný okamžik).' },
   { v: '___ Friday evening', spr: 'on', proc: 'Konkrétní den + část dne má on.' },
   { v: '___ half past six', spr: 'at', proc: 'Přesný čas má at.' },
 ];
@@ -154,7 +196,7 @@ function misto() {
   const poloha = Uloha.nahodne(POLOHY);
   p.innerHTML = `<div class="zadani">Where is the cat?</div>
     <div class="karta">
-      <div class="scenka"><img class="scenka-pokoj" src="img/aj/aj4-predlozky-pokoj.webp" alt="Pokoj s otevřenou krabicí." width="768" height="768"><img class="scenka-kocka" src="img/aj/aj4-predlozky-kocka.webp" alt="Kočka je ${poloha.cz} krabice." width="768" height="768" style="--x:${poloha.x}%;--y:${poloha.y}%;--z:${poloha.z}"></div>
+      <div class="scenka"><img class="scenka-pokoj" src="img/aj/aj4-predlozky-pokoj.webp" alt="Pokoj s otevřenou krabicí." width="768" height="768"><img class="scenka-kocka" src="img/aj/aj4-predlozky-kocka.webp" alt="Kočka." width="768" height="768" style="--x:${poloha.x}%;--y:${poloha.y}%;--z:${poloha.z}"></div>
       <div class="veta-en">The cat is <span class="mezera">?</span> the box.</div>
     </div>`;
   const jine = Uloha.zamichej(POLOHY.filter(x => x.klic !== poloha.klic)).slice(0, 3);
@@ -164,7 +206,7 @@ function misto() {
     kam: p, odezva,
     moznosti: Uloha.zamichej([poloha, ...jine]).map(x => ({ klic: x.klic, popis: x.klic })),
     spravnyKlic: poloha.klic,
-    zpravaOk: `✅ The cat is ${poloha.klic} the box. – ${poloha.cz} krabice`,
+    zpravaOk: `✅ The cat is ${poloha.klic} the box. – Kočka je ${poloha.veta}.`,
     zpravaChyba: 'Podívej se pozorně, kde kočka na obrázku je.',
     poSpravne: napoprve => {
       skore.vyhodnot(napoprve);

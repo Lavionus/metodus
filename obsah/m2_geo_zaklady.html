@@ -6,6 +6,8 @@
   <title>Bod, přímka, úsečka</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -28,6 +30,40 @@
 <body>
   <h1>📏 Bod, přímka, úsečka</h1>
   <p class="podtitul">Pro 2.–3. ročník: poznávání útvarů, měření úseček a rýsování podle zadání.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Bod, přímka, polopřímka a úsečka</summary>
+    <div class="obsah">
+      <p>V geometrii kreslíme tužkou a pravítkem. Každý útvar poznáš podle toho, <b>kde začíná a kde končí</b>.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Bod</h3><p>Je to jedno místo. Kreslíme ho jako malý kroužek nebo křížek.
+          Pojmenujeme ho <b>velkým písmenem</b>, třeba A.</p></article>
+        <article class="vyklad-karta"><h3>Přímka</h3><p>Je rovná a <b>nikde nekončí</b>, ani na jedné straně.
+          Proto má na obou koncích šipku. Značíme ji malým písmenem, třeba p.</p></article>
+        <article class="vyklad-karta"><h3>Polopřímka</h3><p>Má <b>jeden začátek</b> (bod A) a na druhou stranu
+          pokračuje pořád dál. Šipku má jen na jedné straně.</p></article>
+        <article class="vyklad-karta"><h3>Úsečka</h3><p>Má <b>dva krajní body</b>, třeba A a B. Je to jediný z těchto
+          útvarů, který můžeš změřit pravítkem.</p></article>
+      </div>
+      <p>Když měříš úsečku, přilož pravítko tak, aby bod A byl přesně u nuly. Pak čteš číslo u bodu B. Když bod A
+        u nuly není, odečti menší číslo od většího.</p>
+      <aside class="zapamatuj">Přímka nemá konec, polopřímka má jeden začátek, úsečka má dva konce a dá se změřit.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: změř úsečku</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Bod A je u čísla 3 na pravítku, bod B u čísla 8. Kolik centimetrů měří úsečka AB?</p>
+      <ol class="kroky">
+        <li>Podívám se, kde úsečka začíná: bod A je u čísla <b>3</b>.</li>
+        <li>Podívám se, kde končí: bod B je u čísla <b>8</b>.</li>
+        <li>Úsečka nezačíná u nuly, takže odečtu: 8 − 3 = 5.</li>
+        <li>Ověřím to počítáním dílků od 3 do 8: 4, 5, 6, 7, 8 – je jich pět.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Úsečka AB měří 5 cm.</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="poznej" class="active">🔍 Co je to?</button>
@@ -62,7 +98,10 @@ const TYPY = [
 
 function kresliUtvar(typ) {
   const sipka = '<defs><marker id="sip" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">'
-    + '<path d="M0 0 L9 4.5 L0 9 z" fill="var(--accent)"/></marker></defs>';
+    + '<path d="M0 0 L9 4.5 L0 9 z" fill="var(--accent)"/></marker>'
+    // šipka na začátku čáry musí mířit ven (doleva), orient="auto" by ji otočil dovnitř
+    + '<marker id="sipL" markerWidth="9" markerHeight="9" refX="2" refY="4.5" orient="auto">'
+    + '<path d="M9 0 L0 4.5 L9 9 z" fill="var(--accent)"/></marker></defs>';
   const zaklad = `<svg class="kresba" viewBox="0 0 400 120">${sipka}`;
   if (typ === 'bod') {
     return zaklad + `<circle class="bod" cx="200" cy="60" r="7"/>
@@ -70,7 +109,7 @@ function kresliUtvar(typ) {
   }
   if (typ === 'primka') {
     return zaklad + `<line class="cara" x1="40" y1="60" x2="360" y2="60"
-      marker-start="url(#sip)" marker-end="url(#sip)"/>
+      marker-start="url(#sipL)" marker-end="url(#sip)"/>
       <text class="popisek" x="196" y="46">p</text></svg>`;
   }
   if (typ === 'poloprimka') {

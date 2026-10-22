@@ -6,6 +6,8 @@
   <title>Počítání do 20 a 100</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -28,6 +30,41 @@
 <body>
   <h1>🔢 Počítání do 20 a 100</h1>
   <p class="podtitul">Pro 1.–3. ročník: sčítání a odčítání v sérii deseti příkladů. Po chybě máš druhý pokus a ukáže se postup, na konci přehled chyb.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Sčítání a odčítání přes desítku</summary>
+    <div class="obsah">
+      <p>Deset je pro počítání důležité číslo. Do rámečku po deseti se vejde přesně deset teček.
+        Když je rámeček plný, začneme plnit druhý. Proto se přes desítku počítá nejlépe <b>na dva kroky</b>.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Sčítání přes desítku</h3><p>Nejdřív <b>doplň do deseti</b>, potom přičti, co zbylo.
+          8 + 5: k 8 chybí do deseti 2, takže 8 + 2 = 10. Z pětky zbyly 3: 10 + 3 = <b>13</b>.</p></article>
+        <article class="vyklad-karta"><h3>Odčítání přes desítku</h3><p>Nejdřív <b>uber do deseti</b>, potom uber zbytek.
+          13 − 5: z 13 uberu 3 a mám 10. Z pětky zbývá ubrat 2: 10 − 2 = <b>8</b>.</p></article>
+        <article class="vyklad-karta"><h3>Do 100</h3><p>Počítej zvlášť <b>desítky</b> a zvlášť <b>jednotky</b>.
+          47 + 25: nejdřív 47 + 20 = 67, pak 67 + 5 = <b>72</b>.</p></article>
+      </div>
+      <p>Jak poznám, že jdu přes desítku? Když se jednotky nevejdou: u 8 + 5 je 8 a 5 víc než 10.
+        Častá chyba je zapomenout druhý krok – napsat 10 a zbytek už nepřičíst. Kontrola: výsledek sčítání
+        musí být větší než obě čísla, výsledek odčítání menší než první číslo.</p>
+      <aside class="zapamatuj">Přes desítku na dva kroky: nejdřív do deseti, potom zbytek.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: 7 + 6</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Vypočítej 7 + 6.</p>
+      <ol class="kroky">
+        <li>7 a 6 je víc než 10, půjdu tedy přes desítku.</li>
+        <li>K sedmičce chybí do deseti <b>3</b>: 7 + 3 = 10.</li>
+        <li>Šestku rozložím na 3 a <b>3</b>. Jednu trojku už jsem přičetl, druhá zbývá.</li>
+        <li>K desítce přičtu zbytek: 10 + 3 = <b>13</b>.</li>
+        <li>Kontrola: 13 je víc než 7 i víc než 6. Sedí to.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ 7 + 6 = 7 + 3 + 3 = 13</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="10">do 10</button>

@@ -6,6 +6,8 @@
   <title>Šifrování a kódování dat</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -33,6 +35,38 @@
   <h1>🔐 Šifrování a kódování dat</h1>
   <p class="podtitul">Pro 7. ročník: Caesarova šifra, luštění, komprese a kódování znaků.</p>
 
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Kódování, šifrování a komprese</summary>
+    <div class="obsah">
+      <p>Všechny tři postupy mění zápis dat, ale každý z jiného důvodu. Než začneš počítat, zeptej se:
+        <b>chci data jen jinak zapsat, utajit, nebo zmenšit?</b></p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Kódování</h3><p>Převod do jiné podoby podle veřejné tabulky – písmeno na číslo, číslo do dvojkové soustavy, znak v UTF-8, Morseova abeceda. Klíč nepotřebuje, přečte to každý, kdo zná tabulku.</p></article>
+        <article class="vyklad-karta"><h3>Šifrování</h3><p>Utajení obsahu. Bez <b>klíče</b> zprávu nepřečteš. U Caesarovy šifry je klíčem posun: s posunem +3 se A změní na D, B na E. Za Z se pokračuje znovu od A.</p></article>
+        <article class="vyklad-karta"><h3>Komprese</h3><p>Zmenšení objemu dat. <b>Bezeztrátová</b> (třeba RLE: AAAB → 3A1B) jde přesně vrátit. <b>Ztrátová</b> (JPEG u fotek) zahodí jemné detaily – pro text se nehodí.</p></article>
+      </div>
+      <p>Caesarova šifra má jen 25 užitečných posunů, takže ji rozluštíš zkoušením: posouváš zpět, dokud
+        nevyjdou česká slova. Proto dnes k ochraně dat neslouží. Typická chyba při šifrování: posunout
+        některé písmeno o jiný počet míst nebo zapomenout, že po Z následuje znovu A.</p>
+      <aside class="zapamatuj">Kódování = jiný zápis bez klíče. Šifrování = utajení s klíčem. Komprese = zmenšení (bezeztrátová / ztrátová).</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: Caesarova šifra s posunem +3</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Zašifruj slovo DATA Caesarovou šifrou s posunem +3.</p>
+      <ol class="kroky">
+        <li>Posun +3 znamená: každé písmeno nahradím písmenem o tři místa dál v abecedě A–Z.</li>
+        <li>D → E, F, <b>G</b>.</li>
+        <li>A → B, C, <b>D</b>. Obě písmena A ve slově se změní stejně.</li>
+        <li>T → U, V, <b>W</b>.</li>
+        <li>Složím písmena ve stejném pořadí: D A T A → G D W D.</li>
+      </ol>
+      <p class="vysledek-ukazky">DATA se s posunem +3 zašifruje jako GDWD. Zpět se rozluští posunem o 3 místa dozadu.</p>
+    </div>
+  </details>
+
   <div class="rezimy" id="rezimy">
     <button data-rezim="zasifruj" class="active">🔒 Zašifruj</button>
     <button data-rezim="rozlusti">🔎 Rozluštit</button>
@@ -49,14 +83,15 @@
 
   <section aria-labelledby="kompreseObrazNadpis"><h2 id="kompreseObrazNadpis">Co udělá komprese s obrázkem?</h2><figure class="komprese-obraz">
     <canvas id="kompreseCanvas" width="1152" height="768" role="img" aria-label="Náhled horské krajiny při zvolené úrovni obrazové kvality"></canvas>
-    <input id="kvalitaObrazu" type="range" min="8" max="100" value="100" aria-label="Kvalita obrázku v procentech">
-    <figcaption id="kvalitaPopis" aria-live="polite">Kvalita 100 % – plné rozlišení, všechny jemné detaily.</figcaption>
+    <input id="kvalitaObrazu" type="range" min="8" max="100" value="100" aria-label="Kvalita komprese JPEG v procentech">
+    <figcaption id="kvalitaPopis" aria-live="polite">Posuvníkem měníš kvalitu komprese JPEG.</figcaption>
   </figure></section>
 
   <p class="napoveda">
     <b>Šifrování</b> mění text tak, aby ho nepovolaný nepřečetl – potřebuje klíč.
     <b>Kódování</b> jen převádí zápis do jiné podoby (třeba písmeno na číslo) a klíč nepotřebuje.
-    <b>Komprese</b> zmenšuje objem dat tím, že vynechává opakování.
+    <b>Komprese</b> zmenšuje objem dat: bezeztrátová zkracuje opakování (třeba RLE),
+    ztrátová (JPEG u fotek) navíc zahodí drobné detaily, kterých si oko skoro nevšimne.
   </p>
 
 <script>
@@ -67,18 +102,48 @@ function odezvaEl() { const d = document.createElement('div'); d.className = 'od
 
 const kompreseImg = new Image();
 kompreseImg.src = 'img/inf/inf7-komprese-krajina.webp';
-function kresliKomprimovanyObraz() {
+/* Skutečná ztrátová komprese JPEG v prohlížeči: obrázek se zakóduje se zvolenou kvalitou,
+   zobrazí se výsledek i velikost souboru. Kdyby prohlížeč kódování nedovolil (např. stránka
+   otevřená ze souboru), ukáže se aspoň zjednodušený náhled se sníženým rozlišením. */
+let kompreseKolo = 0, puvodniVelikost = 0;
+function jpegBlob(platno, kvalita) {
+  return new Promise((ok, chyba) => {
+    try { platno.toBlob(b => b ? ok(b) : chyba(new Error('toBlob')), 'image/jpeg', kvalita); }
+    catch (e) { chyba(e); }
+  });
+}
+const kB = bajty => (bajty / 1024).toLocaleString('cs-CZ', { maximumFractionDigits: 0 }) + ' kB';
+async function kresliKomprimovanyObraz() {
   if (!kompreseImg.complete || !kompreseImg.naturalWidth) return;
+  const kolo = ++kompreseKolo;
   const q = Number($('kvalitaObrazu').value);
   const c = $('kompreseCanvas'), ctx = c.getContext('2d');
-  const w = Math.max(24, Math.round(c.width * q / 100));
-  const h = Math.max(16, Math.round(c.height * q / 100));
-  const pomocny = document.createElement('canvas'); pomocny.width = w; pomocny.height = h;
-  pomocny.getContext('2d').drawImage(kompreseImg, 0, 0, w, h);
-  ctx.imageSmoothingEnabled = false; ctx.clearRect(0, 0, c.width, c.height);
-  ctx.drawImage(pomocny, 0, 0, c.width, c.height);
-  const podil = Math.max(1, Math.round(q * q / 100));
-  $('kvalitaPopis').textContent = `Kvalita ${q} % – přibližně ${podil} % obrazových bodů oproti originálu.`;
+  const zdroj = document.createElement('canvas'); zdroj.width = c.width; zdroj.height = c.height;
+  zdroj.getContext('2d').drawImage(kompreseImg, 0, 0, c.width, c.height);
+  try {
+    if (!puvodniVelikost) puvodniVelikost = (await jpegBlob(zdroj, 1)).size;
+    const blob = await jpegBlob(zdroj, q / 100);
+    const url = URL.createObjectURL(blob);
+    const obr = new Image();
+    await new Promise((ok, chyba) => { obr.onload = ok; obr.onerror = chyba; obr.src = url; });
+    URL.revokeObjectURL(url);
+    if (kolo !== kompreseKolo) return;
+    ctx.imageSmoothingEnabled = true; ctx.clearRect(0, 0, c.width, c.height);
+    ctx.drawImage(obr, 0, 0, c.width, c.height);
+    $('kvalitaPopis').textContent = `Kvalita JPEG ${q} % – soubor má asi ${kB(blob.size)}`
+      + ` (při kvalitě 100 % asi ${kB(puvodniVelikost)}). Rozlišení zůstává stejné, ztrácejí se jemné detaily a barevné přechody.`;
+  } catch {
+    if (kolo !== kompreseKolo) return;
+    const w = Math.max(24, Math.round(c.width * q / 100));
+    const h = Math.max(16, Math.round(c.height * q / 100));
+    const pomocny = document.createElement('canvas'); pomocny.width = w; pomocny.height = h;
+    pomocny.getContext('2d').drawImage(kompreseImg, 0, 0, w, h);
+    ctx.imageSmoothingEnabled = false; ctx.clearRect(0, 0, c.width, c.height);
+    ctx.drawImage(pomocny, 0, 0, c.width, c.height);
+    const podil = Math.max(1, Math.round(q * q / 100));
+    $('kvalitaPopis').textContent = `Zjednodušený náhled: snížené rozlišení na asi ${podil} % obrazových bodů.`
+      + ' (Skutečná komprese JPEG rozlišení nemění – zahazuje jemné detaily.)';
+  }
 }
 kompreseImg.addEventListener('load', kresliKomprimovanyObraz);
 $('kvalitaObrazu').addEventListener('input', kresliKomprimovanyObraz);

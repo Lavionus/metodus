@@ -13,7 +13,7 @@ await call('Page.enable');await call('Runtime.enable');
 await call('Page.navigate',{url:'http://127.0.0.1:8766/obsah/prv5_statni_symboly.html'});
 for(let i=0;i<120&&!(await ev(`document.readyState==='complete'&&typeof novaUloha==='function'`));i++)await new Promise(r=>setTimeout(r,50));
 assert.equal(await ev(`SYMBOLY.length`),7);
-assert.equal(await ev(`SYMBOLY.some(s=>s.n==='státní pečeť'&&s.img.endsWith('prv5-symbol-statni-pecet.png'))`),true);
+assert.equal(await ev(`SYMBOLY.some(s=>s.n==='státní pečeť'&&s.img.endsWith('prv5-symbol-statni-pecet.webp'))`),true);
 assert.equal(await ev(`SYMBOLY.some(s=>s.n==='státní hymna'&&s.audio.endsWith('kde-domov-muj.ogg'))`),true);
 assert.deepEqual(await ev(`Promise.all(SYMBOLY.filter(s=>s.img).map(async s=>(await fetch(s.img)).ok))`),[true,true,true,true,true]);
 assert.equal(await ev(`fetch('audio/kde-domov-muj.ogg').then(r=>r.ok)`),true);

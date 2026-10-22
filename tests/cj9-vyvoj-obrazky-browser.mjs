@@ -13,7 +13,7 @@ await call('Page.enable');await call('Runtime.enable');
 await call('Page.navigate',{url:'http://127.0.0.1:8766/obsah/cj9_vyvoj_jazyka.html'});
 for(let i=0;i<120&&!(await ev(`document.readyState==='complete'&&typeof novaUloha==='function'`));i++)await new Promise(r=>setTimeout(r,50));
 assert.equal(await ev(`document.querySelectorAll('.prameny figure').length`),3);
-assert.deepEqual(await ev(`Promise.all([...document.querySelectorAll('.prameny img')].map(img=>img.complete&&img.naturalWidth>0?true:new Promise(ok=>{img.onload=()=>ok(true);img.onerror=()=>ok(false)})))`),[true,true,true]);
+assert.deepEqual(await ev(`Promise.all([...document.querySelectorAll('.prameny img')].map(img=>(img.loading='eager',img)).map(img=>img.complete&&img.naturalWidth>0?true:new Promise(ok=>{img.onload=()=>ok(true);img.onerror=()=>ok(false)})))`),[true,true,true]);
 for(const mode of ['utvary','nareci','vyvoj','slova']){
   await ev(`document.querySelector('[data-rezim=${JSON.stringify(mode)}]').click()`);
   assert.equal(await ev(`document.querySelector('[data-rezim=${JSON.stringify(mode)}]').classList.contains('active')`),true);

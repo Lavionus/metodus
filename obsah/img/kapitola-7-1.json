@@ -264,5 +264,47 @@
       "datum": "2026-10-08",
       "zadani": "aj/vyslovnost-nosovka.prompt.txt"
     }
+  },
+  {
+    "folder": "00",
+    "name": "prehled-housle",
+    "alt": "Housle se smyčcem a notový list.",
+    "webp": "00/prehled-housle.webp",
+    "png": "00/prehled-housle.png",
+    "bytes": 56996,
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "Codex CLI (ImageGen)",
+      "datum": "2026-10-22",
+      "zadani": "00/prehled-housle.prompt.txt"
+    }
+  },
+  {
+    "folder": "00",
+    "name": "prehled-karticky",
+    "alt": "Kartičky se sponou, přesýpací hodiny a tužka.",
+    "webp": "00/prehled-karticky.webp",
+    "png": "00/prehled-karticky.png",
+    "bytes": 39774,
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "Codex CLI (ImageGen)",
+      "datum": "2026-10-22",
+      "zadani": "00/prehled-karticky.prompt.txt"
+    }
+  },
+  {
+    "folder": "00",
+    "name": "prehled-vahy",
+    "alt": "Mosazné váhy spravedlnosti vedle zavřené knihy.",
+    "webp": "00/prehled-vahy.webp",
+    "png": "00/prehled-vahy.png",
+    "bytes": 42840,
+    "puvod": {
+      "typ": "generovano",
+      "nastroj": "Codex CLI (ImageGen)",
+      "datum": "2026-10-22",
+      "zadani": "00/prehled-vahy.prompt.txt"
+    }
   }
 ]

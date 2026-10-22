@@ -44,7 +44,7 @@ try {
   const katalog = await evaluate(`({ polozky: KATALOG_SEKCE.flatMap(s => s.polozky).map(p => ({ soubor: p.soubor, cil: p.cil, rodina: p.rodina || '' })),
     rodiny: KATALOG_RODINY.map(r => ({ id: r.id, hlavni: r.hlavni, cesta: r.cesta })) })`);
   const soubory = [...new Set(katalog.polozky.map(p => p.soubor))].sort();
-  assert.equal(soubory.length, 261);
+  assert.equal(soubory.length, 274);
   for (const p of katalog.polozky) assert.ok(p.cil && p.cil.length > 15, 'cíl ' + p.soubor);
   const clenove = katalog.rodiny.flatMap(r => r.cesta);
   assert.equal(clenove.length, new Set(clenove).size, 'stránka nejvýš v jedné rodině');
@@ -77,7 +77,7 @@ try {
     barvaCj: getComputedStyle(document.documentElement).getPropertyValue('--predmet-cj').trim() })`);
   assert.match(hlava.predmet, /Český jazyk/);
   assert.match(hlava.cil, /Po této lekci: Určím pád/);
-  assert.deepEqual(hlava.faze, ['vyuka', 'procvic', 'overse', 'tahak']);
+  assert.deepEqual(hlava.faze, ['vyuka', 'ukazka', 'procvic', 'overse', 'tahak'], 'cj4_pady má výklad a vedenou ukázku (vyklad.js)');
   assert.equal(hlava.kroky, katalog.rodiny.find(r => r.cesta.includes('obsah/cj4_pady.html')).cesta.length);
   assert.ok(hlava.zapati >= 2);
   assert.equal(hlava.barva, hlava.barvaCj);

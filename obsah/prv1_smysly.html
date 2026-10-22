@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Lidské tělo a smysly</title>
   <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -91,6 +93,42 @@
   <h1>👁️ Lidské tělo a smysly</h1>
   <p class="podtitul">Pro 1.–2. ročník: pojmenuj části těla a poznej, kterým smyslem co vnímáme.</p>
 
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Pět smyslů</summary>
+    <div class="obsah">
+      <p>Jak víš, že venku svítí slunce nebo že voní koláč? Pomáhají ti <b>smysly</b>.
+        Každý smysl má svůj <b>orgán</b> – část těla, která to pozná.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>👁️ Zrak a 👂 sluch</h3><p><b>Očima</b> vidíme barvy, tvary a světlo.
+          <b>Ušima</b> slyšíme zvuky – písničku, štěkot psa, zvonek.</p></article>
+        <article class="vyklad-karta"><h3>👃 Čich a 👅 chuť</h3><p><b>Nosem</b> cítíme vůně a pachy.
+          <b>Jazykem</b> poznáme, co je sladké, slané, kyselé a hořké.</p></article>
+        <article class="vyklad-karta"><h3>✋ Hmat</h3><p><b>Kůží</b> na celém těle cítíme, co je měkké, drsné,
+          teplé nebo studené. Nejcitlivější jsou konečky prstů.</p></article>
+      </div>
+      <p>Jak poznám, který smysl to je? Zeptám se: <b>Čím to poznávám?</b> Když to vidím – zrak.
+        Když to slyším – sluch. Když na to sáhnu – hmat.</p>
+      <p>Pozor na slova jako <b>vůně</b> a <b>chuť</b>. Vůni čokolády cítíš nosem, to je čich.
+        Sladkou chuť čokolády poznáš až jazykem v puse, to je chuť. A teplo od ohně cítíš kůží – to je hmat, ne zrak.</p>
+      <aside class="zapamatuj">Zrak – oči, sluch – uši, čich – nos, chuť – jazyk, hmat – kůže.
+        Smysly si musíme chránit.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: čím poznám studený led?</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Kterým smyslem poznáš, že led je studený?</p>
+      <ol class="kroky">
+        <li>Led vidím očima. Ale uvidím, že je studený? Ne, vidím jen, jak vypadá.</li>
+        <li>Slyším, že je studený? Ne. Voní? Ne.</li>
+        <li>Vezmu led do ruky a ucítím chlad. Poznala to <b>kůže</b>.</li>
+        <li>Kůže je orgán pro <b>hmat</b>.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Studený led poznám hmatem – kůží.</p>
+    </div>
+  </details>
+
   <div class="rezimy" id="rezimy">
     <button data-rezim="telo" class="active">🧍 Části těla</button>
     <button data-rezim="vjem">🎵 Čím to poznám?</button>
@@ -106,7 +144,7 @@
   </div>
 
   <p class="napoveda">
-    Máme <b>pět smyslů</b>: zrak (oči), sluch (uši), čich (nos), chuť (jazyk) a hmat (kůže, hlavně na rukou).
+    Máme <b>pět smyslů</b>: zrak (oči), sluch (uši), čich (nos), chuť (jazyk) a hmat (kůže na celém těle, nejcitlivější jsou konečky prstů). Kůže cítí i teplo, chlad a bolest.
     Smysly nám říkají, co se kolem nás děje – proto je musíme chránit.
   </p>
 
@@ -133,7 +171,7 @@ const SMYSLY = {
   sluch: { ikona: '👂', nazev: 'sluch', organ: 'ucho',           organIkona: '👂' },
   cich:  { ikona: '👃', nazev: 'čich',  organ: 'nos',            organIkona: '👃' },
   chut:  { ikona: '👅', nazev: 'chuť',  organ: 'jazyk',          organIkona: '👅' },
-  hmat:  { ikona: '✋', nazev: 'hmat',  organ: 'kůže na rukou',  organIkona: '✋' },
+  hmat:  { ikona: '✋', nazev: 'hmat',  organ: 'kůže',           organIkona: '✋' },
 };
 
 const VJEMY = [
@@ -168,7 +206,7 @@ const VJEMY = [
   { e: '🚂', t: 'houkání vlaku', s: 'sluch' },
   { e: '🍓', t: 'sladké jahody', s: 'chut' },
   { e: '🍏', t: 'kyselé jablko', s: 'chut' },
-  { e: '🌶️', t: 'pálivá paprika', s: 'chut' },
+  { e: '🍯', t: 'sladký med', s: 'chut' },
   { e: '🍵', t: 'hořký čaj', s: 'chut' },
   { e: '🥨', t: 'slaný preclík', s: 'chut' },
   { e: '🧄', t: 'vůně česneku', s: 'cich' },
@@ -300,12 +338,11 @@ function organ() {
   const klice = Object.keys(SMYSLY);
   const cil = nahodne(klice);
   const s = SMYSLY[cil];
-  cteniZadani = 'Čím vnímáme ' + s.nazev + '?';
+  cteniZadani = 'Který orgán patří ke smyslu ' + s.nazev + '?';
   const volby = zamichej(klice.map(k =>
     ({ klic: k, ikona: SMYSLY[k].organIkona, popis: SMYSLY[k].organ })));
   tlacitkovaUloha(
-    `<div class="zadani">Čím vnímáme <b>${s.nazev}</b>?</div>
-     <div class="obrazek">${s.ikona}</div>`,
+    `<div class="zadani">Který orgán patří ke smyslu <b>${s.nazev}</b>?</div>`,
     volby, cil, s.organ, s.organ);
 }
 

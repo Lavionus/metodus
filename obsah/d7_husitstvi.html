@@ -6,6 +6,8 @@
   <title>Husitství</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -36,6 +38,48 @@
 <body>
   <h1>⛪ Husitství</h1>
   <p class="podtitul">Pro 7. ročník: od kázání Jana Husa po bitvu u Lipan.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Proč vzniklo husitství a jak skončilo</summary>
+    <div class="obsah">
+      <p>Na počátku 15. století byla církev bohatá a mnoho lidí jí vyčítalo, že se kněží víc starají o majetek
+        než o víru. Nejvíc pobuřoval <b>prodej odpustků</b> – za peníze se měly odpouštět tresty za hříchy.
+        Univerzitní mistr <b>Jan Hus</b> to od roku <b>1402</b> kritizoval v kázáních v <b>Betlémské kapli</b>,
+        česky a srozumitelně.</p>
+      <p>Hus byl pozván na koncil do Kostnice, odmítl odvolat své učení a roku <b>1415</b> byl <b>upálen</b> jako
+        kacíř. Jeho smrt jeho stoupence nezastrašila, ale rozhořčila. Roku <b>1419</b> vyházeli při
+        <b>první pražské defenestraci</b> konšely z oken novoměstské radnice – začala husitská revoluce.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Požadavky</h3><p><b>Čtyři artikuly pražské</b> (1420): svobodné kázání,
+          přijímání pod obojí (symbol <b>kalich</b>), chudoba církve a trestání hříchů.</p></article>
+        <article class="vyklad-karta"><h3>Války</h3><p>Proti husitům vedl <b>Zikmund</b> pět křížových výprav. <b>Jan Žižka</b>
+          vítězil díky <b>vozové hradbě</b> a kázni (Vítkov 1420), po něm vedl vojska <b>Prokop Holý</b>.</p></article>
+        <article class="vyklad-karta"><h3>Konec</h3><p>Umírnění husité se dohodli s církví (<b>basilejská kompaktáta</b>
+          potvrdila přijímání pod obojí) a roku <b>1434</b> spolu s katolickou šlechtou porazili radikály u <b>Lipan</b>.</p></article>
+      </div>
+      <p>Typická chyba: husité nebyli jedna skupina. <b>Umírnění</b> (hlavně Pražané) chtěli dohodu,
+        <b>radikální táboři</b> chtěli církev a společnost změnit od základu. U Lipan proti sobě bojovali husité.</p>
+      <aside class="zapamatuj">Příčina: kritika bohaté církve a odpustků. 1415 upálení Husa → 1419 defenestrace →
+        čtyři artikuly a války → 1434 Lipany, konec husitských válek.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: seřaď události podle příčiny a důsledku</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Seřaď od nejstarší: bitva u Lipan, upálení Jana Husa, první pražská defenestrace,
+        bitva na Vítkově.</p>
+      <ol class="kroky">
+        <li>Hledám <b>příčinu</b>, bez které by ostatní nenastalo: smrt Husa rozhořčila jeho stoupence. První je
+          <b>upálení Husa (1415)</b>.</li>
+        <li>Rozhořčení vyústilo ve vzpouru v Praze: <b>první pražská defenestrace (1419)</b> zahájila revoluci.</li>
+        <li>Na vzpouru odpověděl Zikmund první křížovou výpravou, kterou husité odrazili na <b>Vítkově (1420)</b>.</li>
+        <li>Válka skončila, až se husité rozdělili a umírnění porazili radikály u <b>Lipan (1434)</b>.</li>
+        <li>Zkontroluji roky: 1415 → 1419 → 1420 → 1434. Řetěz příčin a důsledků sedí s letopočty.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ upálení Husa (1415) → defenestrace (1419) → Vítkov (1420) → Lipany (1434)</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="bitvy" class="active">🗺️ Mapa bitev</button>
@@ -166,7 +210,7 @@ const OSOBNOSTI = [
   { jmeno: 'Jan Hus', popis: 'kazatel a univerzitní mistr, kritizoval prodej odpustků, upálen roku 1415' },
   { jmeno: 'Jan Žižka z Trocnova', popis: 'husitský vojevůdce, nikdy neprohrál bitvu, používal vozovou hradbu' },
   { jmeno: 'Prokop Holý', popis: 'vůdce polních vojsk po Žižkovi, vedl spanilé jízdy do okolních zemí' },
-  { jmeno: 'Zikmund Lucemburský', popis: 'římský císař, proti husitům vedl křížové výpravy' },
+  { jmeno: 'Zikmund Lucemburský', popis: 'uherský a římský král (císařem až od roku 1433), proti husitům vedl křížové výpravy' },
   { jmeno: 'Jeroným Pražský', popis: 'Husův přítel a učenec, upálen v Kostnici roku 1416' },
   { jmeno: 'Jan Želivský', popis: 'radikální kazatel, vedl průvod při první pražské defenestraci' },
 ];

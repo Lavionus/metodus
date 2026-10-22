@@ -6,6 +6,8 @@
 <title>🧠 Trénink mentální matematiky</title>
 <link rel="stylesheet" href="../common.css">
 <link rel="stylesheet" href="../vyuka.css">
+<link rel="stylesheet" href="../vyklad.css">
+<script src="../vyklad.js" defer></script>
 <script src="../theme.js"></script>
 <script src="../podpis.js" defer></script>
 <script src="../kostra.js" defer></script>
@@ -23,6 +25,42 @@
 <body>
   <h1>🧠 Trénink mentální matematiky</h1>
   <p class="podtitul">Rychlostní dril z hlavy. Počítá se, kolik stihneš — na konci uvidíš, které příklady ti dělaly problém.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Výhodné počítání z hlavy</summary>
+    <div class="obsah">
+      <p>Z hlavy nepočítáš jako na papíře zprava doleva. Rychlejší je příklad <b>přestavět</b> na snadnější:
+        rozložit čísla na desítky a jednotky, zaokrouhlit na celou desítku a pak opravit, nebo rozdělit násobení
+        na dvě jednoduchá. Výsledek se tím nezmění – mění se jen pořadí kroků.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Po řádech</h3><p>Sečti zvlášť desítky a zvlášť jednotky:
+          47 + 38 = (40 + 30) + (7 + 8) = 70 + 15 = <b>85</b>.</p></article>
+        <article class="vyklad-karta"><h3>Zaokrouhli a oprav</h3><p>49 + 36: místo 49 přičti 50 a jedničku pak uber:
+          50 + 36 − 1 = <b>85</b>. Podobně 72 − 29 = 72 − 30 + 1 = <b>43</b>.</p></article>
+        <article class="vyklad-karta"><h3>Doplněk do desítky</h3><p>Odčítání si představ jako cestu od menšího čísla k většímu:
+          83 − 47 → od 47 do 50 jsou 3, od 50 do 83 je 33, dohromady <b>36</b>.</p></article>
+        <article class="vyklad-karta"><h3>Rozklad při násobení</h3><p>14 × 6 = 10 × 6 + 4 × 6 = 60 + 24 = <b>84</b>.
+          Dělení ověř násobením: 84 : 6 = 14, protože 14 × 6 = 84.</p></article>
+      </div>
+      <p>Častá chyba při „zaokrouhli a oprav“ je opravit opačným směrem. Ptej se: přičetl jsem víc, než jsem měl? Pak musím ubrat.
+        Ubral jsem víc? Pak musím přidat. Rychlý odhad (49 + 36 je kolem 50 + 40 = 90) prozradí hrubou chybu.</p>
+      <aside class="zapamatuj">Přestav příklad na snadnější: po řádech, zaokrouhli a oprav, rozlož násobení.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: 68 + 57 z hlavy</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Vypočítej z hlavy 68 + 57.</p>
+      <ol class="kroky">
+        <li>68 je blízko celé desítky 70 – zaokrouhlím ho nahoru o <b>2</b>.</li>
+        <li>Počítám snadnější příklad: 70 + 57 = <b>127</b>.</li>
+        <li>Přičetl jsem o 2 víc, než jsem měl, takže 2 uberu: 127 − 2 = <b>125</b>.</li>
+        <li>Kontrola po řádech: 60 + 50 = 110, 8 + 7 = 15, 110 + 15 = 125. Sedí.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ 68 + 57 = 125</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="nastaveni">
     <div class="operace" id="operace">
@@ -85,11 +123,12 @@ function generuj() {
     vysledek = 1 + Math.floor(Math.random() * (uroven === 1 ? 9 : 12));
     a = b * vysledek;
   }
-  const znak = op === '*' ? '×' : op === '/' ? '÷' : op;
+  const znak = op === '*' ? '×' : op === '/' ? ':' : op === '-' ? '−' : op;
   return { zadani: `${a} ${znak} ${b}`, odpoved: vysledek };
 }
 
 function start() {
+  Uloha.zrusPosun();   // posun z předchozí série nesmí přeskočit první příklad nové
   spravne = 0; pokusy = 0; serie = 0; nejdelsiSerie = 0; chyby = []; zodpovezeno = 0;
   const delka = +$('delka').value;
   naPocet = delka === 0;
@@ -222,8 +261,23 @@ window.addEventListener('DOMContentLoaded', () => {
     operace = vybrane;
   });
   $('btnStart').onclick = start;
-  start();
+  // časomíra se nespouští sama po načtení (WCAG 2.2.1) – série začne až na tlačítko
+  uvod();
 });
+
+function uvod() {
+  $('plocha').innerHTML = '';
+  const karta = document.createElement('div');
+  karta.className = 'karta';
+  karta.innerHTML = `<div class="popis">Vyber operace, obtížnost a délku. Časomíra se rozběhne,
+    až sérii spustíš.</div>`;
+  const b = document.createElement('button');
+  b.className = 'hlavni';
+  b.textContent = '▶️ Spustit sérii';
+  b.onclick = start;
+  karta.appendChild(b);
+  $('plocha').appendChild(karta);
+}
 </script>
 </body>
 </html>

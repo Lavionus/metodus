@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Cesta do školy a bezpečnost</title>
   <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -49,7 +51,9 @@
     }
     .svetlo { width: 54px; height: 54px; border-radius: 50%; background: #3a3a3a; }
     .svetlo.cervena.sviti { background: #e03b3b; box-shadow: 0 0 22px #e03b3b; }
-    .svetlo.oranzova.sviti { background: #e8a33d; box-shadow: 0 0 22px #e8a33d; }
+    .svetlo.zelena.blika { animation: blikani 0.9s steps(1) infinite; }
+    @keyframes blikani { 0% { background: #45c46a; box-shadow: 0 0 22px #45c46a; } 50% { background: #3a3a3a; box-shadow: none; } }
+    .popis-blikani { font-weight: 700; color: var(--text-muted); }
     .svetlo.zelena.sviti { background: #45c46a; box-shadow: 0 0 22px #45c46a; }
     .chodec { font-size: 3.4rem; }
     .situace-obrazky { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; width: 100%; }
@@ -91,6 +95,40 @@
 <body>
   <h1>🚸 Cesta do školy a bezpečnost</h1>
   <p class="podtitul">Pro 1.–2. ročník: co je na cestě do školy, kdy se smí přecházet a jak se chovat bezpečně.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Jak bezpečně dojdu do školy</summary>
+    <div class="obsah">
+      <p>Na cestě do školy jsou auta. Auto jede rychle. Nedokáže zastavit hned. Proto chodíš po <b>chodníku</b>.
+        Silnici přecházíš na <b>přechodu</b>.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>🛑 Zastav se</h3><p>Před přechodem se vždy zastav. Nikdy na silnici nevbíhej.</p></article>
+        <article class="vyklad-karta"><h3>👀 Rozhlédni se</h3><p>Podívej se <b>vlevo, vpravo a znovu vlevo</b>. Poslouchej. Jdi, až auta opravdu stojí.</p></article>
+        <article class="vyklad-karta"><h3>🚦 Semafor</h3><p><b>Červená</b> = stůj. <b>Zelená</b> = jdi, ale nejdřív se rozhlédni. <b>Bliká zelená</b> = už nevstupuj.</p></article>
+        <article class="vyklad-karta"><h3>🦺 Buď vidět</h3><p>Za tmy nos reflexní pásek nebo vestu. Na kole měj přilbu.</p></article>
+      </div>
+      <p>Proč se rozhlížíš i na zelenou? Řidič mohl zelenou přehlédnout. Proč nepřecházíš mezi auty? Zaparkované
+        auto tě schová. Řidič tě pak nevidí.</p>
+      <p>Když ti spadne míč na silnici, neběž pro něj. Zavolej dospělého.</p>
+      <p>Někde chodník není. Pak jdi po <b>levé</b> straně silnice, proti autům. Ty vidíš auto a řidič vidí tebe.
+        Můžeš včas uhnout.</p>
+      <aside class="zapamatuj">Zastav se. Podívej se vlevo, vpravo a znovu vlevo. Přejdi, až auta stojí.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: Smím přejít?</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Na semaforu pro chodce <b>bliká zelená</b>. Smíš vstoupit na přechod?</p>
+      <ol class="kroky">
+        <li>Podívám se na semafor. Zelená nesvítí klidně, ale <b>bliká</b>.</li>
+        <li>Blikání znamená: za chvíli bude červená.</li>
+        <li>Na přechod už nevstoupím. Kdo už přechází, dojde v klidu na druhou stranu.</li>
+        <li>Počkám na chodníku na další zelenou.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ <b>Ne, počkám.</b> Při blikající zelené na přechod nevstupuji.</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="mapa" class="active">🗺️ Co je na cestě</button>
@@ -306,20 +344,20 @@ function mapa() {
 /* ---- Semafor -------------------------------------------------------------- */
 function semafor() {
   const p = $('plocha');
-  const barvy = ['cervena', 'oranzova', 'zelena'];
+  const barvy = ['cervena', 'zelena', 'blika'];
   const sviti = nahodne(barvy);
   const smiPrejit = sviti === 'zelena';
-  cteniZadani = 'Smíš přejít?';
+  cteniZadani = sviti === 'blika' ? 'Na semaforu pro chodce bliká zelená. Smíš vstoupit na přechod?' : 'Smíš vstoupit na přechod?';
   const chodec = sviti === 'zelena' ? '🚶' : '🧍';
   p.innerHTML = `
-    <div class="zadani">Na semaforu svítí tato barva. <b>Smíš přejít?</b></div>
+    <div class="zadani">Na semaforu pro chodce ${sviti === 'blika' ? 'bliká zelená' : 'svítí tato barva'}. <b>Smíš vstoupit na přechod?</b></div>
     ${sviti === 'cervena' || sviti === 'zelena' ? obrazkySituace([sviti]) : ''}
     <div class="semafor-obal">
       <div class="semafor">
         <div class="svetlo cervena ${sviti === 'cervena' ? 'sviti' : ''}"></div>
-        <div class="svetlo oranzova ${sviti === 'oranzova' ? 'sviti' : ''}"></div>
-        <div class="svetlo zelena ${sviti === 'zelena' ? 'sviti' : ''}"></div>
+        <div class="svetlo zelena ${sviti === 'zelena' ? 'sviti' : ''}${sviti === 'blika' ? 'blika' : ''}"></div>
       </div>
+      ${sviti === 'blika' ? '<div class="popis-blikani">zelená bliká</div>' : ''}
       <div class="chodec">${chodec}</div>
     </div>`;
   const m = document.createElement('div');
@@ -327,7 +365,7 @@ function semafor() {
   const odezva = document.createElement('div');
   odezva.className = 'odezva';
   const vysvetleni = sviti === 'zelena' ? 'Zelená znamená jdi – ale nejdřív se rozhlédni.'
-    : sviti === 'oranzova' ? 'Oranžová znamená připrav se, ještě nevstupuj do silnice.'
+    : sviti === 'blika' ? 'Blikající zelená znamená: na přechod už nevstupuj. Kdo už přechází, dojde v klidu na druhou stranu.'
     : 'Červená znamená stůj a čekej na chodníku.';
   const stav = { chyboval: false, hotovo: false };
   [{ t: '✅ Ano, jdu', v: true }, { t: '🛑 Ne, počkám', v: false }].forEach(volba => {

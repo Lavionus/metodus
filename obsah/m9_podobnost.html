@@ -171,6 +171,7 @@ function odezvaEl() { const d = document.createElement('div'); d.className = 'od
 /* Čtyři možnosti k výběru: správná + první tři použitelné návnady.
    Generátory dodávají návnad víc, protože po zaokrouhlení část splyne
    se správnou odpovědí a musela by se řada doplňovat. */
+const r2 = x => Math.round(x * 100) / 100;
 function moznosti4(spravny, kandidati) {
   const jine = [];
   kandidati.forEach(v => {
@@ -501,7 +502,6 @@ function stin() {
   const d = stinData;
   d.uhel = Math.max(d.uhel, nejnizsiSlunce(d.objekt.id));
   const pomer = d.vyskaObjektu / d.vyskaTyce;
-  const stinTyce = d.vyskaTyce / Math.tan(d.uhel * Math.PI / 180);
 
   p.innerHTML = `
     <div class="zadani uloha-text">Tyč vysoká <b>${fmt1(d.vyskaTyce)} m</b> i ${d.objekt.nazev} vrhají stín.
@@ -541,38 +541,52 @@ function stin() {
     <div class="karta"><div class="vzorec">výška tyče : stín tyče = <b>výška objektu : stín objektu</b></div></div>`;
 
   const odezva = odezvaEl();
-  let spravny, moznosti, zpravaOk, zpravaChyba, jednotka = ' m';
-  if (d.naStin) {
-    spravny = fmt1(stinTyce * pomer);
-    moznosti = moznosti4(spravny, [
-      fmt1(stinTyce), fmt1(stinTyce * pomer / 2), fmt1(stinTyce + pomer),
-      fmt1(stinTyce * pomer * 2), fmt1(d.vyskaObjektu),
-    ]);
-    zpravaOk = `✅ ${d.objekt.nazev} je ${fmt(pomer)}× vyšší než tyč, takže i stín je ${fmt(pomer)}× delší: `
-      + `${fmt1(stinTyce)} · ${fmt(pomer)} = ${spravny} m.`;
-    zpravaChyba = 'Kolikrát je objekt vyšší než tyč? Tolikrát je delší i jeho stín.';
-  } else {
-    spravny = fmt1(d.vyskaObjektu);
-    moznosti = moznosti4(spravny, [
-      fmt1(d.vyskaTyce + d.vyskaObjektu / 2), fmt1(d.vyskaObjektu / 2),
-      fmt1(d.vyskaObjektu + d.vyskaTyce), fmt1(d.vyskaObjektu - 1), fmt1(d.vyskaObjektu * 2),
-    ]);
-    zpravaOk = `✅ Stín je ${fmt(pomer)}× delší než stín tyče, takže i objekt je ${fmt(pomer)}× vyšší: `
-      + `${fmt1(d.vyskaTyce)} · ${fmt(pomer)} = ${spravny} m.`;
-    zpravaChyba = 'Kolikrát je delší stín objektu než stín tyče? Tolikrát je vyšší i objekt.';
+  // Možnosti se staví podle aktuální výšky slunce: když žák u otázky na délku stínu
+  // sluncem pohne, správná odpověď se změní – proto se po puštění posuvníku postaví znovu.
+  // Stín tyče se počítá zaokrouhlený na setiny tak, jak ho žák vidí v obrázku.
+  function sestavVolbu() {
+    const stinTyce = r2(d.vyskaTyce / Math.tan(d.uhel * Math.PI / 180));
+    let spravny, moznosti, zpravaOk, zpravaChyba;
+    if (d.naStin) {
+      spravny = fmt1(stinTyce * pomer);
+      moznosti = moznosti4(spravny, [
+        fmt1(stinTyce), fmt1(stinTyce * pomer / 2), fmt1(stinTyce + pomer),
+        fmt1(stinTyce * pomer * 2), fmt1(d.vyskaObjektu),
+      ]);
+      zpravaOk = `✅ ${d.objekt.nazev[0].toUpperCase() + d.objekt.nazev.slice(1)} je ${fmt(pomer)}× vyšší než tyč, takže i stín je ${fmt(pomer)}× delší: `
+        + `${fmt(stinTyce)} · ${fmt(pomer)} ≐ ${spravny} m.`;
+      zpravaChyba = 'Kolikrát je objekt vyšší než tyč? Tolikrát je delší i jeho stín.';
+    } else {
+      spravny = fmt1(d.vyskaObjektu);
+      moznosti = moznosti4(spravny, [
+        fmt1(d.vyskaTyce + d.vyskaObjektu / 2), fmt1(d.vyskaObjektu / 2),
+        fmt1(d.vyskaObjektu + d.vyskaTyce), fmt1(d.vyskaObjektu - 1), fmt1(d.vyskaObjektu * 2),
+      ]);
+      zpravaOk = `✅ Stín je ${fmt(pomer)}× delší než stín tyče, takže i objekt je ${fmt(pomer)}× vyšší: `
+        + `${fmt1(d.vyskaTyce)} · ${fmt(pomer)} = ${spravny} m.`;
+      zpravaChyba = 'Kolikrát je delší stín objektu než stín tyče? Tolikrát je vyšší i objekt.';
+    }
+    return Uloha.vyber({
+      kam: p, odezva, trida: 'velke',
+      moznosti: moznosti.map(t => ({ klic: t, popis: t + ' m' })),
+      spravnyKlic: spravny,
+      zpravaOk, zpravaChyba,
+      poSpravne: skore.vyhodnot,
+      dalsi: () => { novyStin(); stin(); },
+    });
   }
-
-  Uloha.vyber({
-    kam: p, odezva, trida: 'velke',
-    moznosti: moznosti.map(t => ({ klic: t, popis: t + jednotka })),
-    spravnyKlic: spravny,
-    zpravaOk, zpravaChyba,
-    poSpravne: skore.vyhodnot,
-    dalsi: () => { novyStin(); stin(); },
-  });
+  let volba = sestavVolbu();
   p.appendChild(odezva);
 
   $('posUhel').addEventListener('input', e => { d.uhel = +e.target.value; prekresliStin(); });
+  $('posUhel').addEventListener('change', () => {
+    if (!d.naStin || volba.stav.hotovo) return;
+    const { chyboval, ohlaseno } = volba.stav;
+    volba.prvek.remove();
+    volba = sestavVolbu();
+    Object.assign(volba.stav, { chyboval, ohlaseno });
+    p.insertBefore(volba.prvek, odezva);
+  });
   prekresliStin();
 }
 
@@ -649,9 +663,10 @@ function prekresliStin() {
     e.setAttribute('x', x); e.setAttribute('y', y); e.textContent = text;
   };
   popis('popisTyc', xT - 34, ZEM - vT / 2 + 4, `${fmt1(d.vyskaTyce)} m`);
-  popis('popisStinTyce', xT + sT / 2, ZEM + 24, `stín ${fmt1(stinT)} m`);
+  // stíny na setiny – z jedné desetiny by výpočet poměrem vycházel nepřesně
+  popis('popisStinTyce', xT + sT / 2, ZEM + 24, `stín ${fmt(r2(stinT))} m`);
   popis('popisStinObjektu', xStin + sS / 2, ZEM + 24,
-    d.naStin ? 'stín ? m' : `stín ${fmt1(stinS)} m`);
+    d.naStin ? 'stín ? m' : `stín ${fmt(r2(stinS))} m`);
   popis('popisObjekt', xS, ZEM - vS - 14, d.naStin ? `${fmt1(d.vyskaObjektu)} m` : '? m');
 
   $('hodUhel').textContent = d.uhel + '°';

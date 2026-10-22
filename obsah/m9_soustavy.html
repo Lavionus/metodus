@@ -6,6 +6,8 @@
   <title>Soustavy rovnic</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -63,6 +65,20 @@
   <h1>🧮 Soustavy rovnic</h1>
   <p class="podtitul">Pro 9. ročník: dosazovací a sčítací metoda, grafické řešení a slovní úlohy.</p>
 
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: sčítací metoda</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Vyřeš soustavu rovnic: x + y = 7 a 2x − y = 5.</p>
+      <ol class="kroky">
+        <li>Všimnu si, že u y je v jedné rovnici +y a ve druhé −y. Když rovnice sečtu, y zmizí – hodí se <b>sčítací metoda</b>.</li>
+        <li>Sečtu levé i pravé strany: (x + y) + (2x − y) = 7 + 5, tedy <b>3x = 12</b>, a proto <b>x = 4</b>.</li>
+        <li>Dosadím x = 4 do první rovnice: 4 + y = 7, takže <b>y = 3</b>.</li>
+        <li>Zkouška v obou rovnicích: 4 + 3 = 7 ✓ a 2 · 4 − 3 = 5 ✓.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ x = 4, y = 3 (graficky: přímky se protnou v bodě [4; 3]).</p>
+    </div>
+  </details>
+
   <div class="rezimy" id="rezimy">
     <button data-rezim="prusecik" data-faze="vyuka" class="active">📈 Průsečík naživo</button>
     <button data-rezim="reseni">🔑 Vyřeš soustavu</button>
@@ -91,7 +107,9 @@ let rezim = 'prusecik';
 function odezvaEl() { const d = document.createElement('div'); d.className = 'odezva'; return d; }
 const clen = (k, p) => (k === 1 ? '' : k === -1 ? '−' : k) + p;
 const zapisRovnice = (a, b, c) =>
-  `${clen(a, 'x')} ${b >= 0 ? '+' : '−'} ${clen(Math.abs(b), 'y')} = ${c}`;
+  `${clen(a, 'x')} ${b >= 0 ? '+' : '−'} ${clen(Math.abs(b), 'y')} = ${cis(c)}`;
+const cis = v => String(v).replace('-', '−');                 // typografické minus
+const zav = v => v < 0 ? `(${cis(v)})` : String(v);           // záporné číslo za „·“ do závorky
 
 /* ---- Průsečík naživo --------------------------------------------------------------------
    Dvě přímky y = kx + q na posuvnících. Kromě běžného jednoho řešení se dají
@@ -180,7 +198,12 @@ function kresliPrusecik() {
      <text class="popis" x="${X(0) + 11}" y="14">y</text>
      <text class="popis" x="${X(1)}" y="${Y(0) + 13}">1</text>`;
 
-  const zapis = (k, q) => `y = ${fmtC(k)}x ${q >= 0 ? '+' : '−'} ${fmtC(Math.abs(q))}`;
+  // y = x + 2, y = −x, y = 3 (bez „1x“, „0x“ a „+ 0“)
+  const zapis = (k, q) => {
+    const kx = k === 0 ? '' : k === 1 ? 'x' : k === -1 ? '−x' : `${fmtC(k)}x`;
+    if (!kx) return `y = ${fmtC(q)}`;
+    return q === 0 ? `y = ${kx}` : `y = ${kx} ${q > 0 ? '+' : '−'} ${fmtC(Math.abs(q))}`;
+  };
   $('stavPR').className = 'stav-reseni ' + trida;
   $('stavPR').innerHTML =
     `<div class="rovnice1">${zapis(k1, q1)}</div>
@@ -202,15 +225,17 @@ function novaSoustava(maleKoeficienty) {
     a1 = Uloha.nahodneCislo(1, rozsah); b1 = Uloha.nahodneCislo(-rozsah, rozsah) || 1;
     a2 = Uloha.nahodneCislo(1, rozsah); b2 = Uloha.nahodneCislo(-rozsah, rozsah) || -1;
   } while (a1 * b2 - a2 * b1 === 0 && pojistka++ < 100);
+  if (a1 * b2 - a2 * b1 === 0) { a1 = 1; b1 = 1; a2 = 1; b2 = -1; }   // pojistka: nikdy závislá soustava
   return { a1, b1, c1: a1 * x + b1 * y, a2, b2, c2: a2 * x + b2 * y, x, y };
 }
 
 function reseni() {
   const p = $('plocha');
   const s = novaSoustava(true);
-  const spravny = `x = ${s.x}, y = ${s.y}`;
-  const jine = new Set([`x = ${s.y}, y = ${s.x}`, `x = ${s.x + 1}, y = ${s.y - 1}`,
-    `x = ${-s.x}, y = ${-s.y}`, `x = ${s.x}, y = ${s.y + 2}`]);
+  const dvojice = (x, y) => `x = ${cis(x)}, y = ${cis(y)}`;
+  const spravny = dvojice(s.x, s.y);
+  const jine = new Set([dvojice(s.y, s.x), dvojice(s.x + 1, s.y - 1),
+    dvojice(-s.x || 0, -s.y || 0), dvojice(s.x, s.y + 2), dvojice(s.x - 1, s.y + 1)]);
   jine.delete(spravny);
 
   p.innerHTML = `<div class="zadani uloha-text">Vyřeš soustavu rovnic:</div>
@@ -220,7 +245,7 @@ function reseni() {
     kam: p, odezva, trida: 'velke',
     moznosti: Uloha.zamichej([spravny, ...[...jine].slice(0, 3)]).map(t => ({ klic: t, popis: t })),
     spravnyKlic: spravny,
-    zpravaOk: `✅ ${spravny} – zkouška: ${s.a1}·${s.x} ${s.b1 >= 0 ? '+' : '−'} ${Math.abs(s.b1)}·${s.y} = ${s.c1}`,
+    zpravaOk: `✅ ${spravny} – zkouška: ${s.a1}·${zav(s.x)} ${s.b1 >= 0 ? '+' : '−'} ${Math.abs(s.b1)}·${zav(s.y)} = ${cis(s.c1)}`,
     zpravaChyba: 'Dosaď nabízené dvojice do obou rovnic – správná musí vyhovět oběma.',
     poSpravne: skore.vyhodnot,
     dalsi: novaUloha,
@@ -279,8 +304,9 @@ function graf() {
   const primka = (k, q, trida) =>
     `<line class="${trida}" x1="${X(-6)}" y1="${Y(k * -6 + q)}" x2="${X(6)}" y2="${Y(k * 6 + q)}"/>`;
 
-  const spravny = `[${x}; ${y}]`;
-  const jine = new Set([`[${y}; ${x}]`, `[${x + 1}; ${y}]`, `[${-x}; ${-y}]`, `[${x}; ${y - 2}]`]);
+  const bod2 = (a, b) => `[${cis(a)}; ${cis(b)}]`;
+  const spravny = bod2(x, y);
+  const jine = new Set([bod2(y, x), bod2(x + 1, y), bod2(-x || 0, -y || 0), bod2(x, y - 2), bod2(x - 1, y + 1)]);
   jine.delete(spravny);
 
   p.innerHTML = `<div class="zadani uloha-text">Přímky jsou grafy dvou rovnic soustavy.
@@ -311,28 +337,34 @@ function graf() {
 
 const SLOVNI = [
   { text: 'V hospodářství je celkem {celkem} zvířat, slepic a králíků. Dohromady mají {nohy} nohou. Kolik je slepic?',
+    tvary: ['slepice', 'slepice', 'slepic'],
     gen: () => {
       const slepice = Uloha.nahodneCislo(4, 20), kralici = Uloha.nahodneCislo(4, 20);
       return { hodnoty: { celkem: slepice + kralici, nohy: 2 * slepice + 4 * kralici }, vysledek: slepice,
-        jednotka: 'slepic', vysvetleni: `s + k = ${slepice + kralici}, 2s + 4k = ${2 * slepice + 4 * kralici} → s = ${slepice}` };
+        jednotka: '', vysvetleni: `s + k = ${slepice + kralici}, 2s + 4k = ${2 * slepice + 4 * kralici} → s = ${slepice}` };
     } },
-  { text: 'Za {a} rohlíků a {b} croissantů jsme zaplatili {cena1} Kč. Za {c} rohlíků a {d} croissantů {cena2} Kč. Kolik korun stojí jeden croissant?',
+  { text: 'Za {a|rohlík|rohlíky|rohlíků} a {b|croissant|croissanty|croissantů} jsme zaplatili {cena1} Kč. Za {c|rohlík|rohlíky|rohlíků} a {d|croissant|croissanty|croissantů} {cena2} Kč. Kolik korun stojí jeden croissant?',
     gen: () => {
       const rohlik = Uloha.nahodneCislo(2, 6), croissant = Uloha.nahodneCislo(15, 40);
-      const a = Uloha.nahodneCislo(2, 6), b = Uloha.nahodneCislo(1, 4);
-      const c = Uloha.nahodneCislo(2, 6), d = Uloha.nahodneCislo(1, 4) + 1;
+      // a·d ≠ b·c – jinak by obě rovnice byly násobkem jedné (závislá soustava) a cena by nešla určit
+      let a, b, c, d;
+      do {
+        a = Uloha.nahodneCislo(2, 6); b = Uloha.nahodneCislo(1, 4);
+        c = Uloha.nahodneCislo(2, 6); d = Uloha.nahodneCislo(1, 4) + 1;
+      } while (a * d === b * c);
       return { hodnoty: { a, b, c, d, cena1: a * rohlik + b * croissant, cena2: c * rohlik + d * croissant },
         vysledek: croissant, jednotka: 'Kč', vysvetleni: `rohlík stojí ${rohlik} Kč, croissant ${croissant} Kč` };
     } },
   { text: 'Otci je {otec} let a synovi {syn}. Za kolik let bude otec právě dvakrát starší než syn?',
+    tvary: ['rok', 'roky', 'let'],
     gen: () => {
       const syn = Uloha.nahodneCislo(6, 14), rozdil = Uloha.nahodneCislo(20, 34);
       const otec = syn + rozdil;
       const zaKolik = rozdil - syn;
-      return { hodnoty: { otec, syn }, vysledek: zaKolik, jednotka: 'let',
+      return { hodnoty: { otec, syn }, vysledek: zaKolik, jednotka: '',
         vysvetleni: `otec + x = 2·(syn + x) → x = ${zaKolik}` };
     } },
-  { text: 'Smícháme {a} litrů {p1}% roztoku a {b} litrů {p2}% roztoku. Kolik procent má výsledná směs?',
+  { text: 'Smícháme {a|litr|litry|litrů} {p1}% roztoku a {b|litr|litry|litrů} {p2}% roztoku. Kolik procent má výsledná směs?',
     gen: () => {
       const a = Uloha.nahodneCislo(1, 6), b = Uloha.nahodneCislo(1, 6);
       const p1 = Uloha.nahodne([10, 20, 30]), p2 = Uloha.nahodne([40, 50, 60]);
@@ -346,7 +378,10 @@ function slovni() {
   const u = Uloha.nahodne(SLOVNI);
   const d = u.gen();
   let text = u.text;
-  for (const [k, v] of Object.entries(d.hodnoty)) text = text.replaceAll('{' + k + '}', v);
+  // {a} = číslo, {a|1|2–4|5+} = číslo se slovem ve správném tvaru
+  text = text.replace(/\{(\w+)(?:\|([^|}]*)\|([^|}]*)\|([^|}]*))?\}/g, (_, k, t1, t2, t5) =>
+    t1 === undefined ? String(d.hodnoty[k]) : Uloha.tvar(d.hodnoty[k], t1, t2, t5));
+  const sJednotkou = v => u.tvary ? Uloha.tvar(v, ...u.tvary) : `${Uloha.cislo(v)} ${d.jednotka}`;
   const jine = new Set([String(d.vysledek + 2), String(d.vysledek - 1), String(Math.round(d.vysledek * 2)),
     String(Math.max(1, Math.round(d.vysledek / 2)))]);
   jine.delete(String(d.vysledek));
@@ -356,9 +391,9 @@ function slovni() {
   Uloha.vyber({
     kam: p, odezva, trida: 'velke',
     moznosti: Uloha.zamichej([String(d.vysledek), ...[...jine].slice(0, 3)])
-      .map(t => ({ klic: t, popis: t.replace('.', ',') + ' ' + d.jednotka })),
+      .map(t => ({ klic: t, popis: sJednotkou(Number(t)) })),
     spravnyKlic: String(d.vysledek),
-    zpravaOk: `✅ ${String(d.vysledek).replace('.', ',')} ${d.jednotka} – ${d.vysvetleni}`,
+    zpravaOk: `✅ ${sJednotkou(d.vysledek)} – ${d.vysvetleni}`,
     zpravaChyba: 'Označ neznámé písmeny, sestav dvě rovnice a vyřeš soustavu.',
     poSpravne: skore.vyhodnot,
     dalsi: novaUloha,
@@ -370,7 +405,9 @@ const REZIMY = { prusecik, reseni, postup, graf, slovni };
 function novaUloha() {
   if (rezim === 'prusecik') {
     PR.k1 = Uloha.nahodneCislo(-3, 3); PR.q1 = Uloha.nahodneCislo(-4, 4);
-    PR.k2 = Uloha.nahodneCislo(-3, 3); PR.q2 = Uloha.nahodneCislo(-4, 4);
+    // náhodné přímky vždy s jedním průsečíkem; rovnoběžky a totožné přímky si žák nastaví posuvníky
+    do { PR.k2 = Uloha.nahodneCislo(-3, 3); } while (PR.k2 === PR.k1);
+    PR.q2 = Uloha.nahodneCislo(-4, 4);
     prusecik();
     return;
   }

@@ -128,10 +128,11 @@ textarea{resize:vertical;min-height:60px}
 <script>
 const $=id=>document.getElementById(id);
 const STORAGE_KEY='citations_v1';
-let items=JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]');
+let items=[];
+try{ items=JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]'); if(!Array.isArray(items)) items=[]; }catch(e){ items=[]; }
 let style='iso';
 
-function save(){localStorage.setItem(STORAGE_KEY,JSON.stringify(items));}
+function save(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(items));}catch(e){}}
 function esc(s){return (s||'').replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));}
 
 const FIELDS_BY_TYPE={
@@ -220,32 +221,60 @@ function authorsApa(authors){
   const names=authors.map(a=>`${a.prijmeni}${a.jmeno? ', '+a.jmeno.charAt(0).toUpperCase()+'.':''}`);
   if(names.length===0) return '';
   if(names.length===1) return names[0];
-  if(names.length===2) return names[0]+' & '+names[1];
+  if(names.length===2) return names[0]+', & '+names[1];
   return names.slice(0,-1).join(', ')+', & '+names[names.length-1];
 }
 
+/* Skládání citace: prázdné údaje vynecháme, tečku za údajem přidáme, jen když tam ještě není
+   (název končící „?“ nebo zkratkou nedostane druhou tečku). Vše, co zadal uživatel, se escapuje. */
+const tecka = t => /[.?!]$/.test(t.replace(/<[^>]+>/g,'')) ? t : t + '.';
+const vety = casti => casti.filter(Boolean).map(tecka).join(' ');
+const carka = casti => casti.filter(Boolean).join(', ');
+
 function fmtCitation(item, sty){
   const a=parseAuthors(item.autoriRaw);
-  const auIso=authorsIso(a), auApa=authorsApa(a);
-  const d=item.data, rok=item.rok||'n.d.';
-  if(item.typ==='kniha'){
-    if(sty==='iso') return `${auIso}. <i>${esc(item.nazev)}</i>. ${d.vydani?esc(d.vydani)+'. ':''}${d.misto?esc(d.misto)+': ':''}${d.nakladatel?esc(d.nakladatel)+', ':''}${esc(rok)}.${d.isbn?' ISBN '+esc(d.isbn)+'.':''}`;
-    return `${auApa} (${esc(rok)}). <i>${esc(item.nazev)}</i>. ${esc(d.nakladatel||'')}.`;
+  const auIso=esc(authorsIso(a)), auApa=esc(authorsApa(a));
+  const d=item.data||{}, e=k=>esc((d[k]||'').trim());
+  const rokRaw=(item.rok||'').trim();
+  if(sty==='iso'){
+    // ČSN ISO 690: chybějící rok [b.r.], místo [b.m.], nakladatel [b.n.]
+    const rok=rokRaw?esc(rokRaw):'[b.r.]';
+    const nazev=esc(item.nazev);
+    if(item.typ==='kniha'){
+      const vydani=`${e('misto')||'[b.m.]'}: ${e('nakladatel')||'[b.n.]'}, ${rok}`;
+      return vety([auIso, `<i>${nazev}</i>`, e('vydani'), vydani, d.isbn?'ISBN '+e('isbn'):'']);
+    }
+    if(item.typ==='clanek'){
+      const udaje=carka([rok, d.rocnik?'roč. '+e('rocnik'):'', d.cislo?'č. '+e('cislo'):'', d.strany?'s. '+e('strany'):'']);
+      return vety([auIso, nazev, d.casopis?`<i>${e('casopis')}</i>`:'', udaje, d.doi?'DOI: '+e('doi'):'']);
+    }
+    if(item.typ==='web'){
+      const cit=d.datumCitace?` [cit. ${e('datumCitace')}]`:'';
+      const zaklad=vety([auIso, `<i>${nazev}</i> [online]`, carka([e('nazevWebu'), rok])+cit]);
+      return d.url?`${zaklad} Dostupné z: ${e('url')}`:zaklad;
+    }
+    if(item.typ==='prace'){
+      return vety([auIso, `<i>${nazev}</i>`, carka([e('misto2')||'[b.m.]', rok]), e('typPrace')||'Kvalifikační práce',
+        e('instituce'), d.vedouci?'Vedoucí práce '+e('vedouci'):'']);
+    }
+    return '';
   }
+  // APA 7 (anglická konvence: n.d. = bez data)
+  const rok=esc(rokRaw||'n.d.');
+  const hlava=`${auApa?auApa+' ':''}(${rok}).`;
+  const nazev=esc(item.nazev);
+  if(item.typ==='kniha') return vety([hlava, `<i>${nazev}</i>`, e('nakladatel')]);
   if(item.typ==='clanek'){
-    if(sty==='iso') return `${auIso}. ${esc(item.nazev)}. <i>${esc(d.casopis||'')}</i>, ${esc(rok)}, roč. ${esc(d.rocnik||'')}, č. ${esc(d.cislo||'')}, s. ${esc(d.strany||'')}.${d.doi?' DOI: '+esc(d.doi)+'.':''}`;
-    return `${auApa} (${esc(rok)}). ${esc(item.nazev)}. <i>${esc(d.casopis||'')}</i>, ${esc(d.rocnik||'')}(${esc(d.cislo||'')}), ${esc(d.strany||'')}.${d.doi?' https://doi.org/'+esc(d.doi):''}`;
+    const cislo=d.cislo?`(${e('cislo')})`:'';
+    const zdroj=carka([d.casopis?`<i>${e('casopis')}</i>`:'', (e('rocnik')+cislo)||'', e('strany')]);
+    return vety([hlava, nazev, zdroj])+(d.doi?' https://doi.org/'+e('doi'):'');
   }
-  if(item.typ==='web'){
-    if(sty==='iso') return `${auIso}. <i>${esc(item.nazev)}</i> [online]. ${esc(rok)}${rok!=='n.d.'?'. ':''}[cit. ${esc(d.datumCitace||'')}]. Dostupné z: ${esc(d.url||'')}`;
-    return `${auApa} (${esc(rok)}). ${esc(item.nazev)}. ${d.nazevWebu?esc(d.nazevWebu)+'. ':''}${esc(d.url||'')}`;
-  }
-  if(item.typ==='prace'){
-    if(sty==='iso') return `${auIso}. <i>${esc(item.nazev)}</i>. ${esc(d.typPrace||'Kvalifikační práce')}. ${esc(d.misto2||'')}: ${esc(d.instituce||'')}, ${esc(rok)}.${d.vedouci?' Vedoucí práce '+esc(d.vedouci)+'.':''}`;
-    return `${auApa} (${esc(rok)}). <i>${esc(item.nazev)}</i> [${esc(d.typPrace||'kvalifikační práce')}, ${esc(d.instituce||'')}].`;
-  }
+  if(item.typ==='web') return vety([hlava, nazev, e('nazevWebu')])+(d.url?' '+e('url'):'');
+  if(item.typ==='prace') return vety([hlava, `<i>${nazev}</i> [${carka([e('typPrace')||'kvalifikační práce', e('instituce')])}]`]);
   return '';
 }
+/* text citace bez HTML (pro schránku) */
+const naText = html => html.replace(/<\/?i>/g,'').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&');
 
 $('btnAdd').addEventListener('click', ()=>{
   const typ=$('fTyp').value;
@@ -311,7 +340,7 @@ $('btnCopyAll').addEventListener('click', ()=>{
     const bn=parseAuthors(b.autoriRaw)[0]?.prijmeni||b.nazev;
     return an.localeCompare(bn,'cs');
   });
-  const text=sorted.map(it=>fmtCitation(it, style).replace(/<\/?i>/g,'')).join('\n\n');
+  const text=sorted.map(it=>naText(fmtCitation(it, style))).join('\n\n');
   navigator.clipboard.writeText(text);
   const btn=$('btnCopyAll'); const orig=btn.textContent;
   btn.textContent='✅ Zkopírováno'; setTimeout(()=>{btn.textContent=orig;},1200);

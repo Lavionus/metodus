@@ -6,6 +6,8 @@
   <title>Abeceda a řazení slov</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -38,6 +40,36 @@
   <h1>🔤 Abeceda a řazení slov</h1>
   <p class="podtitul">Pro 2.–3. ročník: pořadí písmen v abecedě a řazení slov podle abecedy.</p>
 
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Jak řadit slova podle abecedy</summary>
+    <div class="obsah">
+      <p><b>Abeceda</b> je pevné pořadí písmen: a, b, c, č, d, e, f, g, h, ch, i, j… Podle abecedy jsou seřazená slova ve slovníku,
+        jména v třídní knize nebo knihy v knihovně. Když pořadí znáš, najdeš slovo rychle.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>První písmeno</h3><p>Slova porovnáš podle <b>prvního písmene</b>. Které je v abecedě dřív, to slovo jde dopředu: auto, balón, cesta.</p></article>
+        <article class="vyklad-karta"><h3>Stejný začátek</h3><p>Když mají slova stejné první písmeno, rozhoduje <b>druhé</b>, pak třetí: kolo, koza, kráva.</p></article>
+        <article class="vyklad-karta"><h3>Háčky a čárky</h3><p><b>č, ř, š, ž</b> mají vlastní místo hned za c, r, s, z. Čárka (á, é, í…) pořadí nemění.</p></article>
+        <article class="vyklad-karta"><h3>CH</h3><p><b>CH</b> je jedno písmeno a stojí <b>za H</b>: houba, hrad, chleba.</p></article>
+      </div>
+      <p>Častá chyba: slovo s CH zařadit mezi slova na C. Chleba ale začíná písmenem CH, a to je až za H.</p>
+      <aside class="zapamatuj">Porovnávej písmeno po písmenu zleva. Rozhodne první písmeno, které se liší. CH stojí za H.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: seřaď slova</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Seřaď podle abecedy: <b>koza, chleba, kráva, hrad, kolo</b>.</p>
+      <ol class="kroky">
+        <li>Podívám se na první písmena: k, ch, k, h, k. V abecedě je nejdřív <b>h</b>, pak <b>ch</b>, pak <b>k</b>. Začnu: hrad, chleba.</li>
+        <li>Na k jsou tři slova: koza, kráva, kolo. Porovnám druhé písmeno: o, r, o. O je dřív než r, takže kráva bude poslední.</li>
+        <li>Koza a kolo mají stejné i druhé písmeno. Porovnám třetí: z a l. L je dřív, takže nejdřív <b>kolo</b>, pak <b>koza</b>.</li>
+        <li>Složím celé pořadí a přečtu si ho ještě jednou.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ hrad, chleba, kolo, koza, kráva</p>
+    </div>
+  </details>
+
   <div class="rezimy" id="rezimy">
     <button data-rezim="chybejici" class="active">🔡 Chybějící písmeno</button>
     <button data-rezim="prvni">1️⃣ Které je první?</button>
@@ -61,16 +93,20 @@
 
   <p class="napoveda">
     Slova řadíme podle <b>prvního písmene</b>. Když se shoduje, rozhoduje druhé, pak třetí…
-    Písmena s háčky a čárkami (á, č, ř, š, ž) mají v abecedě své místo hned za základním písmenem.
+    Písmena s háčkem (č, ř, š, ž) mají v abecedě své místo hned za základním písmenem; čárka (á, é…) pořadí slov nemění. <b>CH</b> je jedno písmeno a stojí za H.
     Klávesy: <kbd>H</kbd> nápověda · <kbd>Enter</kbd> další.
   </p>
 
 <script>
 const $ = id => document.getElementById(id);
 
-const ABECEDA = [...'AÁBCČDĎEÉĚFGHIÍJKLMNŇOÓPQRŘSŠTŤUÚŮVWXYÝZŽ'];
+/* CH je v české abecedě samostatné písmeno – stojí mezi H a I. */
+const ABECEDA = [...'AÁBCČDĎEÉĚFGH'].concat('CH', [...'IÍJKLMNŇOÓPQRŘSŠTŤUÚŮVWXYÝZŽ']);
+/* První písmeno slova podle české abecedy (chleba začíná na CH, ne na C). */
+const prvniPismeno = slovo => (/^ch/i.test(slovo) ? 'CH' : slovo[0].toUpperCase());
+const delkaPrvniho = slovo => (/^ch/i.test(slovo) ? 2 : 1);
 /* pro řazení slov stačí zjednodušená abeceda bez délek – tak se řadí i ve slovníku */
-const ZAKLADNI = [...'ABCČDEFGHIJKLMNOPQRŘSŠTUVWXYZŽ'];
+const ZAKLADNI = [...'ABCČDEFGH'].concat('CH', [...'IJKLMNOPQRŘSŠTUVWXYZŽ']);
 
 const SLOVA = [
   'auto', 'balón', 'cesta', 'čáp', 'dům', 'ementál', 'fialka', 'guma', 'hrad', 'chleba',
@@ -192,11 +228,11 @@ function prvni() {
   p.innerHTML = '<div class="zadani">Které slovo by bylo ve slovníku <b>první</b>?</div>';
   const odezva = document.createElement('div');
   odezva.className = 'odezva';
-  const prvniPismena = [...new Set(vyber.map(s => s[0].toUpperCase()))];
+  const prvniPismena = [...new Set(vyber.map(prvniPismeno))];
   napoveda = () => {
     rozsvitPismena(prvniPismena);
     return tipEl('Stačí porovnat <b>první písmena</b>: '
-      + vyber.map(s => `<b>${s[0]}</b>${s.slice(1)}`).join(', ')
+      + vyber.map(s => `<b>${s.slice(0, delkaPrvniho(s))}</b>${s.slice(delkaPrvniho(s))}`).join(', ')
       + '. V pásu dole svítí, kde v abecedě leží.');
   };
   Uloha.vyber({
@@ -207,7 +243,7 @@ function prvni() {
     zpravaChyba: 'Porovnej první písmena slov.',
     poSpravne: napoprve => {
       skore.vyhodnot(napoprve);
-      rozsvitPismena(prvniPismena, prvniSlovo[0].toUpperCase());
+      rozsvitPismena(prvniPismena, prvniPismeno(prvniSlovo));
     },
     prodleva: napoprve => (napoprve ? 1600 : 2600),
     dalsi: novaUloha,
@@ -232,8 +268,8 @@ function serad() {
   let dalsiIndex = 0, chyboval = false;
   napoveda = () => {
     const naRade = spravnePoradi[dalsiIndex];
-    rozsvitPismena([...new Set(vyber.map(x => x[0].toUpperCase()))], naRade[0].toUpperCase());
-    return tipEl(`Další na řadě je slovo od písmene <b>${naRade[0].toUpperCase()}</b> – `
+    rozsvitPismena([...new Set(vyber.map(prvniPismeno))], prvniPismeno(naRade));
+    return tipEl(`Další na řadě je slovo od písmene <b>${prvniPismeno(naRade)}</b> – `
       + 'v pásu abecedy dole svítí žlutě.');
   };
   Uloha.zamichej(vyber).forEach(slovo => {

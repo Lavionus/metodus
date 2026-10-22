@@ -6,6 +6,8 @@
   <title>Neohebné slovní druhy</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -37,6 +39,39 @@
 <body>
   <h1>🔤 Neohebné slovní druhy</h1>
   <p class="podtitul">Pro 7. ročník: příslovce, předložky, spojky, částice a citoslovce.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Neohebné slovní druhy</summary>
+    <div class="obsah">
+      <p>Neohebné slovní druhy (6–10) <b>nemění tvar</b> – neskloňují se ani nečasují (jen některá příslovce se stupňují: rychle – rychleji). Proto je nepoznáš podle koncovky,
+        ale podle toho, <b>co ve větě dělají</b>. Stejné slovo může být jednou příslovce a jindy předložka.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>6. Příslovce</h3><p>Stojí <b>samostatně</b>, nic za sebou neřídí. Ptáme se kde? kdy? jak? proč?: běžel <b>rychle</b>, přijel <b>včas</b>.</p></article>
+        <article class="vyklad-karta"><h3>7. Předložka</h3><p><b>Nestojí sama</b> – pojí se s podstatným jménem nebo zájmenem a určuje mu pád: <b>pod</b> stolem, <b>vedle</b> mě.</p></article>
+        <article class="vyklad-karta"><h3>8. Spojka</h3><p><b>Spojuje</b> větné členy nebo věty. Souřadicí (a, ale, nebo) spojují rovnocenné části, podřadicí (že, protože, když, aby) připojují větu vedlejší.</p></article>
+        <article class="vyklad-karta"><h3>9. Částice a 10. citoslovce</h3><p>Částice vyjadřuje <b>postoj mluvčího</b> (kéž, snad, ano) a dá se vypustit. Citoslovce napodobuje <b>zvuk</b> nebo vyjadřuje cit (bum, haf, au).</p></article>
+      </div>
+      <p>Příslovce, nebo předložka? Podívej se, co následuje. „Auto projelo <b>kolem</b>.“ – za slovem nic není, je to příslovce.
+        „Auto projelo <b>kolem školy</b>.“ – slovo řídí podstatné jméno ve 2. pádě, je to předložka. Zkouška: vypusť ho. Předložka bez svého jména větu rozbije, příslovce ne.</p>
+      <p>Souřadicí, či podřadicí spojka? Zkus se na druhou větu zeptat z první: „Věděl (co?), že má pravdu“ – věta na první závisí, spojka je podřadicí.
+        „Chtěl jít ven, ale pršelo“ – zeptat se nedá, věty jsou rovnocenné, spojka je souřadicí.</p>
+      <aside class="zapamatuj">Neohebná slova určuješ podle funkce: samostatné → příslovce, s jménem v pádě → předložka, spojuje → spojka, postoj → částice, zvuk či cit → citoslovce.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: příslovce, nebo předložka?</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Urči slovní druh slova <b>vedle</b> ve větách: a) „Bydlí hned vedle.“ b) „Bydlí vedle pekárny.“</p>
+      <ol class="kroky">
+        <li>Věta a): za slovem vedle už nic není. Neřídí žádné podstatné jméno.</li>
+        <li>Zeptám se: bydlí kde? – vedle. Odpovídá na otázku kde?, stojí samostatně → <b>příslovce</b>.</li>
+        <li>Věta b): za slovem stojí pekárny. Vedle čeho? – pekárny, to je 2. pád, který slovo vedle určuje.</li>
+        <li>Zkouška vypuštěním: „Bydlí pekárny“ nedává smysl. Slovo vedle se pojí s podstatným jménem → <b>předložka</b>.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ a) vedle = příslovce (6.), b) vedle = předložka (7.).</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="urceni" class="active">🏷️ Urči slovní druh</button>
@@ -145,12 +180,12 @@ const SPOJKY = [
   { s: 'nebo', druh: 'sourad', veta: 'Dáš si čaj, <b>nebo</b> kakao?' },
   { s: 'i', druh: 'sourad', veta: 'Umí německy <b>i</b> anglicky.' },
   { s: 'proto', druh: 'sourad', veta: 'Zaspal, <b>proto</b> přišel pozdě.' },
-  { s: 'však', druh: 'sourad', veta: 'Snažil se, <b>však</b> nestačilo to.' },
+  { s: 'však', druh: 'sourad', veta: 'Snažil se, nestačilo to <b>však</b>.' },
   { s: 'protože', druh: 'podrad', veta: 'Nepřišel, <b>protože</b> byl nemocný.' },
   { s: 'že', druh: 'podrad', veta: 'Věděl, <b>že</b> má pravdu.' },
   { s: 'když', druh: 'podrad', veta: '<b>Když</b> zazvonilo, vyběhli ven.' },
   { s: 'aby', druh: 'podrad', veta: 'Učil se, <b>aby</b> uspěl.' },
-  { s: 'kdyby', druh: 'podrad', veta: '<b>Kdyby</b> pršelo, zůstaneme doma.' },
+  { s: 'kdyby', druh: 'podrad', veta: '<b>Kdyby</b> pršelo, zůstali bychom doma.' },
   { s: 'jakmile', druh: 'podrad', veta: 'Zavolej, <b>jakmile</b> dorazíš.' },
   { s: 'ačkoli', druh: 'podrad', veta: '<b>Ačkoli</b> byl unavený, dočetl knihu.' },
 ];

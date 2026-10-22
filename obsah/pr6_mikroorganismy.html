@@ -6,6 +6,8 @@
   <title>Bakterie, viry a jednobuněčné organismy</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -34,6 +36,45 @@
 <body>
   <h1>🦠 Bakterie, viry a jednobuněčné organismy</h1>
   <p class="podtitul">Pro 6. ročník: mikrosvět, rozdíl mezi virem a bakterií, prevence nákazy.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Virus, bakterie, prvok, nebo houba?</summary>
+    <div class="obsah">
+      <p>Většinu mikroorganismů neuvidíš pouhým okem, potřebuješ mikroskop. Přesto se od sebe velmi liší.
+        Rozhoduje hlavně to, <b>jestli jde o buňku</b> a <b>jestli má buňka pravé jádro</b>.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Bakterie</h3><p>Jedna buňka <b>bez pravého jádra</b> – DNA leží volně v cytoplazmě.
+          Množí se <b>dělením</b>. Patří sem i <b>sinice</b>, které umějí fotosyntézu.</p></article>
+        <article class="vyklad-karta"><h3>Virus</h3><p><b>Není buňka</b>, jen částice z dědičné informace a bílkovinného obalu.
+          Sám se množit neumí, množí se jen <b>uvnitř buňky hostitele</b>.</p></article>
+        <article class="vyklad-karta"><h3>Prvoci</h3><p>Jedna buňka <b>s jádrem</b>. Trepka se pohybuje <b>brvami</b>,
+          měňavka <b>panožkami</b>, krásnoočko <b>bičíkem</b> a má zelená barviva.</p></article>
+        <article class="vyklad-karta"><h3>Houby</h3><p><b>Kvasinka</b> je jednobuněčná houba, množí se pučením.
+          <b>Plíseň</b> tvoří vlákna, třeba na starém pečivu.</p></article>
+      </div>
+      <p>Mikroorganismy nejsou jen škodlivé. Mléčné bakterie dělají jogurt, kvasinky kypří těsto, bakterie v půdě
+        rozkládají odumřelá těla a z plísně se získává penicilin. Jiné ale způsobují nemoci.</p>
+      <p><b>Typická chyba:</b> „Na chřipku si vezmu antibiotika.“ Antibiotika působí na <b>bakterie</b>, na viry nezabírají.
+        Když je předepíše lékař, ber je přesně podle jeho pokynů. Před nákazou tě chrání mytí rukou, kýchání do kapesníku
+        či rukávu, uchovávání potravin v chladu a očkování.</p>
+      <aside class="zapamatuj">Bakterie = buňka bez jádra, množí se dělením. Virus = není buňka, množí se jen v hostiteli.
+        Antibiotika na viry nezabírají.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: kdo způsobuje chřipku?</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Co je původcem chřipky – virus, nebo bakterie? Pomůžou na ni antibiotika?</p>
+      <ol class="kroky">
+        <li>Vybavím si, co o chřipce vím: přenáší se kapénkami a každý rok se proti ní nabízí očkování.</li>
+        <li>Původcem chřipky je <b>virus chřipky</b> – nemoc má podle něj i jméno.</li>
+        <li>Virus není buňka, množí se uvnitř buněk našeho těla.</li>
+        <li>Antibiotika působí jen na bakterie, takže na chřipkový virus <b>nezabírají</b>.</li>
+      </ol>
+      <p class="vysledek-ukazky">Chřipku způsobuje <b>virus</b>; antibiotika na ni nepomůžou. Chrání tě mytí rukou, kýchání do kapesníku a očkování.</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="poznej" class="active">🔬 Poznej organismus</button>
@@ -85,8 +126,8 @@ const ORGANISMY = [
 
 const NEMOCI = [
   { n: 'chřipka', puvodce: 'virus' }, { n: 'covid-19', puvodce: 'virus' },
-  { n: 'neštovice', puvodce: 'virus' }, { n: 'spalničky', puvodce: 'virus' },
-  { n: 'angína', puvodce: 'bakterie' }, { n: 'salmonelóza', puvodce: 'bakterie' },
+  { n: 'plané neštovice', puvodce: 'virus' }, { n: 'spalničky', puvodce: 'virus' },
+  { n: 'streptokoková angína', puvodce: 'bakterie' }, { n: 'salmonelóza', puvodce: 'bakterie' },
   { n: 'tuberkulóza', puvodce: 'bakterie' }, { n: 'zápal plic (bakteriální)', puvodce: 'bakterie' },
   { n: 'borelióza', puvodce: 'bakterie' }, { n: 'vzteklina', puvodce: 'virus' },
 ];
@@ -110,7 +151,7 @@ const PREVENCE = [
   { t: 'Nechat se očkovat proti nemoci', spravne: true, proc: 'očkování naučí tělo bránit se dřív, než onemocní' },
   { t: 'Pít vodu z přehrady se sinicemi', spravne: false, proc: 'toxiny sinic způsobují vyrážky a zažívací potíže' },
   { t: 'Skladovat potraviny v lednici', spravne: true, proc: 'chlad zpomaluje množení bakterií' },
-  { t: 'Dojíst antibiotika jen do poloviny balení', spravne: false, proc: 'nedoléčená infekce se vrátí a bakterie zesílí' },
+  { t: 'Přestat brát antibiotika od lékaře, jakmile je ti trochu lépe', spravne: false, proc: 'antibiotika se berou přesně podle pokynů lékaře; nesprávné užívání pomáhá šířit bakterie odolné (rezistentní) vůči antibiotikům' },
 ];
 
 /* ---- Poznej organismus ---------------------------------------------------------------- */
@@ -120,7 +161,7 @@ function poznej() {
   const jine = Uloha.zamichej(ORGANISMY.filter(x => x.n !== u.n)).slice(0, 3);
   p.innerHTML = `<div class="zadani">O jaký organismus jde?</div>
     <div class="karta">
-      ${u.img ? `<img class="mikro-img" src="${u.img}" alt="${u.alt}" width="768" height="768">` : `<svg class="mikroskop" viewBox="0 0 200 200">
+      ${u.img ? `<img class="mikro-img" src="${u.img}" alt="Obrázek mikroorganismu k určení." width="768" height="768">` : `<svg class="mikroskop" viewBox="0 0 200 200">
         <circle class="zorne-pole" cx="100" cy="100" r="88"/>
         <text x="100" y="118" font-size="56" text-anchor="middle">${u.e}</text>
       </svg>`}
@@ -155,8 +196,8 @@ function virusBakterie() {
     ],
     spravnyKlic: u.puvodce,
     zpravaOk: u.puvodce === 'virus'
-      ? `✅ ${u.n} způsobuje virus – antibiotika na ni nezabírají.`
-      : `✅ ${u.n} způsobuje bakterie – lékař může předepsat antibiotika.`,
+      ? `✅ ${u.n}: původcem je virus – na viry antibiotika nezabírají.`
+      : `✅ ${u.n}: původcem je bakterie – lékař může předepsat antibiotika.`,
     zpravaChyba: 'Zkus druhou možnost.',
     poSpravne: skore.vyhodnot,
     dalsi: novaUloha,

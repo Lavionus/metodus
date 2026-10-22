@@ -7,3 +7,8 @@ __pycache__/
 obsah/img/**/*.png
 docs/zalohy-*/
 obsah/img/kapitola-7-2.zamek
+
+# Zálohy z úprav (soubor.bak-YYYYMMDD…, složka backups/) na web nepatří – úklid 22. 10. 2026
+*.bak
+*.bak-*
+backups/

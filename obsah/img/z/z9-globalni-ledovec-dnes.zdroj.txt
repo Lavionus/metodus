@@ -1,0 +1,8 @@
+Soubor: z9-globalni-ledovec-dnes.png / z9-globalni-ledovec-dnes.webp
+Původní dílo: Rhonegletscher im Juni 2023.jpg
+Autor: Daniel Reust
+Datum vzniku: 20 June 2023 (according to Exif data)
+Zdroj: https://commons.wikimedia.org/wiki/File:Rhonegletscher_im_Juni_2023.jpg
+Licence: CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0)
+Staženo: 2026-10-21
+Úpravy: automatické natočení, odstranění metadat, zmenšení na nejvýše 1600 px; výuková WebP kopie 1152 px.

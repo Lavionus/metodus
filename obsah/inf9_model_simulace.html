@@ -99,7 +99,7 @@ function simulace() {
   const p = $('plocha');
   const cil = Uloha.nahodne([40, 60, 80, 120]);
   let rust = 0.3, kapacita = 100;
-  let hotovo = false, chyboval = false;
+  let hotovo = false;
 
   p.innerHTML = `<div class="zadani uloha-text">Nastav posuvníky tak, aby se populace
       <b>ustálila na hodnotě ${cil}</b> (zelená čára).</div>`;
@@ -125,17 +125,20 @@ function simulace() {
     const konec = hodnoty[hodnoty.length - 1];
     obalGrafu.innerHTML = svgGraf(hodnoty, kapacita, cil);
     $('stavModelu').innerHTML = `po 24 krocích: <b>${fmt(konec)}</b> jedinců`;
-    if (!hotovo && Math.abs(konec - cil) < 2) {
+    // ustálená = za poslední 4 kroky se skoro nezměnila (jinak křivka cílem jen prochází)
+    const ustalena = Math.abs(konec - hodnoty[hodnoty.length - 5]) < 1;
+    if (!hotovo && ustalena && Math.abs(konec - cil) < 2) {
       hotovo = true;
       odezva.className = 'odezva ok';
       odezva.textContent = `✅ Populace se ustálila na ${fmt(konec)} – kapacita prostředí určuje, `
         + 'kde se růst zastaví.';
-      skore.vyhodnot(!chyboval);
+      // hledání posuvníky není chyba – úloha se počítá jako splněná
+      skore.vyhodnot(true);
       Uloha.posun(novaUloha, Uloha.PRODLEVA + 700);
     } else if (!hotovo) {
-      chyboval = true;
       odezva.className = 'odezva';
-      odezva.textContent = konec > cil ? 'Populace je zatím vyšší než cíl…' : 'Populace je zatím nižší než cíl…';
+      odezva.textContent = !ustalena ? 'Populace se pořád mění, ještě se neustálila – zkus větší rychlost růstu…'
+        : konec > cil ? 'Populace je zatím vyšší než cíl…' : 'Populace je zatím nižší než cíl…';
     }
   }
   $('rust').addEventListener('input', e => {
@@ -167,7 +170,7 @@ const PREDPOVED = [
   { q: 'Co v modelu znamená parametr?',
     a: 'hodnota, kterou nastavujeme a která ovlivňuje chování modelu', b: ['výsledek simulace', 'chyba výpočtu', 'jednotka času'] },
   { q: 'Proč se model spouští opakovaně s různým nastavením?',
-    a: 'zjišťujeme, jak citlivý je výsledek na změnu parametrů', b: ['aby se počítač zahřál', 'kvůli náhodě', 'není k tomu důvod'] },
+    a: 'zjišťujeme, jak citlivý je výsledek na změnu parametrů', b: ['aby se počítač zahřál', 'aby vždy vyšel stejný výsledek', 'není k tomu důvod'] },
 ];
 function predpoved() {
   const p = $('plocha');

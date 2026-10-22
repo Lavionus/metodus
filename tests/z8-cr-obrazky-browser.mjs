@@ -13,7 +13,7 @@ await call('Page.enable');await call('Runtime.enable');
 await call('Page.navigate',{url:'http://127.0.0.1:8766/obsah/z8_cr_prirodni.html'});
 for(let i=0;i<120&&!(await ev(`document.readyState==='complete'&&typeof novaUloha==='function'`));i++)await new Promise(r=>setTimeout(r,50));
 assert.equal(await ev(`document.querySelectorAll('.foto-atlas figure').length`),6);
-assert.deepEqual(await ev(`Promise.all([...document.querySelectorAll('.foto-atlas img')].map(img=>img.complete&&img.naturalWidth>0?true:new Promise(ok=>{img.onload=()=>ok(true);img.onerror=()=>ok(false)})))`),[true,true,true,true,true,true]);
+assert.deepEqual(await ev(`Promise.all([...document.querySelectorAll('.foto-atlas img')].map(img=>(img.loading='eager',img)).map(img=>img.complete&&img.naturalWidth>0?true:new Promise(ok=>{img.onload=()=>ok(true);img.onerror=()=>ok(false)})))`),[true,true,true,true,true,true]);
 for(const width of [1366,390,320]){
   await call('Emulation.setDeviceMetricsOverride',{width,height:1000,deviceScaleFactor:1,mobile:width<600});
   for(const theme of ['light','sepia-tmava']){

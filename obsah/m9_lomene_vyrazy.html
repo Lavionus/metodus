@@ -6,6 +6,8 @@
   <title>Lomené výrazy</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -57,6 +59,20 @@
   <h1>🧮 Lomené výrazy</h1>
   <p class="podtitul">Pro 9. ročník: podmínky řešitelnosti, krácení, sčítání a násobení lomených výrazů.</p>
 
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: podmínka a krácení</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Urči podmínku a zkrať lomený výraz (x² − 25) / (x − 5).</p>
+      <ol class="kroky">
+        <li>Podmínka: jmenovatel se nesmí rovnat nule. x − 5 = 0 pro x = 5, proto <b>x ≠ 5</b>.</li>
+        <li>Krátit smím jen součiny. Čitatel je rozdíl čtverců, rozložím ho: x² − 25 = <b>(x + 5)(x − 5)</b>.</li>
+        <li>Teď je v čitateli i ve jmenovateli činitel (x − 5) a ten vykrátím: (x + 5)(x − 5) / (x − 5) = <b>x + 5</b>.</li>
+        <li>Ověřím na čísle, třeba x = 4: (16 − 25) / (4 − 5) = (−9) / (−1) = 9 a také 4 + 5 = 9. Sedí to.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ (x² − 25) / (x − 5) = x + 5 pro x ≠ 5.</p>
+    </div>
+  </details>
+
   <div class="rezimy" id="rezimy">
     <button data-rezim="prozkumnik" data-faze="vyuka" class="active">🔎 Kde to spadne</button>
     <button data-rezim="podminky">⚠️ Podmínky</button>
@@ -92,7 +108,7 @@ const PZ = { p: 2, q: 3, x: 0 };
 
 function novyVyrazProzkumnik() {
   PZ.p = Uloha.nahodneCislo(1, 6) * Uloha.nahodne([1, -1]);
-  PZ.q = Uloha.nahodneCislo(1, 5) * Uloha.nahodne([1, -1]);
+  do { PZ.q = Uloha.nahodneCislo(1, 5) * Uloha.nahodne([1, -1]); } while (PZ.q === PZ.p);   // p = q by dalo výraz rovný 1
   PZ.x = 0;
 }
 
@@ -181,8 +197,8 @@ function kresliProzkumnik() {
   } else {
     $('dosazeni').className = 'dosazeni';
     $('dosazeni').innerHTML =
-      `<div class="radek">(${fmtC(x)} ${znak(pp)}) ÷ (${fmtC(x)} ${znak(q)})
-        = ${fmtC(cit)} ÷ ${fmtC(jm)}</div>
+      `<div class="radek">(${fmtC(x)} ${znak(pp)}) : (${fmtC(x)} ${znak(q)})
+        = ${fmtC(cit)} : ${fmtC(jm)}</div>
        <div class="radek vysledek">= ${fmtC(y)}</div>`;
     const blizko = Math.abs(x - zakaz);
     $('poznamkaPZ').innerHTML = blizko < 1
@@ -195,25 +211,27 @@ function kresliProzkumnik() {
 function podminky() {
   const p = $('plocha');
   const typ = Uloha.nahodne(['linearni', 'soucin', 'rozdilCtvercu', 'cislo']);
-  const a = Uloha.nahodneCislo(1, 9), b = Uloha.nahodneCislo(1, 9);
+  // a ≠ b (u součinu by „prohozená“ špatná možnost byla totéž co správná), a ≥ 2 (u x² − 1 by se možnosti opakovaly)
+  const a = Uloha.nahodneCislo(2, 9);
+  let b; do { b = Uloha.nahodneCislo(1, 9); } while (b === a);
   let vyraz, spravny, jine;
 
   if (typ === 'linearni') {
     vyraz = zl('5', `x ${znak(-a)}`);
     spravny = `x ≠ ${a}`;
-    jine = [`x ≠ ${-a}`, `x ≠ 0`, 'bez podmínek'];
+    jine = [`x ≠ ${cis(-a)}`, `x ≠ 0`, 'bez podmínek'];
   } else if (typ === 'soucin') {
     vyraz = zl('x', `(x ${znak(-a)})(x ${znak(b)})`);
-    spravny = `x ≠ ${a} a x ≠ ${-b}`;
-    jine = [`x ≠ ${-a} a x ≠ ${b}`, `x ≠ 0`, `x ≠ ${a}`];
+    spravny = `x ≠ ${a} a x ≠ ${cis(-b)}`;
+    jine = [`x ≠ ${cis(-a)} a x ≠ ${b}`, `x ≠ 0`, `x ≠ ${a}`];
   } else if (typ === 'rozdilCtvercu') {
     vyraz = zl('3x', `x² − ${a * a}`);
-    spravny = `x ≠ ${a} a x ≠ ${-a}`;
+    spravny = `x ≠ ${a} a x ≠ ${cis(-a)}`;
     jine = [`x ≠ ${a}`, `x ≠ ${a * a}`, 'bez podmínek'];
   } else {
     vyraz = zl(`x ${znak(a)}`, `${b}`);
     spravny = 'bez podmínek – jmenovatel je číslo';
-    jine = [`x ≠ ${b}`, `x ≠ 0`, `x ≠ ${-a}`];
+    jine = [`x ≠ ${b}`, `x ≠ 0`, `x ≠ ${cis(-a)}`];
   }
 
   p.innerHTML = `<div class="zadani uloha-text">Urči podmínky, za kterých má výraz smysl:</div>
@@ -250,7 +268,7 @@ function kraceni() {
   } else {
     vyraz = zl(`${k * a}x`, `${k}`);
     spravny = `${a}x`;
-    jine = [`${k * a}x`, `${a}`, `${k}x`];
+    jine = [`${k * a}x`, `${a}`, a === k ? `${k * a}` : `${k}x`];
     vysvetleni = `krátíme číslem ${k}`;
   }
 
@@ -278,11 +296,12 @@ function scitani() {
   if (stejnyJmenovatel) {
     zadani = `${zl(`${a}`, 'x')} + ${zl(`${b}`, 'x')}`;
     spravny = `${a + b}/x`;
-    jine = [`${a + b}/2x`, `${a * b}/x`, `${a}${b}/x`];
+    jine = [`${a + b}/(2x)`, a * b === a + b ? `${a + b}/x²` : `${a * b}/x`, `${a}${b}/x`];
   } else {
     zadani = `${zl('1', 'x')} + ${zl('1', `${b}`)}`;
-    spravny = `(${b} + x)/${b}x`;
-    jine = [`2/(x + ${b})`, `1/(x + ${b})`, `(x − ${b})/${b}x`];
+    // jmenovatel v závorce: „(x + 3)/3x“ by se dalo číst jako ((x + 3)/3) · x
+    spravny = `(x + ${b})/(${b}x)`;
+    jine = [`2/(x + ${b})`, `1/(x + ${b})`, `(x − ${b})/(${b}x)`];
   }
 
   p.innerHTML = `<div class="zadani uloha-text">Sečti lomené výrazy (x ≠ 0):</div>
@@ -301,19 +320,24 @@ function scitani() {
   p.appendChild(odezva);
 }
 
+const nsd = (m, n) => n ? nsd(n, m % n) : m;
 function nasobeni() {
   const p = $('plocha');
   const nasobime = Math.random() < 0.5;
-  const a = Uloha.nahodneCislo(2, 9), b = Uloha.nahodneCislo(2, 9);
+  const a = Uloha.nahodneCislo(2, 9);
+  let b; do { b = Uloha.nahodneCislo(2, 9); } while (b === a);
   let zadani, spravny, jine;
+  // výsledek v základním tvaru (4/6 → 2/3, 6/3 → 2); nezkrácený tvar a/b proto mezi špatnými není
+  const d = nsd(a, b), zkraceny = b / d === 1 ? `${a / d}` : `${a / d}/${b / d}`;
+  const krat = d > 1 ? ` a zkrátíme číslem ${d}` : '';
 
   if (nasobime) {
     zadani = `${zl(`${a}`, 'x')} · ${zl('x', `${b}`)}`;
-    spravny = `${a}/${b}`;
-    jine = [`${a}x/${b}x`, `${a * b}/x`, `${a}x²/${b}`];
+    spravny = zkraceny;
+    jine = [`${b}/${a}`, `${a * b}/x`, `${a}x²/${b}`];
   } else {
     zadani = `${zl(`${a}`, 'x')} : ${zl(`${b}`, 'x')}`;
-    spravny = `${a}/${b}`;
+    spravny = zkraceny;
     jine = [`${a * b}/x²`, `${a}x/${b}`, `${b}/${a}`];
   }
 
@@ -326,7 +350,7 @@ function nasobeni() {
     kam: p, odezva, trida: 'velke',
     moznosti: Uloha.zamichej([spravny, ...jine.filter(x => x !== spravny)]).map(t => ({ klic: t, popis: t })),
     spravnyKlic: spravny,
-    zpravaOk: `✅ ${spravny}` + (nasobime ? ' – x se vykrátí.' : ' – druhý zlomek převrátíme, x se vykrátí.'),
+    zpravaOk: `✅ ${spravny}` + (nasobime ? ` – x se vykrátí${krat}.` : ` – druhý zlomek převrátíme, x se vykrátí${krat}.`),
     zpravaChyba: nasobime ? 'Násob čitatele mezi sebou a jmenovatele mezi sebou, pak krať.'
       : 'Při dělení druhý zlomek převrať a násob.',
     poSpravne: skore.vyhodnot,

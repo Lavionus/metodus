@@ -6,6 +6,8 @@
   <title>Budoucí čas – will a going to</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -25,6 +27,42 @@
 <body>
   <h1>⏩ Budoucí čas – will a going to</h1>
   <p class="podtitul">Pro 7. ročník: rozhodnutí, plány a předpovědi v angličtině.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: will, nebo going to?</summary>
+    <div class="obsah">
+      <p>O budoucnosti mluví angličtina hlavně dvěma způsoby. Volba nezávisí na tom, <b>kdy</b> se věc stane,
+        ale na tom, <b>odkud o ní víš</b>: rozhoduješ se právě teď, nebo už máš plán či vidíš důkaz?</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3><span lang="en">will</span></h3><p>• rozhodnutí v okamžiku mluvení: <span lang="en">The phone is ringing. I'll answer it.</span><br>
+          • slib a nabídka: <span lang="en">I will help you, I promise.</span><br>
+          • předpověď, názor bez důkazu: <span lang="en">I think it will be sunny.</span></p></article>
+        <article class="vyklad-karta"><h3><span lang="en">going to</span></h3><p>• plán domluvený předem: <span lang="en">I'm going to go hiking tomorrow.</span><br>
+          • předpověď podle toho, co vidíš: <span lang="en">Look at those clouds! It's going to rain.</span></p></article>
+        <article class="vyklad-karta"><h3>Tvary</h3><p><span lang="en">will</span> + základní tvar, pro všechny osoby stejně; zápor <span lang="en">won't</span> (will not); otázka <span lang="en">Will you help?</span><br>
+          <span lang="en">am / is / are going to</span> + základní tvar; zápor <span lang="en">isn't going to</span>; otázka <span lang="en">Are you going to…?</span></p></article>
+      </div>
+      <p>Typické chyby: zapomenout na <span lang="en">be</span> – <span lang="en">She going to study.</span> ✗ – nebo dát
+        za <span lang="en">will</span> <span lang="en">to</span>: <span lang="en">I will to help.</span> ✗
+        Správně <span lang="en">She is going to study.</span> a <span lang="en">I will help.</span></p>
+      <aside class="zapamatuj">Rozhodnu se teď, slibuji, jen tipuji → <b><span lang="en">will</span></b>.
+        Mám plán nebo vidím důkaz → <b><span lang="en">am / is / are going to</span></b>.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: will, nebo going to?</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Sklenice s vodou se naklání přes okraj stolu. Doplň: <span lang="en">The glass ___ fall.</span></p>
+      <ol class="kroky">
+        <li>Ptám se: odkud vím, že sklenice spadne? <b>Vidím to</b> – naklání se.</li>
+        <li>Předpověď podle viditelného důkazu → <b><span lang="en">going to</span></b>.</li>
+        <li>Podmět <span lang="en">the glass</span> je jedna věc, tedy <span lang="en">it</span> → <span lang="en">is</span>.</li>
+        <li>Za <span lang="en">going to</span> přijde základní tvar <span lang="en">fall</span>.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ <span lang="en">The glass <b>is going to</b> fall.</span></p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="volba" class="active">🤔 Will, nebo going to?</button>
@@ -71,9 +109,9 @@ const SITUACE = [
   { cz: 'Sklenice s vodou se naklání přes okraj stolu.',
     en: 'The glass <span class="mezera">?</span> fall.', spravne: 'going to', funkce: 'dukaz',
     img: 'img/aj/aj7-going-to-sklenice.webp', alt: 'Nakloněná sklenice s vodou padá přes okraj stolu.' },
-  { cz: 'Auto zastavilo a řidič zjistil, že v kanystru už nic není.',
+  { cz: 'Ručička paliva je skoro na nule a k nejbližší pumpě je to ještě 30 km.',
     en: 'The car <span class="mezera">?</span> run out of fuel.', spravne: 'going to', funkce: 'dukaz',
-    img: 'img/aj/aj7-going-to-nadrz.webp', alt: 'Řidič u zastaveného auta drží prázdný kanystr.' },
+    img: 'img/aj/aj7-going-to-palivomer.webp', alt: 'Řidička jede po silnici a ručička palivoměru stojí na nule, svítí kontrolka paliva.' },
   { cz: 'Myslíš si, že v roce 2100 budou lidé žít na Marsu.',
     en: 'People <span class="mezera">?</span> live on Mars.', spravne: 'will', funkce: 'predpoved' },
   { cz: 'Slibuješ mamince, že umyješ nádobí.',

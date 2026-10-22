@@ -6,6 +6,8 @@
   <title>Časování pravidelných sloves</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -26,6 +28,40 @@
 <body>
   <h1>🏃 Časování pravidelných sloves</h1>
   <p class="podtitul">Pro 8. ročník: koncovky sloves v němčině (-en) a francouzštině (-er).</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Kmen a koncovka slovesa</summary>
+    <div class="obsah">
+      <p>Pravidelné sloveso se skládá ze dvou částí: <b>kmen</b> nese význam a zůstává stejný, <b>koncovka</b> se mění podle
+        osoby. Kmen najdeš tak, že od infinitivu odtrhneš jeho koncovku: <span lang="de">mach|en</span>,
+        <span lang="fr">parl|er</span>. Pak ke kmeni přidáš koncovku osoby.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>🇩🇪 Slovesa na -en</h3><p><span lang="de">ich -e, du -st, er/sie/es -t, wir -en, ihr -t, sie/Sie -en</span>: <span lang="de">ich mache, du machst, er macht</span>.</p></article>
+        <article class="vyklad-karta"><h3>🇫🇷 Slovesa na -er</h3><p><span lang="fr">je -e, tu -es, il/elle -e, nous -ons, vous -ez, ils/elles -ent</span>: <span lang="fr">je parle, nous parlons</span>.</p></article>
+        <article class="vyklad-karta"><h3>🇫🇷 Němé koncovky</h3><p><span lang="fr">-e, -es, -ent</span> se nevyslovují: <span lang="fr">je parle, tu parles, ils parlent</span> zní stejně.</p></article>
+        <article class="vyklad-karta"><h3>🇫🇷 j’ před samohláskou</h3><p><span lang="fr">je</span> se zkrátí na <span lang="fr">j’</span>: <span lang="fr">j’aime, j’habite</span>.</p></article>
+      </div>
+      <p>Jak poznám osobu? Podívám se na zájmeno, a když chybí, na koncovku. V němčině má stejnou koncovku <b>-t</b>
+        <span lang="de">er/sie/es</span> i <span lang="de">ihr</span>, a <b>-en</b> mají <span lang="de">wir</span> i <span lang="de">sie</span> (oni).
+        Pak rozhodne zájmeno.</p>
+      <p>Typická chyba: ponechat koncovku infinitivu (<span lang="de">ich machen</span>). Infinitiv se nikdy nepřidává k osobě – vždy kmen + koncovka.</p>
+      <aside class="zapamatuj">Tvar = kmen + koncovka osoby. Kmen dostaneš, když z infinitivu odstraníš -en nebo -er.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: doplň tvar slovesa</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Doplň správný tvar: <span lang="de">du … (spielen)</span> – ty hraješ.</p>
+      <ol class="kroky">
+        <li>Najdu kmen: z <span lang="de">spiel<b>en</b></span> odtrhnu -en, zbude <span lang="de">spiel</span>.</li>
+        <li>Zjistím osobu: <span lang="de">du</span> je 2. osoba jednotného čísla (ty).</li>
+        <li>Vybavím si koncovku pro <span lang="de">du</span>: <b>-st</b>.</li>
+        <li>Spojím kmen a koncovku: <span lang="de">spiel + st</span>.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ <span lang="de"><b>du spielst</b></span></p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="koncovkyNJ" class="active">🇩🇪 Doplň tvar</button>
@@ -51,6 +87,9 @@
 const $ = id => document.getElementById(id);
 const skore = Uloha.skore('metodus_dcj8_casovani', $('skore'));
 let rezim = 'koncovkyNJ';
+/* francouzské je se před samohláskou a němým h zkracuje: j'aime, j'habite */
+const elize = (osoba, tvar) => osoba === 'je' && /^[aeéèêiouyh]/i.test(tvar) ? "j'" : osoba;
+const spoj = (osoba, tvar) => { const z = elize(osoba, tvar); return z.endsWith("'") ? z + tvar : z + ' ' + tvar; };
 function odezvaEl() { const d = document.createElement('div'); d.className = 'odezva'; return d; }
 
 const NJ_OSOBY = [
@@ -94,13 +133,13 @@ function koncovky(osoby, slovesa, vlajka, napoveda) {
 
   p.innerHTML = `<div class="zadani"><span class="vlajka">${vlajka}</span>
       Doplň tvar slovesa <b>${s.inf}</b> (${s.cz}):</div>
-    <div class="karta"><div class="veta-ciz">${o.osoba} <span class="mezera">?</span></div></div>`;
+    <div class="karta"><div class="veta-ciz">${elize(o.osoba, s.kmen)}${elize(o.osoba, s.kmen).endsWith("'") ? '' : ' '}<span class="mezera">?</span></div></div>`;
   const odezva = odezvaEl();
   Uloha.vyber({
     kam: p, odezva, trida: 'velke',
     moznosti: Uloha.zamichej([spravny, ...[...jine].slice(0, 3)]).map(t => ({ klic: t, popis: t })),
     spravnyKlic: spravny,
-    zpravaOk: `✅ ${o.osoba} ${spravny} – kmen ${s.kmen} + koncovka -${o.konc}`,
+    zpravaOk: `✅ ${spoj(o.osoba, spravny)} – kmen ${s.kmen} + koncovka -${o.konc}`,
     zpravaChyba: napoveda,
     poSpravne: skore.vyhodnot,
     dalsi: novaUloha,
@@ -124,7 +163,7 @@ function tabulka() {
     .map(x => s.kmen + x.konc));
   jine.delete(spravny);
 
-  const radky = osoby.map((o, k) => `<tr><th>${o.osoba}</th>
+  const radky = osoby.map((o, k) => `<tr><th>${elize(o.osoba, s.kmen)}</th>
     <td class="${k === i ? 'hledany' : ''}">${k === i ? '?' : s.kmen + o.konc}</td></tr>`).join('');
 
   p.innerHTML = `<div class="zadani"><span class="vlajka">${nemecky ? '🇩🇪' : '🇫🇷'}</span>
@@ -135,7 +174,7 @@ function tabulka() {
     kam: p, odezva, trida: 'velke',
     moznosti: Uloha.zamichej([spravny, ...[...jine].slice(0, 3)]).map(t => ({ klic: t, popis: t })),
     spravnyKlic: spravny,
-    zpravaOk: `✅ ${osoby[i].osoba} ${spravny}`,
+    zpravaOk: `✅ ${spoj(osoby[i].osoba, spravny)}`,
     zpravaChyba: 'Podívej se na ostatní řádky tabulky – kmen zůstává, mění se jen koncovka.',
     poSpravne: skore.vyhodnot,
     dalsi: novaUloha,
@@ -164,7 +203,7 @@ function osoba() {
     moznosti: Uloha.zamichej([o.osoba, ...Uloha.zamichej(osoby.filter(x => x.konc !== o.konc))
       .slice(0, 3).map(x => x.osoba)]).map(t => ({ klic: t, popis: t })),
     spravnyKlic: o.osoba,
-    zpravaOk: `✅ ${o.osoba} ${tvar} – koncovka -${o.konc}`,
+    zpravaOk: `✅ ${spoj(o.osoba, tvar)} – koncovka -${o.konc}`,
     zpravaChyba: 'Odděl kmen a koncovku, pak koncovku najdi v přehledu pod úlohou.',
     poSpravne: skore.vyhodnot,
     dalsi: novaUloha,

@@ -6,6 +6,8 @@
   <title>Párové souhlásky</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -28,6 +30,37 @@
 <body>
   <h1>✍️ Párové souhlásky</h1>
   <p class="podtitul">Pro 3. ročník: na konci i uvnitř slova slyšíme něco jiného, než píšeme.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Párové souhlásky</summary>
+    <div class="obsah">
+      <p>Některé souhlásky tvoří <b>dvojice</b>. Jedna je znělá (vyslovujeme ji s hlasem), druhá neznělá (bez hlasu).
+        Ústa přitom dělají skoro totéž. Proto se snadno spletou.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Páry</h3><p><b>b – p, d – t, ď – ť, g – k, z – s, ž – š, v – f, h – ch</b></p></article>
+        <article class="vyklad-karta"><h3>Kde se to plete</h3><p>Na <b>konci slova</b> a <b>uvnitř slova</b> před jinou souhláskou: dub zní jako „dup“, tužka jako „tuška“, sníh jako „sních“.</p></article>
+        <article class="vyklad-karta"><h3>Jak to ověřím</h3><p>Slovo <b>prodloužím</b> nebo změním jeho tvar tak, aby za souhláskou stála samohláska: dub → duby, led → na ledě, rybka → ryba.</p></article>
+      </div>
+      <p>Proč to funguje? Před samohláskou souhlásku vyslovíme tak, jak se píše. V tvaru „duby“ jasně slyšíš <b>b</b>,
+        a tak píšeš b i ve slově dub. Ověřovací slovo musí být <b>stejné slovo</b> nebo slovo příbuzné, ne jen podobně znějící.</p>
+      <p>Častá chyba: napsat souhlásku tak, jak ji slyšíš na konci. „Hra_“ zní jako „hrat“, ale hrady → <b>hrad</b>.</p>
+      <aside class="zapamatuj">Když na konci slova nebo před souhláskou nevíš, kterou z páru napsat, změň tvar slova tak, aby po ní byla samohláska. Co uslyšíš, to napiš.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: doplň párovou souhlásku</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Doplň souhlásku: <b>hou_ka</b> (b, nebo p?).</p>
+      <ol class="kroky">
+        <li>Slovo zní jako „houpka“. Chybějící souhláska stojí uvnitř slova před souhláskou k, tady se b a p pletou.</li>
+        <li>Hledám jiný tvar téhož slova, kde by za ní byla samohláska: houbka → <b>houba</b>, houby.</li>
+        <li>V tvaru „houby“ jasně slyším <b>b</b>.</li>
+        <li>Píšu tedy b i v původním slově.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ houbka – ověříš slovem houby.</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="doplnovani" class="active">✏️ Doplň souhlásku</button>
@@ -83,7 +116,7 @@ const SLOVA = [
   { s: 'hla_ký', spr: 'd', over: 'hladit' },
   { s: 'lo_ka', spr: 'ď', over: 'lodě' },
   { s: 'tu_ka', spr: 'ž', over: 'tužek' },
-  { s: 'kní_ka', spr: 'ž', over: 'kniha' },
+  { s: 'kní_ka', spr: 'ž', over: 'knížek' },
   { s: 'vo_', spr: 'z', over: 'vozy' },
   { s: 'rozka_', spr: 'z', over: 'rozkazy' },
   { s: 'ro_', spr: 'h', over: 'rohy' },
@@ -92,10 +125,12 @@ const SLOVA = [
   { s: 'nů_', spr: 'ž', over: 'nože' },
   { s: 'zu_', spr: 'b', over: 'zuby' },
   { s: 'hra_', spr: 'd', over: 'hrady' },
+  { s: 'katalo_', spr: 'g', over: 'katalogy' },
+  { s: 'dialo_', spr: 'g', over: 'dialogy' },
 ];
 
 /* Znělá – neznělá; v úloze se nabízí právě tahle dvojice. */
-const PARY = [['b', 'p'], ['d', 't'], ['ď', 'ť'], ['z', 's'], ['ž', 'š'], ['v', 'f'], ['h', 'ch']];
+const PARY = [['b', 'p'], ['d', 't'], ['ď', 'ť'], ['g', 'k'], ['z', 's'], ['ž', 'š'], ['v', 'f'], ['h', 'ch']];
 const PROTEJSEK = {};
 PARY.forEach(([a, b]) => { PROTEJSEK[a] = b; PROTEJSEK[b] = a; });
 

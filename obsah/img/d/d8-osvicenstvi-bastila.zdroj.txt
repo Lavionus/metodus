@@ -1,0 +1,8 @@
+Soubor: d8-osvicenstvi-bastila.png / d8-osvicenstvi-bastila.webp
+Původní dílo: Prise de la Bastille IMG 2254.jpg
+Autor: Anonymous painter from France of Northern countries
+Datum vzniku: between circa 1789 and circa 1791date QS:P571,+1750-00-00T00:00:00Z/7,P1319,+1789-00-00T00:00:00Z/9,P1326,+1791-00-00T00:00:00Z/9,P1480,Q5727902
+Zdroj: https://commons.wikimedia.org/wiki/File:Prise_de_la_Bastille_IMG_2254.jpg
+Licence: CC BY-SA 2.0 fr (https://creativecommons.org/licenses/by-sa/2.0/fr/deed.en)
+Staženo: 2026-10-21
+Úpravy: automatické natočení, odstranění metadat, zmenšení na nejvýše 1600 px; výuková WebP kopie 1152 px.

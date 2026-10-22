@@ -6,6 +6,8 @@
   <title>Střídavý proud a rozvod elektřiny</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -15,7 +17,8 @@
     .schema .spoj { stroke: var(--border-strong); stroke-width: 2.5; }
     .schema .uzel { cursor: pointer; }
     .schema .uzel rect { fill: var(--bg-control); stroke: var(--border-strong); stroke-width: 2; rx: 10; }
-    .schema .uzel:hover rect { stroke: var(--accent); }
+    .schema .uzel:hover rect, .schema .uzel:focus-visible rect { stroke: var(--accent); stroke-width: 3; }
+    .schema .uzel:focus { outline: none; }
     .schema .uzel.spravne rect { fill: var(--ok); stroke: var(--ok); }
     .schema .uzel.spatne rect { fill: var(--danger); stroke: var(--danger); }
     .schema .uzel.hotovy rect { fill: var(--accent-soft); stroke: var(--accent); }
@@ -45,6 +48,46 @@
   <h1>🔌 Střídavý proud a rozvod elektřiny</h1>
   <p class="podtitul">Pro 9. ročník: vlastnosti střídavého proudu, transformátor a cesta elektřiny k zásuvce.</p>
 
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Střídavý proud a jeho cesta k zásuvce</summary>
+    <div class="obsah">
+      <p>Baterie dává <b>stejnosměrný proud</b> – teče stále jedním směrem. V elektrické síti je
+        <b>střídavý proud</b>: periodicky mění velikost i směr a jeho průběh má tvar sinusovky.
+        Vyrábí ho <b>generátor (alternátor)</b> v elektrárně, který roztáčí turbína.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Síť v Evropě</h3><p>Frekvence <b>50 Hz</b> – za sekundu proběhne
+          50 celých period. V domácí zásuvce je napětí <b>230 V</b>.</p></article>
+        <article class="vyklad-karta"><h3>Transformátor</h3><p>Dvě cívky na společném jádře.
+          <b>U₁ : U₂ = N₁ : N₂</b> – kolikrát víc závitů má výstupní cívka, tolikrát vyšší je napětí.</p></article>
+        <article class="vyklad-karta"><h3>Cesta elektřiny</h3><p>elektrárna → transformovna (zvýší napětí)
+          → vedení velmi vysokého napětí → trafostanice (sníží napětí) → zásuvka.</p></article>
+      </div>
+      <p>Proč se elektřina přenáší vysokým napětím? Stejný výkon (P = U · I) lze přenést buď nízkým
+        napětím a velkým proudem, nebo vysokým napětím a malým proudem. Vodiče se zahřívají podle
+        proudu, takže <b>menší proud znamená menší ztráty</b> ve vedení. Transformátor pracuje jen
+        se střídavým proudem, protože potřebuje <b>měnící se magnetické pole</b>.</p>
+      <p>Bezpečnost: jistič vypne obvod při zkratu nebo přetížení, proudový chránič při úniku proudu
+        mimo obvod, třeba přes člověka. Poškozený spotřebič nepoužívej a do instalace smí zasahovat
+        jen elektrikář.</p>
+      <aside class="zapamatuj">Síť: střídavý proud 230 V, 50 Hz. U₁ : U₂ = N₁ : N₂.
+        Vysoké napětí ve vedení → menší proud → menší ztráty.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: napětí na výstupu transformátoru</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Transformátor má na primární cívce 1000 závitů a je připojen na napětí 230 V. Sekundární cívka má 200 závitů. Jaké je napětí na výstupu?</p>
+      <ol class="kroky">
+        <li>Zapíšu, co znám: <b>N₁ = 1000</b>, <b>U₁ = 230 V</b>, <b>N₂ = 200</b>, hledám <b>U₂</b>.</li>
+        <li>Porovnám závity: 1000 : 200 = 5, sekundární cívka má <b>5× méně</b> závitů – transformátor napětí snižuje.</li>
+        <li>Napětí se zmenší ve stejném poměru: U₂ = 230 : 5 = <b>46 V</b>.</li>
+        <li>Kontrola vzorcem U₁ : U₂ = N₁ : N₂: 230 : 46 = 5 a 1000 : 200 = 5. Sedí to.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Na výstupu je napětí 46 V.</p>
+    </div>
+  </details>
+
   <div class="rezimy" id="rezimy">
     <button data-rezim="cesta" class="active">🔁 Cesta elektřiny</button>
     <button data-rezim="transformator">🌀 Transformátor</button>
@@ -69,7 +112,10 @@
     <h2 id="atlasRozvod">📷 Cesta elektřiny ve skutečnosti</h2>
     <p>Tyhle stavby a zařízení potkáš cestou z elektrárny až k zásuvce. Zkus je seřadit stejně jako v úloze „Cesta elektřiny“.</p>
     <div class="foto-mrizka">
-@@ATLAS@@
+      <figure class="foto-karta"><img src="img/f/f9-stridavy-stozary-vn.webp" alt="Mohutné ocelové stožáry vedení velmi vysokého napětí s vodiči na izolátorech." width="1152" height="864" loading="lazy"><figcaption><strong>Vedení velmi vysokého napětí</strong>Elektřina se přenáší na velké vzdálenosti při napětí stovek kilovoltů, aby byly ztráty ve vodičích malé.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/f/f9-stridavy-rozvodna.webp" alt="Venkovní rozvodna velmi vysokého napětí s ocelovými konstrukcemi, vodiči a vypínači." width="1152" height="864" loading="lazy"><figcaption><strong>Rozvodna (transformovna)</strong>Velké transformátory tu mění napětí a vypínače rozdělují elektřinu do dalších vedení.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/f/f9-stridavy-transformator-sloup.webp" alt="Transformátor upevněný na betonovém sloupu venkovního vedení v zasněžené krajině." width="1152" height="906" loading="lazy"><figcaption><strong>Transformátor na sloupu</strong>Na vesnici sníží napětí z vysokého (22 kV) na 400/230 V, které vede do domů.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/f/f9-stridavy-pojistkova-skrin.webp" alt="Otevřená domovní rozvodnice ve zdi s řadou jističů a barevnými vodiči." width="1152" height="864" loading="lazy"><figcaption><strong>Domovní rozvodnice</strong>Jističe hlídají jednotlivé okruhy v bytě. Při přetížení nebo zkratu obvod samy vypnou.</figcaption></figure>
     </div>
   </section>
 
@@ -91,7 +137,8 @@ function svgSchema(poradi, hotove) {
   const s = 104, mezera = 12;
   const uzly = poradi.map((u, i) => {
     const x = 8 + i * (s + mezera);
-    return `<g class="uzel${hotove.includes(u.klic) ? ' hotovy' : ''}" data-klic="${u.klic}">
+    return `<g class="uzel${hotove.includes(u.klic) ? ' hotovy' : ''}" data-klic="${u.klic}" tabindex="0" role="button"
+      aria-label="${u.nazev}${hotove.includes(u.klic) ? ' (už zařazeno)' : ''}">
       <rect x="${x}" y="24" width="${s}" height="62"/>
       <text class="ikona" x="${x + s / 2}" y="56">${u.ikona}</text>
       <text class="nazev" x="${x + s / 2}" y="76">${u.nazev}</text></g>`;
@@ -117,7 +164,13 @@ function cesta() {
   p.appendChild(odezva);
 
   function napoj() {
-    obal.querySelectorAll('.uzel').forEach(g => g.addEventListener('click', () => {
+    obal.querySelectorAll('.uzel').forEach(g => {
+      /* ovládání i z klávesnice: Tab na prvek, Enter nebo mezerník */
+      g.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); e.stopPropagation(); klik(); }
+      });
+      g.addEventListener('click', klik);
+      function klik() {
       if (hotovo) return;
       if (g.dataset.klic !== CESTA[hotove.length].klic) {
         chyboval = true;
@@ -140,7 +193,9 @@ function cesta() {
       }
       obal.innerHTML = svgSchema(poradi, hotove);
       napoj();
-    }));
+      obal.querySelector(`.uzel[data-klic="${g.dataset.klic}"]`)?.focus();
+      }
+    });
   }
   napoj();
 }

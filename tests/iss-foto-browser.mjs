@@ -14,7 +14,7 @@ await call('Page.navigate',{url:'http://127.0.0.1:8766/obsah/iss.html'});
 for(let i=0;i<120&&!(await ev(`document.readyState==='complete'&&document.querySelector('#photosBtn')`));i++)await new Promise(r=>setTimeout(r,50));
 
 assert.equal(await ev(`document.querySelectorAll('#photoDialog figure').length`),2);
-assert.deepEqual(await ev(`Promise.all([...document.querySelectorAll('#photoDialog img')].map(img=>img.complete&&img.naturalWidth>0?true:new Promise(ok=>{img.onload=()=>ok(true);img.onerror=()=>ok(false)})))`),[true,true]);
+assert.deepEqual(await ev(`Promise.all([...document.querySelectorAll('#photoDialog img')].map(img=>(img.loading='eager',img)).map(img=>img.complete&&img.naturalWidth>0?true:new Promise(ok=>{img.onload=()=>ok(true);img.onerror=()=>ok(false)})))`),[true,true]);
 for(const width of [1366,390,320]){
   await call('Emulation.setDeviceMetricsOverride',{width,height:900,deviceScaleFactor:1,mobile:width<600});
   await ev(`document.querySelector('#photosBtn').click()`);

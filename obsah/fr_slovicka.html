@@ -6,6 +6,8 @@
   <title>🇫🇷 Francouzština – slovíčka</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <link rel="stylesheet" href="../slovicka.css">
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
@@ -25,6 +27,40 @@
 <body>
   <h1>🇫🇷 Francouzština – slovíčka</h1>
   <p class="podtitul">Základní slovní zásoba se členy le / la / l’. Prohlédni si přehled a kartičky, pak si zkus sérii deseti otázek – po chybě máš druhý pokus.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Rod a člen ve francouzštině</summary>
+    <div class="obsah">
+      <p>Francouzština má jen <b>dva rody</b>: mužský a ženský. Střední rod tu není. Rod poznáš podle <b>členu</b>:
+        mužská slova mají <span lang="fr"><b>le</b></span>, ženská <span lang="fr"><b>la</b></span>. V množném čísle je vždy
+        <span lang="fr"><b>les</b></span>.</p>
+      <p>Rod se s češtinou často neshoduje: mléko je <span lang="fr">le lait</span> (mužský), stůl je
+        <span lang="fr">la table</span> (ženský). Proto se slovo učí <b>vždy se členem</b>, jako jeden celek.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Zkrácené l’</h3><p>Před samohláskou a němým h se le i la zkrátí na <b>l’</b>: <span lang="fr">l’eau, l’école, l’arbre</span>. Rod se pak ze členu nepozná.</p></article>
+        <article class="vyklad-karta"><h3>Pomůže un / une</h3><p>Neurčitý člen se nezkracuje: <span lang="fr">une école</span> (ženský), <span lang="fr">un arbre</span> (mužský).</p></article>
+        <article class="vyklad-karta"><h3>Většinou la</h3><p>Slova na <b>-e</b>: <span lang="fr">la pomme, la porte</span>. Výjimky: <span lang="fr">le livre, le père</span>.</p></article>
+        <article class="vyklad-karta"><h3>Koncovky</h3><p><b>-age, -ment</b> většinou le (<span lang="fr">le fromage</span>); <b>-tion, -té</b> la.</p></article>
+      </div>
+      <p>Typická chyba: u slova s <span lang="fr">l’</span> si myslet, že rod nemá. Má – jen ho člen neukáže.
+        Barva v přehledu ti rod prozradí i u l’.</p>
+      <aside class="zapamatuj">Dva rody: <span lang="fr">le</span> mužský, <span lang="fr">la</span> ženský, před samohláskou <span lang="fr">l’</span>. Slovo se učí se členem, u l’ si pamatuj i <span lang="fr">un / une</span>.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: le, nebo la?</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Který člen má slovo <span lang="fr"><b>fromage</b></span> (sýr)?</p>
+      <ol class="kroky">
+        <li>Slovo začíná souhláskou f, takže se člen nezkracuje – bude to <span lang="fr">le</span>, nebo <span lang="fr">la</span>.</li>
+        <li>Podívám se na konec: <span lang="fr">from<b>age</b></span> končí na <b>-age</b>.</li>
+        <li>Slova na -age jsou většinou mužská, i když končí na -e. Volím <span lang="fr">le</span>.</li>
+        <li>Řeknu nahlas celý výraz: <span lang="fr">le fromage</span>.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ <span lang="fr"><b>le fromage</b></span> – mužský rod (koncovka -age).</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="prehled" data-faze="vyuka" class="active">📖 Přehled</button>

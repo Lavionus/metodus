@@ -6,6 +6,8 @@
   <title>Programování – proměnné a podmínky</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -31,6 +33,38 @@
 <body>
   <h1>📦 Programování – proměnné a podmínky</h1>
   <p class="podtitul">Pro 6.–7. ročník: co je proměnná, jak se mění její hodnota a jak funguje větvení.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Proměnná, přiřazení a podmínka</summary>
+    <div class="obsah">
+      <p>Představ si <b>proměnnou</b> jako krabičku se štítkem. Na štítku je jméno (třeba <b>x</b>),
+        uvnitř je právě jedna <b>hodnota</b>. Když do krabičky vložíš novou hodnotu, ta stará zmizí.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Přiřazení</h3><p><b>x = 7</b> čti „do x ulož 7“. Znak = tu není rovnost jako v matematice, ale příkaz „ulož“.</p></article>
+        <article class="vyklad-karta"><h3>x = x + 1</h3><p>Počítač nejdřív vezme <b>starou</b> hodnotu x, přičte 1 a výsledek uloží zpět do x. Z 5 se tak stane 6.</p></article>
+        <article class="vyklad-karta"><h3>Porovnávání</h3><p><b>&gt;</b> větší, <b>&lt;</b> menší, <b>&gt;=</b> větší nebo rovno, <b>&lt;=</b> menší nebo rovno, <b>==</b> rovná se, <b>!=</b> nerovná se. Výsledek je vždy pravda, nebo nepravda.</p></article>
+        <article class="vyklad-karta"><h3>Větvení</h3><p><b>když</b> podmínka platí, provede se první větev; <b>jinak</b> druhá. Nikdy obě.</p></article>
+      </div>
+      <p>Program čti <b>řádek po řádku</b> a po každém si zapiš, jakou hodnotu proměnná právě má – jako tabulku.
+        Typická chyba je počítat všechno najednou s původní hodnotou, nebo zaměnit &lt; a &lt;=:
+        8 &lt; 8 je nepravda, ale 8 &lt;= 8 je pravda. Zápis <b>x % 2 == 0</b> se ptá, zda je zbytek po dělení dvěma nula, tedy zda je x sudé.</p>
+      <aside class="zapamatuj">Proměnná drží vždy jen svou poslední hodnotu. „=“ znamená „ulož“, „==“ znamená „rovná se?“.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: hodnota proměnné na konci</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Program: x = 5, potom x = x + 3, potom x = x * 2, nakonec x = x + 1. Jakou hodnotu má x na konci?</p>
+      <ol class="kroky">
+        <li>První řádek uloží do x hodnotu <b>5</b>.</li>
+        <li>x = x + 3: vezmu starou hodnotu 5, přičtu 3 → do x uložím <b>8</b>.</li>
+        <li>x = x * 2 (hvězdička znamená násobení): 8 · 2 = 16 → x je teď <b>16</b>.</li>
+        <li>x = x + 1: 16 + 1 = 17 → x je <b>17</b>. Žádný další řádek už není.</li>
+      </ol>
+      <p class="vysledek-ukazky">Na konci má proměnná x hodnotu 17 (postupně 5 → 8 → 16 → 17).</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="hodnota" class="active">🔢 Jaká je hodnota</button>
@@ -108,6 +142,7 @@ function vetveni() {
     vysledek = x > mez ? textA : textB;
   } else if (typ === 'mensiRovno') {
     podminka = `x &lt;= ${mez}`;
+    textA = 'MALÉ'; textB = 'VELKÉ';   // podmínka „menší nebo rovno“ odpovídá nápisu MALÉ
     vysledek = x <= mez ? textA : textB;
   } else {
     podminka = 'x % 2 == 0';

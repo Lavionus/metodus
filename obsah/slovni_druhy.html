@@ -6,6 +6,8 @@
   <title>Slovní druhy</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -37,6 +39,37 @@
 <body>
   <h1>✏️ Slovní druhy</h1>
   <p class="podtitul">Pro 3.–6. ročník: urči, kterým slovním druhem slovo je – a podle jaké otázky se to pozná.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Deset slovních druhů</summary>
+    <div class="obsah">
+      <p>Každé slovo patří k nějakému <b>slovnímu druhu</b>. V češtině jich je deset a mají pevné pořadí čísel 1–10.
+        Slovní druh poznáš dvěma způsoby: podle <b>otázky</b>, na kterou slovo odpovídá, a podle toho, jestli <b>mění tvar</b>.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Ohebné (1–5)</h3><p>Mění tvar – skloňují se nebo časují. <b>1.</b> podstatná jména (kdo? co?), <b>2.</b> přídavná jména (jaký? který? čí?), <b>3.</b> zájmena (zastupují jméno), <b>4.</b> číslovky (kolik? kolikátý?), <b>5.</b> slovesa (co dělá? co se děje?).</p></article>
+        <article class="vyklad-karta"><h3>Neohebné (6–10)</h3><p>Tvar nemění. <b>6.</b> příslovce (kde? kdy? jak?), <b>7.</b> předložky (stojí před jménem), <b>8.</b> spojky (spojují slova a věty), <b>9.</b> částice (uvozují větu, vyjadřují postoj), <b>10.</b> citoslovce (zvuky a pocity).</p></article>
+        <article class="vyklad-karta"><h3>Zkouška ohebnosti</h3><p>Zkus slovo dát do jiného tvaru: pes → psa, psovi (ohebné). Pod → žádný jiný tvar (neohebné). Příslovce se mohou jen stupňovat (rychle → rychleji), neskloňují se.</p></article>
+      </div>
+      <p>Pozor na slova, která vypadají podobně: <b>rychlé</b> je přídavné jméno (jaké auto?), <b>rychle</b> je příslovce (jak jede?).
+        <b>První</b> a <b>pět</b> jsou číslovky, i když „první“ zní jako přídavné jméno – ptáš se ale kolikátý?
+        A <b>já, náš, nikdo</b> jsou zájmena, protože jméno jen zastupují.</p>
+      <aside class="zapamatuj">Polož otázku a zkus změnit tvar. Ohebné druhy 1–5 tvar mění, neohebné 6–10 ne. U některých slov rozhodne až věta.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: urči slovní druh</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Urči slovní druh slova <b>první</b>.</p>
+      <ol class="kroky">
+        <li>Zkusím změnit tvar: první, prvního, prvnímu. Tvar se mění, slovo je <b>ohebné</b> – hledám mezi druhy 1–5.</li>
+        <li>Neoznačuje osobu ani věc, takže to není podstatné jméno. Nezastupuje jméno, není to zájmeno. Nic nedělá, není to sloveso.</li>
+        <li>Zbývá přídavné jméno, nebo číslovka. Nejlépe sedí otázka <b>kolikátý?</b> – vyjadřuje pořadí.</li>
+        <li>Slova vyjadřující počet nebo pořadí jsou číslovky.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ první = 4. číslovka (ohebná, otázka kolikátý?).</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="druh" class="active">✏️ Urči slovní druh</button>
@@ -76,21 +109,22 @@ const DRUHY = [
   { n: 'Citoslovce', o: 'zvuky a pocity', ohebny: false },
 ];
 
-/* [slovo, index druhu]; u slov, která bez věty poznat nejdou, je i příklad užití */
+/* [slovo, index druhu]; jen slova, jejichž druh se pozná i bez věty
+   (ne „se“ – zájmeno × předložka, „je“ – sloveso × zájmeno, „domů“, „během“) */
 const SLOVA = [
   ['pes', 0], ['škola', 0], ['maminka', 0], ['stůl', 0], ['radost', 0], ['Praha', 0],
   ['počítač', 0], ['štěstí', 0], ['traktor', 0], ['pole', 0], ['úsměv', 0], ['zima', 0],
   ['krásný', 1], ['veselý', 1], ['dřevěný', 1], ['psí', 1], ['modrá', 1], ['rychlé', 1],
   ['otcův', 1], ['zimní', 1], ['nejlepší', 1],
-  ['já', 2], ['ona', 2], ['náš', 2], ['tento', 2], ['kdo', 2], ['nikdo', 2], ['se', 2],
+  ['já', 2], ['ona', 2], ['náš', 2], ['tento', 2], ['kdo', 2], ['nikdo', 2], ['sebe', 2],
   ['jeho', 2], ['každý', 2], ['sám', 2],
   ['pět', 3], ['první', 3], ['dvakrát', 3], ['sto', 3], ['několikátý', 3], ['oba', 3],
   ['trojí', 3], ['mnoho', 3],
   ['běžet', 4], ['spal', 4], ['budeme', 4], ['čti', 4], ['vařila', 4], ['přijde', 4],
-  ['smát se', 4], ['je', 4], ['nesmíme', 4],
+  ['smát se', 4], ['jsme', 4], ['nesmíme', 4],
   ['rychle', 5], ['včera', 5], ['venku', 5], ['hezky', 5], ['nahoru', 5], ['někdy', 5],
-  ['velmi', 5], ['domů', 5], ['zítra', 5],
-  ['pod', 6], ['nad', 6], ['ve', 6], ['bez', 6], ['proti', 6], ['během', 6], ['u', 6], ['kvůli', 6],
+  ['velmi', 5], ['doma', 5], ['zítra', 5],
+  ['pod', 6], ['nad', 6], ['ve', 6], ['bez', 6], ['proti', 6], ['mezi', 6], ['u', 6], ['kvůli', 6],
   ['a', 7], ['ale', 7], ['protože', 7], ['nebo', 7], ['aby', 7], ['když', 7], ['i', 7], ['že', 7],
   ['ať', 8], ['kéž', 8], ['snad', 8], ['prý', 8], ['asi', 8], ['ano', 8], ['ne', 8], ['nechť', 8],
   ['haf', 9], ['bum', 9], ['au', 9], ['mňau', 9], ['fuj', 9], ['hurá', 9], ['cink', 9], ['žbluňk', 9],

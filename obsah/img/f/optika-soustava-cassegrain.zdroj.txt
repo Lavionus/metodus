@@ -1,0 +1,8 @@
+Soubor: optika-soustava-cassegrain.png / optika-soustava-cassegrain.webp
+Původní dílo: 355 mm Schmidt-Cassegrain telescope of Bauduen Observatory.jpg
+Autor: Pelligton
+Datum vzniku: 2021-01-25 13:40:16
+Zdroj: https://commons.wikimedia.org/wiki/File:355_mm_Schmidt-Cassegrain_telescope_of_Bauduen_Observatory.jpg
+Licence: CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0)
+Staženo: 2026-10-21
+Úpravy: automatické natočení, odstranění metadat, zmenšení na nejvýše 1600 px; výuková WebP kopie 1152 px.

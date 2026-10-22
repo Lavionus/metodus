@@ -115,6 +115,29 @@ se ze zkoušky vyřadí: nemají `data-faze="procvic"`, nebo nevytvoří otázku
 ▶️ Spustit sérii / 🔄 Nová série · 💡 Nápověda · 👁️ Ukázat řešení · ⏸️ Pauza · ↺ Výchozí stav.
 „Další →“ zůstává jen u listování kartičkami.
 
+### Výklad a vedený příklad
+
+`vyklad.js` + `vyklad.css` (22. 10. 2026) dávají každé lekci stejný 📖 výklad a 📘 vedený příklad. Obojí je statické
+HTML ve stránce, ve výchozím stavu sbalené (procvičování zůstane nahoře); otevře se kliknutím nebo volbou fáze
+v kostře. Vzor: [obsah/f6_hustota.html](obsah/f6_hustota.html).
+
+```html
+<link rel="stylesheet" href="../vyklad.css"> <script src="../vyklad.js" defer></script>
+
+<details class="vyklad" data-faze="vyuka">
+  <summary>📖 Výklad: Co je hustota</summary>
+  <div class="obsah"> odstavce · <div class="vyklad-karty"><article class="vyklad-karta"><h3>…</h3><p>…</p></article>…</div>
+    · <aside class="zapamatuj">…</aside> </div>
+</details>
+<details class="ukazka-kroky" data-faze="ukazka">
+  <summary>📘 Ukázka: hustota kostky</summary>
+  <div class="obsah"><p class="zadani-ukazky">…</p><ol class="kroky"><li>…</li>…</ol><p class="vysledek-ukazky">…</p></div>
+</details>
+```
+
+Ukázka odkrývá kroky tlačítkem „Další krok →“ (také „👁️ Ukázat celé řešení“ a „↺ Od začátku“). V „Ověř se“ jsou
+výklad i ukázka skryté. Tahák dál tvoří `.napoveda`.
+
 ### Knihovna názorných prvků
 
 `nazor.js` + `nazor.css`: stejný jev se na celém webu kreslí stejně. Zlomky (koláč, proužek, osa se
@@ -1089,6 +1112,26 @@ Pole `"png"` v `obsah/img/kapitola-7-*.json` je jen záznam, kde originál lež�
 na disku; žádná stránka ho nenačítá.
 
 Originály PNG nejsou na GitHubu zálohované – zálohuj si složku `obsah/img/` jinak.
+
+### Převzaté fotografie a uvádění autorů
+
+Skutečné fotografie, reprodukce a doklady (styly C a E) se negenerují, berou se
+z Wikimedia Commons jen s licencí volné dílo, CC0, CC BY nebo CC BY-SA:
+
+```
+python3 tools/commons_foto.py hledej "Parthenon west facade"   # ✔ = licence vyhovuje
+python3 tools/commons_foto.py nahled /tmp/x.jpg "File:A.jpg" "File:B.jpg"   # mřížka k výběru okem
+python3 tools/commons_foto.py stahni "File:A.jpg" d/d6-recko-parthenon --id IMG-d-01 --alt "…" [--karta]
+python3 tools/zdroje_obrazku.py   # po každé změně: seznam zdrojů pro stránky
+```
+
+`stahni` uloží PNG, WebP, `.zdroj.txt` (autor, licence, odkaz) a záznam do
+`obsah/img/kapitola-7-2.json`. Místo `.prompt.txt` mají převzaté obrázky
+`.zdroj.txt`. `kostra.js` na konci každé stránky vypíše rozbalovací seznam
+„Zdroje fotografií a reprodukcí“ z `data/obrazky-zdroje.json` – CC BY a CC BY-SA
+uvedení autora a licence vyžadují. Obrázek se ke stránce přiřadí podle výskytu
+názvu souboru v HTML a skriptech stránky; skript vypíše nezapojené obrázky.
+Kontrola: `node tests/foto-atlasy-browser.mjs` (vypíná cache prohlížeče).
 
 Nahrávání dělá `upload.sh` v repozitáři hlavního webu — spouští se jednou
 a nahraje hlavní web, Metodus i ukázkovou stránku.

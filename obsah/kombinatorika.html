@@ -6,6 +6,8 @@
 <title>🎲 Kombinatorika a pravděpodobnost</title>
 <link rel="stylesheet" href="../common.css">
 <link rel="stylesheet" href="../vyuka.css">
+<link rel="stylesheet" href="../vyklad.css">
+<script src="../vyklad.js" defer></script>
 <script src="../theme.js"></script>
 <script src="../podpis.js" defer></script>
 <script src="../kostra.js" defer></script>
@@ -15,6 +17,44 @@
 <body>
   <h1>🎲 Kombinatorika a pravděpodobnost</h1>
   <p class="podtitul">Permutace, kombinace, variace a základní pravděpodobnost. Po chybě máš druhý pokus.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Kolik je možností a jak je to pravděpodobné</summary>
+    <div class="obsah">
+      <p>Kombinatorika počítá, <b>kolika způsoby</b> se něco dá udělat. Základem je pravidlo součinu:
+        když vybíráš postupně, vynásobíš počty možností v každém kroku. Tři knihy na poličku: na první místo
+        můžeš dát kteroukoli ze 3, na druhé už jen jednu ze 2 zbylých, na třetí poslední – celkem 3 · 2 · 1 = 6 pořadí.</p>
+      <p>Než začneš počítat, polož si otázku: <b>záleží na pořadí?</b></p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Permutace</h3><p>Seřazení všech n prvků:
+          <b>n! = n · (n − 1) · … · 2 · 1</b>. Například 4! = 24.</p></article>
+        <article class="vyklad-karta"><h3>Variace</h3><p>Vybíráš k z n a <b>na pořadí záleží</b> (stožáry, medaile):
+          <b>V(n, k) = n · (n − 1) · …</b> (k činitelů) = n! : (n − k)!.</p></article>
+        <article class="vyklad-karta"><h3>Kombinace</h3><p>Vybíráš k z n a <b>na pořadí nezáleží</b> (skupina na výlet):
+          <b>C(n, k) = V(n, k) : k!</b> = n! : (k! · (n − k)!).</p></article>
+        <article class="vyklad-karta"><h3>Pravděpodobnost</h3><p><b>P = příznivé : všechny možnosti</b>, když jsou všechny
+          možnosti stejně pravděpodobné. Vždy 0 ≤ P ≤ 1.</p></article>
+      </div>
+      <p>Proč se u kombinací dělí k!? Každou skupinu k lidí jde seřadit k! způsoby a variace každé z těchto
+        seřazení počítají zvlášť – stejnou skupinu tedy započítají k! krát. U opakovaných pokusů (hod mincí několikrát) se pravděpodobnosti násobí: dvakrát panna je 1/2 · 1/2 = 1/4.</p>
+      <p>Typická chyba: použiješ variace tam, kde na pořadí nezáleží, a výsledek vyjde mnohokrát větší.</p>
+      <aside class="zapamatuj">Záleží na pořadí → variace (nebo permutace, když řadíš všechny). Nezáleží → kombinace. Pravděpodobnost = příznivé : všechny.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: vlaječky na stožárech</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Máme 5 různých vlaječek. Kolika způsoby lze vybrat 3 z nich a vyvěsit je na tři stožáry vedle sebe?</p>
+      <ol class="kroky">
+        <li>Záleží na pořadí? Ano – modrá na prvním stožáru a červená na druhém je jiný pohled než naopak. Jde o <b>variace</b>.</li>
+        <li>Na první stožár vybírám z 5 vlaječek, na druhý už jen ze 4, na třetí ze 3.</li>
+        <li>Podle pravidla součinu: V(5, 3) = 5 · 4 · 3 = <b>60</b>.</li>
+        <li>Pro srovnání: kdyby na pořadí nezáleželo (jen vybíráme, které 3 vlaječky), dělil bych počtem seřazení trojice 3! = 6: C(5, 3) = 60 : 6 = 10.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Vlaječky lze vyvěsit 60 způsoby.</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="poradi">🔢 Řazení a výběr</button>
@@ -30,7 +70,7 @@
     <span class="skore" id="skore"></span>
   </div>
 
-  <p class="napoveda"><b>Permutace</b> n! = kolika způsoby seřadíš n prvků. <b>Kombinace</b> C(n,k) = výběr k z n, na pořadí <i>nezáleží</i>. <b>Variace</b> V(n,k) = výběr k z n, na pořadí <i>záleží</i>. Pravděpodobnost = příznivé / všechny možnosti; piš ji jako desetinné číslo (0,17).</p>
+  <p class="napoveda"><b>Permutace</b> n! = kolika způsoby seřadíš n prvků. <b>Kombinace</b> C(n,k) = výběr k z n, na pořadí <i>nezáleží</i>. <b>Variace</b> V(n,k) = výběr k z n, na pořadí <i>záleží</i>. Pravděpodobnost = příznivé / všechny možnosti; piš ji jako desetinné číslo (0,17), nebo zlomek (1/6).</p>
 
 <script>
 const $ = id => document.getElementById(id);
@@ -43,7 +83,7 @@ const vari = (n, k) => fakt(n) / fakt(n - k);
 const ULOHY_PORADI = [
   () => {
     const n = 3 + Math.floor(Math.random() * 4);
-    return { zadani: `Kolika způsoby lze seřadit ${n} různých knih na poličku vedle sebe?`,
+    return { zadani: `Kolika způsoby lze seřadit ${n} ${n < 5 ? 'různé knihy' : 'různých knih'} na poličku vedle sebe?`,
              odpoved: fakt(n), napoveda: `permutace: ${n}! = ${fakt(n)}` };
   },
   () => {
@@ -55,7 +95,7 @@ const ULOHY_PORADI = [
   () => {
     const n = 4 + Math.floor(Math.random() * 5);
     const k = 2 + Math.floor(Math.random() * 2);
-    return { zadani: `Máme ${n} různých vlaječek. Kolika způsoby lze vybrat a seřadit ${k} z nich na stožáry (na pořadí záleží)?`,
+    return { zadani: `Máme ${n} ${n < 5 ? 'různé vlaječky' : 'různých vlaječek'}. Kolika způsoby lze vybrat a seřadit ${k} z nich na stožáry (na pořadí záleží)?`,
              odpoved: vari(n, k), napoveda: `variace V(${n},${k}) = ${n}!/${n - k}!` };
   },
 ];
@@ -63,18 +103,21 @@ const ULOHY_PORADI = [
 const ULOHY_PRAVD = [
   () => {
     const cil = 1 + Math.floor(Math.random() * 6);
-    return { zadani: `Jaká je pravděpodobnost, že na hrací kostce padne přesně číslo ${cil}? (desetinné číslo, např. 0,17)`,
-             odpoved: 0.167, tolerance: 0.01, napoveda: '1 příznivá z 6 možností' };
+    // přesně 1/6; uzná se 0,17 i 0,167 i zlomek 1/6 (tolerance pod 0,005, ať neprojde 0,2 ani 0,16)
+    return { zadani: `Jaká je pravděpodobnost, že na hrací kostce padne přesně číslo ${cil}? (desetinné číslo, např. 0,17, nebo zlomek)`,
+             odpoved: 1 / 6, tolerance: 0.0045, napoveda: '1 příznivá z 6 možností: 1/6 ≐ 0,17' };
   },
-  () => ({ zadani: 'V balíčku 52 karet je 26 červených a 26 černých. Jaká je pravděpodobnost tažení červené karty? (desetinné číslo)',
-           odpoved: 0.5, tolerance: 0.02, napoveda: '26 z 52 = 1/2' }),
-  () => ({ zadani: 'Jaká je pravděpodobnost, že na hrací kostce padne sudé číslo? (desetinné číslo)',
-           odpoved: 0.5, tolerance: 0.02, napoveda: '3 příznivé (2, 4, 6) z 6' }),
+  () => ({ zadani: 'V balíčku 52 karet je 26 červených a 26 černých. Jaká je pravděpodobnost tažení červené karty? (desetinné číslo nebo zlomek)',
+           odpoved: 0.5, tolerance: 0.001, napoveda: '26 z 52 = 1/2 = 0,5' }),
+  () => ({ zadani: 'Jaká je pravděpodobnost, že na hrací kostce padne sudé číslo? (desetinné číslo nebo zlomek)',
+           odpoved: 0.5, tolerance: 0.001, napoveda: '3 příznivé (2, 4, 6) z 6 = 1/2 = 0,5' }),
   () => {
     const n = 2 + Math.floor(Math.random() * 3);
-    return { zadani: `Hodíme mincí ${n}× po sobě. Jaká je pravděpodobnost, že pokaždé padne panna? (desetinné číslo)`,
-             odpoved: Math.round(Math.pow(0.5, n) * 1000) / 1000, tolerance: 0.01,
-             napoveda: `0,5 na ${n}. = ${Math.pow(0.5, n)}` };
+    // přesná hodnota (0,25 / 0,125 / 0,0625); uzná se i zlomek 1/8 a zaokrouhlení na setiny
+    const p = Math.pow(0.5, n);
+    return { zadani: `Hodíme mincí ${n}× po sobě. Jaká je pravděpodobnost, že pokaždé padne panna? (desetinné číslo nebo zlomek)`,
+             odpoved: p, tolerance: 0.0051,
+             napoveda: `0,5${'⁰¹²³⁴'[n]} = 1/${Math.pow(2, n)} = ${String(p).replace('.', ',')}` };
   },
 ];
 

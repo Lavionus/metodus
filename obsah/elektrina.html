@@ -34,7 +34,7 @@ canvas{display:block;width:100%;height:100%;touch-action:none}
 .info .zavri:hover{background:none;color:var(--accent)}
 .napoveda{position:absolute;left:12px;bottom:10px;font-size:.74rem;color:var(--text-faint);pointer-events:none}
 .skryto{display:none !important}
-@media(max-width:760px){.info{display:none}.panel{gap:10px;padding:8px 10px}input[type=range]{width:84px}}
+@media(max-width:760px){.info{left:12px;width:auto;max-height:calc(100% - 24px);overflow-y:auto;z-index:5}.panel{gap:10px;padding:8px 10px}input[type=range]{width:84px}}
 
 /* ovládací prvky jako přehledné dlaždice v panelu */
 .panel{gap:8px}

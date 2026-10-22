@@ -6,6 +6,8 @@
   <title>Dělitelnost, prvočísla, NSD a NSN</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -26,6 +28,44 @@
 <body>
   <h1>🔍 Dělitelnost, prvočísla, NSD a NSN</h1>
   <p class="podtitul">Pro 6. ročník: znaky dělitelnosti, rozklad na prvočinitele, největší společný dělitel a nejmenší společný násobek.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Dělitelé, násobky a prvočísla</summary>
+    <div class="obsah">
+      <p>Číslo <i>a</i> je <b>dělitelné</b> číslem <i>d</i>, když dělení <i>a</i> : <i>d</i> vyjde beze zbytku.
+        Pak je <i>d</i> <b>dělitel</b> čísla <i>a</i> a <i>a</i> je <b>násobek</b> čísla <i>d</i>: 3 je dělitel 12, 12 je násobek 3.
+        Znaky dělitelnosti dovolí poznat výsledek bez dělení – stačí se podívat na číslice.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Znaky dělitelnosti</h3><p>Na 2, 5 a 10 rozhoduje <b>poslední číslice</b>, na 4 poslední dvojčíslí,
+          na 3 a 9 <b>ciferný součet</b>, na 6 dělitelnost 2 i 3. Příklad: 5 742 má ciferný součet 18, je tedy dělitelné 3 i 9.</p></article>
+        <article class="vyklad-karta"><h3>Prvočíslo</h3><p>Má <b>právě dva</b> dělitele: 1 a samo sebe (2, 3, 5, 7, 11…).
+          Složené číslo má dělitelů víc. Číslo 1 není prvočíslo ani složené – má jen jednoho dělitele.</p></article>
+        <article class="vyklad-karta"><h3>Rozklad na prvočinitele</h3><p>Děl postupně nejmenšími prvočísly, dokud nezbude 1:
+          60 = 2 × 2 × 3 × 5. Každé složené číslo má jen jeden takový rozklad (bez ohledu na pořadí).</p></article>
+        <article class="vyklad-karta"><h3>NSD a NSN</h3><p><b>NSD</b>: společné prvočinitele obou rozkladů, každý tolikrát, kolikrát je v obou.
+          <b>NSN</b>: všechny prvočinitele, každý tolikrát, kolikrát je v rozkladu, kde se vyskytuje nejvícekrát.</p></article>
+      </div>
+      <p>Jak to poznám v úloze: dělím na stejné části a hledám co největší část → NSD.
+        Hledám, kdy se dvě opakující se věci znovu sejdou → NSN. Typická chyba: myslet si, že 2 je jen „sudé číslo“ –
+        je to jediné sudé prvočíslo. A NSN není vždy součin obou čísel; součin je to jen tehdy, když mají NSD = 1.</p>
+      <aside class="zapamatuj">Prvočíslo má právě dva dělitele. NSD bere společné prvočinitele, NSN všechny. Vždy platí NSD ≤ menší číslo ≤ větší číslo ≤ NSN.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: NSD a NSN čísel 24 a 36</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Urči NSD(24, 36) a NSN(24, 36).</p>
+      <ol class="kroky">
+        <li>Rozložím 24: 24 : 2 = 12, 12 : 2 = 6, 6 : 2 = 3, 3 : 3 = 1. Tedy <b>24 = 2 × 2 × 2 × 3</b>.</li>
+        <li>Rozložím 36: 36 : 2 = 18, 18 : 2 = 9, 9 : 3 = 3, 3 : 3 = 1. Tedy <b>36 = 2 × 2 × 3 × 3</b>.</li>
+        <li>NSD: v obou rozkladech jsou společné dvě dvojky a jedna trojka: 2 × 2 × 3 = <b>12</b>.</li>
+        <li>NSN: dvojka nejvícekrát třikrát (u 24), trojka nejvícekrát dvakrát (u 36): 2 × 2 × 2 × 3 × 3 = <b>72</b>.</li>
+        <li>Kontrola: 24 : 12 = 2 a 36 : 12 = 3; 72 : 24 = 3 a 72 : 36 = 2. Navíc 12 × 72 = 864 = 24 × 36.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ NSD(24, 36) = 12, NSN(24, 36) = 72</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="kriterium" class="active">➗ Je dělitelné?</button>

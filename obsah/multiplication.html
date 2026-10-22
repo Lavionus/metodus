@@ -6,6 +6,8 @@
 <title>✖️ Procvičování násobilky</title>
 <link rel="stylesheet" href="../common.css">
 <link rel="stylesheet" href="../vyuka.css">
+<link rel="stylesheet" href="../vyklad.css">
+<script src="../vyklad.js" defer></script>
 <script src="../theme.js"></script>
 <script src="../podpis.js" defer></script>
 <script src="../kostra.js" defer></script>
@@ -15,6 +17,40 @@
 <body>
   <h1>✖️ Procvičování násobilky</h1>
   <p class="podtitul">Rychlostní dril: na každý příklad máš deset sekund. Na konci uvidíš, které příklady ti utekly.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Násobení a dělení</summary>
+    <div class="obsah">
+      <p><b>Násobení</b> je zkrácené sčítání stejných čísel. 4 × 3 znamená „čtyřikrát po třech“:
+        3 + 3 + 3 + 3 = 12. Když si tečky seřadíš do obdélníku 4 řady po 3, vidíš to najednou.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Záměna činitelů</h3><p>Obdélník teček můžeš otočit: 4 řady po 3 jsou totéž co 3 řady po 4.
+          Proto <b>4 × 3 = 3 × 4</b>. Stačí si pamatovat polovinu násobilky.</p></article>
+        <article class="vyklad-karta"><h3>Rozklad</h3><p>Těžký příklad rozděl na lehčí. 7 × 8 = 7 × 4 + 7 × 4 = 28 + 28 = <b>56</b>.
+          Nebo 6 × 9 = 6 × 10 − 6 = 60 − 6 = <b>54</b>.</p></article>
+        <article class="vyklad-karta"><h3>Dělení</h3><p>Dělení je obrácené násobení. <b>56 : 7</b> se ptá:
+          „Kolikrát se 7 vejde do 56?“ Hledám číslo, které po vynásobení sedmi dá 56.</p></article>
+      </div>
+      <p>Užitečné opěrné body: krát 1 se číslo nemění, krát 10 připíšeš nulu, krát 5 je polovina z krát 10
+        (8 × 5 je polovina z 80, tedy 40). Častá chyba je splést sousední výsledky, třeba 7 × 8 a 7 × 7.
+        Když si nejsi jistý, odvoď výsledek od příkladu, který znáš.</p>
+      <aside class="zapamatuj">a × b = b × a. Dělení ověříš násobením: 56 : 7 = 8, protože 7 × 8 = 56.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: 63 : 9</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Vypočítej 63 : 9.</p>
+      <ol class="kroky">
+        <li>Dělení převedu na násobení: hledám číslo, pro které platí <b>9 × ? = 63</b>.</li>
+        <li>Vyjdu z toho, co znám jistě: 9 × 10 = 90. To je moc.</li>
+        <li>Zkusím menší: 9 × 5 = 45, 9 × 6 = 54, 9 × 7 = <b>63</b>. Mám to.</li>
+        <li>Zkouška: 7 × 9 = 63, takže 63 : 9 = 7.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ 63 : 9 = 7</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="nastaveni">
     <label>Rozsah
@@ -30,7 +66,7 @@
     <label>Operace
       <select id="operace">
         <option value="x">Násobení ×</option>
-        <option value="d">Dělení ÷</option>
+        <option value="d">Dělení :</option>
         <option value="both" selected>Obojí</option>
       </select>
     </label>
@@ -46,7 +82,7 @@
   </div>
 
   <p class="napoveda">
-    Odpověď potvrď <b>Enterem</b>. Dělení je jen obrácené násobení: <b>56 ÷ 7</b> se ptá „kolikrát se sedmička vejde do 56“.
+    Odpověď potvrď <b>Enterem</b>. Dělení je jen obrácené násobení: <b>56 : 7</b> se ptá „kolikrát se sedmička vejde do 56“.
     Když si nejsi jistý, pomůže rozklad: 7 × 8 = 7 × 4 + 7 × 4 = 28 + 28.
   </p>
 
@@ -64,12 +100,13 @@ function pripravPriklady() {
     const a = 1 + Math.floor(Math.random() * max), b = 1 + Math.floor(Math.random() * max);
     const deleni = op === 'd' || (op === 'both' && Math.random() < 0.5);
     priklady.push(deleni
-      ? { zadani: `${a * b} ÷ ${a}`, odpoved: b, napoveda: `${a} × ${b} = ${a * b}` }
+      ? { zadani: `${a * b} : ${a}`, odpoved: b, napoveda: `${a} × ${b} = ${a * b}` }
       : { zadani: `${a} × ${b}`, odpoved: a * b, napoveda: `${b}× po ${a}` });
   }
 }
 
 function start() {
+  Uloha.zrusPosun();   // posun z předchozí série nesmí přeskočit první příklad nové
   pripravPriklady();
   poradi = 0; spravne = 0; serie = 0; nejdelsiSerie = 0; chyby = [];
   dalsi();
@@ -193,8 +230,23 @@ window.addEventListener('DOMContentLoaded', () => {
     rek.prvek($('rekordBox'));
   }
   $('btnStart').onclick = start;
-  start();
+  // časomíra se nespouští sama po načtení (WCAG 2.2.1) – série začne až na tlačítko
+  uvod();
 });
+
+function uvod() {
+  $('plocha').innerHTML = '';
+  const karta = document.createElement('div');
+  karta.className = 'karta';
+  karta.innerHTML = `<div class="popis">Na každý příklad máš ${CAS_NA_PRIKLAD / 1000} sekund.
+    Nastav rozsah a operace a až budeš připravený, spusť sérii.</div>`;
+  const b = document.createElement('button');
+  b.className = 'hlavni';
+  b.textContent = '▶️ Spustit sérii';
+  b.onclick = start;
+  karta.appendChild(b);
+  $('plocha').appendChild(karta);
+}
 </script>
 </body>
 </html>

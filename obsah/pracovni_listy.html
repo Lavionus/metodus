@@ -462,7 +462,7 @@ medium:[
 {w:'o_v',f:'objev'},{w:'o_dnat',f:'objednat'},{w:'o_kt',f:'objekt'},{w:'su_kt',f:'subjekt'},
 {w:'_zd auta',f:'vjezd'},{w:'_t do garáže',f:'vjet'},{w:'o_ť',f:'oběť'},{w:'o_mka',f:'objímka'},
 {w:'ná_stí',f:'náměstí'},{w:'za_stnanec',f:'zaměstnanec'},{w:'zá_r',f:'záměr'},{w:'o_tí',f:'objetí'},
-{w:'roz_r',f:'rozměr'},{w:'ú_ra',f:'úvěra'}],
+{w:'roz_r',f:'rozměr'},{w:'ú_r',f:'úvěr'}],
 hard:[
 {w:'do_nka',f:'domněnka'},{w:'vzpo_l si',f:'vzpomněl'},{w:'zapo_l',f:'zapomněl'},
 {w:'připo_l',f:'připomněl'},{w:'po_nka (květina)',f:'pomněnka'},{w:'u_l to',f:'uměl'},
@@ -482,7 +482,7 @@ hard:[
 {t:'Kluci a holky běžel_ o závod.',a:'běželi'},{t:'Sestry a bratři přijel_ na návštěvu.',a:'přijeli'},
 {t:'Naše kočky i kotě spal_ na peci.',a:'spaly'},{t:'Lvi a lvice lovil_ v savaně.',a:'lovili'},
 {t:'Traktory a auta stál_ na poli.',a:'stály'},{t:'Rodiče i děti čekal_ před školou.',a:'čekali'},
-{t:'Dívky a jejich koně zvítězil_.',a:'zvítězily'},{t:'Ptáci a jejich mláďata odlétl_ na jih.',a:'odlétli'}]};
+{t:'Dívky a jejich koně zvítězil_.',a:'zvítězili'},{t:'Ptáci a jejich mláďata odlétl_ na jih.',a:'odlétli'}]};
 const VELKA={easy:[['praha','Praha'],['vltava','Vltava'],['krkonoše','Krkonoše'],['česká republika','Česká republika'],
 ['brno','Brno'],['české budějovice','České Budějovice'],['evropa','Evropa'],['labe','Labe'],['šumava','Šumava'],['ostrava','Ostrava']],
 medium:[['václavské náměstí','Václavské náměstí'],['středočeský kraj','Středočeský kraj'],['vánoce','Vánoce'],
@@ -494,7 +494,7 @@ hard:[['univerzita karlova','Univerzita Karlova'],['základní škola komenskéh
 ['náměstí míru','náměstí Míru'],['pražský hrad','Pražský hrad'],['karlův most','Karlův most'],['bílá hora','Bílá hora']]};
 const KRAJE=[['Jihočeský','České Budějovice'],['Plzeňský','Plzeň'],['Karlovarský','Karlovy Vary'],['Ústecký','Ústí nad Labem'],
 ['Liberecký','Liberec'],['Královéhradecký','Hradec Králové'],['Pardubický','Pardubice'],['Kraj Vysočina','Jihlava'],
-['Jihomoravský','Brno'],['Olomoucký','Olomouc'],['Zlínský','Zlín'],['Moravskoslezský','Ostrava'],['Středočeský','Praha']];
+['Jihomoravský','Brno'],['Olomoucký','Olomouc'],['Zlínský','Zlín'],['Moravskoslezský','Ostrava'],['Středočeský','Praha'],['Hlavní město Praha','Praha']];
 const EVROPA={easy:[['Německo','Berlín'],['Rakousko','Vídeň'],['Polsko','Varšava'],['Slovensko','Bratislava'],
 ['Francie','Paříž'],['Itálie','Řím'],['Španělsko','Madrid'],['Velká Británie','Londýn'],['Maďarsko','Budapešť'],['Řecko','Atény']],
 medium:[['Nizozemsko','Amsterodam'],['Belgie','Brusel'],['Švédsko','Stockholm'],['Norsko','Oslo'],['Dánsko','Kodaň'],
@@ -527,24 +527,27 @@ hard:[['seek','sought','sought'],['bind','bound','bound'],['weave','wove','woven
 ['lay','laid','laid'],['flee','fled','fled'],['swear','swore','sworn'],['sink','sank','sunk'],['shake','shook','shaken']]};
 /* [jméno, koncovka minulého času] — aby věty seděly i v ženském rodě */
 const JMENA=[['Petr',''],['Jana','a'],['Tomáš',''],['Eva','a'],['David',''],['Klára','a'],['Martin',''],['Lucie','a'],['Adam',''],['Tereza','a']];
+/* Skloňování podle čísla: skl(3, 'sešit', 'sešity', 'sešitů') → „3 sešity“ (1 / 2–4 / 5 a víc). */
+function skl(n,jeden,dva,pet){const a=Math.abs(n);return `${n} ${a===1?jeden:(a>=2&&a<=4)?dva:pet}`;}
+const dalsich=n=>n>=2&&n<=4?`další ${n}`:`dalších ${n}`;
 const ULOHY_PLUS=[
-(a,b,R)=>{const j=R.pick(JMENA);return `${j[0]} měl${j[1]} ${a} kuliček a získal${j[1]} dalších ${b}. Kolik jich má teď?`;},
-(a,b)=>`Maminka koupila ${a} jablek a ${b} hrušek. Kolik kusů ovoce koupila celkem?`,
-(a,b)=>`Ve třídě je ${a} chlapců a ${b} dívek. Kolik je ve třídě žáků?`,
-(a,b)=>`V knihovně bylo ${a} knih, přibylo dalších ${b}. Kolik knih je v knihovně nyní?`];
+(a,b,R)=>{const j=R.pick(JMENA);return `${j[0]} měl${j[1]} ${skl(a,'kuličku','kuličky','kuliček')} a získal${j[1]} ${dalsich(b)}. Kolik jich má teď?`;},
+(a,b)=>`Maminka koupila ${skl(a,'jablko','jablka','jablek')} a ${skl(b,'hrušku','hrušky','hrušek')}. Kolik kusů ovoce koupila celkem?`,
+(a,b)=>`Ve třídě sedí ${skl(a,'chlapec','chlapci','chlapců')} a ${skl(b,'dívka','dívky','dívek')}. Kolik je ve třídě žáků?`,
+(a,b)=>`Knihovna měla ${skl(a,'knihu','knihy','knih')} a dostala ${dalsich(b)}. Kolik knih má nyní?`];
 const ULOHY_MINUS=[
-(a,b)=>`V autobuse bylo ${a} cestujících, na zastávce jich ${b} vystoupilo. Kolik jich zůstalo?`,
-(a,b,R)=>{const j=R.pick(JMENA);return `${j[0]} měl${j[1]} ${a} korun a utratil${j[1]} ${b} korun. Kolik korun ${j[1]?'jí':'mu'} zbylo?`;},
-(a,b)=>`Na stromě bylo ${a} jablek, ${b} jich spadlo. Kolik jablek zůstalo na stromě?`,
-(a,b)=>`V sadu je ${a} stromů, z toho ${b} jabloní. Kolik ostatních stromů tam roste?`];
+(a,b)=>`Autobus vezl ${skl(a,'cestujícího','cestující','cestujících')}, na zastávce ${b<=4?'vystoupili':'vystoupilo'} ${b}. Kolik cestujících zůstalo v autobuse?`,
+(a,b,R)=>{const j=R.pick(JMENA);return `${j[0]} měl${j[1]} ${skl(a,'korunu','koruny','korun')} a utratil${j[1]} ${skl(b,'korunu','koruny','korun')}. Kolik korun ${j[1]?'jí':'mu'} zbylo?`;},
+(a,b)=>`Strom měl ${skl(a,'jablko','jablka','jablek')}, ${b<=4?'spadla':'spadlo'} ${b}. Kolik jablek zůstalo na stromě?`,
+(a,b)=>`Sad má ${skl(a,'strom','stromy','stromů')}, z toho ${skl(b,'jabloň','jabloně','jabloní')}. Kolik ostatních stromů tam roste?`];
 const ULOHY_KRAT=[
-(a,b)=>`Jedna krabice obsahuje ${a} tužek. Kolik tužek je v ${b} krabicích?`,
-(a,b)=>`Sešit stojí ${a} Kč. Kolik zaplatíme za ${b} sešitů?`,
-(a,b)=>`Do jednoho autobusu se vejde ${a} cestujících. Kolik cestujících se vejde do ${b} autobusů?`];
+(a,b)=>`Jedna krabice obsahuje ${skl(a,'tužku','tužky','tužek')}. Kolik tužek je v ${b} krabicích?`,
+(a,b)=>`Sešit stojí ${a} Kč. Kolik zaplatíme za ${skl(b,'sešit','sešity','sešitů')}?`,
+(a,b)=>`Jeden autobus uveze ${skl(a,'cestujícího','cestující','cestujících')}. Kolik cestujících se vejde do ${b} autobusů?`];
 const ULOHY_DEL=[
-(a,b)=>`${a} bonbonů rozdělíme rovným dílem mezi ${b} dětí. Kolik bonbonů dostane každé?`,
-(a,b)=>`${a} knih srovnáme do ${b} stejných polic. Kolik knih bude v jedné polici?`,
-(a,b)=>`Za ${b} hodin ujel cyklista ${a} km. Kolik km ujel průměrně za hodinu?`];
+(a,b)=>`${skl(a,'bonbon','bonbony','bonbonů')} rozdělíme rovným dílem mezi ${b} ${b<=4?'děti':'dětí'}. Kolik bonbonů dostane každé?`,
+(a,b)=>`${skl(a,'knihu','knihy','knih')} srovnáme do ${b} stejných polic. Kolik knih bude v jedné polici?`,
+(a,b)=>`Za ${skl(b,'hodinu','hodiny','hodin')} ujel cyklista ${a} km. Kolik km ujel průměrně za hodinu?`];
 const JEDNOTKY={easy:[['m','cm',100],['km','m',1000],['kg','g',1000],['l','ml',1000],['h','min',60],['min','s',60],['dm','cm',10]],
 medium:[['cm','mm',10],['t','kg',1000],['km','cm',100000],['den','h',24],['hl','l',100],['m²','dm²',100],['kg','mg',1000000]],
 hard:[['cm','m',0.01],['g','kg',0.001],['ml','l',0.001],['mm','m',0.001],['kg','t',0.001],['m³','l',1000],['ha','m²',10000]]};
@@ -565,7 +568,10 @@ hard:[['ch_trák','chytrák'],['r_chlík','rychlík'],['ž_vot','život'],['ř_z
 
 /* ---- prvouka: čas a kalendář ---- */
 const DNY=['pondělí','úterý','středa','čtvrtek','pátek','sobota','neděle'];
+const DNY_PO=['pondělí','úterý','středě','čtvrtku','pátku','sobotě','neděli'];      // po + 6. pád
+const DNY_PRED=['pondělím','úterým','středou','čtvrtkem','pátkem','sobotou','nedělí']; // před + 7. pád
 const MESICE=['leden','únor','březen','duben','květen','červen','červenec','srpen','září','říjen','listopad','prosinec'];
+const MESICE_PO=['lednu','únoru','březnu','dubnu','květnu','červnu','červenci','srpnu','září','říjnu','listopadu','prosinci'];
 const DNU_V_MESICI=[31,28,31,30,31,30,31,31,30,31,30,31];
 const OBDOBI=['zima','zima','jaro','jaro','jaro','léto','léto','léto','podzim','podzim','podzim','zima'];
 function cas(min){min=((min%1440)+1440)%1440;return `${Math.floor(min/60)}:${String(min%60).padStart(2,'0')}`;}
@@ -621,7 +627,8 @@ zlomky:{p:'m',r:[4,5,6,7],t:'Zlomky se stejným jmenovatelem',instr:'Vypočítej
   if(op==='+'&&n1+n2>den)n2=den-n1;
   if(op==='−'&&n2>n1)[n1,n2]=[n2,n1];
   const r=op==='+'?n1+n2:n1-n2;const g=gcd(r,den)||1;
-  return{q:`${n1}/${den} ${op} ${n2}/${den} =`,a:r===0?'0':`${r}/${den}${g>1?` = ${r/g}/${den/g}`:''}`};}},
+  // 4/4 = 1 (ne 1/1): po zkrácení se jmenovatelem 1 píšeme celé číslo
+  return{q:`${n1}/${den} ${op} ${n2}/${den} =`,a:r===0?'0':`${r}/${den}${g>1?` = ${den/g===1?r/g:`${r/g}/${den/g}`}`:''}`};}},
 procenta:{p:'m',r:[6,7,8,9],t:'Procenta z čísla',instr:'Vypočítej.',gen(d,R){
   const p=R.pick([[10,25,50],[5,20,30,75],[8,15,35,65]][LV[d]]);
   const base=[10,20,40][LV[d]]*R.int(1,10);
@@ -664,9 +671,9 @@ nsd:{p:'m',r:[6,7],t:'Největší společný dělitel a nejmenší násobek',ins
   const m=[20,40,80][LV[d]];const a=R.int(4,m),b=R.int(4,m);const g=gcd(a,b);
   return R.chance(.5)?{q:`D(${a}, ${b}) =`,a:String(g)}:{q:`n(${a}, ${b}) =`,a:String(a*b/g)};}},
 trojclenka:{p:'m',r:[7,8,9],t:'Přímá úměrnost (trojčlenka)',sig:it=>it.q.replace(/\d+/g,'#'),instr:'Vyřeš trojčlenkou.',gen(d,R){
-  const unit=R.int(2,[12,30,90][LV[d]]);const k1=R.int(2,9),k2=R.int(2,12);
-  const vec=R.pick([['sešitů','Kč'],['rohlíků','Kč'],['metrů látky','Kč']]);
-  return{q:`${k1} ${vec[0]} stojí ${k1*unit} ${vec[1]}. Kolik stojí ${k2} ${vec[0]}?`,a:`${k2*unit} ${vec[1]}`};}},
+  const unit=R.int(2,[12,30,90][LV[d]]);const k1=R.int(2,9);let k2=R.int(2,12);if(k2===k1)k2++;
+  const vec=R.pick([['sešit','sešity','sešitů'],['rohlík','rohlíky','rohlíků'],['metr látky','metry látky','metrů látky']]);
+  return{q:`${skl(k1,...vec)} stojí ${k1*unit} Kč. Kolik stojí ${skl(k2,...vec)}?`,a:`${k2*unit} Kč`};}},
 slovni_ulohy:{p:'m',r:[3,4,5,6,7,8,9],t:'Slovní úlohy',sig:it=>it.q.replace(/\d+/g,'#').replace(/[A-ZÁ-Ž][a-zá-ž]+/g,'@'),instr:'Zapiš výpočet i odpověď.',gen(d,R){
   const lvl=LV[d];const max=[15,40,120][lvl];
   const kind=lvl===0?R.pick(['+','−']):R.pick(['+','−','·',':']);
@@ -701,7 +708,7 @@ fr:{p:'dcj',r:[7,8,9],t:'Francouzština – slovíčka',instr:'Přelož do češ
 aj_slovesa:{p:'aj',r:[6,7,8,9],t:'Nepravidelná slovesa (AJ)',instr:'Doplň minulý čas a příčestí trpné.',gen(d,R){const v=R.pick(tier(VERBY,d));return{q:`${v[0]} – ___ – ___`,a:`${v[1]} / ${v[2]}`};}},
 
 /* ---- svět kolem nás ---- */
-kraje:{p:'z',r:[4,5,6,7,8,9],p2:['prv'],t:'Krajská města ČR',instr:'Napiš krajské město.',gen(d,R){const k=R.pick(KRAJE);return{q:`${k[0]} kraj →`,a:k[1]};}},
+kraje:{p:'z',r:[4,5,6,7,8,9],p2:['prv'],t:'Krajská města ČR',instr:'Napiš krajské město.',gen(d,R){const k=R.pick(KRAJE);return{q:`${/^(Kraj |Hlavní)/.test(k[0])?k[0]:k[0]+' kraj'} →`,a:k[1]};}},
 evropa:{p:'z',r:[5,6,7,8,9],p2:['prv'],t:'Státy Evropy a jejich hlavní města',instr:'Napiš hlavní město.',gen(d,R){const k=R.pick(tier(EVROPA,d));return R.chance(.7)?{q:`${k[0]} →`,a:k[1]}:{q:`Ve kterém státě leží ${k[1]}?`,a:k[0]};}},
 dejiny:{p:'d',r:[4,5,6,7,8,9],p2:['prv'],t:'České dějiny – letopočty',instr:'Doplň letopočet.',gen(d,R){const it=R.pick(tier(DEJINY,d));return{q:`${it.e} →`,a:String(it.y)};}},
 chemie:{p:'ch',r:[8,9],t:'Chemické značky prvků',instr:'Doplň značku nebo název prvku.',gen(d,R){const w=R.pick(tier(CHEM,d));return R.chance(.5)?{q:`značka prvku ${w[1]} →`,a:w[0]}:{q:`prvek se značkou ${w[0]} →`,a:w[1]};}},
@@ -731,13 +738,13 @@ kalendar:{p:'prv',r:[1,2,3,4],t:'Kalendář — dny a měsíce',sig:it=>it.q.rep
   const lvl=LV[d];
   if(lvl===0){
     const i=R.int(0,6);
-    return R.chance(.5)?{q:`Který den následuje po ${DNY[i]}?`,a:DNY[(i+1)%7]}
-                       :{q:`Který den je před ${DNY[i]}?`,a:DNY[(i+6)%7]};}
+    return R.chance(.5)?{q:`Který den následuje po ${DNY_PO[i]}?`,a:DNY[(i+1)%7]}
+                       :{q:`Který den je před ${DNY_PRED[i]}?`,a:DNY[(i+6)%7]};}
   if(lvl===1){
     const i=R.int(0,11);const tv=R.int(1,3);
     if(tv===1)return{q:`Kolikátý měsíc v roce je ${MESICE[i]}?`,a:`${i+1}.`};
     if(tv===2)return{q:`Který měsíc je ${i+1}. v pořadí?`,a:MESICE[i]};
-    return{q:`Který měsíc následuje po ${MESICE[i]}?`,a:MESICE[(i+1)%12]};}
+    return{q:`Který měsíc následuje po ${MESICE_PO[i]}?`,a:MESICE[(i+1)%12]};}
   const i=R.int(0,11);const tv=R.int(1,3);
   if(tv===1)return{q:`Kolik dní má ${MESICE[i]}?`,a:`${DNU_V_MESICI[i]}${i===1?' (v přestupném roce 29)':''}`};
   if(tv===2)return{q:`Do kterého ročního období patří ${MESICE[i]}?`,a:OBDOBI[i]};

@@ -6,6 +6,8 @@
   <title>Zvukové jevy</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -31,6 +33,46 @@
 <body>
   <h1>🔊 Zvukové jevy</h1>
   <p class="podtitul">Pro 9. ročník: vznik a šíření zvuku, výška a hlasitost, ozvěna a ochrana sluchu.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Jak vzniká a šíří se zvuk</summary>
+    <div class="obsah">
+      <p>Zvuk vzniká, když něco <b>kmitá</b> – struna, hlasivky, membrána reproduktoru. Kmitající těleso
+        rozkmitá sousední částice vzduchu a ty předávají kmitání dál. Zvuk je tedy <b>mechanické vlnění</b>
+        a potřebuje látku: ve vakuu chybí částice, proto se tam nešíří. Nejrychleji se šíří v pevných
+        látkách, ve vzduchu asi <b>340 m/s</b>.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Výška tónu</h3><p>Určuje ji <b>frekvence</b> – počet kmitů za sekundu,
+          jednotka <b>hertz (Hz)</b>. Na obrázku vlny: hustší vlnky = vyšší tón.</p></article>
+        <article class="vyklad-karta"><h3>Hlasitost</h3><p>Určuje ji <b>amplituda</b> – jak velký je rozkmit.
+          Vyšší vlna = hlasitější zvuk. Hladina hlasitosti se udává v <b>decibelech (dB)</b>.</p></article>
+        <article class="vyklad-karta"><h3>Co slyšíme</h3><p>Zhruba 16 Hz až 20 000 Hz. Pod tím je
+          <b>infrazvuk</b>, nad tím <b>ultrazvuk</b> (sonar, lékařské vyšetření).</p></article>
+      </div>
+      <p>Vzdálenost spočítáš ze vztahu <b>s = v · t</b>. U <b>ozvěny</b> se zvuk odrazí od překážky
+        a vrací se, takže urazí cestu tam i zpět – vzdálenost překážky je jen polovina:
+        <b>s = v · t : 2</b>. To je nejčastější chyba. U bouřky: počet sekund mezi bleskem a hromem
+        vyděl třemi a máš přibližnou vzdálenost v kilometrech.</p>
+      <p>Hluk nad zhruba <b>85 dB</b> při dlouhém působení poškozuje sluch a ten se už neobnoví.
+        Chraň se špunty a přestávkami v tichu.</p>
+      <aside class="zapamatuj">Frekvence (Hz) = výška tónu, amplituda = hlasitost (dB).
+        Ve vzduchu v ≈ 340 m/s, ozvěna: s = v · t : 2.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: jak daleko je skála</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Křikneme proti skále a ozvěnu uslyšíme po 1,5 s. Jak daleko je skála? (rychlost zvuku 340 m/s)</p>
+      <ol class="kroky">
+        <li>Zapíšu, co znám: <b>v = 340 m/s</b>, <b>t = 1,5 s</b>, hledám vzdálenost skály <b>s</b>.</li>
+        <li>Spočítám celou dráhu zvuku: 340 · 1,5 = <b>510 m</b>.</li>
+        <li>Uvědomím si, že zvuk letěl ke skále <b>a zpátky</b> – 510 m je dvojnásobek vzdálenosti.</li>
+        <li>Vydělím dvěma: s = 510 : 2 = <b>255 m</b>.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Skála je asi 255 m daleko.</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="vlna" class="active">〰️ Čtení zvukové vlny</button>
@@ -81,7 +123,9 @@ function svgVlny(f1, a1, f2, a2) {
 }
 function vlna() {
   const p = $('plocha');
-  const f1 = Uloha.nahodne([2, 3, 4]), f2 = Uloha.nahodne([5, 6, 8].filter(x => x !== f1));
+  // frekvence losujeme ze dvou pásem a náhodně prohodíme, aby vyšší tón nebyl vždy B
+  let f1 = Uloha.nahodne([2, 3, 4]), f2 = Uloha.nahodne([5, 6, 8]);
+  if (Math.random() < 0.5) [f1, f2] = [f2, f1];
   const a1 = Uloha.nahodne([18, 30, 45]), a2 = Uloha.nahodne([18, 30, 45].filter(x => x !== a1));
   const otazka = Uloha.nahodne(['vyssi', 'hlasitejsi', 'frekvence']);
   let zadani, spravny, jine;
@@ -125,7 +169,7 @@ function rychlost() {
   if (typ === 'draha') {
     const t = Uloha.nahodneCislo(2, 12);
     const s = v * t;
-    zadani = `Jak daleko doletí zvuk ve vzduchu za <b>${t} sekund</b>? (rychlost zvuku 340 m/s)`;
+    zadani = `Jak daleko doletí zvuk ve vzduchu za <b>${Uloha.tvar(t, 'sekundu', 'sekundy', 'sekund')}</b>? (rychlost zvuku 340 m/s)`;
     spravny = fmt(s); jednotka = ' m';
     jine = [fmt(v / t), fmt(s / 2), fmt(v + t)];
   } else if (typ === 'ozvena') {
@@ -134,13 +178,14 @@ function rychlost() {
     zadani = `Křikneme a ozvěnu uslyšíme po <b>${fmt(t)} s</b>. Jak daleko je překážka?
       (zvuk musí urazit cestu tam i zpět)`;
     spravny = fmt(s); jednotka = ' m';
-    jine = [fmt(v * t), fmt(v / t), fmt(s / 2)];
+    jine = [fmt(v * t), fmt(s / 2), fmt(3 * s)];
   } else {
     const t = Uloha.nahodneCislo(3, 15);
     const s = v * t / 1000;
-    zadani = `Blesk uvidíme a hrom uslyšíme za <b>${t} sekund</b>. Jak daleko bouřka je? (v km)`;
+    zadani = `Hrom uslyšíme <b>${Uloha.tvar(t, 'sekundu', 'sekundy', 'sekund')}</b> po blesku. Jak daleko je bouřka? (v km)`;
     spravny = fmt(s); jednotka = ' km';
-    jine = [fmt(t / 3), fmt(v * t), fmt(s * 2)];
+    // t/3 je správné pravidlo palce (≈ 0,34 · t), proto ho mezi chybné nedáváme
+    jine = [fmt(s * 10), fmt(v * t), fmt(s * 2)];
   }
 
   p.innerHTML = `<div class="zadani uloha-text">${zadani}</div>
@@ -150,7 +195,7 @@ function rychlost() {
     kam: p, odezva, trida: 'velke',
     moznosti: Uloha.zamichej([spravny, ...jine.filter(x => x !== spravny)]).map(t => ({ klic: t, popis: t + jednotka })),
     spravnyKlic: spravny,
-    zpravaOk: `✅ ${spravny}${jednotka}`,
+    zpravaOk: `✅ ${spravny}${jednotka}` + (typ === 'bourka' ? ' – rychlý odhad: počet sekund vyděl třemi.' : ''),
     zpravaChyba: 'U ozvěny nezapomeň, že zvuk urazí dvojnásobnou dráhu – tam i zpět.',
     poSpravne: skore.vyhodnot,
     dalsi: novaUloha,

@@ -6,6 +6,8 @@
   <title>ČR – obyvatelstvo a hospodářství</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -19,6 +21,43 @@
 <body>
   <h1>🏭 ČR – obyvatelstvo a hospodářství</h1>
   <p class="podtitul">Pro 8. ročník: kraje a města, obyvatelstvo, průmysl, zemědělství a služby.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Kde v Česku lidé žijí a čím se živí</summary>
+    <div class="obsah">
+      <p>Česko má <b>14 krajů</b> (včetně Prahy). Podle ČSÚ v něm k roku 2024 žilo asi <b>10,9 milionu</b> obyvatel.
+        Lidé ale nejsou rozmístěni rovnoměrně – to popisuje <b>hustota zalidnění</b>.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Hustota zalidnění</h3><p>Počet obyvatel na <b>1 km²</b>: obyvatelé : rozloha.
+          Hustě zalidněné jsou <b>Praha</b> a <b>Moravskoslezský kraj</b> (města, průmysl), řídce <b>Jihočeský kraj</b> a hory.</p></article>
+        <article class="vyklad-karta"><h3>Proměny obyvatelstva</h3><p>Obyvatelstvo <b>stárne</b> – přibývá lidí v důchodovém věku.
+          Z měst se lidé stěhují do okolních obcí: <b>suburbanizace</b>.</p></article>
+        <article class="vyklad-karta"><h3>Tři sektory</h3><p><b>Primární</b>: zemědělství, těžba. <b>Sekundární</b>: průmysl
+          (hlavně <b>automobilový a strojírenský</b>). <b>Terciární</b>: služby – obchod, doprava, školství, cestovní ruch.</p></article>
+      </div>
+      <p>Hospodářství se drží přírodních podmínek: úrodné nížiny (<b>Polabí</b>) dávají obilí a cukrovou řepu, teplá
+        <b>jižní Morava</b> víno, pod Krušnými horami (Mostecko, Sokolovsko) se těží <b>hnědé uhlí</b>. Elektřinu vyrábějí
+        hlavně <b>jaderné a uhelné</b> elektrárny. Průmysl ovlivňuje také tradice a doprava – Mladá Boleslav vyrábí automobily.</p>
+      <p><b>Typická chyba:</b> plést si „nejvíc obyvatel“ a „nejhustěji zalidněný“. Nejvíc obyvatel má <b>Středočeský kraj</b>,
+        ale je velký; nejhustěji zalidněná je malá rozlohou Praha.</p>
+      <aside class="zapamatuj">Hustota = obyvatelé : rozloha (ob./km²). Primární sektor bere z přírody, sekundární vyrábí,
+        terciární poskytuje služby.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: do kterého sektoru to patří</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Co z toho patří mezi služby: těžba uhlí, výroba aut, pěstování obilí, nebo doprava?</p>
+      <ol class="kroky">
+        <li>U každé činnosti se zeptám: bere něco přímo z přírody, něco vyrábí, nebo poskytuje službu lidem?</li>
+        <li>Těžba uhlí a pěstování obilí berou z přírody – to je <b>primární</b> sektor.</li>
+        <li>Výroba aut je průmysl, vzniká výrobek – to je <b>sekundární</b> sektor.</li>
+        <li>Doprava nic nevyrábí, ale přepravuje lidi a zboží – je to služba, <b>terciární</b> sektor.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Mezi služby patří doprava.</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="mapa1" class="active">🏙️ Slepá mapa – krajská města</button>
@@ -34,7 +73,7 @@
     <span class="skore" id="skore"></span>
   </div>
 
-  <p class="napoveda">V Česku žije přibližně <b>10,9 milionu</b> obyvatel, hustota zalidnění je asi <b>138 obyvatel na km²</b>. Nejlidnatější je Praha, nejhustěji zalidněné jsou Praha a Moravskoslezský kraj, nejřidčeji Jihočeský kraj.</p>
+  <p class="napoveda">V Česku žije přibližně <b>10,9 milionu</b> obyvatel, hustota zalidnění je asi <b>138 obyvatel na km²</b> (údaje ČSÚ k roku 2024). Nejvíc obyvatel má <b>Středočeský kraj</b>, těsně za ním je Praha; nejhustěji zalidněné jsou Praha a Moravskoslezský kraj, nejřidčeji Jihočeský kraj.</p>
 
 <script>
 const $ = id => document.getElementById(id);
@@ -48,7 +87,7 @@ const SADA1 = [
     "popis": "Praha",
     "lon": 14.44,
     "lat": 50.08,
-    "info": "hlavní město, asi 1,3 milionu obyvatel"
+    "info": "hlavní město, asi 1,4 milionu obyvatel (2024)"
   },
   {
     "klic": "brno",
@@ -209,6 +248,7 @@ const KVIZ1 = [
   {
     "q": "Kolik obyvatel má přibližně Česká republika?",
     "a": "asi 10,9 milionu",
+    "proc": "údaj ČSÚ k roku 2024",
     "b": [
       "asi 5 milionů",
       "asi 20 milionů",
@@ -217,12 +257,13 @@ const KVIZ1 = [
   },
   {
     "q": "Který kraj má nejvíce obyvatel?",
-    "a": "Praha (jako samostatný kraj)",
+    "a": "Středočeský kraj",
     "b": [
       "Zlínský kraj",
       "Karlovarský kraj",
       "Pardubický kraj"
-    ]
+    ],
+    "proc": "Středočeský kraj má přes 1,4 milionu obyvatel, o něco víc než Praha (ČSÚ, 2024)"
   },
   {
     "q": "Kolik krajů má Česká republika?",

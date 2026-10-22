@@ -6,6 +6,8 @@
   <title>Číslovky a určování času</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -27,6 +29,40 @@
 <body>
   <h1>🕐 Číslovky a určování času</h1>
   <p class="podtitul">Pro 8. ročník: číslovky a hodiny v němčině a francouzštině.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Čísla a hodiny v němčině a francouzštině</summary>
+    <div class="obsah">
+      <p>Čísla do 100 se v obou jazycích skládají z několika dílků. Když znáš dílky a pořadí, ve kterém se řadí,
+        přečteš každé číslo.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>🇩🇪 Jednotky napřed</h3><p>Nejdřív jednotky, pak <b>und</b>, nakonec desítky – vše jedním slovem: 34 = <span lang="de">vier-und-dreißig</span>. U 21: <span lang="de">einundzwanzig</span> (ne eins).</p></article>
+        <article class="vyklad-karta"><h3>🇫🇷 70–99 počítáním</h3><p>70 = <span lang="fr">soixante-dix</span> (60 + 10), 80 = <span lang="fr">quatre-vingts</span> (4 × 20), 90 = <span lang="fr">quatre-vingt-dix</span> (4 × 20 + 10).</p></article>
+        <article class="vyklad-karta"><h3>🇩🇪 Hodiny</h3><p><span lang="de">Viertel nach drei</span> = 3:15, <span lang="de">Viertel vor vier</span> = 3:45. <span lang="de">halb vier</span> = půl čtvrté, tedy 3:30.</p></article>
+        <article class="vyklad-karta"><h3>🇫🇷 Hodiny</h3><p><span lang="fr">Il est trois heures et quart</span> = 3:15, <span lang="fr">et demie</span> = 3:30. Po půl se odečítá: <span lang="fr">quatre heures moins le quart</span> = 3:45.</p></article>
+      </div>
+      <p>Typická chyba v němčině: <span lang="de">halb vier</span> přeložit jako „půl čtyři“, tedy 4:30. Němčina počítá půlhodinu
+        k <b>následující</b> hodině stejně jako čeština „půl čtvrté“ – je 3:30.</p>
+      <p>Po půl hodině se v obou jazycích obvykle říká, kolik minut <b>zbývá</b> do další hodiny:
+        3:50 = <span lang="de">zehn vor vier</span> = <span lang="fr">quatre heures moins dix</span>.</p>
+      <aside class="zapamatuj">🇩🇪 jednotky + und + desítky; halb = půl následující hodiny. 🇫🇷 70 = 60 + 10, 80 = 4 × 20; po půl se odečítá „moins“.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: číslo 75 v obou jazycích</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Jak se řekne číslo <b>75</b> německy a francouzsky?</p>
+      <ol class="kroky">
+        <li>Rozložím 75 na desítky a jednotky: 70 a 5.</li>
+        <li>Německy jdou nejdřív jednotky: 5 = <span lang="de">fünf</span>, pak <span lang="de">und</span>, pak 70 = <span lang="de">siebzig</span>.</li>
+        <li>Spojím do jednoho slova: <span lang="de">fünfundsiebzig</span>.</li>
+        <li>Francouzsky nemá 70 vlastní slovo, počítá se 60 + 15: 60 = <span lang="fr">soixante</span>, 15 = <span lang="fr">quinze</span>.</li>
+        <li>Spojím spojovníkem: <span lang="fr">soixante-quinze</span>.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ 75 = <span lang="de"><b>fünfundsiebzig</b></span> = <span lang="fr"><b>soixante-quinze</b></span></p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="cislovkyNJ" class="active">🇩🇪 Číslovky</button>
@@ -135,18 +171,20 @@ function svgHodiny(h, m) {
   </svg>`;
 }
 
-const NJ_HODINY = ['zwölf', 'ein', 'zwei', 'drei', 'vier', 'fünf', 'sechs', 'sieben', 'acht', 'neun', 'zehn', 'elf'];
+// „ein Uhr“, ale „Viertel nach eins“, „halb eins“
+const NJ_HODINY = ['zwölf', 'eins', 'zwei', 'drei', 'vier', 'fünf', 'sechs', 'sieben', 'acht', 'neun', 'zehn', 'elf'];
 function casNemecky(h, m) {
   const hod = NJ_HODINY[h % 12];
   const dalsi = NJ_HODINY[(h + 1) % 12];
-  if (m === 0) return `${hod} Uhr`;
+  if (m === 0) return `${hod === 'eins' ? 'ein' : hod} Uhr`;
   if (m === 15) return `Viertel nach ${hod}`;
   if (m === 30) return `halb ${dalsi}`;
   if (m === 45) return `Viertel vor ${dalsi}`;
   if (m < 30) return `${nemecky(m)} nach ${hod}`;
   return `${nemecky(60 - m)} vor ${dalsi}`;
 }
-const FJ_HODINY = ['minuit', 'une heure', 'deux heures', 'trois heures', 'quatre heures', 'cinq heures',
+// hodiny jsou 1–12 jako na ciferníku; 12:15 čteme „midi et quart“ (minuit = půlnoc)
+const FJ_HODINY = ['midi', 'une heure', 'deux heures', 'trois heures', 'quatre heures', 'cinq heures',
   'six heures', 'sept heures', 'huit heures', 'neuf heures', 'dix heures', 'onze heures'];
 function casFrancouzsky(h, m) {
   const hod = FJ_HODINY[h % 12];

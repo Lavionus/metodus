@@ -6,6 +6,8 @@
   <title>Slovesa – osoba, číslo, čas</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -30,6 +32,37 @@
 <body>
   <h1>🏃 Slovesa – osoba, číslo, čas</h1>
   <p class="podtitul">Pro 3.–4. ročník: u sloves určujeme osobu, číslo a čas.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Osoba, číslo a čas slovesa</summary>
+    <div class="obsah">
+      <p><b>Sloveso</b> říká, co kdo dělá nebo co se děje. Sloveso mění svůj tvar: píšu, píšeš, psali, budeme psát.
+        Z tvaru slovesa poznáš tři věci: <b>kdo</b> to dělá (osoba), <b>kolik</b> jich je (číslo) a <b>kdy</b> se to děje (čas).</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Osoba</h3><p><b>1.</b> já, my – mluvím o sobě. <b>2.</b> ty, vy – mluvím k někomu. <b>3.</b> on, ona, oni – mluvím o někom jiném. Dosaď před sloveso zájmeno a uvidíš, které sedí: (ty) píšeš.</p></article>
+        <article class="vyklad-karta"><h3>Číslo</h3><p><b>Jednotné</b> – dělá to jeden (já, ty, on). <b>Množné</b> – dělá to víc lidí (my, vy, oni).</p></article>
+        <article class="vyklad-karta"><h3>Čas</h3><p><b>Minulý</b> – už se stalo, poznáš ho podle <b>-l</b> (psal, psali jsme). <b>Přítomný</b> – děje se teď (píšu). <b>Budoucí</b> – teprve bude, často se slovem <b>budu, budeš, bude…</b> (budu psát).</p></article>
+      </div>
+      <p>Kde to hledat? Osoba a číslo jsou schované v <b>koncovce</b> (píš<b>eme</b> = my) nebo v pomocném slově
+        (psal <b>jsem</b> = já, psal <b>jsi</b> = ty). Ve 3. osobě minulého času pomocné slovo chybí: on psal, oni psali.</p>
+      <p>Když převádíš do jiného času, <b>osoba a číslo zůstávají stejné</b>, mění se jen čas. Častá chyba je změnit i osobu.</p>
+      <aside class="zapamatuj">Osoba = kdo (1. já/my, 2. ty/vy, 3. on/oni). Číslo = jeden, nebo víc. Čas = minulý (-l), přítomný, budoucí (budu…).</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: převeď sloveso do jiného času</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Převeď sloveso <b>psali jsme</b> do budoucího času.</p>
+      <ol class="kroky">
+        <li>Najdu pomocné slovo: <b>jsme</b>. Patří k němu zájmeno <b>my</b> – je to 1. osoba.</li>
+        <li>My je víc lidí, takže číslo <b>množné</b>.</li>
+        <li>Psali má na konci -l(i), je to minulý čas. Mám ho změnit na budoucí.</li>
+        <li>Osobu a číslo nechám: my, 1. osoba množného čísla. Budoucí čas utvořím slovem <b>budeme</b> a slovesem psát.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ psali jsme → budeme psát (1. osoba, číslo množné, čas budoucí).</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="cas" class="active">⏰ Určit čas</button>
@@ -265,7 +298,10 @@ function osoba() {
 /* ---- Určit číslo ---------------------------------------------------------- */
 function cislo() {
   const p = $('plocha');
-  const u = nahodnyTvar();
+  /* Tvar stejný v jednotném i množném čísle (on/oni běží, vaří, kreslí) se bez
+     podmětu určit nedá – takový se v tomto režimu nelosuje. */
+  let u;
+  do { u = nahodnyTvar(); } while (tvar(u.s, u.cas, u.osoba, !u.mnozne) === u.text);
   uloha = u;
   p.innerHTML = `<div class="zadani">Je sloveso v jednotném, nebo množném čísle?</div>${kartaTvaru(u)}`;
   const odezva = odezvaEl();

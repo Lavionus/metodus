@@ -1224,19 +1224,29 @@ tecna:{
 };
 
 /* ---------- kontroly konstrukcí ---------- */
+/* Vazby: výsledek se uzná, jen když je opravdu sestrojený – přímka vede body zadání nebo body,
+   které vznikly konstrukcí (průsečík, střed…), ne volně umístěnými body „od oka“ či podle mřížky. */
+let jenVazane=true;
+const vazany=p=>!!p&&!p.bad&&(!!p.fixed||(!!p.def&&p.def.k!=='on'));
+function vazanyUtvar(o){
+  if(isLinear(o)) return vazany(P(o.a))&&vazany(P(o.b));
+  if(isCircle(o)) return vazany(P(o.c))&&(o.rs?o.rs.every(id=>vazany(P(id))):o.p!=null?vazany(P(o.p)):o.rk==='in');
+  return false;
+}
+const kandidat=o=>!o.fixed&&(!jenVazane||vazanyUtvar(o));
 function bisectorOK(){
   const A=byLabel('A'),B=byLabel('B'); if(!A||!B) return false;
   const mid={x:(A.x+B.x)/2,y:(A.y+B.y)/2};
   const d={x:B.x-A.x,y:B.y-A.y},L=Math.hypot(d.x,d.y)||1; d.x/=L; d.y/=L;
-  return linears().some(o=>!o.fixed&&distToShape(o,mid)<4&&Math.abs(angleBetween(dirOf(o),d)-90)<1.2);
+  return linears().some(o=>kandidat(o)&&distToShape(o,mid)<4&&Math.abs(angleBetween(dirOf(o),d)-90)<1.2);
 }
 function perpOK(){
   const P0=byLabel('P'), base=objs.find(o=>o.fixed&&isLinear(o)); if(!P0||!base) return false;
-  return linears().some(o=>!o.fixed&&distToShape(o,P0)<4&&Math.abs(angleBetween(dirOf(o),dirOf(base))-90)<1.2);
+  return linears().some(o=>kandidat(o)&&distToShape(o,P0)<4&&Math.abs(angleBetween(dirOf(o),dirOf(base))-90)<1.2);
 }
 function parallelOK(){
   const M=byLabel('M'), base=objs.find(o=>o.fixed&&isLinear(o)); if(!M||!base) return false;
-  return linears().some(o=>!o.fixed&&distToShape(o,M)<4&&angleBetween(dirOf(o),dirOf(base))<1.2&&distToShape(base,M)>4);
+  return linears().some(o=>kandidat(o)&&distToShape(o,M)<4&&angleBetween(dirOf(o),dirOf(base))<1.2&&distToShape(base,M)>4);
 }
 function bisectorAngleOK(){
   const V=byLabel('V'); if(!V) return false;
@@ -1244,33 +1254,34 @@ function bisectorAngleOK(){
   const d1=pickDir(rays[0],V,dirOf(rays[0])), d2=pickDir(rays[1],V,dirOf(rays[1]));
   const half=Math.acos(Math.max(-1,Math.min(1,d1.x*d2.x+d1.y*d2.y)))*90/Math.PI;
   return linears().some(o=>{
-    if(o.fixed||distToShape(o,V)>4) return false;
+    if(!kandidat(o)||distToShape(o,V)>4) return false;
     const d=dirOf(o), a1=angleBetween(d,d1), a2=angleBetween(d,d2);
     return Math.abs(a1-a2)<1.5&&Math.abs(Math.min(a1,180-a1)-half)<2;
   });
 }
 function angle60OK(){
   const V=byLabel('V'), base=objs.find(o=>o.fixed&&isLinear(o)); if(!V||!base) return false;
-  return linears().some(o=>!o.fixed&&distToShape(o,V)<4&&Math.abs(angleBetween(dirOf(o),dirOf(base))-60)<1.5);
+  return linears().some(o=>kandidat(o)&&distToShape(o,V)<4&&Math.abs(angleBetween(dirOf(o),dirOf(base))-60)<1.5);
 }
 function segExists(p,q){
-  return objs.some(o=>isLinear(o)&&!o.bad&&distToShape(o,p)<4&&distToShape(o,q)<4&&dist(p,q)>4);
+  return objs.some(o=>isLinear(o)&&!o.bad&&(o.fixed||!jenVazane||vazanyUtvar(o))&&distToShape(o,p)<4&&distToShape(o,q)<4&&dist(p,q)>4);
 }
 function equilateralOK(){
   const A=byLabel('A'),B=byLabel('B'); if(!A||!B) return false;
   const ab=dist(A,B);
-  return objs.some(C=>C.t==='point'&&!C.bad&&C!==A&&C!==B&&
+  return objs.some(C=>C.t==='point'&&!C.bad&&C!==A&&C!==B&&(!jenVazane||vazany(C))&&
     Math.abs(dist(A,C)-ab)<4&&Math.abs(dist(B,C)-ab)<4&&segExists(A,C)&&segExists(B,C));
 }
 function axisOfExists(l1,l2){
   const A=byLabel(l1),B=byLabel(l2); if(!A||!B) return false;
   const mid={x:(A.x+B.x)/2,y:(A.y+B.y)/2},d={x:B.x-A.x,y:B.y-A.y},L=Math.hypot(d.x,d.y)||1;
   d.x/=L; d.y/=L;
-  return linears().some(o=>!o.fixed&&distToShape(o,mid)<5&&Math.abs(angleBetween(dirOf(o),d)-90)<1.5);
+  return linears().some(o=>kandidat(o)&&distToShape(o,mid)<5&&Math.abs(angleBetween(dirOf(o),d)-90)<1.5);
 }
 function circumOK(){
   const A=byLabel('A'),B=byLabel('B'),C=byLabel('C'); if(!A||!B||!C) return false;
   return circles().some(c=>{
+    if(jenVazane&&!vazanyUtvar(c)) return false;
     const S=P(c.c),R=radius(c);
     return Math.abs(dist(S,A)-R)<5&&Math.abs(dist(S,B)-R)<5&&Math.abs(dist(S,C)-R)<5;
   });
@@ -1278,19 +1289,19 @@ function circumOK(){
 function medianOK(v,x,y){
   const V=byLabel(v),X=byLabel(x),Y=byLabel(y); if(!V||!X||!Y) return false;
   const mid={x:(X.x+Y.x)/2,y:(X.y+Y.y)/2};
-  return linears().some(o=>!o.fixed&&distToShape(o,V)<4&&distToShape(o,mid)<4);
+  return linears().some(o=>kandidat(o)&&distToShape(o,V)<4&&distToShape(o,mid)<4);
 }
 function centroidOK(){
   const A=byLabel('A'),B=byLabel('B'),C=byLabel('C'); if(!A||!B||!C) return false;
   if(!(medianOK('A','B','C')&&medianOK('B','C','A'))) return false;
   const T={x:(A.x+B.x+C.x)/3,y:(A.y+B.y+C.y)/3};
-  return points().some(p=>!p.fixed&&!p.bad&&dist(p,T)<5);
+  return points().some(p=>!p.fixed&&!p.bad&&(!jenVazane||vazany(p))&&dist(p,T)<5);
 }
 function tangentOK(){
   const S=byLabel('S'),M=byLabel('M'); if(!S||!M) return false;
   const k=circles().find(c=>c.fixed); if(!k) return false;
   const R=radius(k);
-  return linears().some(o=>!o.fixed&&distToShape(o,M)<4&&Math.abs(distToLine(o,S)-R)<3);
+  return linears().some(o=>kandidat(o)&&distToShape(o,M)<4&&Math.abs(distToLine(o,S)-R)<3);
 }
 function distToLine(o,p){ // vzdálenost od nosné přímky útvaru (bez omezení na úsečku)
   const a=P(o.a),b=P(o.b); if(!a||!b) return 1e9;
@@ -1308,7 +1319,15 @@ function loadTask(k){
   $('taskDesc').textContent=TASKS[k].desc;
   $('result').className='result';
   setOpt('strict',k!=='free');
+  zamkniPrisny();
   fit(); refresh(); scheduleSave();
+}
+// V úloze je přísný režim zamčený (jinak by šlo „konstruovat“ hotovým nástrojem Kolmice, Osa…).
+function zamkniPrisny(){
+  const v=task!=='free', box=$('optStrict');
+  if(v&&!opts.strict) setOpt('strict',true);
+  box.disabled=v;
+  box.parentElement.title=v?'V úloze je přísný režim zapnutý vždy – vypneš ho ve Volné ploše.':'';
 }
 $('taskSel').onchange=()=>loadTask($('taskSel').value);
 $('resetTask').onclick=()=>loadTask(task);
@@ -1323,6 +1342,12 @@ function updateSteps(){
 }
 $('checkBtn').onclick=()=>{
   let r; try{ r=(TASKS[task]||TASKS.free).check(); }catch(e){ r={ok:false,msg:'Konstrukce je zatím neúplná.'}; }
+  if(!r.ok){ // vypadá výsledek správně, jen není sestrojený? řekni proč se neuznal
+    jenVazane=false;
+    let odOka=false; try{ odOka=(TASKS[task]||TASKS.free).check().ok; }catch(e){}
+    jenVazane=true;
+    if(odOka) r={ok:false,msg:'❌ Výsledek vypadá správně, ale je narýsovaný od oka. Veď ho body, které vznikly konstrukcí – průsečíky kružnic a čar (bod ukotvi přímo na průsečík).'};
+  }
   const el=$('result'); el.className='result '+(r.ok?'ok':'bad'); el.textContent=r.msg;
 };
 function refresh(){ recompute(); render(); updateSteps(); updateBtns(); updateHud(); scheduleSave(); }
@@ -1404,6 +1429,7 @@ function loadState(d,odkud){
   $('taskSel').value=task; $('taskDesc').textContent=TASKS[task].desc;
   if(d.view&&isFinite(d.view.s)) view={x:d.view.x,y:d.view.y,s:d.view.s};
   if(d.opts) for(const k in opts) if(k in d.opts && typeof d.opts[k]===typeof opts[k]) setOpt(k,d.opts[k]);
+  zamkniPrisny();
   recompute(); gc(); refresh();
   if(odkud) toast('Načteno: '+odkud);
 }

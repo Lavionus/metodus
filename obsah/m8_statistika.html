@@ -6,6 +6,8 @@
   <title>Statistika – průměr, medián, modus</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -75,6 +77,20 @@
   <h1>📊 Statistika – průměr, medián, modus</h1>
   <p class="podtitul">Pro 8. ročník: charakteristiky souboru dat a čtení diagramů.</p>
 
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: průměr, medián a modus jednoho souboru</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Soubor dat: 4, 9, 2, 7, 4, 11, 5. Urči aritmetický průměr, medián a modus.</p>
+      <ol class="kroky">
+        <li>Průměr: sečtu všechny hodnoty 4 + 9 + 2 + 7 + 4 + 11 + 5 = 42 a vydělím jejich počtem 7: 42 : 7 = <b>6</b>.</li>
+        <li>Medián: nejdřív hodnoty seřadím: 2, 4, 4, 5, 7, 9, 11.</li>
+        <li>Hodnot je 7 (liché číslo), prostřední je čtvrtá v pořadí: medián = <b>5</b>.</li>
+        <li>Modus: hledám hodnotu, která se opakuje nejčastěji. Dvakrát je tu jen 4, proto modus = <b>4</b>.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Průměr 6, medián 5, modus 4.</p>
+    </div>
+  </details>
+
   <div class="rezimy" id="rezimy">
     <button data-rezim="dilna" data-faze="vyuka" class="active">🔬 Dílna dat</button>
     <button data-rezim="charakteristiky">🔢 Spočítej charakteristiku</button>
@@ -115,6 +131,13 @@ function modus(a) {
   let nej = null, nejPocet = 0;
   for (const [h, c] of Object.entries(pocty)) if (c > nejPocet) { nej = Number(h); nejPocet = c; }
   return nej;
+}
+/* Všechny mody (hodnoty s nejvyšší četností, aspoň 2×) – v dílně jich může být víc. */
+function mody(a) {
+  const pocty = {};
+  a.forEach(x => { pocty[x] = (pocty[x] || 0) + 1; });
+  const max = Math.max(...Object.values(pocty));
+  return max < 2 ? [] : Object.keys(pocty).filter(h => pocty[h] === max).map(Number).sort((x, y) => x - y);
 }
 
 /* Soubor s jednoznačným modem – ať má úloha jediné správné řešení. */
@@ -254,8 +277,8 @@ function kresliDilnu() {
 
   $('hPrumer').textContent = fmt(pr);
   $('hMedian').textContent = fmt(md);
-  const pocetModu = DL.data.filter(x => x === mo).length;
-  $('hModus').textContent = pocetModu >= 2 ? fmt(mo) : '—';
+  const vsechnyMody = mody(DL.data);
+  $('hModus').textContent = vsechnyMody.length ? vsechnyMody.map(fmt).join(' a ') : '—';
 
   const rozdil = Math.abs(pr - md);
   $('poznamkaDl').innerHTML = rozdil > 0.5
@@ -301,7 +324,10 @@ function charakteristiky() {
 const POPISKY = ['1', '2', '3', '4', '5'];
 function diagram() {
   const p = $('plocha');
-  const cetnosti = [...Array(5)].map(() => Uloha.nahodneCislo(1, 9));
+  // nejčastější i nejméně častá známka musí být jediná – při shodě by bylo správných odpovědí víc
+  let cetnosti;
+  do { cetnosti = [...Array(5)].map(() => Uloha.nahodneCislo(1, 9)); }
+  while (cetnosti.filter(c => c === Math.max(...cetnosti)).length > 1 || cetnosti.filter(c => c === Math.min(...cetnosti)).length > 1);
   const celkem = cetnosti.reduce((s, x) => s + x, 0);
   const hodnoty = [];
   cetnosti.forEach((c, i) => { for (let k = 0; k < c; k++) hodnoty.push(i + 1); });
@@ -369,7 +395,10 @@ function odlehla() {
   } else if (otazka === 'oKolik') {
     zadani = `Jaký je průměr celého souboru? (zaokrouhli na dvě desetinná místa)`;
     spravny = fmt(prumerS);
-    jine = [fmt(prumerBez), fmt(medianS), fmt(odlehlaHodnota)];
+    // bez opakování (průměr bez odlehlé hodnoty může vyjít stejně jako medián); záloha = dělení o 1 menším počtem
+    const soucet = soubor.reduce((x, y) => x + y, 0);
+    jine = [...new Set([fmt(prumerBez), fmt(medianS), fmt(odlehlaHodnota), fmt(soucet / (soubor.length - 1))])]
+      .filter(x => x !== spravny).slice(0, 3);
   } else {
     zadani = 'Co se stane s průměrem, když ze souboru odstraníme nejvyšší hodnotu?';
     spravny = 'výrazně klesne';
@@ -378,8 +407,8 @@ function odlehla() {
 
   p.innerHTML = `<div class="zadani uloha-text">${zadani}</div>
     ${zobrazSoubor(soubor, odlehlaHodnota)}
-    <div class="uloha-text" style="color:var(--text-faint);font-size:0.85rem">
-      průměr se všemi hodnotami: ${fmt(prumerS)} · medián: ${fmt(medianS)}</div>`;
+    ${otazka === 'oKolik' ? '' : `<div class="uloha-text" style="color:var(--text-faint);font-size:0.85rem">
+      průměr se všemi hodnotami: ${fmt(prumerS)} · medián: ${fmt(medianS)}</div>`}`;
   const odezva = odezvaEl();
   Uloha.vyber({
     kam: p, odezva,

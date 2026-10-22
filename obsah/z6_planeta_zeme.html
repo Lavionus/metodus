@@ -6,6 +6,8 @@
   <title>Planeta Země – tvar a pohyby</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -24,6 +26,46 @@
 <body>
   <h1>🌎 Planeta Země – tvar a pohyby</h1>
   <p class="podtitul">Pro 6. ročník: otáčení a oběh Země, střídání dne a noci, roční období a časová pásma.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Dva pohyby Země a jejich důsledky</summary>
+    <div class="obsah">
+      <p>Země je koule mírně zploštělá na pólech (přesný tvar se nazývá <b>geoid</b>). Současně dělá
+        <b>dva různé pohyby</b> a každý z nich má jiné důsledky. Abys je nespletl, ptej se: trvá to
+        <b>jeden den</b>, nebo <b>celý rok</b>?</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>🔄 Otáčení (rotace)</h3><p>Země se otočí kolem své osy za <b>24 hodin</b>,
+          od západu na východ. Proto se střídá <b>den a noc</b>, Slunce zdánlivě putuje po obloze (vychází na východě)
+          a na Zemi jsou <b>časová pásma</b>.</p></article>
+        <article class="vyklad-karta"><h3>🛰️ Oběh (revoluce)</h3><p>Kolem Slunce oběhne Země za <b>365 dní a asi 6 hodin</b>.
+          Z těch 6 hodin se za 4 roky nastřádá jeden den – proto máme <b>přestupný rok</b>.</p></article>
+        <article class="vyklad-karta"><h3>📐 Sklon osy 23,5°</h3><p>Osa je při oběhu stále stejně nakloněná. Během roku proto
+          dostává víc slunce jednou severní, jindy jižní polokoule. Tak vznikají <b>roční období</b>, různě dlouhé dny
+          a <b>polární den a noc</b>.</p></article>
+      </div>
+      <p><b>Typická chyba:</b> myslet si, že v létě je Země blíž ke Slunci. Roční období způsobuje sklon osy, ne vzdálenost –
+        proto je v Austrálii léto, když je u nás zima.</p>
+      <p>Čtyři významné dny: <b>jarní rovnodennost</b> (kolem 20. března) a <b>podzimní rovnodennost</b> (kolem 22. září) –
+        den a noc jsou přibližně stejně dlouhé; <b>letní slunovrat</b> (kolem 21. června) – nejdelší den;
+        <b>zimní slunovrat</b> (kolem 21. prosince) – nejkratší den.</p>
+      <aside class="zapamatuj">Den → otáčení kolem osy (den a noc, časová pásma). Rok → oběh kolem Slunce
+        se skloněnou osou (roční období, polární den a noc, přestupný rok).</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: který pohyb to způsobuje</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Který pohyb Země způsobuje polární den a polární noc?</p>
+      <ol class="kroky">
+        <li>Zeptám se, jak dlouho jev trvá: polární den za polárním kruhem trvá i celé týdny až měsíce, ne jeden den.</li>
+        <li>Jev, který se mění během roku, souvisí s <b>oběhem kolem Slunce</b>, ne s otáčením za 24 hodin.</li>
+        <li>Ověřím příčinu: osa je nakloněná o 23,5°, takže v létě je severní pól stále natočený ke Slunci a nezapadá tam.</li>
+        <li>Na druhém pólu je v tu dobu naopak polární noc – to potvrzuje, že jde o sklon osy při oběhu.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Polární den a noc způsobuje oběh Země kolem Slunce (revoluce) spolu se sklonem osy.</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="pohyby" class="active">🔄 Který pohyb</button>
@@ -66,16 +108,19 @@ const DUSLEDKY = [
   { t: 'ráno vychází Slunce na východě', p: 'rotace' },
 ];
 
+/* Přesné datum se rok od roku posouvá o den (přestupné roky); u nás v tomto
+   století připadá jarní rovnodennost většinou na 20. března, podzimní na 22.–23. září. */
 const VYZNAMNE_DNY = [
-  { d: '21. březen', n: 'jarní rovnodennost', proc: 'den a noc jsou stejně dlouhé, začíná astronomické jaro' },
-  { d: '21. červen', n: 'letní slunovrat', proc: 'nejdelší den v roce, začíná astronomické léto' },
-  { d: '23. září', n: 'podzimní rovnodennost', proc: 'den a noc jsou opět stejně dlouhé, začíná podzim' },
-  { d: '21. prosinec', n: 'zimní slunovrat', proc: 'nejkratší den v roce, začíná astronomická zima' },
+  { d: 'kolem 20. března', n: 'jarní rovnodennost', proc: 'den a noc jsou přibližně stejně dlouhé, začíná astronomické jaro' },
+  { d: 'kolem 21. června', n: 'letní slunovrat', proc: 'nejdelší den v roce, začíná astronomické léto' },
+  { d: 'kolem 22. září', n: 'podzimní rovnodennost', proc: 'den a noc jsou opět přibližně stejně dlouhé, začíná astronomický podzim' },
+  { d: 'kolem 21. prosince', n: 'zimní slunovrat', proc: 'nejkratší den v roce, začíná astronomická zima' },
 ];
 
 const FAKTA = [
-  { o: 'Jaký tvar má Země?', spr: 'geoid – koule zploštělá na pólech',
-    jine: ['dokonalá koule', 'placka', 'krychle'] },
+  { o: 'Jaký tvar má Země?', spr: 'koule mírně zploštělá na pólech',
+    jine: ['dokonalá koule', 'placka', 'krychle'],
+    proc: 'přesný, trochu nepravidelný tvar Země se nazývá geoid' },
   { o: 'Jak dlouho trvá otočení Země kolem osy?', spr: '24 hodin',
     jine: ['365 dní', '12 hodin', '30 dní'] },
   { o: 'Jak dlouho trvá oběh Země kolem Slunce?', spr: '365 dní a 6 hodin',
@@ -151,7 +196,7 @@ function rovnodennost() {
   const podleData = Math.random() < 0.5;
   p.innerHTML = podleData
     ? `<div class="zadani">Co připadá na tento den?</div>
-       <div class="karta"><div class="obrazek">📅</div><div class="otazka-t">${u.d}</div></div>`
+       <div class="karta"><div class="obrazek">📅</div><div class="otazka-t">${u.d[0].toUpperCase() + u.d.slice(1)}</div></div>`
     : `<div class="zadani">Kdy nastává tento den?</div>
        <div class="karta"><div class="obrazek">🌗</div><div class="otazka-t">${u.n}</div></div>`;
   const odezva = document.createElement('div');
@@ -160,7 +205,7 @@ function rovnodennost() {
     kam: p, odezva,
     moznosti: Uloha.zamichej(VYZNAMNE_DNY).map(x => ({ klic: x.d, popis: podleData ? x.n : x.d })),
     spravnyKlic: u.d,
-    zpravaOk: `✅ ${u.d} – ${u.n}: ${u.proc}.`,
+    zpravaOk: `✅ ${u.d[0].toUpperCase() + u.d.slice(1)} – ${u.n}: ${u.proc}.`,
     zpravaChyba: 'Zkus jinou možnost – rovnodennosti jsou na jaře a na podzim.',
     poSpravne: skore.vyhodnot,
     dalsi: novaUloha,
@@ -180,7 +225,7 @@ function fakta() {
     kam: p, odezva,
     moznosti: Uloha.zamichej([u.spr, ...u.jine]).map(t => ({ klic: t, popis: t })),
     spravnyKlic: u.spr,
-    zpravaOk: `✅ ${u.spr}.`,
+    zpravaOk: `✅ ${u.spr}` + (u.proc ? ` – ${u.proc}.` : '.'),
     zpravaChyba: 'Zkus jinou možnost.',
     poSpravne: skore.vyhodnot,
     dalsi: novaUloha,

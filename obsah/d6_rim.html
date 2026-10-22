@@ -6,6 +6,8 @@
   <title>Starověký Řím</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -43,6 +45,46 @@
 <body>
   <h1>🏟️ Starověký Řím</h1>
   <p class="podtitul">Pro 6.–7. ročník: od království přes republiku k císařství, stavitelství a vznik křesťanství.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Tři období římských dějin</summary>
+    <div class="obsah">
+      <p>Římské dějiny trvaly přes tisíc let. Abys v nich neztratil přehled, rozděl si je podle toho,
+        <b>kdo vládl</b>. To je otázka, kterou si u každé události polož jako první.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Království</h3><p>Podle pověsti založili Řím roku <b>753 př. n. l.</b>
+          bratři <b>Romulus a Remus</b>. Vládli králové.</p></article>
+        <article class="vyklad-karta"><h3>Republika</h3><p>Od roku <b>509 př. n. l.</b> stáli v čele dva volení
+          <b>konzulové</b> a <b>senát</b>. Konec přinesly občanské války; <b>Caesar</b> byl zavražděn 44 př. n. l.</p></article>
+        <article class="vyklad-karta"><h3>Císařství</h3><p>Roku <b>27 př. n. l.</b> se <b>Octavianus Augustus</b> stal
+          prvním císařem. Západořímská říše zanikla <b>476 n. l.</b> – tím končí starověk.</p></article>
+      </div>
+      <p>Římané byli skvělí <b>stavitelé</b>: akvadukty přiváděly vodu do měst, silnice spojovaly celou říši,
+        v Koloseu bojovali gladiátoři. Jejich jazyk <b>latina</b> je základem románských jazyků. V době císařství
+        se šířilo <b>křesťanství</b>; dlouho bylo pronásledované, až je roku <b>313</b> povolil Konstantin
+        Veliký milánským ediktem.</p>
+      <p>Typická chyba je u přelomu letopočtu: <b>před naším letopočtem</b> je dřív větší číslo,
+        <b>v našem letopočtu</b> menší číslo. Proto 44 př. n. l. bylo dřív než 27 př. n. l.</p>
+      <aside class="zapamatuj">Království → republika (konzulové, senát) → císařství (od Augusta). Konec západořímské
+        říše 476 = konec starověku.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: seřaď události přes přelom letopočtu</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Seřaď od nejstarší: milánský edikt (313 n. l.), zavraždění Caesara (44 př. n. l.),
+        vznik republiky (509 př. n. l.), zánik západořímské říše (476 n. l.).</p>
+      <ol class="kroky">
+        <li>Rozdělím události na dvě skupiny: <b>před naším letopočtem</b> (509, 44) a <b>v našem letopočtu</b> (313, 476).
+          Všechno „před“ bylo dřív než všechno „v našem“.</li>
+        <li>Před naším letopočtem je dřív větší číslo: nejdřív <b>vznik republiky (509)</b>, potom <b>Caesar (44)</b>.</li>
+        <li>V našem letopočtu je dřív menší číslo: nejdřív <b>milánský edikt (313)</b>, potom <b>zánik západořímské říše (476)</b>.</li>
+        <li>Kontrola smyslem: republika vznikla dřív, než Caesar žil, a konec říše patří až na úplný konec.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ vznik republiky (509 př. n. l.) → Caesar (44 př. n. l.) → milánský edikt (313) → zánik západořímské říše (476)</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="osobnosti" class="active">👤 Kdo to byl</button>
@@ -302,7 +344,7 @@ function fotky() {
   const u = Uloha.nahodne(FOTKY);
   const jine = Uloha.zamichej(FOTKY.filter(x => x.n !== u.n)).slice(0, 3);
   p.innerHTML = `<div class="zadani">Co je na fotografii?</div>
-    <div class="karta"><img class="foto-ukol" src="${u.img.getAttribute('src')}" alt="${u.img.alt.replace(/"/g, '&quot;')}"
+    <div class="karta"><img class="foto-ukol" src="${u.img.getAttribute('src')}" alt="Fotografie k určení."
       width="${u.img.getAttribute('width')}" height="${u.img.getAttribute('height')}"></div>`;
   const odezva = document.createElement('div');
   odezva.className = 'odezva';

@@ -6,6 +6,8 @@
   <title>Obyvatelstvo a sídla světa</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -30,6 +32,44 @@
   <h1>👥 Obyvatelstvo a sídla světa</h1>
   <p class="podtitul">Pro 9. ročník: rozmístění obyvatel, růst populace, migrace a města.</p>
 
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Kolik nás je, kde žijeme a proč se stěhujeme</summary>
+    <div class="obsah">
+      <p>Podle OSN žilo na Zemi v roce 2024 přes <b>8 miliard</b> lidí. Rozmístěni jsou velmi nerovnoměrně: nejvíc jich
+        žije v <b>jižní a východní Asii</b>, v nížinách u řek a na pobřeží. Pouště, polární oblasti a vysoké hory jsou
+        téměř prázdné – chybí voda, teplo nebo úrodná půda.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Přirozený přírůstek</h3><p><b>Narození − zemřelí.</b> Je-li kladný, obyvatel přibývá.
+          Nejrychleji dnes roste <b>subsaharská Afrika</b>; v Evropě se rodí méně dětí a obyvatelstvo <b>stárne</b>.</p></article>
+        <article class="vyklad-karta"><h3>Věková pyramida</h3><p>Graf počtu lidí podle věku. <b>Široký základ</b> = hodně dětí
+          (rozvojová země). <b>Úzký základ</b> a širší horní část = málo dětí, hodně seniorů (vyspělá země).</p></article>
+        <article class="vyklad-karta"><h3>Migrace</h3><p>Stěhování lidí. <b>Emigrace</b> = vystěhování ze země, <b>imigrace</b> = přistěhování.
+          Pracovní migrant hledá lepší práci; <b>uprchlík</b> utíká před válkou nebo pronásledováním.</p></article>
+      </div>
+      <p>Stále víc lidí žije ve městech – to je <b>urbanizace</b>. Velké město srostlé s okolními sídly tvoří <b>aglomeraci</b>.
+        Když lidé z venkova přicházejí rychleji, než se stihne postavit bydlení, vznikají na okrajích <b>slumy</b>.
+        Ve vyspělých zemích se naopak lidé stěhují z center na předměstí (<b>suburbanizace</b>).</p>
+      <p><b>Typická chyba:</b> zaměnit počet obyvatel a hustotu zalidnění. Hustota je počet obyvatel na 1 km² –
+        velký stát může mít hodně lidí, a přesto malou hustotu.</p>
+      <aside class="zapamatuj">Přirozený přírůstek = narození − zemřelí. Široký základ pyramidy = mladá, rostoucí populace;
+        úzký základ = stárnoucí populace. Urbanizace = růst měst.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: čtení věkové pyramidy</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Věková pyramida má velmi široký základ a směrem nahoru se rychle zužuje do úzké špičky. Jakou zemi spíš popisuje – rozvojovou, nebo vyspělou?</p>
+      <ol class="kroky">
+        <li>Vím, že dole jsou nejmladší, nahoře nejstarší lidé.</li>
+        <li>Široký základ znamená, že je v zemi hodně dětí – rodí se hodně dětí.</li>
+        <li>Rychlé zužování nahoru ukazuje, že se méně lidí dožívá vysokého věku.</li>
+        <li>Hodně dětí a málo seniorů je typické pro rozvojové země s vysokou porodností; vyspělá země by měla úzký základ.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Pyramida popisuje rozvojovou zemi s rychle rostoucí, mladou populací.</p>
+    </div>
+  </details>
+
   <div class="rezimy" id="rezimy">
     <button data-rezim="mapa1" class="active">🗺️ Oblasti zalidnění</button>
     <button data-rezim="mapa2">🏙️ Velkoměsta světa</button>
@@ -45,12 +85,17 @@
     <span class="skore" id="skore"></span>
   </div>
 
-  <p class="napoveda">Na Zemi žije přes <b>8 miliard</b> lidí, ale rozmístěni jsou velmi nerovnoměrně – nejhustěji je osídlena <b>jižní a východní Asie</b>. Roste podíl lidí žijících ve městech (<b>urbanizace</b>) a zvyšuje se počet <b>aglomerací</b> nad 10 milionů obyvatel.</p>
+  <p class="napoveda">Na Zemi žije přes <b>8 miliard</b> lidí (OSN, 2024), ale rozmístěni jsou velmi nerovnoměrně – nejhustěji je osídlena <b>jižní a východní Asie</b>. Roste podíl lidí žijících ve městech (<b>urbanizace</b>) a zvyšuje se počet <b>aglomerací</b> nad 10 milionů obyvatel.</p>
 
   <section class="foto-atlas" aria-labelledby="sidlaNadpis">
     <h2 id="sidlaNadpis">Jak lidé bydlí v různých částech světa</h2>
     <p>Čtyři sídla, čtyři způsoby života. Všímej si stavebního materiálu, hustoty zástavby a toho, kolik místa připadá na jednoho člověka.</p>
-    <div class="foto-mrizka" id="sidlaAtlas"></div>
+    <div class="foto-mrizka" id="sidlaAtlas">
+      <figure class="foto-karta"><img src="img/z/z9-obyvatelstvo-sahel-vesnice.webp" alt="Vesnice v Čadu s kulatými chýšemi s kuželovými doškovými střechami mezi řídkými stromy na suché písčité zemi." width="1152" height="647" loading="lazy"><figcaption><strong>Vesnice v Sahelu</strong>Kulaté chýše z hlíny s doškovými střechami rozptýlené v suché savaně (na snímku Čad); lidé žijí hlavně z pastevectví a pěstování prosa.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/z/z9-obyvatelstvo-bombaj.webp" alt="Chatrče slumu z plechu a plachet v Bombaji, za zálivem v pozadí řada mrakodrapů." width="1152" height="864" loading="lazy"><figcaption><strong>Bombaj – slum a mrakodrapy</strong>Nouzové chatrče těsně vedle výškových budov; rychlá urbanizace – lidé z venkova přicházejí za prací rychleji, než stihne vzniknout bydlení.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/z/z9-obyvatelstvo-predmesti-usa.webp" alt="Letecký pohled na americké předměstí v Nevadě: stovky podobných rodinných domů podél zakřivených ulic." width="1152" height="822" loading="lazy"><figcaption><strong>Předměstí v USA</strong>Rodinné domy se zahradou a často i bazénem podél tichých ulic daleko od centra; suburbanizace – do práce a do obchodu se jezdí autem.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/z/z9-obyvatelstvo-evropske-centrum.webp" alt="Historické centrum Českého Krumlova: hustá zástavba starých domů s červenými střechami v ohbí Vltavy a nad ní zámek." width="1152" height="559" loading="lazy"><figcaption><strong>Historické centrum evropského města</strong>Hustá zástavba starých domů s úzkými ulicemi kolem náměstí, kostela a zámku (na snímku Český Krumlov); jádro města rostlo po staletí.</figcaption></figure>
+    </div>
   </section>
 
 <script>
@@ -124,7 +169,7 @@ const SADA2 = [
     "popis": "Tokio",
     "lon": 139.7,
     "lat": 35.7,
-    "info": "největší aglomerace světa, přes 35 milionů lidí"
+    "info": "jedna z největších aglomerací světa, přes 30 milionů lidí (OSN, 2025)"
   },
   {
     "klic": "dilli",
@@ -350,16 +395,17 @@ const KVIZ2 = [
 ];
 
 const SIDLA = [
-  { n: 'vesnice v Sahelu', img: 'z9-obyvatelstvo-sahel-vesnice', w: 0, h: 0, alt: '',
-    o: 'nízké domy z hlíny a slámy rozptýlené v suché savaně; lidé žijí hlavně z pastevectví a pěstování prosa' },
-  { n: 'Bombaj – slum a mrakodrapy', img: 'z9-obyvatelstvo-bombaj', w: 0, h: 0, alt: '',
+  { n: 'vesnice v Sahelu', img: 'z9-obyvatelstvo-sahel-vesnice', w: 1152, h: 647, alt: 'Vesnice v Čadu s kulatými chýšemi s kuželovými doškovými střechami mezi řídkými stromy na suché písčité zemi.',
+    o: 'kulaté chýše z hlíny s doškovými střechami rozptýlené v suché savaně (na snímku Čad); lidé žijí hlavně z pastevectví a pěstování prosa' },
+  { n: 'Bombaj – slum a mrakodrapy', img: 'z9-obyvatelstvo-bombaj', w: 1152, h: 864, alt: 'Chatrče slumu z plechu a plachet v Bombaji, za zálivem v pozadí řada mrakodrapů.',
     o: 'nouzové chatrče těsně vedle výškových budov; rychlá urbanizace – lidé z venkova přicházejí za prací rychleji, než stihne vzniknout bydlení' },
-  { n: 'předměstí v USA', img: 'z9-obyvatelstvo-predmesti-usa', w: 0, h: 0, alt: '',
-    o: 'rodinné domy se zahradou v pravidelných ulicích daleko od centra; suburbanizace – do práce a do obchodu se jezdí autem' },
-  { n: 'historické centrum evropského města', img: 'z9-obyvatelstvo-evropske-centrum', w: 0, h: 0, alt: '',
-    o: 'hustá zástavba starých domů kolem náměstí a kostela, úzké ulice; jádro města rostlo po staletí' },
+  { n: 'předměstí v USA', img: 'z9-obyvatelstvo-predmesti-usa', w: 1152, h: 822, alt: 'Letecký pohled na americké předměstí v Nevadě: stovky podobných rodinných domů podél zakřivených ulic.',
+    o: 'rodinné domy se zahradou a často i bazénem podél tichých ulic daleko od centra; suburbanizace – do práce a do obchodu se jezdí autem' },
+  { n: 'historické centrum evropského města', img: 'z9-obyvatelstvo-evropske-centrum', w: 1152, h: 559, alt: 'Historické centrum Českého Krumlova: hustá zástavba starých domů s červenými střechami v ohbí Vltavy a nad ní zámek.',
+    o: 'hustá zástavba starých domů s úzkými ulicemi kolem náměstí, kostela a zámku (na snímku Český Krumlov); jádro města rostlo po staletí' },
 ];
-const fotoSidlo = (x, trida) => `<img class="${trida}" src="img/z/${x.img}.webp" alt="${x.alt}" width="${x.w}" height="${x.h}">`;
+// Fotka je sama otázkou – alt nesmí prozradit odpověď.
+const fotoSidlo = (x, trida) => `<img class="${trida}" src="img/z/${x.img}.webp" alt="Fotografie sídla k určení." width="${x.w}" height="${x.h}">`;
 function foto() {
   const p = $('plocha');
   const u = Uloha.nahodne(SIDLA);

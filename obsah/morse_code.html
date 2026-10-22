@@ -105,12 +105,19 @@ function play(){
   const wpm=+$('wpm').value;const dot=1200/wpm; // ms
   const freq=+$('freq').value;
   let t=audioCtx.currentTime;const seq=[];
-  for(const ch of morse){
-    if(ch==='.'){seq.push([t,dot]);t+=dot/1000;t+=dot/1000;}
-    else if(ch==='-'){seq.push([t,dot*3]);t+=dot*3/1000;t+=dot/1000;}
-    else if(ch===' ')t+=dot*2/1000;
-    else if(ch==='/')t+=dot*4/1000;
-  }
+  // Mezery podle normy: mezi značkami 1 jednotka, mezi písmeny 3, mezi slovy 7.
+  const u=dot/1000;
+  morse.split(/\s*[\/\n]\s*/).map(w=>w.trim()).filter(Boolean).forEach((slovo,wi)=>{
+    if(wi>0)t+=7*u;
+    slovo.split(/\s+/).forEach((pismeno,li)=>{
+      if(li>0)t+=3*u;
+      [...pismeno].filter(z=>z==='.'||z==='-').forEach((z,si)=>{
+        if(si>0)t+=u;
+        const delka=z==='.'?1:3;
+        seq.push([t,dot*delka]);t+=delka*u;
+      });
+    });
+  });
   seq.forEach(([start,dur])=>{
     const o=audioCtx.createOscillator(),g=audioCtx.createGain();
     o.frequency.value=freq;o.connect(g);g.connect(audioCtx.destination);

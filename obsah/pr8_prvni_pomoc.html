@@ -6,6 +6,8 @@
   <title>Zdraví a první pomoc</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -36,6 +38,51 @@
 <body>
   <h1>🚑 Zdraví a první pomoc</h1>
   <p class="podtitul">Pro 8. ročník: tísňová volání, postup při úrazech a základy resuscitace.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Jak postupovat při první pomoci</summary>
+    <div class="obsah">
+      <p>První pomoc nemusí být dokonalá, ale musí přijít včas. Nejhorší je neudělat nic. Zároveň platí, že
+        <b>nesmíš se sám stát dalším zraněným</b> – proto vždy začínáš kontrolou bezpečnosti místa
+        (provoz, oheň, elektřina, voda).</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Tísňová čísla</h3><p><b>155</b> záchranná služba, <b>150</b> hasiči (oheň, plyn),
+          <b>158</b> policie, <b>112</b> jednotné evropské číslo. Volání je zdarma.</p></article>
+        <article class="vyklad-karta"><h3>Co říct operátorovi</h3><p><b>Co se stalo, kde to je, kolik je zraněných</b> a své jméno.
+          Zapni hlasitý odposlech, řiď se pokyny a hovor nech ukončit operátora.</p></article>
+        <article class="vyklad-karta"><h3>Vědomí a dýchání</h3><p>Hlasitě oslov, jemně zatřes rameny. Zakloň hlavu, zvedni bradu a
+          <b>nejvýše 10 sekund</b> sleduj, jestli dýchá <b>normálně</b>.</p></article>
+        <article class="vyklad-karta"><h3>Resuscitace</h3><p>Nereaguje a nedýchá normálně → volej 155 a hned stlačuj
+          <b>střed hrudní kosti</b>, hloubka <b>5–6 cm</b>, tempo <b>100–120 za minutu</b>. Vdechy jen pokud je umíš (30 : 2),
+          jinak stlačuj bez přestávek.</p></article>
+      </div>
+      <p><b>Typická chyba:</b> považovat ojedinělé lapavé nádechy za dýchání. Pokud si nejsi jistý, že dýchá normálně,
+        jednej, jako by nedýchal, a řiď se operátorem. Když někdo přinese <b>AED</b>, zapni ho a poslouchej jeho pokyny;
+        smí ho použít kdokoli. Kdo nereaguje, ale normálně dýchá a není podezření na úraz, ulož ho <b>na bok</b>
+        a dýchání dál sleduj.</p>
+      <p>U úrazů nejdřív zabraň zhoršení: krvácení zastav <b>tlakem čistého krytí přímo na ránu</b>, popáleninu
+        <b>chlaď tekoucí chladnou vodou 20 minut</b>, zlomeninu nenarovnávej, jen znehybni v poloze, v jaké je.</p>
+      <aside class="zapamatuj">Bezpečnost → reakce → dýchání → 155 → pomoc podle stavu → zůstaň u postiženého.
+        Nedýchá normálně = stlačuj hrudník 100–120× za minutu do příjezdu záchranky.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: spolužák leží a nereaguje</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Na chodbě leží spolužák. Na oslovení nereaguje. Co uděláš a v jakém pořadí?</p>
+      <ol class="kroky">
+        <li>Rozhlédnu se, jestli mi nic nehrozí (třeba kluzká podlaha, rozbité sklo). Teprve pak jdu k němu.</li>
+        <li>Hlasitě ho oslovím a jemně zatřesu rameny – nereaguje. Zavolám na okolí o pomoc.</li>
+        <li>Zakloním mu hlavu, zvednu bradu a nejvýše 10 sekund sleduji, jestli <b>dýchá normálně</b>.</li>
+        <li>Volám <b>155</b> (nebo 112) na hlasitý odposlech a řeknu, co se stalo, kde jsme a že nereaguje.</li>
+        <li>Když nedýchá normálně, hned stlačuji střed hrudní kosti 100–120× za minutu a někoho pošlu pro AED.
+          Když dýchá normálně a nejde o úraz, uložím ho na bok a dýchání sleduji.</li>
+        <li>Zůstanu u něj a řídím se pokyny operátora, dokud mě nevystřídá záchranář.</li>
+      </ol>
+      <p class="vysledek-ukazky">Bezpečnost → reakce → dýchání → 155 → stlačování hrudníku (nebo poloha na boku) → zůstat u postiženého do příjezdu záchranky.</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="tisnova" class="active">📞 Tísňová volání</button>
@@ -114,26 +161,28 @@ function tisnova() {
 
 const SITUACE = [
   { s: 'Kamarád má hluboce pořezanou ruku a silně krvácí.',
-    a: 'přitlačit čisté krytí přímo na ránu a přivolat záchrannou službu', b: ['omýt ránu v potoce', 'ránu vysušit fénem', 'dát ruku do teplé vody'],
+    a: 'přitlačit čisté krytí přímo na ránu a přivolat záchrannou službu', b: ['omýt ránu v potoce a nechat ji volně krvácet', 'ránu vysušit fénem a pak ji zalepit náplastí', 'ponořit ruku do teplé vody, aby se krev rozředila'],
     img: 'krvaceni', alt: 'Pomocník v rukavicích tlačí čisté krytí na poraněné předloktí.' },
   { s: 'Někdo si opařil ruku horkou vodou.',
-    a: 'chladit popáleninu tekoucí chladnou vodou 20 minut', b: ['potřít máslem', 'propíchnout puchýře', 'zabalit do deky a zahřát'],
+    a: 'chladit popáleninu tekoucí chladnou vodou 20 minut', b: ['potřít popáleninu máslem nebo sádlem', 'propíchnout puchýře a nechat je oschnout', 'zabalit ruku do deky a zahřát ji'],
     img: 'popalenina', alt: 'Zarudlé předloktí se chladí proudem vody z kohoutku.' },
   { s: 'Člověk leží v bezvědomí, ale normálně dýchá.',
-    a: 'pokud není podezření na úraz, uložit ho na bok, volat 155 a sledovat dýchání', b: ['posadit ho', 'dát mu napít', 'zahájit stlačování hrudníku'],
+    a: 'pokud není podezření na úraz, uložit ho na bok, volat 155 a sledovat dýchání', b: ['posadit ho opřeného o zeď, dát mu facku a čekat, až se probere', 'dát mu napít vody, přidržet mu hlavu a pak ho nechat odpočívat', 'hned zahájit stlačování hrudníku, i když dýchá úplně normálně'],
     img: 'poloha', alt: 'Normálně dýchající člověk je uložený ve stabilní poloze na boku.' },
   { s: 'Kamarádka má podezření na zlomeninu nohy.',
-    a: 'znehybnit končetinu v poloze, v jaké je, a volat pomoc', b: ['zkusit kost narovnat', 'nechat ji chodit', 'natáhnout nohu silou'] },
-  { s: 'Někdo se dusí soustem a nemůže mluvit.',
-    a: 'předklonit ho a udeřit pětkrát mezi lopatky', b: ['dát mu napít', 'poplácat po tváři', 'čekat, až to přejde'] },
+    a: 'znehybnit končetinu v poloze, v jaké je, a volat pomoc', b: ['zkusit kost opatrně narovnat do správné polohy', 'nechat ji chodit, aby noha neztuhla', 'natáhnout nohu silou a pevně ji obvázat'] },
+  { s: 'Někdo se dusí soustem, nemůže mluvit ani kašlat.',
+    a: 'předklonit ho, 5× udeřit mezi lopatky, pak 5× Heimlichův manévr a střídat', b: ['dát mu rychle napít vody, aby sousto spláchl, a pak chvíli počkat', 'poplácat ho po tváři a říct mu, ať se pomalu a zhluboka nadechne', 'položit ho na záda, zvednout mu nohy a čekat, až sousto vyjde'] },
+  { s: 'Dusící se člověk přestane reagovat a upadne do bezvědomí.',
+    a: 'opatrně ho položit na zem, volat 155 a zahájit stlačování hrudníku', b: ['dál ho jen bouchat do zad, dokud se neprobere', 'uložit ho na bok a odejít pro pomoc ke kamarádům', 'posadit ho a pokusit se mu prsty vytáhnout sousto'] },
   { s: 'Člověka bodla vosa a rychle mu otéká obličej.',
-    a: 'okamžitě volat 155, může jít o alergickou reakci', b: ['dát studený obklad a jít domů', 'vypít teplý čaj', 'nechat ho lehnout na břicho'] },
+    a: 'okamžitě volat 155, může jít o alergickou reakci', b: ['dát studený obklad a poslat ho domů', 'uvařit mu teplý čaj a počkat, až to splaskne', 'nechat ho lehnout na břicho a odpočinout si'] },
   { s: 'Spolužák omdlel, ale za chvíli se probral.',
-    a: 'nechat ho ležet, zvednout mu nohy a informovat dospělého', b: ['posadit ho a dát mu kávu', 'polít ho studenou vodou', 'poslat ho domů samotného'] },
+    a: 'nechat ho ležet, zvednout mu nohy a informovat dospělého', b: ['posadit ho a dát mu silnou kávu', 'polít ho studenou vodou, aby se vzpamatoval', 'hned ho poslat domů samotného pěšky'] },
   { s: 'Vidíš tonoucího ve vodě, sám plaveš průměrně.',
-    a: 'volat pomoc a podat mu předmět nebo hodit plovací pomůcku ze břehu', b: ['okamžitě skočit za ním', 'čekat, až vyplave', 'jít pro rodiče domů'] },
+    a: 'volat pomoc a podat mu předmět nebo hodit plovací pomůcku ze břehu', b: ['okamžitě skočit do vody za ním a sám ho doplavat a vytáhnout', 'čekat na břehu a dívat se, jestli nakonec vyplave sám', 'utíkat domů pro rodiče a do té doby nikomu nevolat'] },
   { s: 'Někdo má úpal – je mu horko, točí se mu hlava.',
-    a: 'přemístit do stínu, chladit a dát pít po malých doušcích', b: ['dát ho na slunce', 'dát mu horký čaj', 'zabalit do teplé deky'] },
+    a: 'přemístit do stínu, chladit a dát pít po malých doušcích', b: ['nechat ho na slunci, ať se zahřeje a zpotí', 'dát mu horký čaj a vypít ho naráz', 'zabalit ho do teplé deky a uložit'] },
 ];
 function situace() {
   const p = $('plocha');
@@ -158,7 +207,7 @@ const POSTUP = [
   { t: 'zjisti, jestli postižený reaguje', info: 'hlasitě ho oslov a jemně zatřes rameny', img: 'reakce', alt: 'Pomocník hlasitě oslovuje člověka a kontroluje jeho reakci dotykem ramen.' },
   { t: 'zprůchodni dýchací cesty a zjisti dýchání', info: 'zakloň hlavu, zvedni bradu a nejvýše 10 sekund sleduj normální dýchání', img: 'dychani', alt: 'Pomocník po záklonu hlavy sleduje dýchání člověka.' },
   { t: 'zavolej 155 (nebo 112)', info: 'zapni hlasitý odposlech a řiď se pokyny operátora', img: 'volani', alt: 'Pomocník telefonuje na hlasitý odposlech a zapojuje dalšího svědka.' },
-  { t: 'poskytni první pomoc podle stavu', info: 'při nenormálním dýchání ihned zahaj stlačování hrudníku', img: 'stlacovani', alt: 'Pomocnice správně stlačuje hrudník dospělého na pevné podložce.' },
+  { t: 'poskytni první pomoc podle stavu', info: 'při nenormálním dýchání ihned zahaj stlačování hrudníku a nech někoho přinést AED', img: 'stlacovani', alt: 'Pomocnice správně stlačuje hrudník dospělého na pevné podložce.' },
   { t: 'zůstaň u postiženého do příjezdu záchranky', info: 'sleduj jeho stav a řiď se pokyny operátora', img: 'poloha', alt: 'Pomocnice sleduje dýchání člověka uloženého na boku.' },
 ];
 function postup() {
@@ -208,14 +257,15 @@ function postup() {
 }
 
 const RESUSCITACE = [
-  { q: 'Kdy zahájíš resuscitaci?', a: 'když postižený nereaguje a nedýchá normálně', b: ['vždy při bezvědomí, i když dýchá', 'když má zlomeninu', 'když silně krvácí'] },
-  { q: 'Kam tlačíš při stlačování hrudníku dospělého?', a: 'doprostřed hrudní kosti', b: ['na levou stranu hrudi', 'na břicho', 'na krk'] },
-  { q: 'Jak hluboko se stlačuje hrudník dospělého?', a: 'asi 5–6 cm', b: ['1 cm', '10 cm', 'jen lehce se dotknout'] },
-  { q: 'Jaké je doporučené tempo stlačování?', a: 'asi 100–120 stlačení za minutu', b: ['30 za minutu', '200 za minutu', 'co nejpomaleji'] },
+  { q: 'Kdy zahájíš resuscitaci?', a: 'když postižený nereaguje a nedýchá normálně', b: ['vždy při bezvědomí, i když normálně dýchá', 'když má postižený zlomenou nohu nebo ruku', 'když silně krvácí, ale je při vědomí'] },
+  { q: 'Kam tlačíš při stlačování hrudníku dospělého?', a: 'doprostřed hrudní kosti', b: ['na levou stranu hrudi k srdci', 'na břicho pod žebry', 'na krk pod bradou'] },
+  { q: 'Jak hluboko se stlačuje hrudník dospělého?', a: 'asi 5–6 cm', b: ['asi 1–2 cm', 'asi 10–12 cm', 'jen lehce se dotknout'] },
+  { q: 'Jaké je doporučené tempo stlačování?', a: 'asi 100–120 stlačení za minutu', b: ['asi 30–40 stlačení za minutu', 'asi 200–220 stlačení za minutu', 'co nejpomaleji, ať se neunavíš'] },
   { q: 'Jaký je poměr stlačení a vdechů, pokud dýchání provádíš?', a: '30 stlačení a 2 vdechy', b: ['5 stlačení a 5 vdechů', '2 stlačení a 30 vdechů', '10 stlačení a 1 vdech'] },
-  { q: 'Co dělat, když si nejsi jistý umělým dýcháním?', a: 'stlačovat hrudník bez přestávek – i to výrazně pomáhá', b: ['nedělat nic', 'čekat na záchranku bez pomoci', 'jen postiženého přikrýt'] },
-  { q: 'Kdy resuscitaci ukončíš?', a: 'až tě vystřídá záchranář, nebo se postižený probere', b: ['po pěti minutách', 'když se unavíš při prvních stlačeních', 'jakmile zavoláš 155'] },
-  { q: 'K čemu slouží AED (automatizovaný externí defibrilátor)?', a: 'sám vyhodnotí rytmus a navede tě hlasem, co dělat', b: ['měří teplotu', 'nahradí volání 155', 'používá ho jen lékař'] },
+  { q: 'Co dělat, když si nejsi jistý umělým dýcháním?', a: 'stlačovat hrudník bez přestávek – i to výrazně pomáhá', b: ['nedělat nic, abys postiženému neublížil', 'čekat na záchranku a postiženého se nedotýkat', 'jen postiženého přikrýt dekou a hlídat ho'] },
+  { q: 'Kdy resuscitaci ukončíš?', a: 'až tě vystřídá záchranář, nebo se postižený probere', b: ['vždy po pěti minutách, i když záchranka nedorazila', 'když se unavíš už při prvních stlačeních', 'hned, jakmile dovoláš na číslo 155'] },
+  { q: 'K čemu slouží AED (automatizovaný externí defibrilátor)?', a: 'sám vyhodnotí srdeční rytmus a hlasem tě navede, co dělat', b: ['změří tělesnou teplotu a tlak postiženého', 'nahradí volání 155, záchranku pak volat nemusíš', 'smí ho použít jen lékař nebo záchranář'] },
+  { q: 'Během resuscitace někdo přinese AED. Co uděláš?', a: 'zapnout ho, nalepit elektrody podle obrázku a řídit se jeho pokyny', b: ['nechat ho stranou, dokud nepřijede záchranka', 'přestat stlačovat a čekat, až se postižený probere', 'nejdřív si přečíst celý návod a pak se rozhodnout'] },
 ];
 function resuscitace() {
   const p = $('plocha');

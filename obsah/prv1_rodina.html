@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Rodina a domov</title>
   <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -99,6 +101,38 @@
   <h1>👨‍👩‍👧 Rodina a domov</h1>
   <p class="podtitul">Pro 1.–2. ročník: kdo do rodiny patří, jak si říkáme a co se kde doma dělá.</p>
 
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Kdo patří do rodiny</summary>
+    <div class="obsah">
+      <p>Rodina jsou lidé, kteří k sobě patří a starají se o sebe. Každá rodina je trochu jiná. Někde žije víc lidí,
+        někde méně. To je v pořádku.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>👵 Prarodiče</h3><p>Rodiče maminky a tatínka. Maminka maminky je <b>babička</b>, tatínek tatínka je <b>dědeček</b>.</p></article>
+        <article class="vyklad-karta"><h3>👩 Rodiče</h3><p><b>Maminka</b> a <b>tatínek</b>. Sestra rodiče je <b>teta</b>, bratr rodiče je <b>strýc</b>.</p></article>
+        <article class="vyklad-karta"><h3>👦 Děti</h3><p>Děti stejných rodičů jsou <b>sourozenci</b>: bratr a sestra. Děti tety a strýce jsou <b>bratranec</b> a <b>sestřenice</b>.</p></article>
+      </div>
+      <p><b>Rodokmen</b> je obrázek rodiny. Nahoře jsou prarodiče. Uprostřed jsou rodiče, teta a strýc. Dole jsou děti.
+        Kdo je výš, je starší.</p>
+      <p>Doma má každá místnost svou práci. V <b>kuchyni</b> se vaří. V <b>ložnici</b> se spí. V <b>koupelně</b> se myjeme.
+        V <b>obýváku</b> spolu odpočíváme. V <b>předsíni</b> se zouváme a věšíme bundu.</p>
+      <aside class="zapamatuj">Rodiče maminky a tatínka jsou babička a dědeček. Sestra rodiče je teta, bratr rodiče je strýc.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: Kdo je kdo?</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Syn tvého strýce je tvůj… kdo?</p>
+      <ol class="kroky">
+        <li>Strýc je bratr maminky nebo tatínka.</li>
+        <li>Jeho syn je dítě, stejně jako ty. V rodokmenu je dole, vedle tebe.</li>
+        <li>Nemáte ale stejné rodiče. Není to tedy bratr.</li>
+        <li>Syn strýce nebo tety je <b>bratranec</b>.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Syn tvého strýce je tvůj <b>bratranec</b>.</p>
+    </div>
+  </details>
+
   <div class="rezimy" id="rezimy">
     <button data-rezim="rodokmen" class="active">🌳 Rodokmen</button>
     <button data-rezim="vztahy">❓ Kdo je kdo</button>
@@ -149,9 +183,9 @@ const PATRA = [
 const VZTAHY = [
   { e: '👵', o: 'Maminka tvojí maminky je tvoje…', s: 'babicka' },
   { e: '👴', o: 'Tatínek tvojí maminky je tvůj…', s: 'dedecek' },
-  { e: '👩', o: 'Dcera tvojí babičky může být tvoje…', s: 'maminka' },
-  { e: '👧', o: 'Holčička, která má stejné rodiče jako ty, je tvoje…', s: 'sestra' },
-  { e: '👦', o: 'Chlapec, který má stejné rodiče jako ty, je tvůj…', s: 'bratr' },
+  { e: '👩', o: 'Dcera tvojí babičky může být tvoje…', s: 'maminka', taky: ['teta'] },
+  { e: '👧', o: 'Holčička, která má stejné rodiče jako ty, je tvoje…', s: 'sestra', taky: ['mladsi'] },
+  { e: '👦', o: 'Chlapec, který má stejné rodiče jako ty, je tvůj…', s: 'bratr', taky: ['mladsi'] },
   { e: '👩‍🦰', o: 'Sestra tvojí maminky je tvoje…', s: 'teta' },
   { e: '🧔', o: 'Bratr tvého tatínka je tvůj…', s: 'stryc' },
   { e: '👧', o: 'Dcera tvojí tety je tvoje…', s: 'sestrenice' },
@@ -348,10 +382,11 @@ function tlacitkovaUloha(zadaniHtml, volby, spravnyKlic, popisSpravne) {
 function vztahy() {
   const v = nahodne(VZTAHY);
   cteniZadani = v.o;
-  const jine = zamichej(Object.keys(OSOBY).filter(k => k !== v.s)).slice(0, 3);
+  // rušivá možnost nesmí být také správně (dcera babičky může být i teta, sestra i mladší sourozenec)
+  const jine = zamichej(Object.keys(OSOBY).filter(k => k !== v.s && !(v.taky || []).includes(k))).slice(0, 3);
   const volby = zamichej([v.s, ...jine]).map(k => ({ klic: k, ...OSOBY[k] }));
   tlacitkovaUloha(
-    `<div class="zadani">${v.o}</div><img class="rodina-portret" src="${OSOBY[v.s].img}" alt="${OSOBY[v.s].nazev}">`,
+    `<div class="zadani">${v.o}</div>`,
     volby, v.s, OSOBY[v.s].nazev);
 }
 

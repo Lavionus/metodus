@@ -6,6 +6,8 @@
   <title>Podmínkové věty</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -23,6 +25,48 @@
 <body>
   <h1>🔀 Podmínkové věty</h1>
   <p class="podtitul">Pro 9. ročník: nultý, první a druhý kondicionál – reálná i nereálná podmínka.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Podmínkové věty (kondicionály)</summary>
+    <div class="obsah">
+      <p>Podmínková věta má dvě části: <b>podmínku</b> s <span lang="en">if</span> a <b>důsledek</b>. Který typ použiješ,
+        záleží na tom, jak <b>skutečná</b> podmínka je: platí vždy, může se opravdu stát, nebo si ji jen představuješ?
+        Typ poznáš podle slovesných tvarů v obou částech.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>0. – vždy platí</h3><p><span lang="en">if</span> + přítomný čas, přítomný čas<br>
+          <span lang="en">If you heat water to 100 °C, it boils.</span><br>
+          Obecné pravdy a zákonitosti; <span lang="en">if</span> tu znamená skoro „kdykoli“.</p></article>
+        <article class="vyklad-karta"><h3>1. – reálná budoucnost</h3><p><span lang="en">if</span> + přítomný čas, <span lang="en">will</span> + základní tvar<br>
+          <span lang="en">If it rains tomorrow, we will stay at home.</span><br>
+          Může se to opravdu stát.</p></article>
+        <article class="vyklad-karta"><h3>2. – nereálné, představa</h3><p><span lang="en">if</span> + minulý čas, <span lang="en">would</span> + základní tvar<br>
+          <span lang="en">If I won a million, I would travel around the world.</span><br>
+          Minulý tvar tu neznamená minulost, ale „není to tak“ nebo „asi se to nestane“.</p></article>
+      </div>
+      <p>Nejčastější chyba: dát <span lang="en">will</span> do části s <span lang="en">if</span> –
+        <span lang="en">If it will rain…</span> ✗. Budoucnost tam vyjadřuje přítomný čas:
+        <span lang="en">If it rains…</span>. Stejně tak <span lang="en">would</span> patří jen do důsledku.</p>
+      <p>U slovesa <span lang="en">be</span> se ve 2. kondicionálu užívá <span lang="en">were</span> pro všechny osoby:
+        <span lang="en">If I were you, I would apologise.</span> (Americky <span lang="en">apologize</span>; v hovoru slyšíš
+        i <span lang="en">If I was…</span>) Když věta začíná podmínkou, odděl obě části čárkou.</p>
+      <aside class="zapamatuj">0.: přítomný + přítomný. 1.: přítomný + <span lang="en">will</span>.
+        2.: minulý + <span lang="en">would</span>. Ve větě s <span lang="en">if</span> nikdy <span lang="en">will</span>.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: který kondicionál?</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">O který kondicionál jde: <span lang="en">If we lived by the sea, we would swim every day.</span></p>
+      <ol class="kroky">
+        <li>Podívám se na sloveso v části s <span lang="en">if</span>: <span lang="en">lived</span> – minulý tvar.</li>
+        <li>V důsledku je <span lang="en">would swim</span> – <span lang="en">would</span> + základní tvar.</li>
+        <li>Minulý tvar + <span lang="en">would</span> = 2. kondicionál.</li>
+        <li>Ověřím význam: u moře nebydlíme, je to jen představa – sedí to na nereálnou podmínku.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ 2. kondicionál – nereálná situace: Kdybychom bydleli u moře, plavali bychom každý den.</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="typ" class="active">🔢 Který kondicionál</button>
@@ -93,12 +137,14 @@ const SLOVESA = [
   { z: 'have', pr: 'have', min: 'had' }, { z: 'come', pr: 'comes', min: 'came' },
   { z: 'find', pr: 'finds', min: 'found' }, { z: 'ask', pr: 'asks', min: 'asked' },
 ];
+/* dopl = doplnění k slovesu ve větě s if, aby věta dávala smysl (If I have time…) */
 const DOPLNENI = [
-  { podmet: 'it', sloveso: 'rain', hlavni: 'we / stay at home' },
-  { podmet: 'you', sloveso: 'study', hlavni: 'you / pass the test' },
-  { podmet: 'I', sloveso: 'have', hlavni: 'I / call you' },
-  { podmet: 'she', sloveso: 'come', hlavni: 'we / start the film' },
-  { podmet: 'they', sloveso: 'ask', hlavni: 'I / help them' },
+  { podmet: 'it', sloveso: 'rain', dopl: '', hlavni: 'we / stay at home' },
+  { podmet: 'you', sloveso: 'study', dopl: ' hard', hlavni: 'you / pass the test' },
+  { podmet: 'I', sloveso: 'have', dopl: ' time', hlavni: 'I / call you' },
+  { podmet: 'she', sloveso: 'come', dopl: ' early', hlavni: 'we / go to the cinema together' },
+  { podmet: 'they', sloveso: 'ask', dopl: ' me', hlavni: 'I / help them' },
+  { podmet: 'he', sloveso: 'find', dopl: ' your keys', hlavni: 'he / bring them to you' },
 ];
 function doplnPrvni() {
   const p = $('plocha');
@@ -110,14 +156,14 @@ function doplnPrvni() {
 
   p.innerHTML = `<div class="zadani uloha-text">Doplň sloveso <b>${s.z}</b> do věty
       v <b>1. kondicionálu</b>:</div>
-    <div class="karta"><div class="veta-en">If ${u.podmet} <span class="mezera">?</span>,
+    <div class="karta"><div class="veta-en">If ${u.podmet} <span class="mezera">?</span>${u.dopl},
       ${u.hlavni.split(' / ')[0]} will ${u.hlavni.split(' / ')[1]}.</div></div>`;
   const odezva = odezvaEl();
   Uloha.vyber({
     kam: p, odezva, trida: 'velke',
     moznosti: Uloha.zamichej([spravny, ...jine.filter(x => x !== spravny)]).map(t => ({ klic: t, popis: t })),
     spravnyKlic: spravny,
-    zpravaOk: `✅ If ${u.podmet} ${spravny}, ${u.hlavni.split(' / ')[0]} will ${u.hlavni.split(' / ')[1]}.
+    zpravaOk: `✅ If ${u.podmet} ${spravny}${u.dopl}, ${u.hlavni.split(' / ')[0]} will ${u.hlavni.split(' / ')[1]}.
       – po if je přítomný čas, will je jen v hlavní větě.`,
     zpravaChyba: 'Po if nikdy nepiš will – budoucnost tam vyjadřuje přítomný čas.',
     poSpravne: skore.vyhodnot,
@@ -140,8 +186,8 @@ function doplnDruhy() {
   p.innerHTML = `<div class="zadani uloha-text">Doplň sloveso do věty ve <b>2. kondicionálu</b>
       (nereálná situace):</div>
     <div class="karta"><div class="veta-en">${vHlavni
-      ? `If ${u.podmet} ${s.min}, ${podmetH} <span class="mezera">?</span> ${slovesoH.split(' ').slice(1).join(' ')}.`
-      : `If ${u.podmet} <span class="mezera">?</span>, ${podmetH} would ${slovesoH}.`}</div></div>`;
+      ? `If ${u.podmet} ${s.min}${u.dopl}, ${podmetH} <span class="mezera">?</span> ${slovesoH.split(' ').slice(1).join(' ')}.`
+      : `If ${u.podmet} <span class="mezera">?</span>${u.dopl}, ${podmetH} would ${slovesoH}.`}</div></div>`;
   const odezva = odezvaEl();
   Uloha.vyber({
     kam: p, odezva, trida: 'velke',

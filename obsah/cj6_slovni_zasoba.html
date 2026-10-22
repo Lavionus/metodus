@@ -6,6 +6,8 @@
   <title>Slovní zásoba a význam slov</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -35,6 +37,41 @@
 <body>
   <h1>📚 Slovní zásoba a význam slov</h1>
   <p class="podtitul">Pro 6.–7. ročník: jednoznačná a mnohoznačná slova, synonyma, homonyma a nadřazenost.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Význam slova a vztahy mezi slovy</summary>
+    <div class="obsah">
+      <p>Slovo má <b>podobu</b> (jak se píše a vyslovuje) a <b>význam</b> (co označuje). Některá slova mají jen
+        jeden význam – jsou <b>jednoznačná</b>: <i>kyslík, trojúhelník, sešit</i>. Většina běžných slov je ale
+        <b>mnohoznačná</b>. Který význam platí, poznáš až z <b>kontextu</b>, tedy z věty, ve které slovo stojí.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>🌳 Mnohoznačné slovo</h3><p>Další význam vznikl z původního <b>přenesením</b> podle podobnosti: <i>koruna stromu</i> je nahoře jako koruna na hlavě. Významy spolu souvisejí.</p></article>
+        <article class="vyklad-karta"><h3>🎭 Homonyma</h3><p>Stejná podoba, ale významy spolu <b>nijak nesouvisejí</b>: <i>los</i> (zvíře) – <i>los</i> (do loterie).</p></article>
+        <article class="vyklad-karta"><h3>🟰 ↔️ Synonyma a antonyma</h3><p>Různá slova s blízkým významem (<i>dům – stavení</i>), nebo s opačným (<i>vysoký – nízký</i>).</p></article>
+        <article class="vyklad-karta"><h3>🗂️ Nadřazené a podřazené</h3><p>Nadřazené slovo zahrnuje víc druhů: <i>ovoce → jablko, hruška</i>. Jablko a hruška jsou spolu souřadná.</p></article>
+      </div>
+      <p>Mnohoznačné slovo a homonymum se pletou nejčastěji. Zeptej se: <b>dá se vysvětlit, proč se obě věci
+        jmenují stejně?</b> List papíru je tenký a plochý jako list stromu – to je mnohoznačnost. U slova
+        <i>pila</i> (nástroj) a <i>pila</i> (kočka pila mléko) žádnou souvislost nenajdeš, jde o homonyma.</p>
+      <p>U nadřazenosti pomůže věta „<i>… je druh …</i>“: <i>Dub je druh stromu.</i> Když dává smysl, je
+        <i>strom</i> nadřazené slovo.</p>
+      <aside class="zapamatuj">Význam určí kontext. Souvisejí významy přenesením → mnohoznačné slovo. Nesouvisejí vůbec → homonyma. „B je druh A“ → A je nadřazené.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: jaký je to vztah?</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Jaký vztah je mezi slovy <b>raketa (tenisová) – raketa (vesmírná)</b>?</p>
+      <ol class="kroky">
+        <li>Obě slova se píšou a vyslovují stejně – nejsou to různá slova, takže nejde o synonyma ani antonyma.</li>
+        <li>Nadřazenost to také není: tenisová raketa není druh vesmírné rakety.</li>
+        <li>Zkusím najít souvislost mezi významy: sportovní pomůcka na odpalování míčku a dopravní prostředek do vesmíru spolu nijak nesouvisejí.</li>
+        <li>Stejná podoba a nesouvisející významy – to jsou <b>homonyma</b>.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ raketa – raketa: homonyma (stejná podoba, jiný význam).</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="vztah" class="active">🔗 Jaký je to vztah?</button>
@@ -81,7 +118,7 @@
   <section class="obrazovy-slovnik" aria-labelledby="obrazovySlovnikNadpis">
     <h2 id="obrazovySlovnikNadpis">🖼️ Jedno slovo, tři významy</h2>
     <p>Vyber slovo a porovnej obrázky. Dokážeš ke každému významu vymyslet větu?</p>
-    <div class="slova-volby" id="slovaVolby" aria-label="Vyber mnohoznačné slovo"></div>
+    <div class="slova-volby" id="slovaVolby" aria-label="Vyber slovo"></div>
     <div class="vyznamy-obrazky" id="vyznamyObrazky" aria-live="polite"></div>
   </section>
 
@@ -108,8 +145,8 @@ const DVOJICE = [
   { a: 'začátek', b: 'konec', vztah: 'antonyma' },
   { a: 'radost', b: 'smutek', vztah: 'antonyma' },
   { a: 'kolej (na trati)', b: 'kolej (ubytovna)', vztah: 'homonyma' },
-  { a: 'zámek (na dveřích)', b: 'zámek (budova)', vztah: 'homonyma' },
-  { a: 'oko (na těle)', b: 'oko (na polévce)', vztah: 'homonyma' },
+  { a: 'raketa (tenisová)', b: 'raketa (vesmírná)', vztah: 'homonyma' },
+  { a: 'pila (nástroj)', b: 'pila (kočka pila mléko)', vztah: 'homonyma' },
   { a: 'los (zvíře)', b: 'los (do loterie)', vztah: 'homonyma' },
   { a: 'strom', b: 'dub', vztah: 'nadrazene' },
   { a: 'nábytek', b: 'židle', vztah: 'nadrazene' },
@@ -197,15 +234,15 @@ ukazVyznamy('koruna');
 
 const KONTEXTY = [
   { v: 'Ve škole nám postavili novou <span class="zvyraz">kolej</span> pro studenty.',
-    spr: 'ubytovna pro studenty', jine: ['dráha pro vlak', 'část kola', 'skupina zvířat'] },
+    spr: 'ubytovna pro studenty', jine: ['dráha pro vlak', 'část kola', 'skupina zvířat'], taky: ['dráha pro vlak', 'vyjetá stopa v cestě'] },
   { v: 'Vlak vjel na vedlejší <span class="zvyraz">kolej</span>.',
-    spr: 'dráha pro vlak', jine: ['ubytovna pro studenty', 'silnice', 'most'] },
+    spr: 'dráha pro vlak', jine: ['ubytovna pro studenty', 'silnice', 'most'], taky: ['ubytovna pro studenty', 'vyjetá stopa v cestě'] },
   { v: 'V polévce plavala mastná <span class="zvyraz">oka</span>.',
     spr: 'kapky tuku na hladině', jine: ['orgány zraku', 'otvory v síti', 'kola'] },
   { v: 'Zavři dveře na <span class="zvyraz">zámek</span>.',
-    spr: 'zařízení na zamykání', jine: ['historickou stavbu', 'zip u bundy', 'klíč'] },
+    spr: 'zařízení na zamykání', jine: ['historickou stavbu', 'zip u bundy', 'klíč'], taky: ['historická stavba', 'jezdec zipu'] },
   { v: 'Na kopci stojí barokní <span class="zvyraz">zámek</span>.',
-    spr: 'historická stavba', jine: ['zařízení na zamykání', 'věž', 'hradba'] },
+    spr: 'historická stavba', jine: ['zařízení na zamykání', 'věž', 'hradba'], taky: ['zařízení na zamykání', 'jezdec zipu'] },
   { v: 'Cizí <span class="zvyraz">jazyk</span> se učíme od třetí třídy.',
     spr: 'řeč, kterou se mluví', jine: ['orgán v ústech', 'jazýček u boty', 'plamen'] },
   { v: '<span class="zvyraz">Koruna</span> stromu poskytovala stín.',
@@ -321,7 +358,7 @@ function mnohoznacnost() {
     zpravaOk: `✅ ${u.s}: ${u.vyznamy}`,
     zpravaChyba: 'Zkus vymyslet, jestli má slovo víc různých významů.',
     poSpravne: napoprve => {
-      hotovo(p, napoprve, u.pocet === 'víc' ? 'homonyma' : null);
+      hotovo(p, napoprve, null); /* mnohoznačnost není homonymie – skupinu homonym nerozsvěcovat */
       p.appendChild(pravidloEl(u.pocet === 'víc' ? '🎭' : '1️⃣', u.pocet === 'víc'
         ? `<b>${u.s}</b> je slovo <span class="vysledek">mnohoznačné</span>:
            ${u.vyznamy}.
@@ -354,11 +391,11 @@ function vyznamVeVete() {
     zpravaOk: `✅ Tady znamená: ${u.spr}.`,
     zpravaChyba: 'Význam poznáš z celé věty – co dává smysl?',
     poSpravne: napoprve => {
-      hotovo(p, napoprve, 'homonyma');
+      hotovo(p, napoprve, null);
       p.appendChild(pravidloEl('🔍', `V téhle větě slovo znamená
         <span class="vysledek">${u.spr}</span>.
         <div style="margin-top:6px">Samotné slovo by mohlo znamenat i něco jiného
-        (${u.jine.slice(0, 2).join(', ')}). Rozhodne <b>kontext</b> — ostatní slova ve větě.
+        (${(u.taky || u.jine.slice(0, 2)).join(', ')}). Rozhodne <b>kontext</b> — ostatní slova ve větě.
         Právě proto se u víceznačných slov nedá význam určit, dokud nevidíš celou větu.</div>`));
     },
     prodleva: PRODLEVA, dalsi: novaUloha,

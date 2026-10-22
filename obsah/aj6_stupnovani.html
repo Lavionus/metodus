@@ -6,6 +6,8 @@
   <title>Angličtina – stupňování přídavných jmen</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -32,6 +34,49 @@
   <h1>📈 Stupňování přídavných jmen</h1>
   <p class="podtitul">Pro 6.–7. ročník: -er/-est, more/most a nepravidelné tvary.</p>
 
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Stupňování přídavných jmen</summary>
+    <div class="obsah">
+      <p>Když porovnáváš, potřebuješ <b>stupně</b> přídavného jména: 1. stupeň <span lang="en">big</span> (velký),
+        2. stupeň <span lang="en">bigger</span> (větší) pro porovnání dvou věcí, 3. stupeň
+        <span lang="en">the biggest</span> (největší) pro jednu věc ze skupiny. Způsob tvoření závisí hlavně na
+        <b>délce slova</b> – počítej slabiky.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Krátká: -er / -est</h3><p>1 slabika: <span lang="en">small → smaller → the smallest</span><br>
+          krátká samohláska + souhláska zdvojí: <span lang="en">big → bigger → the biggest</span><br>
+          2 slabiky na -y → <b>-ier / -iest</b>: <span lang="en">happy → happier → the happiest</span></p></article>
+        <article class="vyklad-karta"><h3>Dlouhá: more / most</h3><p>3 a více slabik (a většina dvouslabičných):
+          <span lang="en">beautiful → more beautiful → the most beautiful</span>,
+          <span lang="en">difficult → more difficult</span></p></article>
+        <article class="vyklad-karta"><h3>Nepravidelná</h3><p><span lang="en">good → better → the best</span><br>
+          <span lang="en">bad → worse → the worst</span><br>
+          <span lang="en">far → further → the furthest</span> (Američané častěji <span lang="en">farther</span>)<br>
+          <span lang="en">many → more → the most</span></p></article>
+      </div>
+      <p>Ve větě s 2. stupněm porovnáváš pomocí <b><span lang="en">than</span></b>:
+        <span lang="en">My brother is taller than me.</span> Ve 3. stupni stojí <b><span lang="en">the</span></b>:
+        <span lang="en">She is the best student in our class.</span></p>
+      <p>Typická chyba je zkombinovat oba způsoby: <span lang="en">more bigger</span> ✗ nebo
+        <span lang="en">the most easiest</span> ✗. Buď koncovka, nebo <span lang="en">more / most</span> – nikdy obojí.</p>
+      <aside class="zapamatuj">Krátké slovo → -er / -est, dlouhé → more / most. 2. stupeň + <span lang="en">than</span>,
+        3. stupeň s <span lang="en">the</span>.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: doplň do věty</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Doplň správný tvar <span lang="en">interesting</span>: <span lang="en">This is ___ book in the library.</span></p>
+      <ol class="kroky">
+        <li>Zjistím, který stupeň potřebuji: kniha se srovnává se <b>všemi</b> v knihovně, nemám tu <span lang="en">than</span> → 3. stupeň.</li>
+        <li>Spočítám slabiky: <span lang="en">in-ter-est-ing</span> – to je dlouhé slovo.</li>
+        <li>Dlouhé slovo stupňuji pomocí <span lang="en">most</span>, ne koncovkou -est.</li>
+        <li>Před 3. stupeň patří <span lang="en">the</span>.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ <span lang="en">This is <b>the most interesting</b> book in the library.</span></p>
+    </div>
+  </details>
+
   <div class="rezimy" id="rezimy">
     <button data-rezim="stupen" class="active">📊 Druhý a třetí stupeň</button>
     <button data-rezim="pravidlo">📏 Které pravidlo platí</button>
@@ -54,7 +99,8 @@
 
   <p class="napoveda">
     U jednoslabičných přídavných jmen přidáváme <b>-er</b> a <b>-est</b>.
-    U slov se třemi a více slabikami používáme <b>more</b> a <b>most</b>.
+    Dvojslabičná na <b>-y</b> mají <b>-ier</b> (happy → happier), ostatní dvojslabičná většinou
+    <b>more</b> (more careful). U slov se třemi a více slabikami používáme <b>more</b> a <b>most</b>.
     Ve druhém stupni bývá <b>than</b>, ve třetím <b>the</b>.
   </p>
 
@@ -83,7 +129,7 @@ const PRIDAVNA = [
 ];
 
 const TYPY = {
-  kratke: 'krátké – přidáme -er / -est',
+  kratke: 'krátké (1 slabika, 2 slabiky na -y) – přidáme -er / -est',
   dlouhe: 'dlouhé – použijeme more / most',
   nepravidelne: 'nepravidelné – tvar se mění',
 };
@@ -92,7 +138,7 @@ const OBRAZKY = [
   { noun: 'dog', prid: 'big', tvary: ['small dog', 'medium dog', 'large dog'], soubory: ['pes-maly', 'pes-stredni', 'pes-velky'] },
   { noun: 'car', prid: 'big', tvary: ['small car', 'medium car', 'large car'], soubory: ['auto-male', 'auto-stredni', 'auto-velke'] },
   { noun: 'house', prid: 'big', tvary: ['small house', 'medium house', 'large house'], soubory: ['dum-maly', 'dum-stredni', 'dum-velky'] },
-  { noun: 'mountain', prid: 'high', tvary: ['low mountain', 'medium mountain', 'high mountain'], soubory: ['hora-nizka', 'hora-stredni', 'hora-vysoka'] },
+  { noun: 'mountain', prid: 'high', tvary: ['small mountain', 'medium mountain', 'big mountain'], soubory: ['hora-nizka', 'hora-stredni', 'hora-vysoka'] },
   { noun: 'cake', prid: 'big', tvary: ['small cake', 'medium cake', 'large cake'], soubory: ['dort-maly', 'dort-stredni', 'dort-velky'] },
 ];
 
@@ -155,7 +201,7 @@ function pravidlo() {
     moznosti: Uloha.zamichej(Object.entries(TYPY)).map(([klic, popis]) => ({ klic, popis })),
     spravnyKlic: u.typ,
     zpravaOk: `✅ ${u.z} → ${u.d} → ${u.t}`,
-    zpravaChyba: 'Spočítej slabiky – jedna nebo dvě znamenají -er, tři a víc more.',
+    zpravaChyba: 'Spočítej slabiky – jedna slabika (a dvě slabiky na -y: happy, easy) znamenají -er, jinak většinou more.',
     poSpravne: skore.vyhodnot,
     dalsi: novaUloha,
   });
@@ -199,8 +245,8 @@ function porovnani() {
   const stupen = Math.random() < 0.5 ? 2 : 3;
   const spravny = tvarStupne(u.prid, stupen);
   const veta = stupen === 2
-    ? `The medium ${u.noun} is <span class="mezera">?</span> than the small ${u.noun}.`
-    : `The large ${u.noun} is <span class="mezera">?</span>.`;
+    ? `The ${u.tvary[1]} is <span class="mezera">?</span> than the ${u.tvary[0]}.`
+    : `The ${u.tvary[2]} is <span class="mezera">?</span>.`;
 
   p.innerHTML = `<div class="zadani">Doplň <b>${stupen}. stupeň</b> slova <b>${u.prid}</b>:</div>
     <div class="karta">
@@ -218,8 +264,8 @@ function porovnani() {
     moznosti: Uloha.zamichej([spravny, ...chybne.slice(0, 3)]).map(t => ({ klic: t, popis: t })),
     spravnyKlic: spravny,
     zpravaOk: stupen === 2
-      ? `✅ The medium ${u.noun} is ${spravny} than the small ${u.noun}.`
-      : `✅ The large ${u.noun} is ${spravny}.`,
+      ? `✅ The ${u.tvary[1]} is ${spravny} than the ${u.tvary[0]}.`
+      : `✅ The ${u.tvary[2]} is ${spravny}.`,
     zpravaChyba: stupen === 2
       ? 'Porovnáváme dvě věci – patří sem druhý stupeň se slovem than.'
       : 'Vybíráme jednu věc ze tří – patří sem třetí stupeň se slovem the.',

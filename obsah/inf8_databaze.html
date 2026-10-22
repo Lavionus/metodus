@@ -6,6 +6,8 @@
   <title>Databáze a strukturovaná data</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -27,6 +29,38 @@
 <body>
   <h1>🗄️ Databáze a strukturovaná data</h1>
   <p class="podtitul">Pro 8. ročník: tabulky, záznamy, filtrování, řazení a návrh struktury dat.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Tabulka, záznam, klíč a dotaz</summary>
+    <div class="obsah">
+      <p>Databáze ukládá <b>strukturovaná data</b>: každý údaj má pevné místo, a proto v nich počítač umí rychle
+        hledat, filtrovat a řadit. Základem je tabulka – řádky popisují jednotlivé věci, sloupce druhy údajů.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Záznam a pole</h3><p><b>Záznam</b> je jeden řádek – vše o jednom žákovi nebo jedné knize. <b>Pole</b> (atribut) je jeden sloupec – jeden druh údaje, třeba věk. Každé pole má svůj datový typ: text, číslo, datum, ano/ne.</p></article>
+        <article class="vyklad-karta"><h3>Primární klíč</h3><p>Údaj, který <b>jednoznačně</b> určí záznam. Jméno se nehodí – dva žáci se mohou jmenovat stejně. Hodí se evidenční nebo inventární číslo.</p></article>
+        <article class="vyklad-karta"><h3>Filtrování</h3><p>Vybere jen záznamy, které splní podmínku. U spojky <b>A ZÁROVEŇ</b> musí platit obě části současně.</p></article>
+        <article class="vyklad-karta"><h3>Řazení</h3><p><b>Vzestupně</b> = od nejmenšího (text od A), <b>sestupně</b> = od největšího (text od Z). Řazení záznamy nemaže, jen mění pořadí.</p></article>
+      </div>
+      <p>Při návrhu tabulky dávej do jednoho sloupce jen jeden údaj: adresa rozdělená na ulici, město a PSČ
+        se dá filtrovat podle města, adresa v jednom poli ne. Tabulky se propojují přes klíč – do tabulky
+        zápůjček stačí zapsat klíč žáka, ne kopírovat všechny jeho údaje.</p>
+      <aside class="zapamatuj">Řádek = záznam, sloupec = pole. Každý záznam má jednoznačný klíč. Filtr vybírá, řazení přeskládá.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: filtr se dvěma podmínkami</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">V tabulce žáků jsou mimo jiné: Adam (8.A, florbal), Bára (8.B, plavání), Eva (8.B, florbal), Honza (8.B, atletika). Který záznam vyhoví podmínce sport = "florbal" A ZÁROVEŇ třída = "8.B"?</p>
+      <ol class="kroky">
+        <li>Nejdřív projdu sloupec <b>sport</b> a nechám jen florbal: zůstane Adam a Eva.</li>
+        <li>Mezi nimi zkontroluji sloupec <b>třída</b>: Adam je z 8.A, Eva z 8.B.</li>
+        <li>Spojka A ZÁROVEŇ chce, aby platily obě části, proto Adam vypadne.</li>
+        <li>Bára a Honza jsou sice z 8.B, ale nehrají florbal – první část u nich neplatí.</li>
+      </ol>
+      <p class="vysledek-ukazky">Podmínce vyhoví jen záznam Eva (8.B, florbal).</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="filtr" class="active">🔎 Filtrování</button>
@@ -95,7 +129,7 @@ function filtr() {
     vyhovujici = data.filter(podminka.fn);
     if (vyhovujici.length === 1) break;
   }
-  if (vyhovujici.length !== 1) { podminka = { text: `body > 0`, fn: () => true }; vyhovujici = [data[0]]; }
+  if (vyhovujici.length !== 1) { const j = data[0].jmeno; podminka = { text: `jméno = "${j}"`, fn: z => z.jmeno === j }; vyhovujici = [data[0]]; }
   const stav = { chyboval: false, hotovo: false };
 
   p.innerHTML = `<div class="zadani uloha-text">Klepni na záznam, který vyhoví podmínce:<br>
@@ -117,28 +151,37 @@ function filtr() {
 /* ---- Řazení ---------------------------------------------------------------------------------- */
 function razeni() {
   const p = $('plocha');
-  const data = Uloha.zamichej([...ZAZNAMY]).slice(0, 5);
   const sloupec = Uloha.nahodne(SLOUPCE.filter(s => s.klic !== 'sport'));
+  // Pokud to jde, vyber záznamy s různými hodnotami v řadicím sloupci; jinak rozhoduje při shodě jméno.
+  let data = Uloha.zamichej([...ZAZNAMY]).slice(0, 5);
+  for (let pokus = 0; pokus < 60 && new Set(data.map(z => z[sloupec.klic])).size < data.length; pokus++) {
+    data = Uloha.zamichej([...ZAZNAMY]).slice(0, 5);
+  }
+  const shody = new Set(data.map(z => z[sloupec.klic])).size < data.length;
   const vzestupne = Math.random() < 0.5;
+  const porovnej = (x, y) => typeof x === 'number' ? x - y : String(x).localeCompare(String(y), 'cs');
   const serazeno = [...data].sort((a, b) => {
-    const x = a[sloupec.klic], y = b[sloupec.klic];
-    const r = typeof x === 'number' ? x - y : String(x).localeCompare(String(y), 'cs');
-    return vzestupne ? r : -r;
+    const r = porovnej(a[sloupec.klic], b[sloupec.klic]);
+    return (vzestupne ? r : -r) || porovnej(a.jmeno, b.jmeno);
   });
   const spravny = serazeno.map(z => z.jmeno).join(' → ');
-  const jine = new Set([
-    [...serazeno].reverse().map(z => z.jmeno).join(' → '),
-    Uloha.zamichej([...data]).map(z => z.jmeno).join(' → '),
-    Uloha.zamichej([...data]).map(z => z.jmeno).join(' → '),
-  ]);
-  jine.delete(spravny);
+  const sledHodnot = poradi => poradi.map(z => z[sloupec.klic]).join('|');
+  const spravnySled = sledHodnot(serazeno);
+  // Rušivé pořadí nesmí být správné ani při jiném pořadí shodných hodnot.
+  const jine = new Set();
+  const kandidati = [[...serazeno].reverse()];
+  for (let i = 0; i < 80; i++) kandidati.push(Uloha.zamichej([...data]));
+  for (const k of kandidati) {
+    if (jine.size >= 3) break;
+    if (sledHodnot(k) !== spravnySled) jine.add(k.map(z => z.jmeno).join(' → '));
+  }
 
   p.innerHTML = `<div class="zadani uloha-text">Jak budou záznamy seřazené podle sloupce
-      <b>${sloupec.nazev}</b> ${vzestupne ? 'vzestupně' : 'sestupně'}?</div>${tabulkaHtml(data)}`;
+      <b>${sloupec.nazev}</b> ${vzestupne ? 'vzestupně' : 'sestupně'}?${shody ? '<br><small>Při shodné hodnotě rozhoduje jméno podle abecedy (od A).</small>' : ''}</div>${tabulkaHtml(data)}`;
   const odezva = odezvaEl();
   Uloha.vyber({
     kam: p, odezva,
-    moznosti: Uloha.zamichej([spravny, ...[...jine].slice(0, 3)]).map(t => ({ klic: t, popis: t })),
+    moznosti: Uloha.zamichej([spravny, ...jine]).map(t => ({ klic: t, popis: t })),
     spravnyKlic: spravny,
     zpravaOk: `✅ ${spravny}`,
     zpravaChyba: vzestupne ? 'Vzestupně = od nejmenšího (u textu od A).' : 'Sestupně = od největšího (u textu od Z).',

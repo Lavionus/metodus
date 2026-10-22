@@ -312,8 +312,8 @@ function prectiZlomek() {
       if (!t) return 'Spočítej nejdřív všechny díly, pak jen ty vybarvené.';
       if (t.c === j - c && t.j === j) return `${t.c}/${j} je nevybarvená část. Vybarvených je ${c} z ${j} dílů.`;
       if (t.c === j && t.j === c) return `Máš prohozený zápis: dole patří počet všech dílů (${j}), nahoru vybarvených (${c}).`;
-      if (t.j === j) return `Jmenovatel ${j} máš správně, vybarvených dílů ale není ${t.c} – jsou ${c}.`;
-      return `Celek je rozdělený na ${j} dílů, ne na ${t.j}. Spočítej nejdřív všechny díly obrázku.`;
+      if (t.j === j) return `Jmenovatel ${j} máš správně, vybarvených dílů ale není ${t.c}, nýbrž ${c}.`;
+      return `Celek je rozdělený na ${dily(j)}, ne na ${t.j}. Spočítej nejdřív všechny díly obrázku.`;
     },
     poSpravne: napoprve => {
       skore.vyhodnot(napoprve);
@@ -345,7 +345,7 @@ function vybarvi() {
   p.appendChild(odezva);
 
   const svg = p.querySelector('svg');
-  const dily = [...svg.querySelectorAll('path')];
+  const casti = [...svg.querySelectorAll('path')];
   let chyboval = false, hotovo = false;
 
   function popisDilu(cast, i) {
@@ -356,12 +356,12 @@ function vybarvi() {
 
   function prekresli() {
     const vybrane = svg.querySelectorAll('path.plna').length;
-    dily.forEach(popisDilu);
+    casti.forEach(popisDilu);
     odezva.className = 'odezva';
-    odezva.textContent = `Vybarveno ${vybrane} z ${c} dílů.`;
+    odezva.textContent = `Vybarveno ${vybrane} z ${c} ${c === 1 ? 'dílu' : 'dílů'}.`;
     if (vybrane === c) {
       hotovo = true;
-      dily.forEach(x => { x.setAttribute('tabindex', '-1'); });
+      casti.forEach(x => { x.setAttribute('tabindex', '-1'); });
       svg.querySelectorAll('path.plna').forEach(x => x.classList.add('spravne'));
       odezva.className = 'odezva ok';
       odezva.textContent = `✅ Správně – ${c} z ${j} dílů je ${c}/${j}.`;
@@ -382,7 +382,7 @@ function vybarvi() {
     prekresli();
   }
 
-  dily.forEach((cast, i) => {
+  casti.forEach((cast, i) => {
     cast.setAttribute('role', 'button');
     cast.setAttribute('tabindex', '0');
     popisDilu(cast, i);
@@ -395,11 +395,11 @@ function vybarvi() {
       if (posun) {
         e.preventDefault();
         e.stopPropagation();   // stránka má na šipku vpravo „další otázka"
-        dily[(i + posun + dily.length) % dily.length].focus();
+        casti[(i + posun + casti.length) % casti.length].focus();
       }
     });
   });
-  odezva.textContent = `Vybarveno 0 z ${c} dílů.`;
+  odezva.textContent = `Vybarveno 0 z ${c} ${c === 1 ? 'dílu' : 'dílů'}.`;
 }
 
 /* ---- Co je víc? -------------------------------------------------------------- */
@@ -442,7 +442,7 @@ function porovnej() {
     zpravaChyba: klic => {
       const m = klic === 'a' ? a : b, v = klic === 'a' ? b : a;
       return stejnyJmenovatel
-        ? `Oba mají stejné díly (${m.j}), ale ${m.c} dílů je míň než ${v.c}. Porovnej vybarvené části.`
+        ? `Oba mají stejné díly (${m.j}), ale ${dily(m.c)} ${m.c >= 2 && m.c <= 4 ? 'jsou' : 'je'} míň než ${v.c}. Porovnej vybarvené části.`
         : `${m.c}/${m.j} má víc dílů, a tím pádem menší. Jeden díl z ${v.j} je větší než jeden z ${m.j}.`;
     },
     poSpravne: skore.vyhodnot,

@@ -6,6 +6,8 @@
   <title>Mapa, plán a světové strany</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -27,6 +29,38 @@
 <body>
   <h1>🧭 Mapa, plán a světové strany</h1>
   <p class="podtitul">Pro 4.–5. ročník: mapové značky, měřítko a orientace podle světových stran.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Jak číst mapu</summary>
+    <div class="obsah">
+      <p>Mapa je zmenšený obrázek krajiny, jak ji vidí pták shora. Všechno se na ni nevejde ve skutečné velikosti.
+        Proto mapa používá <b>značky</b> a <b>měřítko</b>.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>🗺️ Mapové značky</h3><p>Malý obrázek místo skutečné věci: kostel, most, kemp, nádraží… Co značka znamená, najdeš v <b>legendě</b> mapy.</p></article>
+        <article class="vyklad-karta"><h3>🧭 Sever nahoře</h3><p>Na mapě je <b>sever nahoře</b>, jih dole, východ vpravo, západ vlevo. Směr ukazuje i severka.</p></article>
+        <article class="vyklad-karta"><h3>📏 Měřítko</h3><p><b>1 : 100 000</b> znamená: 1 cm na mapě je 100 000 cm ve skutečnosti, tedy <b>1 km</b>.</p></article>
+      </div>
+      <p>Jak spočítám skutečnou vzdálenost? Nejdřív zjistím, kolik kilometrů je <b>1 cm</b>. Pak to vynásobím počtem
+        naměřených centimetrů. Pomůcka: z čísla za dvojtečkou škrtni pět nul a dostaneš kilometry na 1 cm.
+        1 : 50 000 → 0,5 km, 1 : 200 000 → 2 km.</p>
+      <p>Typická chyba je u směru říct „nahoru“ místo „na sever“. Na mapě se směr pojmenuje světovou stranou.
+        Ptám se vždy: <b>od čeho</b> měřím? Od toho místa se dívám k druhému.</p>
+      <aside class="zapamatuj">Na mapě je sever nahoře. Skutečná vzdálenost = počet cm × kolik km je 1 cm.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: měřítko mapy</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Mapa má měřítko <b>1 : 50 000</b>. Na mapě jsi naměřil <b>6 cm</b>. Kolik kilometrů je to ve skutečnosti?</p>
+      <ol class="kroky">
+        <li>Měřítko říká: 1 cm na mapě je 50 000 cm ve skutečnosti.</li>
+        <li>Převedu na kilometry: 50 000 cm = 500 m = <b>0,5 km</b>. Takže 1 cm je 0,5 km.</li>
+        <li>Naměřil jsem 6 cm, proto násobím: 6 × 0,5 km = 3 km.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Ve skutečnosti je to <b>3 km</b>.</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="znacky" class="active">🗺️ Mapové značky</button>
@@ -160,9 +194,9 @@ function meritko() {
   odezva.className = 'odezva';
   Uloha.vyber({
     kam: p, odezva, trida: 'velke',
-    moznosti: Uloha.zamichej([km, ...jine]).map(x => ({ klic: String(x), popis: x + ' km' })),
+    moznosti: Uloha.zamichej([km, ...jine]).map(x => ({ klic: String(x), popis: Uloha.cislo(x) + ' km' })),
     spravnyKlic: String(km),
-    zpravaOk: `✅ Při měřítku ${v.m} je 1 cm na mapě ${v.cmNaKm} km, takže ${cm} × ${v.cmNaKm} = ${km} km.`,
+    zpravaOk: `✅ Při měřítku ${v.m} je 1 cm na mapě ${Uloha.cislo(v.cmNaKm)} km, takže ${cm} × ${Uloha.cislo(v.cmNaKm)} = ${Uloha.cislo(km)} km.`,
     zpravaChyba: `Spočítej, kolik kilometrů je 1 cm při měřítku ${v.m}, a vynásob počtem centimetrů.`,
     poSpravne: skore.vyhodnot,
     dalsi: novaUloha,

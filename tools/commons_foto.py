@@ -78,7 +78,7 @@ IIPROP = 'url|size|mime|extmetadata'
 
 def hledej(dotaz, n):
     d = api(action='query', generator='search', gsrnamespace=6, gsrsearch=dotaz, gsrlimit=n,
-            prop='imageinfo', iiprop=IIPROP, iiurlwidth=1600)
+            prop='imageinfo', iiprop=IIPROP, iiurlwidth=1280)
     stranky = sorted(d.get('query', {}).get('pages', {}).values(), key=lambda s: s.get('index', 0))
     for s in stranky:
         if 'imageinfo' not in s:
@@ -89,7 +89,7 @@ def hledej(dotaz, n):
 
 
 def info(nazev):
-    d = api(action='query', titles=nazev, prop='imageinfo', iiprop=IIPROP, iiurlwidth=1600)
+    d = api(action='query', titles=nazev, prop='imageinfo', iiprop=IIPROP, iiurlwidth=1280)   # standardní šířka náhledu; nestandardní (1600) Wikimedia odmítá (429/400)
     s = next(iter(d['query']['pages'].values()))
     if 'imageinfo' not in s:
         sys.exit(f'Soubor nenalezen: {nazev}')
@@ -97,13 +97,18 @@ def info(nazev):
 
 
 def uloz_webp(im, cil, sirka, limit):
+    """WebP do limitu: nejdřív snižuje kvalitu, pak (u detailních snímků) i rozměr."""
     if im.width > sirka:
         im = im.resize((sirka, round(im.height * sirka / im.width)), Image.LANCZOS)
-    for q in (84, 80, 76, 72, 68, 64, 60, 55, 50, 45):
-        b = io.BytesIO()
-        im.save(b, 'WEBP', quality=q, method=6)
-        if b.tell() <= limit:
+    while True:
+        for q in (84, 80, 76, 72, 68, 64, 60, 55, 50):
+            b = io.BytesIO()
+            im.save(b, 'WEBP', quality=q, method=6)
+            if b.tell() <= limit:
+                break
+        if b.tell() <= limit or im.width <= sirka // 2:
             break
+        im = im.resize((round(im.width * 0.9), round(im.height * 0.9)), Image.LANCZOS)
     cil.write_bytes(b.getvalue())
     return im.size, b.tell()
 

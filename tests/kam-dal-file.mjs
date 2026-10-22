@@ -1,4 +1,5 @@
 // Regrese: odkazy „Kam dál“ musí fungovat i při místním otevření indexu přes file://.
+// Chromium musí běžet s --allow-file-access-from-files (jinak je obsah rámce pod file:// nedostupný).
 import assert from 'node:assert/strict';
 
 const endpoint = process.env.METODUS_CDP_URL || 'http://127.0.0.1:9223/json';

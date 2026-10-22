@@ -6,6 +6,8 @@
   <title>Pravěk</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -49,6 +51,46 @@
 <body>
   <h1>🦴 Pravěk</h1>
   <p class="podtitul">Pro 6. ročník: doba kamenná, bronzová a železná, vývoj člověka a první zemědělci.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Jak dělíme pravěk</summary>
+    <div class="obsah">
+      <p><b>Pravěk</b> je nejdelší období dějin lidstva – doba, kdy lidé ještě neuměli psát. Nemáme z něj tedy
+        žádné písemné prameny. Vše, co o něm víme, zjistili <b>archeologové</b> z nálezů: z nástrojů, keramiky,
+        kostí, ohnišť nebo stop po domech.</p>
+      <p>Nejčastěji se dochovaly <b>nástroje</b>, a proto pravěk dělíme podle materiálu, ze kterého je lidé
+        vyráběli. Materiál ukazuje, co lidé v dané době uměli.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Doba kamenná</h3><p><b>Starší (paleolit):</b> lovci a sběrači, štípané nástroje,
+          život v tlupách. <b>Mladší (neolit):</b> první zemědělci, chov zvířat, broušené nástroje a keramika.</p></article>
+        <article class="vyklad-karta"><h3>Doba bronzová</h3><p>Lidé slévají <b>měď s cínem</b> a vzniká tvrdší bronz.
+          Rozvíjí se obchod, mrtví se pohřbívají do <b>mohyl</b>.</p></article>
+        <article class="vyklad-karta"><h3>Doba železná</h3><p>Železné nástroje a zbraně. Na našem území žijí
+          <b>Keltové</b> a stavějí opevněná sídliště – <b>oppida</b>.</p></article>
+      </div>
+      <p>Největší změnou pravěku byla <b>neolitická revoluce</b>: lidé začali pěstovat obilí a chovat zvířata.
+        Už nemuseli táhnout za zvěří, a tak se usadili v trvalých osadách. Pozor na častou chybu: prvním kovem,
+        který lidé zpracovávali, nebylo železo, ale <b>měď</b>. A <b>neandertálec</b> nebyl naším předkem,
+        ale příbuznou větví, která část doby žila vedle člověka dnešního typu.</p>
+      <aside class="zapamatuj">Pravěk = doba bez písma. Dělíme ho podle materiálu nástrojů: kámen → bronz → železo.
+        Zemědělství (neolit) přineslo trvalé osady.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: seřaď období pravěku</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Seřaď od nejstaršího: doba železná, starší doba kamenná, doba bronzová, mladší doba kamenná.</p>
+      <ol class="kroky">
+        <li>Vím, že pravěk dělíme podle materiálu nástrojů. Nejdřív lidé znali jen <b>kámen</b>, takže začnu dobou kamennou.</li>
+        <li>Doba kamenná má dvě části. Starší patří lovcům a sběračům, mladší prvním zemědělcům – lov a sběr byl dřív.
+          Nejstarší je tedy <b>starší doba kamenná</b>, po ní <b>mladší doba kamenná</b>.</li>
+        <li>Z kovů se nejdřív zpracovávala měď a z ní se slitím s cínem vyráběl bronz. Další je <b>doba bronzová</b>.</li>
+        <li>Železo se zpracovává obtížněji, lidé ho ovládli až později. Poslední je <b>doba železná</b>.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ starší doba kamenná → mladší doba kamenná → doba bronzová → doba železná</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="doby" class="active">⏳ Které období</button>
@@ -116,12 +158,17 @@ const DOBY = [
   { n: 'doba železná', o: 'železné nástroje a zbraně, na našem území Keltové a oppida', poradi: 4 },
 ];
 
+/* Neandertálec nebyl předkem člověka dnešního typu, ale příbuznou vedlejší větví,
+   která s ním část doby žila současně – do řady „předchůdců“ proto nepatří
+   (vetev: true → v úloze „Seřaď“ se nepoužije). */
 const PREDCI = [
   { n: 'člověk zručný', o: 'první vyráběl jednoduché kamenné nástroje', poradi: 1 },
   { n: 'člověk vzpřímený', o: 'naučil se používat oheň a rozšířil se z Afriky', poradi: 2 },
-  { n: 'člověk neandertálský', o: 'žil v době ledové, pohřbíval mrtvé a lovil velkou zvěř', poradi: 3 },
-  { n: 'člověk dnešního typu', o: 'tvořil jeskynní malby a sošky, například Věstonickou venuši', poradi: 4 },
+  { n: 'člověk neandertálský', o: 'žil v době ledové, pohřbíval mrtvé a lovil velkou zvěř', vetev: true,
+    pozn: 'nebyl naším předkem, ale příbuznou větví, která část doby žila současně s člověkem dnešního typu' },
+  { n: 'člověk dnešního typu', o: 'tvořil jeskynní malby a sošky, například Věstonickou venuši', poradi: 3 },
 ];
+const RADA_PREDKU = PREDCI.filter(x => !x.vetev);
 
 const ZIVOT = [
   { o: 'Čím se živili lidé ve starší době kamenné?', spr: 'lovem zvířat a sběrem plodů',
@@ -164,7 +211,7 @@ function doby() {
 function poradi() {
   const p = $('plocha');
   const predci = Math.random() < 0.5;
-  const data = predci ? PREDCI : DOBY;
+  const data = predci ? RADA_PREDKU : DOBY;
   const serazene = [...data].sort((a, b) => a.poradi - b.poradi);
 
   p.innerHTML = `<div class="zadani">Seřaď ${predci ? 'předchůdce člověka' : 'období pravěku'}
@@ -199,7 +246,8 @@ function poradi() {
         odezva.className = 'odezva ok';
         odezva.textContent = '✅ Správně!';
         if (dalsiIndex === serazene.length) {
-          odezva.textContent = '🎉 Časová osa je hotová!';
+          odezva.textContent = '🎉 Časová osa je hotová!' + (predci
+            ? ' Neandertálec do této řady nepatří – nebyl naším předkem, ale příbuznou větví.' : '');
           skore.vyhodnot(!chyboval);
           Uloha.posun(novaUloha, Uloha.PRODLEVA + 600);
         }
@@ -220,7 +268,7 @@ function predci() {
   const p = $('plocha');
   const u = Uloha.nahodne(PREDCI);
   const jine = Uloha.zamichej(PREDCI.filter(x => x.n !== u.n)).slice(0, 3);
-  p.innerHTML = `<div class="zadani">O kterého předchůdce člověka jde?</div>
+  p.innerHTML = `<div class="zadani">O který druh člověka jde?</div>
     <div class="karta"><div class="obrazek">🧍</div><div class="popis-p">${u.o}</div></div>`;
   const odezva = document.createElement('div');
   odezva.className = 'odezva';
@@ -228,8 +276,8 @@ function predci() {
     kam: p, odezva,
     moznosti: Uloha.zamichej([u, ...jine]).map(x => ({ klic: x.n, popis: x.n })),
     spravnyKlic: u.n,
-    zpravaOk: `✅ ${u.n} – ${u.o}.`,
-    zpravaChyba: 'Zkus jiného předchůdce.',
+    zpravaOk: `✅ ${u.n} – ${u.o}` + (u.pozn ? `; ${u.pozn}.` : '.'),
+    zpravaChyba: 'Zkus jiný druh.',
     poSpravne: skore.vyhodnot,
     dalsi: novaUloha,
   });
@@ -264,7 +312,7 @@ function nalezy() {
   const p = $('plocha');
   const u = Uloha.nahodne(NALEZY);
   p.innerHTML = `<div class="zadani">Z kterého období pravěku pochází tento nález?</div>
-    <div class="karta"><img class="foto-ukol" src="${u.img.getAttribute('src')}" alt="${u.img.alt.replace(/"/g, '&quot;')}"
+    <div class="karta"><img class="foto-ukol" src="${u.img.getAttribute('src')}" alt="Fotografie nálezu k určení."
       width="${u.img.getAttribute('width')}" height="${u.img.getAttribute('height')}"></div>`;
   const odezva = document.createElement('div');
   odezva.className = 'odezva';

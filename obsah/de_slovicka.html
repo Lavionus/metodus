@@ -6,6 +6,8 @@
   <title>🇩🇪 Němčina – slovíčka</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <link rel="stylesheet" href="../slovicka.css">
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
@@ -26,6 +28,41 @@
 <body>
   <h1>🇩🇪 Němčina – slovíčka</h1>
   <p class="podtitul">Základní slovní zásoba se členy der / die / das. Prohlédni si přehled a kartičky, pak si zkus sérii deseti otázek – po chybě máš druhý pokus.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Proč se slovíčko učí se členem</summary>
+    <div class="obsah">
+      <p>Každé německé podstatné jméno má svůj <b>rod</b> a ten prozrazuje <b>člen</b>. Mužský rod má <span lang="de"><b>der</b></span>,
+        ženský <span lang="de"><b>die</b></span> a střední <span lang="de"><b>das</b></span>.</p>
+      <p>Rod často nesedí s češtinou. Stůl je u nás mužského rodu i v němčině (<span lang="de">der Tisch</span>), ale
+        dívka je v němčině středního rodu (<span lang="de">das Mädchen</span>) a kočka ženského (<span lang="de">die Katze</span>).
+        Když se naučíš jen samotné slovo <span lang="de">Haus</span>, budeš později váhat. Proto si ho zapiš a říkej nahlas
+        celé: <span lang="de">das Haus</span>.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Vždy die</h3><p>Slova na <b>-ung, -heit, -keit, -schaft, -ion</b>: <span lang="de">die Wohnung, die Zeitung</span>.</p></article>
+        <article class="vyklad-karta"><h3>Vždy das</h3><p>Zdrobněliny na <b>-chen, -lein</b>: <span lang="de">das Mädchen</span> – i když jde o dívku.</p></article>
+        <article class="vyklad-karta"><h3>Většinou die</h3><p>Slova na <b>-e</b>: <span lang="de">die Blume, die Schule</span>. Výjimky: <span lang="de">der Käse, das Auge</span>.</p></article>
+        <article class="vyklad-karta"><h3>Osoby</h3><p>Muži a mužská povolání <b>der</b> (<span lang="de">der Vater, der Lehrer</span>), ženy <b>die</b> (<span lang="de">die Mutter</span>). Pozor: <span lang="de">das Kind</span>.</p></article>
+      </div>
+      <p>Typická chyba je hádat rod podle češtiny. Pomůcky z karet ti poradí jen u části slov; ostatní si zapamatuj
+        i s barvou: <b class="art-der">der</b> modrá, <b class="art-die">die</b> červená, <b class="art-das">das</b> zelená.</p>
+      <aside class="zapamatuj">Slovíčko se učí vždy i se členem: <span lang="de">der Tisch, die Katze, das Haus</span>. Rod podle češtiny neodhaduj.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: der, die, nebo das?</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Jaký člen má slovo <span lang="de"><b>Wohnung</b></span> (byt)?</p>
+      <ol class="kroky">
+        <li>Nejdřív se podívám na konec slova: <span lang="de">Wohn<b>ung</b></span> končí na <b>-ung</b>.</li>
+        <li>Vzpomenu si na pravidlo: slova na -ung jsou <b>vždy die</b>.</li>
+        <li>Český rod („ten byt“) mě nesmí zmást – v němčině rozhoduje koncovka, ne čeština.</li>
+        <li>Řeknu si nahlas celý výraz se členem: <span lang="de">die Wohnung</span>.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ <span lang="de"><b>die Wohnung</b></span> – ženský rod podle koncovky -ung.</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="prehled" data-faze="vyuka" class="active">📖 Přehled</button>

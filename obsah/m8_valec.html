@@ -6,6 +6,8 @@
   <title>Válec</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -25,6 +27,45 @@
 <body>
   <h1>🥫 Válec</h1>
   <p class="podtitul">Pro 8. ročník: síť válce, obsah pláště, povrch a objem.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Síť, povrch a objem válce</summary>
+    <div class="obsah">
+      <p>Válec má dvě shodné kruhové <b>podstavy</b> o poloměru r a mezi nimi zakřivený <b>plášť</b>.
+        Když z plechovky sloupneš etiketu a rozvineš ji, dostaneš <b>obdélník</b>. Jedna jeho strana je
+        výška válce <b>v</b>, druhá je dlouhá jako obvod podstavy <b>2πr</b> – etiketa totiž přesně obepnula kruh.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Síť válce</h3><p>Dva shodné kruhy + obdélník o stranách 2πr a v.
+          Která strana obdélníku je delší, záleží na rozměrech válce.</p></article>
+        <article class="vyklad-karta"><h3>Plášť a povrch</h3><p>Plášť = obdélník: <b>S<sub>pl</sub> = 2πr · v</b>.
+          Povrch = dvě podstavy + plášť: <b>S = 2πr² + 2πr · v</b>.</p></article>
+        <article class="vyklad-karta"><h3>Objem</h3><p>Jako u hranolu: obsah podstavy krát výška.
+          <b>V = πr² · v</b>.</p></article>
+      </div>
+      <p>Typické chyby: místo poloměru dosadíš <b>průměr</b> (když je zadán průměr, nejdřív ho vyděl dvěma);
+        zapomeneš na druhou podstavu; nebo spleteš obvod 2πr s obsahem πr². Ve slovní úloze se zeptej:
+        chce se, <b>kolik se vejde</b> (objem), nebo <b>kolik materiálu</b> (povrch či plášť)? Etiketa je jen plášť,
+        natření celého sudu je celý povrch.</p>
+      <p>U objemu pozor na jednotky: 1 cm³ = 1 ml a 1 dm³ = 1 l, tedy 1 l = 1000 cm³.</p>
+      <aside class="zapamatuj">Plášť 2πr · v, povrch 2πr² + 2πr · v, objem πr² · v. Dosazuj poloměr, ne průměr.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: plechovka</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Plechovka má poloměr dna r = 4 cm a výšku v = 10 cm. Kolik mililitrů se do ní vejde
+        a kolik cm² plechu je potřeba na celou plechovku? (π = 3,14)</p>
+      <ol class="kroky">
+        <li>Obsah jedné podstavy: πr² = 3,14 · 4 · 4 = <b>50,24 cm²</b>.</li>
+        <li>Objem = podstava krát výška: V = 50,24 · 10 = <b>502,4 cm³</b>. Protože 1 cm³ = 1 ml, je to 502,4 ml.</li>
+        <li>Plášť je obdélník o stranách 2πr a v: 2 · 3,14 · 4 · 10 = <b>251,2 cm²</b>.</li>
+        <li>Povrch = dvě podstavy + plášť: S = 2 · 50,24 + 251,2 = 100,48 + 251,2 = <b>351,68 cm²</b>.</li>
+        <li>Kontrola jednotek: objem v cm³ (ml), plech v cm².</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Vejde se 502,4 ml, na plechovku je potřeba 351,68 cm² plechu.</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="sit" class="active">📄 Síť válce</button>

@@ -6,6 +6,8 @@
   <title>Doplňovačky i/y</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -33,6 +35,37 @@
 <body>
   <h1>✍️ Doplňovačky i/y</h1>
   <p class="podtitul">Vyjmenovaná slova a slova s nimi příbuzná – doplň i/í, nebo y/ý (3.–5. ročník ZŠ).</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: i/y po obojetných souhláskách</summary>
+    <div class="obsah">
+      <p>Po tvrdých souhláskách píšeš y, po měkkých i. Jenže po <b>obojetných</b> souhláskách může být obojí.
+        Jejich řada zní <b>b, f, l, m, p, s, v, z</b>. Tady ti zvuk nepomůže, musíš znát slovo.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Vyjmenované slovo</h3><p>Když je slovo v řadě vyjmenovaných slov, píšeš <b>y/ý</b>: býk, kobyla, myš, lyže.</p></article>
+        <article class="vyklad-karta"><h3>Příbuzné slovo</h3><p>Má stejný kořen a souvisí s ním i významem, proto také <b>y/ý</b>: mýdlo (od mýt), nábytek (od byt), mlýně (od mlýn).</p></article>
+        <article class="vyklad-karta"><h3>Ostatní slova</h3><p>Když slovo není vyjmenované ani příbuzné, píšeš <b>i/í</b>: obilí, listí, liška, lítost.</p></article>
+      </div>
+      <p>Příbuznost poznáš podle <b>významu</b>, ne jen podle zvuku. „Bít“ (tlouci) zní stejně jako „být“ (existovat),
+        ale příbuzné nejsou, proto „bil na buben“ píšeš s i. Stejně tak mýt (umývat) × mít (vlastnit), výr (sova) × vír (ve vodě).</p>
+      <p>Častá chyba: dát y jen proto, že slovo začíná podobně. Sbírat nemá s být nic společného, proto „sbírám“.</p>
+      <aside class="zapamatuj">Po obojetné souhlásce (b, f, l, m, p, s, v, z) píšeš <b>y</b> ve vyjmenovaných slovech a ve slovech s nimi příbuzných. Jinde píšeš <b>i</b>. Po <b>f</b> vyjmenovaná slova nejsou.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: doplň i/y ve větě</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Doplň i, nebo y: „Náb_tek jsme složili sami.“</p>
+      <ol class="kroky">
+        <li>Najdu souhlásku před mezerou: je to <b>b</b>. To je obojetná souhláska, musím přemýšlet o slově.</li>
+        <li>Řeknu si celé slovo: nábytek. Ve vyjmenované řadě po b samo není.</li>
+        <li>Hledám příbuzné vyjmenované slovo: nábytek patří do bytu, takže je příbuzné se slovem <b>byt</b>.</li>
+        <li>Příbuzné slovo píšu stejně jako vyjmenované, tedy s <b>y</b>.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Nábytek jsme složili sami. (y – příbuzné se slovem byt)</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="doplnovani" class="active">✏️ Doplň i/y</button>
@@ -103,7 +136,7 @@ const ULOHY = {
     { v: 'Chudák přišel o své b_dlo.', p: 'y', s: 'bydlo', d: 'bydlo = živobytí, příbuzné s bydlit', r: 'bydlit (bydlet)' },
     { v: 'Budeme b_dlet v novém domě.', p: 'y', s: 'bydlet', d: 'vyjmenované slovo', r: 'bydlit (bydlet)' },
     { v: 'Ob_lí letos pěkně vzrostlo.', p: 'i', s: 'obilí', d: 'není vyjmenované ani příbuzné' },
-    { v: 'Je to starob_lý zámek.', p: 'y', s: 'starobylý', d: 'příbuzné se slovem bydlit (obývat)', r: 'bydlit (bydlet)' },
+    { v: 'Je to starob_lý zámek.', p: 'y', s: 'starobylý', d: 'příbuzné se slovem být (starobylý = který tu je odedávna)', r: 'být' },
     { v: 'Sb_rám poštovní známky.', p: 'í', s: 'sbírám', d: 'od slovesa sbírat, nesouvisí s být' },
     { v: 'Zvyk je prostě starý ob_čej.', p: 'y', s: 'obyčej', d: 'vyjmenované slovo' },
     { v: 'Na louce se pásl dob_tek.', p: 'y', s: 'dobytek', d: 'vyjmenované slovo' },

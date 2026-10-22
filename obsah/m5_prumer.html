@@ -6,6 +6,8 @@
   <title>Aritmetický průměr</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -61,6 +63,42 @@
   <h1>📈 Aritmetický průměr</h1>
   <p class="podtitul">Pro 5.–6. ročník: výpočet průměru, doplnění chybějící hodnoty a porovnání.</p>
 
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Co je aritmetický průměr</summary>
+    <div class="obsah">
+      <p>Tři kamarádi nasbírali 2, 5 a 8 kaštanů. Kdyby se rozdělili <b>spravedlivě nastejno</b>, kolik by měl každý?
+        Dohromady mají 2 + 5 + 8 = 15 kaštanů. Rozdělí je mezi 3, tedy 15 : 3 = 5. Každý by měl 5 kaštanů.
+        Číslo 5 je <b>aritmetický průměr</b>.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Výpočet</h3><p>Sečti všechny hodnoty. Součet vyděl tím, <b>kolik hodnot</b> je.
+          průměr = součet : počet.</p></article>
+        <article class="vyklad-karta"><h3>Vyrovnání</h3><p>Průměr je výška, na kterou se sloupečky „srovnají“.
+          Co přečnívá nad průměrem, přesně zaplní díry pod ním.</p></article>
+        <article class="vyklad-karta"><h3>Chybějící číslo</h3><p>Známe-li průměr, známe i součet:
+          součet = průměr · počet. Pak odečteš čísla, která už znáš.</p></article>
+      </div>
+      <p>Jak poznáš, že se ti výsledek nepovedl? Průměr leží vždy <b>mezi nejmenší a největší</b> hodnotou.
+        Když ti vyjde víc, než je největší číslo, něco je špatně.</p>
+      <p>Typická chyba: dělíš špatným číslem. Dělí se <b>počtem hodnot</b>, ne třeba největším číslem.
+        Průměr také nemusí být žádná z hodnot – klidně může vyjít i desetinné číslo.</p>
+      <aside class="zapamatuj">Průměr = součet všech hodnot : jejich počet. Leží vždy mezi nejmenší a největší hodnotou.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: doplň chybějící body</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Ze čtyř testů má Eva body 10, 15, ? a 9. Její průměr je 12 bodů. Kolik bodů měla ve třetím testu?</p>
+      <ol class="kroky">
+        <li>Testy jsou 4 a průměr je 12. Celkový součet tedy musí být 12 · 4 = <b>48</b> bodů.</li>
+        <li>Sečtu body, které znám: 10 + 15 + 9 = <b>34</b>.</li>
+        <li>Chybějící číslo je to, co do součtu ještě chybí: 48 − 34 = <b>14</b>.</li>
+        <li>Zkouška: (10 + 15 + 14 + 9) : 4 = 48 : 4 = 12. Sedí to.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Ve třetím testu měla Eva 14 bodů.</p>
+    </div>
+  </details>
+
   <div class="rezimy" id="rezimy">
     <button data-rezim="srovnej" class="active">⚖️ Srovnej sloupečky</button>
     <button data-rezim="spocitej">🧮 Spočítej průměr</button>
@@ -85,13 +123,28 @@ const $ = id => document.getElementById(id);
 const skore = Uloha.skore('metodus_m5_prumer', $('skore'));
 let rezim = 'srovnej';
 
+/* Každý kontext má svůj reálný rozsah hodnot (známky 1–5, skoky přes metr…).
+   j = jednotka, nebo trojice tvarů pro 1 / 2–4 / 5 a víc. */
 const KONTEXTY = [
-  { t: 'známky z matematiky', j: '' },
-  { t: 'body z pěti testů', j: ' bodů' },
-  { t: 'naměřené teploty ve stupních Celsia', j: ' °C' },
-  { t: 'délky skoků v centimetrech', j: ' cm' },
-  { t: 'počty přečtených stran za den', j: ' stran' },
+  { t: 'známky z matematiky', j: '', od: 1, do: 5 },
+  { t: 'body z testů (nejvýš 20 bodů)', j: ['bod', 'body', 'bodů'], od: 4, do: 20 },
+  { t: 'naměřené teploty ve stupních Celsia', j: ' °C', od: 2, do: 25 },
+  { t: 'délky skoků do dálky v centimetrech', j: ' cm', od: 180, do: 320 },
+  { t: 'počty přečtených stran za den', j: ['strana', 'strany', 'stran'], od: 5, do: 40 },
 ];
+const sJednotkou = (v, k) => Array.isArray(k.j)
+  ? `${v} ${v === 1 ? k.j[0] : (v >= 2 && v <= 4) ? k.j[1] : k.j[2]}` : v + k.j;
+/* tři různé rušivé hodnoty v rozsahu kontextu */
+function rusive(spravna, k, posuny) {
+  const jine = new Set();
+  for (let pokus = 0; jine.size < 3 && pokus < 300; pokus++) {
+    const kand = spravna + Uloha.nahodne(posuny) * (pokus > 100 ? 2 : 1);
+    if (kand !== spravna && kand >= k.od && kand <= k.do) jine.add(kand);
+  }
+  // úzký rozsah (známky): doplnit čímkoli z rozsahu
+  for (let v = k.od; jine.size < 3 && v <= k.do; v++) if (v !== spravna) jine.add(v);
+  return [...jine];
+}
 
 /* vygeneruje sadu čísel, jejíž průměr je celé číslo */
 function sadaSCelymPrumerem(pocet, od, do_) {
@@ -130,7 +183,7 @@ function srovnej() {
       Zelená čára je <b>průměr</b> — a když zmáčkneš „Srovnej“, uvidíš, proč se mu taky
       říká vyrovnání: co přečnívá, přesně zaplní díry.</div>
     <svg class="scena" id="scenaSl" viewBox="0 0 520 260" role="img"
-         aria-label="Sloupce dat a jejich prumer"></svg>
+         aria-label="Sloupce dat a jejich průměr"></svg>
     <div class="ovladace">
       <button id="btnSrovnej">⚖️ Srovnej do roviny</button>
       <button id="btnPridej">➕ Přidat sloupec</button>
@@ -228,14 +281,14 @@ function kresliSloupce() {
   $('vypocetSl').innerHTML =
     `<div class="radek">součet: ${SL.hodnoty.map(v => cele(v)).join(' + ')} = <b>${cele(soucet)}</b></div>
      <div class="radek">počet hodnot: <b>${n}</b></div>
-     <div class="radek vysledek">průměr = ${cele(soucet)} ÷ ${n} = ${cele(prumer)}</div>`;
+     <div class="radek vysledek">průměr = ${cele(soucet)} : ${n} ${Math.abs(prumer * 100 - Math.round(prumer * 100)) < 1e-6 ? '=' : '≈'} ${cele(prumer)}</div>`;
 
   const nad = SL.hodnoty.filter(v => v > prumer + 0.02).length;
   const vsechnyStejne = SL.hodnoty.every(v => Math.abs(v - prumer) < 0.05);
   $('poznamkaSl').innerHTML = vsechnyStejne
     ? 'Teď mají všechny sloupečky stejnou výšku — a ta výška <b>je</b> průměr. '
       + 'Součet se přerozdělil rovným dílem.'
-    : `Nad čárou je <b>${nad}</b> ${nad === 1 ? 'sloupeček' : 'sloupečky'}. `
+    : `Nad čárou ${nad >= 2 && nad <= 4 ? 'jsou' : 'je'} <b>${nad}</b> ${nad === 1 ? 'sloupeček' : nad <= 4 ? 'sloupečky' : 'sloupečků'}. `
       + 'To, co přečnívá nad průměrem, je přesně tolik, kolik chybí pod ním.';
 }
 
@@ -244,23 +297,18 @@ function spocitej() {
   const p = $('plocha');
   const k = Uloha.nahodne(KONTEXTY);
   const pocet = Uloha.nahodneCislo(3, 5);
-  const { cisla, prumer, soucet } = sadaSCelymPrumerem(pocet, 1, 20);
+  const { cisla, prumer, soucet } = sadaSCelymPrumerem(pocet, k.od, k.do);
 
   p.innerHTML = `<div class="zadani">Jaký je aritmetický průměr?</div>
     <div class="karta"><div class="kontext">${k.t}</div>
     <div class="cisla">${cisla.map(c => `<span>${c}</span>`).join('')}</div></div>`;
 
-  const jine = new Set();
-  let pokusu1 = 0;
-  while (jine.size < 3 && pokusu1++ < 200) {
-    const kand = prumer + Uloha.nahodne([-3, -2, -1, 1, 2, 3]);
-    if (kand !== prumer && kand > 0) jine.add(kand);
-  }
+  const jine = rusive(prumer, k, [-3, -2, -1, 1, 2, 3]);
   const odezva = document.createElement('div');
   odezva.className = 'odezva';
   Uloha.vyber({
     kam: p, odezva, trida: 'velke',
-    moznosti: Uloha.zamichej([prumer, ...jine]).map(v => ({ klic: String(v), popis: v + k.j })),
+    moznosti: Uloha.zamichej([prumer, ...jine]).map(v => ({ klic: String(v), popis: sJednotkou(v, k) })),
     spravnyKlic: String(prumer),
     zpravaOk: `✅ ${cisla.join(' + ')} = ${soucet}, a ${soucet} : ${pocet} = ${prumer}`,
     zpravaChyba: `Sečti všechna čísla a vyděl je počtem (${pocet}).`,
@@ -275,29 +323,24 @@ function chybejici() {
   const p = $('plocha');
   const k = Uloha.nahodne(KONTEXTY);
   const pocet = Uloha.nahodneCislo(3, 5);
-  const { cisla, prumer } = sadaSCelymPrumerem(pocet, 2, 20);
+  const { cisla, prumer } = sadaSCelymPrumerem(pocet, k.od, k.do);
   const kde = Uloha.nahodneCislo(0, pocet - 1);
   const hledane = cisla[kde];
 
-  p.innerHTML = `<div class="zadani">Průměr má být <b>${prumer}${k.j}</b>. Které číslo chybí?</div>
+  p.innerHTML = `<div class="zadani">Průměr má být <b>${sJednotkou(prumer, k)}</b>. Které číslo chybí?</div>
     <div class="karta"><div class="kontext">${k.t}</div>
     <div class="cisla">${cisla.map((c, i) =>
       i === kde ? '<span class="chybi">?</span>' : `<span>${c}</span>`).join('')}</div></div>`;
 
-  const jine = new Set();
-  let pokusu2 = 0;
-  while (jine.size < 3 && pokusu2++ < 200) {
-    const kand = hledane + Uloha.nahodne([-4, -3, -2, -1, 1, 2, 3, 4]);
-    if (kand !== hledane && kand > 0) jine.add(kand);
-  }
+  const jine = rusive(hledane, k, [-4, -3, -2, -1, 1, 2, 3, 4]);
   const odezva = document.createElement('div');
   odezva.className = 'odezva';
   Uloha.vyber({
     kam: p, odezva, trida: 'velke',
     moznosti: Uloha.zamichej([hledane, ...jine]).map(v => ({ klic: String(v), popis: String(v) })),
     spravnyKlic: String(hledane),
-    zpravaOk: `✅ Celkový součet musí být ${prumer} × ${pocet} = ${prumer * pocet}, takže chybí ${hledane}.`,
-    zpravaChyba: `Spočítej, jaký musí být celkový součet (${prumer} × ${pocet}), a odečti známá čísla.`,
+    zpravaOk: `✅ Celkový součet musí být ${prumer} · ${pocet} = ${prumer * pocet}, takže chybí ${hledane}.`,
+    zpravaChyba: `Spočítej, jaký musí být celkový součet (${prumer} · ${pocet}), a odečti známá čísla.`,
     poSpravne: napoprve => {
       skore.vyhodnot(napoprve);
       const el = p.querySelector('.chybi');
@@ -322,7 +365,7 @@ function porovnej() {
     .map(c => `<div style="height:${c / 20 * 120}px">${c}</div>`).join('')}</div>`;
 
   p.innerHTML = `<div class="zadani">Kdo má vyšší průměr?</div>
-    <div class="karta" style="flex-direction:row;gap:34px;align-items:flex-end">
+    <div class="karta" style="flex-direction:row;flex-wrap:wrap;justify-content:center;gap:16px 34px;align-items:flex-end;max-width:100%">
       <div><div class="kontext">${jmena[0]}</div>${sloupce(a)}</div>
       <div><div class="kontext">${jmena[1]}</div>${sloupce(b)}</div>
     </div>`;

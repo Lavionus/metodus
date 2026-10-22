@@ -6,6 +6,8 @@
 <title>📐 Trigonometrie v pravoúhlém trojúhelníku</title>
 <link rel="stylesheet" href="../common.css">
 <link rel="stylesheet" href="../vyuka.css">
+<link rel="stylesheet" href="../vyklad.css">
+<script src="../vyklad.js" defer></script>
 <script src="../theme.js"></script>
 <script src="../podpis.js" defer></script>
 <script src="../kostra.js" defer></script>
@@ -15,6 +17,43 @@
 <body>
   <h1>📐 Trigonometrie</h1>
   <p class="podtitul">Sinus, kosinus a tangens v pravoúhlém trojúhelníku. Po chybě máš druhý pokus a na konci přehled chyb.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Sinus, kosinus a tangens</summary>
+    <div class="obsah">
+      <p>Všechny pravoúhlé trojúhelníky se stejným ostrým úhlem α jsou <b>podobné</b> – liší se jen velikostí.
+        Poměry jejich stran proto závisí jen na úhlu, ne na velikosti trojúhelníku. Tyto poměry mají jména
+        a kalkulačka je zná pro každý úhel.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Názvy stran vůči úhlu α</h3><p><b>Přepona</b> leží naproti pravému úhlu.
+          <b>Protilehlá odvěsna</b> leží naproti úhlu α, <b>přilehlá odvěsna</b> je ta, která úhel α spolu s přeponou
+          svírá.</p></article>
+        <article class="vyklad-karta"><h3>Tři poměry</h3><p><b>sin α = protilehlá : přepona</b>,
+          <b>cos α = přilehlá : přepona</b>, <b>tg α = protilehlá : přilehlá</b>.</p></article>
+        <article class="vyklad-karta"><h3>Jak počítat</h3><p>Hledáš odvěsnu – vynásob přeponu: a = c · sin α,
+          b = c · cos α. Hledáš přeponu – vyděl odvěsnu: c = a : sin α.</p></article>
+      </div>
+      <p>Postup je vždy stejný: označ, která strana je vůči úhlu α protilehlá a která přilehlá, vyber poměr, ve kterém
+        je známá i hledaná strana, a dosaď. Na kalkulačce musí být nastavené <b>stupně</b> (DEG), jinak vyjdou
+        nesmysly. Kontrola: odvěsna musí vyjít kratší než přepona, protože sinus i kosinus ostrého úhlu jsou menší než 1.</p>
+      <aside class="zapamatuj">sin = protilehlá : přepona, cos = přilehlá : přepona, tg = protilehlá : přilehlá. Kalkulačka ve stupních.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: přilehlá odvěsna z přepony</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Přepona c = 12, úhel α = 40°. Vypočti přilehlou odvěsnu b na 1 desetinné místo.</p>
+      <ol class="kroky">
+        <li>Znám přeponu a hledám odvěsnu, která s ní svírá úhel α – tedy přilehlou.</li>
+        <li>Poměr s přilehlou odvěsnou a přeponou je kosinus: cos α = b : c, takže b = c · cos α.</li>
+        <li>Na kalkulačce ve stupních zjistím cos 40° ≐ 0,766.</li>
+        <li>Dosadím: b = 12 · 0,766 ≐ 9,19 a zaokrouhlím na 9,2.</li>
+        <li>Kontrola: 9,2 &lt; 12, odvěsna je kratší než přepona.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ b ≐ 9,2</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="odvesna">📏 Odvěsna z přepony</button>
@@ -37,6 +76,7 @@ const $ = id => document.getElementById(id);
 let rezim = 'mix';
 
 const nadesetiny = x => Math.round(x * 10) / 10;
+const cs = x => String(x).replace('.', ',');          // desetinná čárka
 
 function nakresli(a, b, c, hledana) {
   return function (karta) {
@@ -66,9 +106,9 @@ function nakresli(a, b, c, hledana) {
       ctx.fillStyle = zvyraz ? barvaZvyraz : barvaCary;
       ctx.fillText(text, x, y);
     };
-    popis(hledana === 'a' ? 'a = ?' : 'a = ' + a, x0 - 30, (y0 + y1) / 2, hledana === 'a');
-    popis(hledana === 'b' ? 'b = ?' : 'b = ' + b, (x0 + x1) / 2 - 18, y0 + 22, hledana === 'b');
-    popis(hledana === 'c' ? 'c = ?' : 'c = ' + c, (x0 + x1) / 2, (y0 + y1) / 2 - 8, hledana === 'c');
+    popis(hledana === 'a' ? 'a = ?' : 'a = ' + cs(a), x0 - 30, (y0 + y1) / 2, hledana === 'a');
+    popis(hledana === 'b' ? 'b = ?' : 'b = ' + cs(b), (x0 + x1) / 2 - 18, y0 + 22, hledana === 'b');
+    popis(hledana === 'c' ? 'c = ?' : 'c = ' + cs(c), (x0 + x1) / 2, (y0 + y1) / 2 - 8, hledana === 'c');
     popis('α', x1 - 26, y0 - 8, false);
   };
 }
@@ -87,18 +127,20 @@ function generuj(r) {
   else hledana = ['a', 'b', 'c'][Math.floor(Math.random() * 3)];
 
   if (hledana === 'a') {
-    return { zadani: `Přepona c = ${c}, úhel α = ${uhelSt}°. Vypočti odvěsnu <span class="zvyraz">a</span> (protilehlou) na 1 des. místo.`,
+    return { zadani: `Přepona c = ${cs(c)}, úhel α = ${uhelSt}°. Vypočti odvěsnu <span class="zvyraz">a</span> (protilehlou) na 1 des. místo.`,
              obrazekHtml: PLATNO, poVykresleni: nakresli(a, b, c, 'a'),
-             odpoved: a, tolerance: 0.15, napoveda: `a = c · sin α = ${c} · sin ${uhelSt}°` };
+             odpoved: a, tolerance: 0.15, napoveda: `a = c · sin α = ${cs(c)} · sin ${uhelSt}°` };
   }
   if (hledana === 'b') {
-    return { zadani: `Přepona c = ${c}, úhel α = ${uhelSt}°. Vypočti odvěsnu <span class="zvyraz">b</span> (přilehlou) na 1 des. místo.`,
+    return { zadani: `Přepona c = ${cs(c)}, úhel α = ${uhelSt}°. Vypočti odvěsnu <span class="zvyraz">b</span> (přilehlou) na 1 des. místo.`,
              obrazekHtml: PLATNO, poVykresleni: nakresli(a, b, c, 'b'),
-             odpoved: b, tolerance: 0.15, napoveda: `b = c · cos α = ${c} · cos ${uhelSt}°` };
+             odpoved: b, tolerance: 0.15, napoveda: `b = c · cos α = ${cs(c)} · cos ${uhelSt}°` };
   }
-  return { zadani: `Odvěsna a = ${a}, úhel α = ${uhelSt}°. Vypočti přeponu <span class="zvyraz">c</span> na 1 des. místo.`,
-           obrazekHtml: PLATNO, poVykresleni: nakresli(a, b, c, 'c'),
-           odpoved: c, tolerance: 0.3, napoveda: `c = a / sin α = ${a} / sin ${uhelSt}°` };
+  // přepona z vypsané (zaokrouhlené) odvěsny, ať výsledek sedí s tím, co žák počítá
+  const cZa = nadesetiny(a / Math.sin(uhel));
+  return { zadani: `Odvěsna a = ${cs(a)}, úhel α = ${uhelSt}°. Vypočti přeponu <span class="zvyraz">c</span> na 1 des. místo.`,
+           obrazekHtml: PLATNO, poVykresleni: nakresli(a, b, cZa, 'c'),
+           odpoved: cZa, tolerance: 0.15, napoveda: `c = a / sin α = ${cs(a)} / sin ${uhelSt}°` };
 }
 
 let serie = null;

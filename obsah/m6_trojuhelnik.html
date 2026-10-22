@@ -6,6 +6,8 @@
   <title>Trojúhelník – druhy a konstrukce</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -22,6 +24,45 @@
 <body>
   <h1>🔺 Trojúhelník – druhy a konstrukce</h1>
   <p class="podtitul">Pro 6. ročník: dělení podle stran i úhlů, trojúhelníková nerovnost a věty o konstrukci.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Druhy trojúhelníků a kdy trojúhelník existuje</summary>
+    <div class="obsah">
+      <p>Trojúhelník má tři vrcholy A, B, C, tři strany a, b, c a tři vnitřní úhly α, β, γ se součtem 180°.
+        Třídíme ho dvěma nezávislými způsoby – podle stran a podle úhlů. Jeden trojúhelník proto může být
+        třeba <b>rovnoramenný a zároveň pravoúhlý</b>.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Podle stran</h3><p><b>Různostranný</b> – všechny strany různé,
+          <b>rovnoramenný</b> – dvě strany stejné (ramena), <b>rovnostranný</b> – všechny tři stejné.</p></article>
+        <article class="vyklad-karta"><h3>Podle úhlů</h3><p><b>Ostroúhlý</b> – všechny úhly menší než 90°,
+          <b>pravoúhlý</b> – jeden úhel 90°, <b>tupoúhlý</b> – jeden úhel větší než 90°. Dva pravé nebo tupé úhly
+          mít nemůže, součet by přesáhl 180°.</p></article>
+        <article class="vyklad-karta"><h3>Trojúhelníková nerovnost</h3><p>Součet každých dvou stran je větší než
+          strana třetí. Stačí ověřit, že <b>dvě kratší strany</b> dají dohromady víc než nejdelší – ostatní součty
+          jsou pak větší samy.</p></article>
+        <article class="vyklad-karta"><h3>Věty o konstrukci</h3><p><b>sss</b> – tři strany, <b>sus</b> – dvě strany
+          a úhel jimi sevřený, <b>usu</b> – strana a dva úhly k ní přilehlé, <b>Ssu</b> – dvě strany a úhel
+          proti větší z nich.</p></article>
+      </div>
+      <p>Proč nerovnost platí? Představ si dvě kratší strany jako tyčky připevněné ke koncům nejdelší strany.
+        Když jsou dohromady stejně dlouhé nebo kratší, nedokážou se nad ní sejít ve vrcholu – „lehnou si“ na ni.</p>
+      <aside class="zapamatuj">Dvě kratší strany dohromady &gt; nejdelší strana, jinak trojúhelník nevznikne.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: dá se trojúhelník sestrojit?</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Dá se sestrojit trojúhelník se stranami a = 8 cm, b = 3 cm, c = 4 cm?</p>
+      <ol class="kroky">
+        <li>Najdu nejdelší stranu: a = 8 cm.</li>
+        <li>Sečtu dvě kratší strany: 3 + 4 = 7 cm.</li>
+        <li>Porovnám: 7 cm není větší než 8 cm, trojúhelníková nerovnost neplatí.</li>
+        <li>Představa: tyčky 3 cm a 4 cm se nad úsečkou 8 cm nesejdou, chybí jim 1 cm.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Nedá – 3 + 4 = 7, a to není víc než 8.</p>
+    </div>
+  </details>
 
   <div class="rezimy" id="rezimy">
     <button data-rezim="podleStran" class="active">📏 Podle stran</button>
@@ -70,11 +111,11 @@ function svgTrojuhelnik(body, znacky = '') {
 
 const TROJUHELNIKY = [
   { strany: [6, 6, 6], body: [[50, 140], [190, 140], [120, 20]], s: 'rovnostranny', u: 'ostrouhly' },
-  { strany: [7, 7, 4], body: [[70, 140], [170, 140], [120, 25]], s: 'rovnoramenny', u: 'ostrouhly' },
-  { strany: [5, 8, 6], body: [[40, 140], [200, 140], [150, 40]], s: 'ruznostranny', u: 'ostrouhly' },
+  { strany: [7, 7, 4], body: [[85, 145], [155, 145], [120, 28]], s: 'rovnoramenny', u: 'ostrouhly' },
+  { strany: [5, 6, 7], body: [[40, 140], [200, 140], [138, 44]], s: 'ruznostranny', u: 'ostrouhly' },
   { strany: [3, 4, 5], body: [[50, 140], [190, 140], [50, 40]], s: 'ruznostranny', u: 'pravouhly' },
-  { strany: [5, 5, 7], body: [[45, 130], [195, 130], [120, 45]], s: 'rovnoramenny', u: 'tupouhly' },
-  { strany: [4, 9, 7], body: [[30, 130], [210, 130], [80, 55]], s: 'ruznostranny', u: 'tupouhly' },
+  { strany: [5, 5, 8], body: [[40, 130], [200, 130], [120, 70]], s: 'rovnoramenny', u: 'tupouhly' },
+  { strany: [4, 9, 7], body: [[30, 135], [210, 135], [157, 75]], s: 'ruznostranny', u: 'tupouhly' },
   { strany: [6, 8, 10], body: [[50, 145], [210, 145], [50, 45]], s: 'ruznostranny', u: 'pravouhly' },
   { strany: [5, 5, 5], body: [[55, 135], [185, 135], [120, 28]], s: 'rovnostranny', u: 'ostrouhly' },
 ];
@@ -111,14 +152,15 @@ const podleUhlu = () => ulohaDruh(false);
 function nerovnost() {
   const p = $('plocha');
   const lze = Math.random() < 0.5;
-  let a, b, c;
-  if (lze) {
-    a = Uloha.nahodneCislo(4, 9); b = Uloha.nahodneCislo(4, 9);
-    c = Uloha.nahodneCislo(Math.abs(a - b) + 1, a + b - 1);
-  } else {
-    a = Uloha.nahodneCislo(2, 5); b = Uloha.nahodneCislo(2, 5);
-    c = a + b + Uloha.nahodneCislo(0, 3);
-  }
+  // Obě varianty ze stejného rozsahu délek, ať se odpověď nedá poznat podle velikosti čísel.
+  let x, y, z;
+  do {
+    x = Uloha.nahodneCislo(2, 9); y = Uloha.nahodneCislo(2, 9);
+    z = lze ? Uloha.nahodneCislo(Math.max(x, y) - Math.min(x, y) + 1, Math.min(12, x + y - 1))
+            : x + y + Uloha.nahodneCislo(0, 2);
+  } while (z < 2 || z > 12);
+  const [a, b, c] = Uloha.zamichej([x, y, z]);
+  const [k1, k2, nej] = [a, b, c].sort((m, n) => m - n);
   const platí = (a + b > c) && (a + c > b) && (b + c > a);
 
   p.innerHTML = `<div class="zadani">Dá se z těchto stran sestrojit trojúhelník?</div>
@@ -133,8 +175,8 @@ function nerovnost() {
     ],
     spravnyKlic: platí ? 'ano' : 'ne',
     zpravaOk: platí
-      ? `✅ ${a} + ${b} = ${a + b} > ${c} – nerovnost platí pro všechny dvojice.`
-      : `✅ ${Math.min(a, b)} + ${Math.max(a, b)} = ${a + b} není větší než ${c}, trojúhelník nevznikne.`,
+      ? `✅ ${k1} + ${k2} = ${k1 + k2} > ${nej} – součet dvou kratších stran je větší než nejdelší strana.`
+      : `✅ ${k1} + ${k2} = ${k1 + k2} není větší než ${nej}, trojúhelník nevznikne.`,
     zpravaChyba: 'Sečti dvě kratší strany a porovnej je s nejdelší.',
     poSpravne: skore.vyhodnot,
     dalsi: novaUloha,

@@ -6,6 +6,8 @@
   <title>Přejatá slova</title>
   <link rel="stylesheet" href="../common.css">
   <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
   <script src="../theme.js"></script>
   <script src="../podpis.js" defer></script>
   <script src="../kostra.js" defer></script>
@@ -23,6 +25,37 @@
   <h1>🌍 Přejatá slova</h1>
   <p class="podtitul">Pro 8. ročník: pravopis, význam, původ a skloňování slov přejatých z cizích jazyků.</p>
 
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Přejatá slova</summary>
+    <div class="obsah">
+      <p><b>Přejatá slova</b> přišla do češtiny z jiných jazyků – z latiny a řečtiny (univerzita, telefon), z němčiny (knedlík),
+        z francouzštiny (restaurace), z angličtiny (fotbal). Postupně se přizpůsobují češtině: píšeme je česky a skloňujeme podle českých vzorů.
+        Čím je slovo <b>zdomácnělejší</b>, tím víc se podobá domácím slovům.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Pravopis</h3><p>Zdomácnělá slova píšeme se <b>z</b> (univerzita, televize); u některých platí obě podoby (kurz i kurs, diskuse i diskuze). Po d, t, n píšeme často <b>i</b>, ale čteme tvrdě (organizace). Řecké ypsilon zůstává jako <b>y</b> (fyzika, gymnázium), th se zjednodušilo na <b>t</b> (architekt).</p></article>
+        <article class="vyklad-karta"><h3>Skloňování</h3><p>Slova na <b>-um</b> v ostatních pádech toto zakončení ztrácejí a jdou podle vzoru město: muzeum → v muzeu, vízum → bez víza. Slova na <b>-ma</b> přibírají <b>-t-</b>: téma → k tématu, drama → dramatu.</p></article>
+        <article class="vyklad-karta"><h3>Význam</h3><p>Mnohá přejatá slova mají český ekvivalent: import = dovoz, kooperace = spolupráce, kontinent = světadíl. Znát ho pomůže porozumět textu i vybrat vhodné slovo.</p></article>
+      </div>
+      <p>Proč si pravopis musíš často pamatovat? Přejaté slovo se neřídí vyjmenovanými slovy ani pravidly o tvrdých a měkkých souhláskách.
+        Fyzika má y po f, i když domácí slova mají po f i (film, fialka). Při nejistotě rozhoduje slovník (Pravidla českého pravopisu).</p>
+      <aside class="zapamatuj">Přejatá slova se přizpůsobují češtině. Podobu slova si zapamatuj nebo ověř ve slovníku; slova na -um skloňuj podle vzoru město bez -um (v muzeu), slova na -ma s -t- (k tématu).</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: skloňování slova na -um</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Doplň správný tvar slova <b>gymnázium</b>: „Studuje na pražském ___.“</p>
+      <ol class="kroky">
+        <li>Určím pád: studuje na kom, na čem? – <b>6. pád</b>.</li>
+        <li>Slovo končí na -um. Vím, že toto zakončení v ostatních pádech odpadá: zůstane základ <b>gymnázi-</b>.</li>
+        <li>Ke základu přidám koncovku 6. pádu <b>-u</b> stejně jako u slova muzeum (v muzeu): <b>gymnáziu</b>.</li>
+        <li>Odmítnu chybné tvary „gymnáziumu“ (-um neodpadlo) a „gymnázium“ (to je 1. pád).</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Studuje na pražském gymnáziu.</p>
+    </div>
+  </details>
+
   <div class="rezimy" id="rezimy">
     <button data-rezim="pravopis" class="active">✍️ Pravopis</button>
     <button data-rezim="vyznam">🔁 Český význam</button>
@@ -38,8 +71,8 @@
   </div>
 
   <p class="napoveda">
-    U <b>zdomácnělých</b> slov píšeme z (kurz, univerzita), u méně zdomácnělých se dnes většinou
-    připouštějí obě podoby (diskuse i diskuze). Slova na <b>-um</b> (muzeum, centrum) toto zakončení
+    U <b>zdomácnělých</b> slov píšeme z (univerzita, televize), u řady slov se dnes
+    připouštějí obě podoby (kurz i kurs, diskuse i diskuze). Slova na <b>-um</b> (muzeum, centrum) toto zakončení
     v ostatních pádech ztrácejí: <i>v muzeu, do centra</i>.
   </p>
 
@@ -62,12 +95,12 @@ const PRODLEVA = napoprve => (napoprve ? 2200 : 3400);
 /* Slovo s vynechaným místem; možnosti obsahují jen jednu spisovnou variantu. */
 const PRAVOPIS = [
   { pred: 'univer', mezera: 'z', za: 'ita', jine: ['s'], cele: 'univerzita', proc: 'zcela zdomácnělé slovo, píše se z' },
-  { pred: 'kur', mezera: 'z', za: '', jine: ['s'], cele: 'kurz', proc: 'zdomácnělá podoba se z' },
+  { pred: 'televi', mezera: 'z', za: 'e', jine: ['s'], cele: 'televize', proc: 'zcela zdomácnělé slovo, píše se jen z (u slov jako kurz/kurs nebo diskuse/diskuze jsou spisovné obě podoby)' },
   { pred: 'muzi', mezera: 'k', za: 'a', jine: ['c'], cele: 'muzika', proc: 'z latinského musica, česky se píše k' },
-  { pred: 'f', mezera: 'y', za: 'zika', jine: ['i'], cele: 'fyzika', proc: 'po f píšeme y – zapamatuj si jako výjimku z pravidel o i/y' },
+  { pred: 'f', mezera: 'y', za: 'zika', jine: ['i'], cele: 'fyzika', proc: 'z řeckého fysis (příroda) – y odpovídá řeckému ypsilonu; po f se jinak píše i (film, fialka), proto je třeba si slovo zapamatovat' },
   { pred: 'g', mezera: 'y', za: 'mnázium', jine: ['i'], cele: 'gymnázium', proc: 'z řeckého gymnasion' },
   { pred: 'ré', mezera: 'ž', za: 'isér', jine: ['z'], cele: 'režisér', proc: 'z francouzského régisseur' },
-  { pred: 'organ', mezera: 'i', za: 'zace', jine: ['y'], cele: 'organizace', proc: 'po měkkém n píšeme i' },
+  { pred: 'organ', mezera: 'i', za: 'zace', jine: ['y'], cele: 'organizace', proc: 'v přejatých slovech píšeme po d, t, n často i, ale čteme je tvrdě (organyzace) – podobu si zapamatuj' },
   { pred: 'ch', mezera: 'e', za: 'mie', jine: ['é'], cele: 'chemie', proc: 'první e je krátké' },
   { pred: 'kancel', mezera: 'á', za: 'ř', jine: ['a'], cele: 'kancelář', proc: 'dlouhé á' },
   { pred: 'prezent', mezera: 'a', za: 'ce', jine: ['á'], cele: 'prezentace', proc: 'krátké a uprostřed' },
@@ -163,13 +196,17 @@ function sklonovani() {
     moznosti: Uloha.zamichej([u.spravne, ...u.jine]).map(t => ({ klic: t, popis: t })),
     spravnyKlic: u.spravne,
     zpravaOk: '✅ Správně!',
-    zpravaChyba: 'Zkus slovo nahradit domácím vzorem: město → v městě, tedy muzeum → v muzeu.',
+    zpravaChyba: 'Zkus slovo skloňovat podle vzoru město: muzeum → v muzeu, motto → s mottem; téma → k tématu.',
     poSpravne: napoprve => {
       skore.vyhodnot(napoprve);
       p.querySelector('.mezera').textContent = u.spravne;
-      ukazPravidlo('📗', `<b>${u.zaklad}</b> → <span class="vysledek">${u.spravne}</span> —
-        zakončení -um (-a, -o) v ostatních pádech odpadá a slovo se skloňuje
-        podle domácího vzoru (město → v městě, tedy ${u.zaklad} → ${u.spravne}).`);
+      const vyklad = /um$/.test(u.zaklad)
+        ? `zakončení -um v ostatních pádech odpadá a slovo se skloňuje podle vzoru město
+           (${u.zaklad} → ${u.spravne})`
+        : /ma$/.test(u.zaklad)
+        ? `slova na -ma (téma, drama) přibírají v ostatních pádech -t-: ${u.zaklad} → ${u.spravne}`
+        : `slovo se skloňuje podle vzoru město (${u.zaklad} → ${u.spravne})`;
+      ukazPravidlo('📗', `<b>${u.zaklad}</b> → <span class="vysledek">${u.spravne}</span> — ${vyklad}.`);
     },
     prodleva: PRODLEVA,
     dalsi: novaUloha,
