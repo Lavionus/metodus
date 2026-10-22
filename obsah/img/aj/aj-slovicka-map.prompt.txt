@@ -1,0 +1,7 @@
+IMG-aj-02 · map
+
+Use case: scientific-educational. Square vocabulary flashcard for language learning. Friendly realistic watercolor and gouache with delicate contours on warm ivory paper and a subtle grounding shadow. Exactly one centered school object, fully visible with generous margin. No readable text, letters, numbers, equations, logo, brand, border, watermark or unrelated props. Subject: one rolled-edge physical wall map of an imaginary land with coastlines, rivers and terrain colors but no labels.
+
+Nástroj: OpenAI image_gen
+Datum: 2026-10-15
+Výstup: aj-slovicka-map.png, aj-slovicka-map.webp

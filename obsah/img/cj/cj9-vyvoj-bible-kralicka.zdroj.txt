@@ -1,0 +1,7 @@
+Název: Kralice.jpg
+Popis: titulní list prvního dílu Bible kralické, 1579
+Autor: kolektiv překladatelů a tiskařů Jednoty bratrské
+Zdroj: https://commons.wikimedia.org/wiki/File:Kralice.jpg
+Licence: public domain / PD-old
+Staženo: 2026-10-20
+Úpravy: automatická orientace, odstranění metadat, převod do projektového PNG a WebP; bez zvětšování zdroje.

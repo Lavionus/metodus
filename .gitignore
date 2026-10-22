@@ -1,0 +1,15 @@
+__pycache__/
+*.pyc
+.DS_Store
+
+# Originály ilustrací (PNG v plném rozlišení) zůstávají na disku vedle WebP,
+# ale na web nejdou – stránky používají jen WebP. Zálohy z úprav taky ne.
+obsah/img/**/*.png
+docs/zalohy-*/
+obsah/img/kapitola-7-2.zamek
+
+# Zálohy z úprav (soubor.bak-YYYYMMDD…, složka backups/) na web nepatří – úklid 22. 10. 2026
+*.bak
+*.bak-*
+backups/
+obsah/img/ikony/archy/*.log

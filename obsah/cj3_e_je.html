@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Psaní ě a je</title>
+  <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
+  <script src="../theme.js"></script>
+  <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
+  <script src="../rec.js"></script>
+  <script src="../uloha.js"></script>
+  <style>
+    .slovo-uloha { font-size: clamp(1.6rem, 7vw, 2.8rem); letter-spacing: 0.02em; }
+    .veta-uloha .hledane { color: var(--zvyraz-text); border-bottom: 2px solid var(--zvyraz-text); }
+    .moznosti button.ztlumeno { opacity: 0.35; }
+    .moznosti.pravidla button { text-align: left; }
+    .hranice { width: min(340px, 86vw); }
+    .hranice .text { fill: var(--text); font-weight: 700; font-family: inherit; }
+    .hranice .cast { fill: var(--accent); }
+    .hranice .cara { stroke: var(--warn); stroke-width: 3; stroke-dasharray: 5 4; }
+    .hranice .popis { fill: var(--text-faint); font-size: 12px; font-family: inherit; }
+  </style>
+</head>
+<body>
+  <h1>✍️ Psaní ě a je, mě a mně</h1>
+  <p class="podtitul">Pro 3.–6. ročník: bě, pě, vě, dě, tě, ně, mě × mně, objet, vjet a v jezeře.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Kdy píšeme ě a kdy je</summary>
+    <div class="obsah">
+      <p>Ve slovech <i>oběd</i> a <i>objet</i> slyšíme stejně [bje], přesto je píšeme jinak. Rozhoduje,
+        <b>z čeho je slovo složené</b>.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>bě, pě, vě</h3><p>Po <b>b, p, v</b> píšeme obvykle <b>ě</b>:
+          <i>oběd, běhat, pěna, pět, věda, svět</i>.</p></article>
+        <article class="vyklad-karta"><h3>ob-je, v-je</h3><p>Když se setká předpona <b>ob-</b> nebo <b>v-</b> se slovem na <b>j</b>,
+          píšeme <b>je</b>: <i>ob-jet, ob-jednat, ob-jevit, v-jet, v-jezd</i>. Stejně předložka:
+          <i>v jezeře, v jeskyni</i> – ta se píše zvlášť.</p></article>
+        <article class="vyklad-karta"><h3>dě, tě, ně</h3><p>Háček nad <b>ě</b> tu znamená měkké <b>ď, ť, ň</b>:
+          <i>děti, tělo, něco</i>. Slyšíš-li tvrdě, píšeš <b>e</b>: <i>deska, teta, nebe</i>.</p></article>
+        <article class="vyklad-karta"><h3>mě × mně</h3><p><b>mně</b> píšeme u zájmena <b>já</b> ve 3. a 6. pádě
+          (<i>dej mně, o mně</i>) a tam, kde příbuzné slovo má <b>mn/men</b>: <i>zapomenout → zapomněl</i>.
+          Jinde <b>mě</b>: <i>město, měsíc, vidíš mě</i>.</p></article>
+      </div>
+      <svg class="hranice" viewBox="0 0 340 110" role="img" aria-label="Slovo objet se dělí na ob a jet, slovo oběd se nedělí">
+        <text class="text" x="20" y="44" font-size="32"><tspan class="cast">ob</tspan>jet</text>
+        <line class="cara" x1="58" y1="10" x2="58" y2="56"/>
+        <text class="popis" x="20" y="76">ob- + jet → je</text>
+        <text class="text" x="200" y="44" font-size="32">oběd</text>
+        <text class="popis" x="200" y="76">nedá se rozdělit → ě</text>
+        <text class="popis" x="20" y="102">Za předponou ob- stojí celé slovo „jet“ – proto je.</text>
+      </svg>
+      <aside class="zapamatuj">Zkus slovo rozdělit: ob-/v- + slovo na j → <b>je</b>, jinak <b>ě</b>.
+        U zájmena já dosaď <b>ty</b>: tobě → <b>mně</b>, tebe → <b>mě</b>.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: doplň ě, je, mě, mně</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Doplň: „Zapo__l jsem doma penál, půjč __ tužku. Po ob__dě ob__deme rybník.“</p>
+      <ol class="kroky">
+        <li><i>zapo__l</i> – příbuzné slovo je <b>zapomenout</b>, má v sobě <b>men</b> → <b>zapomněl</b>.</li>
+        <li><i>půjč __</i> – zájmeno já: půjč komu? Dosadím <b>tobě</b> → 3. pád → <b>mně</b>.</li>
+        <li><i>ob__dě</i> – slovo oběd nejde rozdělit na ob- + slovo na j → po b píšu <b>ě</b>: <b>obědě</b>.</li>
+        <li><i>ob__deme</i> – předpona <b>ob-</b> + <b>jedeme</b> → <b>objedeme</b>.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Zapomněl jsem doma penál, půjč mně tužku. Po obědě objedeme rybník.</p>
+    </div>
+  </details>
+
+  <div class="rezimy" id="rezimy">
+    <button data-rezim="eje" class="active">✏️ Doplň ě, nebo je</button>
+    <button data-rezim="dtn">🔤 dě, tě, ně</button>
+    <button data-rezim="mne">🙋 mě, nebo mně</button>
+    <button data-rezim="proc">❓ Vysvětli proč</button>
+  </div>
+
+  <div class="plocha" id="plocha"></div>
+
+  <div class="ovladani">
+    <button class="hlavni" id="btnDalsi">Přeskočit →</button>
+    <button id="btnNapoveda">💡 Nápověda</button>
+    <span class="serie" id="serie"></span>
+    <span class="skore" id="skore"></span>
+  </div>
+
+  <p class="napoveda">
+    📌 <b>bě, pě, vě</b>: oběd, pěna, věda. <b>bje, vje</b> jen na hranici <b>ob-/v-</b> a slova na j: objet, objednat, vjezd;
+    předložka zvlášť: <b>v jezeře</b>. <b>dě, tě, ně</b> = měkké ď, ť, ň (děti, tělo, něco); tvrdě <b>de, te, ne</b> (deska, nebe).
+    <b>mně</b>: já ve 3. a 6. pádě (dosaď tobě, nebo mi) a slova s mn/men (zapomněl, vzpomněl, domněnka).
+    <b>mě</b>: já ve 2. a 4. pádě (dosaď tebe, nebo mne) a ostatní slova (město, měsíc, změna).
+    Klávesy: <kbd>H</kbd> nápověda · <kbd>Enter</kbd> další.
+  </p>
+
+<script>
+const $ = id => document.getElementById(id);
+const skore = Uloha.skore('metodus_cj3_e_je', $('skore'));
+let rezim = 'eje';
+let serie = 0, napovedaVidet = false, aktualni = null, posledni = null;
+
+/* Pravidla: popis do tlačítka a vysvětlení po odpovědi. */
+const PRAVIDLA = {
+  bpv: { popis: 'bě, pě, vě – po b, p, v píšeme ě', proc: 'slovo nejde rozdělit na předponu ob-/v- a slovo na j, proto po b, p, v píšeme ě' },
+  predpona: { popis: 'předpona ob- nebo v- + slovo začínající na j', proc: 'setká se předpona ob-/v- se slovem, které začíná na j – proto je' },
+  predlozka: { popis: 'předložka v zvlášť + slovo začínající na je-', proc: 'v je tu samostatná předložka a slovo za ní začíná na je-' },
+  dtn: { popis: 'měkké ď, ť, ň – píšeme dě, tě, ně', proc: 'slyšíme měkké ď, ť, ň – měkkost zapíšeme jako dě, tě, ně' },
+  tvrde: { popis: 'tvrdé d, t, n – píšeme de, te, ne', proc: 'slyšíme tvrdé d, t, n – píšeme de, te, ne' },
+  mekoren: { popis: 'mě – v příbuzných slovech není mn ani men', proc: 'v příbuzných slovech není skupina mn ani men, proto píšeme mě' },
+  mnkoren: { popis: 'mně – v příbuzném slově je mn nebo men', proc: 'v příbuzném slově je skupina mn nebo men, proto píšeme mně' },
+  pad3: { popis: 'mně – zájmeno já ve 3. pádě (tobě)', proc: 'zájmeno já ve 3. pádě (komu?) – dosadíš tobě nebo mi, píšeš mně' },
+  pad6: { popis: 'mně – zájmeno já v 6. pádě (o tobě)', proc: 'zájmeno já v 6. pádě (o kom?) – dosadíš o tobě, píšeš mně' },
+  pad2: { popis: 'mě – zájmeno já ve 2. pádě (tebe)', proc: 'zájmeno já ve 2. pádě (koho?) – dosadíš tebe nebo mne, píšeš mě' },
+  pad4: { popis: 'mě – zájmeno já ve 4. pádě (tebe)', proc: 'zájmeno já ve 4. pádě (koho?) – dosadíš tebe nebo mne, píšeš mě' },
+};
+const SKUPINA = { bpv: 'eje', predpona: 'eje', predlozka: 'eje', dtn: 'dtn', tvrde: 'dtn',
+  mekoren: 'mne', mnkoren: 'mne', pad3: 'mne', pad6: 'mne', pad2: 'mne', pad4: 'mne' };
+
+/* Úlohy: s = zápis s mezerou _, r = pravidlo, o = vysvětlující tvar (příbuzné slovo, rozdělení). */
+const ULOHY = [
+  /* bě, pě, vě */
+  { s: 'ob_d', r: 'bpv' }, { s: 'b_hat', r: 'bpv' }, { s: 'b_žet', r: 'bpv' }, { s: 'ob_ ruce', r: 'bpv' },
+  { s: 'v_da', r: 'bpv' }, { s: 'v_c', r: 'bpv' }, { s: 'sv_t', r: 'bpv' }, { s: 'kv_tina', r: 'bpv' },
+  { s: 'v_ž', r: 'bpv' }, { s: 'v_trat', r: 'bpv' }, { s: 'p_kný', r: 'bpv' }, { s: 'p_t', r: 'bpv' },
+  { s: 'op_t', r: 'bpv' }, { s: 'zp_v', r: 'bpv' }, { s: 'p_na', r: 'bpv' }, { s: 'p_šina', r: 'bpv' },
+  { s: 'b_lásek', r: 'bpv' }, { s: 'v_tev', r: 'bpv' }, { s: 'pov_st', r: 'bpv' }, { s: 'v_rný', r: 'bpv' },
+  /* ob-/v- + slovo na j */
+  { s: 'ob_dnat', r: 'predpona', o: 'ob- + jednat' }, { s: 'ob_vit', r: 'predpona', o: 'ob- + jevit' },
+  { s: 'ob_m', r: 'predpona', o: 'ob- + jem (jako v slově objímat)' }, { s: 'ob_t', r: 'predpona', o: 'ob- + jet' },
+  { s: 'v_t', r: 'predpona', o: 'v- + jet' }, { s: 'v_zd', r: 'predpona', o: 'v- + jezd (jezdit)' },
+  { s: 'ob_zd', r: 'predpona', o: 'ob- + jezd (jezdit)' }, { s: 'ob_snit', r: 'predpona', o: 'ob- + jasnit (jasný)' },
+  { s: 'ob_dnávka', r: 'predpona', o: 'ob- + jednávka (jednat)' }, { s: 'v_la do garáže', r: 'predpona', o: 'v- + jela' },
+  { s: 'ob_li jezero', r: 'predpona', o: 'ob- + jeli' },
+  /* předložka v + slovo na je- */
+  { s: 'Ryby plavou v_zeře.', r: 'predlozka', o: 'v + jezeře' }, { s: 'Netopýři spí v_skyni.', r: 'predlozka', o: 'v + jeskyni' },
+  { s: 'Sedíme v_dné lavici.', r: 'predlozka', o: 'v + jedné' }, { s: 'Sešit je v_ho tašce.', r: 'predlozka', o: 'v + jeho' },
+  { s: 'Bydlí v_jich domě.', r: 'predlozka', o: 'v + jejich' },
+  /* dě, tě, ně × de, te, ne */
+  { s: 'd_ti', r: 'dtn' }, { s: 't_lo', r: 'dtn' }, { s: 'n_co', r: 'dtn' }, { s: 'd_lat', r: 'dtn' },
+  { s: 't_šit se', r: 'dtn' }, { s: 'n_mý', r: 'dtn' }, { s: 't_sto', r: 'dtn' }, { s: 'd_da', r: 'dtn' },
+  { s: 'od_v', r: 'dtn' }, { s: 'n_jaký', r: 'dtn' }, { s: 'lod_', r: 'dtn' },
+  { s: 'd_ska', r: 'tvrde' }, { s: 'n_be', r: 'tvrde' }, { s: 't_lefon', r: 'tvrde' }, { s: 'd_n', r: 'tvrde' },
+  { s: 't_nký', r: 'tvrde' }, { s: 'n_su', r: 'tvrde' }, { s: 't_rč', r: 'tvrde' }, { s: 'n_topýr', r: 'tvrde' },
+  { s: 't_plo', r: 'tvrde' }, { s: 'd_vět', r: 'tvrde' }, { s: 't_ta', r: 'tvrde' }, { s: 'd_štník', r: 'tvrde' },
+  /* mě × mně ve slovech */
+  { s: '_sto', r: 'mekoren', o: 'město, městský – žádné mn' }, { s: '_síc', r: 'mekoren', o: 'měsíc, měsíční – žádné mn' },
+  { s: 'z_na', r: 'mekoren', o: 'měnit, výměna – žádné mn' }, { s: 'ná_stí', r: 'mekoren', o: 'náměstí, město – žádné mn' },
+  { s: '_kký', r: 'mekoren', o: 'měkký, měknout – žádné mn' }, { s: '_řit', r: 'mekoren', o: 'měřit, měřítko – žádné mn' },
+  { s: 'u_t', r: 'mekoren', o: 'umět, umění – žádné mn' }, { s: 's_t', r: 'mekoren', o: 'smět, smí – žádné mn' },
+  { s: 'Pes _l hlad.', r: 'mekoren', o: 'měl od slovesa mít – žádné mn' }, { s: 'rozu_l', r: 'mekoren', o: 'rozumět, rozum – žádné mn' },
+  { s: 'zapo_l', r: 'mnkoren', o: 'zapomenout' }, { s: 'vzpo_l', r: 'mnkoren', o: 'vzpomenout' },
+  { s: 'připo_l', r: 'mnkoren', o: 'připomenout' }, { s: 'do_nka', r: 'mnkoren', o: 'domnívat se' },
+  { s: 'rozpo_la se', r: 'mnkoren', o: 'rozpomenout se' },
+  /* zájmeno já */
+  { s: 'Dej _ tu knihu.', r: 'pad3', o: 'dej tobě' }, { s: 'Pojď ke _.', r: 'pad3', o: 'ke tobě' },
+  { s: 'Pomoz _ s úkolem.', r: 'pad3', o: 'pomoz tobě' }, { s: 'Kvůli _ jsme přišli pozdě.', r: 'pad3', o: 'kvůli tobě' },
+  { s: 'Je _ zima.', r: 'pad3', o: 'je tobě zima' }, { s: 'Napiš _ dopis.', r: 'pad3', o: 'napiš tobě' },
+  { s: 'Mluvili o _.', r: 'pad6', o: 'o tobě' }, { s: 'Na _ to nezáleží.', r: 'pad6', o: 'na tobě' },
+  { s: 'Při _ se nemusíš bát.', r: 'pad6', o: 'při tobě' }, { s: 'Šel po _ pes.', r: 'pad6', o: 'po tobě' },
+  { s: 'Bez _ nikam nechoď.', r: 'pad2', o: 'bez tebe' }, { s: 'Bojí se _.', r: 'pad2', o: 'bojí se tebe' },
+  { s: 'Přespal u _.', r: 'pad2', o: 'u tebe' }, { s: 'Sedni si vedle _.', r: 'pad2', o: 'vedle tebe' },
+  { s: 'Vidíš _?', r: 'pad4', o: 'vidíš tebe' }, { s: 'Počkej na _.', r: 'pad4', o: 'na tebe' },
+  { s: 'Pozvali _ na oslavu.', r: 'pad4', o: 'pozvali tebe' }, { s: 'Ten dárek je pro _.', r: 'pad4', o: 'pro tebe' },
+];
+
+/* Co se do mezery doplňuje: klíč → zapsaný text. */
+const VYPLN = {
+  eje: { 'ě': 'ě', 'je': 'je' },
+  predlozka: { 'ě': 'ě', 'je': ' je' },
+  dtn: { 'ě': 'ě', 'e': 'e' },
+  mne: { 'ě': 'mě', 'ně': 'mně' },
+};
+const MOZNOSTI = { eje: ['ě', 'je'], dtn: ['ě', 'e'], mne: ['ě', 'ně'] };
+const POPIS_MOZNOSTI = { 'ě': 'ě', 'je': 'je', 'e': 'e', 'ně': 'mně' };
+
+function spravnyKlic(u) {
+  if (u.r === 'bpv' || u.r === 'dtn' || u.r === 'mekoren' || u.r === 'pad2' || u.r === 'pad4') return 'ě';
+  if (u.r === 'predpona' || u.r === 'predlozka') return 'je';
+  if (u.r === 'tvrde') return 'e';
+  return 'ně';
+}
+const vyplnPro = u => (u.r === 'predlozka' ? VYPLN.predlozka : VYPLN[SKUPINA[u.r]]);
+const popisMoznosti = (u, k) => (SKUPINA[u.r] === 'mne' ? (k === 'ě' ? 'mě' : 'mně') : POPIS_MOZNOSTI[k]);
+const jeVeta = u => /[.?!]$/.test(u.s);
+
+/* Zápis slova s mezerou; doplneno = klíč doplněné možnosti, zvyrazni = hotové slovo se zvýrazněním. */
+function zapisHTML(u, doplneno, trida = 'mezera doplneno') {
+  const v = vyplnPro(u);
+  return u.s.split('_').map((kus, i, pole) => {
+    if (i === pole.length - 1) return kus;
+    if (doplneno === undefined) return kus + '<span class="mezera prazdna">?</span>';
+    const t = v[doplneno];
+    return kus + (t.startsWith(' ') ? ' ' : '') + `<span class="${trida}">${t.trim()}</span>`;
+  }).join('');
+}
+const hotoveSlovo = u => {
+  const v = vyplnPro(u)[spravnyKlic(u)];
+  return u.s.split('_').join(v);
+};
+
+function vyberUlohu(filtr) {
+  const kandidati = ULOHY.filter(filtr);
+  let u;
+  do { u = Uloha.nahodne(kandidati); } while (u === posledni && kandidati.length > 1);
+  posledni = u;
+  return u;
+}
+
+/* ---- společné díly -------------------------------------------------------------- */
+function odezvaEl() { const d = document.createElement('div'); d.className = 'odezva'; return d; }
+function vysvetleni(u) {
+  const pr = PRAVIDLA[u.r];
+  const overeni = u.o ? ` <span class="vysledek">(${u.o})</span>` : '';
+  return `<b>${hotoveSlovo(u)}</b> – ${pr.proc}.${overeni}`;
+}
+function hotovo(p, napoprve, u) {
+  skore.vyhodnot(napoprve);
+  serie = napoprve ? serie + 1 : 0;
+  $('serie').textContent = serie >= 3 ? '🔥 série ' + serie : '';
+  const tip = p.querySelector('.pravidlo.tip');
+  if (tip) tip.remove();
+  const el = document.createElement('div');
+  el.className = 'pravidlo ok';
+  el.innerHTML = `<span class="znak">📏</span><div>${vysvetleni(u)}</div>`;
+  p.appendChild(el);
+}
+const PRODLEVA = napoprve => (napoprve ? 2200 : 3200);
+
+/* Proč je zvolená možnost špatně – podle pravidla, které platí. */
+function procSpatne(u, k) {
+  const spatne = u.s.split('_').join(vyplnPro(u)[k]).trim();
+  const proc = {
+    bpv: 'tohle slovo nejde rozdělit na předponu ob-/v- a slovo na j, takže je tu nepatří',
+    predpona: `slovo se skládá z předpony a slova na j (${u.o}), takže ě tu nepatří`,
+    predlozka: `v je samostatná předložka a slovo za ní začíná na je- (${u.o})`,
+    dtn: 'vyslov si slovo: slyšíš měkké ď, ť, ň, a to se zapisuje ě',
+    tvrde: 'vyslov si slovo: slyšíš tvrdé d, t, n, takže ě by tu nesedělo',
+    mekoren: `v příbuzných slovech není mn ani men (${u.o})`,
+    mnkoren: `příbuzné slovo ${u.o} má v sobě mn/men`,
+    pad3: `je to 3. pád zájmena já – zkus dosadit: ${u.o}`,
+    pad6: `je to 6. pád zájmena já – zkus dosadit: ${u.o}`,
+    pad2: `je to 2. pád zájmena já – zkus dosadit: ${u.o}`,
+    pad4: `je to 4. pád zájmena já – zkus dosadit: ${u.o}`,
+  }[u.r];
+  return `„${spatne}“ je špatně: ${proc}.`;
+}
+
+/* ---- doplňovací režimy (ě/je, dě/tě/ně, mě/mně) ------------------------------------ */
+function doplnovani(skupina) {
+  const p = $('plocha');
+  const u = vyberUlohu(x => SKUPINA[x.r] === skupina);
+  const spravny = spravnyKlic(u);
+  aktualni = { rezim, u, spravny };
+  const zadani = { eje: 'Doplň ě, nebo je.', dtn: 'Doplň ě, nebo e.', mne: 'Doplň mě, nebo mně.' }[skupina];
+  p.innerHTML = `<div class="zadani">${zadani}</div>
+    <div class="karta"><div class="veta-uloha ${jeVeta(u) ? '' : 'slovo-uloha'}" id="slovo">${zapisHTML(u)}</div></div>`;
+  const odezva = odezvaEl();
+  Uloha.vyber({
+    kam: p, odezva, trida: 'velke',
+    moznosti: MOZNOSTI[skupina].map(k => ({ klic: k, popis: popisMoznosti(u, k) })),
+    spravnyKlic: spravny,
+    zpravaOk: '✅ Správně!',
+    zpravaChyba: k => procSpatne(u, k),
+    poSpravne: napoprve => {
+      $('slovo').innerHTML = zapisHTML(u, spravny);
+      hotovo(p, napoprve, u);
+    },
+    prodleva: PRODLEVA, dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+const eje = () => doplnovani('eje');
+const dtn = () => doplnovani('dtn');
+const mne = () => doplnovani('mne');
+
+/* ---- Vysvětli proč ------------------------------------------------------------------- */
+function proc() {
+  const p = $('plocha');
+  const u = vyberUlohu(() => true);
+  /* dvě záměny ze stejné skupiny pravidel, jedna odjinud */
+  const stejna = Uloha.zamichej(Object.keys(PRAVIDLA).filter(k => k !== u.r && SKUPINA[k] === SKUPINA[u.r])).slice(0, 2);
+  const jina = Uloha.zamichej(Object.keys(PRAVIDLA).filter(k => SKUPINA[k] !== SKUPINA[u.r]));
+  const nabidka = [u.r, ...stejna, ...jina].slice(0, 4);
+  aktualni = { rezim, u, spravny: u.r };
+  p.innerHTML = `<div class="zadani">Proč se zvýrazněné místo píše právě takhle?</div>
+    <div class="karta"><div class="veta-uloha ${jeVeta(u) ? '' : 'slovo-uloha'}">${zapisHTML(u, spravnyKlic(u), 'hledane')}</div></div>`;
+  const odezva = odezvaEl();
+  Uloha.vyber({
+    kam: p, odezva, trida: 'pravidla',
+    moznosti: Uloha.zamichej(nabidka).map(k => ({ klic: k, popis: PRAVIDLA[k].popis })),
+    spravnyKlic: u.r,
+    zpravaOk: '✅ Přesně tak!',
+    zpravaChyba: k => {
+      if (SKUPINA[k] !== SKUPINA[u.r]) return `Ne – tohle pravidlo se týká jiného místa ve slově, než je zvýrazněné.`;
+      return `Ne – ${PRAVIDLA[k].popis} tu neplatí. Podívej se ještě jednou, ${{
+        eje: 'jestli jde slovo rozdělit na předponu nebo předložku a slovo na j.',
+        dtn: 'jak souhlásku vyslovuješ – měkce, nebo tvrdě?',
+        mne: 'jestli jde o zájmeno já (a v jakém pádě), nebo o jiné slovo.',
+      }[SKUPINA[u.r]]}`;
+    },
+    poSpravne: napoprve => hotovo(p, napoprve, u),
+    prodleva: PRODLEVA, dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+/* ---- nápověda: postup, ne výsledek ----------------------------------------------------- */
+function napoveda() {
+  if (!aktualni || napovedaVidet) return;
+  const p = $('plocha');
+  const sk = SKUPINA[aktualni.u.r];
+  const text = {
+    eje: 'Zkus slovo rozdělit. Stojí na začátku předpona ob- nebo v- (případně předložka v) a za ní slovo, které začíná na j? Pak je. Jinak po b, p, v píšeš ě.',
+    dtn: 'Vyslov slovo pomalu nahlas. Slyšíš měkce ďe, ťe, ňe (jako ve slovech ďábel, ťukat)? Pak ě. Slyšíš tvrdě de, te, ne? Pak e.',
+    mne: 'Je to zájmeno já? Dosaď místo něj ty: tobě → mně, tebe → mě. Je to jiné slovo? Hledej příbuzné slovo – má v sobě mn nebo men?',
+  }[sk];
+  const el = document.createElement('div');
+  el.className = 'pravidlo tip';
+  el.innerHTML = `<span class="znak">💡</span><div>${text}</div>`;
+  p.appendChild(el);
+  if (aktualni.rezim === 'proc') {
+    const spatne = Uloha.zamichej([...p.querySelectorAll('.moznosti button')]
+      .filter(b => b.dataset.klic !== aktualni.spravny));
+    spatne.slice(0, Math.floor(spatne.length / 2)).forEach(b => { b.disabled = true; b.classList.add('ztlumeno'); });
+  }
+  napovedaVidet = true;
+}
+
+/* ---- ovládání ------------------------------------------------------------------------- */
+const REZIMY = { eje, dtn, mne, proc };
+function novaUloha() {
+  napovedaVidet = false;
+  REZIMY[rezim]();
+}
+document.querySelectorAll('#rezimy button').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('#rezimy button').forEach(x => x.classList.remove('active'));
+  b.classList.add('active');
+  rezim = b.dataset.rezim;
+  posledni = null;
+  novaUloha();
+}));
+$('btnDalsi').addEventListener('click', novaUloha);
+$('btnNapoveda').addEventListener('click', napoveda);
+document.addEventListener('keydown', e => {
+  if (e.target instanceof Element && e.target.closest('summary, input, textarea')) return;
+  if (e.key === 'ArrowRight' || e.key === 'Enter') { e.preventDefault(); novaUloha(); return; }
+  if (e.key === 'h' || e.key === 'H') napoveda();
+});
+
+novaUloha();
+</script>
+</body>
+</html>

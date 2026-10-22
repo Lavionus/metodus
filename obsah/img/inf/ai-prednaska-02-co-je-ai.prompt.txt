@@ -1,0 +1,2 @@
+Společné zadání: ai-prednaska.prompt.txt
+Data různých druhů vstupují do modelu, nalezené vzory vytvářejí nový obraz, zvuk a textové bloky.

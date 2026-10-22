@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>20. století v našich dějinách</title>
+  <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
+  <script src="../theme.js"></script>
+  <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
+  <script src="../rec.js"></script>
+  <script src="../uloha.js"></script>
+  <style>
+    .udalost { max-width: 560px; font-size: 1.05rem; line-height: 1.55; }
+    .rok { font-size: clamp(1.8rem, 7vw, 2.6rem); font-weight: 700; color: var(--accent); }
+    .osoba { font-size: 1.3rem; font-weight: 700; }
+    .osa { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; align-items: center; min-height: 46px; }
+    .osa .bod {
+      background: var(--accent-soft); border: 2px solid var(--accent); border-radius: 8px;
+      padding: 7px 11px; font-size: 0.84rem; font-weight: 600;
+    }
+    .osa .sipka { color: var(--text-faint); }
+    .dobovy-snimhek { width: min(100%, 620px); max-height: 330px; object-fit: contain; border-radius: 10px; background: #191919; }
+    .pramen { margin-top: 7px; color: var(--text-faint); font-size: 0.82rem; }
+  </style>
+</head>
+<body>
+  <h1>🕰️ 20. století v našich dějinách</h1>
+  <p class="podtitul">Pro 5. ročník: od vzniku Československa po sametovou revoluci.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Mezníky 20. století</summary>
+    <div class="obsah">
+      <p>20. století jsou roky 1901 až 2000. Naši prababičky a pradědové v něm zažili dvě světové války,
+        vznik vlastního státu, ztrátu svobody i její návrat. Důležitým událostem, které změnily život všech lidí,
+        říkáme <b>mezníky</b>.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Vlastní stát</h3><p><b>1918</b> – po první světové válce vzniklo
+          <b>Československo</b>. Prvním prezidentem byl <b>T. G. Masaryk</b>.</p></article>
+        <article class="vyklad-karta"><h3>Válka</h3><p><b>1938</b> Mnichovská dohoda nám vzala pohraničí.
+          <b>1939–1945</b> druhá světová válka, země byla obsazená jako protektorát.</p></article>
+        <article class="vyklad-karta"><h3>Bez svobody</h3><p><b>1948</b> převzali moc komunisté.
+          <b>1968</b> vojska Varšavské smlouvy obsadila Československo a ukončila pražské jaro.</p></article>
+        <article class="vyklad-karta"><h3>Zase svobodní</h3><p><b>1989</b> sametová revoluce, prezidentem se stal <b>Václav Havel</b>.
+          <b>1993</b> se stát rozdělil na Česko a Slovensko.</p></article>
+      </div>
+      <p>Jak si letopočty zapamatovat? Spoj si je do příběhu: stát vznikl (1918) → přišla válka (1939) → válka skončila (1945)
+        → přišli komunisté (1948) → obsazení (1968) → svoboda (1989) → dva státy (1993).</p>
+      <p>Typická chyba: plést si <b>1938</b> a <b>1939</b>. V roce 1938 byla Mnichovská dohoda, válka začala až o rok později.</p>
+      <aside class="zapamatuj">1918 vznik Československa · 1939–1945 válka · 1948 komunisté · 1968 okupace ·
+        1989 sametová revoluce · 1993 Česká republika.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: seřaď události</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Seřaď od nejstarší po nejnovější: sametová revoluce · vznik Československa ·
+        moc převzali komunisté · skončila druhá světová válka.</p>
+      <ol class="kroky">
+        <li>Ke každé události připíšu rok: sametová revoluce 1989, vznik Československa 1918, komunisté 1948, konec války 1945.</li>
+        <li>Najdu nejmenší číslo: 1918. Vznik Československa jde první.</li>
+        <li>Pak 1945 a 1948 – válka skončila dřív, než přišli komunisté.</li>
+        <li>Nakonec největší číslo 1989 – sametová revoluce.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ 1918 vznik Československa → 1945 konec války → 1948 komunisté → 1989 sametová revoluce.</p>
+    </div>
+  </details>
+
+  <div class="rezimy" id="rezimy">
+    <button data-rezim="rokUdalost" class="active">📅 Kdy se to stalo</button>
+    <button data-rezim="coSeStalo">📜 Co se tehdy stalo</button>
+    <button data-rezim="osobnosti">👤 Kdo to byl</button>
+    <button data-rezim="poradi">↕️ Seřaď události</button>
+  </div>
+
+  <div class="plocha" id="plocha"></div>
+
+  <div class="ovladani">
+    <button class="hlavni" id="btnDalsi">Přeskočit →</button>
+    <span class="skore" id="skore"></span>
+  </div>
+
+  <p class="napoveda">
+    Hlavní mezníky: <b>1918</b> vznik Československa · <b>1939–1945</b> druhá světová válka ·
+    <b>1948</b> nástup komunistické vlády · <b>1968</b> okupace vojsky Varšavské smlouvy ·
+    <b>1989</b> sametová revoluce · <b>1993</b> vznik České republiky.
+  </p>
+
+<script>
+const $ = id => document.getElementById(id);
+const skore = Uloha.skore('metodus_prv5_dejiny20', $('skore'));
+let rezim = 'rokUdalost';
+
+const UDALOSTI = [
+  { rok: '1914', t: 'začala první světová válka', poradi: 1 },
+  { rok: '1918', t: 'vzniklo samostatné Československo', poradi: 2, img: 'img/prv/prv5-dejiny-1918.webp', alt: 'Dav na Václavském náměstí při vyhlášení Československa 28. října 1918.' },
+  { rok: '1938', t: 'Mnichovská dohoda odtrhla pohraničí', poradi: 3, img: 'img/prv/prv5-dejiny-mobilizace.webp', alt: 'Českoslovenští záložníci nastupují při mobilizaci v září 1938.' },
+  { rok: '1939', t: 'začala druhá světová válka a vznikl protektorát', poradi: 4 },
+  { rok: '1945', t: 'skončila druhá světová válka', poradi: 5, img: 'img/prv/prv5-dejiny-osvobozeni.webp', alt: 'Pražané vítají maršála Koněva v květnu 1945.' },
+  { rok: '1948', t: 'moc ve státě převzali komunisté', poradi: 6, img: 'img/prv/prv5-dejiny-unor-1948.webp', alt: 'Manifestace svolaná KSČ na Václavském náměstí 25. února 1948.' },
+  { rok: '1968', t: 'vojska Varšavské smlouvy obsadila Československo', poradi: 7, img: 'img/prv/prv5-dejiny-srpen-1968.webp', alt: 'Lidé s československou vlajkou procházejí kolem hořícího tanku v Praze roku 1968.' },
+  { rok: '1989', t: 'sametová revoluce ukončila vládu jedné strany', poradi: 8, img: 'img/prv/prv5-dejiny-listopad-1989.webp', alt: 'Noční demonstrace sametové revoluce na Václavském náměstí v listopadu 1989.' },
+  { rok: '1990', t: 'proběhly první svobodné parlamentní volby po pádu komunistického režimu', poradi: 9, img: 'img/prv/prv5-dejiny-volby-1990.webp', alt: 'Úřední pokyny pro voliče k československým volbám v červnu 1990.' },
+  { rok: '1993', t: 'Československo se rozdělilo na Česko a Slovensko', poradi: 10 },
+  { rok: '2004', t: 'Česká republika vstoupila do Evropské unie', poradi: 11 },
+];
+
+const OSOBNOSTI = [
+  { n: 'Tomáš Garrigue Masaryk', e: '🎩', img: 'img/prv/prv5-dejiny-masaryk.webp', alt: 'Dobový portrét Tomáše Garrigua Masaryka.', cin: 'první československý prezident, zasloužil se o vznik republiky v roce 1918' },
+  { n: 'Edvard Beneš', e: '📜', cin: 'prezident, který musel přijmout Mnichovskou dohodu a za války vedl exilovou vládu v Londýně' },
+  { n: 'Václav Havel', e: '✌️', cin: 'dramatik a disident, po sametové revoluci se stal prezidentem' },
+  { n: 'Alexander Dubček', e: '🌸', cin: 'vedl reformy pražského jara v roce 1968' },
+  { n: 'Jan Palach', e: '🕯️', cin: 'student, který se v lednu 1969 upálil na protest proti okupaci' },
+  { n: 'Emil Zátopek', e: '🏃', cin: 'běžec, který získal tři zlaté olympijské medaile v roce 1952' },
+];
+
+/* ---- Kdy se to stalo -------------------------------------------------------------- */
+function rokUdalost() {
+  const p = $('plocha');
+  const u = Uloha.nahodne(UDALOSTI);
+  const jine = Uloha.zamichej(UDALOSTI.filter(x => x.rok !== u.rok)).slice(0, 3);
+  p.innerHTML = `<div class="zadani">Ve kterém roce se to stalo?</div>
+    <div class="karta">${u.img ? `<img class="dobovy-snimhek" src="${u.img}" alt="Dobová fotografie k události.">` : '<div class="obrazek">📜</div>'}<div class="udalost">${u.t}</div>${u.img ? '<div class="pramen">Dobový pramen · autor a licence jsou dole na stránce</div>' : ''}</div>`;
+  const odezva = document.createElement('div');
+  odezva.className = 'odezva';
+  Uloha.vyber({
+    kam: p, odezva, trida: 'velke',
+    moznosti: Uloha.zamichej([u, ...jine]).map(x => ({ klic: x.rok, popis: x.rok })),
+    spravnyKlic: u.rok,
+    zpravaOk: `✅ ${u.rok} – ${u.t}.`,
+    zpravaChyba: 'To je rok jiné události – zkus to znovu.',
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+/* ---- Co se tehdy stalo ------------------------------------------------------------- */
+function coSeStalo() {
+  const p = $('plocha');
+  const u = Uloha.nahodne(UDALOSTI);
+  const jine = Uloha.zamichej(UDALOSTI.filter(x => x.t !== u.t)).slice(0, 3);
+  p.innerHTML = `<div class="zadani">Co se stalo v tomto roce?</div>
+    <div class="karta"><div class="rok">${u.rok}</div></div>`;
+  const odezva = document.createElement('div');
+  odezva.className = 'odezva';
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: Uloha.zamichej([u, ...jine]).map(x => ({ klic: x.t, popis: x.t })),
+    spravnyKlic: u.t,
+    zpravaOk: `✅ V roce ${u.rok} ${u.t}.`,
+    zpravaChyba: 'To se stalo v jiném roce.',
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+/* ---- Kdo to byl --------------------------------------------------------------------- */
+function osobnosti() {
+  const p = $('plocha');
+  const o = Uloha.nahodne(OSOBNOSTI);
+  const jine = Uloha.zamichej(OSOBNOSTI.filter(x => x.n !== o.n)).slice(0, 3);
+  p.innerHTML = `<div class="zadani">O koho jde?</div>
+    <div class="karta">${o.img ? `<img class="dobovy-snimhek" src="${o.img}" alt="Dobový portrét osobnosti k určení.">` : `<div class="obrazek">${o.e}</div>`}<div class="udalost">${o.cin}</div></div>`;
+  const odezva = document.createElement('div');
+  odezva.className = 'odezva';
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: Uloha.zamichej([o, ...jine]).map(x => ({ klic: x.n, popis: x.n })),
+    spravnyKlic: o.n,
+    zpravaOk: `✅ ${o.n} – ${o.cin}.`,
+    zpravaChyba: 'To byl někdo jiný.',
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+/* ---- Seřaď události ------------------------------------------------------------------ */
+function poradi() {
+  const p = $('plocha');
+  const vyber = Uloha.zamichej(UDALOSTI).slice(0, 4).sort((a, b) => a.poradi - b.poradi);
+  p.innerHTML = '<div class="zadani">Seřaď události od nejstarší po nejnovější.</div>';
+  const osa = document.createElement('div');
+  osa.className = 'osa';
+  const nabidka = document.createElement('div');
+  nabidka.className = 'nabidka';
+  const odezva = document.createElement('div');
+  odezva.className = 'odezva';
+  let dalsiIndex = 0, chyboval = false;
+
+  Uloha.zamichej(vyber).forEach(u => {
+    const b = document.createElement('button');
+    b.textContent = u.t;
+    b.dataset.t = u.t;
+    b.addEventListener('click', () => {
+      if (b.disabled) return;
+      if (u.t === vyber[dalsiIndex].t) {
+        if (dalsiIndex > 0) {
+          const s = document.createElement('span');
+          s.className = 'sipka';
+          s.textContent = '→';
+          osa.appendChild(s);
+        }
+        const el = document.createElement('span');
+        el.className = 'bod';
+        el.textContent = `${u.rok}: ${u.t}`;
+        osa.appendChild(el);
+        b.disabled = true;
+        dalsiIndex++;
+        odezva.className = 'odezva ok';
+        odezva.textContent = '✅ Správně!';
+        if (dalsiIndex === vyber.length) {
+          odezva.textContent = '🎉 Časová osa je hotová!';
+          skore.vyhodnot(!chyboval);
+          Uloha.posun(novaUloha, Uloha.PRODLEVA + 600);
+        }
+      } else {
+        chyboval = true;
+        Uloha.trhni(b);
+        odezva.className = 'odezva chyba';
+        odezva.textContent = 'Tahle událost je pozdější – hledej starší.';
+      }
+    });
+    nabidka.appendChild(b);
+  });
+  p.append(osa, nabidka, odezva);
+}
+
+const REZIMY = { rokUdalost, coSeStalo, osobnosti, poradi };
+function novaUloha() { REZIMY[rezim](); }
+
+document.querySelectorAll('#rezimy button').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('#rezimy button').forEach(x => x.classList.remove('active'));
+  b.classList.add('active');
+  rezim = b.dataset.rezim;
+  novaUloha();
+}));
+$('btnDalsi').addEventListener('click', novaUloha);
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === 'Enter') { e.preventDefault(); novaUloha(); }
+});
+novaUloha();
+</script>
+</body>
+</html>

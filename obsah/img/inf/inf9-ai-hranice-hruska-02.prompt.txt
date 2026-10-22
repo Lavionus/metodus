@@ -1,0 +1,5 @@
+Use case: scientific-educational
+Asset type: difficult apple-versus-pear classification card
+Primary request: one whole squat red pear with very short neck, broad shoulders and subtle pear taper
+Style: realistic botanical product illustration on pale warm-gray studio background
+Constraints: correct label pear; no text, logo, extra fruit or scenery

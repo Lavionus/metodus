@@ -1,0 +1,26 @@
+Vygeneruj jeden obrázek a ulož ho jako arch-08.png do aktuální složky.
+
+Asset: icon sprite sheet for the Metodus Czech educational website. Match the painting style of vzor-styl.png and arch-01.png in this folder (watercolor and gouache with fine dark ink outlines, warm ivory paper #faf6ec, muted sage / jade / ochre / brick / slate-blue palette, soft daylight from upper left), SIMPLIFIED FOR SMALL ICONS exactly like arch-01.png: one bold, chunky object or tight group per icon, strong clear silhouette, slightly thicker ink outline, few details, flat even ivory background, readable when shrunk to 24 px.
+
+Layout (very important): square 1:1 image, an exact 4 × 4 grid of 16 equal invisible cells, 4 rows and 4 columns, read left to right, top to bottom. Each icon is centered in its own cell and fills about 70 % of the cell, with clear empty ivory space between icons; nothing may cross into a neighbouring cell. No grid lines, no frames, no borders, no text, no words, no labels, no watermark. Single letters, digits or math symbols only where the description asks for them.
+
+Icons in order:
+1. One apple and a group of many apples.
+2. A cat sitting in a box, another cat on top of the box.
+3. Three countable apples next to a glass of milk.
+4. Three stairs of growing height with a small, medium and big ball.
+5. A key and a small padlock.
+6. A wrench and a gear being repaired (something is done).
+7. Two speech bubbles with an arrow from one to the other.
+8. A signpost with two arrows pointing in different directions.
+9. Flashcards with a small German flag sticker and a pretzel.
+10. Flashcards with a small French flag sticker and a croissant.
+11. A wall clock and number blocks.
+12. A small speaker emitting sound waves next to letter blocks.
+13. Three small wooden name tags in blue, red and green.
+14. A conveyor of word cards turning around a gear.
+15. An hourglass with a curved arrow going back.
+16. A pedestrian crossing with a school bag and a traffic light.
+
+Id: aj4_mnozne_cislo aj4_predlozky aj7_pocitatelnost aj6_stupnovani aj5_modalni aj8_trpny_rod aj9_neprima_rec aj9_podminkove de_slovicka fr_slovicka dcj8_cislovky_cas dcj7_vyslovnost dcj7_cleny dcj8_casovani dcj9_minuly prv1_cesta_skola
+Generator: Codex CLI (vestavěný ImageGen)

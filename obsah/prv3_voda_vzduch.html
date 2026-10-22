@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Voda, vzduch a půda</title>
+  <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
+  <script src="../theme.js"></script>
+  <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
+  <script src="../rec.js"></script>
+  <script src="../uloha.js"></script>
+  <style>
+    .nazev-jevu { font-size: 1.2rem; font-weight: 700; }
+    .otazka-text { font-size: 1.08rem; max-width: 580px; line-height: 1.45; }
+    .naucna-scena { width: min(720px, 100%); height: auto; border-radius: 16px; box-shadow: var(--shadow); }
+    .obrazova-mapa { position: relative; width: min(720px, 100%); }
+    .obrazova-mapa img { display: block; width: 100%; border-radius: 16px; }
+    .mapovy-bod { position: absolute; right: 3%; transform: translateY(-50%); border: 2px solid #fff; border-radius: 999px; background: var(--accent); color: var(--na-akcentu,#fff); padding: 5px 9px; font-weight: 700; cursor: pointer; box-shadow: 0 2px 7px #0007; }
+  </style>
+</head>
+<body>
+  <h1>💧 Voda, vzduch a půda</h1>
+  <p class="podtitul">Pro 3.–4. ročník: skupenství vody, koloběh vody v přírodě, vlastnosti vzduchu a půdy.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Voda, vzduch a půda</summary>
+    <div class="obsah">
+      <p>Bez vody, vzduchu a půdy by na Zemi nemohly žít rostliny, zvířata ani lidé. Voda se navíc umí
+        měnit: jednou je to led, jindy tekutina, jindy neviditelná pára.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Tři skupenství vody</h3><p><b>pevné</b> – led, sníh, kroupy;
+          <b>kapalné</b> – voda v řece, déšť, rosa; <b>plynné</b> – vodní pára. Voda mrzne při 0 °C a vaří se při 100 °C.</p></article>
+        <article class="vyklad-karta"><h3>Koloběh vody</h3><p>Slunce ohřeje vodu → voda se <b>vypaří</b> → pára se ochladí
+          a vzniknou <b>mraky</b> → <b>prší</b> nebo sněží → voda steče do řek → řeky ji odnesou do moře.</p></article>
+        <article class="vyklad-karta"><h3>Vzduch</h3><p>Směs plynů, nejvíc <b>dusíku</b>, pak <b>kyslíku</b>.
+          Kyslík dýcháme. Vzduch nevidíme, ale jeho pohyb cítíme jako vítr.</p></article>
+        <article class="vyklad-karta"><h3>Půda</h3><p>Úrodná půda má hodně <b>humusu</b> (tlející zbytky rostlin a živočichů).
+          Žížaly ji kypří. Vzniká velmi pomalu z hornin.</p></article>
+      </div>
+      <p>Typická chyba: bílý obláček nad hrncem nebo mlha <b>nejsou pára</b>. Vodní pára je neviditelná.
+        To, co vidíš, jsou drobné kapičky vody – tedy kapalné skupenství.</p>
+      <aside class="zapamatuj">Led – voda – pára. Vodní pára není vidět. Voda v přírodě koluje dokola:
+        vypaří se, udělá mraky, spadne jako déšť a steče zpět do moře.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: jaké skupenství má rosa?</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Ráno jsou na trávě kapky rosy. Jaké mají skupenství?</p>
+      <ol class="kroky">
+        <li>Podívám se, jak rosa vypadá: jsou to <b>kapky</b>, které stékají po stéblech.</li>
+        <li>Je to tvrdé jako led? Ne, kapka se rozteče. Pevné skupenství to není.</li>
+        <li>Je to neviditelné jako pára? Ne, kapky dobře vidím. Plynné to také není.</li>
+        <li>Teče to a dá se to vidět – je to tekutá voda.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Rosa má kapalné skupenství.</p>
+    </div>
+  </details>
+
+  <div class="rezimy" id="rezimy">
+    <button data-rezim="skupenstvi" class="active">🧊 Skupenství vody</button>
+    <button data-rezim="kolobeh">🔄 Koloběh vody</button>
+    <button data-rezim="kviz">❓ Vzduch a půda</button>
+    <button data-rezim="puda">🌱 Půdní profil</button>
+  </div>
+
+  <div class="plocha" id="plocha"></div>
+
+  <div class="ovladani">
+    <button class="hlavni" id="btnDalsi">Přeskočit →</button>
+    <span class="skore" id="skore"></span>
+  </div>
+
+  <p class="napoveda">
+    Voda má tři skupenství: <b>pevné</b> (led), <b>kapalné</b> (voda) a <b>plynné</b> (vodní pára).
+    Vodní pára je neviditelná – mlha, mraky i bílý obláček nad hrncem jsou drobné kapičky vody.
+    V přírodě neustále koluje – vypařuje se, tvoří mraky, prší a stéká zpátky do moří.
+  </p>
+
+<script>
+const $ = id => document.getElementById(id);
+const skore = Uloha.skore('metodus_prv3_voda', $('skore'));
+let rezim = 'skupenstvi';
+
+const SKUPENSTVI = [
+  { n: 'led v mrazáku', e: '🧊', s: 'pevne' },
+  { n: 'sníh na střeše', e: '❄️', s: 'pevne' },
+  { n: 'kroupy', e: '🧊', s: 'pevne' },
+  { n: 'rampouch', e: '🥶', s: 'pevne' },
+  { n: 'voda v řece', e: '🌊', s: 'kapalne' },
+  { n: 'déšť', e: '🌧️', s: 'kapalne' },
+  { n: 'rosa na trávě', e: '💧', s: 'kapalne' },
+  { n: 'voda v hrnci', e: '🥣', s: 'kapalne' },
+  { n: 'bílý obláček nad hrncem', e: '♨️', s: 'kapalne', pozn: 'Bílý obláček, který vidíme, tvoří drobné kapičky vody. Samotná vodní pára je neviditelná.' },
+  { n: 'mlha nad loukou', e: '🌫️', s: 'kapalne', pozn: 'Mlha je oblak drobných kapiček vody u země – vodní pára by nebyla vidět.' },
+  { n: 'vodní pára ve vzduchu', e: '💨', s: 'plynne', pozn: 'Vodní pára je plyn – je ve vzduchu všude kolem nás, ale nevidíme ji.' },
+  { n: 'voda, která se vypařila z louže', e: '☀️', s: 'plynne', pozn: 'Vypařená voda se stala neviditelnou vodní párou ve vzduchu.' },
+  { n: 'voda vypařená z prádla na šňůře', e: '👕', s: 'plynne', pozn: 'Prádlo schne, protože se voda mění v neviditelnou vodní páru.' },
+];
+
+const NAZVY_SKUPENSTVI = {
+  pevne: { nazev: 'pevné (led)', ikona: '🧊' },
+  kapalne: { nazev: 'kapalné (voda)', ikona: '💧' },
+  plynne: { nazev: 'plynné (vodní pára)', ikona: '💨' },
+};
+
+const KOLOBEH = [
+  '☀️ Slunce ohřeje vodu v moři',
+  '💨 Voda se vypaří do vzduchu',
+  '☁️ Vodní pára se ochladí a vzniknou mraky z kapiček',
+  '🌧️ Z mraků prší nebo sněží',
+  '🏞️ Voda steče do potoků a řek',
+  '🌊 Řeky odnesou vodu zpátky do moře',
+];
+
+const KVIZ = [
+  { o: 'Z čeho je hlavně složený vzduch?', v: ['dusík a kyslík', 'jen kyslík', 'vodní pára a kouř'], proc: 'Vzduch je směs plynů – nejvíc je v něm dusíku, pak kyslíku.' },
+  { o: 'Který plyn potřebujeme k dýchání?', v: ['kyslík', 'dusík', 'oxid uhličitý'], proc: 'Kyslík vdechujeme, oxid uhličitý vydechujeme.' },
+  { o: 'Co vyrábějí rostliny na světle?', v: ['kyslík', 'dusík', 'prach'], proc: 'Rostliny při fotosyntéze uvolňují kyslík – proto je les tak zdravý.' },
+  { o: 'Čím se pozná úrodná půda?', v: ['má hodně humusu', 'je úplně suchá', 'nemá žádné živočichy'], proc: 'Humus je tlející zbytky rostlin a živočichů – dělá půdu úrodnou.' },
+  { o: 'Kdo pomáhá kypřit půdu?', v: ['žížaly', 'vosy', 'mouchy'], proc: 'Žížaly hloubí chodbičky, kterými se do půdy dostane vzduch a voda.' },
+  { o: 'Co se stane s vodou při 100 °C?', v: ['začne se vařit a měnit v páru', 'zmrzne', 'zmizí beze zbytku'], proc: 'Při varu se voda mění v plynné skupenství – vodní páru.' },
+  { o: 'Při jaké teplotě voda mrzne?', v: ['0 °C', '10 °C', '100 °C'], proc: 'Při nule se voda mění v led – pevné skupenství.' },
+  { o: 'Proč se nesmí do potoka lít barvy a oleje?', v: ['znečistí vodu pro rostliny i živočichy', 'změní barvu vody a to je vše', 'nic se nestane'], proc: 'Znečištěná voda ubližuje rybám i rostlinám a vrací se k nám v pitné vodě.' },
+  { o: 'Jak poznáme, že vzduch je v pohybu?', v: ['fouká vítr', 'je vidět', 'je slyšet ticho'], proc: 'Vzduch není vidět, ale jeho pohyb cítíme jako vítr.' },
+  { o: 'K čemu je v půdě voda?', v: ['rostliny ji nasávají kořeny', 'jen ji ochlazuje', 'nemá tam význam'], proc: 'Kořeny nasávají vodu s rozpuštěnými živinami.' },
+];
+
+/* ---- Skupenství ------------------------------------------------------------ */
+function skupenstvi() {
+  const p = $('plocha');
+  const u = Uloha.nahodne(SKUPENSTVI);
+  p.innerHTML = `<div class="zadani">Jaké je to skupenství vody?</div>
+    <div class="karta"><div class="obrazek">${u.e}</div><div class="nazev-jevu">${u.n}</div></div>`;
+  const odezva = document.createElement('div');
+  odezva.className = 'odezva';
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: Object.entries(NAZVY_SKUPENSTVI).map(([klic, s]) => ({ klic, ikona: s.ikona, popis: s.nazev })),
+    spravnyKlic: u.s,
+    zpravaOk: `✅ ${u.n} – skupenství ${NAZVY_SKUPENSTVI[u.s].nazev}.${u.pozn ? ' ' + u.pozn : ''}`,
+    zpravaChyba: 'Zkus to znovu – je to pevné, jsou to kapky vody (i ty drobné), nebo neviditelný plyn?',
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+/* ---- Koloběh vody (řazení) ------------------------------------------------- */
+function kolobeh() {
+  const p = $('plocha');
+  p.innerHTML = '<div class="zadani">Seřaď koloběh vody – klepej popořadě od začátku.</div><img class="naucna-scena" src="img/prv/prv3-kolobeh-vody.webp" alt="Koloběh vody v krajině: vypařování, mraky, déšť, řeka a podzemní voda" width="1152" height="768">';
+  const porada = document.createElement('div');
+  porada.className = 'porada';
+  const nabidka = document.createElement('div');
+  nabidka.className = 'nabidka';
+  const odezva = document.createElement('div');
+  odezva.className = 'odezva';
+  let dalsiIndex = 0, chyboval = false;
+
+  Uloha.zamichej(KOLOBEH).forEach(krok => {
+    const b = document.createElement('button');
+    b.textContent = krok;
+    b.dataset.krok = krok;
+    b.addEventListener('click', () => {
+      if (b.disabled) return;
+      if (krok === KOLOBEH[dalsiIndex]) {
+        const el = document.createElement('span');
+        el.className = 'polozka';
+        el.innerHTML = `<span class="cislo">${dalsiIndex + 1}.</span>${krok}`;
+        porada.appendChild(el);
+        b.disabled = true;
+        dalsiIndex++;
+        odezva.className = 'odezva ok';
+        odezva.textContent = '✅ Správně!';
+        if (dalsiIndex === KOLOBEH.length) {
+          odezva.textContent = '🎉 Koloběh vody je hotový – a začíná znovu!';
+          skore.vyhodnot(!chyboval);
+          Uloha.posun(novaUloha, Uloha.PRODLEVA + 600);
+        }
+      } else {
+        chyboval = true;
+        Uloha.trhni(b);
+        odezva.className = 'odezva chyba';
+        odezva.textContent = dalsiIndex === 0
+          ? 'Čím to celé začíná? Co dodává energii?'
+          : `Po kroku „${KOLOBEH[dalsiIndex - 1]}“ následuje něco jiného.`;
+      }
+    });
+    nabidka.appendChild(b);
+  });
+  p.append(porada, nabidka, odezva);
+}
+
+/* ---- Kvíz vzduch a půda ---------------------------------------------------- */
+function kviz() {
+  const p = $('plocha');
+  const u = Uloha.nahodne(KVIZ);
+  p.innerHTML = `<div class="zadani"><span class="otazka-text">${u.o}</span></div>`;
+  const odezva = document.createElement('div');
+  odezva.className = 'odezva';
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: Uloha.zamichej(u.v).map(t => ({ klic: t, popis: t })),
+    spravnyKlic: u.v[0],
+    zpravaOk: '✅ ' + u.proc,
+    zpravaChyba: 'Ještě ne – zkus jinou možnost.',
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+function puda() {
+  const p = $('plocha');
+  const vrstvy = [['kořeny a drn',14],['humusová vrstva',29],['podorniční vrstva',48],['zvětralá hornina',67],['pevná hornina',86]];
+  p.innerHTML = `<div class="zadani">Klepni na vrstvy půdy shora dolů.</div><div class="obrazova-mapa"><img src="img/prv/prv3-pudni-profil.webp" alt="Řez půdou od trávy a kořenů přes humus a podorniční vrstvu až k pevné hornině; v půdě je žížala a krtek." width="1152" height="768">${vrstvy.map(([n,y],i)=>`<button class="mapovy-bod" style="top:${y}%" data-vrstva="${n}" aria-label="${n}">${i+1}</button>`).join('')}</div><div class="odezva" aria-live="polite">Půda vzniká velmi pomalu zvětráváním hornin a činností organismů.</div>`;
+  p.querySelectorAll('[data-vrstva]').forEach(b => b.addEventListener('click', () => p.querySelector('.odezva').textContent = `Vrstva: ${b.dataset.vrstva}.`));
+}
+
+const REZIMY = { skupenstvi, kolobeh, kviz, puda };
+function novaUloha() { REZIMY[rezim](); }
+
+document.querySelectorAll('#rezimy button').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('#rezimy button').forEach(x => x.classList.remove('active'));
+  b.classList.add('active');
+  rezim = b.dataset.rezim;
+  novaUloha();
+}));
+$('btnDalsi').addEventListener('click', novaUloha);
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === 'Enter') { e.preventDefault(); novaUloha(); }
+});
+novaUloha();
+</script>
+</body>
+</html>

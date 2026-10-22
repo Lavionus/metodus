@@ -1,0 +1,76 @@
+/* Vysoký kontrast: pro projektor ve světlé třídě (vybledlé barvy) a pro žáky
+   se slabším zrakem. Černý text na bílé, zřetelné okraje ovládacích prvků,
+   podtržené odkazy v textu a výrazný rámeček fokusu. Tón je světlý
+   (data-tone="light"), úpravy stránek pro světlé pozadí platí i tady.
+   Mění se jen barvy a čáry – písmo, velikosti ani rozložení ne.
+   Kontrasty (WCAG): text 21 : 1, tlumený 16,5 : 1, nejslabší 10,9 : 1,
+   akcent 9,4 : 1 (vše AAA na bílé); okraje 5,3 : 1; bílá na výplních
+   akcent/ok/chyba/varování 9,4 / 7,2 / 7,8 / 8,3 : 1. Bez textur. */
+
+:root[data-theme="kontrast"] {
+  color-scheme: light;
+  --bg: #ffffff;
+  --bg-deep: #f4f4f4;
+  --bg-panel: #ffffff;
+  --bg-elevated: #ffffff;
+  --bg-control: #ebebeb;
+  --bg-input: #ffffff;
+  --bg-hover: #dcdcdc;
+  --text: #000000;
+  --text-muted: #1f1f1f;
+  --text-faint: #3d3d3d;
+  --border: #6b6b6b;
+  --border-strong: #000000;
+  --accent: #0037b8;
+  --accent-soft: rgba(0, 55, 184, .14);
+  --accent-hover: #00246e;
+  --ok: #00662b;
+  --warn: #6e4600;
+  --danger: #a8001c;
+  --ok-text: #00662b;
+  --danger-text: #a8001c;
+  --zvyraz-text: #6e4600;
+  --shadow: 0 0 0 1px #000;
+  /* předměty a větné členy: sytější varianty světlého motivu (≥ 6 : 1 na bílé) */
+  --predmet-cj: #9e1f2c;
+  --predmet-m: #0b4f94;
+  --predmet-aj: #6b2391;
+  --predmet-dcj: #8a4300;
+  --predmet-prv: #466000;
+  --predmet-inf: #2c3aa8;
+  --predmet-f: #6e5200;
+  --predmet-ch: #911c4a;
+  --predmet-pr: #0f6a3b;
+  --predmet-z: #00685a;
+  --predmet-d: #70431b;
+  --predmet-nastroj: #454d55;
+  --clen-podmet: #0b55a0;
+  --clen-prisudek: #99260f;
+  --clen-predmet: #0d6541;
+  --clen-privlastek: #662c8a;
+  --clen-urceni: #6e4d00;
+  --clen-doplnek: #2b5470;
+  /* Starší samostatné simulace mají jiná jména palety. */
+  --bg-dark: var(--bg-deep);
+  --panel: var(--bg-panel);
+  --surface: var(--bg-panel);
+  --surface2: var(--bg-elevated);
+  --muted: var(--text-muted);
+  --accent2: #a8001c;
+}
+
+/* Odkazy uprostřed textu se nepoznají jen podle barvy – podtrhnout. */
+:root[data-theme="kontrast"] :where(p, li, dd, td, figcaption, .napoveda, .vysvetleni) a {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* Fokus musí být vidět na každém podkladu i na projektoru. */
+:root[data-theme="kontrast"] :focus-visible {
+  outline: 3px solid var(--accent) !important;
+  outline-offset: 2px !important;
+}
+
+:root[data-theme="kontrast"] :where(button, input, select, textarea) { accent-color: var(--accent); }
+:root[data-theme="kontrast"] ::placeholder { color: #595959; opacity: 1; }   /* 7 : 1 */
+:root[data-theme="kontrast"] ::selection { background: #ffe600; color: #000; }

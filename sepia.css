@@ -1,0 +1,102 @@
+/* Sépie: generovaný recyklovaný papír, barevný inkoust, stejné ovládání.
+   Textura je pod obsahem: žádný filtr přes text, fotografie nebo diagramy.
+   Tón motivu je světlý (theme.js nastaví data-tone="light"), takže stránky
+   s vlastními úpravami pro světlý motiv je dostanou i tady. */
+
+:root[data-theme="sepia"] {
+  color-scheme: light;
+  --bg: #f1e6c9;
+  --bg-deep: #e9ddbe;
+  --bg-panel: #faf1db;
+  --bg-elevated: #f7ecd2;
+  --bg-control: #e5d4ae;
+  --bg-input: #fcf5e5;
+  --bg-hover: #dfcca3;
+  --text: #392d21;
+  --text-muted: #62513b;
+  --text-faint: #6c583e;   /* 5,0 : 1 i na nejtmavším papíře (--bg-deep) */
+  --border: #c5b18b;
+  --border-strong: #9d8259;
+  --accent: #805326;
+  --accent-soft: rgba(128, 83, 38, .12);
+  --accent-hover: #603915;
+  --ok: #426447;
+  --warn: #805b10;
+  --danger: #a13f32;
+  --ok-text: #365b3b;
+  --danger-text: #94362b;
+  --zvyraz-text: #78520b;
+  --shadow: 0 2px 10px rgba(70, 46, 18, .14);
+  --predmet-cj: #984738;
+  --predmet-m: #3f6077;
+  --predmet-aj: #75516d;
+  --predmet-dcj: #865321;
+  --predmet-prv: #60662c;
+  --predmet-inf: #555e7a;
+  --predmet-f: #80601d;
+  --predmet-ch: #925063;
+  --predmet-pr: #40654c;
+  --predmet-z: #3b6b61;
+  --predmet-d: #855635;
+  --predmet-nastroj: #696050;
+  --clen-podmet: #355e7b;
+  --clen-prisudek: #98432f;
+  --clen-predmet: #3d654c;
+  --clen-privlastek: #74507c;
+  --clen-urceni: #805f13;
+  --clen-doplnek: #46666b;
+  /* Starší samostatné simulace mají jiná jména palety. */
+  --bg-dark: var(--bg-deep);
+  --panel: var(--bg-panel);
+  --surface: var(--bg-panel);
+  --surface2: var(--bg-elevated);
+  --muted: var(--text-muted);
+  --accent2: #87566b;
+  --paper-texture: url('obsah/textures/recyklovany-papir.webp');
+}
+
+/* Textura se násobí s barvou pozadí, kterou si prvek určí sám: na papírové
+   ploše je vidět vlákno, záměrně tmavé simulace (vesmír, hladina) zůstanou
+   tmavé. Proto se tu nepřepisuje background-color. */
+:root[data-theme="sepia"] body {
+  background-image: var(--paper-texture);
+  background-size: 512px 512px;
+  background-repeat: repeat;
+  background-blend-mode: multiply;
+}
+
+/* Povrchy rozhraní. Významové barvy prvků, obrázků, map a grafů se nefiltrují.
+   Jen prvky, které mají vlastní barvu pozadí: na průhledném prvku by se
+   textura nakreslila sama, bez barvy – i přes tmavou plochu simulace. */
+:root[data-theme="sepia"] :where(
+  input:not([type="range"]):not([type="checkbox"]):not([type="radio"]):not([type="color"]),
+  select, textarea, dialog, .card, .karta, .panel, .kostra-hlavicka
+) {
+  background-image: var(--paper-texture);
+  background-size: 512px 512px;
+  background-repeat: repeat;
+  background-blend-mode: multiply;
+}
+:root[data-theme="sepia"] :where(button, input, select, textarea) { accent-color: var(--accent); }
+:root[data-theme="sepia"] :where(a,button,input,select,textarea,summary):focus-visible {
+  outline-color: var(--accent);
+}
+:root[data-theme="sepia"] ::selection { background: #cdb180; color: #30251a; }
+
+:root[data-theme="sepia"] .predmet-ilustrace,
+:root[data-theme="sepia"] .atlas-detail img { background-color: #f5ead2; }
+:root[data-theme="sepia"] [data-paper-canvas] {
+  background-color: var(--bg-panel);
+  background-image: var(--paper-texture);
+  background-size: 512px 512px;
+  background-blend-mode: multiply;
+}
+/* Tisk zůstává úsporný; textura je pouze vzhled obrazovky. */
+@media print {
+  :root[data-theme="sepia"], :root[data-theme="sepia"] body,
+  :root[data-theme="sepia"] body * { background-image: none !important; }
+}
+@media (forced-colors: active) {
+  :root[data-theme="sepia"], :root[data-theme="sepia"] body,
+  :root[data-theme="sepia"] body * { background-image: none !important; }
+}

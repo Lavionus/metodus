@@ -1,0 +1,8 @@
+Soubor: cj9-lit20-hasek.png / cj9-lit20-hasek.webp
+Původní dílo: Jaroslav Hašek by Václav Donát (crop).jpg
+Autor: Václav Donát
+Datum vzniku: between 1904 and 1908date QS:P,+1904-00-00T00:00:00Z/8,P1319,+1904-00-00T00:00:00Z/9,P1326,+1908-00-00T00:00:00Z/9
+Zdroj: https://commons.wikimedia.org/wiki/File:Jaroslav_Ha%C5%A1ek_by_V%C3%A1clav_Don%C3%A1t_(crop).jpg
+Licence: Public domain
+Staženo: 2026-10-21
+Úpravy: automatické natočení, odstranění metadat, zmenšení na nejvýše 1600 px; výuková WebP kopie 458 px.

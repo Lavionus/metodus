@@ -1,0 +1,8 @@
+Soubor: d9-valka1-chlebenka.png / d9-valka1-chlebenka.webp
+Původní dílo: Ansichtskarte mit Brotkarte 1915.jpg
+Autor: Unknown author
+Datum vzniku: circa 1915date QS:P,+1915-00-00T00:00:00Z/9,P1480,Q5727902
+Zdroj: https://commons.wikimedia.org/wiki/File:Ansichtskarte_mit_Brotkarte_1915.jpg
+Licence: Public domain
+Staženo: 2026-10-21
+Úpravy: automatické natočení, odstranění metadat, zmenšení na nejvýše 1600 px; výuková WebP kopie 734 px.

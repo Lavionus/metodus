@@ -1,0 +1,8 @@
+Sada: IMG-pr-19
+Soubor: pr9-geologie-rip
+Popis: Hora Říp od severovýchodu, erozní relikt třetihorního vulkanismu.
+Autor: Lilili42
+Zdroj: https://commons.wikimedia.org/wiki/File:%C5%98%C3%ADp_Mountain_from_north_east.jpg
+Licence: CC BY-SA 4.0
+Staženo: 2026-10-19
+Úpravy: automatická orientace, odstranění metadat, PNG do 1600 px; WebP 1152 px q82

@@ -1,0 +1,6 @@
+Sada: IMG-cj-10 · text „Jak se peče chléb“
+Scéna: Přikryté vykynuté těsto odpočívá v míse v teplé kuchyni u tradiční pece; bez surovin, hotového chleba a hodin.
+Styl: teplý akvarel a kvaš, jemná linka, slonovinový papír, tlumená šalvějová, jadeitová a okrová.
+Omezení: bez písmen, slov, receptu, popisků, čísel, loga, vodoznaku a rámečku.
+Alt: Vykynuté chlebové těsto odpočívá v míse.
+Generátor: OpenAI image_gen · 2026-09-24

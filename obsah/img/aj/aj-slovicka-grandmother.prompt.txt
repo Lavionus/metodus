@@ -1,0 +1,7 @@
+IMG-aj-02 · grandmother
+
+Use case: scientific-educational. Asset type: square family vocabulary card for children. Gentle watercolor and gouache with delicate fine-ink contours, warm ivory paper background, muted sage, jade, ochre and earthy palette, soft upper-left lighting, consistent refined Czech schoolbook style. Exactly one person only, anatomically natural, centered with generous even 12 percent margins. Inclusive ordinary contemporary appearance, respectful and non-caricatured. No scenery except a faint grounding shadow. No text, letters, labels, arrows, numbers, border, frame, logo, or watermark. One friendly elderly grandmother about 70 years old, standing in a relaxed three-quarter pose, whole body visible, natural grey hair, simple plum cardigan and long dark skirt, warm neutral expression, no props.
+
+Nástroj: OpenAI image_gen
+Datum: 2026-09-25
+Výstup: aj-slovicka-grandmother.png, aj-slovicka-grandmother.webp

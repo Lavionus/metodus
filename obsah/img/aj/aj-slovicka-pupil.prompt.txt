@@ -1,0 +1,7 @@
+IMG-aj-02 · pupil
+
+Use case: scientific-educational. Square vocabulary flashcard for language learning. Friendly realistic watercolor and gouache, delicate contours, warm ivory paper, subtle grounding shadow. Centered subject visible from head to waist with generous margin. No text, logo, border, watermark or unrelated props. Subject: one attentive school-age pupil wearing a simple backpack, no school uniform or text.
+
+Nástroj: OpenAI image_gen
+Datum: 2026-10-15
+Výstup: aj-slovicka-pupil.png, aj-slovicka-pupil.webp

@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Atmosféra a počasí</title>
+  <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
+  <script src="../theme.js"></script>
+  <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
+  <script src="../rec.js"></script>
+  <script src="../uloha.js"></script>
+  <style>
+    .popis-a { color: var(--text-muted); max-width: 560px; line-height: 1.55; }
+    .nazev-a { font-size: 1.2rem; font-weight: 700; }
+    .pasy { width: min(320px, 84vw); }
+    .pasy rect { stroke: var(--border); stroke-width: 1; }
+    .pasy text { fill: var(--text); font-size: 11px; text-anchor: middle; font-weight: 700; }
+    .atmosfera-img { width:min(720px,100%); border-radius:16px; background:#f8f1df; }
+    .foto-uloha { display:block; width:min(560px,100%); aspect-ratio:4/3; object-fit:cover; border-radius:14px; border:1px solid var(--border); background:var(--bg-card); }
+    .foto-atlas { width:min(1120px,100%); margin:22px auto; }
+    .foto-atlas h2 { margin:0 0 5px; text-align:center; font-size:1.22rem; }
+    .foto-atlas > p { margin:0 auto 12px; max-width:820px; text-align:center; color:var(--text-muted,var(--text)); }
+    .foto-mrizka { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
+    .foto-karta { margin:0; overflow:hidden; border:1px solid var(--border); border-radius:14px; background:var(--bg-card); box-shadow:var(--shadow-sm); }
+    .foto-karta img { display:block; width:100%; aspect-ratio:4/3; object-fit:cover; }
+    .foto-karta figcaption { padding:10px 11px 12px; font-size:.9rem; line-height:1.35; }
+    .foto-karta strong { display:block; margin-bottom:3px; color:var(--accent); font-size:1rem; }
+    @media (max-width:820px) { .foto-mrizka { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+    @media (max-width:440px) { .foto-mrizka { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+  <h1>☁️ Atmosféra a počasí</h1>
+  <p class="podtitul">Pro 6.–7. ročník: složení vzduchu, vrstvy atmosféry, počasí a podnebné pásy.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Vzduch, počasí a podnebí</summary>
+    <div class="obsah">
+      <p><b>Atmosféra</b> je plynný obal Země. Tvoří ji hlavně <b>dusík (78 %)</b> a <b>kyslík (21 %)</b>, zbytek jsou
+        další plyny a vodní pára. S výškou vzduch řídne a dělí se na vrstvy.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Vrstvy zdola</h3><p><b>Troposféra</b> (zhruba do 11 km, v ní je všechno počasí) →
+          <b>stratosféra</b> (ozonová vrstva) → <b>mezosféra</b> (shoří v ní většina meteoroidů) → <b>termosféra</b> (polární záře, družice).</p></article>
+        <article class="vyklad-karta"><h3>Počasí</h3><p><b>Okamžitý stav</b> ovzduší na určitém místě: teplota, srážky, vítr, oblačnost
+          dnes, zítra, právě teď.</p></article>
+        <article class="vyklad-karta"><h3>Podnebí</h3><p><b>Dlouhodobý průměr</b> počasí za desítky let. Popisuje, jaké to v kraji
+          obvykle bývá – průměrné teploty, roční srážky, typická léta a zimy.</p></article>
+      </div>
+      <p>Jak je poznáš? Hledej v textu <b>čas</b>. Slova „dnes, zítra, v noci, právě“ ukazují na počasí. Slova
+        „průměrně, ročně, bývá, celoročně“ ukazují na podnebí. <b>Typická chyba:</b> jedna horká zima ještě neznamená změnu
+        podnebí – to je jen počasí v jednom roce.</p>
+      <p>Podnebí určuje hlavně to, jak vysoko Slunce během roku vystupuje. Proto se od rovníku k pólům střídají
+        <b>podnebné pásy</b>: tropický, subtropický, mírný (Česko), subpolární a polární.</p>
+      <aside class="zapamatuj">Počasí = teď a tady, podnebí = dlouhodobý průměr. Veškeré počasí se odehrává v troposféře.
+        Tlaková níže přináší oblačnost a srážky, tlaková výše jasno.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: počasí, nebo podnebí?</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Rozhodni, zda věta popisuje počasí, nebo podnebí: „V Sahaře prší v průměru méně než 100 mm ročně.“</p>
+      <ol class="kroky">
+        <li>Hledám ve větě údaj o čase: je tam „v průměru“ a „ročně“.</li>
+        <li>Věta tedy nemluví o jednom dni, ale o tom, jak to v Sahaře <b>obvykle bývá</b> po mnoho let.</li>
+        <li>Dlouhodobý průměr počasí je podnebí.</li>
+        <li>Pro kontrolu si představím opak: „Dnes v Sahaře nepršelo“ by bylo počasí.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Věta popisuje podnebí.</p>
+    </div>
+  </details>
+
+  <div class="rezimy" id="rezimy">
+    <button data-rezim="pasy" class="active">🌡️ Podnebné pásy</button>
+    <button data-rezim="vrstvy">🛰️ Vrstvy atmosféry</button>
+    <button data-rezim="pocasi">🌦️ Počasí a podnebí</button>
+    <button data-rezim="jevy">⛈️ Meteorologické jevy</button>
+    <button data-rezim="foto">📷 Poznej jev na fotce</button>
+  </div>
+
+  <div class="plocha" id="plocha"></div>
+
+  <div class="ovladani">
+    <button class="hlavni" id="btnDalsi">Přeskočit →</button>
+    <span class="skore" id="skore"></span>
+  </div>
+
+  <p class="napoveda">
+    <b>Počasí</b> je okamžitý stav ovzduší na určitém místě, <b>podnebí</b> je dlouhodobý průměr
+    počasí za desítky let. Vzduch tvoří hlavně dusík (78 %) a kyslík (21 %).
+  </p>
+
+  <section class="foto-atlas" aria-labelledby="jevyFotoNadpis">
+    <h2 id="jevyFotoNadpis">Jevy, které uvidíš na obloze i kolem sebe</h2>
+    <p>Skutečné fotografie osmi meteorologických jevů. Všímej si tvaru oblaků, světla a toho, kde se voda nebo led objevují.</p>
+    <div class="foto-mrizka" id="jevyAtlas">
+      <figure class="foto-karta"><img src="img/z/z6-atmosfera-kupovita-oblaka.webp" alt="Bílé kupovité mraky s plochou základnou a zaobleným vrcholem na modré obloze." width="1152" height="768" loading="lazy"><figcaption><strong>Kupovitá oblaka</strong>Bílé „chuchvalce“ s plochou spodní částí; vznikají, když teplý vzduch stoupá od zahřáté země – typické pro pěkné letní dopoledne.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/z/z6-atmosfera-bourkovy-oblak.webp" alt="Mohutný bouřkový oblak, jehož vrchol se rozlévá do široké ploché kovadliny." width="1152" height="864" loading="lazy"><figcaption><strong>Bouřkový oblak</strong>Mohutná kupovitá věž vysoká přes 10 km; vrchol se rozlévá do ploché „kovadliny“, přináší přívalový déšť, blesky a někdy kroupy.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/z/z6-atmosfera-mlha.webp" alt="Les v husté mlze, vzdálenější stromy mizí v šedém oparu." width="1152" height="768" loading="lazy"><figcaption><strong>Mlha</strong>Oblak ležící přímo na zemi – drobné kapičky vody snižují dohlednost pod 1 km, vzdálené předměty mizí.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/z/z6-atmosfera-jinovatka.webp" alt="Větvička pokrytá dlouhými jehličkovitými krystalky jinovatky proti modré obloze." width="1152" height="864" loading="lazy"><figcaption><strong>Jinovatka</strong>Ledové jehličky narostlé na větvích za mrazu z mlhy nebo vlhkého vzduchu – nepadá z oblaků, usazuje se na předmětech.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/z/z6-atmosfera-kroupy.webp" alt="Tři velké kroupy o průměru několika centimetrů na dlani." width="1152" height="864" loading="lazy"><figcaption><strong>Kroupy</strong>Kuličky ledu padající z bouřkového oblaku i v létě; rostou, když je silný výstupný proud vynáší znovu a znovu vzhůru.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/z/z6-atmosfera-duha.webp" alt="Dvojitá duha nad domy na tmavém pozadí dešťových mraků." width="1152" height="664" loading="lazy"><figcaption><strong>Duha</strong>Barevný oblouk, když Slunce svítí do padajícího deště; kapky rozloží bílé světlo na barvy – Slunce máš vždy za zády.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/z/z6-atmosfera-halo.webp" alt="Světelný kruh halo kolem Slunce na obloze se závojem vysokých řasových oblaků." width="1152" height="864" loading="lazy"><figcaption><strong>Halo</strong>Světelný kruh kolem Slunce nebo Měsíce; vzniká lomem světla v ledových krystalcích vysokých oblaků a často ohlašuje změnu počasí.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/z/z6-atmosfera-inverze.webp" alt="Údolí vyplněná mořem nízké oblačnosti, nad kterou vystupují vrcholky kopců do jasného počasí." width="1152" height="864" loading="lazy"><figcaption><strong>Inverze</strong>V údolí leží studený vzduch s mlhou nebo nízkou oblačností a na horách je tepleji a jasno – z kopce vidíš „moře mraků“.</figcaption></figure>
+    </div>
+  </section>
+
+<script>
+const $ = id => document.getElementById(id);
+const skore = Uloha.skore('metodus_z6_atmosfera', $('skore'));
+let rezim = 'pasy';
+
+const PASY = [
+  { n: 'tropický pás', o: 'celoročně horko, u rovníku hodně srážek, roste tam deštný prales', b: '#2f7a3f' },
+  { n: 'subtropický pás', o: 'horká suchá léta a mírné zimy, typické pro Středomoří a pouště', b: '#c9a227' },
+  { n: 'mírný pás', o: 'střídají se čtyři roční období, patří sem i Česko', b: '#4f9d5d' },
+  { n: 'subpolární pás', o: 'dlouhé mrazivé zimy a krátká chladná léta, roste tam tundra', b: '#7ba9e8' },
+  { n: 'polární pás', o: 'celoročně mráz, trvale zamrzlá půda a ledovce', b: '#dfefff' },
+];
+
+const VRSTVY = [
+  { n: 'troposféra', o: 'nejnižší vrstva do 11 km, odehrává se v ní veškeré počasí' },
+  { n: 'stratosféra', o: 'obsahuje ozonovou vrstvu chránící před ultrafialovým zářením' },
+  { n: 'mezosféra', o: 'vrstva, ve které shoří většina meteoroidů' },
+  { n: 'termosféra', o: 'velmi řídká vrstva, kde vzniká polární záře a obíhají družice' },
+];
+
+const POCASI_PODNEBI = [
+  { t: 'Dnes odpoledne bude v Brně bouřka.', pocasi: true },
+  { t: 'V Česku jsou průměrné roční teploty kolem 8 °C.', pocasi: false },
+  { t: 'Zítra ráno klesne teplota pod nulu.', pocasi: true },
+  { t: 'V Sahaře prší v průměru méně než 100 mm ročně.', pocasi: false },
+  { t: 'Právě fouká silný vítr od západu.', pocasi: true },
+  { t: 'V tropickém pásu je celoročně horko.', pocasi: false },
+  { t: 'Během noci napadlo pět centimetrů sněhu.', pocasi: true },
+  { t: 'Léta ve Středomoří bývají suchá a horká.', pocasi: false },
+];
+
+const JEVY = [
+  { n: 'tlaková níže', o: 'oblast nízkého tlaku, přináší oblačnost a srážky' },
+  { n: 'tlaková výše', o: 'oblast vysokého tlaku, přináší jasno a stabilní počasí' },
+  { n: 'studená fronta', o: 'rozhraní, kde studený vzduch vytlačuje teplý, bývají přeháňky a bouřky' },
+  { n: 'inverze', o: 'v nížině leží studený vzduch a nad ním teplejší, drží se mlha a smog' },
+  { n: 'srážky', o: 'voda padající z oblaků – déšť, sníh, kroupy' },
+  { n: 'vlhkost vzduchu', o: 'množství vodní páry ve vzduchu, měří se vlhkoměrem' },
+  { n: 'atmosférický tlak', o: 'tlak vzduchového sloupce, měří se barometrem v hektopascalech' },
+];
+
+const FOTO_JEVY = [
+  { n: 'kupovitá oblaka', img: 'z6-atmosfera-kupovita-oblaka', w: 1152, h: 768, alt: 'Bílé kupovité mraky s plochou základnou a zaobleným vrcholem na modré obloze.',
+    o: 'bílé „chuchvalce“ s plochou spodní částí; vznikají, když teplý vzduch stoupá od zahřáté země – typické pro pěkné letní dopoledne' },
+  { n: 'bouřkový oblak', img: 'z6-atmosfera-bourkovy-oblak', w: 1152, h: 864, alt: 'Mohutný bouřkový oblak, jehož vrchol se rozlévá do široké ploché kovadliny.',
+    o: 'mohutná kupovitá věž vysoká přes 10 km; vrchol se rozlévá do ploché „kovadliny“, přináší přívalový déšť, blesky a někdy kroupy' },
+  { n: 'mlha', img: 'z6-atmosfera-mlha', w: 1152, h: 768, alt: 'Les v husté mlze, vzdálenější stromy mizí v šedém oparu.',
+    o: 'oblak ležící přímo na zemi – drobné kapičky vody snižují dohlednost pod 1 km, vzdálené předměty mizí' },
+  { n: 'jinovatka', img: 'z6-atmosfera-jinovatka', w: 1152, h: 864, alt: 'Větvička pokrytá dlouhými jehličkovitými krystalky jinovatky proti modré obloze.',
+    o: 'ledové jehličky narostlé na větvích za mrazu z mlhy nebo vlhkého vzduchu – nepadá z oblaků, usazuje se na předmětech' },
+  { n: 'kroupy', img: 'z6-atmosfera-kroupy', w: 1152, h: 864, alt: 'Tři velké kroupy o průměru několika centimetrů na dlani.',
+    o: 'kuličky ledu padající z bouřkového oblaku i v létě; rostou, když je silný výstupný proud vynáší znovu a znovu vzhůru' },
+  { n: 'duha', img: 'z6-atmosfera-duha', w: 1152, h: 664, alt: 'Dvojitá duha nad domy na tmavém pozadí dešťových mraků.',
+    o: 'barevný oblouk, když Slunce svítí do padajícího deště; kapky rozloží bílé světlo na barvy – Slunce máš vždy za zády' },
+  { n: 'halo', img: 'z6-atmosfera-halo', w: 1152, h: 864, alt: 'Světelný kruh halo kolem Slunce na obloze se závojem vysokých řasových oblaků.',
+    o: 'světelný kruh kolem Slunce nebo Měsíce; vzniká lomem světla v ledových krystalcích vysokých oblaků a často ohlašuje změnu počasí' },
+  { n: 'inverze', img: 'z6-atmosfera-inverze', w: 1152, h: 864, alt: 'Údolí vyplněná mořem nízké oblačnosti, nad kterou vystupují vrcholky kopců do jasného počasí.',
+    o: 'v údolí leží studený vzduch s mlhou nebo nízkou oblačností a na horách je tepleji a jasno – z kopce vidíš „moře mraků“' },
+];
+// Fotka je sama otázkou – alt nesmí prozradit odpověď.
+const fotoJev = (x, trida) => `<img class="${trida}" src="img/z/${x.img}.webp" alt="Fotografie k určení." width="${x.w}" height="${x.h}">`;
+
+/* ---- Podnebné pásy ---------------------------------------------------------------------- */
+function pasy() {
+  const p = $('plocha');
+  const u = Uloha.nahodne(PASY);
+  const jine = Uloha.zamichej(PASY.filter(x => x.n !== u.n)).slice(0, 3);
+  let obdelniky = '';
+  PASY.forEach((x, i) => {
+    obdelniky += `<rect x="10" y="${12 + i * 30}" width="300" height="28" fill="${x.b}" fill-opacity="0.65"/>
+      <text x="160" y="${31 + i * 30}" fill="#1c1c1c">${x.n}</text>`;
+  });
+
+  p.innerHTML = `<div class="zadani">Který podnebný pás je popsán?</div>
+    <svg class="pasy" viewBox="0 0 320 165">${obdelniky}</svg>
+    <div class="popis-a">${u.o}</div>`;
+  const odezva = document.createElement('div');
+  odezva.className = 'odezva';
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: Uloha.zamichej([u, ...jine]).map(x => ({ klic: x.n, popis: x.n })),
+    spravnyKlic: u.n,
+    zpravaOk: `✅ ${u.n} – ${u.o}.`,
+    zpravaChyba: 'Zkus jiný pás – je tam horko celý rok, nebo se střídají období?',
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+/* ---- Vrstvy atmosféry ------------------------------------------------------------------- */
+function vrstvy() {
+  const p = $('plocha');
+  const u = Uloha.nahodne(VRSTVY);
+  const jine = Uloha.zamichej(VRSTVY.filter(x => x.n !== u.n)).slice(0, 3);
+  p.innerHTML = `<div class="zadani">O kterou vrstvu atmosféry jde?</div>
+    <img class="atmosfera-img" src="img/z/z6-atmosfera-vrstvy.webp" alt="Vrstvy atmosféry od mraků a letadla přes balon a meteor až k polární záři a ISS." width="1152" height="768"><div class="karta"><div class="popis-a">${u.o}</div></div>`;
+  const odezva = document.createElement('div');
+  odezva.className = 'odezva';
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: Uloha.zamichej([u, ...jine]).map(x => ({ klic: x.n, popis: x.n })),
+    spravnyKlic: u.n,
+    zpravaOk: `✅ ${u.n} – ${u.o}.`,
+    zpravaChyba: 'Zkus jinou vrstvu.',
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+/* ---- Počasí a podnebí -------------------------------------------------------------------- */
+function pocasi() {
+  const p = $('plocha');
+  const u = Uloha.nahodne(POCASI_PODNEBI);
+  p.innerHTML = `<div class="zadani">Popisuje věta počasí, nebo podnebí?</div>
+    <div class="karta"><div class="obrazek">🌦️</div><div class="popis-a">${u.t}</div></div>`;
+  const odezva = document.createElement('div');
+  odezva.className = 'odezva';
+  Uloha.vyber({
+    kam: p, odezva, trida: 'dve',
+    moznosti: [
+      { klic: 'pocasi', ikona: '⛅', popis: 'počasí (okamžitý stav)' },
+      { klic: 'podnebi', ikona: '📊', popis: 'podnebí (dlouhodobý průměr)' },
+    ],
+    spravnyKlic: u.pocasi ? 'pocasi' : 'podnebi',
+    zpravaOk: u.pocasi
+      ? '✅ Popisuje konkrétní chvíli a místo – to je počasí.'
+      : '✅ Popisuje dlouhodobý stav za mnoho let – to je podnebí.',
+    zpravaChyba: 'Mluví věta o dnešku, nebo o dlouhodobém průměru?',
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+/* ---- Meteorologické jevy ------------------------------------------------------------------ */
+function jevy() {
+  const p = $('plocha');
+  const u = Uloha.nahodne(JEVY);
+  const jine = Uloha.zamichej(JEVY.filter(x => x.n !== u.n)).slice(0, 3);
+  p.innerHTML = `<div class="zadani">Který pojem odpovídá popisu?</div>
+    <div class="karta"><div class="obrazek">⛈️</div><div class="popis-a">${u.o}</div></div>`;
+  const odezva = document.createElement('div');
+  odezva.className = 'odezva';
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: Uloha.zamichej([u, ...jine]).map(x => ({ klic: x.n, popis: x.n })),
+    spravnyKlic: u.n,
+    zpravaOk: `✅ ${u.n} – ${u.o}.`,
+    zpravaChyba: 'Zkus jinou možnost.',
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+/* ---- Poznej jev na fotce -------------------------------------------------------------- */
+function foto() {
+  const p = $('plocha');
+  const u = Uloha.nahodne(FOTO_JEVY);
+  const jine = Uloha.zamichej(FOTO_JEVY.filter(x => x.n !== u.n)).slice(0, 3);
+  p.innerHTML = `<div class="zadani">Jaký jev je na fotografii?</div>${fotoJev(u, 'foto-uloha')}`;
+  const odezva = document.createElement('div');
+  odezva.className = 'odezva';
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: Uloha.zamichej([u, ...jine]).map(x => ({ klic: x.n, popis: x.n })),
+    spravnyKlic: u.n,
+    zpravaOk: `✅ ${u.n} – ${u.o}.`,
+    zpravaChyba: 'Podívej se znovu: je to oblak, led, nebo hra světla?',
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+const REZIMY = { pasy, vrstvy, pocasi, jevy, foto };
+function novaUloha() { REZIMY[rezim](); }
+
+document.querySelectorAll('#rezimy button').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('#rezimy button').forEach(x => x.classList.remove('active'));
+  b.classList.add('active');
+  rezim = b.dataset.rezim;
+  novaUloha();
+}));
+$('btnDalsi').addEventListener('click', novaUloha);
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === 'Enter') { e.preventDefault(); novaUloha(); }
+});
+novaUloha();
+</script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+Vygeneruj jeden obrázek a ulož ho jako arch-05.png do aktuální složky.
+
+Asset: icon sprite sheet for the Metodus Czech educational website. Match the painting style of vzor-styl.png and arch-01.png in this folder (watercolor and gouache with fine dark ink outlines, warm ivory paper #faf6ec, muted sage / jade / ochre / brick / slate-blue palette, soft daylight from upper left), SIMPLIFIED FOR SMALL ICONS exactly like arch-01.png: one bold, chunky object or tight group per icon, strong clear silhouette, slightly thicker ink outline, few details, flat even ivory background, readable when shrunk to 24 px.
+
+Layout (very important): square 1:1 image, an exact 4 × 4 grid of 16 equal invisible cells, 4 rows and 4 columns, read left to right, top to bottom. Each icon is centered in its own cell and fills about 70 % of the cell, with clear empty ivory space between icons; nothing may cross into a neighbouring cell. No grid lines, no frames, no borders, no text, no words, no labels, no watermark. Single letters, digits or math symbols only where the description asks for them.
+
+Icons in order:
+1. Two wooden letter blocks, one hard dark with letter Y and one soft cushion-like with letter I.
+2. A worksheet with blank gaps and a pencil filling in a letter.
+3. A teacher's open notebook with handwriting lines and a fountain pen.
+4. Two matching socks hanging on a line (pairs).
+5. A long scroll list with a quill.
+6. A wooden letter block with Ě and a red check mark.
+7. A big capital letter A block next to a small letter a block.
+8. Two puzzle pieces fitting together, one with a person silhouette and one with a running arrow.
+9. A small globe with a dictionary book.
+10. Colorful wooden alphabet blocks A, B, C.
+11. Alphabet letter cards A, B, C lined up in order.
+12. A child's reading primer book with a small picture of a cat.
+13. An open book with a magnifying glass over the text lines.
+14. Ten colored pencils in a box, each a different color.
+15. A running shoe in motion (action word).
+16. A green book with a small teddy bear sitting on it (naming things).
+
+Id: cj2_tvrde_mekke doplnovacky diktat_gen cj3_parove vyjmenovana_slova cj3_e_je cj4_velka_pismena shoda_podmetu cj8_prejata cj1_pismena cj2_abeceda slabiky cteni_s_porozumenim slovni_druhy cj3_slovesa cj3_podstatna
+Generator: Codex CLI (vestavěný ImageGen)

@@ -1,0 +1,26 @@
+Vygeneruj jeden obrázek a ulož ho jako arch-04.png do aktuální složky.
+
+Asset: icon sprite sheet for the Metodus Czech educational website. Match the painting style of vzor-styl.png and arch-01.png in this folder (watercolor and gouache with fine dark ink outlines, warm ivory paper #faf6ec, muted sage / jade / ochre / brick / slate-blue palette, soft daylight from upper left), SIMPLIFIED FOR SMALL ICONS exactly like arch-01.png: one bold, chunky object or tight group per icon, strong clear silhouette, slightly thicker ink outline, few details, flat even ivory background, readable when shrunk to 24 px.
+
+Layout (very important): square 1:1 image, an exact 4 × 4 grid of 16 equal invisible cells, 4 rows and 4 columns, read left to right, top to bottom. Each icon is centered in its own cell and fills about 70 % of the cell, with clear empty ivory space between icons; nothing may cross into a neighbouring cell. No grid lines, no frames, no borders, no text, no words, no labels, no watermark. Single letters, digits or math symbols only where the description asks for them.
+
+Icons in order:
+1. A small piggy bank with gold coins.
+2. An exam sheet with a pencil and a small stopwatch, mathematics test.
+3. An open book with a quill pen.
+4. A wooden ruler, a set square triangle and a small cube.
+5. A red double-decker bus.
+6. Two overlapping speech bubbles in different colors.
+7. A small house with a red roof and a tree beside it.
+8. A small laptop computer.
+9. A golden atom model with orbiting electrons.
+10. An Erlenmeyer flask with green liquid.
+11. A green leaf with a magnified plant cell beside it.
+12. A classic desk globe.
+13. A small medieval castle tower.
+14. A brass scale of justice.
+15. A violin with its bow.
+16. A stack of index cards and a small hourglass.
+
+Id: m9_financni m9_prijimacky predmet-cj predmet-m predmet-aj predmet-dcj predmet-prv predmet-inf predmet-f predmet-ch predmet-pr predmet-z predmet-d predmet-vo predmet-hv predmet-nastroje
+Generator: Codex CLI (vestavěný ImageGen)

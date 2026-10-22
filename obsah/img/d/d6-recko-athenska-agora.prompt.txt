@@ -1,0 +1,8 @@
+Use case: historical-scene
+Asset type: interactive history lesson reconstruction, 3:2 landscape
+Primary request: historically grounded reconstruction of the Athenian Agora during the 5th century BCE, citizens gathering and debating in small groups, merchants at modest stalls, a stoa, civic buildings, altar and statues
+Scene/backdrop: sunlit classical Athens with the Acropolis visible in the distance
+Style/medium: refined watercolor and gouache with delicate ink, warm ivory paper, educational museum reconstruction
+Composition/framing: wide readable scene with distinct civic, commercial and religious areas, generous edge margins for overlay hotspots
+Color palette: limestone, terracotta, muted sage, dusty blue, warm ochre
+Constraints: period-appropriate Greek clothing and architecture, diverse everyday civic activity, no Roman arches, no imperial Roman togas, no modern objects, no text, no labels, no letters, no watermark

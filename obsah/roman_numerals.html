@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🏛️ Římské číslice</title>
+<link rel="stylesheet" href="../common.css">
+<link rel="stylesheet" href="../vyuka.css">
+<script src="../theme.js"></script>
+<script src="../podpis.js" defer></script>
+<script src="../kostra.js" defer></script>
+<script src="../uloha.js" defer></script>
+<script src="../procvic.js" defer></script>
+<style>
+  #prehledObal[hidden] { display: none; }
+  .karta-prevod { max-width: 680px; background: var(--bg-panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; margin-bottom: 16px; }
+  .row { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; flex-wrap: wrap; }
+  .row label { width: 120px; font-size: 0.9rem; color: var(--text-muted); }
+  .row input { flex: 1; min-width: 0; background: var(--bg-input); border: 1px solid var(--border-strong); border-radius: 6px; color: var(--accent-hover); padding: 12px; font-size: 1.4rem; text-align: center; font-weight: 700; }
+  .swap { text-align: center; color: var(--text-faint); margin: 4px 0 10px; }
+  .breakdown { background: var(--bg-input); border-radius: 8px; padding: 12px; margin-top: 12px; display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+  .part { text-align: center; padding: 8px 12px; background: var(--bg-control); border: 1px solid var(--border); border-radius: 6px; }
+  .part .r { font-size: 1.4rem; font-weight: 700; color: var(--accent-hover); }
+  .part .v { font-size: 0.75rem; color: var(--text-muted); }
+  .err { color: var(--danger-text, var(--danger)); text-align: center; font-size: 0.88rem; margin-top: 8px; min-height: 1.2em; }
+  .ref { display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 6px; margin-top: 8px; }
+  .ref div { background: var(--bg-input); border-radius: 4px; padding: 6px 8px; text-align: center; font-size: 0.9rem; }
+  .ref b { color: var(--accent-hover); }
+  .karta-prevod h2 { font-size: 1rem; margin-bottom: 8px; }
+  /* Vinculum – nadtržení znamená tisíckrát víc; vnořením vznikne dvojité nadtržení */
+  .vinc { border-top: 2px solid currentColor; padding-top: 1px; margin-top: 2px; display: inline-block; line-height: 1.1; }
+  .vysvetlivka { font-size: 0.85rem; color: var(--text-muted); margin-top: 8px; line-height: 1.5; }
+  .druh { display: block; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-faint); margin-bottom: 6px; }
+  .rimske { font-family: Georgia, 'Times New Roman', serif; letter-spacing: 0.06em; }
+  .prehled-chyb .druh { display: none; }
+  .rimske-kontext { display:block; width:min(430px,88vw); aspect-ratio:1; object-fit:cover; margin:10px auto; border-radius:14px; border:1px solid var(--border); }
+  .kontext-popis { display:block; max-width:560px; margin:8px auto 0; font-size:.86rem; color:var(--text-muted); line-height:1.45; }
+  .plocha .karta { width:min(680px,100%); max-width:100%; box-sizing:border-box; }
+  #autor-podpis { max-width:100%; box-sizing:border-box; }
+</style>
+</head>
+<body>
+  <h1>🏛️ Římské číslice</h1>
+  <p class="podtitul">Pro 4.–6. ročník: převodník s rozkladem po řádech a procvičování – přečti, zapiš a najdi správný zápis. Po chybě máš druhý pokus a ukáže se rozklad.</p>
+
+  <div class="rezimy" id="rezimy">
+    <button data-rezim="prevod" data-faze="vyuka" class="active">🔁 Převodník</button>
+    <button data-rezim="cti">👀 Přečti</button>
+    <button data-rezim="zapis">✍️ Zapiš</button>
+    <button data-rezim="chyba">🔍 Najdi správný zápis</button>
+    <button data-rezim="kontext">🏙️ V praxi</button>
+  </div>
+
+  <div id="prehledObal">
+    <div class="karta-prevod">
+      <div class="row"><label for="arabic">Arabské číslo</label><input type="number" id="arabic" value="2026" min="1" max="3999999999"></div>
+      <div class="swap" aria-hidden="true">⇅</div>
+      <div class="row"><label for="roman">Římské číslo</label><input type="text" id="roman" value="MMXXVI" autocomplete="off"></div>
+      <div class="err" id="err" role="status"></div>
+      <div id="nahled" style="text-align:center;font-size:1.6rem;font-weight:700;margin-top:6px"></div>
+      <div class="breakdown" id="breakdown"></div>
+    </div>
+    <div class="karta-prevod">
+      <h2>📖 Základní hodnoty</h2>
+      <div class="ref">
+        <div><b>I</b> = 1</div><div><b>V</b> = 5</div><div><b>X</b> = 10</div><div><b>L</b> = 50</div>
+        <div><b>C</b> = 100</div><div><b>D</b> = 500</div><div><b>M</b> = 1000</div>
+      </div>
+      <p class="vysvetlivka">Klasický zápis končí u 3999. Větší čísla se zapisují s <b>nadtržením
+        (vinculum)</b> – nadtržená část znamená tisíckrát víc: <span class="vinc">V</span> = 5000,
+        <span class="vinc">X</span>LII = 10 042. Při psaní se nadtržení zapisuje závorkami: (V) = 5000.</p>
+    </div>
+  </div>
+
+  <div class="plocha" id="plocha" hidden></div>
+  <div class="ovladani" id="ovladani" hidden>
+    <button class="hlavni" id="startBtn">🔄 Nová série</button>
+    <span class="pokrok" id="pokrok"></span>
+    <span class="skore" id="skore"></span>
+  </div>
+
+  <p class="napoveda">Sedm znaků: <b>I</b> 1, <b>V</b> 5, <b>X</b> 10, <b>L</b> 50, <b>C</b> 100, <b>D</b> 500, <b>M</b> 1000. Čte se zleva, hodnoty se sčítají; menší znak <b>před</b> větším se odečítá, ale jen v šesti dvojicích: <b>IV</b> 4, <b>IX</b> 9, <b>XL</b> 40, <b>XC</b> 90, <b>CD</b> 400, <b>CM</b> 900. Stejný znak se opakuje nejvýš třikrát (III, ne IIII); V, L a D se neopakují. Zapisuj po řádech: 1994 = M + CM + XC + IV = MCMXCIV. Římské číslice najdeš na ciferníku, v letopočtech na budovách a v číslování kapitol.</p>
+
+<script>
+const $ = id => document.getElementById(id);
+const MAP=[[1000,'M'],[900,'CM'],[500,'D'],[400,'CD'],[100,'C'],[90,'XC'],[50,'L'],[40,'XL'],[10,'X'],[9,'IX'],[5,'V'],[4,'IV'],[1,'I']];
+/* základní (klasický) zápis do 3999 */
+function zakladni(n){let r='';for(const[v,s]of MAP)while(n>=v){r+=s;n-=v;}return r;}
+
+/* Nad 3999 se používá nadtržení: nadtržená skupina platí tisíckrát.
+   Rekurze zvládne i miliony (dvojité nadtržení). */
+function toRomanHtml(n){
+  if(n<4000)return zakladni(n);
+  const tisice=Math.floor(n/1000),zbytek=n%1000;
+  return `<span class="vinc">${toRomanHtml(tisice)}</span>${zbytek?zakladni(zbytek):''}`;
+}
+/* textová podoba se závorkami, aby se dala zkopírovat i napsat */
+function toRomanText(n){
+  if(n<4000)return zakladni(n);
+  const tisice=Math.floor(n/1000),zbytek=n%1000;
+  return `(${toRomanText(tisice)})${zbytek?zakladni(zbytek):''}`;
+}
+
+/* Převod zápisu na číslo; přijme jen ustálený tvar – ten, který by vytvořil toRomanText
+   (MMMM ani (I) neprojdou, správně je (IV) a M). */
+function fromRoman(vstup){
+  const s=vstup.toUpperCase().replace(/\s+/g,'');
+  const v=rozeberRimske(s);
+  return v!==null&&toRomanText(v)===s?v:null;
+}
+function rozeberRimske(s){
+  if(!s)return null;
+  // závorky = nadtržení: obsah závorky se násobí tisícem
+  const zavorka=s.match(/^\((.+)\)([IVXLCDM]*)$/);
+  if(zavorka){
+    const uvnitr=rozeberRimske(zavorka[1]);
+    if(uvnitr===null)return null;
+    const zbytek=zavorka[2]?rozeberRimske(zavorka[2]):0;
+    if(zbytek===null||zbytek>=1000)return null;
+    return uvnitr*1000+zbytek;
+  }
+  const vals={I:1,V:5,X:10,L:50,C:100,D:500,M:1000};
+  if(!/^[IVXLCDM]+$/.test(s))return null;
+  let total=0;
+  for(let i=0;i<s.length;i++){const cur=vals[s[i]],next=vals[s[i+1]]||0;if(cur<next)total-=cur;else total+=cur;}
+  if(zakladni(total)!==s)return null; // hlídá kanonický tvar (např. IIII neprojde)
+  return total;
+}
+
+/* rozklad po řádech: 1994 → [['M',1000],['CM',900],['XC',90],['IV',4]] */
+function poRadech(n) {
+  const r = [];
+  for (const rad of [1000, 100, 10, 1]) {
+    const cast = Math.floor(n / rad) % 10 * rad;
+    if (cast) r.push([zakladni(cast), cast]);
+  }
+  return r;
+}
+const rozkladText = n => `${n} = ` + poRadech(n).map(([s]) => s).join(' + ');
+
+function breakdown(n) {
+  const parts = [];
+  let nasobek = 1, zbyva = n;
+  const skupiny = [];
+  while (zbyva > 0) { skupiny.unshift({ cast: zbyva % 1000, nasobek }); zbyva = Math.floor(zbyva / 1000); nasobek *= 1000; }
+  for (const { cast, nasobek: m } of skupiny) for (const [s, v] of poRadech(cast)) parts.push([m > 1 ? `<span class="vinc">${s}</span>` : s, v * m]);
+  $('breakdown').innerHTML = parts.map(([r, v]) =>
+    `<div class="part"><div class="r">${r}</div><div class="v">${v.toLocaleString('cs-CZ')}</div></div>`).join('');
+}
+function zobrazRimske(n) {
+  $('roman').value = toRomanText(n);
+  $('nahled').innerHTML = n >= 4000 ? toRomanHtml(n) : '';
+}
+const MAX = 3999999999;
+$('arabic').oninput = () => {
+  $('err').textContent = '';
+  const n = parseInt($('arabic').value);
+  if (isNaN(n) || n < 1 || n > MAX) {
+    $('err').textContent = `Zadej celé číslo 1–${MAX.toLocaleString('cs-CZ')}.`;
+    $('roman').value = ''; $('breakdown').innerHTML = ''; $('nahled').innerHTML = '';
+    return;
+  }
+  zobrazRimske(n); breakdown(n);
+};
+$('roman').oninput = () => {
+  $('err').textContent = '';
+  const v = fromRoman($('roman').value.trim());
+  if (v === null) {
+    const s = $('roman').value.trim().toUpperCase().replace(/\s+/g, ''), n = rozeberRimske(s);
+    $('err').textContent = n !== null && n !== 0
+      ? `Hodnota by byla ${n.toLocaleString('cs-CZ')}, ale ustálený zápis je ${toRomanText(n)}.`
+      : 'Neplatné římské číslo. Nadtržení zapiš závorkami, například (VI) = 6000.';
+    $('breakdown').innerHTML = ''; return;
+  }
+  $('arabic').value = v; breakdown(v);
+  $('nahled').innerHTML = v >= 4000 ? toRomanHtml(v) : '';
+};
+zobrazRimske(2026); breakdown(2026);
+
+/* ---- procvičování ---------------------------------------------------------- */
+// čísla s aspoň jednou čtyřkou nebo devítkou jsou zajímavější (odčítání)
+function cislo() {
+  const n = Uloha.nahodne([() => Uloha.nahodneCislo(1, 49), () => Uloha.nahodneCislo(50, 399), () => Uloha.nahodneCislo(400, 3999),
+    () => Uloha.nahodne([1348, 1415, 1620, 1848, 1918, 1945, 1968, 1989, 1993, 2004, 2026])])();
+  return n;
+}
+/* typické chyby: sčítací tvar místo odčítacího (IIII), nedovolené odčítání (IC),
+   opakované V/L/D (VV), prohozené pořadí (VI místo IV) */
+function chybneTvary(n) {
+  const ok = zakladni(n), k = new Set();
+  const nahrad = (co, cim) => { if (ok.includes(co)) k.add(ok.replace(co, cim)); };
+  nahrad('CM', 'DCCCC'); nahrad('CD', 'CCCC'); nahrad('XC', 'LXXXX'); nahrad('XL', 'XXXX'); nahrad('IX', 'VIIII'); nahrad('IV', 'IIII');
+  nahrad('XCIX', 'IC'); nahrad('XLIX', 'IL'); nahrad('CDXC', 'XD'); nahrad('CMXC', 'XM'); nahrad('XLV', 'VL');
+  nahrad('IV', 'VI'); nahrad('IX', 'XI'); nahrad('XL', 'LX'); nahrad('XC', 'CX');
+  nahrad('X', 'VV'); nahrad('C', 'LL'); nahrad('M', 'DD');
+  nahrad('III', 'IIII'); nahrad('XXX', 'XXXX');
+  return [...k].filter(t => t !== ok);
+}
+let rezim = 'prevod';
+function generuj(r) {
+  if (r === 'kontext') {
+    const u = Uloha.nahodne([
+      {img:'img/m/m5-rimske-hodiny.webp', alt:'Ciferník věžních hodin Zytglogge v Bernu s římskými číslicemi.', kod:'XII', n:12, kde:'na horním okraji ciferníku'},
+      {img:'img/m/m5-rimske-stavba.webp', alt:'Kamenný stavební nápis na mostě Basteibrücke s letopočty MDCCCL a MDCCCLI.', kod:'MDCCCL', n:1850, kde:'jako první letopočet na kamenném nápisu'},
+      {img:'img/m/m5-rimske-nahrobek.webp', alt:'Historický náhrobní nápis v Malé Morávce zakončený římským letopočtem MDCCC.', kod:'MDCCC', n:1800, kde:'na konci náhrobního nápisu'},
+      {img:'img/m/m5-rimske-kapitola.webp', alt:'Sken historické knihy se záhlavím CHAPTER XIV.', kod:'XIV', n:14, kde:'v označení kapitoly'},
+    ]);
+    return {
+      zadani:`<span class="druh">Kolik znamená zápis ${u.kod} ${u.kde}?</span><img class="rimske-kontext" src="${u.img}" alt="${u.alt}" width="768" height="768"><span class="kontext-popis">Zapiš hodnotu arabskými číslicemi.</span>`,
+      odpoved:u.n, napoveda:`${u.kod} = ${u.n.toLocaleString('cs-CZ')}`,
+    };
+  }
+  if (r === 'chyba') {
+    let n, spatne;
+    do { n = cislo(); spatne = Uloha.zamichej(chybneTvary(n)).slice(0, 3); } while (spatne.length < 3);
+    const ok = zakladni(n);
+    return {
+      zadani: `<span class="druh">Který zápis je správně?</span>${n}`,
+      odpoved: ok, moznosti: Uloha.zamichej([ok, ...spatne]), tridaMoznosti: 'rimske',
+      napoveda: rozkladText(n),
+    };
+  }
+  const n = cislo();
+  if (r === 'cti') return {
+    zadani: `<span class="druh">Kolik je</span><span class="rimske">${zakladni(n)}</span>`,
+    odpoved: n, napoveda: rozkladText(n),
+  };
+  return {
+    zadani: `<span class="druh">Zapiš římskými číslicemi</span>${n}`,
+    odpoved: zakladni(n), napoveda: rozkladText(n),
+  };
+}
+window.addEventListener('DOMContentLoaded', () => {
+  const serie = Procvic.spust({
+    klic: 'metodus_rimske', pocet: 10, typ: 'text',
+    plocha: $('plocha'), skoreEl: $('skore'), pokrokEl: $('pokrok'),
+    rezim: () => rezim, generuj,
+  });
+  $('rezimy').addEventListener('click', e => {
+    const b = e.target.closest('button[data-rezim]');
+    if (!b) return;
+    $('rezimy').querySelectorAll('button').forEach(x => x.classList.toggle('active', x === b));
+    rezim = b.dataset.rezim;
+    const prevod = rezim === 'prevod';
+    $('prehledObal').hidden = !prevod;
+    $('plocha').hidden = $('ovladani').hidden = prevod;
+    if (!prevod) serie.restart();
+  });
+  $('startBtn').onclick = () => serie.restart();
+});
+</script>
+</body>
+</html>

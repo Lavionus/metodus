@@ -1,0 +1,7 @@
+Use case: scientific-educational
+Asset type: classroom biology diagram for an interactive anatomy lesson
+Primary request: a clean simplified textbook schematic of the internal female reproductive organ system only.
+Subject: frontal medical diagram with uterus and cavity, cervix, vaginal canal, paired fallopian tubes with fimbriae and exactly two ovaries; pale urinary bladder as an orientation landmark.
+Style: polished non-photorealistic medical atlas, muted coral, rose, cream and pale blue, anatomically plausible and suitable for Czech eighth-grade biology.
+Composition: vertical 2:3, centered, large unobscured structures and uniform warm ivory background for HTML hotspot overlays.
+Constraints: strictly clinical and educational; no person, skin, nudity, sexual context, text, numbers, arrows, legend, frame, vignette, watermark, pregnancy or fetus.

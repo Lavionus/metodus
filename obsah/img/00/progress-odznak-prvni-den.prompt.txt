@@ -1,0 +1,3 @@
+IMG-00-04 · progress-odznak-prvni-den
+OpenAI image_gen · 2026-10-12
+Úplné zadání: progress-odznaky.prompt.txt, položka progress-odznak-prvni-den.

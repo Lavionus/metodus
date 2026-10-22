@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🏔️ Řeky a pohoří ČR</title>
+<link rel="stylesheet" href="../common.css">
+<link rel="stylesheet" href="../vyuka.css">
+<link rel="stylesheet" href="../vyklad.css">
+<script src="../vyklad.js" defer></script>
+<script src="../theme.js"></script>
+<script src="../podpis.js" defer></script>
+<script src="../kostra.js" defer></script>
+<script src="../uloha.js" defer></script>
+<script src="../procvic.js" defer></script>
+<style>
+  .druh { display: block; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-faint); margin-bottom: 6px; }
+  .fakt { display: block; font-size: 1.15rem; font-weight: 500; line-height: 1.45; max-width: 560px; margin: 0 auto; }
+  .prehled-chyb .druh { display: none; }
+  .prehled-chyb .fakt { display: inline; font-size: inherit; }
+</style>
+</head>
+<body>
+  <h1>🏔️ Řeky a pohoří ČR</h1>
+  <p class="podtitul">Série dvanácti otázek: poznej řeku nebo pohoří podle popisu a zjisti, kam která řeka odvádí vodu. Po chybě máš druhý pokus, na konci přehled chyb.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Řeky jako strom, hory kolem hranic</summary>
+    <div class="obsah">
+      <p>Řeky si nepamatuj jednotlivě, ale jako <b>strom</b>: malé potoky se vlévají do řek, ty do větších řek a největší
+        do moře. Každá řeka se vlévá vždy do <b>nejbližšího většího toku</b>, ne rovnou do moře.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>🌊 Strom Labe</h3><p>Do <b>Vltavy</b> tečou Lužnice, Otava, Sázava a Berounka.
+          Vltava, Ohře, Jizera a Orlice tečou do <b>Labe</b> → Severní moře.</p></article>
+        <article class="vyklad-karta"><h3>🌊 Strom Moravy</h3><p>Jihlava → <b>Svratka</b> → <b>Dyje</b> → <b>Morava</b>; do Moravy teče i Bečva.
+          Morava → <b>Dunaj</b> → Černé moře.</p></article>
+        <article class="vyklad-karta"><h3>🌊 Strom Odry</h3><p><b>Opava</b> ústí u Ostravy do <b>Odry</b> → Baltské moře.</p></article>
+        <article class="vyklad-karta"><h3>⛰️ Pohoří po obvodu</h3><p>Sever: Lužické, Jizerské hory, <b>Krkonoše</b> (Sněžka 1 603 m).
+          Severozápad: Krušné hory. Západ: Český les. Jihozápad: <b>Šumava</b>. Jih: Novohradské hory. Východ: Orlické hory,
+          Jeseníky, <b>Beskydy</b>, Bílé Karpaty.</p></article>
+      </div>
+      <p>Uvnitř země leží nižší <b>Českomoravská vrchovina</b> (mezi Čechami a Moravou) a <b>Brdy</b> jihozápadně od Prahy.
+        Pohoří proto poznáš hlavně podle toho, <b>u které hranice</b> leží a se kterým sousedem.</p>
+      <p><b>Typická chyba:</b> na otázku „Kam se vlévá Vltava?“ odpovědět „do Severního moře“. Správně je <b>do Labe</b> –
+        moře je až konec celé cesty.</p>
+      <aside class="zapamatuj">Řeka se vlévá do nejbližšího většího toku. Labe → Severní moře, Odra → Baltské moře,
+        Morava → Dunaj → Černé moře. Hory hledej po obvodu republiky.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: kam se vlévá Jihlava</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Kam se vlévá řeka Jihlava? Možnosti: Morava, Svratka, Dunaj, Vltava.</p>
+      <ol class="kroky">
+        <li>Jihlava pramení na Českomoravské vrchovině a teče na jihovýchod, na Moravu – Vltava v Čechách to tedy není.</li>
+        <li>Vybavím si strom Moravy: Jihlava → Svratka → Dyje → Morava → Dunaj.</li>
+        <li>Ptají se, kam se vlévá, takže hledám <b>nejbližší</b> větší tok, ne konec cesty.</li>
+        <li>Nejbližší je <b>Svratka</b>; Morava a Dunaj jsou až dál po proudu.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Jihlava se vlévá do Svratky.</p>
+    </div>
+  </details>
+
+  <div class="rezimy" id="rezimy">
+    <button data-rezim="reky" class="active">🌊 Řeky</button>
+    <button data-rezim="pohori">⛰️ Pohoří</button>
+    <button data-rezim="vlevani">🧭 Kam se vlévá?</button>
+    <button data-rezim="mix">🔀 Mix</button>
+  </div>
+
+  <div class="plocha" id="plocha"></div>
+
+  <div class="ovladani">
+    <button class="hlavni" id="startBtn">🔄 Nová série</button>
+    <span class="pokrok" id="pokrok"></span>
+    <span class="skore" id="skore"></span>
+  </div>
+
+  <p class="napoveda">Česko leží na <b>střeše Evropy</b> – vody odtékají do tří moří: <b>Labe</b> (s Vltavou, Ohří a Jizerou) do <b>Severního moře</b>, <b>Odra</b> (s Opavou) do <b>Baltského moře</b> a <b>Morava</b> (s Dyjí, Svratkou a Bečvou) přes Dunaj do <b>Černého moře</b>. Nejvyšší hora je <b>Sněžka</b> (1 603 m) v Krkonoších.</p>
+
+<script>
+const $ = id => document.getElementById(id);
+/* Popisy nesmí prozradit název (např. „soutok Rožnovské a Vsetínské Bečvy“).
+   `do` = kam se řeka vlévá. */
+const REKY = [
+  { n: 'Vltava', do: 'Labe', fact: 'Nejdelší česká řeka, protéká Českými Budějovicemi a Prahou.' },
+  { n: 'Labe', do: 'Severní moře', fact: 'Pramení v Krkonoších a odvádí vodu z většiny Čech do Německa.' },
+  { n: 'Morava', do: 'Dunaj', fact: 'Hlavní řeka východní části republiky, které dala jméno.' },
+  { n: 'Odra', do: 'Baltské moře', fact: 'Pramení v Oderských vrších, protéká Ostravou a teče na sever do Polska.' },
+  { n: 'Ohře', do: 'Labe', fact: 'Protéká Karlovými Vary a Žatcem, ústí u Litoměřic.' },
+  { n: 'Sázava', do: 'Vltava', fact: 'Přítok Vltavy, oblíbená řeka vodáků s hradem Český Šternberk.' },
+  { n: 'Dyje', do: 'Morava', fact: 'Řeka jižní Moravy, protéká Znojmem a vodní nádrží Nové Mlýny.' },
+  { n: 'Berounka', do: 'Vltava', fact: 'Vzniká u Plzně soutokem Mže, Radbuzy, Úhlavy a Úslavy.' },
+  { n: 'Jizera', do: 'Labe', fact: 'Protéká Turnovem a Mladou Boleslaví.' },
+  { n: 'Lužnice', do: 'Vltava', fact: 'Jihočeská řeka, protéká Třeboňskem a Táborem.' },
+  { n: 'Otava', do: 'Vltava', fact: 'Pramení na Šumavě; v Písku přes ni vede nejstarší dochovaný kamenný most v Česku.' },
+  { n: 'Svratka', do: 'Dyje', fact: 'Protéká Brnem a Brněnskou přehradou.' },
+  { n: 'Jihlava', do: 'Svratka', fact: 'Pramení na Českomoravské vrchovině a protéká krajským městem Vysočiny.' },
+  { n: 'Bečva', do: 'Morava', fact: 'Vzniká soutokem dvou zdrojnic ve Valašském Meziříčí a protéká Přerovem.' },
+  { n: 'Opava', do: 'Odra', fact: 'Slezská řeka, pramení v Jeseníkách a ústí u Ostravy.' },
+  { n: 'Orlice', do: 'Labe', fact: 'Vzniká ze dvou zdrojnic, Divoké a Tiché, a ústí v Hradci Králové.' },
+];
+const POHORI = [
+  { n: 'Krkonoše', fact: 'Nejvyšší pohoří Česka se Sněžkou (1 603 m).' },
+  { n: 'Šumava', fact: 'Rozsáhlé zalesněné pohoří na jihozápadě při hranici s Rakouskem a Německem.' },
+  { n: 'Jeseníky', fact: 'Pohoří na severu Moravy a ve Slezsku, nejvyšší vrchol Praděd.' },
+  { n: 'Beskydy', fact: 'Pohoří na východní Moravě při hranici se Slovenskem, s Lysou horou a Radhoštěm.' },
+  { n: 'Orlické hory', fact: 'Pohoří ve východních Čechách při hranici s Polskem.' },
+  { n: 'Krušné hory', fact: 'Pohoří na severozápadě při hranici s Německem, dříve bohaté na rudy; nejvyšší vrchol Klínovec.' },
+  { n: 'Českomoravská vrchovina', fact: 'Mírně zvlněná vrchovina mezi Čechami a Moravou.' },
+  { n: 'Jizerské hory', fact: 'Pohoří na severu Čech vedle Krkonoš, s rozsáhlými rašeliništi.' },
+  { n: 'Brdy', fact: 'Zalesněná vrchovina jihozápadně od Prahy, bývalý vojenský prostor.' },
+  { n: 'Bílé Karpaty', fact: 'Pohoří na jihovýchodě Moravy při hranici se Slovenskem, proslulé orchidejovými loukami.' },
+  { n: 'Novohradské hory', fact: 'Pohoří na jihu Čech při hranici s Rakouskem.' },
+  { n: 'Lužické hory', fact: 'Nízké pohoří na severu Čech při hranici s Německem, nejvyšší vrchol Luž.' },
+  { n: 'Český les', fact: 'Pohoří na západě Čech podél hranice s Německem, severně od Šumavy.' },
+];
+const KAM = ['Labe', 'Vltava', 'Morava', 'Odra', 'Dyje', 'Svratka', 'Dunaj', 'Severní moře', 'Baltské moře'];
+let rezim = 'reky';
+
+function otazka(typ) {
+  if (typ === 'vlevani') {
+    const r = Uloha.nahodne(REKY);
+    const spatne = Uloha.zamichej(KAM.filter(k => k !== r.do && k !== r.n)).slice(0, 3);
+    return {
+      zadani: `<span class="druh">🧭 Kam se vlévá?</span><span class="fakt">${r.n}</span>`,
+      odpoved: r.do, moznosti: Uloha.zamichej([r.do, ...spatne]),
+      napoveda: r.fact,
+    };
+  }
+  const reka = typ === 'reky';
+  const seznam = reka ? REKY : POHORI;
+  const x = Uloha.nahodne(seznam);
+  const spatne = Uloha.zamichej(seznam.filter(y => y.n !== x.n)).slice(0, 3).map(y => y.n);
+  return {
+    zadani: `<span class="druh">${reka ? '🌊 Která řeka?' : '⛰️ Které pohoří?'}</span><span class="fakt">${x.fact}</span>`,
+    odpoved: x.n, moznosti: Uloha.zamichej([x.n, ...spatne]),
+    napoveda: reka ? `vlévá se do: ${x.do}` : '',
+  };
+}
+function generuj(r) {
+  return otazka(r === 'mix' ? Uloha.nahodne(['reky', 'pohori', 'vlevani']) : r);
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  const serie = Procvic.spust({
+    klic: 'metodus_reky_pohori',
+    pocet: 12,
+    typ: 'text',
+    plocha: $('plocha'),
+    skoreEl: $('skore'),
+    pokrokEl: $('pokrok'),
+    rezim: () => rezim,
+    generuj,
+  });
+  $('rezimy').addEventListener('click', e => {
+    const b = e.target.closest('button[data-rezim]');
+    if (!b) return;
+    $('rezimy').querySelectorAll('button').forEach(x => x.classList.toggle('active', x === b));
+    rezim = b.dataset.rezim;
+    serie.restart();
+  });
+  $('startBtn').onclick = () => serie.restart();
+  serie.restart();
+});
+</script>
+</body>
+</html>

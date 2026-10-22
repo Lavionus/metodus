@@ -1,0 +1,8 @@
+Sada: IMG-ch-07
+Soubor: ch9-redox-medena-strecha
+Popis: Měděná střecha hotelu v Lysekilu s typickou zelenou patinou.
+Autor: W. Carter
+Zdroj: https://commons.wikimedia.org/wiki/File:Copper_roof_on_Lysekil_Hotel,_detail.jpg
+Licence: CC0 1.0
+Staženo: 2026-10-19
+Úpravy: automatická orientace, odstranění metadat, zmenšení PNG na 1600 px; WebP 1152 px q82

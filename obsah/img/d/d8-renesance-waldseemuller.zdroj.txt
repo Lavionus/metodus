@@ -1,0 +1,8 @@
+Soubor: d8-renesance-waldseemuller.png / d8-renesance-waldseemuller.webp
+Původní dílo: Waldseemuller map 2.jpg
+Autor: Martin Waldseemüller
+Datum vzniku: 1507
+Zdroj: https://commons.wikimedia.org/wiki/File:Waldseemuller_map_2.jpg
+Licence: Public domain
+Staženo: 2026-10-21
+Úpravy: automatické natočení, odstranění metadat, zmenšení na nejvýše 1600 px; výuková WebP kopie 1152 px.

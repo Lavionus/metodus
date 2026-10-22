@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Počitatelná a nepočitatelná podstatná jména</title>
+  <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
+  <script src="../theme.js"></script>
+  <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
+  <script src="../uloha.js"></script>
+  <style>
+    .slovo-en { font-size: clamp(1.6rem, 6vw, 2.4rem); font-weight: 700; }
+    .preklad { color: var(--text-faint); font-size: 0.9rem; }
+    .veta-en { font-size: clamp(1.1rem, 4.2vw, 1.55rem); font-weight: 600; max-width: 620px; line-height: 1.5; }
+    .veta-en .mezera { color: var(--accent); border-bottom: 2px dashed var(--accent); padding: 0 12px; }
+    .mira-obrazek { display: block; width: min(100%, 260px); aspect-ratio: 1; object-fit: contain;
+      border: 1px solid var(--border); border-radius: 16px; background: #f7f1e5; }
+    .tabulka { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; max-width: 740px;
+      margin-top: 10px; color: var(--text-faint); font-size: 0.8rem; }
+    .tabulka span { background: var(--bg-control); border: 1px solid var(--border); border-radius: 8px; padding: 6px 12px; }
+  </style>
+</head>
+<body>
+  <h1>🍎 Počitatelná a nepočitatelná podstatná jména</h1>
+  <p class="podtitul">Pro 7. ročník: countable × uncountable, some/any, much/many a míry.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Dá se to spočítat?</summary>
+    <div class="obsah">
+      <p>Anglická podstatná jména se dělí na <b>počitatelná</b> (<span lang="en">countable</span>) a
+        <b>nepočitatelná</b> (<span lang="en">uncountable</span>). Počitatelné věci jdou spočítat po kusech:
+        <span lang="en">an apple, two apples</span>. Nepočitatelné jsou látky a pojmy bez jasných kusů:
+        <span lang="en">water, milk, sugar, rice, money, time</span>. Nemají množné číslo ani člen
+        <span lang="en">a / an</span>.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Test</h3><p>Zkus říct „<span lang="en">two …s</span>“. <span lang="en">Two books</span> zní dobře →
+          počitatelné. <span lang="en">Two waters</span> jako množství vody nejde → nepočitatelné.</p></article>
+        <article class="vyklad-karta"><h3><span lang="en">some / any</span></h3><p><span lang="en"><b>some</b></span> – kladná věta a zdvořilá nabídka:
+          <span lang="en">There is some milk. Would you like some tea?</span><br>
+          <span lang="en"><b>any</b></span> – otázka a zápor: <span lang="en">Have you got any brothers? We haven't got any bread.</span></p></article>
+        <article class="vyklad-karta"><h3><span lang="en">much / many</span></h3><p><span lang="en"><b>many</b></span> + počitatelné v množném čísle: <span lang="en">many books</span><br>
+          <span lang="en"><b>much</b></span> + nepočitatelné: <span lang="en">much water</span><br>
+          <span lang="en"><b>a lot of</b></span> jde k oběma, hlavně v kladné větě.</p></article>
+      </div>
+      <p>Jak spočítat nepočitatelné? Přes <b>míru nebo nádobu</b>: <span lang="en">a glass of water, a loaf of bread,
+        a slice of cheese, a cup of tea, a bag of flour</span>. Počítáš pak nádoby: <span lang="en">two bottles of milk</span>.</p>
+      <p>Pozor na slova, která jsou v češtině počitatelná: <span lang="en">information</span> a <span lang="en">homework</span>
+        jsou nepočitatelná – ne <span lang="en">informations</span> ✗, ale <span lang="en">a piece of information</span>.
+        Místo britského <span lang="en">Have you got…?</span> řekne Američan spíš <span lang="en">Do you have…?</span></p>
+      <aside class="zapamatuj"><span lang="en">many</span> + počitatelné, <span lang="en">much</span> + nepočitatelné.
+        <span lang="en">some</span> v kladné větě a nabídce, <span lang="en">any</span> v otázce a záporu.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: much, nebo many?</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Doplň <span lang="en">much</span>, nebo <span lang="en">many</span>: <span lang="en">How ___ sugar do you need?</span></p>
+      <ol class="kroky">
+        <li>Najdu podstatné jméno: <span lang="en">sugar</span> (cukr).</li>
+        <li>Zkusím test: „<span lang="en">two sugars</span>“ jako dva cukry na hromadě nedává smysl, cukr je látka → <b>nepočitatelné</b>.</li>
+        <li>Také tvar mi napoví: <span lang="en">sugar</span> stojí bez -s, ne v množném čísle.</li>
+        <li>K nepočitatelnému patří <span lang="en">much</span>.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ <span lang="en">How <b>much</b> sugar do you need?</span></p>
+    </div>
+  </details>
+
+  <div class="rezimy" id="rezimy">
+    <button data-rezim="trideni" class="active">🗂️ Počitatelné, či ne</button>
+    <button data-rezim="someAny">🔤 some / any</button>
+    <button data-rezim="muchMany">🔢 much / many / a lot of</button>
+    <button data-rezim="miry">🥛 Jak to spočítat</button>
+  </div>
+
+  <div class="plocha" id="plocha"></div>
+
+  <div class="ovladani">
+    <button class="hlavni" id="btnDalsi">Přeskočit →</button>
+    <span class="skore" id="skore"></span>
+  </div>
+
+  <div class="tabulka">
+    <span><b>countable</b> – dá se počítat: an apple, two apples</span>
+    <span><b>uncountable</b> – nepočítá se: water, bread, money</span>
+    <span>some v kladné větě · any v otázce a záporu</span>
+  </div>
+
+  <p class="napoveda">
+    <b>Many</b> patří k počitatelným (many books), <b>much</b> k nepočitatelným (much water),
+    <b>a lot of</b> lze použít u obou. Nepočitatelné se počítá pomocí míry:
+    <i>a glass of water, a piece of bread, a kilo of sugar</i>.
+  </p>
+
+<script>
+const $ = id => document.getElementById(id);
+const skore = Uloha.skore('metodus_aj7_pocitatelnost', $('skore'));
+let rezim = 'trideni';
+
+function odezvaEl() { const d = document.createElement('div'); d.className = 'odezva'; return d; }
+
+const SLOVA = [
+  { en: 'apple', cz: 'jablko', ikona: '🍎', poc: true, mn: 'apples' },
+  { en: 'book', cz: 'kniha', ikona: '📖', poc: true, mn: 'books' },
+  { en: 'chair', cz: 'židle', ikona: '🪑', poc: true, mn: 'chairs' },
+  { en: 'egg', cz: 'vejce', ikona: '🥚', poc: true, mn: 'eggs' },
+  { en: 'car', cz: 'auto', ikona: '🚗', poc: true, mn: 'cars' },
+  { en: 'coin', cz: 'mince', ikona: '🪙', poc: true, mn: 'coins' },
+  { en: 'sandwich', cz: 'sendvič', ikona: '🥪', poc: true, mn: 'sandwiches' },
+  { en: 'water', cz: 'voda', ikona: '💧', poc: false, mira: 'a glass of water' },
+  { en: 'bread', cz: 'chléb', ikona: '🍞', poc: false, mira: 'a piece of bread' },
+  { en: 'money', cz: 'peníze', ikona: '💰', poc: false, mira: 'a lot of money' },
+  { en: 'milk', cz: 'mléko', ikona: '🥛', poc: false, mira: 'a bottle of milk' },
+  { en: 'sugar', cz: 'cukr', ikona: '🧂', poc: false, mira: 'a kilo of sugar' },
+  { en: 'rice', cz: 'rýže', ikona: '🍚', poc: false, mira: 'a bowl of rice' },
+  { en: 'information', cz: 'informace', ikona: 'ℹ️', poc: false, mira: 'a piece of information' },
+  { en: 'time', cz: 'čas', ikona: '⏰', poc: false, mira: 'a lot of time' },
+  { en: 'homework', cz: 'domácí úkol', ikona: '📝', poc: false, mira: 'a lot of homework' },
+  { en: 'cheese', cz: 'sýr', ikona: '🧀', poc: false, mira: 'a slice of cheese' },
+  { en: 'pen', cz: 'pero', ikona: '🖊️', poc: true, mn: 'pens' },
+];
+
+const MIRY = [
+  { spravne: 'a glass of water', slovo: 'water', img: 'sklenice', alt: 'A glass of water.', jine: ['a piece of water', 'a slice of water', 'a loaf of water'] },
+  { spravne: 'a piece of cake', slovo: 'cake', img: 'kus', alt: 'A piece of cake.', jine: ['a glass of cake', 'a bottle of cake', 'a bowl of cake'] },
+  { spravne: 'a bottle of milk', slovo: 'milk', img: 'lahev', alt: 'A bottle of milk.', jine: ['a slice of milk', 'a bar of milk', 'a piece of milk'] },
+  { spravne: 'a loaf of bread', slovo: 'bread', img: 'bochnik', alt: 'A loaf of bread.', jine: ['a bar of bread', 'a glass of bread', 'a bowl of bread'] },
+  { spravne: 'a packet of rice', slovo: 'rice', img: 'balicek', alt: 'A packet of rice.', jine: ['a slice of rice', 'a loaf of rice', 'a bar of rice'] },
+  { spravne: 'a can of lemonade', slovo: 'lemonade', img: 'plechovka', alt: 'A can of lemonade.', jine: ['a loaf of lemonade', 'a slice of lemonade', 'a piece of lemonade'] },
+  { spravne: 'a bowl of rice', slovo: 'rice', img: 'miska', alt: 'A bowl of rice.', jine: ['a loaf of rice', 'a bottle of rice', 'a slice of rice'] },
+  { spravne: 'a cup of tea', slovo: 'tea', img: 'salek', alt: 'A cup of tea.', jine: ['a piece of tea', 'a bar of tea', 'a slice of tea'] },
+  { spravne: 'a cube of sugar', slovo: 'sugar', img: 'kostka', alt: 'A cube of sugar.', jine: ['a slice of sugar', 'a bottle of sugar', 'a loaf of sugar'] },
+  { spravne: 'a slice of cheese', slovo: 'cheese', img: 'platek', alt: 'A slice of cheese.', jine: ['a glass of cheese', 'a bottle of cheese', 'a loaf of cheese'] },
+  { spravne: 'a bag of flour', slovo: 'flour', img: 'pytel', alt: 'A bag of flour.', jine: ['a bottle of flour', 'a slice of flour', 'a loaf of flour'] },
+  { spravne: 'a box of cereal', slovo: 'cereal', img: 'krabice', alt: 'A box of cereal.', jine: ['a bottle of cereal', 'a slice of cereal', 'a glass of cereal'] },
+];
+
+/* ---- Počitatelné, či ne ----------------------------------------------------------------- */
+function trideni() {
+  const p = $('plocha');
+  const s = Uloha.nahodne(SLOVA);
+  p.innerHTML = `<div class="zadani">Je toto slovo počitatelné, nebo nepočitatelné?</div>
+    <div class="karta"><div class="obrazek">${s.ikona}</div>
+      <div class="slovo-en">${s.en}</div><div class="preklad">${s.cz}</div></div>`;
+  const odezva = odezvaEl();
+  Uloha.vyber({
+    kam: p, odezva, trida: 'dve',
+    moznosti: [
+      { klic: 'poc', ikona: '1️⃣', popis: 'countable (počitatelné)' },
+      { klic: 'nepoc', ikona: '🌊', popis: 'uncountable (nepočitatelné)' },
+    ],
+    spravnyKlic: s.poc ? 'poc' : 'nepoc',
+    zpravaOk: s.poc
+      ? `✅ countable – one ${s.en}, two ${s.mn}`
+      : `✅ uncountable – nemá množné číslo, počítá se přes míru: ${s.mira}`,
+    zpravaChyba: 'Zkus říct „two …s“. Když to nejde, je slovo nepočitatelné.',
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+/* ---- some / any ---------------------------------------------------------------------------- */
+const SOME_ANY = [
+  { veta: 'There is <span class="mezera">?</span> milk in the fridge.', spravne: 'some', typ: 'kladná věta' },
+  { veta: 'Have you got <span class="mezera">?</span> brothers?', spravne: 'any', typ: 'otázka' },
+  { veta: 'We haven\'t got <span class="mezera">?</span> bread at home.', spravne: 'any', typ: 'zápor' },
+  { veta: 'I need <span class="mezera">?</span> new shoes.', spravne: 'some', typ: 'kladná věta' },
+  { veta: 'Is there <span class="mezera">?</span> sugar in my tea?', spravne: 'any', typ: 'otázka' },
+  { veta: 'She bought <span class="mezera">?</span> apples yesterday.', spravne: 'some', typ: 'kladná věta' },
+  { veta: 'There aren\'t <span class="mezera">?</span> chairs in the room.', spravne: 'any', typ: 'zápor' },
+  { veta: 'Would you like <span class="mezera">?</span> tea?', spravne: 'some', typ: 'zdvořilá nabídka' },
+  { veta: 'I didn\'t take <span class="mezera">?</span> money with me.', spravne: 'any', typ: 'zápor' },
+  { veta: 'Let\'s buy <span class="mezera">?</span> cheese for dinner.', spravne: 'some', typ: 'kladná věta' },
+];
+function someAny() {
+  const p = $('plocha');
+  const u = Uloha.nahodne(SOME_ANY);
+  p.innerHTML = `<div class="zadani">Doplň some, nebo any:</div>
+    <div class="karta"><div class="veta-en">${u.veta}</div></div>`;
+  const odezva = odezvaEl();
+  Uloha.vyber({
+    kam: p, odezva, trida: 'dve',
+    moznosti: [{ klic: 'some', popis: 'some' }, { klic: 'any', popis: 'any' }],
+    spravnyKlic: u.spravne,
+    zpravaOk: `✅ ${u.spravne} – ${u.typ}`,
+    zpravaChyba: 'Some patří do kladné věty a zdvořilé nabídky, any do otázky a záporu.',
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+/* ---- much / many / a lot of ------------------------------------------------------------------ */
+function muchMany() {
+  const p = $('plocha');
+  const s = Uloha.nahodne(SLOVA);
+  const otazka = Math.random() < 0.5;
+  const slovoVeVete = s.poc ? s.mn : s.en;
+  const veta = otazka
+    ? `How <span class="mezera">?</span> ${slovoVeVete} do you need?`
+    : `I haven't got <span class="mezera">?</span> ${slovoVeVete}.`;
+
+  p.innerHTML = `<div class="zadani">Doplň much, nebo many:</div>
+    <div class="karta"><div class="veta-en">${veta}</div>
+      <div class="preklad">${s.cz}</div></div>`;
+  const odezva = odezvaEl();
+  Uloha.vyber({
+    kam: p, odezva, trida: 'dve',
+    moznosti: [{ klic: 'many', popis: 'many' }, { klic: 'much', popis: 'much' }],
+    spravnyKlic: s.poc ? 'many' : 'much',
+    zpravaOk: s.poc
+      ? `✅ many ${s.mn} – slovo je počitatelné a je v množném čísle.`
+      : `✅ much ${s.en} – slovo je nepočitatelné. (V kladné větě raději: a lot of ${s.en}.)`,
+    zpravaChyba: 'Many jde k počitatelným v množném čísle, much k nepočitatelným.',
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+/* ---- Jak to spočítat --------------------------------------------------------------------------- */
+function miry() {
+  const p = $('plocha');
+  const u = Uloha.nahodne(MIRY);
+  p.innerHTML = `<div class="zadani">Jak správně vyjádříš množství?</div>
+    <div class="karta"><img class="mira-obrazek" src="img/aj/aj7-mira-${u.img}.webp" alt="Obrázek k úloze – v jaké míře je ${u.slovo}?" width="768" height="768">
+      <div class="slovo-en">${u.slovo}</div></div>`;
+  const odezva = odezvaEl();
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: Uloha.zamichej([u.spravne, ...u.jine]).map(t => ({ klic: t, popis: t })),
+    spravnyKlic: u.spravne,
+    zpravaOk: `✅ ${u.spravne}`,
+    zpravaChyba: 'Ke každé nepočitatelné látce patří jiná míra – sklenice, plátek, bochník…',
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+const REZIMY = { trideni, someAny, muchMany, miry };
+function novaUloha() { REZIMY[rezim](); }
+
+document.querySelectorAll('#rezimy button').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('#rezimy button').forEach(x => x.classList.remove('active'));
+  b.classList.add('active');
+  rezim = b.dataset.rezim;
+  novaUloha();
+}));
+$('btnDalsi').addEventListener('click', novaUloha);
+novaUloha();
+</script>
+</body>
+</html>

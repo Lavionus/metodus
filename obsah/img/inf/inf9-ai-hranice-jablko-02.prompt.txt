@@ -1,0 +1,5 @@
+Use case: scientific-educational
+Asset type: difficult apple-versus-pear classification card
+Primary request: one whole elongated yellow-green apple with tapered lower half, clear apple cavity and calyx
+Style: realistic botanical product illustration on pale warm-gray studio background
+Constraints: correct label apple; no text, logo, extra fruit or scenery

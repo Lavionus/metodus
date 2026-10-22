@@ -1,0 +1,11 @@
+Sada: IMG-f-19
+Soubor: iss-stanice
+Typ: oficiální fotografie / mozaika
+Popis: Mezinárodní vesmírná stanice vyfotografovaná při obletu po odpojení lodi Crew Dragon Endeavour dne 8. listopadu 2021.
+Autor: ESA / Thomas Pesquet; NASA/JSC
+Identifikátor NASA: jsc2021e064215_alt
+Zdrojová stránka: https://www.nasa.gov/international-space-station/space-station-gallery/
+Přímý zdroj: https://images-assets.nasa.gov/image/jsc2021e064215_alt/jsc2021e064215_alt~large.jpg
+Licence: NASA image; public domain under U.S. law, subject to NASA Media Usage Guidelines
+Staženo: 2026-10-19
+Úpravy: převod JPEG do projektového PNG; zmenšení na šířku 1152 px a převod do WebP q82 pro web

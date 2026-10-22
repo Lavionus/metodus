@@ -1,0 +1,8 @@
+Sada: IMG-pr-19
+Soubor: pr9-geologie-luznice
+Popis: Letecký pohled na meandrující Lužnici a výtopu Rožmberka na Třeboňsku.
+Autor: Kralpilot
+Zdroj: https://commons.wikimedia.org/wiki/File:Rybn%C3%ADk_-_Ro%C5%BEmberk,%C3%BAst%C3%AD_%C5%99eky_Lu%C5%BEnice_2_(T%C5%99ebo%C5%88),_T%C5%99ebo%C5%88.jpg
+Licence: CC BY-SA 3.0
+Staženo: 2026-10-19
+Úpravy: automatická orientace, odstranění metadat, PNG do 1600 px; WebP 1152 px q82

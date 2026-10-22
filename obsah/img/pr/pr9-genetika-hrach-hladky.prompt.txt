@@ -1,0 +1,4 @@
+Use case: scientific-educational
+Asset type: square phenotype card for genetics
+Primary request: Three mature pea seeds with distinctly smooth taut rounded surfaces, isolated on warm ivory paper in the project's watercolor schoolbook style.
+Constraints: scientifically recognizable; no text, labels, arrows, formulas, logos, watermark, border, photorealism or emoji style.

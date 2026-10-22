@@ -1,0 +1,2 @@
+Common specification: inf9-ai-ovoce.prompt.txt
+Variant: Red apple with many fine golden lenticels and a subtle green patch near the stem, tilted right.

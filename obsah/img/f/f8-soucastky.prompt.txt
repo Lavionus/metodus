@@ -1,0 +1,17 @@
+Sada: IMG-f-10 — reálné elektrické součástky
+Datum: 2026-10-12
+Nástroj: OpenAI image_gen
+
+Společné zadání:
+Use case: scientific-educational. Asset type: square component card for a Czech physics lesson. Scene/backdrop: softly textured warm cream paper. Style/medium: highly detailed naturalistic watercolor and colored-pencil illustration, realistic materials and proportions. Composition/framing: one isolated electrical component centered in three-quarter view, complete object visible, clear silhouette, gentle shadow. Constraints: no border, no people, no hands, no brand logos, no watermark, no decorative symbols, no captions, consistent lighting and scale across the set.
+
+Jednotlivé motivy:
+- f8-soucastka-baterie: one traditional flat 4.5-volt school battery with two brass contact tabs on top, plain blue casing without writing
+- f8-soucastka-zarovka: one small clear incandescent torch bulb screwed into a black classroom bulb holder with two visible screw terminals
+- f8-soucastka-spinac: one simple open knife switch on a small dark insulating base, two metal terminals and raised metal lever, safe low-voltage classroom apparatus
+- f8-soucastka-rezistor: one axial through-hole resistor with beige ceramic body, several realistic colored identification bands, and straight metal leads
+- f8-soucastka-ampermetr: one compact analog classroom ammeter with white dial, black needle, red and black terminals, the single capital letter A clearly printed at the center of the dial and no other readable text
+- f8-soucastka-voltmetr: one compact analog classroom voltmeter with white dial, black needle, red and black terminals, the single capital letter V clearly printed at the center of the dial and no other readable text
+- f8-soucastka-pojistka: one transparent glass cartridge fuse with metal end caps and a thin intact fuse wire visible inside
+- f8-soucastka-civka: one school solenoid: neat cylindrical coil of enamelled copper wire around a hollow light-gray tube, two terminal posts, no iron core
+- f8-soucastka-kompas: one round magnetic compass with brass rim, white face, red-and-dark needle, simple cardinal tick marks but no letters

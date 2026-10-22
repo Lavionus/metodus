@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Šíření tepla a izolace</title>
+  <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
+  <script src="../theme.js"></script>
+  <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
+  <script src="../rec.js"></script>
+  <script src="../uloha.js"></script>
+  <style>
+    .situace { font-size: clamp(1.05rem, 3.6vw, 1.3rem); font-weight: 650; max-width: 600px; line-height: 1.5; text-align: center; }
+    .otazka-pod { color: var(--text-muted); font-size: 0.98rem; max-width: 600px; text-align: center; }
+    .moznosti.dlouhe button { max-width: 300px; min-width: 200px; }
+    .obr-teplo { width: min(360px, 100%); height: auto; }
+    .obr-teplo .hrnec { fill: none; stroke: var(--text-muted); stroke-width: 4; stroke-linejoin: round; }
+    .obr-teplo .voda { fill: var(--accent); fill-opacity: 0.3; }
+    .obr-teplo .plotna { fill: var(--danger); fill-opacity: 0.75; }
+    .obr-teplo .proud { fill: none; stroke: var(--accent); stroke-width: 3; }
+    .obr-teplo .vedeni { stroke: var(--danger); stroke-width: 7; stroke-linecap: round; }
+    .obr-teplo .slunce { fill: var(--danger); fill-opacity: 0.85; }
+    .obr-teplo .paprsek { stroke: var(--danger); stroke-width: 2.5; stroke-dasharray: 6 4; }
+    .obr-teplo text { fill: var(--text); font-size: 14px; font-weight: 700; }
+    .obr-teplo .sipka { fill: var(--accent); }
+    .material { font-size: clamp(2.6rem, 10vw, 3.6rem); line-height: 1; }
+  </style>
+</head>
+<body>
+  <h1>🔥 Šíření tepla a tepelná izolace</h1>
+  <p class="podtitul">Pro 8. ročník: vedení, proudění a záření tepla, tepelné vodiče a izolanty, teplotní roztažnost.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Jak se teplo šíří</summary>
+    <div class="obsah">
+      <p>Teplo samo přechází vždy z <b>teplejšího tělesa na chladnější</b>, dokud se teploty nevyrovnají.
+        Může se šířit třemi způsoby:</p>
+      <svg class="obr-teplo" viewBox="0 0 360 190" role="img" aria-label="Hrnec na plotně: rukojeť se zahřívá vedením, voda v hrnci proudí, slunce hřeje zářením.">
+        <rect class="plotna" x="60" y="160" width="150" height="12" rx="3"/>
+        <rect class="voda" x="74" y="92" width="122" height="64"/>
+        <path class="hrnec" d="M70 80 V158 H200 V80"/>
+        <line class="vedeni" x1="200" y1="96" x2="262" y2="96"/>
+        <path class="proud" d="M105 146 C90 120 100 104 120 104 M165 104 C180 104 182 128 168 146"/>
+        <polygon class="sipka" points="114,98 126,104 114,110"/><polygon class="sipka" points="162,140 168,152 174,140"/>
+        <text x="96" y="74">proudění</text><text x="226" y="120">vedení</text>
+        <circle class="slunce" cx="318" cy="34" r="18"/>
+        <line class="paprsek" x1="300" y1="44" x2="232" y2="74"/><line class="paprsek" x1="304" y1="54" x2="262" y2="84"/>
+        <text x="270" y="28" text-anchor="end">záření</text>
+      </svg>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Vedení</h3><p>Hlavně v <b>pevných látkách</b> při dotyku. Částice předávají pohyb sousedům, látka se přitom nepřemisťuje. Lžička v čaji se zahřeje celá.</p></article>
+        <article class="vyklad-karta"><h3>Proudění</h3><p>V <b>kapalinách a plynech</b>. Teplejší látka má menší hustotu a stoupá, chladnější klesá. Takto hřeje radiátor celou místnost.</p></article>
+        <article class="vyklad-karta"><h3>Záření</h3><p>Šíří se <b>i vakuem</b>, bez dotyku. Tak k nám dopadá teplo ze Slunce. Tmavé povrchy záření pohlcují víc, světlé a lesklé ho odrážejí.</p></article>
+      </div>
+      <p><b>Tepelné vodiče</b> vedou teplo dobře – hlavně <b>kovy</b> (měď, hliník, stříbro, železo). <b>Tepelné izolanty</b>
+        vedou teplo špatně: dřevo, plasty, vlna, peří, polystyren a hlavně <b>nehybný vzduch</b>, který je uzavřený v jejich pórech.
+        Izolace domu, peřina nebo dvojité okno proto zadržují vzduch.</p>
+      <p><b>Teplotní roztažnost:</b> při zahřátí se tělesa většinou <b>roztahují</b>, při ochlazení <b>smršťují</b>. Proto mají koleje
+        a mosty dilatační spáry a dráty v létě víc prověšují. Výjimkou je voda: mezi 0 °C a 4 °C se ochlazením roztahuje
+        a při zamrznutí zvětší objem.</p>
+      <aside class="zapamatuj">Vedení = dotykem v pevné látce, proudění = pohybem kapaliny nebo plynu, záření = na dálku i vakuem. Kovy jsou vodiče, nehybný vzduch je výborný izolant.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: proč termoska udrží čaj teplý</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Termoska má dvojitou skleněnou stěnu, mezi stěnami je vakuum a stěny jsou uvnitř postříbřené. Proč v ní čaj dlouho nevychladne?</p>
+      <ol class="kroky">
+        <li>Zjistím, kudy by teplo mohlo z čaje utíkat: <b>vedením</b> přes stěnu, <b>prouděním</b> vzduchu a <b>zářením</b>.</li>
+        <li>Mezi stěnami je <b>vakuum</b> – není tam žádná látka, takže tudy nemůže teplo projít vedením ani prouděním.</li>
+        <li>Zbývá záření, které projde i vakuem. <b>Lesklé postříbřené stěny</b> ho ale odrážejí zpátky k čaji.</li>
+        <li>Shora brání proudění vzduchu <b>uzávěr</b> z izolantu (plastu nebo korku).</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Termoska brzdí všechny tři způsoby: vakuum zastaví vedení a proudění, lesklé stěny odrážejí záření.</p>
+    </div>
+  </details>
+
+  <div class="rezimy" id="rezimy">
+    <button data-rezim="zpusob" class="active">🌡️ Kterým způsobem se teplo šíří?</button>
+    <button data-rezim="vodic">🥄 Vodič, nebo izolant?</button>
+    <button data-rezim="roztaznost">🛤️ Roztažnost v praxi</button>
+  </div>
+
+  <div class="plocha" id="plocha"></div>
+
+  <div class="ovladani">
+    <button class="hlavni" id="btnDalsi">Přeskočit →</button>
+    <span class="skore" id="skore"></span>
+  </div>
+
+  <p class="napoveda">
+    Teplo přechází z teplejšího na chladnější těleso. <b>Vedení</b> – dotykem, hlavně v pevných látkách (lžička v čaji).
+    <b>Proudění</b> – v kapalinách a plynech, teplá látka stoupá, studená klesá (radiátor, voda v hrnci).
+    <b>Záření</b> – na dálku i vakuem (Slunce, táborák zboku); tmavé povrchy záření pohlcují, lesklé odrážejí.
+    <b>Vodiče tepla:</b> kovy. <b>Izolanty:</b> nehybný vzduch, polystyren, vlna, peří, dřevo, plasty.
+    <b>Roztažnost:</b> zahřátím se tělesa roztahují, ochlazením smršťují (dilatační spáry, prověšené dráty v létě);
+    voda při zamrznutí zvětší objem.
+  </p>
+
+<script>
+const $ = id => document.getElementById(id);
+const skore = Uloha.skore('metodus_f8_sireni_tepla', $('skore'));
+let rezim = 'zpusob';
+
+/* společné položení otázky; každá možnost nese vlastní vysvětlení „proc“ */
+function poloz(u) {
+  const p = $('plocha');
+  p.innerHTML = u.html;
+  const odezva = document.createElement('div');
+  odezva.className = 'odezva';
+  Uloha.vyber({
+    kam: p, odezva, trida: u.trida || 'dlouhe',
+    moznosti: u.moznosti.map(m => ({ klic: m.klic, popis: m.popis, ikona: m.ikona })),
+    spravnyKlic: u.spravny,
+    zpravaOk: u.ok,
+    zpravaChyba: k => (u.moznosti.find(m => m.klic === k) || {}).proc || 'Zkus jinou možnost.',
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+    prodleva: n => n ? 3000 : 4200,
+  });
+  p.appendChild(odezva);
+}
+
+/* ---- Kterým způsobem se teplo šíří? ---------------------------------------------------- */
+const ZPUSOBY = {
+  vedeni: { ikona: '🥄', popis: 'vedením' },
+  proudeni: { ikona: '🌀', popis: 'prouděním' },
+  zareni: { ikona: '☀️', popis: 'zářením' },
+};
+/* proč je zvolený způsob špatně, když správný je jiný: PROC[správný][zvolený] */
+const PROC = {
+  vedeni: {
+    proudeni: 'Při proudění se pohybuje celá kapalina nebo plyn a nese teplo s sebou. Tady se nic nepřelévá – teplo přechází dotykem, to je vedení.',
+    zareni: 'Záření hřeje na dálku bez dotyku. Tady se tělesa dotýkají a teplo přechází přímo z jednoho do druhého – vedením.',
+  },
+  proudeni: {
+    vedeni: 'Vedení probíhá hlavně v pevných látkách při dotyku. Tady se pohybuje sama teplá kapalina nebo vzduch a nese teplo s sebou – to je proudění.',
+    zareni: 'Záření hřeje na dálku i vakuem. Tady ale teplo přenáší proudící vzduch nebo voda – proudění.',
+  },
+  zareni: {
+    vedeni: 'Vedení potřebuje dotyk nebo látku, která teplo předává. Tady teplo přichází na dálku, bez dotyku – zářením.',
+    proudeni: 'Proudění by znamenalo, že teplo nese pohybující se vzduch nebo voda (a ten stoupá hlavně vzhůru). Tady teplo dopadá přímo od zdroje – zářením.',
+  },
+};
+const SITUACE = [
+  ['vedeni', 'Kovová lžička v horkém čaji se po chvíli zahřeje i na konci, který držíš.', 'Částice kovu si postupně předávají pohyb až ke tvým prstům.'],
+  ['vedeni', 'Pánev se zahřívá od plotýnky sporáku, na které stojí.', 'Pánev se plotýnky dotýká a teplo přechází přímo kovem.'],
+  ['vedeni', 'Žehlička zahřívá látku košile, po které jezdí.', 'Horká deska žehličky se látky dotýká.'],
+  ['vedeni', 'Když držíš v dlani kostku ledu, dlaň tě studí.', 'Teplo přechází dotykem z teplé dlaně do studeného ledu.'],
+  ['vedeni', 'Bosé nohy tě studí na dlaždicích v koupelně.', 'Dlaždice se dotýkají chodidel a odvádějí z nich teplo.'],
+  ['vedeni', 'Termofor s teplou vodou hřeje na břiše, na kterém leží.', 'Teplo přechází dotykem přes obal termoforu.'],
+  ['vedeni', 'V mrazu tě kovové zábradlí studí do ruky víc než dřevěná lavička.', 'Kov je dobrý tepelný vodič, a proto z ruky odvádí teplo rychleji.'],
+  ['proudeni', 'Teplý vzduch od radiátoru stoupá ke stropu a studený klesá k podlaze.', 'Teplý vzduch má menší hustotu, stoupá a nese teplo po místnosti.'],
+  ['proudeni', 'Voda v hrnci na plotně je za chvíli teplá v celém objemu, i u hladiny.', 'Ohřátá voda u dna stoupá vzhůru a studená klesá dolů.'],
+  ['proudeni', 'Teplá voda z kotle obíhá potrubím do radiátorů v celém domě.', 'Teplo nese proudící voda – tak funguje ústřední topení.'],
+  ['proudeni', 'Ve dne vane u moře vítr od vody k pevnině, protože pevnina se ohřeje dřív.', 'Nad teplou pevninou vzduch stoupá a od moře na jeho místo proudí chladnější.'],
+  ['proudeni', 'Teplovzdušná trouba má ventilátor, který rozhání horký vzduch kolem koláče.', 'Teplo nese vzduch, který ventilátor pohání – nucené proudění.'],
+  ['proudeni', 'Fén ti vysouší vlasy proudem teplého vzduchu.', 'Ohřátý vzduch nese teplo k vlasům.'],
+  ['proudeni', 'Kouř z táboráku stoupá rovnou vzhůru.', 'Ohřátý vzduch má menší hustotu, stoupá a strhává s sebou kouř.'],
+  ['zareni', 'Slunce ti v zimě hřeje do tváře, i když je venku mráz.', 'Záření ze Slunce dopadá přímo na tvář, studený vzduch mu nevadí.'],
+  ['zareni', 'Teplo ze Slunce se k Zemi dostane přes vesmír, kde není žádná látka.', 'Vakuem projde jen záření.'],
+  ['zareni', 'U táboráku tě hřeje do obličeje, i když sedíš bokem a kouř jde vzhůru.', 'Teplý vzduch stoupá nahoru, k tobě dopadá záření z ohně.'],
+  ['zareni', 'Infrazářič v koupelně hřeje na kůži, i když je vzduch ještě studený.', 'Zářič vysílá tepelné (infračervené) záření.'],
+  ['zareni', 'Černé auto na slunci se rozpálí víc než bílé.', 'Tmavý povrch pohlcuje víc záření, bílý ho víc odráží.'],
+  ['zareni', 'Když držíš ruku kousek vedle svítící klasické žárovky, cítíš teplo.', 'Ruka není nad žárovkou, kam stoupá teplý vzduch – hřeje ji záření.'],
+  ['zareni', 'Termokamera ukáže teplé tělo zvířete i v úplné tmě.', 'Každé teplé těleso vysílá tepelné záření a kamera ho zachytí.'],
+];
+
+function genZpusob() {
+  const [spravny, text, proc] = Uloha.nahodne(SITUACE);
+  return {
+    html: `<div class="zadani">Kterým způsobem se tady teplo šíří <b>hlavně</b>?</div>
+      <div class="karta"><div class="situace">${text}</div></div>`,
+    trida: 'dve',
+    moznosti: Object.entries(ZPUSOBY).map(([k, z]) => ({ klic: k, ikona: z.ikona, popis: z.popis,
+      proc: k === spravny ? '' : '❌ ' + PROC[spravny][k] })),
+    spravny,
+    ok: `✅ ${ZPUSOBY[spravny].popis[0].toUpperCase() + ZPUSOBY[spravny].popis.slice(1)}. ${proc}`,
+  };
+}
+
+/* ---- Vodič, nebo izolant? -------------------------------------------------------------- */
+const VODICE = [
+  { n: 'měď', e: '🟠', pozn: 'Měď je kov a vede teplo velmi dobře – proto se z ní dělají dna kvalitních hrnců a chladiče.' },
+  { n: 'hliník', e: '🥫', pozn: 'Hliník je kov, teplo vede velmi dobře – proto se z něj dělají chladiče a lehké hrnce.' },
+  { n: 'stříbro', e: '🥈', pozn: 'Stříbro je kov a vede teplo ze všech kovů nejlépe.' },
+  { n: 'železo', e: '⛓️', pozn: 'Železo je kov, a proto dobře vede teplo – kovová tyč v ohni se zahřeje až k ruce.' },
+  { n: 'ocel', e: '🔩', pozn: 'Ocel je slitina železa, kov – teplo vede dobře.' },
+  { n: 'mosaz', e: '🎺', pozn: 'Mosaz je slitina mědi a zinku, kov – teplo vede dobře.' },
+];
+const IZOLANTY = [
+  { n: 'polystyren', e: '⬜', pozn: 'Polystyren je plný drobných bublinek nehybného vzduchu, a proto teplo vede velmi špatně – výborný izolant.' },
+  { n: 'vlna', e: '🧶', pozn: 'Vlna mezi vlákny zadržuje vzduch, a proto teplo vede špatně – je to izolant.' },
+  { n: 'peří', e: '🪶', pozn: 'Peří zadržuje hodně nehybného vzduchu – je to výborný izolant (peřina, péřová bunda).' },
+  { n: 'dřevo', e: '🪵', pozn: 'Dřevo vede teplo špatně – proto mají vařečky a rukojeti často dřevěné držadlo.' },
+  { n: 'korek', e: '🍾', pozn: 'Korek obsahuje drobné dutinky se vzduchem, a proto teplo vede špatně – je to izolant.' },
+  { n: 'plast', e: '🧴', pozn: 'Plasty vedou teplo špatně – jsou to tepelné izolanty.' },
+  { n: 'minerální vata', e: '🧱', pozn: 'Minerální vata zadržuje vzduch mezi vlákny – izoluje se jí střecha i stěny domu.' },
+  { n: 'nehybný vzduch', e: '💨', pozn: 'Nehybný vzduch je jeden z nejlepších izolantů – proto izolační materiály vzduch uzavírají.' },
+  { n: 'guma', e: '⚫', pozn: 'Guma vede teplo špatně, je to izolant.' },
+];
+/* účel → materiály, které se k němu opravdu hodí (dobrá odpověď se vybírá jen z nich) */
+const IZOL_UCEL = [
+  ['rukojeť pánve, aby tě nepálila do ruky', ['dřevo', 'plast']],
+  ['chňapku na vytahování plechu z trouby', ['vlna']],
+  ['izolaci stěn domu, aby v zimě neunikalo teplo', ['polystyren', 'minerální vata']],
+  ['podložku pod horký hrnec, aby se nepoškodil stůl', ['korek', 'dřevo']],
+  ['obal termohrnku, aby ses o něj nespálil', ['plast', 'korek']],
+  ['zimní bundu, která udrží teplo těla', ['peří', 'vlna']],
+];
+const VOD_UCEL = [
+  ['dno hrnce, aby se jídlo rychle ohřálo', ['měď', 'hliník', 'ocel']],
+  ['chladič procesoru, který má rychle odvádět teplo', ['hliník', 'měď']],
+  ['radiátor, který má dobře předávat teplo do místnosti', ['ocel', 'hliník']],
+  ['hrot páječky, který má rychle předat teplo spoji', ['měď']],
+];
+
+function genVodic() {
+  const typ = Uloha.nahodne(['jeden', 'jeden', 'izolUcel', 'vodUcel', 'porovnej']);
+  if (typ === 'jeden') {
+    const vod = Math.random() < 0.5;
+    const m = Uloha.nahodne(vod ? VODICE : IZOLANTY);
+    return {
+      html: `<div class="zadani">Je tento materiál dobrý <b>tepelný vodič</b>, nebo <b>tepelný izolant</b>?</div>
+        <div class="karta"><div class="material">${m.e}</div><div class="situace">${m.n}</div></div>`,
+      trida: 'dve',
+      moznosti: [
+        { klic: 'vodic', ikona: '🔥', popis: 'tepelný vodič', proc: vod ? '' : '❌ ' + m.pozn },
+        { klic: 'izolant', ikona: '🧤', popis: 'tepelný izolant', proc: vod ? '❌ ' + m.pozn : '' },
+      ],
+      spravny: vod ? 'vodic' : 'izolant',
+      ok: '✅ ' + m.pozn,
+    };
+  }
+  if (typ === 'porovnej') {
+    const v = Uloha.nahodne(VODICE), i = Uloha.nahodne(IZOLANTY);
+    return {
+      html: `<div class="zadani">Který z materiálů <b>vede teplo lépe</b>?</div>
+        <div class="karta"><div class="material">${v.e} ${i.e}</div></div>`,
+      trida: 'dve',
+      moznosti: Uloha.zamichej([
+        { klic: 'v', popis: v.n, proc: '' },
+        { klic: 'i', popis: i.n, proc: '❌ ' + i.pozn },
+      ]),
+      spravny: 'v',
+      ok: '✅ ' + v.pozn,
+    };
+  }
+  const chceIzol = typ === 'izolUcel';
+  const [ucel, vhodne] = Uloha.nahodne(chceIzol ? IZOL_UCEL : VOD_UCEL);
+  const dobry = Uloha.nahodne((chceIzol ? IZOLANTY : VODICE).filter(m => vhodne.includes(m.n)));
+  const spatne = Uloha.zamichej(chceIzol ? VODICE : IZOLANTY.filter(m => m.n !== 'nehybný vzduch')).slice(0, 3);
+  return {
+    html: `<div class="zadani">Vyber nejvhodnější materiál:</div>
+      <div class="karta"><div class="situace">${ucel[0].toUpperCase() + ucel.slice(1)}</div></div>`,
+    trida: 'dve',
+    moznosti: Uloha.zamichej([dobry, ...spatne]).map(m => ({
+      klic: m.n, popis: `${m.e} ${m.n}`,
+      proc: m === dobry ? '' : chceIzol
+        ? `❌ ${m.n[0].toUpperCase() + m.n.slice(1)} je kov a teplo dobře vede – tady potřebuješ izolant, který teplo nepropustí.`
+        : `❌ ${m.n[0].toUpperCase() + m.n.slice(1)} je tepelný izolant – teplo by přes něj procházelo pomalu. Tady potřebuješ dobrý vodič, tedy kov.`,
+    })),
+    spravny: dobry.n,
+    ok: '✅ ' + dobry.pozn,
+  };
+}
+
+/* ---- Roztažnost v praxi ---------------------------------------------------------------- */
+const LETO = () => `V létě při ${Uloha.nahodneCislo(28, 36)} °C`;
+const ZIMA = () => `V zimě při −${Uloha.nahodneCislo(8, 20)} °C`;
+const ROZTAZNOST = [
+  { ot: () => `${LETO()}: jak vypadají dráty elektrického vedení mezi sloupy?`,
+    ok: 'Teplem se dráty prodlouží, a proto se víc prověsí.',
+    m: [['víc se prověsí', ''],
+      ['víc se napnou', 'Napnou se v zimě, když se chladem zkrátí. V létě se teplem prodlouží.'],
+      ['nic se nezmění', 'Kovové dráty se teplem roztahují – při dlouhém drátu je změna dobře vidět.']] },
+  { ot: () => `${ZIMA()}: jak vypadají dráty elektrického vedení mezi sloupy?`,
+    ok: 'Chladem se dráty zkrátí, a proto jsou víc napnuté. Montéři jim proto nechávají průvěs.',
+    m: [['víc se napnou, méně prověšují', ''],
+      ['víc se prověsí', 'Prověšují se v létě, kdy se teplem prodlouží. Chladem se zkracují.'],
+      ['nic se nezmění', 'Kov se chladem smršťuje – dlouhý drát se zkrátí natolik, že je to vidět.']] },
+  { ot: () => `${LETO()}: co se stane s mezerami (dilatačními spárami) mezi kolejnicemi?`,
+    ok: 'Kolejnice se teplem prodlouží a mezera se zmenší – právě proto ji tam stavitelé nechávají.',
+    m: [['zmenší se', ''],
+      ['zvětší se', 'Mezery se zvětšují v zimě, kdy se kolejnice chladem zkracují.'],
+      ['nezmění se', 'Kolejnice se teplem roztahují. Kdyby mezery nebyly, koleje by se zkroutily.']] },
+  { ot: () => `${ZIMA()}: co se stane s dilatační spárou na konci mostu?`,
+    ok: 'Konstrukce mostu se chladem zkrátí, takže se spára rozšíří.',
+    m: [['rozšíří se', ''],
+      ['zúží se', 'Zúží se v létě, kdy se most teplem prodlouží.'],
+      ['zmizí', 'Spára by zmizela (zavřela se) spíš v horku, kdy se most roztahuje.']] },
+  { ot: () => 'Kovové víčko zavařovací sklenice nejde povolit. Co pomůže?',
+    ok: 'Víčko z kovu se v teplé vodě roztáhne víc než sklo a povolí se.',
+    m: [['podržet víčko pod teplou vodou', ''],
+      ['dát sklenici do mrazáku', 'Chladem se víčko smrští a sevře sklenici ještě pevněji.'],
+      ['podržet víčko pod ledovou vodou', 'Studená voda víčko smrští, takže drží ještě víc.']] },
+  { ot: () => 'Kovová kulička právě prošla kovovým kroužkem. Pak ji zahřeješ nad kahanem. Co se stane?',
+    ok: 'Zahřátá kulička zvětší objem a kroužkem už neprojde (pokus s Gravesandovým kroužkem).',
+    m: [['kroužkem už neprojde', ''],
+      ['projde ještě snáz', 'Teplem se kulička roztáhne, je tedy větší, ne menší.'],
+      ['nic se nezmění', 'I malé zvětšení stačí, aby kulička zůstala v kroužku viset.']] },
+  { ot: () => `Nafouknutý míč necháš ${Uloha.nahodne(['na prudkém slunci', 'u topení'])}. Co se stane?`,
+    ok: 'Vzduch v míči se ohřeje a roztáhne, takže míč ztvrdne.',
+    m: [['míč ztvrdne', ''],
+      ['míč změkne', 'Změkne v mrazu, kdy se vzduch uvnitř smrští.'],
+      ['nic se nezmění', 'Plyny se teplem roztahují dokonce víc než pevné látky.']] },
+  { ot: () => 'Teploměr přeneseš z pokoje ven do mrazu. Co udělá kapalina v trubičce?',
+    ok: 'Kapalina se ochladí, zmenší objem a sloupec v trubičce klesne.',
+    m: [['sloupec klesne', ''],
+      ['sloupec stoupne', 'Stoupá při zahřátí, kdy kapalina zvětšuje objem.'],
+      ['zůstane stejně', 'Kapalinový teploměr funguje právě díky tomu, že kapalina mění objem s teplotou.']] },
+  { ot: () => 'Proč se láhev plná vody v mrazáku roztrhne?',
+    ok: 'Voda při zamrznutí zvětší objem (asi o desetinu) a láhev roztlačí – to je výjimka z běžného chování látek.',
+    m: [['voda zamrznutím zvětší objem', ''],
+      ['sklo se mrazem roztáhne', 'Sklo se chladem naopak smršťuje. Láhev roztrhne led, který má větší objem než voda.'],
+      ['led je těžší než voda', 'Hmotnost se zamrznutím nemění. Led má menší hustotu, a tedy větší objem.']] },
+  { ot: () => 'Proč rybník v zimě zamrzá od hladiny a ryby přežijí u dna?',
+    ok: 'Voda má největší hustotu při 4 °C. Ta klesne ke dnu, chladnější voda a led zůstávají nahoře.',
+    m: [['nejhustší je voda o teplotě 4 °C a drží se u dna', ''],
+      ['led je těžší než voda, ale drží ho rákos', 'Led má menší hustotu než voda, proto plave na hladině sám.'],
+      ['u dna je voda teplejší, protože ji ohřívají ryby', 'Ryby vodu znatelně neohřejí. Rozhoduje hustota: voda o 4 °C klesá ke dnu.']] },
+  { ot: () => 'Proč se mezi dlaždice venkovní terasy nechávají spáry?',
+    ok: 'Dlaždice se v horku roztahují a v mrazu smršťují. Spára jim dá místo, aby nepopraskaly.',
+    m: [['aby měly místo, když se teplem roztáhnou', ''],
+      ['aby jimi rychleji tekla dešťová voda', 'Spáry vodu opravdu propustí, ale hlavní důvod je teplotní roztažnost dlaždic.'],
+      ['aby se ušetřil materiál', 'Kvůli úspoře by se spáry nedělaly – chrání dlažbu před popraskáním.']] },
+  { ot: () => 'V termostatu žehličky je bimetalový pásek ze dvou kovů. Co udělá, když se zahřeje?',
+    ok: 'Každý kov se roztahuje jinak, a proto se pásek ohne a rozpojí obvod – žehlička přestane hřát.',
+    m: [['ohne se a rozpojí obvod', ''],
+      ['zůstane rovný, jen se prodlouží', 'Kdyby byl z jednoho kovu, jen by se prodloužil. Dva kovy se roztahují různě, a tak se pásek ohne.'],
+      ['roztaví se', 'Teplota žehličky je daleko pod teplotou tání kovů. Pásek se jen ohne.']] },
+];
+
+function genRoztaznost() {
+  const o = Uloha.nahodne(ROZTAZNOST);
+  const spravny = o.m[0][0];
+  return {
+    html: `<div class="zadani">Teplotní roztažnost:</div>
+      <div class="karta"><div class="situace">${o.ot()}</div></div>`,
+    moznosti: Uloha.zamichej(o.m).map(([t, proc]) => ({ klic: t, popis: t, proc: proc ? '❌ ' + proc : '' })),
+    spravny,
+    ok: '✅ ' + o.ok,
+  };
+}
+
+const GEN = { zpusob: genZpusob, vodic: genVodic, roztaznost: genRoztaznost };
+function novaUloha() { poloz(GEN[rezim]()); }
+
+document.querySelectorAll('#rezimy button').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('#rezimy button').forEach(x => x.classList.remove('active'));
+  b.classList.add('active');
+  rezim = b.dataset.rezim;
+  novaUloha();
+}));
+$('btnDalsi').addEventListener('click', novaUloha);
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === 'Enter') { e.preventDefault(); novaUloha(); }
+});
+novaUloha();
+</script>
+</body>
+</html>

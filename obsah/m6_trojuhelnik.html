@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Trojúhelník – druhy a konstrukce</title>
+  <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
+  <script src="../theme.js"></script>
+  <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
+  <script src="../rec.js"></script>
+  <script src="../uloha.js"></script>
+  <style>
+    .obrazec { width: min(300px, 76vw); }
+    .obrazec .tvar { fill: var(--accent); fill-opacity: 0.45; stroke: var(--accent); stroke-width: 3; }
+    .obrazec .popisek { fill: var(--text-muted); font-size: 13px; font-weight: 700; text-anchor: middle; }
+    .obrazec .znacka { fill: none; stroke: var(--warn); stroke-width: 2.5; }
+    .strany { font-size: clamp(1.3rem, 5vw, 1.9rem); font-weight: 700; font-variant-numeric: tabular-nums; }
+  </style>
+</head>
+<body>
+  <h1>🔺 Trojúhelník – druhy a konstrukce</h1>
+  <p class="podtitul">Pro 6. ročník: dělení podle stran i úhlů, trojúhelníková nerovnost a věty o konstrukci.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Druhy trojúhelníků a kdy trojúhelník existuje</summary>
+    <div class="obsah">
+      <p>Trojúhelník má tři vrcholy A, B, C, tři strany a, b, c a tři vnitřní úhly α, β, γ se součtem 180°.
+        Třídíme ho dvěma nezávislými způsoby – podle stran a podle úhlů. Jeden trojúhelník proto může být
+        třeba <b>rovnoramenný a zároveň pravoúhlý</b>.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Podle stran</h3><p><b>Různostranný</b> – všechny strany různé,
+          <b>rovnoramenný</b> – dvě strany stejné (ramena), <b>rovnostranný</b> – všechny tři stejné.</p></article>
+        <article class="vyklad-karta"><h3>Podle úhlů</h3><p><b>Ostroúhlý</b> – všechny úhly menší než 90°,
+          <b>pravoúhlý</b> – jeden úhel 90°, <b>tupoúhlý</b> – jeden úhel větší než 90°. Dva pravé nebo tupé úhly
+          mít nemůže, součet by přesáhl 180°.</p></article>
+        <article class="vyklad-karta"><h3>Trojúhelníková nerovnost</h3><p>Součet každých dvou stran je větší než
+          strana třetí. Stačí ověřit, že <b>dvě kratší strany</b> dají dohromady víc než nejdelší – ostatní součty
+          jsou pak větší samy.</p></article>
+        <article class="vyklad-karta"><h3>Věty o konstrukci</h3><p><b>sss</b> – tři strany, <b>sus</b> – dvě strany
+          a úhel jimi sevřený, <b>usu</b> – strana a dva úhly k ní přilehlé, <b>Ssu</b> – dvě strany a úhel
+          proti větší z nich.</p></article>
+      </div>
+      <p>Proč nerovnost platí? Představ si dvě kratší strany jako tyčky připevněné ke koncům nejdelší strany.
+        Když jsou dohromady stejně dlouhé nebo kratší, nedokážou se nad ní sejít ve vrcholu – „lehnou si“ na ni.</p>
+      <aside class="zapamatuj">Dvě kratší strany dohromady &gt; nejdelší strana, jinak trojúhelník nevznikne.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: dá se trojúhelník sestrojit?</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Dá se sestrojit trojúhelník se stranami a = 8 cm, b = 3 cm, c = 4 cm?</p>
+      <ol class="kroky">
+        <li>Najdu nejdelší stranu: a = 8 cm.</li>
+        <li>Sečtu dvě kratší strany: 3 + 4 = 7 cm.</li>
+        <li>Porovnám: 7 cm není větší než 8 cm, trojúhelníková nerovnost neplatí.</li>
+        <li>Představa: tyčky 3 cm a 4 cm se nad úsečkou 8 cm nesejdou, chybí jim 1 cm.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Nedá – 3 + 4 = 7, a to není víc než 8.</p>
+    </div>
+  </details>
+
+  <div class="rezimy" id="rezimy">
+    <button data-rezim="podleStran" class="active">📏 Podle stran</button>
+    <button data-rezim="podleUhlu">📐 Podle úhlů</button>
+    <button data-rezim="nerovnost">⚖️ Dá se sestrojit?</button>
+    <button data-rezim="veta">🧭 Podle které věty</button>
+  </div>
+
+  <div class="plocha" id="plocha"></div>
+
+  <div class="ovladani">
+    <button class="hlavni" id="btnDalsi">Přeskočit →</button>
+    <span class="skore" id="skore"></span>
+  </div>
+
+  <p class="napoveda">
+    <b>Trojúhelníková nerovnost:</b> součet každých dvou stran musí být větší než strana třetí.
+    Konstrukční věty: <b>sss</b> (tři strany), <b>sus</b> (strana–úhel–strana),
+    <b>usu</b> (úhel–strana–úhel), <b>Ssu</b> (větší strana, menší strana a úhel proti větší).
+  </p>
+
+<script>
+const $ = id => document.getElementById(id);
+const skore = Uloha.skore('metodus_m6_trojuhelnik', $('skore'));
+let rezim = 'podleStran';
+
+const PODLE_STRAN = {
+  ruznostranny: 'různostranný (všechny strany různé)',
+  rovnoramenny: 'rovnoramenný (dvě strany stejné)',
+  rovnostranny: 'rovnostranný (všechny strany stejné)',
+};
+const PODLE_UHLU = {
+  ostrouhly: 'ostroúhlý (všechny úhly < 90°)',
+  pravouhly: 'pravoúhlý (jeden úhel = 90°)',
+  tupouhly: 'tupoúhlý (jeden úhel > 90°)',
+};
+
+/* vykreslí trojúhelník ze tří vrcholů */
+function svgTrojuhelnik(body, znacky = '') {
+  const b = body.map(([x, y]) => `${x},${y}`).join(' ');
+  const popisky = ['A', 'B', 'C'].map((n, i) =>
+    `<text class="popisek" x="${body[i][0]}" y="${body[i][1] + (i === 2 ? -8 : 18)}">${n}</text>`).join('');
+  return `<svg class="obrazec" viewBox="0 0 240 170">
+    <polygon class="tvar" points="${b}"/>${popisky}${znacky}</svg>`;
+}
+
+const TROJUHELNIKY = [
+  { strany: [6, 6, 6], body: [[50, 140], [190, 140], [120, 20]], s: 'rovnostranny', u: 'ostrouhly' },
+  { strany: [7, 7, 4], body: [[85, 145], [155, 145], [120, 28]], s: 'rovnoramenny', u: 'ostrouhly' },
+  { strany: [5, 6, 7], body: [[40, 140], [200, 140], [138, 44]], s: 'ruznostranny', u: 'ostrouhly' },
+  { strany: [3, 4, 5], body: [[50, 140], [190, 140], [50, 40]], s: 'ruznostranny', u: 'pravouhly' },
+  { strany: [5, 5, 8], body: [[40, 130], [200, 130], [120, 70]], s: 'rovnoramenny', u: 'tupouhly' },
+  { strany: [4, 9, 7], body: [[30, 135], [210, 135], [157, 75]], s: 'ruznostranny', u: 'tupouhly' },
+  { strany: [6, 8, 10], body: [[50, 145], [210, 145], [50, 45]], s: 'ruznostranny', u: 'pravouhly' },
+  { strany: [5, 5, 5], body: [[55, 135], [185, 135], [120, 28]], s: 'rovnostranny', u: 'ostrouhly' },
+];
+
+/* ---- Podle stran / úhlů ------------------------------------------------------------ */
+function ulohaDruh(podleStran) {
+  const p = $('plocha');
+  const t = Uloha.nahodne(TROJUHELNIKY);
+  const tabulka = podleStran ? PODLE_STRAN : PODLE_UHLU;
+  const spravny = podleStran ? t.s : t.u;
+
+  p.innerHTML = `<div class="zadani">Jaký je to trojúhelník ${podleStran ? 'podle stran' : 'podle úhlů'}?</div>
+    ${svgTrojuhelnik(t.body)}
+    ${podleStran ? `<div class="strany">strany: ${t.strany.join(' cm, ')} cm</div>` : ''}`;
+  const odezva = document.createElement('div');
+  odezva.className = 'odezva';
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: Uloha.zamichej(Object.entries(tabulka)).map(([klic, popis]) => ({ klic, popis })),
+    spravnyKlic: spravny,
+    zpravaOk: `✅ Je ${tabulka[spravny]}.`,
+    zpravaChyba: podleStran
+      ? 'Porovnej délky stran – kolik jich má stejnou délku?'
+      : 'Podívej se, jestli je některý úhel pravý nebo tupý.',
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+const podleStran = () => ulohaDruh(true);
+const podleUhlu = () => ulohaDruh(false);
+
+/* ---- Trojúhelníková nerovnost -------------------------------------------------------- */
+function nerovnost() {
+  const p = $('plocha');
+  const lze = Math.random() < 0.5;
+  // Obě varianty ze stejného rozsahu délek, ať se odpověď nedá poznat podle velikosti čísel.
+  let x, y, z;
+  do {
+    x = Uloha.nahodneCislo(2, 9); y = Uloha.nahodneCislo(2, 9);
+    z = lze ? Uloha.nahodneCislo(Math.max(x, y) - Math.min(x, y) + 1, Math.min(12, x + y - 1))
+            : x + y + Uloha.nahodneCislo(0, 2);
+  } while (z < 2 || z > 12);
+  const [a, b, c] = Uloha.zamichej([x, y, z]);
+  const [k1, k2, nej] = [a, b, c].sort((m, n) => m - n);
+  const platí = (a + b > c) && (a + c > b) && (b + c > a);
+
+  p.innerHTML = `<div class="zadani">Dá se z těchto stran sestrojit trojúhelník?</div>
+    <div class="karta"><div class="strany">a = ${a} cm · b = ${b} cm · c = ${c} cm</div></div>`;
+  const odezva = document.createElement('div');
+  odezva.className = 'odezva';
+  Uloha.vyber({
+    kam: p, odezva, trida: 'dve',
+    moznosti: [
+      { klic: 'ano', ikona: '✅', popis: 'Ano, dá' },
+      { klic: 'ne', ikona: '❌', popis: 'Ne, nedá' },
+    ],
+    spravnyKlic: platí ? 'ano' : 'ne',
+    zpravaOk: platí
+      ? `✅ ${k1} + ${k2} = ${k1 + k2} > ${nej} – součet dvou kratších stran je větší než nejdelší strana.`
+      : `✅ ${k1} + ${k2} = ${k1 + k2} není větší než ${nej}, trojúhelník nevznikne.`,
+    zpravaChyba: 'Sečti dvě kratší strany a porovnej je s nejdelší.',
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+/* ---- Podle které věty ----------------------------------------------------------------- */
+const ZADANI_VET = [
+  { z: 'a = 5 cm, b = 7 cm, c = 6 cm', v: 'sss', proc: 'jsou zadané tři strany' },
+  { z: 'a = 6 cm, b = 4 cm, úhel γ = 50°', v: 'sus', proc: 'dvě strany a úhel jimi sevřený' },
+  { z: 'c = 8 cm, úhel α = 40°, úhel β = 60°', v: 'usu', proc: 'strana a dva úhly k ní přilehlé' },
+  { z: 'a = 9 cm, b = 5 cm, úhel α = 70°', v: 'Ssu', proc: 'dvě strany a úhel proti té větší' },
+  { z: 'a = 4 cm, b = 4 cm, c = 4 cm', v: 'sss', proc: 'jsou zadané tři strany' },
+  { z: 'b = 7 cm, c = 5 cm, úhel α = 90°', v: 'sus', proc: 'dvě strany a úhel mezi nimi' },
+  { z: 'a = 6 cm, úhel β = 45°, úhel γ = 65°', v: 'usu', proc: 'strana a dva přilehlé úhly' },
+];
+
+function veta() {
+  const p = $('plocha');
+  const u = Uloha.nahodne(ZADANI_VET);
+  p.innerHTML = `<div class="zadani">Podle které věty trojúhelník sestrojíš?</div>
+    <div class="karta"><div class="obrazek">📐</div><div class="strany">${u.z}</div></div>`;
+  const odezva = document.createElement('div');
+  odezva.className = 'odezva';
+  Uloha.vyber({
+    kam: p, odezva, trida: 'velke',
+    moznosti: Uloha.zamichej(['sss', 'sus', 'usu', 'Ssu']).map(t => ({ klic: t, popis: t })),
+    spravnyKlic: u.v,
+    zpravaOk: `✅ Věta ${u.v} – ${u.proc}.`,
+    zpravaChyba: 'Spočítej, kolik je zadaných stran a kolik úhlů a jak jsou umístěné.',
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+const REZIMY = { podleStran, podleUhlu, nerovnost, veta };
+function novaUloha() { REZIMY[rezim](); }
+
+document.querySelectorAll('#rezimy button').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('#rezimy button').forEach(x => x.classList.remove('active'));
+  b.classList.add('active');
+  rezim = b.dataset.rezim;
+  novaUloha();
+}));
+$('btnDalsi').addEventListener('click', novaUloha);
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === 'Enter') { e.preventDefault(); novaUloha(); }
+});
+novaUloha();
+</script>
+</body>
+</html>

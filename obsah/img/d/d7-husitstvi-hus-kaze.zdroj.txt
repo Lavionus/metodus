@@ -1,0 +1,8 @@
+Soubor: d7-husitstvi-hus-kaze.png / d7-husitstvi-hus-kaze.webp
+Původní dílo: Hus na kazatelne.jpg
+Autor: Unknown author
+Datum vzniku: 1490sdate QS:P,+1490-00-00T00:00:00Z/8
+Zdroj: https://commons.wikimedia.org/wiki/File:Hus_na_kazatelne.jpg
+Licence: Public domain
+Staženo: 2026-10-21
+Úpravy: automatické natočení, odstranění metadat, zmenšení na nejvýše 1600 px; výuková WebP kopie 768 px.

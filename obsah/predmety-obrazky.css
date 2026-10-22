@@ -1,0 +1,9 @@
+.predmet-ilustrace { width: 64px; height: 64px; object-fit: contain; background: #faf6ec; border-radius: 9px; flex-shrink: 0; }
+.predmet-ilustrace-rada { display: flex; gap: 7px; margin-bottom: 8px; }
+.predmet-ilustrace-rada .predmet-ilustrace { width: 68px; height: 68px; max-width: 30%; }
+#mrizka th .predmet-ilustrace { width: 42px; height: 42px; vertical-align: middle; margin-right: 9px; }
+.detail h2 .predmet-ilustrace { vertical-align: middle; margin-right: 12px; }
+.predmet:focus-visible, .bunka:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+.atlas-odkaz { margin-top: 12px; font-size: .9rem; }
+.atlas-odkaz a { color: var(--accent); }
+@media (prefers-reduced-motion: reduce) { .predmet { transition: none; } }

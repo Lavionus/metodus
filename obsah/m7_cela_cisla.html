@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Celá čísla</title>
+  <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
+  <link rel="stylesheet" href="../nazor.css">
+  <script src="../nazor.js"></script>
+  <script src="../theme.js"></script>
+  <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
+  <script src="../uloha.js"></script>
+  <style>
+    .osa { width: min(620px, 96%); }
+    .osa .cara { stroke: var(--text-muted); stroke-width: 2; }
+    .osa .ryska { stroke: var(--border-strong); stroke-width: 1.5; }
+    .osa .cislo { fill: var(--text-faint); font-size: 11px; text-anchor: middle; }
+    .osa .bod { fill: var(--accent); }
+    .osa .sipka { fill: var(--text-muted); }
+    .osa .znacka { fill: var(--warn); font-size: 20px; text-anchor: middle; }
+    .priklad { font-size: clamp(1.7rem, 6vw, 2.6rem); font-weight: 700; font-variant-numeric: tabular-nums; }
+    .priklad .zap { color: var(--warn); }
+    .kontexty-celych { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; width: min(760px, 100%); margin: 14px auto 20px; }
+    .kontext-cisla { margin: 0; padding: 8px; border: 1px solid var(--border); border-radius: 14px; background: var(--panel); box-shadow: 0 4px 14px #0001; }
+    .kontext-obrazek { position: relative; overflow: hidden; aspect-ratio: 1; border-radius: 10px; background: #f4edda; }
+    .kontext-obrazek img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    .kontext-stupnice { position: absolute; inset: 8% 5% 8% auto; display: flex; flex-direction: column; justify-content: space-between; min-width: 2.2rem; padding: 4px 6px; color: #172026; background: #fffdf1d9; border-left: 3px solid #246b78; border-radius: 7px; font-weight: 800; font-size: clamp(.68rem, 2vw, .88rem); text-align: center; box-shadow: 0 1px 5px #0003; }
+    .kontext-cisla figcaption { padding: 7px 3px 2px; color: var(--text-faint); font-size: .82rem; text-align: center; line-height: 1.35; }
+    @media (max-width: 540px) { .kontexty-celych { gap: 6px; } .kontext-cisla { padding: 4px; } .kontext-cisla figcaption { font-size: .68rem; } }
+  </style>
+</head>
+<body>
+  <h1>➖ Celá čísla</h1>
+  <p class="podtitul">Pro 7. ročník: záporná čísla na ose, porovnávání, absolutní hodnota a počítání.</p>
+
+  <section class="kontexty-celych" aria-label="Kde se setkáme se zápornými čísly">
+    <figure class="kontext-cisla">
+      <div class="kontext-obrazek"><img src="img/m/m7-cela-teplomer.webp" alt="Teploměr v zasněžené zahradě." width="768" height="768">
+        <span class="kontext-stupnice" aria-hidden="true"><span>10 °C</span><span>0 °C</span><span>−10 °C</span></span></div>
+      <figcaption>Teplota pod nulou je záporná.</figcaption>
+    </figure>
+    <figure class="kontext-cisla">
+      <div class="kontext-obrazek"><img src="img/m/m7-cela-vytah.webp" alt="Řez budovou s výtahem a podzemními patry." width="768" height="768">
+        <span class="kontext-stupnice" aria-hidden="true"><span>5</span><span>2</span><span>0</span><span>−2</span></span></div>
+      <figcaption>Podzemní patra značíme záporně.</figcaption>
+    </figure>
+    <figure class="kontext-cisla">
+      <div class="kontext-obrazek"><img src="img/m/m7-cela-potapec.webp" alt="Potápěč plave pod hladinou nad mořským dnem." width="768" height="768">
+        <span class="kontext-stupnice" aria-hidden="true"><span>0 m</span><span>−5 m</span><span>−10 m</span></span></div>
+      <figcaption>Hloubka leží pod úrovní hladiny.</figcaption>
+    </figure>
+  </section>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Celá čísla na ose a počítání s nimi</summary>
+    <div class="obsah">
+      <p>Celá čísla jsou kladná čísla 1, 2, 3…, nula a záporná čísla −1, −2, −3… Na číselné ose leží záporná čísla
+        <b>vlevo od nuly</b>. Čím je číslo víc vlevo, tím je <b>menší</b> – proto −8 &lt; −3, i když 8 je víc než 3.
+        Pomůže teploměr: −8 °C je větší mráz než −3 °C.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Opačné číslo a absolutní hodnota</h3><p>Opačné číslo leží na druhé straně
+          nuly ve stejné vzdálenosti: k 5 je to −5, k −5 je to 5. <b>Absolutní hodnota</b> |a| je vzdálenost od nuly,
+          proto nikdy není záporná: |−7| = 7, |7| = 7.</p></article>
+        <article class="vyklad-karta"><h3>Sčítání a odčítání</h3><p>Sčítání je posun po ose: přičtení kladného čísla
+          posouvá doprava, záporného doleva. <b>Odečíst záporné číslo je totéž jako přičíst opačné</b>:
+          4 − (−3) = 4 + 3 = 7.</p></article>
+        <article class="vyklad-karta"><h3>Násobení a dělení</h3><p>Nejdřív počítej bez znamének, pak urči znaménko:
+          <b>stejná znaménka → kladný výsledek</b>, různá znaménka → záporný. (−3) · (−6) = 18, (−24) : 3 = −8.</p></article>
+      </div>
+      <p>Typická chyba je „dvě minus dají plus“ i u sčítání: (−2) + (−5) není 7, ale −7 – posouváš se dvakrát doleva.
+        Pravidlo o znaménkách platí jen pro násobení a dělení.</p>
+      <aside class="zapamatuj">Vlevo na ose = menší. Odečíst záporné = přičíst kladné. Při násobení a dělení stejná
+        znaménka dávají plus, různá minus.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: odčítání záporného čísla</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Vypočítej (−4) − (−7).</p>
+      <ol class="kroky">
+        <li>Odčítám záporné číslo, takže ho nahradím přičtením opačného čísla: (−4) − (−7) = (−4) + 7.</li>
+        <li>Na ose začnu u −4.</li>
+        <li>Přičítám kladné číslo 7, posunu se o 7 kroků doprava: −3, −2, −1, 0, 1, 2, 3.</li>
+        <li>Kontrola: |7| je větší než |−4|, proto výsledek musí být kladný a rovná se 7 − 4 = 3.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ (−4) − (−7) = 3</p>
+    </div>
+  </details>
+
+  <div class="rezimy" id="rezimy">
+    <button data-rezim="osa" class="active">📏 Číslo na ose</button>
+    <button data-rezim="porovnani">⚖️ Porovnávání</button>
+    <button data-rezim="operace">🧮 Sčítání a odčítání</button>
+    <button data-rezim="soucin">✖️ Násobení a dělení</button>
+    <button data-rezim="absolutni">🔁 Opačné číslo a absolutní hodnota</button>
+  </div>
+
+  <div class="plocha" id="plocha"></div>
+
+  <div class="ovladani">
+    <button class="hlavni" id="btnDalsi">Přeskočit →</button>
+    <span class="skore" id="skore"></span>
+  </div>
+
+  <p class="napoveda">
+    Na číselné ose leží záporná čísla <b>vlevo</b> od nuly – čím dál vlevo, tím menší.
+    <b>Absolutní hodnota</b> |a| je vzdálenost od nuly, je vždy nezáporná.
+    Součin dvou čísel se <b>stejnými</b> znaménky je kladný, s <b>různými</b> záporný.
+  </p>
+
+<script>
+const $ = id => document.getElementById(id);
+const skore = Uloha.skore('metodus_m7_cela_cisla', $('skore'));
+let rezim = 'osa';
+
+const SIRKA = 620, VYSKA = 110, STRED_Y = 62;
+
+/* Číselná osa ze společné knihovny nazor.js – stejná osa jako v ostatních
+   lekcích. volby.bod = zvýrazněné číslo, volby.skryjPopisek = místo čísla „?". */
+function svgOsa(od, doC, volby = {}) {
+  const krok = doC - od > 26 ? 5 : 1;
+  const body = volby.bod !== undefined ? [{ hodnota: volby.bod, popis: volby.skryjPopisek ? '?' : String(volby.bod).replace('-', '−') }] : [];
+  return Nazor.osa({
+    od, do: doC, krok, jemny: krok > 1 ? 1 : 0, body,
+    popisek: n => (volby.skryjPopisek && n === volby.bod) ? '' : String(n).replace('-', '−'),
+    popis: volby.skryjPopisek ? `Číselná osa od ${od} do ${doC}, jedno číslo je označené otazníkem` : undefined,
+  });
+}
+
+/* Po správném výpočtu ukáže výsledek jako posun po ose: z prvního čísla
+   o druhé doprava (kladné) nebo doleva (záporné). */
+function osaPosunu(a, posun, popis) {
+  const vysl = a + posun;
+  const od = Math.min(a, vysl, 0) - 2, doC = Math.max(a, vysl, 0) + 2;
+  const krok = doC - od > 26 ? 5 : 1;
+  const znak = n => String(n).replace('-', '−');
+  if (posun === 0) return Nazor.osa({ od, do: doC, krok, jemny: krok > 1 ? 1 : 0, body: [{ hodnota: a, popis: znak(a) + ' (posun o 0)' }] });
+  return Nazor.osa({
+    od, do: doC, krok, jemny: krok > 1 ? 1 : 0,
+    body: [{ hodnota: a, popis: znak(a), druh: 'druhy' }, { hodnota: vysl, popis: znak(vysl) }],
+    skok: { z: a, na: vysl, popis },
+  });
+}
+
+/* Záporná čísla vždy se znakem − (ne spojovníkem); v příkladu v závorce. */
+const c = n => Uloha.cislo(n);
+const zv = n => n < 0 ? `(${c(n)})` : String(n);
+const zapis = n => n < 0 ? `<span class="zap">(${c(n)})</span>` : String(n);
+function odezvaEl() { const d = document.createElement('div'); d.className = 'odezva'; return d; }
+
+/* ---- Číslo na ose ------------------------------------------------------------------ */
+function osa() {
+  const p = $('plocha');
+  const od = -Uloha.nahodneCislo(4, 8), doC = Uloha.nahodneCislo(4, 8);
+  const bod = Uloha.nahodneCislo(od + 1, doC - 1);
+
+  p.innerHTML = `<div class="zadani">Které číslo ukazuje šipka?</div>${svgOsa(od, doC, { bod, skryjPopisek: true })}`;
+  const jine = new Set();
+  let pojistka = 0;
+  while (jine.size < 3 && pojistka++ < 100) {
+    const x = bod + Uloha.nahodne([-3, -2, -1, 1, 2, 3, -bod * 2]);
+    if (x !== bod && x >= od && x <= doC) jine.add(String(x));
+  }
+  const odezva = odezvaEl();
+  Uloha.vyber({
+    kam: p, odezva, trida: 'velke',
+    moznosti: Uloha.zamichej([String(bod), ...jine]).map(t => ({ klic: t, popis: c(+t) })),
+    spravnyKlic: String(bod),
+    zpravaOk: `✅ Šipka ukazuje na ${c(bod)}.`,
+    zpravaChyba: 'Počítej od nuly – doprava kladná čísla, doleva záporná.',
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+/* ---- Porovnávání -------------------------------------------------------------------- */
+function porovnani() {
+  const p = $('plocha');
+  const a = Uloha.nahodneCislo(-12, 12), b = Uloha.nahodneCislo(-12, 12);
+  const spravny = a < b ? '<' : a > b ? '>' : '=';
+
+  p.innerHTML = `<div class="zadani">Doplň správné znaménko:</div>
+    <div class="karta"><div class="priklad">${zapis(a)} &nbsp;?&nbsp; ${zapis(b)}</div></div>
+    ${svgOsa(Math.min(-12, a, b), Math.max(12, a, b))}`;
+  const odezva = odezvaEl();
+  Uloha.vyber({
+    kam: p, odezva, trida: 'velke',
+    moznosti: [{ klic: '<', popis: '<' }, { klic: '=', popis: '=' }, { klic: '>', popis: '>' }],
+    spravnyKlic: spravny,
+    zpravaOk: `✅ ${c(a)} ${spravny} ${c(b)} – na ose leží ${a < b ? c(a) + ' vlevo od ' + c(b) : (a > b ? c(a) + ' vpravo od ' + c(b) : 'obě čísla na stejném místě')}.`,
+    zpravaChyba: 'Menší je to číslo, které leží na ose více vlevo.',
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+/* ---- Sčítání a odčítání ------------------------------------------------------------- */
+function operace() {
+  const p = $('plocha');
+  const a = Uloha.nahodneCislo(-15, 15);
+  const b = Uloha.nahodneCislo(-15, 15);
+  const scitame = Math.random() < 0.5;
+  const vysledek = scitame ? a + b : a - b;
+
+  const jine = new Set();
+  let pojistka = 0;
+  while (jine.size < 3 && pojistka++ < 200) {
+    const x = Uloha.nahodne([a + b, a - b, -a + b, -a - b, vysledek + 1, vysledek - 1, vysledek + 2 * b]);
+    if (x !== vysledek) jine.add(String(x));
+  }
+
+  p.innerHTML = `<div class="zadani">Vypočítej:</div>
+    <div class="karta"><div class="priklad">${zapis(a)} ${scitame ? '+' : '−'} ${zapis(b)} = ?</div></div>`;
+  const odezva = odezvaEl();
+  Uloha.vyber({
+    kam: p, odezva, trida: 'velke',
+    moznosti: Uloha.zamichej([String(vysledek), ...jine]).map(t => ({ klic: t, popis: c(+t) })),
+    spravnyKlic: String(vysledek),
+    zpravaOk: `✅ ${c(a)} ${scitame ? '+' : '−'} ${zv(b)} = ${c(vysledek)}` + (!scitame
+      ? ` – odčítání ${b < 0 ? 'záporného čísla je přičítání' : 'znamená posun doleva'}.` : ''),
+    zpravaChyba: 'Představ si posun po číselné ose: kladné doprava, záporné doleva.',
+    poSpravne: napoprve => {
+      skore.vyhodnot(napoprve);
+      const posun = scitame ? b : -b;
+      odezva.insertAdjacentHTML('afterend', osaPosunu(a, posun, (posun < 0 ? '−' : '+') + Math.abs(posun)));
+    },
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+/* ---- Násobení a dělení --------------------------------------------------------------- */
+function soucin() {
+  const p = $('plocha');
+  const nasobime = Math.random() < 0.5;
+  const a = Uloha.nahodne([-1, 1]) * Uloha.nahodneCislo(2, 12);
+  const b = Uloha.nahodne([-1, 1]) * Uloha.nahodneCislo(2, 9);
+  const x = nasobime ? a : a * b;         // u dělení dělíme součin, ať vyjde celé číslo
+  const vysledek = nasobime ? a * b : a;
+
+  const jine = new Set();
+  let pojistka = 0;
+  while (jine.size < 3 && pojistka++ < 200) {
+    const y = Uloha.nahodne([-vysledek, vysledek + b, vysledek - b, vysledek + 1, vysledek * -1 + 1]);
+    if (y !== vysledek) jine.add(String(y));
+  }
+
+  p.innerHTML = `<div class="zadani">Vypočítej:</div>
+    <div class="karta"><div class="priklad">${zapis(x)} ${nasobime ? '·' : ':'} ${zapis(b)} = ?</div></div>`;
+  const odezva = odezvaEl();
+  const stejna = (x < 0) === (b < 0);
+  Uloha.vyber({
+    kam: p, odezva, trida: 'velke',
+    moznosti: Uloha.zamichej([String(vysledek), ...jine]).map(t => ({ klic: t, popis: c(+t) })),
+    spravnyKlic: String(vysledek),
+    zpravaOk: `✅ ${c(x)} ${nasobime ? '·' : ':'} ${zv(b)} = ${c(vysledek)} – znaménka jsou ${stejna ? 'stejná, výsledek je kladný' : 'různá, výsledek je záporný'}.`,
+    zpravaChyba: 'Nejdřív spočítej čísla bez znamének, pak urči znaménko výsledku.',
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+/* ---- Opačné číslo a absolutní hodnota ------------------------------------------------ */
+function absolutni() {
+  const p = $('plocha');
+  const a = Uloha.nahodne([-1, 1]) * Uloha.nahodneCislo(1, 15);
+  const ptameSeNaAbsolutni = Math.random() < 0.5;
+  const vysledek = ptameSeNaAbsolutni ? Math.abs(a) : -a;
+
+  const jine = new Set([String(-vysledek), String(Math.abs(a) + 1), String(-Math.abs(a) - 1)]);
+  jine.delete(String(vysledek));
+
+  p.innerHTML = `<div class="zadani">${ptameSeNaAbsolutni ? 'Kolik je absolutní hodnota čísla?' : 'Které číslo je opačné k číslu?'}</div>
+    <div class="karta"><div class="priklad">${ptameSeNaAbsolutni ? `|${c(a)}|` : zapis(a)}</div></div>`;
+  const odezva = odezvaEl();
+  Uloha.vyber({
+    kam: p, odezva, trida: 'velke',
+    moznosti: Uloha.zamichej([String(vysledek), ...jine]).map(t => ({ klic: t, popis: c(+t) })),
+    spravnyKlic: String(vysledek),
+    zpravaOk: ptameSeNaAbsolutni
+      ? `✅ |${c(a)}| = ${c(vysledek)} – vzdálenost od nuly nemůže být záporná.`
+      : `✅ Opačné číslo k ${c(a)} je ${c(vysledek)}; jejich součet je 0.`,
+    zpravaChyba: ptameSeNaAbsolutni
+      ? 'Absolutní hodnota je vzdálenost od nuly – vždy nezáporná.'
+      : 'Opačné číslo má stejnou vzdálenost od nuly, ale druhé znaménko.',
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+const REZIMY = { osa, porovnani, operace, soucin, absolutni };
+function novaUloha() { REZIMY[rezim](); }
+
+document.querySelectorAll('#rezimy button').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('#rezimy button').forEach(x => x.classList.remove('active'));
+  b.classList.add('active');
+  rezim = b.dataset.rezim;
+  novaUloha();
+}));
+$('btnDalsi').addEventListener('click', novaUloha);
+novaUloha();
+</script>
+</body>
+</html>

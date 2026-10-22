@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Středová souměrnost</title>
+  <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
+  <script src="../theme.js"></script>
+  <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
+  <script src="../rec.js"></script>
+  <script src="../uloha.js"></script>
+  <style>
+    .zadani-ulohy { font-size: clamp(1.05rem, 3.6vw, 1.35rem); font-weight: 700; max-width: 600px; line-height: 1.5; text-align: center; }
+    .utvar { width: min(230px, 62vw); height: auto; }
+    .utvar .tvar { fill: var(--accent); fill-opacity: 0.35; stroke: var(--accent); stroke-width: 4; stroke-linejoin: round; }
+    .utvar .pismeno { fill: none; stroke: var(--accent); stroke-width: 14; stroke-linecap: round; stroke-linejoin: round; }
+    .utvar .stred { fill: var(--danger); }
+    .utvar .stred-text { fill: var(--danger); font-size: 16px; font-weight: 700; }
+    .mrizka { width: min(440px, 100%); height: auto; touch-action: manipulation; border-radius: 10px; }
+    .mrizka:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+    .mrizka .pozadi { fill: var(--bg-elevated); }
+    .mrizka .cara { stroke: var(--border); stroke-width: 1; }
+    .mrizka .osa-xy { stroke: var(--text-faint); stroke-width: 2; }
+    .mrizka .popis-osy { fill: var(--text-faint); font-size: 11px; }
+    .mrizka .bod { fill: var(--accent); stroke: var(--bg-elevated); stroke-width: 2; }
+    .mrizka .bod.s { fill: var(--danger); }
+    .mrizka .jmeno { fill: var(--text); font-size: 15px; font-weight: 700; }
+    .mrizka .jmeno.male { font-size: 12px; }
+    .mrizka .cil { fill: transparent; cursor: pointer; }
+    .mrizka .cil:hover { fill: var(--accent); fill-opacity: 0.25; }
+    .mrizka .cil.spatne { fill: var(--danger); fill-opacity: 0.6; }
+    .mrizka .cil.spravne { fill: var(--ok); fill-opacity: 0.85; }
+    .mrizka .kurzor { fill: none; stroke: var(--accent); stroke-width: 2.5; stroke-dasharray: 4 3; pointer-events: none; }
+    .mrizka .spojnice { stroke: var(--ok); stroke-width: 2; stroke-dasharray: 6 4; }
+    .mrizka .vzor { fill: var(--accent); fill-opacity: 0.45; stroke: var(--accent); stroke-width: 2; stroke-linejoin: round; }
+    .mrizka .obraz { fill: var(--danger); fill-opacity: 0.25; stroke: var(--danger); stroke-width: 2; stroke-dasharray: 5 3; stroke-linejoin: round; }
+    .mrizka .reseni { stroke: var(--ok); stroke-width: 3; stroke-dasharray: 7 5; }
+    .mrizka .reseni-bod { fill: var(--ok); }
+    .stav-kurzoru { color: var(--text-faint); font-size: 0.85rem; }
+    .obr-vyklad .cara-v { stroke: var(--text-faint); stroke-width: 2; stroke-dasharray: 6 4; }
+    .obr-vyklad .bod-v { fill: var(--accent); }
+    .obr-vyklad .s-v { fill: var(--danger); }
+    .obr-vyklad text { fill: var(--text); font-size: 15px; font-weight: 700; }
+    .obr-vyklad .znacka { stroke: var(--text); stroke-width: 2; }
+    .obr-vyklad .tvar-v { fill: var(--accent); fill-opacity: 0.25; stroke: var(--accent); stroke-width: 2.5; }
+  </style>
+</head>
+<body>
+  <h1>🔄 Středová souměrnost</h1>
+  <p class="podtitul">Pro 7. ročník: střed souměrnosti, obraz bodu, úsečky a útvaru, středově souměrné útvary.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Co je středová souměrnost</summary>
+    <div class="obsah">
+      <p>Osovou souměrnost už znáš: útvar se překlopí přes přímku jako v zrcadle. <b>Středová souměrnost</b>
+        má místo osy jeden bod – <b>střed souměrnosti S</b>. Obraz útvaru dostaneš tak, že ho
+        <b>otočíš o půl otáčky (o 180°) kolem bodu S</b>.</p>
+      <svg class="obr-vyklad" viewBox="0 0 360 120" role="img" aria-label="Bod A, střed S a obraz A′ leží na jedné přímce, vzdálenost AS je stejná jako SA′.">
+        <line class="cara-v" x1="40" y1="90" x2="320" y2="30"/>
+        <line class="znacka" x1="104" y1="68" x2="112" y2="84"/><line class="znacka" x1="244" y1="38" x2="252" y2="54"/>
+        <circle class="bod-v" cx="40" cy="90" r="6"/><text x="22" y="112">A</text>
+        <circle class="s-v" cx="180" cy="60" r="6"/><text x="174" y="48">S</text>
+        <circle class="bod-v" cx="320" cy="30" r="6"/><text x="326" y="24">A′</text>
+      </svg>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Obraz bodu</h3><p>Bod A′ leží na polopřímce opačné k SA a platí <b>|AS| = |SA′|</b>. Střed S je tedy <b>středem úsečky AA′</b>. Obrazem bodu S je S sám.</p></article>
+        <article class="vyklad-karta"><h3>Obraz úsečky a útvaru</h3><p>Stačí najít obrazy krajních bodů a vrcholů. Obraz úsečky je s ní <b>shodný a rovnoběžný</b>, útvar se nepřeklopí, jen se <b>otočí</b>.</p></article>
+        <article class="vyklad-karta"><h3>V souřadnicích</h3><p>Z A do S udělej krok a stejný krok zopakuj od S. Pro S[2; 3] a A[0; 1]: krok je o 2 vpravo a o 2 nahoru, takže <b>A′[4; 5]</b>.</p></article>
+      </div>
+      <p>Útvar je <b>středově souměrný</b>, když se po otočení o 180° kolem nějakého bodu překryje sám se sebou.
+        Takové jsou <b>rovnoběžníky</b> (střed je v průsečíku úhlopříček), <b>kružnice a kruh</b>, úsečka,
+        pravidelný šestiúhelník nebo písmena <b>H, I, N, O, S, X, Z</b>. Žádný trojúhelník středově souměrný není.</p>
+      <svg class="obr-vyklad" viewBox="0 0 360 120" role="img" aria-label="Rovnoběžník se středem souměrnosti v průsečíku úhlopříček.">
+        <polygon class="tvar-v" points="70,100 230,100 290,20 130,20"/>
+        <line class="cara-v" x1="70" y1="100" x2="290" y2="20"/><line class="cara-v" x1="230" y1="100" x2="130" y2="20"/>
+        <circle class="s-v" cx="180" cy="60" r="6"/><text x="188" y="56">S</text>
+      </svg>
+      <aside class="zapamatuj">Středová souměrnost = otočení o 180° kolem bodu S. S je středem úsečky AA′; obraz je s útvarem shodný a není překlopený.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: obraz bodu v souřadnicích</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Je dán střed souměrnosti S[5; 3] a bod A[2; 1]. Najdi obraz A′ ve středové souměrnosti se středem S.</p>
+      <ol class="kroky">
+        <li>Spočítám krok z A do S: x se změní z 2 na 5, tedy <b>o 3 vpravo</b>; y z 1 na 3, tedy <b>o 2 nahoru</b>.</li>
+        <li>Obraz leží na druhé straně od S ve stejné vzdálenosti, takže stejný krok udělám ještě jednou – <b>od bodu S</b>.</li>
+        <li>x: 5 + 3 = <b>8</b>; y: 3 + 2 = <b>5</b>. Obraz je A′[8; 5].</li>
+        <li>Kontrola: střed úsečky AA′ je [(2 + 8) : 2; (1 + 5) : 2] = [5; 3], což je opravdu bod S.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ A′[8; 5] – bod S leží přesně uprostřed úsečky AA′.</p>
+    </div>
+  </details>
+
+  <div class="rezimy" id="rezimy">
+    <button data-rezim="soumerny" class="active">🔍 Je útvar středově souměrný?</button>
+    <button data-rezim="obraz">🎯 Najdi obraz bodu</button>
+    <button data-rezim="souradnice">🔢 Obraz v souřadnicích</button>
+    <button data-rezim="osova">🪞 Osová, nebo středová?</button>
+  </div>
+
+  <div class="plocha" id="plocha"></div>
+
+  <div class="ovladani">
+    <button class="hlavni" id="btnDalsi">Přeskočit →</button>
+    <span class="skore" id="skore"></span>
+  </div>
+
+  <p class="napoveda">
+    <b>Středová souměrnost se středem S</b> = otočení o 180° kolem S. Obraz A′ leží na přímce AS na druhé straně od S
+    a <b>|AS| = |SA′|</b> (S je středem úsečky AA′). Obraz S je S. V souřadnicích: <b>A′ = [2·s₁ − a₁; 2·s₂ − a₂]</b>
+    (krok z A do S zopakuj od S). Středově souměrné: rovnoběžník, kružnice, kruh, úsečka, pravidelný šestiúhelník,
+    písmena H, I, N, O, S, X, Z. Trojúhelník nikdy. Osová souměrnost útvar <b>překlopí</b>, středová ho jen <b>otočí</b>.
+  </p>
+
+<script>
+const $ = id => document.getElementById(id);
+const skore = Uloha.skore('metodus_m7_stredova_soumernost', $('skore'));
+let rezim = 'soumerny';
+const C = n => Uloha.cislo(n);
+const bodTxt = (j, b) => `${j}[${C(b[0])}; ${C(b[1])}]`;
+const stejne = (a, b) => a[0] === b[0] && a[1] === b[1];
+const r1 = n => Math.round(n * 10) / 10;
+
+/* popis kroku z bodu A do bodu S slovy („o 3 vpravo a o 2 dolů“) */
+function krokSlovy(dx, dy) {
+  const casti = [];
+  if (dx) casti.push(`o ${Math.abs(dx)} ${dx > 0 ? 'vpravo' : 'vlevo'}`);
+  if (dy) casti.push(`o ${Math.abs(dy)} ${dy > 0 ? 'nahoru' : 'dolů'}`);
+  return casti.join(' a ');
+}
+
+/* společné položení otázky s možnostmi; každá možnost nese vlastní vysvětlení „proc“ */
+function poloz(u) {
+  const p = $('plocha');
+  p.innerHTML = u.html;
+  const odezva = document.createElement('div');
+  odezva.className = 'odezva';
+  Uloha.vyber({
+    kam: p, odezva, trida: u.trida || 'dve',
+    moznosti: u.moznosti.map(m => ({ klic: m.klic, popis: m.popis, ikona: m.ikona })),
+    spravnyKlic: u.spravny,
+    zpravaOk: u.ok,
+    zpravaChyba: k => (u.moznosti.find(m => m.klic === k) || {}).proc || 'Zkus jinou možnost.',
+    poSpravne: n => { skore.vyhodnot(n); if (u.poOk) u.poOk(p); },
+    dalsi: novaUloha,
+    prodleva: n => n ? 2600 : 3800,
+  });
+  p.appendChild(odezva);
+}
+
+/* ---- Je útvar středově souměrný? ------------------------------------------------------ */
+const nahodneMezi = (a, b) => a + Math.random() * (b - a);
+const body = pole => pole.map(([x, y]) => `${r1(x)},${r1(y)}`).join(' ');
+
+const UTVARY = [
+  () => { const a = nahodneMezi(90, 120), h = nahodneMezi(50, 80), k = nahodneMezi(14, 30);
+    return { n: 'rovnoběžník', s: true, svg: `<polygon class="tvar" points="${body([[-a/2-k, h/2], [a/2-k, h/2], [a/2+k, -h/2], [-a/2+k, -h/2]])}"/>`,
+      proc: 'Rovnoběžník je středově souměrný: otoč ho o půl otáčky kolem průsečíku úhlopříček a překryje se sám se sebou.' }; },
+  () => { const a = nahodneMezi(100, 140), b = nahodneMezi(50, 80);
+    return { n: 'obdélník', s: true, svg: `<rect class="tvar" x="${r1(-a/2)}" y="${r1(-b/2)}" width="${r1(a)}" height="${r1(b)}"/>`,
+      proc: 'Obdélník je rovnoběžník, takže je středově souměrný – střed leží v průsečíku úhlopříček.' }; },
+  () => { const a = nahodneMezi(80, 110);
+    return { n: 'čtverec', s: true, svg: `<rect class="tvar" x="${r1(-a/2)}" y="${r1(-a/2)}" width="${r1(a)}" height="${r1(a)}"/>`,
+      proc: 'Čtverec je rovnoběžník, a proto je i středově souměrný (střed je v průsečíku úhlopříček).' }; },
+  () => { const e = nahodneMezi(60, 75), f = nahodneMezi(35, 50);
+    return { n: 'kosočtverec', s: true, svg: `<polygon class="tvar" points="${body([[-e, 0], [0, -f], [e, 0], [0, f]])}"/>`,
+      proc: 'Kosočtverec je rovnoběžník – po otočení o 180° kolem průsečíku úhlopříček se překryje.' }; },
+  () => { const r = nahodneMezi(45, 70);
+    return { n: 'kružnice', s: true, svg: `<circle class="tvar" style="fill: none" cx="0" cy="0" r="${r1(r)}"/>`,
+      proc: 'Kružnice je středově souměrná podle svého středu: každý bod má naproti sebe bod ve stejné vzdálenosti od středu.' }; },
+  () => { const r = nahodneMezi(45, 70);
+    return { n: 'kruh', s: true, svg: `<circle class="tvar" cx="0" cy="0" r="${r1(r)}"/>`,
+      proc: 'Kruh je středově souměrný podle svého středu.' }; },
+  () => { const d = nahodneMezi(60, 85);
+    return { n: 'úsečka', s: true, svg: `<line class="tvar" x1="${r1(-d)}" y1="0" x2="${r1(d)}" y2="0"/>`,
+      proc: 'Úsečka je středově souměrná – středem souměrnosti je její střed: krajní body se navzájem vymění.' }; },
+  () => { const r = nahodneMezi(55, 75);
+    const v = [0, 1, 2, 3, 4, 5].map(i => [r * Math.cos(i * Math.PI / 3), r * Math.sin(i * Math.PI / 3)]);
+    return { n: 'pravidelný šestiúhelník', s: true, svg: `<polygon class="tvar" points="${body(v)}"/>`,
+      proc: 'Pravidelný šestiúhelník má sudý počet vrcholů a proti každému vrcholu leží vrchol – je středově souměrný.' }; },
+  () => { const r = nahodneMezi(60, 75);
+    const v = [0, 1, 2].map(i => [r * Math.cos(-Math.PI / 2 + i * 2 * Math.PI / 3), r * Math.sin(-Math.PI / 2 + i * 2 * Math.PI / 3)]);
+    return { n: 'rovnostranný trojúhelník', s: false, svg: `<polygon class="tvar" points="${body(v)}"/>`,
+      proc: 'Rovnostranný trojúhelník má tři osy souměrnosti, ale středově souměrný není: po otočení o 180° by vrchol mířil na opačnou stranu, kde je strana.' }; },
+  () => { const z = nahodneMezi(70, 100), h = nahodneMezi(80, 110);
+    return { n: 'rovnoramenný trojúhelník', s: false, svg: `<polygon class="tvar" points="${body([[-z/2, h/2], [z/2, h/2], [0, -h/2]])}"/>`,
+      proc: 'Žádný trojúhelník není středově souměrný. Rovnoramenný má jen jednu osu souměrnosti.' }; },
+  () => { const a = nahodneMezi(90, 120), b = nahodneMezi(60, 90);
+    return { n: 'pravoúhlý trojúhelník', s: false, svg: `<polygon class="tvar" points="${body([[-a/2, b/2], [a/2, b/2], [-a/2, -b/2]])}"/>`,
+      proc: 'Žádný trojúhelník není středově souměrný – po otočení o 180° by pravý úhel skončil na druhé straně.' }; },
+  () => { const a = nahodneMezi(120, 140), c = nahodneMezi(50, 70), h = nahodneMezi(55, 75);
+    return { n: 'rovnoramenný lichoběžník', s: false, svg: `<polygon class="tvar" points="${body([[-a/2, h/2], [a/2, h/2], [c/2, -h/2], [-c/2, -h/2]])}"/>`,
+      proc: 'Rovnoramenný lichoběžník má osu souměrnosti, ale ne střed: po otočení o 180° by se delší základna dostala nahoru.' }; },
+  () => { const r = nahodneMezi(60, 72);
+    const v = [0, 1, 2, 3, 4].map(i => [r * Math.cos(-Math.PI / 2 + i * 2 * Math.PI / 5), r * Math.sin(-Math.PI / 2 + i * 2 * Math.PI / 5)]);
+    return { n: 'pravidelný pětiúhelník', s: false, svg: `<polygon class="tvar" points="${body(v)}"/>`,
+      proc: 'Pravidelný pětiúhelník má pět os, ale lichý počet vrcholů: proti vrcholu leží strana, takže středově souměrný není.' }; },
+  () => { const e = nahodneMezi(45, 60), h1 = nahodneMezi(25, 40), h2 = nahodneMezi(70, 85);
+    return { n: 'deltoid', s: false, svg: `<polygon class="tvar" points="${body([[0, -h2 + 20], [e, -h2 / 2 + h1], [0, h2 - 10], [-e, -h2 / 2 + h1]])}"/>`,
+      proc: 'Deltoid je osově souměrný podle jedné úhlopříčky, ale středově souměrný není – jeho dva vrcholy na ose jsou různě daleko od středu.' }; },
+  () => { const r = nahodneMezi(65, 80);
+    return { n: 'půlkruh', s: false, svg: `<path class="tvar" d="M${r1(-r)},${r1(r / 2)} A${r1(r)},${r1(r)} 0 0 1 ${r1(r)},${r1(r / 2)} Z"/>`,
+      proc: 'Půlkruh má jen osu souměrnosti. Po otočení o 180° by oblouk mířil na opačnou stranu.' }; },
+];
+
+/* písmena kreslená čarami se středem v bodě [0; 0] */
+const PISMENA = [
+  { p: 'H', s: true, d: 'M-35,-60 V60 M35,-60 V60 M-35,0 H35' },
+  { p: 'I', s: true, d: 'M0,-60 V60 M-22,-60 H22 M-22,60 H22' },
+  { p: 'N', s: true, d: 'M-35,60 V-60 L35,60 V-60' },
+  { p: 'S', s: true, d: 'M35,-60 H-35 V0 H35 V60 H-35' },
+  { p: 'X', s: true, d: 'M-35,-60 L35,60 M35,-60 L-35,60' },
+  { p: 'Z', s: true, d: 'M-35,-60 H35 L-35,60 H35' },
+  { p: 'O', s: true, d: 'M0,-60 A35,60 0 1 1 0,60 A35,60 0 1 1 0,-60' },
+  { p: 'A', s: false, d: 'M-40,60 L0,-60 L40,60 M-24,12 H24', osa: 'svislou osu' },
+  { p: 'T', s: false, d: 'M-40,-60 H40 M0,-60 V60', osa: 'svislou osu' },
+  { p: 'V', s: false, d: 'M-40,-60 L0,60 L40,-60', osa: 'svislou osu' },
+  { p: 'U', s: false, d: 'M-35,-60 V20 A35,40 0 0 0 35,20 V-60', osa: 'svislou osu' },
+  { p: 'Y', s: false, d: 'M-40,-60 L0,0 L40,-60 M0,0 V60', osa: 'svislou osu' },
+  { p: 'E', s: false, d: 'M35,-60 H-35 V60 H35 M-35,0 H25', osa: 'vodorovnou osu' },
+  { p: 'L', s: false, d: 'M-30,-60 V60 H35' },
+  { p: 'F', s: false, d: 'M35,-60 H-30 V60 M-30,0 H25' },
+  { p: 'K', s: false, d: 'M-30,-60 V60 M35,-60 L-30,5 M-10,-12 L35,60' },
+];
+
+function genSoumerny() {
+  let u;
+  if (Math.random() < 0.35) {
+    const l = Uloha.nahodne(PISMENA);
+    u = { n: `písmeno ${l.p}`, s: l.s, svg: `<path class="pismeno" d="${l.d}"/>`, rot: 0,
+      proc: l.s
+        ? `Písmeno ${l.p} otočené o půl otáčky kolem svého středu vypadá úplně stejně – je středově souměrné.`
+        : `Písmeno ${l.p} po otočení o 180° stojí vzhůru nohama, takže středově souměrné není.`
+          + (l.osa ? ` Má jen ${l.osa} souměrnosti.` : '') };
+  } else {
+    u = { ...Uloha.nahodne(UTVARY)(), rot: Math.floor(Math.random() * 360) };
+  }
+  return {
+    html: `<div class="zadani">Je tento útvar <b>středově souměrný</b>?</div>
+      <div class="karta"><svg class="utvar" viewBox="-100 -100 200 200" role="img" aria-label="${u.n}">
+        <g transform="rotate(${u.rot})">${u.svg}</g><g class="odhal"></g></svg>
+        <div class="popis">${u.n}</div></div>`,
+    moznosti: [
+      { klic: 'ano', ikona: '🔄', popis: 'ano, je středově souměrný', proc: u.s ? '' : '❌ ' + u.proc },
+      { klic: 'ne', ikona: '🚫', popis: 'ne, není', proc: u.s ? '❌ ' + u.proc : '' },
+    ],
+    spravny: u.s ? 'ano' : 'ne',
+    ok: '✅ ' + u.proc,
+    poOk: u.s ? p => {
+      const g = p.querySelector('.odhal');
+      if (g) g.innerHTML = '<circle class="stred" cx="0" cy="0" r="6"/><text class="stred-text" x="9" y="-8">S</text>';
+    } : null,
+    _soumerny: u.s,
+  };
+}
+
+/* ---- Obraz v souřadnicích (výběr) ---------------------------------------------------- */
+function genSouradnice() {
+  for (;;) {
+    const S = [Uloha.nahodneCislo(-5, 5), Uloha.nahodneCislo(-5, 5)];
+    const A = [Uloha.nahodneCislo(-6, 6), Uloha.nahodneCislo(-6, 6)];
+    if (stejne(A, S)) continue;
+    const spravne = [2 * S[0] - A[0], 2 * S[1] - A[1]];
+    if (Math.abs(spravne[0]) > 12 || Math.abs(spravne[1]) > 12) continue;
+    const kandidati = Uloha.zamichej([
+      { b: [2 * S[0] - A[0], A[1]], proc: 'Změnila se jen x-ová souřadnice – tak by vypadal obraz v osové souměrnosti podle svislé přímky. Ve středové souměrnosti se mění obě souřadnice.' },
+      { b: [A[0], 2 * S[1] - A[1]], proc: 'Změnila se jen y-ová souřadnice – to by byl obraz v osové souměrnosti podle vodorovné přímky. Ve středové se mění obě.' },
+      { b: [2 * A[0] - S[0], 2 * A[1] - S[1]], proc: 'Tady se prohodily role: to je obraz bodu S ve středové souměrnosti se středem A. Krok z A do S musíš zopakovat od S.' },
+      { b: [-A[0], -A[1]], proc: 'To je obraz podle počátku [0; 0], ne podle středu S.' },
+      { b: [S[0] - A[0], S[1] - A[1]], proc: 'To je jen samotný krok z A do S (rozdíl souřadnic). Ten musíš ještě přičíst k bodu S.' },
+      { b: [S[0] + A[0], S[1] + A[1]], proc: 'Souřadnice bodů se nesčítají. Spočítej krok z A do S a ten přičti k S.' },
+    ]);
+    const vybrane = [];
+    for (const k of kandidati) {
+      if (stejne(k.b, spravne) || stejne(k.b, A) || stejne(k.b, S) || vybrane.some(v => stejne(v.b, k.b))) continue;
+      vybrane.push(k);
+      if (vybrane.length === 3) break;
+    }
+    if (vybrane.length < 3) continue;
+    const dx = S[0] - A[0], dy = S[1] - A[1];
+    const klic = b => b.join(';');
+    return {
+      html: `<div class="zadani">Najdi obraz bodu ve středové souměrnosti:</div>
+        <div class="karta"><div class="zadani-ulohy">střed ${bodTxt('S', S)}, bod ${bodTxt('A', A)}</div>
+        <div class="popis">A′ = ?</div></div>`,
+      trida: 'velke',
+      moznosti: Uloha.zamichej([{ b: spravne, proc: '' }, ...vybrane])
+        .map(k => ({ klic: klic(k.b), popis: bodTxt('A′', k.b), proc: k.proc ? '❌ ' + k.proc : '' })),
+      spravny: klic(spravne),
+      ok: `✅ Z A do S je to ${krokSlovy(dx, dy)}. Stejný krok od S: ${bodTxt('A′', spravne)}.`,
+    };
+  }
+}
+
+/* ---- Osová, nebo středová? ------------------------------------------------------------ */
+/* nesouměrný „L“ útvar (ramena 4 a 3) – nemá osu ani střed, takže obraz jde poznat jednoznačně */
+const L_TVAR = [[0, 0], [4, 0], [4, 1], [1, 1], [1, 3], [0, 3]];
+const SIRKA = 14, VYSKA = 10;
+const bbox = pole => [Math.min(...pole.map(b => b[0])), Math.min(...pole.map(b => b[1])),
+  Math.max(...pole.map(b => b[0])), Math.max(...pole.map(b => b[1]))];
+const uvnitr = pole => pole.every(([x, y]) => x >= 0 && y >= 0 && x <= SIRKA && y <= VYSKA);
+
+function genOsova() {
+  for (;;) {
+    /* natočení a případné zrcadlení vzoru, pak posun do mřížky */
+    let tvar = L_TVAR.map(b => [...b]);
+    const otoc = Uloha.nahodneCislo(0, 3);
+    for (let i = 0; i < otoc; i++) tvar = tvar.map(([x, y]) => [-y, x]);
+    if (Math.random() < 0.5) tvar = tvar.map(([x, y]) => [-x, y]);
+    const [mx, my] = bbox(tvar);
+    const ox = Uloha.nahodneCislo(0, SIRKA), oy = Uloha.nahodneCislo(0, VYSKA);
+    tvar = tvar.map(([x, y]) => [x - mx + ox, y - my + oy]);
+    if (!uvnitr(tvar)) continue;
+    const stredova = Math.random() < 0.5;
+    let obraz, prvek;
+    if (stredova) {
+      const S = [Uloha.nahodneCislo(1, SIRKA - 1), Uloha.nahodneCislo(1, VYSKA - 1)];
+      obraz = tvar.map(([x, y]) => [2 * S[0] - x, 2 * S[1] - y]);
+      prvek = { typ: 'stred', S };
+    } else {
+      const druh = Uloha.nahodne(['svisla', 'vodorovna', 'sikma']);
+      if (druh === 'svisla') { const c = Uloha.nahodneCislo(1, SIRKA - 1); obraz = tvar.map(([x, y]) => [2 * c - x, y]); prvek = { typ: druh, c }; }
+      else if (druh === 'vodorovna') { const c = Uloha.nahodneCislo(1, VYSKA - 1); obraz = tvar.map(([x, y]) => [x, 2 * c - y]); prvek = { typ: druh, c }; }
+      else { const c = Uloha.nahodneCislo(-6, 6); obraz = tvar.map(([x, y]) => [y - c, x + c]); prvek = { typ: druh, c }; }
+    }
+    if (!uvnitr(obraz)) continue;
+    const a = bbox(tvar), b = bbox(obraz);
+    if (!(a[2] < b[0] || b[2] < a[0] || a[3] < b[1] || b[3] < a[1])) continue;   // vzor a obraz se nesmí překrývat
+    return {
+      html: `<div class="zadani">Útvar <b>F′</b> je obrazem útvaru <b>F</b>. Ve které souměrnosti?</div>
+        ${svgMrizka({ sirka: SIRKA, vyska: VYSKA, obsah: kresliOsova(tvar, obraz), popisky: false,
+          popis: 'Mřížka s útvarem F a jeho obrazem F′.' })}`,
+      moznosti: [
+        { klic: 'osova', ikona: '🪞', popis: 'osová souměrnost',
+          proc: stredova ? '❌ F′ není překlopený jako v zrcadle. Obejdi vrcholy A → B → C u F i u F′: jdeš u obou stejným směrem, útvar je jen otočený o půl otáčky – to dělá středová souměrnost.' : '' },
+        { klic: 'stredova', ikona: '🔄', popis: 'středová souměrnost',
+          proc: stredova ? '' : '❌ F′ je překlopený jako v zrcadle: obejdeš-li vrcholy A → B → C, jdeš u F′ opačným směrem než u F. Středová souměrnost útvar jen otočí a pořadí vrcholů zachová.' },
+      ],
+      spravny: stredova ? 'stredova' : 'osova',
+      ok: stredova
+        ? `✅ Středová souměrnost – F′ je otočený o 180° kolem bodu S[${C(prvek.S[0])}; ${C(prvek.S[1])}], který leží uprostřed úsečky AA′.`
+        : '✅ Osová souměrnost – F′ je překlopený přes osu (vyznačená čárkovaně), pořadí vrcholů se obrátilo.',
+      poOk: p => {
+        const g = p.querySelector('.odhal');
+        if (!g) return;
+        if (prvek.typ === 'stred') {
+          g.innerHTML = `<line class="reseni" x1="${px(tvar[0][0])}" y1="${py(tvar[0][1])}" x2="${px(obraz[0][0])}" y2="${py(obraz[0][1])}"/>
+            <circle class="reseni-bod" cx="${px(prvek.S[0])}" cy="${py(prvek.S[1])}" r="6"/>
+            <text class="jmeno" x="${px(prvek.S[0]) + 8}" y="${py(prvek.S[1]) - 8}">S</text>`;
+        } else {
+          let k;
+          if (prvek.typ === 'svisla') k = [prvek.c, -1, prvek.c, VYSKA + 1];
+          else if (prvek.typ === 'vodorovna') k = [-1, prvek.c, SIRKA + 1, prvek.c];
+          else k = [-12, -12 + prvek.c, SIRKA + 12, SIRKA + 12 + prvek.c];   // přímka y = x + c (přesah ořízne clipPath)
+          g.innerHTML = `<line class="reseni" x1="${px(k[0])}" y1="${py(k[1])}" x2="${px(k[2])}" y2="${py(k[3])}"/>`;
+        }
+      },
+      _stredova: stredova, _tvar: tvar, _obraz: obraz,
+    };
+  }
+}
+
+/* ---- kreslení mřížky ------------------------------------------------------------------- */
+const KROK = 28, OKRAJ = 26;
+let mrizkaVyska = VYSKA;
+const px = x => OKRAJ + KROK * x;
+const py = y => OKRAJ + KROK * (mrizkaVyska - y);
+
+function svgMrizka({ sirka, vyska, obsah, popisky, popis, klik }) {
+  mrizkaVyska = vyska;
+  let s = `<svg class="mrizka" viewBox="0 0 ${2 * OKRAJ + KROK * sirka} ${2 * OKRAJ + KROK * vyska}"
+    ${klik ? 'tabindex="0" role="application"' : 'role="img"'} aria-label="${popis}">
+    <defs><clipPath id="vyrez"><rect x="${OKRAJ}" y="${OKRAJ}" width="${KROK * sirka}" height="${KROK * vyska}"/></clipPath></defs>
+    <rect class="pozadi" x="0" y="0" width="${2 * OKRAJ + KROK * sirka}" height="${2 * OKRAJ + KROK * vyska}" rx="10"/>`;
+  for (let x = 0; x <= sirka; x++) s += `<line class="${x === 0 && popisky ? 'osa-xy' : 'cara'}" x1="${px(x)}" y1="${py(0)}" x2="${px(x)}" y2="${py(vyska)}"/>`;
+  for (let y = 0; y <= vyska; y++) s += `<line class="${y === 0 && popisky ? 'osa-xy' : 'cara'}" x1="${px(0)}" y1="${py(y)}" x2="${px(sirka)}" y2="${py(y)}"/>`;
+  if (popisky) {
+    for (let x = 0; x <= sirka; x++) s += `<text class="popis-osy" x="${px(x)}" y="${py(0) + 16}" text-anchor="middle">${x}</text>`;
+    for (let y = 1; y <= vyska; y++) s += `<text class="popis-osy" x="${px(0) - 8}" y="${py(y) + 4}" text-anchor="end">${y}</text>`;
+  }
+  s += obsah + `<g class="odhal" clip-path="url(#vyrez)"></g>`;
+  if (klik) {
+    for (let x = 0; x <= sirka; x++) for (let y = 0; y <= vyska; y++) {
+      s += `<circle class="cil" data-klic="${x};${y}" cx="${px(x)}" cy="${py(y)}" r="11"/>`;
+    }
+    s += `<rect class="kurzor" width="22" height="22" rx="5" x="0" y="0" style="display:none"/>`;
+  }
+  return s + '</svg>';
+}
+
+function polygon(pole, trida) {
+  return `<polygon class="${trida}" points="${pole.map(([x, y]) => `${px(x)},${py(y)}`).join(' ')}"/>`;
+}
+function kresliOsova(tvar, obraz) {
+  /* vrcholy A, B, C: rohy 0, 1 a 5 útvaru L */
+  const jmena = [[0, 'A'], [1, 'B'], [5, 'C']];
+  const stitek = (pole, carka, tr) => jmena.map(([i, j]) =>
+    `<circle class="bod${tr}" cx="${px(pole[i][0])}" cy="${py(pole[i][1])}" r="4"/>
+     <text class="jmeno male" x="${px(pole[i][0]) + 5}" y="${py(pole[i][1]) - 5}">${j}${carka}</text>`).join('');
+  const t = bbox(tvar), o = bbox(obraz);
+  return polygon(tvar, 'vzor') + polygon(obraz, 'obraz') + stitek(tvar, '', '') + stitek(obraz, '′', ' s')
+    + `<text class="jmeno" x="${px((t[0] + t[2]) / 2) - 6}" y="${py(t[3]) - 8}">F</text>`
+    + `<text class="jmeno" x="${px((o[0] + o[2]) / 2) - 6}" y="${py(o[3]) - 8}">F′</text>`;
+}
+
+/* ---- Najdi obraz bodu (klik do mřížky) ------------------------------------------------- */
+const MX = 10, MY = 8;
+function genObraz() {
+  for (;;) {
+    const S = [Uloha.nahodneCislo(2, MX - 2), Uloha.nahodneCislo(2, MY - 2)];
+    const A = [Uloha.nahodneCislo(0, MX), Uloha.nahodneCislo(0, MY)];
+    if (stejne(A, S)) continue;
+    const B = [2 * S[0] - A[0], 2 * S[1] - A[1]];
+    if (B[0] < 0 || B[1] < 0 || B[0] > MX || B[1] > MY) continue;
+    return { typ: Math.random() < 0.3 ? 'stred' : 'obraz', S, A, B };
+  }
+}
+
+/* vysvětlení chybného kliknutí: pojmenuje, co žák udělal */
+function vysvetliKlik(u, Q) {
+  const { S, A, B } = u;
+  const v = (P, R) => [R[0] - P[0], R[1] - P[1]];
+  const kolinearni = (P, R, T) => { const a = v(P, R), b = v(P, T); return a[0] * b[1] - a[1] * b[0] === 0; };
+  if (u.typ === 'obraz') {
+    if (stejne(Q, A)) return '❌ To je vzor A. Obraz leží na druhé straně od středu S.';
+    if (stejne(Q, S)) return '❌ Bod S je obrazem jen sám sebe. Od S musíš ujít ještě jednou stejný krok jako z A do S.';
+    if (stejne(Q, [B[0], A[1]]) || stejne(Q, [A[0], B[1]])) return '❌ Tady se změnila jen jedna souřadnice – to by byl obraz v osové souměrnosti. Ve středové se mění obě souřadnice.';
+    const dx = S[0] - A[0], dy = S[1] - A[1];
+    if (kolinearni(A, S, Q)) {
+      const w = v(S, Q);
+      if (w[0] * dx + w[1] * dy < 0) return '❌ Tenhle bod leží na stejné straně od S jako A. Obraz musí být na opačné straně.';
+      return `❌ Směr je dobrý, ale vzdálenost nesedí: |SA′| musí být stejná jako |AS|. Z A do S je to ${krokSlovy(dx, dy)}.`;
+    }
+    return `❌ Bod [${Q[0]}; ${Q[1]}] neleží na přímce AS. Z A do S je to ${krokSlovy(dx, dy)} – stejný krok udělej ještě jednou od S.`;
+  }
+  if (stejne(Q, A) || stejne(Q, B)) return '❌ To je jeden z daných bodů. Střed souměrnosti leží mezi A a A′.';
+  if (kolinearni(A, B, Q)) {
+    const w1 = v(A, Q), w2 = v(B, Q);
+    if (w1[0] * w2[0] + w1[1] * w2[1] < 0) return '❌ Bod leží na úsečce AA′, ale ne v jejím středu – od A i od A′ musí být stejně daleko.';
+    return '❌ Bod leží na přímce AA′, ale mimo úsečku. Střed souměrnosti je mezi body A a A′.';
+  }
+  return '❌ Střed souměrnosti leží na úsečce AA′, přesně uprostřed. Spočítej polovinu kroku z A do A′.';
+}
+
+function obrazBodu() {
+  const u = genObraz();
+  const p = $('plocha');
+  const meloFokus = !!(document.activeElement && document.activeElement.closest && document.activeElement.closest('.mrizka'));
+  const spravny = u.typ === 'obraz' ? u.B : u.S;
+  mrizkaVyska = MY;
+  const bod = (b, j, tr) => `<circle class="bod${tr}" cx="${px(b[0])}" cy="${py(b[1])}" r="6"/>
+    <text class="jmeno" x="${px(b[0]) + 8}" y="${py(b[1]) - 8}">${j}</text>`;
+  const dane = u.typ === 'obraz' ? bod(u.A, 'A', '') + bod(u.S, 'S', ' s') : bod(u.A, 'A', '') + bod(u.B, 'A′', '');
+  const zadani = u.typ === 'obraz'
+    ? `Klikni na obraz <b>A′</b> bodu ${bodTxt('A', u.A)} ve středové souměrnosti se středem ${bodTxt('S', u.S)}.`
+    : `Bod ${bodTxt('A′', u.B)} je obrazem bodu ${bodTxt('A', u.A)}. Klikni na <b>střed souměrnosti S</b>.`;
+  p.innerHTML = `<div class="zadani">${zadani}</div>
+    ${svgMrizka({ sirka: MX, vyska: MY, obsah: dane, popisky: true, klik: true,
+      popis: 'Mřížka se souřadnicemi. Šipkami posuň výběr, Enterem nebo mezerníkem potvrď.' })}
+    <div class="stav-kurzoru" id="stavKurzoru">Klikni do mřížky, nebo použij šipky a Enter.</div>`;
+  const odezva = document.createElement('div');
+  odezva.className = 'odezva';
+  p.appendChild(odezva);
+
+  Uloha.zrusPosun();
+  const stav = { chyboval: false, hotovo: false };
+  Uloha.ohlas('otazka', { stav });
+  const svg = p.querySelector('.mrizka');
+  const kurzor = svg.querySelector('.kurzor');
+  let kx = 5, ky = 4, kurzorVidet = false;
+
+  function zvol(Q) {
+    if (stav.hotovo) return;
+    const prvek = svg.querySelector(`.cil[data-klic="${Q[0]};${Q[1]}"]`);
+    const ok = stejne(Q, spravny);
+    Uloha.odpoved({
+      prvek, spravne: ok, stav, odezva,
+      zpravaOk: u.typ === 'obraz'
+        ? `✅ ${bodTxt('A′', u.B)} – z A do S je to ${krokSlovy(u.S[0] - u.A[0], u.S[1] - u.A[1])} a stejně od S k A′.`
+        : `✅ ${bodTxt('S', u.S)} – leží přesně uprostřed úsečky AA′.`,
+      zpravaChyba: vysvetliKlik(u, Q),
+      poSpravne: n => {
+        skore.vyhodnot(n);
+        const g = svg.querySelector('.odhal');
+        g.innerHTML = `<line class="spojnice" x1="${px(u.A[0])}" y1="${py(u.A[1])}" x2="${px(u.B[0])}" y2="${py(u.B[1])}"/>`
+          + bod(u.typ === 'obraz' ? u.B : u.S, u.typ === 'obraz' ? 'A′' : 'S', ' s');
+      },
+      dalsi: novaUloha,
+      prodleva: n => n ? 2200 : 3400,
+    });
+  }
+  function ukazKurzor() {
+    kurzorVidet = true;
+    kurzor.style.display = '';
+    kurzor.setAttribute('x', px(kx) - 11);
+    kurzor.setAttribute('y', py(ky) - 11);
+    $('stavKurzoru').textContent = `Výběr: [${kx}; ${ky}] – potvrď Enterem nebo mezerníkem.`;
+  }
+  svg.querySelectorAll('.cil').forEach(c => c.addEventListener('click', () => {
+    const [x, y] = c.dataset.klic.split(';').map(Number);
+    zvol([x, y]);
+  }));
+  svg.addEventListener('focus', () => { if (!kurzorVidet) ukazKurzor(); });
+  svg.addEventListener('keydown', e => {
+    const posun = { ArrowLeft: [-1, 0], ArrowRight: [1, 0], ArrowUp: [0, 1], ArrowDown: [0, -1] }[e.key];
+    if (posun) {
+      kx = Math.max(0, Math.min(MX, kx + posun[0]));
+      ky = Math.max(0, Math.min(MY, ky + posun[1]));
+      ukazKurzor();
+    } else if (e.key === 'Enter' || e.key === ' ') {
+      if (stav.hotovo) return;   // po správné odpovědi Enter pustíme dál (další úloha)
+      zvol([kx, ky]);
+    } else return;
+    e.preventDefault();
+    e.stopPropagation();
+  });
+  if (meloFokus) svg.focus({ preventScroll: true });
+}
+
+const GEN = { soumerny: genSoumerny, souradnice: genSouradnice, osova: genOsova };
+const REZIMY = { obraz: obrazBodu };
+function novaUloha() {
+  if (REZIMY[rezim]) REZIMY[rezim]();
+  else poloz(GEN[rezim]());
+}
+
+document.querySelectorAll('#rezimy button').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('#rezimy button').forEach(x => x.classList.remove('active'));
+  b.classList.add('active');
+  rezim = b.dataset.rezim;
+  novaUloha();
+}));
+$('btnDalsi').addEventListener('click', novaUloha);
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === 'Enter') { e.preventDefault(); novaUloha(); }
+});
+novaUloha();
+</script>
+</body>
+</html>

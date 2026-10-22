@@ -1,0 +1,2 @@
+Common specification: inf9-ai-ovoce.prompt.txt
+Variant: Red-and-yellow striped apple with broad shoulders and tapered base, rotated left.

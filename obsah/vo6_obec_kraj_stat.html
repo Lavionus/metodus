@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Obec, kraj, stát</title>
+  <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
+  <script src="../theme.js"></script>
+  <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
+  <script src="../rec.js"></script>
+  <script src="../uloha.js"></script>
+  <style>
+    .urovne { display: block; width: min(440px, 100%); height: auto; margin: 10px auto; }
+    .urovne .ram { stroke: var(--border-strong); stroke-width: 2; }
+    .urovne .stat { fill: var(--bg-panel); }
+    .urovne .kraj { fill: var(--bg-elevated); }
+    .urovne .obec { fill: var(--accent-soft); stroke: var(--accent); }
+    .urovne .nadp { fill: var(--accent); font-weight: 700; font-size: 15px; }
+    .urovne .pop { fill: var(--text); font-size: 12px; }
+    .urovne .mal { fill: var(--text-muted); font-size: 11px; }
+    .situace { font-size: clamp(1.05rem, 3.6vw, 1.35rem); font-weight: 600; line-height: 1.45; max-width: 620px; overflow-wrap: anywhere; }
+    .druh { display: block; font-size: .8rem; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; color: var(--text-faint); margin-bottom: 6px; }
+    .moznosti button { max-width: 100%; white-space: normal; }
+    .napoveda a { color: var(--accent); }
+  </style>
+</head>
+<body>
+  <h1>🏘️ Obec, kraj, stát</h1>
+  <p class="podtitul">Pro 6.–7. ročník: obec a obecní úřad, starosta a zastupitelstvo, 14 krajů a hejtman, stát a kdo co řeší v běžném životě.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Kdo se stará o to, co tě obklopuje</summary>
+    <div class="obsah">
+      <p>Žiješ zároveň ve třech „patrech“ veřejné správy: v <b>obci</b>, v <b>kraji</b> a ve <b>státě</b>.
+        Obec i kraj se samy spravují – jejich občané si volí zastupitele, kteří rozhodují o místních věcech.</p>
+      <svg class="urovne" viewBox="0 0 340 262" role="img" aria-label="Schéma: stát obsahuje 14 krajů, kraje obsahují obce. U každé úrovně jsou její hlavní orgány.">
+        <rect class="ram stat" x="3" y="3" width="334" height="256" rx="14"/>
+        <text class="nadp" x="16" y="27">🇨🇿 Stát – Česká republika</text>
+        <text class="pop" x="16" y="47">Parlament, vláda, prezident, soudy</text>
+        <text class="mal" x="16" y="63">zákony · dálnice · armáda · důchody</text>
+        <rect class="ram kraj" x="14" y="74" width="312" height="172" rx="12"/>
+        <text class="nadp" x="28" y="98">🏢 Kraj – v Česku jich je 14</text>
+        <text class="pop" x="28" y="118">zastupitelstvo kraje → hejtman</text>
+        <text class="mal" x="28" y="134">silnice II. a III. třídy · střední školy</text>
+        <rect class="ram obec" x="26" y="146" width="288" height="88" rx="10"/>
+        <text class="nadp" x="40" y="170">🏘️ Obec – přes 6 000 obcí</text>
+        <text class="pop" x="40" y="190">zastupitelstvo obce → starosta</text>
+        <text class="mal" x="40" y="207">ulice a chodníky · základní školy</text>
+        <text class="mal" x="40" y="222">odpad · veřejné osvětlení</text>
+      </svg>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Obec</h3><p>Občané volí na 4 roky <b>zastupitelstvo obce</b>. To ze svých členů zvolí <b>starostu</b> (ve statutárních městech a v Praze se mu říká <b>primátor</b>). Úředníci pracují na <b>obecním úřadě</b>.</p></article>
+        <article class="vyklad-karta"><h3>Kraj</h3><p>Česko má <b>14 krajů</b>, Praha je obcí i krajem zároveň. Občané volí <b>zastupitelstvo kraje</b>, to zvolí <b>hejtmana</b>. Kraj má <b>krajský úřad</b>.</p></article>
+        <article class="vyklad-karta"><h3>Stát</h3><p>Má <b>území, obyvatelstvo a státní moc</b>. Řeší věci celé republiky: zákony, dálnice, armádu, důchody. Patří k němu i <a href="prv5_statni_symboly.html">státní symboly</a>.</p></article>
+      </div>
+      <p>Komu tedy napsat? <b>Díra v ulici</b> nebo nesvítící lampa – obci. <b>Výmol na silnici mezi vesnicemi</b>
+        (II. a III. třída) – kraji. <b>Rozbitá dálnice</b> – státu. Základní školu většinou zřizuje obec,
+        střední školu kraj a pravidla pro všechny školy určuje stát.</p>
+      <aside class="zapamatuj">Starostu ani hejtmana nevolí občané přímo – volí je zastupitelstvo. Místní věci řeší obec, regionální kraj, celostátní stát.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: komu napsat o výmolu na silnici</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Cestou na kole z vaší vesnice do sousední obce je na silnici III. třídy hluboký výmol. Komu o něm dáš vědět?</p>
+      <ol class="kroky">
+        <li>Zjistím, o jakou cestu jde: není to ulice uvnitř obce, ale <b>silnice mezi dvěma obcemi</b>, a to <b>III. třídy</b>.</li>
+        <li>Připomenu si, komu které cesty patří: ulice a chodníky v obci – <b>obec</b>; silnice II. a III. třídy – <b>kraj</b>; dálnice a silnice I. třídy – <b>stát</b>.</li>
+        <li>Silnice III. třídy tedy patří <b>kraji</b>. Kraj má na údržbu silnic svou organizaci, kontakt najdu na webu krajského úřadu.</li>
+        <li>Napíšu krátce, <b>kde přesně</b> výmol je (mezi kterými obcemi, u čeho) a přidám fotku.</li>
+        <li>Když si nejsem jistý, čí silnice je, zeptám se na obecním úřadě – tam to vědí.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Výmol na silnici III. třídy nahlásím kraji (jeho správě silnic).</p>
+    </div>
+  </details>
+
+  <div class="rezimy" id="rezimy">
+    <button data-rezim="situace" class="active">🧭 Kdo to má na starosti?</button>
+    <button data-rezim="pojmy">📚 Pojmy</button>
+    <button data-rezim="kraje">🗺️ Kraje a krajská města</button>
+    <button data-rezim="volba">🗳️ Kdo koho volí?</button>
+  </div>
+
+  <div class="plocha" id="plocha"></div>
+
+  <div class="ovladani">
+    <button class="hlavni" id="btnDalsi">Přeskočit →</button>
+    <span class="skore" id="skore"></span>
+  </div>
+
+  <p class="napoveda">
+    <b>Obec</b>: občané volí zastupitelstvo (na 4 roky) → to volí <b>starostu</b> a radu obce; úředníci na <b>obecním úřadě</b>.
+    Obec: ulice, chodníky, osvětlení, odpad, mateřské a základní školy.
+    <b>Kraj</b> (14, Praha je obcí i krajem): zastupitelstvo kraje → <b>hejtman</b>; silnice II. a III. třídy, střední školy, záchranná služba, autobusy mezi obcemi.
+    <b>Stát</b> (území + obyvatelstvo + státní moc): zákony, dálnice a silnice I. třídy, armáda, důchody, pravidla pro školy.
+    Státní symboly: <a href="prv5_statni_symboly.html">přehled sedmi symbolů</a>.
+  </p>
+
+<script>
+const $ = id => document.getElementById(id);
+const skore = Uloha.skore('metodus_vo6_obec_kraj_stat', $('skore'));
+let rezim = 'situace';
+
+/* ---- data ---------------------------------------------------------------- */
+const AKTERI = {
+  obec: { ikona: '🏘️', popis: 'obec (obecní úřad)',
+    dela: 'Obec řeší místní věci: ulice a chodníky v obci, veřejné osvětlení, odpad, parky, mateřské a základní školy.' },
+  kraj: { ikona: '🏢', popis: 'kraj (krajský úřad)',
+    dela: 'Kraj se stará o silnice II. a III. třídy, většinu středních škol, záchrannou službu a autobusy mezi obcemi.' },
+  stat: { ikona: '🇨🇿', popis: 'stát (Parlament, vláda, ministerstva)',
+    dela: 'Stát řeší věci celé republiky: zákony, dálnice a silnice I. třídy, armádu, důchody a pravidla pro všechny školy.' },
+};
+
+const SITUACE = [
+  { k: 'obec', t: 'V boční ulici před vaším domem je díra a rozbitý chodník.', p: 'Ulice a chodníky v obci (místní komunikace) patří obci.' },
+  { k: 'obec', t: 'Na sídlišti už týden nesvítí pouliční lampa.', p: 'Veřejné osvětlení v obci zajišťuje a platí obec.' },
+  { k: 'obec', t: 'Chceš navrhnout nové dětské hřiště v obecním parku.', p: 'Obecní park patří obci – návrh pošli starostovi nebo zastupitelstvu.' },
+  { k: 'obec', t: 'Rodiče chtějí vědět, kolik se v obci platí za svoz odpadu.', p: 'Svoz komunálního odpadu zajišťuje obec a stanoví i poplatek za odpad.' },
+  { k: 'obec', t: 'Na budově běžné základní školy ve vaší obci zatéká střecha. Kdo ji obvykle opravuje?', p: 'Základní a mateřské školy většinou zřizuje obec, a tak se stará i o jejich budovy.' },
+  { k: 'obec', t: 'Rodina se přistěhovala a chce se přihlásit k trvalému pobytu.', p: 'Trvalý pobyt se hlásí na ohlašovně, a tou je obecní úřad.' },
+  { k: 'obec', t: 'Kdo může vydat vyhlášku, že se na návsi jedné vesnice nesmí odpalovat ohňostroje?', p: 'Pravidla jen pro území jedné obce vydává zastupitelstvo obce obecně závaznou vyhláškou.' },
+  { k: 'kraj', t: 'Na silnici III. třídy mezi dvěma vesnicemi je hluboký výmol.', p: 'Silnice II. a III. třídy vlastní a udržuje kraj.' },
+  { k: 'kraj', t: 'Na silnici II. třídy, která vede přes celý okres, chybí svodidla v ostré zatáčce.', p: 'Silnice II. třídy patří kraji, ten se stará o jejich bezpečnost.' },
+  { k: 'kraj', t: 'Autobus z vaší vesnice do okresního města jezdí jen dvakrát denně.', p: 'Autobusové spoje mezi obcemi v kraji objednává a platí kraj.' },
+  { k: 'kraj', t: 'Kdo zřizuje většinu gymnázií a středních odborných škol?', p: 'Střední školy většinou zřizuje kraj.' },
+  { k: 'kraj', t: 'Kdo zřizuje zdravotnickou záchrannou službu (sanitky na čísle 155) ve vašem regionu?', p: 'Zdravotnickou záchrannou službu zřizuje kraj.' },
+  { k: 'stat', t: 'Na dálnici D1 je rozbitý povrch.', p: 'Dálnice a silnice I. třídy patří státu, spravuje je Ředitelství silnic a dálnic.' },
+  { k: 'stat', t: 'Kdo určuje, co se mají naučit žáci na všech základních školách v republice?', p: 'Celostátní pravidla pro školy (rámcové vzdělávací programy) určuje stát – ministerstvo školství.' },
+  { k: 'stat', t: 'Kdo může změnit pravidla silničního provozu, která platí v celé republice?', p: 'Zákony pro celou republiku schvaluje Parlament – to je věc státu.' },
+  { k: 'stat', t: 'Babička chce vědět, kdo jí vyplácí starobní důchod.', p: 'Důchody vyplácí stát (Česká správa sociálního zabezpečení).' },
+  { k: 'stat', t: 'Kdo se stará o obranu země a armádu?', p: 'Armáda patří státu, řídí ji ministerstvo obrany.' },
+  { k: 'stat', t: 'Kdo vydává české bankovky a mince?', p: 'Peníze vydává Česká národní banka – ústřední banka státu.' },
+];
+
+const POJMY = [
+  { n: 'obec', d: 'základní územní samosprávný celek – společenství občanů, kteří žijí na jejím území' },
+  { n: 'kraj', d: 'vyšší územní samosprávný celek; v Česku jich je 14' },
+  { n: 'stát', d: 'útvar, který má vlastní území, obyvatelstvo a státní moc' },
+  { n: 'starosta', d: 'stojí v čele obce a zastupuje ji navenek; volí ho zastupitelstvo obce' },
+  { n: 'primátor', d: 'tak se říká starostovi statutárního města (třeba Brna nebo Ostravy) a hlavního města Prahy' },
+  { n: 'hejtman', d: 'stojí v čele kraje a zastupuje ho navenek; volí ho zastupitelstvo kraje' },
+  { n: 'zastupitelstvo obce', d: 'zástupci zvolení občany obce; schvalují rozpočet a rozhodují o nejdůležitějších věcech obce' },
+  { n: 'rada obce', d: 'výkonný orgán obce ze starosty, místostarostů a dalších radních, které volí zastupitelstvo' },
+  { n: 'obecní úřad', d: 'úřad, kde zaměstnanci obce v čele se starostou vyřizují každodenní záležitosti občanů' },
+  { n: 'krajský úřad', d: 'úřad, kde pracují zaměstnanci kraje v čele s ředitelem' },
+  { n: 'komunální volby', d: 'volby do zastupitelstev obcí, konají se každé čtyři roky' },
+  { n: 'rozpočet obce', d: 'plán, kolik peněz obec za rok získá a za co je utratí' },
+  { n: 'obecně závazná vyhláška', d: 'předpis, který vydá zastupitelstvo obce a platí jen na jejím území' },
+  { n: 'státní občanství', d: 'trvalý právní vztah člověka a státu, který mu dává práva i povinnosti' },
+  { n: 'hlavní město Praha', d: 'jediné místo v Česku, které je obcí i krajem zároveň' },
+];
+
+const KRAJE = [
+  { n: 'Hlavní město Praha', m: 'Praha' },
+  { n: 'Středočeský kraj', g: 'Středočeského kraje', m: 'Praha', pozn: 'Úřad Středočeského kraje sídlí v Praze, i když Praha do tohoto kraje nepatří.' },
+  { n: 'Jihočeský kraj', g: 'Jihočeského kraje', m: 'České Budějovice' },
+  { n: 'Plzeňský kraj', g: 'Plzeňského kraje', m: 'Plzeň' },
+  { n: 'Karlovarský kraj', g: 'Karlovarského kraje', m: 'Karlovy Vary' },
+  { n: 'Ústecký kraj', g: 'Ústeckého kraje', m: 'Ústí nad Labem' },
+  { n: 'Liberecký kraj', g: 'Libereckého kraje', m: 'Liberec' },
+  { n: 'Královéhradecký kraj', g: 'Královéhradeckého kraje', m: 'Hradec Králové' },
+  { n: 'Pardubický kraj', g: 'Pardubického kraje', m: 'Pardubice' },
+  { n: 'Kraj Vysočina', g: 'Kraje Vysočina', m: 'Jihlava' },
+  { n: 'Jihomoravský kraj', g: 'Jihomoravského kraje', m: 'Brno' },
+  { n: 'Olomoucký kraj', g: 'Olomouckého kraje', m: 'Olomouc' },
+  { n: 'Zlínský kraj', g: 'Zlínského kraje', m: 'Zlín' },
+  { n: 'Moravskoslezský kraj', g: 'Moravskoslezského kraje', m: 'Ostrava' },
+];
+
+const VOLICI = {
+  volici_obce: { popis: 'voliči v obci', ikona: '🧑‍🤝‍🧑', dela: 'Voliči v obci volí v komunálních volbách jen zastupitelstvo obce.' },
+  zast_obce: { popis: 'zastupitelstvo obce', ikona: '🏘️', dela: 'Zastupitelstvo obce volí ze svých členů starostu, místostarosty a radu obce.' },
+  volici_kraje: { popis: 'voliči v kraji', ikona: '🗳️', dela: 'Voliči v kraji volí v krajských volbách jen zastupitelstvo kraje.' },
+  zast_kraje: { popis: 'zastupitelstvo kraje', ikona: '🏢', dela: 'Zastupitelstvo kraje volí ze svých členů hejtmana, jeho náměstky a radu kraje.' },
+};
+const KOHO = [
+  { n: 'starostu', k: 'zast_obce' },
+  { n: 'místostarostu', k: 'zast_obce' },
+  { n: 'radu obce', k: 'zast_obce' },
+  { n: 'zastupitelstvo obce', k: 'volici_obce' },
+  { n: 'hejtmana', k: 'zast_kraje' },
+  { n: 'radu kraje', k: 'zast_kraje' },
+  { n: 'zastupitelstvo kraje', k: 'volici_kraje' },
+];
+
+/* ---- generátory: vrací otázku jako data --------------------------------------
+   { druh, text, moznosti:[{klic,popis,ikona?}], spravny, ok, chyby:{klic: proč ne} } */
+function situace() {
+  const s = Uloha.nahodne(SITUACE);
+  const chyby = {};
+  for (const k of Object.keys(AKTERI)) if (k !== s.k) chyby[k] = `Ne. ${AKTERI[k].dela} ${s.p}`;
+  return {
+    druh: '🧭 Kdo to má na starosti?', text: s.t, trida: '',
+    moznosti: Object.keys(AKTERI).map(k => ({ klic: k, ikona: AKTERI[k].ikona, popis: AKTERI[k].popis })),
+    spravny: s.k, ok: `✅ ${AKTERI[s.k].popis}: ${s.p}`, chyby,
+  };
+}
+
+function pojmy() {
+  const pojem = Uloha.nahodne(POJMY);
+  const jine = Uloha.zamichej(POJMY.filter(x => x !== pojem)).slice(0, 3);
+  const vyber = Uloha.zamichej([pojem, ...jine]);
+  const chyby = {};
+  if (Math.random() < 0.5) {
+    jine.forEach(x => { chyby[x.n] = `Ne – „${x.n}“: ${x.d}.`; });
+    return {
+      druh: '📚 Který pojem to je?', text: pojem.d.charAt(0).toUpperCase() + pojem.d.slice(1) + '.',
+      moznosti: vyber.map(x => ({ klic: x.n, popis: x.n })),
+      spravny: pojem.n, ok: `✅ ${pojem.n.charAt(0).toUpperCase() + pojem.n.slice(1)} – ${pojem.d}.`, chyby,
+    };
+  }
+  jine.forEach(x => { chyby[x.n] = `Ne – tohle popisuje pojem „${x.n}“. ${pojem.n.charAt(0).toUpperCase() + pojem.n.slice(1)}: ${pojem.d}.`; });
+  return {
+    druh: '📚 Co znamená pojem?', text: pojem.n,
+    moznosti: vyber.map(x => ({ klic: x.n, popis: x.d })),
+    spravny: pojem.n, ok: `✅ ${pojem.n.charAt(0).toUpperCase() + pojem.n.slice(1)}: ${pojem.d}.`, chyby,
+  };
+}
+
+function kraje() {
+  const chyby = {};
+  if (Math.random() < 0.5) {
+    // kraj → krajské město (Praha jako kraj by byla otázka bez přemýšlení)
+    const kr = Uloha.nahodne(KRAJE.filter(x => x.n !== 'Hlavní město Praha'));
+    const mesta = [...new Set(KRAJE.map(x => x.m))].filter(m => m !== kr.m);
+    const jine = Uloha.zamichej(mesta).slice(0, 3);
+    jine.forEach(m => {
+      chyby[m] = m === 'Praha'
+        ? 'Ne – v Praze sídlí úřad Středočeského kraje (a Praha je sama krajem).'
+        : `Ne – ${m} je krajské město ${KRAJE.find(x => x.m === m).g}.`;
+    });
+    return {
+      druh: '🗺️ Kde sídlí krajský úřad?', text: kr.n,
+      moznosti: Uloha.zamichej([kr.m, ...jine]).map(m => ({ klic: m, popis: m })),
+      spravny: kr.m, ok: `✅ ${kr.n} – krajský úřad sídlí v ${MISTNI[kr.m]}.${kr.pozn ? ' ' + kr.pozn : ''}`, chyby,
+    };
+  }
+  // krajské město → kraj (Praha vynechána, patří ke dvěma odpovědím)
+  const kr = Uloha.nahodne(KRAJE.filter(x => x.m !== 'Praha'));
+  const jine = Uloha.zamichej(KRAJE.filter(x => x !== kr)).slice(0, 3);
+  jine.forEach(x => {
+    chyby[x.n] = x.n === 'Hlavní město Praha'
+      ? `Ne – Hlavní město Praha je obcí i krajem zároveň; ${kr.m} k ní nepatří.`
+      : `Ne – ${x.n} má krajský úřad v ${MISTNI[x.m]}.`;
+  });
+  return {
+    druh: '🗺️ Kterého kraje je to krajské město?', text: kr.m,
+    moznosti: Uloha.zamichej([kr, ...jine]).map(x => ({ klic: x.n, popis: x.n })),
+    spravny: kr.n, ok: `✅ ${kr.m} je krajské město ${kr.g}.`, chyby,
+  };
+}
+/* 6. pád pro větu „sídlí v …“ */
+const MISTNI = {
+  'Praha': 'Praze', 'České Budějovice': 'Českých Budějovicích', 'Plzeň': 'Plzni', 'Karlovy Vary': 'Karlových Varech',
+  'Ústí nad Labem': 'Ústí nad Labem', 'Liberec': 'Liberci', 'Hradec Králové': 'Hradci Králové', 'Pardubice': 'Pardubicích',
+  'Jihlava': 'Jihlavě', 'Brno': 'Brně', 'Olomouc': 'Olomouci', 'Zlín': 'Zlíně', 'Ostrava': 'Ostravě',
+};
+
+function volba() {
+  const q = Uloha.nahodne(KOHO);
+  const chyby = {};
+  for (const k of Object.keys(VOLICI)) if (k !== q.k) chyby[k] = `Ne. ${VOLICI[k].dela}`;
+  return {
+    druh: '🗳️ Kdo volí?', text: `Kdo volí ${q.n}?`, trida: '',
+    moznosti: Object.keys(VOLICI).map(k => ({ klic: k, ikona: VOLICI[k].ikona, popis: VOLICI[k].popis })),
+    spravny: q.k, ok: `✅ ${VOLICI[q.k].dela}`, chyby,
+  };
+}
+
+const GENERATORY = { situace, pojmy, kraje, volba };
+
+/* ---- zobrazení ------------------------------------------------------------ */
+function poloz(q) {
+  const p = $('plocha');
+  p.innerHTML = `<div class="karta"><span class="druh">${q.druh}</span><div class="situace">${q.text}</div></div>`;
+  const odezva = document.createElement('div');
+  odezva.className = 'odezva';
+  Uloha.vyber({
+    kam: p, odezva, trida: q.trida,
+    moznosti: q.moznosti, spravnyKlic: q.spravny,
+    zpravaOk: q.ok, zpravaChyba: k => q.chyby[k] || 'Ještě ne – zkus jinou možnost.',
+    poSpravne: skore.vyhodnot, dalsi: novaUloha,
+    prodleva: napoprve => napoprve ? 1800 : 3200,
+  });
+  p.appendChild(odezva);
+}
+function novaUloha() { poloz(GENERATORY[rezim]()); }
+
+document.querySelectorAll('#rezimy button').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('#rezimy button').forEach(x => x.classList.remove('active'));
+  b.classList.add('active');
+  rezim = b.dataset.rezim;
+  novaUloha();
+}));
+$('btnDalsi').addEventListener('click', novaUloha);
+document.addEventListener('keydown', e => {
+  if (e.target.closest && e.target.closest('details, a, input, textarea')) return;
+  if (e.key === 'ArrowRight' || e.key === 'Enter') { e.preventDefault(); novaUloha(); }
+});
+novaUloha();
+</script>
+</body>
+</html>

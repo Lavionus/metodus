@@ -1,0 +1,8 @@
+Soubor: f6-latky-stul.png / f6-latky-stul.webp
+Původní dílo: Tavolino DSC 0482.tif
+Autor: Museo Egizio
+Datum vzniku: between 1425 and 1353 BCdate QS:P,-1500-00-00T00:00:00Z/6,P1319,-1425-00-00T00:00:00Z/9,P1326,-1353-00-00T00:00:00Z/9 Egyptian Empire (circa 1550 BCdate QS:P,-1550-00-00T00:00:00Z/9,P1480,Q5727902–1070 BCdate QS:P,-1070-00-00T00:00:00Z/9)
+Zdroj: https://commons.wikimedia.org/wiki/File:Tavolino_DSC_0482.tif
+Licence: CC0 (http://creativecommons.org/publicdomain/zero/1.0/deed.en)
+Staženo: 2026-10-21
+Úpravy: automatické natočení, odstranění metadat, zmenšení na nejvýše 1600 px; výuková WebP kopie 768 px.

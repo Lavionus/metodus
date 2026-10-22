@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Evropa ve středověku</title>
+  <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../theme.js"></script>
+  <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
+  <script src="../rec.js"></script>
+  <script src="../uloha.js"></script>
+  <script src="../vyklad.js" defer></script>
+  <style>
+    .uloha-text { max-width: 640px; font-size: 1.02rem; line-height: 1.6; }
+    .uloha-text b { color: var(--accent); }
+    .popis-d { color: var(--text-muted); max-width: 560px; line-height: 1.55; }
+    .nazev-d { font-size: 1.2rem; font-weight: 700; }
+    .rok { font-size: clamp(2rem, 8vw, 3.2rem); font-weight: 700; color: var(--accent);
+      font-variant-numeric: tabular-nums; }
+    .osa { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; max-width: 760px;
+      color: var(--text-faint); font-size: 0.78rem; }
+    .osa span { background: var(--bg-control); border: 1px solid var(--border); border-radius: 6px; padding: 4px 9px; }
+    .osa-cas { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; align-items: center; min-height: 44px; }
+    .osa-cas .bod { background: var(--accent-soft); border: 2px solid var(--accent); border-radius: 8px;
+      padding: 7px 11px; font-size: 0.85rem; font-weight: 600; }
+    .osa-cas .sipka { color: var(--text-faint); }
+    .pyramida .stupen { fill: var(--bg-control); stroke: var(--border-strong); stroke-width: 1.5; }
+    .pyramida .vrchol { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 2; }
+    .pyramida text { fill: var(--text); font-size: 13px; font-family: var(--font, sans-serif); text-anchor: middle; }
+    .pyramida .mala { fill: var(--text-muted); font-size: 11px; }
+    .pyramida .sipka-sv { stroke: var(--accent); stroke-width: 2; fill: none; marker-end: url(#hrotSv); }
+    .pyramida .hrot { fill: var(--accent); }
+  </style>
+</head>
+<body>
+  <h1>⚜️ Evropa ve středověku</h1>
+  <p class="podtitul">Pro 7. ročník: Franská a Byzantská říše, islám, lenní systém, církev, křížové výpravy, románské a gotické umění, města a cechy.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Jak žila středověká Evropa</summary>
+    <div class="obsah">
+      <p>Středověk začíná zánikem Západořímské říše roku <b>476</b> a končí v 15. století. Na troskách Říma vznikly nové státy.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Franská říše</h3><p>Nejsilnější stát Západu. <b>Karel Veliký</b> ji rozšířil a roku <b>800</b> byl v Římě korunován na císaře. Roku 843 si říši rozdělili jeho vnuci.</p></article>
+        <article class="vyklad-karta"><h3>Byzantská říše</h3><p>Východní část římské říše s hlavním městem <b>Konstantinopolí</b>. Za císaře <b>Justiniána</b> vznikl zákoník a chrám Hagia Sofia. Padla až roku 1453.</p></article>
+        <article class="vyklad-karta"><h3>Islám a Arabové</h3><p>Prorok <b>Muhammad</b> hlásal víru v jediného boha Alláha; posvátnou knihou je <b>Korán</b>. Arabové pak ovládli Blízký východ, severní Afriku i většinu Pyrenejského poloostrova.</p></article>
+        <article class="vyklad-karta"><h3>Církev a kláštery</h3><p>Církev vybírala <b>desátek</b> a vedla školy. Mniši v klášterech žili podle <b>řehole</b> a opisovali knihy. Roku 1054 se církev rozdělila na západní a východní.</p></article>
+        <article class="vyklad-karta"><h3>Křížové výpravy</h3><p>Roku <b>1095</b> vyzval papež Urban II. k výpravě do Svaté země. Křižáci dobyli roku 1099 Jeruzalém, ale roku 1291 ztratili poslední pevnost Akkon.</p></article>
+        <article class="vyklad-karta"><h3>Umění a města</h3><p><b>Románský sloh</b> má silné zdi a půlkruhové oblouky, <b>gotika</b> lomené oblouky a vysoká okna s vitrážemi. Ve městech se řemeslníci sdružovali do <b>cechů</b>.</p></article>
+      </div>
+      <p>Společnost držel pohromadě <b>lenní systém</b>: pán propůjčil vazalovi půdu (<b>léno</b>) a vazal mu za to slíbil věrnost a vojenskou službu. Na půdě pracovali <b>poddaní</b>.</p>
+      <svg class="pyramida" viewBox="0 0 400 238" width="400" role="img" aria-label="Lenní pyramida: nahoře král, pod ním velmoži, pod nimi rytíři, dole poddaní rolníci. Šipka dolů: léno a ochrana, šipka nahoru: věrnost a služba.">
+        <defs><marker id="hrotSv" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="hrot" d="M0 0 L10 5 L0 10 z"/></marker></defs>
+        <polygon class="vrchol" points="170,14 230,14 245,59 155,59"/>
+        <text x="200" y="42">král</text>
+        <polygon class="stupen" points="155,64 245,64 265,114 135,114"/>
+        <text x="200" y="94">velmoži</text>
+        <polygon class="stupen" points="135,119 265,119 285,169 115,169"/>
+        <text x="200" y="149">rytíři</text>
+        <polygon class="stupen" points="115,174 285,174 305,224 95,224"/>
+        <text x="200" y="204">poddaní rolníci</text>
+        <path class="sipka-sv" d="M45 26 V214"/>
+        <text class="mala" x="48" y="14">léno, ochrana</text>
+        <path class="sipka-sv" d="M355 214 V26"/>
+        <text class="mala" x="352" y="234">věrnost, služba</text>
+      </svg>
+      <aside class="zapamatuj">800 – Karel Veliký císařem · 1054 rozkol církve · 1095 první křížová výprava · 1453 pád Konstantinopole. Léno = půda za věrnost a službu.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: Je stavba románská, nebo gotická?</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Kostel má vysoká úzká okna s barevnými skly, špičaté oblouky a zvenku ho podpírají pilíře s oblouky. Ve kterém slohu je postavený?</p>
+      <ol class="kroky">
+        <li>Podívám se na <b>oblouky</b> nad okny a dveřmi: jsou <b>lomené</b> (špičaté), ne půlkruhové. Půlkruh by ukazoval na románský sloh.</li>
+        <li>Prohlédnu <b>okna</b>: jsou vysoká a vyplňují je <b>vitráže</b>. Románské stavby mají jen malá okna.</li>
+        <li>Všimnu si <b>opěrných pilířů a oblouků</b> zvenku. Nesou tíhu klenby, a proto mohou být zdi tenčí a okna větší.</li>
+        <li>Shrnu znaky: lomený oblouk + vysoká okna s vitrážemi + opěrný systém = <b>gotika</b>. Takový je třeba chrám sv. Víta v Praze.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Stavba je gotická. Románský sloh poznáš podle silných zdí, malých oken a půlkruhových oblouků.</p>
+    </div>
+  </details>
+
+  <div class="rezimy" id="rezimy">
+    <button data-rezim="osobnosti" class="active">👤 Kdo to byl</button>
+    <button data-rezim="pojmy">📖 Pojmy</button>
+    <button data-rezim="udalosti">📜 Události a letopočty</button>
+    <button data-rezim="poradi">↕️ Seřaď události</button>
+  </div>
+
+  <div class="plocha" id="plocha"></div>
+
+  <div class="ovladani">
+    <button class="hlavni" id="btnDalsi">Přeskočit →</button>
+    <span class="skore" id="skore"></span>
+  </div>
+
+  <div class="osa" id="osa"></div>
+
+  <details class="napoveda" data-faze="tahak">
+    <summary>📌 Tahák</summary>
+    <p><b>Franská říše:</b> Karel Veliký císařem 800, rozdělení 843. <b>Byzanc:</b> Konstantinopol, Justinián, pád 1453.
+      <b>Islám:</b> Muhammad, hidžra 622, Korán. <b>Lenní systém:</b> pán dává léno, vazal slibuje věrnost a službu, poddaní odvádějí dávky a robotu.
+      <b>Církev:</b> desátek, kláštery a řehole, rozkol 1054. <b>Křížové výpravy:</b> 1095–1291, Jeruzalém dobyt 1099.
+      <b>Románský sloh:</b> silné zdi, malá okna, půlkruhový oblouk, rotunda. <b>Gotika:</b> lomený oblouk, vitráže, opěrný systém.
+      <b>Města:</b> hradby, trh, městská práva, řemeslníci v cechu (učeň → tovaryš → mistr).</p>
+  </details>
+
+<script>
+const $ = id => document.getElementById(id);
+const skore = Uloha.skore('metodus_d7_stredoveka_evropa', $('skore'));
+let rezim = 'osobnosti';
+function odezvaEl() { const d = document.createElement('div'); d.className = 'odezva'; return d; }
+
+const OSOBNOSTI = [
+  { n: 'Karel Veliký', e: '👑', o: 'franský král, který roku 800 přijal v Římě císařskou korunu a podporoval vzdělanost' },
+  { n: 'Karel Martel', e: '⚔️', o: 'franský majordomus, který roku 732 zastavil u Poitiers postup Arabů' },
+  { n: 'Chlodvík', e: '✝️', o: 'franský král z rodu Merovejců, který sjednotil Franky a přijal křest' },
+  { n: 'Justinián I.', e: '📜', o: 'byzantský císař, který dal sepsat zákoník a postavit chrám Hagia Sofia' },
+  { n: 'Muhammad', e: '🕌', o: 'prorok islámu, roku 622 odešel z Mekky do Medíny' },
+  { n: 'Ota I. Veliký', e: '🛡️', o: 'německý král, který porazil Maďary na řece Lech a roku 962 se stal císařem' },
+  { n: 'Benedikt z Nursie', e: '📿', o: 'zakladatel benediktinského řádu s heslem „Modli se a pracuj“' },
+  { n: 'František z Assisi', e: '🕊️', o: 'zakladatel žebravého řádu, který žil v chudobě a kázal prostým lidem' },
+  { n: 'Urban II.', e: '⛪', o: 'papež, který roku 1095 vyzval k první křížové výpravě' },
+  { n: 'Saladin', e: '🌙', o: 'muslimský sultán, který roku 1187 dobyl Jeruzalém zpět od křižáků' },
+  { n: 'Richard Lví srdce', e: '🦁', o: 'anglický král, jeden z vůdců třetí křížové výpravy' },
+  { n: 'Vilém Dobyvatel', e: '🏹', o: 'normanský vévoda, který roku 1066 zvítězil u Hastingsu a stal se anglickým králem' },
+];
+
+const POJMY = [
+  { n: 'léno', e: '🌾', o: 'půda propůjčená pánem vazalovi výměnou za věrnost a vojenskou službu' },
+  { n: 'vazal', e: '🤝', o: 'šlechtic, který dostal od pána půdu a slíbil mu věrnost a službu' },
+  { n: 'poddaný', e: '🧑‍🌾', o: 'rolník, který obdělával půdu pána a odváděl mu dávky' },
+  { n: 'robota', e: '⛏️', o: 'bezplatná práce poddaného na panských polích' },
+  { n: 'desátek', e: '🧺', o: 'desetina úrody nebo výdělku odváděná církvi' },
+  { n: 'řehole', e: '📖', o: 'soubor pravidel, podle kterých žijí mniši v klášteře' },
+  { n: 'klášter', e: '🏯', o: 'místo, kde společně žijí mniši nebo jeptišky a věnují se modlitbě a práci' },
+  { n: 'křížová výprava', e: '✝️', o: 'válečné tažení křesťanů do Svaté země, jehož cílem byl Jeruzalém' },
+  { n: 'rytíř', e: '🐎', o: 'urozený bojovník na koni, který měl být statečný, věrný a chránit slabé' },
+  { n: 'Korán', e: '📗', o: 'posvátná kniha islámu' },
+  { n: 'hidžra', e: '🐪', o: 'Muhammadův odchod z Mekky do Medíny, od kterého muslimové počítají letopočet' },
+  { n: 'rozkol církve', e: '💔', o: 'rozdělení roku 1054 na západní (katolickou) a východní (pravoslavnou) církev' },
+  { n: 'Konstantinopol', e: '🏙️', o: 'hlavní město Byzantské říše, dnešní Istanbul' },
+  { n: 'románský sloh', e: '🧱', o: 'stavební sloh se silnými zdmi, malými okny a půlkruhovými oblouky' },
+  { n: 'gotika', e: '⛪', o: 'stavební sloh s lomenými oblouky, vysokými okny a opěrným systémem' },
+  { n: 'rotunda', e: '⭕', o: 'malá okrouhlá románská stavba, často kostel' },
+  { n: 'vitráž', e: '🪟', o: 'okenní obraz z barevných kousků skla spojených olovem' },
+  { n: 'cech', e: '🔨', o: 'sdružení řemeslníků stejného oboru ve městě, které hlídalo kvalitu a ceny' },
+  { n: 'tovaryš', e: '🧰', o: 'vyučený řemeslník, který pracoval u mistra' },
+  { n: 'městská práva', e: '🏰', o: 'výsady města, například právo trhu, hradeb a vlastního soudu' },
+];
+
+/* roky jsou jedinečné – v nabídce se nemohou opakovat */
+const UDALOSTI = [
+  { r: 476, t: 'zanikla Západořímská říše – začátek středověku' },
+  { r: 622, t: 'Muhammad odešel z Mekky do Medíny (hidžra)' },
+  { r: 732, t: 'Karel Martel porazil Araby u Poitiers' },
+  { r: 800, t: 'Karel Veliký byl v Římě korunován na císaře' },
+  { r: 843, t: 'Verdunská smlouva rozdělila Franskou říši na tři části' },
+  { r: 955, t: 'Ota I. porazil Maďary na řece Lech' },
+  { r: 962, t: 'Ota I. se stal císařem – vznikla Svatá říše římská' },
+  { r: 1054, t: 'rozkol církve na západní a východní' },
+  { r: 1066, t: 'Vilém Dobyvatel zvítězil u Hastingsu' },
+  { r: 1095, t: 'papež Urban II. vyzval k první křížové výpravě' },
+  { r: 1099, t: 'křižáci dobyli Jeruzalém' },
+  { r: 1187, t: 'sultán Saladin dobyl Jeruzalém zpět' },
+  { r: 1215, t: 'anglický král musel potvrdit Velkou listinu svobod' },
+  { r: 1291, t: 'křižáci ztratili Akkon, poslední pevnost ve Svaté zemi' },
+  { r: 1453, t: 'Turci dobyli Konstantinopol – zanikla Byzantská říše' },
+];
+
+$('osa').innerHTML = UDALOSTI.map(u => `<span>${u.r} ${u.t}</span>`).join('');
+
+/* ---- Kdo to byl / Pojmy: dva směry nad dvojicí název + popis ----------------- */
+function kviz(data, otazkaNaNazev, otazkaNaPopis, druh) {
+  // druh.jiny = věta po záměně názvu, druh.cizi(k) = věta po záměně popisu
+  const p = $('plocha');
+  const u = Uloha.nahodne(data);
+  const jine = Uloha.zamichej(data.filter(x => x.n !== u.n)).slice(0, 3);
+  const naNazev = Math.random() < 0.6;
+  const najdi = k => data.find(x => x.n === k);
+  const odezva = odezvaEl();
+  p.innerHTML = naNazev
+    ? `<div class="zadani">${otazkaNaNazev}</div>
+       <div class="karta"><div class="obrazek">${u.e}</div><div class="popis-d">${u.o}</div></div>`
+    : `<div class="zadani">${otazkaNaPopis}</div>
+       <div class="karta"><div class="obrazek">${u.e}</div><div class="nazev-d">${u.n}</div></div>`;
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: Uloha.zamichej([u, ...jine]).map(x => ({ klic: x.n, popis: naNazev ? x.n : x.o })),
+    spravnyKlic: u.n,
+    zpravaOk: `✅ ${u.n} – ${u.o}.`,
+    zpravaChyba: k => naNazev ? `✗ ${k} – ${najdi(k).o}. ${druh.jiny}` : druh.cizi(k),
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+const osobnosti = () => kviz(OSOBNOSTI, 'O koho jde?', 'Čím je známá tato osobnost?', {
+  jiny: 'Hledaný popis patří jiné osobnosti.', cizi: k => `✗ Takhle bychom popsali jinou osobnost: ${k}.` });
+const pojmy = () => kviz(POJMY, 'Který pojem odpovídá popisu?', 'Co znamená tento pojem?', {
+  jiny: 'Hledaný popis patří jinému pojmu.', cizi: k => `✗ Tento popis patří k pojmu „${k}“.` });
+
+/* ---- Události a letopočty --------------------------------------------------- */
+function udalosti() {
+  const p = $('plocha');
+  const u = Uloha.nahodne(UDALOSTI);
+  const jine = Uloha.zamichej(UDALOSTI.filter(x => x.r !== u.r)).slice(0, 3);
+  const zRoku = Math.random() < 0.5;
+  const najdi = k => UDALOSTI.find(x => String(x.r) === k);
+  const odezva = odezvaEl();
+  p.innerHTML = zRoku
+    ? `<div class="zadani">Co se stalo v roce</div><div class="karta"><div class="rok">${u.r}</div></div>`
+    : `<div class="zadani uloha-text">V kterém roce k tomu došlo?<br><b>${u.t}</b></div>`;
+  Uloha.vyber({
+    kam: p, odezva, trida: zRoku ? '' : 'velke',
+    moznosti: Uloha.zamichej([u, ...jine]).map(x => ({ klic: String(x.r), popis: zRoku ? x.t : String(x.r) })),
+    spravnyKlic: String(u.r),
+    zpravaOk: `✅ ${u.r} – ${u.t}.`,
+    zpravaChyba: k => zRoku
+      ? `✗ Tato událost se stala roku ${k}, tedy ${+k < u.r ? 'dřív' : 'později'}. Časová osa pod úlohou napoví.`
+      : `✗ V roce ${k}: ${najdi(k).t}.`,
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+/* ---- Seřaď události --------------------------------------------------------- */
+function poradi() {
+  Uloha.zrusPosun();
+  const p = $('plocha');
+  const vyber = Uloha.zamichej(UDALOSTI).slice(0, 4).sort((a, b) => a.r - b.r);
+  p.innerHTML = '<div class="zadani">Seřaď události od nejstarší po nejnovější.</div>';
+  const osa = document.createElement('div'); osa.className = 'osa-cas';
+  const nabidka = document.createElement('div'); nabidka.className = 'nabidka';
+  const odezva = odezvaEl();
+  let dalsiIndex = 0, chyboval = false;
+  Uloha.zamichej(vyber).forEach(u => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.textContent = u.t;
+    b.addEventListener('click', () => {
+      if (b.disabled || dalsiIndex >= vyber.length) return;
+      if (u.r === vyber[dalsiIndex].r) {
+        if (dalsiIndex > 0) { const s = document.createElement('span'); s.className = 'sipka'; s.textContent = '→'; osa.appendChild(s); }
+        const el = document.createElement('span'); el.className = 'bod'; el.textContent = `${u.r}: ${u.t}`;
+        osa.appendChild(el);
+        b.disabled = true;
+        dalsiIndex++;
+        odezva.className = 'odezva ok';
+        odezva.textContent = `✅ Správně – rok ${u.r}.`;
+        if (dalsiIndex === vyber.length) {
+          odezva.textContent = '🎉 Časová osa je hotová!';
+          skore.vyhodnot(!chyboval);
+          Uloha.posun(novaUloha, Uloha.PRODLEVA + 600);
+        } else {
+          const dalsiB = [...nabidka.querySelectorAll('button')].find(x => !x.disabled);
+          if (dalsiB) dalsiB.focus();
+        }
+      } else {
+        chyboval = true;
+        Uloha.trhni(b);
+        odezva.className = 'odezva chyba';
+        odezva.textContent = `✗ „${u.t}“ se stalo až roku ${u.r}. Mezi zbylými je ještě starší událost.`;
+      }
+    });
+    nabidka.appendChild(b);
+  });
+  p.append(osa, nabidka, odezva);
+}
+
+const REZIMY = { osobnosti, pojmy, udalosti, poradi };
+function novaUloha() { REZIMY[rezim](); }
+
+document.querySelectorAll('#rezimy button').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('#rezimy button').forEach(x => x.classList.remove('active'));
+  b.classList.add('active');
+  rezim = b.dataset.rezim;
+  novaUloha();
+}));
+$('btnDalsi').addEventListener('click', novaUloha);
+document.addEventListener('keydown', e => {
+  if (e.key !== 'ArrowRight') return;
+  if (e.target instanceof Element && e.target.closest('input, textarea, select, summary, .ovladani-kroku')) return;
+  e.preventDefault();
+  novaUloha();
+});
+novaUloha();
+</script>
+</body>
+</html>

@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Angličtina – stupňování přídavných jmen</title>
+  <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
+  <script src="../theme.js"></script>
+  <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
+  <script src="../rec.js"></script>
+  <script src="../uloha.js"></script>
+  <style>
+    .veta-en { font-size: clamp(1.15rem, 4.4vw, 1.8rem); font-weight: 700; line-height: 1.45; max-width: 640px; }
+    .veta-en .mezera { color: var(--accent); border-bottom: 3px solid var(--accent); padding: 0 12px; }
+    .preklad { color: var(--text-faint); font-size: 0.95rem; font-style: italic; }
+    .porovnani { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; width: min(100%, 660px); }
+    .porovnani figure { margin: 0; display: grid; gap: 5px; text-align: center; font-size: 0.9rem; }
+    .porovnani img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 12px; border: 1px solid var(--border); background: #fffaf0; }
+    .porovnani figcaption { color: var(--text-muted); }
+    @media (max-width: 480px) { .porovnani { gap: 6px; } .porovnani figcaption { font-size: 0.72rem; } }
+    .tabulka { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; max-width: var(--sirka-obsahu, 900px); margin-top: 12px; }
+    .tabulka span {
+      background: var(--bg-panel); border: 1px solid var(--border); border-radius: 8px;
+      padding: 6px 12px; font-size: 0.8rem; color: var(--text-muted);
+    }
+    .tabulka b { color: var(--text); }
+  </style>
+</head>
+<body>
+  <h1>📈 Stupňování přídavných jmen</h1>
+  <p class="podtitul">Pro 6.–7. ročník: -er/-est, more/most a nepravidelné tvary.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Stupňování přídavných jmen</summary>
+    <div class="obsah">
+      <p>Když porovnáváš, potřebuješ <b>stupně</b> přídavného jména: 1. stupeň <span lang="en">big</span> (velký),
+        2. stupeň <span lang="en">bigger</span> (větší) pro porovnání dvou věcí, 3. stupeň
+        <span lang="en">the biggest</span> (největší) pro jednu věc ze skupiny. Způsob tvoření závisí hlavně na
+        <b>délce slova</b> – počítej slabiky.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Krátká: -er / -est</h3><p>1 slabika: <span lang="en">small → smaller → the smallest</span><br>
+          krátká samohláska + souhláska zdvojí: <span lang="en">big → bigger → the biggest</span><br>
+          2 slabiky na -y → <b>-ier / -iest</b>: <span lang="en">happy → happier → the happiest</span></p></article>
+        <article class="vyklad-karta"><h3>Dlouhá: more / most</h3><p>3 a více slabik (a většina dvouslabičných):
+          <span lang="en">beautiful → more beautiful → the most beautiful</span>,
+          <span lang="en">difficult → more difficult</span></p></article>
+        <article class="vyklad-karta"><h3>Nepravidelná</h3><p><span lang="en">good → better → the best</span><br>
+          <span lang="en">bad → worse → the worst</span><br>
+          <span lang="en">far → further → the furthest</span> (Američané častěji <span lang="en">farther</span>)<br>
+          <span lang="en">many → more → the most</span></p></article>
+      </div>
+      <p>Ve větě s 2. stupněm porovnáváš pomocí <b><span lang="en">than</span></b>:
+        <span lang="en">My brother is taller than me.</span> Ve 3. stupni stojí <b><span lang="en">the</span></b>:
+        <span lang="en">She is the best student in our class.</span></p>
+      <p>Typická chyba je zkombinovat oba způsoby: <span lang="en">more bigger</span> ✗ nebo
+        <span lang="en">the most easiest</span> ✗. Buď koncovka, nebo <span lang="en">more / most</span> – nikdy obojí.</p>
+      <aside class="zapamatuj">Krátké slovo → -er / -est, dlouhé → more / most. 2. stupeň + <span lang="en">than</span>,
+        3. stupeň s <span lang="en">the</span>.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: doplň do věty</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Doplň správný tvar <span lang="en">interesting</span>: <span lang="en">This is ___ book in the library.</span></p>
+      <ol class="kroky">
+        <li>Zjistím, který stupeň potřebuji: kniha se srovnává se <b>všemi</b> v knihovně, nemám tu <span lang="en">than</span> → 3. stupeň.</li>
+        <li>Spočítám slabiky: <span lang="en">in-ter-est-ing</span> – to je dlouhé slovo.</li>
+        <li>Dlouhé slovo stupňuji pomocí <span lang="en">most</span>, ne koncovkou -est.</li>
+        <li>Před 3. stupeň patří <span lang="en">the</span>.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ <span lang="en">This is <b>the most interesting</b> book in the library.</span></p>
+    </div>
+  </details>
+
+  <div class="rezimy" id="rezimy">
+    <button data-rezim="stupen" class="active">📊 Druhý a třetí stupeň</button>
+    <button data-rezim="pravidlo">📏 Které pravidlo platí</button>
+    <button data-rezim="veta">✏️ Doplň do věty</button>
+    <button data-rezim="porovnani">⚖️ Porovnej obrázky</button>
+  </div>
+
+  <div class="plocha" id="plocha"></div>
+
+  <div class="ovladani">
+    <button class="hlavni" id="btnDalsi">Přeskočit →</button>
+    <span class="skore" id="skore"></span>
+  </div>
+
+  <div class="tabulka">
+    <span>krátká: <b>-er / -est</b> (big → bigger → the biggest)</span>
+    <span>dlouhá: <b>more / most</b> (beautiful → more beautiful)</span>
+    <span>nepravidelná: good → <b>better</b> → <b>the best</b></span>
+  </div>
+
+  <p class="napoveda">
+    U jednoslabičných přídavných jmen přidáváme <b>-er</b> a <b>-est</b>.
+    Dvojslabičná na <b>-y</b> mají <b>-ier</b> (happy → happier), ostatní dvojslabičná většinou
+    <b>more</b> (more careful). U slov se třemi a více slabikami používáme <b>more</b> a <b>most</b>.
+    Ve druhém stupni bývá <b>than</b>, ve třetím <b>the</b>.
+  </p>
+
+<script>
+const $ = id => document.getElementById(id);
+const skore = Uloha.skore('metodus_aj6_stupnovani', $('skore'));
+let rezim = 'stupen';
+
+/* typ: kratke (-er), dlouhe (more), nepravidelne */
+const PRIDAVNA = [
+  { z: 'big', d: 'bigger', t: 'the biggest', cz: 'velký', typ: 'kratke' },
+  { z: 'small', d: 'smaller', t: 'the smallest', cz: 'malý', typ: 'kratke' },
+  { z: 'fast', d: 'faster', t: 'the fastest', cz: 'rychlý', typ: 'kratke' },
+  { z: 'old', d: 'older', t: 'the oldest', cz: 'starý', typ: 'kratke' },
+  { z: 'tall', d: 'taller', t: 'the tallest', cz: 'vysoký', typ: 'kratke' },
+  { z: 'happy', d: 'happier', t: 'the happiest', cz: 'šťastný', typ: 'kratke' },
+  { z: 'easy', d: 'easier', t: 'the easiest', cz: 'snadný', typ: 'kratke' },
+  { z: 'beautiful', d: 'more beautiful', t: 'the most beautiful', cz: 'krásný', typ: 'dlouhe' },
+  { z: 'expensive', d: 'more expensive', t: 'the most expensive', cz: 'drahý', typ: 'dlouhe' },
+  { z: 'interesting', d: 'more interesting', t: 'the most interesting', cz: 'zajímavý', typ: 'dlouhe' },
+  { z: 'difficult', d: 'more difficult', t: 'the most difficult', cz: 'obtížný', typ: 'dlouhe' },
+  { z: 'good', d: 'better', t: 'the best', cz: 'dobrý', typ: 'nepravidelne' },
+  { z: 'bad', d: 'worse', t: 'the worst', cz: 'špatný', typ: 'nepravidelne' },
+  { z: 'far', d: 'further', t: 'the furthest', cz: 'daleký', typ: 'nepravidelne' },
+  { z: 'many', d: 'more', t: 'the most', cz: 'mnoho', typ: 'nepravidelne' },
+];
+
+const TYPY = {
+  kratke: 'krátké (1 slabika, 2 slabiky na -y) – přidáme -er / -est',
+  dlouhe: 'dlouhé – použijeme more / most',
+  nepravidelne: 'nepravidelné – tvar se mění',
+};
+
+const OBRAZKY = [
+  { noun: 'dog', prid: 'big', tvary: ['small dog', 'medium dog', 'large dog'], soubory: ['pes-maly', 'pes-stredni', 'pes-velky'] },
+  { noun: 'car', prid: 'big', tvary: ['small car', 'medium car', 'large car'], soubory: ['auto-male', 'auto-stredni', 'auto-velke'] },
+  { noun: 'house', prid: 'big', tvary: ['small house', 'medium house', 'large house'], soubory: ['dum-maly', 'dum-stredni', 'dum-velky'] },
+  { noun: 'mountain', prid: 'high', tvary: ['small mountain', 'medium mountain', 'big mountain'], soubory: ['hora-nizka', 'hora-stredni', 'hora-vysoka'] },
+  { noun: 'cake', prid: 'big', tvary: ['small cake', 'medium cake', 'large cake'], soubory: ['dort-maly', 'dort-stredni', 'dort-velky'] },
+];
+
+const VETY = [
+  { v: 'My brother is ___ than me.', prid: 'tall', stupen: 2 },
+  { v: 'This is ___ book in the library.', prid: 'interesting', stupen: 3 },
+  { v: 'Today is ___ than yesterday.', prid: 'warm', stupen: 2 },
+  { v: 'She is ___ student in our class.', prid: 'good', stupen: 3 },
+  { v: 'This exercise is ___ than the first one.', prid: 'difficult', stupen: 2 },
+  { v: 'It was ___ day of my life.', prid: 'bad', stupen: 3 },
+];
+
+function tvarStupne(z, stupen) {
+  const p = PRIDAVNA.find(x => x.z === z);
+  if (p) return stupen === 2 ? p.d : p.t;
+  /* pro slova mimo tabulku použijeme krátké pravidlo */
+  return stupen === 2 ? z + 'er' : 'the ' + z + 'est';
+}
+
+/* ---- Druhý a třetí stupeň ------------------------------------------------------------- */
+function stupen() {
+  const p = $('plocha');
+  const u = Uloha.nahodne(PRIDAVNA);
+  const druhy = Math.random() < 0.5;
+  const spravny = druhy ? u.d : u.t;
+  const jine = Uloha.zamichej(PRIDAVNA.filter(x => x.z !== u.z))
+    .slice(0, 2).map(x => druhy ? x.d : x.t);
+  const chybny = druhy
+    ? (u.typ === 'dlouhe' ? u.z + 'er' : 'more ' + u.z)
+    : (u.typ === 'dlouhe' ? 'the ' + u.z + 'est' : 'the most ' + u.z);
+
+  p.innerHTML = `<div class="zadani">Jak zní <b>${druhy ? '2.' : '3.'} stupeň</b>?</div>
+    <div class="karta"><div class="veta-en">${u.z}</div><div class="preklad">${u.cz}</div></div>`;
+  const odezva = document.createElement('div');
+  odezva.className = 'odezva';
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: Uloha.zamichej([spravny, chybny, ...jine])
+      .filter((x, i, a) => a.indexOf(x) === i)
+      .map(t => ({ klic: t, popis: t })),
+    spravnyKlic: spravny,
+    zpravaOk: `✅ ${u.z} – ${u.d} – ${u.t}`,
+    zpravaChyba: `Tohle je ${TYPY[u.typ]}.`,
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+/* ---- Které pravidlo platí --------------------------------------------------------------- */
+function pravidlo() {
+  const p = $('plocha');
+  const u = Uloha.nahodne(PRIDAVNA);
+  p.innerHTML = `<div class="zadani">Jak se toto přídavné jméno stupňuje?</div>
+    <div class="karta"><div class="veta-en">${u.z}</div><div class="preklad">${u.cz}</div></div>`;
+  const odezva = document.createElement('div');
+  odezva.className = 'odezva';
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: Uloha.zamichej(Object.entries(TYPY)).map(([klic, popis]) => ({ klic, popis })),
+    spravnyKlic: u.typ,
+    zpravaOk: `✅ ${u.z} → ${u.d} → ${u.t}`,
+    zpravaChyba: 'Spočítej slabiky – jedna slabika (a dvě slabiky na -y: happy, easy) znamenají -er, jinak většinou more.',
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+/* ---- Doplň do věty ------------------------------------------------------------------------ */
+function veta() {
+  const p = $('plocha');
+  const u = Uloha.nahodne(VETY);
+  const spravny = tvarStupne(u.prid, u.stupen);
+  const chybny = u.stupen === 2 ? tvarStupne(u.prid, 3) : tvarStupne(u.prid, 2);
+  const jine = Uloha.zamichej(PRIDAVNA.filter(x => x.z !== u.prid))
+    .slice(0, 2).map(x => u.stupen === 2 ? x.d : x.t);
+
+  p.innerHTML = `<div class="zadani">Doplň správný tvar slova <b>${u.prid}</b>:</div>
+    <div class="karta"><div class="veta-en">${u.v.replace('___', '<span class="mezera">?</span>')}</div></div>`;
+  const odezva = document.createElement('div');
+  odezva.className = 'odezva';
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: Uloha.zamichej([spravny, chybny, ...jine])
+      .filter((x, i, a) => a.indexOf(x) === i)
+      .map(t => ({ klic: t, popis: t })),
+    spravnyKlic: spravny,
+    zpravaOk: `✅ ${u.v.replace('___', spravny)}`,
+    zpravaChyba: 'Je ve větě „than“ (2. stupeň), nebo „the“ a porovnání se všemi (3. stupeň)?',
+    poSpravne: napoprve => {
+      skore.vyhodnot(napoprve);
+      p.querySelector('.mezera').textContent = spravny;
+    },
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+/* ---- Porovnej obrázky ---------------------------------------------------------------------- */
+function porovnani() {
+  const p = $('plocha');
+  const u = Uloha.nahodne(OBRAZKY);
+  const stupen = Math.random() < 0.5 ? 2 : 3;
+  const spravny = tvarStupne(u.prid, stupen);
+  const veta = stupen === 2
+    ? `The ${u.tvary[1]} is <span class="mezera">?</span> than the ${u.tvary[0]}.`
+    : `The ${u.tvary[2]} is <span class="mezera">?</span>.`;
+
+  p.innerHTML = `<div class="zadani">Doplň <b>${stupen}. stupeň</b> slova <b>${u.prid}</b>:</div>
+    <div class="karta">
+      <div class="porovnani">
+        ${u.soubory.map((soubor, i) => `<figure><img src="img/aj/aj6-stupnovani-${soubor}.webp" alt="${u.tvary[i]}" width="768" height="768"><figcaption>${u.tvary[i]}</figcaption></figure>`).join('')}
+      </div>
+      <div class="veta-en">${veta}</div>
+    </div>`;
+  const chybne = [u.prid, tvarStupne(u.prid, stupen === 2 ? 3 : 2), 'more ' + u.prid, 'the most ' + u.prid]
+    .filter((t, i, a) => t !== spravny && a.indexOf(t) === i);
+  const odezva = document.createElement('div');
+  odezva.className = 'odezva';
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: Uloha.zamichej([spravny, ...chybne.slice(0, 3)]).map(t => ({ klic: t, popis: t })),
+    spravnyKlic: spravny,
+    zpravaOk: stupen === 2
+      ? `✅ The ${u.tvary[1]} is ${spravny} than the ${u.tvary[0]}.`
+      : `✅ The ${u.tvary[2]} is ${spravny}.`,
+    zpravaChyba: stupen === 2
+      ? 'Porovnáváme dvě věci – patří sem druhý stupeň se slovem than.'
+      : 'Vybíráme jednu věc ze tří – patří sem třetí stupeň se slovem the.',
+    poSpravne: napoprve => {
+      skore.vyhodnot(napoprve);
+      p.querySelector('.mezera').textContent = spravny;
+    },
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+const REZIMY = { stupen, pravidlo, veta, porovnani };
+function novaUloha() { REZIMY[rezim](); }
+
+document.querySelectorAll('#rezimy button').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('#rezimy button').forEach(x => x.classList.remove('active'));
+  b.classList.add('active');
+  rezim = b.dataset.rezim;
+  novaUloha();
+}));
+$('btnDalsi').addEventListener('click', novaUloha);
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === 'Enter') { e.preventDefault(); novaUloha(); }
+});
+novaUloha();
+</script>
+</body>
+</html>

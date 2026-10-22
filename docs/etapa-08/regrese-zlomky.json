@@ -1,0 +1,132 @@
+{
+  "ok": true,
+  "uvod": {
+    "cil": "🎯 Po této lekci dokážu zapsat vybarvenou část celku zlomkem",
+    "predOvladaci": true,
+    "proUcitele": true,
+    "odkazy": [
+      "m3_deleni_zbytkem.html",
+      "m3_deleni_zbytkem.html",
+      "m7_zlomky_operace.html",
+      "procenta.html"
+    ],
+    "navaznosti": true
+  },
+  "vedenyPriklad": [
+    {
+      "cislo": "Krok 1 ze 4",
+      "text": "Jmenovatel je dole. Spočítej, na kolik stejných dílů je celek rozdělen",
+      "zvyrazneno": 1,
+      "obrazku": 1,
+      "tlacitko": "Další krok →"
+    },
+    {
+      "cislo": "Krok 2 ze 4",
+      "text": "Čitatel je nahoře. Spočítej jen vybarvené díly: tady 1 díl. Proto naho",
+      "zvyrazneno": 1,
+      "obrazku": 1,
+      "tlacitko": "Další krok →"
+    },
+    {
+      "cislo": "Krok 3 ze 4",
+      "text": "Čteme: jedna čtvrtina, píšeme 1/4. Koláč, proužek i osa ukazují stejně",
+      "zvyrazneno": 0,
+      "obrazku": 3,
+      "tlacitko": "Další krok →"
+    },
+    {
+      "cislo": "Krok 4 ze 4",
+      "text": "Shrnutí: dole je počet všech dílů (4), nahoře počet vzatých dílů (1). ",
+      "zvyrazneno": 0,
+      "obrazku": 3,
+      "tlacitko": "Zkusit sám →"
+    }
+  ],
+  "cestina": [
+    "1/4 = jedna čtvrtina",
+    "2/3 = dvě třetiny",
+    "5/6 = pět šestin"
+  ],
+  "pocitaneTvary": [
+    "1 díl",
+    "2 díly",
+    "3 díly",
+    "4 díly",
+    "5 dílů",
+    "6 dílů",
+    "8 dílů"
+  ],
+  "stejnyCelek": {
+    "sirky": [
+      240,
+      240,
+      240
+    ],
+    "stejne": true,
+    "pohledy": [
+      "0 0 180 180",
+      "0 0 180 180",
+      "0 0 180 180"
+    ]
+  },
+  "stridani": [
+    "koláč",
+    "proužek",
+    "číselná osa"
+  ],
+  "adresnaZpetnaVazba": [
+    "Jmenovatel 8 máš správně, vybarvených dílů ale není 6 – jsou 5.",
+    "Máš prohozený zápis: dole patří počet všech dílů (8), nahoru vybarvených (5).",
+    "Jmenovatel 5 máš správně, vybarvených dílů ale není 2 – jsou 1."
+  ],
+  "poSpravne": {
+    "trida": "odezva ok",
+    "obrazku": 3,
+    "popis": "Stejný zlomek 1/4 ve třech obrázcích se stejně velkým celkem.",
+    "tlacitko": true
+  },
+  "vybarvovaniKlavesnici": {
+    "zadani": {
+      "dily": 5,
+      "role": "button",
+      "tabindex": "0",
+      "popis": "1. díl z 5 – prázdný",
+      "stav": "false",
+      "potreba": 3,
+      "odezvaZiva": "polite"
+    },
+    "poVybarveni": {
+      "trida": "odezva ok",
+      "text": "✅ Správně – 3 z 5 dílů je 3/5.",
+      "stav": "true",
+      "tlacitko": true
+    }
+  },
+  "rezimy": {
+    "ukazka": {
+      "zadani": true,
+      "interakce": 1,
+      "aktivni": "ukazka"
+    },
+    "prectiZlomek": {
+      "zadani": true,
+      "interakce": 4,
+      "aktivni": "prectiZlomek"
+    },
+    "vybarvi": {
+      "zadani": true,
+      "interakce": 6,
+      "aktivni": "vybarvi"
+    },
+    "porovnej": {
+      "zadani": true,
+      "interakce": 2,
+      "aktivni": "porovnej"
+    },
+    "zCelku": {
+      "zadani": true,
+      "interakce": 4,
+      "aktivni": "zCelku"
+    }
+  }
+}

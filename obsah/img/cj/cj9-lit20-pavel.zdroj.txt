@@ -1,0 +1,8 @@
+Soubor: cj9-lit20-pavel.png / cj9-lit20-pavel.webp
+Původní dílo: Ota Pavel, obituary photo (Československý voják, 1973).png
+Autor: Unknown author
+Datum vzniku: circa 1970date QS:P,+1970-00-00T00:00:00Z/9,P1480,Q5727902
+Zdroj: https://commons.wikimedia.org/wiki/File:Ota_Pavel,_obituary_photo_(%C4%8Ceskoslovensk%C3%BD_voj%C3%A1k,_1973).png
+Licence: Public domain
+Staženo: 2026-10-21
+Úpravy: automatické natočení, odstranění metadat, zmenšení na nejvýše 1600 px; výuková WebP kopie 768 px.

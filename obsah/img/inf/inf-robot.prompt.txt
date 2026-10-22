@@ -1,0 +1,18 @@
+Sada: IMG-inf-01 — dlaždice robota na mřížce
+Datum: 2026-10-12
+Nástroj: OpenAI image_gen
+
+Společné zadání:
+Use case: scientific-educational. Asset type: square top-down tile for a Czech primary-school programming grid game. Scene/backdrop: plain warm cream paper with only a faint soft shadow. Style/medium: polished hand-painted watercolor and colored-pencil illustration, friendly but not childish, crisp readable silhouette, consistent with educational flashcards. Composition/framing: one isolated object centered, viewed exactly from directly overhead, complete object visible, generous empty margin, same apparent scale across the set. Constraints: no border, no words, no letters, no numbers, no logos, no watermark, no people, no extra objects.
+
+Jednotlivé motivy:
+- inf-robot-nahoru: the same small friendly cobalt-blue classroom robot facing straight upward (north), rectangular rounded body, square head, two short gray arms, two dark wheels, one orange circular head light; overhead orientation must be unmistakable
+- inf-robot-dolu: the same small friendly cobalt-blue classroom robot facing straight downward (south), rectangular rounded body, square head, two short gray arms, two dark wheels, one orange circular head light; overhead orientation must be unmistakable
+- inf-robot-vlevo: the same small friendly cobalt-blue classroom robot facing straight left (west), rectangular rounded body, square head, two short gray arms, two dark wheels, one orange circular head light; overhead orientation must be unmistakable
+- inf-robot-vpravo: the same small friendly cobalt-blue classroom robot facing straight right (east), rectangular rounded body, square head, two short gray arms, two dark wheels, one orange circular head light; overhead orientation must be unmistakable
+- inf-robot-vlajka: a small green triangular goal flag on a short wooden pole fixed into a round base, seen exactly from overhead, no checkered pattern
+- inf-robot-kamen: one rounded gray granite boulder with a few subtle cracks and moss specks, seen exactly from overhead
+- inf-robot-strom: one small leafy deciduous tree with a round green crown and a tiny visible brown trunk center, seen exactly from overhead
+- inf-robot-voda: one shallow irregular blue puddle of water with gentle concentric ripples, seen exactly from overhead, isolated and not a landscape
+- inf-robot-klic: one simple antique brass key, seen exactly from overhead, lying horizontally
+- inf-robot-jablko: one fresh red apple with a green leaf and short brown stem, seen exactly from overhead

@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Polovodiče a dioda</title>
+  <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
+  <script src="../theme.js"></script>
+  <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
+  <script src="../rec.js"></script>
+  <script src="../uloha.js"></script>
+  <style>
+    .situace { font-size: clamp(1.05rem, 3.6vw, 1.3rem); font-weight: 650; max-width: 600px; line-height: 1.5; text-align: center; }
+    .moznosti.dlouhe button { max-width: 300px; min-width: 200px; }
+    .obvod { width: min(400px, 100%); height: auto; }
+    .obvod .drat { fill: none; stroke: var(--text-muted); stroke-width: 3; stroke-linejoin: round; }
+    .obvod .maska { fill: var(--bg-elevated); }
+    .obvod .soucastka { fill: none; stroke: var(--text); stroke-width: 3; stroke-linejoin: round; }
+    .obvod .dioda { fill: var(--accent); fill-opacity: 0.35; stroke: var(--text); stroke-width: 3; stroke-linejoin: round; }
+    .obvod .katoda { stroke: var(--text); stroke-width: 4; }
+    .obvod .led-sipka { stroke: var(--text-muted); stroke-width: 2; fill: none; }
+    .obvod .plus { stroke: var(--danger); stroke-width: 4; }
+    .obvod .minus { stroke: var(--accent); stroke-width: 7; }
+    .obvod .znak-plus { fill: var(--danger); font-size: 20px; font-weight: 800; }
+    .obvod .znak-minus { fill: var(--accent); font-size: 22px; font-weight: 800; }
+    .obvod .jmeno { fill: var(--text); font-size: 14px; font-weight: 700; }
+    .obvod .svit { fill: var(--ok); fill-opacity: 0.35; }
+    .obvod .paprsky { stroke: var(--ok); stroke-width: 2.5; }
+    .obvod .proud { fill: var(--ok); }
+    .obr-dioda text { fill: var(--text); font-size: 14px; }
+    .obr-dioda .tucne { font-weight: 700; }
+  </style>
+</head>
+<body>
+  <h1>💡 Polovodiče a dioda</h1>
+  <p class="podtitul">Pro 9. ročník: vodič, izolant a polovodič, dioda a její propustný a závěrný směr, LED, fotovoltaický článek, usměrnění proudu.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Co je polovodič a jak funguje dioda</summary>
+    <div class="obsah">
+      <p><b>Vodiče</b> (kovy) mají mnoho volných elektronů a proud vedou dobře. <b>Izolanty</b> (plast, sklo, porcelán)
+        volné nosiče náboje skoro nemají. Mezi nimi stojí <b>polovodiče</b> – hlavně <b>křemík</b> a germanium. Za nízké teploty
+        vedou proud špatně, ale když je <b>zahřeješ nebo osvětlíš</b>, uvolní se v nich víc nosičů náboje a jejich
+        odpor <b>klesá</b> (u kovů s teplotou roste). Toho využívá termistor a fotorezistor.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Typ N a typ P</h3><p>Příměs fosforu dodá volné <b>elektrony</b> (polovodič typu N), příměs boru vytvoří <b>díry</b> – místa, kde elektron chybí (typ P).</p></article>
+        <article class="vyklad-karta"><h3>Dioda = přechod PN</h3><p>Propouští proud <b>jen jedním směrem</b>. V <b>propustném směru</b> je anoda připojená k + pólu a katoda (proužek) k − pólu; obráceně je v <b>závěrném směru</b> a proud neprochází.</p></article>
+        <article class="vyklad-karta"><h3>Využití</h3><p><b>LED</b> svítí, když jí prochází proud v propustném směru. <b>Fotovoltaický článek</b> mění světlo na elektrickou energii. Diody v nabíječce <b>usměrňují</b> střídavý proud na stejnosměrný.</p></article>
+      </div>
+      <svg class="obr-dioda" viewBox="0 0 360 110" role="img" aria-label="Schematická značka diody: trojúhelník míří ve směru proudu k čárce, která označuje katodu.">
+        <line x1="20" y1="50" x2="150" y2="50" style="stroke: var(--text-muted); stroke-width: 3"/><line x1="190" y1="50" x2="340" y2="50" style="stroke: var(--text-muted); stroke-width: 3"/>
+        <polygon points="150,30 150,70 188,50" style="fill: var(--accent); fill-opacity: .35; stroke: var(--text); stroke-width: 3"/>
+        <line x1="190" y1="30" x2="190" y2="70" style="stroke: var(--text); stroke-width: 4"/>
+        <text x="96" y="90" class="tucne">anoda (P)</text><text x="196" y="90" class="tucne">katoda (N)</text>
+        <text x="20" y="24">+ pól → proud prochází →</text><text x="250" y="24">− pól</text>
+      </svg>
+      <p>Ve schématu míří <b>trojúhelník diody ve směru, kterým proud prochází</b>. Dohodnutý směr proudu ve vnějším obvodu je
+        <b>od kladného pólu zdroje k zápornému</b>.</p>
+      <aside class="zapamatuj">Dioda propouští proud jen jedním směrem: v propustném směru míří trojúhelník značky od + k −. Polovodiči zahřátím nebo osvětlením odpor klesá, kovu zahřátím roste.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: svítí žárovka s diodou?</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Baterie má kladný pól nahoře. Z něj vede drát doprava přes diodu, jejíž trojúhelník míří doprava, dál přes žárovku a zpátky k zápornému pólu. Svítí žárovka?</p>
+      <ol class="kroky">
+        <li>Najdu <b>kladný pól</b> zdroje – je nahoře, delší čárka značky baterie.</li>
+        <li>Proud jde vnějším obvodem od + k −: z horního pólu <b>doprava</b> přes diodu, dolů přes žárovku a zpět.</li>
+        <li>Trojúhelník diody míří <b>doprava</b>, tedy ve směru proudu – dioda je v <b>propustném směru</b>.</li>
+        <li>Obvod je uzavřený a dioda proud propouští, takže žárovkou prochází proud.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Žárovka svítí. Kdybychom diodu otočili, byla by v závěrném směru a žárovka by zhasla.</p>
+    </div>
+  </details>
+
+  <div class="rezimy" id="rezimy">
+    <button data-rezim="obvod" class="active">💡 Svítí žárovka?</button>
+    <button data-rezim="kde">🔍 Kde je polovodič</button>
+    <button data-rezim="odpor">🌡️ Teplo, světlo a odpor</button>
+    <button data-rezim="pojmy">📚 Pojmy</button>
+  </div>
+
+  <div class="plocha" id="plocha"></div>
+
+  <div class="ovladani">
+    <button class="hlavni" id="btnDalsi">Přeskočit →</button>
+    <span class="skore" id="skore"></span>
+  </div>
+
+  <p class="napoveda">
+    <b>Vodič</b> (kov) – hodně volných elektronů, odpor s teplotou roste. <b>Izolant</b> – téměř žádné volné nosiče.
+    <b>Polovodič</b> (křemík, germanium) – zahřátím nebo osvětlením vede lépe, odpor klesá.
+    Typ N: volné elektrony (příměs fosforu), typ P: díry (příměs boru). <b>Dioda</b> (přechod PN) propouští proud jen jedním směrem:
+    <b>propustný směr</b> = anoda k +, katoda (proužek, čárka ve značce) k −; trojúhelník značky míří ve směru proudu (od + k −).
+    <b>LED</b> svítí jen v propustném směru. <b>Fotovoltaický článek</b>: světlo → elektrická energie.
+    <b>Usměrňovač</b>: z diod, mění střídavý proud na stejnosměrný.
+  </p>
+
+<script>
+const $ = id => document.getElementById(id);
+const skore = Uloha.skore('metodus_f9_polovodice', $('skore'));
+let rezim = 'obvod';
+const velke = t => t[0].toUpperCase() + t.slice(1);
+
+function poloz(u) {
+  const p = $('plocha');
+  p.innerHTML = u.html;
+  const odezva = document.createElement('div');
+  odezva.className = 'odezva';
+  Uloha.vyber({
+    kam: p, odezva, trida: u.trida || 'dlouhe',
+    moznosti: u.moznosti.map(m => ({ klic: m.klic, popis: m.popis, ikona: m.ikona })),
+    spravnyKlic: u.spravny,
+    zpravaOk: u.ok,
+    zpravaChyba: k => (u.moznosti.find(m => m.klic === k) || {}).proc || 'Zkus jinou možnost.',
+    poSpravne: n => { skore.vyhodnot(n); if (u.poOk) u.poOk(p); },
+    dalsi: novaUloha,
+    prodleva: n => n ? 2800 : 4200,
+  });
+  p.appendChild(odezva);
+}
+
+/* ---- kreslení součástek (kreslí se pro směr „vpravo“ a otáčí) ---------------------------- */
+const UHEL = { r: 0, d: 90, l: 180, u: 270 };
+const SLOVY = { r: 'doprava', l: 'doleva', d: 'dolů', u: 'nahoru' };
+const svisle = dir => dir === 'd' || dir === 'u';
+function dioda(cx, cy, dir, jmeno, led) {
+  const mx = svisle(dir) ? `<rect class="maska" x="${cx - 14}" y="${cy - 16}" width="28" height="32"/>`
+    : `<rect class="maska" x="${cx - 16}" y="${cy - 14}" width="32" height="28"/>`;
+  const sipky = led ? `<path class="led-sipka" d="M${cx + 2} ${cy - 16} l8 -12 m-6 1 l6 -1 l-1 6 M${cx + 10} ${cy - 13} l8 -12 m-6 1 l6 -1 l-1 6"/>` : '';
+  const pj = svisle(dir) ? [cx + 18, cy + 5] : [cx - 8, cy + 30];
+  return mx + `<g transform="rotate(${UHEL[dir]} ${cx} ${cy})">
+      <polygon class="dioda" points="${cx - 12},${cy - 13} ${cx - 12},${cy + 13} ${cx + 11},${cy}"/>
+      <line class="katoda" x1="${cx + 12}" y1="${cy - 13}" x2="${cx + 12}" y2="${cy + 13}"/>${sipky}</g>
+    <text class="jmeno" x="${pj[0]}" y="${pj[1]}">${jmeno}</text>`;
+}
+function zarovka(cx, cy, jmeno, pozice) {
+  const [tx, ty] = pozice === 'vpravo' ? [cx + 22, cy + 5] : [cx - 10, cy + 34];
+  return `<circle class="maska" cx="${cx}" cy="${cy}" r="16"/><g class="svit-${jmeno}"></g>
+    <circle class="soucastka" cx="${cx}" cy="${cy}" r="16"/>
+    <path class="soucastka" d="M${cx - 11} ${cy - 11} L${cx + 11} ${cy + 11} M${cx + 11} ${cy - 11} L${cx - 11} ${cy + 11}"/>
+    <text class="jmeno" x="${tx}" y="${ty}">${jmeno}</text>`;
+}
+/* baterie na svislém drátu; plusNahore = delší (kladná) deska nahoře */
+function baterie(cx, cy, plusNahore) {
+  const [yp, ym] = plusNahore ? [cy - 7, cy + 7] : [cy + 7, cy - 7];
+  return `<rect class="maska" x="${cx - 22}" y="${cy - 6}" width="44" height="12"/>
+    <line class="plus" x1="${cx - 20}" y1="${yp}" x2="${cx + 20}" y2="${yp}"/>
+    <line class="minus" x1="${cx - 9}" y1="${ym}" x2="${cx + 9}" y2="${ym}"/>
+    <text class="znak-plus" x="${cx - 40}" y="${yp + 7}">+</text>
+    <text class="znak-minus" x="${cx - 40}" y="${ym + 7}">−</text>`;
+}
+function paprsky(cx, cy) {
+  let s = `<circle class="svit" cx="${cx}" cy="${cy}" r="27"/>`;
+  for (let i = 0; i < 8; i++) {
+    const a = i * Math.PI / 4;
+    s += `<line class="paprsky" x1="${Math.round(cx + 21 * Math.cos(a))}" y1="${Math.round(cy + 21 * Math.sin(a))}" x2="${Math.round(cx + 31 * Math.cos(a))}" y2="${Math.round(cy + 31 * Math.sin(a))}"/>`;
+  }
+  return s;
+}
+
+/* ---- Svítí žárovka? -------------------------------------------------------------------- */
+function genObvod() {
+  const plusNahore = Math.random() < 0.5;
+  const sm = (nahore, dole) => plusNahore ? nahore : dole;   // směr proudu na hraně
+  const opak = { r: 'l', l: 'r', u: 'd', d: 'u' };
+  if (Math.random() < 0.35) {
+    /* dvě větve vedle sebe, každá s diodou a žárovkou */
+    const propust = sm('d', 'u');
+    const d1 = Math.random() < 0.5 ? propust : opak[propust], d2 = Math.random() < 0.5 ? propust : opak[propust];
+    const s1 = d1 === propust, s2 = d2 === propust;
+    const spravny = s1 && s2 ? 'obe' : s1 ? 'z1' : s2 ? 'z2' : 'zadna';
+    const stavDiody = (j, s) => `dioda ${j} je v ${s ? 'propustném' : 'závěrném'} směru`;
+    const PROC = {
+      z1: 'Žárovka Ž1 svítí jen tehdy, když je D1 v propustném směru',
+      z2: 'Žárovka Ž2 svítí jen tehdy, když je D2 v propustném směru',
+      obe: 'Obě žárovky by svítily, jen kdyby byly obě diody v propustném směru',
+      zadna: 'Aspoň jedna dioda je v propustném směru, takže její větví proud prochází',
+    };
+    const fakta = `${velke(stavDiody('D1', s1))} a ${stavDiody('D2', s2)}.`;
+    const svg = `<svg class="obvod" viewBox="0 0 400 240" role="img" aria-label="Zdroj se dvěma větvemi, v každé dioda a žárovka. Kladný pól je ${plusNahore ? 'nahoře' : 'dole'}, dioda D1 míří ${SLOVY[d1]}, dioda D2 míří ${SLOVY[d2]}.">
+      <path class="drat" d="M60 40 H330 V200 H60 Z M200 40 V200"/>
+      ${baterie(60, 120, plusNahore)}
+      ${dioda(200, 85, d1, 'D1')}${zarovka(200, 150, 'Ž1', 'vpravo')}
+      ${dioda(330, 85, d2, 'D2')}${zarovka(330, 150, 'Ž2', 'vpravo')}
+    </svg>`;
+    return {
+      html: `<div class="zadani">Které žárovky svítí?</div><div class="karta">${svg}</div>`,
+      trida: 'dve',
+      moznosti: [
+        { klic: 'z1', popis: 'jen Ž1' }, { klic: 'z2', popis: 'jen Ž2' },
+        { klic: 'obe', popis: 'obě' }, { klic: 'zadna', popis: 'žádná' },
+      ].map(m => ({ ...m, proc: m.klic === spravny ? '' : `❌ ${PROC[m.klic]}. ${fakta}` })),
+      spravny,
+      ok: `✅ Proud jde od + pólu (${plusNahore ? 'nahoře' : 'dole'}) do obou větví ${plusNahore ? 'shora dolů' : 'zdola nahoru'}. ${fakta}`,
+      poOk: p => {
+        if (s1) { const g = p.querySelector('.svit-Ž1'); if (g) g.innerHTML = paprsky(200, 150); }
+        if (s2) { const g = p.querySelector('.svit-Ž2'); if (g) g.innerHTML = paprsky(330, 150); }
+      },
+      _sviti: [s1, s2],
+    };
+  }
+  /* jedna smyčka: dioda nahoře, případně druhá dole, vpravo žárovka nebo LED */
+  const led = Math.random() < 0.3;
+  const dve = !led && Math.random() < 0.4;
+  const diody = [{ j: 'D1', x: 195, y: 40, ok: sm('r', 'l') }];
+  if (dve) diody.push({ j: 'D2', x: 195, y: 200, ok: sm('l', 'r') });
+  if (led) diody.push({ j: 'LED', x: 330, y: 120, ok: sm('d', 'u'), led: true });
+  diody.forEach(d => { d.dir = Math.random() < 0.5 ? d.ok : opak[d.ok]; });
+  const sviti = diody.every(d => d.dir === d.ok);
+  const zaverne = diody.filter(d => d.dir !== d.ok).map(d => d.j);
+  const co = led ? 'LED' : 'žárovka';
+  const svg = `<svg class="obvod" viewBox="0 0 400 240" role="img" aria-label="Obvod: kladný pól zdroje je ${plusNahore ? 'nahoře' : 'dole'}; ${diody.map(d => `${d.j} míří ${SLOVY[d.dir]}`).join(', ')}.">
+    <path class="drat" d="M60 40 H330 V200 H60 Z"/>
+    ${baterie(60, 120, plusNahore)}
+    ${diody.map(d => dioda(d.x, d.y, d.dir, d.j, d.led)).join('')}
+    ${led ? '<g class="svit-LED"></g>' : zarovka(330, 120, 'Ž', 'vpravo')}
+  </svg>`;
+  const smer = `Proud jde od + pólu (${plusNahore ? 'nahoře' : 'dole'}) ${plusNahore ? 'nahoru a horním drátem doprava' : 'dolů a dolním drátem doprava'}.`;
+  return {
+    html: `<div class="zadani">${led ? 'Svítí LED?' : 'Svítí žárovka?'}</div><div class="karta">${svg}</div>`,
+    trida: 'dve',
+    moznosti: [
+      { klic: 'sviti', ikona: '💡', popis: 'svítí',
+        proc: sviti ? '' : `❌ ${zaverne.length > 1 ? 'Diody ' + zaverne.join(' a ') + ' jsou' : (zaverne[0] === 'LED' ? 'LED je' : 'Dioda ' + zaverne[0] + ' je')} v závěrném směru – trojúhelník míří proti směru proudu. ${smer}` },
+      { klic: 'nesviti', ikona: '⚫', popis: 'nesvítí',
+        proc: sviti ? `❌ ${diody.length > 1 ? 'Všechny diody míří' : (led ? 'LED míří' : 'Dioda míří')} trojúhelníkem ve směru proudu, jsou tedy v propustném směru. ${smer}` : '' },
+    ],
+    spravny: sviti ? 'sviti' : 'nesviti',
+    ok: sviti
+      ? `✅ ${velke(co)} svítí: ${smer} ${diody.length > 1 ? 'Všechny diody jsou' : (led ? 'LED je' : 'Dioda je')} v propustném směru.`
+      : `✅ ${velke(co)} nesvítí: ${zaverne.map(j => j === 'LED' ? 'LED' : 'dioda ' + j).join(' a ')} ${zaverne.length > 1 ? 'jsou' : 'je'} v závěrném směru a proud neprojde.`,
+    poOk: p => {
+      if (!sviti) return;
+      const g = p.querySelector(led ? '.svit-LED' : '.svit-Ž');
+      if (g) g.innerHTML = led ? `<circle class="svit" cx="330" cy="120" r="24"/>` : paprsky(330, 120);
+    },
+    _sviti: sviti, _diody: diody, _plus: plusNahore,
+  };
+}
+
+/* ---- Kde je polovodič ----------------------------------------------------------------- */
+const S_POLO = [
+  ['LED v baterce', 'LED je svítivá dioda – polovodičová součástka s přechodem PN.'],
+  ['solární panel na střeše', 'Fotovoltaické články v panelu jsou z křemíku, tedy z polovodiče.'],
+  ['diody v nabíječce mobilu', 'Diody v nabíječce usměrňují proud a jsou polovodičové.'],
+  ['tranzistor v zesilovači', 'Tranzistor je polovodičová součástka (dva přechody PN).'],
+  ['procesor v počítači', 'Procesor je čip z křemíku s miliardami tranzistorů.'],
+  ['termistor v digitálním teploměru', 'Termistor je polovodič, jehož odpor se mění s teplotou.'],
+  ['fotorezistor v soumrakovém spínači', 'Fotorezistor je polovodič, jehož odpor klesá při osvětlení.'],
+  ['laserová dioda v ukazovátku', 'Laserová dioda je polovodičová součástka.'],
+];
+const S_NEPOLO = [
+  ['měděný drát v kabelu', 'Měď je kov, tedy vodič – polovodič to není.'],
+  ['wolframové vlákno klasické žárovky', 'Wolfram je kov. Klasická žárovka svítí rozžhaveným kovovým vláknem, bez polovodiče.'],
+  ['porcelánový izolátor na sloupu', 'Porcelán je izolant, proud nevede.'],
+  ['topná spirála rychlovarné konvice', 'Topná spirála je z kovové slitiny – je to vodič s větším odporem.'],
+  ['tavná pojistka', 'Tavná pojistka je tenký kovový drátek, který se při velkém proudu přepálí.'],
+  ['plastový obal kabelu', 'Plast je izolant.'],
+  ['měděné vinutí cívky', 'Cívka je navinutá z měděného drátu – kov, tedy vodič.'],
+];
+const M_POLO = [['křemík', 'Křemík je nejpoužívanější polovodič – vyrábějí se z něj čipy i solární články.'],
+  ['germanium', 'Germanium je polovodič, používal se v prvních tranzistorech a diodách.']];
+const M_NEPOLO = [['měď', 'Měď je kov, výborný vodič.'], ['hliník', 'Hliník je kov, tedy vodič.'], ['stříbro', 'Stříbro je kov a nejlepší vodič.'],
+  ['sklo', 'Sklo je izolant.'], ['guma', 'Guma je izolant.'], ['porcelán', 'Porcelán je izolant.'], ['wolfram', 'Wolfram je kov, tedy vodič.'],
+  ['PVC', 'PVC je plast, tedy izolant.']];
+
+function genKde() {
+  const typ = Uloha.nahodne(['je', 'je', 'neni', 'material']);
+  let zadani, dobry, spatne, procSpatne;
+  if (typ === 'material') {
+    zadani = 'Který z materiálů je <b>polovodič</b>?';
+    dobry = Uloha.nahodne(M_POLO); spatne = Uloha.zamichej(M_NEPOLO).slice(0, 3);
+    procSpatne = t => `❌ ${t}`;
+  } else if (typ === 'je') {
+    zadani = 'Ve které z věcí najdeš <b>polovodič</b>?';
+    dobry = Uloha.nahodne(S_POLO); spatne = Uloha.zamichej(S_NEPOLO).slice(0, 3);
+    procSpatne = t => `❌ ${t}`;
+  } else {
+    zadani = 'Ve které z věcí polovodič <b>není</b>?';
+    dobry = Uloha.nahodne(S_NEPOLO); spatne = Uloha.zamichej(S_POLO).slice(0, 3);
+    procSpatne = t => `❌ Tady polovodič je. ${t}`;
+  }
+  return {
+    html: `<div class="zadani">${zadani}</div>`,
+    moznosti: Uloha.zamichej([dobry, ...spatne]).map(([n, t]) => ({ klic: n, popis: n, proc: n === dobry[0] ? '' : procSpatne(t) })),
+    spravny: dobry[0],
+    ok: '✅ ' + dobry[1],
+  };
+}
+
+/* ---- Teplo, světlo a odpor ----------------------------------------------------------- */
+const ODPOR = [
+  { co: 'Kovový drát', zmena: 'zahřeješ', vysl: 'zvetsi', proc: 'V kovu s teplotou víc kmitají atomy a brání pohybu elektronů – odpor roste.' },
+  { co: 'Kovový drát', zmena: 'ochladíš', vysl: 'zmensi', proc: 'Chladem atomy kovu kmitají méně a elektrony procházejí snáz – odpor klesá.' },
+  { co: 'Termistor (polovodič)', zmena: 'zahřeješ', vysl: 'zmensi', proc: 'V polovodiči se teplem uvolní víc volných nosičů náboje, vede lépe – odpor klesá.' },
+  { co: 'Termistor (polovodič)', zmena: 'ochladíš', vysl: 'zvetsi', proc: 'Chladem ubude v polovodiči volných nosičů náboje – odpor roste.' },
+  { co: 'Fotorezistor', zmena: 'osvětlíš baterkou', vysl: 'zmensi', proc: 'Světlo v polovodiči uvolní další nosiče náboje – odpor fotorezistoru klesá.' },
+  { co: 'Fotorezistor', zmena: 'zakryješ dlaní, aby byl ve tmě', vysl: 'zvetsi', proc: 'Ve tmě má fotorezistor málo volných nosičů náboje – odpor je velký.' },
+  { co: 'Čistý křemík', zmena: 'zahřeješ', vysl: 'zmensi', proc: 'Křemík je polovodič: zahřátím se uvolní víc nosičů náboje a odpor klesne.' },
+  { co: 'Měděný drát', zmena: 'osvětlíš baterkou', vysl: 'nezmeni', proc: 'Na odpor kovového drátu nemá světlo baterky znatelný vliv. Citlivý na světlo je polovodič.' },
+];
+const ODPOR_M = { zvetsi: '⬆️ odpor se zvětší', zmensi: '⬇️ odpor se zmenší', nezmeni: '➖ odpor se nezmění' };
+const ODPOR_CHYBA = {
+  zvetsi: 'Odpor se zvětšuje u kovu při zahřátí a u polovodiče při ochlazení nebo ve tmě. Tady je to jinak.',
+  zmensi: 'Odpor se zmenšuje u kovu při ochlazení a u polovodiče při zahřátí nebo osvětlení. Tady je to jinak.',
+  nezmeni: 'Odpor se tady mění – právě toho využívají teploměry a soumrakové spínače.',
+};
+function genOdpor() {
+  const o = Uloha.nahodne(ODPOR);
+  return {
+    html: `<div class="zadani">Jak se změní elektrický odpor?</div>
+      <div class="karta"><div class="situace">${o.co} ${o.zmena}.</div></div>`,
+    moznosti: Object.entries(ODPOR_M).map(([k, t]) => ({ klic: k, popis: t, proc: k === o.vysl ? '' : '❌ ' + ODPOR_CHYBA[k] })),
+    spravny: o.vysl,
+    ok: '✅ ' + o.proc,
+  };
+}
+
+/* ---- Pojmy ----------------------------------------------------------------------------- */
+const POJMY = [
+  ['polovodič', 'látka, která za nízké teploty vede proud špatně, ale zahřátím nebo osvětlením vede lépe'],
+  ['dioda', 'polovodičová součástka, která propouští proud jen jedním směrem'],
+  ['propustný směr', 'zapojení diody, kdy je anoda připojená ke kladnému pólu a proud prochází'],
+  ['závěrný směr', 'zapojení diody, kdy je katoda připojená ke kladnému pólu a proud neprochází'],
+  ['LED', 'dioda, která svítí, když jí prochází proud v propustném směru'],
+  ['fotovoltaický článek', 'polovodičová součástka, která mění světlo přímo na elektrickou energii'],
+  ['usměrňovač', 'zařízení s diodami, které mění střídavý proud na stejnosměrný'],
+  ['přechod PN', 'rozhraní polovodiče typu P a typu N – základ každé diody'],
+  ['polovodič typu N', 'polovodič s příměsí (např. fosforu), ve kterém vedou proud hlavně volné elektrony'],
+  ['polovodič typu P', 'polovodič s příměsí (např. boru), ve kterém vedou proud hlavně díry'],
+  ['díra', 'místo v polovodiči, kde chybí elektron; chová se jako kladný nosič náboje'],
+  ['termistor', 'polovodičová součástka, jejíž odpor se výrazně mění s teplotou'],
+  ['fotorezistor', 'polovodičová součástka, jejíž odpor klesá při osvětlení'],
+  ['katoda', 'vývod diody označený proužkem; v propustném směru je připojený k zápornému pólu'],
+  ['anoda', 'vývod diody, který je v propustném směru připojený ke kladnému pólu'],
+];
+function genPojmy() {
+  const [pojem, def] = Uloha.nahodne(POJMY);
+  /* pojmy, jejichž popisy se překrývají (LED je také dioda…), se jako záměna nenabízejí */
+  const PRIBUZNE = { dioda: ['LED'], LED: ['dioda'], polovodič: ['termistor', 'fotorezistor'],
+    termistor: ['polovodič'], fotorezistor: ['polovodič'] };
+  const jine = Uloha.zamichej(POJMY.filter(p => p[0] !== pojem && !(PRIBUZNE[pojem] || []).includes(p[0]))).slice(0, 3);
+  const zDefinice = Math.random() < 0.6;
+  if (zDefinice) {
+    return {
+      html: `<div class="zadani">Který pojem odpovídá popisu?</div>
+        <div class="karta"><div class="situace">${velke(def)}.</div></div>`,
+      trida: 'dve',
+      moznosti: Uloha.zamichej([[pojem, def], ...jine]).map(([p, d]) => ({ klic: p, popis: p,
+        proc: p === pojem ? '' : `❌ ${velke(p)} je ${d}.` })),
+      spravny: pojem,
+      ok: `✅ ${velke(pojem)} je ${def}.`,
+    };
+  }
+  return {
+    html: `<div class="zadani">Co znamená pojem <b>${pojem}</b>?</div>`,
+    moznosti: Uloha.zamichej([[pojem, def], ...jine]).map(([p, d]) => ({ klic: p, popis: velke(d),
+      proc: p === pojem ? '' : `❌ Tohle je popis pojmu „${p}“.` })),
+    spravny: pojem,
+    ok: `✅ ${velke(pojem)} je ${def}.`,
+  };
+}
+
+const GEN = { obvod: genObvod, kde: genKde, odpor: genOdpor, pojmy: genPojmy };
+function novaUloha() { poloz(GEN[rezim]()); }
+
+document.querySelectorAll('#rezimy button').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('#rezimy button').forEach(x => x.classList.remove('active'));
+  b.classList.add('active');
+  rezim = b.dataset.rezim;
+  novaUloha();
+}));
+$('btnDalsi').addEventListener('click', novaUloha);
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === 'Enter') { e.preventDefault(); novaUloha(); }
+});
+novaUloha();
+</script>
+</body>
+</html>

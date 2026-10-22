@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Počítání do 20 a 100</title>
+  <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
+  <script src="../theme.js"></script>
+  <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
+  <script src="../uloha.js" defer></script>
+  <script src="../procvic.js" defer></script>
+  <style>
+    /* rámeček po deseti: dvě desítky teček (5 × 2), první sčítanec modře, druhý zeleně,
+       při odčítání se odebrané tečky přeškrtnou */
+    .ramecky { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-bottom: 12px; }
+    .desitka { display: grid; grid-template-columns: repeat(5, 26px); gap: 5px; padding: 6px; border: 2px solid var(--border-strong); border-radius: 8px; }
+    .desitka i { width: 26px; height: 26px; border-radius: 50%; border: 2px dashed var(--border); }
+    .desitka i.a { background: var(--accent); border: 2px solid var(--accent); }
+    .desitka i.b { background: var(--ok); border: 2px solid var(--ok); }
+    .desitka i.pryc { background: transparent; border: 2px solid var(--danger); position: relative; }
+    .desitka i.pryc::after { content: ''; position: absolute; left: 50%; top: -3px; bottom: -3px; width: 2px; background: var(--danger); transform: rotate(45deg); }
+    .ovladani .prepinac-op { display: inline-flex; gap: 6px; }
+    .ovladani .prepinac-op button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--na-akcentu, #fff); font-weight: 600; }
+  </style>
+</head>
+<body>
+  <h1>🔢 Počítání do 20 a 100</h1>
+  <p class="podtitul">Pro 1.–3. ročník: sčítání a odčítání v sérii deseti příkladů. Po chybě máš druhý pokus a ukáže se postup, na konci přehled chyb.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Sčítání a odčítání přes desítku</summary>
+    <div class="obsah">
+      <p>Deset je pro počítání důležité číslo. Do rámečku po deseti se vejde přesně deset teček.
+        Když je rámeček plný, začneme plnit druhý. Proto se přes desítku počítá nejlépe <b>na dva kroky</b>.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Sčítání přes desítku</h3><p>Nejdřív <b>doplň do deseti</b>, potom přičti, co zbylo.
+          8 + 5: k 8 chybí do deseti 2, takže 8 + 2 = 10. Z pětky zbyly 3: 10 + 3 = <b>13</b>.</p></article>
+        <article class="vyklad-karta"><h3>Odčítání přes desítku</h3><p>Nejdřív <b>uber do deseti</b>, potom uber zbytek.
+          13 − 5: z 13 uberu 3 a mám 10. Z pětky zbývá ubrat 2: 10 − 2 = <b>8</b>.</p></article>
+        <article class="vyklad-karta"><h3>Do 100</h3><p>Počítej zvlášť <b>desítky</b> a zvlášť <b>jednotky</b>.
+          47 + 25: nejdřív 47 + 20 = 67, pak 67 + 5 = <b>72</b>.</p></article>
+      </div>
+      <p>Jak poznám, že jdu přes desítku? Když se jednotky nevejdou: u 8 + 5 je 8 a 5 víc než 10.
+        Častá chyba je zapomenout druhý krok – napsat 10 a zbytek už nepřičíst. Kontrola: výsledek sčítání
+        musí být větší než obě čísla, výsledek odčítání menší než první číslo.</p>
+      <aside class="zapamatuj">Přes desítku na dva kroky: nejdřív do deseti, potom zbytek.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: 7 + 6</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Vypočítej 7 + 6.</p>
+      <ol class="kroky">
+        <li>7 a 6 je víc než 10, půjdu tedy přes desítku.</li>
+        <li>K sedmičce chybí do deseti <b>3</b>: 7 + 3 = 10.</li>
+        <li>Šestku rozložím na 3 a <b>3</b>. Jednu trojku už jsem přičetl, druhá zbývá.</li>
+        <li>K desítce přičtu zbytek: 10 + 3 = <b>13</b>.</li>
+        <li>Kontrola: 13 je víc než 7 i víc než 6. Sedí to.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ 7 + 6 = 7 + 3 + 3 = 13</p>
+    </div>
+  </details>
+
+  <div class="rezimy" id="rezimy">
+    <button data-rezim="10">do 10</button>
+    <button data-rezim="20" class="active">do 20</button>
+    <button data-rezim="prechod">🔟 přes desítku</button>
+    <button data-rezim="100">do 100</button>
+  </div>
+
+  <div class="plocha" id="plocha"></div>
+
+  <div class="ovladani">
+    <span class="prepinac-op" id="operace" role="group" aria-label="Počty">
+      <button data-v="+" aria-pressed="false">jen +</button>
+      <button data-v="-" aria-pressed="false">jen −</button>
+      <button data-v="mix" aria-pressed="true">+ i −</button>
+    </span>
+    <button class="hlavni" id="startBtn">🔄 Nová série</button>
+    <span class="pokrok" id="pokrok"></span>
+    <span class="skore" id="skore"></span>
+  </div>
+
+  <p class="napoveda">Přes desítku počítej na dva kroky: nejdřív <b>doplň do deseti</b>, pak přičti zbytek – 8 + 5 = 8 + 2 + 3 = 13. Při odčítání nejdřív <b>uber do deseti</b> – 13 − 5 = 13 − 3 − 2 = 8. Do 100 sčítej zvlášť desítky a jednotky: 47 + 25 = 47 + 20 + 5 = 72.</p>
+
+<script>
+const $ = id => document.getElementById(id);
+let rezim = '20', operace = 'mix';
+const n = max => Math.floor(Math.random() * (max + 1));
+
+// rámeček po deseti (jen do 20): tečky prvního čísla, pak přičtené / odebrané
+function ramecek(a, b, op) {
+  const tecky = [];
+  for (let i = 0; i < 20; i++) {
+    let t = '';
+    if (op === '+') t = i < a ? 'a' : i < a + b ? 'b' : '';
+    else t = i < a - b ? 'a' : i < a ? 'pryc' : '';
+    tecky.push(`<i class="${t}"></i>`);
+  }
+  const prvni = tecky.slice(0, 10).join(''), druha = tecky.slice(10).join('');
+  return `<div class="ramecky" aria-hidden="true"><div class="desitka">${prvni}</div>${op === '+' ? (a + b > 10 ? `<div class="desitka">${druha}</div>` : '') : (a > 10 ? `<div class="desitka">${druha}</div>` : '')}</div>`;
+}
+
+// postup po chybě: rozklad přes desítku, do 100 po desítkách a jednotkách
+function postup(a, b, op, v) {
+  if (op === '+') {
+    if (a < 10 && a + b > 10) { const d = 10 - a; return `${a} + ${d} = 10, 10 + ${b - d} = ${v}`; }
+    if (a >= 10 && b >= 10) { const des = b - b % 10; return `${a} + ${des} = ${a + des}, ${a + des} + ${b % 10} = ${v}`; }
+    return '';
+  }
+  if (a > 10 && a < 20 && a - b < 10) { const d = a - 10; return `${a} − ${d} = 10, 10 − ${b - d} = ${v}`; }
+  if (a >= 20 && b >= 10) { const des = b - b % 10; return `${a} − ${des} = ${a - des}, ${a - des} − ${b % 10} = ${v}`; }
+  return '';
+}
+
+function generuj(r) {
+  const op = operace === 'mix' ? (Math.random() < 0.5 ? '+' : '-') : operace;
+  let a, b;
+  if (r === 'prechod') {                       // vždy přes desítku
+    if (op === '+') { a = 2 + n(7); b = 11 - a + n(a - 2); }      // a 2–9, a + b 11–18
+    else { const u = 1 + n(7); a = 10 + u; b = u + 1 + n(8 - u); }   // 13 − 5: jednotky menšence < menšitel ≤ 9
+  } else {
+    const obor = +r;
+    if (op === '+') { a = n(obor); b = n(obor - a); } else { a = n(obor); b = n(a); }
+  }
+  const v = op === '+' ? a + b : a - b;
+  return {
+    zadani: `${a} ${op === '-' ? '−' : '+'} ${b} = ?`,
+    odpoved: v,
+    obrazekHtml: (r === '100') ? '' : ramecek(a, b, op),
+    napoveda: postup(a, b, op, v),
+  };
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+  const serie = Procvic.spust({
+    klic: 'metodus_pocitani', pocet: 10, typ: 'number',
+    plocha: $('plocha'), skoreEl: $('skore'), pokrokEl: $('pokrok'),
+    rezim: () => rezim, generuj,
+  });
+  $('rezimy').addEventListener('click', e => {
+    const b = e.target.closest('button[data-rezim]');
+    if (!b) return;
+    $('rezimy').querySelectorAll('button').forEach(x => x.classList.toggle('active', x === b));
+    rezim = b.dataset.rezim;
+    serie.restart();
+  });
+  $('operace').addEventListener('click', e => {
+    const b = e.target.closest('button[data-v]');
+    if (!b) return;
+    $('operace').querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+    operace = b.dataset.v;
+    serie.restart();
+  });
+  $('startBtn').onclick = () => serie.restart();
+  serie.restart();
+});
+</script>
+</body>
+</html>

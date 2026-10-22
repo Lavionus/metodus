@@ -1,0 +1,97 @@
+/* ============================================================
+   zavity_lekce.css – doplněk k paka_lekce.css pro výklad
+   „Závity a šrouby“. Rozvržení lekce, úkoly, předpovědi, tahák,
+   procvičování i barvy mechaniky (síla oranžová, břemeno modrá,
+   stoupání zelená, obvod a dráha fialová) bere stránka z výkladu
+   páky, aby obě lekce vypadaly stejně. Tady jsou jen prvky navíc:
+     chody (a otáčky) šroubovice = tyrkysová, růžová, žlutá, šedá,
+     tření = červená, papír, matice, mikrometr, sklo a víčka.
+   ============================================================ */
+
+:root {
+  --z-chod1: #3ed1c2;
+  --z-chod2: #f78fb3;
+  --z-chod3: #e6cf5c;
+  --z-chod4: #b8c2cc;
+  --z-treni: #ff7a7a;
+  --z-papir: #efe6cf;
+  --z-papir-okraj: #b9a77c;
+  --z-voda: #4f8fd8;
+}
+:root[data-tone="light"] {
+  --z-chod1: #0d8578;
+  --z-chod2: #b8336a;
+  --z-chod3: #8f7a00;
+  --z-chod4: #59636e;
+  --z-treni: #c62828;
+  --z-papir: #fbf6e8;
+  --z-papir-okraj: #9a8655;
+  --z-voda: #2d6fbf;
+}
+:root[data-theme="kontrast"] {
+  --z-chod1: #006b60;
+  --z-chod2: #9c1850;
+  --z-chod3: #6b5a00;
+  --z-chod4: #333;
+  --z-treni: #a8001c;
+}
+
+.c-chod1 { --c: var(--z-chod1); }
+.c-chod2 { --c: var(--z-chod2); }
+.c-chod3 { --c: var(--z-chod3); }
+.c-chod4 { --c: var(--z-chod4); }
+.c-treni { --c: var(--z-treni); }
+svg.model text.t-treni { fill: var(--z-treni); font-weight: 600; }
+svg.model text.t-nasvetle { fill: var(--text); }
+.znacka.z-treni { color: var(--z-treni); }
+
+.papir { fill: var(--z-papir); stroke: var(--z-papir-okraj); stroke-width: calc(1.2px * var(--k)); stroke-linejoin: round; }
+.navinuto { opacity: .28; }
+.zadni { opacity: .55; }
+.tuzka-orez { fill: #e9c9a0; stroke: var(--m-drevo-okraj); stroke-width: calc(1px * var(--k)); }
+.matice { fill: color-mix(in srgb, var(--m-kov) 70%, var(--bg-panel)); stroke: var(--m-kov-tmavy); stroke-width: calc(1.4px * var(--k)); }
+.kov-svetly { fill: color-mix(in srgb, var(--m-kov) 55%, var(--bg-panel)); stroke: var(--m-kov-tmavy); stroke-width: calc(1px * var(--k)); }
+.bubinek { fill: color-mix(in srgb, var(--m-kov) 80%, #fff 20%); stroke: var(--m-kov-tmavy); stroke-width: calc(1.2px * var(--k)); }
+.sklo { fill: color-mix(in srgb, var(--z-voda) 18%, var(--bg-panel)); stroke: var(--z-voda); stroke-width: calc(1.4px * var(--k)); }
+.vicko { fill: color-mix(in srgb, var(--z-voda) 70%, var(--bg-panel)); stroke: var(--m-kov-tmavy); stroke-width: calc(1px * var(--k)); }
+.voda { fill: color-mix(in srgb, var(--z-voda) 55%, var(--bg-panel)); stroke: none; }
+
+/* ikony v kartách a mapě (mimo model nemají --k) */
+.pristroj svg, .mapa svg, .tahak-karta svg { --k: 1; }
+
+/* druhý řádek ovládání (otáčení matice, měření) */
+.obr-ovladani .nazev-ovl { font-size: .86rem; color: var(--text-muted); }
+.obr-ovladani + .obr-ovladani { border-top-style: dashed; }
+.mi-mereni[hidden] { display: none; }
+.mi-mereni label { display: inline-flex; align-items: center; gap: 8px; }
+.mi-mereni input[type=text] {
+  font: inherit; width: 7ch; padding: 6px 8px; border-radius: 8px;
+  border: 1px solid var(--border-strong); background: var(--bg-control); color: var(--text);
+}
+.mi-vysledek.ok { color: var(--ok-text, var(--ok)); font-weight: 600; }
+.mi-vysledek.chyba { color: var(--danger-text, var(--danger)); font-weight: 600; }
+
+/* třídička: čtyři účely závitu – tlačítka pod sebou po dvou */
+#tridicka .volby-druhu { display: grid; grid-template-columns: 1fr 1fr; }
+#tridicka .volby-druhu button { font-size: .82rem; }
+
+/* lupa mikrometru */
+.mi-lupa { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; padding: 10px 16px; border-top: 1px solid var(--border); }
+.obr .mi-lupa svg.model { width: min(100%, 520px); background: var(--bg-deep); border: 1px solid var(--border); border-radius: 10px; }
+
+/* určení šroubu: závitová měrka, displej posuvného měřítka, volba velikosti */
+.merka { fill: color-mix(in srgb, var(--z-chod3) 45%, var(--bg-panel)); stroke: var(--z-chod3); stroke-width: calc(1.2px * var(--k)); stroke-linejoin: round; opacity: .92; }
+.displej { fill: var(--bg-panel); stroke: var(--m-kov-tmavy); stroke-width: calc(1.4px * var(--k)); }
+.volby-sroubu { display: flex; flex-wrap: wrap; gap: 6px; }
+.volby-sroubu button { min-width: 3.4em; }
+.volby-sroubu button.spravne { background: var(--ok); border-color: var(--ok); color: var(--na-akcentu); }
+.volby-sroubu button.spatne { background: var(--danger); border-color: var(--danger); color: var(--na-akcentu); opacity: 1; }
+#ur-tabulka td { text-align: center; font-weight: 400; }
+#ur-tabulka th { white-space: nowrap; }
+
+/* utahování: zóny ukazatele předpětí, prasklý šroub */
+.zona-malo { fill: color-mix(in srgb, var(--z-chod4) 55%, var(--bg-panel)); }
+.zona-ok { fill: color-mix(in srgb, var(--ok, #3a9d5d) 70%, var(--bg-panel)); }
+.zona-pozor { fill: color-mix(in srgb, var(--z-chod3) 70%, var(--bg-panel)); }
+.zona-prask { fill: color-mix(in srgb, var(--z-treni) 75%, var(--bg-panel)); }
+.prasklo { fill: var(--z-treni); }

@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Čas, prameny a práce historika</title>
+  <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../pilot07.css">
+  <script src="../pilot07.js" defer></script>
+  <script src="../theme.js"></script>
+  <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
+  <script src="../rec.js"></script>
+  <script src="../uloha.js"></script>
+  <link rel="stylesheet" href="../propojeni.css">
+  <script src="../prubeh.js"></script>
+  <style>
+    .polozka { font-size: 1.15rem; font-weight: 700; max-width: 540px; }
+    .popis-p { color: var(--text-muted); max-width: 560px; line-height: 1.55; }
+    .osa-cas { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; align-items: center; min-height: 44px; }
+    .osa-cas .bod {
+      background: var(--accent-soft); border: 2px solid var(--accent); border-radius: 8px;
+      padding: 7px 11px; font-size: 0.85rem; font-weight: 600;
+    }
+    .osa-cas .sipka { color: var(--text-faint); }
+    /* Fotografie v úloze s fotkou */
+    .foto-ukol { display:block; width:min(440px,80vw); height:auto; aspect-ratio:4/3; object-fit:contain; border-radius:12px; background:var(--bg-deep,var(--bg-card)); }
+    /* Foto-atlas */
+    .foto-atlas { width:min(1120px,100%); margin:22px auto; }
+    .foto-atlas h2 { margin:0 0 5px; text-align:center; font-size:1.22rem; }
+    .foto-atlas > p { margin:0 auto 12px; max-width:820px; text-align:center; color:var(--text-muted,var(--text)); }
+    .foto-mrizka { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
+    .foto-karta { margin:0; overflow:hidden; border:1px solid var(--border); border-radius:14px; background:var(--bg-card); box-shadow:var(--shadow-sm); }
+    .foto-karta img { display:block; width:100%; height:auto; aspect-ratio:4/3; object-fit:cover; }
+    .foto-karta img.cele { object-fit:contain; background:#1d1c1a; }
+    .foto-karta figcaption { padding:10px 11px 12px; font-size:.9rem; line-height:1.35; }
+    .foto-karta strong { display:block; margin-bottom:3px; color:var(--accent); font-size:1rem; }
+    @media (max-width:820px) { .foto-mrizka { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+    @media (max-width:440px) { .foto-mrizka { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+  <h1>🔎 Čas, prameny a práce historika</h1>
+  <p class="podtitul">Pro 6. ročník: dějepisné prameny, počítání letopočtů a historická období.</p>
+
+  <section class="cil" aria-label="Cíl lekce">
+    <p><b>Po této lekci dokážu</b> určit původ a účel pramene a doložit závěr konkrétními slovy.</p>
+    <p class="drobne">6. ročník · přibližně 15 minut · Nejdřív: <a href="casova_osa.html" data-lekce>Časová osa</a>.</p>
+    <details><summary>Pro učitele: 5 / 15 / 45 minut</summary><ul>
+      <li>5 minut: společně projděte vedenou aktivitu a nechte žáky vysvětlit výsledek.</li>
+      <li>15 minut: nejprve vlastní předpověď, pak ověření a několik úloh z procvičování.</li>
+      <li>45 minut: práce ve dvojicích, vlastní obměna příkladu a závěrečné vysvětlení bez nápovědy.</li>
+    </ul></details>
+  </section>
+  <section id="vedena-aktivita" class="pilot" data-pilot="d6_prameny" aria-label="Vedená aktivita"></section>
+  <h2 class="pilot-heading" id="procvicovani">Procvičování</h2>
+
+  <div class="rezimy" id="rezimy">
+    <button data-rezim="pramen" class="active">📜 Hmotný, či písemný</button>
+    <button data-rezim="letopocty">🔢 Počítání s letopočty</button>
+    <button data-rezim="obdobi">🕰️ Historická období</button>
+    <button data-rezim="vedy">🔬 Pomocné vědy</button>
+    <button data-rezim="trideni">🗂️ Roztřiď prameny z fotek</button>
+  </div>
+
+  <div class="plocha" id="plocha"></div>
+
+  <div class="ovladani">
+    <button class="hlavni" id="btnDalsi">Přeskočit →</button>
+    <span class="skore" id="skore"></span>
+  </div>
+
+  <p class="napoveda">
+    <b>Hmotné prameny</b> jsou předměty (nádoby, zbraně, stavby), <b>písemné</b> jsou texty
+    (kroniky, listiny, dopisy). Letopočty <b>před naším letopočtem</b> jdou pozpátku –
+    rok 500 př. n. l. je starší než rok 200 př. n. l.
+  </p>
+
+  <section class="foto-atlas" id="atlasPrameny" aria-labelledby="pramenyNadpis">
+    <h2 id="pramenyNadpis">Osm skutečných pramenů</h2>
+    <p>Prameny třídíme podle toho, <b>co nesou</b>: <b>hmotné</b> jsou předměty, <b>písemné</b> nesou text, <b>obrazové</b> zachycují obraz. Vyzkoušej si to v režimu „Roztřiď prameny z fotek“.</p>
+    <div class="foto-mrizka">
+      <figure class="foto-karta" data-typ="hmotny" data-nazev="kamenná sekera" data-info="předmět z doby, kdy lidé ještě neuměli psát"><img class="cele" src="img/d/d6-prameny-kamenna-sekera.webp" alt="Broušená kamenná sekera z mladší doby kamenné vyfocená z několika stran." width="768" height="589" loading="lazy"><figcaption><strong>Broušená kamenná sekera</strong>Hmotný pramen z mladší doby kamenné. Nic na ní není napsáno – o jejím stáří a použití vypovídá materiál, tvar a místo nálezu.</figcaption></figure>
+      <figure class="foto-karta" data-typ="hmotny" data-nazev="římská mince" data-info="předmět zkoumaný numismatikou – i když nese krátký nápis, jde hlavně o věc"><img class="cele" src="img/d/d6-prameny-rimska-mince.webp" alt="Stříbrná římská mince, denár Octaviana s hlavou panovníka z profilu." width="768" height="775" loading="lazy"><figcaption><strong>Římská mince</strong>Hmotný pramen. Stříbrný denár Octaviana (Augusta) prozradí, jak vypadal panovník, z čeho se razily peníze a kam sahal římský obchod.</figcaption></figure>
+      <figure class="foto-karta" data-typ="pisemny" data-nazev="listina s pečetí" data-info="text, který potvrzoval práva; pečeť zaručovala, že je pravý"><img class="cele" src="img/d/d6-prameny-listina-pecet.webp" alt="Zlatá bula sicilská z roku 1212: pergamenová listina psaná latinou se zavěšenou zlatou pečetí." width="1152" height="1633" loading="lazy"><figcaption><strong>Zlatá bula sicilská (1212)</strong>Písemný pramen. Listina Fridricha II. (pozdějšího císaře) potvrdila českým panovníkům královský titul; zlatá pečeť dokládá, že je pravá.</figcaption></figure>
+      <figure class="foto-karta" data-typ="pisemny" data-nazev="kronika" data-info="vyprávění o minulých událostech zapsané kronikářem"><img class="cele" src="img/d/d6-prameny-kronika.webp" alt="Stránka Budyšínského rukopisu Kosmovy Kroniky Čechů psaná latinou s velkou zdobenou iniciálou K." width="1152" height="1762" loading="lazy"><figcaption><strong>Kosmova kronika Čechů</strong>Písemný pramen. Nejstarší kronika našich dějin, kterou ve 12. století latinsky sepsal Kosmas. Tuto stránku opsal písař o něco později.</figcaption></figure>
+      <figure class="foto-karta" data-typ="obrazovy" data-nazev="dobová fotografie" data-info="obraz zachycený fotoaparátem přímo v té době"><img src="img/d/d6-prameny-dobova-fotografie.webp" alt="Černobílá fotografie davu lidí na Václavském náměstí v Praze 28. října 1918 kolem sochy svatého Václava." width="1152" height="1053" loading="lazy"><figcaption><strong>Dobová fotografie (28. 10. 1918)</strong>Obrazový pramen. Dav na Václavském náměstí v den vzniku Československa. Fotografie ukazuje, kolik lidí přišlo a jak vypadalo město.</figcaption></figure>
+      <figure class="foto-karta" data-typ="pisemny" data-nazev="noviny z roku 1918" data-info="tištěný text zpráv – čteme, co se psalo hned po události"><img class="cele" src="img/d/d6-prameny-noviny-1918.webp" alt="Horní část titulní strany novin The New York Times z 11. listopadu 1918 s velkým titulkem o podepsání příměří a konci války." width="1152" height="613" loading="lazy"><figcaption><strong>Noviny z 11. listopadu 1918</strong>Písemný pramen. Americký deník oznamuje příměří a konec první světové války. Noviny ukazují, co se lidé o události dozvěděli ještě týž den.</figcaption></figure>
+      <figure class="foto-karta" data-typ="pisemny" data-nazev="plakát z roku 1918" data-info="vyhláška pro občany – podstatná je zpráva v textu, znaky ji jen zdobí"><img class="cele" src="img/d/d6-prameny-plakat.webp" alt="Plakát z 29. října 1918 s českými zemskými znaky a nadpisem Občané svobodného státu Československého." width="1152" height="1740" loading="lazy"><figcaption><strong>Plakát z 29. října 1918</strong>Vyhláška národního výboru v Berouně den po vzniku republiky. Převažuje text, proto ho řadíme k písemným pramenům; znaky jsou jen výzdoba.</figcaption></figure>
+      <figure class="foto-karta" data-typ="obrazovy" data-nazev="pohlednice" data-info="obrázek města, jak vypadalo v době vzniku pohlednice"><img src="img/d/d6-prameny-pohlednice.webp" alt="Kolorovaná pohlednice z doby kolem roku 1907 s pražským nádražím Františka Josefa, kolejemi a parní lokomotivou." width="1152" height="795" loading="lazy"><figcaption><strong>Pohlednice (kolem 1907)</strong>Obrazový pramen. Pražské nádraží Františka Josefa (dnes hlavní nádraží) ještě před dostavbou nové budovy – parní vlaky a staré střechy.</figcaption></figure>
+    </div>
+  </section>
+
+  <nav class="navaznosti" aria-label="Navazující lekce"><h2>Kam dál</h2><a href="d9_csr.html" data-lekce>Vznik ČSR</a></nav>
+<script>
+const $ = id => document.getElementById(id);
+const skore = Uloha.skore('metodus_d6_prameny', $('skore'));
+let rezim = 'pramen';
+
+const PRAMENY = [
+  { t: 'hliněná nádoba z pravěkého hrobu', typ: 'hmotny' },
+  { t: 'kostel postavený v roce 1350', typ: 'hmotny' },
+  { t: 'bronzový meč nalezený v řece', typ: 'hmotny' },
+  { t: 'zbytky hradeb keltského oppida', typ: 'hmotny' },
+  { t: 'mince s portrétem panovníka', typ: 'hmotny' },
+  { t: 'Kosmova kronika česká', typ: 'pisemny' },
+  { t: 'zakládací listina kláštera', typ: 'pisemny' },
+  { t: 'dopis vojáka z první světové války', typ: 'pisemny' },
+  { t: 'nápis na náhrobním kameni', typ: 'pisemny' },
+  { t: 'školní vysvědčení z roku 1900', typ: 'pisemny' },
+];
+
+const OBDOBI = [
+  { n: 'pravěk', o: 'od objevení se člověka do vynálezu písma', poradi: 1 },
+  { n: 'starověk', o: 'od vynálezu písma do zániku západořímské říše (476)', poradi: 2 },
+  { n: 'středověk', o: 'od roku 476 do objevení Ameriky (1492)', poradi: 3 },
+  { n: 'novověk', o: 'od roku 1492 do konce první světové války', poradi: 4 },
+  { n: 'moderní dějiny', o: 'od roku 1918 do současnosti', poradi: 5 },
+];
+
+const VEDY = [
+  { n: 'archeologie', o: 'zkoumá hmotné pozůstatky vykopané ze země' },
+  { n: 'numismatika', o: 'zabývá se mincemi a platidly' },
+  { n: 'heraldika', o: 'zkoumá erby a znaky' },
+  { n: 'genealogie', o: 'sestavuje rodokmeny a zkoumá příbuzenské vztahy' },
+  { n: 'paleografie', o: 'učí číst staré typy písma' },
+  { n: 'chronologie', o: 'zabývá se měřením času a letopočty' },
+];
+
+/* ---- Hmotný, či písemný --------------------------------------------------------------- */
+function pramen() {
+  const p = $('plocha');
+  const u = Uloha.nahodne(PRAMENY);
+  p.innerHTML = `<div class="zadani">Jaký je to historický pramen?</div>
+    <div class="karta"><div class="obrazek">${u.typ === 'hmotny' ? '🏺' : '📜'}</div>
+    <div class="polozka">${u.t}</div></div>`;
+  const odezva = document.createElement('div');
+  odezva.className = 'odezva';
+  Uloha.vyber({
+    kam: p, odezva, trida: 'dve',
+    moznosti: [
+      { klic: 'hmotny', ikona: '🏺', popis: 'hmotný pramen' },
+      { klic: 'pisemny', ikona: '📜', popis: 'písemný pramen' },
+    ],
+    spravnyKlic: u.typ,
+    zpravaOk: u.typ === 'hmotny'
+      ? '✅ Hmotný pramen – je to předmět nebo stavba, kterou zkoumá archeologie.'
+      : '✅ Písemný pramen – nese text, který se dá přečíst.',
+    zpravaChyba: 'Je to předmět, nebo něco psaného?',
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+/* ---- Počítání s letopočty ------------------------------------------------------------- */
+function letopocty() {
+  const p = $('plocha');
+  const typ = Uloha.nahodne(['rozdil', 'stoleti', 'starsi']);
+  let zadani, spravny, jine, vysvetleni;
+
+  if (typ === 'rozdil') {
+    const pred = Uloha.nahodneCislo(2, 8) * 100;
+    const po = Uloha.nahodneCislo(1, 12) * 100;
+    zadani = `Kolik let uplynulo od začátku roku ${pred} př. n. l. do začátku roku ${po} n. l.?`;
+    spravny = pred + po - 1;
+    jine = [Math.abs(po - pred), spravny + 100, spravny - 100];
+    vysvetleni = `${pred} + ${po} − 1 = ${spravny} let (mezi stejnými daty; rok nula v historickém letopočtu není)`;
+  } else if (typ === 'stoleti') {
+    const rok = Uloha.nahodneCislo(1, 20) * 100 - Uloha.nahodneCislo(1, 99);
+    const stol = Math.ceil(rok / 100);
+    zadani = `Do kterého století patří rok ${rok}?`;
+    spravny = stol;
+    jine = [stol - 1, stol + 1, stol + 2];
+    vysvetleni = `rok ${rok} patří do ${stol}. století (století končí rokem ${stol * 100})`;
+  } else {
+    const a = Uloha.nahodneCislo(2, 9) * 100;
+    const b = Uloha.nahodneCislo(2, 9) * 100;
+    if (a === b) return letopocty();
+    zadani = `Který rok je starší: ${a} př. n. l., nebo ${b} př. n. l.?`;
+    spravny = Math.max(a, b);
+    jine = [Math.min(a, b)];
+    vysvetleni = `před naším letopočtem platí, že větší číslo je starší – proto ${Math.max(a, b)} př. n. l.`;
+  }
+
+  p.innerHTML = `<div class="zadani">${zadani}</div>
+    <div class="karta"><div class="obrazek">🕰️</div></div>`;
+  const odezva = document.createElement('div');
+  odezva.className = 'odezva';
+  const popisky = typ === 'stoleti' ? v => v + '. století'
+    : typ === 'starsi' ? v => v + ' př. n. l.' : v => v + ' let';
+  Uloha.vyber({
+    kam: p, odezva, trida: 'velke',
+    moznosti: Uloha.zamichej([spravny, ...jine.filter(x => x !== spravny && x > 0)])
+      .map(v => ({ klic: String(v), popis: popisky(v) })),
+    spravnyKlic: String(spravny),
+    zpravaOk: `✅ ${vysvetleni}.`,
+    zpravaChyba: 'Nezapomeň, že roky před naším letopočtem jdou pozpátku.',
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+/* ---- Historická období ------------------------------------------------------------------ */
+function obdobi() {
+  const p = $('plocha');
+  const razeni = Math.random() < 0.5;
+
+  if (razeni) {
+    p.innerHTML = '<div class="zadani">Seřaď historická období od nejstaršího.</div>';
+    const osa = document.createElement('div');
+    osa.className = 'osa-cas';
+    const nabidka = document.createElement('div');
+    nabidka.className = 'nabidka';
+    const odezva = document.createElement('div');
+    odezva.className = 'odezva';
+    let dalsiIndex = 0, chyboval = false;
+    const serazene = [...OBDOBI].sort((a, b) => a.poradi - b.poradi);
+
+    Uloha.zamichej(OBDOBI).forEach(o => {
+      const b = document.createElement('button');
+      b.textContent = o.n;
+      b.dataset.n = o.n;
+      b.addEventListener('click', () => {
+        if (b.disabled) return;
+        if (o.n === serazene[dalsiIndex].n) {
+          if (dalsiIndex > 0) {
+            const s = document.createElement('span');
+            s.className = 'sipka';
+            s.textContent = '→';
+            osa.appendChild(s);
+          }
+          const el = document.createElement('span');
+          el.className = 'bod';
+          el.textContent = o.n;
+          osa.appendChild(el);
+          b.disabled = true;
+          dalsiIndex++;
+          odezva.className = 'odezva ok';
+          odezva.textContent = '✅ Správně!';
+          if (dalsiIndex === serazene.length) {
+            odezva.textContent = '🎉 Celá časová osa je hotová!';
+            skore.vyhodnot(!chyboval);
+            Uloha.posun(novaUloha, Uloha.PRODLEVA + 600);
+          }
+        } else {
+          chyboval = true;
+          Uloha.trhni(b);
+          odezva.className = 'odezva chyba';
+          odezva.textContent = 'Tohle období přijde na řadu později.';
+        }
+      });
+      nabidka.appendChild(b);
+    });
+    p.append(osa, nabidka, odezva);
+    return;
+  }
+
+  const u = Uloha.nahodne(OBDOBI);
+  const jine = Uloha.zamichej(OBDOBI.filter(x => x.n !== u.n)).slice(0, 3);
+  p.innerHTML = `<div class="zadani">O které období jde?</div>
+    <div class="karta"><div class="obrazek">📚</div><div class="popis-p">${u.o}</div></div>`;
+  const odezva = document.createElement('div');
+  odezva.className = 'odezva';
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: Uloha.zamichej([u, ...jine]).map(x => ({ klic: x.n, popis: x.n })),
+    spravnyKlic: u.n,
+    zpravaOk: `✅ ${u.n} – ${u.o}.`,
+    zpravaChyba: 'Zkus jiné období.',
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+/* ---- Pomocné vědy ------------------------------------------------------------------------ */
+function vedy() {
+  const p = $('plocha');
+  const u = Uloha.nahodne(VEDY);
+  const jine = Uloha.zamichej(VEDY.filter(x => x.n !== u.n)).slice(0, 3);
+  p.innerHTML = `<div class="zadani">Která pomocná věda historická to je?</div>
+    <div class="karta"><div class="obrazek">🔬</div><div class="popis-p">${u.o}</div></div>`;
+  const odezva = document.createElement('div');
+  odezva.className = 'odezva';
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: Uloha.zamichej([u, ...jine]).map(x => ({ klic: x.n, popis: x.n })),
+    spravnyKlic: u.n,
+    zpravaOk: `✅ ${u.n} – ${u.o}.`,
+    zpravaChyba: 'Zkus jinou vědu.',
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+/* ---- Roztřiď prameny z fotek (fotografie z atlasu pod úlohou) ------------------------- */
+const DRUHY = {
+  hmotny: { ikona: '🏺', popis: 'hmotný pramen' },
+  pisemny: { ikona: '📜', popis: 'písemný pramen' },
+  obrazovy: { ikona: '🖼️', popis: 'obrazový pramen' },
+};
+const FOTO_PRAMENY = [...document.querySelectorAll('#atlasPrameny .foto-karta')].map(f => ({
+  n: f.dataset.nazev, typ: f.dataset.typ, info: f.dataset.info, img: f.querySelector('img'),
+}));
+function trideni() {
+  const p = $('plocha');
+  const u = Uloha.nahodne(FOTO_PRAMENY);
+  p.innerHTML = `<div class="zadani">Jaký je to pramen? (${u.n})</div>
+    <div class="karta"><img class="foto-ukol" src="${u.img.getAttribute('src')}" alt="${u.img.alt.replace(/"/g, '&quot;')}"
+      width="${u.img.getAttribute('width')}" height="${u.img.getAttribute('height')}"></div>`;
+  const odezva = document.createElement('div');
+  odezva.className = 'odezva';
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: Object.entries(DRUHY).map(([klic, d]) => ({ klic, ikona: d.ikona, popis: d.popis })),
+    spravnyKlic: u.typ,
+    zpravaOk: `✅ ${DRUHY[u.typ].popis[0].toUpperCase() + DRUHY[u.typ].popis.slice(1)} – ${u.info}.`,
+    zpravaChyba: 'Je to předmět, text, nebo obraz?',
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+const REZIMY = { pramen, letopocty, obdobi, vedy, trideni };
+function novaUloha() { Uloha.zrusPosun(); REZIMY[rezim](); }
+
+document.querySelectorAll('#rezimy button').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('#rezimy button').forEach(x => x.classList.remove('active'));
+  b.classList.add('active');
+  rezim = b.dataset.rezim;
+  novaUloha();
+}));
+$('btnDalsi').addEventListener('click', novaUloha);
+document.addEventListener('keydown', e => {
+  if (e.target.closest('input, select, textarea, button, a, summary, .pilot')) return;
+  if (e.key === 'ArrowRight' || e.key === 'Enter') { e.preventDefault(); novaUloha(); }
+});
+novaUloha();
+</script>
+</body>
+</html>

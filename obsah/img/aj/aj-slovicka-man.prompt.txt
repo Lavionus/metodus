@@ -1,0 +1,7 @@
+IMG-aj-02 · man
+
+Use case: scientific-educational. Square vocabulary flashcard for language learning. Friendly realistic watercolor and gouache, delicate contours, warm ivory paper, subtle grounding shadow. Centered subject visible from head to waist with generous margin. No text, logo, border, watermark or unrelated props. Subject: one friendly adult man around age 35 in a simple green shirt and relaxed pose.
+
+Nástroj: OpenAI image_gen
+Datum: 2026-10-15
+Výstup: aj-slovicka-man.png, aj-slovicka-man.webp

@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Obyvatelstvo a sídla světa</title>
+  <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
+  <script src="../theme.js"></script>
+  <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
+  <script src="../uloha.js"></script>
+  <script src="../mapy.js"></script>
+  <style>
+    .uloha-text { max-width: 640px; font-size: 1.02rem; line-height: 1.6; }
+    .uloha-text b { color: var(--accent); }
+    .foto-uloha { display:block; width:min(560px,100%); aspect-ratio:4/3; object-fit:cover; border-radius:14px; border:1px solid var(--border); background:var(--bg-card); }
+    .foto-atlas { width:min(1120px,100%); margin:22px auto; }
+    .foto-atlas h2 { margin:0 0 5px; text-align:center; font-size:1.22rem; }
+    .foto-atlas > p { margin:0 auto 12px; max-width:820px; text-align:center; color:var(--text-muted,var(--text)); }
+    .foto-mrizka { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+    .foto-karta { margin:0; overflow:hidden; border:1px solid var(--border); border-radius:14px; background:var(--bg-card); box-shadow:var(--shadow-sm); }
+    .foto-karta img { display:block; width:100%; aspect-ratio:4/3; object-fit:cover; }
+    .foto-karta figcaption { padding:10px 11px 12px; font-size:.9rem; line-height:1.35; }
+    .foto-karta strong { display:block; margin-bottom:3px; color:var(--accent); font-size:1rem; }
+    @media (max-width:440px) { .foto-mrizka { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+  <h1>👥 Obyvatelstvo a sídla světa</h1>
+  <p class="podtitul">Pro 9. ročník: rozmístění obyvatel, růst populace, migrace a města.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Kolik nás je, kde žijeme a proč se stěhujeme</summary>
+    <div class="obsah">
+      <p>Podle OSN žilo na Zemi v roce 2024 přes <b>8 miliard</b> lidí. Rozmístěni jsou velmi nerovnoměrně: nejvíc jich
+        žije v <b>jižní a východní Asii</b>, v nížinách u řek a na pobřeží. Pouště, polární oblasti a vysoké hory jsou
+        téměř prázdné – chybí voda, teplo nebo úrodná půda.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Přirozený přírůstek</h3><p><b>Narození − zemřelí.</b> Je-li kladný, obyvatel přibývá.
+          Nejrychleji dnes roste <b>subsaharská Afrika</b>; v Evropě se rodí méně dětí a obyvatelstvo <b>stárne</b>.</p></article>
+        <article class="vyklad-karta"><h3>Věková pyramida</h3><p>Graf počtu lidí podle věku. <b>Široký základ</b> = hodně dětí
+          (rozvojová země). <b>Úzký základ</b> a širší horní část = málo dětí, hodně seniorů (vyspělá země).</p></article>
+        <article class="vyklad-karta"><h3>Migrace</h3><p>Stěhování lidí. <b>Emigrace</b> = vystěhování ze země, <b>imigrace</b> = přistěhování.
+          Pracovní migrant hledá lepší práci; <b>uprchlík</b> utíká před válkou nebo pronásledováním.</p></article>
+      </div>
+      <p>Stále víc lidí žije ve městech – to je <b>urbanizace</b>. Velké město srostlé s okolními sídly tvoří <b>aglomeraci</b>.
+        Když lidé z venkova přicházejí rychleji, než se stihne postavit bydlení, vznikají na okrajích <b>slumy</b>.
+        Ve vyspělých zemích se naopak lidé stěhují z center na předměstí (<b>suburbanizace</b>).</p>
+      <p><b>Typická chyba:</b> zaměnit počet obyvatel a hustotu zalidnění. Hustota je počet obyvatel na 1 km² –
+        velký stát může mít hodně lidí, a přesto malou hustotu.</p>
+      <aside class="zapamatuj">Přirozený přírůstek = narození − zemřelí. Široký základ pyramidy = mladá, rostoucí populace;
+        úzký základ = stárnoucí populace. Urbanizace = růst měst.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: čtení věkové pyramidy</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Věková pyramida má velmi široký základ a směrem nahoru se rychle zužuje do úzké špičky. Jakou zemi spíš popisuje – rozvojovou, nebo vyspělou?</p>
+      <ol class="kroky">
+        <li>Vím, že dole jsou nejmladší, nahoře nejstarší lidé.</li>
+        <li>Široký základ znamená, že je v zemi hodně dětí – rodí se hodně dětí.</li>
+        <li>Rychlé zužování nahoru ukazuje, že se méně lidí dožívá vysokého věku.</li>
+        <li>Hodně dětí a málo seniorů je typické pro rozvojové země s vysokou porodností; vyspělá země by měla úzký základ.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Pyramida popisuje rozvojovou zemi s rychle rostoucí, mladou populací.</p>
+    </div>
+  </details>
+
+  <div class="rezimy" id="rezimy">
+    <button data-rezim="mapa1" class="active">🗺️ Oblasti zalidnění</button>
+    <button data-rezim="mapa2">🏙️ Velkoměsta světa</button>
+    <button data-rezim="kviz1">📊 Obyvatelstvo</button>
+    <button data-rezim="kviz2">🚶 Migrace a sídla</button>
+    <button data-rezim="foto">📷 Sídla na fotkách</button>
+  </div>
+
+  <div class="plocha" id="plocha"></div>
+
+  <div class="ovladani">
+    <button class="hlavni" id="btnDalsi">Přeskočit →</button>
+    <span class="skore" id="skore"></span>
+  </div>
+
+  <p class="napoveda">Na Zemi žije přes <b>8 miliard</b> lidí (OSN, 2024), ale rozmístěni jsou velmi nerovnoměrně – nejhustěji je osídlena <b>jižní a východní Asie</b>. Roste podíl lidí žijících ve městech (<b>urbanizace</b>) a zvyšuje se počet <b>aglomerací</b> nad 10 milionů obyvatel.</p>
+
+  <section class="foto-atlas" aria-labelledby="sidlaNadpis">
+    <h2 id="sidlaNadpis">Jak lidé bydlí v různých částech světa</h2>
+    <p>Čtyři sídla, čtyři způsoby života. Všímej si stavebního materiálu, hustoty zástavby a toho, kolik místa připadá na jednoho člověka.</p>
+    <div class="foto-mrizka" id="sidlaAtlas">
+      <figure class="foto-karta"><img src="img/z/z9-obyvatelstvo-sahel-vesnice.webp" alt="Vesnice v Čadu s kulatými chýšemi s kuželovými doškovými střechami mezi řídkými stromy na suché písčité zemi." width="1152" height="647" loading="lazy"><figcaption><strong>Vesnice v Sahelu</strong>Kulaté chýše z hlíny s doškovými střechami rozptýlené v suché savaně (na snímku Čad); lidé žijí hlavně z pastevectví a pěstování prosa.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/z/z9-obyvatelstvo-bombaj.webp" alt="Chatrče slumu z plechu a plachet v Bombaji, za zálivem v pozadí řada mrakodrapů." width="1152" height="864" loading="lazy"><figcaption><strong>Bombaj – slum a mrakodrapy</strong>Nouzové chatrče těsně vedle výškových budov; rychlá urbanizace – lidé z venkova přicházejí za prací rychleji, než stihne vzniknout bydlení.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/z/z9-obyvatelstvo-predmesti-usa.webp" alt="Letecký pohled na americké předměstí v Nevadě: stovky podobných rodinných domů podél zakřivených ulic." width="1152" height="822" loading="lazy"><figcaption><strong>Předměstí v USA</strong>Rodinné domy se zahradou a často i bazénem podél tichých ulic daleko od centra; suburbanizace – do práce a do obchodu se jezdí autem.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/z/z9-obyvatelstvo-evropske-centrum.webp" alt="Historické centrum Českého Krumlova: hustá zástavba starých domů s červenými střechami v ohbí Vltavy a nad ní zámek." width="1152" height="559" loading="lazy"><figcaption><strong>Historické centrum evropského města</strong>Hustá zástavba starých domů s úzkými ulicemi kolem náměstí, kostela a zámku (na snímku Český Krumlov); jádro města rostlo po staletí.</figcaption></figure>
+    </div>
+  </section>
+
+<script>
+const $ = id => document.getElementById(id);
+const skore = Uloha.skore('metodus_z9_obyvatelstvo', $('skore'));
+let rezim = 'mapa1';
+function odezvaEl() { const d = document.createElement('div'); d.className = 'odezva'; return d; }
+
+const SADA1 = [
+  {
+    "klic": "jvAsie",
+    "popis": "jižní a východní Asie",
+    "lon": 100,
+    "lat": 25,
+    "info": "nejlidnatější oblast světa – Čína, Indie, Indonésie"
+  },
+  {
+    "klic": "evropa",
+    "popis": "západní a střední Evropa",
+    "lon": 8,
+    "lat": 50,
+    "info": "hustě osídlená oblast s vysokou urbanizací"
+  },
+  {
+    "klic": "severovychodUSA",
+    "popis": "severovýchod USA",
+    "lon": -75,
+    "lat": 40,
+    "info": "pás velkoměst od Bostonu po Washington"
+  },
+  {
+    "klic": "nil",
+    "popis": "údolí Nilu",
+    "lon": 31,
+    "lat": 27,
+    "info": "úzký pás hustého osídlení uprostřed pouště"
+  },
+  {
+    "klic": "sahara",
+    "popis": "Sahara",
+    "lon": 15,
+    "lat": 23,
+    "info": "téměř neobydlená oblast – extrémní sucho"
+  },
+  {
+    "klic": "sibir",
+    "popis": "Sibiř",
+    "lon": 100,
+    "lat": 65,
+    "info": "řídce osídlená oblast kvůli drsnému podnebí"
+  },
+  {
+    "klic": "amazonie",
+    "popis": "Amazonie",
+    "lon": -62,
+    "lat": -5,
+    "info": "řídké osídlení v deštném pralese"
+  },
+  {
+    "klic": "australskyVnitrozemi",
+    "popis": "australský outback",
+    "lon": 133,
+    "lat": -25,
+    "info": "suché vnitrozemí s minimem obyvatel"
+  }
+];
+
+const SADA2 = [
+  {
+    "klic": "tokio",
+    "popis": "Tokio",
+    "lon": 139.7,
+    "lat": 35.7,
+    "info": "jedna z největších aglomerací světa, přes 30 milionů lidí (OSN, 2025)"
+  },
+  {
+    "klic": "dilli",
+    "popis": "Dillí",
+    "lon": 77.2,
+    "lat": 28.6,
+    "info": "rychle rostoucí velkoměsto Indie"
+  },
+  {
+    "klic": "sanghaj",
+    "popis": "Šanghaj",
+    "lon": 121.5,
+    "lat": 31.2,
+    "info": "největší přístav a průmyslové centrum Číny"
+  },
+  {
+    "klic": "saoPaulo",
+    "popis": "São Paulo",
+    "lon": -46.6,
+    "lat": -23.5,
+    "info": "největší město Jižní Ameriky"
+  },
+  {
+    "klic": "mexicoCity",
+    "popis": "Ciudad de México",
+    "lon": -99.1,
+    "lat": 19.4,
+    "info": "velkoměsto ve vysoko položené kotlině"
+  },
+  {
+    "klic": "kahira",
+    "popis": "Káhira",
+    "lon": 31.2,
+    "lat": 30.0,
+    "info": "největší město Afriky a arabského světa"
+  },
+  {
+    "klic": "newYork",
+    "popis": "New York",
+    "lon": -74.0,
+    "lat": 40.7,
+    "info": "finanční centrum a přístav USA"
+  },
+  {
+    "klic": "lagos",
+    "popis": "Lagos",
+    "lon": 3.4,
+    "lat": 6.5,
+    "info": "nejrychleji rostoucí africké velkoměsto"
+  }
+];
+
+function mapaUloha(sada, zadaniText) {
+  const p = $('plocha');
+  const body = Uloha.zamichej([...sada]).slice(0, 6);
+  const cil = Uloha.nahodne(body);
+  const stav = { chyboval: false, hotovo: false };
+
+  p.innerHTML = `<div class="zadani">${zadaniText} <b>${cil.popis}</b></div>` + Mapy.svg('svet', body);
+  const odezva = odezvaEl();
+  p.querySelectorAll('.znacka').forEach(g => g.addEventListener('click', () => {
+    const trefa = sada.find(x => x.klic === g.dataset.klic);
+    Uloha.odpoved({
+      prvek: g, spravne: g.dataset.klic === cil.klic, stav, odezva,
+      zpravaOk: `✅ ${cil.popis} – ${cil.info}`,
+      zpravaChyba: `Tady je ${trefa.popis}. Hledáme ${cil.popis}.`,
+      poSpravne: skore.vyhodnot,
+      dalsi: novaUloha,
+    });
+  }));
+  p.appendChild(odezva);
+}
+const mapa1 = () => mapaUloha(SADA1, 'Najdi na mapě');
+const mapa2 = () => mapaUloha(SADA2, 'Najdi na mapě město');
+
+const KVIZ1 = [
+  {
+    "q": "Kolik lidí přibližně žije na Zemi?",
+    "a": "přes 8 miliard",
+    "b": [
+      "asi 1 miliarda",
+      "asi 3 miliardy",
+      "asi 20 miliard"
+    ]
+  },
+  {
+    "q": "Ve které oblasti žije nejvíc lidí?",
+    "a": "v jižní a východní Asii",
+    "b": [
+      "v Africe",
+      "v Jižní Americe",
+      "v Austrálii"
+    ]
+  },
+  {
+    "q": "Co je hustota zalidnění?",
+    "a": "počet obyvatel na km²",
+    "b": [
+      "počet měst",
+      "podíl městského obyvatelstva",
+      "počet narozených dětí"
+    ]
+  },
+  {
+    "q": "Co ukazuje věková pyramida rozvojové země?",
+    "a": "široký základ – hodně dětí a mladých lidí",
+    "b": [
+      "úzký základ a širokou špičku",
+      "stejné zastoupení všech skupin",
+      "převahu seniorů"
+    ]
+  },
+  {
+    "q": "Co je přirozený přírůstek?",
+    "a": "rozdíl mezi počtem narozených a zemřelých",
+    "b": [
+      "počet přistěhovalců",
+      "počet obyvatel měst",
+      "rozdíl mezi muži a ženami"
+    ]
+  },
+  {
+    "q": "Proč obyvatelstvo Evropy stárne?",
+    "a": "rodí se méně dětí a lidé se dožívají vyššího věku",
+    "b": [
+      "lidé se stěhují do Asie",
+      "roste úmrtnost dětí",
+      "zvyšuje se porodnost"
+    ]
+  },
+  {
+    "q": "Které oblasti jsou téměř neosídlené?",
+    "a": "pouště, polární oblasti a vysokohorské oblasti",
+    "b": [
+      "nížiny u řek",
+      "pobřeží moří",
+      "mírné pásmo"
+    ]
+  },
+  {
+    "q": "Co je gramotnost?",
+    "a": "schopnost číst a psát",
+    "b": [
+      "počet škol",
+      "podíl obyvatel ve městech",
+      "délka života"
+    ]
+  }
+];
+const KVIZ2 = [
+  {
+    "q": "Co je urbanizace?",
+    "a": "růst měst a podílu obyvatel, kteří v nich žijí",
+    "b": [
+      "stěhování na venkov",
+      "pokles počtu obyvatel",
+      "výstavba silnic"
+    ]
+  },
+  {
+    "q": "Co je aglomerace?",
+    "a": "velké město i s propojenými sídly v okolí",
+    "b": [
+      "jedna ulice",
+      "vesnice v horách",
+      "skupina států"
+    ]
+  },
+  {
+    "q": "Co bývá hlavní příčinou pracovní migrace?",
+    "a": "hledání lepší práce a životních podmínek",
+    "b": [
+      "zvědavost",
+      "změna počasí",
+      "sportovní akce"
+    ]
+  },
+  {
+    "q": "Kdo je uprchlík?",
+    "a": "člověk, který opustil zemi kvůli válce nebo pronásledování",
+    "b": [
+      "turista",
+      "student na výměně",
+      "sezónní dělník"
+    ]
+  },
+  {
+    "q": "Co jsou slumy?",
+    "a": "chudinské čtvrti na okrajích velkoměst",
+    "b": [
+      "centrum obchodu",
+      "průmyslová zóna",
+      "rekreační oblast"
+    ]
+  },
+  {
+    "q": "Jaký problém přináší rychlý růst měst?",
+    "a": "nedostatek bydlení, dopravy a hygienického zázemí",
+    "b": [
+      "nedostatek lidí",
+      "pokles cen půdy",
+      "zánik obchodu"
+    ]
+  },
+  {
+    "q": "Co je emigrace?",
+    "a": "vystěhování z vlastní země",
+    "b": [
+      "přistěhování",
+      "cestování na dovolenou",
+      "stěhování v rámci města"
+    ]
+  },
+  {
+    "q": "Které oblasti světa dnes rostou populačně nejrychleji?",
+    "a": "subsaharská Afrika",
+    "b": [
+      "Evropa",
+      "Japonsko",
+      "Kanada"
+    ]
+  }
+];
+
+const SIDLA = [
+  { n: 'vesnice v Sahelu', img: 'z9-obyvatelstvo-sahel-vesnice', w: 1152, h: 647, alt: 'Vesnice v Čadu s kulatými chýšemi s kuželovými doškovými střechami mezi řídkými stromy na suché písčité zemi.',
+    o: 'kulaté chýše z hlíny s doškovými střechami rozptýlené v suché savaně (na snímku Čad); lidé žijí hlavně z pastevectví a pěstování prosa' },
+  { n: 'Bombaj – slum a mrakodrapy', img: 'z9-obyvatelstvo-bombaj', w: 1152, h: 864, alt: 'Chatrče slumu z plechu a plachet v Bombaji, za zálivem v pozadí řada mrakodrapů.',
+    o: 'nouzové chatrče těsně vedle výškových budov; rychlá urbanizace – lidé z venkova přicházejí za prací rychleji, než stihne vzniknout bydlení' },
+  { n: 'předměstí v USA', img: 'z9-obyvatelstvo-predmesti-usa', w: 1152, h: 822, alt: 'Letecký pohled na americké předměstí v Nevadě: stovky podobných rodinných domů podél zakřivených ulic.',
+    o: 'rodinné domy se zahradou a často i bazénem podél tichých ulic daleko od centra; suburbanizace – do práce a do obchodu se jezdí autem' },
+  { n: 'historické centrum evropského města', img: 'z9-obyvatelstvo-evropske-centrum', w: 1152, h: 559, alt: 'Historické centrum Českého Krumlova: hustá zástavba starých domů s červenými střechami v ohbí Vltavy a nad ní zámek.',
+    o: 'hustá zástavba starých domů s úzkými ulicemi kolem náměstí, kostela a zámku (na snímku Český Krumlov); jádro města rostlo po staletí' },
+];
+// Fotka je sama otázkou – alt nesmí prozradit odpověď.
+const fotoSidlo = (x, trida) => `<img class="${trida}" src="img/z/${x.img}.webp" alt="Fotografie sídla k určení." width="${x.w}" height="${x.h}">`;
+function foto() {
+  const p = $('plocha');
+  const u = Uloha.nahodne(SIDLA);
+  p.innerHTML = `<div class="zadani uloha-text">Jaké sídlo je na fotografii?</div>${fotoSidlo(u, 'foto-uloha')}`;
+  const odezva = odezvaEl();
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: Uloha.zamichej(SIDLA).map(x => ({ klic: x.n, popis: x.n })),
+    spravnyKlic: u.n,
+    zpravaOk: `✅ ${u.n} – ${u.o}.`,
+    zpravaChyba: 'Všimni si materiálu domů, hustoty zástavby a krajiny kolem.',
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+function kviz(sada, napoveda) {
+  const p = $('plocha');
+  const u = Uloha.nahodne(sada);
+  p.innerHTML = `<div class="zadani uloha-text">${u.q}</div>`;
+  const odezva = odezvaEl();
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: Uloha.zamichej([u.a, ...u.b]).map(t => ({ klic: t, popis: t })),
+    spravnyKlic: u.a,
+    zpravaOk: `✅ ${u.a}` + (u.proc ? ` – ${u.proc}` : ''),
+    zpravaChyba: napoveda,
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+const kviz1 = () => kviz(KVIZ1, 'Sleduj, kde jsou úrodné nížiny, mírné podnebí a dostatek vody.');
+const kviz2 = () => kviz(KVIZ2, 'Rozliš příčiny migrace: práce, bezpečí, studium, katastrofy.');
+
+const REZIMY = { mapa1, mapa2, kviz1, kviz2, foto };
+function novaUloha() { REZIMY[rezim](); }
+
+document.querySelectorAll('#rezimy button').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('#rezimy button').forEach(x => x.classList.remove('active'));
+  b.classList.add('active');
+  rezim = b.dataset.rezim;
+  novaUloha();
+}));
+$('btnDalsi').addEventListener('click', novaUloha);
+novaUloha();
+</script>
+</body>
+</html>

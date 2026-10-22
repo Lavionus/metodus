@@ -1,0 +1,7 @@
+IMG-aj-02 · girl
+
+Use case: scientific-educational. Square vocabulary flashcard for language learning. Friendly realistic watercolor and gouache, delicate contours, warm ivory paper, subtle grounding shadow. Centered subject visible from head to waist with generous margin. No text, logo, border, watermark or unrelated props. Subject: one cheerful school-age girl with shoulder-length dark-blond hair, simple coral top and relaxed pose.
+
+Nástroj: OpenAI image_gen
+Datum: 2026-10-15
+Výstup: aj-slovicka-girl.png, aj-slovicka-girl.webp

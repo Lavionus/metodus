@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mapa, měřítko a souřadnice</title>
+  <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
+  <script src="../theme.js"></script>
+  <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
+  <script src="../rec.js"></script>
+  <script src="../uloha.js"></script>
+  <style>
+    .globus { width: min(340px, 88vw); }
+    .globus .mrizka { stroke: var(--border-strong); stroke-width: 1; fill: none; }
+    .globus .rovnik { stroke: var(--danger); stroke-width: 2.5; }
+    .globus .polednik { stroke: var(--warn); stroke-width: 2.5; }
+    .globus .pozadi { fill: rgba(74,144,217,0.18); stroke: var(--border-strong); stroke-width: 2; }
+    .globus .bod { fill: var(--accent); cursor: pointer; }
+    .globus .bod.spravne { fill: var(--ok); }
+    .globus .popisek { fill: var(--text-faint); font-size: 10px; text-anchor: middle; }
+    .zadani-t { font-size: clamp(1.05rem, 4vw, 1.5rem); font-weight: 700; }
+    .foto-uloha { display:block; width:min(560px,100%); aspect-ratio:4/3; object-fit:cover; border-radius:14px; border:1px solid var(--border); background:var(--bg-card); }
+    .foto-atlas { width:min(1120px,100%); margin:22px auto; }
+    .foto-atlas h2 { margin:0 0 5px; text-align:center; font-size:1.22rem; }
+    .foto-atlas > p { margin:0 auto 12px; max-width:820px; text-align:center; color:var(--text-muted,var(--text)); }
+    .foto-mrizka { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+    .foto-karta { margin:0; overflow:hidden; border:1px solid var(--border); border-radius:14px; background:var(--bg-card); box-shadow:var(--shadow-sm); }
+    .foto-karta img { display:block; width:100%; aspect-ratio:4/3; object-fit:cover; }
+    .foto-karta figcaption { padding:10px 11px 12px; font-size:.9rem; line-height:1.35; }
+    .foto-karta strong { display:block; margin-bottom:3px; color:var(--accent); font-size:1rem; }
+    @media (max-width:440px) { .foto-mrizka { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+  <h1>🗺️ Mapa, měřítko a souřadnice</h1>
+  <p class="podtitul">Pro 6. ročník: zeměpisná síť, souřadnice, měřítko a mapové značky.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Zeměpisná síť, souřadnice a měřítko</summary>
+    <div class="obsah">
+      <p>Aby šlo každé místo na Zemi přesně popsat, je glóbus pokrytý pomyslnou <b>zeměpisnou sítí</b>.
+        Skládá se ze dvou druhů čar a každá čára má své číslo ve stupních.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Rovnoběžky → šířka</h3><p>Vodorovné kružnice. Nejdelší je <b>rovník (0°)</b>,
+          k pólům se zkracují. <b>Zeměpisná šířka</b> se měří od rovníku k pólům: 0° až 90° <b>s. š.</b> nebo <b>j. š.</b></p></article>
+        <article class="vyklad-karta"><h3>Poledníky → délka</h3><p>Polokružnice od pólu k pólu, všechny stejně dlouhé.
+          <b>Nultý poledník</b> prochází Greenwichem. <b>Zeměpisná délka</b>: 0° až 180° <b>v. d.</b> nebo <b>z. d.</b></p></article>
+        <article class="vyklad-karta"><h3>Měřítko mapy</h3><p>1 : 50 000 znamená, že 1 cm na mapě je 50 000 cm ve skutečnosti,
+          tedy <b>0,5 km</b>. Škrtni pět nul a dostaneš kilometry (100 000 cm = 1 km).</p></article>
+      </div>
+      <p>Souřadnice se zapisují v pořadí <b>nejdřív šířka, potom délka</b>, a vždy se směrem: Praha leží asi na 50° s. š., 14° v. d.
+        Směr poznáš podle polokoule: sever, nebo jih od rovníku? Východ, nebo západ od Greenwiche?
+        <b>Typická chyba:</b> zapomenout směr – „34°, 151°“ může ležet na čtyřech různých místech.</p>
+      <p>Čím menší číslo za dvojtečkou, tím <b>větší měřítko</b> a podrobnější mapa menšího území (plán města).
+        Účelu odpovídá i druh mapy: turistická ukazuje značené trasy, automapa silnice, tematická jeden jev.</p>
+      <aside class="zapamatuj">Šířka od rovníku (s./j.), délka od nultého poledníku (v./z.), zapisuj šířku první.
+        Skutečná vzdálenost = délka na mapě × kolik km odpovídá 1 cm.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: převod měřítkem</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Na mapě s měřítkem 1 : 50 000 naměříš mezi dvěma obcemi 7 cm. Kolik kilometrů je to ve skutečnosti?</p>
+      <ol class="kroky">
+        <li>Měřítko říká: 1 cm na mapě = 50 000 cm ve skutečnosti.</li>
+        <li>Převedu na kilometry: 1 km = 100 000 cm, takže 50 000 cm = <b>0,5 km</b>. Tedy 1 cm na mapě = 0,5 km.</li>
+        <li>Vynásobím naměřenou délkou: 7 × 0,5 = <b>3,5 km</b>.</li>
+        <li>Zkontroluji odhadem: 2 cm jsou 1 km, 7 cm je o něco víc než 3 km – sedí to.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Obce jsou ve skutečnosti od sebe 3,5 km (vzdušnou čarou).</p>
+    </div>
+  </details>
+
+  <div class="rezimy" id="rezimy">
+    <button data-rezim="pojmy" class="active">🌐 Zeměpisná síť</button>
+    <button data-rezim="souradnice">📍 Urči souřadnice</button>
+    <button data-rezim="meritko">📏 Měřítko mapy</button>
+    <button data-rezim="druhyMap">🗂️ Druhy map</button>
+    <button data-rezim="ukazkyMap">🖼️ Poznej mapu</button>
+  </div>
+
+  <div class="plocha" id="plocha"></div>
+
+  <div class="ovladani">
+    <button class="hlavni" id="btnDalsi">Přeskočit →</button>
+    <span class="skore" id="skore"></span>
+  </div>
+
+  <p class="napoveda">
+    <b>Rovnoběžky</b> jsou vodorovné kružnice (nejdelší je rovník, 0°), <b>poledníky</b> vedou
+    od pólu k pólu (nultý prochází Greenwichem). Zeměpisná <b>šířka</b> se měří od rovníku
+    na sever a na jih, zeměpisná <b>délka</b> od nultého poledníku na východ a na západ.
+  </p>
+
+  <section class="foto-atlas" aria-labelledby="mapyNadpis">
+    <h2 id="mapyNadpis">Jedno místo – tři pohledy, a k tomu plán města</h2>
+    <p>První tři výřezy ukazují stejné území (Útěchov na okraji Brna) ve stejném měřítku. Porovnej, co která mapa zdůrazňuje a co vynechává. Čtvrtý obrázek je plán celého středu Brna v menším měřítku.</p>
+    <div class="foto-mrizka" id="mapyAtlas">
+      <figure class="foto-karta"><img src="img/z/z6-mapa-utechov-zakladni.webp" alt="Základní mapa Útěchova u Brna: zástavba, silnice, lesy, vrstevnice a názvy míst." width="1152" height="1085" loading="lazy"><figcaption><strong>Obecně zeměpisná (základní) mapa</strong>Ukazuje všechno důležité najednou: zástavbu, silnice, lesy, vodu, vrstevnice a názvy; výška terénu je vidět z vrstevnic.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/z/z6-mapa-utechov-turisticka.webp" alt="Turistická mapa Útěchova u Brna se stejným výřezem a barevně vyznačenými turistickými a cyklistickými trasami." width="1152" height="1090" loading="lazy"><figcaption><strong>Turistická mapa</strong>Stejné území jako základní mapa, ale navíc barevné čáry značených turistických a cyklistických tras.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/z/z6-mapa-utechov-letecka.webp" alt="Letecký snímek (ortofoto) Útěchova u Brna: střechy domů, ulice, pole a souvislé lesy." width="840" height="795" loading="lazy"><figcaption><strong>Letecký snímek (ortofoto)</strong>Skutečná fotografie krajiny shora, upravená tak, aby šla měřit jako mapa; nejsou na ní značky ani názvy – musíš je poznat sám.</figcaption></figure>
+      <figure class="foto-karta"><img src="img/z/z6-mapa-brno-osm.webp" alt="Plán středu Brna z OpenStreetMap s hustou sítí ulic, hlavními silnicemi a zelení parků." width="915" height="1079" loading="lazy"><figcaption><strong>Plán města</strong>Mapa z projektu OpenStreetMap ukazuje celý střed Brna – větší území, a proto menší měřítko; jednotlivé domy už nejsou vidět, zato celá síť ulic.</figcaption></figure>
+    </div>
+  </section>
+
+<script>
+const $ = id => document.getElementById(id);
+const skore = Uloha.skore('metodus_z6_mapa', $('skore'));
+let rezim = 'pojmy';
+
+const POJMY = [
+  { n: 'rovník', o: 'nejdelší rovnoběžka, zeměpisná šířka 0°, dělí Zemi na severní a jižní polokouli' },
+  { n: 'nultý poledník', o: 'poledník procházející Greenwichem, zeměpisná délka 0°' },
+  { n: 'rovnoběžky', o: 'kružnice rovnoběžné s rovníkem, směrem k pólům se zkracují' },
+  { n: 'poledníky', o: 'polokružnice spojující severní a jižní pól, všechny stejně dlouhé' },
+  { n: 'zeměpisná šířka', o: 'vzdálenost od rovníku ve stupních, na sever nebo na jih' },
+  { n: 'zeměpisná délka', o: 'vzdálenost od nultého poledníku, na východ nebo na západ' },
+  { n: 'obratník Raka', o: 'rovnoběžka 23,5° severní šířky, nejsevernější místo se sluncem v nadhlavníku' },
+  { n: 'polární kruh', o: 'rovnoběžka 66,5°, za níž nastává polární den a noc' },
+];
+
+const MESTA = [
+  { n: 'Praha', s: 50, d: 14, smerS: 's', smerD: 'v' },
+  { n: 'Káhira', s: 30, d: 31, smerS: 's', smerD: 'v' },
+  { n: 'New York', s: 41, d: 74, smerS: 's', smerD: 'z' },
+  { n: 'Sydney', s: 34, d: 151, smerS: 'j', smerD: 'v' },
+  { n: 'Rio de Janeiro', s: 23, d: 43, smerS: 'j', smerD: 'z' },
+  { n: 'Tokio', s: 36, d: 140, smerS: 's', smerD: 'v' },
+  { n: 'Kapské Město', s: 34, d: 18, smerS: 'j', smerD: 'v' },
+];
+
+const MERITKA = [
+  { m: '1 : 100 000', cm: 1, popis: '1 cm na mapě = 1 km ve skutečnosti' },
+  { m: '1 : 50 000', cm: 0.5, popis: '1 cm na mapě = 0,5 km ve skutečnosti' },
+  { m: '1 : 200 000', cm: 2, popis: '1 cm na mapě = 2 km ve skutečnosti' },
+  { m: '1 : 1 000 000', cm: 10, popis: '1 cm na mapě = 10 km ve skutečnosti' },
+];
+
+const DRUHY_MAP = [
+  { n: 'obecně zeměpisná mapa', o: 'ukazuje povrch, vodstvo, sídla a hranice zároveň' },
+  { n: 'tematická mapa', o: 'zaměřuje se na jeden jev, například podnebí nebo hustotu zalidnění' },
+  { n: 'turistická mapa', o: 'obsahuje značené trasy, rozhledny a chaty' },
+  { n: 'automapa', o: 'zdůrazňuje silnice, dálnice a čerpací stanice' },
+  { n: 'plán města', o: 'velmi podrobné zobrazení ulic v malém území' },
+  { n: 'vrstevnicová mapa', o: 'nadmořskou výšku znázorňuje čárami spojujícími stejně vysoká místa' },
+];
+
+const UKAZKY_MAP = [
+  { n: 'obecně zeměpisná (základní) mapa', img: 'z6-mapa-utechov-zakladni', w: 1152, h: 1085, alt: 'Základní mapa Útěchova u Brna: zástavba, silnice, lesy, vrstevnice a názvy míst.',
+    o: 'ukazuje všechno důležité najednou: zástavbu, silnice, lesy, vodu, vrstevnice a názvy; výška terénu je vidět z vrstevnic' },
+  { n: 'turistická mapa', img: 'z6-mapa-utechov-turisticka', w: 1152, h: 1090, alt: 'Turistická mapa Útěchova u Brna se stejným výřezem a barevně vyznačenými turistickými a cyklistickými trasami.',
+    o: 'stejné území jako základní mapa, ale navíc barevné čáry značených turistických a cyklistických tras' },
+  { n: 'letecký snímek (ortofoto)', img: 'z6-mapa-utechov-letecka', w: 840, h: 795, alt: 'Letecký snímek (ortofoto) Útěchova u Brna: střechy domů, ulice, pole a souvislé lesy.',
+    o: 'skutečná fotografie krajiny shora, upravená tak, aby šla měřit jako mapa; nejsou na ní značky ani názvy – musíš je poznat sám' },
+  { n: 'plán města', img: 'z6-mapa-brno-osm', w: 915, h: 1079, alt: 'Plán středu Brna z OpenStreetMap s hustou sítí ulic, hlavními silnicemi a zelení parků.',
+    o: 'mapa z projektu OpenStreetMap ukazuje celý střed Brna – větší území, a proto menší měřítko; jednotlivé domy už nejsou vidět, zato celá síť ulic' },
+];
+// Obrázek je sám otázkou – alt nesmí prozradit druh mapy.
+const ukazkaMapy = (x, trida) => `<img class="${trida}" src="img/z/${x.img}.webp" alt="Mapa nebo snímek k určení." width="${x.w}" height="${x.h}">`;
+
+/* ---- Zeměpisná síť ------------------------------------------------------------------- */
+function pojmy() {
+  const p = $('plocha');
+  const u = Uloha.nahodne(POJMY);
+  const jine = Uloha.zamichej(POJMY.filter(x => x.n !== u.n)).slice(0, 3);
+  p.innerHTML = `<div class="zadani">O který pojem jde?</div>
+    <svg class="globus" viewBox="0 0 300 170">
+      <ellipse class="pozadi" cx="150" cy="85" rx="130" ry="72"/>
+      <line class="rovnik" x1="20" y1="85" x2="280" y2="85"/>
+      <line class="polednik" x1="150" y1="13" x2="150" y2="157"/>
+      <path class="mrizka" d="M35 50 H265 M35 120 H265"/>
+      <path class="mrizka" d="M85 20 V150 M215 20 V150"/>
+      <text class="popisek" x="150" y="80">rovník</text>
+      <text class="popisek" x="192" y="24">nultý poledník</text>
+    </svg>
+    <div class="popis">${u.o}</div>`;
+  const odezva = document.createElement('div');
+  odezva.className = 'odezva';
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: Uloha.zamichej([u, ...jine]).map(x => ({ klic: x.n, popis: x.n })),
+    spravnyKlic: u.n,
+    zpravaOk: `✅ ${u.n} – ${u.o}.`,
+    zpravaChyba: 'Je to čára vodorovná (rovnoběžka), nebo svislá (poledník)?',
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+/* ---- Urči souřadnice ----------------------------------------------------------------- */
+function souradnice() {
+  const p = $('plocha');
+  const m = Uloha.nahodne(MESTA);
+  const zapis = x => `${x.s}° ${x.smerS === 's' ? 's. š.' : 'j. š.'}, ${x.d}° ${x.smerD === 'v' ? 'v. d.' : 'z. d.'}`;
+  const jine = Uloha.zamichej(MESTA.filter(x => x.n !== m.n)).slice(0, 3);
+
+  p.innerHTML = `<div class="zadani">Které souřadnice patří tomuto městu?</div>
+    <div class="karta"><div class="obrazek">📍</div><div class="zadani-t">${m.n}</div></div>`;
+  const odezva = document.createElement('div');
+  odezva.className = 'odezva';
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: Uloha.zamichej([m, ...jine]).map(x => ({ klic: x.n, popis: zapis(x) })),
+    spravnyKlic: m.n,
+    zpravaOk: `✅ ${m.n}: ${zapis(m)}`,
+    zpravaChyba: 'Nejdřív se určuje zeměpisná šířka (od rovníku), pak délka (od nultého poledníku).',
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+/* ---- Měřítko mapy -------------------------------------------------------------------- */
+function meritko() {
+  const p = $('plocha');
+  const u = Uloha.nahodne(MERITKA);
+  const cm = Uloha.nahodneCislo(2, 12);
+  const km = +(cm * u.cm).toFixed(1);
+
+  p.innerHTML = `<div class="zadani">Kolik kilometrů je to ve skutečnosti?</div>
+    <div class="karta"><div class="obrazek">🗺️</div>
+    <div class="zadani-t">měřítko ${u.m}, na mapě ${cm} cm</div></div>`;
+  const jine = new Set([+(km * 2).toFixed(1), +(km / 2).toFixed(1), +(km + 10).toFixed(1)]
+    .filter(x => x !== km && x > 0));
+  const odezva = document.createElement('div');
+  odezva.className = 'odezva';
+  Uloha.vyber({
+    kam: p, odezva, trida: 'velke',
+    moznosti: Uloha.zamichej([km, ...[...jine].slice(0, 3)])
+      .map(v => ({ klic: String(v), popis: String(v).replace('.', ',') + ' km' })),
+    spravnyKlic: String(km),
+    zpravaOk: `✅ ${u.popis}, takže ${cm} × ${String(u.cm).replace('.', ',')} = ${String(km).replace('.', ',')} km.`,
+    zpravaChyba: 'Zjisti nejdřív, kolik kilometrů odpovídá jednomu centimetru.',
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+/* ---- Druhy map ------------------------------------------------------------------------ */
+function druhyMap() {
+  const p = $('plocha');
+  const u = Uloha.nahodne(DRUHY_MAP);
+  const jine = Uloha.zamichej(DRUHY_MAP.filter(x => x.n !== u.n)).slice(0, 3);
+  p.innerHTML = `<div class="zadani">O jaký druh mapy jde?</div>
+    <div class="karta"><div class="obrazek">🧭</div><div class="popis">${u.o}</div></div>`;
+  const odezva = document.createElement('div');
+  odezva.className = 'odezva';
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: Uloha.zamichej([u, ...jine]).map(x => ({ klic: x.n, popis: x.n })),
+    spravnyKlic: u.n,
+    zpravaOk: `✅ ${u.n} – ${u.o}.`,
+    zpravaChyba: 'Zkus jinou možnost.',
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+/* ---- Poznej mapu ---------------------------------------------------------------------- */
+function ukazkyMap() {
+  const p = $('plocha');
+  const u = Uloha.nahodne(UKAZKY_MAP);
+  p.innerHTML = `<div class="zadani">Co je na obrázku?</div>${ukazkaMapy(u, 'foto-uloha')}`;
+  const odezva = document.createElement('div');
+  odezva.className = 'odezva';
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: Uloha.zamichej(UKAZKY_MAP).map(x => ({ klic: x.n, popis: x.n })),
+    spravnyKlic: u.n,
+    zpravaOk: `✅ ${u.n} – ${u.o}.`,
+    zpravaChyba: 'Je to fotografie, nebo kresba? Jsou tam barevné trasy? Vidíš jednotlivé domy, nebo celé město?',
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+const REZIMY = { pojmy, souradnice, meritko, druhyMap, ukazkyMap };
+function novaUloha() { REZIMY[rezim](); }
+
+document.querySelectorAll('#rezimy button').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('#rezimy button').forEach(x => x.classList.remove('active'));
+  b.classList.add('active');
+  rezim = b.dataset.rezim;
+  novaUloha();
+}));
+$('btnDalsi').addEventListener('click', novaUloha);
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === 'Enter') { e.preventDefault(); novaUloha(); }
+});
+novaUloha();
+</script>
+</body>
+</html>

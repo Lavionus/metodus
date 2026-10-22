@@ -1,0 +1,7 @@
+IMG-aj-02 · armchair
+
+Use case: scientific-educational. Square vocabulary flashcard for language learning. Friendly realistic watercolor and gouache with delicate contours on warm ivory paper and a subtle grounding shadow. Exactly one centered household object, fully visible with generous margin. No readable text, logo, brand, border, watermark, people or unrelated props. Subject: a cozy single armchair upholstered in muted ochre fabric.
+
+Nástroj: OpenAI image_gen
+Datum: 2026-10-15
+Výstup: aj-slovicka-armchair.png, aj-slovicka-armchair.webp

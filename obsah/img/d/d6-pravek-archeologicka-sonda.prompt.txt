@@ -1,0 +1,8 @@
+Use case: scientific-educational
+Asset type: interactive archaeology lesson scene, 3:2 landscape
+Primary request: clean vertical cross-section through an archaeological excavation trench showing readable stratigraphy from modern turf downward: recent soil, medieval occupation layer, older settlement layer, natural subsoil; embedded finds include pottery sherds, charcoal hearth, posthole, animal bone, coin and stone foundation
+Scene/backdrop: open excavation trench with a small strip of ground surface and tools outside the trench
+Style/medium: refined watercolor and gouache educational illustration with delicate ink, warm ivory paper
+Composition/framing: broad straight trench wall dominates the image; layers and finds are visually distinct and large enough for HTML hotspots
+Color palette: realistic soil browns, ochre, charcoal gray, muted green
+Constraints: archaeologically plausible superposition, no human remains, no labels, no text, no letters, no arrows, no numbers, no border, no watermark

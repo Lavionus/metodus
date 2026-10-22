@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🌠 Astronomický kalendář úkazů</title>
+<link rel="stylesheet" href="../common.css">
+<script src="../theme.js"></script>
+<script src="../podpis.js" defer></script>
+<script src="../kostra.js" defer></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding:20px}
+.container{max-width: var(--sirka-obsahu, 900px);margin:0 auto}
+h1{font-size:1.6rem;margin-bottom:6px;font-weight:600;text-align:center}
+.sub{text-align:center;color:var(--text-faint);font-size:.85rem;margin-bottom:18px}
+.controls{display:flex;justify-content:center;gap:10px;align-items:end;margin-bottom:20px}
+label{display:block;font-size:.78rem;color:var(--text-faint);margin-bottom:4px}
+input,select{background:var(--bg-input);border:1px solid var(--border-strong);border-radius:4px;color:var(--text);padding:9px;width:100px;text-align:center}
+.btn{background:var(--accent);color: var(--na-akcentu, #fff);border:none;padding:9px 16px;border-radius:6px;cursor:pointer;font-weight:600}
+.btn:hover{background:var(--accent)}
+.card{background:var(--bg-elevated);border:1px solid var(--border);border-radius:8px;padding:20px;margin-bottom:18px}
+h2{font-size:1.05rem;color:var(--accent);margin-bottom:12px}
+table{width:100%;border-collapse:collapse;font-size:.9rem}
+td,th{padding:8px 6px;border-bottom:1px solid var(--bg-hover);text-align:left}
+th{color:var(--text-faint);font-size:.75rem;text-transform:uppercase}
+tr:last-child td{border-bottom:none}
+.moon-emoji{font-size:1.1rem;margin-right:4px}
+.note{font-size:.78rem;color:var(--text-faint);margin-top:10px;line-height:1.5}
+.phase-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.phase-grid figure,.meteor-photo{margin:0;background:#02040a;border:1px solid var(--border);border-radius:8px;overflow:hidden}
+.phase-grid img{display:block;width:100%;aspect-ratio:1;object-fit:cover}
+.phase-grid figcaption,.meteor-photo figcaption{padding:7px 5px;color:var(--text-faint);font-size:.72rem;line-height:1.3;text-align:center;background:var(--bg-elevated)}
+.meteor-photo{max-width:380px;margin:0 auto 14px}
+.meteor-photo img{display:block;width:100%;aspect-ratio:1;object-fit:cover}
+@media(max-width:560px){body{padding:12px}.card{padding:14px}.phase-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.controls{align-items:stretch}.btn{align-self:end}}
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>🌠 Astronomický kalendář úkazů</h1>
+  <p class="sub">Meteorické roje, slunovraty/rovnodennosti a fáze měsíce pro zvolený rok</p>
+
+  <div class="controls">
+    <div><label>Rok</label><input type="number" id="year" min="1900" max="2200"></div>
+    <button class="btn" id="btnGo">Zobrazit</button>
+  </div>
+
+  <section class="card" aria-labelledby="phaseTitle">
+    <h2 id="phaseTitle">🌙 Osm kroků měsíčního cyklu</h2>
+    <div class="phase-grid">
+      <figure><img src="img/f/f9-mesic-nov.webp" alt="Černá obloha při novu; osvětlená polokoule Měsíce směřuje od Země."><figcaption>1. Nov</figcaption></figure>
+      <figure><img src="img/f/f9-mesic-dorustajici-srpek.webp" alt="Úzký dorůstající srpek Měsíce osvětlený zprava."><figcaption>2. Dorůstající srpek</figcaption></figure>
+      <figure><img src="img/f/f9-mesic-prvni-ctvrt.webp" alt="Měsíc v první čtvrti s osvětlenou pravou částí kotouče."><figcaption>3. První čtvrť</figcaption></figure>
+      <figure><img src="img/f/f9-mesic-dorustajici.webp" alt="Dorůstající Měsíc s osvětlenou většinou pravé části kotouče."><figcaption>4. Dorůstající Měsíc</figcaption></figure>
+      <figure><img src="img/f/f9-mesic-uplnek.webp" alt="Úplně osvětlený měsíční kotouč při úplňku."><figcaption>5. Úplněk</figcaption></figure>
+      <figure><img src="img/f/f9-mesic-couvajici.webp" alt="Couvající Měsíc s osvětlenou většinou levé části kotouče."><figcaption>6. Couvající Měsíc</figcaption></figure>
+      <figure><img src="img/f/f9-mesic-posledni-ctvrt.webp" alt="Měsíc v poslední čtvrti s osvětlenou levou částí kotouče."><figcaption>7. Poslední čtvrť</figcaption></figure>
+      <figure><img src="img/f/f9-mesic-couvajici-srpek.webp" alt="Úzký couvající srpek Měsíce osvětlený zleva."><figcaption>8. Couvající srpek</figcaption></figure>
+    </div>
+    <p class="note"><strong>Proč je nov černý?</strong> Měsíc je tehdy na obloze blízko Slunce a jeho osvětlená polokoule směřuje od Země. Černá karta tedy není chybějící obrázek.</p>
+  </section>
+
+  <div class="card">
+    <h2>☄️ Meteorické roje</h2>
+    <figure class="meteor-photo"><img src="img/f/f9-meteor.webp" alt="Několik jasných stop meteorů během výbuchu roje Alfa Monocerotid."><figcaption>Meteorický výbuch roje Alfa Monocerotid · NASA</figcaption></figure>
+    <table><thead><tr><th>Roj</th><th>Vrchol</th><th>Nejlepší pozorování</th></tr></thead><tbody id="showers"></tbody></table>
+    <p class="note">Data vrcholu jsou přibližná a rok od roku se mohou lišit o 1–2 dny. Pro pozorování hledej co nejtmavší oblohu po půlnoci, ideálně bez měsíčního svitu.</p>
+  </div>
+
+  <div class="card">
+    <h2>🌍 Slunovraty a rovnodennosti</h2>
+    <table><thead><tr><th>Úkaz</th><th>Datum a čas (v Česku)</th></tr></thead><tbody id="seasons"></tbody></table>
+    <p class="note">Vypočteno podle J. Meeuse (Astronomical Algorithms), přesnost asi na minutu. Datum se rok od roku posouvá (např. letní slunovrat 20. nebo 21. června), protože tropický rok nemá celý počet dní.</p>
+  </div>
+
+  <div class="card">
+    <h2>🌕 Úplňky a novy v roce</h2>
+    <table><thead><tr><th>Fáze</th><th>Datum a čas (v Česku)</th></tr></thead><tbody id="moons"></tbody></table>
+    <p class="note">Vypočteno lokálně podle J. Meeuse (Astronomical Algorithms), přesnost asi na minutu; čas je uveden v českém pásmu (SEČ/SELČ).</p>
+  </div>
+</div>
+<script>
+const $=id=>document.getElementById(id);
+$('year').value=new Date().getFullYear();
+
+const SHOWERS=[
+  {name:'Kvadrantidy', month:1, day:3, best:'noc z 3. na 4. ledna'},
+  {name:'Lyridy', month:4, day:22, best:'noc z 21. na 22. dubna'},
+  {name:'Eta Akvaridy', month:5, day:5, best:'noc z 5. na 6. května'},
+  {name:'Perseidy', month:8, day:12, best:'noc z 12. na 13. srpna'},
+  {name:'Orionidy', month:10, day:21, best:'noc z 21. na 22. října'},
+  {name:'Leonidy', month:11, day:17, best:'noc z 17. na 18. listopadu'},
+  {name:'Geminidy', month:12, day:13, best:'noc z 13. na 14. prosince'},
+  {name:'Ursidy', month:12, day:22, best:'noc z 21. na 22. prosince'},
+];
+
+const SEASONS=['🌸 Jarní rovnodennost','☀️ Letní slunovrat','🍂 Podzimní rovnodennost','❄️ Zimní slunovrat'];
+
+function fmtDate(y,m,d){
+  const dt=new Date(y,m-1,d);
+  return dt.toLocaleDateString('cs-CZ',{day:'numeric',month:'long',year:'numeric'});
+}
+// datum a čas v Česku (SEČ/SELČ) – okamžik úkazu je spočtený v UT
+function fmtOkamzik(d){
+  return d.toLocaleString('cs-CZ',{timeZone:'Europe/Prague',day:'numeric',month:'long',year:'numeric',hour:'2-digit',minute:'2-digit'});
+}
+
+// Slunovraty a rovnodennosti podle J. Meeuse (Astronomical Algorithms, kap. 27), přesnost ~1 min.
+const MEEUS_SEZONY=[
+  [2451623.80984,365242.37404,0.05169,-0.00411,-0.00057],
+  [2451716.56767,365241.62603,0.00325,0.00888,-0.00030],
+  [2451810.21715,365242.01767,-0.11575,0.00337,0.00078],
+  [2451900.05952,365242.74049,-0.06223,-0.00823,0.00032]];
+const MEEUS_CLENY=[[485,324.96,1934.136],[203,337.23,32964.467],[199,342.08,20.186],[182,27.85,445267.112],[156,73.14,45036.886],[136,171.52,22518.443],[77,222.54,65928.934],[74,296.72,3034.906],[70,243.58,9037.513],[58,119.81,33718.147],[52,297.17,150.678],[50,21.02,2281.226],[45,247.54,29929.562],[44,325.15,31555.956],[29,60.93,4443.417],[18,155.12,67555.328],[17,288.79,4562.452],[16,198.04,62894.029],[14,199.76,31436.921],[12,95.39,14577.848],[12,287.11,31931.756],[12,320.81,34777.259],[9,227.73,1222.114],[8,15.45,16859.074]];
+function deltaT(y){ // přibližné ΔT v sekundách (Espenak & Meeus, zjednodušeně)
+  const t=y-2000;
+  if(y>=2005&&y<2050)return 62.92+0.32217*t+0.005589*t*t;
+  if(y>=1986&&y<2005)return 63.86+0.3345*t-0.060374*t*t+0.0017275*t**3+0.000651814*t**4+0.00002373599*t**5;
+  if(y>=1961&&y<1986){const u=y-1975;return 45.45+1.067*u-u*u/260-u**3/718;}
+  if(y>=1941&&y<1961){const u=y-1950;return 29.07+0.407*u-u*u/233+u**3/2547;}
+  if(y>=1920&&y<1941){const u=y-1920;return 21.20+0.84493*u-0.076100*u*u+0.0020936*u**3;}
+  if(y>=1900&&y<1920){const u=y-1900;return -2.79+1.494119*u-0.0598939*u*u+0.0061966*u**3-0.000197*u**4;}
+  const u=(y-1820)/100;return -20+32*u*u-(y<2150?0.5628*(2150-y):0);
+}
+function sezona(rok,k){ // k: 0 jarní rovnodennost, 1 letní slunovrat, 2 podzimní rovnodennost, 3 zimní slunovrat
+  const Y=(rok-2000)/1000,c=MEEUS_SEZONY[k];
+  const jde0=c[0]+c[1]*Y+c[2]*Y*Y+c[3]*Y**3+c[4]*Y**4;
+  const T=(jde0-2451545)/36525,rad=Math.PI/180;
+  const W=(35999.373*T-2.47)*rad,dl=1+0.0334*Math.cos(W)+0.0007*Math.cos(2*W);
+  const S=MEEUS_CLENY.reduce((s,[A,B,C])=>s+A*Math.cos((B+C*T)*rad),0);
+  const jde=jde0+0.00001*S/dl;
+  return new Date((jde-2440587.5)*86400000-deltaT(rok)*1000); // UT
+}
+
+// Nov a úplněk podle J. Meeuse (Astronomical Algorithms, kap. 49), přesnost ~1 min.
+function fazeMesice(k){ // k celé = nov, k+0,5 = úplněk
+  const T=k/1236.85,r=Math.PI/180,sin=x=>Math.sin(x*r);
+  let jde=2451550.09766+29.530588861*k+0.00015437*T*T-0.000000150*T**3+0.00000000073*T**4;
+  const E=1-0.002516*T-0.0000074*T*T;
+  const M=2.5534+29.10535670*k-0.0000014*T*T-0.00000011*T**3;
+  const Mp=201.5643+385.81693528*k+0.0107582*T*T+0.00001238*T**3-0.000000058*T**4;
+  const F=160.7108+390.67050284*k-0.0016118*T*T-0.00000227*T**3+0.000000011*T**4;
+  const O=124.7746-1.56375588*k+0.0020672*T*T+0.00000215*T**3;
+  const uplnek=Math.abs(k%1)>0.25;
+  const a=uplnek?[-0.40614,0.17302,0.01614,0.01043,0.00734,-0.00515,0.00209]:[-0.40720,0.17241,0.01608,0.01039,0.00739,-0.00514,0.00208];
+  jde+=a[0]*sin(Mp)+a[1]*E*sin(M)+a[2]*sin(2*Mp)+a[3]*sin(2*F)+a[4]*E*sin(Mp-M)+a[5]*E*sin(Mp+M)+a[6]*E*E*sin(2*M)
+    -0.00111*sin(Mp-2*F)-0.00057*sin(Mp+2*F)+0.00056*E*sin(2*Mp+M)-0.00042*sin(3*Mp)+0.00042*E*sin(M+2*F)
+    +0.00038*E*sin(M-2*F)-0.00024*E*sin(2*Mp-M)-0.00017*sin(O)-0.00007*sin(Mp+2*M)+0.00004*sin(2*Mp-2*F)
+    +0.00004*sin(3*M)+0.00003*sin(Mp+M-2*F)+0.00003*sin(2*Mp+2*F)-0.00003*sin(Mp+M+2*F)+0.00003*sin(Mp-M+2*F)
+    -0.00002*sin(Mp-M-2*F)-0.00002*sin(3*Mp+M)+0.00002*sin(4*Mp);
+  return jde;
+}
+function rokVPraze(d){return +d.toLocaleDateString('en-GB',{timeZone:'Europe/Prague',year:'numeric'});}
+function findMoonPhases(year){
+  const events=[],k0=Math.floor((year-2000)*12.3685)-2;
+  for(let k=k0;k<k0+17;k++)for(const typ of ['new','full']){
+    const jde=fazeMesice(typ==='new'?k:k+0.5);
+    const date=new Date((jde-2440587.5)*86400000-deltaT(year)*1000);
+    if(rokVPraze(date)===year)events.push({type:typ,date});
+  }
+  return events.sort((a,b)=>a.date-b.date);
+}
+
+function render(){
+  const year=Number($('year').value)||new Date().getFullYear();
+
+  $('showers').innerHTML=SHOWERS.map(s=>`<tr><td>☄️ ${s.name}</td><td>${fmtDate(year,s.month,s.day)}</td><td>${s.best}</td></tr>`).join('');
+  $('seasons').innerHTML=SEASONS.map((n,k)=>`<tr><td>${n}</td><td>${fmtOkamzik(sezona(year,k))}</td></tr>`).join('');
+
+  const moons=findMoonPhases(year);
+  $('moons').innerHTML=moons.map(e=>`<tr><td><span class="moon-emoji">${e.type==='full'?'🌕':'🌑'}</span>${e.type==='full'?'Úplněk':'Nov'}</td><td>${fmtOkamzik(e.date)}</td></tr>`).join('');
+}
+
+$('btnGo').onclick=render;
+render();
+</script>
+</body>
+</html>

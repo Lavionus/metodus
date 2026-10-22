@@ -1,0 +1,6 @@
+Sada: IMG-cj-09 · věta „Sova sedí na dubu.“
+Scéna: Jedna sova sedí na silné dubové větvi, kolem zřetelné dubové listy a žaludy; čtvercový formát.
+Styl: teplý akvarel a kvaš, jemná inkoustová linka, slonovinové pozadí, tlumená šalvějová, jadeitová a okrová.
+Omezení: bez písmen, slov, popisků, log, vodoznaku, rámečku a bublin.
+Alt: Sova sedí na větvi dubu.
+Generátor: OpenAI image_gen · 2026-09-24

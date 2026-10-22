@@ -1,0 +1,2 @@
+Common specification: inf9-ai-ovoce.prompt.txt
+Variant: Large yellow-green pear with irregular knobby contours and long leaning stem.

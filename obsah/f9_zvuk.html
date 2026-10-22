@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Zvukové jevy</title>
+  <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
+  <script src="../theme.js"></script>
+  <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
+  <script src="../uloha.js"></script>
+  <style>
+    .vlna { width: min(420px, 94%); }
+    .vlna .osa { stroke: var(--text-muted); stroke-width: 2; }
+    .vlna .krivka { fill: none; stroke: var(--accent); stroke-width: 3; }
+    .vlna .krivka2 { fill: none; stroke: var(--warn); stroke-width: 3; }
+    .vlna .popis { fill: var(--text-faint); font-size: 11px; }
+    .uloha-text { max-width: 640px; font-size: 1.02rem; line-height: 1.6; }
+    .uloha-text b { color: var(--accent); }
+    .vzorec { font-family: 'Courier New', monospace; color: var(--text-muted); font-size: 0.95rem; }
+    .hluk-grid { display:grid; grid-template-columns:repeat(4,minmax(125px,1fr)); gap:10px; width:min(860px,96vw); }
+    .hluk-karta { padding:6px; border:1px solid var(--border); border-radius:10px; background:var(--bg-panel); color:var(--text); cursor:pointer; text-align:center; }
+    .hluk-karta:hover,.hluk-karta:focus-visible,.hluk-karta[aria-pressed="true"] { border-color:var(--accent); outline:2px solid var(--accent-soft); }
+    .hluk-karta img { display:block; width:100%; aspect-ratio:1; object-fit:cover; border-radius:7px; }
+    .hluk-karta b { display:block; margin-top:5px; font-size:.8rem; }
+    .hluk-vysledek { min-height:3em; max-width:640px; margin-top:10px; color:var(--text-muted); line-height:1.5; }
+    @media(max-width:650px){.hluk-grid{grid-template-columns:repeat(2,minmax(120px,1fr))}}
+  </style>
+</head>
+<body>
+  <h1>🔊 Zvukové jevy</h1>
+  <p class="podtitul">Pro 9. ročník: vznik a šíření zvuku, výška a hlasitost, ozvěna a ochrana sluchu.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Jak vzniká a šíří se zvuk</summary>
+    <div class="obsah">
+      <p>Zvuk vzniká, když něco <b>kmitá</b> – struna, hlasivky, membrána reproduktoru. Kmitající těleso
+        rozkmitá sousední částice vzduchu a ty předávají kmitání dál. Zvuk je tedy <b>mechanické vlnění</b>
+        a potřebuje látku: ve vakuu chybí částice, proto se tam nešíří. Nejrychleji se šíří v pevných
+        látkách, ve vzduchu asi <b>340 m/s</b>.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Výška tónu</h3><p>Určuje ji <b>frekvence</b> – počet kmitů za sekundu,
+          jednotka <b>hertz (Hz)</b>. Na obrázku vlny: hustší vlnky = vyšší tón.</p></article>
+        <article class="vyklad-karta"><h3>Hlasitost</h3><p>Určuje ji <b>amplituda</b> – jak velký je rozkmit.
+          Vyšší vlna = hlasitější zvuk. Hladina hlasitosti se udává v <b>decibelech (dB)</b>.</p></article>
+        <article class="vyklad-karta"><h3>Co slyšíme</h3><p>Zhruba 16 Hz až 20 000 Hz. Pod tím je
+          <b>infrazvuk</b>, nad tím <b>ultrazvuk</b> (sonar, lékařské vyšetření).</p></article>
+      </div>
+      <p>Vzdálenost spočítáš ze vztahu <b>s = v · t</b>. U <b>ozvěny</b> se zvuk odrazí od překážky
+        a vrací se, takže urazí cestu tam i zpět – vzdálenost překážky je jen polovina:
+        <b>s = v · t : 2</b>. To je nejčastější chyba. U bouřky: počet sekund mezi bleskem a hromem
+        vyděl třemi a máš přibližnou vzdálenost v kilometrech.</p>
+      <p>Hluk nad zhruba <b>85 dB</b> při dlouhém působení poškozuje sluch a ten se už neobnoví.
+        Chraň se špunty a přestávkami v tichu.</p>
+      <aside class="zapamatuj">Frekvence (Hz) = výška tónu, amplituda = hlasitost (dB).
+        Ve vzduchu v ≈ 340 m/s, ozvěna: s = v · t : 2.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: jak daleko je skála</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Křikneme proti skále a ozvěnu uslyšíme po 1,5 s. Jak daleko je skála? (rychlost zvuku 340 m/s)</p>
+      <ol class="kroky">
+        <li>Zapíšu, co znám: <b>v = 340 m/s</b>, <b>t = 1,5 s</b>, hledám vzdálenost skály <b>s</b>.</li>
+        <li>Spočítám celou dráhu zvuku: 340 · 1,5 = <b>510 m</b>.</li>
+        <li>Uvědomím si, že zvuk letěl ke skále <b>a zpátky</b> – 510 m je dvojnásobek vzdálenosti.</li>
+        <li>Vydělím dvěma: s = 510 : 2 = <b>255 m</b>.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Skála je asi 255 m daleko.</p>
+    </div>
+  </details>
+
+  <div class="rezimy" id="rezimy">
+    <button data-rezim="vlna" class="active">〰️ Čtení zvukové vlny</button>
+    <button data-rezim="rychlost">📏 Rychlost zvuku a ozvěna</button>
+    <button data-rezim="vlastnosti">🎚️ Výška a hlasitost</button>
+    <button data-rezim="sluch">👂 Sluch a hluk</button>
+    <button data-rezim="decibely">📶 Stupnice hluku</button>
+  </div>
+
+  <div class="plocha" id="plocha"></div>
+
+  <div class="ovladani">
+    <button class="hlavni" id="btnDalsi">Přeskočit →</button>
+    <span class="skore" id="skore"></span>
+  </div>
+
+  <p class="napoveda">
+    Zvuk je <b>mechanické vlnění</b> – potřebuje látkové prostředí, ve vakuu se nešíří.
+    Ve vzduchu se šíří rychlostí asi <b>340 m/s</b>. <b>Frekvence</b> určuje výšku tónu,
+    <b>amplituda</b> hlasitost.
+  </p>
+
+<script>
+const $ = id => document.getElementById(id);
+const skore = Uloha.skore('metodus_f9_zvuk', $('skore'));
+let rezim = 'vlna';
+const fmt = x => Number(Number(x).toFixed(2)).toLocaleString('cs-CZ');
+function odezvaEl() { const d = document.createElement('div'); d.className = 'odezva'; return d; }
+
+/* Dvě zvukové vlny nad sebou: f = frekvence (počet vln), a = amplituda. */
+function svgVlny(f1, a1, f2, a2) {
+  const krivka = (f, a, stred, trida) => {
+    const body = [];
+    for (let x = 0; x <= 380; x += 4) {
+      const y = stred - a * Math.sin(x / 380 * f * 2 * Math.PI);
+      body.push(`${x + 10} ${y.toFixed(1)}`);
+    }
+    return `<path class="${trida}" d="M${body.join(' L')}"/>`;
+  };
+  return `<svg class="vlna" viewBox="0 0 400 210">
+    <line class="osa" x1="10" y1="70" x2="395" y2="70"/>
+    ${krivka(f1, a1, 70, 'krivka')}
+    <text class="popis" x="12" y="16">A</text>
+    <line class="osa" x1="10" y1="170" x2="395" y2="170"/>
+    ${krivka(f2, a2, 170, 'krivka2')}
+    <text class="popis" x="12" y="116">B</text>
+  </svg>`;
+}
+function vlna() {
+  const p = $('plocha');
+  // frekvence losujeme ze dvou pásem a náhodně prohodíme, aby vyšší tón nebyl vždy B
+  let f1 = Uloha.nahodne([2, 3, 4]), f2 = Uloha.nahodne([5, 6, 8]);
+  if (Math.random() < 0.5) [f1, f2] = [f2, f1];
+  const a1 = Uloha.nahodne([18, 30, 45]), a2 = Uloha.nahodne([18, 30, 45].filter(x => x !== a1));
+  const otazka = Uloha.nahodne(['vyssi', 'hlasitejsi', 'frekvence']);
+  let zadani, spravny, jine;
+
+  if (otazka === 'vyssi') {
+    zadani = 'Který tón je <b>vyšší</b>?';
+    spravny = f1 > f2 ? 'tón A' : 'tón B';
+    jine = ['oba stejně vysoké', f1 > f2 ? 'tón B' : 'tón A', 'nedá se určit'];
+  } else if (otazka === 'hlasitejsi') {
+    zadani = 'Který tón je <b>hlasitější</b>?';
+    spravny = a1 > a2 ? 'tón A' : 'tón B';
+    jine = ['oba stejně hlasité', a1 > a2 ? 'tón B' : 'tón A', 'nedá se určit'];
+  } else {
+    zadani = 'Co na obrázku určuje <b>výšku</b> tónu?';
+    spravny = 'frekvence – počet kmitů za sekundu';
+    jine = ['amplituda – výška vlny', 'délka osy', 'barva čáry'];
+  }
+
+  p.innerHTML = `<div class="zadani uloha-text">${zadani}</div>
+    <div class="karta">${svgVlny(f1, a1, f2, a2)}</div>`;
+  const odezva = odezvaEl();
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: Uloha.zamichej([spravny, ...jine.filter(x => x !== spravny)]).map(t => ({ klic: t, popis: t })),
+    spravnyKlic: spravny,
+    zpravaOk: `✅ ${spravny}` + (otazka === 'vyssi' ? ' – hustější vlnky znamenají vyšší frekvenci.'
+      : otazka === 'hlasitejsi' ? ' – vyšší vlna znamená větší amplitudu.' : ''),
+    zpravaChyba: 'Hustota vlnek = frekvence (výška tónu), výška vlny = amplituda (hlasitost).',
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+function rychlost() {
+  const p = $('plocha');
+  const typ = Uloha.nahodne(['draha', 'ozvena', 'bourka']);
+  const v = 340;
+  let zadani, spravny, jine, jednotka;
+
+  if (typ === 'draha') {
+    const t = Uloha.nahodneCislo(2, 12);
+    const s = v * t;
+    zadani = `Jak daleko doletí zvuk ve vzduchu za <b>${Uloha.tvar(t, 'sekundu', 'sekundy', 'sekund')}</b>? (rychlost zvuku 340 m/s)`;
+    spravny = fmt(s); jednotka = ' m';
+    jine = [fmt(v / t), fmt(s / 2), fmt(v + t)];
+  } else if (typ === 'ozvena') {
+    const t = Uloha.nahodne([1, 1.5, 2, 2.5, 3]);
+    const s = v * t / 2;
+    zadani = `Křikneme a ozvěnu uslyšíme po <b>${fmt(t)} s</b>. Jak daleko je překážka?
+      (zvuk musí urazit cestu tam i zpět)`;
+    spravny = fmt(s); jednotka = ' m';
+    jine = [fmt(v * t), fmt(s / 2), fmt(3 * s)];
+  } else {
+    const t = Uloha.nahodneCislo(3, 15);
+    const s = v * t / 1000;
+    zadani = `Hrom uslyšíme <b>${Uloha.tvar(t, 'sekundu', 'sekundy', 'sekund')}</b> po blesku. Jak daleko je bouřka? (v km)`;
+    spravny = fmt(s); jednotka = ' km';
+    // t/3 je správné pravidlo palce (≈ 0,34 · t), proto ho mezi chybné nedáváme
+    jine = [fmt(s * 10), fmt(v * t), fmt(s * 2)];
+  }
+
+  p.innerHTML = `<div class="zadani uloha-text">${zadani}</div>
+    <div class="karta"><div class="vzorec">s = v · t &nbsp;·&nbsp; ozvěna: s = v · t / 2</div></div>`;
+  const odezva = odezvaEl();
+  Uloha.vyber({
+    kam: p, odezva, trida: 'velke',
+    moznosti: Uloha.zamichej([spravny, ...jine.filter(x => x !== spravny)]).map(t => ({ klic: t, popis: t + jednotka })),
+    spravnyKlic: spravny,
+    zpravaOk: `✅ ${spravny}${jednotka}` + (typ === 'bourka' ? ' – rychlý odhad: počet sekund vyděl třemi.' : ''),
+    zpravaChyba: 'U ozvěny nezapomeň, že zvuk urazí dvojnásobnou dráhu – tam i zpět.',
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+const VLASTNOSTI = [
+  { q: 'Co určuje výšku tónu?', a: 'frekvence kmitání', b: ['amplituda', 'rychlost zvuku', 'teplota vzduchu'] },
+  { q: 'Co určuje hlasitost zvuku?', a: 'amplituda kmitání', b: ['frekvence', 'barva tónu', 'vlnová délka'] },
+  { q: 'V jaké jednotce se udává frekvence?', a: 'hertz (Hz)', b: ['decibel', 'metr za sekundu', 'watt'] },
+  { q: 'V jaké jednotce se udává hladina hlasitosti?', a: 'decibel (dB)', b: ['hertz', 'joule', 'newton'] },
+  { q: 'Jaký rozsah frekvencí slyší zdravý mladý člověk?', a: 'zhruba 16 Hz až 20 000 Hz', b: ['0 až 100 Hz', '1 000 až 2 000 Hz', 'jen nad 20 000 Hz'] },
+  { q: 'Co je ultrazvuk?', a: 'zvuk s frekvencí vyšší, než člověk slyší', b: ['velmi hlasitý zvuk', 'zvuk pod 16 Hz', 'zvuk ve vakuu'] },
+  { q: 'Kde se zvuk šíří nejrychleji?', a: 'v pevných látkách', b: ['ve vzduchu', 've vodě', 've vakuu'] },
+  { q: 'Proč se zvuk nešíří ve vakuu?', a: 'chybí částice látky, které by kmitání předávaly', b: ['je tam příliš chladno', 'brání tomu gravitace', 'šíří se, ale pomalu'] },
+];
+function vlastnosti() {
+  const p = $('plocha');
+  const u = Uloha.nahodne(VLASTNOSTI);
+  p.innerHTML = `<div class="zadani uloha-text">${u.q}</div>`;
+  const odezva = odezvaEl();
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: Uloha.zamichej([u.a, ...u.b]).map(t => ({ klic: t, popis: t })),
+    spravnyKlic: u.a,
+    zpravaOk: `✅ ${u.a}`,
+    zpravaChyba: 'Frekvence = výška, amplituda = hlasitost, prostředí = rychlost šíření.',
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+const SLUCH = [
+  { q: 'Od jaké hladiny hluku hrozí při dlouhém působení poškození sluchu?', a: 'zhruba od 85 dB', b: ['od 20 dB', 'od 40 dB', 'až od 200 dB'] },
+  { q: 'Kolik decibelů má běžný hovor?', a: 'asi 60 dB', b: ['asi 10 dB', 'asi 120 dB', 'asi 200 dB'] },
+  { q: 'Co poškozuje sluch nejčastěji u mladých lidí?', a: 'hlasitý poslech ve sluchátkách a koncerty bez ochrany', b: ['čtení potmě', 'plavání', 'jízda na kole'] },
+  { q: 'Jak se dá chránit sluch na koncertě?', a: 'špunty do uší a přestávky v tišším prostředí', b: ['stát blíž reproduktoru', 'zvyknout si', 'zacpat uši rukama celý večer'] },
+  { q: 'Jak funguje ozvěna?', a: 'zvuk se odrazí od překážky a vrátí se k nám', b: ['zvuk se rozpadne', 'zvuk zrychlí', 'zvuk se změní na světlo'] },
+  { q: 'K čemu se využívá ultrazvuk?', a: 'k vyšetření v medicíně a k měření vzdálenosti (sonar)', b: ['k ohřevu vody', 'k výrobě elektřiny', 'ke svícení'] },
+  { q: 'Co je infrazvuk?', a: 'zvuk s frekvencí nižší, než člověk slyší', b: ['nejhlasitější zvuk', 'zvuk v pevné látce', 'ozvěna'] },
+  { q: 'Proč se v koncertních sálech používají měkké materiály?', a: 'pohlcují odrazy a zlepšují srozumitelnost zvuku', b: ['zesilují ozvěnu', 'zvyšují frekvenci', 'zrychlují zvuk'] },
+];
+function sluch() {
+  const p = $('plocha');
+  const u = Uloha.nahodne(SLUCH);
+  p.innerHTML = `<div class="zadani uloha-text">${u.q}</div>`;
+  const odezva = odezvaEl();
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: Uloha.zamichej([u.a, ...u.b]).map(t => ({ klic: t, popis: t })),
+    spravnyKlic: u.a,
+    zpravaOk: `✅ ${u.a}`,
+    zpravaChyba: 'Sluch se neobnovuje – hlasitý zvuk po delší dobu ho trvale poškozuje.',
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+const HLUKY = [
+  {id:'list',nazev:'šustění listu',db:10,popis:'Velmi tichý zvuk, slyšitelný hlavně v klidném prostředí.'},
+  {id:'sepot',nazev:'šepot',db:30,popis:'Tichá řeč z malé vzdálenosti.'},
+  {id:'rozhovor',nazev:'rozhovor',db:60,popis:'Běžný rozhovor z přibližně jednoho metru.'},
+  {id:'trida',nazev:'rušná třída',db:75,popis:'Dlouhý pobyt už může být únavný a zhoršuje soustředění.'},
+  {id:'sekacka',nazev:'sekačka',db:90,popis:'Při delší práci je vhodná ochrana sluchu.'},
+  {id:'motorka',nazev:'motorka',db:100,popis:'Bez ochrany je bezpečná doba poslechu krátká.'},
+  {id:'koncert',nazev:'koncert',db:110,popis:'Hrozí poškození sluchu; použij špunty a dělej přestávky.'},
+  {id:'letadlo',nazev:'letadlo při startu',db:120,popis:'Velmi hlasitý zvuk blízko hranice bolesti.'},
+];
+function decibely(){
+  const p=$('plocha');
+  p.innerHTML=`<div class="zadani uloha-text">Vyber zdroj zvuku a zjisti jeho přibližnou hladinu. Stupnice decibelů je <b>logaritmická</b>: rozdíl 10 dB vnímáme zhruba jako dvojnásobnou hlasitost.</div>
+    <div class="hluk-grid">${HLUKY.map((h,i)=>`<button class="hluk-karta" type="button" data-i="${i}" aria-pressed="false"><img src="img/f/f9-zvuk-${h.id}.webp" alt="${h.nazev}" width="768" height="768"><b>${h.nazev}</b></button>`).join('')}</div>
+    <div class="hluk-vysledek" id="hlukVysledek" aria-live="polite">Karty jsou seřazené od nejtiššího zdroje po nejhlasitější.</div>`;
+  p.querySelectorAll('.hluk-karta').forEach(b=>b.addEventListener('click',()=>{
+    p.querySelectorAll('.hluk-karta').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));
+    const h=HLUKY[+b.dataset.i]; $('hlukVysledek').innerHTML=`<b>${h.nazev}: přibližně ${h.db} dB.</b> ${h.popis}`;
+  }));
+}
+
+const REZIMY = { vlna, rychlost, vlastnosti, sluch, decibely };
+function novaUloha() { REZIMY[rezim](); }
+
+document.querySelectorAll('#rezimy button').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('#rezimy button').forEach(x => x.classList.remove('active'));
+  b.classList.add('active');
+  rezim = b.dataset.rezim;
+  novaUloha();
+}));
+$('btnDalsi').addEventListener('click', novaUloha);
+novaUloha();
+</script>
+</body>
+</html>

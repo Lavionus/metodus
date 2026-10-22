@@ -1,0 +1,2 @@
+Common specification: inf9-ai-ovoce.prompt.txt
+Variant: Deep-green apple with subtle russeting around the stem cavity, broad shoulders, rotated right.

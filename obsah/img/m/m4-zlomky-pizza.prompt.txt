@@ -1,0 +1,6 @@
+Sada: IMG-m-02 · pizza
+Jedna celá neporušená kulatá pizza margherita při přesném pohledu shora na slonovinovém povrchu.
+Styl: teplý akvarel a kvaš s jemnou linkou, přirozené barvy, zřetelný kruhový celek.
+Omezení: bez řezů, dílků, chybějící části, rukou, textu, číslic, značek, loga, rámečku a vodoznaku; dělicí čáry kreslí web.
+Alt: Celá nerozkrájená pizza při pohledu shora.
+Generátor: OpenAI image_gen · 2026-09-24

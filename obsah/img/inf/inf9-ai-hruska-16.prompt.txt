@@ -1,0 +1,2 @@
+Common specification: inf9-ai-ovoce.prompt.txt
+Variant: Matte dark-green pear with very short neck, wide shoulders and flattened base.

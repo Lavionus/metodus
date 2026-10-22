@@ -1,0 +1,7 @@
+Use case: scientific-educational
+Asset type: wide interactive background showing the title page and copyright page of a fictional book
+Reference image: prehled-kniha-pero.png; match its restrained watercolor washes, fine colored-pencil and ink edges, visible warm ivory paper texture, muted ochre-sage-blue palette and soft low-contrast daylight.
+Primary request: An open hardback book viewed almost straight from above on a plain warm desk. The left page is a clean title page with a subtle empty framed illustration area and generous blank regions for web-rendered author and title. The right page is a copyright or colophon page with several faint horizontal guide lines and six clearly separated blank regions for web-rendered edition, publisher, place, year and ISBN.
+Composition/framing: complete open book centered in a wide 3:2 composition, both pages fully visible and nearly rectangular, gutter in the center, enough blank space for precise HTML overlays.
+Materials/textures: natural cream paper, muted blue-grey cloth cover visible at edges, fine paper grain, understated bookbinding.
+Constraints: absolutely no readable text, letters, numbers, pseudo-writing, logos, brand marks, watermark, hands, pen or other objects; no perspective distortion that makes overlay alignment difficult.

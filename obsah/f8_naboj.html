@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Elektrický náboj</title>
+  <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
+  <script src="../theme.js"></script>
+  <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
+  <script src="../rec.js"></script>
+  <script src="../uloha.js"></script>
+  <style>
+    .situace { font-size: clamp(1.05rem, 3.6vw, 1.3rem); font-weight: 650; max-width: 600px; line-height: 1.5; text-align: center; }
+    .moznosti.dlouhe button { max-width: 300px; min-width: 200px; }
+    .naboje { width: min(380px, 100%); height: auto; }
+    .naboje .koule { stroke-width: 3; }
+    .naboje .kladna { fill: var(--danger); fill-opacity: 0.2; stroke: var(--danger); }
+    .naboje .zaporna { fill: var(--accent); fill-opacity: 0.2; stroke: var(--accent); }
+    .naboje .neutralni { fill: var(--bg-control); stroke: var(--border-strong); }
+    .naboje .znak { font-size: 20px; font-weight: 800; text-anchor: middle; dominant-baseline: central; }
+    .naboje .znak.plus { fill: var(--danger); }
+    .naboje .znak.minus { fill: var(--accent); }
+    .naboje .jmeno { fill: var(--text); font-size: 16px; font-weight: 700; text-anchor: middle; }
+    .naboje .popisek { fill: var(--text-muted); font-size: 13px; text-anchor: middle; }
+    .naboje .nit { stroke: var(--text-faint); stroke-width: 1.5; }
+    .naboje .sila { stroke: var(--ok); stroke-width: 3.5; marker-end: url(#hrot); }
+    .naboje .hrot { fill: var(--ok); }
+  </style>
+</head>
+<body>
+  <h1>🎈 Elektrický náboj a elektrostatika</h1>
+  <p class="podtitul">Pro 8. ročník: kladný a záporný náboj, přitahování a odpuzování, zelektrování třením, elektroskop, bouřka a bleskosvod.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Co je elektrický náboj</summary>
+    <div class="obsah">
+      <p>Každá látka se skládá z atomů. V jádře atomu jsou <b>protony</b> s kladným nábojem a neutrony bez náboje,
+        v obalu jsou <b>elektrony</b> se záporným nábojem. Když má těleso stejně protonů jako elektronů, je
+        <b>elektricky neutrální</b> (nenabité). Elektrický náboj se značí <b>Q</b> a jeho jednotkou je <b>coulomb (C)</b>.</p>
+      <svg class="naboje" viewBox="0 0 380 120" role="img" aria-label="Souhlasné náboje se odpuzují, nesouhlasné se přitahují.">
+        <defs><marker id="hrotV" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path class="hrot" d="M0 0 L10 5 L0 10 z"/></marker></defs>
+        <circle class="koule kladna" cx="40" cy="50" r="22"/><text class="znak plus" x="40" y="50">+</text>
+        <circle class="koule kladna" cx="140" cy="50" r="22"/><text class="znak plus" x="140" y="50">+</text>
+        <line class="sila" style="marker-end:url(#hrotV)" x1="22" y1="50" x2="2" y2="50"/><line class="sila" style="marker-end:url(#hrotV)" x1="158" y1="50" x2="178" y2="50"/>
+        <text class="popisek" x="90" y="105">odpuzují se</text>
+        <circle class="koule kladna" cx="240" cy="50" r="22"/><text class="znak plus" x="240" y="50">+</text>
+        <circle class="koule zaporna" cx="340" cy="50" r="22"/><text class="znak minus" x="340" y="50">−</text>
+        <line class="sila" style="marker-end:url(#hrotV)" x1="264" y1="50" x2="286" y2="50"/><line class="sila" style="marker-end:url(#hrotV)" x1="316" y1="50" x2="294" y2="50"/>
+        <text class="popisek" x="290" y="105">přitahují se</text>
+      </svg>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Zelektrování třením</h3><p>Třením se z jednoho tělesa na druhé <b>přesunou elektrony</b>. Těleso, které je získá, je <b>záporné</b>; které je ztratí, je <b>kladné</b>. Náboj nevzniká, jen se přesouvá.</p></article>
+        <article class="vyklad-karta"><h3>Síly mezi náboji</h3><p><b>Souhlasné</b> náboje se <b>odpuzují</b>, <b>nesouhlasné</b> se <b>přitahují</b>. Nabité těleso přitahuje i drobná nenabitá tělesa (papírky, vlasy).</p></article>
+        <article class="vyklad-karta"><h3>Elektroskop</h3><p>Ukáže, zda je těleso nabité. Náboj přejde na ručku i stojan, mají souhlasný náboj, a proto se ručka <b>vychýlí</b>.</p></article>
+      </div>
+      <p><b>Vodiče</b> (kovy, lidské tělo, vlhká zem, slaná voda) náboj vedou, <b>izolanty</b> (plasty, sklo, guma, porcelán,
+        suchý vzduch) ho nevedou. Za <b>bouřky</b> se v oblacích oddělí obrovské náboje a mezi mrakem a zemí přeskočí
+        výboj – <b>blesk</b>. <b>Bleskosvod</b> je kovový vodič, který výboj bezpečně svede do země.</p>
+      <aside class="zapamatuj">Souhlasné náboje se odpuzují, nesouhlasné přitahují. Třením se přesouvají elektrony: kdo je získá, je záporný; kdo je ztratí, je kladný.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: balonek a vlasy</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Otřeš nafouknutý balonek o suché vlasy. Balonek pak vlasy přitahuje a vlasy samotné stojí do stran. Proč?</p>
+      <ol class="kroky">
+        <li>Třením se přesunou elektrony: z vlasů přejdou <b>na balonek</b>.</li>
+        <li>Balonek má teď elektronů víc, než má protonů – je nabitý <b>záporně</b>.</li>
+        <li>Vlasy elektrony ztratily – jsou nabité <b>kladně</b>.</li>
+        <li>Balonek (−) a vlasy (+) mají nesouhlasné náboje, proto se <b>přitahují</b>.</li>
+        <li>Jednotlivé vlasy mají všechny kladný náboj – souhlasné náboje se <b>odpuzují</b>, a tak vlasy stojí od sebe.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Balonek je záporný, vlasy kladné: balonek a vlasy se přitahují, vlasy navzájem se odpuzují.</p>
+    </div>
+  </details>
+
+  <div class="rezimy" id="rezimy">
+    <button data-rezim="sily" class="active">🧲 Přitahují se, nebo odpuzují?</button>
+    <button data-rezim="naboj">➕ Kladný, nebo záporný?</button>
+    <button data-rezim="situace">🎈 Co se stane</button>
+    <button data-rezim="bourka">⛈️ Bezpečně za bouřky</button>
+  </div>
+
+  <div class="plocha" id="plocha"></div>
+
+  <div class="ovladani">
+    <button class="hlavni" id="btnDalsi">Přeskočit →</button>
+    <span class="skore" id="skore"></span>
+  </div>
+
+  <p class="napoveda">
+    Proton má náboj <b>kladný</b>, elektron <b>záporný</b>, neutron žádný. Víc protonů než elektronů → těleso kladné,
+    víc elektronů → záporné, stejně → neutrální. Jednotka náboje: <b>coulomb (C)</b>.
+    <b>Souhlasné náboje se odpuzují, nesouhlasné přitahují</b>; nabité těleso přitahuje i drobná nenabitá tělesa.
+    Při tření se přesouvají <b>elektrony</b>. Elektroskop ukazuje náboj vychýlením ručky.
+    Vodiče: kovy, tělo, vlhká zem. Izolanty: plast, sklo, guma, suchý vzduch.
+    Za bouřky: ne pod osamělý strom, ne na vrchol, ven z vody, v autě jsi v bezpečí; přikrč se s nohama u sebe.
+    Vzdálenost bouřky: počet sekund od blesku do hromu × 340 m (asi 3 s na 1 km).
+  </p>
+
+<script>
+const $ = id => document.getElementById(id);
+const skore = Uloha.skore('metodus_f8_naboj', $('skore'));
+let rezim = 'sily';
+const C = n => Uloha.cislo(n);
+const velke = t => t[0].toUpperCase() + t.slice(1);
+
+function poloz(u) {
+  const p = $('plocha');
+  p.innerHTML = u.html;
+  const odezva = document.createElement('div');
+  odezva.className = 'odezva';
+  Uloha.vyber({
+    kam: p, odezva, trida: u.trida || 'dlouhe',
+    moznosti: u.moznosti.map(m => ({ klic: m.klic, popis: m.popis, ikona: m.ikona })),
+    spravnyKlic: u.spravny,
+    zpravaOk: u.ok,
+    zpravaChyba: k => (u.moznosti.find(m => m.klic === k) || {}).proc || 'Zkus jinou možnost.',
+    poSpravne: n => { skore.vyhodnot(n); if (u.poOk) u.poOk(p); },
+    dalsi: novaUloha,
+    prodleva: n => n ? 2800 : 4000,
+  });
+  p.appendChild(odezva);
+}
+
+/* ---- Přitahují se, nebo odpuzují? (SVG dvojice) ---------------------------------------- */
+/* náboj: '+', '-', '0' (nenabitá kulička), 'p' (nenabitý papírek) */
+function teleso(x, n, jmeno, pocet) {
+  const y = 95;
+  let s = `<line class="nit" x1="${x}" y1="0" x2="${x}" y2="${y - 34}"/>`;
+  if (n === 'p') {
+    s += `<rect class="koule neutralni" x="${x - 24}" y="${y - 16}" width="48" height="32" rx="3"/>
+      <text class="znak plus" x="${x - 9}" y="${y}">+</text><text class="znak minus" x="${x + 9}" y="${y}">−</text>`;
+  } else {
+    const tr = n === '+' ? 'kladna' : n === '-' ? 'zaporna' : 'neutralni';
+    s += `<circle class="koule ${tr}" cx="${x}" cy="${y}" r="34"/>`;
+    const znaky = n === '0' ? ['+', '−', '+', '−'] : Array(pocet).fill(n === '+' ? '+' : '−');
+    const poz = [[-14, -12], [14, -12], [-14, 12], [14, 12]];
+    znaky.forEach((z, i) => { s += `<text class="znak ${z === '+' ? 'plus' : 'minus'}" x="${x + poz[i][0]}" y="${y + poz[i][1]}">${z}</text>`; });
+  }
+  return s + `<text class="jmeno" x="${x}" y="${y + 58}">${jmeno}</text>`;
+}
+const POPIS_N = { '+': 'kladně nabitá', '-': 'záporně nabitá', '0': 'nenabitá', 'p': 'nenabitý papírek' };
+
+function genSily() {
+  if (Math.random() < 0.3) {
+    /* jaký náboj má B, když je odpuzována? */
+    const a = Uloha.nahodne(['+', '-']);
+    const kl = a === '+' ? 'kladny' : 'zaporny';
+    return {
+      html: `<div class="zadani">Kulička A je nabitá <b>${a === '+' ? 'kladně' : 'záporně'}</b>. Kuličku B <b>odpuzuje</b>. Jaký náboj má kulička B?</div>
+        <div class="karta"><svg class="naboje" viewBox="0 0 380 170" role="img" aria-label="Kulička A a kulička B, které se odpuzují.">
+          ${teleso(130, a, 'A', Uloha.nahodneCislo(2, 4))}
+          <line class="nit" x1="250" y1="0" x2="262" y2="61"/>
+          <circle class="koule neutralni" cx="268" cy="95" r="34"/><text class="znak" x="268" y="95" style="fill: var(--text)">?</text>
+          <text class="jmeno" x="268" y="153">B</text></svg></div>`,
+      trida: 'dve',
+      moznosti: [
+        { klic: 'kladny', ikona: '➕', popis: 'kladný', proc: kl === 'kladny' ? '' : '❌ Kladná a záporná kulička by se přitahovaly. Odpuzují se jen souhlasné náboje.' },
+        { klic: 'zaporny', ikona: '➖', popis: 'záporný', proc: kl === 'zaporny' ? '' : '❌ Záporná a kladná kulička by se přitahovaly. Odpuzují se jen souhlasné náboje.' },
+        { klic: 'zadny', ikona: '⚪', popis: 'nenabitá', proc: '❌ Nenabitou kuličku by nabitá kulička A přitahovala, ne odpuzovala.' },
+      ],
+      spravny: kl,
+      ok: `✅ Odpuzují se jen souhlasné náboje, takže B je nabitá stejně jako A – ${a === '+' ? 'kladně' : 'záporně'}.`,
+    };
+  }
+  const dvojice = Uloha.nahodne([['+', '+'], ['-', '-'], ['+', '-'], ['-', '+'], ['+', 'p'], ['-', 'p'], ['p', '-'], ['0', '0'], ['+', '-'], ['-', '-']]);
+  const [a, b] = dvojice;
+  const nabite = x => x === '+' || x === '-';
+  let spravny, ok;
+  if (nabite(a) && nabite(b)) {
+    spravny = a === b ? 'odpuzuji' : 'pritahuji';
+    ok = a === b ? '✅ Obě tělesa mají souhlasný náboj – odpuzují se.' : '✅ Tělesa mají nesouhlasné náboje – přitahují se.';
+  } else if (nabite(a) || nabite(b)) {
+    spravny = 'pritahuji';
+    ok = '✅ Nabité těleso přitahuje i drobná nenabitá tělesa, třeba papírky.';
+  } else {
+    spravny = 'nepusobi';
+    ok = '✅ Obě tělesa jsou nenabitá, elektrickou silou na sebe nepůsobí.';
+  }
+  const PROC = {
+    pritahuji: spravny === 'odpuzuji' ? 'Přitahují se nesouhlasné náboje (+ a −). Tady mají obě tělesa stejný náboj.'
+      : 'Dvě nenabitá tělesa se elektrickou silou nepřitahují – žádné z nich není nabité.',
+    odpuzuji: spravny === 'pritahuji' && nabite(a) && nabite(b) ? 'Odpuzují se jen souhlasné náboje. Plus a minus se přitahují.'
+      : spravny === 'pritahuji' ? 'Nenabité těleso nemůže být odpuzováno – nabité těleso drobná nenabitá tělesa přitahuje.'
+      : 'Odpuzovat se mohou jen dvě tělesa se stejným nábojem. Tady nejsou nabitá vůbec.',
+    nepusobi: nabite(a) && nabite(b) ? 'Obě tělesa jsou nabitá, takže na sebe elektrickou silou působí.'
+      : 'Jedno těleso je nabité – a nabité těleso přitahuje i drobná nenabitá tělesa.',
+  };
+  const popisAB = `A: ${POPIS_N[a]}, B: ${POPIS_N[b]}`;
+  return {
+    html: `<div class="zadani">Co udělají tělesa <b>A</b> a <b>B</b>?</div>
+      <div class="karta"><svg class="naboje" viewBox="0 0 380 170" role="img" aria-label="${popisAB}">
+        <defs><marker id="hrot" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path class="hrot" d="M0 0 L10 5 L0 10 z"/></marker></defs>
+        ${teleso(120, a, 'A', Uloha.nahodneCislo(2, 4))}${teleso(260, b, 'B', Uloha.nahodneCislo(2, 4))}<g class="odhal"></g>
+      </svg><div class="popis">${popisAB}</div></div>`,
+    trida: 'dve',
+    moznosti: [
+      { klic: 'pritahuji', ikona: '➡️⬅️', popis: 'přitahují se' },
+      { klic: 'odpuzuji', ikona: '⬅️➡️', popis: 'odpuzují se' },
+      { klic: 'nepusobi', ikona: '⏸️', popis: 'nepůsobí na sebe' },
+    ].map(m => ({ ...m, proc: m.klic === spravny ? '' : '❌ ' + PROC[m.klic] })),
+    spravny, ok,
+    poOk: p => {
+      const g = p.querySelector('.odhal');
+      if (!g || spravny === 'nepusobi') return;
+      g.innerHTML = spravny === 'odpuzuji'
+        ? '<line class="sila" x1="80" y1="95" x2="40" y2="95"/><line class="sila" x1="300" y1="95" x2="340" y2="95"/>'
+        : '<line class="sila" x1="160" y1="95" x2="182" y2="95"/><line class="sila" x1="220" y1="95" x2="198" y2="95"/>';
+    },
+  };
+}
+
+/* ---- Kladný, nebo záporný? ------------------------------------------------------------ */
+const DVOJICE_TRENI = [
+  /* [kdo elektrony ztratí, kdo je získá, popis činnosti]; mn = množné číslo (kvůli tvaru slovesa) */
+  [{ n: 'skleněná tyč' }, { n: 'hedvábný šátek' }, 'Skleněnou tyč třeš hedvábným šátkem'],
+  [{ n: 'vlasy', mn: true }, { n: 'balonek' }, 'Balonek třeš o suché vlasy'],
+  [{ n: 'vlněná šála' }, { n: 'plastová tyč' }, 'Plastovou tyč třeš vlněnou šálou'],
+  [{ n: 'kočičí srst' }, { n: 'ebonitová tyč' }, 'Ebonitovou tyč třeš kočičí srstí'],
+  [{ n: 'vlasy', mn: true }, { n: 'plastový hřeben' }, 'Češeš se plastovým hřebenem'],
+];
+const sl = (t, jedn, mnoz) => t.mn ? mnoz : jedn;
+const ZNAK = { kladny: { ikona: '➕', popis: 'kladný' }, zaporny: { ikona: '➖', popis: 'záporný' }, neutralni: { ikona: '⚪', popis: 'žádný (je neutrální)' } };
+function moznostiNaboje(spravny, proc) {
+  return Object.entries(ZNAK).map(([k, z]) => ({ klic: k, ikona: z.ikona, popis: z.popis, proc: k === spravny ? '' : '❌ ' + proc[k] }));
+}
+
+function genNaboj() {
+  const typ = Uloha.nahodne(['castice', 'treni', 'treni']);
+  if (typ === 'castice') {
+    const p = Uloha.nahodneCislo(3, 20);
+    const e = Math.max(0, p + Uloha.nahodne([-2, -1, 0, 0, 1, 2]));
+    const spravny = p > e ? 'kladny' : p < e ? 'zaporny' : 'neutralni';
+    const prot = Uloha.tvar(p, 'proton', 'protony', 'protonů'), el = Uloha.tvar(e, 'elektron', 'elektrony', 'elektronů');
+    return {
+      html: `<div class="zadani">Jaký celkový náboj má tato částice?</div>
+        <div class="karta"><div class="situace">Částice má ${prot}, ${el} a několik neutronů.</div></div>`,
+      trida: 'dve',
+      moznosti: moznostiNaboje(spravny, {
+        kladny: 'Kladný náboj má částice, která má víc protonů než elektronů. Porovnej obě čísla.',
+        zaporny: 'Záporný náboj má částice, která má víc elektronů než protonů. Porovnej obě čísla.',
+        neutralni: 'Neutrální je částice jen tehdy, když má stejně protonů jako elektronů. Neutrony náboj nemají.',
+      }),
+      spravny,
+      ok: spravny === 'neutralni' ? `✅ ${velke(prot)} a ${el} – kladný a záporný náboj se vyrovnají, částice je neutrální.`
+        : spravny === 'kladny' ? `✅ Protonů je víc (${p} > ${e}), proto je náboj kladný – je to kladný iont.`
+        : `✅ Elektronů je víc (${e} > ${p}), proto je náboj záporný – je to záporný iont.`,
+    };
+  }
+  const [ztrati, ziska, cinnost] = Uloha.nahodne(DVOJICE_TRENI);
+  const ptaSe = Math.random() < 0.5 ? ztrati : ziska;
+  const spravny = ptaSe === ztrati ? 'kladny' : 'zaporny';
+  const X = velke(ptaSe.n);
+  return {
+    html: `<div class="zadani">Zelektrování třením:</div>
+      <div class="karta"><div class="situace">${cinnost}. Elektrony přitom přecházejí:
+      <b>${ztrati.n}</b> ${sl(ztrati, 'je ztrácí', 'je ztrácejí')}, <b>${ziska.n}</b> ${sl(ziska, 'je získává', 'je získávají')}.
+      Jaký náboj ${sl(ptaSe, 'má', 'mají')} teď <b>${ptaSe.n}</b>?</div></div>`,
+    trida: 'dve',
+    moznosti: moznostiNaboje(spravny, {
+      kladny: `${X} elektrony ${sl(ptaSe, 'získává', 'získávají')} – přebytek elektronů znamená záporný náboj, ne kladný.`,
+      zaporny: `${X} elektrony ${sl(ptaSe, 'ztrácí', 'ztrácejí')} – převáží protony, takže náboj je kladný, ne záporný.`,
+      neutralni: 'Tření náboj nevytváří, ale přesouvá elektrony. Kdo je ztratí, je kladný; kdo je získá, je záporný – neutrální nezůstane ani jedno těleso.',
+    }),
+    spravny,
+    ok: spravny === 'kladny'
+      ? `✅ ${X} elektrony ${sl(ptaSe, 'ztrácí', 'ztrácejí')}, převáží protony – náboj je kladný.`
+      : `✅ ${X} elektrony ${sl(ptaSe, 'získává', 'získávají')}, mají jich přebytek – náboj je záporný.`.replace('mají jich', ptaSe.mn ? 'mají jich' : 'má jich'),
+  };
+}
+
+/* ---- Co se stane (situace) ----------------------------------------------------------- */
+const SITUACE = [
+  { s: 'Nabitý plastový hřeben přiblížíš k drobným papírkům na stole.', ok: 'Nabité těleso přitahuje drobná nenabitá tělesa – papírky vyskočí k hřebenu.',
+    m: [['papírky se přitáhnou k hřebenu', ''], ['papírky se od hřebenu odsunou', 'Odpuzovat by se mohly jen souhlasně nabité předměty. Nenabité papírky se k nabitému hřebenu přitahují.'],
+      ['nic se nestane', 'Nabité těleso přitahuje i nenabitá lehká tělesa. Papírky jsou dost lehké, aby se pohnuly.']] },
+  { s: 'Nabitou plastovou tyč přiblížíš k tenkému proudu vody z kohoutku.', ok: 'Voda je přitahována nabitou tyčí, proud se ohne směrem k ní.',
+    m: [['proud vody se ohne k tyči', ''], ['proud se odkloní od tyče', 'Nenabitý proud vody nabité těleso přitahuje, ne odpuzuje.'],
+      ['proud poteče rovně', 'Tenký proud vody je lehký a nabitá tyč ho viditelně přitáhne.']] },
+  { s: 'Nafouknutý balonek otřeš o vlasy a přiložíš ke zdi.', ok: 'Nabitý balonek je přitahován ke zdi a chvíli na ní drží.',
+    m: [['balonek na zdi chvíli drží', ''], ['balonek hned spadne', 'Bez tření by spadl. Nabitý balonek ale zeď přitahuje.'],
+      ['balonek se od zdi odrazí', 'Zeď není nabitá souhlasným nábojem, nemůže balonek odpuzovat – naopak ho přitahuje.']] },
+  { s: 'Dva balonky otřené o vlasy zavěsíš na nitích vedle sebe.', ok: 'Oba balonky mají stejný (záporný) náboj, a proto se odpuzují.',
+    m: [['balonky se od sebe odtáhnou', ''], ['balonky se k sobě přitáhnou', 'Přitahují se nesouhlasné náboje. Oba balonky se nabily stejně.'],
+      ['visí rovně vedle sebe', 'Oba jsou nabité, takže na sebe působí silou – stejné náboje se odpuzují.']] },
+  { s: 'Nabitou tyčí se dotkneš kuličky nenabitého elektroskopu.', ok: 'Část náboje přejde na elektroskop. Ručka a stojan mají souhlasný náboj, odpuzují se a ručka se vychýlí.',
+    m: [['ručka elektroskopu se vychýlí', ''], ['ručka zůstane v klidu', 'Náboj přejde z tyče na elektroskop, jehož části se pak navzájem odpuzují.'],
+      ['elektroskop se vybije', 'Elektroskop byl nenabitý – náboj naopak získal.']] },
+  { s: 'Nabitého elektroskopu se dotkneš prstem.', ok: 'Tělo je vodič, náboj z elektroskopu odvede do země a ručka klesne.',
+    m: [['elektroskop se vybije, ručka klesne', ''], ['výchylka ručky se zvětší', 'Prst náboj nepřidá, ale odvede – tělo je vodič.'],
+      ['nic se nestane', 'Lidské tělo je vodič, náboj jím odteče do země.']] },
+  { s: 'Kuličky nabitého elektroskopu se dotkneš suchým plastovým pravítkem.', ok: 'Plast je izolant, náboj neodvede a ručka zůstane vychýlená.',
+    m: [['ručka zůstane vychýlená', ''], ['elektroskop se vybije', 'Vybije ho jen vodič. Suchý plast je izolant.'],
+      ['výchylka se zvětší', 'Nenabité pravítko žádný náboj nepřidá.']] },
+  { s: 'Svlékáš svetr z umělých vláken v suchém, vytopeném pokoji.', ok: 'Třením se svetr i vlasy nabijí a mezi nimi přeskakují drobné výboje – praská to a ve tmě i jiskří.',
+    m: [['praská to a ve tmě jiskří', ''], ['svetr zvlhne', 'Vlhkost s tím nesouvisí – jde o přeskakování drobných výbojů.'],
+      ['svetr se zahřeje do horka', 'Tření tu jen nabije svetr a vlasy, nijak výrazně ho nezahřeje.']] },
+  { s: 'Projdeš se v ponožkách po koberci a pak sáhneš na kovovou kliku.', ok: 'Při chůzi se nabiješ a na kovové klice se náboj vybije – ucítíš malou ránu.',
+    m: [['ucítíš malou elektrickou ránu', ''], ['klika se zahřeje', 'Výboj je slabý a krátký, kliku nezahřeje. Ucítíš ho jako štípnutí.'],
+      ['nic se nestane', 'Chůzí po koberci se nabiješ a kov je vodič – náboj se vybije.']] },
+  { s: 'Proč se cisterna s benzínem při stáčení paliva uzemňuje kovovým kabelem?', ok: 'Kabel odvede nahromaděný náboj do země, aby nepřeskočila jiskra, která by zapálila páry benzínu.',
+    m: [['aby se odvedl náboj a nevznikla jiskra', ''], ['aby se benzín ochladil', 'Kabel nic nechladí – odvádí elektrický náboj.'],
+      ['aby cisterna stála pevně', 'Kabel nemá nosnou funkci, jde o odvedení náboje do země.']] },
+  { s: 'Proč se elektrostatické pokusy nedaří ve vlhkém vzduchu?', ok: 'Vlhkost na površích a ve vzduchu náboj postupně odvádí, tělesa se rychle vybijí.',
+    m: [['vlhkost náboj odvádí, tělesa se vybijí', ''], ['ve vlhku vzniká víc náboje', 'Je to naopak – náboj ve vlhku rychle uteče.'],
+      ['vlhký vzduch je lepší izolant', 'Lepší izolant je suchý vzduch. Vlhkost náboj odvádí.']] },
+  { s: 'Co dělá bleskosvod na střeše domu?', ok: 'Bleskosvod je kovový vodič spojený se zemí, který výboj blesku bezpečně svede do země.',
+    m: [['svede výboj blesku do země', ''], ['zabrání vzniku bouřky', 'Bouřku nic na střeše nezastaví. Bleskosvod jen bezpečně odvede výboj.'],
+      ['přitahuje mraky nad dům', 'Mraky nepřitahuje. Je to vodič, který blesk odvede do země místo přes dům.']] },
+  { s: 'Co je blesk?', ok: 'Blesk je obrovský elektrický výboj mezi nabitými mraky nebo mezi mrakem a zemí.',
+    m: [['elektrický výboj mezi mrakem a zemí nebo mezi mraky', ''], ['hořící plyn v mraku', 'V mraku nic nehoří – světlo vzniká při elektrickém výboji.'],
+      ['odraz slunečního světla na kapkách', 'To je duha. Blesk je elektrický výboj.']] },
+  { s: 'Elektrikářské kleště mají rukojeti obalené gumou nebo plastem. Proč?', ok: 'Guma a plast jsou izolanty – náboj (proud) jimi neprojde do ruky.',
+    m: [['guma a plast jsou izolanty', ''], ['guma a plast jsou vodiče', 'Vodiče náboj vedou – tím by rukojeť člověka neochránila.'],
+      ['aby kleště byly lehčí', 'Hlavním důvodem je izolace, ne hmotnost.']] },
+];
+
+function genSituace() {
+  const o = Uloha.nahodne(SITUACE);
+  return {
+    html: `<div class="zadani">Co se stane?</div><div class="karta"><div class="situace">${o.s}</div></div>`,
+    moznosti: Uloha.zamichej(o.m).map(([t, proc]) => ({ klic: t, popis: t, proc: proc ? '❌ ' + proc : '' })),
+    spravny: o.m[0][0],
+    ok: '✅ ' + o.ok,
+  };
+}
+
+/* ---- Bezpečně za bouřky ---------------------------------------------------------------- */
+const MISTA = [
+  { kde: 'na otevřené louce', ok: ['přikrčíš se v nejnižším místě s nohama u sebe', 'Snížíš se a nohama u sebe omezíš krokové napětí, kdyby blesk udeřil poblíž.'],
+    spatne: [['schováš se pod osamělý strom', 'Blesk udeří nejčastěji do nejvyššího bodu v okolí – osamělý strom je nejnebezpečnější místo.'],
+      ['lehneš si na zem', 'Vleže se dotýkáš země velkou plochou, a když blesk udeří poblíž, projde tělem proud zemí. Lepší je přikrčit se s nohama u sebe.'],
+      ['postavíš se a zvedneš deštník nad hlavu', 'Deštník tě udělá nejvyšším bodem louky – blesk si hledá nejvyšší místo.']] },
+  { kde: 'u rybníka a koupeš se', ok: ['hned vylezeš z vody a odejdeš od břehu', 'Voda vede elektrický proud a hladina je rovná plocha, kde jsi nejvyšším bodem.'],
+    spatne: [['zůstaneš ve vodě, ta tě ochrání', 'Voda tě nechrání – vede proud, a když blesk udeří do hladiny, šíří se do okolí.'],
+      ['schováš se pod vysoký strom na břehu', 'Vysoký strom u vody přitahuje blesk. Odejdi raději do budovy nebo auta.'],
+      ['ponoříš se celý pod hladinu', 'Pod hladinou proud z blesku tělem projde také. Z vody je třeba vylézt.']] },
+  { kde: 'na horském hřebeni', ok: ['co nejdřív sestoupíš níž a vyhneš se kovovým lanům', 'Hřeben a vrchol jsou nejvyšší místa a kovová lana a řetězy vedou proud.'],
+    spatne: [['zůstaneš na vrcholu a budeš bouřku pozorovat', 'Vrchol je nejvyšší bod v krajině – blesk tam udeří nejspíš.'],
+      ['přidržíš se kovového řetězu na skále', 'Kov je vodič. Řetězem by proud z blesku prošel až k tobě.'],
+      ['schováš se pod osamělou borovici na vrcholu', 'Osamělý strom na vrcholu je to nejvyšší široko daleko – blesk do něj snadno udeří.']] },
+  { kde: 'v autě na silnici', ok: ['zůstaneš v zavřeném autě', 'Kovová karoserie funguje jako Faradayova klec – proud blesku jde po povrchu auta do země.'],
+    spatne: [['vystoupíš a schováš se pod strom u silnice', 'Strom přitahuje blesk. Uvnitř auta jsi v bezpečí.'],
+      ['vystoupíš a postavíš se vedle auta', 'Venku jsi bez ochrany. Bezpečně je uvnitř zavřeného auta.'],
+      ['otevřeš okna a vystrčíš ruku ven', 'Chrání tě zavřená kovová karoserie – ven nic nevystrkuj.']] },
+  { kde: 'na kole na polní cestě', ok: ['slezeš z kola, odejdeš od něj a ukryješ se v budově', 'Kovové kolo je vodič a na otevřené cestě jsi nejvyšším bodem. Nejlepší úkryt je budova nebo auto.'],
+    spatne: [['rychle pokračuješ přes otevřené pole', 'Na otevřeném poli jsi nejvyšším bodem v okolí.'],
+      ['schováš se pod osamělý strom u cesty', 'Osamělý strom přitahuje blesk – je to velmi nebezpečné místo.'],
+      ['zastavíš a opřeš se o kovový sloup', 'Kovový sloup je vysoký vodič, do kterého blesk rád udeří.']] },
+  { kde: 'doma', ok: ['zůstaneš uvnitř a nebudeš se sprchovat', 'Budova s bleskosvodem chrání. Výboj se ale může šířit kovovým potrubím a vodou, proto se za bouřky nesprchuj.'],
+    spatne: [['půjdeš se osprchovat', 'Voda a kovové potrubí mohou vést proud z blesku, který udeří do budovy.'],
+      ['postavíš se k otevřenému oknu a díváš se ven', 'U otevřeného okna můžeš být zasažen výbojem nebo ohrožen větrem – zůstaň dál od oken.'],
+      ['vyběhneš ven sebrat prádlo ze šňůry', 'Venku jsi bez ochrany a kovová šňůra je vodič. Zůstaň uvnitř.']] },
+];
+
+function genBourka() {
+  if (Math.random() < 0.35) {
+    const t = Uloha.nahodneCislo(2, 15);
+    const d = 340 * t;
+    return {
+      html: `<div class="zadani">Jak daleko je bouřka?</div>
+        <div class="karta"><div class="situace">Od záblesku do zahřmění napočítáš <b>${Uloha.tvar(t, 'sekundu', 'sekundy', 'sekund')}</b>.
+        Zvuk se ve vzduchu šíří rychlostí asi 340 m/s.</div></div>`,
+      trida: 'dve',
+      moznosti: Uloha.zamichej([
+        { klic: 'ok', popis: `asi ${C(d)} m`, proc: '' },
+        { klic: 'km', popis: `asi ${C(t)} km`, proc: '❌ Zvuk za 1 s urazí jen asi 340 m, ne 1 km. Na 1 km potřebuje asi 3 s.' },
+        { klic: 'malo', popis: `asi ${C(34 * t)} m`, proc: '❌ Rychlost zvuku je 340 m/s, ne 34 m/s. Vynásob 340 · počet sekund.' },
+        { klic: 'svetlo', popis: `asi ${C(300000 * t)} km`, proc: '❌ 300 000 km/s je rychlost světla. Záblesk vidíš prakticky hned, zpoždění má jen zvuk.' },
+      ]),
+      spravny: 'ok',
+      ok: `✅ s = v · t = 340 m/s · ${C(t)} s = ${C(d)} m (asi ${C(Math.round(d / 100) / 10)} km). Světlo dorazí prakticky okamžitě.`,
+    };
+  }
+  const m = Uloha.nahodne(MISTA);
+  const spatne = Uloha.zamichej(m.spatne).slice(0, 2);
+  return {
+    html: `<div class="zadani">Blíží se bouřka. Jak se zachováš?</div>
+      <div class="karta"><div class="situace">Jsi ${m.kde}.</div></div>`,
+    moznosti: Uloha.zamichej([[m.ok[0], ''], ...spatne]).map(([t, proc]) => ({ klic: t, popis: t, proc: proc ? '❌ ' + proc : '' })),
+    spravny: m.ok[0],
+    ok: '✅ ' + m.ok[1],
+  };
+}
+
+const GEN = { sily: genSily, naboj: genNaboj, situace: genSituace, bourka: genBourka };
+function novaUloha() { poloz(GEN[rezim]()); }
+
+document.querySelectorAll('#rezimy button').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('#rezimy button').forEach(x => x.classList.remove('active'));
+  b.classList.add('active');
+  rezim = b.dataset.rezim;
+  novaUloha();
+}));
+$('btnDalsi').addEventListener('click', novaUloha);
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === 'Enter') { e.preventDefault(); novaUloha(); }
+});
+novaUloha();
+</script>
+</body>
+</html>

@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Zdraví a první pomoc</title>
+  <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
+  <script src="../theme.js"></script>
+  <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
+  <script src="../data/tisnova_cisla.js"></script>
+  <script src="../uloha.js"></script>
+  <style>
+    .uloha-text { max-width: 640px; font-size: 1.02rem; line-height: 1.6; }
+    .uloha-text b { color: var(--accent); }
+    .cislo-tisnove { font-size: clamp(2.6rem, 11vw, 4rem); font-weight: 700; color: var(--danger);
+      font-variant-numeric: tabular-nums; }
+    .kroky { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; max-width: 700px; }
+    .kroky button {
+      background: var(--bg-control); border: 2px solid var(--border-strong); color: var(--text);
+      border-radius: 10px; padding: 10px 14px; font-size: 0.9rem; font-family: inherit; cursor: pointer;
+      max-width: 220px;
+    }
+    .kroky button:hover:not(:disabled) { border-color: var(--accent); }
+    .kroky button.hotovy { background: var(--accent-soft); border-color: var(--accent); opacity: 0.7; }
+    .kroky button.spatne { background: var(--danger); border-color: var(--danger); color: var(--na-akcentu, #fff); }
+    .situace { font-size: 1.15rem; font-weight: 700; max-width: 600px; }
+    .karta-prvni-pomoc { width: min(100%, 360px); aspect-ratio: 1; object-fit: cover; border-radius: 14px;
+      border: 1px solid var(--border); box-shadow: 0 5px 18px #0002; }
+    .lista { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; max-width: 740px;
+      color: var(--text-faint); font-size: 0.8rem; }
+    .lista span { background: var(--bg-control); border: 1px solid var(--border); border-radius: 8px; padding: 5px 11px; }
+  </style>
+</head>
+<body>
+  <h1>🚑 Zdraví a první pomoc</h1>
+  <p class="podtitul">Pro 8. ročník: tísňová volání, postup při úrazech a základy resuscitace.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Jak postupovat při první pomoci</summary>
+    <div class="obsah">
+      <p>První pomoc nemusí být dokonalá, ale musí přijít včas. Nejhorší je neudělat nic. Zároveň platí, že
+        <b>nesmíš se sám stát dalším zraněným</b> – proto vždy začínáš kontrolou bezpečnosti místa
+        (provoz, oheň, elektřina, voda).</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Tísňová čísla</h3><p><b>155</b> záchranná služba, <b>150</b> hasiči (oheň, plyn),
+          <b>158</b> policie, <b>112</b> jednotné evropské číslo. Volání je zdarma.</p></article>
+        <article class="vyklad-karta"><h3>Co říct operátorovi</h3><p><b>Co se stalo, kde to je, kolik je zraněných</b> a své jméno.
+          Zapni hlasitý odposlech, řiď se pokyny a hovor nech ukončit operátora.</p></article>
+        <article class="vyklad-karta"><h3>Vědomí a dýchání</h3><p>Hlasitě oslov, jemně zatřes rameny. Zakloň hlavu, zvedni bradu a
+          <b>nejvýše 10 sekund</b> sleduj, jestli dýchá <b>normálně</b>.</p></article>
+        <article class="vyklad-karta"><h3>Resuscitace</h3><p>Nereaguje a nedýchá normálně → volej 155 a hned stlačuj
+          <b>střed hrudní kosti</b>, hloubka <b>5–6 cm</b>, tempo <b>100–120 za minutu</b>. Vdechy jen pokud je umíš (30 : 2),
+          jinak stlačuj bez přestávek.</p></article>
+      </div>
+      <p><b>Typická chyba:</b> považovat ojedinělé lapavé nádechy za dýchání. Pokud si nejsi jistý, že dýchá normálně,
+        jednej, jako by nedýchal, a řiď se operátorem. Když někdo přinese <b>AED</b>, zapni ho a poslouchej jeho pokyny;
+        smí ho použít kdokoli. Kdo nereaguje, ale normálně dýchá a není podezření na úraz, ulož ho <b>na bok</b>
+        a dýchání dál sleduj.</p>
+      <p>U úrazů nejdřív zabraň zhoršení: krvácení zastav <b>tlakem čistého krytí přímo na ránu</b>, popáleninu
+        <b>chlaď tekoucí chladnou vodou 20 minut</b>, zlomeninu nenarovnávej, jen znehybni v poloze, v jaké je.</p>
+      <aside class="zapamatuj">Bezpečnost → reakce → dýchání → 155 → pomoc podle stavu → zůstaň u postiženého.
+        Nedýchá normálně = stlačuj hrudník 100–120× za minutu do příjezdu záchranky.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: spolužák leží a nereaguje</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Na chodbě leží spolužák. Na oslovení nereaguje. Co uděláš a v jakém pořadí?</p>
+      <ol class="kroky">
+        <li>Rozhlédnu se, jestli mi nic nehrozí (třeba kluzká podlaha, rozbité sklo). Teprve pak jdu k němu.</li>
+        <li>Hlasitě ho oslovím a jemně zatřesu rameny – nereaguje. Zavolám na okolí o pomoc.</li>
+        <li>Zakloním mu hlavu, zvednu bradu a nejvýše 10 sekund sleduji, jestli <b>dýchá normálně</b>.</li>
+        <li>Volám <b>155</b> (nebo 112) na hlasitý odposlech a řeknu, co se stalo, kde jsme a že nereaguje.</li>
+        <li>Když nedýchá normálně, hned stlačuji střed hrudní kosti 100–120× za minutu a někoho pošlu pro AED.
+          Když dýchá normálně a nejde o úraz, uložím ho na bok a dýchání sleduji.</li>
+        <li>Zůstanu u něj a řídím se pokyny operátora, dokud mě nevystřídá záchranář.</li>
+      </ol>
+      <p class="vysledek-ukazky">Bezpečnost → reakce → dýchání → 155 → stlačování hrudníku (nebo poloha na boku) → zůstat u postiženého do příjezdu záchranky.</p>
+    </div>
+  </details>
+
+  <div class="rezimy" id="rezimy">
+    <button data-rezim="tisnova" class="active">📞 Tísňová volání</button>
+    <button data-rezim="situace">🩹 Co udělat</button>
+    <button data-rezim="postup">🧭 Postup krok za krokem</button>
+    <button data-rezim="resuscitace">❤️ Resuscitace</button>
+  </div>
+
+  <div class="plocha" id="plocha"></div>
+
+  <div class="ovladani">
+    <button class="hlavni" id="btnDalsi">Přeskočit →</button>
+    <span class="skore" id="skore"></span>
+  </div>
+
+  <div class="lista">
+    <span>155 zdravotnická záchranná služba</span><span>150 hasiči</span>
+    <span>158 policie</span><span>112 jednotné evropské číslo</span>
+    <span>Volání je zdarma z každého telefonu.</span>
+  </div>
+
+  <p class="napoveda">
+    Při volání nahlas <b>co se stalo, kde to je, kolik je zraněných</b> a své jméno.
+    Hovor ukončuje operátor, ne ty. Než pomůžeš, vždy nejdřív <b>zkontroluj bezpečnost místa</b>.
+  </p>
+
+<script>
+const $ = id => document.getElementById(id);
+const skore = Uloha.skore('metodus_pr8_prvni_pomoc', $('skore'));
+let rezim = 'tisnova';
+function odezvaEl() { const d = document.createElement('div'); d.className = 'odezva'; return d; }
+
+// Tísňová čísla jsou společná data rodiny „Lidské tělo a zdraví" (data/tisnova_cisla.js).
+const TISNOVA = METODUS_TISNOVA.map(t => ({ c: t.cislo, kdo: t.kdo, kdy: t.kdy }));
+const PRIPADY = [
+  { s: 'Spolužák upadl na hřišti, nehýbe se a nereaguje.', c: '155' },
+  { s: 'Ze sousedova balkonu jde hustý kouř.', c: '150' },
+  { s: 'Někdo se vloupal do školní šatny.', c: '158' },
+  { s: 'Jsi na dovolené v Itálii a stala se nehoda.', c: '112' },
+  { s: 'Kamarádka si při pádu z kola zlomila ruku.', c: '155' },
+  { s: 'V lese hoří tráva u cesty.', c: '150' },
+  { s: 'V parku se pere skupina lidí.', c: '158' },
+  { s: 'Cítíš doma silný zápach plynu.', c: '150' },
+];
+function tisnova() {
+  const p = $('plocha');
+  const typ = Math.random() < 0.5;
+  const odezva = odezvaEl();
+  if (typ) {
+    const u = Uloha.nahodne(PRIPADY);
+    const t = TISNOVA.find(x => x.c === u.c);
+    p.innerHTML = `<div class="zadani uloha-text">${u.s}<br>Které číslo zavoláš?</div>`;
+    Uloha.vyber({
+      kam: p, odezva, trida: 'velke',
+      moznosti: Uloha.zamichej(TISNOVA.map(x => x.c)).map(c => ({ klic: c, popis: c })),
+      spravnyKlic: u.c,
+      zpravaOk: `✅ ${u.c} – ${t.kdo}`,
+      zpravaChyba: '155 = zdraví, 150 = oheň a technická pomoc, 158 = policie, 112 = univerzální.',
+      poSpravne: skore.vyhodnot, dalsi: novaUloha,
+    });
+  } else {
+    const t = Uloha.nahodne(TISNOVA);
+    p.innerHTML = `<div class="zadani">Komu patří tísňové číslo</div>
+      <div class="karta"><div class="cislo-tisnove">${t.c}</div></div>`;
+    Uloha.vyber({
+      kam: p, odezva,
+      moznosti: Uloha.zamichej(TISNOVA.map(x => x.kdo)).map(k => ({ klic: k, popis: k })),
+      spravnyKlic: t.kdo,
+      zpravaOk: `✅ ${t.c} – ${t.kdo}: ${t.kdy}`,
+      zpravaChyba: 'Podívej se na lištu s čísly pod úlohou.',
+      poSpravne: skore.vyhodnot, dalsi: novaUloha,
+    });
+  }
+  p.appendChild(odezva);
+}
+
+const SITUACE = [
+  { s: 'Kamarád má hluboce pořezanou ruku a silně krvácí.',
+    a: 'přitlačit čisté krytí přímo na ránu a přivolat záchrannou službu', b: ['omýt ránu v potoce a nechat ji volně krvácet', 'ránu vysušit fénem a pak ji zalepit náplastí', 'ponořit ruku do teplé vody, aby se krev rozředila'],
+    img: 'krvaceni', alt: 'Pomocník v rukavicích tlačí čisté krytí na poraněné předloktí.' },
+  { s: 'Někdo si opařil ruku horkou vodou.',
+    a: 'chladit popáleninu tekoucí chladnou vodou 20 minut', b: ['potřít popáleninu máslem nebo sádlem', 'propíchnout puchýře a nechat je oschnout', 'zabalit ruku do deky a zahřát ji'],
+    img: 'popalenina', alt: 'Zarudlé předloktí se chladí proudem vody z kohoutku.' },
+  { s: 'Člověk leží v bezvědomí, ale normálně dýchá.',
+    a: 'pokud není podezření na úraz, uložit ho na bok, volat 155 a sledovat dýchání', b: ['posadit ho opřeného o zeď, dát mu facku a čekat, až se probere', 'dát mu napít vody, přidržet mu hlavu a pak ho nechat odpočívat', 'hned zahájit stlačování hrudníku, i když dýchá úplně normálně'],
+    img: 'poloha', alt: 'Normálně dýchající člověk je uložený ve stabilní poloze na boku.' },
+  { s: 'Kamarádka má podezření na zlomeninu nohy.',
+    a: 'znehybnit končetinu v poloze, v jaké je, a volat pomoc', b: ['zkusit kost opatrně narovnat do správné polohy', 'nechat ji chodit, aby noha neztuhla', 'natáhnout nohu silou a pevně ji obvázat'] },
+  { s: 'Někdo se dusí soustem, nemůže mluvit ani kašlat.',
+    a: 'předklonit ho, 5× udeřit mezi lopatky, pak 5× Heimlichův manévr a střídat', b: ['dát mu rychle napít vody, aby sousto spláchl, a pak chvíli počkat', 'poplácat ho po tváři a říct mu, ať se pomalu a zhluboka nadechne', 'položit ho na záda, zvednout mu nohy a čekat, až sousto vyjde'] },
+  { s: 'Dusící se člověk přestane reagovat a upadne do bezvědomí.',
+    a: 'opatrně ho položit na zem, volat 155 a zahájit stlačování hrudníku', b: ['dál ho jen bouchat do zad, dokud se neprobere', 'uložit ho na bok a odejít pro pomoc ke kamarádům', 'posadit ho a pokusit se mu prsty vytáhnout sousto'] },
+  { s: 'Člověka bodla vosa a rychle mu otéká obličej.',
+    a: 'okamžitě volat 155, může jít o alergickou reakci', b: ['dát studený obklad a poslat ho domů', 'uvařit mu teplý čaj a počkat, až to splaskne', 'nechat ho lehnout na břicho a odpočinout si'] },
+  { s: 'Spolužák omdlel, ale za chvíli se probral.',
+    a: 'nechat ho ležet, zvednout mu nohy a informovat dospělého', b: ['posadit ho a dát mu silnou kávu', 'polít ho studenou vodou, aby se vzpamatoval', 'hned ho poslat domů samotného pěšky'] },
+  { s: 'Vidíš tonoucího ve vodě, sám plaveš průměrně.',
+    a: 'volat pomoc a podat mu předmět nebo hodit plovací pomůcku ze břehu', b: ['okamžitě skočit do vody za ním a sám ho doplavat a vytáhnout', 'čekat na břehu a dívat se, jestli nakonec vyplave sám', 'utíkat domů pro rodiče a do té doby nikomu nevolat'] },
+  { s: 'Někdo má úpal – je mu horko, točí se mu hlava.',
+    a: 'přemístit do stínu, chladit a dát pít po malých doušcích', b: ['nechat ho na slunci, ať se zahřeje a zpotí', 'dát mu horký čaj a vypít ho naráz', 'zabalit ho do teplé deky a uložit'] },
+];
+function situace() {
+  const p = $('plocha');
+  const u = Uloha.nahodne(SITUACE);
+  p.innerHTML = `${u.img ? `<img class="karta-prvni-pomoc" src="img/pr/pr8-prvni-pomoc-${u.img}.webp" alt="${u.alt}" width="768" height="768">` : ''}
+    <div class="zadani uloha-text">${u.s}<br><b>Co uděláš?</b></div>`;
+  const odezva = odezvaEl();
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: Uloha.zamichej([u.a, ...u.b]).map(t => ({ klic: t, popis: t })),
+    spravnyKlic: u.a,
+    zpravaOk: `✅ ${u.a}`,
+    zpravaChyba: 'Nejdřív zabraň zhoršení stavu a přivolej odbornou pomoc.',
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+const POSTUP = [
+  { t: 'zkontroluj bezpečnost místa', info: 'nesmíš se sám stát dalším zraněným', img: 'bezpecnost', alt: 'Pomocník se před přiblížením rozhlíží po nebezpečí.' },
+  { t: 'zjisti, jestli postižený reaguje', info: 'hlasitě ho oslov a jemně zatřes rameny', img: 'reakce', alt: 'Pomocník hlasitě oslovuje člověka a kontroluje jeho reakci dotykem ramen.' },
+  { t: 'zprůchodni dýchací cesty a zjisti dýchání', info: 'zakloň hlavu, zvedni bradu a nejvýše 10 sekund sleduj normální dýchání', img: 'dychani', alt: 'Pomocník po záklonu hlavy sleduje dýchání člověka.' },
+  { t: 'zavolej 155 (nebo 112)', info: 'zapni hlasitý odposlech a řiď se pokyny operátora', img: 'volani', alt: 'Pomocník telefonuje na hlasitý odposlech a zapojuje dalšího svědka.' },
+  { t: 'poskytni první pomoc podle stavu', info: 'při nenormálním dýchání ihned zahaj stlačování hrudníku a nech někoho přinést AED', img: 'stlacovani', alt: 'Pomocnice správně stlačuje hrudník dospělého na pevné podložce.' },
+  { t: 'zůstaň u postiženého do příjezdu záchranky', info: 'sleduj jeho stav a řiď se pokyny operátora', img: 'poloha', alt: 'Pomocnice sleduje dýchání člověka uloženého na boku.' },
+];
+function postup() {
+  const p = $('plocha');
+  const poradi = Uloha.zamichej([...POSTUP]);
+  const hotove = [];
+  let chyboval = false, hotovo = false;
+
+  p.innerHTML = `<div class="zadani uloha-text">Seřaď postup první pomoci –
+    klepej na kroky v pořadí, jak je uděláš.</div>
+    <img class="karta-prvni-pomoc" id="obrazekPostupu" src="img/pr/pr8-prvni-pomoc-${POSTUP[0].img}.webp" alt="${POSTUP[0].alt}" width="768" height="768">`;
+  const box = document.createElement('div');
+  box.className = 'kroky';
+  const odezva = odezvaEl();
+  poradi.forEach(k => {
+    const b = document.createElement('button');
+    b.textContent = k.t;
+    b.addEventListener('click', () => {
+      if (hotovo) return;
+      if (k !== POSTUP[hotove.length]) {
+        chyboval = true;
+        Uloha.trhni(b);
+        b.classList.add('spatne');
+        setTimeout(() => b.classList.remove('spatne'), 420);
+        odezva.className = 'odezva chyba';
+        odezva.textContent = `Ještě ne – teď je na řadě jiný krok (${hotove.length + 1}. z ${POSTUP.length}).`;
+        return;
+      }
+      hotove.push(k);
+      b.classList.add('hotovy');
+      b.disabled = true;
+      odezva.className = 'odezva ok';
+      odezva.textContent = `${hotove.length}. ${k.t} – ${k.info}`;
+      const dalsi=POSTUP[hotove.length];
+      if(dalsi){$('obrazekPostupu').src=`img/pr/pr8-prvni-pomoc-${dalsi.img}.webp`;$('obrazekPostupu').alt=dalsi.alt;}
+      if (hotove.length === POSTUP.length) {
+        hotovo = true;
+        odezva.textContent = '✅ Celý postup první pomoci je ve správném pořadí!';
+        skore.vyhodnot(!chyboval);
+        Uloha.posun(novaUloha, Uloha.PRODLEVA + 500);
+      }
+    });
+    box.appendChild(b);
+  });
+  p.appendChild(box);
+  p.appendChild(odezva);
+}
+
+const RESUSCITACE = [
+  { q: 'Kdy zahájíš resuscitaci?', a: 'když postižený nereaguje a nedýchá normálně', b: ['vždy při bezvědomí, i když normálně dýchá', 'když má postižený zlomenou nohu nebo ruku', 'když silně krvácí, ale je při vědomí'] },
+  { q: 'Kam tlačíš při stlačování hrudníku dospělého?', a: 'doprostřed hrudní kosti', b: ['na levou stranu hrudi k srdci', 'na břicho pod žebry', 'na krk pod bradou'] },
+  { q: 'Jak hluboko se stlačuje hrudník dospělého?', a: 'asi 5–6 cm', b: ['asi 1–2 cm', 'asi 10–12 cm', 'jen lehce se dotknout'] },
+  { q: 'Jaké je doporučené tempo stlačování?', a: 'asi 100–120 stlačení za minutu', b: ['asi 30–40 stlačení za minutu', 'asi 200–220 stlačení za minutu', 'co nejpomaleji, ať se neunavíš'] },
+  { q: 'Jaký je poměr stlačení a vdechů, pokud dýchání provádíš?', a: '30 stlačení a 2 vdechy', b: ['5 stlačení a 5 vdechů', '2 stlačení a 30 vdechů', '10 stlačení a 1 vdech'] },
+  { q: 'Co dělat, když si nejsi jistý umělým dýcháním?', a: 'stlačovat hrudník bez přestávek – i to výrazně pomáhá', b: ['nedělat nic, abys postiženému neublížil', 'čekat na záchranku a postiženého se nedotýkat', 'jen postiženého přikrýt dekou a hlídat ho'] },
+  { q: 'Kdy resuscitaci ukončíš?', a: 'až tě vystřídá záchranář, nebo se postižený probere', b: ['vždy po pěti minutách, i když záchranka nedorazila', 'když se unavíš už při prvních stlačeních', 'hned, jakmile dovoláš na číslo 155'] },
+  { q: 'K čemu slouží AED (automatizovaný externí defibrilátor)?', a: 'sám vyhodnotí srdeční rytmus a hlasem tě navede, co dělat', b: ['změří tělesnou teplotu a tlak postiženého', 'nahradí volání 155, záchranku pak volat nemusíš', 'smí ho použít jen lékař nebo záchranář'] },
+  { q: 'Během resuscitace někdo přinese AED. Co uděláš?', a: 'zapnout ho, nalepit elektrody podle obrázku a řídit se jeho pokyny', b: ['nechat ho stranou, dokud nepřijede záchranka', 'přestat stlačovat a čekat, až se postižený probere', 'nejdřív si přečíst celý návod a pak se rozhodnout'] },
+];
+function resuscitace() {
+  const p = $('plocha');
+  const u = Uloha.nahodne(RESUSCITACE);
+  p.innerHTML = `<img class="karta-prvni-pomoc" src="img/pr/pr8-prvni-pomoc-stlacovani.webp" alt="Pomocnice správně stlačuje hrudník dospělého na pevné podložce." width="768" height="768">
+    <div class="zadani uloha-text">${u.q}</div>`;
+  const odezva = odezvaEl();
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: Uloha.zamichej([u.a, ...u.b]).map(t => ({ klic: t, popis: t })),
+    spravnyKlic: u.a,
+    zpravaOk: `✅ ${u.a}`,
+    zpravaChyba: 'Zapamatuj si: 30 stlačení : 2 vdechy, hloubka 5–6 cm, tempo 100–120 za minutu.',
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+const REZIMY = { tisnova, situace, postup, resuscitace };
+function novaUloha() { REZIMY[rezim](); }
+
+document.querySelectorAll('#rezimy button').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('#rezimy button').forEach(x => x.classList.remove('active'));
+  b.classList.add('active');
+  rezim = b.dataset.rezim;
+  novaUloha();
+}));
+$('btnDalsi').addEventListener('click', novaUloha);
+novaUloha();
+</script>
+</body>
+</html>

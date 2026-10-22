@@ -1,0 +1,2 @@
+Common specification: inf9-ai-ovoce.prompt.txt
+Variant: Small bright-yellow compact teardrop pear with fine red freckles.

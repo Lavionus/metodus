@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Voda a vzduch</title>
+  <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
+  <script src="../theme.js"></script>
+  <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
+  <script src="../uloha.js"></script>
+  <style>
+    .kolac { width: min(260px, 68%); }
+    .kolac .popisek { fill: var(--text-muted); font-size: 12px; }
+    .kolac-legenda { list-style: none; margin: 8px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 4px 14px; justify-content: center; font-size: .88rem; }
+    .kolac-legenda li { display: flex; align-items: center; gap: 6px; }
+    .kolac-legenda i { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
+    .kroky { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; max-width: 700px; }
+    .kroky button {
+      background: var(--bg-control); border: 2px solid var(--border-strong); color: var(--text);
+      border-radius: 10px; padding: 10px 14px; font-size: 0.9rem; font-family: inherit; cursor: pointer;
+      max-width: 210px;
+    }
+    .kroky button:hover:not(:disabled) { border-color: var(--accent); }
+    .kroky button.hotovy { background: var(--accent-soft); border-color: var(--accent); opacity: 0.7; }
+    .kroky button.spatne { background: var(--danger); border-color: var(--danger); color: var(--na-akcentu, #fff); }
+    .uloha-text { max-width: 640px; font-size: 1.02rem; line-height: 1.6; }
+    .uloha-text b { color: var(--accent); }
+    .upravna-scena { width:min(720px,100%); height:auto; border-radius:16px; background:#f8f1df; }
+  </style>
+</head>
+<body>
+  <h1>💨 Voda a vzduch</h1>
+  <p class="podtitul">Pro 8. ročník: složení vzduchu, úprava pitné vody a ochrana ovzduší.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Z čeho je vzduch a jak se z řeky stane pitná voda</summary>
+    <div class="obsah">
+      <p>Vzduch i voda z kohoutku vypadají jako „čisté látky“, ale vzduch je <b>směs plynů</b> a voda v přírodě
+        obsahuje rozpuštěné soli, kaly i mikroorganismy. Než ji můžeme pít, musí projít úpravnou.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Složení vzduchu</h3><p><b>Dusík 78 %</b>, <b>kyslík 21 %</b>, argon a další vzácné plyny asi 0,9 %,
+          oxid uhličitý jen asi 0,04 %. Dýcháme kyslík, ale většinu vzduchu tvoří dusík.</p></article>
+        <article class="vyklad-karta"><h3>Vlastnosti vody</h3><p>Molekula H<sub>2</sub>O. Voda je dobré <b>rozpouštědlo</b>, největší hustotu má při <b>4 °C</b>,
+          led má menší hustotu, a proto plave. Tvrdost vody způsobují soli vápníku a hořčíku.</p></article>
+        <article class="vyklad-karta"><h3>Úprava pitné vody</h3><p>Odběr → česle a síta → čiření (vločky) → usazování → filtrace pískem →
+          dezinfekce → vodojem a rozvod.</p></article>
+        <article class="vyklad-karta"><h3>Znečištění</h3><p>Doprava a topeniště tvoří smog, oxidy síry a dusíku kyselé deště,
+          oxid uhličitý zesiluje skleníkový efekt.</p></article>
+      </div>
+      <p>Pořadí kroků úpravy má logiku: nejdřív se odstraní <b>největší</b> nečistoty, pak stále menší. Jemné částice jsou
+        tak malé, že by prošly filtrem, proto se při čiření nejdřív spojí do vloček, které klesnou ke dnu. Dezinfekce je až
+        na konci, aby zničila zárodky ve vodě, která už je čirá. Typická chyba: plést si úpravnu pitné vody
+        s <b>čistírnou odpadních vod</b>, kam teče voda z domácností kanalizací.</p>
+      <aside class="zapamatuj">Vzduch: dusík 78 %, kyslík 21 %. Úprava vody jde od hrubých nečistot k jemným a končí dezinfekcí.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: seřaď kroky úpravy vody</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Seřaď kroky: filtrace přes pískové filtry, odběr z řeky, dezinfekce, česle a síta, usazování vloček, čiření, rozvod přes vodojem.</p>
+      <ol class="kroky">
+        <li>Začátek je jasný: vodu musím nejdřív <b>odebrat</b> z řeky nebo nádrže.</li>
+        <li>Pak odstraním to největší – listí a větve zachytí <b>česle a síta</b>.</li>
+        <li>Jemné částice se samy neusadí, proto přidám činidla: <b>čiření</b> je spojí do vloček, a ty se pak <b>usadí</b> na dně nádrže.</li>
+        <li>Co zbylo, zachytí <b>pískový filtr</b>. Voda je čirá, ale mohou v ní být choroboplodné zárodky – proto přijde <b>dezinfekce</b>.</li>
+        <li>Hotová pitná voda putuje přes <b>vodojem</b> do domácností.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Odběr → česle a síta → čiření → usazování → filtrace → dezinfekce → vodojem.</p>
+    </div>
+  </details>
+
+  <div class="rezimy" id="rezimy">
+    <button data-rezim="slozeni" class="active">🥧 Složení vzduchu</button>
+    <button data-rezim="uprava">🚰 Úprava vody</button>
+    <button data-rezim="voda">💧 Vlastnosti vody</button>
+    <button data-rezim="znecisteni">🏭 Znečištění</button>
+  </div>
+
+  <div class="plocha" id="plocha"></div>
+
+  <div class="ovladani">
+    <button class="hlavni" id="btnDalsi">Přeskočit →</button>
+    <span class="skore" id="skore"></span>
+  </div>
+
+  <p class="napoveda">
+    Vzduch je <b>směs plynů</b>: dusík 78 %, kyslík 21 %, argon a další vzácné plyny asi 0,9 % a stopové plyny včetně
+    oxidu uhličitého (asi 0,04 %). Voda je výborné <b>rozpouštědlo</b>, největší hustotu má při <b>4 °C</b>
+    a led plave, protože má menší hustotu než kapalná voda.
+  </p>
+
+<script>
+const $ = id => document.getElementById(id);
+const skore = Uloha.skore('metodus_ch8_voda_vzduch', $('skore'));
+let rezim = 'slozeni';
+function odezvaEl() { const d = document.createElement('div'); d.className = 'odezva'; return d; }
+
+const SLOZKY = [
+  { n: 'dusík', p: 78, barva: '#4a90d9' },
+  { n: 'kyslík', p: 21, barva: '#4caf7d' },
+  { n: 'argon a další vzácné plyny', p: 0.9, barva: '#e6aa3c' },
+  { n: 'oxid uhličitý', p: 0.04, barva: '#d43a2f' },
+];
+function svgKolac() {
+  let uhel = -90, casti = '';
+  // nejmenší podíly zvětšíme, ať jsou vidět – a výseče pak přepočítáme, aby dohromady daly 360°
+  const zobraz = SLOZKY.map(s => Math.max(s.p, 1.6));
+  const soucet = zobraz.reduce((a, b) => a + b, 0);
+  SLOZKY.forEach((s, i) => {
+    const rozsah = zobraz[i] / soucet * 360;
+    const konec = uhel + rozsah;
+    const rad = a => a * Math.PI / 180;
+    const x1 = 100 + 80 * Math.cos(rad(uhel)), y1 = 100 + 80 * Math.sin(rad(uhel));
+    const x2 = 100 + 80 * Math.cos(rad(konec)), y2 = 100 + 80 * Math.sin(rad(konec));
+    casti += `<path d="M100 100 L${x1.toFixed(1)} ${y1.toFixed(1)}
+      A80 80 0 ${rozsah > 180 ? 1 : 0} 1 ${x2.toFixed(1)} ${y2.toFixed(1)} Z"
+      fill="${s.barva}" stroke="var(--bg-panel)" stroke-width="2"/>`;
+    uhel = konec;
+  });
+  const legenda = SLOZKY.map(s => `<li><i style="background:${s.barva}"></i>${s.n}</li>`).join('');
+  return `<svg class="kolac" viewBox="0 0 200 200" role="img" aria-label="Koláčový graf složení vzduchu (nejmenší podíly jsou zvětšené, aby byly vidět)">${casti}</svg>`
+    + `<ul class="kolac-legenda">${legenda}</ul>`;
+}
+function slozeni() {
+  const p = $('plocha');
+  const s = Uloha.nahodne(SLOZKY);
+  const naProcenta = Math.random() < 0.5;
+  const odezva = odezvaEl();
+
+  if (naProcenta) {
+    p.innerHTML = `<div class="zadani uloha-text">Kolik procent vzduchu tvoří <b>${s.n}</b>?</div>
+      <div class="karta">${svgKolac()}</div>`;
+    Uloha.vyber({
+      kam: p, odezva, trida: 'velke',
+      moznosti: Uloha.zamichej(SLOZKY.map(x => `${Uloha.cislo(x.p)} %`)).map(t => ({ klic: t, popis: t })),
+      spravnyKlic: `${Uloha.cislo(s.p)} %`,
+      zpravaOk: `✅ ${s.n[0].toUpperCase() + s.n.slice(1)} tvoří ${Uloha.cislo(s.p)} % vzduchu.`,
+      zpravaChyba: 'Největší podíl má dusík, druhý kyslík.',
+      poSpravne: skore.vyhodnot, dalsi: novaUloha,
+    });
+  } else {
+    p.innerHTML = `<div class="zadani uloha-text">Který plyn tvoří <b>${Uloha.cislo(s.p)} %</b> vzduchu?</div>
+      <div class="karta">${svgKolac()}</div>`;
+    Uloha.vyber({
+      kam: p, odezva,
+      moznosti: Uloha.zamichej(SLOZKY.map(x => x.n)).map(t => ({ klic: t, popis: t })),
+      spravnyKlic: s.n,
+      zpravaOk: `✅ ${s.n} – ${Uloha.cislo(s.p)} %`,
+      zpravaChyba: 'Dusík 78 %, kyslík 21 %, argon a další vzácné plyny asi 0,9 %, oxid uhličitý jen 0,04 %.',
+      poSpravne: skore.vyhodnot, dalsi: novaUloha,
+    });
+  }
+  p.appendChild(odezva);
+}
+
+/* Úprava vody: kroky se klikají ve správném pořadí */
+const UPRAVA = [
+  { t: '1. odběr surové vody z řeky nebo nádrže', info: 'voda se čerpá ze zdroje' },
+  { t: '2. česle a síta zachytí hrubé nečistoty', info: 'zůstanou na nich listí, větve a odpadky' },
+  { t: '3. čiření – přidání činidel, která shlukují jemné nečistoty do vloček', info: 'drobné částice se spojí do větších vloček' },
+  { t: '4. usazování vloček v usazovací nádrži', info: 'vločky s nečistotami klesnou ke dnu' },
+  { t: '5. filtrace přes pískové filtry', info: 'zachytí se zbylé jemné částice' },
+  { t: '6. dezinfekce (chlorem, ozonem nebo UV zářením)', info: 'zneškodní se choroboplodné zárodky' },
+  { t: '7. rozvod přes vodojem k odběratelům', info: 'voda putuje potrubím do domácností' },
+];
+function uprava() {
+  const p = $('plocha');
+  const poradi = Uloha.zamichej([...UPRAVA]);
+  const hotove = [];
+  let chyboval = false, hotovo = false;
+
+  p.innerHTML = `<div class="zadani uloha-text">Seřaď kroky <b>úpravy pitné vody</b> –
+    klepej na ně v pořadí, jak jdou za sebou.</div><img class="upravna-scena" src="img/ch/ch8-upravna-vody.webp" alt="Úpravna pitné vody od odběru přes česle, čiření, usazování, pískový filtr a dezinfekci až k vodojemu." width="1152" height="768">`;
+  const box = document.createElement('div');
+  box.className = 'kroky';
+  const odezva = odezvaEl();
+  poradi.forEach(k => {
+    const b = document.createElement('button');
+    b.textContent = k.t.replace(/^\d+\.\s*/, '');
+    b.addEventListener('click', () => {
+      if (hotovo) return;
+      const ocekavany = UPRAVA[hotove.length];
+      if (k !== ocekavany) {
+        chyboval = true;
+        Uloha.trhni(b);
+        b.classList.add('spatne');
+        setTimeout(() => b.classList.remove('spatne'), 420);
+        odezva.className = 'odezva chyba';
+        odezva.textContent = `Ještě ne – teď je na řadě jiný krok (${hotove.length + 1}. z ${UPRAVA.length}).`;
+        return;
+      }
+      hotove.push(k);
+      b.classList.add('hotovy');
+      b.disabled = true;
+      odezva.className = 'odezva ok';
+      odezva.textContent = `${hotove.length}. ${k.t.replace(/^\d+\.\s*/, '')} – ${k.info}`;
+      if (hotove.length === UPRAVA.length) {
+        hotovo = true;
+        odezva.textContent = '✅ Voda je upravená na pitnou!';
+        skore.vyhodnot(!chyboval);
+        Uloha.posun(novaUloha, Uloha.PRODLEVA + 500);
+      }
+    });
+    box.appendChild(b);
+  });
+  p.appendChild(box);
+  p.appendChild(odezva);
+}
+
+const VODA = [
+  { q: 'Při jaké teplotě má voda největší hustotu?', a: '4 °C', b: ['0 °C', '100 °C', '20 °C'] },
+  { q: 'Proč led plave na vodě?', a: 'led má menší hustotu než kapalná voda', b: ['led je teplejší', 'led obsahuje vzduch v celém objemu', 'voda je hustší při 0 °C'] },
+  { q: 'Co je destilovaná voda?', a: 'voda zbavená rozpuštěných látek destilací', b: ['voda s minerály', 'mořská voda', 'voda z vodovodu'] },
+  { q: 'Co způsobuje tvrdost vody?', a: 'rozpuštěné soli vápníku a hořčíku', b: ['chlor', 'kyslík', 'písek'] },
+  { q: 'Proč se voda označuje za dobré rozpouštědlo?', a: 'rozpouští velké množství látek, hlavně soli a cukry', b: ['rozpouští úplně vše', 'nerozpouští nic', 'jen tuky'] },
+  { q: 'Jaké je chemické složení vody?', a: 'dva atomy vodíku a jeden atom kyslíku (H₂O)', b: ['dva kyslíky a vodík', 'vodík a dusík', 'uhlík a kyslík'] },
+  { q: 'K čemu slouží vodojem?', a: 'vyrovnává rozdíly v odběru a udržuje tlak v síti', b: ['čistí odpadní vodu', 'vyrábí elektřinu', 'ohřívá vodu'] },
+  { q: 'Kam putuje voda z domácností?', a: 'kanalizací na čistírnu odpadních vod', b: ['rovnou do řeky', 'zpět do vodovodu', 'do vodojemu'] },
+];
+function voda() {
+  const p = $('plocha');
+  const u = Uloha.nahodne(VODA);
+  p.innerHTML = `<div class="zadani uloha-text">${u.q}</div>`;
+  const odezva = odezvaEl();
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: Uloha.zamichej([u.a, ...u.b]).map(t => ({ klic: t, popis: t })),
+    spravnyKlic: u.a,
+    zpravaOk: `✅ ${u.a}`,
+    zpravaChyba: 'Zamysli se nad tím, co o vodě víš z pokusů i z běžného života.',
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+const ZNECISTENI = [
+  { q: 'Co je hlavní příčinou smogu ve městech?', a: 'doprava a lokální topeniště', b: ['sopečná činnost', 'pyl z rostlin', 'mořský vítr'] },
+  { q: 'Který plyn hlavně přispívá ke skleníkovému efektu z lidské činnosti?', a: 'oxid uhličitý', b: ['dusík', 'argon', 'helium'] },
+  { q: 'Co způsobují oxidy síry a dusíku v ovzduší?', a: 'kyselé deště', b: ['ozonovou vrstvu', 'polární záři', 'tvrdost vody'] },
+  { q: 'Proč se do benzinu už nepřidává olovo?', a: 'je jedovaté a hromadí se v prostředí', b: ['bylo drahé', 'ucpávalo motory', 'nemá žádný účinek'] },
+  { q: 'Co pomáhá snižovat znečištění ovzduší z dopravy?', a: 'hromadná doprava, kolo a filtry na výfucích', b: ['větší motory', 'jízda na volnoběh', 'topení uhlím'] },
+  { q: 'Kde v atmosféře je ozon prospěšný?', a: 've stratosféře – chrání před UV zářením', b: ['u země, kde se dýchá', 'v jádru Země', 'v oceánech'] },
+  { q: 'Co je to imise?', a: 'znečišťující látka už rozptýlená v ovzduší v místě dopadu', b: ['látka opouštějící komín', 'druh filtru', 'jednotka teploty'] },
+  { q: 'Co je nejúčinnější ochranou vody před znečištěním?', a: 'předcházet vypouštění látek a čistit odpadní vodu', b: ['ředit odpad ve větší řece', 'vypouštět jen v noci', 'používat víc chloru'] },
+];
+function znecisteni() {
+  const p = $('plocha');
+  const u = Uloha.nahodne(ZNECISTENI);
+  p.innerHTML = `<div class="zadani uloha-text">${u.q}</div>`;
+  const odezva = odezvaEl();
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: Uloha.zamichej([u.a, ...u.b]).map(t => ({ klic: t, popis: t })),
+    spravnyKlic: u.a,
+    zpravaOk: `✅ ${u.a}`,
+    zpravaChyba: 'Hledej příčinu, kterou může ovlivnit člověk.',
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+const REZIMY = { slozeni, uprava, voda, znecisteni };
+function novaUloha() { REZIMY[rezim](); }
+
+document.querySelectorAll('#rezimy button').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('#rezimy button').forEach(x => x.classList.remove('active'));
+  b.classList.add('active');
+  rezim = b.dataset.rezim;
+  novaUloha();
+}));
+$('btnDalsi').addEventListener('click', novaUloha);
+novaUloha();
+</script>
+</body>
+</html>

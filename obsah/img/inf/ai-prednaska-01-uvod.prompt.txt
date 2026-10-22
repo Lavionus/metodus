@@ -1,0 +1,2 @@
+Společné zadání: ai-prednaska.prompt.txt
+Skupina dospělých a studentů spolupracuje kolem abstraktní síťové koule; přívětivý úvod do AI.

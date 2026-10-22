@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Starověký Egypt a Mezopotámie</title>
+  <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
+  <script src="../theme.js"></script>
+  <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
+  <script src="../rec.js"></script>
+  <script src="../uloha.js"></script>
+  <style>
+    .popis-d { color: var(--text-muted); max-width: 560px; line-height: 1.55; }
+    .nazev-d { font-size: 1.2rem; font-weight: 700; }
+    .osa-cas { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; align-items: center; min-height: 44px; }
+    .osa-cas .bod {
+      background: var(--accent-soft); border: 2px solid var(--accent); border-radius: 8px;
+      padding: 7px 11px; font-size: 0.85rem; font-weight: 600;
+    }
+    .osa-cas .sipka { color: var(--text-faint); }
+    /* Fotografie v úloze s fotkou */
+    .foto-ukol { display:block; width:min(440px,80vw); height:auto; aspect-ratio:4/3; object-fit:contain; border-radius:12px; background:var(--bg-deep,var(--bg-card)); }
+    /* Foto-atlas */
+    .foto-atlas { width:min(1120px,100%); margin:22px auto; }
+    .foto-atlas h2 { margin:0 0 5px; text-align:center; font-size:1.22rem; }
+    .foto-atlas > p { margin:0 auto 12px; max-width:820px; text-align:center; color:var(--text-muted,var(--text)); }
+    .foto-mrizka { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
+    .foto-karta { margin:0; overflow:hidden; border:1px solid var(--border); border-radius:14px; background:var(--bg-card); box-shadow:var(--shadow-sm); }
+    .foto-karta img { display:block; width:100%; height:auto; aspect-ratio:4/3; object-fit:cover; }
+    .foto-karta img.cele { object-fit:contain; background:#1d1c1a; }
+    .foto-karta figcaption { padding:10px 11px 12px; font-size:.9rem; line-height:1.35; }
+    .foto-karta strong { display:block; margin-bottom:3px; color:var(--accent); font-size:1rem; }
+    @media (max-width:820px) { .foto-mrizka { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+    @media (max-width:440px) { .foto-mrizka { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+  <h1>🏺 Starověký Egypt a Mezopotámie</h1>
+  <p class="podtitul">Pro 6. ročník: první státy u velkých řek, písmo, stavby a panovníci.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Proč první státy vznikly u řek</summary>
+    <div class="obsah">
+      <p>Kolem velkých řek byla v suché krajině úrodná půda. Řeka ale přinášela i povodně a sucha. Aby lidé
+        uživili víc obyvatel, museli stavět <b>zavlažovací kanály</b> a hráze – a to jeden člověk ani jedna vesnice
+        nezvládne. Bylo potřeba práci řídit, rozdělovat vodu a úrodu, vybírat daně.</p>
+      <p>Tak vznikla <b>města</b>, <b>úředníci</b>, panovníci a nakonec <b>stát</b>. A protože si úředníci
+        nemohli všechno pamatovat, vymysleli <b>písmo</b>. Řetěz si můžeš zapamatovat takto:
+        řeka → zavlažování → úroda → města → správa → písmo.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Egypt</h3><p>U řeky <b>Nil</b>. Vládl <b>faraon</b>, stavěly se <b>pyramidy</b>
+          jako hrobky. Písmo <b>hieroglyfy</b> se tesalo do kamene a psalo na <b>papyrus</b>.</p></article>
+        <article class="vyklad-karta"><h3>Mezopotámie</h3><p>„Země mezi řekami“ <b>Eufrat a Tigris</b>. Města měla
+          stupňovité chrámy – <b>zikkuraty</b>. <b>Klínové písmo</b> se vtlačovalo do hliněných destiček.</p></article>
+        <article class="vyklad-karta"><h3>Zákony</h3><p>Babylonský panovník <b>Chammurapi</b> nechal vytesat sbírku
+          zákonů do kamenné stély, aby platila pro všechny stejně.</p></article>
+      </div>
+      <p>Hieroglyfy dlouho nikdo neuměl přečíst. Klíčem se stala <b>Rosettská deska</b> se stejným textem ve třech
+        písmech; podle ní je rozluštil Francouz <b>Champollion</b>. Pozor na letopočty před naším letopočtem:
+        čím <b>větší číslo</b>, tím <b>dávnější</b> událost.</p>
+      <aside class="zapamatuj">První státy vznikly u velkých řek, protože zavlažování vyžadovalo společnou práci a řízení.
+        Egypt – Nil, hieroglyfy, pyramidy. Mezopotámie – Eufrat a Tigris, klínové písmo, zikkuraty.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: seřaď události před naším letopočtem</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Seřaď od nejstarší: Egypt se stal římskou provincií (30 př. n. l.), dokončena Velká pyramida
+        v Gíze (asi 2560 př. n. l.), v Mezopotámii vzniká klínové písmo (asi 3500 př. n. l.), na trůn usedl
+        Tutanchamon (1332 př. n. l.).</p>
+      <ol class="kroky">
+        <li>Všechny letopočty jsou <b>před naším letopočtem</b>. Počítáme je pozpátku od přelomu letopočtu, takže
+          <b>větší číslo znamená dřív</b>.</li>
+        <li>Najdu největší číslo: 3500. Nejstarší je <b>vznik klínového písma</b>.</li>
+        <li>Další v pořadí je 2560 – <b>Velká pyramida v Gíze</b>.</li>
+        <li>Pak 1332 – <b>Tutanchamon</b> a nakonec nejmenší číslo 30 – <b>Egypt římskou provincií</b>.</li>
+        <li>Kontrola smyslem: písmo bylo potřeba dřív než velké stavby a konec samostatného Egypta patří na konec.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ klínové písmo (asi 3500) → Velká pyramida (asi 2560) → Tutanchamon (1332) → Egypt římskou provincií (30 př. n. l.)</p>
+    </div>
+  </details>
+
+  <div class="rezimy" id="rezimy">
+    <button data-rezim="osobnosti" class="active">👤 Kdo to byl</button>
+    <button data-rezim="pojmy">📖 Pojmy a stavby</button>
+    <button data-rezim="udalosti">📜 Události a letopočty</button>
+    <button data-rezim="poradi">↕️ Seřaď události</button>
+    <button data-rezim="fotky">📷 Poznej památku</button>
+  </div>
+
+  <div class="plocha" id="plocha"></div>
+
+  <div class="ovladani">
+    <button class="hlavni" id="btnDalsi">Přeskočit →</button>
+    <span class="skore" id="skore"></span>
+  </div>
+
+  <section class="foto-atlas" id="atlasOrient" aria-labelledby="dokladyNadpis">
+    <h2 id="dokladyNadpis">Co se dochovalo z Egypta a Mezopotámie</h2>
+    <p>Skutečné památky, které můžeš vidět v muzeích nebo přímo na místě. Všímej si materiálu a písma.</p>
+    <div class="foto-mrizka">
+      <figure class="foto-karta" data-nazev="Chammurapiho zákoník" data-info="čedičová stéla se zákony babylonského krále, asi 1750 př. n. l., dnes v Louvru"><img class="cele" src="img/d/d6-orient-chammurapi.webp" alt="Vysoká čedičová stéla Chammurapiho zákoníku: nahoře reliéf krále před bohem Šamašem, pod ním řádky klínového písma." width="1152" height="1896" loading="lazy"><figcaption><strong>Stéla Chammurapiho zákoníku</strong>Přes 2 m vysoký kámen (asi 1750 př. n. l.). Nahoře král stojí před bohem spravedlnosti, pod ním je klínovým písmem vytesáno 282 zákonů.</figcaption></figure>
+      <figure class="foto-karta" data-nazev="klínopisná destička" data-info="hliněná destička s klínovým písmem vtlačeným rydlem"><img class="cele" src="img/d/d6-orient-klinopisna-desticka.webp" alt="Malá hliněná destička pokrytá vtlačenými klínovitými znaky klínového písma." width="768" height="847" loading="lazy"><figcaption><strong>Klínopisná destička</strong>Písař vtlačoval rydlo do měkké hlíny – znaky mají tvar klínků. Tahle destička ze starobabylonské doby zaznamenává práci dělníků.</figcaption></figure>
+      <figure class="foto-karta" data-nazev="Rosettská deska" data-info="stejný text ve třech písmech: hieroglyfy, démotické písmo a řečtina (196 př. n. l.)"><img class="cele" src="img/d/d6-orient-rosettska-deska.webp" alt="Tmavá kamenná Rosettská deska se třemi pásy textu: nahoře hieroglyfy, uprostřed démotické písmo, dole řečtina." width="768" height="899" loading="lazy"><figcaption><strong>Rosettská deska</strong>Jeden text třemi písmy: hieroglyfy (nahoře), démotické písmo a řečtina (dole). Podle řečtiny rozluštil Champollion roku 1822 hieroglyfy.</figcaption></figure>
+      <figure class="foto-karta" data-nazev="pyramidy v Gíze" data-info="hrobky faraonů Chufua, Rachefa a Menkaurea ze Staré říše"><img src="img/d/d6-orient-pyramidy-giza.webp" alt="Tři velké pyramidy v Gíze a menší pyramidy královen v poušti pod modrým nebem." width="1152" height="765" loading="lazy"><figcaption><strong>Pyramidy v Gíze</strong>Hrobky faraonů Chufua (Cheopse), Rachefa a Menkaurea z doby asi 2600–2500 př. n. l. Vpředu stojí menší pyramidy královen.</figcaption></figure>
+      <figure class="foto-karta" data-nazev="zikkurat v Uru" data-info="stupňovitá chrámová věž z pálených cihel, asi 21. stol. př. n. l."><img src="img/d/d6-orient-zikkurat-ur.webp" alt="Zrekonstruovaný stupňovitý zikkurat v Uru z pálených cihel s velkým schodištěm v průčelí." width="1152" height="864" loading="lazy"><figcaption><strong>Zikkurat v Uru</strong>Stupňovitá chrámová věž z cihel (asi 21. stol. př. n. l.). Na vrcholu stála svatyně boha Měsíce. V Mezopotámii bylo málo kamene, stavělo se z hliněných cihel.</figcaption></figure>
+      <figure class="foto-karta" data-nazev="papyrus s hieroglyfy" data-info="svitek Knihy mrtvých, který se dával zemřelým do hrobu"><img src="img/d/d6-orient-papyrus.webp" alt="Papyrus Knihy mrtvých se sloupci hieroglyfů a malovaným výjevem uprostřed." width="1152" height="768" loading="lazy"><figcaption><strong>Papyrus s hieroglyfy</strong>Část Knihy mrtvých – zaříkadel, která měla zemřelému pomoci na cestě do posmrtného světa. Papyrus se vyráběl z rostliny rostoucí u Nilu.</figcaption></figure>
+    </div>
+  </section>
+
+  <p class="napoveda">První státy vznikaly v <b>úrodných údolích velkých řek</b> – v Egyptě u Nilu, v Mezopotámii mezi Eufratem a Tigridem. Zavlažování vyžadovalo spolupráci, a tak vznikla města, úředníci a <b>písmo</b>.</p>
+
+<script>
+const $ = id => document.getElementById(id);
+const skore = Uloha.skore('metodus_d6_orient', $('skore'));
+let rezim = 'osobnosti';
+
+const OSOBNOSTI = [
+  {
+    n: "Chufu (Cheops)",
+    e: "🔺",
+    o: "faraon, pro kterého byla postavena největší pyramida v Gíze"
+  },
+  {
+    n: "Tutanchamon",
+    e: "⚱️",
+    o: "faraon, jehož nevyloupená hrobka byla objevena roku 1922"
+  },
+  {
+    n: "Ramesse II.",
+    e: "🗿",
+    o: "faraon, který vládl přes 60 let a nechal stavět chrámy v Abú Simbelu"
+  },
+  {
+    n: "Chammurapi",
+    e: "⚖️",
+    o: "babylonský panovník, který nechal vytesat sbírku zákonů do kamenné stély"
+  },
+  {
+    n: "Kleopatra",
+    e: "👑",
+    o: "poslední egyptská vládkyně před ovládnutím země Římem"
+  },
+  {
+    n: "Champollion",
+    e: "🔤",
+    o: "francouzský badatel, který rozluštil egyptské hieroglyfy"
+  }
+];
+const POJMY = [
+  {
+    n: "hieroglyfy",
+    e: "🔤",
+    o: "egyptské obrázkové písmo tesané do kamene a psané na papyrus"
+  },
+  {
+    n: "klínové písmo",
+    e: "🖋️",
+    o: "písmo Mezopotámie vtlačované rydlem do hliněných destiček"
+  },
+  {
+    n: "papyrus",
+    e: "📜",
+    o: "psací materiál vyráběný v Egyptě ze stejnojmenné rostliny"
+  },
+  {
+    n: "pyramida",
+    e: "🔺",
+    o: "monumentální hrobka faraonů ze Staré říše"
+  },
+  {
+    n: "zikkurat",
+    e: "🏛️",
+    o: "stupňovitá chrámová věž mezopotamských měst"
+  },
+  {
+    n: "mumifikace",
+    e: "⚱️",
+    o: "balzamování těla, aby se zachovalo pro posmrtný život"
+  },
+  {
+    n: "Rosettská deska",
+    e: "🪨",
+    o: "kámen se stejným textem ve třech písmech, klíč k rozluštění hieroglyfů"
+  },
+  {
+    n: "zavlažovací kanály",
+    e: "💧",
+    o: "stavby rozvádějící vodu z řeky na pole"
+  }
+];
+const UDALOSTI = [
+  {
+    rok: "asi 3500 př. n. l.",
+    t: "v Mezopotámii vzniká klínové písmo",
+    poradi: 1
+  },
+  {
+    rok: "asi 3000 př. n. l.",
+    t: "sjednocení Horního a Dolního Egypta",
+    poradi: 2
+  },
+  {
+    rok: "asi 2560 př. n. l.",
+    t: "dokončena Velká pyramida v Gíze",
+    poradi: 3
+  },
+  {
+    rok: "asi 1750 př. n. l.",
+    t: "vznikl Chammurapiho zákoník",
+    poradi: 4
+  },
+  {
+    rok: "1332 př. n. l.",
+    t: "na trůn usedl Tutanchamon",
+    poradi: 5
+  },
+  {
+    rok: "30 př. n. l.",
+    t: "Egypt se stal římskou provincií",
+    poradi: 6
+  }
+];
+
+/* ---- společná kvízová úloha nad dvojicí název + popis ---------------------- */
+function kvizNadPopisem(data, zadaniText, ikona) {
+  const p = $('plocha');
+  const u = Uloha.nahodne(data);
+  const jine = Uloha.zamichej(data.filter(x => x.n !== u.n)).slice(0, 3);
+  p.innerHTML = `<div class="zadani">${zadaniText}</div>
+    <div class="karta"><div class="obrazek">${u.e || ikona}</div>
+    <div class="popis-d">${u.o}</div></div>`;
+  const odezva = document.createElement('div');
+  odezva.className = 'odezva';
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: Uloha.zamichej([u, ...jine]).map(x => ({ klic: x.n, popis: x.n })),
+    spravnyKlic: u.n,
+    zpravaOk: `✅ ${u.n} – ${u.o}.`,
+    zpravaChyba: 'Zkus jinou možnost.',
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+const osobnosti = () => kvizNadPopisem(OSOBNOSTI, 'O koho jde?', '👤');
+const pojmy = () => kvizNadPopisem(POJMY, 'Který pojem odpovídá popisu?', '🏛️');
+
+/* ---- Události a letopočty --------------------------------------------------- */
+function udalosti() {
+  const p = $('plocha');
+  const u = Uloha.nahodne(UDALOSTI);
+  const jine = Uloha.zamichej(UDALOSTI.filter(x => x.rok !== u.rok)).slice(0, 3);
+  const podleUdalosti = Math.random() < 0.5;
+
+  p.innerHTML = podleUdalosti
+    ? `<div class="zadani">Kdy se to stalo?</div>
+       <div class="karta"><div class="obrazek">📜</div><div class="popis-d">${u.t}</div></div>`
+    : `<div class="zadani">Co se stalo v tomto roce?</div>
+       <div class="karta"><div class="obrazek">🗓️</div><div class="nazev-d">${u.rok}</div></div>`;
+  const odezva = document.createElement('div');
+  odezva.className = 'odezva';
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: Uloha.zamichej([u, ...jine]).map(x => ({ klic: x.rok, popis: podleUdalosti ? x.rok : x.t })),
+    spravnyKlic: u.rok,
+    zpravaOk: `✅ ${u.rok} – ${u.t}.`,
+    zpravaChyba: 'Zkus jinou možnost.',
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+/* ---- Seřaď události --------------------------------------------------------- */
+function poradi() {
+  const p = $('plocha');
+  const vyber = Uloha.zamichej(UDALOSTI).slice(0, 4).sort((a, b) => a.poradi - b.poradi);
+  p.innerHTML = '<div class="zadani">Seřaď události od nejstarší po nejnovější.</div>';
+  const osa = document.createElement('div');
+  osa.className = 'osa-cas';
+  const nabidka = document.createElement('div');
+  nabidka.className = 'nabidka';
+  const odezva = document.createElement('div');
+  odezva.className = 'odezva';
+  let dalsiIndex = 0, chyboval = false;
+
+  Uloha.zamichej(vyber).forEach(u => {
+    const b = document.createElement('button');
+    b.textContent = u.t;
+    b.dataset.t = u.t;
+    b.addEventListener('click', () => {
+      if (b.disabled) return;
+      if (u.t === vyber[dalsiIndex].t) {
+        if (dalsiIndex > 0) {
+          const s = document.createElement('span');
+          s.className = 'sipka';
+          s.textContent = '→';
+          osa.appendChild(s);
+        }
+        const el = document.createElement('span');
+        el.className = 'bod';
+        el.textContent = `${u.rok}: ${u.t}`;
+        osa.appendChild(el);
+        b.disabled = true;
+        dalsiIndex++;
+        odezva.className = 'odezva ok';
+        odezva.textContent = '✅ Správně!';
+        if (dalsiIndex === vyber.length) {
+          odezva.textContent = '🎉 Časová osa je hotová!';
+          skore.vyhodnot(!chyboval);
+          Uloha.posun(novaUloha, Uloha.PRODLEVA + 600);
+        }
+      } else {
+        chyboval = true;
+        Uloha.trhni(b);
+        odezva.className = 'odezva chyba';
+        odezva.textContent = 'Tahle událost je pozdější – hledej starší.';
+      }
+    });
+    nabidka.appendChild(b);
+  });
+  p.append(osa, nabidka, odezva);
+}
+
+/* ---- Poznej památku (fotografie z atlasu pod úlohou) ----------------------------- */
+const FOTKY = [...document.querySelectorAll('#atlasOrient .foto-karta')].map(f => ({
+  n: f.dataset.nazev, info: f.dataset.info, img: f.querySelector('img'),
+}));
+function fotky() {
+  const p = $('plocha');
+  const u = Uloha.nahodne(FOTKY);
+  const jine = Uloha.zamichej(FOTKY.filter(x => x.n !== u.n)).slice(0, 3);
+  p.innerHTML = `<div class="zadani">Která památka je na fotografii?</div>
+    <div class="karta"><img class="foto-ukol" src="${u.img.getAttribute('src')}" alt="Fotografie památky k určení."
+      width="${u.img.getAttribute('width')}" height="${u.img.getAttribute('height')}"></div>`;
+  const odezva = document.createElement('div');
+  odezva.className = 'odezva';
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: Uloha.zamichej([u, ...jine]).map(x => ({ klic: x.n, popis: x.n })),
+    spravnyKlic: u.n,
+    zpravaOk: `✅ ${u.n} – ${u.info}.`,
+    zpravaChyba: 'Všímej si materiálu a písma a zkus to znovu.',
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+const REZIMY = { osobnosti, pojmy, udalosti, poradi, fotky };
+function novaUloha() { REZIMY[rezim](); }
+
+document.querySelectorAll('#rezimy button').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('#rezimy button').forEach(x => x.classList.remove('active'));
+  b.classList.add('active');
+  rezim = b.dataset.rezim;
+  novaUloha();
+}));
+$('btnDalsi').addEventListener('click', novaUloha);
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === 'Enter') { e.preventDefault(); novaUloha(); }
+});
+novaUloha();
+</script>
+</body>
+</html>

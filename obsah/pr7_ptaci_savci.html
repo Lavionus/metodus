@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ptáci a savci</title>
+  <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
+  <script src="../theme.js"></script>
+  <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
+  <script src="../uloha.js"></script>
+  <style>
+    .uloha-text { max-width: 620px; font-size: 1.02rem; line-height: 1.6; }
+    .uloha-text b { color: var(--accent); }
+    .druh { font-size: 1.15rem; font-weight: 700; }
+    .zobak { width: min(220px, 60%); }
+    .zobak path, .zobak polygon { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 2.5; }
+    .chrup-obrazek { width: min(100%, 320px); aspect-ratio: 1; object-fit: contain; border-radius: 14px;
+      border: 1px solid var(--border); background: #f7f1e5; }
+    .atlas-chrupu { width: min(100%, 960px); margin: 0 0 20px; }
+    .atlas-chrupu h2 { margin: 0 0 5px; font-size: 1.2rem; }
+    .atlas-chrupu > p { margin: 0 0 12px; color: var(--text-muted); }
+    .chrup-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+    .chrup-grid details { overflow: hidden; border: 1px solid var(--border); border-radius: 14px; background: var(--bg-panel); }
+    .chrup-grid img { display: block; width: 100%; aspect-ratio: 1; object-fit: contain; background: #f7f1e5; }
+    .chrup-grid summary { padding: 9px 11px; cursor: pointer; font-weight: 750; color: var(--text); }
+    .chrup-grid p { margin: 0; padding: 0 11px 12px; color: var(--text-muted); font-size: .84rem; line-height: 1.45; }
+    .ptaci-atlas { width: min(100%, 1100px); margin: 0 0 22px; }
+    .ptaci-atlas h2 { margin: 0 0 5px; font-size: 1.2rem; }
+    .ptaci-atlas > p { margin: 0 0 12px; color: var(--text-muted); }
+    .ptaci-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+    .ptaci-grid.nohy { grid-template-columns: repeat(6, minmax(0, 1fr)); margin-top: 10px; }
+    .ptaci-karta { margin: 0; padding: 6px; border: 1px solid var(--border); border-radius: 13px; background: var(--bg-panel); text-align: center; }
+    .ptaci-karta img, .zobak-obrazek { display: block; width: 100%; aspect-ratio: 1; object-fit: contain; border-radius: 9px; background: #f7f1e5; }
+    .ptaci-karta figcaption { padding: 6px 2px 2px; font-size: .82rem; font-weight: 700; }
+    .zobak-obrazek { width: min(100%, 300px); }
+    @media (max-width: 720px) { .chrup-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 850px) { .ptaci-grid.nohy { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+    @media (max-width: 620px) { .ptaci-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 390px) { .chrup-grid { grid-template-columns: 1fr; } .ptaci-grid.nohy { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    .druh-foto { width: min(100%, 400px); aspect-ratio: 4 / 3; object-fit: cover; border-radius: 14px; border: 1px solid var(--border); }
+    .foto-atlas { width: min(1120px, 100%); margin: 26px auto; }
+    .foto-atlas h2 { margin: 0 0 5px; text-align: center; font-size: 1.22rem; }
+    .foto-atlas > p { margin: 0 auto 12px; max-width: 820px; text-align: center; color: var(--text-muted, var(--text)); }
+    .foto-atlas h3 { margin: 18px 0 8px; font-size: 1.05rem; }
+    .foto-mrizka { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+    .foto-karta { margin: 0; overflow: hidden; border: 1px solid var(--border); border-radius: 14px; background: var(--bg-card, var(--bg-elevated)); min-width: 0; }
+    .foto-karta img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+    .foto-karta figcaption { padding: 10px 11px 12px; font-size: .9rem; line-height: 1.38; }
+    .foto-karta strong { display: block; margin-bottom: 3px; color: var(--accent); font-size: 1rem; }
+    @media (max-width: 820px) { .foto-mrizka { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 440px) { .foto-mrizka { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <h1>🦅 Ptáci a savci</h1>
+  <p class="podtitul">Pro 7. ročník: přizpůsobení stavby těla způsobu života a naši zástupci.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Tělo prozradí způsob života</summary>
+    <div class="obsah">
+      <p>Ptáci i savci jsou <b>živočichové se stálou teplotou těla</b> – udržují si ji bez ohledu na teplotu okolí.
+        Pomáhá jim v tom peří, nebo srst. U obou skupin platí, že <b>stavba těla odpovídá způsobu života</b>:
+        podle zobáku, končetin či zubů odhadneš, čím se živočich živí a kde žije.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Zobák ptáka</h3><p>Hákovitý zobák trhá maso (dravci), krátký kuželovitý louská semena
+          (zrnožravci), tenký špičatý sbírá hmyz, plochý široký cedí potravu z vody (kachna).</p></article>
+        <article class="vyklad-karta"><h3>Nohy</h3><p>Plovací blány = plavání. Dva prsty dopředu a dva dozadu = šplhání po kmeni
+          (strakapoud). Ostré zahnuté drápy = uchopení kořisti. Lopatovité přední končetiny = hrabání (krtek).</p></article>
+        <article class="vyklad-karta"><h3>Chrup savce</h3><p>Šelmy mají dlouhé <b>špičáky</b> a ostré trháky, hlodavci velké stále dorůstající
+          <b>řezáky</b> a bezzubou mezeru, přežvýkavci nemají horní řezáky a mají široké stoličky.</p></article>
+      </div>
+      <p>Savce třídíme do <b>řádů</b>: hmyzožravci (ježek, krtek), letouni (netopýr), hlodavci (veverka, bobr), zajícovci (zajíc, králík),
+        šelmy (liška, rys) a sudokopytníci (srnec, prase divoké).</p>
+      <p><b>Typická chyba:</b> „Zajíc je hlodavec.“ Zajíc má <b>dva páry horních řezáků</b>, a proto patří k <b>zajícovcům</b>.
+        Netopýr zase není pták – je to savec, jediný schopný aktivního letu.</p>
+      <aside class="zapamatuj">Ptáci a savci mají stálou teplotu těla. Tvar zobáku, nohou a zubů ukazuje potravu a způsob života.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: chrup prozradí řád</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Lebka savce má velké řezáky, za nimi bezzubou mezeru a v horní čelisti jen jeden pár řezáků.
+        Čím se živočich živí a do kterého řádu patří?</p>
+      <ol class="kroky">
+        <li>Hledám dlouhé špičáky – nejsou tu, takže to nebude šelma lovící kořist.</li>
+        <li>Velké řezáky a <b>bezzubá mezera</b> ukazují na hlodání tvrdé potravy, například semen a oříšků.</li>
+        <li>Takový chrup mají hlodavci i zajícovci; rozhodne <b>počet horních řezáků</b>.</li>
+        <li>Je tu jen <b>jeden pár</b> horních řezáků, zajícovci mají dva páry – jde tedy o <b>hlodavce</b>.</li>
+      </ol>
+      <p class="vysledek-ukazky">Živočich hlodá semena a plody; patří k <b>hlodavcům</b> (například veverka).</p>
+    </div>
+  </details>
+
+  <div class="rezimy" id="rezimy">
+    <button data-rezim="zobaky" class="active">🐦 Zobák a potrava</button>
+    <button data-rezim="koncetiny">🦶 Končetiny a způsob života</button>
+    <button data-rezim="poznavacka">🔍 Poznávačka</button>
+    <button data-rezim="rady">🗂️ Řády savců</button>
+    <button data-rezim="chrup">🦷 Chrup a potrava</button>
+  </div>
+
+  <section class="ptaci-atlas" aria-labelledby="ptaci-atlas-nadpis">
+    <h2 id="ptaci-atlas-nadpis">Jak potrava a pohyb mění tělo ptáků?</h2>
+    <p>Porovnej tvary zobáků ve stejném profilu a stavbu nohou. Podoba každého „nástroje“ odpovídá způsobu života.</p>
+    <div class="ptaci-grid">
+      <figure class="ptaci-karta"><img src="img/pr/pr7-ptaci-hlava-datel.webp" alt="Hlava strakapouda s rovným zobákem ve tvaru dláta." width="768" height="768"><figcaption>strakapoud · tesání</figcaption></figure>
+      <figure class="ptaci-karta"><img src="img/pr/pr7-ptaci-hlava-kachna.webp" alt="Hlava kachny s širokým plochým zobákem." width="768" height="768"><figcaption>kachna · cezení</figcaption></figure>
+      <figure class="ptaci-karta"><img src="img/pr/pr7-ptaci-hlava-kane.webp" alt="Hlava káněte se silným zahnutým zobákem." width="768" height="768"><figcaption>káně · trhání</figcaption></figure>
+      <figure class="ptaci-karta"><img src="img/pr/pr7-ptaci-hlava-penkava.webp" alt="Hlava pěnkavy s krátkým kuželovitým zobákem." width="768" height="768"><figcaption>pěnkava · semena</figcaption></figure>
+      <figure class="ptaci-karta"><img src="img/pr/pr7-ptaci-hlava-cap.webp" alt="Hlava čápa s dlouhým rovným špičatým zobákem." width="768" height="768"><figcaption>čáp · lov ve vodě</figcaption></figure>
+      <figure class="ptaci-karta"><img src="img/pr/pr7-ptaci-hlava-kos.webp" alt="Hlava kosa se štíhlým špičatým zobákem." width="768" height="768"><figcaption>kos · bezobratlí</figcaption></figure>
+      <figure class="ptaci-karta"><img src="img/pr/pr7-ptaci-hlava-vlastovka.webp" alt="Hlava vlaštovky s velmi krátkým široce nasazeným zobákem." width="768" height="768"><figcaption>vlaštovka · hmyz za letu</figcaption></figure>
+      <figure class="ptaci-karta"><img src="img/pr/pr7-ptaci-hlava-sykora.webp" alt="Hlava sýkory s krátkým jemným špičatým zobákem." width="768" height="768"><figcaption>sýkora · drobný hmyz</figcaption></figure>
+    </div>
+    <div class="ptaci-grid nohy">
+      <figure class="ptaci-karta"><img src="img/pr/pr7-ptaci-noha-plovaci.webp" alt="Kachní noha se třemi prsty spojenými plovací blánou." width="768" height="768"><figcaption>plovací</figcaption></figure>
+      <figure class="ptaci-karta"><img src="img/pr/pr7-ptaci-noha-dravci.webp" alt="Dravčí noha se silnými prsty a zahnutými ostrými drápy." width="768" height="768"><figcaption>dravčí</figcaption></figure>
+      <figure class="ptaci-karta"><img src="img/pr/pr7-ptaci-noha-splhava.webp" alt="Datlí šplhavá noha se dvěma prsty vpřed a dvěma vzad." width="768" height="768"><figcaption>šplhavá 2 + 2</figcaption></figure>
+      <figure class="ptaci-karta"><img src="img/pr/pr7-ptaci-noha-behava.webp" alt="Pštrosí běhavá noha se dvěma prsty." width="768" height="768"><figcaption>běhavá</figcaption></figure>
+      <figure class="ptaci-karta"><img src="img/pr/pr7-ptaci-noha-pevci.webp" alt="Pěvčí noha se třemi prsty vpřed a jedním vzad svírá větev." width="768" height="768"><figcaption>pěvčí</figcaption></figure>
+      <figure class="ptaci-karta"><img src="img/pr/pr7-ptaci-noha-brodiva.webp" alt="Brodivá noha s dlouhými široce roztaženými prsty." width="768" height="768"><figcaption>brodivá</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="atlas-chrupu" aria-labelledby="atlas-chrupu-nadpis">
+    <h2 id="atlas-chrupu-nadpis">Co prozradí chrup savce?</h2>
+    <p>Porovnej řezáky, špičáky, stoličky a bezzubé mezery. Rozbalením karty zobrazíš vysvětlení.</p>
+    <div class="chrup-grid">
+      <details><summary>Šelma · vlk</summary><img src="img/pr/pr7-chrup-selma.webp" alt="Lebka vlka z boku s dlouhými špičáky a ostrými trháky." width="768" height="768"><p>Špičáky kořist uchopí, ostré trháky maso stříhají.</p></details>
+      <details><summary>Hlodavec · veverka</summary><img src="img/pr/pr7-chrup-hlodavec.webp" alt="Lebka veverky z boku s velkými hlodavými řezáky a bezzubou mezerou." width="768" height="768"><p>Řezáky stále dorůstají; za nimi je dlouhá bezzubá mezera.</p></details>
+      <details><summary>Přežvýkavec · srnec</summary><img src="img/pr/pr7-chrup-prezvykavec.webp" alt="Lebka srnce z boku bez horních řezáků, s mezerou a širokými stoličkami." width="768" height="768"><p>Dolní řezáky tlačí na horní zubní polštář, stoličky drtí rostliny.</p></details>
+      <details><summary>Hmyzožravec · ježek</summary><img src="img/pr/pr7-chrup-hmyzozravec.webp" alt="Lebka ježka z boku s mnoha drobnými hrotitými zuby." width="768" height="768"><p>Mnoho drobných špičatých zubů rozrušuje pevné schránky bezobratlých.</p></details>
+      <details><summary>Všežravec · prase</summary><img src="img/pr/pr7-chrup-vsezravec.webp" alt="Lebka prasete divokého z boku s kly a širokými hrbolkatými stoličkami." width="768" height="768"><p>Smíšený chrup potravu ukousne, trhá i rozmělňuje.</p></details>
+      <details><summary>Zajícovec · zajíc</summary><img src="img/pr/pr7-chrup-zajic.webp" alt="Lebka zajíce z boku se dvěma páry horních řezáků, mezerou a stoličkami." width="768" height="768"><p>Za velkými horními řezáky je druhý malý pár; stoličky melou rostliny.</p></details>
+    </div>
+  </section>
+
+  <div class="plocha" id="plocha"></div>
+
+  <div class="ovladani">
+    <button class="hlavni" id="btnDalsi">Přeskočit →</button>
+    <span class="skore" id="skore"></span>
+  </div>
+
+  <p class="napoveda">
+    Tvar zobáku, končetin i chrupu prozradí, <b>čím se živočich živí a kde žije</b>.
+    Ptáci i savci mají <b>stálou teplotu těla</b> – udržují si ji bez ohledu na okolí.
+  </p>
+
+  <section class="foto-atlas" aria-labelledby="fotoAtlasNadpis">
+    <h2 id="fotoAtlasNadpis">📷 Naši ptáci a savci na fotografiích</h2>
+    <p>Skutečné fotografie druhů z poznávačky. Hledej znaky z popisu – zbarvení, tvar zobáku, uši, ocas nebo parůžky.</p>
+    <div id="fotoAtlas"></div>
+  </section>
+
+<script>
+const $ = id => document.getElementById(id);
+const skore = Uloha.skore('metodus_pr7_ptaci_savci', $('skore'));
+let rezim = 'zobaky';
+function odezvaEl() { const d = document.createElement('div'); d.className = 'odezva'; return d; }
+
+/* Zjednodušené tvary zobáků – tvar prozradí potravu */
+const ZOBAKY = [
+  { klic: 'dravec', obrazek: 'kane', alt: 'Hlava káněte se zahnutým zobákem.', popis: 'hákovitý zobák', potrava: 'trhá maso ulovené kořisti', priklad: 'káně, orel, sokol',
+    tvar: '<path d="M20 60 L110 40 C140 40 150 55 130 70 C150 74 120 96 90 84 Z"/>' },
+  { klic: 'zrnozravec', obrazek: 'penkava', alt: 'Hlava pěnkavy s kuželovitým zobákem.', popis: 'krátký kuželovitý zobák', potrava: 'louská semena a zrní', priklad: 'zvonek, dlask, vrabec',
+    tvar: '<polygon points="20,50 90,40 90,80 20,70"/><polygon points="90,40 130,60 90,80"/>' },
+  { klic: 'hmyzozravec', obrazek: 'sykora', alt: 'Hlava sýkory s jemným špičatým zobákem.', popis: 'tenký špičatý zobák', potrava: 'sbírá drobný hmyz', priklad: 'sýkora, střízlík, rehek',
+    tvar: '<polygon points="20,50 90,55 145,60 90,68 20,70"/>' },
+  { klic: 'kachna', obrazek: 'kachna', alt: 'Hlava kachny s plochým širokým zobákem.', popis: 'plochý široký zobák', potrava: 'cedí potravu z vody a bahna', priklad: 'kachna, husa, labuť',
+    tvar: '<path d="M20 50 L120 48 C145 50 145 72 120 74 L20 72 Z"/>' },
+  { klic: 'brodivy', obrazek: 'cap', alt: 'Hlava čápa s dlouhým špičatým zobákem.', popis: 'dlouhý dýkovitý zobák', potrava: 'loví ryby a žáby v mělké vodě', priklad: 'volavka, čáp',
+    tvar: '<polygon points="20,52 170,58 170,64 20,70"/>' },
+  { klic: 'datel', obrazek: 'datel', alt: 'Hlava strakapouda s rovným zobákem jako dláto.', popis: 'silný rovný zobák jako dláto', potrava: 'tesá do dřeva a hledá larvy', priklad: 'strakapoud, datel',
+    tvar: '<polygon points="20,48 140,56 140,66 20,72"/>' },
+];
+function zobaky() {
+  const p = $('plocha');
+  const z = Uloha.nahodne(ZOBAKY);
+  const ptameSeNaPotravu = Math.random() < 0.5;
+  p.innerHTML = `<div class="zadani">${ptameSeNaPotravu
+    ? 'Čím se živí pták s takovým zobákem?' : 'Který zobák patří ptákovi, který ' + z.potrava + '?'}</div>
+    ${ptameSeNaPotravu ? `<div class="karta"><img class="zobak-obrazek" src="img/pr/pr7-ptaci-hlava-${z.obrazek}.webp" alt="Obrázek ptačí hlavy se zobákem k určení." width="768" height="768">
+      <div class="popis">${z.popis}</div></div>` : ''}`;
+  const odezva = odezvaEl();
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: ptameSeNaPotravu
+      ? Uloha.zamichej([z, ...Uloha.zamichej(ZOBAKY.filter(x => x.klic !== z.klic)).slice(0, 3)])
+        .map(x => ({ klic: x.klic, popis: x.potrava }))
+      : Uloha.zamichej([z, ...Uloha.zamichej(ZOBAKY.filter(x => x.klic !== z.klic)).slice(0, 3)])
+        .map(x => ({ klic: x.klic, popis: x.popis })),
+    spravnyKlic: z.klic,
+    zpravaOk: `✅ ${z.popis} – ${z.potrava} (${z.priklad})`,
+    zpravaChyba: 'Tvar zobáku je nástroj: hák trhá, dláto tesá, plochý zobák cedí vodu.',
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+const PRIZPUSOBENI = [
+  { q: 'K čemu má kachna plovací blány mezi prsty?', a: 'k plavání – noha funguje jako veslo', b: ['k hrabání v zemi', 'k uchopení kořisti', 'k šplhání po stromech'] },
+  { q: 'Proč má strakapoud (šplhavec) dva prsty dopředu a dva dozadu?', a: 'aby se udržel na svislém kmeni', b: ['aby lépe plaval', 'aby rychleji běhal', 'aby unesl kořist'] },
+  { q: 'K čemu slouží dravci ostré zahnuté drápy?', a: 'k uchopení a usmrcení kořisti', b: ['k hrabání nory', 'k šplhání', 'k čištění peří'] },
+  { q: 'Proč má krtek lopatovité přední končetiny?', a: 'hrabe jimi podzemní chodby', b: ['plave s nimi', 'šplhá po stromech', 'brání se jimi'] },
+  { q: 'Čím se pohybuje netopýr?', a: 'létá – blána je napjatá mezi prsty', b: ['plachtí bez blány', 'jen leze', 'skáče'] },
+  { q: 'Proč má zajíc dlouhé zadní nohy?', a: 'k rychlému běhu a skokům', b: ['k hrabání', 'k plavání', 'k držení potravy'] },
+  { q: 'K čemu slouží veverce dlouhý huňatý ocas?', a: 'k udržení rovnováhy při skocích', b: ['k obraně', 'k plavání', 'k hledání potravy'] },
+  { q: 'Proč mají kopytníci na nohou kopyta?', a: 'chrání prsty při rychlém běhu po tvrdé zemi', b: ['pomáhají plavat', 'slouží k hrabání', 'brání se jimi predátorům'] },
+  { q: 'K čemu slouží šelmám špičáky?', a: 'k uchopení a usmrcení kořisti', b: ['k žvýkání trávy', 'k drcení semen', 'k hrabání'] },
+  { q: 'Proč má sova měkké peří na okrajích křídel?', a: 'aby letěla téměř neslyšně', b: ['aby se udržela ve vodě', 'aby lépe viděla', 'aby se zahřála'] },
+];
+function koncetiny() {
+  const p = $('plocha');
+  const u = Uloha.nahodne(PRIZPUSOBENI);
+  p.innerHTML = `<div class="zadani uloha-text">${u.q}</div>`;
+  const odezva = odezvaEl();
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: Uloha.zamichej([u.a, ...u.b]).map(t => ({ klic: t, popis: t })),
+    spravnyKlic: u.a,
+    zpravaOk: `✅ ${u.a}`,
+    zpravaChyba: 'Stavba těla vždy odpovídá prostředí a způsobu obživy.',
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+const RADY = {
+  hmyzozravci: 'hmyzožravci', letouni: 'letouni', hlodavci: 'hlodavci',
+  selmy: 'šelmy', sudokopytnici: 'sudokopytníci', zajici: 'zajícovci',
+};
+const SAVCI = [
+  { n: 'ježek západní', r: 'hmyzozravci', i: '🦔', popis: 'bodliny na hřbetě, loví hmyz a plže' },
+  { n: 'krtek obecný', r: 'hmyzozravci', i: '🕳️', popis: 'hrabe podzemní chodby, živí se žížalami' },
+  { n: 'netopýr velký', r: 'letouni', i: '🦇', popis: 'jediný savec schopný aktivního letu, orientuje se echolokací' },
+  { n: 'veverka obecná', r: 'hlodavci', i: '🐿️', popis: 'hlodavé zuby, sbírá oříšky a semena' },
+  { n: 'bobr evropský', r: 'hlodavci', i: '🦫', popis: 'staví hráze, kácí stromy zuby' },
+  { n: 'myšice lesní', r: 'hlodavci', i: '🐭', popis: 'drobný noční hlodavec lesů' },
+  { n: 'liška obecná', r: 'selmy', i: '🦊', popis: 'šelma s huňatým ocasem, loví hraboše' },
+  { n: 'kuna lesní', r: 'selmy', i: '🐾', popis: 'štíhlá lasicovitá šelma, šplhá po stromech' },
+  { n: 'rys ostrovid', r: 'selmy', i: '🐆', popis: 'naše největší kočkovitá šelma se štětičkami na uších' },
+  { n: 'srnec obecný', r: 'sudokopytnici', i: '🦌', popis: 'přežvýkavec s parůžky, žije v lesích a na polích' },
+  { n: 'prase divoké', r: 'sudokopytnici', i: '🐗', popis: 'všežravec s rypákem, ryje v zemi' },
+  { n: 'jelen lesní', r: 'sudokopytnici', i: '🦌', popis: 'velký přežvýkavec s mohutným parožím' },
+  { n: 'zajíc polní', r: 'zajici', i: '🐇', popis: 'dlouhé uši i zadní nohy, mláďata se rodí vidoucí' },
+  { n: 'králík divoký', r: 'zajici', i: '🐰', popis: 'žije v norách v koloniích' },
+];
+const CHRUPY = [
+  { k: 'selma', n: 'šelma', druh: 'vlk', img: 'img/pr/pr7-chrup-selma.webp', alt: 'Lebka vlka s dlouhými špičáky a ostrými trháky.', znak: 'dlouhé špičáky a ostré trháky', potrava: 'maso' },
+  { k: 'hlodavec', n: 'hlodavec', druh: 'veverka', img: 'img/pr/pr7-chrup-hlodavec.webp', alt: 'Lebka veverky s velkými řezáky a bezzubou mezerou.', znak: 'velké stále dorůstající řezáky a bezzubá mezera', potrava: 'semena a další tuhá rostlinná potrava' },
+  { k: 'prezvykavec', n: 'přežvýkavec', druh: 'srnec', img: 'img/pr/pr7-chrup-prezvykavec.webp', alt: 'Lebka srnce bez horních řezáků a s širokými stoličkami.', znak: 'chybějící horní řezáky a široké rýhované stoličky', potrava: 'tráva, listy a výhonky' },
+  { k: 'hmyzozravec', n: 'hmyzožravec', druh: 'ježek', img: 'img/pr/pr7-chrup-hmyzozravec.webp', alt: 'Lebka ježka s mnoha drobnými hrotitými zuby.', znak: 'mnoho drobných hrotitých zubů', potrava: 'hmyz a další bezobratlí' },
+  { k: 'vsezravec', n: 'všežravec', druh: 'prase', img: 'img/pr/pr7-chrup-vsezravec.webp', alt: 'Lebka prasete s kly a hrbolkatými stoličkami.', znak: 'různé typy zubů včetně hrbolkatých stoliček', potrava: 'rostlinná i živočišná potrava' },
+  { k: 'zajic', n: 'zajícovec', druh: 'zajíc', img: 'img/pr/pr7-chrup-zajic.webp', alt: 'Lebka zajíce se dvěma páry horních řezáků a bezzubou mezerou.', znak: 'dva páry horních řezáků a bezzubá mezera', potrava: 'trávy, byliny a větvičky' },
+];
+function rady() {
+  const p = $('plocha');
+  const s = Uloha.nahodne(SAVCI);
+  p.innerHTML = `<div class="zadani">Do kterého řádu savců patří?</div>
+    <div class="karta">${s.foto ? fotoDruhu(s.foto) : `<div class="obrazek">${s.i}</div>`}<div class="druh">${s.n}</div>
+      <div class="popis" style="color:var(--text-faint);font-weight:400">${s.popis}</div></div>`;
+  const odezva = odezvaEl();
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: Uloha.zamichej([s.r, ...Uloha.zamichej(Object.keys(RADY).filter(k => k !== s.r)).slice(0, 3)])
+      .map(k => ({ klic: k, popis: RADY[k] })),
+    spravnyKlic: s.r,
+    zpravaOk: `✅ ${s.n} – ${RADY[s.r]}`,
+    zpravaChyba: 'Pomůže chrup a potrava: hlodavé zuby, špičáky šelem, přežvýkavci bez horních řezáků.',
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+const PTACI = [
+  { n: 'sýkora koňadra', i: '🐦', popis: 'černý pruh na žlutém bříšku, běžná u krmítek' },
+  { n: 'vrabec domácí', i: '🐦', popis: 'hnědý pěvec žijící u lidských sídel' },
+  { n: 'kos černý', i: '🐦‍⬛', popis: 'samec je černý s oranžovým zobákem' },
+  { n: 'strakapoud velký', i: '🪶', popis: 'černobílý pták, bubnuje do kmenů' },
+  { n: 'káně lesní', i: '🦅', popis: 'dravec často sedící na sloupech u polí' },
+  { n: 'poštolka obecná', i: '🦅', popis: 'dravec, který se při lovu třepotá na místě' },
+  { n: 'sova pálená', i: '🦉', popis: 'srdčitý závoj v obličeji, loví v noci' },
+  { n: 'labuť velká', i: '🦢', popis: 'velký bílý vodní pták s dlouhým krkem' },
+  { n: 'čáp bílý', i: '🕊️', popis: 'hnízdí na komínech, na zimu odlétá do Afriky' },
+  { n: 'vlaštovka obecná', i: '🐦', popis: 'vidličnatý ocas, hnízdí ve stájích' },
+];
+/* Fotografie zástupců (IMG-pr-05, Wikimedia Commons; zdroje vypisuje kostra.js). */
+/* FOTO_PS:zacatek */
+const FOTO_PS = {
+  "sýkora koňadra": { src: "img/pr/pr7-ptaci-savci-foto-sykora.webp", alt: "Sýkora koňadra z boku se žlutým bříškem s černým pruhem a černou hlavou s bílou lící.", w: 768, h: 536 },
+  "vrabec domácí": { src: "img/pr/pr7-ptaci-savci-foto-vrabec.webp", alt: "Samec vrabce domácího s šedým temenem, hnědými křídly a černou skvrnou na hrdle.", w: 768, h: 597 },
+  "kos černý": { src: "img/pr/pr7-ptaci-savci-foto-kos.webp", alt: "Samec kosa černého s černým peřím a oranžovým zobákem v trávě.", w: 768, h: 554 },
+  "strakapoud velký": { src: "img/pr/pr7-ptaci-savci-foto-strakapoud.webp", alt: "Samec strakapouda velkého s černobílým peřím a červenou skvrnou pod ocasem na kmeni.", w: 768, h: 512 },
+  "káně lesní": { src: "img/pr/pr7-ptaci-savci-foto-kane.webp", alt: "Mladá káně lesní s hnědě skvrnitým peřím sedící na pařezu v lese.", w: 768, h: 703 },
+  "poštolka obecná": { src: "img/pr/pr7-ptaci-savci-foto-postolka.webp", alt: "Samec poštolky obecné s rezavým hřbetem a šedou hlavou sedící na drátě.", w: 768, h: 1083 },
+  "sova pálená": { src: "img/pr/pr7-ptaci-savci-foto-sova.webp", alt: "Sova pálená se světlým srdčitým obličejovým závojem a tmavýma očima.", w: 768, h: 937 },
+  "labuť velká": { src: "img/pr/pr7-ptaci-savci-foto-labut.webp", alt: "Bílá labuť velká s oranžovým zobákem s černým hrbolkem hledá potravu ve vlnách.", w: 768, h: 511 },
+  "čáp bílý": { src: "img/pr/pr7-ptaci-savci-foto-cap.webp", alt: "Čáp bílý s bílým peřím, černými letkami, dlouhým červeným zobákem a červenýma nohama stojí na pařezu.", w: 768, h: 1152 },
+  "vlaštovka obecná": { src: "img/pr/pr7-ptaci-savci-foto-vlastovka.webp", alt: "Vlaštovka obecná s tmavě modrým hřbetem, rezavým hrdlem a dlouhým vidličnatým ocasem sedí na prkně.", w: 768, h: 491 },
+  "ježek západní": { src: "img/pr/pr7-ptaci-savci-foto-jezek.webp", alt: "Mladý ježek západní s hnědými bodlinami na hřbetě v trávě.", w: 768, h: 595 },
+  "krtek obecný": { src: "img/pr/pr7-ptaci-savci-foto-krtek.webp", alt: "Krtek obecný se sametově černou srstí a lopatovitými předními končetinami vylézá z krtiny.", w: 768, h: 512 },
+  "netopýr velký": { src: "img/pr/pr7-ptaci-savci-foto-netopyr.webp", alt: "Netopýr velký zimující v jeskyni, zavěšený s hnědou srstí a složenými křídly.", w: 768, h: 1160 },
+  "veverka obecná": { src: "img/pr/pr7-ptaci-savci-foto-veverka.webp", alt: "Veverka obecná s rezavou srstí, huňatým ocasem a štětičkami na uších drží potravu.", w: 768, h: 642 },
+  "bobr evropský": { src: "img/pr/pr7-ptaci-savci-foto-bobr.webp", alt: "Bobr evropský s hustou hnědou srstí sedící na břehu.", w: 768, h: 576 },
+  "liška obecná": { src: "img/pr/pr7-ptaci-savci-foto-liska.webp", alt: "Liška obecná s rezavou srstí a huňatým ocasem v trávě.", w: 768, h: 512 },
+  "rys ostrovid": { src: "img/pr/pr7-ptaci-savci-foto-rys.webp", alt: "Hlava rysa ostrovida s licousy a dlouhými štětičkami na uších.", w: 768, h: 512 },
+  "srnec obecný": { src: "img/pr/pr7-ptaci-savci-foto-srnec.webp", alt: "Srnec obecný s krátkými parůžky stojící na louce.", w: 768, h: 768 },
+  "prase divoké": { src: "img/pr/pr7-ptaci-savci-foto-prase.webp", alt: "Prase divoké s tmavou štětinatou srstí a dlouhým rypákem se pase v trávě.", w: 768, h: 512 },
+  "zajíc polní": { src: "img/pr/pr7-ptaci-savci-foto-zajic.webp", alt: "Zajíc polní s dlouhýma ušima s černými špičkami sedící v trávě.", w: 768, h: 576 },
+};
+/* FOTO_PS:konec */
+[...PTACI, ...SAVCI].forEach(z => { if (FOTO_PS[z.n]) z.foto = FOTO_PS[z.n]; });
+// Volitelný alt: neutrální text, když je fotka sama otázkou (nesmí prozradit druh).
+const fotoDruhu = (f, alt) => `<img class="druh-foto" src="${f.src}" alt="${alt || f.alt}" width="${f.w}" height="${f.h}">`;
+$('fotoAtlas').innerHTML = [['Ptáci', PTACI], ['Savci', SAVCI]].map(([nadpis, sada]) => {
+  const karty = sada.filter(z => z.foto).map(z => `<figure class="foto-karta"><img src="${z.foto.src}" alt="${z.foto.alt}" width="${z.foto.w}" height="${z.foto.h}" loading="lazy"><figcaption><strong>${z.n}</strong>${z.r ? RADY[z.r] + ' · ' : ''}${z.popis}.</figcaption></figure>`).join('');
+  return karty ? `<h3>${nadpis}</h3><div class="foto-mrizka">${karty}</div>` : '';
+}).join('');
+
+function poznavacka() {
+  const p = $('plocha');
+  const ptak = Math.random() < 0.5;
+  const sada = ptak ? PTACI : SAVCI;
+  const z = Uloha.nahodne(sada);
+  const jine = Uloha.zamichej(sada.filter(x => x.n !== z.n)).slice(0, 3).map(x => x.n);
+  p.innerHTML = `<div class="zadani">Který druh to je?</div>
+    <div class="karta">${z.foto ? fotoDruhu(z.foto, 'Fotografie živočicha k určení.') : `<div class="obrazek">${z.i}</div>`}
+      <div class="popis" style="font-weight:400">${z.popis}</div></div>`;
+  const odezva = odezvaEl();
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: Uloha.zamichej([z.n, ...jine]).map(t => ({ klic: t, popis: t })),
+    spravnyKlic: z.n,
+    zpravaOk: `✅ ${z.n}`,
+    zpravaChyba: 'Popis obsahuje typický poznávací znak – zbarvení, chování nebo prostředí.',
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+function chrup() {
+  const p = $('plocha');
+  const c = Uloha.nahodne(CHRUPY);
+  p.innerHTML = `<div class="zadani uloha-text">Kterému typu savce patří tento chrup?</div>
+    <div class="karta"><img class="chrup-obrazek" src="${c.img}" alt="Obrázek lebky savce k určení." width="768" height="768">
+      <div class="popis" style="font-weight:400">Nápověda: ${c.znak}</div></div>`;
+  const odezva = odezvaEl();
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: Uloha.zamichej(CHRUPY.map(x => ({ klic: x.k, popis: x.n }))),
+    spravnyKlic: c.k,
+    zpravaOk: `✅ ${c.n} (${c.druh}) – chrup odpovídá potravě: ${c.potrava}.`,
+    zpravaChyba: 'Porovnej velikost řezáků a špičáků, tvar stoliček a případnou bezzubou mezeru.',
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+const REZIMY = { zobaky, koncetiny, poznavacka, rady, chrup };
+function novaUloha() { REZIMY[rezim](); }
+
+document.querySelectorAll('#rezimy button').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('#rezimy button').forEach(x => x.classList.remove('active'));
+  b.classList.add('active');
+  rezim = b.dataset.rezim;
+  novaUloha();
+}));
+$('btnDalsi').addEventListener('click', novaUloha);
+novaUloha();
+</script>
+</body>
+</html>

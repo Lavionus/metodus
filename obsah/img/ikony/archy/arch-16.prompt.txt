@@ -1,0 +1,26 @@
+Vygeneruj jeden obrázek a ulož ho jako arch-16.png do aktuální složky.
+
+Asset: icon sprite sheet for the Metodus Czech educational website. Match the painting style of vzor-styl.png and arch-01.png in this folder (watercolor and gouache with fine dark ink outlines, warm ivory paper #faf6ec, muted sage / jade / ochre / brick / slate-blue palette, soft daylight from upper left), SIMPLIFIED FOR SMALL ICONS exactly like arch-01.png: one bold, chunky object or tight group per icon, strong clear silhouette, slightly thicker ink outline, few details, flat even ivory background, readable when shrunk to 24 px.
+
+Layout (very important): square 1:1 image, an exact 4 × 4 grid of 16 equal invisible cells, 4 rows and 4 columns, read left to right, top to bottom. Each icon is centered in its own cell and fills about 70 % of the cell, with clear empty ivory space between icons; nothing may cross into a neighbouring cell. No grid lines, no frames, no borders, no text, no words, no labels, no watermark. Single letters, digits or math symbols only where the description asks for them.
+
+Icons in order:
+1. Three small colorful flags on poles.
+2. A map outline of Europe with a ring of gold stars.
+3. A blank outline map of Europe with a question mark pin.
+4. Czech mountains with a river and a pine tree.
+5. A mountain range with a winding river.
+6. A factory with a chimney and a wheat field.
+7. A blank outline map of the Czech Republic with a question mark pin.
+8. A group of diverse simple people figures and a city skyline.
+9. A cargo ship with shipping containers.
+10. A melting ice floe and a smoking chimney.
+11. An old document with a magnifying glass and a wax seal.
+12. A long timeline ribbon with dated markers.
+13. A rolled timeline scroll with a small globe.
+14. An old antique map with a compass rose.
+15. A stone axe and a cave painting of a mammoth.
+16. An Egyptian pyramid and a clay tablet.
+
+Id: flags_quiz z8_evropa_regiony slepa_mapa_evropa z8_cr_prirodni reky_pohori z8_cr_hospodarstvi slepa_mapa z9_obyvatelstvo z9_hospodarstvi_svet z9_globalni_problemy d6_prameny casova_osa svetove_dejiny historicke_mapy_odkazy d6_pravek d6_stary_orient
+Generator: Codex CLI (vestavěný ImageGen)

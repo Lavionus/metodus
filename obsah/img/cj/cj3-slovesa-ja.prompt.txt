@@ -1,0 +1,9 @@
+Use case: scientific-educational
+Asset type: IMG-cj-06 grammar-person card — já
+Subject: one illustrated elementary pupil uses a bent thumb to indicate their own shoulder, clearly referring to themself.
+Style: warm watercolor and gouache schoolbook illustration with delicate ink, warm ivory background, muted sage, jade, ochre and brick palette.
+Composition: square, centered upper body, generous margins, gesture legible at card size.
+Constraints: no text, letters, digits, speech bubble, arrows, labels, logo, watermark or border; natural hands; age-appropriate.
+Alt: Dítě ukazuje samo na sebe – já.
+Generator: built-in image_gen
+Datum: 2026-09-24

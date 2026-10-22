@@ -1,0 +1,7 @@
+IMG-aj-02 · table
+
+Use case: scientific-educational. Asset type: square home vocabulary card for children. Gentle watercolor and gouache with delicate fine-ink contours, warm ivory paper background, muted sage, jade, ochre and earthy palette, soft upper-left lighting, consistent refined Czech schoolbook style. One central subject only, centered with generous even 12 percent margins. No people. No text, letters, labels, arrows, numbers, border, frame, logo, or watermark. One simple rectangular wooden dining table in three-quarter view, whole table and all four legs visible, no chairs and nothing on top, unmistakable.
+
+Nástroj: OpenAI image_gen
+Datum: 2026-09-25
+Výstup: aj-slovicka-table.png, aj-slovicka-table.webp

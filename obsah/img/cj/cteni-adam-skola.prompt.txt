@@ -1,0 +1,6 @@
+Sada: IMG-cj-10 · text „Adamův první školní den“
+Scéna: Lehce nervózní Adam vstupuje do přívětivé třídy s učitelkou a několika dětmi v pozadí; bez půjčování gumy, dinosaurů a závěrečného kamarádství.
+Styl: teplý akvarel a kvaš, jemná linka, slonovinový papír, tlumená šalvějová, jadeitová, okrová a modrá.
+Omezení: bez čitelných písmen, slov, popisků, čísel, loga, vodoznaku a rámečku.
+Alt: Adam poprvé vstupuje do nové třídy.
+Generátor: OpenAI image_gen · 2026-09-24

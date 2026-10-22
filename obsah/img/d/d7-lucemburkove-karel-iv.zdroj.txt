@@ -1,0 +1,8 @@
+Soubor: d7-lucemburkove-karel-iv.png / d7-lucemburkove-karel-iv.webp
+Původní dílo: Charles IV-John Ocko votive picture-fragment.jpg
+Autor: Circle of Theodoric of Prague
+Datum vzniku: before 1371date QS:P571,+1371-00-00T00:00:00Z/7,P1326,+1371-00-00T00:00:00Z/9
+Zdroj: https://commons.wikimedia.org/wiki/File:Charles_IV-John_Ocko_votive_picture-fragment.jpg
+Licence: Public domain
+Staženo: 2026-10-21
+Úpravy: automatické natočení, odstranění metadat, zmenšení na nejvýše 1600 px; výuková WebP kopie 768 px.

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Angličtina – minulý čas prostý</title>
+  <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
+  <script src="../theme.js"></script>
+  <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
+  <script src="../rec.js"></script>
+  <script src="../uloha.js"></script>
+  <style>
+    .veta-en { font-size: clamp(1.15rem, 4.4vw, 1.8rem); font-weight: 700; line-height: 1.45; max-width: 640px; }
+    .veta-en .mezera { color: var(--accent); border-bottom: 3px solid var(--accent); padding: 0 12px; }
+    .preklad { color: var(--text-faint); font-size: 0.95rem; font-style: italic; }
+    .tabulka { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; max-width: var(--sirka-obsahu, 900px); margin-top: 12px; }
+    .tabulka span {
+      background: var(--bg-panel); border: 1px solid var(--border); border-radius: 8px;
+      padding: 6px 12px; font-size: 0.8rem; color: var(--text-muted);
+    }
+    .tabulka b { color: var(--text); }
+    .pribeh-obrazek { width: min(100%, 560px); aspect-ratio: 3 / 2; object-fit: cover; border-radius: 14px;
+      border: 1px solid var(--border); box-shadow: 0 5px 18px #0002; }
+    .pribeh-krok { color: var(--text-faint); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.04em; }
+  </style>
+</head>
+<body>
+  <h1>⏪ Minulý čas prostý</h1>
+  <p class="podtitul">Pro 6.–7. ročník: koncovka -ed, nepravidelná slovesa, otázky a zápor s did.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Minulý čas prostý</summary>
+    <div class="obsah">
+      <p>Minulý čas prostý (<span lang="en">past simple</span>) používáš pro děj, který se stal a <b>skončil
+        v minulosti</b>, často v určitém čase. Prozradí ho signální slova <span lang="en">yesterday, last week,
+        two days ago, in 2020</span>. Tvar slovesa je pro všechny osoby stejný: <span lang="en">I played, she played</span>.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Pravidelná slovesa</h3><p><span lang="en">play → played</span> (-ed)<br>
+          <span lang="en">like → liked</span> (na -e jen -d)<br>
+          <span lang="en">study → studied</span> (souhláska + y → -ied)<br>
+          <span lang="en">stop → stopped</span> (krátká slabika zdvojí souhlásku)</p></article>
+        <article class="vyklad-karta"><h3>Nepravidelná slovesa</h3><p>Mají vlastní tvar, který se musíš naučit:
+          <span lang="en">go → went, see → saw, buy → bought, eat → ate</span>.
+          <span lang="en">be</span> má dva tvary: <span lang="en">I / he / she / it was, you / we / they were</span>.</p></article>
+        <article class="vyklad-karta"><h3>Otázka a zápor</h3><p><span lang="en"><b>Did</b> you go to the cinema?</span><br>
+          <span lang="en">I <b>didn't</b> go to the cinema.</span><br>
+          Po <span lang="en">did / didn't</span> stojí <b>základní tvar</b>.</p></article>
+      </div>
+      <p>Proč <span lang="en">didn't went</span> ✗ nesedí? Minulost už nese pomocné <span lang="en">did</span>,
+        takže hlavní sloveso se vrátí do základního tvaru: <span lang="en">She went.</span> →
+        <span lang="en">Did she go?</span> → <span lang="en">She didn't go.</span></p>
+      <p>Britská angličtina zdvojuje -l: <span lang="en">travel → travelled</span>; americká píše
+        <span lang="en">traveled</span>.</p>
+      <aside class="zapamatuj">Minulost: <b>-ed</b> nebo nepravidelný tvar. V otázce a záporu
+        <span lang="en">did / didn't</span> + sloveso v základním tvaru.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: patří tam minulý čas?</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Doplň sloveso <span lang="en">buy</span>: <span lang="en">They ___ a new house two years ago.</span></p>
+      <ol class="kroky">
+        <li>Hledám signál času: <span lang="en">two years ago</span> = před dvěma lety, to je <b>minulost</b>.</li>
+        <li>Děj skončil, takže použiji minulý čas prostý.</li>
+        <li><span lang="en">buy</span> je nepravidelné – tvar <span lang="en">buyed</span> neexistuje. Minulý tvar je <b><span lang="en">bought</span></b>.</li>
+        <li>Věta je oznamovací, žádné <span lang="en">did</span> nepotřebuji.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ <span lang="en">They <b>bought</b> a new house two years ago.</span></p>
+    </div>
+  </details>
+
+  <div class="rezimy" id="rezimy">
+    <button data-rezim="tvar" class="active">✏️ Tvar slovesa</button>
+    <button data-rezim="nepravidelna">⭐ Nepravidelná slovesa</button>
+    <button data-rezim="otazkaZapor">❓ Otázka a zápor</button>
+    <button data-rezim="signaly">🕐 Patří tam minulý čas?</button>
+    <button data-rezim="pribeh">🏖️ Výlet k moři</button>
+  </div>
+
+  <div class="plocha" id="plocha"></div>
+
+  <div class="ovladani">
+    <button class="hlavni" id="btnDalsi">Přeskočit →</button>
+    <span class="skore" id="skore"></span>
+  </div>
+
+  <div class="tabulka">
+    <span>pravidelná: <b>-ed</b> (played, worked)</span>
+    <span>končí na -e: <b>-d</b> (liked)</span>
+    <span>souhláska + y: <b>-ied</b> (studied)</span>
+    <span>otázka a zápor: <b>did / didn't</b> + základní tvar</span>
+  </div>
+
+  <p class="napoveda">
+    V otázce a záporu se sloveso vrací do <b>základního tvaru</b>:
+    <i>Did you go?</i> – <i>I didn't go.</i> (nikoli <i>didn't went</i>).
+  </p>
+
+<script>
+const $ = id => document.getElementById(id);
+const skore = Uloha.skore('metodus_aj6_minuly', $('skore'));
+let rezim = 'tvar';
+
+const PRAVIDELNA = [
+  { z: 'play', m: 'played', cz: 'hrát si', d: 'football' }, { z: 'work', m: 'worked', cz: 'pracovat', d: 'in the garden' },
+  { z: 'watch', m: 'watched', cz: 'dívat se', d: 'the match' }, { z: 'open', m: 'opened', cz: 'otevřít', d: 'the window' },
+  { z: 'like', m: 'liked', cz: 'mít rád', d: 'the film' }, { z: 'dance', m: 'danced', cz: 'tančit', d: 'at the party' },
+  { z: 'study', m: 'studied', cz: 'studovat', d: 'for the test' }, { z: 'carry', m: 'carried', cz: 'nést', d: 'the bags' },
+  { z: 'stop', m: 'stopped', cz: 'zastavit', d: 'at the shop' }, { z: 'plan', m: 'planned', cz: 'plánovat', d: 'the trip' },
+];
+
+const NEPRAVIDELNA = [
+  { z: 'go', m: 'went', cz: 'jít, jet', d: 'to the cinema' }, { z: 'see', m: 'saw', cz: 'vidět', d: 'the new film' },
+  { z: 'eat', m: 'ate', cz: 'jíst', d: 'pizza' }, { z: 'drink', m: 'drank', cz: 'pít', d: 'the milk' },
+  { z: 'write', m: 'wrote', cz: 'psát', d: 'a letter' }, { z: 'read', m: 'read', cz: 'číst', d: 'the book' },
+  { z: 'take', m: 'took', cz: 'vzít', d: 'the bus' }, { z: 'give', m: 'gave', cz: 'dát', d: 'him a present' },
+  { z: 'come', m: 'came', cz: 'přijít', d: 'to the party' }, { z: 'buy', m: 'bought', cz: 'koupit', d: 'a new bike' },
+  { z: 'make', m: 'made', cz: 'dělat', d: 'a cake' }, { z: 'have', m: 'had', cz: 'mít', d: 'a picnic' },
+  { z: 'be', m: 'was/were', cz: 'být' }, { z: 'do', m: 'did', cz: 'dělat', d: 'the homework' },
+  { z: 'run', m: 'ran', cz: 'běžet', d: 'in the park' }, { z: 'swim', m: 'swam', cz: 'plavat', d: 'in the lake' },
+];
+
+const PODMETY = ['I', 'You', 'He', 'She', 'We', 'They', 'My brother', 'The children'];
+const DOPLNKY = ['yesterday', 'last week', 'two days ago', 'in 2020', 'last summer'];
+
+const SIGNALY = [
+  { v: 'We ___ to the zoo last Sunday.', minuly: true, spr: 'went', zaklad: 'go' },
+  { v: 'She ___ tennis every Monday.', minuly: false, spr: 'plays', zaklad: 'play' },
+  { v: 'They ___ a new house two years ago.', minuly: true, spr: 'bought', zaklad: 'buy' },
+  { v: 'I usually ___ breakfast at seven.', minuly: false, spr: 'eat', zaklad: 'eat' },
+  { v: 'He ___ his homework yesterday evening.', minuly: true, spr: 'did', zaklad: 'do' },
+  { v: 'My sister ___ books every night.', minuly: false, spr: 'reads', zaklad: 'read' },
+  { v: 'We ___ in the sea last summer.', minuly: true, spr: 'swam', zaklad: 'swim' },
+  { v: 'Tom always ___ to school by bus.', minuly: false, spr: 'goes', zaklad: 'go' },
+];
+
+const PRIBEH = [
+  { img: 'img/aj/aj6-vylet-baleni.webp', alt: 'Dívka si ráno balí kufr na cestu k moři.', veta: 'She ___ her suitcase in the morning.', a: 'packed', b: ['pack', 'packted', 'packs'] },
+  { img: 'img/aj/aj6-vylet-vlak.webp', alt: 'Dívka cestuje vlakem a z okna poprvé vidí moře.', veta: 'She ___ to the coast by train.', a: 'travelled', b: ['travel', 'travels', 'travelling'] },
+  { img: 'img/aj/aj6-vylet-plaz.webp', alt: 'Dívka staví na slunečné pláži hrad z písku.', veta: 'She ___ a sandcastle on the beach.', a: 'built', b: ['build', 'builded', 'builds'] },
+  { img: 'img/aj/aj6-vylet-dest.webp', alt: 'Dívku na pláži překvapil prudký déšť.', veta: 'Then it ___ to rain.', a: 'started', b: ['start', 'startted', 'starts'] },
+  { img: 'img/aj/aj6-vylet-kavarna.webp', alt: 'Dívka čeká v kavárně a pije teplé kakao.', veta: 'She ___ hot cocoa in a cafe.', a: 'drank', b: ['drink', 'drinked', 'drinks'] },
+  { img: 'img/aj/aj6-vylet-navrat.webp', alt: 'Dívka se večer vrátila domů a ukazuje mušli.', veta: 'She ___ home in the evening.', a: 'returned', b: ['return', 'returnt', 'returns'] },
+];
+let pribehIndex = 0;
+
+/* ---- Tvar slovesa -------------------------------------------------------------------- */
+function tvar() {
+  const p = $('plocha');
+  const u = Uloha.nahodne(PRAVIDELNA);
+  const chybne = [u.z + 'ed', u.z + 'd', u.z.replace(/y$/, 'ied'), u.z + u.z.slice(-1) + 'ed']
+    .filter(t => t !== u.m).filter((x, i, a) => a.indexOf(x) === i);
+
+  p.innerHTML = `<div class="zadani">Jak zní minulý čas?</div>
+    <div class="karta"><div class="veta-en">${u.z}</div><div class="preklad">${u.cz}</div></div>`;
+  const odezva = document.createElement('div');
+  odezva.className = 'odezva';
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: Uloha.zamichej([u.m, ...chybne.slice(0, 3)]).map(t => ({ klic: t, popis: t })),
+    spravnyKlic: u.m,
+    zpravaOk: `✅ ${u.z} → ${u.m}`,
+    zpravaChyba: 'Podívej se na konec slovesa: -e → jen -d, souhláska + y → -ied, krátká slabika → zdvojení.',
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+/* ---- Nepravidelná slovesa -------------------------------------------------------------- */
+function nepravidelna() {
+  const p = $('plocha');
+  const u = Uloha.nahodne(NEPRAVIDELNA);
+  const jine = Uloha.zamichej(NEPRAVIDELNA.filter(x => x.m !== u.m)).slice(0, 2).map(x => x.m);
+  const chybny = u.z + 'ed';
+
+  p.innerHTML = `<div class="zadani">Jak zní minulý čas tohoto nepravidelného slovesa?</div>
+    <div class="karta"><div class="veta-en">${u.z}</div><div class="preklad">${u.cz}</div></div>`;
+  const odezva = document.createElement('div');
+  odezva.className = 'odezva';
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: Uloha.zamichej([u.m, chybny, ...jine]).map(t => ({ klic: t, popis: t })),
+    spravnyKlic: u.m,
+    zpravaOk: `✅ ${u.z} → ${u.m} (${u.cz})`,
+    zpravaChyba: 'Nepravidelná slovesa koncovku -ed nepřidávají, musíš je znát zpaměti.',
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+/* ---- Otázka a zápor ---------------------------------------------------------------------- */
+function otazkaZapor() {
+  const p = $('plocha');
+  // každé sloveso má vlastní doplnění (d), aby věta dávala smysl
+  const u = Uloha.nahodne([...PRAVIDELNA, ...NEPRAVIDELNA].filter(x => x.z !== 'be'));
+  const podmet = Uloha.nahodne(PODMETY);
+  const jeOtazka = Math.random() < 0.5;
+  const spravny = u.z;
+  const chybne = [u.m, u.z + 'ed', u.z + 's'].filter(t => t !== spravny)
+    .filter((x, i, a) => a.indexOf(x) === i);
+
+  p.innerHTML = `<div class="zadani">Doplň správný tvar slovesa:</div>
+    <div class="karta"><div class="veta-en">${jeOtazka
+      ? `Did ${podmet === 'I' ? 'I' : podmet.toLowerCase()} <span class="mezera">?</span> ${u.d} ${Uloha.nahodne(DOPLNKY)}?`
+      : `${podmet} didn't <span class="mezera">?</span> ${u.d} ${Uloha.nahodne(DOPLNKY)}.`}</div>
+    <div class="preklad">sloveso: ${u.z} (${u.cz})</div></div>`;
+  const odezva = document.createElement('div');
+  odezva.className = 'odezva';
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: Uloha.zamichej([spravny, ...chybne.slice(0, 3)]).map(t => ({ klic: t, popis: t })),
+    spravnyKlic: spravny,
+    zpravaOk: `✅ Po did a didn't je sloveso v základním tvaru: ${spravny}.`,
+    zpravaChyba: 'Minulost už vyjadřuje did/didn\'t – sloveso zůstává základní.',
+    poSpravne: napoprve => {
+      skore.vyhodnot(napoprve);
+      p.querySelector('.mezera').textContent = spravny;
+    },
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+/* ---- Patří tam minulý čas? ---------------------------------------------------------------- */
+function signaly() {
+  const p = $('plocha');
+  const u = Uloha.nahodne(SIGNALY);
+  p.innerHTML = `<div class="zadani">Který čas patří do věty?</div>
+    <div class="karta"><div class="veta-en">${u.v}</div></div>`;
+  const odezva = document.createElement('div');
+  odezva.className = 'odezva';
+  Uloha.vyber({
+    kam: p, odezva, trida: 'dve',
+    moznosti: [
+      { klic: 'minuly', ikona: '⏪', popis: 'minulý čas' },
+      { klic: 'pritomny', ikona: '⏺️', popis: 'přítomný čas' },
+    ],
+    spravnyKlic: u.minuly ? 'minuly' : 'pritomny',
+    zpravaOk: `✅ Správně: ${u.v.replace('___', u.spr)}`,
+    zpravaChyba: 'Hledej signální slova: yesterday, last week, ago → minulý; every day, usually → přítomný.',
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+/* ---- Obrázkový příběh --------------------------------------------------------------- */
+function pribeh() {
+  const p = $('plocha');
+  const u = PRIBEH[pribehIndex];
+  p.innerHTML = `<div class="pribeh-krok">PŘÍBĚH · ${pribehIndex + 1} / ${PRIBEH.length}</div>
+    <img class="pribeh-obrazek" src="${u.img}" alt="${u.alt}" width="1152" height="768">
+    <div class="zadani">Doplň sloveso v minulém čase:</div>
+    <div class="karta"><div class="veta-en">${u.veta.replace('___', '<span class="mezera">?</span>')}</div></div>`;
+  const odezva = document.createElement('div');
+  odezva.className = 'odezva';
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: Uloha.zamichej([u.a, ...u.b]).map(t => ({ klic: t, popis: t })),
+    spravnyKlic: u.a,
+    zpravaOk: `✅ ${u.veta.replace('___', u.a)}`,
+    zpravaChyba: 'Příběh se už stal – potřebuješ tvar slovesa v minulém čase.',
+    poSpravne: napoprve => { skore.vyhodnot(napoprve); pribehIndex = (pribehIndex + 1) % PRIBEH.length; },
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+const REZIMY = { tvar, nepravidelna, otazkaZapor, signaly, pribeh };
+function novaUloha() { REZIMY[rezim](); }
+
+document.querySelectorAll('#rezimy button').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('#rezimy button').forEach(x => x.classList.remove('active'));
+  b.classList.add('active');
+  rezim = b.dataset.rezim;
+  novaUloha();
+}));
+$('btnDalsi').addEventListener('click', novaUloha);
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === 'Enter') { e.preventDefault(); novaUloha(); }
+});
+novaUloha();
+</script>
+</body>
+</html>

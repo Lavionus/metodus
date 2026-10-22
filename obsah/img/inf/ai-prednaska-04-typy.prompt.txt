@@ -1,0 +1,2 @@
+Společné zadání: ai-prednaska.prompt.txt
+Jeden abstraktní model větví výstupy do konverzace, obrazu, zvuku a videa.

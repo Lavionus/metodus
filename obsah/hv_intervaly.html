@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hudební intervaly</title>
+  <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
+  <script src="../theme.js"></script>
+  <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
+  <script src="../rec.js"></script>
+  <script src="../uloha.js"></script>
+  <style>
+    /* klaviatura je skutečný předmět – bílé a černé klávesy zůstávají v obou motivech stejné */
+    :root { --klav-bila: #f7f7f2; --klav-cerna: #1d1d1f; --klav-obrys: #7a7a7a; }
+    .osnova-svg, .klav-svg { display: block; width: 100%; height: auto; margin: 0 auto; }
+    .osnova-svg { max-width: 460px; color: var(--text); }
+    .osnova-svg .linka { stroke: var(--text-muted); stroke-width: 1.2; }
+    .osnova-svg .klic { fill: var(--text); font-size: 50px; }
+    .osnova-svg .posuvka { fill: var(--text); font-size: 17px; font-weight: 700; }
+    .osnova-svg .jmeno, .klav-svg .jmeno { fill: var(--text); font-size: 12px; font-weight: 700; }
+    .klav-svg { max-width: 520px; }
+    .klav-svg .bila { fill: var(--klav-bila); stroke: var(--klav-obrys); stroke-width: 1; }
+    .klav-svg .cerna { fill: var(--klav-cerna); stroke: var(--klav-cerna); stroke-width: 1; }
+    .klav-svg .k1 { fill: var(--accent); }
+    .klav-svg .k2 { fill: var(--ok); }
+    .karta.interval { width: min(100%, 600px); padding: 14px 12px; gap: 6px; }
+    .karta.poslech { padding: 22px 28px; }
+    .karta .ucho { font-size: 3rem; line-height: 1; }
+    .prehrat { font: inherit; font-size: 0.95rem; background: var(--bg-control); color: var(--text); border: 1px solid var(--border-strong); border-radius: 8px; padding: 8px 16px; cursor: pointer; }
+    .prehrat:hover { border-color: var(--accent); }
+    .prehrat:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+    .moznosti.nazvy button { min-width: 130px; font-weight: 600; }
+    .zadani { text-align: center; }
+    .vyklad-obrazek { max-width: 460px; margin: 8px auto 12px; }
+    .tabulka-iv { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+    .tabulka-iv td, .tabulka-iv th { padding: 4px 6px; border-bottom: 1px solid var(--border); text-align: left; }
+    .tabulka-iv th { color: var(--text-muted); font-weight: 600; }
+    .bez-zvuku { color: var(--text-faint); font-size: 0.85rem; text-align: center; margin: 4px 0 0; }
+  </style>
+</head>
+<body>
+  <h1>🎹 Intervaly</h1>
+  <p class="podtitul">Pro 6.–9. ročník: prima až oktáva, velká a malá sekunda a tercie, čistá kvarta, kvinta a oktáva – podle stupňů, půltónů na klaviatuře i sluchem.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Co je interval</summary>
+    <div class="obsah">
+      <p><b>Interval</b> je vzdálenost mezi dvěma tóny. Když tóny zazní po sobě, je interval <b>melodický</b>,
+        když zazní současně, je <b>harmonický</b>. Interval určíme ve dvou krocích: nejdřív <b>počet stupňů</b>
+        (dá intervalu jméno), potom <b>počet půltónů</b> (řekne, jestli je velký, malý, nebo čistý).</p>
+      <div class="vyklad-obrazek" id="vykladKlav"></div>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>1. Stupně</h3><p>Počítáme názvy not od dolního tónu po horní <b>včetně obou</b>:
+          c–d–e jsou 3 stupně, tedy <b>tercie</b>. Jména: 1 prima, 2 sekunda, 3 tercie, 4 kvarta, 5 kvinta,
+          6 sexta, 7 septima, 8 oktáva. V osnově je každá linka i mezera jeden stupeň.</p></article>
+        <article class="vyklad-karta"><h3>2. Půltóny</h3><p>Půltón je krok na <b>nejbližší sousední klávesu</b>, bílou i černou.
+          Mezi <b>e–f</b> a <b>h–c</b> černá klávesa není, proto je tam půltón přímo mezi bílými klávesami.</p></article>
+        <article class="vyklad-karta"><h3>Velká, nebo malá?</h3>
+          <table class="tabulka-iv">
+            <tr><th>interval</th><th>půltóny</th><th>příklad</th></tr>
+            <tr><td>čistá prima</td><td>0</td><td>c1–c1</td></tr>
+            <tr><td>malá sekunda</td><td>1</td><td>e1–f1</td></tr>
+            <tr><td>velká sekunda</td><td>2</td><td>c1–d1</td></tr>
+            <tr><td>malá tercie</td><td>3</td><td>d1–f1</td></tr>
+            <tr><td>velká tercie</td><td>4</td><td>c1–e1</td></tr>
+            <tr><td>čistá kvarta</td><td>5</td><td>c1–f1</td></tr>
+            <tr><td>čistá kvinta</td><td>7</td><td>c1–g1</td></tr>
+            <tr><td>čistá oktáva</td><td>12</td><td>c1–c2</td></tr>
+          </table></article>
+      </div>
+      <p>Prima, kvarta, kvinta a oktáva bývají <b>čisté</b>, sekundy a tercie (i sexty a septimy) jsou <b>velké</b> nebo <b>malé</b>.
+        Malý interval má o jeden půltón méně než velký. Velká tercie zní jasně (začátek durového akordu),
+        malá tercie tlumeněji (začátek mollového akordu).</p>
+      <aside class="zapamatuj">Stupně → jméno intervalu, půltóny → velký/malý/čistý. Velká tercie 4 půltóny, malá 3; čistá kvarta 5, čistá kvinta 7, oktáva 12.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: urči interval d1–f1</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Jaký interval tvoří tóny d1 a f1?</p>
+      <div class="vyklad-obrazek" id="ukazkaKlav"></div>
+      <ol class="kroky">
+        <li>Spočítám stupně včetně obou krajních not: d (1), e (2), f (3) – jsou to <b>3 stupně</b>.</li>
+        <li>3 stupně = <b>tercie</b>. Zbývá zjistit, jestli velká, nebo malá.</li>
+        <li>Spočítám půltóny po sousedních klávesách: d1 → dis1 (1) → e1 (2) → f1 (3). Mezi e a f černá klávesa není.</li>
+        <li><b>3 půltóny</b> má <b>malá tercie</b> (velká by měla 4).</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ d1–f1 je malá tercie (3 stupně, 3 půltóny).</p>
+    </div>
+  </details>
+
+  <div class="rezimy" id="rezimy">
+    <button data-rezim="stupne" class="active">🪜 Kolik stupňů?</button>
+    <button data-rezim="pultony">🎹 Kolik půltónů?</button>
+    <button data-rezim="nazev">🏷️ Pojmenuj interval</button>
+    <button data-rezim="tercie">⚖️ Velká, nebo malá tercie?</button>
+    <button data-rezim="sluch" data-faze="poslech">👂 Poznej sluchem</button>
+  </div>
+
+  <div class="plocha" id="plocha"></div>
+
+  <div class="ovladani">
+    <button class="hlavni" id="btnDalsi">Přeskočit →</button>
+    <span class="skore" id="skore"></span>
+  </div>
+
+  <details class="napoveda" data-faze="tahak">
+    <summary>📌 Tahák</summary>
+    <p><b>Stupně</b> počítej včetně obou krajních not: 1 prima, 2 sekunda, 3 tercie, 4 kvarta, 5 kvinta, 6 sexta, 7 septima, 8 oktáva.
+      <b>Půltón</b> = krok na sousední klávesu (i černou); e–f a h–c jsou půltóny bez černé klávesy.
+      Malá sekunda 1, velká sekunda 2, <b>malá tercie 3</b>, <b>velká tercie 4</b>, čistá kvarta 5, čistá kvinta 7, čistá oktáva 12 půltónů.
+      Čistá prima jsou dva stejné tóny (0 půltónů).</p>
+  </details>
+
+<script>
+const $ = id => document.getElementById(id);
+const skore = Uloha.skore('metodus_hv_intervaly', $('skore'));
+let rezim = 'stupne';
+
+/* ---- tóny ------------------------------------------------------------------------
+   nota = { l: písmeno 0–6 (c d e f g a h), okt: 1 | 2, a: posuvka −1 / 0 / +1 } */
+const PISMENA = ['c', 'd', 'e', 'f', 'g', 'a', 'h'];
+const PC = [0, 2, 4, 5, 7, 9, 11];
+const KRIZEK = { 0: 'cis', 1: 'dis', 3: 'fis', 4: 'gis', 5: 'ais' };   // eis a his nepoužíváme
+const BECKO = { 1: 'des', 2: 'es', 4: 'ges', 5: 'as', 6: 'b' };       // ces a fes nepoužíváme
+const stupen = n => (n.okt - 1) * 7 + n.l;                 // c1 = 0
+const pul = n => (n.okt - 1) * 12 + PC[n.l] + n.a;          // c1 = 0
+const platna = n => n.a === 0 || (n.a === 1 ? n.l in KRIZEK : n.a === -1 ? n.l in BECKO : false);
+function jmeno(n) {
+  const z = n.a === 1 ? KRIZEK[n.l] : n.a === -1 ? BECKO[n.l] : PISMENA[n.l];
+  return z + n.okt;
+}
+const bila = l => ({ l, okt: 1, a: 0 });
+
+const CISLA = ['prima', 'sekunda', 'tercie', 'kvarta', 'kvinta', 'sexta', 'septima', 'oktáva'];
+const nazevCisla = n => CISLA[n - 1];
+/* intervaly, které se na stránce pojmenovávají (učivo ZŠ) */
+const INTERVALY = [
+  { k: 'c1', n: 1, s: 0, nazev: 'čistá prima' },
+  { k: 'm2', n: 2, s: 1, nazev: 'malá sekunda' },
+  { k: 'v2', n: 2, s: 2, nazev: 'velká sekunda' },
+  { k: 'm3', n: 3, s: 3, nazev: 'malá tercie' },
+  { k: 'v3', n: 3, s: 4, nazev: 'velká tercie' },
+  { k: 'c4', n: 4, s: 5, nazev: 'čistá kvarta' },
+  { k: 'c5', n: 5, s: 7, nazev: 'čistá kvinta' },
+  { k: 'c8', n: 8, s: 12, nazev: 'čistá oktáva' },
+];
+const IV = k => INTERVALY.find(i => i.k === k);
+const velke = s => s.charAt(0).toUpperCase() + s.slice(1);
+const stupnu = n => Uloha.tvar(n, 'stupeň', 'stupně', 'stupňů');
+const pultonu = n => Uloha.tvar(n, 'půltón', 'půltóny', 'půltónů');
+const jeJsou = n => n >= 2 && n <= 4 ? 'jsou' : 'je';
+
+/* horní tón intervalu (n stupňů, s půltónů) nad dolním – nebo null, když by se psal neobvykle */
+function horniNota(dolni, n, s) {
+  const st = stupen(dolni) + n - 1;
+  const h = { l: st % 7, okt: 1 + Math.floor(st / 7), a: 0 };
+  h.a = s - (pul(h) - pul(dolni));
+  return platna(h) ? h : null;
+}
+/* náhodný interval z nabídky nad bílou klávesou c1–h1 */
+function nahodnyInterval(nabidka) {
+  for (;;) {
+    const iv = Uloha.nahodne(nabidka);
+    const d = bila(Uloha.nahodneCislo(0, 6));
+    const h = horniNota(d, iv.n, iv.s);
+    if (h) return { iv, d, h };
+  }
+}
+
+/* ---- osnova s houslovým klíčem (celé noty, melodicky vedle sebe) ----------------- */
+const YE = 88;                                    // spodní linka = e1 (stupeň 2)
+const yNoty = st => YE - (st - 2) * 5;
+function osnova(dolni, horni, sJmeny = true) {
+  let h = '';
+  for (let i = 0; i < 5; i++) h += `<line class="linka" x1="6" y1="${YE - i * 10}" x2="294" y2="${YE - i * 10}"/>`;
+  h += `<text class="klic" x="10" y="${YE + 5}">𝄞</text>`;
+  [[dolni, 140], [horni, 215]].forEach(([n, x]) => {
+    const st = stupen(n), y = yNoty(st);
+    // pomocné linky: c1 pod osnovou, a2 nad ní (a výš)
+    for (let p = 0; p >= st; p -= 2) h += `<line class="linka" x1="${x - 12}" y1="${yNoty(p)}" x2="${x + 12}" y2="${yNoty(p)}"/>`;
+    for (let p = 12; p <= st; p += 2) h += `<line class="linka" x1="${x - 12}" y1="${yNoty(p)}" x2="${x + 12}" y2="${yNoty(p)}"/>`;
+    h += `<ellipse cx="${x}" cy="${y}" rx="6.8" ry="4.7" fill="none" stroke="currentColor" stroke-width="2.4" transform="rotate(-14 ${x} ${y})"/>`;
+    if (n.a) h += `<text class="posuvka" x="${x - 21}" y="${y + 6}">${n.a > 0 ? '♯' : '♭'}</text>`;
+    if (sJmeny) h += `<text class="jmeno" x="${x}" y="116" text-anchor="middle">${jmeno(n)}</text>`;
+  });
+  return `<svg class="osnova-svg" viewBox="0 0 300 ${sJmeny ? 122 : 106}" role="img" `
+    + `aria-label="Notová osnova s houslovým klíčem, tóny ${jmeno(dolni)} a ${jmeno(horni)}">${h}</svg>`;
+}
+
+/* ---- klaviatura c1–h2 (14 bílých kláves) ------------------------------------------- */
+const BW = 24, BH = 100, CW = 14, CH = 60;
+const CERNE_ZA = [0, 1, 3, 4, 5];                 // černá klávesa za c, d, f, g, a
+/* poloha klávesy podle půltónu: { cerna, x (střed) } */
+function klavesa(p) {
+  const okt = Math.floor(p / 12), pc = p % 12;
+  const l = PC.indexOf(pc);
+  if (l >= 0) return { cerna: false, x: (okt * 7 + l) * BW + BW / 2 };
+  const vlevo = PC.indexOf(pc - 1);
+  return { cerna: true, x: (okt * 7 + vlevo + 1) * BW };
+}
+function klaviatura(dolni, horni) {
+  const p1 = pul(dolni), p2 = pul(horni);
+  const trida = p => p === p1 ? ' k1' : p === p2 ? ' k2' : '';
+  let b = '', c = '', t = '';
+  for (let p = 0; p < 24; p++) {
+    const k = klavesa(p);
+    if (!k.cerna) b += `<rect class="bila${trida(p)}" x="${k.x - BW / 2}" y="2" width="${BW}" height="${BH}" rx="2"/>`;
+    else c += `<rect class="cerna${trida(p)}" x="${k.x - CW / 2}" y="2" width="${CW}" height="${CH}" rx="2"/>`;
+  }
+  [[dolni, p1], [horni, p2]].forEach(([n, p], i) => {
+    if (i === 1 && p2 === p1) return;
+    const k = klavesa(p);
+    t += `<text class="jmeno" x="${k.x}" y="${k.cerna ? 132 : 116}" text-anchor="middle">${jmeno(n)}</text>`;
+  });
+  return `<svg class="klav-svg" viewBox="0 0 ${14 * BW} 136" role="img" `
+    + `aria-label="Klaviatura od c1 do h2, vyznačené klávesy ${jmeno(dolni)} a ${jmeno(horni)}">${b}${c}${t}</svg>`;
+}
+const obrazek = (d, h) => `<div class="karta interval">${osnova(d, h)}${klaviatura(d, h)}</div>`;
+
+/* ---- zvuk (nepovinný) ------------------------------------------------------------- */
+const AudioTrida = typeof window !== 'undefined' && (window.AudioContext || window.webkitAudioContext);
+let actx = null;
+function ton(p, t, delka) {
+  const o = actx.createOscillator(), g = actx.createGain();
+  o.type = 'triangle'; o.frequency.value = 261.63 * Math.pow(2, p / 12);   // c1 = 261,63 Hz
+  o.connect(g); g.connect(actx.destination);
+  g.gain.setValueAtTime(0.0001, t);
+  g.gain.exponentialRampToValueAtTime(0.22, t + 0.02);
+  g.gain.exponentialRampToValueAtTime(0.0001, t + delka);
+  o.start(t); o.stop(t + delka + 0.05);
+}
+/* melodicky (po sobě), potom harmonicky (současně) */
+function prehraj(d, h) {
+  if (!AudioTrida) return;
+  try { actx = actx || new AudioTrida(); } catch { return; }
+  if (actx.state === 'suspended') actx.resume();
+  const t = actx.currentTime + 0.08, p1 = pul(d), p2 = pul(h);
+  ton(p1, t, 0.75); ton(p2, t + 0.8, 0.75);
+  ton(p1, t + 1.7, 1.3); ton(p2, t + 1.7, 1.3);
+}
+
+/* ================================================================================
+   Generátory úloh – vrací { html, moznosti, spravnyKlic, zpravaOk, zpravaChyba, trida, zvuk }
+   ================================================================================ */
+
+/* ---- Kolik stupňů? (jen bílé klávesy) ---- */
+function ulohaStupne() {
+  const d = bila(Uloha.nahodneCislo(0, 6));
+  const n = Uloha.nahodne([1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 7, 8, 8]);
+  const st = stupen(d) + n - 1;
+  const h = { l: st % 7, okt: 1 + Math.floor(st / 7), a: 0 };
+  const jine = [n - 1, n + 1, n - 2, n + 2, n - 3, n + 3].filter(k => k >= 1 && k <= 8).slice(0, 3);
+  return {
+    html: `<div class="zadani">Kolik stupňů je od <b>${jmeno(d)}</b> do <b>${jmeno(h)}</b>? Jak se interval jmenuje?</div>${obrazek(d, h)}`,
+    trida: 'nazvy',
+    moznosti: [n, ...jine].sort((a, b) => a - b).map(k => ({ klic: String(k), popis: `${nazevCisla(k)} (${stupnu(k)})` })),
+    spravnyKlic: String(n),
+    zpravaOk: n === 1
+      ? `✅ Dva stejné tóny ${jmeno(d)} – 1 stupeň, prima.`
+      : `✅ ${PISMENA.concat(PISMENA).slice(d.l, d.l + n).join(' – ')}: ${stupnu(n)}, ${nazevCisla(n)}.`,
+    zpravaChyba: kl => {
+      const k = +kl;
+      if (n === 1) return `${velke(nazevCisla(k))} má ${stupnu(k)}. Tady jsou oba tóny stejné (${jmeno(d)}) – to je jediný stupeň.`;
+      if (k === n - 1) return `${velke(nazevCisla(k))} má jen ${stupnu(k)}. Nezapomněl jsi započítat i krajní notu? Dolní ${jmeno(d)} je 1. stupeň.`;
+      return `${velke(nazevCisla(k))} má ${stupnu(k)} – to je ${k > n ? 'víc' : 'méně'}. `
+        + `Začni na ${jmeno(d)} jako na 1. stupni a počítej názvy not až po ${jmeno(h)} včetně.`;
+    },
+    zvuk: [d, h],
+  };
+}
+
+/* ---- Kolik půltónů? ---- */
+function ulohaPultony() {
+  const d = bila(Uloha.nahodneCislo(0, 6));
+  const s = Uloha.nahodneCislo(1, 12);
+  const p2 = pul(d) + s, okt = 1 + Math.floor(p2 / 12), pc = p2 % 12;
+  let h;
+  if (PC.includes(pc)) h = { l: PC.indexOf(pc), okt, a: 0 };
+  else {
+    const krizkem = { l: PC.indexOf(pc - 1), okt, a: 1 }, beckem = { l: PC.indexOf(pc + 1), okt, a: -1 };
+    h = Math.random() < 0.5 ? krizkem : beckem;
+  }
+  const bileKroky = stupen(h) - stupen(d);
+  const kandidati = [s + 1, bileKroky, s - 1, s + 2, s - 2, s + 3]
+    .filter((k, i, a) => k >= 0 && k !== s && a.indexOf(k) === i).slice(0, 3);
+  return {
+    html: `<div class="zadani">Kolik půltónů je od <b>${jmeno(d)}</b> nahoru k <b>${jmeno(h)}</b>?</div>${obrazek(d, h)}`,
+    trida: 'velke',
+    moznosti: [s, ...kandidati].sort((a, b) => a - b).map(k => ({ klic: String(k), popis: String(k) })),
+    spravnyKlic: String(s),
+    zpravaOk: `✅ Od ${jmeno(d)} k ${jmeno(h)} ${jeJsou(s)} ${pultonu(s)}.`,
+    zpravaChyba: kl => {
+      const k = +kl;
+      if (k === s + 1) return `${k}? Počítáš klávesy včetně té, na které začínáš. Půltón je krok na sousední klávesu – počítej kroky, ne klávesy.`;
+      if (k === bileKroky && k > 0) return `${k}? Počítáš jen bílé klávesy. Do půltónů patří i kroky přes černé klávesy (jen mezi e–f a h–c černá není).`;
+      return `${k} je ${k > s ? 'víc' : 'méně'}. Krokuj po sousedních klávesách, bílých i černých, od ${jmeno(d)} až k ${jmeno(h)}.`;
+    },
+    zvuk: [d, h],
+  };
+}
+
+/* ---- Pojmenuj interval ---- */
+function ulohaNazev() {
+  const { iv, d, h } = nahodnyInterval(INTERVALY);
+  const stejne = INTERVALY.filter(x => x !== iv && x.n === iv.n);
+  const blizke = Uloha.zamichej(INTERVALY.filter(x => x !== iv && x.n !== iv.n && Math.abs(x.n - iv.n) <= 2));
+  const dalsi = Uloha.zamichej(INTERVALY.filter(x => x !== iv && !stejne.includes(x) && !blizke.includes(x)));
+  const nabidka = [iv, ...[...stejne, ...blizke, ...dalsi].slice(0, 3)].sort((a, b) => a.s - b.s);
+  return {
+    html: `<div class="zadani">Jaký interval tvoří tóny <b>${jmeno(d)}</b> a <b>${jmeno(h)}</b>?</div>${obrazek(d, h)}`,
+    trida: 'nazvy',
+    moznosti: nabidka.map(x => ({ klic: x.k, popis: x.nazev })),
+    spravnyKlic: iv.k,
+    zpravaOk: `✅ ${velke(iv.nazev)}: ${stupnu(iv.n)} a ${pultonu(iv.s)}.`,
+    zpravaChyba: kl => {
+      const x = IV(kl);
+      if (iv.n === 1) return `${velke(x.nazev)} má ${stupnu(x.n)}. Tady jsou oba tóny stejné – je to jediný stupeň a 0 půltónů.`;
+      if (x.n === iv.n) return `Stupně sedí – je to ${nazevCisla(iv.n)}. ${velke(x.nazev)} má ale ${pultonu(x.s)}; spočítej půltóny na klaviatuře.`;
+      return `${velke(x.nazev)} má ${stupnu(x.n)}. Spočítej názvy not od ${jmeno(d)} po ${jmeno(h)} včetně obou – vyjde ti ${x.n > iv.n ? 'méně' : 'víc'}.`;
+    },
+    zvuk: [d, h],
+  };
+}
+
+/* ---- Velká, nebo malá tercie? ---- */
+function ulohaTercie() {
+  const { iv, d, h } = nahodnyInterval([IV('m3'), IV('v3')]);
+  const velka = iv.k === 'v3';
+  return {
+    html: `<div class="zadani">Tóny <b>${jmeno(d)}</b> a <b>${jmeno(h)}</b> tvoří tercii. Je velká, nebo malá?</div>${obrazek(d, h)}`,
+    trida: 'dve',
+    moznosti: [{ klic: 'v3', popis: 'velká tercie (4 půltóny)' }, { klic: 'm3', popis: 'malá tercie (3 půltóny)' }],
+    spravnyKlic: iv.k,
+    zpravaOk: `✅ Od ${jmeno(d)} k ${jmeno(h)} jsou ${pultonu(iv.s)} – ${iv.nazev}.`,
+    zpravaChyba: () => velka
+      ? `Malá tercie má jen 3 půltóny. Spočítej kroky po klávesách od ${jmeno(d)} k ${jmeno(h)} – vyjde ti víc.`
+      : `Velká tercie má 4 půltóny. Spočítej kroky po klávesách od ${jmeno(d)} k ${jmeno(h)} – vyjde ti méně. Pozor na e–f a h–c, tam je půltón bez černé klávesy.`,
+    zvuk: [d, h],
+  };
+}
+
+/* ---- Poznej sluchem (jen se zvukem) ---- */
+const SLUCHOVE = ['v2', 'm3', 'v3', 'c4', 'c5', 'c8'].map(IV);
+function ulohaSluch() {
+  const { iv, d, h } = nahodnyInterval(SLUCHOVE);
+  const nabidka = [iv, ...Uloha.zamichej(SLUCHOVE.filter(x => x !== iv)).slice(0, 3)].sort((a, b) => a.s - b.s);
+  return {
+    html: `<div class="zadani">Poslechni si dva tóny – nejdřív po sobě, pak spolu. Jaký je to interval?</div>
+      <div class="karta poslech"><div class="ucho" aria-hidden="true">👂</div></div>`,
+    trida: 'nazvy',
+    moznosti: nabidka.map(x => ({ klic: x.k, popis: `${x.nazev} (${x.s})` })),
+    spravnyKlic: iv.k,
+    zpravaOk: `✅ ${velke(iv.nazev)}: ${jmeno(d)} – ${jmeno(h)}, ${pultonu(iv.s)}.`,
+    zpravaChyba: kl => {
+      const x = IV(kl);
+      return `${velke(x.nazev)} má ${pultonu(x.s)}, tóny by byly ${x.s > iv.s ? 'dál od sebe' : 'blíž u sebe'}. Poslechni si to ještě jednou.`;
+    },
+    zvuk: [d, h],
+    hned: true,
+  };
+}
+
+const GENERATORY = { stupne: ulohaStupne, pultony: ulohaPultony, nazev: ulohaNazev, tercie: ulohaTercie, sluch: ulohaSluch };
+
+/* ---- vykreslení úlohy ---- */
+function novaUloha() {
+  if (rezim === 'sluch' && !AudioTrida) rezim = 'stupne';
+  const p = $('plocha');
+  const u = GENERATORY[rezim]();
+  p.innerHTML = u.html;
+  if (AudioTrida && u.zvuk) {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'prehrat';
+    b.textContent = u.hned ? '🔊 Přehrát znovu' : '🔊 Poslechnout';
+    b.addEventListener('click', () => prehraj(...u.zvuk));
+    (p.querySelector('.karta') || p).appendChild(b);
+    if (u.hned) setTimeout(() => prehraj(...u.zvuk), 150);
+  }
+  const odezva = document.createElement('div');
+  odezva.className = 'odezva';
+  Uloha.vyber({
+    kam: p, odezva, trida: u.trida, moznosti: u.moznosti, spravnyKlic: u.spravnyKlic,
+    zpravaOk: u.zpravaOk, zpravaChyba: u.zpravaChyba,
+    poSpravne: skore.vyhodnot, dalsi: novaUloha,
+    prodleva: napoprve => napoprve ? 1600 : 2600,
+  });
+  p.appendChild(odezva);
+}
+
+/* obrázky ve výkladu a ukázce */
+(function () {
+  const v = $('vykladKlav');
+  if (v) v.innerHTML = klaviatura(bila(0), bila(2));
+  const u = $('ukazkaKlav');
+  if (u) u.innerHTML = osnova(bila(1), bila(3)) + klaviatura(bila(1), bila(3));
+})();
+
+/* bez Web Audio se poslechový režim vypne (zbytek stránky zvuk nepotřebuje) */
+if (!AudioTrida) {
+  const b = document.querySelector('#rezimy [data-rezim="sluch"]');
+  if (b) { b.disabled = true; b.title = 'Tento prohlížeč neumí přehrát zvuk – ostatní režimy fungují i bez něj.'; }
+}
+
+document.querySelectorAll('#rezimy button').forEach(b => b.addEventListener('click', () => {
+  if (b.disabled) return;
+  document.querySelectorAll('#rezimy button').forEach(x => x.classList.remove('active'));
+  b.classList.add('active');
+  rezim = b.dataset.rezim;
+  novaUloha();
+}));
+$('btnDalsi').addEventListener('click', novaUloha);
+document.addEventListener('keydown', e => {
+  if (e.target instanceof Element && e.target.closest('input, textarea, select')) return;
+  if (e.key === 'ArrowRight' || e.key === 'Enter') { e.preventDefault(); novaUloha(); }
+});
+novaUloha();
+</script>
+</body>
+</html>

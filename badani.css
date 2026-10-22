@@ -1,0 +1,218 @@
+/* ============================================================
+   badani.css – panel „🧪 Úkoly k modelu“ (viz badani.js).
+   Nemodální: plave nad simulací, model pod ním jde dál ovládat.
+   Barvy bere z motivu (common.css), proužek z barvy předmětu
+   (--predmet nastavuje kostra.js).
+   ============================================================ */
+.badani {
+  --b-ok: var(--ok-text, var(--ok));
+  --b-chyba: var(--danger-text, var(--danger));
+  position: fixed;
+  z-index: 950;
+  bottom: calc(max(var(--badani-dole, 0px), var(--podpis-vyska, 0px)) + 10px);
+  left: 12px;
+  width: min(390px, calc(100vw - 24px));
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-family: var(--font);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--text);
+  text-align: left;
+  pointer-events: none;           /* prázdné místo vedle spouštěče nepřekáží modelu */
+}
+:root[data-tone="light"] .badani {
+  --b-ok: var(--ok-text, #1f7a52);
+  --b-chyba: var(--danger-text, #b3261e);
+}
+.badani[data-strana="vpravo"] { left: auto; right: 12px; align-items: flex-end; }
+.badani > * { pointer-events: auto; }
+.badani [hidden] { display: none !important; }
+
+.badani button {
+  font: inherit;
+  font-size: 0.88rem;
+  color: var(--text);
+  background: var(--bg-control);
+  border: 1px solid var(--border-strong);
+  border-radius: 6px;
+  padding: 7px 12px;
+  min-height: 38px;
+  cursor: pointer;
+  text-align: left;
+  line-height: 1.35;
+  transform: none;
+}
+.badani button:hover:not(:disabled) { background: var(--bg-hover); border-color: var(--predmet, var(--accent)); color: var(--text); }
+.badani button:disabled { cursor: default; }
+.badani :is(button, [tabindex]):focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.badani :is(h3, h4, p, div)[tabindex="-1"]:focus { outline: none; }
+
+/* sbalený stav: jedno tlačítko */
+.badani-spoustec {
+  border-radius: 999px !important;
+  padding: 8px 16px !important;
+  font-weight: 600;
+  box-shadow: var(--shadow);
+  border: 2px solid var(--predmet, var(--accent)) !important;
+  background: var(--bg-elevated) !important;
+}
+.badani-otevreno .badani-spoustec { display: none; }
+.badani-pocet { color: var(--text-muted); font-weight: 400; margin-left: 4px; }
+.badani-upozorneni { color: var(--b-ok); margin-left: 4px; }
+.badani-spoustec.badani-upozorni { animation: badaniUpozorni 1.2s ease 2; }
+@keyframes badaniUpozorni {
+  50% { box-shadow: 0 0 0 5px color-mix(in srgb, var(--predmet, var(--accent)) 45%, transparent); }
+}
+
+/* otevřený panel */
+.badani-okno {
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  max-height: min(72vh, calc(100vh - var(--kostra-vyska, 0px) - max(var(--badani-dole, 0px), var(--podpis-vyska, 0px)) - 70px));
+  background: var(--bg-panel);
+  border: 1px solid var(--border-strong);
+  border-top: 4px solid var(--predmet, var(--accent));
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+}
+.badani-hlava {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 8px 4px 14px;
+}
+.badani-hlava h2 { flex: 1; margin: 0; font-size: 1rem; font-weight: 700; color: var(--text); }
+.badani .badani-ikona { min-height: 32px; min-width: 32px; padding: 2px 8px; text-align: center; background: transparent; border-color: transparent; color: var(--text-muted); }
+.badani .badani-ikona:hover:not(:disabled) { color: var(--text); border-color: var(--border-strong); }
+
+.badani-zalozky {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  padding: 2px 14px 8px;
+  border-bottom: 1px solid var(--border);
+}
+.badani-zalozky button { min-width: 38px; padding: 4px 10px; text-align: center; border-radius: 999px; min-height: 32px; }
+.badani-zalozky button[aria-pressed="true"] {
+  background: color-mix(in srgb, var(--predmet, var(--accent)) 24%, var(--bg-control));
+  border-color: var(--predmet, var(--accent));
+  font-weight: 700;
+}
+.badani-zalozka-otazky { margin-left: auto; }
+.badani-skryte { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+.badani-telo { overflow-y: auto; padding: 10px 14px 14px; overscroll-behavior: contain; }
+.badani-telo p { margin: 6px 0; }
+.badani-ukol h3 { font-size: 0.98rem; margin: 0 0 4px; color: var(--text); }
+.badani-uvod { color: var(--text-muted); }
+
+/* tři kroky */
+.badani-krok {
+  border-left: 3px solid var(--border-strong);
+  padding: 4px 0 6px 12px;
+  margin: 10px 0 0;
+}
+.badani-krok[data-stav="aktivni"] { border-left-color: var(--predmet, var(--accent)); }
+.badani-krok[data-stav="hotovy"] { opacity: 0.92; }
+.badani-krok h4 { margin: 0 0 4px; font-size: 0.9rem; color: var(--text); display: flex; align-items: center; gap: 6px; }
+.badani-krok-cislo {
+  display: inline-grid; place-items: center;
+  width: 1.45em; height: 1.45em; border-radius: 50%;
+  font-size: 0.78rem; font-weight: 700;
+  background: var(--bg-control); border: 1px solid var(--border-strong); color: var(--text-muted);
+}
+.badani-krok[data-stav="aktivni"] .badani-krok-cislo { background: var(--predmet, var(--accent)); border-color: var(--predmet, var(--accent)); color: var(--bg-panel); }
+.badani-krok[data-stav="hotovy"] .badani-krok-cislo { color: var(--b-ok); border-color: var(--b-ok); background: var(--bg-panel); }
+
+.badani-volby { display: flex; flex-direction: column; gap: 6px; margin: 6px 0; }
+.badani-volby button { width: 100%; }
+.badani .badani-zvoleno, .badani .badani-zvoleno:disabled {
+  border: 2px solid var(--predmet, var(--accent));
+  background: color-mix(in srgb, var(--predmet, var(--accent)) 16%, var(--bg-control));
+  font-weight: 600;
+  opacity: 1;
+}
+.badani-volby button:disabled:not(.badani-zvoleno):not(.badani-spravne):not(.badani-spatne) { opacity: 0.6; }
+/* Výsledek volby: tónovaná výplň, silný rámeček a značka ✔/✗ – čitelné
+   v každém motivu (bílá na plné --ok má jen 2,7 : 1) a nejen barvou. */
+.badani .badani-spravne, .badani .badani-spravne:disabled {
+  background: color-mix(in srgb, var(--ok) 20%, var(--bg-control));
+  border: 2px solid var(--ok); color: var(--text); opacity: 1; font-weight: 600;
+}
+.badani .badani-spatne, .badani .badani-spatne:disabled {
+  background: color-mix(in srgb, var(--danger) 16%, var(--bg-control));
+  border: 2px solid var(--danger); color: var(--text); opacity: 1;
+}
+.badani .badani-spravne::before { content: '✔ '; color: var(--b-ok); }
+.badani .badani-spatne::before { content: '✗ '; color: var(--b-chyba); }
+
+.badani-pozn { color: var(--text-muted); font-size: 0.84rem; }
+.badani-souhrn { margin: 2px 0 0 !important; font-size: 0.86rem; }
+.badani-stav-pokusu.badani-souhrn { padding: 4px 8px; }
+.badani-stav-pokusu {
+  padding: 7px 10px;
+  border-radius: 6px;
+  background: var(--bg-elevated);
+  border: 1px dashed var(--border-strong);
+}
+.badani-stav-pokusu.badani-ok { border-style: solid; border-color: var(--ok); }
+.badani-srovnani { padding: 7px 10px; border-radius: 6px; background: var(--bg-elevated); }
+.badani-srovnani.badani-ok { border-left: 4px solid var(--ok); }
+.badani-srovnani.badani-jinak { border-left: 4px solid var(--warn); }
+.badani-odezva { min-height: 1.4em; font-weight: 600; }
+.badani-odezva.badani-ok { color: var(--b-ok); }
+.badani-odezva.badani-chyba { color: var(--b-chyba); }
+.badani-odezva.badani-ok, .badani-odezva.badani-chyba { font-weight: 500; }
+.badani-shrnuti {
+  margin: 12px 0 6px;
+  padding: 9px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--predmet, var(--accent));
+  background: color-mix(in srgb, var(--predmet, var(--accent)) 12%, var(--bg-panel));
+}
+
+.badani-akce { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 8px; }
+.badani .badani-hlavni { background: var(--accent); border-color: var(--accent); color: var(--na-akcentu, #fff); font-weight: 600; }
+.badani .badani-hlavni:hover:not(:disabled) { background: var(--accent-hover); border-color: var(--accent-hover); color: var(--na-akcentu, #fff); }
+.badani-skore { color: var(--text-muted); font-size: 0.84rem; margin-left: auto; }
+
+.badani-otazka-text { font-weight: 600; }
+.badani .moznosti { display: flex; flex-direction: column; justify-content: flex-start; gap: 6px; }
+.badani .moznosti button { min-width: 0; transform: none; }
+
+/* Ověř se z kostry běží uvnitř panelu – bez záložek a úkolů */
+body.kostra-overuje .badani-zalozky { display: none; }
+.badani .kostra-overeni, .badani .kostra-vysledek { max-width: none; margin: 0 0 10px; }
+
+/* široká obrazovka: otevřený panel je boční sloupec, stránka se zúží */
+html.badani-dok { --badani-sirka: clamp(320px, 28vw, 410px); }
+html.badani-dok[data-badani-strana="vpravo"] { padding-right: var(--badani-sirka); }
+html.badani-dok[data-badani-strana="vlevo"] { padding-left: var(--badani-sirka); }
+html.badani-dok .badani {
+  top: 0; bottom: var(--podpis-vyska, 0px); right: 0; left: auto;
+  width: var(--badani-sirka);
+}
+html.badani-dok .badani[data-strana="vlevo"] { left: 0; right: auto; }
+html.badani-dok .badani-okno {
+  height: 100%; max-height: none;
+  border-radius: 0; border-width: 4px 0 0 1px; box-shadow: none;
+}
+html.badani-dok .badani[data-strana="vlevo"] .badani-okno { border-width: 4px 1px 0 0; }
+
+/* úzká obrazovka: panel jako list u spodní hrany */
+@media (max-width: 640px) {
+  .badani, .badani[data-strana="vpravo"] { left: 8px; right: 8px; width: auto; align-items: flex-end; }
+  .badani-okno { max-height: min(56vh, calc(100vh - max(var(--badani-dole, 0px), var(--podpis-vyska, 0px)) - 90px)); }
+  .badani .badani-ikona[title^="Přesunout"] { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .badani-spoustec.badani-upozorni { animation: none; }
+}
+@media print { .badani { display: none !important; } }
+
+/* výklad stránky, který by prozradil odpověď, do zapsání předpovědi */
+.badani-zakryto { filter: blur(5px); user-select: none; pointer-events: none; }

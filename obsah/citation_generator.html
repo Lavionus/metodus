@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📚 Generátor citací</title>
+<link rel="stylesheet" href="../common.css">
+<script src="../theme.js"></script>
+<script src="../podpis.js" defer></script>
+<script src="../kostra.js" defer></script>
+<script src="../dialog.js" defer></script>
+<style>
+body{background:var(--bg-deep);padding:20px clamp(14px,3vw,40px);min-height:100vh}
+.container{max-width: var(--sirka-obsahu, 900px);margin:0 auto}
+h1{font-size:1.5rem;margin-bottom:4px}
+.sub{color:var(--text-muted);font-size:.85rem;margin-bottom:16px}
+.note{background:var(--bg-elevated);border:1px solid var(--border);color:var(--text-muted);padding:10px 14px;border-radius:8px;font-size:.8rem;margin-bottom:18px}
+.card{background:var(--bg-panel);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:16px}
+.card h2{font-size:.85rem;color:var(--accent);text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px}
+label{display:block;font-size:.75rem;color:var(--text-faint);margin-bottom:4px;margin-top:10px}
+label:first-child{margin-top:0}
+input,select,textarea{width:100%;background:var(--bg-input);border:1px solid var(--border);color:var(--text);border-radius:6px;padding:8px 10px;font-size:.88rem;font-family:inherit}
+textarea{resize:vertical;min-height:60px}
+.row{display:flex;gap:12px;flex-wrap:wrap}
+.row>div{flex:1;min-width:150px}
+.btn{background:var(--bg-control);color:var(--text);border:1px solid var(--border-strong);padding:9px 16px;border-radius:6px;cursor:pointer;font-size:.85rem;font-weight:600}
+.btn:hover{background:var(--bg-hover)}
+.btn.primary{background:var(--accent);color: var(--na-akcentu, #fff);border-color:var(--accent)}
+.hint{font-size:.74rem;color:var(--text-faint);margin-top:4px}
+
+.toolbar{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.styleToggle{display:flex;gap:6px}
+.styleToggle button{background:var(--bg-elevated);border:1px solid var(--border);color:var(--text-muted);border-radius:14px;padding:5px 14px;font-size:.8rem;cursor:pointer}
+.styleToggle button.active{background:var(--accent);border-color:var(--accent);color: var(--na-akcentu, #fff);font-weight:600}
+.list{display:flex;flex-direction:column;gap:8px}
+.citItem{background:var(--bg-panel);border:1px solid var(--border);border-radius:var(--radius);padding:12px 14px;display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.citItem .txt{font-size:.88rem;line-height:1.55}
+.citItem .txt i{font-style:italic}
+.citItem .actions{display:flex;gap:6px;flex-shrink:0}
+.citItem .actions button{font-size:.78rem;padding:5px 9px}
+.empty{padding:30px;text-align:center;color:var(--text-faint)}
+.kniha-pomucka p{margin:0 0 12px;color:var(--text-muted);font-size:.84rem}
+.kniha-scena{position:relative;max-width:780px;margin:0 auto;border-radius:10px;overflow:hidden;background:#eee6d5;box-shadow:0 4px 16px #0002}
+.kniha-scena>img{display:block;width:100%;height:auto}
+.kniha-text{position:absolute;color:#34424a;text-align:center;font-family:Georgia,serif;line-height:1.15;pointer-events:none;text-shadow:0 1px #fff8}
+.kniha-autor{left:17%;top:18%;width:24%;font-size:clamp(.52rem,1.5vw,.86rem);letter-spacing:.08em}
+.kniha-nazev{left:14%;top:28%;width:30%;font-size:clamp(.7rem,2.2vw,1.35rem);font-weight:700}
+.kniha-udaj{left:59%;width:25%;text-align:left;font-size:clamp(.5rem,1.4vw,.82rem)}
+.kniha-vydani{top:22%}.kniha-misto{top:32%}.kniha-nakladatel{top:42%}.kniha-rok{top:52%}.kniha-isbn{top:62%}
+.kniha-bod{position:absolute;display:grid;place-items:center;width:clamp(22px,3.5vw,30px);aspect-ratio:1;border:2px solid #fff;border-radius:50%;background:#1d6473;color:#fff;font-weight:700;box-shadow:0 2px 6px #0006;cursor:pointer;transform:translate(-50%,-50%)}
+.kniha-bod:hover,.kniha-bod:focus-visible,.kniha-bod[aria-pressed="true"]{background:#b65a32;outline:3px solid #fff8;outline-offset:2px}
+.kniha-bod[data-pole="autor"]{left:13%;top:19%}.kniha-bod[data-pole="nazev"]{left:13%;top:30%}
+.kniha-bod[data-pole="vydani"]{left:56%;top:23%}.kniha-bod[data-pole="misto"]{left:56%;top:33%}.kniha-bod[data-pole="nakladatel"]{left:56%;top:43%}.kniha-bod[data-pole="rok"]{left:56%;top:53%}.kniha-bod[data-pole="isbn"]{left:56%;top:63%}
+.kniha-vysvetleni{min-height:2.8em;margin:12px 0 10px;padding:9px 12px;border-left:4px solid var(--accent);background:var(--bg-elevated);border-radius:0 7px 7px 0;font-size:.82rem}
+.kniha-akce{display:flex;justify-content:center}
+@media(max-width:520px){.kniha-bod{border-width:1px}.kniha-pomucka{padding:14px 10px}.kniha-vysvetleni{font-size:.76rem}}
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>📚 Generátor citací</h1>
+  <p class="sub">Vyplň zdroj, přidej do seznamu a spravuj bibliografii ve stylu ISO 690 nebo APA 7. Vše zůstává jen v tomto prohlížeči.</p>
+  <div class="note">Generátor pokrývá nejběžnější případy. U specifických typů zdrojů (normy, patenty, audiovizuální díla…) ověř formát podle aktuální normy nebo pokynů školy/redakce.</div>
+
+  <section class="card kniha-pomucka" aria-labelledby="knihaNadpis">
+    <h2 id="knihaNadpis">Kde najdu údaje o knize?</h2>
+    <p>Vyber očíslovaný bod na titulní straně nebo v tiráži. Popisky jsou ukázkové; u skutečné knihy mohou být uspořádané jinak.</p>
+    <div class="kniha-scena">
+      <img src="img/00/citace-kniha-tiraz.webp" alt="Otevřená kniha: vlevo titulní strana, vpravo tiráž s řádky pro bibliografické údaje.">
+      <span class="kniha-text kniha-autor">EVA NOVOTNÁ</span>
+      <span class="kniha-text kniha-nazev">TAJEMSTVÍ LESA</span>
+      <span class="kniha-text kniha-udaj kniha-vydani">2. vydání</span>
+      <span class="kniha-text kniha-udaj kniha-misto">Praha</span>
+      <span class="kniha-text kniha-udaj kniha-nakladatel">Modrý list</span>
+      <span class="kniha-text kniha-udaj kniha-rok">2026</span>
+      <span class="kniha-text kniha-udaj kniha-isbn">ISBN 978-80-00000-00-0</span>
+      <button class="kniha-bod" data-pole="autor" type="button" aria-label="1: autor" aria-pressed="false">1</button>
+      <button class="kniha-bod" data-pole="nazev" type="button" aria-label="2: název knihy" aria-pressed="false">2</button>
+      <button class="kniha-bod" data-pole="vydani" type="button" aria-label="3: vydání" aria-pressed="false">3</button>
+      <button class="kniha-bod" data-pole="misto" type="button" aria-label="4: místo vydání" aria-pressed="false">4</button>
+      <button class="kniha-bod" data-pole="nakladatel" type="button" aria-label="5: nakladatel" aria-pressed="false">5</button>
+      <button class="kniha-bod" data-pole="rok" type="button" aria-label="6: rok vydání" aria-pressed="false">6</button>
+      <button class="kniha-bod" data-pole="isbn" type="button" aria-label="7: ISBN" aria-pressed="false">7</button>
+    </div>
+    <div class="kniha-vysvetleni" id="knihaVysvetleni" aria-live="polite">Vyber bod 1–7 a zjisti, k čemu údaj v citaci slouží.</div>
+    <div class="kniha-akce"><button class="btn" id="btnUkazka" type="button">Přenést ukázkové údaje do formuláře</button></div>
+  </section>
+
+  <div class="card">
+    <h2>Nový zdroj</h2>
+    <select id="fTyp">
+      <option value="kniha">Kniha</option>
+      <option value="clanek">Časopisecký / vědecký článek</option>
+      <option value="web">Webová stránka</option>
+      <option value="prace">Kvalifikační práce</option>
+    </select>
+
+    <label>Autoři (jeden na řádek, ve tvaru „Příjmení, Jméno“)</label>
+    <textarea id="fAutori" placeholder="Novák, Jan&#10;Svobodová, Petra"></textarea>
+
+    <label id="lblNazev">Název</label>
+    <input id="fNazev" placeholder="Název knihy / článku / stránky">
+
+    <div id="dynFields"></div>
+
+    <label>Rok vydání / publikace</label>
+    <input id="fRok" placeholder="2024">
+
+    <div class="row" style="margin-top:14px">
+      <button class="btn primary" id="btnAdd" type="button" style="flex:1">+ Přidat do seznamu</button>
+    </div>
+  </div>
+
+  <div class="toolbar">
+    <div class="styleToggle" id="styleToggle">
+      <button data-style="iso" class="active">ISO 690</button>
+      <button data-style="apa">APA 7</button>
+    </div>
+    <div style="display:flex;gap:8px">
+      <button class="btn" id="btnCopyAll">📋 Kopírovat celý seznam</button>
+      <button class="btn" id="btnClearAll">🗑️ Vymazat vše</button>
+    </div>
+  </div>
+
+  <div id="list"></div>
+</div>
+
+<script>
+const $=id=>document.getElementById(id);
+const STORAGE_KEY='citations_v1';
+let items=[];
+try{ items=JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]'); if(!Array.isArray(items)) items=[]; }catch(e){ items=[]; }
+let style='iso';
+
+function save(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(items));}catch(e){}}
+function esc(s){return (s||'').replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));}
+
+const FIELDS_BY_TYPE={
+  kniha:[
+    {id:'vydani',label:'Vydání (nepovinné)',ph:'2., přeprac. vyd.'},
+    {id:'misto',label:'Místo vydání',ph:'Praha'},
+    {id:'nakladatel',label:'Nakladatel',ph:'Grada'},
+    {id:'isbn',label:'ISBN (nepovinné)',ph:'978-80-...'}
+  ],
+  clanek:[
+    {id:'casopis',label:'Název časopisu',ph:'Journal of…'},
+    {id:'rocnik',label:'Ročník'},
+    {id:'cislo',label:'Číslo'},
+    {id:'strany',label:'Strany',ph:'15–28'},
+    {id:'doi',label:'DOI (nepovinné)'}
+  ],
+  web:[
+    {id:'nazevWebu',label:'Název webu (nepovinné)',ph:'Wikipedia'},
+    {id:'url',label:'URL'},
+    {id:'datumCitace',label:'Datum citace',type:'date'}
+  ],
+  prace:[
+    {id:'typPrace',label:'Typ práce',ph:'diplomová práce'},
+    {id:'instituce',label:'Instituce',ph:'Univerzita Karlova'},
+    {id:'misto2',label:'Místo'},
+    {id:'vedouci',label:'Vedoucí práce (nepovinné)'}
+  ]
+};
+
+function renderDynFields(){
+  const typ=$('fTyp').value;
+  $('lblNazev').textContent = typ==='clanek' ? 'Název článku' : 'Název';
+  const wrap=$('dynFields');
+  wrap.innerHTML='';
+  (FIELDS_BY_TYPE[typ]||[]).forEach(f=>{
+    const lab=document.createElement('label');
+    lab.textContent=f.label;
+    const inp=document.createElement('input');
+    inp.id='f_'+f.id;
+    if(f.type) inp.type=f.type;
+    if(f.ph) inp.placeholder=f.ph;
+    wrap.appendChild(lab);
+    wrap.appendChild(inp);
+  });
+  if(typ==='web' && !document.getElementById('f_datumCitace').value){
+    document.getElementById('f_datumCitace').value=new Date().toISOString().slice(0,10);
+  }
+}
+$('fTyp').addEventListener('change', renderDynFields);
+
+const POPIS_POLE={
+  autor:'Autor je člověk, který knihu napsal. Do formuláře zapisujeme „Příjmení, Jméno“.',
+  nazev:'Název přesně opisujeme z titulní strany knihy.',
+  vydani:'Číslo vydání rozlišuje různé verze téže knihy. První vydání se často neuvádí.',
+  misto:'Místo vydání je město, ve kterém sídlí nakladatel uvedený v knize.',
+  nakladatel:'Nakladatel knihu vydal; nepleť si ho s tiskárnou.',
+  rok:'Rok vydání patří ke konkrétnímu vydání knihy.',
+  isbn:'ISBN je jedinečný identifikátor konkrétního vydání knihy.'
+};
+document.querySelectorAll('.kniha-bod').forEach(bod=>bod.addEventListener('click',()=>{
+  document.querySelectorAll('.kniha-bod').forEach(jiny=>jiny.setAttribute('aria-pressed',String(jiny===bod)));
+  $('knihaVysvetleni').textContent=POPIS_POLE[bod.dataset.pole];
+}));
+$('btnUkazka').addEventListener('click',()=>{
+  $('fTyp').value='kniha'; renderDynFields();
+  $('fAutori').value='Novotná, Eva'; $('fNazev').value='Tajemství lesa'; $('fRok').value='2026';
+  $('f_vydani').value='2. vydání'; $('f_misto').value='Praha'; $('f_nakladatel').value='Modrý list'; $('f_isbn').value='978-80-00000-00-0';
+  $('fAutori').focus();
+});
+
+function parseAuthors(text){
+  return (text||'').split('\n').map(l=>l.trim()).filter(Boolean).map(l=>{
+    const [prijmeni, jmeno]=l.split(',').map(s=>(s||'').trim());
+    return {prijmeni: prijmeni||l, jmeno: jmeno||''};
+  });
+}
+
+function authorsIso(authors){
+  const names=authors.map(a=>`${a.prijmeni.toUpperCase()}${a.jmeno?', '+a.jmeno:''}`);
+  if(names.length===0) return '';
+  if(names.length===1) return names[0];
+  if(names.length===2) return names[0]+' a '+names[1];
+  return names.slice(0,-1).join(', ')+' a '+names[names.length-1];
+}
+function authorsApa(authors){
+  const names=authors.map(a=>`${a.prijmeni}${a.jmeno? ', '+a.jmeno.charAt(0).toUpperCase()+'.':''}`);
+  if(names.length===0) return '';
+  if(names.length===1) return names[0];
+  if(names.length===2) return names[0]+', & '+names[1];
+  return names.slice(0,-1).join(', ')+', & '+names[names.length-1];
+}
+
+/* Skládání citace: prázdné údaje vynecháme, tečku za údajem přidáme, jen když tam ještě není
+   (název končící „?“ nebo zkratkou nedostane druhou tečku). Vše, co zadal uživatel, se escapuje. */
+const tecka = t => /[.?!]$/.test(t.replace(/<[^>]+>/g,'')) ? t : t + '.';
+const vety = casti => casti.filter(Boolean).map(tecka).join(' ');
+const carka = casti => casti.filter(Boolean).join(', ');
+
+function fmtCitation(item, sty){
+  const a=parseAuthors(item.autoriRaw);
+  const auIso=esc(authorsIso(a)), auApa=esc(authorsApa(a));
+  const d=item.data||{}, e=k=>esc((d[k]||'').trim());
+  const rokRaw=(item.rok||'').trim();
+  if(sty==='iso'){
+    // ČSN ISO 690: chybějící rok [b.r.], místo [b.m.], nakladatel [b.n.]
+    const rok=rokRaw?esc(rokRaw):'[b.r.]';
+    const nazev=esc(item.nazev);
+    if(item.typ==='kniha'){
+      const vydani=`${e('misto')||'[b.m.]'}: ${e('nakladatel')||'[b.n.]'}, ${rok}`;
+      return vety([auIso, `<i>${nazev}</i>`, e('vydani'), vydani, d.isbn?'ISBN '+e('isbn'):'']);
+    }
+    if(item.typ==='clanek'){
+      const udaje=carka([rok, d.rocnik?'roč. '+e('rocnik'):'', d.cislo?'č. '+e('cislo'):'', d.strany?'s. '+e('strany'):'']);
+      return vety([auIso, nazev, d.casopis?`<i>${e('casopis')}</i>`:'', udaje, d.doi?'DOI: '+e('doi'):'']);
+    }
+    if(item.typ==='web'){
+      const cit=d.datumCitace?` [cit. ${e('datumCitace')}]`:'';
+      const zaklad=vety([auIso, `<i>${nazev}</i> [online]`, carka([e('nazevWebu'), rok])+cit]);
+      return d.url?`${zaklad} Dostupné z: ${e('url')}`:zaklad;
+    }
+    if(item.typ==='prace'){
+      return vety([auIso, `<i>${nazev}</i>`, carka([e('misto2')||'[b.m.]', rok]), e('typPrace')||'Kvalifikační práce',
+        e('instituce'), d.vedouci?'Vedoucí práce '+e('vedouci'):'']);
+    }
+    return '';
+  }
+  // APA 7 (anglická konvence: n.d. = bez data)
+  const rok=esc(rokRaw||'n.d.');
+  const hlava=`${auApa?auApa+' ':''}(${rok}).`;
+  const nazev=esc(item.nazev);
+  if(item.typ==='kniha') return vety([hlava, `<i>${nazev}</i>`, e('nakladatel')]);
+  if(item.typ==='clanek'){
+    const cislo=d.cislo?`(${e('cislo')})`:'';
+    const zdroj=carka([d.casopis?`<i>${e('casopis')}</i>`:'', (e('rocnik')+cislo)||'', e('strany')]);
+    return vety([hlava, nazev, zdroj])+(d.doi?' https://doi.org/'+e('doi'):'');
+  }
+  if(item.typ==='web') return vety([hlava, nazev, e('nazevWebu')])+(d.url?' '+e('url'):'');
+  if(item.typ==='prace') return vety([hlava, `<i>${nazev}</i> [${carka([e('typPrace')||'kvalifikační práce', e('instituce')])}]`]);
+  return '';
+}
+/* text citace bez HTML (pro schránku) */
+const naText = html => html.replace(/<\/?i>/g,'').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&amp;/g,'&');
+
+$('btnAdd').addEventListener('click', ()=>{
+  const typ=$('fTyp').value;
+  const nazev=$('fNazev').value.trim();
+  const autoriRaw=$('fAutori').value.trim();
+  if(!nazev){ Dialog.info('Vyplň název zdroje.'); return; }
+  const d={};
+  (FIELDS_BY_TYPE[typ]||[]).forEach(f=>{ const el=document.getElementById('f_'+f.id); d[f.id]=el?el.value.trim():''; });
+  items.push({id:'c'+Date.now()+Math.random().toString(36).slice(2,6), typ, nazev, autoriRaw, rok:$('fRok').value.trim(), data:d});
+  save();
+  $('fNazev').value=''; $('fAutori').value=''; $('fRok').value='';
+  renderDynFields();
+  renderList();
+});
+
+function renderList(){
+  if(!items.length){
+    $('list').innerHTML='<div class="empty">Zatím žádné citace. Vyplň formulář výše a přidej první zdroj.</div>';
+    return;
+  }
+  const sorted=[...items].sort((a,b)=>{
+    const an=parseAuthors(a.autoriRaw)[0]?.prijmeni||a.nazev;
+    const bn=parseAuthors(b.autoriRaw)[0]?.prijmeni||b.nazev;
+    return an.localeCompare(bn,'cs');
+  });
+  $('list').innerHTML='<div class="list">'+sorted.map(it=>`
+    <div class="citItem" data-id="${it.id}">
+      <div class="txt">${fmtCitation(it, style)}</div>
+      <div class="actions">
+        <button class="btn copyOne">📋</button>
+        <button class="btn delOne" style="color:var(--danger)">🗑️</button>
+      </div>
+    </div>`).join('')+'</div>';
+
+  $('list').querySelectorAll('.citItem').forEach(card=>{
+    const id=card.dataset.id;
+    card.querySelector('.copyOne').onclick=(e)=>{
+      const it=items.find(x=>x.id===id);
+      const plain=card.querySelector('.txt').textContent;
+      navigator.clipboard.writeText(plain);
+      e.target.textContent='✅';
+      setTimeout(()=>{e.target.textContent='📋';},1000);
+    };
+    card.querySelector('.delOne').onclick=()=>{
+      items=items.filter(x=>x.id!==id);
+      save(); renderList();
+    };
+  });
+}
+
+$('styleToggle').addEventListener('click', e=>{
+  const btn=e.target.closest('button'); if(!btn)return;
+  $('styleToggle').querySelectorAll('button').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  style=btn.dataset.style;
+  renderList();
+});
+
+$('btnCopyAll').addEventListener('click', ()=>{
+  if(!items.length)return;
+  const sorted=[...items].sort((a,b)=>{
+    const an=parseAuthors(a.autoriRaw)[0]?.prijmeni||a.nazev;
+    const bn=parseAuthors(b.autoriRaw)[0]?.prijmeni||b.nazev;
+    return an.localeCompare(bn,'cs');
+  });
+  const text=sorted.map(it=>naText(fmtCitation(it, style))).join('\n\n');
+  navigator.clipboard.writeText(text);
+  const btn=$('btnCopyAll'); const orig=btn.textContent;
+  btn.textContent='✅ Zkopírováno'; setTimeout(()=>{btn.textContent=orig;},1200);
+});
+$('btnClearAll').addEventListener('click', async ()=>{
+  if(!items.length)return;
+  if(!await Dialog.potvrd('Opravdu smazat celý seznam citací?'))return;
+  items=[]; save(); renderList();
+});
+
+renderDynFields();
+renderList();
+</script>
+</body>
+</html>

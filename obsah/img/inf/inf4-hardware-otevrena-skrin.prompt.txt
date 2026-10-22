@@ -1,0 +1,8 @@
+Use case: scientific-educational
+Asset type: interactive computing lesson scene, 3:2 landscape
+Primary request: an open desktop computer tower shown in a clear exploded-style educational view, with six distinct components easy to identify: motherboard, CPU with cooler lifted slightly to reveal its position, two RAM sticks, SSD and hard drive, power supply, graphics card
+Scene/backdrop: clean neutral workbench on warm ivory background
+Style/medium: polished watercolor and gouache with fine ink contours, accurate technical educational illustration
+Composition/framing: three-quarter view of open case, components visually separated but their installation locations and cable relationships remain understandable, generous margins for HTML hotspots
+Color palette: graphite gray case, muted green circuit boards, copper, silver, restrained blue accents
+Constraints: believable modern desktop hardware, exactly one clearly identifiable example of each requested component group, no brand logos, no text, no labels, no letters, no numbers, no arrows, no watermark

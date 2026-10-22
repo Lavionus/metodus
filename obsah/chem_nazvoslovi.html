@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chemické názvosloví</title>
+  <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="../vyuka.css">
+  <script src="../theme.js"></script>
+  <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
+  <script src="../uloha.js" defer></script>
+  <script src="../procvic.js" defer></script>
+  <style>
+    body { background-color: var(--bg-deep); padding: 24px clamp(14px, 3vw, 40px); min-height: 100vh; }
+    h1 { font-size: 1.4rem; margin-bottom: 4px; }
+    .podtitul { color: var(--text-muted); font-size: 0.88rem; margin-bottom: 16px; }
+    .rezimy, .kategorie { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+    .rezimy button, .kategorie button {
+      background: var(--bg-control); border: 1px solid var(--border-strong); color: var(--text-muted);
+      border-radius: 6px; padding: 7px 13px; font-size: 0.84rem; cursor: pointer;
+    }
+    .rezimy button.active, .kategorie button.active {
+      background: var(--accent); border-color: var(--accent); color: var(--na-akcentu, #fff); font-weight: 600;
+    }
+    .karta { background: var(--bg-panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; }
+    /* zadání série (karta uvnitř #plocha má vzhled z vyuka.css) */
+    .plocha .karta { margin: 0; padding: 18px 28px; background: var(--bg-elevated); border-radius: 18px; }
+    .druh { display: block; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-faint); margin-bottom: 6px; }
+    .dotaz { display: block; font-size: clamp(1.5rem, 5vw, 2rem); font-weight: 700; color: var(--text); }
+    .dotaz sub { font-size: 60%; }
+    .plocha .moznosti button { min-width: 150px; font-size: 1.05rem; }
+    /* psané názvy jsou dlouhé (hydrogenuhličitan sodný) */
+    .plocha .odpoved-pole { width: min(420px, 80vw); font-size: 1.25rem; }
+    .reseni-postup { margin-top: 10px; font-size: 0.95rem; color: var(--text-muted); line-height: 1.5; max-width: 560px; }
+    .reseni-postup b { color: var(--text); }
+    .prehled-chyb .druh { display: none; }
+    .prehled-chyb .dotaz { display: inline; font-size: inherit; }
+    /* tabulka učení */
+    .uceni-nastroje { margin: 4px 0 10px; }
+    .uceni-nastroje input {
+      background: var(--bg-input); border: 1px solid var(--border); border-radius: 6px;
+      color: var(--text); padding: 8px 12px; font-size: 0.9rem; width: min(300px, 100%);
+    }
+    table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+    th, td { padding: 8px 10px; text-align: left; border-bottom: 1px solid var(--border); }
+    th { color: var(--text-faint); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.5px; }
+    td.vzorec { font-weight: 600; white-space: nowrap; }
+    td .kat { font-size: 0.72rem; color: var(--text-faint); }
+
+    body { max-width: 1120px; margin: auto; line-height: 1.6; }
+    h1 { font-size: clamp(1.6rem,4vw,2.4rem); } h2 { font-size: 1.3rem; margin-bottom: 10px; }
+    h3 { font-size: 1rem; margin-bottom: 8px; }
+    .karta { max-width: none; margin: 16px 0; }
+    button, input, select { font: inherit; } button { touch-action: manipulation; }
+    button:focus-visible, input:focus-visible, select:focus-visible, summary:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+    .lab-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .lab-controls { display:flex; flex-wrap:wrap; gap:10px; margin:12px 0; }
+    .lab-controls label { flex:1; min-width:130px; }
+    select, .lab-controls input { display:block; width:100%; background:var(--bg-input); color:var(--text); border:1px solid var(--border-strong); border-radius:8px; padding:10px; }
+    .action, .suffix button { background:var(--bg-control); color:var(--text); border:1px solid var(--border-strong); padding:9px 13px; border-radius:8px; cursor:pointer; }
+    .suffix { display:flex; flex-wrap:wrap; gap:8px; margin:12px 0; }
+    .suffix button[aria-pressed="true"] { border-color:var(--accent); background:var(--accent-soft); }
+    .suffix small { display:block; }
+    .visual { background:var(--bg-deep); border:1px solid var(--border); border-radius:12px; padding:18px; }
+    .formula-big { font-size:2.4rem; font-weight:700; text-align:center; overflow-wrap:anywhere; }
+    .ions { display:flex; flex-wrap:wrap; gap:7px; margin:12px 0; min-height:44px; }
+    .ion { border:2px solid var(--accent); background:var(--accent-soft); padding:5px 10px; border-radius:8px; font-weight:600; }
+    .ion.negative { border-color:var(--warn); background:var(--bg-control); }
+    .balance { font-size:1.2rem; font-weight:700; } .muted { color:var(--text-muted); }
+    .feedback { border-left:4px solid var(--accent); padding:10px 14px; background:var(--accent-soft); margin:12px 0; }
+    .feedback:empty { display:none; } .steps { padding-left:24px; } .steps li { margin:7px 0; }
+    .table-wrap { overflow-x:auto; } .stavovy { flex-wrap:wrap; }
+    [hidden] { display:none !important; } summary { cursor:pointer; font-weight:600; }
+    @media(max-width:650px) { .lab-grid { grid-template-columns:1fr; } .karta { padding:16px; } th,td { padding:8px 5px; } }
+  </style>
+</head>
+<body>
+  <h1>⚗️ Chemické názvosloví</h1>
+  <p class="podtitul">Procvičování vzorců a názvů anorganických sloučenin (učivo ZŠ/SŠ).</p>
+
+  <section class="karta" aria-labelledby="guideTitle">
+    <h2 id="guideTitle">1. Od koncovky k oxidačnímu číslu</h2>
+    <p>Koncovka přídavného jména napoví oxidační číslo prvku. Vyber ji a prohlédni si příklad oxidu.</p>
+    <div class="suffix" id="suffixes" aria-label="Koncovky názvosloví"></div>
+    <div class="feedback" id="suffixExample" aria-live="polite"></div>
+    <details><summary>Horní číslo, dolní číslo a závorky</summary>
+      <p><b>Fe<sup>III</sup></b>: římské číslo nahoře vyjadřuje oxidační číslo. <b>Fe₂O₃</b>: dolní indexy říkají poměr počtů atomů (2 : 3). Jedničku nepíšeme.</p>
+      <p><b>Ca(OH)₂</b>: dvojka násobí celou skupinu OH → 1 Ca, 2 O a 2 H. Oxidační číslo je formální hodnota; není vždy skutečným nábojem atomu. V peroxidech má kyslík −I, nikoli obvyklé −II.</p>
+    </details>
+  </section>
+  <section class="karta" aria-labelledby="labTitle">
+    <h2 id="labTitle">2. Dílna vzorců: vyrovnej náboje</h2>
+    <p>Sestav vzorec z iontů. Celkový náboj musí být <b>nula</b> a počty iontů v <b>nejmenším celočíselném poměru</b>.</p>
+    <div class="lab-grid">
+      <div>
+        <div class="lab-controls"><label>Kladný ion<select id="cation"></select></label><label>Záporný ion<select id="anion"></select></label></div>
+        <div class="lab-controls"><label>Počet kladných iontů<input id="positiveCount" type="number" min="1" max="6" value="1"></label><label>Počet záporných iontů<input id="negativeCount" type="number" min="1" max="6" value="1"></label></div>
+        <div class="lab-controls"><button class="action" id="labCheck">Zkontrolovat poměr</button><button class="action" id="labHint">Ukázat postup</button><button class="action" id="labTask">Nová výzva</button></div>
+        <p class="muted">Kartičky představují ionty a jejich náboje, nikoli tvar molekuly nebo krystalu.</p>
+      </div>
+      <div class="visual" aria-live="polite">
+        <h3 id="labName"></h3><div class="formula-big" id="labFormula"></div>
+        <div class="ions" id="ionTiles" aria-hidden="true"></div><div class="balance" id="labBalance"></div>
+        <p id="labState"></p>
+      </div>
+    </div>
+    <div id="labFeedback" class="feedback" role="status"></div>
+    <ol id="labSteps" class="steps" hidden></ol>
+  </section>
+  <h2>3. Vyzkoušej se nebo prozkoumej přehled</h2>
+  <div class="rezimy" id="rezimy">
+    <button data-rezim="uceni" data-faze="vyuka">📋 Přehled (učení)</button>
+    <button data-rezim="vzorec" class="active">Vzorec → název</button>
+    <button data-rezim="nazev">Název → vzorec</button>
+    <button data-rezim="pisnazev">✍️ Napiš název</button>
+    <button data-rezim="pisvzorec">✍️ Napiš vzorec</button>
+  </div>
+  <div class="kategorie" id="kategorie"></div>
+
+  <div class="plocha" id="plocha"></div>
+  <div class="ovladani" id="ovladani">
+    <button class="hlavni" id="startBtn">🔄 Nová série</button>
+    <span class="pokrok" id="pokrok"></span>
+    <span class="skore" id="skore"></span>
+  </div>
+  <p class="napoveda" id="napovedaPsani" hidden>Vzorec piš s obyčejnými číslicemi, například <b>Ca(OH)2</b> nebo <b>Fe2O3</b>; u značek prvků záleží na velikosti písmen (<b>CO</b> je oxid uhelnatý, <b>Co</b> kobalt). Název můžeš psát i bez diakritiky.</p>
+
+  <div class="karta" id="uceniKarta" hidden>
+    <div class="uceni-nastroje">
+      <label for="uceniHledat">Vyhledat podle názvu nebo vzorce</label><br><input type="search" id="uceniHledat" placeholder="🔍 Hledat sloučeninu…">
+    </div>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Vzorec</th><th>Název</th><th>Kategorie</th></tr></thead>
+      <tbody id="uceniTelo"></tbody>
+    </table></div><p id="searchCount" role="status"></p>
+  </div>
+
+  <script>
+    // Vzorce jako HTML s <sub> – v datech používáme čísla, sub se doplní při vykreslení
+    const LATKY = [
+      // oxidy
+      ['CO2', 'oxid uhličitý', 'oxidy'], ['CO', 'oxid uhelnatý', 'oxidy'],
+      ['SO2', 'oxid siřičitý', 'oxidy'], ['SO3', 'oxid sírový', 'oxidy'],
+      ['NO', 'oxid dusnatý', 'oxidy'], ['NO2', 'oxid dusičitý', 'oxidy'],
+      ['N2O', 'oxid dusný', 'oxidy'], ['N2O5', 'oxid dusičný', 'oxidy'],
+      ['CaO', 'oxid vápenatý', 'oxidy'], ['MgO', 'oxid hořečnatý', 'oxidy'],
+      ['Al2O3', 'oxid hlinitý', 'oxidy'], ['SiO2', 'oxid křemičitý', 'oxidy'],
+      ['Fe2O3', 'oxid železitý', 'oxidy'], ['FeO', 'oxid železnatý', 'oxidy'],
+      ['CuO', 'oxid měďnatý', 'oxidy'], ['Cu2O', 'oxid měďný', 'oxidy'],
+      ['ZnO', 'oxid zinečnatý', 'oxidy'], ['P2O5', 'oxid fosforečný', 'oxidy'],
+      ['Cl2O7', 'oxid chloristý', 'oxidy'], ['MnO2', 'oxid manganičitý', 'oxidy'],
+      ['CrO3', 'oxid chromový', 'oxidy'], ['K2O', 'oxid draselný', 'oxidy'],
+      ['Na2O', 'oxid sodný', 'oxidy'], ['PbO2', 'oxid olovičitý', 'oxidy'],
+      // kyseliny
+      ['HCl', 'kyselina chlorovodíková', 'kyseliny'], ['HF', 'kyselina fluorovodíková', 'kyseliny'],
+      ['H2SO4', 'kyselina sírová', 'kyseliny'], ['H2SO3', 'kyselina siřičitá', 'kyseliny'],
+      ['HNO3', 'kyselina dusičná', 'kyseliny'], ['HNO2', 'kyselina dusitá', 'kyseliny'],
+      ['H2CO3', 'kyselina uhličitá', 'kyseliny'], ['H3PO4', 'kyselina fosforečná', 'kyseliny'],
+      ['HClO', 'kyselina chlorná', 'kyseliny'], ['HClO2', 'kyselina chloritá', 'kyseliny'],
+      ['HClO3', 'kyselina chlorečná', 'kyseliny'], ['HClO4', 'kyselina chloristá', 'kyseliny'],
+      ['H2S', 'kyselina sirovodíková', 'kyseliny'], ['HBr', 'kyselina bromovodíková', 'kyseliny'],
+      ['H2SiO3', 'kyselina křemičitá', 'kyseliny'], ['HMnO4', 'kyselina manganistá', 'kyseliny'],
+      // hydroxidy
+      ['NaOH', 'hydroxid sodný', 'hydroxidy'], ['KOH', 'hydroxid draselný', 'hydroxidy'],
+      ['Ca(OH)2', 'hydroxid vápenatý', 'hydroxidy'], ['Mg(OH)2', 'hydroxid hořečnatý', 'hydroxidy'],
+      ['Al(OH)3', 'hydroxid hlinitý', 'hydroxidy'], ['Fe(OH)3', 'hydroxid železitý', 'hydroxidy'],
+      ['Fe(OH)2', 'hydroxid železnatý', 'hydroxidy'], ['Ba(OH)2', 'hydroxid barnatý', 'hydroxidy'],
+      // soli
+      ['NaCl', 'chlorid sodný', 'soli'], ['KCl', 'chlorid draselný', 'soli'],
+      ['CaCl2', 'chlorid vápenatý', 'soli'], ['AlCl3', 'chlorid hlinitý', 'soli'],
+      ['FeCl3', 'chlorid železitý', 'soli'], ['CaCO3', 'uhličitan vápenatý', 'soli'],
+      ['Na2CO3', 'uhličitan sodný', 'soli'], ['NaHCO3', 'hydrogenuhličitan sodný', 'soli'],
+      ['CaSO4', 'síran vápenatý', 'soli'], ['CuSO4', 'síran měďnatý', 'soli'],
+      ['FeSO4', 'síran železnatý', 'soli'], ['Na2SO4', 'síran sodný', 'soli'],
+      ['KNO3', 'dusičnan draselný', 'soli'], ['AgNO3', 'dusičnan stříbrný', 'soli'],
+      ['NH4NO3', 'dusičnan amonný', 'soli'], ['Ca3(PO4)2', 'fosforečnan vápenatý', 'soli'],
+      ['KMnO4', 'manganistan draselný', 'soli'], ['K2CrO4', 'chroman draselný', 'soli'],
+      ['Na2S', 'sulfid sodný', 'soli'], ['ZnS', 'sulfid zinečnatý', 'soli'],
+      ['AgBr', 'bromid stříbrný', 'soli'], ['KI', 'jodid draselný', 'soli'],
+      // ostatní
+      ['H2O', 'voda', 'ostatní'], ['NH3', 'amoniak (čpavek)', 'ostatní'],
+      ['CH4', 'methan', 'ostatní'], ['H2O2', 'peroxid vodíku', 'ostatní'],
+    ];
+    const KATEGORIE = ['vše', 'oxidy', 'kyseliny', 'hydroxidy', 'soli', 'ostatní'];
+
+    let rezim = 'vzorec';
+    let kategorie = 'vše';
+    let posledni = null;
+
+    const $ = id => document.getElementById(id);
+    const subHtml = v => v.replace(/(\d+)/g, '<sub>$1</sub>');
+    const subText = v => v.replace(/\d/g, d => '₀₁₂₃₄₅₆₇₈₉'[d]);   // možnosti jsou prostý text
+    const bezDiakritiky = v => v.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    const vyber = () => LATKY.filter(l => kategorie === 'vše' || l[2] === kategorie);
+
+    /* kategorie pilulky – platí pro sérii i přehled */
+    KATEGORIE.forEach(k => {
+      const b = document.createElement('button');
+      b.textContent = k; b.setAttribute('aria-pressed', k === kategorie);
+      if (k === 'vše') b.classList.add('active');
+      b.addEventListener('click', () => {
+        document.querySelectorAll('#kategorie button').forEach(x => { x.classList.toggle('active', x === b); x.setAttribute('aria-pressed', x === b); });
+        kategorie = k;
+        if (rezim === 'uceni') vykresliUceni();
+        else serie.restart();
+      });
+      $('kategorie').appendChild(b);
+    });
+
+    function generuj(r) {
+      const zdroj = vyber();
+      let l; do { l = zdroj[Math.floor(Math.random() * zdroj.length)]; } while (zdroj.length > 1 && l === posledni);
+      posledni = l;
+      const naVzorec = r === 'nazev' || r === 'pisvzorec';
+      const zadani = `<span class="druh">${naVzorec ? 'Jaký vzorec má' : 'Jak se jmenuje'}</span>`
+        + `<span class="dotaz">${naVzorec ? l[1] : subHtml(l[0])}</span>`;
+      // po uzavření otázky vzorec, název a proč (oxidační čísla, poměr iontů)
+      const poVyhodnoceni = karta => karta.insertAdjacentHTML('beforeend',
+        `<div class="reseni-postup">💡 <b>${subHtml(l[0])}</b> – ${l[1]}. ${explanation(l)}</div>`);
+      if (r === 'pisvzorec') {
+        return { zadani, odpoved: l[0], varianty: [subText(l[0])], presne: true, napoveda: '', poVyhodnoceni };
+      }
+      if (r === 'pisnazev') {
+        // „amoniak (čpavek)" uzná i jednotlivá jména; vše i bez diakritiky
+        const jmena = [l[1], ...l[1].split(/[()]/).map(x => x.trim()).filter(Boolean)];
+        return { zadani, odpoved: l[1], varianty: [...jmena, ...jmena.map(bezDiakritiky)], napoveda: '', poVyhodnoceni };
+      }
+      // tři jiné látky ze stejné kategorie (když nestačí, doplní se z ostatních)
+      const text = x => naVzorec ? subText(x[0]) : x[1];
+      const kandidati = [...Uloha.zamichej(LATKY.filter(x => x !== l && x[2] === l[2])), ...Uloha.zamichej(LATKY.filter(x => x[2] !== l[2]))];
+      const jine = [...new Set(kandidati.map(text))].filter(t => t !== text(l)).slice(0, 3);
+      return { zadani, odpoved: text(l), moznosti: Uloha.zamichej([text(l), ...jine]), napoveda: '', poVyhodnoceni };
+    }
+
+    let serie;
+    window.addEventListener('DOMContentLoaded', () => {
+      serie = Procvic.spust({
+        klic: 'metodus_chem_nazvoslovi', pocet: 10, typ: 'text',
+        plocha: $('plocha'), skoreEl: $('skore'), pokrokEl: $('pokrok'),
+        rezim: () => rezim, generuj,
+      });
+      $('startBtn').onclick = () => serie.restart();
+      serie.restart();
+    });
+
+    $('rezimy').addEventListener('click', e => {
+      const b = e.target.closest('button[data-rezim]'); if (!b) return;
+      document.querySelectorAll('#rezimy button').forEach(x => { x.classList.toggle('active', x === b); x.setAttribute('aria-pressed', x === b); });
+      rezim = b.dataset.rezim;
+      const uceni = rezim === 'uceni';
+      $('plocha').hidden = $('ovladani').hidden = uceni;
+      $('uceniKarta').hidden = !uceni;
+      $('napovedaPsani').hidden = !rezim.startsWith('pis');
+      posledni = null;
+      if (uceni) vykresliUceni();
+      else serie.restart();
+    });
+    document.querySelectorAll('#rezimy button').forEach(b => b.setAttribute('aria-pressed', b.dataset.rezim === rezim));
+
+    function vykresliUceni() {
+      const q = $('uceniHledat').value.trim().toLowerCase();
+      const telo = $('uceniTelo');
+      telo.innerHTML = '';
+      vyber()
+        .filter(l => !q || (l[0] + ' ' + l[1]).toLowerCase().includes(q))
+        .forEach(l => {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `<td class="vzorec">${subHtml(l[0])}</td><td>${l[1]}</td><td class="kat">${l[2]}</td>`;
+          telo.appendChild(tr);
+        });
+      $('searchCount').textContent = telo.children.length ? `Nalezeno: ${telo.children.length} sloučenin.` : 'Žádná shoda. Zkus jiný název nebo kategorii.';
+    }
+    $('uceniHledat').addEventListener('input', vykresliUceni);
+  </script>
+  <script src="chem_nazvoslovi.js"></script>
+</body>
+</html>

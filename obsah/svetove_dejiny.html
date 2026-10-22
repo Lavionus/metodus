@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>📜 Časová osa světových dějin</title>
+  <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../nazor.css">
+  <script src="../nazor.js"></script>
+  <script src="../data/udalosti.js"></script>
+  <script src="../theme.js"></script>
+  <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
+  <script src="../uloha.js" defer></script>
+  <script src="../procvic.js" defer></script>
+  <script src="../osa-kviz.js" defer></script>
+  <style>
+    /* přehled – souběžná osa a svislý seznam událostí (stejné na obou osách) */
+    #prehledObal[hidden] { display: none; }
+    .osa-nahled { max-width: 980px; margin-bottom: 18px; background: var(--bg-panel); border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; }
+    .osa-pozn { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 6px; }
+    .osa-meritko { font-size: 0.85rem; display: inline-flex; gap: 6px; align-items: center; cursor: pointer; }
+    .osa { max-width: 760px; position: relative; padding-left: 30px; }
+    .osa::before { content: ''; position: absolute; left: 9px; top: 6px; bottom: 6px; width: 2px; background: var(--border-strong); }
+    .udalost { position: relative; margin-bottom: 18px; }
+    .udalost::before { content: ''; position: absolute; left: -26px; top: 5px; width: 12px; height: 12px; border-radius: 50%; background: var(--accent); border: 2px solid var(--bg-deep); }
+    .udalost .rok { font-weight: 700; color: var(--accent-hover); font-size: 1.05rem; }
+    .udalost .era { display: inline-block; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-faint); margin-left: 8px; }
+    .udalost .co { margin-top: 2px; font-weight: 600; }
+    .udalost .popis { font-size: 0.88rem; line-height: 1.5; color: var(--text-muted); }
+    /* kvíz */
+    .druh { display: block; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-faint); margin-bottom: 6px; }
+    .velky-text .rok { color: var(--accent-hover); }
+    .fakt { display: block; font-size: 1.2rem; font-weight: 600; line-height: 1.4; max-width: 600px; margin: 0 auto; }
+    .moznosti.udalosti button { font-size: 0.98rem; max-width: 320px; }
+    .prehled-chyb .druh { display: none; }
+    .prehled-chyb .fakt, .prehled-chyb .rok { display: inline; font-size: inherit; }
+  </style>
+</head>
+<body>
+  <h1>📜 Časová osa světových dějin</h1>
+  <p class="podtitul">Přehled klíčových událostí světových dějin od starověku po současnost a procvičování letopočtů. Po chybě máš druhý pokus, na konci přehled chyb.</p>
+
+  <div class="rezimy" id="rezimy">
+    <button data-rezim="prehled" data-faze="vyuka" class="active">📖 Časová osa</button>
+    <button data-rezim="rokudalost">📅 Rok → událost</button>
+    <button data-rezim="udalostrok">🗓️ Událost → rok</button>
+    <button data-rezim="letopocet">✍️ Napiš letopočet</button>
+  </div>
+
+  <div id="prehledObal">
+    <div class="osa-nahled">
+      <p class="osa-pozn">Horní pruh: svět. Dolní pruh: české dějiny ve stejné době (stejná data jako Časová osa českých dějin).</p>
+      <label class="osa-meritko"><input type="checkbox" id="meritko"> 📏 Skutečné měřítko (vzdálenost = počet let)</label>
+      <div id="osaNazor"></div>
+    </div>
+    <div class="osa" id="prehled"></div>
+  </div>
+
+  <div class="plocha" id="plocha" hidden></div>
+  <div class="ovladani" id="ovladani" hidden>
+    <button class="hlavni" id="startBtn">🔄 Nová série</button>
+    <span class="pokrok" id="pokrok"></span>
+    <span class="skore" id="skore"></span>
+  </div>
+
+  <p class="napoveda">Opěrné body: <b>776 př. n. l.</b> první olympijské hry, <b>476</b> zánik Západořímské říše (konec starověku), <b>1492</b> Kolumbus v Americe (začátek novověku), <b>1789</b> Francouzská revoluce, <b>1914–1918</b> první a <b>1939–1945</b> druhá světová válka, <b>1989</b> pád Berlínské zdi. Letopočty před naším letopočtem piš se znaménkem minus; u nich se toleruje ±50 let, u ostatních ±3 roky.</p>
+
+<script>
+const $ = id => document.getElementById(id);
+// Události jsou společná data rodiny „Čas a práce historika" (data/udalosti.js);
+// stejná data čte i sesterská osa, kvíz je společný (osa-kviz.js).
+const UDALOSTI = METODUS_UDALOSTI.filter(u => u.pruh === 'svet').map(u => ({ y: u.rok, t: u.nazev, d: u.popis }));
+/* Společná časová osa (nazor.js): české a světové dějiny souběžně. */
+function kresliOsu() {
+  $('osaNazor').innerHTML = Nazor.casovaOsa(METODUS_UDALOSTI, {
+    pruhy: [...METODUS_PRUHY].reverse(), meritko: $('meritko').checked ? 'linearni' : 'poradi',
+  });
+}
+$('meritko').addEventListener('change', kresliOsu);
+kresliOsu();
+const rokText = r => r < 0 ? r * -1 + ' př. n. l.' : r;
+$('prehled').innerHTML = METODUS_UDALOSTI.filter(u => u.pruh === 'svet').map(u =>
+  `<div class="udalost"><span class="rok">${rokText(u.rok)}</span>${u.obdobi ? `<span class="era">${u.obdobi}</span>` : ''}` +
+  `<div class="co">${u.nazev}</div>${u.popis ? `<div class="popis">${u.popis}</div>` : ''}</div>`).join('');
+window.addEventListener('DOMContentLoaded', () => OsaKviz.spust({ pruh: 'svet', klic: 'metodus_svetove_dejiny' }));
+</script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+Sada: IMG-ch-07
+Soubor: ch9-redox-rezavy-hrebik
+Popis: Železný hřebík po přibližně dvaceti letech ve vlhkém prostředí; hnědý povlak je rez.
+Autor: Thomas Maeder
+Zdroj: https://commons.wikimedia.org/wiki/File:Corrosion_atmosph%C3%A9rique_d%27un_clou_-_Atmospheric_corrosion_of_a_nail.jpg
+Licence: CC BY-SA 3.0
+Staženo: 2026-10-19
+Úpravy: automatická orientace, odstranění metadat, zmenšení PNG na 1600 px; WebP 1152 px q82

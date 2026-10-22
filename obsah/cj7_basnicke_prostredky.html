@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Básnické prostředky</title>
+  <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
+  <script src="../theme.js"></script>
+  <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
+  <script src="../rec.js"></script>
+  <script src="../uloha.js"></script>
+  <style>
+    .basen { font-size: clamp(1.02rem, 3.6vw, 1.3rem); line-height: 1.7; text-align: left; max-width: 560px; margin: 0 auto; }
+    .basen .vers { display: flex; gap: 10px; align-items: baseline; }
+    .basen .pismeno { min-width: 1.4em; font-weight: 700; color: var(--text-faint); }
+    .basen .pismeno.a { color: var(--accent); }
+    .basen .pismeno.b { color: var(--zvyraz-text); }
+    .basen .rym-a { color: var(--accent); font-weight: 700; }
+    .basen .rym-b { color: var(--zvyraz-text); font-weight: 700; }
+    .zdroj { color: var(--text-faint); font-size: 0.82rem; margin-top: 6px; text-align: right; }
+    .ukazka-textu { white-space: pre-line; text-align: left; max-width: 560px; line-height: 1.6; font-size: clamp(0.98rem, 3.4vw, 1.15rem); }
+    .veta-uloha .hledane { color: var(--zvyraz-text); border-bottom: 2px solid var(--zvyraz-text); }
+    .moznosti button.ztlumeno { opacity: 0.35; }
+    .schema-rymu { width: min(420px, 92vw); }
+    .schema-rymu .radek { fill: var(--bg-control); stroke: var(--border-strong); }
+    .schema-rymu .oblouk-a { fill: none; stroke: var(--accent); stroke-width: 3; }
+    .schema-rymu .oblouk-b { fill: none; stroke: var(--zvyraz-text); stroke-width: 3; stroke-dasharray: 6 4; }
+    .schema-rymu .pism { font-weight: 700; font-size: 13px; font-family: inherit; }
+    .schema-rymu .pism.a { fill: var(--accent); }
+    .schema-rymu .pism.b { fill: var(--zvyraz-text); }
+    .schema-rymu .nazev { fill: var(--text); font-size: 13px; font-weight: 700; font-family: inherit; }
+  </style>
+</head>
+<body>
+  <h1>🎭 Lyrika, epika, drama a básnické prostředky</h1>
+  <p class="podtitul">Pro 6.–8. ročník: literární druhy, verš, sloka, druhy rýmu, přirovnání, personifikace, metafora, epiteton a nadsázka.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Literární druhy a jazyk básně</summary>
+    <div class="obsah">
+      <p>Literaturu dělíme na tři <b>literární druhy</b>. <b>Lyrika</b> vyjadřuje pocity a nálady, děj v ní skoro není.
+        <b>Epika</b> vypráví příběh (pohádka, pověst, povídka, román). <b>Drama</b> je určené k hraní na divadle:
+        tvoří ho rozhovory postav a scénické poznámky. Pozor: i epika může být psaná ve verších.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>📏 Verš a sloka</h3><p><b>Verš</b> je jeden řádek básně. Několik veršů tvoří
+          <b>sloku</b> (strofu). <b>Rým</b> je zvuková shoda konců veršů: <i>les – dnes</i>.</p></article>
+        <article class="vyklad-karta"><h3>🔁 Druhy rýmu</h3><p><b>sdružený</b> AABB · <b>střídavý</b> ABAB ·
+          <b>obkročný</b> ABBA. Stejné písmeno = verše, které se rýmují.</p></article>
+        <article class="vyklad-karta"><h3>🪞 Přirovnání a metafora</h3><p><b>Přirovnání</b> porovná dvě věci slovem
+          <i>jako, jak</i>: <i>oči jako studánky</i>. <b>Metafora</b> věc rovnou pojmenuje jinak podle podobnosti:
+          <i>perly rosy</i>.</p></article>
+        <article class="vyklad-karta"><h3>🌬️ Personifikace</h3><p>Zosobnění: věc nebo příroda dělá to, co umí člověk:
+          <i>vítr zpívá, stromy si šeptají</i>.</p></article>
+        <article class="vyklad-karta"><h3>✨ Epiteton a nadsázka</h3><p><b>Epiteton</b> je básnický přívlastek:
+          <i>tichá noc, temný les</i>. <b>Nadsázka</b> (hyperbola) zveličuje: <i>říkal jsem ti to stokrát</i>.</p></article>
+      </div>
+      <svg class="schema-rymu" viewBox="0 0 420 150" role="img" aria-label="Schémata rýmu: sdružený AABB, střídavý ABAB, obkročný ABBA">
+        <g id="schemata"></g>
+      </svg>
+      <aside class="zapamatuj">Lyrika = pocity, epika = příběh, drama = rozhovory na jevišti.
+        Rým urči podle písmen: AABB sdružený, ABAB střídavý, ABBA obkročný. Slovo <i>jako</i> → přirovnání.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: urči rým v Máchově Máji</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Karel Hynek Mácha, Máj:<br>
+        „Byl pozdní večer – první máj – / večerní máj – byl lásky čas. / Hrdliččin zval ku lásce hlas, / kde borový zaváněl háj.“
+        Jaký je to rým?</p>
+      <ol class="kroky">
+        <li>Spočítám verše: ukázka má <b>4 verše</b>, tvoří jednu sloku.</li>
+        <li>Najdu poslední slova veršů: <b>máj – čas – hlas – háj</b>.</li>
+        <li>Rýmující se konce označím stejným písmenem: máj = <b>A</b>, čas = <b>B</b>, hlas = <b>B</b>, háj = <b>A</b>.</li>
+        <li>Schéma <b>ABBA</b>: první verš se rýmuje se čtvrtým, druhý se třetím – rým „obkročuje“ prostřední verše.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ ABBA – rým obkročný.</p>
+    </div>
+  </details>
+
+  <div class="rezimy" id="rezimy">
+    <button data-rezim="rym" class="active">🔁 Který druh rýmu?</button>
+    <button data-rezim="prostredek">🔎 Najdi básnický prostředek</button>
+    <button data-rezim="druh">🎭 Lyrika, epika, nebo drama?</button>
+    <button data-rezim="pojmy">📏 Pojmy</button>
+  </div>
+
+  <div class="plocha" id="plocha"></div>
+
+  <div class="ovladani">
+    <button class="hlavni" id="btnDalsi">Přeskočit →</button>
+    <button id="btnNapoveda">💡 Nápověda</button>
+    <span class="serie" id="serie"></span>
+    <span class="skore" id="skore"></span>
+  </div>
+
+  <p class="napoveda">
+    📌 <b>Lyrika</b> – pocity a nálady (óda, elegie, hymnus) · <b>epika</b> – příběh s dějem (pohádka, pověst, bajka, povídka, román)
+    · <b>drama</b> – rozhovory postav pro divadlo (komedie, tragédie). <b>Verš</b> = řádek, <b>sloka</b> = skupina veršů, <b>rým</b> = shoda konců veršů.
+    <b>Sdružený</b> AABB, <b>střídavý</b> ABAB, <b>obkročný</b> ABBA. <b>Přirovnání</b> – jako, jak; <b>metafora</b> – jiné pojmenování podle podobnosti;
+    <b>personifikace</b> – věc jedná jako člověk; <b>epiteton</b> – básnický přívlastek; <b>nadsázka</b> – zveličení.
+    Klávesy: <kbd>H</kbd> nápověda · <kbd>Enter</kbd> další.
+  </p>
+
+<script>
+const $ = id => document.getElementById(id);
+const skore = Uloha.skore('metodus_cj7_basnicke_prostredky', $('skore'));
+let rezim = 'rym';
+let serie = 0, napovedaVidet = false, aktualni = null, posledni = null;
+
+/* ---- schémata rýmu ve výkladu (SVG) ------------------------------------------------- */
+(function kresliSchemata() {
+  const g = document.getElementById('schemata');
+  if (!g) return;
+  const sady = [['sdružený', 'AABB'], ['střídavý', 'ABAB'], ['obkročný', 'ABBA']];
+  let svg = '';
+  sady.forEach(([nazev, sch], s) => {
+    const x0 = 10 + s * 140;
+    svg += `<text class="nazev" x="${x0}" y="16">${nazev}</text>`;
+    const y = i => 34 + i * 28;
+    [...sch].forEach((p, i) => {
+      svg += `<rect class="radek" x="${x0 + 18}" y="${y(i) - 8}" width="74" height="14" rx="4"/>`;
+      svg += `<text class="pism ${p.toLowerCase()}" x="${x0}" y="${y(i) + 4}">${p}</text>`;
+    });
+    ['A', 'B'].forEach(p => {
+      const idx = [...sch].map((z, i) => (z === p ? i : -1)).filter(i => i >= 0);
+      const [a, b] = idx;
+      const sirka = 12 + (b - a) * 8;
+      svg += `<path class="oblouk-${p.toLowerCase()}" d="M${x0 + 94} ${y(a)} C ${x0 + 94 + sirka} ${y(a)}, ${x0 + 94 + sirka} ${y(b)}, ${x0 + 94} ${y(b)}"/>`;
+    });
+  });
+  g.innerHTML = svg;
+})();
+
+/* ---- data ------------------------------------------------------------------------------ */
+const RYMY = {
+  sdruzeny: { nazev: 'sdružený', schema: 'AABB' },
+  stridavy: { nazev: 'střídavý', schema: 'ABAB' },
+  obkrocny: { nazev: 'obkročný', schema: 'ABBA' },
+};
+/* Sloky: vlastní ukázky; citace jen z volných děl (Mácha † 1836, Erben † 1870). */
+const SLOKY = [
+  { typ: 'sdruzeny', v: ['Padá listí na cestu,', 'vítr běží k městu.', 'Nad polem se stmívá,', 'sýkorka už nezpívá.'] },
+  { typ: 'sdruzeny', v: ['Sněží tiše do kraje,', 'kopec bílý od háje.', 'Děti běží ven,', 'bílý je celý den.'] },
+  { typ: 'sdruzeny', v: ['Kočka spí na lavici,', 'tlapky schová v rukavici.', 'Pes jí hlídá sen,', 'dokud nezačne den.'] },
+  { typ: 'sdruzeny', v: ['Řeka teče do dálky,', 'nese s sebou korálky.', 'Na břehu stojí mlýn,', 'za ním dlouhý stín.'] },
+  { typ: 'sdruzeny', v: ['Jaro přišlo do zahrad,', 'kvetou třešně, kvete sad.', 'Včelka sedá na květ,', 'krásný je ten svět.'] },
+  { typ: 'sdruzeny', v: ['Na topole nad jezerem', 'seděl vodník pod večerem.'], zdroj: 'Karel Jaromír Erben, Vodník (úryvek)' },
+  { typ: 'stridavy', v: ['Za humny se stmívá,', 'ztichl celý les,', 'maminka mi zpívá,', 'že byl krásný dnes.'] },
+  { typ: 'stridavy', v: ['Na kopci stojí hrad,', 'pod ním teče říčka,', 'pod hradem je sad,', 'v sadu spí kočička.'] },
+  { typ: 'stridavy', v: ['Zpívá ráno pták,', 'domů letí sova,', 'nad lesem pluje mrak,', 'den začíná znova.'] },
+  { typ: 'stridavy', v: ['Přišla k nám zima,', 'zamrzl nám rybník,', 'klouzat se je prima,', 'klouže se i chodník.'] },
+  { typ: 'stridavy', v: ['U potoka vrba stojí,', 'v listí šumí vánek,', 'pstruzi se jí trochu bojí,', 'pod ní sedí Janek.'] },
+  { typ: 'obkrocny', v: ['Byl pozdní večer – první máj –', 'večerní máj – byl lásky čas.', 'Hrdliččin zval ku lásce hlas,', 'kde borový zaváněl háj.'], zdroj: 'Karel Hynek Mácha, Máj (úryvek)' },
+  { typ: 'obkrocny', v: ['Když padá sníh,', 'zahrada spí,', 'jen vrabec ví,', 'kde schovat smích.'] },
+  { typ: 'obkrocny', v: ['Ráno je les', 'plný ptačích hlasů,', 'zpívají do jasu,', 'co je nového dnes.'] },
+  { typ: 'obkrocny', v: ['Za vsí stojí mlýn,', 'voda kolo točí,', 'pstruh pod splavem skočí', 'a zmizí jak stín.'] },
+  { typ: 'obkrocny', v: ['Po cestě jde pes,', 'nese v tlamě kost,', 'má z ní velkou radost,', 'tak hezký je dnes.'] },
+];
+
+const PROSTREDKY = {
+  prirovnani: { nazev: 'přirovnání', def: 'přirovnání porovnává dvě věci pomocí slov jako, jak', znak: 'se tu dvě věci porovnávají pomocí slova jako nebo jak' },
+  personifikace: { nazev: 'personifikace', def: 'personifikace znamená, že věc, rostlina nebo zvíře jedná či cítí jako člověk', znak: 'věc nebo příroda tu dělá něco, co umí jen člověk' },
+  metafora: { nazev: 'metafora', def: 'metafora pojmenuje věc jiným slovem podle podobnosti, bez slova jako', znak: 'je tu věc pojmenovaná jiným slovem podle podobnosti, bez slova jako' },
+  epiteton: { nazev: 'epiteton (básnický přívlastek)', def: 'epiteton je básnický přívlastek – přídavné jméno, které ozdobí podstatné jméno', znak: 'je tu přídavné jméno, které básnicky ozdobí podstatné jméno' },
+  nadsazka: { nazev: 'nadsázka (hyperbola)', def: 'nadsázka schválně zveličuje skutečnost', znak: 'se tu věc schválně zveličuje' },
+};
+/* {…} = zvýrazněné místo, o které v úloze jde; o = co znamená */
+const UKAZKY = [
+  { k: 'prirovnani', t: 'Bratr je silný {jako medvěd}.' },
+  { k: 'prirovnani', t: 'Sníh byl měkký {jako peřina}.' },
+  { k: 'prirovnani', t: 'Utíkal {rychle jako vítr}.' },
+  { k: 'prirovnani', t: 'Oči jí svítily {jak dvě hvězdy}.' },
+  { k: 'prirovnani', t: 'Seděl tam {tichý jako myška}.' },
+  { k: 'prirovnani', t: 'Voda v potoce byla {studená jako led}.' },
+  { k: 'personifikace', t: 'Vítr si {zpívá} v komíně.' },
+  { k: 'personifikace', t: 'Slunce se na nás {usmívá}.' },
+  { k: 'personifikace', t: 'Stromy si {šeptají} o zimě.' },
+  { k: 'personifikace', t: 'Potok {vypráví} kamenům pohádky.' },
+  { k: 'personifikace', t: 'Staré hodiny {pospávají} na zdi.' },
+  { k: 'personifikace', t: 'Večer ulice {usínají}.' },
+  { k: 'metafora', t: 'V trávě se třpytí {perly} rosy.', o: 'perly = kapky rosy' },
+  { k: 'metafora', t: '{Zub} času ohlodal staré zdi.', o: 'zub času = působení času' },
+  { k: 'metafora', t: 'Díval se do {studánek} jejích očí.', o: 'studánky = oči' },
+  { k: 'metafora', t: 'Na louce svítí žlutá {sluníčka} pampelišek.', o: 'sluníčka = květy pampelišek' },
+  { k: 'metafora', t: 'Nad kopcem se pasou bílé {ovečky} mraků.', o: 'ovečky = obláčky' },
+  { k: 'metafora', t: 'Cestu pokryl barevný {koberec} listí.', o: 'koberec = vrstva listí' },
+  { k: 'epiteton', t: 'Nad krajem leží {tichá} noc.' },
+  { k: 'epiteton', t: 'Za vsí šumí {temný} les.' },
+  { k: 'epiteton', t: 'Za vesnicí se rozkládá {širé} pole.' },
+  { k: 'epiteton', t: 'V dálce modrají {mlžné} hory.' },
+  { k: 'epiteton', t: 'U plotu kvete {voňavý} šeřík.' },
+  { k: 'epiteton', t: 'Přišlo {šedivé} ráno.' },
+  { k: 'nadsazka', t: 'Říkal jsem ti to už {stokrát}.' },
+  { k: 'nadsazka', t: 'Čekám tu na tebe {celou věčnost}.' },
+  { k: 'nadsazka', t: 'Ta taška váží {snad tunu}.' },
+  { k: 'nadsazka', t: 'Smáli jsme se, {až se hory třásly}.' },
+  { k: 'nadsazka', t: 'Ten film jsem viděl {milionkrát}.' },
+  { k: 'nadsazka', t: 'Mám takový hlad, že {bych snědl slona}.' },
+];
+
+const DRUHY = {
+  lyrika: { nazev: 'lyrika', ikona: '💭', def: 'lyrika vyjadřuje pocity a nálady, děj v ní skoro není', znak: 'text hlavně vyjadřuje pocity a nálady, příběh v něm není' },
+  epika: { nazev: 'epika', ikona: '📖', def: 'epika vypráví příběh s dějem a postavami', znak: 'text vypráví příběh – něco se v něm postupně děje' },
+  drama: { nazev: 'drama', ikona: '🎭', def: 'drama tvoří rozhovory postav a scénické poznámky pro divadlo', znak: 'text tvoří repliky postav a scénické poznámky' },
+};
+const DRUH_ULOHY = [
+  /* žánry */
+  ...['óda', 'elegie', 'hymnus', 'sonet'].map(z => ({ k: 'lyrika', zanr: z })),
+  ...['pohádka', 'pověst', 'bajka', 'povídka', 'román', 'epos', 'báje'].map(z => ({ k: 'epika', zanr: z })),
+  ...['komedie', 'tragédie', 'činohra', 'fraška'].map(z => ({ k: 'drama', zanr: z })),
+  /* popisy */
+  { k: 'lyrika', popis: 'Básník v textu vyjadřuje své pocity, nálady a dojmy; děj tu skoro není.' },
+  { k: 'epika', popis: 'Text vypráví příběh: má děj, postavy a vypravěče.' },
+  { k: 'drama', popis: 'Text je určený k hraní na divadle: tvoří ho rozhovory postav a poznámky pro herce.' },
+  /* vlastní ukázky */
+  { k: 'lyrika', text: 'Je mi smutno, když padá listí,\ntiše se loučím s létem.\nV duši mám ticho podzimních dní\na stýská se mi po světě.' },
+  { k: 'lyrika', text: 'Miluju ráno, kdy rosa svítí\na ptáci zpívají do oken.\nJe mi tak lehko, tak radostně,\nže bych snad vzlétl nad strom.' },
+  { k: 'lyrika', text: 'Domove můj, tichý kraji,\nkde jsem byl kdysi malý,\nna tebe myslím, když je mi zle,\ntvé louky mě vždycky hřály.' },
+  { k: 'epika', text: 'Jednou v zimě šel chudý uhlíř lesem. U cesty potkal starce, který ho prosil o kousek chleba. Uhlíř se s ním rozdělil. Když se ohlédl, stařec byl pryč a na pařezu ležel zlatý peníz.' },
+  { k: 'epika', text: 'Šel Honza přes hory a doly,\naž přišel k černému hradu.\nTam drak tři princezny hlídal\na Honza si nevěděl rady.' },
+  { k: 'epika', text: 'Liška pozvala čápa na oběd. Uvařila kaši a nalila ji na plochý talíř. Čáp do talíře jen ťukal zobákem a odešel hladový. Druhý den pozval lišku k sobě on.' },
+  { k: 'drama', text: 'HONZA (vstoupí do mlýna): Dobrý den, mistře!\nMLYNÁŘ (otře si ruce do zástěry): Co tě sem přivádí, chlapče?\nHONZA: Hledám práci.' },
+  { k: 'drama', text: '(Trůnní sál. Král sedí na trůnu.)\nKRÁL: Kdo mi přinese živou vodu?\nPASTÝŘ (vystoupí): Já to zkusím, Veličenstvo!' },
+  { k: 'drama', text: 'EVA: Kde jsi byl tak dlouho?\nPETR (zadýchaně): Běžel jsem celou cestu!\nEVA (směje se): Tak to ti věřím.' },
+];
+
+const POJMY = {
+  vers: { nazev: 'verš', def: 'jeden řádek básně', sk: 'stavba' },
+  sloka: { nazev: 'sloka', def: 'skupina veršů, která tvoří v básni samostatný celek (strofa)', sk: 'stavba' },
+  rym: { nazev: 'rým', def: 'zvuková shoda konců veršů', sk: 'stavba' },
+  refren: { nazev: 'refrén', def: 'verš nebo skupina veršů, které se v básni pravidelně opakují', sk: 'stavba' },
+  prirovnani: { nazev: 'přirovnání', def: 'porovnání dvou věcí pomocí slov jako, jak', sk: 'prostredek' },
+  personifikace: { nazev: 'personifikace', def: 'zosobnění – věc, rostlina nebo zvíře jedná či cítí jako člověk', sk: 'prostredek' },
+  metafora: { nazev: 'metafora', def: 'pojmenování věci jiným slovem na základě podobnosti, bez slova jako', sk: 'prostredek' },
+  epiteton: { nazev: 'epiteton', def: 'básnický přívlastek, který ozdobí podstatné jméno', sk: 'prostredek' },
+  nadsazka: { nazev: 'nadsázka', def: 'záměrné zveličení skutečnosti', sk: 'prostredek' },
+  lyrika: { nazev: 'lyrika', def: 'literární druh, který vyjadřuje pocity a nálady, děj v něm skoro není', sk: 'druh' },
+  epika: { nazev: 'epika', def: 'literární druh, který vypráví příběh s dějem', sk: 'druh' },
+  drama: { nazev: 'drama', def: 'literární druh určený k hraní na divadle, tvořený rozhovory postav', sk: 'druh' },
+};
+
+/* ---- pomůcky ---------------------------------------------------------------------------- */
+const posledniSlovo = vers => vers.replace(/[\s.,;:!?–—“„]+$/u, '').split(/\s+/).pop().replace(/[.,;:!?–—“„]/gu, '');
+const velkeSlovo = s => s[0].toUpperCase() + s.slice(1);
+function vyberZ(pole) {
+  let x;
+  do { x = Uloha.nahodne(pole); } while (x === posledni && pole.length > 1);
+  posledni = x;
+  return x;
+}
+function odezvaEl() { const d = document.createElement('div'); d.className = 'odezva'; return d; }
+function hotovo(p, napoprve, html) {
+  skore.vyhodnot(napoprve);
+  serie = napoprve ? serie + 1 : 0;
+  $('serie').textContent = serie >= 3 ? '🔥 série ' + serie : '';
+  const tip = p.querySelector('.pravidlo.tip');
+  if (tip) tip.remove();
+  const el = document.createElement('div');
+  el.className = 'pravidlo ok';
+  el.innerHTML = `<span class="znak">📏</span><div>${html}</div>`;
+  p.appendChild(el);
+}
+const PRODLEVA = napoprve => (napoprve ? 2400 : 3400);
+const radovaCislovka = n => ['prvním', 'druhým', 'třetím', 'čtvrtým'][n];
+
+/* ---- Který druh rýmu? ---------------------------------------------------------------------- */
+function rym() {
+  const p = $('plocha');
+  const s = vyberZ(SLOKY);
+  const schema = RYMY[s.typ].schema.slice(0, s.v.length);
+  const konce = s.v.map(posledniSlovo);
+  aktualni = { rezim: 'rym', spravny: s.typ, s };
+  const basenHTML = hotova => s.v.map((v, i) => {
+    const pism = schema[i];
+    if (!hotova) return `<div class="vers"><span class="pismeno">${i + 1}.</span><span>${v}</span></div>`;
+    const konec = konce[i];
+    const idx = v.lastIndexOf(konec);
+    const zv = v.slice(0, idx) + `<span class="rym-${pism.toLowerCase()}">${konec}</span>` + v.slice(idx + konec.length);
+    return `<div class="vers"><span class="pismeno ${pism.toLowerCase()}">${pism}</span><span>${zv}</span></div>`;
+  }).join('');
+  p.innerHTML = `<div class="zadani">Jaký rým má tahle sloka?</div>
+    <div class="karta"><div><div class="basen" id="basen">${basenHTML(false)}</div>
+    ${s.zdroj ? `<div class="zdroj">${s.zdroj}</div>` : ''}</div></div>`;
+  const partner = i => schema.split('').findIndex((z, j) => j !== i && z === schema[i]);
+  const odezva = odezvaEl();
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: Object.keys(RYMY).map(k => ({ klic: k, ikona: RYMY[k].schema, popis: RYMY[k].nazev })),
+    spravnyKlic: s.typ,
+    zpravaOk: `✅ Ano – rým ${RYMY[s.typ].nazev} (${schema}).`,
+    zpravaChyba: k => {
+      const j = partner(0);
+      return `Ne – ${RYMY[k].nazev} rým má schéma ${RYMY[k].schema}. Tady se ale 1. verš („${konce[0]}“) rýmuje `
+        + `${j === 3 ? 'se' : 's'} ${radovaCislovka(j)} veršem („${konce[j]}“).`;
+    },
+    poSpravne: napoprve => {
+      $('basen').innerHTML = basenHTML(true);
+      const dvojice = [...new Set(schema)].map(z => schema.split('').map((x, i) => (x === z ? konce[i] : null)).filter(Boolean).join(' – '));
+      hotovo(p, napoprve, `Rýmují se <b>${dvojice.join('</b> a <b>')}</b>, schéma <b>${schema}</b> → rým <b>${RYMY[s.typ].nazev}</b>.`);
+    },
+    prodleva: PRODLEVA, dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+/* ---- Najdi básnický prostředek -------------------------------------------------------------- */
+function prostredek() {
+  const p = $('plocha');
+  const u = vyberZ(UKAZKY);
+  const jine = Uloha.zamichej(Object.keys(PROSTREDKY).filter(k => k !== u.k)).slice(0, 3);
+  aktualni = { rezim: 'prostredek', spravny: u.k, u };
+  const html = u.t.replace(/\{([^}]+)\}/, '<span class="hledane">$1</span>');
+  const misto = u.t.match(/\{([^}]+)\}/)[1];
+  p.innerHTML = `<div class="zadani">Jaký básnický prostředek je ve zvýrazněném místě?</div>
+    <div class="karta"><div class="veta-uloha">${html}</div></div>`;
+  const odezva = odezvaEl();
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: Uloha.zamichej([u.k, ...jine]).map(k => ({ klic: k, popis: PROSTREDKY[k].nazev })),
+    spravnyKlic: u.k,
+    zpravaOk: '✅ Správně!',
+    zpravaChyba: k => `Ne – ${PROSTREDKY[k].def}. Tady ale ${PROSTREDKY[u.k].znak}.`,
+    poSpravne: napoprve => hotovo(p, napoprve,
+      `<b>${misto}</b> – ${PROSTREDKY[u.k].nazev}: ${PROSTREDKY[u.k].znak}.${u.o ? ` <span class="vysledek">(${u.o})</span>` : ''}`),
+    prodleva: PRODLEVA, dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+/* ---- Lyrika, epika, nebo drama? ---------------------------------------------------------------- */
+function druh() {
+  const p = $('plocha');
+  const u = vyberZ(DRUH_ULOHY);
+  aktualni = { rezim: 'druh', spravny: u.k, u };
+  let zadani, obsah;
+  if (u.zanr) { zadani = 'Do kterého literárního druhu patří tento žánr?'; obsah = `<div class="veta-uloha">${u.zanr}</div>`; }
+  else if (u.popis) { zadani = 'Který literární druh popisuje věta?'; obsah = `<div class="veta-uloha">${u.popis}</div>`; }
+  else { zadani = 'Ke kterému literárnímu druhu patří ukázka?'; obsah = `<div class="ukazka-textu">${u.text}</div>`; }
+  p.innerHTML = `<div class="zadani">${zadani}</div><div class="karta">${obsah}</div>`;
+  const odezva = odezvaEl();
+  Uloha.vyber({
+    kam: p, odezva, trida: 'dve',
+    moznosti: Object.keys(DRUHY).map(k => ({ klic: k, ikona: DRUHY[k].ikona, popis: DRUHY[k].nazev })),
+    spravnyKlic: u.k,
+    zpravaOk: `✅ Ano – ${DRUHY[u.k].nazev}.`,
+    zpravaChyba: k => (u.zanr
+      ? `Ne – ${DRUHY[k].def}. ${velkeSlovo(u.zanr)} ale patří jinam – vzpomeň si, jestli vypráví příběh, vyjadřuje pocity, nebo se hraje na divadle.`
+      : `Ne – ${DRUHY[k].def}. Tady ale ${DRUHY[u.k].znak}.`),
+    poSpravne: napoprve => hotovo(p, napoprve, u.zanr
+      ? `<b>${velkeSlovo(u.zanr)}</b> patří do druhu <b>${DRUHY[u.k].nazev}</b>: ${DRUHY[u.k].def}.`
+      : `<b>${velkeSlovo(DRUHY[u.k].nazev)}</b> – ${DRUHY[u.k].znak}.${u.k === 'epika' && u.text && u.text.includes('\n') ? ' I epika může být psaná ve verších.' : ''}`),
+    prodleva: PRODLEVA, dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+/* ---- Pojmy ----------------------------------------------------------------------------------- */
+function pojmy() {
+  const p = $('plocha');
+  const k = vyberZ(Object.keys(POJMY));
+  const po = POJMY[k];
+  /* dvě záměny ze stejné skupiny, jedna odjinud */
+  const stejna = Uloha.zamichej(Object.keys(POJMY).filter(x => x !== k && POJMY[x].sk === po.sk)).slice(0, 2);
+  const jina = Uloha.zamichej(Object.keys(POJMY).filter(x => POJMY[x].sk !== po.sk)).slice(0, 1);
+  aktualni = { rezim: 'pojmy', spravny: k };
+  p.innerHTML = `<div class="zadani">Který pojem odpovídá popisu?</div>
+    <div class="karta"><div class="veta-uloha">${velkeSlovo(po.def)}.</div></div>`;
+  const odezva = odezvaEl();
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: Uloha.zamichej([k, ...stejna, ...jina]).map(x => ({ klic: x, popis: POJMY[x].nazev })),
+    spravnyKlic: k,
+    zpravaOk: `✅ Ano – ${po.nazev}.`,
+    zpravaChyba: x => `Ne – ${POJMY[x].nazev} je ${POJMY[x].def}.`,
+    poSpravne: napoprve => hotovo(p, napoprve, `<b>${velkeSlovo(po.nazev)}</b> = ${po.def}.`),
+    prodleva: PRODLEVA, dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+/* ---- nápověda ---------------------------------------------------------------------------------- */
+function napoveda() {
+  if (!aktualni || napovedaVidet) return;
+  const p = $('plocha');
+  const text = {
+    rym: 'Najdi poslední slova veršů a napiš si k nim písmena: první konec je A, konec, který se s ním nerýmuje, je B. Pak porovnej schéma: AABB, ABAB, nebo ABBA?',
+    prostredek: 'Je tam slovo jako, jak? Dělá věc něco, co umí jen člověk? Je to přídavné jméno u podstatného jména? Něco se zveličuje? Půlku nabídky jsem ti ztlumil.',
+    druh: 'Zeptej se: Vypráví text příběh (epika)? Vyjadřuje hlavně pocity (lyrika)? Mluví v něm postavy jako na jevišti (drama)?',
+    pojmy: 'Rozmysli si, jestli popis mluví o stavbě básně, o básnickém prostředku, nebo o literárním druhu. Půlku nabídky jsem ti ztlumil.',
+  }[aktualni.rezim];
+  const el = document.createElement('div');
+  el.className = 'pravidlo tip';
+  el.innerHTML = `<span class="znak">💡</span><div>${text}</div>`;
+  p.appendChild(el);
+  if (aktualni.rezim === 'prostredek' || aktualni.rezim === 'pojmy') {
+    const spatne = Uloha.zamichej([...p.querySelectorAll('.moznosti button')]
+      .filter(b => b.dataset.klic !== aktualni.spravny));
+    spatne.slice(0, Math.floor(spatne.length / 2)).forEach(b => { b.disabled = true; b.classList.add('ztlumeno'); });
+  }
+  napovedaVidet = true;
+}
+
+/* ---- ovládání ----------------------------------------------------------------------------------- */
+const REZIMY = { rym, prostredek, druh, pojmy };
+function novaUloha() {
+  napovedaVidet = false;
+  REZIMY[rezim]();
+}
+document.querySelectorAll('#rezimy button').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('#rezimy button').forEach(x => x.classList.remove('active'));
+  b.classList.add('active');
+  rezim = b.dataset.rezim;
+  posledni = null;
+  novaUloha();
+}));
+$('btnDalsi').addEventListener('click', novaUloha);
+$('btnNapoveda').addEventListener('click', napoveda);
+document.addEventListener('keydown', e => {
+  if (e.target instanceof Element && e.target.closest('summary, input, textarea')) return;
+  if (e.key === 'ArrowRight' || e.key === 'Enter') { e.preventDefault(); novaUloha(); return; }
+  if (e.key === 'h' || e.key === 'H') napoveda();
+});
+
+novaUloha();
+</script>
+</body>
+</html>

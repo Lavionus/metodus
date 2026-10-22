@@ -1,0 +1,2 @@
+Common specification: inf9-ai-ovoce.prompt.txt
+Variant: Deep-green elongated Conference-like pear with russet patches and a long bent stem.

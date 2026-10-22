@@ -1,0 +1,114 @@
+{
+  "ok": true,
+  "hlavicka390": {
+    "nazev": "Metodus",
+    "orezany": false,
+    "tlacitka": [
+      "hamburger",
+      "btnDomu",
+      "btnVice"
+    ],
+    "radku": 1,
+    "vyskaHlavicky": 59,
+    "viceSkryte": true
+  },
+  "nabidka": {
+    "otevrena": true,
+    "aria": "true",
+    "polozky": [
+      "btnOsnova",
+      "btnUcitel",
+      "btnPredstaveni",
+      "btnTema",
+      "btnProjektor",
+      "btnNoveOkno"
+    ],
+    "popisky": [
+      "Osnova",
+      "Kabinet učitele",
+      "Živé ukázky",
+      "Světlý režim",
+      "Projektor",
+      "Nové okno"
+    ],
+    "role": "menuitem",
+    "fokus": "btnOsnova"
+  },
+  "filtry": {
+    "sFiltrem": {
+      "skryte": false,
+      "co": "zruší: předmět 📖 Čeština, 3. ročník",
+      "vidno": 24
+    },
+    "poZruseni": {
+      "skupina": "vse",
+      "rocnik": "vse",
+      "skryte": true,
+      "fokus": "hledatMenu",
+      "vidno": 255
+    }
+  },
+  "sirky": [
+    {
+      "sirka": 1366,
+      "motiv": "dark",
+      "radku": 1
+    },
+    {
+      "sirka": 1366,
+      "motiv": "light",
+      "radku": 1
+    },
+    {
+      "sirka": 1024,
+      "motiv": "dark",
+      "radku": 1
+    },
+    {
+      "sirka": 1024,
+      "motiv": "light",
+      "radku": 1
+    },
+    {
+      "sirka": 768,
+      "motiv": "dark",
+      "radku": 1
+    },
+    {
+      "sirka": 768,
+      "motiv": "light",
+      "radku": 1
+    },
+    {
+      "sirka": 700,
+      "motiv": "dark",
+      "radku": 1
+    },
+    {
+      "sirka": 700,
+      "motiv": "light",
+      "radku": 1
+    },
+    {
+      "sirka": 390,
+      "motiv": "dark",
+      "radku": 1
+    },
+    {
+      "sirka": 390,
+      "motiv": "light",
+      "radku": 1
+    },
+    {
+      "sirka": 320,
+      "motiv": "dark",
+      "radku": 1
+    },
+    {
+      "sirka": 320,
+      "motiv": "light",
+      "radku": 1
+    }
+  ],
+  "runtimeErrors": 0
+}

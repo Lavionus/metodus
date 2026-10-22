@@ -1,0 +1,4 @@
+Use case: scientific-educational
+Primary request: Wide Czech landscape with hydro, wind, solar, coal, nuclear and biogas power generation connected by power lines to a village; elevated view, recognizable facilities, no text.
+Style: accurate warm watercolor and light gouache with delicate ink contours, cohesive with the Metodus library.
+Constraints: no text, labels, numbers, logos, signature or watermark.

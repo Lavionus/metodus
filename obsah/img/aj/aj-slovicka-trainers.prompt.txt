@@ -1,0 +1,7 @@
+IMG-aj-02 · trainers
+
+Use case: scientific-educational. Square vocabulary flashcard for language learning. Friendly realistic watercolor and gouache with delicate contours on warm ivory paper and subtle shadow. One centered garment or natural pair/set, fully visible, neatly arranged. No text, logo, brand, border, watermark, mannequin, person or body parts. Subject: a matching pair of white and teal athletic trainers.
+
+Nástroj: OpenAI image_gen
+Datum: 2026-10-15
+Výstup: aj-slovicka-trainers.png, aj-slovicka-trainers.webp

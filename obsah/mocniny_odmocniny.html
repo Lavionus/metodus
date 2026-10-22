@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>√ Mocniny a odmocniny</title>
+<link rel="stylesheet" href="../common.css">
+<link rel="stylesheet" href="../vyuka.css">
+<link rel="stylesheet" href="../vyklad.css">
+<script src="../vyklad.js" defer></script>
+<script src="../theme.js"></script>
+<script src="../podpis.js" defer></script>
+<script src="../kostra.js" defer></script>
+<script src="../uloha.js" defer></script>
+<script src="../procvic.js" defer></script>
+</head>
+<body>
+  <h1>√ Mocniny a odmocniny</h1>
+  <p class="podtitul">Druhé a třetí mocniny a celočíselné odmocniny. Po chybě dostaneš druhou šanci; na konci uvidíš, co nesedělo.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Mocnina a odmocnina</summary>
+    <div class="obsah">
+      <p><b>Mocnina</b> je zkrácený zápis násobení stejných čísel. V zápisu 5² je 5 <b>základ</b> a malá dvojka
+        <b>mocnitel</b> – říká, kolikrát základ násobíš sebou samým: 5² = 5 · 5 = 25, 2³ = 2 · 2 · 2 = 8.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Druhá mocnina</h3><p>a² = a · a. Je to obsah čtverce o straně a,
+          proto se jí říká i „na druhou“ nebo „čtverec čísla“. 7² = 49.</p></article>
+        <article class="vyklad-karta"><h3>Třetí mocnina</h3><p>a³ = a · a · a. Je to objem krychle o hraně a:
+          krychle 3 × 3 × 3 má 27 krychliček, 3³ = 27.</p></article>
+        <article class="vyklad-karta"><h3>Druhá odmocnina</h3><p>√b je nezáporné číslo, které po umocnění na druhou
+          dá b. √49 = 7, protože 7² = 49. Odmocnina je opačná operace k druhé mocnině.</p></article>
+      </div>
+      <p>Pozor na nejčastější chybu: 5² není 5 · 2 = 10, ale 5 · 5 = 25. Mocnitel neznamená „krát dvě“.</p>
+      <p>U odmocniny pomáhá <b>odhad</b>: √50 leží mezi 7 a 8, protože 7² = 49 a 8² = 64. Druhé mocniny čísel
+        do 20 se vyplatí umět zpaměti. Velkou mocninu spočítáš rozkladem: 18² = (20 − 2)² = 400 − 80 + 4 = 324.</p>
+      <aside class="zapamatuj">a² = a · a, a³ = a · a · a. √b hledá číslo, jehož druhá mocnina je b.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: druhá odmocnina odhadem</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Vypočítej √196.</p>
+      <ol class="kroky">
+        <li>Hledám číslo, které po umocnění na druhou dá 196.</li>
+        <li>Odhadnu rozmezí: 10² = 100 a 20² = 400, takže výsledek leží mezi 10 a 20.</li>
+        <li>Podívám se na poslední číslici: 196 končí šestkou. Na druhou dají šestku na konci jen čísla končící 4 nebo 6.</li>
+        <li>Vyzkouším 14: 14² = 14 · 14 = 196. Sedí.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ √196 = 14, protože 14² = 196.</p>
+    </div>
+  </details>
+
+  <div class="rezimy" id="rezimy">
+    <button data-rezim="pow2">Druhé mocniny (do 20²)</button>
+    <button data-rezim="pow3">Třetí mocniny (do 10³)</button>
+    <button data-rezim="sqrt">Druhé odmocniny</button>
+    <button data-rezim="mix" class="active">Mix</button>
+  </div>
+
+  <div class="plocha" id="plocha"></div>
+
+  <div class="ovladani">
+    <button class="hlavni" id="btnNova">🔄 Nová série</button>
+    <span class="pokrok" id="pokrok"></span>
+    <span class="skore" id="skore"></span>
+  </div>
+
+  <p class="napoveda">
+    Odpověď napiš a potvrď <b>Enterem</b>. <b>Mocnina</b> znamená násobení čísla sebou samým
+    (5² = 5·5 = 25), <b>odmocnina</b> je opačná operace: hledáš číslo, které dá po umocnění zadanou hodnotu.
+    U velkých druhých mocnin pomáhá rozklad: 18² = (20−2)² = 400 − 2·20·2 + 4 = 324.
+  </p>
+
+<script>
+const $ = id => document.getElementById(id);
+let rezim = 'mix';
+
+function generuj(r) {
+  let typ = r;
+  if (typ === 'mix') typ = ['pow2', 'pow3', 'sqrt'][Math.floor(Math.random() * 3)];
+  if (typ === 'pow2') {
+    const n = 2 + Math.floor(Math.random() * 19);
+    return { zadani: `${n}<sup>2</sup> = ?`, odpoved: n * n, napoveda: `${n}·${n}` };
+  }
+  if (typ === 'pow3') {
+    const n = 2 + Math.floor(Math.random() * 9);
+    return { zadani: `${n}<sup>3</sup> = ?`, odpoved: n * n * n, napoveda: `${n}·${n}·${n}` };
+  }
+  const n = 2 + Math.floor(Math.random() * 19);
+  return { zadani: `√${n * n} = ?`, odpoved: n, napoveda: `${n}² = ${n * n}` };
+}
+
+let serie = null;
+window.addEventListener('DOMContentLoaded', () => {
+  serie = Procvic.spust({
+    klic: 'metodus_mocniny_odmocniny',
+    pocet: 12,
+    plocha: $('plocha'),
+    skoreEl: $('skore'),
+    pokrokEl: $('pokrok'),
+    rezim: () => rezim,
+    generuj,
+  });
+  $('rezimy').addEventListener('click', e => {
+    const b = e.target.closest('button[data-rezim]');
+    if (!b) return;
+    $('rezimy').querySelectorAll('button').forEach(x => x.classList.remove('active'));
+    b.classList.add('active');
+    rezim = b.dataset.rezim;
+    serie.restart();
+  });
+  $('btnNova').onclick = () => serie.restart();
+  serie.restart();
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ústava, dělba moci a volby</title>
+  <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
+  <script src="../theme.js"></script>
+  <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
+  <script src="../rec.js"></script>
+  <script src="../uloha.js"></script>
+  <style>
+    .chram { display: block; width: min(460px, 100%); height: auto; margin: 10px auto; }
+    .chram .strecha { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 2; }
+    .chram .sloup { fill: var(--bg-elevated); stroke: var(--border-strong); stroke-width: 2; }
+    .chram .zaklad { fill: var(--bg-panel); stroke: var(--border-strong); stroke-width: 2; }
+    .chram .nadp { fill: var(--accent); font-weight: 700; font-size: 13px; }
+    .chram .pop { fill: var(--text); font-size: 12px; }
+    .chram .mal { fill: var(--text-muted); font-size: 11px; }
+    .situace { font-size: clamp(1.05rem, 3.6vw, 1.35rem); font-weight: 600; line-height: 1.45; max-width: 640px; overflow-wrap: anywhere; }
+    .druh { display: block; font-size: .8rem; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; color: var(--text-faint); margin-bottom: 6px; }
+    .moznosti button { max-width: 100%; white-space: normal; }
+    .napoveda a { color: var(--accent); }
+  </style>
+</head>
+<body>
+  <h1>⚖️ Ústava, dělba moci a volby</h1>
+  <p class="podtitul">Pro 8.–9. ročník: Ústava ČR a Listina základních práv a svobod, moc zákonodárná, výkonná a soudní, volby, referendum a ochrana lidských práv.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Jak funguje náš stát</summary>
+    <div class="obsah">
+      <p><b>Ústava ČR</b> platí od 1. ledna 1993 a je nejvyšším zákonem státu. Spolu s <b>Listinou základních práv
+        a svobod</b> tvoří základ ústavního pořádku. Podle Ústavy je <b>lid zdrojem veškeré státní moci</b>
+        a ta je rozdělena mezi tři moci, které se navzájem hlídají.</p>
+      <svg class="chram" viewBox="0 0 360 270" role="img" aria-label="Schéma dělby moci: střecha Lid je zdrojem státní moci, tři sloupy – moc zákonodárná, výkonná a soudní – stojí na základu Ústava a Listina.">
+        <polygon class="strecha" points="180,6 354,62 6,62"/>
+        <text class="nadp" x="180" y="40" text-anchor="middle">Lid – zdroj</text>
+        <text class="nadp" x="180" y="56" text-anchor="middle">veškeré státní moci</text>
+        <rect class="sloup" x="10" y="70" width="108" height="150" rx="6"/>
+        <text class="nadp" x="64" y="92" text-anchor="middle">zákonodárná</text>
+        <text class="pop" x="64" y="114" text-anchor="middle">Parlament</text>
+        <text class="pop" x="64" y="138" text-anchor="middle">Poslanecká</text>
+        <text class="pop" x="64" y="154" text-anchor="middle">sněmovna</text>
+        <text class="mal" x="64" y="170" text-anchor="middle">200 · 4 roky</text>
+        <text class="pop" x="64" y="194" text-anchor="middle">Senát</text>
+        <text class="mal" x="64" y="210" text-anchor="middle">81 · 6 let</text>
+        <rect class="sloup" x="126" y="70" width="108" height="150" rx="6"/>
+        <text class="nadp" x="180" y="92" text-anchor="middle">výkonná</text>
+        <text class="pop" x="180" y="114" text-anchor="middle">prezident</text>
+        <text class="mal" x="180" y="130" text-anchor="middle">přímá volba</text>
+        <text class="mal" x="180" y="146" text-anchor="middle">5 let</text>
+        <text class="pop" x="180" y="170" text-anchor="middle">vláda</text>
+        <text class="mal" x="180" y="186" text-anchor="middle">odpovídá</text>
+        <text class="mal" x="180" y="202" text-anchor="middle">Sněmovně</text>
+        <rect class="sloup" x="242" y="70" width="108" height="150" rx="6"/>
+        <text class="nadp" x="296" y="92" text-anchor="middle">soudní</text>
+        <text class="pop" x="296" y="114" text-anchor="middle">nezávislé</text>
+        <text class="pop" x="296" y="130" text-anchor="middle">soudy</text>
+        <text class="pop" x="296" y="162" text-anchor="middle">Ústavní soud</text>
+        <text class="mal" x="296" y="178" text-anchor="middle">15 soudců</text>
+        <text class="mal" x="296" y="194" text-anchor="middle">10 let</text>
+        <rect class="zaklad" x="6" y="226" width="348" height="40" rx="6"/>
+        <text class="pop" x="180" y="243" text-anchor="middle">Ústava ČR</text>
+        <text class="pop" x="180" y="259" text-anchor="middle">+ Listina základních práv a svobod</text>
+        </svg>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Zákonodárná moc</h3><p><b>Parlament</b> má dvě komory: <b>Poslaneckou sněmovnu</b> (200 poslanců na 4 roky) a <b>Senát</b> (81 senátorů na 6 let, každé 2 roky se volí třetina).</p></article>
+        <article class="vyklad-karta"><h3>Výkonná moc</h3><p><b>Prezident</b> je hlava státu, volí ho přímo občané na 5 let. <b>Vláda</b> je nejvyšší orgán výkonné moci a odpovídá Sněmovně.</p></article>
+        <article class="vyklad-karta"><h3>Soudní moc</h3><p><b>Nezávislé soudy</b> rozhodují spory a o vině. <b>Ústavní soud</b> chrání ústavnost – může zrušit zákon, který odporuje Ústavě.</p></article>
+      </div>
+      <p><b>Volby</b> se konají tajným hlasováním na základě <b>všeobecného, rovného a přímého</b> volebního práva.
+        Volit může občan od <b>18 let</b>, do Sněmovny kandidovat od <b>21</b>, do Senátu a na prezidenta od <b>40 let</b>.
+        Volit je právo, ne povinnost. Lid může rozhodovat i přímo v <b>referendu</b> – celostátní se zatím konalo
+        jen jednou, v roce 2003 o vstupu do EU. Základní práva jsou podle Listiny nezadatelná a nezrušitelná;
+        chrání je soudy, Ústavní soud a veřejný ochránce práv.</p>
+      <aside class="zapamatuj">Tři moci: zákonodárná (Parlament), výkonná (prezident, vláda), soudní (soudy). Věky: volit 18, Sněmovna 21, Senát i prezident 40.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: jak vzniká zákon</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Vláda chce zavést nový zákon. Kudy musí projít, než začne platit?</p>
+      <ol class="kroky">
+        <li><b>Návrh:</b> zákon může navrhnout poslanec, skupina poslanců, Senát, vláda nebo zastupitelstvo kraje. Tady ho předloží vláda <b>Poslanecké sněmovně</b>.</li>
+        <li><b>Sněmovna</b> návrh projedná a schválí.</li>
+        <li><b>Senát</b> má na projednání 30 dní: zákon schválí, zamítne, nebo vrátí se změnami. Když se nevyjádří, platí, že je schválen. Zamítnutí může Sněmovna přehlasovat.</li>
+        <li><b>Prezident</b> může zákon do 15 dnů podepsat, nebo vrátit (veto). Sněmovna veto přehlasuje, když pro zákon hlasuje nadpoloviční většina všech poslanců – aspoň 101.</li>
+        <li>Zákon se <b>vyhlásí ve Sbírce zákonů</b> a od stanoveného dne je účinný – musí se jím řídit všichni.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Návrh → Poslanecká sněmovna → Senát → prezident → Sbírka zákonů.</p>
+    </div>
+  </details>
+
+  <div class="rezimy" id="rezimy">
+    <button data-rezim="moc" class="active">🏛️ Která moc?</button>
+    <button data-rezim="volby">🗳️ Volby – pravda, nebo ne?</button>
+    <button data-rezim="prava">📜 Práva a povinnosti</button>
+    <button data-rezim="cisla">🔢 Čísla a věky</button>
+  </div>
+
+  <div class="plocha" id="plocha"></div>
+
+  <div class="ovladani">
+    <button class="hlavni" id="btnDalsi">Přeskočit →</button>
+    <span class="skore" id="skore"></span>
+  </div>
+
+  <p class="napoveda">
+    <b>Ústava ČR</b> (od 1. 1. 1993) + <b>Listina základních práv a svobod</b>. Lid je zdrojem státní moci.
+    <b>Zákonodárná</b>: Parlament = Poslanecká sněmovna (200 poslanců, 4 roky, poměrný systém) + Senát (81 senátorů, 6 let, třetina každé 2 roky, většinový systém).
+    <b>Výkonná</b>: prezident (přímá volba, 5 let, nejvýše dvakrát za sebou), vláda (odpovídá Sněmovně).
+    <b>Soudní</b>: nezávislé soudy, Ústavní soud (15 soudců, 10 let).
+    Volby: všeobecné, rovné, přímé, tajné. Volit od 18, Sněmovna od 21, Senát a prezident od 40.
+    Ústavní zákon: 3/5 všech poslanců (120) a 3/5 přítomných senátorů.
+    Navazuje na <a href="vo6_obec_kraj_stat.html">Obec, kraj, stát</a> a <a href="eu_instituce.html">Instituce EU</a>.
+  </p>
+
+<script>
+const $ = id => document.getElementById(id);
+const skore = Uloha.skore('metodus_vo8_ustava_volby', $('skore'));
+let rezim = 'moc';
+const velke = t => t.charAt(0).toUpperCase() + t.slice(1);
+
+/* ---- Která moc? -------------------------------------------------------------- */
+const MOCI = {
+  zak: { ikona: '📜', popis: 'zákonodárná', dela: 'Zákonodárná moc (Parlament – Sněmovna a Senát) tvoří a schvaluje zákony.' },
+  vyk: { ikona: '🏛️', popis: 'výkonná', dela: 'Výkonná moc (prezident, vláda, ministerstva) řídí stát a provádí zákony.' },
+  soud: { ikona: '⚖️', popis: 'soudní', dela: 'Soudní moc (nezávislé soudy, Ústavní soud) rozhoduje spory, o vině a o souladu zákonů s Ústavou.' },
+};
+const MOC_POLOZKY = [
+  { k: 'zak', t: 'Poslanecká sněmovna', p: 'Sněmovna je komora Parlamentu.' },
+  { k: 'zak', t: 'Senát', p: 'Senát je druhá komora Parlamentu.' },
+  { k: 'zak', t: 'poslanec', p: 'Poslanec je členem Poslanecké sněmovny.' },
+  { k: 'zak', t: 'senátor', p: 'Senátor je členem Senátu.' },
+  { k: 'zak', t: 'schvaluje zákon o státním rozpočtu', p: 'Státní rozpočet schvaluje zákonem Poslanecká sněmovna.' },
+  { k: 'zak', t: 'může vyslovit vládě nedůvěru', p: 'Nedůvěru vládě vyslovuje Poslanecká sněmovna.' },
+  { k: 'vyk', t: 'prezident republiky', p: 'Ústava řadí prezidenta do hlavy o moci výkonné.' },
+  { k: 'vyk', t: 'vláda', p: 'Vláda je podle Ústavy nejvyšší orgán výkonné moci.' },
+  { k: 'vyk', t: 'předseda vlády', p: 'Předseda vlády stojí v čele vlády.' },
+  { k: 'vyk', t: 'ministerstvo zdravotnictví', p: 'Ministerstva řídí stát v jednotlivých oblastech a patří k výkonné moci.' },
+  { k: 'vyk', t: 'jmenuje předsedu vlády', p: 'Předsedu vlády jmenuje prezident republiky.' },
+  { k: 'vyk', t: 'řídí ministerstva a provádí zákony', p: 'To dělá vláda.' },
+  { k: 'soud', t: 'Ústavní soud', p: 'Ústavní soud je soudní orgán ochrany ústavnosti.' },
+  { k: 'soud', t: 'Nejvyšší soud', p: 'Nejvyšší soud je součástí soustavy soudů.' },
+  { k: 'soud', t: 'okresní soud', p: 'Okresní soud je součástí soustavy soudů.' },
+  { k: 'soud', t: 'zruší zákon, který odporuje Ústavě', p: 'To může udělat Ústavní soud.' },
+  { k: 'soud', t: 'rozhodne, zda obžalovaný spáchal trestný čin', p: 'O vině a trestu rozhoduje jen soud.' },
+  { k: 'soud', t: 'rozhodne spor dvou sousedů o hranici pozemku', p: 'Spory mezi lidmi rozhodují soudy.' },
+];
+const INSTITUCE = [
+  { n: 'Poslanecká sněmovna', d: 'má 200 členů volených na 4 roky a může vyslovit vládě nedůvěru' },
+  { n: 'Senát', d: 'má 81 členů volených na 6 let; každé 2 roky se volí třetina' },
+  { n: 'prezident republiky', d: 'hlava státu volená přímo na 5 let; jmenuje předsedu vlády' },
+  { n: 'vláda', d: 'nejvyšší orgán výkonné moci; tvoří ji předseda, místopředsedové a ministři' },
+  { n: 'Ústavní soud', d: 'má 15 soudců jmenovaných na 10 let; chrání ústavnost a může zrušit zákon' },
+  { n: 'Nejvyšší soud', d: 'vrcholný soud v občanských a trestních věcech' },
+];
+
+function moc() {
+  const chyby = {};
+  if (Math.random() < 0.65) {
+    const q = Uloha.nahodne(MOC_POLOZKY);
+    for (const k of Object.keys(MOCI)) if (k !== q.k) chyby[k] = `Ne. ${MOCI[k].dela} ${q.p}`;
+    return {
+      druh: '🏛️ Do které moci patří?', text: velke(q.t), trida: '',
+      moznosti: Object.keys(MOCI).map(k => ({ klic: k, ikona: MOCI[k].ikona, popis: MOCI[k].popis })),
+      spravny: q.k, ok: `✅ Moc ${MOCI[q.k].popis}. ${q.p}`, chyby,
+    };
+  }
+  const i = Uloha.nahodne(INSTITUCE);
+  const jine = Uloha.zamichej(INSTITUCE.filter(x => x !== i)).slice(0, 3);
+  jine.forEach(x => { chyby[x.n] = `Ne – ${x.n}: ${x.d}.`; });
+  return {
+    druh: '🏛️ O kom to platí?', text: velke(i.d) + '.',
+    moznosti: Uloha.zamichej([i, ...jine]).map(x => ({ klic: x.n, popis: velke(x.n) })),
+    spravny: i.n, ok: `✅ ${velke(i.n)} – ${i.d}.`, chyby,
+  };
+}
+
+/* ---- Volby – pravda, nebo ne? -------------------------------------------------- */
+const roky = n => Uloha.tvar(n, 'rok', 'roky', 'let');
+const PEVNE = [
+  { t: 'Volby do Poslanecké sněmovny jsou tajné – nikdo nesmí vidět, koho volíš.', v: true, p: 'Ústava stanoví tajné hlasování.' },
+  { t: 'Rovné volební právo znamená, že hlas každého voliče má stejnou váhu.', v: true, p: 'Rovné = každý hlas platí stejně.' },
+  { t: 'Všeobecné volební právo znamená, že volit mohou všichni dospělí občané bez ohledu na majetek, pohlaví nebo vzdělání.', v: true, p: 'Všeobecné = nikdo dospělý není vyloučen kvůli majetku, pohlaví, vzdělání či náboženství.' },
+  { t: 'V Česku je účast ve volbách povinná.', v: false, p: 'Volit je právo, ne povinnost – k volbám jít nemusíš.' },
+  { t: 'Prezidenta republiky volí od roku 2013 přímo občané.', v: true, p: 'První přímá volba prezidenta proběhla v roce 2013.' },
+  { t: 'Prezidenta republiky dnes volí poslanci a senátoři na společné schůzi.', v: false, p: 'Parlament volil prezidenta naposledy v roce 2008; od roku 2013 ho volí přímo občané.' },
+  { t: 'Prezident může být zvolen nejvýše dvakrát za sebou.', v: true, p: 'Ústava: nikdo nemůže být zvolen více než dvakrát za sebou.' },
+  { t: 'Všech 81 senátorů se volí najednou jednou za šest let.', v: false, p: 'Senátor je volen na 6 let, ale každé 2 roky se volí třetina Senátu.' },
+  { t: 'Do Poslanecké sněmovny se volí poměrným systémem – strany dostanou mandáty podle počtu hlasů.', v: true, p: 'Ústava stanoví pro Sněmovnu zásadu poměrného zastoupení.' },
+  { t: 'Do Senátu se volí většinovým systémem – v každém z 81 obvodů vyhraje jeden kandidát.', v: true, p: 'Ústava stanoví pro Senát zásady většinového systému.' },
+  { t: 'Starostu obce volí občané přímo v komunálních volbách.', v: false, p: 'Občané volí zastupitelstvo obce, starostu pak zvolí zastupitelstvo ze svých členů.' },
+  { t: 'Ústava České republiky platí od 1. ledna 1993.', v: true, p: 'Ústava nabyla účinnosti dnem vzniku samostatné České republiky.' },
+  { t: 'Listinu základních práv a svobod může změnit obyčejný zákon schválený nadpoloviční většinou.', v: false, p: 'Listina je součástí ústavního pořádku; mění se jen ústavním zákonem (3/5 všech poslanců a 3/5 přítomných senátorů).' },
+  { t: 'Celostátní referendum se v Česku zatím konalo jen jednou – v roce 2003 o vstupu do Evropské unie.', v: true, p: 'Bylo vyhlášeno zvláštním ústavním zákonem jen pro tuto otázku.' },
+  { t: 'Zákon začne platit hned, jak ho schválí Poslanecká sněmovna.', v: false, p: 'Zákon projedná ještě Senát a prezident a platí až po vyhlášení ve Sbírce zákonů.' },
+  { t: 'Vláda odpovídá Poslanecké sněmovně, která jí může vyslovit nedůvěru.', v: true, p: 'Tak to stanoví Ústava.' },
+  { t: 'Soudce smí při rozhodování poslechnout pokyn ministra nebo prezidenta.', v: false, p: 'Soudci jsou při výkonu své funkce nezávislí.' },
+];
+const VEKY = [
+  { t: n => `Ve volbách do Poslanecké sněmovny smí volit občan, kterému je ${roky(n)}.`, hr: 18, n: [15, 16, 17, 18, 19, 25], p: 'Volit může občan, který dosáhl 18 let.' },
+  { t: n => `Do Poslanecké sněmovny může být zvolen občan, kterému je ${roky(n)}.`, hr: 21, n: [18, 19, 20, 21, 25, 30], p: 'Do Sněmovny může být zvolen občan od 21 let.' },
+  { t: n => `Do Senátu může být zvolen občan, kterému je ${roky(n)}.`, hr: 40, n: [21, 30, 35, 39, 40, 45, 60], p: 'Do Senátu může být zvolen občan od 40 let.' },
+  { t: n => `Prezidentem může být zvolen občan, kterému je ${roky(n)}.`, hr: 40, n: [30, 35, 39, 40, 50, 65], p: 'Prezidentem může být zvolen občan od 40 let.' },
+];
+const OBDOBI = [
+  { t: n => `Poslanci jsou voleni na ${roky(n)}.`, s: 4, n: [3, 4, 5, 6], p: 'Volební období Sněmovny jsou 4 roky.' },
+  { t: n => `Senátor je volen na ${roky(n)}.`, s: 6, n: [4, 5, 6, 8], p: 'Senátor je volen na 6 let.' },
+  { t: n => `Prezident je volen na ${roky(n)}.`, s: 5, n: [4, 5, 6, 7], p: 'Prezident je volen na 5 let.' },
+  { t: n => `Poslanecká sněmovna má ${n} poslanců.`, s: 200, n: [81, 150, 200, 300], p: 'Sněmovna má 200 poslanců.' },
+  { t: n => `Senát má ${n} senátorů.`, s: 81, n: [61, 81, 100, 200], p: 'Senát má 81 senátorů.' },
+];
+
+function volby() {
+  const r = Math.random();
+  let t, v, p;
+  if (r < 0.45) { const q = Uloha.nahodne(PEVNE); t = q.t; v = q.v; p = q.p; }
+  else if (r < 0.75) { const q = Uloha.nahodne(VEKY); const n = Uloha.nahodne(q.n); t = q.t(n); v = n >= q.hr; p = q.p; }
+  else { const q = Uloha.nahodne(OBDOBI); const n = Uloha.nahodne(q.n); t = q.t(n); v = n === q.s; p = q.p; }
+  const spravny = v ? 'ano' : 'ne';
+  return {
+    druh: '🗳️ Pravda, nebo ne?', text: t, trida: 'dve',
+    moznosti: [{ klic: 'ano', ikona: '✅', popis: 'pravda' }, { klic: 'ne', ikona: '❌', popis: 'nepravda' }],
+    spravny, ok: `✅ ${v ? 'Pravda' : 'Nepravda'}. ${p}`,
+    chyby: { [v ? 'ne' : 'ano']: `Ne – to tvrzení je ${v ? 'pravdivé' : 'nepravdivé'}. ${p}` },
+  };
+}
+
+/* ---- Práva a povinnosti -------------------------------------------------------- */
+const PRAVO_POVINNOST = [
+  { k: 'pravo', t: 'volit ve volbách do Poslanecké sněmovny', p: 'Volební právo je politické právo – k volbám jít nemusíš.' },
+  { k: 'pravo', t: 'svobodně vyjádřit svůj názor', p: 'Svoboda projevu je zaručena Listinou.' },
+  { k: 'pravo', t: 'podat petici', p: 'Petiční právo zaručuje Listina – můžeš, ale nemusíš.' },
+  { k: 'pravo', t: 'svobodně si zvolit povolání', p: 'Svobodná volba povolání je hospodářské právo.' },
+  { k: 'pravo', t: 'sdružovat se ve spolcích', p: 'Sdružovací právo zaručuje Listina.' },
+  { k: 'pravo', t: 'vyznávat náboženství, nebo být bez vyznání', p: 'Svoboda myšlení, svědomí a náboženského vyznání je základní svoboda.' },
+  { k: 'pravo', t: 'studovat na střední škole', p: 'Právo na vzdělání zaručuje Listina; střední škola povinná není.' },
+  { k: 'povinnost', t: 'chodit do školy po dobu povinné školní docházky', p: 'Listina říká, že školní docházka je povinná po dobu, kterou stanoví zákon.' },
+  { k: 'povinnost', t: 'platit daně podle zákona', p: 'Daně a poplatky stanoví zákon a platit se musí.' },
+  { k: 'povinnost', t: 'mít od 15 let občanský průkaz', p: 'Občan starší 15 let s trvalým pobytem v Česku musí mít občanský průkaz.' },
+  { k: 'povinnost', t: 'dodržovat zákony', p: 'Zákony platí pro všechny.' },
+  { k: 'povinnost', t: 'pomoci zraněnému (aspoň zavolat 155), když tím neohrozíš sebe ani jiné', p: 'Neposkytnutí pomoci je podle trestního zákoníku trestný čin.' },
+];
+const PP = {
+  pravo: { ikona: '🙋', popis: 'právo', dela: 'Právo můžeš využít, ale nikdo tě k tomu nenutí.' },
+  povinnost: { ikona: '📌', popis: 'povinnost', dela: 'Povinnost stanoví zákon a musíš ji splnit.' },
+};
+const SKUPINY = {
+  zakl: { popis: 'základní lidská práva a svobody', dela: 'Základní lidská práva a svobody chrání život, svobodu, soukromí a majetek člověka (čl. 5–16 Listiny).' },
+  pol: { popis: 'politická práva', dela: 'Politická práva umožňují podílet se na veřejném životě: projev, informace, petice, shromažďování, sdružování, volby (čl. 17–23).' },
+  hsk: { popis: 'hospodářská, sociální a kulturní práva', dela: 'Hospodářská, sociální a kulturní práva se týkají práce, vzdělání, zdraví, rodiny a životního prostředí (čl. 26–35).' },
+  soud: { popis: 'právo na soudní a jinou právní ochranu', dela: 'Právo na soudní ochranu zaručuje spravedlivý proces (čl. 36–40).' },
+};
+const PRAVA = [
+  { k: 'zakl', t: 'právo na život' }, { k: 'zakl', t: 'nedotknutelnost obydlí' }, { k: 'zakl', t: 'listovní tajemství' },
+  { k: 'zakl', t: 'svoboda pohybu a pobytu' }, { k: 'zakl', t: 'právo vlastnit majetek' }, { k: 'zakl', t: 'zákaz mučení' },
+  { k: 'pol', t: 'svoboda projevu a právo na informace' }, { k: 'pol', t: 'petiční právo' }, { k: 'pol', t: 'právo pokojně se shromažďovat' },
+  { k: 'pol', t: 'právo sdružovat se ve spolcích' }, { k: 'pol', t: 'právo volit a být volen' },
+  { k: 'hsk', t: 'svobodná volba povolání' }, { k: 'hsk', t: 'právo na vzdělání' }, { k: 'hsk', t: 'právo na ochranu zdraví' },
+  { k: 'hsk', t: 'právo na příznivé životní prostředí' }, { k: 'hsk', t: 'právo na stávku' },
+  { k: 'soud', t: 'právo na obhájce' }, { k: 'soud', t: 'presumpce neviny – dokud tě soud neodsoudí, hledí se na tebe jako na nevinného' },
+  { k: 'soud', t: 'právo domáhat se svého práva u nezávislého soudu' }, { k: 'soud', t: 'právo na tlumočníka, když nerozumíš jazyku jednání' },
+];
+const OCHRANA = {
+  policie: { ikona: '👮', popis: 'policie', dela: 'Policie vyšetřuje trestné činy a chrání bezpečnost lidí.' },
+  soud: { ikona: '⚖️', popis: 'soud', dela: 'Soud rozhoduje spory mezi lidmi a o vině a trestu.' },
+  us: { ikona: '🏛️', popis: 'Ústavní soud', dela: 'Ústavní stížnost k Ústavnímu soudu se podává až po vyčerpání ostatních cest, když bylo porušeno základní právo.' },
+  ombudsman: { ikona: '🧑‍⚖️', popis: 'veřejný ochránce práv', dela: 'Veřejný ochránce práv (ombudsman) prošetřuje, když úřad postupuje nesprávně nebo nečinně.' },
+};
+const SITUACE_OCHRANA = [
+  { k: 'policie', t: 'Někdo ti ukradl mobil z šatny.' },
+  { k: 'policie', t: 'Viděl jsi, jak někdo úmyslně rozbíjí auta na parkovišti.' },
+  { k: 'soud', t: 'Soused ti nechce vrátit půjčené peníze a dohoda nejde.' },
+  { k: 'soud', t: 'Firma ti nevyplatila mzdu za brigádu a nereaguje na výzvy.' },
+  { k: 'us', t: 'Prošel jsi všemi soudy a myslíš si, že konečný rozsudek porušil tvé základní právo.' },
+  { k: 'ombudsman', t: 'Úřad už půl roku nevyřizuje tvou žádost a neodpovídá na urgence.' },
+];
+
+function prava() {
+  const r = Math.random();
+  const chyby = {};
+  if (r < 0.4) {
+    const q = Uloha.nahodne(PRAVO_POVINNOST);
+    const jiny = q.k === 'pravo' ? 'povinnost' : 'pravo';
+    chyby[jiny] = `Ne – „${q.t}“ je ${PP[q.k].popis}. ${PP[q.k].dela} ${q.p}`;
+    return {
+      druh: '📜 Právo, nebo povinnost?', text: velke(q.t), trida: 'dve',
+      moznosti: Object.keys(PP).map(k => ({ klic: k, ikona: PP[k].ikona, popis: PP[k].popis })),
+      spravny: q.k, ok: `✅ ${velke(PP[q.k].popis)}. ${q.p}`, chyby,
+    };
+  }
+  if (r < 0.75) {
+    const q = Uloha.nahodne(PRAVA);
+    for (const k of Object.keys(SKUPINY)) if (k !== q.k) chyby[k] = `Ne. ${SKUPINY[k].dela} „${velke(q.t)}“ patří mezi ${SKUPINY[q.k].popis}.`;
+    return {
+      druh: '📜 Do které skupiny práv v Listině patří?', text: velke(q.t), trida: '',
+      moznosti: Object.keys(SKUPINY).map(k => ({ klic: k, popis: SKUPINY[k].popis })),
+      spravny: q.k, ok: `✅ ${velke(SKUPINY[q.k].popis)}. ${SKUPINY[q.k].dela}`, chyby,
+    };
+  }
+  const q = Uloha.nahodne(SITUACE_OCHRANA);
+  for (const k of Object.keys(OCHRANA)) if (k !== q.k) chyby[k] = `Ne. ${OCHRANA[k].dela} Tady pomůže ${OCHRANA[q.k].popis}.`;
+  return {
+    druh: '📜 Kam se obrátíš?', text: q.t, trida: '',
+    moznosti: Object.keys(OCHRANA).map(k => ({ klic: k, ikona: OCHRANA[k].ikona, popis: OCHRANA[k].popis })),
+    spravny: q.k, ok: `✅ ${velke(OCHRANA[q.k].popis)}. ${OCHRANA[q.k].dela}`, chyby,
+  };
+}
+
+/* ---- Čísla a věky ---------------------------------------------------------------- */
+const CISLA = {
+  pocet: {
+    jednotka: n => Uloha.cislo(n),
+    fakta: { 200: 'tolik poslanců má Poslanecká sněmovna', 81: 'tolik senátorů má Senát', 15: 'tolik soudců má Ústavní soud',
+      14: 'tolik krajů má Česko (včetně Prahy)', 101: 'tolik poslanců stačí k přehlasování prezidentova veta (nadpoloviční většina všech)',
+      120: 'tolik poslanců (3/5 ze 200) musí hlasovat pro ústavní zákon' },
+    otazky: [
+      { t: 'Kolik poslanců má Poslanecká sněmovna?', s: 200 },
+      { t: 'Kolik senátorů má Senát?', s: 81 },
+      { t: 'Kolik soudců má Ústavní soud?', s: 15 },
+      { t: 'Kolik krajů má Česko (včetně hlavního města Prahy)?', s: 14 },
+      { t: 'Kolik poslanců nejméně musí hlasovat pro zákon, aby Sněmovna přehlasovala prezidentovo veto?', s: 101 },
+      { t: 'Kolik poslanců nejméně musí hlasovat pro ústavní zákon?', s: 120 },
+    ],
+  },
+  roky: {
+    jednotka: n => roky(n),
+    fakta: { 4: 'na 4 roky se volí Poslanecká sněmovna', 6: 'na 6 let je volen senátor', 5: 'na 5 let je volen prezident',
+      10: 'na 10 let je jmenován soudce Ústavního soudu', 2: 'po 2 letech se volí třetina senátorů' },
+    otazky: [
+      { t: 'Na kolik let se volí Poslanecká sněmovna?', s: 4 },
+      { t: 'Na kolik let je volen senátor?', s: 6 },
+      { t: 'Na kolik let je volen prezident republiky?', s: 5 },
+      { t: 'Na kolik let je jmenován soudce Ústavního soudu?', s: 10 },
+      { t: 'Po kolika letech se volí vždy třetina senátorů?', s: 2 },
+    ],
+  },
+  vek: {
+    jednotka: n => roky(n),
+    fakta: { 18: 'od 18 let smí občan volit', 21: 'od 21 let může být občan zvolen do Poslanecké sněmovny',
+      40: 'od 40 let může být občan zvolen do Senátu i prezidentem', 15: 'od 15 let je člověk trestně odpovědný a občan s trvalým pobytem v Česku musí mít občanský průkaz' },
+    otazky: [
+      { t: 'Od kolika let smí občan volit do Poslanecké sněmovny?', s: 18 },
+      { t: 'Od kolika let může být občan zvolen poslancem?', s: 21 },
+      { t: 'Od kolika let může být občan zvolen senátorem?', s: 40 },
+      { t: 'Od kolika let může být občan zvolen prezidentem?', s: 40 },
+    ],
+  },
+};
+
+function cisla() {
+  const skupina = CISLA[Uloha.nahodne(Object.keys(CISLA))];
+  const q = Uloha.nahodne(skupina.otazky);
+  const hodnoty = Object.keys(skupina.fakta).map(Number).filter(n => n !== q.s);
+  const jine = Uloha.zamichej(hodnoty).slice(0, 3);
+  const chyby = {};
+  jine.forEach(n => { chyby[String(n)] = `Ne – ${skupina.jednotka(n)}: ${skupina.fakta[n]}.`; });
+  return {
+    druh: '🔢 Čísla a věky', text: q.t, trida: 'velke',
+    moznosti: Uloha.zamichej([q.s, ...jine]).map(n => ({ klic: String(n), popis: skupina.jednotka(n) })),
+    spravny: String(q.s), ok: `✅ ${skupina.jednotka(q.s)}: ${skupina.fakta[q.s]}.`, chyby,
+  };
+}
+
+const GENERATORY = { moc, volby, prava, cisla };
+
+/* ---- zobrazení ------------------------------------------------------------------ */
+function poloz(q) {
+  const p = $('plocha');
+  p.innerHTML = `<div class="karta"><span class="druh">${q.druh}</span><div class="situace">${q.text}</div></div>`;
+  const odezva = document.createElement('div');
+  odezva.className = 'odezva';
+  Uloha.vyber({
+    kam: p, odezva, trida: q.trida,
+    moznosti: q.moznosti, spravnyKlic: q.spravny,
+    zpravaOk: q.ok, zpravaChyba: k => q.chyby[k] || 'Ještě ne – zkus jinou možnost.',
+    poSpravne: skore.vyhodnot, dalsi: novaUloha,
+    prodleva: napoprve => napoprve ? 2000 : 3500,
+  });
+  p.appendChild(odezva);
+}
+function novaUloha() { poloz(GENERATORY[rezim]()); }
+
+document.querySelectorAll('#rezimy button').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('#rezimy button').forEach(x => x.classList.remove('active'));
+  b.classList.add('active');
+  rezim = b.dataset.rezim;
+  novaUloha();
+}));
+$('btnDalsi').addEventListener('click', novaUloha);
+document.addEventListener('keydown', e => {
+  if (e.target.closest && e.target.closest('details, a, input, textarea')) return;
+  if (e.key === 'ArrowRight' || e.key === 'Enter') { e.preventDefault(); novaUloha(); }
+});
+novaUloha();
+</script>
+</body>
+</html>

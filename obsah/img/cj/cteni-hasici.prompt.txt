@@ -1,0 +1,6 @@
+Sada: IMG-cj-10 · text „Hasiči pomáhají“
+Scéna: Dva hasiči stojí připraveni před červeným hasičským autem u stanice; bez tísňového čísla, požáru, nehody, povodně a zachraňování.
+Styl: teplý akvarel a kvaš, jemná linka, slonovinový papír, tlumená šalvějová, jadeitová, okrová a červená.
+Omezení: bez písmen, slov, popisků, čísel, loga, vodoznaku a rámečku.
+Alt: Dva hasiči stojí před hasičským autem.
+Generátor: OpenAI image_gen · 2026-09-24

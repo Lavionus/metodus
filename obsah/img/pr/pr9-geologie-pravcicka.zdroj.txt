@@ -1,0 +1,8 @@
+Sada: IMG-pr-19
+Soubor: pr9-geologie-pravcicka
+Popis: Pravčická brána, pískovcový skalní oblouk vytvořený zvětráváním a erozí.
+Autor: ŠJů / Wikimedia Commons
+Zdroj: https://commons.wikimedia.org/wiki/File:Prav%C4%8Dick%C3%A1_br%C3%A1na_(02).jpg
+Licence: CC BY 4.0
+Staženo: 2026-10-19
+Úpravy: automatická orientace, odstranění metadat, PNG do 1600 px; WebP 1152 px q74

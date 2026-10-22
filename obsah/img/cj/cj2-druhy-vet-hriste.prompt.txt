@@ -1,0 +1,9 @@
+Use case: scientific-educational
+Asset type: IMG-cj-05, situation card for a Czech elementary lesson about sentence types
+Scene: two school-age children with a ball on a neighborhood playground; one gestures toward the ball and the other responds.
+Style: warm watercolor and gouache educational picture-book illustration with delicate ink, muted sage, jade, ochre and brick palette.
+Composition: square, medium-wide, clear empty space in the upper third for an HTML speech bubble.
+Constraints: no bubble, text, letters, digits, labels, logo, watermark or border; natural hands; age-appropriate.
+Alt: Dvě děti s míčem na hřišti.
+Generator: built-in image_gen
+Datum: 2026-09-23

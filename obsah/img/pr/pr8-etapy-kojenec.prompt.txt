@@ -1,0 +1,5 @@
+Use case: scientific-educational. Square classroom atlas card, stage 2 of a human life-stage series between newborn and toddler. Same watercolor style, family resemblance and muted teal-cream-rust palette as the references. Show one healthy infant about eight months old, entire body visible, sitting upright unsupported on the ground with a happy expression, chestnut hair, wearing a soft cream romper. Warm ivory paper background and soft shadow. Refined watercolor and gouache with delicate ink contours, centered with 12% margins. No adult, toys, furniture, text, letters, numbers, labels, arrows, frame, logo, or watermark.
+
+Alt: Kojenec asi v osmi měsících sedí sám na zemi a usmívá se.
+Generator: Codex CLI (vestavěný ImageGen)
+Datum: 2026-10-22

@@ -1,0 +1,6 @@
+Sada: IMG-cj-10 · text „Vlaštovky“
+Scéna: Hejno vlaštovek se shromažďuje na drátech nad krajinou na konci léta; bez mapy, Afriky, sněhu, hmyzu, hnízda a šipek.
+Styl: teplý akvarel a kvaš, jemná linka, slonovinový papír, tlumená šalvějová, jadeitová, okrová a modrá.
+Omezení: bez písmen, slov, popisků, čísel, loga, vodoznaku a rámečku.
+Alt: Vlaštovky se na konci léta slétají na drátech.
+Generátor: OpenAI image_gen · 2026-09-24

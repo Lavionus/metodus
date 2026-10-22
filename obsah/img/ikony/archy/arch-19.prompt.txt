@@ -1,0 +1,19 @@
+Vygeneruj jeden obrázek a ulož ho jako arch-19.png do aktuální složky.
+
+Asset: icon sprite sheet for the Metodus Czech educational website. Match the painting style of vzor-styl.png and arch-01.png in this folder (watercolor and gouache with fine dark ink outlines, warm ivory paper #faf6ec, muted sage / jade / ochre / brick / slate-blue palette, soft daylight from upper left), SIMPLIFIED FOR SMALL ICONS exactly like arch-01.png: one bold, chunky object or tight group per icon, strong clear silhouette, slightly thicker ink outline, few details, flat even ivory background, readable when shrunk to 24 px.
+
+Layout (very important): square 1:1 image, an exact 3 × 3 grid of 9 equal invisible cells, 3 rows and 3 columns, read left to right, top to bottom. Each icon is centered in its own cell and fills about 70 % of the cell, with clear empty ivory space between icons; nothing may cross into a neighbouring cell. No grid lines, no frames, no borders, no text, no words, no labels, no watermark. Single letters, digits or math symbols only where the description asks for them.
+
+Icons in order:
+1. A small house with a chimney (home).
+2. A folded curriculum map with a route path and a flag.
+3. A theater stage curtain opening with a sparkle.
+4. A brass gear cog with a small wrench.
+5. A planner notebook with a pencil and a clock.
+6. A classroom projector beaming light.
+7. A window frame with an arrow pointing out of it.
+8. A folded paper map with a small scale bar ruler on it, all paper parts clearly outlined in ink.
+9. A shiny gold five-pointed star.
+
+Id: prehled osnova predstaveni nastaveni priprava_hodiny projektor nove_okno m7_pomer oblibene
+Generator: Codex CLI (vestavěný ImageGen)

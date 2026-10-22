@@ -1,0 +1,8 @@
+Soubor: d9-valka1-horsky-zakop.png / d9-valka1-horsky-zakop.webp
+Původní dílo: Schützengraben am Campigoletti (BildID 15627396).jpg
+Autor: K.u.k. Kriegspressequartier, Lichtbildstelle - Wien
+Datum vzniku: 8 June 1917date QS:P571,+1917-06-08T00:00:00Z/11
+Zdroj: https://commons.wikimedia.org/wiki/File:Sch%C3%BCtzengraben_am_Campigoletti_(BildID_15627396).jpg
+Licence: Public domain
+Staženo: 2026-10-21
+Úpravy: automatické natočení, odstranění metadat, zmenšení na nejvýše 1600 px; výuková WebP kopie 1152 px.

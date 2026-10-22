@@ -1,0 +1,76 @@
+/* Noční škola: zelená školní tabule, text v barvě bílé křídy a žlutá křída
+   jako akcent. Tón motivu je tmavý (theme.js nastaví data-tone="dark"),
+   stránky počítající s tmavým motivem fungují beze změny. Písmo motiv nemění.
+   Textura je procedurální (obsah/textures/tabule-krida.py) – neutrální šedá
+   kolem 50 %, v režimu overlay prokreslí do barvy plochy setřené šmouhy
+   a zrno břidlice; na záměrně tmavých simulacích (vesmír) téměř zmizí.
+   Kontrasty (WCAG) na panelu #244236: text 9,6 : 1, tlumený 7,6 : 1,
+   nejslabší 5,5 : 1, akcent 7,4 : 1; tmavý inkoust na žluté 10,1 : 1. */
+
+:root[data-theme="nocni-skola"] {
+  color-scheme: dark;
+  --bg: #1f3a2f;
+  --bg-deep: #1a3128;
+  --bg-panel: #244236;
+  --bg-elevated: #2a4a3d;
+  --bg-control: #335648;
+  --bg-input: #1c342a;
+  --bg-hover: #3d6453;
+  --text: #eef1e8;
+  --text-muted: #cfdacd;
+  --text-faint: #a9bcaa;
+  --border: #3e5f50;
+  --border-strong: #56796a;
+  --accent: #f0d264;
+  --accent-soft: rgba(240, 210, 100, .15);
+  --accent-hover: #f7e08f;
+  --na-akcentu: #1a2a22;     /* žlutá křída je světlá – text na ní tmavý */
+  --ok: #9ad8a4;
+  --warn: #f3bd6a;
+  --danger: #ffa596;
+  --ok-text: #9ad8a4;
+  --danger-text: #ffa596;
+  --zvyraz-text: #f3bd6a;
+  --shadow: 0 2px 12px rgba(0, 0, 0, .45);
+  /* Starší samostatné simulace mají jiná jména palety. */
+  --bg-dark: var(--bg-deep);
+  --panel: var(--bg-panel);
+  --surface: var(--bg-panel);
+  --surface2: var(--bg-elevated);
+  --muted: var(--text-muted);
+  --accent2: #9ad8a4;
+  --tabule-textura: url('obsah/textures/tabule-krida.webp');
+}
+
+:root[data-theme="nocni-skola"] body {
+  background-image: var(--tabule-textura);
+  background-size: 512px 512px;
+  background-repeat: repeat;
+  background-blend-mode: overlay;
+}
+
+/* Tabule i na plochách s vlastní barvou pozadí (na průhledném prvku by zůstala
+   šedá kresba bez barvy). */
+:root[data-theme="nocni-skola"] :where(
+  select, dialog, .card, .karta, .panel, .kostra-hlavicka
+) {
+  background-image: var(--tabule-textura);
+  background-size: 512px 512px;
+  background-repeat: repeat;
+  background-blend-mode: overlay;
+}
+
+:root[data-theme="nocni-skola"] :where(button, input, select, textarea) { accent-color: var(--accent); }
+:root[data-theme="nocni-skola"] :where(a,button,input,select,textarea,summary):focus-visible {
+  outline-color: var(--accent);
+}
+:root[data-theme="nocni-skola"] ::selection { background: #56796a; color: #fffbe8; }
+
+@media print {
+  :root[data-theme="nocni-skola"] body,
+  :root[data-theme="nocni-skola"] body * { background-image: none !important; }
+}
+@media (forced-colors: active) {
+  :root[data-theme="nocni-skola"] body,
+  :root[data-theme="nocni-skola"] body * { background-image: none !important; }
+}

@@ -1,0 +1,8 @@
+Soubor: d8-renesance-vitruvianus.png / d8-renesance-vitruvianus.webp
+Původní dílo: Da Vinci Vitruve Luc Viatour.jpg
+Autor: Leonardo da Vinci
+Datum vzniku: circa 1492date QS:P571,+1492-00-00T00:00:00Z/9,P1480,Q5727902
+Zdroj: https://commons.wikimedia.org/wiki/File:Da_Vinci_Vitruve_Luc_Viatour.jpg
+Licence: Public domain
+Staženo: 2026-10-21
+Úpravy: automatické natočení, odstranění metadat, zmenšení na nejvýše 1600 px; výuková WebP kopie 1152 px.

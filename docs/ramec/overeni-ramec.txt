@@ -1,0 +1,35 @@
+{
+  "ok": true,
+  "katalog": {
+    "polozek": 255,
+    "rodin": 43,
+    "vRodinach": 247
+  },
+  "kostra": {
+    "stranek": 255
+  },
+  "hlavicka": {
+    "predmet": "📖 Český jazyk",
+    "cil": "🎯 Po této lekci: Určím pád podstatného jména podle otázky a přiřadím slovo ke vzoru.",
+    "faze": [
+      "vyuka",
+      "procvic",
+      "overse",
+      "tahak"
+    ],
+    "kroky": 7,
+    "zapati": 3,
+    "barva": "#e8828b",
+    "barvaCj": "#e8828b"
+  },
+  "overse": {
+    "datum": "2026-09-22",
+    "spravne": 5,
+    "celkem": 8,
+    "chyby": {
+      "otazka": 2,
+      "sklonuj": 1
+    },
+    "rezimu": 4
+  }
+}

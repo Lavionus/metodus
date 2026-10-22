@@ -1,0 +1,6 @@
+Sada: IMG-cj-10 · text „Prázdniny u babičky“
+Scéna: Dvě děti přijíždějí k babičce, která je vítá u branky venkovského domu; bez ovoce, košíků a koláče.
+Styl: teplý akvarel a kvaš, jemná linka, slonovinový papír, tlumená šalvějová, jadeitová a okrová.
+Omezení: bez písmen, slov, popisků, čísel, loga, vodoznaku a rámečku.
+Alt: Petr a Jana přijíždějí k babičce na venkov.
+Generátor: OpenAI image_gen · 2026-09-24

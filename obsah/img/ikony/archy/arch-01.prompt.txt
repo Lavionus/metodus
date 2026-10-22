@@ -1,0 +1,23 @@
+Vygeneruj jeden obrázek a ulož ho jako arch-01.png do aktuální složky.
+
+Asset: icon sprite sheet for the Metodus Czech educational website. Match the painting style of vzor-styl.png in this folder (watercolor and gouache with fine dark ink outlines, warm ivory paper #faf6ec, muted sage / jade / ochre / brick / slate-blue palette, soft daylight from upper left), but SIMPLIFIED FOR SMALL ICONS: one bold, chunky object per icon, strong clear silhouette, slightly thicker ink outline, few details, flat even ivory background, readable when shrunk to 24 px.
+
+Layout (very important): square 1:1 image, an exact 4 × 4 grid of 16 equal invisible cells, 4 rows and 4 columns, read left to right, top to bottom. Each icon is centered in its own cell and fills about 70 % of the cell, with clear empty ivory space between icons. No grid lines, no frames, no borders, no shadows reaching other cells, no text, no words, no labels, no watermark. Simple math symbols drawn as objects are allowed where listed.
+
+Icons in order:
+1. A small brass balance scale with a pile of three wooden beads in one pan and one bead in the other (comparing numbers).
+2. A wooden abacus with red and cream beads.
+3. A wooden toy block with a large multiplication cross × painted on it.
+4. Three small baskets with two red apples each and one apple left lying outside (division with remainder).
+5. A yellow pencil on a small sheet of squared paper with two stacked rows of dots under a line (written addition).
+6. A small sheet of squared paper with a long-division bracket and a short pencil.
+7. A grey stone tablet with the Roman numeral XII carved in it.
+8. A glowing light bulb with tiny plus and minus sparks (mental arithmetic).
+9. An open notebook with a big question mark and a small shopping basket beside it (word problems).
+10. A magnifying glass over dots arranged in three equal groups (divisibility).
+11. A round pizza with one slice pulled out.
+12. A wooden ruler with one big round dot in the middle, a decimal point (decimal numbers).
+13. A small vintage calculator.
+14. Two cake slices pushed together into a bigger piece (adding fractions).
+15. A folded paper map with a small scale bar ruler on it.
+16. A large percent sign % made of wood with a tiny pie chart beside it.

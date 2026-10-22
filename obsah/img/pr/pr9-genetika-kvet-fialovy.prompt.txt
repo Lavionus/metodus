@@ -1,0 +1,5 @@
+Use case: scientific-educational. Square phenotype card for genetics. Botanically recognizable garden pea stem with leaves, tendril and one clearly purple-violet pea flower (Mendel's purple-flowered pea), isolated on warm ivory paper in the same watercolor schoolbook style as the reference. No pods, text, labels, arrows, formulas, logos, watermark, border or photorealism.
+
+Alt: Stonek hrachu s listy, úponkem a jedním fialovým květem.
+Generator: Codex CLI (vestavěný ImageGen)
+Datum: 2026-10-22

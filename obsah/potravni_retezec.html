@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Potravní řetězce</title>
+  <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
+  <script src="../theme.js"></script>
+  <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
+  <script src="../rec.js"></script>
+  <script src="../uloha.js"></script>
+  <style>
+    .retezec { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 6px; margin: 4px 0 14px; }
+    .clanek { background: var(--bg-elevated); border: 1px solid var(--border-strong); border-radius: 10px; padding: 8px 12px; text-align: center; min-width: 92px; }
+    .clanek .jmeno { font-size: 1.05rem; }
+    .clanek .role { font-size: 0.72rem; color: var(--text-faint); text-transform: uppercase; letter-spacing: 0.04em; }
+    .clanek.prazdny { border-style: dashed; color: var(--text-faint); }
+    .clanek.hledany { border: 2px solid var(--accent); }
+    .clanek.zmizel { text-decoration: line-through; opacity: 0.55; border-style: dashed; }
+    .sipka { color: var(--text-faint); font-size: 1.2rem; }
+    .zadani { text-align: center; }
+  </style>
+</head>
+<body>
+  <h1>🌾 Potravní řetězce</h1>
+  <p class="podtitul">Pro 6. a 9. ročník: kdo koho jí, kudy teče energie a co se stane, když jeden článek zmizí.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Kdo koho jí a kudy teče energie</summary>
+    <div class="obsah">
+      <p>Každý organismus potřebuje energii. Rostliny ji získávají ze světla, živočichové z potravy. Když seřadíš
+        organismy podle toho, kdo koho jí, vznikne <b>potravní řetězec</b>.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Producent</h3><p>Rostlina (i řasa) si <b>vyrábí živiny fotosyntézou</b>.
+          Proto každý řetězec začíná u ní.</p></article>
+        <article class="vyklad-karta"><h3>Konzumenti</h3><p><b>1. řádu</b> jedí rostliny (býložravci), <b>2. řádu</b> jedí býložravce,
+          <b>3. řádu</b> jedí konzumenty 2. řádu. Řád určuje <b>pozice v řetězci</b>, počítáno od rostliny.</p></article>
+        <article class="vyklad-karta"><h3>Rozkladači</h3><p>Houby a bakterie rozkládají <b>odumřelé zbytky všech článků</b>
+          a vracejí živiny do půdy.</p></article>
+      </div>
+      <p><b>Šipka ukazuje tok energie</b> – od toho, kdo je sněden, k tomu, kdo jí: tráva → zajíc → liška.
+        <b>Typická chyba:</b> kreslit šipku „kdo loví koho“ (liška → zajíc). Správně šipka míří k tomu, kdo energii získá.</p>
+      <p>Články na sobě závisí. Zmizí-li jeden článek, jeho <b>kořist se může přemnožit</b> (nikdo ji nežere)
+        a jeho <b>predátorům ubude potravy</b>. Ve skutečné přírodě se řetězce proplétají do <b>potravní sítě</b>
+        a většina živočichů má víc zdrojů potravy, takže dopad bývá menší.</p>
+      <aside class="zapamatuj">Producent → konzument 1. řádu → 2. řádu → 3. řádu; šipka = tok energie k tomu, kdo jí.
+        Zmizí článek: kořist přibude, predátor ubude.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: slož řetězec a urči role</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Seřaď do řetězce: užovka, tráva, žába, kobylka. Kdo je konzument 2. řádu?
+        A co se stane s kobylkami, když zmizí žáby?</p>
+      <ol class="kroky">
+        <li>Hledám producenta – jen <b>tráva</b> si vyrobí živiny sama. Je na začátku.</li>
+        <li>Kdo jí trávu? <b>Kobylka</b> – je to býložravec, konzument 1. řádu.</li>
+        <li>Kdo jí kobylku? <b>Žába</b> → konzument 2. řádu. Žábu jí <b>užovka</b> → konzument 3. řádu.</li>
+        <li>Zapíšu řetězec se šipkami ve směru toku energie: tráva → kobylka → žába → užovka.</li>
+        <li>Zmizí-li žáby, v tomto řetězci už kobylky nikdo nežere – jejich počet nejspíš <b>vzroste</b>.</li>
+      </ol>
+      <p class="vysledek-ukazky">Tráva → kobylka → žába → užovka. Konzument 2. řádu je <b>žába</b>; bez žab kobylek <b>přibude</b>.</p>
+    </div>
+  </details>
+
+  <div class="rezimy" id="rezimy">
+    <button data-rezim="sloz" class="active">🔗 Slož řetězec</button>
+    <button data-rezim="role">🏷️ Kdo je kdo</button>
+    <button data-rezim="zmizi">❓ Co když zmizí?</button>
+  </div>
+
+  <div class="plocha" id="plocha"></div>
+
+  <div class="ovladani">
+    <button class="hlavni" id="btnDalsi">Přeskočit →</button>
+    <span class="skore" id="skore"></span>
+  </div>
+
+  <p class="napoveda">
+    Řetězec začíná <b>producentem</b> (rostlina vyrábí živiny fotosyntézou). Pak jdou <b>konzumenti</b>:
+    1. řádu jsou býložravci, 2. a 3. řádu masožravci. Šipka ukazuje <b>tok energie</b> – od toho, kdo je sněden,
+    k tomu, kdo jí (tráva → zajíc). Odumřelé zbytky všech článků rozkládají <b>rozkladači</b> (houby, bakterie).
+    Zmizí-li článek, jeho kořist se přemnoží a jeho predátorům ubude potravy. Ve skutečné <b>potravní síti</b>
+    má ale většina živočichů víc zdrojů potravy, takže dopad bývá menší.
+  </p>
+
+<script>
+const $ = id => document.getElementById(id);
+const skore = Uloha.skore('metodus_potravni_retezec', $('skore'));
+let rezim = 'sloz';
+
+/* Řetězce od producenta; každý vztah „kdo koho jí“ odpovídá skutečnosti ve střední Evropě.
+   Zápis „ikona jméno|4. pád“ – 4. pád kvůli otázce „Kdo jí zajíce?“. */
+const ZAPIS = [
+  ['🌾 obilí|obilí', '🐭 myš|myš', '🦉 sova|sovu'],
+  ['🌿 tráva|trávu', '🐇 zajíc|zajíce', '🦊 liška|lišku'],
+  ['🌿 tráva|trávu', '🦗 kobylka|kobylku', '🐸 žába|žábu', '🐍 užovka|užovku'],
+  ['🌿 bylina|bylinu', '🟢 mšice|mšici', '🐞 slunéčko|slunéčko'],
+  ['🌱 řasy|řasy', '🦐 perloočka|perloočku', '🐟 plotice|plotici', '🐟 štika|štiku'],
+  ['🥬 list|list', '🐌 slimák|slimáka', '🦔 ježek|ježka', '🦉 výr|výra'],
+  ['🌰 bukvice|bukvice', '🐿️ veverka|veverku', '🐾 kuna|kunu'],
+  ['🌾 pšenice|pšenici', '🐛 housenka|housenku', '🐦 sýkora|sýkoru', '🦅 krahujec|krahujce'],
+  ['🍃 list|list', '🦌 srnec|srnce', '🐺 vlk|vlka'],
+  ['🌿 tráva|trávu', '🐄 kráva|krávu', '🧑 člověk|člověka'],
+];
+const ROLE = ['producent', 'konzument 1. řádu', 'konzument 2. řádu', 'konzument 3. řádu'];
+const bez = s => s.replace(/^\S+\s/, '');   // „🐭 myš“ → „myš“
+const AKUZATIV = {};
+const RETEZCE = ZAPIS.map(r => r.map(x => { const [n, a] = x.split('|'); AKUZATIV[bez(n)] = a; return n; }));
+const koho = s => AKUZATIV[bez(s)] || bez(s);   // 4. pád
+
+function kresliRetezec(r, zobrazit, trida = () => '') {
+  const box = document.createElement('div');
+  box.className = 'retezec';
+  r.forEach((org, i) => {
+    if (i) box.insertAdjacentHTML('beforeend', '<span class="sipka" aria-hidden="true">→</span>');
+    const vid = zobrazit(i);
+    box.insertAdjacentHTML('beforeend', `<div class="clanek ${vid ? '' : 'prazdny'} ${trida(i)}">` +
+      `<div class="jmeno">${vid ? org : '?'}</div><div class="role">${ROLE[i]}</div></div>`);
+  });
+  box.setAttribute('aria-label', 'Řetězec: ' + r.map((o, i) => zobrazit(i) ? bez(o) : 'neznámý článek').join(', potom '));
+  return box;
+}
+
+/* ---- Slož řetězec: po článcích, kdo je na řadě ---------------------------- */
+function sloz(r = Uloha.nahodne(RETEZCE), hotovo = 0) {
+  const p = $('plocha');
+  p.innerHTML = '';
+  p.insertAdjacentHTML('beforeend', `<div class="zadani">${hotovo === 0
+    ? 'Kdo je na začátku řetězce – <b>producent</b>?'
+    : `Kdo jí <b>${koho(r[hotovo - 1])}</b>?`}</div>`);
+  p.appendChild(kresliRetezec(r, i => i < hotovo));
+  const odezva = document.createElement('div');
+  odezva.className = 'odezva';
+  // Nabídka: zbytek řetězce, doplněný do tří možností rostlinami z jiných řetězců.
+  // Doplňují se jen rostliny – živočich z jiného řetězce by kořist mohl jíst
+  // i doopravdy (liška myš), a pak by „chybná“ odpověď byla pravdivá.
+  const jmena = new Set(r.map(bez));
+  const rostliny = [...new Map(RETEZCE.map(x => [bez(x[0]), x[0]])).values()].filter(o => !jmena.has(bez(o)));  // bez dvou „list“
+  const doplnek = hotovo === 0 ? [] : Uloha.zamichej(rostliny).slice(0, Math.max(0, 3 - (r.length - hotovo)));
+  const zbyvajici = Uloha.zamichej([...r.slice(hotovo), ...doplnek]);
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: zbyvajici.map(o => ({ klic: o, popis: o })),
+    spravnyKlic: r[hotovo],
+    zpravaOk: hotovo === r.length - 1 ? '✅ Řetězec je hotový – energie teče zleva doprava.' : `✅ Ano, ${bez(r[hotovo])}.`,
+    zpravaChyba: k => hotovo === 0
+      ? `${bez(k)} si potravu sama nevyrobí – na začátku řetězce je rostlina.`
+      : RETEZCE.some(x => x[0] === k) ? `${bez(k)} je rostlina – nikoho nejí.` : `Tohle ne. Hledej, kdo jí ${koho(r[hotovo - 1])}.`,
+    poSpravne: napoprve => { skore.vyhodnot(napoprve); },
+    dalsi: hotovo < r.length - 1 ? () => sloz(r, hotovo + 1) : novaUloha,
+    prodleva: hotovo < r.length - 1 ? 500 : 1300,
+  });
+  p.appendChild(odezva);
+}
+
+/* ---- Kdo je kdo: role článku v řetězci ----------------------------------- */
+function role() {
+  const p = $('plocha');
+  const r = Uloha.nahodne(RETEZCE);
+  const i = Uloha.nahodneCislo(0, r.length - 1);
+  p.innerHTML = `<div class="zadani">Čím je v tomto řetězci <b>${bez(r[i])}</b>?</div>`;
+  p.appendChild(kresliRetezec(r, () => true, j => j === i ? 'hledany' : ''));
+  p.querySelectorAll('.role').forEach(e => { e.style.visibility = 'hidden'; });   // role nesmí prozradit odpověď
+  const odezva = document.createElement('div');
+  odezva.className = 'odezva';
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: ROLE.slice(0, Math.max(3, r.length)).map(t => ({ klic: t, popis: t })),
+    spravnyKlic: ROLE[i],
+    zpravaOk: `✅ ${bez(r[i])} je ${ROLE[i]}` + (i === 0 ? ' – vyrábí živiny ze světla.' : i === 1 ? ' – živí se rostlinou.' : ` – živí se ${i === 2 ? 'býložravcem' : 'masožravcem'}.`),
+    zpravaChyba: 'Počítej od rostliny: rostlina je producent, kdo ji jí, je konzument 1. řádu, a tak dál.',
+    poSpravne: napoprve => { skore.vyhodnot(napoprve); p.querySelectorAll('.role').forEach(e => { e.style.visibility = ''; }); },
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+/* ---- Co když zmizí: dopad na kořist a na predátora ----------------------- */
+function zmizi() {
+  const p = $('plocha');
+  // bez člověka: ten má tolik zdrojů potravy, že by otázka neměla smysl
+  const r = Uloha.nahodne(RETEZCE.filter(x => x.length >= 3 && !x.some(o => o.includes('člověk'))));
+  const z = Uloha.nahodneCislo(1, r.length - 2);          // zmizí prostřední článek
+  const naKorist = Math.random() < 0.5;                   // ptáme se na kořist, nebo na predátora
+  const cil = naKorist ? z - 1 : z + 1;
+  p.innerHTML = `<div class="zadani">Z krajiny zmizí: <b>${bez(r[z])}</b>. Co se nejspíš stane s počtem – <b>${bez(r[cil])}</b> (zvýrazněno v řetězci)?</div>`;
+  p.appendChild(kresliRetezec(r, () => true, j => j === z ? 'zmizel' : j === cil ? 'hledany' : ''));
+  const odezva = document.createElement('div');
+  odezva.className = 'odezva';
+  const spravne = naKorist ? 'vzroste' : 'klesne';
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: [{ klic: 'vzroste', popis: '📈 vzroste' }, { klic: 'klesne', popis: '📉 klesne' }, { klic: 'stejne', popis: '➖ nezmění se' }],
+    spravnyKlic: spravne,
+    zpravaOk: naKorist
+      ? `✅ Vzroste: zmizel ten, kdo se tímto článkem živil, a tak se může přemnožit.`
+      : `✅ Klesne: zmizela jeho potrava. Přežijí jen ti, kdo najdou jinou potravu.`,
+    zpravaChyba: k => k === 'stejne'
+      ? 'Články řetězce na sobě závisí – změna jednoho se projeví i u sousedů.'
+      : naKorist ? 'Zmizel jeho predátor (článek napravo). Co se stane, když ho nikdo nežere?'
+                 : 'Zmizela jeho potrava (článek nalevo). Co se stane, když potrava chybí?',
+    poSpravne: napoprve => { skore.vyhodnot(napoprve); },
+    dalsi: novaUloha,
+    prodleva: 2200,
+  });
+  p.appendChild(odezva);
+}
+
+function novaUloha() {
+  ({ sloz: () => sloz(), role, zmizi })[rezim]();
+}
+$('rezimy').addEventListener('click', e => {
+  const b = e.target.closest('button[data-rezim]');
+  if (!b) return;
+  $('rezimy').querySelectorAll('button').forEach(x => x.classList.toggle('active', x === b));
+  rezim = b.dataset.rezim;
+  novaUloha();
+});
+$('btnDalsi').addEventListener('click', novaUloha);
+novaUloha();
+</script>
+</body>
+</html>

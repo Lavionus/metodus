@@ -1,0 +1,9 @@
+Use case: scientific-educational
+Asset type: IMG-cj-06 grammar-person card — vy
+Subject: one illustrated pupil addresses a clearly grouped pair of pupils with a welcoming open-hand gesture.
+Style: warm watercolor and gouache schoolbook illustration with delicate ink, warm ivory background, muted sage, jade, ochre and brick palette.
+Composition: square, speaker separate from addressed pair, generous margins, plural address legible at card size.
+Constraints: no text, letters, digits, speech bubble, arrows, labels, logo, watermark or border; natural hands; age-appropriate.
+Alt: Dítě oslovuje dvojici – vy.
+Generator: built-in image_gen
+Datum: 2026-09-24

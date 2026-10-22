@@ -1,0 +1,2 @@
+Společné zadání: ai-prednaska.prompt.txt
+Srovnání ručního třídění jednoduchých znaků a hluboké sítě hledající složité vzory ve velkých datech.

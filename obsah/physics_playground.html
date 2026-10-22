@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🔬 Fyzikální hřiště – síla, pohyb a energie</title>
+<meta name="description" content="Interaktivní výklad mechaniky pro 7. a 8. ročník: síla a pohyb, tření, tíha a nakloněná rovina, polohová a pohybová energie, kyvadlo, srážky a hybnost.">
+<link rel="stylesheet" href="../common.css">
+<link rel="stylesheet" href="physics_playground.css?v=1">
+<script src="../theme.js"></script>
+<script src="../podpis.js" defer></script>
+<script src="../kostra.js" defer></script>
+<script src="../uloha.js"></script>
+</head>
+<body>
+<div class="stranka">
+
+<aside class="osnova" aria-label="Kapitoly lekce">
+  <h2>Kapitoly</h2>
+  <ol id="osnova"></ol>
+  <div class="pokrok">
+    <span id="pokrokText">Splněno 0 úkolů</span>
+    <div class="pokrok-pruh" aria-hidden="true"><span id="pokrokPruh"></span></div>
+    <button type="button" class="znovu" id="zacitZnovu">↺ Začít lekci znovu</button>
+  </div>
+</aside>
+
+<main class="lekce">
+  <nav class="cipy" id="cipy" aria-label="Kapitoly lekce"></nav>
+
+  <header class="uvod">
+    <p class="nadtitul">Interaktivní výklad</p>
+    <h1>Fyzikální hřiště</h1>
+    <p class="podtitul">Proč bedna po ledě klouže dál, kde bere kulička na rampě rychlost, proč kyvadlové hodiny jdou pořád stejně a co se stane, když do sebe narazí dva vozíky. Každý jev si pustíš na živém modelu a změříš.</p>
+  </header>
+
+  <ul class="jak-pracovat" aria-label="Jak s lekcí pracovat">
+    <li><svg viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="var(--accent)" stroke-width="2.5"/><circle cx="11" cy="11" r="2.5" fill="var(--accent)"/></svg> Za modré kroužky se dá táhnout (i šipkami na klávesnici).</li>
+    <li>▶️ Modely se pouštějí tlačítkem, 🐌 zpomalí je.</li>
+    <li>🤔 Nejdřív předpověz, pak ověř na modelu.</li>
+    <li>🔬 Úkoly si samy poznají, že jsi je splnil(a).</li>
+  </ul>
+
+  <div class="barvy-sil" aria-label="Barvy v obrázcích">
+    <span class="znacka z-tiha">tíha</span><span class="znacka z-slozka">složky tíhy</span><span class="znacka z-podlozka">síla podložky</span><span class="znacka z-treni">tření</span><span class="znacka z-tah">tah</span><span class="znacka z-rychlost">rychlost</span><span class="znacka z-ep">polohová energie</span><span class="znacka z-ek">pohybová energie</span><span class="znacka z-teplo">teplo</span>
+  </div>
+
+  <nav class="mapa" id="mapa" aria-label="Mapa lekce"></nav>
+
+  <!-- ============================================================ 1 -->
+  <section class="kapitola" id="sila" data-faze="vyuka" data-nazev="Síla a pohyb" data-popis="Šipka síly, tření, setrvačnost">
+    <header class="kap-hlava"><span class="kap-cislo">1</span><div><p class="kap-otazka">Proč bedna po ledě klouže dál, i když už ji nikdo netáhne?</p><h2>Síla a pohyb</h2></div></header>
+    <div class="text">
+      <p>Když něco táhneš, tlačíš nebo zvedáš, působíš na to <span class="term">silou</span>. Síla může těleso rozpohybovat, zastavit, změnit směr jeho pohybu nebo ho zdeformovat. Značíme ji <i>F</i> a měříme v <strong>newtonech</strong> (N), například siloměrem. Pro představu: na dlaň, na které leží tabulka čokolády (100 g), působí síla asi 1 N.</p>
+      <p>Sílu kreslíme jako <strong>šipku</strong>. Šipka začíná v <strong>působišti</strong> (tam, kde síla na těleso působí), míří ve <strong>směru</strong> síly a její délka odpovídá <strong>velikosti</strong> síly. Na těleso obvykle působí sil víc najednou. Jejich společný účinek nahradí jediná <span class="term">výsledná síla</span>: síly stejného směru se sčítají, síly opačného směru se odečítají.</p>
+      <p>Když bednu smýkáš po podlaze, brzdí ji <span class="term">třecí síla</span>. Tření vzniká tím, že se nerovnosti obou povrchů zachytávají. Působí vždy <strong>proti pohybu</strong> a je tím větší, čím víc těleso tlačí na podložku a čím drsnější povrchy jsou.</p>
+    </div>
+    <div class="vzorec" aria-label="Třecí síla se rovná součinitel tření krát tlaková síla"><span><i>F</i><sub>t</sub> = <i>f</i> · <i>F</i><sub>n</sub></span><span class="vzorec-popis"><i>f</i> je součinitel smykového tření (led asi 0,03, dřevo po dřevě 0,3, guma po betonu až 0,8), <i>F</i><sub>n</sub> síla, kterou těleso tlačí kolmo na podložku</span></div>
+
+    <figure class="obr" id="obr-vozik">
+      <div class="obr-plocha"><svg class="model" role="img" aria-label="Bedna na podlaze, provaz, síly a graf rychlosti"></svg></div>
+      <div class="obr-ovladani">
+        <button type="button" class="hlavni" id="voz-tahni">✋ Táhnout</button>
+        <label class="posuvnik">Tah <input type="range" id="voz-sila" min="0" max="60" step="0.5" value="20"><output id="voz-sila-h"></output></label>
+        <label class="posuvnik">Hmotnost bedny <input type="range" id="voz-hmotnost" min="1" max="20" step="1" value="5"><output id="voz-hmotnost-h"></output></label>
+      </div>
+      <div class="obr-ovladani">
+        <div class="skupina"><span class="nazev">Podlaha:</span>
+          <div class="segment" id="voz-povrch" role="group" aria-label="Povrch podlahy">
+            <button type="button" data-hodnota="led">🧊 led</button><button type="button" data-hodnota="drevo">🪵 dřevo</button><button type="button" data-hodnota="koberec">🟫 koberec</button>
+          </div>
+        </div>
+        <label class="prepinac"><input type="checkbox" id="voz-vysledna"> Výsledná síla</label>
+        <label class="prepinac"><input type="checkbox" id="voz-pomalu"> 🐌 Zpomalit</label>
+        <button type="button" id="voz-reset">↺ Výchozí stav</button>
+      </div>
+      <div class="odecty"></div>
+      <div class="obr-zprava" role="status"></div>
+      <figcaption>Tlačítkem ✋ Táhnout napneš provaz, dalším stiskem ho pustíš. Posuvník tahu jde měnit i za jízdy. Vpravo nahoře se kreslí graf rychlosti za posledních 12 sekund. <span class="legenda"><span class="znacka z-tah">tah</span><span class="znacka z-treni">tření</span><span class="znacka z-tiha">tíha</span><span class="znacka z-podlozka">síla podložky</span><span class="znacka z-rychlost">rychlost</span></span></figcaption>
+    </figure>
+
+    <div class="predpoved" data-predpoved="voz-led"></div>
+    <div class="ukol" data-ukol="voz-koberec"><div class="ukol-hlava"><p><b>🔬 Úkol:</b> Bedna má 5 kg a stojí na koberci. Najdi nejmenší tah, se kterým se rozjede (s přesností na 1 N).</p><span class="stav"></span></div><p class="ukol-reakce"></p></div>
+    <div class="ukol" data-ukol="voz-rovnomerne"><div class="ukol-hlava"><p><b>🔬 Úkol:</b> Na dřevěné podlaze bednu rozjeď a pak tah zmenši tak, aby jela <strong>stálou rychlostí</strong> – ani nezrychlovala, ani nezpomalovala.</p><span class="stav"></span></div><p class="ukol-reakce"></p></div>
+
+    <h3>Tři pravidla pohybu</h3>
+    <div class="text">
+      <p>Co model ukazuje, popsal už v roce 1687 Isaac Newton ve třech <strong>pohybových zákonech</strong>:</p>
+      <ol>
+        <li><strong>Zákon setrvačnosti.</strong> Když je výsledná síla nulová, těleso zůstane v klidu, nebo se dál pohybuje stejnou rychlostí stejným směrem. Bedna na ledu jede dlouho sama, protože ji skoro nic nebrzdí.</li>
+        <li><strong>Zákon síly.</strong> Výsledná síla mění rychlost tělesa. Čím je větší, tím rychleji se rychlost mění. Čím má těleso větší hmotnost, tím pomaleji se jeho rychlost mění.</li>
+        <li><strong>Zákon akce a reakce.</strong> Síly vznikají vždy ve dvojicích. Bedna tlačí na podlahu a podlaha stejně velkou silou tlačí na bednu opačným směrem. Proto se bedna do podlahy nepropadne.</li>
+      </ol>
+    </div>
+
+    <details class="zvidave"><summary>📐 Pro zvídavé: jak rychle se rychlost mění <small>zrychlení a druhý Newtonův zákon</small></summary>
+      <div class="obsah text">
+        <p>Jak rychle se mění rychlost, udává <strong>zrychlení</strong> <i>a</i> – o kolik metrů za sekundu se rychlost zvětší za každou sekundu (jednotka m/s²). Druhý Newtonův zákon ho spojuje se silou a hmotností:</p>
+        <div class="vzorec"><span><i>F</i> = <i>m</i> · <i>a</i></span><span class="vzorec-popis">výsledná síla = hmotnost × zrychlení</span></div>
+        <p>Příklad: bednu 5 kg na dřevě (tření 14,7 N) táhneš silou 25 N. Výsledná síla je 25 N − 14,7 N = 10,3 N a zrychlení 10,3 N / 5 kg ≈ 2,1 m/s². Každou sekundu se bedna zrychlí asi o 2 m/s. V modelu to vidíš na přímce v grafu rychlosti – čím větší výsledná síla, tím strměji stoupá.</p>
+      </div>
+    </details>
+
+    <aside class="zapamatuj"><h3>📌 Zapamatuj si</h3>
+      <ul>
+        <li>Síla se měří v <strong>newtonech</strong> (N) a kreslí se šipkou: působiště, směr, velikost.</li>
+        <li><strong>Tření</strong> působí proti pohybu; <span class="m"><i>F</i><sub>t</sub> = <i>f</i> · <i>F</i><sub>n</sub></span>.</li>
+        <li>Když je výsledná síla <strong>nulová</strong>, těleso stojí, nebo jede <strong>stálou rychlostí</strong>. Nenulová výsledná síla rychlost mění.</li>
+      </ul>
+    </aside>
+  </section>
+
+  <!-- ============================================================ 2 -->
+  <section class="kapitola" id="rovina" data-faze="vyuka" data-nazev="Nakloněná rovina" data-popis="Tíha, rozklad sil, mezní úhel">
+    <header class="kap-hlava"><span class="kap-cislo">2</span><div><p class="kap-otazka">Proč sáňky na mírném svahu stojí a na prudkém se samy rozjedou?</p><h2>Tíha a nakloněná rovina</h2></div></header>
+    <div class="text">
+      <p>Země přitahuje každé těleso. Sílu, kterou Země na těleso působí, nazýváme <span class="term">tíhová síla</span> <i>F</i><sub>G</sub> (zkráceně jí tu říkáme <span class="term">tíha</span>). Míří vždy <strong>svisle dolů</strong> a je tím větší, čím větší je hmotnost tělesa. Těleso v klidu pak stejně velkou silou tlačí na vodorovnou podložku nebo táhne za závěs:</p>
+    </div>
+    <div class="vzorec" aria-label="Tíha se rovná hmotnost krát g"><span><i>F</i><sub>G</sub> = <i>m</i> · <i>g</i></span><span class="vzorec-popis"><i>g</i> = 9,81 N/kg na Zemi; ve výpočtech ho zaokrouhlujeme na 10 N/kg. Těleso o hmotnosti 1 kg má tíhu asi 10 N.</span></div>
+    <div class="text">
+      <p>Na nakloněné rovině míří tíha pořád svisle dolů – ne podél svahu. Abychom viděli, co s tělesem dělá, <span class="term">rozložíme ji</span> na dvě složky (jsou to strany rovnoběžníku, jehož úhlopříčkou je tíha):</p>
+      <ul>
+        <li><strong><i>F</i><sub>∥</sub></strong> míří dolů <strong>podél svahu</strong> a těleso rozjíždí;</li>
+        <li><strong><i>F</i><sub>⊥</sub></strong> míří <strong>kolmo do podložky</strong> a přitlačuje těleso k ní – na ní závisí tření.</li>
+      </ul>
+      <p>Čím je svah strmější, tím větší je <i>F</i><sub>∥</sub> a tím menší <i>F</i><sub>⊥</sub>. Těleso se rozjede, až tah dolů po svahu přemůže největší možné tření. Sklonu, od kterého se to stane, říkáme <span class="term">mezní úhel</span>.</p>
+    </div>
+
+    <figure class="obr" id="obr-rovina">
+      <div class="obr-plocha"><svg class="model" role="img" aria-label="Kvádr na nakloněné rovině a síly, které na něj působí"></svg></div>
+      <div class="obr-ovladani">
+        <button type="button" class="hlavni" id="rov-pustit">▶️ Pustit</button>
+        <label class="posuvnik">Sklon <input type="range" id="rov-sklon" min="0" max="60" step="1" value="12"><output id="rov-sklon-h"></output></label>
+        <label class="posuvnik">Hmotnost <input type="range" id="rov-hmotnost" min="1" max="10" step="1" value="2"><output id="rov-hmotnost-h"></output></label>
+      </div>
+      <div class="obr-ovladani">
+        <div class="skupina"><span class="nazev">Podložka:</span>
+          <div class="segment" id="rov-povrch" role="group" aria-label="Povrch roviny">
+            <button type="button" data-hodnota="led">🧊 led</button><button type="button" data-hodnota="drevo">🪵 dřevo</button><button type="button" data-hodnota="guma">⚫ guma</button>
+          </div>
+        </div>
+        <label class="prepinac"><input type="checkbox" id="rov-rozklad" checked> Rozložit tíhu</label>
+        <label class="prepinac"><input type="checkbox" id="rov-mez"> Ukázat mezní úhel</label>
+        <button type="button" id="rov-reset">↺ Nahoru</button>
+      </div>
+      <div class="odecty"></div>
+      <div class="obr-zprava" role="status"></div>
+      <figcaption>Sklon měníš tažením za kroužek na vrcholu svahu nebo posuvníkem. Šipky sil jsou nakreslené ve stejném měřítku, tíha je vždy stejně dlouhá – čísla v newtonech jsou pod obrázkem. <span class="legenda"><span class="znacka z-tiha">tíha F<sub>G</sub></span><span class="znacka z-slozka">složky F<sub>∥</sub> a F<sub>⊥</sub></span><span class="znacka z-podlozka">síla podložky</span><span class="znacka z-treni">tření</span></span></figcaption>
+    </figure>
+
+    <div class="predpoved" data-predpoved="rov-tezsi"></div>
+    <div class="ukol" data-ukol="rov-45"><div class="ukol-hlava"><p><b>🔬 Úkol:</b> Najdi sklon, při kterém táhne kvádr dolů po svahu <strong>stejně velká</strong> složka tíhy, jakou ho tlačí do podložky.</p><span class="stav"></span></div><p class="ukol-reakce"></p></div>
+    <div class="ukol" data-ukol="rov-mez"><div class="ukol-hlava"><p><b>🔬 Úkol:</b> Na gumové podložce najdi <strong>nejmenší celý sklon</strong>, při kterém se kvádr po puštění rozjede. Mezní úhel si přitom neukazuj.</p><span class="stav"></span></div><p class="ukol-reakce"></p></div>
+
+    <div class="fakty">
+      <div class="fakt"><b>9,81 N/kg</b><span>tíhové zrychlení <i>g</i> na Zemi – kilogram váží asi 10 N</span></div>
+      <div class="fakt"><b>1,62 N/kg</b><span>na Měsíci – kilogram tam váží jen asi 1,6 N, šestkrát méně</span></div>
+      <div class="fakt"><b>24,8 N/kg</b><span>na Jupiteru – tam by tě tíha tiskla k zemi dvaapůlkrát víc</span></div>
+      <div class="fakt"><b>8,3 %</b><span>největší sklon nájezdové rampy pro vozíčkáře (1 : 12, tedy asi 4,8°)</span></div>
+    </div>
+
+    <details class="zvidave"><summary>📐 Pro zvídavé: složky tíhy a mezní úhel početně <small>sinus, kosinus a tangens</small></summary>
+      <div class="obsah text">
+        <p>Složky tíhy spočítáme z pravoúhlého trojúhelníku, který na obrázku tvoří tíha a její dvě složky:</p>
+        <div class="vzorec"><span><i>F</i><sub>∥</sub> = <i>F</i><sub>G</sub> · sin <i>α</i></span><span><i>F</i><sub>⊥</sub> = <i>F</i><sub>G</sub> · cos <i>α</i></span></div>
+        <p>Tření dokáže nanejvýš <i>F</i><sub>t</sub> = <i>f</i> · <i>F</i><sub>⊥</sub>. Těleso se rozjede, když <i>F</i><sub>G</sub> · sin <i>α</i> &gt; <i>f</i> · <i>F</i><sub>G</sub> · cos <i>α</i>. Tíha se na obou stranách zkrátí, a tak mezní úhel <strong>nezávisí na hmotnosti</strong>:</p>
+        <div class="vzorec"><span>tg <i>α</i><sub>m</sub> = <i>f</i></span></div>
+        <p>Pro dřevo (<i>f</i> = 0,3) vychází <i>α</i><sub>m</sub> ≈ 17°, pro gumu (<i>f</i> = 0,8) asi 39°. Model počítá právě takto.</p>
+      </div>
+    </details>
+
+    <div class="text">
+      <p><strong>Kde to potkáš:</strong> nakloněná rovina patří mezi <strong>jednoduché stroje</strong>. Po rampě vytlačíš sud do auta menší silou, než kdybys ho zvedal(a) svisle – zato po delší dráze. Na stejném principu stojí serpentiny na horských silnicích, klín a závit šroubu.</p>
+    </div>
+
+    <aside class="zapamatuj"><h3>📌 Zapamatuj si</h3>
+      <ul>
+        <li><strong>Tíha</strong> <span class="m"><i>F</i><sub>G</sub> = <i>m</i> · <i>g</i></span> míří svisle dolů; <i>g</i> ≈ 10 N/kg.</li>
+        <li>Na nakloněné rovině ji rozložíme na složku <strong>podél svahu</strong> (rozjíždí těleso) a složku <strong>do podložky</strong> (určuje tření).</li>
+        <li>Těleso se rozjede nad <strong>mezním úhlem</strong>. Ten závisí jen na tření, ne na hmotnosti.</li>
+      </ul>
+    </aside>
+  </section>
+
+  <!-- ============================================================ 3 -->
+  <section class="kapitola" id="energie" data-faze="vyuka" data-nazev="Energie" data-popis="Polohová, pohybová, zachování">
+    <header class="kap-hlava"><span class="kap-cislo">3</span><div><p class="kap-otazka">Kde bere kulička na rampě rychlost a proč nakonec zůstane ležet dole?</p><h2>Polohová a pohybová energie</h2></div></header>
+    <div class="text">
+      <p><span class="term">Energie</span> vyjadřuje, kolik práce dokáže těleso vykonat. Měří se v <strong>joulech</strong> (J). Kulička na okraji rampy ještě stojí, ale energii už má – stačí ji pustit a rozjede se. Říkáme jí <span class="term">polohová</span> (tíhová) <strong>energie</strong>. Je tím větší, čím je těleso těžší a čím výš je:</p>
+    </div>
+    <div class="vzorec" aria-label="Polohová energie se rovná m krát g krát h"><span><i>E</i><sub>p</sub> = <i>m</i> · <i>g</i> · <i>h</i></span><span class="vzorec-popis"><i>h</i> je výška nad zvolenou hladinou (tady nad dnem rampy) v metrech</span></div>
+    <div class="text">
+      <p>Pohybující se těleso má <span class="term">pohybovou energii</span>. Ta roste s hmotností a hodně rychle s rychlostí – dvakrát rychlejší těleso jí má čtyřikrát víc:</p>
+    </div>
+    <div class="vzorec" aria-label="Pohybová energie se rovná jedna polovina m v na druhou"><span><i>E</i><sub>k</sub> = <span class="zl"><span>1</span><span>2</span></span> · <i>m</i> · <i>v</i><sup>2</sup></span><span class="vzorec-popis"><i>v</i> v metrech za sekundu</span></div>
+    <div class="text">
+      <p>Cestou dolů se polohová energie mění na pohybovou, cestou nahoru zase zpět. Když nic nebrzdí, jejich součet zůstává pořád stejný. To je <span class="term">zákon zachování energie</span>: energie nevzniká ani nezaniká, jen se mění z jedné formy na jinou.</p>
+    </div>
+
+    <figure class="obr" id="obr-rampa">
+      <div class="obr-plocha"><svg class="model" role="img" aria-label="Kulička na U-rampě a sloupce energie"></svg></div>
+      <div class="obr-ovladani">
+        <button type="button" class="hlavni" id="ram-pustit">▶️ Pustit</button>
+        <label class="posuvnik">Výška startu <input type="range" id="ram-vyska" min="0.2" max="2.5" step="0.1" value="2"><output id="ram-vyska-h"></output></label>
+        <label class="posuvnik">Hmotnost <input type="range" id="ram-hmotnost" min="0.5" max="5" step="0.5" value="1"><output id="ram-hmotnost-h"></output></label>
+      </div>
+      <div class="obr-ovladani">
+        <div class="skupina"><span class="nazev">Tření a odpor vzduchu:</span>
+          <div class="segment" id="ram-treni" role="group" aria-label="Tření">
+            <button type="button" data-hodnota="zadne">žádné</button><button type="button" data-hodnota="male">malé</button><button type="button" data-hodnota="velke">velké</button>
+          </div>
+        </div>
+        <label class="prepinac"><input type="checkbox" id="ram-pomalu"> 🐌 Zpomalit</label>
+        <button type="button" id="ram-reset">↺ Na start</button>
+      </div>
+      <div class="odecty"></div>
+      <div class="obr-zprava" role="status"></div>
+      <figcaption>Kuličku táhni po rampě na místo, odkud ji chceš pustit. Sloupec „celkem“ skládá všechny tři druhy energie na sebe – sleduj, jestli se mění jeho výška. <span class="legenda"><span class="znacka z-ep">polohová E<sub>p</sub></span><span class="znacka z-ek">pohybová E<sub>k</sub></span><span class="znacka z-teplo">teplo</span><span class="znacka z-rychlost">rychlost</span></span></figcaption>
+    </figure>
+
+    <div class="predpoved" data-predpoved="ram-vyska"></div>
+    <div class="ukol" data-ukol="ram-6"><div class="ukol-hlava"><p><b>🔬 Úkol:</b> Bez tření najdi nejmenší výšku startu, ze které projede kulička dnem rampy rychlostí aspoň <strong>6 m/s</strong>.</p><span class="stav"></span></div><p class="ukol-reakce"></p></div>
+    <div class="ukol" data-ukol="ram-teplo"><div class="ukol-hlava"><p><b>🔬 Úkol:</b> Zapni velké tření a nech kuličku jezdit, dokud se skoro nezastaví. Kam se poděla její energie?</p><span class="stav"></span></div><p class="ukol-reakce"></p></div>
+
+    <div class="analogie">
+      <svg viewBox="0 0 52 52" aria-hidden="true"><rect x="4" y="14" width="44" height="30" rx="5" fill="none" stroke="var(--h-celkem)" stroke-width="2.5"/><rect x="10" y="22" width="10" height="16" rx="2" fill="var(--h-ep)"/><rect x="22" y="28" width="10" height="10" rx="2" fill="var(--h-ek)"/><rect x="34" y="32" width="8" height="6" rx="2" fill="var(--h-teplo)"/></svg>
+      <p>Energie se chová jako peníze na <b>třech účtech</b> jedné rodiny. Peníze se převádějí z účtu na účet, ale dohromady jich je pořád stejně. Tření je jako poplatek, který odchází do okolí – z rodinných účtů zmizí, ale ve světě pořád jsou: <b>ohřejí</b> kuličku, rampu i vzduch.</p>
+    </div>
+
+    <div class="ukazka" data-faze="ukazka" id="ram-priklad">
+      <h3>📘 Řešený příklad</h3>
+      <p>Kulička o hmotnosti 0,5 kg startuje z výšky 1,8 m nad dnem rampy. Jak rychle projede dnem, když ji nic nebrzdí? (<i>g</i> = 10 N/kg)</p>
+      <ol>
+        <li>Zapíšeme: <i>m</i> = 0,5 kg, <i>h</i> = 1,8 m, <i>g</i> = 10 N/kg; hledáme <i>v</i> dole.</li>
+        <li>Polohová energie nahoře: <span class="m"><i>E</i><sub>p</sub> = <i>m</i> · <i>g</i> · <i>h</i> = 0,5 · 10 · 1,8 = 9 J</span>.</li>
+        <li>Dole je výška nulová. Bez tření se celá polohová energie změní na pohybovou: <span class="m"><i>E</i><sub>k</sub> = 9 J</span>.</li>
+        <li>Z <span class="m"><i>E</i><sub>k</sub> = ½ · <i>m</i> · <i>v</i><sup>2</sup></span>: <span class="m"><i>v</i><sup>2</sup> = 2 · 9 / 0,5 = 36</span>, tedy <strong><i>v</i> = 6 m/s</strong>.</li>
+        <li>Všimni si: hmotnost se nakonec neuplatní. Těžší kulička má víc polohové energie, ale potřebuje jí víc i na stejnou rychlost. Model počítá přesněji s <i>g</i> = 9,81 N/kg, proto ukáže 5,9 m/s.</li>
+      </ol>
+      <button type="button" id="ram-priklad-model">Ukázat příklad v modelu</button>
+    </div>
+
+    <aside class="zapamatuj"><h3>📌 Zapamatuj si</h3>
+      <ul>
+        <li><strong>Polohová energie</strong> <span class="m"><i>E</i><sub>p</sub> = <i>m</i> · <i>g</i> · <i>h</i></span>, <strong>pohybová</strong> <span class="m"><i>E</i><sub>k</sub> = ½ · <i>m</i> · <i>v</i><sup>2</sup></span>; jednotkou je joule (J).</li>
+        <li>Při pohybu se jedna mění na druhou, jejich součet se bez tření nemění – <strong>zákon zachování energie</strong>.</li>
+        <li>Tření energii nezničí, ale mění ji na <strong>teplo</strong> (vnitřní energii těles a okolí).</li>
+      </ul>
+    </aside>
+  </section>
+
+  <!-- ============================================================ 4 -->
+  <section class="kapitola" id="kyvadlo" data-faze="vyuka" data-nazev="Kyvadlo" data-popis="Doba kmitu, měření, graf">
+    <header class="kap-hlava"><span class="kap-cislo">4</span><div><p class="kap-otazka">Proč jdou kyvadlové hodiny pořád stejně, i když se kyvadlo kývá čím dál míň?</p><h2>Kyvadlo</h2></div></header>
+    <div class="text">
+      <p><span class="term">Kyvadlo</span> je závaží zavěšené na provázku nebo tyči. Když ho vychýlíš a pustíš, pohybuje se pořád tam a zpět – <strong>kmitá</strong>. Jeden <strong>kmit</strong> je celý pohyb tam a zase zpět do stejné polohy. Čas, za který kyvadlo vykoná jeden kmit, je <span class="term">doba kmitu</span> <i>T</i> (perioda) v sekundách.</p>
+      <p>Kyvadlo je ukázka zákona zachování energie z předchozí kapitoly: v krajní poloze se na okamžik zastaví a má jen polohovou energii, v nejnižším bodě je nejrychlejší. Tíha ho pořád táhne zpátky do nejnižšího bodu – rozhoupává ho její složka <i>F</i><sub>∥</sub> kolmá k závěsu.</p>
+      <p>Podle pověsti si roku 1583 mladý <strong>Galileo Galilei</strong> v katedrále v Pise všiml, že houpající se lustr kmitá pořád stejně dlouho, ať se houpe hodně, nebo málo. Dobu kmitu si měřil vlastním tepem. Na čem tedy doba kmitu závisí? Zjisti to měřením.</p>
+    </div>
+
+    <figure class="obr" id="obr-kyvadlo">
+      <div class="obr-plocha"><svg class="model" role="img" aria-label="Kyvadlo, jeho výchylka a síly"></svg></div>
+      <div class="obr-ovladani">
+        <button type="button" class="hlavni" id="kyv-pustit">▶️ Pustit</button>
+        <button type="button" id="kyv-zapsat" disabled>📝 Zapsat měření</button>
+        <label class="prepinac"><input type="checkbox" id="kyv-dve"> 🪀🪀 Druhé kyvadlo</label>
+        <label class="prepinac"><input type="checkbox" id="kyv-odpor"> 💨 Odpor vzduchu</label>
+        <label class="prepinac"><input type="checkbox" id="kyv-sily" checked> Síly</label>
+      </div>
+      <div class="obr-ovladani kyv-posuvniky">
+        <span class="znacka-kyv a" aria-hidden="true">A</span>
+        <label class="posuvnik">Délka <input type="range" id="kyv-delka" min="0.2" max="2" step="0.05" value="1"><output id="kyv-delka-h"></output></label>
+        <label class="posuvnik">Hmotnost <input type="range" id="kyv-hmotnost" min="0.1" max="5" step="0.1" value="1"><output id="kyv-hmotnost-h"></output></label>
+        <label class="posuvnik">Výchylka <input type="range" id="kyv-uhel" min="5" max="60" step="1" value="20"><output id="kyv-uhel-h"></output></label>
+      </div>
+      <div class="obr-ovladani kyv-posuvniky" id="kyv-b" hidden>
+        <span class="znacka-kyv b" aria-hidden="true">B</span>
+        <label class="posuvnik">Délka <input type="range" id="kyv-delka-b" min="0.2" max="2" step="0.05" value="1"><output id="kyv-delka-b-h"></output></label>
+        <label class="posuvnik">Hmotnost <input type="range" id="kyv-hmotnost-b" min="0.1" max="5" step="0.1" value="1"><output id="kyv-hmotnost-b-h"></output></label>
+        <button type="button" id="kyv-b-jako-a">⧉ B jako A</button>
+      </div>
+      <div class="obr-ovladani">
+        <div class="skupina"><span class="nazev">Kde kyvadlo je:</span>
+          <div class="segment" id="kyv-misto" role="group" aria-label="Místo">
+            <button type="button" data-hodnota="zeme">🌍 Země</button><button type="button" data-hodnota="mesic">🌙 Měsíc</button><button type="button" data-hodnota="mars">🔴 Mars</button>
+          </div>
+        </div>
+        <label class="prepinac"><input type="checkbox" id="kyv-pomalu"> 🐌 Zpomalit</label>
+        <button type="button" id="kyv-reset">↺ Do výchylky</button>
+      </div>
+      <div class="odecty"></div>
+      <div class="obr-zprava" role="status"></div>
+      <figcaption>Závaží táhni myší: do strany měníš výchylku, od závěsu a k němu délku. Dobu kmitu model měří sám z průchodů nejnižším bodem. Když je změřená, tlačítkem 📝 ji zapíšeš do tabulky. <span class="legenda"><span class="znacka z-tiha">tíha</span><span class="znacka z-slozka">složka tíhy, která kyvadlo vrací</span><span class="znacka z-rychlost">rychlost</span></span></figcaption>
+    </figure>
+
+    <div class="mereni" id="kyv-mereni">
+      <div class="mereni-tabulka">
+        <h3>📝 Tabulka měření</h3>
+        <div class="tabulka-obal">
+          <table class="pripady" id="kyv-tabulka">
+            <thead><tr><th>#</th><th>délka <i>l</i></th><th>hmotnost</th><th>výchylka</th><th>místo</th><th>doba kmitu <i>T</i></th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <p class="vzorec-popis" id="kyv-tabulka-prazdna">Zatím nic nezapsáno. Pusť kyvadlo, počkej na změřenou dobu kmitu a stiskni 📝 Zapsat měření.</p>
+        <button type="button" id="kyv-smazat" class="male">🗑️ Smazat tabulku</button>
+      </div>
+      <figure class="graf-obal" id="obr-kyv-graf">
+        <svg class="model graf" role="img" aria-label="Graf doby kmitu v závislosti na délce závěsu"></svg>
+        <figcaption>Body = tvoje měření. Čárkovaná křivka ukazuje, jak doba kmitu roste s délkou na Zemi (a na Měsíci či Marsu, pokud tam měříš).</figcaption>
+      </figure>
+    </div>
+
+    <div class="predpoved" data-predpoved="kyv-hmotnost"></div>
+    <div class="predpoved" data-predpoved="kyv-delka"></div>
+    <div class="ukol" data-ukol="kyv-tabulka"><div class="ukol-hlava"><p><b>🔬 Úkol:</b> Změř dobu kmitu aspoň pro <strong>tři různé délky</strong> a všechna měření zapiš do tabulky. Co ukazuje graf?</p><span class="stav"></span></div><p class="ukol-reakce"></p></div>
+    <div class="ukol" data-ukol="kyv-sekundove"><div class="ukol-hlava"><p><b>🔬 Úkol:</b> Najdi délku kyvadla, které má na Zemi dobu kmitu <strong>2 sekundy</strong> – každý kyv tam nebo zpět trvá právě sekundu.</p><span class="stav"></span></div><p class="ukol-reakce"></p></div>
+    <div class="ukol" data-ukol="kyv-mesic"><div class="ukol-hlava"><p><b>🔬 Úkol:</b> Přenes kyvadlo na Měsíc a změř tam dobu kmitu. Kmitá rychleji, nebo pomaleji než na Zemi?</p><span class="stav"></span></div><p class="ukol-reakce"></p></div>
+
+    <details class="zvidave"><summary>📐 Pro zvídavé: vzorec pro dobu kmitu a Foucaultovo kyvadlo <small>proč √</small></summary>
+      <div class="obsah text">
+        <p>Pro malé výchylky platí:</p>
+        <div class="vzorec"><span><i>T</i> = 2π · √(<i>l</i> / <i>g</i>)</span><span class="vzorec-popis"><i>l</i> délka závěsu v metrech, <i>g</i> tíhové zrychlení</span></div>
+        <p>Hmotnost ve vzorci vůbec není. Délka je pod odmocninou: čtyřikrát delší kyvadlo kmitá dvakrát pomaleji, devětkrát delší třikrát pomaleji. Na Měsíci je <i>g</i> asi šestkrát menší, a tak tam stejné kyvadlo kmitá asi 2,5krát pomaleji (√6 ≈ 2,45). Při velké výchylce (nad 20°) je kmit o něco delší – vyzkoušej 60°.</p>
+        <p>V roce 1851 zavěsil Léon Foucault v pařížském Pantheonu kyvadlo s 67 m dlouhým lanem a 28kg koulí. Kmit trval asi 16 sekund a rovina kyvů se během dne pomalu stáčela. Kyvadlo si svou rovinu drží, a tak se pod ním otáčela Země. Byl to první pokus, který otáčení Země ukázal přímo.</p>
+      </div>
+    </details>
+
+    <aside class="zapamatuj"><h3>📌 Zapamatuj si</h3>
+      <ul>
+        <li><strong>Doba kmitu</strong> <i>T</i> je čas jednoho kmitu tam a zpět.</li>
+        <li>Závisí na <strong>délce</strong> závěsu (delší kyvadlo kmitá pomaleji) a na <i>g</i>. <strong>Nezávisí na hmotnosti</strong> a u malých výchylek ani na výchylce.</li>
+        <li>Kyvadlo s délkou asi 1 m má dobu kmitu 2 s – proto se hodí do hodin.</li>
+      </ul>
+    </aside>
+  </section>
+
+  <!-- ============================================================ 5 -->
+  <section class="kapitola" id="srazky" data-faze="vyuka" data-nazev="Srážky" data-popis="Hybnost, pružná a nepružná srážka">
+    <header class="kap-hlava"><span class="kap-cislo">5</span><div><p class="kap-otazka">Proč se kulečníková koule po přímém nárazu zastaví a ta druhá odjede?</p><h2>Srážky a hybnost <small class="rozsirujici">rozšiřující učivo</small></h2></div></header>
+    <div class="text">
+      <p>Zastavit rozjetý nákladní vůz je mnohem těžší než zastavit kolo jedoucí stejnou rychlostí. Obě tělesa se liší <span class="term">hybností</span> – veličinou, která spojuje hmotnost a rychlost:</p>
+    </div>
+    <div class="vzorec" aria-label="Hybnost se rovná m krát v"><span><i>p</i> = <i>m</i> · <i>v</i></span><span class="vzorec-popis">jednotka kg·m/s; hybnost má směr jako rychlost – pohyb doleva počítáme se záporným znaménkem</span></div>
+    <div class="text">
+      <p>Při srážce na sebe tělesa působí stejně velkými silami opačného směru (akce a reakce). Kolik hybnosti jedno těleso ztratí, tolik druhé získá. Celková hybnost se proto nezmění – to je <span class="term">zákon zachování hybnosti</span>. Platí při <strong>každé</strong> srážce.</p>
+      <ul>
+        <li>Při <strong>pružné</strong> srážce (pružina, ocelové koule, kulečník) se tělesa od sebe odrazí a zachová se i pohybová energie.</li>
+        <li>Při <strong>nepružné</strong> srážce (plastelína, suchý zip, bourající auta) se tělesa spojí a jedou dál spolu. Část pohybové energie se změní na teplo a na deformaci.</li>
+      </ul>
+    </div>
+
+    <figure class="obr" id="obr-srazka">
+      <div class="obr-plocha"><svg class="model" role="img" aria-label="Dva vozíky na kolejnici a bilance hybnosti a energie"></svg></div>
+      <div class="obr-ovladani">
+        <button type="button" class="hlavni" id="sr-pustit">▶️ Spustit srážku</button>
+        <div class="skupina"><span class="nazev">Nárazník:</span>
+          <div class="segment" id="sr-typ" role="group" aria-label="Druh srážky">
+            <button type="button" data-hodnota="pruzna">pružina (pružná)</button><button type="button" data-hodnota="castecna">guma (částečně)</button><button type="button" data-hodnota="nepruzna">suchý zip (nepružná)</button>
+          </div>
+        </div>
+        <label class="prepinac"><input type="checkbox" id="sr-pomalu"> 🐌 Zpomalit</label>
+        <button type="button" id="sr-reset">↺ Znovu</button>
+      </div>
+      <div class="obr-ovladani kyv-posuvniky">
+        <span class="znacka-kyv a" aria-hidden="true">A</span>
+        <label class="posuvnik">Hmotnost <input type="range" id="sr-m1" min="0.5" max="4" step="0.5" value="1"><output id="sr-m1-h"></output></label>
+        <label class="posuvnik">Rychlost <input type="range" id="sr-v1" min="-3" max="3" step="0.5" value="2"><output id="sr-v1-h"></output></label>
+      </div>
+      <div class="obr-ovladani kyv-posuvniky">
+        <span class="znacka-kyv b" aria-hidden="true">B</span>
+        <label class="posuvnik">Hmotnost <input type="range" id="sr-m2" min="0.5" max="4" step="0.5" value="1"><output id="sr-m2-h"></output></label>
+        <label class="posuvnik">Rychlost <input type="range" id="sr-v2" min="-3" max="3" step="0.5" value="0"><output id="sr-v2-h"></output></label>
+      </div>
+      <div class="obr-ovladani" aria-label="Hotová nastavení">
+        <span class="nazev-mal">Nastav jako:</span>
+        <button type="button" data-sr-preset="kulecnik">🎱 kulečník (stejné, B stojí)</button>
+        <button type="button" data-sr-preset="tezky">🚚 těžký do lehkého</button>
+        <button type="button" data-sr-preset="lehky">🚲 lehký do těžkého</button>
+        <button type="button" data-sr-preset="celne">🚗🚗 čelně proti sobě</button>
+      </div>
+      <div class="odecty"></div>
+      <div class="obr-zprava" role="status"></div>
+      <figcaption>Kladná rychlost = doprava, záporná = doleva. Nahoře je bilance: horní proužek každé dvojice je stav před srážkou, dolní stav teď. <span class="legenda"><span class="znacka z-rychlost">rychlost</span><span class="znacka z-hybnost">hybnost</span><span class="znacka z-ek">pohybová energie</span><span class="znacka z-teplo">teplo a deformace</span></span></figcaption>
+    </figure>
+
+    <div class="predpoved" data-predpoved="sr-stejne"></div>
+    <div class="predpoved" data-predpoved="sr-lehky"></div>
+    <div class="ukol" data-ukol="sr-zastav"><div class="ukol-hlava"><p><b>🔬 Úkol:</b> Nastav nepružnou srážku dvou jedoucích vozíků tak, aby po srážce <strong>oba stály</strong>.</p><span class="stav"></span></div><p class="ukol-reakce"></p></div>
+
+    <div class="text">
+      <p><strong>Kde to potkáš:</strong> auta mají vpředu a vzadu <strong>deformační zóny</strong>. Při nárazu se záměrně zmačkají – srážka je nepružná a pohybová energie se spotřebuje na deformaci plechu, ne na cestující. Pružnou srážku zase vidíš u <strong>Newtonovy kolébky</strong>: řada ocelových kuliček, kde náraz jedné krajní kuličky vymrští tu na druhém konci.</p>
+    </div>
+
+    <aside class="zapamatuj"><h3>📌 Zapamatuj si</h3>
+      <ul>
+        <li><strong>Hybnost</strong> <span class="m"><i>p</i> = <i>m</i> · <i>v</i></span> má směr jako rychlost; jednotka kg·m/s.</li>
+        <li>Při <strong>každé</strong> srážce se celková hybnost <strong>zachová</strong>.</li>
+        <li>Pohybová energie se zachová jen při <strong>pružné</strong> srážce; při nepružné se část změní na teplo a deformaci.</li>
+      </ul>
+    </aside>
+  </section>
+
+  <!-- ============================================================ tahák -->
+  <section class="kapitola" id="tahak" data-faze="tahak" data-nazev="Tahák" data-popis="Všechno na jedné stránce" data-zvlast>
+    <header class="kap-hlava"><span class="kap-cislo">📌</span><div><p class="kap-otazka">Všechno podstatné na jedné stránce</p><h2>Tahák – síla, pohyb a energie</h2></div></header>
+    <div class="tahak-mrizka">
+      <div class="tahak-karta"><h3>Síla</h3>
+        <svg viewBox="0 0 300 96" class="ikona" aria-hidden="true"><line x1="10" y1="80" x2="290" y2="80" class="cara tenka c-text"/><rect x="110" y="40" width="60" height="40" rx="4" class="bedna"/><path class="cara c-tah" d="M170 60 L250 60"/><path class="hrot c-tah" d="M262 60 L248 53 L248 67Z"/><path class="cara c-treni" d="M110 78 L62 78"/><path class="hrot c-treni" d="M52 78 L64 72 L64 84Z"/><text x="222" y="50" font-size="13" fill="var(--h-tah)">F</text><text x="62" y="70" font-size="13" fill="var(--h-treni)">Fₜ</text></svg>
+        <ul><li>Jednotka newton (N); šipka: působiště, směr, velikost.</li><li>Stejný směr → síly se sčítají, opačný → odečítají.</li><li>Tření <i>F</i><sub>t</sub> = <i>f</i> · <i>F</i><sub>n</sub> působí proti pohybu.</li></ul></div>
+      <div class="tahak-karta"><h3>Newtonovy zákony</h3><ul><li><b>1.</b> Výsledná síla nulová → těleso stojí, nebo jede stálou rychlostí přímo (setrvačnost).</li><li><b>2.</b> Výsledná síla mění rychlost; <i>F</i> = <i>m</i> · <i>a</i>.</li><li><b>3.</b> Akce a reakce: síly jsou vždy ve dvojicích, stejně velké, opačného směru.</li></ul></div>
+      <div class="tahak-karta"><h3>Tíha a nakloněná rovina</h3><p class="m" style="font-size:1.15rem"><i>F</i><sub>G</sub> = <i>m</i> · <i>g</i>, <i>g</i> ≈ 10 N/kg</p><ul><li>Tíhu rozložíme na složku podél svahu (rozjíždí) a do podložky (určuje tření).</li><li>Se sklonem roste <i>F</i><sub>∥</sub>, klesá <i>F</i><sub>⊥</sub>.</li><li>Mezní úhel: tg <i>α</i><sub>m</sub> = <i>f</i>, nezávisí na hmotnosti.</li></ul></div>
+      <div class="tahak-karta"><h3>Energie</h3><p class="m" style="font-size:1.15rem"><i>E</i><sub>p</sub> = <i>m</i> · <i>g</i> · <i>h</i> · <i>E</i><sub>k</sub> = ½ · <i>m</i> · <i>v</i><sup>2</sup></p><ul><li>Jednotka joule (J).</li><li>Zákon zachování: energie nevzniká ani nezaniká, jen se mění.</li><li>Tření mění pohybovou energii na teplo.</li><li>Pád z výšky <i>h</i> bez tření: <i>v</i> = √(2 · <i>g</i> · <i>h</i>).</li></ul></div>
+      <div class="tahak-karta"><h3>Kyvadlo</h3><p class="m" style="font-size:1.15rem"><i>T</i> = 2π · √(<i>l</i> / <i>g</i>)</p><ul><li>Doba kmitu závisí na délce a na <i>g</i>, ne na hmotnosti.</li><li>4× delší kyvadlo → 2× delší kmit.</li><li>Délka 1 m → <i>T</i> ≈ 2 s.</li><li>Nahoře jen <i>E</i><sub>p</sub>, dole nejvíc <i>E</i><sub>k</sub>.</li></ul></div>
+      <div class="tahak-karta"><h3>Hybnost a srážky</h3><p class="m" style="font-size:1.15rem"><i>p</i> = <i>m</i> · <i>v</i></p><ul><li>Celková hybnost se při srážce zachová – vždy.</li><li>Pružná srážka: zachová se i pohybová energie.</li><li>Nepružná: tělesa se spojí, část energie → teplo a deformace.</li><li>Stejně těžká tělesa si při pružné srážce vymění rychlosti.</li></ul></div>
+    </div>
+  </section>
+
+  <!-- ============================================================ procvič -->
+  <section class="kapitola" id="procvic" data-faze="procvic" data-nazev="Procvič" data-popis="Otázky napříč lekcí" data-zvlast>
+    <header class="kap-hlava"><span class="kap-cislo">✏️</span><div><p class="kap-otazka">Otázky se pokaždé vygenerují znovu, s jinými čísly.</p><h2>Procvič si mechaniku</h2></div></header>
+    <div class="cviceni">
+      <div class="cviceni-hlava">
+        <div class="temata" id="cv-temata" role="group" aria-label="Téma otázek"></div>
+      </div>
+      <div class="karta-otazky">
+        <div id="plocha">
+          <p class="tema" id="cv-tema"></p>
+          <p class="zadani" id="cv-zadani" tabindex="-1"></p>
+          <div class="obrazek" id="cv-obrazek" hidden></div>
+          <div id="cv-moznosti"></div>
+          <p class="odezva" id="cv-odezva"></p>
+        </div>
+        <div class="napoveda" id="cv-napoveda" hidden></div>
+        <div class="ovladani cviceni-ovladani">
+          <button type="button" id="btnNapoveda">💡 Nápověda</button>
+          <button type="button" id="btnDalsi">Přeskočit →</button>
+          <span class="skore" id="cv-skore"></span>
+        </div>
+      </div>
+      <p class="vzorec-popis">Na odpověď můžeš klepnout, nebo zmáčknout klávesu 1–4. Po chybě se ukáže, v čem je záměna, a můžeš to zkusit znovu – do skóre se počítá jen odpověď napoprvé. Ve výpočtech počítej s <i>g</i> = 10 N/kg.</p>
+    </div>
+  </section>
+
+  <div data-kostra-zapati></div>
+</main>
+</div>
+
+<script src="physics_playground.js?v=1"></script>
+</body>
+</html>

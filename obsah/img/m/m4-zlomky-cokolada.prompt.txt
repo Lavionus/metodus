@@ -1,0 +1,6 @@
+Sada: IMG-m-02 · čokoláda
+Jedna celá hladká obdélníková tabulka čokolády při přesném pohledu shora na slonovinovém povrchu.
+Styl: teplý akvarel a kvaš s jemnou linkou, kakaově hnědá textura, zřetelný obdélníkový celek.
+Omezení: bez vylisovaných čtverečků, drážek, zlomů, obalu, rukou, textu, číslic, loga, rámečku a vodoznaku; dělicí čáry kreslí web.
+Alt: Celá hladká tabulka čokolády při pohledu shora.
+Generátor: OpenAI image_gen · 2026-09-24

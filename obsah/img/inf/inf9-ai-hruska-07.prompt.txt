@@ -1,0 +1,2 @@
+Common specification: inf9-ai-ovoce.prompt.txt
+Variant: Pale-yellow pear with very long narrow curved neck, compact base and long dark stem.

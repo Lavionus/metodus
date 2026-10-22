@@ -1,0 +1,26 @@
+Vygeneruj jeden obrázek a ulož ho jako arch-18.png do aktuální složky.
+
+Asset: icon sprite sheet for the Metodus Czech educational website. Match the painting style of vzor-styl.png and arch-01.png in this folder (watercolor and gouache with fine dark ink outlines, warm ivory paper #faf6ec, muted sage / jade / ochre / brick / slate-blue palette, soft daylight from upper left), SIMPLIFIED FOR SMALL ICONS exactly like arch-01.png: one bold, chunky object or tight group per icon, strong clear silhouette, slightly thicker ink outline, few details, flat even ivory background, readable when shrunk to 24 px.
+
+Layout (very important): square 1:1 image, an exact 4 × 4 grid of 16 equal invisible cells, 4 rows and 4 columns, read left to right, top to bottom. Each icon is centered in its own cell and fills about 70 % of the cell, with clear empty ivory space between icons; nothing may cross into a neighbouring cell. No grid lines, no frames, no borders, no text, no words, no labels, no watermark. Single letters, digits or math symbols only where the description asks for them.
+
+Icons in order:
+1. A town hall building with a flag.
+2. A ballot box with a voting paper going in.
+3. A blue flag with a circle of gold stars.
+4. A small drum with drumsticks.
+5. A treble clef with music notes.
+6. A music staff sheet with a few notes.
+7. Piano keys with two keys highlighted.
+8. A stack of flashcards with one flipped over.
+9. A box file organizer with card sets.
+10. A gold medal with a ribbon and a small diary.
+11. A computer keyboard.
+12. A stack of books with a quotation mark bookmark.
+13. A fish skeleton diagram.
+14. A teacher's desk with an apple and a chalkboard.
+15. A printer printing a worksheet.
+16. A presentation screen on a stand with a chart.
+
+Id: vo6_obec_kraj_stat vo8_ustava_volby eu_instituce hv_rytmus music_theory notes_reading hv_intervaly flashcards knihovna_sad edu_progress typing_trainer citation_generator rybi_kost ucitel pracovni_listy prezentace
+Generator: Codex CLI (vestavěný ImageGen)

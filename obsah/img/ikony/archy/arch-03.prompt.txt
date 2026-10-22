@@ -1,0 +1,26 @@
+Vygeneruj jeden obrázek a ulož ho jako arch-03.png do aktuální složky.
+
+Asset: icon sprite sheet for the Metodus Czech educational website. Match the painting style of vzor-styl.png and arch-01.png in this folder (watercolor and gouache with fine dark ink outlines, warm ivory paper #faf6ec, muted sage / jade / ochre / brick / slate-blue palette, soft daylight from upper left), SIMPLIFIED FOR SMALL ICONS exactly like arch-01.png: one bold, chunky object or tight group per icon, strong clear silhouette, slightly thicker ink outline, few details, flat even ivory background, readable when shrunk to 24 px.
+
+Layout (very important): square 1:1 image, an exact 4 × 4 grid of 16 equal invisible cells, 4 rows and 4 columns, read left to right, top to bottom. Each icon is centered in its own cell and fills about 70 % of the cell, with clear empty ivory space between icons; nothing may cross into a neighbouring cell. No grid lines, no frames, no borders, no text, no words, no labels, no watermark. Single letters, digits or math symbols only where the description asks for them.
+
+Icons in order:
+1. A big and a small similar triangle, the small one inside a magnifying glass.
+2. A stack of a cube, a cylinder and a cone with a measuring ruler.
+3. Wooden geometric solids: a sphere, a cube and a pyramid.
+4. A flat cardboard cube net partly folded into a box.
+5. A wooden cube and a longer cuboid block.
+6. A tin can cylinder with its circular lid beside it.
+7. A small pyramid, a cone and a ball made of wood.
+8. A balance scale with an x block on one side and weights on the other.
+9. Wooden letter tiles a and b with a plus tile between them.
+10. A coordinate grid with a rising straight line and a curved parabola.
+11. A fraction bar with x tiles above and below it, like a stacked fraction.
+12. A coordinate grid with two straight lines crossing at one marked point.
+13. Three bars of different heights with a dashed line across at their average height.
+14. A rising straight line graph next to a downward curved line graph.
+15. A bar chart with a magnifying glass.
+16. Two red dice and a small spinner wheel.
+
+Id: m9_podobnost geometrie_vzorce geo_tvary m5_site_teles m6_krychle_kvadr m8_valec m9_jehlan_kuzel rovnice m8_vyrazy grafy_funkci m9_lomene_vyrazy m9_soustavy m5_prumer m7_umernost m8_statistika kombinatorika
+Generator: Codex CLI (vestavěný ImageGen)

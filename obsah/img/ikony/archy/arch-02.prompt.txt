@@ -1,0 +1,26 @@
+Vygeneruj jeden obrázek a ulož ho jako arch-02.png do aktuální složky.
+
+Asset: icon sprite sheet for the Metodus Czech educational website. Match the painting style of vzor-styl.png and arch-01.png in this folder (watercolor and gouache with fine dark ink outlines, warm ivory paper #faf6ec, muted sage / jade / ochre / brick / slate-blue palette, soft daylight from upper left), SIMPLIFIED FOR SMALL ICONS exactly like arch-01.png: one bold, chunky object or tight group per icon, strong clear silhouette, slightly thicker ink outline, few details, flat even ivory background, readable when shrunk to 24 px.
+
+Layout (very important): square 1:1 image, an exact 4 × 4 grid of 16 equal invisible cells, 4 rows and 4 columns, read left to right, top to bottom. Each icon is centered in its own cell and fills about 70 % of the cell, with clear empty ivory space between icons; nothing may cross into a neighbouring cell. No grid lines, no frames, no borders, no text, no words, no labels, no watermark. Single letters, digits or math symbols only where the description asks for them.
+
+Icons in order:
+1. A wooden number line with a red minus sign on the left and a green plus sign on the right of a zero mark.
+2. A small wooden square block made of 3 by 3 little cubes with a radical root sign √ beside it.
+3. A round red alarm clock with clear hands.
+4. A metal measuring tape and a small glass measuring jug side by side.
+5. A sharp pencil drawing a straight line segment between two dots.
+6. A blue rectangle tile with a dashed border traced around it.
+7. A paper butterfly cut-out folded along its middle line with a small mirror.
+8. A metal drawing compass drawing a circle.
+9. A transparent protractor measuring an angle between two rays.
+10. A wooden triangle with a pencil.
+11. Two identical green triangles, one overlapping the other.
+12. A green parallelogram tile and a small wooden prism block.
+13. Two identical arrows pointing in opposite directions around a central dot (point symmetry).
+14. A circle drawn with a compass, its radius marked by a red line.
+15. A right triangle with small square tiles on each of its three sides.
+16. A right triangle ladder leaning against a wall with the angle at the ground marked.
+
+Id: m7_cela_cisla mocniny_odmocniny clock_learning prevody_jednotek m2_geo_zaklady m4_obvod_obsah m4_soumernost geometricke_konstrukce m6_uhly m6_trojuhelnik m7_shodnost m7_ctyruhelniky m7_stredova_soumernost m8_kruh m8_pythagoras trigonometrie
+Generator: Codex CLI (vestavěný ImageGen)

@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bakterie, viry a jednobuněčné organismy</title>
+  <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
+  <script src="../theme.js"></script>
+  <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
+  <script src="../rec.js"></script>
+  <script src="../uloha.js"></script>
+  <style>
+    .nazev-o { font-size: 1.25rem; font-weight: 700; }
+    .popis-o { color: var(--text-muted); max-width: 560px; line-height: 1.55; }
+    .mikroskop { width: min(260px, 66vw); }
+    .mikroskop .zorne-pole { fill: var(--bg-deep); stroke: var(--border-strong); stroke-width: 3; }
+    .mikro-img { width: min(280px, 72vw); aspect-ratio: 1; object-fit: contain; border-radius: 14px;
+      border: 1px solid var(--border); background: #f8f1df; }
+    .atlas-mikro { width: min(100%, 980px); margin: 0 0 20px; }
+    .atlas-mikro h2 { margin: 0 0 4px; font-size: 1.2rem; }
+    .atlas-mikro > p { margin: 0 0 12px; color: var(--text-muted); }
+    .mikro-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 9px; }
+    .mikro-grid details { min-width: 0; overflow: hidden; border: 1px solid var(--border); border-radius: 13px;
+      background: var(--bg-panel); }
+    .mikro-grid img { display: block; width: 100%; aspect-ratio: 1; object-fit: contain; background: #f8f1df; }
+    .mikro-grid summary { padding: 8px 9px; cursor: pointer; font-size: .82rem; font-weight: 750; }
+    .mikro-grid p { margin: 0; padding: 0 9px 10px; color: var(--text-muted); font-size: .75rem; line-height: 1.4; }
+    @media (max-width: 760px) { .mikro-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 360px) { .mikro-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <h1>🦠 Bakterie, viry a jednobuněčné organismy</h1>
+  <p class="podtitul">Pro 6. ročník: mikrosvět, rozdíl mezi virem a bakterií, prevence nákazy.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Virus, bakterie, prvok, nebo houba?</summary>
+    <div class="obsah">
+      <p>Většinu mikroorganismů neuvidíš pouhým okem, potřebuješ mikroskop. Přesto se od sebe velmi liší.
+        Rozhoduje hlavně to, <b>jestli jde o buňku</b> a <b>jestli má buňka pravé jádro</b>.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Bakterie</h3><p>Jedna buňka <b>bez pravého jádra</b> – DNA leží volně v cytoplazmě.
+          Množí se <b>dělením</b>. Patří sem i <b>sinice</b>, které umějí fotosyntézu.</p></article>
+        <article class="vyklad-karta"><h3>Virus</h3><p><b>Není buňka</b>, jen částice z dědičné informace a bílkovinného obalu.
+          Sám se množit neumí, množí se jen <b>uvnitř buňky hostitele</b>.</p></article>
+        <article class="vyklad-karta"><h3>Prvoci</h3><p>Jedna buňka <b>s jádrem</b>. Trepka se pohybuje <b>brvami</b>,
+          měňavka <b>panožkami</b>, krásnoočko <b>bičíkem</b> a má zelená barviva.</p></article>
+        <article class="vyklad-karta"><h3>Houby</h3><p><b>Kvasinka</b> je jednobuněčná houba, množí se pučením.
+          <b>Plíseň</b> tvoří vlákna, třeba na starém pečivu.</p></article>
+      </div>
+      <p>Mikroorganismy nejsou jen škodlivé. Mléčné bakterie dělají jogurt, kvasinky kypří těsto, bakterie v půdě
+        rozkládají odumřelá těla a z plísně se získává penicilin. Jiné ale způsobují nemoci.</p>
+      <p><b>Typická chyba:</b> „Na chřipku si vezmu antibiotika.“ Antibiotika působí na <b>bakterie</b>, na viry nezabírají.
+        Když je předepíše lékař, ber je přesně podle jeho pokynů. Před nákazou tě chrání mytí rukou, kýchání do kapesníku
+        či rukávu, uchovávání potravin v chladu a očkování.</p>
+      <aside class="zapamatuj">Bakterie = buňka bez jádra, množí se dělením. Virus = není buňka, množí se jen v hostiteli.
+        Antibiotika na viry nezabírají.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: kdo způsobuje chřipku?</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Co je původcem chřipky – virus, nebo bakterie? Pomůžou na ni antibiotika?</p>
+      <ol class="kroky">
+        <li>Vybavím si, co o chřipce vím: přenáší se kapénkami a každý rok se proti ní nabízí očkování.</li>
+        <li>Původcem chřipky je <b>virus chřipky</b> – nemoc má podle něj i jméno.</li>
+        <li>Virus není buňka, množí se uvnitř buněk našeho těla.</li>
+        <li>Antibiotika působí jen na bakterie, takže na chřipkový virus <b>nezabírají</b>.</li>
+      </ol>
+      <p class="vysledek-ukazky">Chřipku způsobuje <b>virus</b>; antibiotika na ni nepomůžou. Chrání tě mytí rukou, kýchání do kapesníku a očkování.</p>
+    </div>
+  </details>
+
+  <div class="rezimy" id="rezimy">
+    <button data-rezim="poznej" class="active">🔬 Poznej organismus</button>
+    <button data-rezim="virusBakterie">⚔️ Virus, či bakterie?</button>
+    <button data-rezim="uzitek">⚖️ Prospěšné, či škodlivé</button>
+    <button data-rezim="prevence">🧼 Jak se chránit</button>
+  </div>
+
+  <section class="atlas-mikro" aria-labelledby="atlas-mikro-nadpis">
+    <h2 id="atlas-mikro-nadpis">Modely mikrosvěta</h2>
+    <p>Jde o zvětšené výukové modely, ne mikrofotografie. Každý zvýrazňuje znaky důležité pro rozlišení.</p>
+    <div class="mikro-grid">
+      <details><summary>Bakterie</summary><img src="img/pr/pr6-mikro-bakterie.webp" alt="Model tyčinkovité bakterie s buněčnými obaly, nukleoidem, plazmidy, pili a bičíkem." width="768" height="768"><p>Buňka bez pravého jádra; DNA je volně v cytoplazmě.</p></details>
+      <details><summary>Obalený virus</summary><img src="img/pr/pr6-mikro-virus.webp" alt="Model obalené virové částice s povrchovými výběžky, bílkovinným obalem a RNA." width="768" height="768"><p>Není to buňka a bez hostitele se nedokáže množit.</p></details>
+      <details><summary>Trepka</summary><img src="img/pr/pr6-mikro-trepka.webp" alt="Model trepky s brvami, ústní rýhou, jádry a pulzujícími vakuolami." width="768" height="768"><p>Jednobuněčný prvok; pohybuje se pomocí brv.</p></details>
+      <details><summary>Měňavka</summary><img src="img/pr/pr6-mikro-menavka.webp" alt="Model měňavky s panožkami, jádrem, potravními a pulzující vakuolou." width="768" height="768"><p>Mění tvar a panožkami se pohybuje i přijímá potravu.</p></details>
+      <details><summary>Kvasinka</summary><img src="img/pr/pr6-mikro-kvasinka.webp" alt="Model pučících kvasinek s buněčnou stěnou, jádrem a velkou vakuolou." width="768" height="768"><p>Jednobuněčná houba; na obrázku je vidět pučení.</p></details>
+    </div>
+  </section>
+
+  <div class="plocha" id="plocha"></div>
+
+  <div class="ovladani">
+    <button class="hlavni" id="btnDalsi">Přeskočit →</button>
+    <span class="skore" id="skore"></span>
+  </div>
+
+  <p class="napoveda">
+    <b>Bakterie</b> jsou jednobuněčné organismy bez jádra – množí se dělením a některé jsou
+    pro nás užitečné. <b>Viry</b> nejsou buňky, samy se rozmnožovat neumí a potřebují hostitele.
+    Na viry antibiotika nezabírají.
+  </p>
+
+<script>
+const $ = id => document.getElementById(id);
+const skore = Uloha.skore('metodus_pr6_mikro', $('skore'));
+let rezim = 'poznej';
+
+const ORGANISMY = [
+  { n: 'bakterie', e: '🦠', img: 'img/pr/pr6-mikro-bakterie.webp', alt: 'Model tyčinkovité bakterie s nukleoidem a bičíkem.', popis: 'jednobuněčný organismus bez jádra, množí se dělením', typ: 'bakterie' },
+  { n: 'virus', e: '🧬', img: 'img/pr/pr6-mikro-virus.webp', alt: 'Model obalené virové částice s RNA.', popis: 'nebuněčná částice, která se množí jen uvnitř hostitelské buňky', typ: 'virus' },
+  { n: 'trepka velká', e: '💧', img: 'img/pr/pr6-mikro-trepka.webp', alt: 'Model trepky s brvami, jádry a vakuolami.', popis: 'jednobuněčný prvok pohybující se pomocí brv', typ: 'prvok' },
+  { n: 'měňavka', e: '🫧', img: 'img/pr/pr6-mikro-menavka.webp', alt: 'Model měňavky s panožkami, jádrem a vakuolami.', popis: 'prvok, který se pohybuje pomocí panožek', typ: 'prvok' },
+  { n: 'sinice', e: '🟢', popis: 'bakterie schopná fotosyntézy, přemnožuje se v teplé vodě', typ: 'bakterie' },
+  { n: 'kvasinka', e: '🍞', img: 'img/pr/pr6-mikro-kvasinka.webp', alt: 'Model pučících kvasinek s jádrem a vakuolou.', popis: 'jednobuněčná houba, kterou využíváme při kvašení', typ: 'houba' },
+  { n: 'krásnoočko', e: '🟩', popis: 'jednobuněčný organismus s bičíkem a zelenými barvivy', typ: 'prvok' },
+  { n: 'plíseň', e: '🧫', popis: 'houba tvořící vlákna, roste na starém pečivu', typ: 'houba' },
+];
+
+const NEMOCI = [
+  { n: 'chřipka', puvodce: 'virus' }, { n: 'covid-19', puvodce: 'virus' },
+  { n: 'plané neštovice', puvodce: 'virus' }, { n: 'spalničky', puvodce: 'virus' },
+  { n: 'streptokoková angína', puvodce: 'bakterie' }, { n: 'salmonelóza', puvodce: 'bakterie' },
+  { n: 'tuberkulóza', puvodce: 'bakterie' }, { n: 'zápal plic (bakteriální)', puvodce: 'bakterie' },
+  { n: 'borelióza', puvodce: 'bakterie' }, { n: 'vzteklina', puvodce: 'virus' },
+];
+
+const UZITEK = [
+  { t: 'kvašení mléka na jogurt a sýr', dobre: true, proc: 'mléčné bakterie mění mléko na jogurt' },
+  { t: 'kvasinky při pečení chleba', dobre: true, proc: 'kvasinky uvolňují oxid uhličitý a těsto kyne' },
+  { t: 'rozklad odumřelých těl v půdě', dobre: true, proc: 'bakterie vracejí živiny zpět do půdy' },
+  { t: 'bakterie v našich střevech', dobre: true, proc: 'pomáhají trávit a chrání před škodlivými bakteriemi' },
+  { t: 'salmonely ve špatně tepelně upraveném mase', dobre: false, proc: 'způsobují prudké střevní onemocnění' },
+  { t: 'plíseň na starém pečivu', dobre: false, proc: 'některé plísně vytvářejí jedovaté látky' },
+  { t: 'sinice v přehřáté vodě přehrady', dobre: false, proc: 'uvolňují toxiny a voda se nesmí pít ani koupat' },
+  { t: 'výroba antibiotik z plísní', dobre: true, proc: 'z plísně rodu Penicillium se získává penicilin' },
+];
+
+const PREVENCE = [
+  { t: 'Mýt si ruce mýdlem po příchodu domů', spravne: true, proc: 'většina nákaz se přenáší rukama' },
+  { t: 'Brát antibiotika na chřipku', spravne: false, proc: 'chřipku způsobuje virus a na ten antibiotika nezabírají' },
+  { t: 'Kýchat do kapesníku nebo rukávu', spravne: true, proc: 'kapénky se tak nešíří vzduchem po místnosti' },
+  { t: 'Nechat maso několik hodin v teple', spravne: false, proc: 'bakterie se v teple rychle množí' },
+  { t: 'Nechat se očkovat proti nemoci', spravne: true, proc: 'očkování naučí tělo bránit se dřív, než onemocní' },
+  { t: 'Pít vodu z přehrady se sinicemi', spravne: false, proc: 'toxiny sinic způsobují vyrážky a zažívací potíže' },
+  { t: 'Skladovat potraviny v lednici', spravne: true, proc: 'chlad zpomaluje množení bakterií' },
+  { t: 'Přestat brát antibiotika od lékaře, jakmile je ti trochu lépe', spravne: false, proc: 'antibiotika se berou přesně podle pokynů lékaře; nesprávné užívání pomáhá šířit bakterie odolné (rezistentní) vůči antibiotikům' },
+];
+
+/* ---- Poznej organismus ---------------------------------------------------------------- */
+function poznej() {
+  const p = $('plocha');
+  const u = Uloha.nahodne(ORGANISMY);
+  const jine = Uloha.zamichej(ORGANISMY.filter(x => x.n !== u.n)).slice(0, 3);
+  p.innerHTML = `<div class="zadani">O jaký organismus jde?</div>
+    <div class="karta">
+      ${u.img ? `<img class="mikro-img" src="${u.img}" alt="Obrázek mikroorganismu k určení." width="768" height="768">` : `<svg class="mikroskop" viewBox="0 0 200 200">
+        <circle class="zorne-pole" cx="100" cy="100" r="88"/>
+        <text x="100" y="118" font-size="56" text-anchor="middle">${u.e}</text>
+      </svg>`}
+      <div class="popis-o">${u.popis}</div></div>`;
+  const odezva = document.createElement('div');
+  odezva.className = 'odezva';
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: Uloha.zamichej([u, ...jine]).map(x => ({ klic: x.n, popis: x.n })),
+    spravnyKlic: u.n,
+    zpravaOk: `✅ ${u.n} – ${u.popis}.`,
+    zpravaChyba: 'Přečti popis znovu – má buňku, jádro, bičík?',
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+/* ---- Virus, či bakterie? ---------------------------------------------------------------- */
+function virusBakterie() {
+  const p = $('plocha');
+  const u = Uloha.nahodne(NEMOCI);
+  p.innerHTML = `<div class="zadani">Co je původcem této nemoci?</div>
+    <div class="karta"><div class="obrazek">🤒</div><div class="nazev-o">${u.n}</div></div>`;
+  const odezva = document.createElement('div');
+  odezva.className = 'odezva';
+  Uloha.vyber({
+    kam: p, odezva, trida: 'dve',
+    moznosti: [
+      { klic: 'virus', ikona: '🧬', popis: 'virus' },
+      { klic: 'bakterie', ikona: '🦠', popis: 'bakterie' },
+    ],
+    spravnyKlic: u.puvodce,
+    zpravaOk: u.puvodce === 'virus'
+      ? `✅ ${u.n}: původcem je virus – na viry antibiotika nezabírají.`
+      : `✅ ${u.n}: původcem je bakterie – lékař může předepsat antibiotika.`,
+    zpravaChyba: 'Zkus druhou možnost.',
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+/* ---- Prospěšné, či škodlivé -------------------------------------------------------------- */
+function uzitek() {
+  const p = $('plocha');
+  const u = Uloha.nahodne(UZITEK);
+  p.innerHTML = `<div class="zadani">Je to pro člověka prospěšné, nebo škodlivé?</div>
+    <div class="karta"><div class="obrazek">🔬</div><div class="popis-o">${u.t}</div></div>`;
+  const odezva = document.createElement('div');
+  odezva.className = 'odezva';
+  Uloha.vyber({
+    kam: p, odezva, trida: 'dve',
+    moznosti: [
+      { klic: 'ano', ikona: '💚', popis: 'prospěšné' },
+      { klic: 'ne', ikona: '☣️', popis: 'škodlivé' },
+    ],
+    spravnyKlic: u.dobre ? 'ano' : 'ne',
+    zpravaOk: `✅ ${u.proc}.`,
+    zpravaChyba: 'Zkus druhou možnost a přečti si vysvětlení.',
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+/* ---- Jak se chránit ---------------------------------------------------------------------- */
+function prevence() {
+  const p = $('plocha');
+  const u = Uloha.nahodne(PREVENCE);
+  p.innerHTML = `<div class="zadani">Je to správný postup?</div>
+    <div class="karta"><div class="obrazek">🧼</div><div class="popis-o">${u.t}</div></div>`;
+  const odezva = document.createElement('div');
+  odezva.className = 'odezva';
+  Uloha.vyber({
+    kam: p, odezva, trida: 'dve',
+    moznosti: [
+      { klic: 'ano', ikona: '✅', popis: 'Ano, správně' },
+      { klic: 'ne', ikona: '⚠️', popis: 'Ne, špatně' },
+    ],
+    spravnyKlic: u.spravne ? 'ano' : 'ne',
+    zpravaOk: `✅ ${u.proc}.`,
+    zpravaChyba: 'Zkus druhou možnost.',
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+const REZIMY = { poznej, virusBakterie, uzitek, prevence };
+function novaUloha() { REZIMY[rezim](); }
+
+document.querySelectorAll('#rezimy button').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('#rezimy button').forEach(x => x.classList.remove('active'));
+  b.classList.add('active');
+  rezim = b.dataset.rezim;
+  novaUloha();
+}));
+$('btnDalsi').addEventListener('click', novaUloha);
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === 'Enter') { e.preventDefault(); novaUloha(); }
+});
+novaUloha();
+</script>
+</body>
+</html>

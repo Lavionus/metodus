@@ -1,0 +1,7 @@
+IMG-aj-02 · tomato
+
+Use case: scientific-educational. Square vocabulary flashcard for language learning. Friendly realistic watercolor and gouache with delicate contours on warm ivory paper and subtle grounding shadow. Exactly one centered subject, fully visible with generous margin. No text, logo, brand, border, watermark or unrelated props. Subject: one whole ripe red tomato with a green calyx.
+
+Nástroj: OpenAI image_gen
+Datum: 2026-10-15
+Výstup: aj-slovicka-tomato.png, aj-slovicka-tomato.webp

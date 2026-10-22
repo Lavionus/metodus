@@ -1,0 +1,7 @@
+IMG-aj-02 · lion
+
+Square educational vocabulary card illustration for children, natural-history watercolor and gouache with delicate fine-ink contours, warm ivory paper background, muted sage green, jade, ochre and earthy brown palette, soft upper-left lighting, consistent refined Czech schoolbook style. One central subject only, centered with generous even 12 percent margins. No scenery except a very faint grounding shadow. No text, no letters, no labels, no arrows, no numbers, no border, no frame, no watermark. A male lion with a clear mane standing in three-quarter view, whole body visible, unmistakable silhouette.
+
+Nástroj: OpenAI image_gen
+Datum: 2026-09-25
+Výstup: aj-slovicka-lion.png, aj-slovicka-lion.webp

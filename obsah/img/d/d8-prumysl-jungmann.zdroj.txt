@@ -1,0 +1,8 @@
+Soubor: d8-prumysl-jungmann.png / d8-prumysl-jungmann.webp
+Původní dílo: Antonín Machek - Portrait of Josef Jungmann.jpg
+Autor: Antonín Machek
+Datum vzniku: 1833date QS:P571,+1833-00-00T00:00:00Z/9
+Zdroj: https://commons.wikimedia.org/wiki/File:Anton%C3%ADn_Machek_-_Portrait_of_Josef_Jungmann.jpg
+Licence: CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0)
+Staženo: 2026-10-21
+Úpravy: automatické natočení, odstranění metadat, zmenšení na nejvýše 1600 px; výuková WebP kopie 1152 px.

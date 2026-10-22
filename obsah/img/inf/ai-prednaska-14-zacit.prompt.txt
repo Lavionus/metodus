@@ -1,0 +1,2 @@
+Společné zadání: ai-prednaska.prompt.txt
+Začátečnice prochází kroky malý úkol, jasné zadání, kontrola výsledku, ověření ve zdrojích a oprava zadání.

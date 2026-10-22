@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🎼 Notová osnova – čtení not</title>
+<link rel="stylesheet" href="../common.css">
+<link rel="stylesheet" href="../vyuka.css">
+<link rel="stylesheet" href="../vyklad.css">
+<script src="../vyklad.js" defer></script>
+<script src="../theme.js"></script>
+<script src="../podpis.js" defer></script>
+<script src="../kostra.js" defer></script>
+<script src="../rec.js"></script>
+<script src="../uloha.js"></script>
+<style>
+  .osnova { display: block; width: 100%; max-width: 460px; height: auto; margin: 0 auto 10px; background: var(--bg-panel); border: 1px solid var(--border); border-radius: var(--radius); }
+  .zadani { text-align: center; }
+  .moznosti.nazvy button { min-width: 64px; font-size: 1.3rem; font-weight: 600; }
+</style>
+</head>
+<body>
+  <h1>🎼 Notová osnova – čtení not</h1>
+  <p class="podtitul">Hudební výchova: rychlé čtení not v houslovém klíči. Po chybě se dozvíš, na které lince nebo v které mezeře nota leží.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Jak číst noty v houslovém klíči</summary>
+    <div class="obsah">
+      <p><b>Notová osnova</b> má pět linek. Linky se počítají <b>zdola</b>: nejspodnější je 1. linka. Mezi linkami jsou
+        čtyři mezery. Nota leží buď <b>na lince</b> (linka prochází jejím středem), nebo <b>v mezeře</b> (mezi dvěma linkami).</p>
+      <p>Čím výš nota leží, tím vyšší tón zní. Noty jdou po stupních jako abeceda tónů: <b>c d e f g a h c</b>.
+        Každý krok nahoru znamená střídání: linka – mezera – linka.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Houslový klíč</h3><p>Začíná se kreslit na <b>2. lince</b>. Tam leží nota <b>g1</b>, proto se mu říká i klíč G.</p></article>
+        <article class="vyklad-karta"><h3>Noty na linkách</h3><p>Zdola: <b>e1, g1, h1, d2, f2</b>.</p></article>
+        <article class="vyklad-karta"><h3>Noty v mezerách</h3><p>Zdola: <b>f1, a1, c2, e2</b>.</p></article>
+        <article class="vyklad-karta"><h3>Mimo osnovu</h3><p><b>d1</b> visí pod osnovou, <b>c1</b> leží ještě níž na pomocné lince, <b>g2</b> je nad osnovou.</p></article>
+      </div>
+      <p>Nemusíš znát všechny noty zpaměti. Stačí jedna <b>záchytná nota</b> – g1 na 2. lince – a od ní počítáš po krocích
+        nahoru nebo dolů. Typická chyba je počítat linky shora; počítej vždy od spodní linky.</p>
+      <aside class="zapamatuj">Linky se počítají zdola. Na 2. lince je g1. Od ní jdi po krocích: linka, mezera, linka…</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: nota na 3. lince</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Nota leží na <b>3. lince</b> zdola. Jak se jmenuje?</p>
+      <ol class="kroky">
+        <li>Najdu záchytnou notu: na 2. lince je <b>g1</b>.</li>
+        <li>O krok výš je mezera nad 2. linkou – to je další tón, <b>a1</b>.</li>
+        <li>O další krok výš je 3. linka – to je další tón po a, tedy <b>h1</b>.</li>
+        <li>Zkontroluji podle řady not na linkách: e1, g1, <b>h1</b> – sedí.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Nota na 3. lince je <b>h1</b>.</p>
+    </div>
+  </details>
+
+  <div class="rezimy" id="rezimy">
+    <button data-rezim="poloha">📏 Linka, nebo mezera?</button>
+    <button data-rezim="zaklad" class="active">🟢 Noty c1–c2</button>
+    <button data-rezim="cely">🔵 Celý rozsah c1–g2</button>
+  </div>
+
+  <div class="plocha" id="plocha"></div>
+
+  <div class="ovladani">
+    <button class="hlavni" id="btnDalsi">Přeskočit →</button>
+    <span class="skore" id="skore"></span>
+  </div>
+
+  <p class="napoveda">Houslový klíč začíná na <b>2. lince</b> – tam leží nota <b>g1</b> (proto se mu říká i klíč G). Noty na linkách zdola: <b>e1, g1, h1, d2, f2</b>. Noty v mezerách zdola: <b>f1, a1, c2, e2</b>. Pod osnovou visí <b>d1</b>, ještě níž na pomocné lince je <b>c1</b>; nad osnovou je <b>g2</b>. Noty jdou po stupních: c d e f g a h c.</p>
+
+<script>
+const $ = id => document.getElementById(id);
+const skore = Uloha.skore('metodus_noty', $('skore'));
+let rezim = 'zaklad';
+
+/* krok 0 = c1 (pomocná linka pod osnovou), každý další krok = o notu výš.
+   Linky osnovy leží na krocích 2, 4, 6, 8, 10 (e1, g1, h1, d2, f2). */
+const NOTY = ['c1', 'd1', 'e1', 'f1', 'g1', 'a1', 'h1', 'c2', 'd2', 'e2', 'f2', 'g2'];
+const NAZVY = ['c', 'd', 'e', 'f', 'g', 'a', 'h'];
+
+function poloha(krok) {
+  if (krok === 0) return 'na pomocné lince pod osnovou';
+  if (krok === 1) return 'pod osnovou (pod 1. linkou)';
+  if (krok === 11) return 'nad osnovou (nad 5. linkou)';
+  return krok % 2 === 0 ? `na ${krok / 2}. lince` : `v ${(krok - 1) / 2}. mezeře`;
+}
+
+function osnova(krok) {
+  const mezera = 16, dole = 130;                      // y spodní linky (e1, krok 2)
+  const y = s => dole - (s - 2) * (mezera / 2);
+  let h = '';
+  for (let i = 0; i < 5; i++) h += `<line x1="40" y1="${dole - i * mezera}" x2="420" y2="${dole - i * mezera}" stroke="var(--text-muted)" stroke-width="1.5"/>`;
+  h += `<text x="44" y="${dole + 6}" font-size="80" fill="var(--text)">𝄞</text>`;
+  const x = 250;
+  // pomocné linky jen tam, kde nota leží na lince mimo osnovu (c1); d1 a g2 visí bez ní
+  for (let s = 0; s >= krok && s < 2; s -= 2) h += `<line x1="${x - 20}" y1="${y(s)}" x2="${x + 20}" y2="${y(s)}" stroke="var(--text-muted)" stroke-width="1.5"/>`;
+  for (let s = 12; s <= krok; s += 2) h += `<line x1="${x - 20}" y1="${y(s)}" x2="${x + 20}" y2="${y(s)}" stroke="var(--text-muted)" stroke-width="1.5"/>`;
+  const ny = y(krok), nahoru = krok < 6, sx = nahoru ? x + 10 : x - 10;
+  h += `<ellipse cx="${x}" cy="${ny}" rx="11" ry="8" fill="var(--accent)" transform="rotate(-18 ${x} ${ny})"/>`;
+  h += `<line x1="${sx}" y1="${ny}" x2="${sx}" y2="${nahoru ? ny - 55 : ny + 55}" stroke="var(--accent)" stroke-width="2"/>`;
+  // popisek nesmí prozradit polohu noty – ta je odpovědí na otázku
+  return `<svg class="osnova" viewBox="0 0 460 180" role="img" aria-label="Notová osnova s houslovým klíčem a jednou notou">${h}</svg>`;
+}
+
+function novaUloha() {
+  const p = $('plocha');
+  const rozsah = rezim === 'cely' ? [0, 11] : [0, 7];
+  const krok = Uloha.nahodneCislo(rozsah[0], rozsah[1]);
+  const nota = NOTY[krok];
+  const odezva = document.createElement('div');
+  odezva.className = 'odezva';
+  if (rezim === 'poloha') {
+    const k = Uloha.nahodneCislo(2, 10);               // jen noty uvnitř osnovy
+    p.innerHTML = `<div class="zadani">Leží tahle nota <b>na lince</b>, nebo <b>v mezeře</b>?</div>` + osnova(k);
+    Uloha.vyber({
+      kam: p, odezva,
+      moznosti: [{ klic: 'linka', popis: '➖ na lince' }, { klic: 'mezera', popis: '⬜ v mezeře' }],
+      spravnyKlic: k % 2 === 0 ? 'linka' : 'mezera',
+      zpravaOk: `✅ Ano – nota ${NOTY[k]} leží ${poloha(k)}.`,
+      zpravaChyba: 'Podívej se, jestli linka prochází středem noty (na lince), nebo je nota mezi dvěma linkami (v mezeře).',
+      poSpravne: skore.vyhodnot, dalsi: novaUloha,
+    });
+  } else {
+    p.innerHTML = `<div class="zadani">Jak se jmenuje tahle nota?</div>` + osnova(krok);
+    const pismeno = nota[0];
+    const jine = Uloha.zamichej(NAZVY.filter(n => n !== pismeno)).slice(0, 3);
+    Uloha.vyber({
+      kam: p, odezva, trida: 'nazvy',
+      moznosti: Uloha.zamichej([pismeno, ...jine]).map(n => ({ klic: n, popis: n })),
+      spravnyKlic: pismeno,
+      zpravaOk: `✅ ${nota} – leží ${poloha(krok)}.`,
+      zpravaChyba: `Tahle nota leží ${poloha(krok)}. Počítej od 2. linky, kde je g1.`,
+      poSpravne: skore.vyhodnot, dalsi: novaUloha,
+    });
+  }
+  p.appendChild(odezva);
+}
+
+$('rezimy').addEventListener('click', e => {
+  const b = e.target.closest('button[data-rezim]');
+  if (!b) return;
+  $('rezimy').querySelectorAll('button').forEach(x => x.classList.toggle('active', x === b));
+  rezim = b.dataset.rezim;
+  novaUloha();
+});
+$('btnDalsi').addEventListener('click', novaUloha);
+novaUloha();
+</script>
+</body>
+</html>

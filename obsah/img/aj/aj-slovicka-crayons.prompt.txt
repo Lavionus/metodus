@@ -1,0 +1,7 @@
+IMG-aj-02 · crayons
+
+Use case: scientific-educational. Square vocabulary flashcard for language learning. Friendly realistic watercolor and gouache with delicate contours on warm ivory paper and a subtle grounding shadow. Exactly one centered school object, fully visible with generous margin. No readable text, letters, numbers, equations, logo, brand, border, watermark or unrelated props. Subject: one compact fan-shaped set of six colored wax crayons, no box.
+
+Nástroj: OpenAI image_gen
+Datum: 2026-10-15
+Výstup: aj-slovicka-crayons.png, aj-slovicka-crayons.webp

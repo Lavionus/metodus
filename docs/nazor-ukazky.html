@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Názorné prvky – ukázky</title>
+  <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../nazor.css">
+  <script src="../theme.js"></script>
+  <script src="../mapy.js"></script>
+  <script src="../nazor.js"></script>
+  <style>
+    section { max-width: 920px; margin: 0 0 28px; padding: 14px 16px; background: var(--bg-panel); border: 1px solid var(--border); border-radius: 8px; }
+    section h2 { font-size: 1.05rem; margin-bottom: 4px; }
+    section p.api { font-family: monospace; font-size: .8rem; color: var(--text-muted); margin-bottom: 10px; }
+    .radek { display: flex; flex-wrap: wrap; gap: 18px; align-items: center; }
+    .motiv { margin: 0 0 18px; }
+  </style>
+</head>
+<body>
+  <h1>Názorné prvky Metodusu</h1>
+  <p class="podtitul">Knihovna nazor.js – stejný jev se na celém webu kreslí stejně. Stránka slouží k vývoji a kontrole vzhledu.</p>
+  <p class="motiv"><button type="button" onclick="document.documentElement.dataset.theme = document.documentElement.dataset.theme === 'light' ? '' : 'light'">Přepnout motiv</button></p>
+
+  <section><h2>Zlomek: koláč, proužek, osa</h2>
+    <p class="api">Nazor.kolac(4, 3) · Nazor.prouzek(4, 3) · Nazor.zlomekNaOse(3, 4)</p>
+    <div class="radek" id="zlomek"></div></section>
+
+  <section><h2>Číselná osa</h2>
+    <p class="api">Nazor.osa({ od: -5, do: 5, body: [...], skok: { z: -2, na: 3, popis: '+5' } })</p>
+    <div id="osa1"></div>
+    <p class="api">Nazor.osa({ od: 2, do: 3, krok: 0.1, body: [{ hodnota: 2.35 }] })</p>
+    <div id="osa2"></div></section>
+
+  <section><h2>Procenta</h2>
+    <p class="api">Nazor.procenta(36, 120, { jednotka: 'Kč' })</p>
+    <div id="procenta"></div></section>
+
+  <section><h2>Věta s větnými členy</h2>
+    <p class="api">Nazor.veta([['Malý','privlastek'],['chlapec','podmet'],['kreslí','prisudek'],['obrázek','predmet'],['doma','urceni']], { znacky: true })</p>
+    <p id="veta" style="font-size:1.4rem"></p>
+    <p id="legenda"></p></section>
+
+  <section><h2>Časová osa</h2>
+    <p class="api">Nazor.casovaOsa(udalosti, { pruhy: [{ id: 'cr', nazev: 'Česko' }, { id: 'svet', nazev: 'Svět' }] })</p>
+    <div id="cas"></div></section>
+
+  <section><h2>Mapa (mapy.js)</h2>
+    <p class="api">Nazor.mapa('afrika', [{ klic: 'egypt', lon: 30, lat: 26 }])</p>
+    <div id="mapa" style="max-width:420px"></div></section>
+
+<script>
+const $ = id => document.getElementById(id);
+$('zlomek').innerHTML = Nazor.kolac(4, 3) + Nazor.prouzek(4, 3) + Nazor.zlomekNaOse(3, 4);
+$('osa1').innerHTML = Nazor.osa({ od: -5, do: 5, body: [{ hodnota: -2, popis: '−2', druh: 'druhy' }, { hodnota: 3, popis: '3' }], skok: { z: -2, na: 3, popis: '+5' } });
+$('osa2').innerHTML = Nazor.osa({ od: 2, do: 3, krok: 0.1, jemny: 0.01, body: [{ hodnota: 2.35, popis: '2,35' }] });
+$('procenta').innerHTML = Nazor.procenta(36, 120, { jednotka: 'Kč' });
+$('veta').innerHTML = Nazor.veta([['Malý', 'privlastek'], ['chlapec', 'podmet'], ['kreslí', 'prisudek'], ['obrázek', 'predmet'], ['doma', 'urceni']], { znacky: true });
+$('legenda').innerHTML = Nazor.legenda();
+$('cas').innerHTML = Nazor.casovaOsa([
+  { rok: -776, nazev: 'První olympijské hry', pruh: 'svet' },
+  { rok: 476, nazev: 'Zánik Západořímské říše', pruh: 'svet' },
+  { rok: 863, nazev: 'Příchod Cyrila a Metoděje', pruh: 'cr' },
+  { rok: 1348, nazev: 'Založení univerzity v Praze', pruh: 'cr' },
+  { rok: 1492, nazev: 'Kolumbus v Americe', pruh: 'svet' },
+  { rok: 1918, nazev: 'Vznik Československa', pruh: 'cr' },
+], { pruhy: [{ id: 'cr', nazev: 'Česko' }, { id: 'svet', nazev: 'Svět' }] });
+$('mapa').innerHTML = Nazor.mapa('afrika', [{ klic: 'egypt', lon: 30, lat: 26 }]);
+</script>
+</body>
+</html>

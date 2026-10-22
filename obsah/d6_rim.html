@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Starověký Řím</title>
+  <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
+  <script src="../theme.js"></script>
+  <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
+  <script src="../rec.js"></script>
+  <script src="../uloha.js"></script>
+  <style>
+    .popis-d { color: var(--text-muted); max-width: 560px; line-height: 1.55; }
+    .nazev-d { font-size: 1.2rem; font-weight: 700; }
+    .osa-cas { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; align-items: center; min-height: 44px; }
+    .osa-cas .bod {
+      background: var(--accent-soft); border: 2px solid var(--accent); border-radius: 8px;
+      padding: 7px 11px; font-size: 0.85rem; font-weight: 600;
+    }
+    .osa-cas .sipka { color: var(--text-faint); }
+    .rekonstrukce { width: min(760px, 100%); margin: 18px auto; }
+    .rekonstrukce img { display:block; width:100%; border-radius:14px; }
+    .rekonstrukce figcaption { margin-top:8px; color:var(--text-muted); line-height:1.5; }
+    .stit-rekonstrukce { font-weight:800; color:var(--accent); text-transform:uppercase; letter-spacing:.05em; }
+    /* Fotografie v úloze „Poznej podle fotky“ */
+    .foto-ukol { display:block; width:min(440px,80vw); height:auto; aspect-ratio:4/3; object-fit:contain; border-radius:12px; background:var(--bg-deep,var(--bg-card)); }
+    /* Foto-atlas: co se z Říma dochovalo */
+    .foto-atlas { width:min(1120px,100%); margin:22px auto; }
+    .foto-atlas h2 { margin:0 0 5px; text-align:center; font-size:1.22rem; }
+    .foto-atlas > p { margin:0 auto 12px; max-width:820px; text-align:center; color:var(--text-muted,var(--text)); }
+    .foto-mrizka { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
+    .foto-karta { margin:0; overflow:hidden; border:1px solid var(--border); border-radius:14px; background:var(--bg-card); box-shadow:var(--shadow-sm); }
+    .foto-karta img { display:block; width:100%; height:auto; aspect-ratio:4/3; object-fit:cover; }
+    .foto-karta img.cele { object-fit:contain; background:#1d1c1a; }
+    .foto-karta figcaption { padding:10px 11px 12px; font-size:.9rem; line-height:1.35; }
+    .foto-karta strong { display:block; margin-bottom:3px; color:var(--accent); font-size:1rem; }
+    @media (max-width:820px) { .foto-mrizka { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+    @media (max-width:440px) { .foto-mrizka { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+  <h1>🏟️ Starověký Řím</h1>
+  <p class="podtitul">Pro 6.–7. ročník: od království přes republiku k císařství, stavitelství a vznik křesťanství.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Tři období římských dějin</summary>
+    <div class="obsah">
+      <p>Římské dějiny trvaly přes tisíc let. Abys v nich neztratil přehled, rozděl si je podle toho,
+        <b>kdo vládl</b>. To je otázka, kterou si u každé události polož jako první.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Království</h3><p>Podle pověsti založili Řím roku <b>753 př. n. l.</b>
+          bratři <b>Romulus a Remus</b>. Vládli králové.</p></article>
+        <article class="vyklad-karta"><h3>Republika</h3><p>Od roku <b>509 př. n. l.</b> stáli v čele dva volení
+          <b>konzulové</b> a <b>senát</b>. Konec přinesly občanské války; <b>Caesar</b> byl zavražděn 44 př. n. l.</p></article>
+        <article class="vyklad-karta"><h3>Císařství</h3><p>Roku <b>27 př. n. l.</b> se <b>Octavianus Augustus</b> stal
+          prvním císařem. Západořímská říše zanikla <b>476 n. l.</b> – tím končí starověk.</p></article>
+      </div>
+      <p>Římané byli skvělí <b>stavitelé</b>: akvadukty přiváděly vodu do měst, silnice spojovaly celou říši,
+        v Koloseu bojovali gladiátoři. Jejich jazyk <b>latina</b> je základem románských jazyků. V době císařství
+        se šířilo <b>křesťanství</b>; dlouho bylo pronásledované, až je roku <b>313</b> povolil Konstantin
+        Veliký milánským ediktem.</p>
+      <p>Typická chyba je u přelomu letopočtu: <b>před naším letopočtem</b> je dřív větší číslo,
+        <b>v našem letopočtu</b> menší číslo. Proto 44 př. n. l. bylo dřív než 27 př. n. l.</p>
+      <aside class="zapamatuj">Království → republika (konzulové, senát) → císařství (od Augusta). Konec západořímské
+        říše 476 = konec starověku.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: seřaď události přes přelom letopočtu</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Seřaď od nejstarší: milánský edikt (313 n. l.), zavraždění Caesara (44 př. n. l.),
+        vznik republiky (509 př. n. l.), zánik západořímské říše (476 n. l.).</p>
+      <ol class="kroky">
+        <li>Rozdělím události na dvě skupiny: <b>před naším letopočtem</b> (509, 44) a <b>v našem letopočtu</b> (313, 476).
+          Všechno „před“ bylo dřív než všechno „v našem“.</li>
+        <li>Před naším letopočtem je dřív větší číslo: nejdřív <b>vznik republiky (509)</b>, potom <b>Caesar (44)</b>.</li>
+        <li>V našem letopočtu je dřív menší číslo: nejdřív <b>milánský edikt (313)</b>, potom <b>zánik západořímské říše (476)</b>.</li>
+        <li>Kontrola smyslem: republika vznikla dřív, než Caesar žil, a konec říše patří až na úplný konec.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ vznik republiky (509 př. n. l.) → Caesar (44 př. n. l.) → milánský edikt (313) → zánik západořímské říše (476)</p>
+    </div>
+  </details>
+
+  <div class="rezimy" id="rezimy">
+    <button data-rezim="osobnosti" class="active">👤 Kdo to byl</button>
+    <button data-rezim="pojmy">📖 Pojmy a stavby</button>
+    <button data-rezim="udalosti">📜 Události a letopočty</button>
+    <button data-rezim="poradi">↕️ Seřaď události</button>
+    <button data-rezim="fotky">📷 Poznej podle fotky</button>
+  </div>
+
+  <div class="plocha" id="plocha"></div>
+
+  <div class="ovladani">
+    <button class="hlavni" id="btnDalsi">Přeskočit →</button>
+    <span class="skore" id="skore"></span>
+  </div>
+
+  <section aria-labelledby="forumNadpis"><h2 id="forumNadpis">Římské fórum</h2><figure class="rekonstrukce">
+    <img src="img/d/d6-rim-forum.webp" alt="Umělecká rekonstrukce římského fóra s chrámy, bazilikou, řečništěm, tržištěm a obyvateli Říma." width="1152" height="768" loading="lazy">
+    <figcaption><span class="stit-rekonstrukce">Rekonstrukce:</span> Fórum spojovalo politiku, soudnictví, náboženství i obchod. Rozlehlé baziliky sloužily veřejným jednáním, nikoli původně jako kostely.</figcaption>
+  </figure></section>
+
+  <section class="foto-atlas" id="atlasRim" aria-labelledby="dokladyNadpis">
+    <h2 id="dokladyNadpis">Co se z Říma dochovalo</h2>
+    <p>Skutečné stavby a předměty, které můžeš vidět dodnes. Podle čeho je poznáš?</p>
+    <div class="foto-mrizka">
+      <figure class="foto-karta" data-nazev="Koloseum" data-info="amfiteátr pro gladiátorské zápasy, dokončený roku 80 n. l."><img src="img/d/d6-rim-koloseum.webp" alt="Vnější zeď Kolosea v Římě se třemi patry oblouků a nejvyšším patrem s okny." width="1152" height="828" loading="lazy"><figcaption><strong>Koloseum</strong>Největší amfiteátr Říma (dokončen 80 n. l.) pro asi 50 000 diváků. Poznáš ho podle oválného tvaru a pater oblouků nad sebou.</figcaption></figure>
+      <figure class="foto-karta" data-nazev="akvadukt Pont du Gard" data-info="akvadukt přiváděl vodu do města Nîmes přes údolí řeky"><img src="img/d/d6-rim-pont-du-gard.webp" alt="Římský akvadukt Pont du Gard ve Francii se třemi řadami kamenných oblouků nad řekou." width="1152" height="860" loading="lazy"><figcaption><strong>Akvadukt Pont du Gard</strong>Most akvaduktu v dnešní Francii (1. stol. n. l.). Voda tekla žlabem úplně nahoře s nepatrným spádem – bez čerpadel.</figcaption></figure>
+      <figure class="foto-karta" data-nazev="římská silnice Via Appia" data-info="dlážděná silnice z Říma na jih Itálie, budovaná od roku 312 př. n. l."><img src="img/d/d6-rim-silnice.webp" alt="Dochovaná dlažba starověké silnice Via Appia z velkých plochých kamenů lemovaná stromy." width="1152" height="768" loading="lazy"><figcaption><strong>Via Appia</strong>„Královna silnic“ z roku 312 př. n. l. Pod dlažbou z velkých kamenů leží několik vrstev štěrku – proto silnice vydržela dodnes.</figcaption></figure>
+      <figure class="foto-karta" data-nazev="Pompeje" data-info="město zasypané popelem při výbuchu Vesuvu roku 79 n. l."><img src="img/d/d6-rim-pompeje.webp" alt="Ulice v ruinách Pompejí a v pozadí sopka Vesuv." width="1152" height="864" loading="lazy"><figcaption><strong>Pompeje</strong>Roku 79 n. l. je zasypal popel ze sopky Vesuv (vzadu). Díky tomu se zachovaly ulice, domy i malby – archeologové tu vidí každodenní život Římanů.</figcaption></figure>
+      <figure class="foto-karta" data-nazev="římská mince (denár)" data-info="stříbrná mince s hlavou císaře Augusta a jeho jménem"><img class="cele" src="img/d/d6-rim-mince.webp" alt="Stříbrný denár císaře Augusta: na líci hlava císaře s nápisem CAESAR, na rubu nápis a obětní nádoby." width="768" height="389" loading="lazy"><figcaption><strong>Denár císaře Augusta</strong>Stříbrná mince: na líci hlava a jméno panovníka. Mince šířily po celé říši podobu i jméno císaře.</figcaption></figure>
+      <figure class="foto-karta" data-nazev="nápis na Titově oblouku" data-info="latinský nápis: Senát a lid římský božskému Titovi"><img class="cele" src="img/d/d6-rim-napis-oblouk.webp" alt="Latinský nápis vytesaný velkými písmeny na Titově oblouku v Římě: SENATVS POPVLVSQVE ROMANVS DIVO TITO DIVI VESPASIANI F VESPASIANO AVGVSTO." width="1152" height="503" loading="lazy"><figcaption><strong>Nápis na Titově oblouku</strong>„Senát a lid římský božskému Titovi…“ Písmeno V se četlo i jako U. Latinská velká písmena jsou předlohou naší abecedy.</figcaption></figure>
+    </div>
+  </section>
+
+  <p class="napoveda">Řím prošel třemi obdobími: <b>království</b>, <b>republika</b> (v čele dva konzulové a senát) a <b>císařství</b>. Římané byli skvělí stavitelé – akvadukty, silnice a beton používáme dodnes.</p>
+
+<script>
+const $ = id => document.getElementById(id);
+const skore = Uloha.skore('metodus_d6_rim', $('skore'));
+let rezim = 'osobnosti';
+
+const OSOBNOSTI = [
+  {
+    n: "Gaius Iulius Caesar",
+    e: "⚔️",
+    o: "vojevůdce, který dobyl Galii a byl zavražděn v senátu roku 44 př. n. l."
+  },
+  {
+    n: "Octavianus Augustus",
+    e: "👑",
+    o: "první římský císař, za jeho vlády nastal dlouhý mír"
+  },
+  {
+    n: "Spartakus",
+    e: "⛓️",
+    o: "gladiátor, který vedl největší povstání otroků"
+  },
+  {
+    n: "Nero",
+    e: "🔥",
+    o: "císař, kterému se přisuzuje požár Říma a pronásledování křesťanů"
+  },
+  {
+    n: "Konstantin Veliký",
+    e: "✝️",
+    o: "císař, který povolil křesťanství milánským ediktem"
+  },
+  {
+    n: "Romulus a Remus",
+    e: "🐺",
+    o: "bájní bratři odkojení vlčicí, zakladatelé Říma"
+  }
+];
+const POJMY = [
+  {
+    n: "republika",
+    e: "🏛️",
+    o: "zřízení, kde v čele stáli dva volení konzulové a senát"
+  },
+  {
+    n: "legie",
+    e: "🛡️",
+    o: "základní jednotka římského vojska o několika tisících mužů"
+  },
+  {
+    n: "akvadukt",
+    e: "🌉",
+    o: "stavba přivádějící vodu do měst na kamenných obloucích"
+  },
+  {
+    n: "Koloseum",
+    e: "🏟️",
+    o: "obrovský amfiteátr v Římě pro gladiátorské zápasy"
+  },
+  {
+    n: "forum",
+    e: "🏙️",
+    o: "hlavní náměstí, středisko obchodu a politiky"
+  },
+  {
+    n: "limes romanus",
+    e: "🧱",
+    o: "opevněná hranice římské říše proti barbarům"
+  },
+  {
+    n: "gladiátor",
+    e: "⚔️",
+    o: "zápasník, který bojoval pro pobavení diváků v aréně"
+  },
+  {
+    n: "latina",
+    e: "🔤",
+    o: "jazyk Římanů, ze kterého vycházejí románské jazyky"
+  }
+];
+const UDALOSTI = [
+  {
+    rok: "753 př. n. l.",
+    t: "podle pověsti byl založen Řím",
+    poradi: 1
+  },
+  {
+    rok: "509 př. n. l.",
+    t: "v Římě vznikla republika",
+    poradi: 2
+  },
+  {
+    rok: "44 př. n. l.",
+    t: "byl zavražděn Gaius Iulius Caesar",
+    poradi: 3
+  },
+  {
+    rok: "27 př. n. l.",
+    t: "Octavianus se stal prvním císařem a začalo císařství",
+    poradi: 4
+  },
+  {
+    rok: "313 n. l.",
+    t: "milánský edikt povolil křesťanství",
+    poradi: 5
+  },
+  {
+    rok: "476 n. l.",
+    t: "zanikla západořímská říše a skončil starověk",
+    poradi: 6
+  }
+];
+
+/* ---- společná kvízová úloha nad dvojicí název + popis ---------------------- */
+function kvizNadPopisem(data, zadaniText, ikona) {
+  const p = $('plocha');
+  const u = Uloha.nahodne(data);
+  const jine = Uloha.zamichej(data.filter(x => x.n !== u.n)).slice(0, 3);
+  p.innerHTML = `<div class="zadani">${zadaniText}</div>
+    <div class="karta"><div class="obrazek">${u.e || ikona}</div>
+    <div class="popis-d">${u.o}</div></div>`;
+  const odezva = document.createElement('div');
+  odezva.className = 'odezva';
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: Uloha.zamichej([u, ...jine]).map(x => ({ klic: x.n, popis: x.n })),
+    spravnyKlic: u.n,
+    zpravaOk: `✅ ${u.n} – ${u.o}.`,
+    zpravaChyba: 'Zkus jinou možnost.',
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+const osobnosti = () => kvizNadPopisem(OSOBNOSTI, 'O koho jde?', '👤');
+const pojmy = () => kvizNadPopisem(POJMY, 'Který pojem odpovídá popisu?', '🏛️');
+
+/* ---- Události a letopočty --------------------------------------------------- */
+function udalosti() {
+  const p = $('plocha');
+  const u = Uloha.nahodne(UDALOSTI);
+  const jine = Uloha.zamichej(UDALOSTI.filter(x => x.rok !== u.rok)).slice(0, 3);
+  const podleUdalosti = Math.random() < 0.5;
+
+  p.innerHTML = podleUdalosti
+    ? `<div class="zadani">Kdy se to stalo?</div>
+       <div class="karta"><div class="obrazek">📜</div><div class="popis-d">${u.t}</div></div>`
+    : `<div class="zadani">Co se stalo v tomto roce?</div>
+       <div class="karta"><div class="obrazek">🗓️</div><div class="nazev-d">${u.rok}</div></div>`;
+  const odezva = document.createElement('div');
+  odezva.className = 'odezva';
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: Uloha.zamichej([u, ...jine]).map(x => ({ klic: x.rok, popis: podleUdalosti ? x.rok : x.t })),
+    spravnyKlic: u.rok,
+    zpravaOk: `✅ ${u.rok} – ${u.t}.`,
+    zpravaChyba: 'Zkus jinou možnost.',
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+/* ---- Seřaď události --------------------------------------------------------- */
+function poradi() {
+  const p = $('plocha');
+  const vyber = Uloha.zamichej(UDALOSTI).slice(0, 4).sort((a, b) => a.poradi - b.poradi);
+  p.innerHTML = '<div class="zadani">Seřaď události od nejstarší po nejnovější.</div>';
+  const osa = document.createElement('div');
+  osa.className = 'osa-cas';
+  const nabidka = document.createElement('div');
+  nabidka.className = 'nabidka';
+  const odezva = document.createElement('div');
+  odezva.className = 'odezva';
+  let dalsiIndex = 0, chyboval = false;
+
+  Uloha.zamichej(vyber).forEach(u => {
+    const b = document.createElement('button');
+    b.textContent = u.t;
+    b.dataset.t = u.t;
+    b.addEventListener('click', () => {
+      if (b.disabled) return;
+      if (u.t === vyber[dalsiIndex].t) {
+        if (dalsiIndex > 0) {
+          const s = document.createElement('span');
+          s.className = 'sipka';
+          s.textContent = '→';
+          osa.appendChild(s);
+        }
+        const el = document.createElement('span');
+        el.className = 'bod';
+        el.textContent = `${u.rok}: ${u.t}`;
+        osa.appendChild(el);
+        b.disabled = true;
+        dalsiIndex++;
+        odezva.className = 'odezva ok';
+        odezva.textContent = '✅ Správně!';
+        if (dalsiIndex === vyber.length) {
+          odezva.textContent = '🎉 Časová osa je hotová!';
+          skore.vyhodnot(!chyboval);
+          Uloha.posun(novaUloha, Uloha.PRODLEVA + 600);
+        }
+      } else {
+        chyboval = true;
+        Uloha.trhni(b);
+        odezva.className = 'odezva chyba';
+        odezva.textContent = 'Tahle událost je pozdější – hledej starší.';
+      }
+    });
+    nabidka.appendChild(b);
+  });
+  p.append(osa, nabidka, odezva);
+}
+
+/* ---- Poznej podle fotky (fotografie z atlasu pod úlohou) ------------------------ */
+const FOTKY = [...document.querySelectorAll('#atlasRim .foto-karta')].map(f => ({
+  n: f.dataset.nazev, info: f.dataset.info, img: f.querySelector('img'),
+}));
+function fotky() {
+  const p = $('plocha');
+  const u = Uloha.nahodne(FOTKY);
+  const jine = Uloha.zamichej(FOTKY.filter(x => x.n !== u.n)).slice(0, 3);
+  p.innerHTML = `<div class="zadani">Co je na fotografii?</div>
+    <div class="karta"><img class="foto-ukol" src="${u.img.getAttribute('src')}" alt="Fotografie k určení."
+      width="${u.img.getAttribute('width')}" height="${u.img.getAttribute('height')}"></div>`;
+  const odezva = document.createElement('div');
+  odezva.className = 'odezva';
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: Uloha.zamichej([u, ...jine]).map(x => ({ klic: x.n, popis: x.n })),
+    spravnyKlic: u.n,
+    zpravaOk: `✅ ${u.n} – ${u.info}.`,
+    zpravaChyba: 'Podívej se pozorně a zkus jinou možnost.',
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+const REZIMY = { osobnosti, pojmy, udalosti, poradi, fotky };
+function novaUloha() { REZIMY[rezim](); }
+
+document.querySelectorAll('#rezimy button').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('#rezimy button').forEach(x => x.classList.remove('active'));
+  b.classList.add('active');
+  rezim = b.dataset.rezim;
+  novaUloha();
+}));
+$('btnDalsi').addEventListener('click', novaUloha);
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === 'Enter') { e.preventDefault(); novaUloha(); }
+});
+novaUloha();
+</script>
+</body>
+</html>

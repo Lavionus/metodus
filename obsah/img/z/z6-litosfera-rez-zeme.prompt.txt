@@ -1,0 +1,8 @@
+Use case: scientific-educational
+Asset type: interactive geography lesson scene, 3:2 landscape
+Primary request: a scientifically accurate cutaway of planet Earth showing four clearly separable concentric layers: extremely thin rocky crust, very thick mantle, liquid outer core, solid inner core
+Scene/backdrop: isolated full globe with a large clean wedge cut away, warm ivory paper background
+Style/medium: refined watercolor and gouache educational illustration with delicate ink contours, consistent with a Czech school atlas
+Composition/framing: centered globe, generous margins, every layer large and visually distinct for HTML hotspots
+Color palette: natural blue-green surface, ochre-brown crust, rust and amber mantle, orange-gold outer core, pale yellow inner core
+Constraints: physically sensible proportions, no labels, no text, no letters, no arrows, no numbers, no legend, no border, no watermark

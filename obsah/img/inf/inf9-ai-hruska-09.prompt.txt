@@ -1,0 +1,2 @@
+Common specification: inf9-ai-ovoce.prompt.txt
+Variant: Bright-green broad pear with one healthy leaf attached to a curved stem.

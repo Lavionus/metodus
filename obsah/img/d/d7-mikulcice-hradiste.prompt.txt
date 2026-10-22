@@ -1,0 +1,5 @@
+Use case: historical-scene
+Asset type: Czech history lesson reconstruction, 3:2 landscape
+Primary request: aerial oblique reconstruction of 9th-century Great Moravian Mikulčice, river channels, timber-earth ramparts, gate, court, houses, workshops, small stone churches, boats and fields
+Style: refined watercolor and gouache archaeological reconstruction with delicate ink
+Constraints: no later castle, Gothic towers, modern buildings, fantasy, text, labels, numbers or watermark

@@ -1,0 +1,7 @@
+IMG-f-17 · Labuť
+
+Use case: scientific-educational. Square transparent constellation overlay for an interactive astronomy map. Elegant minimal pale blue-white celestial line art with a faint cool-blue glow. Genuine transparent RGBA background. One centered full figure with generous margin. No text, labels, stars, star dots, constellation connecting lines, border, logo, watermark or scenery. Subject: a swan flying with wings spread.
+
+Nástroj: OpenAI image_gen
+Datum: 2026-10-15
+Výstup: f9-souhvezdi-cygnus.png, f9-souhvezdi-cygnus.webp

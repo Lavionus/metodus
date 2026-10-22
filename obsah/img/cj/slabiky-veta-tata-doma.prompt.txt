@@ -1,0 +1,6 @@
+Sada: IMG-cj-09 · věta „Táta je doma.“
+Scéna: Tatínek odpočívá a čte si v křesle v útulném obývacím pokoji; čtvercový formát.
+Styl: teplý akvarel a kvaš, jemná inkoustová linka, slonovinové pozadí, tlumená šalvějová, jadeitová a okrová.
+Omezení: bez písmen, slov, popisků, log, vodoznaku, rámečku a bublin.
+Alt: Táta odpočívá doma v křesle.
+Generátor: OpenAI image_gen · 2026-09-24

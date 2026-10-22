@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Geologické děje</title>
+  <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
+  <script src="../theme.js"></script>
+  <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
+  <script src="../uloha.js"></script>
+  <style>
+    .uloha-text { max-width: 660px; font-size: 1.02rem; line-height: 1.62; }
+    .uloha-text b { color: var(--accent); }
+    .predmet { font-size: clamp(1.3rem, 5vw, 1.9rem); font-weight: 700; }
+    .lista { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; max-width: 780px;
+      color: var(--text-faint); font-size: 0.79rem; }
+    .lista span { background: var(--bg-control); border: 1px solid var(--border);
+      border-radius: 8px; padding: 5px 11px; }
+    .desky-prehled { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px;
+      width: min(100%, 1080px); margin: 0 0 18px; }
+    .desky-prehled figure { margin: 0; overflow: hidden; background: var(--bg-panel); border: 1px solid var(--border);
+      border-radius: 14px; }
+    .desky-prehled img { display: block; width: 100%; aspect-ratio: 2 / 1; object-fit: cover; }
+    .desky-prehled figcaption { padding: 9px 11px 11px; color: var(--text-muted); font-size: 0.8rem; line-height: 1.4; }
+    .desky-prehled b { display: block; color: var(--text); font-size: 0.9rem; margin-bottom: 3px; }
+    .cesko-prehled { width: min(100%, 1080px); margin: 0 0 20px; }
+    .cesko-prehled h2 { margin: 2px 0 10px; font-size: 1.05rem; }
+    .cesko-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+    .cesko-grid figure { margin: 0; overflow: hidden; background: var(--bg-panel); border: 1px solid var(--border); border-radius: 14px; }
+    .cesko-grid img { display: block; width: 100%; aspect-ratio: 3 / 2; object-fit: cover; }
+    .cesko-grid figcaption { padding: 9px 11px 11px; color: var(--text-muted); font-size: .79rem; line-height: 1.4; }
+    .cesko-grid b { display: block; color: var(--text); font-size: .9rem; margin-bottom: 3px; }
+    .typ-deje { display: inline-block; margin-top: 5px; padding: 2px 7px; border-radius: 999px; background: var(--bg-control); color: var(--accent); font-size: .7rem; font-weight: 700; }
+    @media (max-width: 720px) { .desky-prehled, .cesko-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <h1>🌋 Geologické děje</h1>
+  <p class="podtitul">Pro 9. ročník: pohyb litosférických desek, sopky, zemětřesení a zvětrávání.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Vnitřní a vnější geologické děje</summary>
+    <div class="obsah">
+      <p>Povrch Země se neustále mění, jen většinou velmi pomalu. Působí na něj dvě skupiny dějů.
+        <b>Vnitřní děje</b> pohání teplo z nitra Země: zvedají pohoří, tvoří sopky a způsobují zemětřesení.
+        <b>Vnější děje</b> pohání Slunce, voda, vítr, led a organismy: povrch rozrušují a obrušují.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Litosférické desky</h3><p>Litosféra (kůra + nejsvrchnější pevná část pláště) je rozlámaná
+          na desky, které se pohybují po plastické <b>astenosféře</b>. Pohání je <b>proudění hmoty v plášti</b>.</p></article>
+        <article class="vyklad-karta"><h3>Tři typy rozhraní</h3><p><b>Rozbíhavé</b> – desky se vzdalují, vzniká nová oceánská kůra
+          (oceánské hřbety). <b>Sbíhavé</b> – srážka, <b>subdukce</b>, pohoří, sopky, zemětřesení. <b>Transformní</b> – posun podél zlomu.</p></article>
+        <article class="vyklad-karta"><h3>Zemětřesení</h3><p>Náhlé uvolnění napětí v horninách podél <b>zlomu</b>. Ohnisko je v hloubce,
+          <b>epicentrum</b> na povrchu přímo nad ním. Otřesy zaznamenává seismograf.</p></article>
+        <article class="vyklad-karta"><h3>Vnější děje</h3><p><b>Zvětrávání</b> horninu rozruší na místě (mráz, voda, teplota, organismy),
+          <b>eroze</b> zvětralý materiál odnáší a jinde se <b>usazuje</b>.</p></article>
+      </div>
+      <p><b>Typická chyba:</b> plést si zvětrávání a erozi. Zvětrávání horninu rozpadá, eroze ji odnáší –
+        skalní města v Českém ráji vznikla spoluprací obou. V Česku nejsou činné sopky ani silná zemětřesení,
+        protože ležíme daleko od okrajů desek; Říp a České středohoří jsou pozůstatky dávných sopek.</p>
+      <aside class="zapamatuj">Vnitřní děje (desky, sopky, zemětřesení, vrásnění) povrch budují, vnější děje (zvětrávání, eroze,
+        usazování) ho obrušují. Nejvíc se děje na okrajích desek.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: co se děje na okraji desek</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Hustší oceánská deska se podsouvá pod pevninskou desku. Jak se tento jev jmenuje, o jaké rozhraní jde
+        a co na něm vzniká?</p>
+      <ol class="kroky">
+        <li>Desky se k sobě pohybují a srážejí – jde o <b>sbíhavé rozhraní</b>.</li>
+        <li>Podsouvání jedné desky pod druhou se nazývá <b>subdukce</b>.</li>
+        <li>Na místě podsouvání se vytvoří hluboký <b>oceánský příkop</b>; tření desek uvolňuje napětí – vznikají <b>zemětřesení</b>.</li>
+        <li>Nad podsouvající se deskou vzniká v hloubce <b>magma</b>, které stoupá k povrchu – vytvoří se <b>pás sopek</b>.</li>
+        <li>Všechny tyto jevy pohání teplo z nitra Země – jsou to <b>vnitřní děje</b>.</li>
+      </ol>
+      <p class="vysledek-ukazky">Subdukce na sbíhavém rozhraní: vzniká příkop, zemětřesení a pás sopek; jde o vnitřní geologické děje.
+        Takto je lemován například ohnivý kruh okolo Tichého oceánu.</p>
+    </div>
+  </details>
+
+  <div class="rezimy" id="rezimy">
+    <button data-rezim="kviz1" class="active">🌍 Litosférické desky</button>
+    <button data-rezim="kviz2">🌋 Sopky</button>
+    <button data-rezim="kviz3">📳 Zemětřesení</button>
+    <button data-rezim="kviz4">🏔️ Vnější děje</button>
+  </div>
+
+  <section class="desky-prehled" aria-label="Tři typy rozhraní litosférických desek">
+    <figure>
+      <img src="img/pr/pr9-desky-hrbet.webp" alt="Řez středooceánským hřbetem, kde vystupuje plášť a vzniká nová oceánská kůra." width="1152" height="576">
+      <figcaption><b>Rozbíhavé rozhraní</b>Desky se vzdalují, magma vystupuje a tuhne v novou oceánskou kůru.</figcaption>
+    </figure>
+    <figure>
+      <img src="img/pr/pr9-desky-subdukce.webp" alt="Řez subdukční zónou, kde se oceánská deska podsouvá pod kontinentální desku s vulkanickým obloukem." width="1152" height="576">
+      <figcaption><b>Sbíhavé rozhraní</b>Hustší oceánská deska se podsouvá; vzniká příkop, zemětřesení a pás sopek.</figcaption>
+    </figure>
+    <figure>
+      <img src="img/pr/pr9-desky-transform.webp" alt="Řez transformním zlomem se dvěma bloky kůry a stranově posunutým říčním korytem." width="1152" height="576">
+      <figcaption><b>Transformní rozhraní</b>Desky se posouvají podél zlomu; kůra nevzniká ani nezaniká.</figcaption>
+    </figure>
+  </section>
+
+  <section class="cesko-prehled" aria-labelledby="ceskoTitle">
+    <h2 id="ceskoTitle">Geologické děje v české krajině</h2>
+    <div class="cesko-grid">
+      <figure><img src="img/pr/pr9-geologie-pravcicka.webp" alt="Mohutný pískovcový oblouk Pravčické brány nad lesem." width="1152" height="864"><figcaption><b>Pravčická brána</b>Odolnější pískovec zůstal jako oblouk, okolní horninu rozrušilo zvětrávání a odnesla eroze.<span class="typ-deje">vnější děje</span></figcaption></figure>
+      <figure><img src="img/pr/pr9-geologie-macocha.webp" alt="Pohled do hluboké vápencové propasti Macocha se svislými skalními stěnami." width="768" height="1024"><figcaption><b>Propast Macocha</b>Voda rozpouštěla vápenec; zřícením stropu velké krasové dutiny se otevřela propast.<span class="typ-deje">vnější děje</span></figcaption></figure>
+      <figure><img src="img/pr/pr9-geologie-rip.webp" alt="Osamělá zalesněná hora Říp vystupující z rovné zemědělské krajiny." width="1152" height="662"><figcaption><b>Říp</b>Odolná sopečná hornina je pozůstatkem třetihorního vulkanismu, který okolní eroze obnažila.<span class="typ-deje">vnitřní i vnější</span></figcaption></figure>
+      <figure><img src="img/pr/pr9-geologie-komorni.webp" alt="Tmavé sopečné horniny vystupující v lese na Komorní hůrce." width="1152" height="769"><figcaption><b>Komorní hůrka</b>Horniny a strusky připomínají jednu z nejmladších sopek na území Česka.<span class="typ-deje">vnitřní děje</span></figcaption></figure>
+      <figure><img src="img/pr/pr9-geologie-adrspach.webp" alt="Vysoké členité pískovcové věže Adršpašských skal vystupující nad lesem." width="1152" height="769"><figcaption><b>Adršpašské skály</b>Pukliny, mráz a tekoucí voda rozčlenily pískovcovou tabuli na věže a soutěsky.<span class="typ-deje">vnější děje</span></figcaption></figure>
+      <figure><img src="img/pr/pr9-geologie-luznice.webp" alt="Letecký pohled na výrazně meandrující tok Lužnice v ploché mokřadní krajině." width="1152" height="864"><figcaption><b>Meandry Lužnice</b>Řeka na vnější straně oblouku břeh podemílá a na vnitřní straně ukládá sedimenty.<span class="typ-deje">vnější děje</span></figcaption></figure>
+    </div>
+  </section>
+
+  <div class="plocha" id="plocha"></div>
+
+  <div class="ovladani">
+    <button class="hlavni" id="btnDalsi">Přeskočit →</button>
+    <span class="skore" id="skore"></span>
+  </div>
+
+  <div class="lista"><span>vnitřní děje – pohyb desek, sopky, zemětřesení, vrásnění</span><span>vnější děje – zvětrávání, eroze, transport a usazování</span></div>
+
+  <p class="napoveda"><b>Litosféra</b> – zemská kůra spolu s nejsvrchnější pevnou částí pláště – je rozlámaná na <b>litosférické desky</b>, které se pohybují po plastické <b>astenosféře</b> (části svrchního pláště). Na jejich okrajích vznikají <b>sopky, zemětřesení a pohoří</b>. Vnější děje naopak povrch <b>obrušují</b> – zvětráváním a erozí.</p>
+
+<script>
+const $ = id => document.getElementById(id);
+const skore = Uloha.skore('metodus_pr9_geologicke_deje', $('skore'));
+let rezim = 'kviz1';
+function odezvaEl() { const d = document.createElement('div'); d.className = 'odezva'; return d; }
+
+const SADY = {
+  "kviz1": [
+    {
+      "q": "Co pohání pohyb litosférických desek?",
+      "a": "proudění hmoty v zemském plášti",
+      "b": [
+        "otáčení Země kolem její osy",
+        "přitažlivost Měsíce a Slunce",
+        "mořské proudy v oceánech"
+      ]
+    },
+    {
+      "q": "Co vzniká při srážce dvou desek?",
+      "a": "pohoří, sopky a zemětřesení",
+      "b": [
+        "pouště, duny a slaná jezera",
+        "nížiny a široká říční údolí",
+        "nic, desky se jen zastaví"
+      ]
+    },
+    {
+      "q": "Co je subdukce?",
+      "a": "podsouvání jedné desky pod druhou",
+      "b": [
+        "vzdalování dvou desek od sebe",
+        "posun desek podél zlomu",
+        "rozpad horniny zvětráváním"
+      ]
+    },
+    {
+      "q": "Co vzniká tam, kde se desky od sebe vzdalují?",
+      "a": "oceánské hřbety a nová kůra",
+      "b": [
+        "hluboké oceánské příkopy",
+        "vysoká vrásová pohoří",
+        "rozsáhlé pouště a ledovce"
+      ]
+    },
+    {
+      "q": "Jak vysvětluje teorie deskové tektoniky tvar kontinentů?",
+      "a": "dnešní pevniny vznikly rozpadem prakontinentu Pangea",
+      "b": [
+        "kontinenty se nikdy nepohnuly z místa",
+        "pevniny vznikly dopadem velkého meteoritu",
+        "tvar pevnin je od vzniku Země stále stejný"
+      ]
+    },
+    {
+      "q": "Kde leží ohnivý kruh se sopkami a zemětřeseními?",
+      "a": "okolo Tichého oceánu",
+      "b": [
+        "ve střední Evropě kolem Alp",
+        "v Atlantiku podél rovníku",
+        "na pobřeží Antarktidy"
+      ]
+    },
+    {
+      "q": "Co jsou vrásy?",
+      "a": "zvlněné vrstvy hornin vzniklé bočním tlakem",
+      "b": [
+        "hluboké praskliny v kůře vzniklé tahem",
+        "sopečné kužely navršené z popela a lávy",
+        "usazeniny uložené na dně mělkého moře"
+      ]
+    },
+    {
+      "q": "Co je zlom?",
+      "a": "porušení hornin s posunem podél plochy",
+      "b": [
+        "tenká vrstva písku mezi horninami",
+        "druh minerálu s lesklými plochami",
+        "kráter na vrcholu vyhaslé sopky"
+      ]
+    }
+  ],
+  "kviz2": [
+    {
+      "q": "Jak se nazývá roztavená hornina pod povrchem?",
+      "a": "magma",
+      "b": [
+        "láva",
+        "popel",
+        "tuf"
+      ]
+    },
+    {
+      "q": "Co je sopečný kráter?",
+      "a": "otvor, kterým vystupuje láva a plyny",
+      "b": [
+        "podzemní jezero pod sopkou",
+        "druh tmavé sopečné horniny",
+        "vlna šířící se při zemětřesení"
+      ]
+    },
+    {
+      "q": "Co je pyroklastický proud?",
+      "a": "rychlá lavina žhavého popela a plynů",
+      "b": [
+        "pomalý proud lávy tekoucí korytem",
+        "bahnotok sjíždějící po vydatném dešti",
+        "obří mořská vlna vyvolaná otřesem"
+      ]
+    },
+    {
+      "q": "Proč jsou sopečné oblasti hustě osídlené?",
+      "a": "sopečná půda je velmi úrodná",
+      "b": [
+        "je tam vždy úplně bezpečno",
+        "nebývají tam žádná zemětřesení",
+        "je tam příjemně chladné podnebí"
+      ]
+    },
+    {
+      "q": "Co je gejzír?",
+      "a": "horký pramen, který pravidelně tryská",
+      "b": [
+        "druh nízké štítové sopky s řídkou lávou",
+        "řeka vytékající z ledovce v horách",
+        "teplý mořský proud u pobřeží Islandu"
+      ]
+    },
+    {
+      "q": "Jsou v Česku činné sopky?",
+      "a": "ne, jen pozůstatky dávných sopek (Říp, České středohoří)",
+      "b": [
+        "ano, několik činných sopek je v Krušných horách",
+        "ano, jedna činná sopka je na jižní Moravě",
+        "ano, pod Prahou je stále činná podzemní sopka"
+      ]
+    },
+    {
+      "q": "Co vzniká z lávy bohaté na plyny?",
+      "a": "sopečná pemza a popel",
+      "b": [
+        "žula a jiné hlubinné horniny",
+        "vápenec z mořských schránek",
+        "kamenná sůl a sádrovec"
+      ]
+    },
+    {
+      "q": "Jak se lidé chrání před sopečnou činností?",
+      "a": "sledováním otřesů a plynů a včasnou evakuací",
+      "b": [
+        "stavbou vysokých hrází kolem sopky",
+        "zalitím kráteru velkým množstvím vody",
+        "nijak, sopky se předpovídat nedají"
+      ]
+    }
+  ],
+  "kviz3": [
+    {
+      "q": "Jak vzniká zemětřesení?",
+      "a": "náhlým uvolněním napětí v horninách podél zlomu",
+      "b": [
+        "prudkým deštěm, který podmáčí svahy",
+        "pohybem mraků a náhlou změnou tlaku",
+        "pomalým zvětráváním hornin na povrchu"
+      ]
+    },
+    {
+      "q": "Co je epicentrum?",
+      "a": "místo na povrchu přímo nad ohniskem otřesu",
+      "b": [
+        "střed Země přímo pod místem otřesu",
+        "nejhlubší bod zlomu uvnitř kůry",
+        "okraj desky, kde se otřes zastaví"
+      ]
+    },
+    {
+      "q": "Čím se měří síla zemětřesení?",
+      "a": "seismografem, hodnotí se magnitudem",
+      "b": [
+        "teploměrem, hodnotí se ve stupních",
+        "barometrem, hodnotí se tlakem",
+        "vlhkoměrem, hodnotí se v procentech"
+      ]
+    },
+    {
+      "q": "Co je tsunami?",
+      "a": "vlna vyvolaná podmořským zemětřesením nebo sesuvem",
+      "b": [
+        "silný vítr nad otevřeným mořem při bouři",
+        "teplý mořský proud podél pobřeží",
+        "pravidelný příliv způsobený Měsícem"
+      ]
+    },
+    {
+      "q": "Jak se stavějí domy v seizmických oblastech?",
+      "a": "pružně a s tlumiči, aby vydržely otřesy",
+      "b": [
+        "co nejtěžší, z masivního kamene",
+        "bez základů, přímo na povrchu",
+        "jen ze skla, aby byly lehké"
+      ]
+    },
+    {
+      "q": "Co dělat při zemětřesení uvnitř budovy?",
+      "a": "schovat se pod pevný nábytek dál od oken",
+      "b": [
+        "běžet k oknu a podívat se ven",
+        "rychle sjet výtahem do přízemí",
+        "vyběhnout na balkon pod širé nebe"
+      ]
+    },
+    {
+      "q": "Proč jsou v Česku zemětřesení slabá?",
+      "a": "ležíme daleko od okrajů litosférických desek",
+      "b": [
+        "nemáme tu žádné pevné a tvrdé horniny",
+        "je tu málo činných sopek a gejzírů",
+        "před otřesy nás chrání hradba Alp"
+      ]
+    },
+    {
+      "q": "Co je seismická vlna?",
+      "a": "vlnění, kterým se otřes šíří horninou",
+      "b": [
+        "vlna na hladině moře za větru",
+        "zvuková vlna šířící se vzduchem",
+        "světelný záblesk při bouřce"
+      ]
+    }
+  ],
+  "kviz4": [
+    {
+      "q": "Co je zvětrávání?",
+      "a": "rozrušování hornin teplotou, vodou, ledem a organismy",
+      "b": [
+        "tuhnutí magmatu hluboko pod povrchem Země",
+        "pohyb litosférických desek po astenosféře",
+        "vznik zemětřesení na okrajích desek"
+      ]
+    },
+    {
+      "q": "Jak působí mráz na horniny?",
+      "a": "voda v puklinách zamrzne, zvětší objem a horninu roztrhá",
+      "b": [
+        "mráz horninu zpevní a zcela utěsní její pukliny",
+        "mráz horninu postupně rozpustí na jemný prach",
+        "mráz na horniny nemá vůbec žádný vliv"
+      ]
+    },
+    {
+      "q": "Co je eroze?",
+      "a": "odnos zvětralého materiálu vodou, větrem nebo ledovcem",
+      "b": [
+        "usazování jemného materiálu na dně jezer",
+        "tuhnutí lávy na povrchu po výbuchu sopky",
+        "vrásnění vrstev hornin bočním tlakem"
+      ]
+    },
+    {
+      "q": "Co vytvořilo skalní města v Českém ráji?",
+      "a": "zvětrávání a eroze pískovce",
+      "b": [
+        "sopečná činnost v třetihorách",
+        "dávné ledovcové jezero",
+        "těžba kamene v minulosti"
+      ]
+    },
+    {
+      "q": "Jak působí ledovec na krajinu?",
+      "a": "vyhlubuje údolí do tvaru U a odnáší materiál",
+      "b": [
+        "zasypává údolí pískem navátým z pouští",
+        "na krajinu nemá žádný viditelný vliv",
+        "zvyšuje hory tím, že na ně přidává led"
+      ]
+    },
+    {
+      "q": "Co je půda?",
+      "a": "svrchní vrstva vzniklá zvětráváním hornin a činností organismů",
+      "b": [
+        "jen rozdrcená hornina bez živých organismů v ní",
+        "usazenina, která vzniká jen na dně moří a jezer",
+        "druh minerálu, který se těží v hlubokých dolech"
+      ]
+    },
+    {
+      "q": "Proč je vodní eroze na polích problém?",
+      "a": "odnáší úrodnou ornici, která vzniká stovky let",
+      "b": [
+        "zvyšuje výnosy, protože přináší vodu",
+        "zpevňuje půdu a brání jejímu odnosu",
+        "na úrodu nemá žádný vliv"
+      ]
+    },
+    {
+      "q": "Co pomáhá proti erozi půdy?",
+      "a": "meze, remízky, vhodné plodiny a orba po vrstevnici",
+      "b": [
+        "větší pole bez mezí, remízků a stromů",
+        "orba po spádnici, tedy dolů ze svahu",
+        "vykácení stromů a keřů na okrajích polí"
+      ]
+    }
+  ]
+};
+const NAPOVEDY = {
+  "kviz1": "Desky se od sebe vzdalují, srážejí, nebo se posouvají podél sebe.",
+  "kviz2": "Sopka vzniká tam, kde se magma dostane k povrchu.",
+  "kviz3": "Zemětřesení vzniká náhlým uvolněním napětí v hornině.",
+  "kviz4": "Vnější děje pohání voda, vítr, led a teplotní změny."
+};
+
+function kviz(klic) {
+  const p = $('plocha');
+  const u = Uloha.nahodne(SADY[klic]);
+  p.innerHTML = `<div class="zadani uloha-text">${u.q}</div>`
+    + (u.p ? `<div class="karta"><div class="predmet">${u.p}</div></div>` : '');
+  const odezva = odezvaEl();
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: Uloha.zamichej([u.a, ...u.b]).map(t => ({ klic: t, popis: t })),
+    spravnyKlic: u.a,
+    zpravaOk: `✅ ${u.a}` + (u.proc ? ` – ${u.proc}` : ''),
+    zpravaChyba: NAPOVEDY[klic],
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+const REZIMY = {
+  kviz1: () => kviz('kviz1'), kviz2: () => kviz('kviz2'),
+  kviz3: () => kviz('kviz3'), kviz4: () => kviz('kviz4'),
+};
+function novaUloha() { REZIMY[rezim](); }
+
+document.querySelectorAll('#rezimy button').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('#rezimy button').forEach(x => x.classList.remove('active'));
+  b.classList.add('active');
+  rezim = b.dataset.rezim;
+  novaUloha();
+}));
+$('btnDalsi').addEventListener('click', novaUloha);
+novaUloha();
+</script>
+</body>
+</html>

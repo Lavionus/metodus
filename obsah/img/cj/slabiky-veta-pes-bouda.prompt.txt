@@ -1,0 +1,6 @@
+Sada: IMG-cj-09 · věta „Pes leží u boudy.“
+Scéna: Jeden pes klidně leží těsně vedle dřevěné psí boudy na zahradě; čtvercový formát.
+Styl: teplý akvarel a kvaš, jemná inkoustová linka, slonovinové pozadí, tlumená šalvějová, jadeitová a okrová.
+Omezení: bez písmen, slov, popisků, log, vodoznaku, rámečku a bublin.
+Alt: Pes leží vedle své boudy.
+Generátor: OpenAI image_gen · 2026-09-24

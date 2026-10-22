@@ -1,0 +1,2 @@
+Společné zadání: ai-prednaska.prompt.txt
+Sestavení osobního asistenta z modulů role, preferencí, znalostí a tónu; vaření a jazykové doučování.

@@ -1,0 +1,2 @@
+Společné zadání: pr8-prvni-pomoc.prompt.txt
+Scéna: pomocník se před přiblížením zastaví a rozhlédne po rizicích; na cestě leží cyklista, kolo a překážka.

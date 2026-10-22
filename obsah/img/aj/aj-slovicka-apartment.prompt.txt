@@ -1,0 +1,7 @@
+IMG-aj-02 · apartment
+
+Use case: scientific-educational. Asset type: square home vocabulary card for children. Gentle watercolor and gouache with delicate fine-ink contours, warm ivory paper background, muted sage, jade, ochre and earthy palette, soft upper-left lighting, consistent refined Czech schoolbook style. One central subject only, centered with generous even 12 percent margins. No people. No text, letters, labels, arrows, numbers, border, frame, logo, or watermark. One compact modern European apartment building in three-quarter view, four storeys with repeated windows and small balconies, one clear entrance, isolated as one subject, unmistakable.
+
+Nástroj: OpenAI image_gen
+Datum: 2026-09-25
+Výstup: aj-slovicka-apartment.png, aj-slovicka-apartment.webp

@@ -1,0 +1,8 @@
+Use case: background-extraction
+Asset type: draggable transparent cat sprite.
+Reference images: aj-slovicka-cat.png as the identity and exact style reference; aj4-den-snida.png confirms the project watercolor treatment.
+Primary request: Preserve realistic tabby anatomy, restrained watercolor washes, fine pencil and ink detail, muted natural colors, ivory-paper illustration character and non-cartoon proportions. Avoid large cartoon eyes, glossy 3D surfaces, heavy saturation or plush-toy proportions.
+Subject: Exactly one compact seated brown-grey tabby cat, whole body and one curled tail visible, slight three-quarter view, friendly alert expression.
+Scene/backdrop: Genuinely transparent background with clean alpha edges and no floor or shadow patch.
+Composition/framing: Square canvas, small transparent margin, readable at 80 px.
+Constraints: no objects, text, border or watermark; preserve real transparency.

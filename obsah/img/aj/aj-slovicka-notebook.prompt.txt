@@ -1,0 +1,7 @@
+IMG-aj-02 · notebook
+
+Use case: scientific-educational. Asset type: square vocabulary card for children. Natural-history watercolor and gouache with delicate fine-ink contours, warm ivory paper background, muted sage green, jade, ochre and earthy palette, soft upper-left lighting, consistent refined Czech schoolbook style. One central subject only, centered with generous even 12 percent margins. No scenery except a faint grounding shadow. No text, letters, labels, arrows, numbers, border, frame, logo, or watermark. One closed spiral-bound school notebook with a plain muted blue cover and a small elastic band, no text or markings, three-quarter view, unmistakable.
+
+Nástroj: OpenAI image_gen
+Datum: 2026-09-25
+Výstup: aj-slovicka-notebook.png, aj-slovicka-notebook.webp

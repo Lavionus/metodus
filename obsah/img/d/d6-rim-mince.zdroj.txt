@@ -1,0 +1,8 @@
+Soubor: d6-rim-mince.png / d6-rim-mince.webp
+Původní dílo: Denarius of Augustus - C Antistus Reginus.png
+Autor: AdhesiveRegex
+Datum vzniku: 2025-08-19
+Zdroj: https://commons.wikimedia.org/wiki/File:Denarius_of_Augustus_-_C_Antistus_Reginus.png
+Licence: CC0 (http://creativecommons.org/publicdomain/zero/1.0/deed.en)
+Staženo: 2026-10-21
+Úpravy: automatické natočení, odstranění metadat, zmenšení na nejvýše 1600 px; výuková WebP kopie 768 px.

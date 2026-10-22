@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Literatura 20. století</title>
+  <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
+  <script src="../theme.js"></script>
+  <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
+  <script src="../rec.js"></script>
+  <script src="../uloha.js"></script>
+  <style>
+    .ukazka { max-width: 640px; text-align: left; line-height: 1.65; background: var(--bg-elevated);
+      border-left: 4px solid var(--accent); border-radius: 8px; padding: 13px 17px; font-style: italic; }
+    .dilo { font-size: clamp(1.3rem, 5vw, 1.9rem); font-weight: 700; }
+    .uloha-text { max-width: 660px; font-size: 1.02rem; line-height: 1.62; }
+    .uloha-text b { color: var(--accent); }
+    .osa { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; max-width: 760px;
+      color: var(--text-faint); font-size: 0.78rem; }
+    .osa span { background: var(--bg-control); border: 1px solid var(--border); border-radius: 6px;
+      padding: 4px 9px; transition: border-color 0.2s, color 0.2s; }
+    /* osa žije: po odpovědi se rozsvítí období, do kterého dílo patří */
+    .osa span.sviti { border-color: var(--accent); color: var(--text); background: var(--accent-soft); }
+    .pomucka .skupina { flex: 1 1 235px; }
+    .pomucka .skupina.sviti { box-shadow: 0 0 0 2px var(--accent-soft); }
+    .foto-atlas { width:min(1120px,100%); margin:22px auto; }
+    .foto-atlas h2 { margin:0 0 5px; text-align:center; font-size:1.22rem; }
+    .foto-atlas > p { margin:0 auto 12px; max-width:820px; text-align:center; color:var(--text-muted,var(--text)); }
+    .foto-atlas h3 { margin:16px 0 8px; font-size:1.02rem; }
+    .foto-mrizka { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
+    .foto-karta { margin:0; overflow:hidden; border:1px solid var(--border); border-radius:14px; background:var(--bg-card); box-shadow:var(--shadow-sm); }
+    .foto-karta img { display:block; width:100%; height:auto; aspect-ratio:4/3; object-fit:cover; }
+    .foto-karta img.cele { object-fit:contain; background:#1d1c1a; }
+    .foto-karta figcaption { padding:10px 11px 12px; font-size:.9rem; line-height:1.35; }
+    .foto-karta strong { display:block; margin-bottom:3px; color:var(--accent); font-size:1rem; }
+    @media (max-width:820px) { .foto-mrizka { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+    @media (max-width:440px) { .foto-mrizka { grid-template-columns:1fr; } }
+    .portrety img.cele { aspect-ratio:3/4; }
+    .pravidlo .portret-mini { flex:0 0 auto; width:64px; height:80px; object-fit:cover; object-position:50% 25%; border-radius:8px; border:1px solid var(--border); }
+  </style>
+</head>
+<body>
+  <h1>📘 Literatura 20. století</h1>
+  <p class="podtitul">Pro 9. ročník: čeští i světoví autoři, jejich díla a literární směry.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Literatura jako odpověď na svou dobu</summary>
+    <div class="obsah">
+      <p>Literaturu 20. století si nemusíš pamatovat jako seznam jmen. Spisovatelé v ní reagují na to, co
+        prožívali: dvě světové války, okupaci, komunistickou nesvobodu i naději po roce 1989. Když víš,
+        <b>co se v té době dělo</b>, dokážeš dílo zařadit i podle jeho tématu.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>1920–1938</h3><p>Po první válce zklamání a hledání nového jazyka: Haškův <i>Švejk</i>, hravý <b>poetismus</b> (Nezval, Seifert), Čapkovo varování před zneužitím techniky (<i>R. U. R.</i>).</p></article>
+        <article class="vyklad-karta"><h3>Válka a 40. léta</h3><p>Okupace, holokaust, totalita: <i>Deník Anne Frankové</i>, Orwellův román <i>1984</i>.</p></article>
+        <article class="vyklad-karta"><h3>1948–1989</h3><p>Cenzura a v 50. letech předepsaný <b>socialistický realismus</b>; uvolnění v 60. letech (Hrabal, Kundera), pak normalizace.</p></article>
+        <article class="vyklad-karta"><h3>Tři cesty knihy</h3><p><b>Oficiální</b> literatura prošla cenzurou. <b>Samizdat</b> se opisoval potají doma. <b>Exil</b> vydával knihy v zahraničí.</p></article>
+      </div>
+      <p>Proč existovaly tři cesty? Za komunismu mohlo v nakladatelství vyjít jen to, co prošlo cenzurou.
+        Zakázaní autoři proto psali „do šuplíku“, pro samizdat, nebo emigrovali. Například Havlova <i>Audience</i>
+        (1975) vznikla v době normalizace, kdy autor oficiálně publikovat nesměl.</p>
+      <p>Častá chyba je hádat dobu podle autora, kterého si nepamatuješ. Spolehlivější je <b>téma</b>: zákopy a
+        Švejk → po první válce, roboti a mloci → 20. a 30. léta, ukrývání a transporty → 40. léta,
+        procesy a prověrky → 50. léta.</p>
+      <aside class="zapamatuj">Dílo zařadíš podle doby, na kterou reaguje: válka, okupace, cenzura, uvolnění, normalizace. Za komunismu vycházely knihy oficiálně, v samizdatu, nebo v exilu.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: poznej dílo z ukázky</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">Z jakého díla je věta: <b>„Tak nám zabili Ferdinanda,“ řekla posluhovačka panu Švejkovi…</b></p>
+      <ol class="kroky">
+        <li>Všimnu si jména postavy: <b>Švejk</b>. To je hlavní hrdina Haškova románu.</li>
+        <li>Ověřím dobu: zabití Ferdinanda je atentát na následníka trůnu v roce 1914, se kterým začíná první světová válka.</li>
+        <li>Jazyk je hovorový a vypravěč se na válku dívá s humorem – to odpovídá satiře.</li>
+        <li>Román vyšel ve 20. letech jako ohlas první světové války.</li>
+      </ol>
+      <p class="vysledek-ukazky">✅ Jaroslav Hašek: Osudy dobrého vojáka Švejka – satira na první světovou válku.</p>
+    </div>
+  </details>
+
+  <div class="rezimy" id="rezimy">
+    <button data-rezim="autorDilo" class="active">✍️ Autor a dílo</button>
+    <button data-rezim="ukazky">📖 Poznej ukázku</button>
+    <button data-rezim="smery">🎨 Literární směry</button>
+    <button data-rezim="kontext">🕰️ Doba a literatura</button>
+  </div>
+
+  <div class="plocha" id="plocha"></div>
+
+  <div class="ovladani">
+    <button class="hlavni" id="btnDalsi">Přeskočit →</button>
+    <button id="btnNapoveda">💡 Nápověda</button>
+    <span class="serie" id="serie"></span>
+    <span class="skore" id="skore"></span>
+  </div>
+
+  <div class="osa" id="osa">
+    <span data-obdobi="1920">1920s avantgarda a poetismus</span>
+    <span data-obdobi="1930">1930s ohrožení demokracie</span>
+    <span data-obdobi="1940">1940s válka a odboj</span>
+    <span data-obdobi="1950">1950s cenzura a exil</span>
+    <span data-obdobi="1960">1960s uvolnění, nová vlna</span>
+    <span data-obdobi="1970">1970–80s samizdat a exil</span>
+    <span data-obdobi="1989">po 1989 svobodné vydávání</span>
+  </div>
+
+  <div class="pomucka" id="pomucka">
+    <div class="skupina" data-h="oficialni">
+      <h2>🏛️ Oficiální literatura</h2>
+      <div class="znaky"><span class="znak">prošla cenzurou, vyšla v nakladatelství</span></div>
+      <p class="popis">Za komunismu mohlo vyjít jen to, co prošlo <b>cenzurou</b>.
+        V 50. letech byl navíc předepsaný <b>socialistický realismus</b>.</p>
+    </div>
+    <div class="skupina" data-h="samizdat">
+      <h2>📄 Samizdat</h2>
+      <div class="znaky"><span class="znak">opisováno na stroji, šířeno potají</span></div>
+      <p class="popis">Zakázaní autoři vydávali <b>doma a načerno</b> — v pár desítkách
+        průklepových kopií. Slovo znamená „vydávám si sám“.</p>
+    </div>
+    <div class="skupina" data-h="exil">
+      <h2>✈️ Exilová literatura</h2>
+      <div class="znaky"><span class="znak">vydáváno v zahraničí (Toronto, Kolín)</span></div>
+      <p class="popis">Autoři, kteří <b>emigrovali</b> nebo doma vyjít nesměli. Knihy se
+        pak pašovaly zpátky do Československa.</p>
+    </div>
+  </div>
+
+  <section class="foto-atlas" aria-labelledby="autoriNadpis">
+    <h2 id="autoriNadpis">Tváře autorů</h2>
+    <p>Dobové fotografie spisovatelů z úloh. Po správné odpovědi se portrét autora objeví i v kartičce s vysvětlením.</p>
+    <div class="foto-mrizka portrety">
+      <figure class="foto-karta"><img class="cele" src="img/cj/cj9-lit20-capek.webp" alt="Černobílý portrét Karla Čapka ve třicátých letech, sedí se skloněnou hlavou." width="768" height="939" loading="lazy"><figcaption><strong>Karel Čapek</strong>R. U. R., Válka s Mloky. Varoval před zneužitím techniky a před totalitou; slovo robot vymyslel jeho bratr Josef.</figcaption></figure>
+      <figure class="foto-karta"><img class="cele" src="img/cj/cj9-lit20-hasek.webp" alt="Ateliérový portrét mladého Jaroslava Haška v obleku s vestou." width="458" height="617" loading="lazy"><figcaption><strong>Jaroslav Hašek</strong>Osudy dobrého vojáka Švejka. Satirou zesměšnil rakouskou armádu a válečnou mašinerii.</figcaption></figure>
+      <figure class="foto-karta"><img class="cele" src="img/cj/cj9-lit20-vancura.webp" alt="Portrét Vladislava Vančury v klobouku, dobová fotografie v hnědém tónu." width="768" height="1024" loading="lazy"><figcaption><strong>Vladislav Vančura</strong>Rozmarné léto, Markéta Lazarová. Mistr bohatého, hravého jazyka; za odboj ho nacisté popravili roku 1942.</figcaption></figure>
+      <figure class="foto-karta"><img class="cele" src="img/cj/cj9-lit20-nezval.webp" alt="Vítězslav Nezval z profilu na dobové fotografii z roku 1934." width="718" height="1110" loading="lazy"><figcaption><strong>Vítězslav Nezval</strong>Edison. Hlavní básník poetismu a později surrealismu.</figcaption></figure>
+      <figure class="foto-karta"><img class="cele" src="img/cj/cj9-lit20-wolker.webp" alt="Mladý Jiří Wolker v obleku s motýlkem na maturitní fotografii z roku 1919." width="694" height="1007" loading="lazy"><figcaption><strong>Jiří Wolker</strong>Těžká hodina. Sociálně laděná poezie; zemřel ve 24 letech na tuberkulózu.</figcaption></figure>
+      <figure class="foto-karta"><img class="cele" src="img/cj/cj9-lit20-seifert.webp" alt="Usměvavý starší Jaroslav Seifert s bílými vlasy na fotografii z roku 1981." width="768" height="768" loading="lazy"><figcaption><strong>Jaroslav Seifert</strong>Maminka. Básník od poetismu po vzpomínkovou lyriku, jediný český nositel Nobelovy ceny za literaturu (1984).</figcaption></figure>
+      <figure class="foto-karta"><img class="cele" src="img/cj/cj9-lit20-hrabal.webp" alt="Bohumil Hrabal v pruhovaném tričku se usmívá a gestikuluje, fotografie z roku 1985." width="768" height="1054" loading="lazy"><figcaption><strong>Bohumil Hrabal</strong>Ostře sledované vlaky. Vypravěč „pábitelů“ a dlouhých souvětí; část díla vyšla jen v samizdatu a exilu.</figcaption></figure>
+      <figure class="foto-karta"><img class="cele" src="img/cj/cj9-lit20-skvorecky.webp" alt="Usměvavý Josef Škvorecký v brýlích a saku se zelenou kravatou." width="566" height="1024" loading="lazy"><figcaption><strong>Josef Škvorecký</strong>Zbabělci. Po roce 1968 emigroval do Kanady a v Torontu vedl exilové nakladatelství 68 Publishers.</figcaption></figure>
+      <figure class="foto-karta"><img class="cele" src="img/cj/cj9-lit20-kundera.webp" alt="Černobílý portrét zamyšleného Milana Kundery z roku 1980." width="768" height="1081" loading="lazy"><figcaption><strong>Milan Kundera</strong>Žert. Od roku 1975 žil ve Francii; jeho romány doma nesměly vycházet.</figcaption></figure>
+      <figure class="foto-karta"><img class="cele" src="img/cj/cj9-lit20-havel.webp" alt="Václav Havel v obleku s kravatou na fotografii z roku 1990." width="768" height="1005" loading="lazy"><figcaption><strong>Václav Havel</strong>Audience. Autor absurdních her, mluvčí Charty 77, po roce 1989 prezident.</figcaption></figure>
+      <figure class="foto-karta"><img class="cele" src="img/cj/cj9-lit20-pavel.webp" alt="Ota Pavel v kožené bundě na černobílé fotografii z časopisu z roku 1973." width="768" height="987" loading="lazy"><figcaption><strong>Ota Pavel</strong>Smrt krásných srnců. Povídky o tátovi, rybaření a válce; původně sportovní novinář.</figcaption></figure>
+      <figure class="foto-karta"><img class="cele" src="img/cj/cj9-lit20-frankova.webp" alt="Anne Franková sedí ve školní lavici s perem v ruce a usmívá se, fotografie z roku 1940." width="768" height="880" loading="lazy"><figcaption><strong>Anne Franková</strong>Deník Anne Frankové. Psala ho v úkrytu v Amsterdamu; zahynula v koncentračním táboře Bergen-Belsen.</figcaption></figure>
+      <figure class="foto-karta"><img class="cele" src="img/cj/cj9-lit20-orwell.webp" alt="Černobílý portrét George Orwella s knírkem." width="768" height="1041" loading="lazy"><figcaption><strong>George Orwell</strong>1984. Román o totalitním státu, který sleduje a přepisuje dějiny.</figcaption></figure>
+      <figure class="foto-karta"><img class="cele" src="img/cj/cj9-lit20-saint-exupery.webp" alt="Mladý Antoine de Saint-Exupéry v obleku s motýlkem na portrétu z roku 1920." width="768" height="1035" loading="lazy"><figcaption><strong>Antoine de Saint-Exupéry</strong>Malý princ. Pilot a spisovatel; z průzkumného letu roku 1944 se nevrátil.</figcaption></figure>
+      <figure class="foto-karta"><img class="cele" src="img/cj/cj9-lit20-hemingway.webp" alt="Ernest Hemingway na pasové fotografii z roku 1923." width="768" height="1024" loading="lazy"><figcaption><strong>Ernest Hemingway</strong>Stařec a moře. Úsporný styl krátkých vět; Nobelova cena 1954.</figcaption></figure>
+    </div>
+  </section>
+
+  <p class="napoveda">
+    Literatura 20. století reaguje na obě světové války, na nesvobodu i na naději.
+    Kdy dílo vzniklo, se dá odhadnout z <b>tématu</b>: zákopy a Švejk → po první válce,
+    roboti a mloci → 30. léta, ukrývání a transporty → 40. léta, procesy a prověrky → 50. léta.
+    Klávesy: <kbd>H</kbd> nápověda · <kbd>Enter</kbd> další.
+  </p>
+
+<script>
+const $ = id => document.getElementById(id);
+const skore = Uloha.skore('metodus_cj9_literatura_20', $('skore'));
+let rezim = 'autorDilo';
+let uloha = null, posledni = null, serie = 0, napovedaVidet = false;
+function odezvaEl() { const d = document.createElement('div'); d.className = 'odezva'; return d; }
+
+/* Kartička s vysvětlením potřebuje čas na přečtení; po chybě ještě delší. */
+const PRODLEVA = napoprve => (napoprve ? 2400 : 3400);
+
+/* Časová osa i přehled pod úlohou žijí – po odpovědi se v nich rozsvítí,
+   kam probírané dílo patří. */
+function rozsvit({ ob, h } = {}) {
+  $('osa').querySelectorAll('span').forEach(el =>
+    el.classList.toggle('sviti', el.dataset.obdobi === ob));
+  $('pomucka').querySelectorAll('.skupina').forEach(el =>
+    el.classList.toggle('sviti', el.dataset.h === h));
+}
+
+function hotovo(p, napoprve, co) {
+  skore.vyhodnot(napoprve);
+  serie = napoprve ? serie + 1 : 0;
+  $('serie').textContent = serie >= 3 ? '🔥 série ' + serie : '';
+  rozsvit(co);
+  const tip = p.querySelector('.pravidlo.tip');
+  if (tip) tip.remove();
+}
+
+function pravidloEl(znak, html) {
+  const el = document.createElement('div');
+  el.className = 'pravidlo ok';
+  el.innerHTML = `<span class="znak">${znak}</span><div>${html}</div>`;
+  return el;
+}
+
+/* Nápověda zužuje, neprozrazuje: ztlumí polovinu špatných možností. */
+function ztlum(p, spravnyKlic) {
+  const spatne = [...p.querySelectorAll('.moznosti button')]
+    .filter(b => b.dataset.klic !== spravnyKlic && !b.disabled);
+  Uloha.zamichej(spatne).slice(0, Math.ceil(spatne.length / 2))
+    .forEach(b => { b.disabled = true; b.style.opacity = '0.25'; });
+}
+
+/* Co se v té které době dělo – kartička tím dílo zasazuje do kontextu. */
+const DOBA = {
+  '1920': 'Po první světové válce: zklamání ze staré Evropy a hledání nového jazyka.',
+  '1930': 'Třicátá léta: sílící fašismus a obavy o osud demokracie.',
+  '1940': 'Válka a bezprostředně po ní: okupace, holokaust, zkušenost totality.',
+  '1950': 'Padesátá léta: cenzura, procesy a předepsaný socialistický realismus.',
+  '1960': 'Šedesátá léta: uvolnění poměrů a nová vlna v próze i ve filmu.',
+  '1970': 'Normalizace: zakázaní autoři píší do samizdatu nebo v exilu.',
+  '1989': 'Po sametové revoluci: konec cenzury a vydávání dříve zakázaných knih.',
+};
+
+/* U každého díla je rok vydání a desetiletí, do kterého na časové ose patří –
+   podle roku se dá dílo zařadit do doby, na kterou reaguje. */
+const AUTORI = [
+  { a: 'Karel Čapek', d: 'R. U. R.', rok: 1920, ob: '1920', o: 'drama, v němž se poprvé objevilo slovo robot', s: 'meziválečná próza a drama' },
+  { a: 'Karel Čapek', d: 'Válka s Mloky', rok: 1936, ob: '1930', o: 'varovný román proti totalitě a lidské lhostejnosti', s: 'meziválečná próza a drama' },
+  { a: 'Jaroslav Hašek', d: 'Osudy dobrého vojáka Švejka', rok: 1923, ob: '1920', o: 'humorný a satirický pohled na první světovou válku', s: 'satira' },
+  { a: 'Vladislav Vančura', d: 'Rozmarné léto', rok: 1926, ob: '1920', o: 'novela s bohatým, hravým jazykem', s: 'meziválečná próza a drama' },
+  { a: 'Jaroslav Seifert', d: 'Maminka', rok: 1954, ob: '1950', o: 'sbírka básní; autor získal Nobelovu cenu za literaturu', s: 'poezie' },
+  { a: 'Vítězslav Nezval', d: 'Edison', rok: 1928, ob: '1920', o: 'básnická skladba obdivující techniku a život', s: 'poetismus a avantgarda' },
+  { a: 'Jiří Wolker', d: 'Těžká hodina', rok: 1922, ob: '1920', o: 'sociálně laděná poezie mladého básníka', s: 'poezie' },
+  { a: 'Bohumil Hrabal', d: 'Ostře sledované vlaky', rok: 1965, ob: '1960', o: 'novela o dospívání za války, zfilmovaná Jiřím Menzelem', s: 'poválečná próza' },
+  { a: 'Milan Kundera', d: 'Žert', rok: 1967, ob: '1960', o: 'román o osudu člověka v padesátých letech', s: 'poválečná próza' },
+  { a: 'Josef Škvorecký', d: 'Zbabělci', rok: 1958, ob: '1950', o: 'román o konci války viděný očima mladíka, po vydání zakázaný', s: 'poválečná próza' },
+  { a: 'Václav Havel', d: 'Audience', rok: 1975, ob: '1970', o: 'absurdní jednoaktovka ze sládkova pivovaru', s: 'absurdní drama' },
+  { a: 'Ota Pavel', d: 'Smrt krásných srnců', rok: 1971, ob: '1970', o: 'povídky o rodině, rybaření a válce', s: 'poválečná próza' },
+  { a: 'George Orwell', d: '1984', rok: 1949, ob: '1940', o: 'světový román o totalitní kontrole společnosti', s: 'světová literatura' },
+  { a: 'Antoine de Saint-Exupéry', d: 'Malý princ', rok: 1943, ob: '1940', o: 'filozofická pohádka o přátelství a odpovědnosti', s: 'světová literatura' },
+  { a: 'Ernest Hemingway', d: 'Stařec a moře', rok: 1952, ob: '1950', o: 'novela o vytrvalosti rybáře v boji s obrovskou rybou', s: 'světová literatura' },
+  { a: 'Anne Franková', d: 'Deník Anne Frankové', rok: 1947, ob: '1940', o: 'deník židovské dívky ukrývající se za války v Amsterdamu', s: 'literatura faktu' },
+];
+
+/* Portréty autorů (dobové fotografie, zdroje v seznamu na konci stránky). */
+const PORTRETY = {
+  "Karel Čapek": { img: 'img/cj/cj9-lit20-capek.webp', w: 768, h: 939, alt: "Černobílý portrét Karla Čapka ve třicátých letech, sedí se skloněnou hlavou." },
+  "Jaroslav Hašek": { img: 'img/cj/cj9-lit20-hasek.webp', w: 458, h: 617, alt: "Ateliérový portrét mladého Jaroslava Haška v obleku s vestou." },
+  "Vladislav Vančura": { img: 'img/cj/cj9-lit20-vancura.webp', w: 768, h: 1024, alt: "Portrét Vladislava Vančury v klobouku, dobová fotografie v hnědém tónu." },
+  "Vítězslav Nezval": { img: 'img/cj/cj9-lit20-nezval.webp', w: 718, h: 1110, alt: "Vítězslav Nezval z profilu na dobové fotografii z roku 1934." },
+  "Jiří Wolker": { img: 'img/cj/cj9-lit20-wolker.webp', w: 694, h: 1007, alt: "Mladý Jiří Wolker v obleku s motýlkem na maturitní fotografii z roku 1919." },
+  "Jaroslav Seifert": { img: 'img/cj/cj9-lit20-seifert.webp', w: 768, h: 768, alt: "Usměvavý starší Jaroslav Seifert s bílými vlasy na fotografii z roku 1981." },
+  "Bohumil Hrabal": { img: 'img/cj/cj9-lit20-hrabal.webp', w: 768, h: 1054, alt: "Bohumil Hrabal v pruhovaném tričku se usmívá a gestikuluje, fotografie z roku 1985." },
+  "Josef Škvorecký": { img: 'img/cj/cj9-lit20-skvorecky.webp', w: 566, h: 1024, alt: "Usměvavý Josef Škvorecký v brýlích a saku se zelenou kravatou." },
+  "Milan Kundera": { img: 'img/cj/cj9-lit20-kundera.webp', w: 768, h: 1081, alt: "Černobílý portrét zamyšleného Milana Kundery z roku 1980." },
+  "Václav Havel": { img: 'img/cj/cj9-lit20-havel.webp', w: 768, h: 1005, alt: "Václav Havel v obleku s kravatou na fotografii z roku 1990." },
+  "Ota Pavel": { img: 'img/cj/cj9-lit20-pavel.webp', w: 768, h: 987, alt: "Ota Pavel v kožené bundě na černobílé fotografii z časopisu z roku 1973." },
+  "Anne Franková": { img: 'img/cj/cj9-lit20-frankova.webp', w: 768, h: 880, alt: "Anne Franková sedí ve školní lavici s perem v ruce a usmívá se, fotografie z roku 1940." },
+  "George Orwell": { img: 'img/cj/cj9-lit20-orwell.webp', w: 768, h: 1041, alt: "Černobílý portrét George Orwella s knírkem." },
+  "Antoine de Saint-Exupéry": { img: 'img/cj/cj9-lit20-saint-exupery.webp', w: 768, h: 1035, alt: "Mladý Antoine de Saint-Exupéry v obleku s motýlkem na portrétu z roku 1920." },
+  "Ernest Hemingway": { img: 'img/cj/cj9-lit20-hemingway.webp', w: 768, h: 1024, alt: "Ernest Hemingway na pasové fotografii z roku 1923." },
+};
+function sPortretem(el, autor) {
+  const f = PORTRETY[autor];
+  if (!f) return el;
+  const img = document.createElement('img');
+  img.className = 'portret-mini'; img.src = f.img; img.alt = f.alt;
+  img.width = f.w; img.height = f.h;
+  el.insertBefore(img, el.lastElementChild);
+  return el;
+}
+
+function autorDilo() {
+  const p = $('plocha');
+  let u;
+  do { u = Uloha.nahodne(AUTORI); } while (u === posledni);
+  posledni = u;
+  const naAutora = Math.random() < 0.5;
+  uloha = { rezim: 'autorDilo', u, naAutora };
+  p.innerHTML = naAutora
+    ? `<div class="zadani">Kdo je autorem díla</div><div class="karta"><div class="dilo">${u.d}</div></div>`
+    : `<div class="zadani uloha-text">Které dílo napsal <b>${u.a}</b>?<br>
+       <span style="color:var(--text-faint);font-size:0.9rem">${u.o}</span></div>`;
+  const odezva = odezvaEl();
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: naAutora
+      ? Uloha.zamichej([u.a, ...Uloha.zamichej([...new Set(AUTORI.map(x => x.a))].filter(x => x !== u.a)).slice(0, 3)])
+        .map(t => ({ klic: t, popis: t }))
+      : Uloha.zamichej([u.d, ...Uloha.zamichej(AUTORI.filter(x => x.d !== u.d)).slice(0, 3).map(x => x.d)])
+        .map(t => ({ klic: t, popis: t })),
+    spravnyKlic: naAutora ? u.a : u.d,
+    zpravaOk: `✅ ${u.a} – ${u.d}: ${u.o}`,
+    zpravaChyba: 'Pomůže si vybavit dobu, ve které autor psal, a téma díla.',
+    poSpravne: napoprve => {
+      hotovo(p, napoprve, { ob: u.ob });
+      p.appendChild(sPortretem(pravidloEl('✍️', `<span class="vysledek">${u.a}</span>:
+        <b>${u.d}</b> (${u.rok}) — ${u.o}.
+        <div style="margin-top:6px">Řadí se k tomu, čemu říkáme <b>${u.s}</b>.
+        ${DOBA[u.ob]}</div>`), u.a));
+    },
+    prodleva: PRODLEVA, dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+const UKAZKY = [
+  { a: 'Jaroslav Hašek', d: 'Osudy dobrého vojáka Švejka',
+    t: '„Tak nám zabili Ferdinanda," řekla posluhovačka panu Švejkovi, který opustiv '
+      + 'před léty vojenskou službu, žil z prodeje psů, ošklivých nečistokrevných oblud.',
+    znak: 'hovorový jazyk, jméno Švejk a začátek první světové války' },
+  { a: 'Karel Čapek', d: 'R. U. R.',
+    t: '„Roboti nejsou lidé. Jsou mechanicky dokonalejší než my, mají úžasnou rozumovou '
+      + 'inteligenci, ale nemají duši."',
+    znak: 'roboti a otázka, co dělá člověka člověkem' },
+  { a: 'Antoine de Saint-Exupéry', d: 'Malý princ',
+    t: '„Správně vidíme jen srdcem. Co je důležité, je očím neviditelné."',
+    znak: 'nejznámější věta z knihy – prostá moudrost o tom, na čem záleží' },
+  { a: 'George Orwell', d: '1984',
+    t: '„Válka je mír. Svoboda je otroctví. Nevědomost je síla."',
+    znak: 'hesla totalitní strany, která tvrdí pravý opak skutečnosti' },
+  { a: 'Anne Franková', d: 'Deník Anne Frankové',
+    t: '„Přes všechno pořád ještě věřím, že lidé jsou v hloubi srdce dobří."',
+    znak: 'osobní tón deníku a naděje uprostřed války' },
+  { a: 'Ota Pavel', d: 'Smrt krásných srnců',
+    t: '„Tatínek byl ten nejlepší rybář na světě. Aspoň mně to tak připadalo, když jsme '
+      + 'spolu chodili k řece."',
+    znak: 'vzpomínka na tatínka a rybaření, vyprávěná očima dítěte' },
+  { a: 'Vítězslav Nezval', d: 'Edison',
+    t: '„Bylo tu tolik světel, tolik radosti, / a naše mládí, jež nikdy nezestárne."',
+    znak: 'verše plné světel a radosti ze života – poetismus' },
+];
+function ukazky() {
+  const p = $('plocha');
+  let u;
+  do { u = Uloha.nahodne(UKAZKY); } while (u === posledni);
+  posledni = u;
+  uloha = { rezim: 'ukazky', u };
+  p.innerHTML = `<div class="zadani">Kdo je autorem této ukázky?</div>
+    <div class="ukazka">${u.t}</div>`;
+  const odezva = odezvaEl();
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: Uloha.zamichej([u.a, ...Uloha.zamichej([...new Set(AUTORI.map(x => x.a))].filter(x => x !== u.a)).slice(0, 3)])
+      .map(t => ({ klic: t, popis: t })),
+    spravnyKlic: u.a,
+    zpravaOk: `✅ ${u.a}`,
+    zpravaChyba: 'Sleduj téma, dobu i jazyk ukázky.',
+    poSpravne: napoprve => {
+      const zaznam = AUTORI.find(x => x.d === u.d);
+      hotovo(p, napoprve, { ob: zaznam && zaznam.ob });
+      p.appendChild(sPortretem(pravidloEl('📖', `<span class="vysledek">${u.a}</span>:
+        <b>${u.d}</b>${zaznam ? ` (${zaznam.rok})` : ''}
+        <div style="margin-top:6px">Poznávací znak ukázky: ${u.znak}.</div>`), u.a));
+    },
+    prodleva: PRODLEVA, dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+const SMERY = [
+  { s: 'poetismus', p: 'český meziválečný směr plný hravosti, obrazů a radosti ze života', kdo: 'Vítězslav Nezval, Jaroslav Seifert' },
+  { s: 'surrealismus', p: 'směr pracující se sny, podvědomím a nečekanými spojeními', kdo: 'André Breton, Vítězslav Nezval' },
+  { s: 'expresionismus', p: 'zdůrazňuje silné pocity, úzkost a vnitřní prožitek', kdo: 'Franz Kafka bývá řazen k jeho vlivu' },
+  { s: 'socialistický realismus', p: 'oficiální, státem prosazovaný směr 50. let s optimistickými hrdiny', kdo: 'budovatelské romány' },
+  { s: 'absurdní drama', p: 'ukazuje nesmyslnost jednání a prázdnotu jazyka', kdo: 'Václav Havel, Samuel Beckett' },
+  { s: 'literatura faktu', p: 'staví na skutečných událostech a dokumentech', kdo: 'deníky a reportáže' },
+];
+function smery() {
+  const p = $('plocha');
+  let u;
+  do { u = Uloha.nahodne(SMERY); } while (u === posledni);
+  posledni = u;
+  const naSmer = Math.random() < 0.5;
+  uloha = { rezim: 'smery', u, naSmer };
+  p.innerHTML = naSmer
+    ? `<div class="zadani uloha-text">Který směr takto charakterizujeme?<br><b>${u.p}</b></div>`
+    : `<div class="zadani">Čím se vyznačuje směr</div><div class="karta"><div class="dilo">${u.s}</div></div>`;
+  const odezva = odezvaEl();
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: naSmer
+      ? Uloha.zamichej([u.s, ...Uloha.zamichej(SMERY.filter(x => x.s !== u.s)).slice(0, 3).map(x => x.s)])
+        .map(t => ({ klic: t, popis: t }))
+      : Uloha.zamichej([u.p, ...Uloha.zamichej(SMERY.filter(x => x.s !== u.s)).slice(0, 3).map(x => x.p)])
+        .map(t => ({ klic: t, popis: t })),
+    spravnyKlic: naSmer ? u.s : u.p,
+    zpravaOk: `✅ ${u.s} – ${u.p} (${u.kdo})`,
+    zpravaChyba: 'Zaměř se na to, co je pro směr nejtypičtější: sny, hravost, úzkost, nebo politická objednávka?',
+    poSpravne: napoprve => {
+      hotovo(p, napoprve, { h: u.s === 'socialistický realismus' ? 'oficialni' : null });
+      p.appendChild(pravidloEl('🎨', `<span class="vysledek">${u.s}</span> — ${u.p}.
+        <div style="margin-top:6px">Kdo sem patří: <b>${u.kdo}</b>.</div>`));
+    },
+    prodleva: PRODLEVA, dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+const KONTEXT = [
+  { q: 'Co byl samizdat?', a: 'literatura opisovaná a šířená potají mimo oficiální nakladatelství',
+    b: ['státní nakladatelství', 'literární cena', 'divadelní festival'], h: 'samizdat',
+    proc: 'Slovo znamená „vydávám si sám“. Texty se přepisovaly na stroji přes průklepový papír, takže z jednoho psaní vzniklo pár kopií — a ty kolovaly z ruky do ruky.' },
+  { q: 'Co je exilová literatura?', a: 'díla českých autorů vydávaná v zahraničí, protože doma vyjít nesměla',
+    b: ['literatura o cestování', 'knihy překládané do češtiny', 'učebnice pro krajany'], h: 'exil',
+    proc: 'Nakladatelství vznikala tam, kam autoři emigrovali (Toronto, Kolín nad Rýnem). Knihy se pak pašovaly zpátky domů.' },
+  { q: 'Co znamenala cenzura pro autory po roce 1948?', a: 'mnozí nesměli publikovat, jejich knihy byly staženy z knihoven',
+    b: ['dostávali vyšší honoráře', 'mohli psát cokoli', 'museli psát jen poezii'], h: 'oficialni',
+    proc: 'Zakázaný autor přišel o povolání — živil se pak třeba jako topič nebo dělník a psal do šuplíku.' },
+  { q: 'Které téma se objevuje v literatuře po první světové válce?', a: 'zklamání z války a hledání nových hodnot',
+    b: ['oslava rytířství', 'obdiv k monarchii', 'popis objevných plaveb'], h: null,
+    proc: 'Válka smetla představu, že hrdinství a monarchie dávají smysl. Odtud jak Haškova satira, tak avantgardní hledání nového jazyka.' },
+  { q: 'Čím je pro literaturu důležité období 60. let?', a: 'uvolněním poměrů, novou vlnou próz i filmů',
+    b: ['úplným zákazem literatury', 'návratem k obrození', 'koncem divadel'], h: 'oficialni',
+    proc: 'Cenzura povolila a vyšly knihy, které by o deset let dřív neprošly — Hrabal, Kundera, Škvorecký. Po roce 1968 se to zase zavřelo.' },
+  { q: 'Co je reportáž?', a: 'žurnalistický žánr, který popisuje skutečnou událost očima autora',
+    b: ['básnická skladba', 'román na pokračování', 'divadelní hra'], h: null,
+    proc: 'Reportáž stojí na tom, že autor <b>u toho byl</b>. Proto patří k literatuře faktu, ne k beletrii.' },
+  { q: 'Proč vznikla literatura reagující na holokaust?', a: 'aby zachytila svědectví obětí a varovala budoucí generace',
+    b: ['kvůli literární soutěži', 'na objednávku státu', 'jako zábavný žánr'], h: null,
+    proc: 'Svědectví má cenu jen tehdy, když je zapsané. Deník Anne Frankové proto působí silněji než jakákoli statistika.' },
+  { q: 'Co se změnilo po roce 1989?', a: 'zmizela cenzura, vyšla dříve zakázaná i samizdatová díla',
+    b: ['literatura zanikla', 'začala se psát jen poezie', 'knihy se přestaly překládat'], h: null,
+    proc: 'Během několika let se dohnalo čtyřicet let zákazů — čtenáři poprvé oficiálně dostali Škvoreckého, Kunderu i Havla.' },
+];
+function kontext() {
+  const p = $('plocha');
+  let u;
+  do { u = Uloha.nahodne(KONTEXT); } while (u === posledni);
+  posledni = u;
+  uloha = { rezim: 'kontext', u };
+  p.innerHTML = `<div class="zadani uloha-text">${u.q}</div>`;
+  const odezva = odezvaEl();
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: Uloha.zamichej([u.a, ...u.b]).map(t => ({ klic: t, popis: t })),
+    spravnyKlic: u.a,
+    zpravaOk: `✅ ${u.a}`,
+    zpravaChyba: 'Literatura vždy souvisí s dobou, ve které vzniká.',
+    poSpravne: napoprve => {
+      hotovo(p, napoprve, { h: u.h });
+      p.appendChild(pravidloEl('🕰️', `<span class="vysledek">${u.a}</span>
+        <div style="margin-top:6px">${u.proc}</div>`));
+    },
+    prodleva: PRODLEVA, dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+/* ---- nápověda -------------------------------------------------------------- */
+/* Zužuje: naznačí dobu nebo téma, správnou odpověď neprozradí. */
+function napoveda() {
+  if (!uloha || napovedaVidet) return;
+  const p = $('plocha');
+  const u = uloha.u;
+  const el = document.createElement('div');
+  el.className = 'pravidlo tip';
+  let text, klic;
+
+  if (uloha.rezim === 'autorDilo') {
+    text = `Dílo vzniklo v <b>${u.ob === '1989' ? 'porevoluční době' : u.ob + '. letech'}</b>.
+      ${DOBA[u.ob]} Který z autorů do téhle doby a k tomuhle tématu sedí?`;
+    klic = uloha.naAutora ? u.a : u.d;
+    rozsvit({ ob: u.ob });
+  } else if (uloha.rezim === 'ukazky') {
+    const zaznam = AUTORI.find(x => x.d === u.d);
+    text = `Všímej si <b>tématu a jazyka</b> ukázky, ne jen jmen.
+      ${zaznam ? `Text pochází z ${zaznam.ob === '1989' ? 'porevoluční doby' : zaznam.ob + '. let'}: ${DOBA[zaznam.ob]}` : ''}`;
+    klic = u.a;
+    if (zaznam) rozsvit({ ob: zaznam.ob });
+  } else if (uloha.rezim === 'smery') {
+    text = `Každý směr má jedno slovo, kterým se dá shrnout: poetismus → <b>hravost</b> ·
+      surrealismus → <b>sen</b> · expresionismus → <b>úzkost</b> · socialistický realismus →
+      <b>objednávka státu</b> · absurdní drama → <b>nesmysl</b> · literatura faktu →
+      <b>skutečnost</b>.`;
+    klic = uloha.naSmer ? u.s : u.p;
+  } else {
+    text = `Odpověď hledej v tom, <b>co doba autorům dovolovala</b>: co smělo vyjít oficiálně,
+      co se opisovalo potají doma (samizdat) a co vycházelo za hranicemi (exil).
+      Přehled je pod úlohou.`;
+    klic = u.a;
+    rozsvit({ h: u.h });
+  }
+  el.innerHTML = `<span class="znak">🔎</span><div>${text}</div>`;
+  p.appendChild(el);
+  ztlum(p, klic);
+  napovedaVidet = true;
+}
+
+/* ---- ovládání -------------------------------------------------------------- */
+const REZIMY = { autorDilo, ukazky, smery, kontext };
+function novaUloha() { napovedaVidet = false; REZIMY[rezim](); }
+
+document.querySelectorAll('#rezimy button').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('#rezimy button').forEach(x => x.classList.remove('active'));
+  b.classList.add('active');
+  rezim = b.dataset.rezim;
+  novaUloha();
+}));
+$('btnDalsi').addEventListener('click', novaUloha);
+$('btnNapoveda').addEventListener('click', napoveda);
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === 'Enter') { e.preventDefault(); novaUloha(); }
+  if (e.key === 'h' || e.key === 'H') napoveda();
+});
+novaUloha();
+</script>
+</body>
+</html>

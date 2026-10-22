@@ -1,0 +1,8 @@
+Soubor: d9-valka2-lidice-po.png / d9-valka2-lidice-po.webp
+Původní dílo: Bundesarchiv Bild 146-1993-020-26A, Lidice, Ort nach Zerstörung.jpg
+Autor: Unknown
+Datum vzniku: June 1942date QS:P571,+1942-06-00T00:00:00Z/10
+Zdroj: https://commons.wikimedia.org/wiki/File:Bundesarchiv_Bild_146-1993-020-26A,_Lidice,_Ort_nach_Zerst%C3%B6rung.jpg
+Licence: Public domain
+Staženo: 2026-10-21
+Úpravy: automatické natočení, odstranění metadat, zmenšení na nejvýše 1600 px; výuková WebP kopie 1152 px.

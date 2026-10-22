@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Databáze a strukturovaná data</title>
+  <link rel="stylesheet" href="../common.css">
+  <link rel="stylesheet" href="../vyuka.css">
+  <link rel="stylesheet" href="../vyklad.css">
+  <script src="../vyklad.js" defer></script>
+  <script src="../theme.js"></script>
+  <script src="../podpis.js" defer></script>
+  <script src="../kostra.js" defer></script>
+  <script src="../uloha.js"></script>
+  <style>
+    table.data { border-collapse: collapse; font-size: 0.92rem; max-width: 100%; }
+    table.data th, table.data td { border: 1px solid var(--border-strong); padding: 7px 12px; text-align: left; }
+    table.data th { background: var(--bg-control); color: var(--text-muted); font-weight: 600; }
+    table.data tbody tr { cursor: pointer; }
+    table.data tbody tr:hover td { background: var(--bg-hover); }
+    table.data tbody tr.spravne td { background: rgba(76,175,125,0.25); }
+    table.data tbody tr.spatne td { background: rgba(212,58,47,0.25); }
+    .obalTabulky { overflow-x: auto; max-width: 100%; }
+    .podminka { font-family: 'Courier New', monospace; font-size: 1.05rem; color: var(--accent); font-weight: 700; }
+    .uloha-text { max-width: 640px; font-size: 1.02rem; line-height: 1.6; }
+    .uloha-text b { color: var(--accent); }
+  </style>
+</head>
+<body>
+  <h1>🗄️ Databáze a strukturovaná data</h1>
+  <p class="podtitul">Pro 8. ročník: tabulky, záznamy, filtrování, řazení a návrh struktury dat.</p>
+
+  <details class="vyklad" data-faze="vyuka">
+    <summary>📖 Výklad: Tabulka, záznam, klíč a dotaz</summary>
+    <div class="obsah">
+      <p>Databáze ukládá <b>strukturovaná data</b>: každý údaj má pevné místo, a proto v nich počítač umí rychle
+        hledat, filtrovat a řadit. Základem je tabulka – řádky popisují jednotlivé věci, sloupce druhy údajů.</p>
+      <div class="vyklad-karty">
+        <article class="vyklad-karta"><h3>Záznam a pole</h3><p><b>Záznam</b> je jeden řádek – vše o jednom žákovi nebo jedné knize. <b>Pole</b> (atribut) je jeden sloupec – jeden druh údaje, třeba věk. Každé pole má svůj datový typ: text, číslo, datum, ano/ne.</p></article>
+        <article class="vyklad-karta"><h3>Primární klíč</h3><p>Údaj, který <b>jednoznačně</b> určí záznam. Jméno se nehodí – dva žáci se mohou jmenovat stejně. Hodí se evidenční nebo inventární číslo.</p></article>
+        <article class="vyklad-karta"><h3>Filtrování</h3><p>Vybere jen záznamy, které splní podmínku. U spojky <b>A ZÁROVEŇ</b> musí platit obě části současně.</p></article>
+        <article class="vyklad-karta"><h3>Řazení</h3><p><b>Vzestupně</b> = od nejmenšího (text od A), <b>sestupně</b> = od největšího (text od Z). Řazení záznamy nemaže, jen mění pořadí.</p></article>
+      </div>
+      <p>Při návrhu tabulky dávej do jednoho sloupce jen jeden údaj: adresa rozdělená na ulici, město a PSČ
+        se dá filtrovat podle města, adresa v jednom poli ne. Tabulky se propojují přes klíč – do tabulky
+        zápůjček stačí zapsat klíč žáka, ne kopírovat všechny jeho údaje.</p>
+      <aside class="zapamatuj">Řádek = záznam, sloupec = pole. Každý záznam má jednoznačný klíč. Filtr vybírá, řazení přeskládá.</aside>
+    </div>
+  </details>
+
+  <details class="ukazka-kroky" data-faze="ukazka">
+    <summary>📘 Ukázka: filtr se dvěma podmínkami</summary>
+    <div class="obsah">
+      <p class="zadani-ukazky">V tabulce žáků jsou mimo jiné: Adam (8.A, florbal), Bára (8.B, plavání), Eva (8.B, florbal), Honza (8.B, atletika). Který záznam vyhoví podmínce sport = "florbal" A ZÁROVEŇ třída = "8.B"?</p>
+      <ol class="kroky">
+        <li>Nejdřív projdu sloupec <b>sport</b> a nechám jen florbal: zůstane Adam a Eva.</li>
+        <li>Mezi nimi zkontroluji sloupec <b>třída</b>: Adam je z 8.A, Eva z 8.B.</li>
+        <li>Spojka A ZÁROVEŇ chce, aby platily obě části, proto Adam vypadne.</li>
+        <li>Bára a Honza jsou sice z 8.B, ale nehrají florbal – první část u nich neplatí.</li>
+      </ol>
+      <p class="vysledek-ukazky">Podmínce vyhoví jen záznam Eva (8.B, florbal).</p>
+    </div>
+  </details>
+
+  <div class="rezimy" id="rezimy">
+    <button data-rezim="filtr" class="active">🔎 Filtrování</button>
+    <button data-rezim="razeni">↕️ Řazení</button>
+    <button data-rezim="navrh">🧱 Návrh tabulky</button>
+    <button data-rezim="pojmy">📖 Pojmy</button>
+  </div>
+
+  <div class="plocha" id="plocha"></div>
+
+  <div class="ovladani">
+    <button class="hlavni" id="btnDalsi">Přeskočit →</button>
+    <span class="skore" id="skore"></span>
+  </div>
+
+  <p class="napoveda">
+    Tabulka databáze má <b>sloupce (pole)</b> a <b>řádky (záznamy)</b>. Každý záznam by měl mít
+    jednoznačný <b>klíč</b>. Filtrování vybírá záznamy podle podmínky, řazení mění jejich pořadí.
+  </p>
+
+<script>
+const $ = id => document.getElementById(id);
+const skore = Uloha.skore('metodus_inf8_databaze', $('skore'));
+let rezim = 'filtr';
+function odezvaEl() { const d = document.createElement('div'); d.className = 'odezva'; return d; }
+
+const ZAZNAMY = [
+  { jmeno: 'Adam', trida: '8.A', body: 42, sport: 'florbal', vek: 14 },
+  { jmeno: 'Bára', trida: '8.B', body: 55, sport: 'plavání', vek: 13 },
+  { jmeno: 'Cyril', trida: '8.A', body: 28, sport: 'fotbal', vek: 14 },
+  { jmeno: 'Dana', trida: '8.C', body: 61, sport: 'atletika', vek: 15 },
+  { jmeno: 'Eva', trida: '8.B', body: 37, sport: 'florbal', vek: 13 },
+  { jmeno: 'Filip', trida: '8.C', body: 49, sport: 'fotbal', vek: 15 },
+  { jmeno: 'Gita', trida: '8.A', body: 33, sport: 'plavání', vek: 14 },
+  { jmeno: 'Honza', trida: '8.B', body: 70, sport: 'atletika', vek: 14 },
+];
+const SLOUPCE = [
+  { klic: 'jmeno', nazev: 'jméno' }, { klic: 'trida', nazev: 'třída' },
+  { klic: 'body', nazev: 'body' }, { klic: 'sport', nazev: 'sport' }, { klic: 'vek', nazev: 'věk' },
+];
+
+function tabulkaHtml(data) {
+  const hlavicka = SLOUPCE.map(s => `<th>${s.nazev}</th>`).join('');
+  const radky = data.map((z, i) => `<tr data-i="${i}">${SLOUPCE.map(s => `<td>${z[s.klic]}</td>`).join('')}</tr>`).join('');
+  return `<div class="obalTabulky"><table class="data">
+    <thead><tr>${hlavicka}</tr></thead><tbody>${radky}</tbody></table></div>`;
+}
+
+/* ---- Filtrování: podmínka vybere právě jeden záznam ---------------------------------------- */
+function filtr() {
+  const p = $('plocha');
+  const data = Uloha.zamichej([...ZAZNAMY]).slice(0, 6);
+  let podminka = null, vyhovujici = [], pojistka = 0;
+  while (pojistka++ < 200) {
+    const typ = Uloha.nahodne(['body', 'sportTrida', 'vekBody']);
+    if (typ === 'body') {
+      const mez = Uloha.nahodne([40, 45, 50, 55, 60]);
+      podminka = { text: `body > ${mez}`, fn: z => z.body > mez };
+    } else if (typ === 'sportTrida') {
+      const s = Uloha.nahodne(data).sport, t = Uloha.nahodne(data).trida;
+      podminka = { text: `sport = "${s}" A ZÁROVEŇ třída = "${t}"`, fn: z => z.sport === s && z.trida === t };
+    } else {
+      const v = Uloha.nahodne(data).vek, mez = Uloha.nahodne([35, 40, 45, 50]);
+      podminka = { text: `věk = ${v} A ZÁROVEŇ body > ${mez}`, fn: z => z.vek === v && z.body > mez };
+    }
+    vyhovujici = data.filter(podminka.fn);
+    if (vyhovujici.length === 1) break;
+  }
+  if (vyhovujici.length !== 1) { const j = data[0].jmeno; podminka = { text: `jméno = "${j}"`, fn: z => z.jmeno === j }; vyhovujici = [data[0]]; }
+  const stav = { chyboval: false, hotovo: false };
+
+  p.innerHTML = `<div class="zadani uloha-text">Klepni na záznam, který vyhoví podmínce:<br>
+    <span class="podminka">${podminka.text}</span></div>${tabulkaHtml(data)}`;
+  const odezva = odezvaEl();
+  p.querySelectorAll('tbody tr').forEach(tr => tr.addEventListener('click', () => {
+    const z = data[Number(tr.dataset.i)];
+    Uloha.odpoved({
+      prvek: tr, spravne: podminka.fn(z), stav, odezva,
+      zpravaOk: `✅ ${z.jmeno} – jediný záznam, který podmínku splňuje.`,
+      zpravaChyba: `${z.jmeno} podmínku nesplňuje (${SLOUPCE.map(s => s.nazev + ': ' + z[s.klic]).join(', ')}).`,
+      poSpravne: skore.vyhodnot,
+      dalsi: novaUloha,
+    });
+  }));
+  p.appendChild(odezva);
+}
+
+/* ---- Řazení ---------------------------------------------------------------------------------- */
+function razeni() {
+  const p = $('plocha');
+  const sloupec = Uloha.nahodne(SLOUPCE.filter(s => s.klic !== 'sport'));
+  // Pokud to jde, vyber záznamy s různými hodnotami v řadicím sloupci; jinak rozhoduje při shodě jméno.
+  let data = Uloha.zamichej([...ZAZNAMY]).slice(0, 5);
+  for (let pokus = 0; pokus < 60 && new Set(data.map(z => z[sloupec.klic])).size < data.length; pokus++) {
+    data = Uloha.zamichej([...ZAZNAMY]).slice(0, 5);
+  }
+  const shody = new Set(data.map(z => z[sloupec.klic])).size < data.length;
+  const vzestupne = Math.random() < 0.5;
+  const porovnej = (x, y) => typeof x === 'number' ? x - y : String(x).localeCompare(String(y), 'cs');
+  const serazeno = [...data].sort((a, b) => {
+    const r = porovnej(a[sloupec.klic], b[sloupec.klic]);
+    return (vzestupne ? r : -r) || porovnej(a.jmeno, b.jmeno);
+  });
+  const spravny = serazeno.map(z => z.jmeno).join(' → ');
+  const sledHodnot = poradi => poradi.map(z => z[sloupec.klic]).join('|');
+  const spravnySled = sledHodnot(serazeno);
+  // Rušivé pořadí nesmí být správné ani při jiném pořadí shodných hodnot.
+  const jine = new Set();
+  const kandidati = [[...serazeno].reverse()];
+  for (let i = 0; i < 80; i++) kandidati.push(Uloha.zamichej([...data]));
+  for (const k of kandidati) {
+    if (jine.size >= 3) break;
+    if (sledHodnot(k) !== spravnySled) jine.add(k.map(z => z.jmeno).join(' → '));
+  }
+
+  p.innerHTML = `<div class="zadani uloha-text">Jak budou záznamy seřazené podle sloupce
+      <b>${sloupec.nazev}</b> ${vzestupne ? 'vzestupně' : 'sestupně'}?${shody ? '<br><small>Při shodné hodnotě rozhoduje jméno podle abecedy (od A).</small>' : ''}</div>${tabulkaHtml(data)}`;
+  const odezva = odezvaEl();
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: Uloha.zamichej([spravny, ...jine]).map(t => ({ klic: t, popis: t })),
+    spravnyKlic: spravny,
+    zpravaOk: `✅ ${spravny}`,
+    zpravaChyba: vzestupne ? 'Vzestupně = od nejmenšího (u textu od A).' : 'Sestupně = od největšího (u textu od Z).',
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+const NAVRHY = [
+  { q: 'Navrhuješ tabulku pro školní knihovnu. Který sloupec do ní nepatří?',
+    a: 'oblíbená barva knihovnice', b: ['název knihy', 'autor', 'rok vydání'] },
+  { q: 'Co je nejvhodnější jako jednoznačný klíč u knih v knihovně?',
+    a: 'inventární číslo (u knih se hodí i ISBN)', b: ['název knihy', 'jméno autora', 'rok vydání'] },
+  { q: 'Do jakého datového typu patří datum narození?',
+    a: 'datum', b: ['text', 'celé číslo', 'ano/ne'] },
+  { q: 'Jak nejlépe uložit informaci, zda je kniha půjčená?',
+    a: 'logická hodnota ano/ne', b: ['dlouhý text', 'desetinné číslo', 'obrázek'] },
+  { q: 'Proč se telefonní číslo ukládá jako text, a ne jako číslo?',
+    a: 'může začínat nulou nebo obsahovat + a mezery', b: ['je vždy příliš velké', 'čísla se nedají třídit', 'jinak se nezobrazí'] },
+  { q: 'Máš tabulku žáků a tabulku zápůjček. Jak je propojíš?',
+    a: 'do zápůjček přidáš odkaz na klíč žáka', b: ['zkopíruješ celou tabulku žáků do zápůjček', 'nepropojíš je vůbec', 'sloučíš je do jedné buňky'] },
+  { q: 'Co je špatně na sloupci „adresa“, který obsahuje ulici, město i PSČ dohromady?',
+    a: 'nedá se dobře filtrovat a řadit podle města', b: ['je příliš krátký', 'nejde uložit jako text', 'databáze to neumí'] },
+  { q: 'Proč se u opakujících se hodnot (třída, sport) vyplatí vybírat ze seznamu?',
+    a: 'zabrání se překlepům a data jsou pak konzistentní', b: ['ušetří se místo na disku úplně', 'databáze pak nepotřebuje klíč', 'zrychlí se internet'] },
+];
+function navrh() {
+  const p = $('plocha');
+  const u = Uloha.nahodne(NAVRHY);
+  p.innerHTML = `<div class="zadani uloha-text">${u.q}</div>`;
+  const odezva = odezvaEl();
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: Uloha.zamichej([u.a, ...u.b]).map(t => ({ klic: t, popis: t })),
+    spravnyKlic: u.a,
+    zpravaOk: `✅ ${u.a}`,
+    zpravaChyba: 'Dobrá tabulka má jeden údaj v jednom sloupci a jednoznačný klíč.',
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+const POJMY = [
+  { q: 'Co je záznam v databázi?', a: 'jeden řádek tabulky se všemi údaji o jedné věci', b: ['jeden sloupec', 'název tabulky', 'celá databáze'] },
+  { q: 'Co je pole (atribut)?', a: 'jeden sloupec, tedy jeden druh údaje', b: ['jeden řádek', 'jedna databáze', 'chybová hláška'] },
+  { q: 'K čemu slouží primární klíč?', a: 'jednoznačně identifikuje každý záznam', b: ['řadí tabulku', 'šifruje data', 'určuje barvu tabulky'] },
+  { q: 'Co dělá dotaz (query)?', a: 'vybere z dat to, co odpovídá zadaným podmínkám', b: ['smaže tabulku', 'zálohuje disk', 'vytiskne sestavu bez výběru'] },
+  { q: 'Co znamená, že jsou data strukturovaná?', a: 'mají pevně daný tvar – tabulku se sloupci a typy hodnot', b: ['jsou zašifrovaná', 'jsou uložená v obrázku', 'jsou napsaná ručně'] },
+  { q: 'Který formát je typický pro jednoduchou výměnu tabulkových dat?', a: 'CSV', b: ['MP3', 'PNG', 'EXE'] },
+  { q: 'Proč se osobní údaje v databázích chrání?', a: 'vyžaduje to zákon (GDPR) a ochrana soukromí lidí', b: ['zabírají moc místa', 'nedají se zálohovat', 'nejdou třídit'] },
+  { q: 'Co je zálohování databáze?', a: 'pořízení kopie dat pro případ ztráty nebo poškození', b: ['smazání starých záznamů', 'přejmenování tabulky', 'třídění podle abecedy'] },
+];
+function pojmy() {
+  const p = $('plocha');
+  const u = Uloha.nahodne(POJMY);
+  p.innerHTML = `<div class="zadani uloha-text">${u.q}</div>`;
+  const odezva = odezvaEl();
+  Uloha.vyber({
+    kam: p, odezva,
+    moznosti: Uloha.zamichej([u.a, ...u.b]).map(t => ({ klic: t, popis: t })),
+    spravnyKlic: u.a,
+    zpravaOk: `✅ ${u.a}`,
+    zpravaChyba: 'Řádek = záznam, sloupec = pole, klíč = jednoznačný identifikátor.',
+    poSpravne: skore.vyhodnot,
+    dalsi: novaUloha,
+  });
+  p.appendChild(odezva);
+}
+
+const REZIMY = { filtr, razeni, navrh, pojmy };
+function novaUloha() { REZIMY[rezim](); }
+
+document.querySelectorAll('#rezimy button').forEach(b => b.addEventListener('click', () => {
+  document.querySelectorAll('#rezimy button').forEach(x => x.classList.remove('active'));
+  b.classList.add('active');
+  rezim = b.dataset.rezim;
+  novaUloha();
+}));
+$('btnDalsi').addEventListener('click', novaUloha);
+novaUloha();
+</script>
+</body>
+</html>

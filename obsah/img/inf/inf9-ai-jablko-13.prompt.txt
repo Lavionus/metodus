@@ -1,0 +1,2 @@
+Common specification: inf9-ai-ovoce.prompt.txt
+Variant: Small golden-yellow apple with a long thin dark stem, slightly asymmetrical, rotated left.
