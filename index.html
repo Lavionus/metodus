@@ -7,6 +7,7 @@
   <meta name="description" content="Metodus – interaktivní výukové aplikace pro 1. a 2. stupeň ZŠ. Čeština, matematika, přírodní vědy, zeměpis, dějepis a cizí jazyky. Zdarma a bez registrace. Uložené lekce lze používat offline; živá data vyžadují internet." />
   <link rel="stylesheet" href="common.css" />
   <script src="theme.js"></script>
+  <script src="barvy-predmetu.js"></script>
   <script src="podpis.js" defer></script>
   <link rel="manifest" href="manifest.webmanifest" />
   <link rel="icon" href="favicon.svg" type="image/svg+xml" />
@@ -811,6 +812,7 @@
         <button id="btnOsnova" title="Osnova – pokrytí učiva podle ročníků"><span class="ikona" aria-hidden="true">🗺️</span><span class="popis">Osnova</span></button>
         <button id="btnUcitel" title="Kabinet učitele – pracovní listy, slidy, nástroje do hodiny"><span class="ikona" aria-hidden="true">🧑‍🏫</span><span class="popis">Kabinet učitele</span></button>
         <button id="btnPredstaveni" title="Živé ukázky – co Metodus umí"><span class="ikona" aria-hidden="true">◈</span><span class="popis">Živé ukázky</span></button>
+        <button id="btnNastaveni" title="Nastavení – barvy předmětů, barevný motiv, data v prohlížeči"><span class="ikona" aria-hidden="true">⚙️</span><span class="popis">Nastavení</span></button>
         <label id="temaObal" class="tema-volba" title="Barevný motiv">
           <span class="popis">Motiv</span>
           <select id="temaVolba" aria-label="Barevný motiv">
@@ -908,7 +910,7 @@
     // stránky, které nejsou aplikacemi v katalogu, ale smí se otevřít v ploše
     // (na vyslovnost.html pořád přesměrovává staré odkazy hlavní web)
     const STRANKY_MIMO_KATALOG = [DOMOVSKA, 'obsah/osnova.html', 'obsah/predstaveni.html',
-      'obsah/vyslovnost.html', 'obsah/priprava_hodiny.html', 'obsah/predmet.html'];
+      'obsah/vyslovnost.html', 'obsah/priprava_hodiny.html', 'obsah/predmet.html', 'obsah/nastaveni.html'];
     const KEY_PAGE = 'metodus_current_page';
     const KEY_COLLAPSE = 'metodus_collapsed_sections';
     const KEY_SKUPINA = 'metodus_skupina';
@@ -1020,7 +1022,11 @@
       const h2 = document.createElement('h2');
       const ul = document.createElement('ul');
       h2.appendChild(hlavaSbalovani(div, nazev, polozky.length));
-      polozky.forEach(p => ul.appendChild(vytvorPolozku(p)));
+      polozky.forEach(p => {
+        const li = ul.appendChild(vytvorPolozku(p));
+        // oblíbené míchají předměty – každý řádek nese barvu svého předmětu
+        if (special && window.MetodusBarvy) MetodusBarvy.oznac(li, p);
+      });
       div.append(h2, ul);
       if (polozky.length === 1 && !special) div.classList.add('jedina');
       else if (collapsedSet.has(nazev)) div.classList.add('collapsed');
@@ -1061,6 +1067,8 @@
       blok.className = 'predmet-blok';
       blok.dataset.skupina = g.id;
       blok.dataset.nazev = 'predmet:' + g.id;
+      // jemné podbarvení celého bloku barvou předmětu (barvy-predmetu.js, mění se v Nastavení)
+      if (window.MetodusBarvy) MetodusBarvy.oznac(blok, g.id);
       const h2 = document.createElement('h2');
       h2.className = 'predmet-hlava';
       h2.appendChild(hlavaSbalovani(blok, g.label, sekce.reduce((n, s) => n + s.polozky.length, 0)));
@@ -1229,6 +1237,9 @@
     });
     document.getElementById('btnPredstaveni').addEventListener('click', () => {
       location.hash = 'obsah/predstaveni.html';
+    });
+    document.getElementById('btnNastaveni').addEventListener('click', () => {
+      location.hash = 'obsah/nastaveni.html';
     });
     document.getElementById('btnNoveOkno').addEventListener('click', () => {
       window.open(aktualni || DOMOVSKA, '_blank');
@@ -1583,7 +1594,7 @@
     const ovladaniEl = document.getElementById('ovladani');
     const btnVice = document.getElementById('btnVice');
     const viceMenu = document.getElementById('viceMenu');
-    const doNabidky = ['btnOsnova', 'btnUcitel', 'btnPredstaveni', 'temaObal', 'btnProjektor', 'btnNoveOkno']
+    const doNabidky = ['btnOsnova', 'btnUcitel', 'btnPredstaveni', 'btnNastaveni', 'temaObal', 'btnProjektor', 'btnNoveOkno']
       .map(id => document.getElementById(id));
     const uzkaHlavicka = window.matchMedia('(max-width: 700px)');
 

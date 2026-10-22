@@ -92,7 +92,7 @@ try {
   })`);
   assert.equal(nabidka.otevrena, true, 'nabídka se otevře Enterem');
   assert.equal(nabidka.aria, 'true', 'aria-expanded po otevření');
-  assert.deepEqual(nabidka.polozky, ['btnOsnova', 'btnUcitel', 'btnPredstaveni', 'temaVolba', 'btnProjektor', 'btnNoveOkno'], 'obsah nabídky');
+  assert.deepEqual(nabidka.polozky, ['btnOsnova', 'btnUcitel', 'btnPredstaveni', 'btnNastaveni', 'temaVolba', 'btnProjektor', 'btnNoveOkno'], 'obsah nabídky');
   assert.ok(nabidka.popisky.every(p => p && p.length > 2), 'každá položka má slovní popis: ' + JSON.stringify(nabidka.popisky));
   assert.equal(nabidka.role, 'menuitem', 'role položek');
   assert.equal(nabidka.fokus, 'btnOsnova', 'fokus skočí na první položku, byl: ' + nabidka.fokus);

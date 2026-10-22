@@ -6,6 +6,7 @@
   <title>Metodus – přehled učiva</title>
   <link rel="stylesheet" href="../common.css">
   <script src="../theme.js"></script>
+  <script src="../barvy-predmetu.js"></script>
   <script src="../podpis.js" defer></script>
   <link rel="icon" href="../favicon.svg" type="image/svg+xml">
   <link rel="alternate icon" href="../favicon.ico" sizes="16x16 32x32 48x48">
@@ -368,6 +369,7 @@
           window.parent.postMessage({ otevri: p.soubor }, '*');
         }
       });
+      if (!popisek && window.MetodusBarvy) MetodusBarvy.oznac(a, p);
       return a;
     }
 
@@ -448,6 +450,7 @@
         const el = document.createElement('a');
         el.className = 'predmet';
         el.href = cil;
+        if (window.MetodusBarvy) MetodusBarvy.oznac(el, g.id);
         el.innerHTML =
           `<span class="nazev">${emoji} ${text}</span>` +
           `<span class="pocet">${pocet} ${pocet === 1 ? 'aplikace' : pocet < 5 ? 'aplikace' : 'aplikací'}` +

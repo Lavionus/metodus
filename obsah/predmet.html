@@ -6,6 +6,7 @@
   <title>Předmět | Metodus</title>
   <link rel="stylesheet" href="../common.css">
   <script src="../theme.js"></script>
+  <script src="../barvy-predmetu.js"></script>
   <script src="../podpis.js" defer></script>
   <style>
     /* Stránka předmětu: skládá se celá z katalogu (apps.js) – okruhy, lekce, cíle, učební cesty.
@@ -15,6 +16,7 @@
     header.uvod .predmet-ilustrace { width: 84px; height: 84px; border-radius: 14px; flex-shrink: 0; }
     header.uvod h1 { font-size: 1.55rem; font-weight: 650; margin-bottom: 4px; }
     header.uvod p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.5; }
+    header.uvod.podbarva { padding: 12px 14px; border-radius: var(--radius); }
     .rocniky { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 22px; }
     .rocniky button {
       border: 1px solid var(--border); background: var(--bg-panel); color: var(--text);
@@ -102,7 +104,9 @@
       return a;
     }
 
-    // hlavička
+    // hlavička; stránka nese jemnou barvu předmětu (barvy-predmetu.js)
+    const B = window.MetodusBarvy;
+    if (B) B.oznac($('hlavicka'), skupina.id);
     const { emoji, text } = rozdel(skupina.label);
     document.title = text + ' | Metodus';
     $('nadpis').textContent = `${emoji} ${text}`;
@@ -142,6 +146,7 @@
         celkem += lekce.length;
         const karta = document.createElement('section');
         karta.className = 'okruh';
+        if (B) B.oznac(karta, skupina.id);
         const h = document.createElement('h3');
         h.innerHTML = `<span></span><span class="pocet">${lekce.length}</span>`;
         h.firstChild.textContent = s.nazev;
@@ -175,6 +180,7 @@
       $('cestyNadpis').hidden = !rodiny.length;
       rodiny.forEach(r => {
         const d = document.createElement('div'); d.className = 'cesta';
+        if (B) B.oznac(d, skupina.id);
         const h = document.createElement('h3'); h.textContent = r.nazev;
         const p = document.createElement('p'); p.textContent = r.popis || '';
         const ol = document.createElement('ol');
@@ -194,6 +200,7 @@
     KATALOG_SKUPINY.filter(g => g.id !== skupina.id && KATALOG_SEKCE.some(s => s.skupina === g.id)).forEach(g => {
       const a = odkaz(`predmet.html?p=${g.id}${rocnik ? '&r=' + rocnik : ''}`, g.label);
       a.target = '_self';
+      if (B) B.oznac(a, g.id);
       if (vRozcestniku) a.addEventListener('click', ev => { ev.preventDefault(); window.parent.postMessage({ otevri: `obsah/predmet.html?p=${g.id}${rocnik ? '&r=' + rocnik : ''}`, skupina: g.id }, '*'); });
       $('jinde').append(a);
     });

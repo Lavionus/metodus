@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nastavení | Metodus</title>
+  <link rel="stylesheet" href="../common.css">
+  <script src="../theme.js"></script>
+  <script src="../barvy-predmetu.js"></script>
+  <script src="../podpis.js" defer></script>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <style>
+    /* Nastavení webu (22. 10. 2026): barvy předmětů, data v prohlížeči, barevný motiv.
+       Všechno se ukládá jen v tomto prohlížeči (localStorage). */
+    body { background-color: var(--bg-deep); padding: 26px clamp(14px, 3vw, 40px) 40px; min-height: 100vh; }
+    .stranka { max-width: 900px; }
+    header.uvod { margin-bottom: 18px; }
+    header.uvod h1 { font-size: 1.5rem; font-weight: 650; margin-bottom: 6px; }
+    header.uvod p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.5; }
+
+    /* záložky */
+    .zalozky { display: flex; gap: 6px; flex-wrap: wrap; border-bottom: 1px solid var(--border); margin-bottom: 18px; }
+    .zalozky button {
+      font: inherit; font-size: 0.92rem; color: var(--text-muted); background: none; cursor: pointer;
+      border: 1px solid transparent; border-bottom: none; border-radius: 8px 8px 0 0; padding: 9px 14px; margin-bottom: -1px;
+    }
+    .zalozky button:hover { color: var(--text); background: var(--bg-hover); }
+    .zalozky button[aria-selected="true"] { color: var(--text); background: var(--bg-panel); border-color: var(--border); font-weight: 600; }
+    .zalozky button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    [role="tabpanel"] { animation: objev .15s ease; }
+    @keyframes objev { from { opacity: .4; } to { opacity: 1; } }
+
+    .panel { background: var(--bg-panel); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 16px; margin-bottom: 14px; }
+    .panel h2 { font-size: 1.02rem; margin-bottom: 8px; }
+    .panel p.pozn { color: var(--text-muted); font-size: 0.85rem; line-height: 1.5; margin-bottom: 10px; }
+    .radek-voleb { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center; }
+    label.volba { display: inline-flex; gap: 8px; align-items: center; cursor: pointer; font-size: 0.92rem; }
+    fieldset { border: none; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+    legend { font-size: 0.9rem; color: var(--text-muted); margin-right: 8px; float: left; padding-top: 6px; }
+    .pilulka { position: relative; }
+    .pilulka input { position: absolute; opacity: 0; inset: 0; cursor: pointer; }
+    .pilulka span { display: inline-block; padding: 6px 12px; border: 1px solid var(--border); border-radius: 999px; font-size: 0.86rem; background: var(--bg-control); }
+    .pilulka input:checked + span { background: var(--accent); border-color: var(--accent); color: var(--na-akcentu, #fff); }
+    .pilulka input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+    button.tl {
+      font: inherit; font-size: 0.86rem; color: var(--text); background: var(--bg-control); border: 1px solid var(--border);
+      border-radius: 8px; padding: 7px 12px; cursor: pointer;
+    }
+    button.tl:hover { border-color: var(--accent); }
+    button.tl:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    button.tl.nebezpecne { border-color: color-mix(in srgb, var(--danger) 60%, var(--border)); }
+    button.tl.potvrdit { background: var(--danger); border-color: var(--danger); color: #fff; }
+    button.tl:disabled { opacity: .5; cursor: default; }
+    .akce { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+
+    /* barvy předmětů */
+    .predmety { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr)); gap: 8px; }
+    .predmet {
+      display: flex; align-items: center; gap: 10px; padding: 8px 10px; border: 1px solid var(--border);
+      border-radius: 8px; background-color: var(--bg-panel); min-width: 0;
+    }
+    .predmet .nazev { flex: 1; min-width: 0; font-size: 0.9rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .predmet input[type="color"] { width: 38px; height: 30px; padding: 0 2px; border: 1px solid var(--border); border-radius: 6px; background: var(--bg-control); cursor: pointer; flex-shrink: 0; }
+    .predmet input[type="color"]:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    .predmet .vratit { font: inherit; background: none; border: none; color: var(--text-faint); cursor: pointer; padding: 2px 4px; border-radius: 4px; }
+    .predmet .vratit:hover { color: var(--text); }
+    .predmet .vratit[hidden] { display: inline-block; visibility: hidden; }
+    .ukazka-menu { margin-top: 12px; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; max-width: 360px; }
+    .ukazka-menu div { padding: 7px 12px; font-size: 0.86rem; color: var(--text-muted); border-bottom: 1px solid var(--border); }
+    .ukazka-menu div:last-child { border-bottom: none; }
+    .ukazka-menu b { color: var(--text); }
+
+    /* data v prohlížeči */
+    .vyuziti { font-size: 0.88rem; color: var(--text-muted); margin-bottom: 8px; }
+    .mira { height: 8px; border-radius: 4px; background: var(--bg-control); overflow: hidden; margin: 6px 0 2px; max-width: 360px; }
+    .mira i { display: block; height: 100%; background: var(--accent); }
+    input[type="search"] {
+      font: inherit; font-size: 0.88rem; width: min(100%, 320px); padding: 7px 10px; border-radius: 8px;
+      border: 1px solid var(--border); background: var(--bg-control); color: var(--text);
+    }
+    .tabulka { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin-top: 10px; }
+    .tabulka th, .tabulka td { text-align: left; padding: 7px 8px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    .tabulka th { color: var(--text-muted); font-weight: 600; font-size: 0.8rem; }
+    .tabulka td.velikost { white-space: nowrap; color: var(--text-muted); text-align: right; }
+    .tabulka th.velikost { text-align: right; }
+    .tabulka code { font-size: 0.78rem; color: var(--text-faint); word-break: break-all; }
+    .tabulka .popis-klice { color: var(--text); }
+    .tabulka td.akce-bunka { white-space: nowrap; text-align: right; }
+    .tabulka td.akce-bunka button { padding: 4px 8px; font-size: 0.8rem; }
+    .hodnota { margin-top: 6px; max-height: 220px; overflow: auto; background: var(--bg-deep); border: 1px solid var(--border); border-radius: 6px; padding: 8px; font-size: 0.75rem; white-space: pre-wrap; word-break: break-all; color: var(--text-muted); }
+    .skupina-klicu td { background: var(--bg-elevated); font-weight: 600; color: var(--text-muted); font-size: 0.8rem; }
+    .prazdne { color: var(--text-faint); font-size: 0.88rem; padding: 6px 0; }
+    .hlaska { min-height: 1.3em; font-size: 0.86rem; color: var(--ok); margin-top: 8px; }
+    .hlaska.chyba { color: var(--danger); }
+    .db { border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; margin-top: 8px; }
+    .db h3 { font-size: 0.92rem; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+    .db h3 small { color: var(--text-faint); font-weight: 400; }
+    .db ul { margin: 6px 0 0 18px; font-size: 0.84rem; color: var(--text-muted); }
+
+    /* barevný motiv */
+    .motivy { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 150px), 1fr)); gap: 10px; }
+    .motiv { position: relative; display: block; cursor: pointer; }
+    .motiv input { position: absolute; opacity: 0; inset: 0; cursor: pointer; }
+    .motiv .karta { display: block; border: 2px solid var(--border); border-radius: 10px; overflow: hidden; background: var(--bg-panel); }
+    .motiv input:checked + .karta { border-color: var(--accent); box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 35%, transparent); }
+    .motiv input:focus-visible + .karta { outline: 2px solid var(--accent); outline-offset: 3px; }
+    .motiv .nahled { display: block; height: 64px; padding: 10px; }
+    .motiv .nahled .okno { display: block; height: 100%; border-radius: 6px; padding: 7px 8px; font-size: 0.75rem; line-height: 1.3; }
+    .motiv .nahled .okno b { display: inline-block; margin-top: 4px; padding: 1px 8px; border-radius: 4px; font-weight: 600; }
+    .motiv .jmeno { display: block; padding: 8px 10px; font-size: 0.88rem; border-top: 1px solid var(--border); }
+    .motiv .jmeno small { display: block; color: var(--text-faint); font-size: 0.76rem; }
+
+    .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+    @media (max-width: 560px) {
+      .tabulka .sl-klic { display: none; }
+      .zalozky button { padding: 8px 10px; font-size: 0.86rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="stranka">
+  <header class="uvod">
+    <h1>⚙️ Nastavení</h1>
+    <p>Všechno se ukládá jen v tomto prohlížeči na tomto zařízení. Do žádného účtu ani na server se nic neposílá.</p>
+  </header>
+
+  <div class="zalozky" role="tablist" aria-label="Oddíly nastavení">
+    <button role="tab" id="tab-barvy" aria-controls="panel-barvy" data-zalozka="barvy">🎨 Barvy předmětů</button>
+    <button role="tab" id="tab-data" aria-controls="panel-data" data-zalozka="data">💾 Data v prohlížeči</button>
+    <button role="tab" id="tab-motiv" aria-controls="panel-motiv" data-zalozka="motiv">🌗 Barevný motiv</button>
+  </div>
+
+  <!-- 1) Barvy předmětů -->
+  <section role="tabpanel" id="panel-barvy" aria-labelledby="tab-barvy">
+    <div class="panel">
+      <h2>Podbarvení podle předmětu</h2>
+      <p class="pozn">Každý předmět má svou jemnou barvu. Lehce jí jsou podbarvené řádky v levém menu, dlaždice na úvodu,
+        osnova, stránka předmětu a hlavička každé lekce – na první pohled tak poznáš, kam stránka patří.</p>
+      <div class="radek-voleb">
+        <label class="volba"><input type="checkbox" id="zapnuto"> Podbarvovat podle předmětu</label>
+        <fieldset id="sila">
+          <legend>Síla:</legend>
+        </fieldset>
+      </div>
+    </div>
+    <div class="panel">
+      <h2>Barvy jednotlivých předmětů</h2>
+      <p class="pozn">Klikni na barevný čtvereček a vyber jinou barvu. Nejlépe vypadají světlé pastelové odstíny – text zůstává čitelný v každém motivu.
+        Změna se projeví hned v celém webu.</p>
+      <div class="predmety" id="predmety"></div>
+      <div class="akce">
+        <button type="button" class="tl" id="vychoziBarvy">↺ Obnovit výchozí barvy</button>
+      </div>
+      <div class="ukazka-menu" aria-hidden="true" id="ukazkaMenu"></div>
+    </div>
+  </section>
+
+  <!-- 2) Data v prohlížeči -->
+  <section role="tabpanel" id="panel-data" aria-labelledby="tab-data" hidden>
+    <div class="panel">
+      <h2>Kolik místa web zabírá</h2>
+      <div class="vyuziti" id="vyuziti">Zjišťuji…</div>
+    </div>
+    <div class="panel">
+      <h2>Uložená data (localStorage)</h2>
+      <p class="pozn">Oblíbené stránky, historie, výsledky cvičení, zvolený motiv a další volby. Data platí pro celý web Metodus v tomto prohlížeči.</p>
+      <input type="search" id="hledatKlic" placeholder="🔍 Hledat v uložených datech…" aria-label="Hledat v uložených datech">
+      <div id="seznamLs"></div>
+      <div class="akce">
+        <button type="button" class="tl" id="exportLs">⬇️ Uložit zálohu do souboru</button>
+        <button type="button" class="tl" id="importLs">⬆️ Obnovit ze zálohy…</button>
+        <input type="file" id="souborZalohy" accept="application/json,.json" hidden>
+        <button type="button" class="tl nebezpecne" id="smazatPostup">🧹 Smazat výsledky a historii</button>
+        <button type="button" class="tl nebezpecne" id="smazatVse">🗑️ Smazat všechna data</button>
+      </div>
+      <div class="hlaska" id="hlaskaLs" role="status" aria-live="polite"></div>
+    </div>
+    <div class="panel">
+      <h2>Databáze (IndexedDB)</h2>
+      <p class="pozn">Větší data, která si některé stránky ukládají do databáze prohlížeče.</p>
+      <div id="seznamDb"><p class="prazdne">Zjišťuji…</p></div>
+      <div class="hlaska" id="hlaskaDb" role="status" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <!-- 3) Barevný motiv -->
+  <section role="tabpanel" id="panel-motiv" aria-labelledby="tab-motiv" hidden>
+    <div class="panel">
+      <h2>Barevný motiv</h2>
+      <p class="pozn">Základní motivy dbají hlavně na čitelnost (i na projektoru), tematické na náladu. Motiv se změní v celém webu.</p>
+      <div class="motivy" id="motivy" role="radiogroup" aria-label="Barevný motiv"></div>
+    </div>
+  </section>
+</div>
+
+<script src="../apps.js"></script>
+<script>
+(function () {
+  'use strict';
+  const $ = id => document.getElementById(id);
+  const B = window.MetodusBarvy;
+
+  /* ================= záložky ================= */
+  const zalozky = [...document.querySelectorAll('[role="tab"]')];
+  function otevriZalozku(id, fokus) {
+    zalozky.forEach(t => {
+      const vybrana = t.dataset.zalozka === id;
+      t.setAttribute('aria-selected', String(vybrana));
+      t.tabIndex = vybrana ? 0 : -1;
+      $('panel-' + t.dataset.zalozka).hidden = !vybrana;
+      if (vybrana && fokus) t.focus();
+    });
+    try { sessionStorage.setItem('metodus_nastaveni_zalozka', id); } catch { /* bez úložiště */ }
+    if (location.hash !== '#' + id) history.replaceState(null, '', '#' + id);
+    if (id === 'data') obnovData();
+  }
+  zalozky.forEach((t, i) => {
+    t.addEventListener('click', () => otevriZalozku(t.dataset.zalozka));
+    t.addEventListener('keydown', e => {
+      const posun = { ArrowRight: 1, ArrowLeft: -1 }[e.key];
+      if (posun) { e.preventDefault(); otevriZalozku(zalozky[(i + posun + zalozky.length) % zalozky.length].dataset.zalozka, true); }
+      else if (e.key === 'Home' || e.key === 'End') { e.preventDefault(); otevriZalozku(zalozky[e.key === 'Home' ? 0 : zalozky.length - 1].dataset.zalozka, true); }
+    });
+  });
+
+  /* ================= 1) barvy předmětů ================= */
+  function vykresliBarvy() {
+    const s = B.stav();
+    $('zapnuto').checked = s.zapnuto;
+    document.querySelectorAll('#sila input').forEach(r => { r.checked = r.value === s.sila; r.disabled = !s.zapnuto; });
+    B.PREDMETY.forEach(p => {
+      const radek = document.querySelector(`.predmet[data-id="${p.id}"]`);
+      if (!radek) return;
+      radek.querySelector('input').value = s.barvy[p.id];
+      radek.querySelector('.vratit').hidden = s.barvy[p.id] === B.VYCHOZI[p.id];
+    });
+  }
+  Object.entries(B.SILY).forEach(([id, sila]) => {
+    const l = document.createElement('label'); l.className = 'pilulka';
+    l.innerHTML = `<input type="radio" name="sila" value="${id}"><span>${sila.label}</span>`;
+    l.querySelector('input').addEventListener('change', () => B.uloz({ ...B.stav(), sila: id }));
+    $('sila').append(l);
+  });
+  $('zapnuto').addEventListener('change', e => B.uloz({ ...B.stav(), zapnuto: e.target.checked }));
+  B.PREDMETY.forEach(p => {
+    const radek = document.createElement('div');
+    radek.className = 'predmet'; radek.dataset.id = p.id;
+    B.oznac(radek, p.id);
+    const nazev = document.createElement('span'); nazev.className = 'nazev'; nazev.textContent = p.emoji + ' ' + p.label;
+    const vstup = document.createElement('input'); vstup.type = 'color'; vstup.setAttribute('aria-label', 'Barva předmětu ' + p.label);
+    const vratit = document.createElement('button'); vratit.type = 'button'; vratit.className = 'vratit'; vratit.textContent = '↺';
+    vratit.title = 'Vrátit výchozí barvu'; vratit.setAttribute('aria-label', 'Vrátit výchozí barvu: ' + p.label);
+    // náhled se mění plynule při tažení, uloží se po výběru (méně zápisů do úložiště)
+    let cekani = 0;
+    vstup.addEventListener('input', () => {
+      cancelAnimationFrame(cekani);
+      cekani = requestAnimationFrame(() => B.uloz({ ...B.stav(), barvy: { [p.id]: vstup.value } }));
+    });
+    vratit.addEventListener('click', () => B.uloz({ ...B.stav(), barvy: { [p.id]: B.VYCHOZI[p.id] } }));
+    radek.append(nazev, vstup, vratit);
+    $('predmety').append(radek);
+  });
+  $('vychoziBarvy').addEventListener('click', () => B.uloz({ ...B.stav(), barvy: { ...B.VYCHOZI } }));
+  // malý náhled menu ze tří předmětů
+  ['cj', 'm', 'pr'].forEach(id => {
+    const p = B.PREDMETY.find(x => x.id === id);
+    const d = document.createElement('div');
+    d.innerHTML = `<b>${p.emoji} ${p.label}</b> · ukázka řádku v menu`;
+    B.oznac(d, id); $('ukazkaMenu').append(d);
+  });
+  window.addEventListener('metodus-barvy', vykresliBarvy);
+  vykresliBarvy();
+
+  /* ================= 2) data v prohlížeči ================= */
+  const katalog = typeof KATALOG_SEKCE !== 'undefined' ? new Map(KATALOG_SEKCE.flatMap(s => s.polozky).map(p => [p.soubor, p.nazev])) : new Map();
+  // klíče nastavení a navigace; ostatní metodus_* jsou výsledky a postup stránek
+  const ZNAME = {
+    webapp_theme: ['nastaveni', 'Barevný motiv'],
+    metodus_barvy_predmetu: ['nastaveni', 'Barvy předmětů'],
+    metodus_collapsed_sections: ['nastaveni', 'Sbalené části levého menu'],
+    metodus_skupina: ['nastaveni', 'Zvolený předmět v menu'],
+    metodus_rocnik: ['nastaveni', 'Zvolený ročník'],
+    metodus_zobraz_plan: ['nastaveni', 'Zobrazovat připravované stránky'],
+    metodus_migrace_nazvu: ['nastaveni', 'Značka převodu starých dat (Nodus → Metodus)'],
+    metodus_oblibene: ['historie', 'Oblíbené stránky (★)'],
+    metodus_nedavne: ['historie', 'Naposledy otevřené stránky'],
+    metodus_current_page: ['historie', 'Naposledy otevřená stránka'],
+    metodus_overeni: ['postup', 'Výsledky „Ověř se“ ze všech lekcí'],
+    metodus_badani: ['postup', 'Bádání – rozpracované úkoly'],
+    metodus_prubeh_v2: ['postup', 'Průběh učení (statistika procvičování)'],
+    metodus_aktivita: ['postup', 'Denní aktivita a odznaky'],
+    metodus_posun: ['nastaveni', 'Posun na další otázku'],
+    metodus_ukazky_tema: ['nastaveni', 'Živé ukázky – vybrané téma'],
+    metodus_ucitel_zalozka: ['ucitel', 'Kabinet – otevřená záložka'],
+    metodus_ucitel_cast: ['ucitel', 'Kabinet – otevřená část'],
+    metodus_ucitel_tabule: ['ucitel', 'Kabinet – tabule'],
+    metodus_tabule: ['ucitel', 'Kabinet – tabule'],
+    metodus_tridy_v1: ['ucitel', 'Kabinet – seznamy tříd'],
+    metodus_tymy_v1: ['ucitel', 'Kabinet – týmy'],
+    metodus_absence_v1: ['ucitel', 'Kabinet – docházka'],
+    metodus_kostka_v1: ['ucitel', 'Kabinet – hrací kostka'],
+    metodus_prezentace_v1: ['ucitel', 'Prezentace – uložené snímky'],
+    metodus_prezentace_kanal: ['ucitel', 'Prezentace – propojení s ovladačem'],
+    metodus_prezenter: ['ucitel', 'Prezentace – režim přednášejícího'],
+  };
+  const SKUPINY_KLICU = { nastaveni: '⚙️ Nastavení a vzhled', historie: '⭐ Oblíbené a historie', postup: '📈 Výsledky a postup ve cvičeních',
+    ucitel: '🧑‍🏫 Kabinet učitele a prezentace', jine: '📦 Ostatní data' };
+  // klíč stránky bývá zkrácený název souboru (metodus_z7_australie → z7_australie_oceanie.html)
+  const souboryKatalogu = [...katalog.keys()].map(f => f.replace(/^obsah\//, '').replace(/\.html$/, ''));
+  const bezPodtrz = t => t.toLowerCase().replace(/_/g, '');
+  function stranka(cast) {
+    const c = bezPodtrz(cast);
+    const f = souboryKatalogu.find(f => bezPodtrz(f) === c) || souboryKatalogu.find(f => bezPodtrz(f).startsWith(c))
+      || souboryKatalogu.find(f => c.startsWith(bezPodtrz(f)));
+    return f ? katalog.get('obsah/' + f + '.html') : null;
+  }
+  function popisKlice(k) {
+    if (ZNAME[k]) return ZNAME[k];
+    const m = k.match(/^(?:metodus|nodus)_(.+)$/);
+    if (m) {
+      const zaklad = m[1].replace(/_(skore|rekord|stav|nastaveni|postup|data|serie|v\d+)$/, '');
+      for (const kandidat of [m[1], zaklad]) {
+        const nazev = stranka(kandidat);
+        if (nazev) return ['postup', nazev];
+      }
+      return ['postup', 'Data stránky „' + m[1].replace(/_/g, ' ') + '“'];
+    }
+    return ['jine', 'Data jiné stránky nebo nástroje'];
+  }
+  const velikost = n => n < 1024 ? n + ' B' : n < 1048576 ? (n / 1024).toFixed(1).replace('.', ',') + ' kB'
+    : n < 1073741824 ? (n / 1048576).toFixed(1).replace('.', ',') + ' MB' : (n / 1073741824).toFixed(1).replace('.', ',') + ' GB';
+  const bajty = t => new Blob([t]).size;
+  const polozek = n => n + ' ' + (n === 1 ? 'položka' : n >= 2 && n <= 4 ? 'položky' : 'položek');
+  function klice() {
+    try { return Object.keys(localStorage).sort((a, b) => a.localeCompare(b, 'cs')); } catch { return null; }
+  }
+  function hlaska(id, text, chyba) { const h = $(id); h.textContent = text; h.classList.toggle('chyba', !!chyba); }
+
+  // dvoukrokové potvrzení: první klik se zeptá, druhý do 5 s provede
+  function potvrzovaci(tlacitko, otazka, akce) {
+    const puvodni = tlacitko.textContent; let casovac = 0;
+    tlacitko.addEventListener('click', () => {
+      if (tlacitko.classList.contains('potvrdit')) {
+        clearTimeout(casovac); tlacitko.classList.remove('potvrdit'); tlacitko.textContent = puvodni; akce();
+      } else {
+        tlacitko.classList.add('potvrdit'); tlacitko.textContent = otazka;
+        casovac = setTimeout(() => { tlacitko.classList.remove('potvrdit'); tlacitko.textContent = puvodni; }, 5000);
+      }
+    });
+  }
+
+  function vykresliLs() {
+    const el = $('seznamLs'); el.replaceChildren();
+    const vse = klice();
+    if (vse === null) { el.innerHTML = '<p class="prazdne">Prohlížeč úložiště nedovoluje (soukromý režim nebo otevření ze souboru).</p>'; return; }
+    const q = $('hledatKlic').value.trim().toLowerCase();
+    const radky = vse.map(k => {
+      const v = localStorage.getItem(k) || '';
+      const [skupina, popis] = popisKlice(k);
+      return { k, v, skupina, popis, b: bajty(k) + bajty(v) };
+    }).filter(r => !q || (r.k + ' ' + r.popis).toLowerCase().includes(q));
+    if (!radky.length) { el.innerHTML = `<p class="prazdne">${vse.length ? 'Nic neodpovídá hledání.' : 'Web si zatím nic neuložil.'}</p>`; return; }
+    const t = document.createElement('table'); t.className = 'tabulka';
+    t.innerHTML = '<thead><tr><th>Co to je</th><th class="velikost">Velikost</th><th><span class="sr-only">Akce</span></th></tr></thead>';
+    const tb = document.createElement('tbody');
+    Object.keys(SKUPINY_KLICU).forEach(sk => {
+      const vSkupine = radky.filter(r => r.skupina === sk);
+      if (!vSkupine.length) return;
+      const hl = document.createElement('tr'); hl.className = 'skupina-klicu';
+      hl.innerHTML = `<td colspan="3"></td>`;
+      hl.firstChild.textContent = `${SKUPINY_KLICU[sk]} · ${vSkupine.length} · ${velikost(vSkupine.reduce((n, r) => n + r.b, 0))}`;
+      tb.append(hl);
+      vSkupine.forEach(r => {
+        const tr = document.createElement('tr');
+        const td1 = document.createElement('td');
+        const p = document.createElement('div'); p.className = 'popis-klice'; p.textContent = r.popis;
+        const c = document.createElement('code'); c.textContent = r.k;
+        const hodnota = document.createElement('pre'); hodnota.className = 'hodnota'; hodnota.hidden = true;
+        td1.append(p, c, hodnota);
+        const td2 = document.createElement('td'); td2.className = 'velikost'; td2.textContent = velikost(r.b);
+        const td3 = document.createElement('td'); td3.className = 'akce-bunka';
+        const uk = document.createElement('button'); uk.type = 'button'; uk.className = 'tl'; uk.textContent = '👁️';
+        uk.title = 'Zobrazit obsah'; uk.setAttribute('aria-label', 'Zobrazit obsah: ' + r.popis); uk.setAttribute('aria-expanded', 'false');
+        uk.addEventListener('click', () => {
+          if (hodnota.hidden) { let v = r.v; try { v = JSON.stringify(JSON.parse(v), null, 2); } catch { /* obyčejný text */ } hodnota.textContent = v.length > 20000 ? v.slice(0, 20000) + '\n…' : v; }
+          hodnota.hidden = !hodnota.hidden; uk.setAttribute('aria-expanded', String(!hodnota.hidden));
+        });
+        const sm = document.createElement('button'); sm.type = 'button'; sm.className = 'tl nebezpecne'; sm.textContent = '🗑️';
+        sm.title = 'Smazat'; sm.setAttribute('aria-label', 'Smazat: ' + r.popis);
+        potvrzovaci(sm, 'Smazat?', () => {
+          localStorage.removeItem(r.k);
+          if (r.k === B.KLIC) window.dispatchEvent(new StorageEvent('storage', { key: B.KLIC }));
+          hlaska('hlaskaLs', 'Smazáno: ' + r.popis); obnovData();
+        });
+        td3.append(uk, ' ', sm);
+        tr.append(td1, td2, td3); tb.append(tr);
+      });
+    });
+    t.append(tb); el.append(t);
+  }
+  $('hledatKlic').addEventListener('input', vykresliLs);
+
+  async function vykresliVyuziti() {
+    const el = $('vyuziti');
+    const vse = klice() || [];
+    const ls = vse.reduce((n, k) => n + bajty(k) + bajty(localStorage.getItem(k) || ''), 0);
+    let text = `Uložená data (localStorage): ${velikost(ls)} v ${vse.length} ${vse.length === 1 ? 'položce' : 'položkách'}.`;
+    el.textContent = text;
+    if (navigator.storage && navigator.storage.estimate) {
+      try {
+        const o = await navigator.storage.estimate();
+        if (o.quota) {
+          el.innerHTML = '';
+          const p = document.createElement('div');
+          p.textContent = `${text} Celkem web využívá ${velikost(o.usage || 0)} z dostupných ${velikost(o.quota)} (včetně offline kopie stránek a databází).`;
+          const m = document.createElement('div'); m.className = 'mira';
+          m.innerHTML = `<i style="width:${Math.max(0.5, Math.min(100, (o.usage || 0) / o.quota * 100))}%"></i>`;
+          el.append(p, m);
+        }
+      } catch { /* odhad není k dispozici */ }
+    }
+  }
+
+  // záloha: jen data tohoto webu (localStorage), jako JSON
+  $('exportLs').addEventListener('click', () => {
+    const data = {};
+    (klice() || []).forEach(k => { data[k] = localStorage.getItem(k); });
+    const obsah = JSON.stringify({ metodus: 1, datum: new Date().toISOString(), localStorage: data }, null, 2);
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([obsah], { type: 'application/json' }));
+    a.download = 'metodus-zaloha-' + new Date().toISOString().slice(0, 10) + '.json';
+    document.body.append(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+    hlaska('hlaskaLs', `Záloha uložena (${polozek(Object.keys(data).length)}).`);
+  });
+  $('importLs').addEventListener('click', () => $('souborZalohy').click());
+  $('souborZalohy').addEventListener('change', async e => {
+    const soubor = e.target.files[0]; e.target.value = '';
+    if (!soubor) return;
+    try {
+      const d = JSON.parse(await soubor.text());
+      const data = d && d.localStorage;
+      if (!data || typeof data !== 'object') throw new Error('není to záloha Metodusu');
+      let n = 0;
+      Object.entries(data).forEach(([k, v]) => { if (typeof v === 'string') { localStorage.setItem(k, v); n++; } });
+      hlaska('hlaskaLs', `Ze zálohy obnoveno: ${polozek(n)}. Projeví se po obnovení stránek.`);
+      window.dispatchEvent(new StorageEvent('storage', { key: null }));
+      if (data.webapp_theme && window.MetodusTheme) MetodusTheme.set(data.webapp_theme);
+      if (window.parent !== window) window.parent.postMessage({ metodusBarvy: 1 }, '*');
+      obnovData();
+    } catch (chyba) { hlaska('hlaskaLs', 'Soubor nejde načíst: ' + chyba.message, true); }
+  });
+  potvrzovaci($('smazatPostup'), '⚠️ Opravdu smazat výsledky a historii?', () => {
+    let n = 0;
+    (klice() || []).forEach(k => { if (['historie', 'postup'].includes(popisKlice(k)[0])) { localStorage.removeItem(k); n++; } });
+    hlaska('hlaskaLs', `Smazáno: ${polozek(n)}. Nastavení a data kabinetu zůstala.`); obnovData();
+  });
+  potvrzovaci($('smazatVse'), '⚠️ Opravdu smazat úplně všechno?', () => {
+    const n = (klice() || []).length;
+    try { localStorage.clear(); } catch { /* bez úložiště */ }
+    window.dispatchEvent(new StorageEvent('storage', { key: null }));
+    if (window.parent !== window) window.parent.postMessage({ metodusBarvy: 1 }, '*');
+    hlaska('hlaskaLs', `Smazáno: ${polozek(n)}. Barvy předmětů jsou výchozí, motiv se vrátí na výchozí po obnovení stránky.`); obnovData();
+  });
+
+  /* IndexedDB: přehled databází, úložišť a počtu záznamů, mazání celé databáze */
+  function otevriDb(jmeno) {
+    return new Promise((ok, chyba) => {
+      const r = indexedDB.open(jmeno);
+      r.onsuccess = () => ok(r.result);
+      r.onerror = () => chyba(r.error);
+      // databáze, která neexistuje, by se tu jen založila – hned ji zrušíme
+      r.onupgradeneeded = () => { r.transaction.abort(); };
+    });
+  }
+  async function popisDb(info) {
+    const db = await otevriDb(info.name);
+    const ulozky = [...db.objectStoreNames];
+    const pocty = await Promise.all(ulozky.map(u => new Promise(ok => {
+      try { const r = db.transaction(u, 'readonly').objectStore(u).count(); r.onsuccess = () => ok(r.result); r.onerror = () => ok(null); }
+      catch { ok(null); }
+    })));
+    db.close();
+    return ulozky.map((u, i) => ({ u, n: pocty[i] }));
+  }
+  async function vykresliDb() {
+    const el = $('seznamDb');
+    if (!window.indexedDB) { el.innerHTML = '<p class="prazdne">Prohlížeč IndexedDB nepodporuje.</p>'; return; }
+    if (!indexedDB.databases) { el.innerHTML = '<p class="prazdne">Tento prohlížeč neumí databáze vypsat. Smazat je můžeš v nastavení prohlížeče (data webu).</p>'; return; }
+    let seznam = [];
+    try { seznam = await indexedDB.databases(); } catch { el.innerHTML = '<p class="prazdne">Databáze se nepodařilo zjistit.</p>'; return; }
+    el.replaceChildren();
+    if (!seznam.length) { el.innerHTML = '<p class="prazdne">Web teď v prohlížeči žádnou databázi nemá.</p>'; return; }
+    for (const info of seznam) {
+      const box = document.createElement('div'); box.className = 'db';
+      const h = document.createElement('h3');
+      const jm = document.createElement('span'); jm.textContent = '🗄️ ' + info.name;
+      const v = document.createElement('small'); v.textContent = 'verze ' + info.version;
+      const sm = document.createElement('button'); sm.type = 'button'; sm.className = 'tl nebezpecne'; sm.textContent = '🗑️ Smazat databázi';
+      sm.style.marginLeft = 'auto';
+      potvrzovaci(sm, '⚠️ Opravdu smazat?', () => {
+        const r = indexedDB.deleteDatabase(info.name);
+        r.onsuccess = () => { hlaska('hlaskaDb', 'Databáze ' + info.name + ' smazána.'); vykresliDb(); vykresliVyuziti(); };
+        r.onerror = () => hlaska('hlaskaDb', 'Databázi se nepodařilo smazat.', true);
+        r.onblocked = () => hlaska('hlaskaDb', 'Databázi právě používá jiná otevřená stránka – zavři ji a zkus to znovu.', true);
+      });
+      h.append(jm, v, sm);
+      const ul = document.createElement('ul');
+      try {
+        const ulozky = await popisDb(info);
+        if (!ulozky.length) ul.innerHTML = '<li>bez úložišť</li>';
+        ulozky.forEach(({ u, n }) => { const li = document.createElement('li'); li.textContent = `${u}: ${n === null ? '?' : n} ${n === 1 ? 'záznam' : n >= 2 && n <= 4 ? 'záznamy' : 'záznamů'}`; ul.append(li); });
+      } catch { ul.innerHTML = '<li>obsah nejde přečíst</li>'; }
+      box.append(h, ul); el.append(box);
+    }
+  }
+  function obnovData() { vykresliLs(); vykresliVyuziti(); vykresliDb(); }
+
+  /* ================= 3) barevný motiv ================= */
+  // náhled: plocha, panel, text a akcent motivu (hodnoty z common.css a souborů motivů)
+  const MOTIVY = {
+    auto: ['🖥️', 'Podle systému', 'tmavý nebo světlý podle zařízení', null],
+    dark: ['🌙', 'Tmavý', 'šetří oči večer', ['#121212', '#242424', '#e0e0e0', '#6aa6fd']],
+    light: ['☀️', 'Světlý', 'na denní světlo', ['#e8eaed', '#ffffff', '#24292f', '#2f6fce']],
+    kontrast: ['🔲', 'Vysoký kontrast', 'nejlepší čitelnost, projektor', ['#f4f4f4', '#ffffff', '#000000', '#0037b8']],
+    sepia: ['📜', 'Sépie', 'teplý papír', ['#e9ddbe', '#faf1db', '#392d21', '#805326']],
+    'sepia-tmava': ['🕯️', 'Tmavá sépie', 'teplá tma', ['#19110c', '#302219', '#f0dfc0', '#d5a45c']],
+    knihovna: ['📚', 'Stará knihovna', 'dřevo a mosaz', ['#1a130d', '#2c2118', '#eee2c8', '#c99a45']],
+    skola: ['✏️', 'Škola', 'sešit a modrá propiska', ['#edf1ea', '#ffffff', '#1d2838', '#1f56b3']],
+    'nocni-skola': ['🦉', 'Noční škola', 'zelená tabule a křída', ['#1a3128', '#244236', '#eef1e8', '#f0d264']],
+  };
+  const SKUPINY_MOTIVU = [['Základní', ['auto', 'dark', 'light', 'kontrast']], ['Tematické', ['sepia', 'sepia-tmava', 'knihovna', 'skola', 'nocni-skola']]];
+  function nahled(barvy) {
+    const [plocha, panel, text, akcent] = barvy;
+    return `<span class="nahled" style="background:${plocha}"><span class="okno" style="background:${panel};color:${text}">Ukázka textu<br><b style="background:${akcent};color:${plocha}">Tlačítko</b></span></span>`;
+  }
+  const motivyEl = $('motivy');
+  SKUPINY_MOTIVU.flat(2).filter(t => MOTIVY[t] && (!window.MetodusTheme || MetodusTheme.themes.includes(t))).forEach(t => {
+    const [emoji, jmeno, popis, barvy] = MOTIVY[t];
+    const l = document.createElement('label'); l.className = 'motiv';
+    const nahledHtml = barvy ? nahled(barvy)
+      : `<span class="nahled" style="background:linear-gradient(90deg,#121212 50%,#e8eaed 50%)"><span class="okno" style="background:linear-gradient(90deg,#242424 50%,#fff 50%);color:#888">Ukázka textu<br><b style="background:#6aa6fd;color:#121212">Tlačítko</b></span></span>`;
+    l.innerHTML = `<input type="radio" name="motiv" value="${t}"><span class="karta">${nahledHtml}<span class="jmeno">${emoji} ${jmeno}<small>${popis}</small></span></span>`;
+    l.querySelector('input').addEventListener('change', () => window.MetodusTheme && MetodusTheme.set(t));
+    motivyEl.append(l);
+  });
+  // Základní / Tematické oddělí nadpis přes celou šířku
+  SKUPINY_MOTIVU.forEach(([nazev, motivy], i) => {
+    const prvni = motivyEl.querySelector(`input[value="${motivy[0]}"]`);
+    if (!prvni) return;
+    const h = document.createElement('h3'); h.textContent = nazev;
+    h.style.cssText = `grid-column:1/-1;font-size:.86rem;color:var(--text-muted);margin:${i ? '8px' : '0'} 0 -2px`;
+    motivyEl.insertBefore(h, prvni.closest('.motiv'));
+  });
+  function zobrazMotiv() {
+    const t = window.MetodusTheme ? MetodusTheme.get() : 'dark';
+    motivyEl.querySelectorAll('input').forEach(i => { i.checked = i.value === t; });
+  }
+  window.addEventListener('metodus-theme', zobrazMotiv);
+  zobrazMotiv();
+
+  /* ================= start ================= */
+  const zHashe = location.hash.slice(1);
+  let vychozi = 'barvy';
+  try { vychozi = sessionStorage.getItem('metodus_nastaveni_zalozka') || vychozi; } catch { /* bez úložiště */ }
+  otevriZalozku(zalozky.some(t => t.dataset.zalozka === zHashe) ? zHashe : vychozi);
+  window.addEventListener('storage', () => { if (!$('panel-data').hidden) obnovData(); });
+})();
+</script>
+</body>
+</html>

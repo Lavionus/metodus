@@ -6,6 +6,7 @@
   <title>Osnova – dostupné aplikace | Metodus</title>
   <link rel="stylesheet" href="../common.css">
   <script src="../theme.js"></script>
+  <script src="../barvy-predmetu.js"></script>
   <script src="../podpis.js" defer></script>
   <style>
     body {
@@ -267,6 +268,8 @@
 
     KATALOG_PREDMETY.forEach(pred => {
       const tr = document.createElement('tr');
+      // řádek předmětu jemně podbarvený jeho barvou (barvy-predmetu.js)
+      if (window.MetodusBarvy) MetodusBarvy.oznac(tr, pred.id);
       const th = document.createElement('th');
       th.scope = 'row';
       th.textContent = pred.label;
@@ -343,6 +346,7 @@
       const ul = document.createElement('ul');
       temata.forEach(p => {
         const li = document.createElement('li');
+        if (window.MetodusBarvy) MetodusBarvy.oznac(li, p);
         li.appendChild(odkazNaTema(p));
         const popis = document.createElement('p');
         // cíl lekce z katalogu (KATALOG_CILE); u pilotů má přednost cíl z KATALOG_VYUKA
@@ -368,6 +372,7 @@
       a.href = '../index.html#' + p.soubor;
       a.target = '_top';
       a.textContent = p.nazev;
+      if (window.MetodusBarvy) MetodusBarvy.oznac(a, p);
       a.addEventListener('click', ev => {
         if (vRozcestniku) {
           ev.preventDefault();
@@ -388,6 +393,7 @@
         const hlavni = najdi(rod.hlavni);
         const karta = document.createElement('article');
         karta.className = 'rodina';
+        if (window.MetodusBarvy && hlavni) MetodusBarvy.oznac(karta, hlavni);
         if (hlavni && hlavni.predmet) karta.style.setProperty('--predmet', `var(--predmet-${hlavni.predmet})`);
         const h = document.createElement('h3'); h.textContent = rod.nazev;
         const popis = document.createElement('p'); popis.className = 'popis-rodiny'; popis.textContent = rod.popis;

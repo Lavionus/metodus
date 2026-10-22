@@ -56,6 +56,18 @@
     });
   }
 
+  // jemné barvy předmětů (barvy-predmetu.js) – stránky lekcí je samy nenačítají
+  function nactiBarvy() {
+    if (window.MetodusBarvy) return Promise.resolve();
+    return new Promise(ok => {
+      const s = document.createElement('script');
+      s.src = new URL('barvy-predmetu.js', KOREN).href;
+      s.onload = ok;
+      s.onerror = ok;   // bez barev hlavička funguje dál
+      document.head.appendChild(s);
+    });
+  }
+
   /* ---- pomocné -------------------------------------------------------- */
   const el = (znacka, trida, text) => {
     const e = document.createElement(znacka);
@@ -435,6 +447,7 @@
 
     const hlava = el('section', 'kostra');
     hlava.setAttribute('aria-label', 'O této lekci');
+    nactiBarvy().then(() => { if (window.MetodusBarvy) MetodusBarvy.oznac(hlava, polozka); });
 
     // 1) proužek předmětu
     const radek = el('p', 'kostra-radek');

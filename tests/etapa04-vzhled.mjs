@@ -77,7 +77,8 @@ try {
     tema: document.documentElement.dataset.theme || '(žádné)',
     stranka: __jas(getComputedStyle(document.body).backgroundColor),
     nejtmavsiKarta: Math.min(...[...document.querySelectorAll('.karta, .lekce, article, section')].map(e => __jas(__pozadi(e)))),
-    gradienty: [...document.querySelectorAll('*')].filter(e => getComputedStyle(e).backgroundImage.includes('gradient')).length,
+    // .podbarva = průsvitná vrstva barvy předmětu (barvy-predmetu.js), ne natvrdo tmavý přechod
+    gradienty: [...document.querySelectorAll('*')].filter(e => !e.classList.contains('podbarva') && getComputedStyle(e).backgroundImage.includes('gradient')).length,
     nejhorsiText: __nejhorsi('p, li, h1, h2, h3, a')
   })`);
   assert.equal(mapy.tema, 'light', 'eduMaps přebírá motiv');

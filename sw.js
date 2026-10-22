@@ -6,7 +6,7 @@
 /* Při větší aktualizaci webu zvyš číslo verze — stará cache se u návštěvníků
    smaže a vše se stáhne čerstvé (jinak SWR ukáže novou verzi až na druhé načtení). */
 const PREFIX = 'metodus-';
-const CACHE = PREFIX + 'v167';
+const CACHE = PREFIX + 'v168';
 const JADRO = [
   './',
   './index.html',
@@ -39,6 +39,7 @@ const JADRO = [
   './kostra.css',
   './vyklad.js',     // společný výklad a vedený příklad
   './vyklad.css',
+  './barvy-predmetu.js',   // pastelové barvy předmětů (Nastavení)
   './nazor.js',       // knihovna názorných prvků (osa, proužek, věta, časová osa)
   './nazor.css',
   './badani.js',      // úkoly k modelu u simulací (předpověz → vyzkoušej → vysvětli)
@@ -78,6 +79,7 @@ const JADRO = [
   './obsah/img/00/prehled-teleso-pravitko.webp',
   './obsah/img/00/prehled-vahy.webp',
   './obsah/predmet.html',
+  './obsah/nastaveni.html',
   './obsah/osnova.html',
   './obsah/predstaveni.html',
 ];
