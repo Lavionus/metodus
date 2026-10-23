@@ -548,6 +548,11 @@
       border-color: var(--accent);
     }
 
+    /* obrysové ikony tlačítek (SVG) */
+    .ovladani button, .vice-menu button { display: inline-flex; align-items: center; gap: 6px; }
+    .ovladani button svg, .vice-menu button svg { display: block; flex-shrink: 0; }
+    .ovladani button .ikona { display: inline-flex; }
+
     /* V hlavičce stačí ikona, v nabídce „Další" je potřeba i slovo. */
     .ovladani button .popis { display: none; }
 
@@ -817,7 +822,7 @@
         <label id="temaObal" class="tema-volba" title="Barevný motiv">
           <span class="popis">Motiv</span>
           <select id="temaVolba" aria-label="Barevný motiv">
-            <option value="dark">🌙 Tmavý</option>
+            <option value="dark">Tmavý</option>
           </select>
         </label>
         <button id="btnProjektor" title="Režim projektor – zvětšit obraz a schovat menu (F8)"><span class="ikona" aria-hidden="true">📽️</span><span class="popis">Projektor</span></button>
@@ -1245,15 +1250,33 @@
     document.getElementById('btnPredstaveni').addEventListener('click', () => {
       location.hash = 'obsah/predstaveni.html';
     });
-    // tlačítka hlavičky dostanou vlastní ikony (emoji zůstane, když ikona chybí)
-    if (window.MetodusIkony) {
-      Object.entries({ btnDomu: 'prehled', btnOsnova: 'osnova', btnUcitel: 'ucitel', btnPredstaveni: 'predstaveni',
-        btnNastaveni: 'nastaveni', btnProjektor: 'projektor', btnNoveOkno: 'nove_okno' }).forEach(([tl, ikona]) => {
-        const misto = document.querySelector('#' + tl + ' .ikona');
-        const i = MetodusIkony.img(ikona, { velikost: 22, hned: true });
-        if (misto && i) misto.replaceChildren(i);
+    /* Tlačítka hlavičky: střídmé obrysové ikony (SVG v barvě textu – sedí v každém motivu
+       i na projektoru). Akvarelové ikony zůstávají u stránek v menu. */
+    (function () {
+      const ozubeni = [0, 45, 90, 135, 180, 225, 270, 315].map(u => {
+        const r = u * Math.PI / 180, c = Math.cos(r), n = Math.sin(r);
+        return `M${(12 + 6.6 * c).toFixed(2)} ${(12 + 6.6 * n).toFixed(2)}L${(12 + 9.2 * c).toFixed(2)} ${(12 + 9.2 * n).toFixed(2)}`;
+      }).join('');
+      const TVARY = {
+        btnDomu: '<path d="M3 10.5 12 3l9 7.5"/><path d="M5.5 9v11h4.5v-6h4v6h4.5V9"/>',
+        btnOsnova: '<path d="M3 6.5 9 4l6 2.5L21 4v13.5L15 20l-6-2.5L3 20z"/><path d="M9 4v13.5M15 6.5V20"/>',
+        btnUcitel: '<rect x="3" y="3.5" width="18" height="12.5" rx="1.2"/><path d="M7 8h7M7 11.5h4.5M8 20.5l4-4.5 4 4.5"/>',
+        btnPredstaveni: '<circle cx="12" cy="12" r="9"/><path d="M10 8.3v7.4l6.2-3.7z"/>',
+        btnNastaveni: '<circle cx="12" cy="12" r="2.6"/><circle cx="12" cy="12" r="6.6"/><path stroke-width="2.6" d="' + ozubeni + '"/>',
+        btnProjektor: '<rect x="2.5" y="8" width="15" height="8.5" rx="1.6"/><circle cx="12.5" cy="12.25" r="2.3"/><path d="M5.5 16.5v2.5M14.5 16.5v2.5M18 10.5l3.5-1.6M18 14l3.5 1.6"/>',
+        btnNoveOkno: '<path d="M14 4h6v6M20 4l-8.5 8.5"/><path d="M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/>',
+        rozbalitVse: '<path d="M7 9.5 12 4.5l5 5M7 14.5l5 5 5-5"/>',
+        sbalitVse: '<path d="M7 4.5l5 5 5-5M7 19.5l5-5 5 5"/>'
+      };
+      const svg = d => `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">${d}</svg>`;
+      Object.entries(TVARY).forEach(([id, d]) => {
+        const tl = document.getElementById(id);
+        if (!tl) return;
+        const misto = tl.querySelector('.ikona');
+        if (misto) misto.innerHTML = svg(d);
+        else tl.innerHTML = svg(d) + '<span>' + tl.textContent.replace(/^[⊞⊟]\s*/, '') + '</span>';
       });
-    }
+    })();
     document.getElementById('btnNastaveni').addEventListener('click', () => {
       location.hash = 'obsah/nastaveni.html';
     });
@@ -1277,7 +1300,7 @@
     const SKUPINY = [['Základní', ['auto', 'dark', 'light', 'kontrast']], ['Tematické', ['sepia', 'sepia-tmava', 'knihovna', 'skola', 'nocni-skola']]];
     temaVolba.replaceChildren(...SKUPINY.map(([nazev, motivy]) => {
       const g = document.createElement('optgroup'); g.label = nazev;
-      g.append(...motivy.filter(t => MetodusTheme.themes.includes(t)).map(t => new Option(MOTIVY[t][0] + ' ' + MOTIVY[t][1], t)));
+      g.append(...motivy.filter(t => MetodusTheme.themes.includes(t)).map(t => new Option(MOTIVY[t][1], t)));
       return g;
     }));
 
