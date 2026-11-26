@@ -2510,6 +2510,28 @@ const KATALOG_SEKCE = [
           8,
           9
         ]
+      },
+      {
+        "soubor": "obsah/excel_vzorce.html",
+        "nazev": "📊 Vzorce v Excelu – kurz a rozbor",
+        "tagy": [
+          "8. ročník",
+          "9. ročník",
+          "informatika",
+          "tabulkový procesor",
+          "Excel",
+          "vzorce",
+          "funkce",
+          "KDYŽ",
+          "SVYHLEDAT",
+          "rozbor vzorce",
+          "algoritmus"
+        ],
+        "predmet": "inf",
+        "rocniky": [
+          8,
+          9
+        ]
       }
     ]
   },
@@ -5720,6 +5742,7 @@ const KATALOG_CILE = {
   "obsah/inf6_promenne.html": "Sleduji hodnotu proměnné v programu a předpovím, co program vypíše.",
   "obsah/inf7_funkce.html": "Poznám, co funkce udělá, a zvolím správné volání s parametry.",
   "obsah/eduSort.html": "Sleduji, jak pracují algoritmy řazení, a porovnám jejich rychlost.",
+  "obsah/excel_vzorce.html": "Sestavím vzorec s funkcemi a odkazy, rozložím ho na kroky a najdu v něm chybu.",
   "obsah/inf9_model_simulace.html": "Měním parametry modelu populace a porovnám model se skutečností.",
   "obsah/inf4_data.html": "Zakóduji obrázek čísly a zapíšu číslo ve dvojkové soustavě.",
   "obsah/morse_code.html": "Převedu text do Morseovy abecedy a zpět a poslechnu si ho.",
@@ -6342,6 +6365,7 @@ const KATALOG_RODINY = [
       "obsah/morse_code.html",
       "obsah/inf7_sifrovani.html",
       "obsah/inf6_tabulky.html",
+      "obsah/excel_vzorce.html",
       "obsah/inf8_databaze.html",
       "obsah/inf7_site.html"
     ]
